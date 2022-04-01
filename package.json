@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -38,6 +38,9 @@
       "limit": "10 KB"
     }
   ],
+  "dependencies": {
+    "ethers": "^5.5.1"
+  },
   "devDependencies": {
     "@size-limit/preset-small-lib": "^7.0.8",
     "eslint": "^8.12.0",
