@@ -12,13 +12,14 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "tsdx build",
+    "build": "npm run copy-dts && tsdx build",
     "test": "tsdx test",
     "lint": "tsdx lint",
-    "prepare": "tsdx build",
+    "prepare": "npm run build",
     "size": "size-limit",
     "analyze": "size-limit --why",
-    "publish": "npm run prepare && npm publish"
+    "publish": "npm run prepare && npm publish",
+    "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" dist"
   },
   "peerDependencies": {},
   "husky": {
@@ -44,6 +45,7 @@
   },
   "devDependencies": {
     "@size-limit/preset-small-lib": "^7.0.8",
+    "copyfiles": "^2.4.1",
     "eslint": "^8.12.0",
     "husky": "^7.0.4",
     "prettier": "^2.6.1",
@@ -53,6 +55,6 @@
     "typescript": "^4.6.3"
   },
   "resolutions": {
-    "tsdx/typescript":"^4.6.3"
+    "tsdx/typescript": "^4.6.3"
   }
 }
