@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "npm run copy-dts && tsdx build",
+    "build": "tsdx build && npm run copy-dts",
     "test": "tsdx test",
     "lint": "tsdx lint",
     "prepare": "npm run build",
