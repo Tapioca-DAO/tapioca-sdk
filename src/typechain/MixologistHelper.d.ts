@@ -95,7 +95,19 @@ export class MixologistHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
+    "getAmountForAssetFraction(address,uint256)"(
+      mixologist: string,
+      fraction: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     getCollateralSharesForBorrowPart(
+      mixologist: string,
+      borrowPart: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "getCollateralSharesForBorrowPart(address,uint256)"(
       mixologist: string,
       borrowPart: BigNumberish,
       overrides?: CallOverrides
@@ -108,7 +120,19 @@ export class MixologistHelper extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  "getAmountForAssetFraction(address,uint256)"(
+    mixologist: string,
+    fraction: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   getCollateralSharesForBorrowPart(
+    mixologist: string,
+    borrowPart: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "getCollateralSharesForBorrowPart(address,uint256)"(
     mixologist: string,
     borrowPart: BigNumberish,
     overrides?: CallOverrides
@@ -121,7 +145,19 @@ export class MixologistHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    "getAmountForAssetFraction(address,uint256)"(
+      mixologist: string,
+      fraction: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getCollateralSharesForBorrowPart(
+      mixologist: string,
+      borrowPart: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getCollateralSharesForBorrowPart(address,uint256)"(
       mixologist: string,
       borrowPart: BigNumberish,
       overrides?: CallOverrides
@@ -137,7 +173,19 @@ export class MixologistHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    "getAmountForAssetFraction(address,uint256)"(
+      mixologist: string,
+      fraction: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getCollateralSharesForBorrowPart(
+      mixologist: string,
+      borrowPart: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getCollateralSharesForBorrowPart(address,uint256)"(
       mixologist: string,
       borrowPart: BigNumberish,
       overrides?: CallOverrides
@@ -151,7 +199,19 @@ export class MixologistHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    "getAmountForAssetFraction(address,uint256)"(
+      mixologist: string,
+      fraction: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     getCollateralSharesForBorrowPart(
+      mixologist: string,
+      borrowPart: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "getCollateralSharesForBorrowPart(address,uint256)"(
       mixologist: string,
       borrowPart: BigNumberish,
       overrides?: CallOverrides

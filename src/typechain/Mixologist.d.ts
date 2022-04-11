@@ -495,11 +495,27 @@ export class Mixologist extends BaseContract {
   functions: {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<[string]>;
 
+    "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<[string]>;
+
     accrue(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    "accrue()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     accrueInfo(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber] & {
+        interestPerSecond: BigNumber;
+        lastAccrued: BigNumber;
+        feesEarnedFraction: BigNumber;
+      }
+    >;
+
+    "accrueInfo()"(
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber, BigNumber] & {
@@ -516,7 +532,21 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    "addAsset(address,bool,uint256)"(
+      to: string,
+      skim: boolean,
+      share: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     addCollateral(
+      to: string,
+      skim: boolean,
+      share: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "addCollateral(address,bool,uint256)"(
       to: string,
       skim: boolean,
       share: BigNumberish,
@@ -529,7 +559,19 @@ export class Mixologist extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
+    "allowance(address,address)"(
+      arg0: string,
+      arg1: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     approve(
+      spender: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "approve(address,uint256)"(
       spender: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -537,13 +579,30 @@ export class Mixologist extends BaseContract {
 
     asset(overrides?: CallOverrides): Promise<[string]>;
 
+    "asset()"(overrides?: CallOverrides): Promise<[string]>;
+
     assetId(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "assetId()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     balanceOf(arg0: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    "balanceOf(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     beachBar(overrides?: CallOverrides): Promise<[string]>;
 
+    "beachBar()"(overrides?: CallOverrides): Promise<[string]>;
+
     borrow(
+      to: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "borrow(address,uint256)"(
       to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -553,20 +612,45 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    "claimOwnership()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     collateral(overrides?: CallOverrides): Promise<[string]>;
+
+    "collateral()"(overrides?: CallOverrides): Promise<[string]>;
 
     collateralId(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    "collateralId()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     decimals(overrides?: CallOverrides): Promise<[number]>;
+
+    "decimals()"(overrides?: CallOverrides): Promise<[number]>;
 
     depositFeesToBeachBar(
       swapper: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    "depositFeesToBeachBar(address)"(
+      swapper: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     exchangeRate(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    "exchangeRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     flashLoan(
+      borrower: string,
+      receiver: string,
+      amount: BigNumberish,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "flashLoan(address,address,uint256,bytes)"(
       borrower: string,
       receiver: string,
       amount: BigNumberish,
@@ -579,7 +663,19 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    "init(bytes)"(
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     liquidate(
+      users: string[],
+      maxBorrowParts: BigNumberish[],
+      swapper: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "liquidate(address[],uint256[],address)"(
       users: string[],
       maxBorrowParts: BigNumberish[],
       swapper: string,
@@ -593,15 +689,44 @@ export class Mixologist extends BaseContract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    "mix(uint8[],uint256[],bytes[])"(
+      actions: BigNumberish[],
+      values: BigNumberish[],
+      datas: BytesLike[],
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     name(overrides?: CallOverrides): Promise<[string]>;
+
+    "name()"(overrides?: CallOverrides): Promise<[string]>;
 
     nonces(arg0: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    "nonces(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     owner(overrides?: CallOverrides): Promise<[string]>;
+
+    "owner()"(overrides?: CallOverrides): Promise<[string]>;
 
     pendingOwner(overrides?: CallOverrides): Promise<[string]>;
 
+    "pendingOwner()"(overrides?: CallOverrides): Promise<[string]>;
+
     permit(
+      owner_: string,
+      spender: string,
+      value: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)"(
       owner_: string,
       spender: string,
       value: BigNumberish,
@@ -618,7 +743,19 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    "removeAsset(address,uint256)"(
+      to: string,
+      fraction: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     removeCollateral(
+      to: string,
+      share: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "removeCollateral(address,uint256)"(
       to: string,
       share: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -631,7 +768,19 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    "repay(address,bool,uint256)"(
+      to: string,
+      skim: boolean,
+      part: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     setCollateralSwapPath(
+      _collateralSwapPath: string[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "setCollateralSwapPath(address[])"(
       _collateralSwapPath: string[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -641,9 +790,22 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    "setTapSwapPath(address[])"(
+      _tapSwapPath: string[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     symbol(overrides?: CallOverrides): Promise<[string]>;
 
+    "symbol()"(overrides?: CallOverrides): Promise<[string]>;
+
     totalAsset(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
+    >;
+
+    "totalAsset()"(
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
@@ -655,9 +817,19 @@ export class Mixologist extends BaseContract {
       [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
     >;
 
+    "totalBorrow()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
+    >;
+
     totalCollateralShare(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    "totalCollateralShare()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "totalSupply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     transfer(
       to: string,
@@ -665,7 +837,20 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    "transfer(address,uint256)"(
+      to: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     transferFrom(
+      from: string,
+      to: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "transferFrom(address,address,uint256)"(
       from: string,
       to: string,
       amount: BigNumberish,
@@ -679,11 +864,27 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    "transferOwnership(address,bool,bool)"(
+      newOwner: string,
+      direct: boolean,
+      renounce: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     updateExchangeRate(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    "updateExchangeRate()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     userBorrowPart(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "userBorrowPart(address)"(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
@@ -693,18 +894,43 @@ export class Mixologist extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
+    "userCollateralShare(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     withdrawFeesEarned(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "withdrawFeesEarned()"(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
   DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
 
+  "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
+
   accrue(
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  "accrue()"(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   accrueInfo(
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber, BigNumber] & {
+      interestPerSecond: BigNumber;
+      lastAccrued: BigNumber;
+      feesEarnedFraction: BigNumber;
+    }
+  >;
+
+  "accrueInfo()"(
     overrides?: CallOverrides
   ): Promise<
     [BigNumber, BigNumber, BigNumber] & {
@@ -721,7 +947,21 @@ export class Mixologist extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  "addAsset(address,bool,uint256)"(
+    to: string,
+    skim: boolean,
+    share: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   addCollateral(
+    to: string,
+    skim: boolean,
+    share: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "addCollateral(address,bool,uint256)"(
     to: string,
     skim: boolean,
     share: BigNumberish,
@@ -734,7 +974,19 @@ export class Mixologist extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  "allowance(address,address)"(
+    arg0: string,
+    arg1: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   approve(
+    spender: string,
+    amount: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "approve(address,uint256)"(
     spender: string,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -742,13 +994,30 @@ export class Mixologist extends BaseContract {
 
   asset(overrides?: CallOverrides): Promise<string>;
 
+  "asset()"(overrides?: CallOverrides): Promise<string>;
+
   assetId(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "assetId()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   balanceOf(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+  "balanceOf(address)"(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   beachBar(overrides?: CallOverrides): Promise<string>;
 
+  "beachBar()"(overrides?: CallOverrides): Promise<string>;
+
   borrow(
+    to: string,
+    amount: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "borrow(address,uint256)"(
     to: string,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -758,20 +1027,45 @@ export class Mixologist extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  "claimOwnership()"(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   collateral(overrides?: CallOverrides): Promise<string>;
+
+  "collateral()"(overrides?: CallOverrides): Promise<string>;
 
   collateralId(overrides?: CallOverrides): Promise<BigNumber>;
 
+  "collateralId()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   decimals(overrides?: CallOverrides): Promise<number>;
+
+  "decimals()"(overrides?: CallOverrides): Promise<number>;
 
   depositFeesToBeachBar(
     swapper: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  "depositFeesToBeachBar(address)"(
+    swapper: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
 
+  "exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   flashLoan(
+    borrower: string,
+    receiver: string,
+    amount: BigNumberish,
+    data: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "flashLoan(address,address,uint256,bytes)"(
     borrower: string,
     receiver: string,
     amount: BigNumberish,
@@ -784,7 +1078,19 @@ export class Mixologist extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  "init(bytes)"(
+    data: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   liquidate(
+    users: string[],
+    maxBorrowParts: BigNumberish[],
+    swapper: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "liquidate(address[],uint256[],address)"(
     users: string[],
     maxBorrowParts: BigNumberish[],
     swapper: string,
@@ -798,15 +1104,44 @@ export class Mixologist extends BaseContract {
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  "mix(uint8[],uint256[],bytes[])"(
+    actions: BigNumberish[],
+    values: BigNumberish[],
+    datas: BytesLike[],
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   name(overrides?: CallOverrides): Promise<string>;
+
+  "name()"(overrides?: CallOverrides): Promise<string>;
 
   nonces(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+  "nonces(address)"(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   owner(overrides?: CallOverrides): Promise<string>;
+
+  "owner()"(overrides?: CallOverrides): Promise<string>;
 
   pendingOwner(overrides?: CallOverrides): Promise<string>;
 
+  "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
+
   permit(
+    owner_: string,
+    spender: string,
+    value: BigNumberish,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)"(
     owner_: string,
     spender: string,
     value: BigNumberish,
@@ -823,7 +1158,19 @@ export class Mixologist extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  "removeAsset(address,uint256)"(
+    to: string,
+    fraction: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   removeCollateral(
+    to: string,
+    share: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "removeCollateral(address,uint256)"(
     to: string,
     share: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -836,7 +1183,19 @@ export class Mixologist extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  "repay(address,bool,uint256)"(
+    to: string,
+    skim: boolean,
+    part: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   setCollateralSwapPath(
+    _collateralSwapPath: string[],
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "setCollateralSwapPath(address[])"(
     _collateralSwapPath: string[],
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -846,9 +1205,20 @@ export class Mixologist extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  "setTapSwapPath(address[])"(
+    _tapSwapPath: string[],
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   symbol(overrides?: CallOverrides): Promise<string>;
 
+  "symbol()"(overrides?: CallOverrides): Promise<string>;
+
   totalAsset(
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }>;
+
+  "totalAsset()"(
     overrides?: CallOverrides
   ): Promise<[BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }>;
 
@@ -856,9 +1226,17 @@ export class Mixologist extends BaseContract {
     overrides?: CallOverrides
   ): Promise<[BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }>;
 
+  "totalBorrow()"(
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }>;
+
   totalCollateralShare(overrides?: CallOverrides): Promise<BigNumber>;
 
+  "totalCollateralShare()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   transfer(
     to: string,
@@ -866,7 +1244,20 @@ export class Mixologist extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  "transfer(address,uint256)"(
+    to: string,
+    amount: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   transferFrom(
+    from: string,
+    to: string,
+    amount: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "transferFrom(address,address,uint256)"(
     from: string,
     to: string,
     amount: BigNumberish,
@@ -880,13 +1271,34 @@ export class Mixologist extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  "transferOwnership(address,bool,bool)"(
+    newOwner: string,
+    direct: boolean,
+    renounce: boolean,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   updateExchangeRate(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "updateExchangeRate()"(
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   userBorrowPart(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+  "userBorrowPart(address)"(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   userCollateralShare(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "userCollateralShare(address)"(
     arg0: string,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
@@ -895,12 +1307,30 @@ export class Mixologist extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  "withdrawFeesEarned()"(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
 
+    "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
+
     accrue(overrides?: CallOverrides): Promise<void>;
 
+    "accrue()"(overrides?: CallOverrides): Promise<void>;
+
     accrueInfo(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber] & {
+        interestPerSecond: BigNumber;
+        lastAccrued: BigNumber;
+        feesEarnedFraction: BigNumber;
+      }
+    >;
+
+    "accrueInfo()"(
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber, BigNumber] & {
@@ -917,7 +1347,21 @@ export class Mixologist extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    "addAsset(address,bool,uint256)"(
+      to: string,
+      skim: boolean,
+      share: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     addCollateral(
+      to: string,
+      skim: boolean,
+      share: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "addCollateral(address,bool,uint256)"(
       to: string,
       skim: boolean,
       share: BigNumberish,
@@ -930,7 +1374,19 @@ export class Mixologist extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    "allowance(address,address)"(
+      arg0: string,
+      arg1: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     approve(
+      spender: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "approve(address,uint256)"(
       spender: string,
       amount: BigNumberish,
       overrides?: CallOverrides
@@ -938,11 +1394,22 @@ export class Mixologist extends BaseContract {
 
     asset(overrides?: CallOverrides): Promise<string>;
 
+    "asset()"(overrides?: CallOverrides): Promise<string>;
+
     assetId(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "assetId()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     balanceOf(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+    "balanceOf(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     beachBar(overrides?: CallOverrides): Promise<string>;
+
+    "beachBar()"(overrides?: CallOverrides): Promise<string>;
 
     borrow(
       to: string,
@@ -950,20 +1417,41 @@ export class Mixologist extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber] & { part: BigNumber; share: BigNumber }>;
 
+    "borrow(address,uint256)"(
+      to: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber] & { part: BigNumber; share: BigNumber }>;
+
     claimOwnership(overrides?: CallOverrides): Promise<void>;
+
+    "claimOwnership()"(overrides?: CallOverrides): Promise<void>;
 
     collateral(overrides?: CallOverrides): Promise<string>;
 
+    "collateral()"(overrides?: CallOverrides): Promise<string>;
+
     collateralId(overrides?: CallOverrides): Promise<BigNumber>;
 
+    "collateralId()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     decimals(overrides?: CallOverrides): Promise<number>;
+
+    "decimals()"(overrides?: CallOverrides): Promise<number>;
 
     depositFeesToBeachBar(
       swapper: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
+    "depositFeesToBeachBar(address)"(
+      swapper: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     flashLoan(
       borrower: string,
@@ -973,9 +1461,26 @@ export class Mixologist extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    "flashLoan(address,address,uint256,bytes)"(
+      borrower: string,
+      receiver: string,
+      amount: BigNumberish,
+      data: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     init(data: BytesLike, overrides?: CallOverrides): Promise<void>;
 
+    "init(bytes)"(data: BytesLike, overrides?: CallOverrides): Promise<void>;
+
     liquidate(
+      users: string[],
+      maxBorrowParts: BigNumberish[],
+      swapper: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "liquidate(address[],uint256[],address)"(
       users: string[],
       maxBorrowParts: BigNumberish[],
       swapper: string,
@@ -991,15 +1496,46 @@ export class Mixologist extends BaseContract {
       [BigNumber, BigNumber] & { value1: BigNumber; value2: BigNumber }
     >;
 
+    "mix(uint8[],uint256[],bytes[])"(
+      actions: BigNumberish[],
+      values: BigNumberish[],
+      datas: BytesLike[],
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { value1: BigNumber; value2: BigNumber }
+    >;
+
     name(overrides?: CallOverrides): Promise<string>;
+
+    "name()"(overrides?: CallOverrides): Promise<string>;
 
     nonces(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+    "nonces(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     owner(overrides?: CallOverrides): Promise<string>;
+
+    "owner()"(overrides?: CallOverrides): Promise<string>;
 
     pendingOwner(overrides?: CallOverrides): Promise<string>;
 
+    "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
+
     permit(
+      owner_: string,
+      spender: string,
+      value: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)"(
       owner_: string,
       spender: string,
       value: BigNumberish,
@@ -1016,7 +1552,19 @@ export class Mixologist extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    "removeAsset(address,uint256)"(
+      to: string,
+      fraction: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     removeCollateral(
+      to: string,
+      share: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "removeCollateral(address,uint256)"(
       to: string,
       share: BigNumberish,
       overrides?: CallOverrides
@@ -1029,7 +1577,19 @@ export class Mixologist extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    "repay(address,bool,uint256)"(
+      to: string,
+      skim: boolean,
+      part: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     setCollateralSwapPath(
+      _collateralSwapPath: string[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setCollateralSwapPath(address[])"(
       _collateralSwapPath: string[],
       overrides?: CallOverrides
     ): Promise<void>;
@@ -1039,9 +1599,22 @@ export class Mixologist extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    "setTapSwapPath(address[])"(
+      _tapSwapPath: string[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     symbol(overrides?: CallOverrides): Promise<string>;
 
+    "symbol()"(overrides?: CallOverrides): Promise<string>;
+
     totalAsset(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
+    >;
+
+    "totalAsset()"(
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
@@ -1053,9 +1626,19 @@ export class Mixologist extends BaseContract {
       [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
     >;
 
+    "totalBorrow()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
+    >;
+
     totalCollateralShare(overrides?: CallOverrides): Promise<BigNumber>;
 
+    "totalCollateralShare()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     transfer(
       to: string,
@@ -1063,7 +1646,20 @@ export class Mixologist extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
+    "transfer(address,uint256)"(
+      to: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
     transferFrom(
+      from: string,
+      to: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "transferFrom(address,address,uint256)"(
       from: string,
       to: string,
       amount: BigNumberish,
@@ -1077,18 +1673,41 @@ export class Mixologist extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    "transferOwnership(address,bool,bool)"(
+      newOwner: string,
+      direct: boolean,
+      renounce: boolean,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     updateExchangeRate(
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { updated: boolean; rate: BigNumber }>;
 
+    "updateExchangeRate()"(
+      overrides?: CallOverrides
+    ): Promise<[boolean, BigNumber] & { updated: boolean; rate: BigNumber }>;
+
     userBorrowPart(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    "userBorrowPart(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     userCollateralShare(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    "userCollateralShare(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     withdrawFeesEarned(overrides?: CallOverrides): Promise<void>;
+
+    "withdrawFeesEarned()"(overrides?: CallOverrides): Promise<void>;
   };
 
   filters: {
@@ -1378,13 +1997,28 @@ export class Mixologist extends BaseContract {
   estimateGas: {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<BigNumber>;
 
+    "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     accrue(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "accrue()"(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     accrueInfo(overrides?: CallOverrides): Promise<BigNumber>;
 
+    "accrueInfo()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     addAsset(
+      to: string,
+      skim: boolean,
+      share: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "addAsset(address,bool,uint256)"(
       to: string,
       skim: boolean,
       share: BigNumberish,
@@ -1398,7 +2032,20 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    "addCollateral(address,bool,uint256)"(
+      to: string,
+      skim: boolean,
+      share: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     allowance(
+      arg0: string,
+      arg1: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "allowance(address,address)"(
       arg0: string,
       arg1: string,
       overrides?: CallOverrides
@@ -1410,15 +2057,38 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    "approve(address,uint256)"(
+      spender: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     asset(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "asset()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     assetId(overrides?: CallOverrides): Promise<BigNumber>;
 
+    "assetId()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     balanceOf(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    "balanceOf(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     beachBar(overrides?: CallOverrides): Promise<BigNumber>;
 
+    "beachBar()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     borrow(
+      to: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "borrow(address,uint256)"(
       to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1428,20 +2098,45 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    "claimOwnership()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     collateral(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "collateral()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     collateralId(overrides?: CallOverrides): Promise<BigNumber>;
 
+    "collateralId()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     decimals(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     depositFeesToBeachBar(
       swapper: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    "depositFeesToBeachBar(address)"(
+      swapper: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
 
+    "exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     flashLoan(
+      borrower: string,
+      receiver: string,
+      amount: BigNumberish,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "flashLoan(address,address,uint256,bytes)"(
       borrower: string,
       receiver: string,
       amount: BigNumberish,
@@ -1454,6 +2149,11 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    "init(bytes)"(
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     liquidate(
       users: string[],
       maxBorrowParts: BigNumberish[],
@@ -1461,7 +2161,21 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    "liquidate(address[],uint256[],address)"(
+      users: string[],
+      maxBorrowParts: BigNumberish[],
+      swapper: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     mix(
+      actions: BigNumberish[],
+      values: BigNumberish[],
+      datas: BytesLike[],
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "mix(uint8[],uint256[],bytes[])"(
       actions: BigNumberish[],
       values: BigNumberish[],
       datas: BytesLike[],
@@ -1470,13 +2184,35 @@ export class Mixologist extends BaseContract {
 
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
+    "name()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     nonces(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    "nonces(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
+    "pendingOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     permit(
+      owner_: string,
+      spender: string,
+      value: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)"(
       owner_: string,
       spender: string,
       value: BigNumberish,
@@ -1493,7 +2229,19 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    "removeAsset(address,uint256)"(
+      to: string,
+      fraction: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     removeCollateral(
+      to: string,
+      share: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "removeCollateral(address,uint256)"(
       to: string,
       share: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1506,7 +2254,19 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    "repay(address,bool,uint256)"(
+      to: string,
+      skim: boolean,
+      part: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     setCollateralSwapPath(
+      _collateralSwapPath: string[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "setCollateralSwapPath(address[])"(
       _collateralSwapPath: string[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -1516,15 +2276,30 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    "setTapSwapPath(address[])"(
+      _tapSwapPath: string[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     symbol(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "symbol()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     totalAsset(overrides?: CallOverrides): Promise<BigNumber>;
 
+    "totalAsset()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     totalBorrow(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "totalBorrow()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     totalCollateralShare(overrides?: CallOverrides): Promise<BigNumber>;
 
+    "totalCollateralShare()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     transfer(
       to: string,
@@ -1532,7 +2307,20 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    "transfer(address,uint256)"(
+      to: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     transferFrom(
+      from: string,
+      to: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "transferFrom(address,address,uint256)"(
       from: string,
       to: string,
       amount: BigNumberish,
@@ -1546,13 +2334,34 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    "transferOwnership(address,bool,bool)"(
+      newOwner: string,
+      direct: boolean,
+      renounce: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     updateExchangeRate(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "updateExchangeRate()"(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     userBorrowPart(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+    "userBorrowPart(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     userCollateralShare(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "userCollateralShare(address)"(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1560,18 +2369,39 @@ export class Mixologist extends BaseContract {
     withdrawFeesEarned(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    "withdrawFeesEarned()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    "DOMAIN_SEPARATOR()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     accrue(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "accrue()"(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     accrueInfo(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    "accrueInfo()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     addAsset(
+      to: string,
+      skim: boolean,
+      share: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "addAsset(address,bool,uint256)"(
       to: string,
       skim: boolean,
       share: BigNumberish,
@@ -1585,7 +2415,20 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    "addCollateral(address,bool,uint256)"(
+      to: string,
+      skim: boolean,
+      share: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     allowance(
+      arg0: string,
+      arg1: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "allowance(address,address)"(
       arg0: string,
       arg1: string,
       overrides?: CallOverrides
@@ -1597,18 +2440,41 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    "approve(address,uint256)"(
+      spender: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     asset(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    "asset()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     assetId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "assetId()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     balanceOf(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    "balanceOf(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     beachBar(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    "beachBar()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     borrow(
+      to: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "borrow(address,uint256)"(
       to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1618,20 +2484,45 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    "claimOwnership()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     collateral(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "collateral()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     collateralId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    "collateralId()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     depositFeesToBeachBar(
       swapper: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    "depositFeesToBeachBar(address)"(
+      swapper: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     exchangeRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    "exchangeRate()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     flashLoan(
+      borrower: string,
+      receiver: string,
+      amount: BigNumberish,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "flashLoan(address,address,uint256,bytes)"(
       borrower: string,
       receiver: string,
       amount: BigNumberish,
@@ -1644,7 +2535,19 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    "init(bytes)"(
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     liquidate(
+      users: string[],
+      maxBorrowParts: BigNumberish[],
+      swapper: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "liquidate(address[],uint256[],address)"(
       users: string[],
       maxBorrowParts: BigNumberish[],
       swapper: string,
@@ -1658,18 +2561,47 @@ export class Mixologist extends BaseContract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    "mix(uint8[],uint256[],bytes[])"(
+      actions: BigNumberish[],
+      values: BigNumberish[],
+      datas: BytesLike[],
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     nonces(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    "nonces(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    "pendingOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     permit(
+      owner_: string,
+      spender: string,
+      value: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)"(
       owner_: string,
       spender: string,
       value: BigNumberish,
@@ -1686,7 +2618,19 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    "removeAsset(address,uint256)"(
+      to: string,
+      fraction: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     removeCollateral(
+      to: string,
+      share: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "removeCollateral(address,uint256)"(
       to: string,
       share: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1699,7 +2643,19 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    "repay(address,bool,uint256)"(
+      to: string,
+      skim: boolean,
+      part: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     setCollateralSwapPath(
+      _collateralSwapPath: string[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setCollateralSwapPath(address[])"(
       _collateralSwapPath: string[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
@@ -1709,17 +2665,34 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    "setTapSwapPath(address[])"(
+      _tapSwapPath: string[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "symbol()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     totalAsset(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    "totalAsset()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     totalBorrow(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "totalBorrow()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     totalCollateralShare(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    "totalCollateralShare()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "totalSupply()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transfer(
       to: string,
@@ -1727,7 +2700,20 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    "transfer(address,uint256)"(
+      to: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     transferFrom(
+      from: string,
+      to: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "transferFrom(address,address,uint256)"(
       from: string,
       to: string,
       amount: BigNumberish,
@@ -1741,11 +2727,27 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    "transferOwnership(address,bool,bool)"(
+      newOwner: string,
+      direct: boolean,
+      renounce: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     updateExchangeRate(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    "updateExchangeRate()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     userBorrowPart(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "userBorrowPart(address)"(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1755,7 +2757,16 @@ export class Mixologist extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    "userCollateralShare(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     withdrawFeesEarned(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "withdrawFeesEarned()"(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };
