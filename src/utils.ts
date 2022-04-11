@@ -1,7 +1,7 @@
 import { Provider } from '@ethersproject/abstract-provider';
 import { Signer } from 'ethers';
 import __deployments from './addresses.json';
-import { BeachBarFactory, MixologistFactory } from './factories';
+import { BeachBarFactory, ERC20Factory, MixologistFactory } from './factories';
 
 const addresses__TEST = __deployments;
 
@@ -16,5 +16,8 @@ export const loadContract__TEST = (signer: Signer | Provider) => {
             addresses__TEST.mixologistHelper,
             signer,
         ),
+        tap: ERC20Factory.connect(addresses__TEST.tap, signer),
+        usdc: ERC20Factory.connect(addresses__TEST.usdc, signer),
+        weth: ERC20Factory.connect(addresses__TEST.weth, signer),
     };
 };
