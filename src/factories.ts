@@ -2,6 +2,8 @@ import {
     BeachBar,
     BeachBar__factory,
     ERC20,
+    ERC20Mock,
+    ERC20Mock__factory,
     ERC20__factory,
     Mixologist,
     MixologistHelper,
@@ -20,3 +22,6 @@ export const MixologistHelperFactory = MixologistHelper__factory;
 
 export type IERC20 = ERC20;
 export const ERC20Factory = ERC20__factory;
+
+export type IERC20Mock = ERC20Mock;
+export const ERC20MockFactory = ERC20Mock__factory;
