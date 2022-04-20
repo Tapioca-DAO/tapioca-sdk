@@ -40,6 +40,7 @@ interface BeachBarInterface extends ethers.utils.Interface {
     "depositAsset(uint256,address,address,uint256,uint256)": FunctionFragment;
     "depositETH(uint256,address,uint256)": FunctionFragment;
     "depositETHAsset(uint256,address,uint256)": FunctionFragment;
+    "executeMixologistFn(address,bytes)": FunctionFragment;
     "feeTo()": FunctionFragment;
     "feeVeTap()": FunctionFragment;
     "ids(uint8,address,address,uint256)": FunctionFragment;
@@ -153,6 +154,10 @@ interface BeachBarInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "depositETHAsset",
     values: [BigNumberish, string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "executeMixologistFn",
+    values: [string, BytesLike]
   ): string;
   encodeFunctionData(functionFragment: "feeTo", values?: undefined): string;
   encodeFunctionData(functionFragment: "feeVeTap", values?: undefined): string;
@@ -334,6 +339,10 @@ interface BeachBarInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "depositETH", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "depositETHAsset",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "executeMixologistFn",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "feeTo", data: BytesLike): Result;
@@ -817,6 +826,18 @@ export class BeachBar extends BaseContract {
       to: string,
       amount: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    executeMixologistFn(
+      mc: string,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "executeMixologistFn(address,bytes)"(
+      mc: string,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     feeTo(overrides?: CallOverrides): Promise<[string]>;
@@ -1517,6 +1538,18 @@ export class BeachBar extends BaseContract {
     to: string,
     amount: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  executeMixologistFn(
+    mc: string,
+    data: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "executeMixologistFn(address,bytes)"(
+    mc: string,
+    data: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   feeTo(overrides?: CallOverrides): Promise<string>;
@@ -2226,6 +2259,18 @@ export class BeachBar extends BaseContract {
     ): Promise<
       [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
     >;
+
+    executeMixologistFn(
+      mc: string,
+      data: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<[boolean, string] & { success: boolean; result: string }>;
+
+    "executeMixologistFn(address,bytes)"(
+      mc: string,
+      data: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<[boolean, string] & { success: boolean; result: string }>;
 
     feeTo(overrides?: CallOverrides): Promise<string>;
 
@@ -3113,6 +3158,18 @@ export class BeachBar extends BaseContract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    executeMixologistFn(
+      mc: string,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "executeMixologistFn(address,bytes)"(
+      mc: string,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     feeTo(overrides?: CallOverrides): Promise<BigNumber>;
 
     "feeTo()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3792,6 +3849,18 @@ export class BeachBar extends BaseContract {
       to: string,
       amount: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    executeMixologistFn(
+      mc: string,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "executeMixologistFn(address,bytes)"(
+      mc: string,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     feeTo(overrides?: CallOverrides): Promise<PopulatedTransaction>;

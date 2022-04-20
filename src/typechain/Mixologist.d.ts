@@ -43,6 +43,7 @@ interface MixologistInterface extends ethers.utils.Interface {
     "flashLoan(address,address,uint256,bytes)": FunctionFragment;
     "init(bytes)": FunctionFragment;
     "liquidate(address[],uint256[],address)": FunctionFragment;
+    "liquidationQueueInfo()": FunctionFragment;
     "mix(uint8[],uint256[],bytes[])": FunctionFragment;
     "name()": FunctionFragment;
     "nonces(address)": FunctionFragment;
@@ -130,6 +131,10 @@ interface MixologistInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "liquidate",
     values: [string[], BigNumberish[], string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "liquidationQueueInfo",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "mix",
@@ -259,6 +264,10 @@ interface MixologistInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "flashLoan", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "init", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "liquidate", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "liquidationQueueInfo",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "mix", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
@@ -682,6 +691,14 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    liquidationQueueInfo(
+      overrides?: CallOverrides
+    ): Promise<[number] & { activationTime: number }>;
+
+    "liquidationQueueInfo()"(
+      overrides?: CallOverrides
+    ): Promise<[number] & { activationTime: number }>;
+
     mix(
       actions: BigNumberish[],
       values: BigNumberish[],
@@ -1097,6 +1114,10 @@ export class Mixologist extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  liquidationQueueInfo(overrides?: CallOverrides): Promise<number>;
+
+  "liquidationQueueInfo()"(overrides?: CallOverrides): Promise<number>;
+
   mix(
     actions: BigNumberish[],
     values: BigNumberish[],
@@ -1486,6 +1507,10 @@ export class Mixologist extends BaseContract {
       swapper: string,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    liquidationQueueInfo(overrides?: CallOverrides): Promise<number>;
+
+    "liquidationQueueInfo()"(overrides?: CallOverrides): Promise<number>;
 
     mix(
       actions: BigNumberish[],
@@ -2168,6 +2193,10 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    liquidationQueueInfo(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "liquidationQueueInfo()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     mix(
       actions: BigNumberish[],
       values: BigNumberish[],
@@ -2552,6 +2581,14 @@ export class Mixologist extends BaseContract {
       maxBorrowParts: BigNumberish[],
       swapper: string,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    liquidationQueueInfo(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "liquidationQueueInfo()"(
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     mix(
