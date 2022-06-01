@@ -12,7 +12,6 @@ import {
   BaseContract,
   ContractTransaction,
   Overrides,
-  PayableOverrides,
   CallOverrides,
 } from "ethers";
 import { BytesLike } from "@ethersproject/bytes";
@@ -37,14 +36,14 @@ interface MixologistInterface extends ethers.utils.Interface {
     "claimOwnership()": FunctionFragment;
     "collateral()": FunctionFragment;
     "collateralId()": FunctionFragment;
+    "computeAssetAmountToSolvency(address,uint256)": FunctionFragment;
     "decimals()": FunctionFragment;
-    "depositFeesToBeachBar(address)": FunctionFragment;
+    "depositFeesToYieldBox(address)": FunctionFragment;
     "exchangeRate()": FunctionFragment;
     "flashLoan(address,address,uint256,bytes)": FunctionFragment;
     "init(bytes)": FunctionFragment;
     "liquidate(address[],uint256[],address)": FunctionFragment;
-    "liquidationQueueInfo()": FunctionFragment;
-    "mix(uint8[],uint256[],bytes[])": FunctionFragment;
+    "liquidationQueue()": FunctionFragment;
     "name()": FunctionFragment;
     "nonces(address)": FunctionFragment;
     "owner()": FunctionFragment;
@@ -54,6 +53,7 @@ interface MixologistInterface extends ethers.utils.Interface {
     "removeCollateral(address,uint256)": FunctionFragment;
     "repay(address,bool,uint256)": FunctionFragment;
     "setCollateralSwapPath(address[])": FunctionFragment;
+    "setLiquidationQueue(address,(uint256,uint256,address))": FunctionFragment;
     "setTapSwapPath(address[])": FunctionFragment;
     "symbol()": FunctionFragment;
     "totalAsset()": FunctionFragment;
@@ -67,6 +67,7 @@ interface MixologistInterface extends ethers.utils.Interface {
     "userBorrowPart(address)": FunctionFragment;
     "userCollateralShare(address)": FunctionFragment;
     "withdrawFeesEarned()": FunctionFragment;
+    "yieldBox()": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -114,9 +115,13 @@ interface MixologistInterface extends ethers.utils.Interface {
     functionFragment: "collateralId",
     values?: undefined
   ): string;
+  encodeFunctionData(
+    functionFragment: "computeAssetAmountToSolvency",
+    values: [string, BigNumberish]
+  ): string;
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "depositFeesToBeachBar",
+    functionFragment: "depositFeesToYieldBox",
     values: [string]
   ): string;
   encodeFunctionData(
@@ -133,12 +138,8 @@ interface MixologistInterface extends ethers.utils.Interface {
     values: [string[], BigNumberish[], string]
   ): string;
   encodeFunctionData(
-    functionFragment: "liquidationQueueInfo",
+    functionFragment: "liquidationQueue",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "mix",
-    values: [BigNumberish[], BigNumberish[], BytesLike[]]
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(functionFragment: "nonces", values: [string]): string;
@@ -174,6 +175,17 @@ interface MixologistInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "setCollateralSwapPath",
     values: [string[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLiquidationQueue",
+    values: [
+      string,
+      {
+        activationTime: BigNumberish;
+        minBidAmount: BigNumberish;
+        feeCollector: string;
+      }
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "setTapSwapPath",
@@ -224,6 +236,7 @@ interface MixologistInterface extends ethers.utils.Interface {
     functionFragment: "withdrawFeesEarned",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "yieldBox", values?: undefined): string;
 
   decodeFunctionResult(
     functionFragment: "DOMAIN_SEPARATOR",
@@ -252,9 +265,13 @@ interface MixologistInterface extends ethers.utils.Interface {
     functionFragment: "collateralId",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "computeAssetAmountToSolvency",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "depositFeesToBeachBar",
+    functionFragment: "depositFeesToYieldBox",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -265,10 +282,9 @@ interface MixologistInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "init", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "liquidate", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "liquidationQueueInfo",
+    functionFragment: "liquidationQueue",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "mix", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -288,6 +304,10 @@ interface MixologistInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "repay", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setCollateralSwapPath",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setLiquidationQueue",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -333,13 +353,13 @@ interface MixologistInterface extends ethers.utils.Interface {
     functionFragment: "withdrawFeesEarned",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "yieldBox", data: BytesLike): Result;
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "LogAccrue(uint256,uint256,uint64,uint256)": EventFragment;
     "LogAddAsset(address,address,uint256,uint256)": EventFragment;
     "LogAddCollateral(address,address,uint256)": EventFragment;
-    "LogBeachBarFeesDeposit(uint256,uint256)": EventFragment;
     "LogBorrow(address,address,uint256,uint256,uint256)": EventFragment;
     "LogExchangeRate(uint256)": EventFragment;
     "LogFlashLoan(address,uint256,uint256,address)": EventFragment;
@@ -347,6 +367,7 @@ interface MixologistInterface extends ethers.utils.Interface {
     "LogRemoveCollateral(address,address,uint256)": EventFragment;
     "LogRepay(address,address,uint256,uint256)": EventFragment;
     "LogWithdrawFees(address,uint256)": EventFragment;
+    "LogYieldBoxFeesDeposit(uint256,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
@@ -355,7 +376,6 @@ interface MixologistInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "LogAccrue"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogAddAsset"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogAddCollateral"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "LogBeachBarFeesDeposit"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogBorrow"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogExchangeRate"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogFlashLoan"): EventFragment;
@@ -363,6 +383,7 @@ interface MixologistInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "LogRemoveCollateral"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogRepay"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogWithdrawFees"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogYieldBoxFeesDeposit"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
@@ -395,10 +416,6 @@ export type LogAddAssetEvent = TypedEvent<
 
 export type LogAddCollateralEvent = TypedEvent<
   [string, string, BigNumber] & { from: string; to: string; share: BigNumber }
->;
-
-export type LogBeachBarFeesDepositEvent = TypedEvent<
-  [BigNumber, BigNumber] & { feeShares: BigNumber; tapAmount: BigNumber }
 >;
 
 export type LogBorrowEvent = TypedEvent<
@@ -448,6 +465,10 @@ export type LogRepayEvent = TypedEvent<
 
 export type LogWithdrawFeesEvent = TypedEvent<
   [string, BigNumber] & { feeTo: string; feesEarnedFraction: BigNumber }
+>;
+
+export type LogYieldBoxFeesDepositEvent = TypedEvent<
+  [BigNumber, BigNumber] & { feeShares: BigNumber; tapAmount: BigNumber }
 >;
 
 export type OwnershipTransferredEvent = TypedEvent<
@@ -633,16 +654,28 @@ export class Mixologist extends BaseContract {
 
     "collateralId()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    computeAssetAmountToSolvency(
+      user: string,
+      _exchangeRate: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "computeAssetAmountToSolvency(address,uint256)"(
+      user: string,
+      _exchangeRate: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     decimals(overrides?: CallOverrides): Promise<[number]>;
 
     "decimals()"(overrides?: CallOverrides): Promise<[number]>;
 
-    depositFeesToBeachBar(
+    depositFeesToYieldBox(
       swapper: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "depositFeesToBeachBar(address)"(
+    "depositFeesToYieldBox(address)"(
       swapper: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -691,27 +724,9 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    liquidationQueueInfo(
-      overrides?: CallOverrides
-    ): Promise<[number] & { activationTime: number }>;
+    liquidationQueue(overrides?: CallOverrides): Promise<[string]>;
 
-    "liquidationQueueInfo()"(
-      overrides?: CallOverrides
-    ): Promise<[number] & { activationTime: number }>;
-
-    mix(
-      actions: BigNumberish[],
-      values: BigNumberish[],
-      datas: BytesLike[],
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "mix(uint8[],uint256[],bytes[])"(
-      actions: BigNumberish[],
-      values: BigNumberish[],
-      datas: BytesLike[],
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    "liquidationQueue()"(overrides?: CallOverrides): Promise<[string]>;
 
     name(overrides?: CallOverrides): Promise<[string]>;
 
@@ -799,6 +814,26 @@ export class Mixologist extends BaseContract {
 
     "setCollateralSwapPath(address[])"(
       _collateralSwapPath: string[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    setLiquidationQueue(
+      _liquidationQueue: string,
+      _liquidationQueueMeta: {
+        activationTime: BigNumberish;
+        minBidAmount: BigNumberish;
+        feeCollector: string;
+      },
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "setLiquidationQueue(address,(uint256,uint256,address))"(
+      _liquidationQueue: string,
+      _liquidationQueueMeta: {
+        activationTime: BigNumberish;
+        minBidAmount: BigNumberish;
+        feeCollector: string;
+      },
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -923,6 +958,10 @@ export class Mixologist extends BaseContract {
     "withdrawFeesEarned()"(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    yieldBox(overrides?: CallOverrides): Promise<[string]>;
+
+    "yieldBox()"(overrides?: CallOverrides): Promise<[string]>;
   };
 
   DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
@@ -1056,16 +1095,28 @@ export class Mixologist extends BaseContract {
 
   "collateralId()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  computeAssetAmountToSolvency(
+    user: string,
+    _exchangeRate: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "computeAssetAmountToSolvency(address,uint256)"(
+    user: string,
+    _exchangeRate: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   decimals(overrides?: CallOverrides): Promise<number>;
 
   "decimals()"(overrides?: CallOverrides): Promise<number>;
 
-  depositFeesToBeachBar(
+  depositFeesToYieldBox(
     swapper: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "depositFeesToBeachBar(address)"(
+  "depositFeesToYieldBox(address)"(
     swapper: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -1114,23 +1165,9 @@ export class Mixologist extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  liquidationQueueInfo(overrides?: CallOverrides): Promise<number>;
+  liquidationQueue(overrides?: CallOverrides): Promise<string>;
 
-  "liquidationQueueInfo()"(overrides?: CallOverrides): Promise<number>;
-
-  mix(
-    actions: BigNumberish[],
-    values: BigNumberish[],
-    datas: BytesLike[],
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "mix(uint8[],uint256[],bytes[])"(
-    actions: BigNumberish[],
-    values: BigNumberish[],
-    datas: BytesLike[],
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  "liquidationQueue()"(overrides?: CallOverrides): Promise<string>;
 
   name(overrides?: CallOverrides): Promise<string>;
 
@@ -1218,6 +1255,26 @@ export class Mixologist extends BaseContract {
 
   "setCollateralSwapPath(address[])"(
     _collateralSwapPath: string[],
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  setLiquidationQueue(
+    _liquidationQueue: string,
+    _liquidationQueueMeta: {
+      activationTime: BigNumberish;
+      minBidAmount: BigNumberish;
+      feeCollector: string;
+    },
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "setLiquidationQueue(address,(uint256,uint256,address))"(
+    _liquidationQueue: string,
+    _liquidationQueueMeta: {
+      activationTime: BigNumberish;
+      minBidAmount: BigNumberish;
+      feeCollector: string;
+    },
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -1331,6 +1388,10 @@ export class Mixologist extends BaseContract {
   "withdrawFeesEarned()"(
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
+
+  yieldBox(overrides?: CallOverrides): Promise<string>;
+
+  "yieldBox()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
@@ -1456,16 +1517,28 @@ export class Mixologist extends BaseContract {
 
     "collateralId()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    computeAssetAmountToSolvency(
+      user: string,
+      _exchangeRate: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "computeAssetAmountToSolvency(address,uint256)"(
+      user: string,
+      _exchangeRate: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     decimals(overrides?: CallOverrides): Promise<number>;
 
     "decimals()"(overrides?: CallOverrides): Promise<number>;
 
-    depositFeesToBeachBar(
+    depositFeesToYieldBox(
       swapper: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "depositFeesToBeachBar(address)"(
+    "depositFeesToYieldBox(address)"(
       swapper: string,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -1508,27 +1581,9 @@ export class Mixologist extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    liquidationQueueInfo(overrides?: CallOverrides): Promise<number>;
+    liquidationQueue(overrides?: CallOverrides): Promise<string>;
 
-    "liquidationQueueInfo()"(overrides?: CallOverrides): Promise<number>;
-
-    mix(
-      actions: BigNumberish[],
-      values: BigNumberish[],
-      datas: BytesLike[],
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { value1: BigNumber; value2: BigNumber }
-    >;
-
-    "mix(uint8[],uint256[],bytes[])"(
-      actions: BigNumberish[],
-      values: BigNumberish[],
-      datas: BytesLike[],
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { value1: BigNumber; value2: BigNumber }
-    >;
+    "liquidationQueue()"(overrides?: CallOverrides): Promise<string>;
 
     name(overrides?: CallOverrides): Promise<string>;
 
@@ -1616,6 +1671,26 @@ export class Mixologist extends BaseContract {
 
     "setCollateralSwapPath(address[])"(
       _collateralSwapPath: string[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setLiquidationQueue(
+      _liquidationQueue: string,
+      _liquidationQueueMeta: {
+        activationTime: BigNumberish;
+        minBidAmount: BigNumberish;
+        feeCollector: string;
+      },
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setLiquidationQueue(address,(uint256,uint256,address))"(
+      _liquidationQueue: string,
+      _liquidationQueueMeta: {
+        activationTime: BigNumberish;
+        minBidAmount: BigNumberish;
+        feeCollector: string;
+      },
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1733,6 +1808,10 @@ export class Mixologist extends BaseContract {
     withdrawFeesEarned(overrides?: CallOverrides): Promise<void>;
 
     "withdrawFeesEarned()"(overrides?: CallOverrides): Promise<void>;
+
+    yieldBox(overrides?: CallOverrides): Promise<string>;
+
+    "yieldBox()"(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
@@ -1820,22 +1899,6 @@ export class Mixologist extends BaseContract {
     ): TypedEventFilter<
       [string, string, BigNumber],
       { from: string; to: string; share: BigNumber }
-    >;
-
-    "LogBeachBarFeesDeposit(uint256,uint256)"(
-      feeShares?: null,
-      tapAmount?: null
-    ): TypedEventFilter<
-      [BigNumber, BigNumber],
-      { feeShares: BigNumber; tapAmount: BigNumber }
-    >;
-
-    LogBeachBarFeesDeposit(
-      feeShares?: null,
-      tapAmount?: null
-    ): TypedEventFilter<
-      [BigNumber, BigNumber],
-      { feeShares: BigNumber; tapAmount: BigNumber }
     >;
 
     "LogBorrow(address,address,uint256,uint256,uint256)"(
@@ -1982,6 +2045,22 @@ export class Mixologist extends BaseContract {
     ): TypedEventFilter<
       [string, BigNumber],
       { feeTo: string; feesEarnedFraction: BigNumber }
+    >;
+
+    "LogYieldBoxFeesDeposit(uint256,uint256)"(
+      feeShares?: null,
+      tapAmount?: null
+    ): TypedEventFilter<
+      [BigNumber, BigNumber],
+      { feeShares: BigNumber; tapAmount: BigNumber }
+    >;
+
+    LogYieldBoxFeesDeposit(
+      feeShares?: null,
+      tapAmount?: null
+    ): TypedEventFilter<
+      [BigNumber, BigNumber],
+      { feeShares: BigNumber; tapAmount: BigNumber }
     >;
 
     "OwnershipTransferred(address,address)"(
@@ -2135,16 +2214,28 @@ export class Mixologist extends BaseContract {
 
     "collateralId()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    computeAssetAmountToSolvency(
+      user: string,
+      _exchangeRate: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "computeAssetAmountToSolvency(address,uint256)"(
+      user: string,
+      _exchangeRate: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     decimals(overrides?: CallOverrides): Promise<BigNumber>;
 
     "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    depositFeesToBeachBar(
+    depositFeesToYieldBox(
       swapper: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "depositFeesToBeachBar(address)"(
+    "depositFeesToYieldBox(address)"(
       swapper: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -2193,23 +2284,9 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    liquidationQueueInfo(overrides?: CallOverrides): Promise<BigNumber>;
+    liquidationQueue(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "liquidationQueueInfo()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    mix(
-      actions: BigNumberish[],
-      values: BigNumberish[],
-      datas: BytesLike[],
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "mix(uint8[],uint256[],bytes[])"(
-      actions: BigNumberish[],
-      values: BigNumberish[],
-      datas: BytesLike[],
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    "liquidationQueue()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2297,6 +2374,26 @@ export class Mixologist extends BaseContract {
 
     "setCollateralSwapPath(address[])"(
       _collateralSwapPath: string[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    setLiquidationQueue(
+      _liquidationQueue: string,
+      _liquidationQueueMeta: {
+        activationTime: BigNumberish;
+        minBidAmount: BigNumberish;
+        feeCollector: string;
+      },
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "setLiquidationQueue(address,(uint256,uint256,address))"(
+      _liquidationQueue: string,
+      _liquidationQueueMeta: {
+        activationTime: BigNumberish;
+        minBidAmount: BigNumberish;
+        feeCollector: string;
+      },
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -2402,6 +2499,10 @@ export class Mixologist extends BaseContract {
     "withdrawFeesEarned()"(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    yieldBox(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "yieldBox()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -2525,16 +2626,28 @@ export class Mixologist extends BaseContract {
 
     "collateralId()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    computeAssetAmountToSolvency(
+      user: string,
+      _exchangeRate: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "computeAssetAmountToSolvency(address,uint256)"(
+      user: string,
+      _exchangeRate: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    depositFeesToBeachBar(
+    depositFeesToYieldBox(
       swapper: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "depositFeesToBeachBar(address)"(
+    "depositFeesToYieldBox(address)"(
       swapper: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
@@ -2583,26 +2696,10 @@ export class Mixologist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    liquidationQueueInfo(
+    liquidationQueue(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "liquidationQueue()"(
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "liquidationQueueInfo()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    mix(
-      actions: BigNumberish[],
-      values: BigNumberish[],
-      datas: BytesLike[],
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "mix(uint8[],uint256[],bytes[])"(
-      actions: BigNumberish[],
-      values: BigNumberish[],
-      datas: BytesLike[],
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -2694,6 +2791,26 @@ export class Mixologist extends BaseContract {
 
     "setCollateralSwapPath(address[])"(
       _collateralSwapPath: string[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setLiquidationQueue(
+      _liquidationQueue: string,
+      _liquidationQueueMeta: {
+        activationTime: BigNumberish;
+        minBidAmount: BigNumberish;
+        feeCollector: string;
+      },
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setLiquidationQueue(address,(uint256,uint256,address))"(
+      _liquidationQueue: string,
+      _liquidationQueueMeta: {
+        activationTime: BigNumberish;
+        minBidAmount: BigNumberish;
+        feeCollector: string;
+      },
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -2806,5 +2923,9 @@ export class Mixologist extends BaseContract {
     "withdrawFeesEarned()"(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    yieldBox(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "yieldBox()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

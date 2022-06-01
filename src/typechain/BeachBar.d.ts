@@ -22,199 +22,44 @@ import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface BeachBarInterface extends ethers.utils.Interface {
   functions: {
-    "amountOf(address,uint256)": FunctionFragment;
-    "assetCount()": FunctionFragment;
-    "assets(uint256)": FunctionFragment;
-    "balanceOf(address,uint256)": FunctionFragment;
-    "balanceOfBatch(address[],uint256[])": FunctionFragment;
-    "batch(bytes[],bool)": FunctionFragment;
-    "batchTransfer(address,address,uint256[],uint256[])": FunctionFragment;
-    "burn(uint256,address,uint256)": FunctionFragment;
     "claimOwnership()": FunctionFragment;
-    "clonesOf(address,uint256)": FunctionFragment;
-    "clonesOfCount(address)": FunctionFragment;
-    "createToken(string,string,uint8)": FunctionFragment;
-    "decimals(uint256)": FunctionFragment;
-    "deploy(address,bytes,bool)": FunctionFragment;
-    "deposit(uint256,address,address,uint256,uint256)": FunctionFragment;
-    "depositAsset(uint256,address,address,uint256,uint256)": FunctionFragment;
-    "depositETH(uint256,address,uint256)": FunctionFragment;
-    "depositETHAsset(uint256,address,uint256)": FunctionFragment;
-    "executeMixologistFn(address,bytes)": FunctionFragment;
+    "executeMixologistFn(address[],bytes[])": FunctionFragment;
     "feeTo()": FunctionFragment;
     "feeVeTap()": FunctionFragment;
-    "ids(uint8,address,address,uint256)": FunctionFragment;
-    "isApprovedForAll(address,address)": FunctionFragment;
-    "masterContractOf(address)": FunctionFragment;
-    "mint(uint256,address,uint256)": FunctionFragment;
-    "name(uint256)": FunctionFragment;
-    "nativeTokens(uint256)": FunctionFragment;
-    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)": FunctionFragment;
-    "onERC1155Received(address,address,uint256,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
-    "pendingTokenOwner(uint256)": FunctionFragment;
-    "permitToken(address,address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "registerAsset(uint8,address,address,uint256)": FunctionFragment;
+    "registerAsset(address,address,uint256)": FunctionFragment;
     "registerMasterContract(address,uint8)": FunctionFragment;
     "registerMixologist(address,bytes,bool)": FunctionFragment;
-    "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": FunctionFragment;
-    "safeTransferFrom(address,address,uint256,uint256,bytes)": FunctionFragment;
-    "setApprovalForAll(address,bool)": FunctionFragment;
     "setFeeTo(address)": FunctionFragment;
     "setFeeVeTap(address)": FunctionFragment;
     "setSwapper(address,bool)": FunctionFragment;
-    "supportsInterface(bytes4)": FunctionFragment;
     "swappers(address)": FunctionFragment;
-    "symbol(uint256)": FunctionFragment;
     "tapAssetId()": FunctionFragment;
     "tapToken()": FunctionFragment;
-    "toAmount(uint256,uint256,bool)": FunctionFragment;
-    "toShare(uint256,uint256,bool)": FunctionFragment;
-    "tokenOwner(uint256)": FunctionFragment;
-    "totalSupply(uint256)": FunctionFragment;
-    "transfer(address,address,uint256,uint256)": FunctionFragment;
-    "transferMultiple(address,address[],uint256,uint256[])": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
-    "uri(uint256)": FunctionFragment;
-    "uriBuilder()": FunctionFragment;
-    "withdraw(uint256,address,address,uint256,uint256,bool)": FunctionFragment;
     "withdrawAllProtocolFees(address[])": FunctionFragment;
-    "wrappedNative()": FunctionFragment;
+    "yieldBox()": FunctionFragment;
   };
 
-  encodeFunctionData(
-    functionFragment: "amountOf",
-    values: [string, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "assetCount",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "assets",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "balanceOf",
-    values: [string, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "balanceOfBatch",
-    values: [string[], BigNumberish[]]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "batch",
-    values: [BytesLike[], boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "batchTransfer",
-    values: [string, string, BigNumberish[], BigNumberish[]]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "burn",
-    values: [BigNumberish, string, BigNumberish]
-  ): string;
   encodeFunctionData(
     functionFragment: "claimOwnership",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "clonesOf",
-    values: [string, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "clonesOfCount",
-    values: [string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "createToken",
-    values: [string, string, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decimals",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "deploy",
-    values: [string, BytesLike, boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "deposit",
-    values: [BigNumberish, string, string, BigNumberish, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "depositAsset",
-    values: [BigNumberish, string, string, BigNumberish, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "depositETH",
-    values: [BigNumberish, string, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "depositETHAsset",
-    values: [BigNumberish, string, BigNumberish]
-  ): string;
-  encodeFunctionData(
     functionFragment: "executeMixologistFn",
-    values: [string, BytesLike]
+    values: [string[], BytesLike[]]
   ): string;
   encodeFunctionData(functionFragment: "feeTo", values?: undefined): string;
   encodeFunctionData(functionFragment: "feeVeTap", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "ids",
-    values: [BigNumberish, string, string, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isApprovedForAll",
-    values: [string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "masterContractOf",
-    values: [string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "mint",
-    values: [BigNumberish, string, BigNumberish]
-  ): string;
-  encodeFunctionData(functionFragment: "name", values: [BigNumberish]): string;
-  encodeFunctionData(
-    functionFragment: "nativeTokens",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "onERC1155BatchReceived",
-    values: [string, string, BigNumberish[], BigNumberish[], BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "onERC1155Received",
-    values: [string, string, BigNumberish, BigNumberish, BytesLike]
-  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "pendingOwner",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "pendingTokenOwner",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "permitToken",
-    values: [
-      string,
-      string,
-      string,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BytesLike,
-      BytesLike
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "registerAsset",
-    values: [BigNumberish, string, string, BigNumberish]
+    values: [string, string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "registerMasterContract",
@@ -224,121 +69,30 @@ interface BeachBarInterface extends ethers.utils.Interface {
     functionFragment: "registerMixologist",
     values: [string, BytesLike, boolean]
   ): string;
-  encodeFunctionData(
-    functionFragment: "safeBatchTransferFrom",
-    values: [string, string, BigNumberish[], BigNumberish[], BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "safeTransferFrom",
-    values: [string, string, BigNumberish, BigNumberish, BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setApprovalForAll",
-    values: [string, boolean]
-  ): string;
   encodeFunctionData(functionFragment: "setFeeTo", values: [string]): string;
   encodeFunctionData(functionFragment: "setFeeVeTap", values: [string]): string;
   encodeFunctionData(
     functionFragment: "setSwapper",
     values: [string, boolean]
   ): string;
-  encodeFunctionData(
-    functionFragment: "supportsInterface",
-    values: [BytesLike]
-  ): string;
   encodeFunctionData(functionFragment: "swappers", values: [string]): string;
-  encodeFunctionData(
-    functionFragment: "symbol",
-    values: [BigNumberish]
-  ): string;
   encodeFunctionData(
     functionFragment: "tapAssetId",
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "tapToken", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "toAmount",
-    values: [BigNumberish, BigNumberish, boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "toShare",
-    values: [BigNumberish, BigNumberish, boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "tokenOwner",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "totalSupply",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transfer",
-    values: [string, string, BigNumberish, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferMultiple",
-    values: [string, string[], BigNumberish, BigNumberish[]]
-  ): string;
-  encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [string, boolean, boolean]
-  ): string;
-  encodeFunctionData(functionFragment: "uri", values: [BigNumberish]): string;
-  encodeFunctionData(
-    functionFragment: "uriBuilder",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "withdraw",
-    values: [BigNumberish, string, string, BigNumberish, BigNumberish, boolean]
   ): string;
   encodeFunctionData(
     functionFragment: "withdrawAllProtocolFees",
     values: [string[]]
   ): string;
-  encodeFunctionData(
-    functionFragment: "wrappedNative",
-    values?: undefined
-  ): string;
+  encodeFunctionData(functionFragment: "yieldBox", values?: undefined): string;
 
-  decodeFunctionResult(functionFragment: "amountOf", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "assetCount", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "assets", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "balanceOfBatch",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "batch", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "batchTransfer",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "claimOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "clonesOf", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "clonesOfCount",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "createToken",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "deploy", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "depositAsset",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "depositETH", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "depositETHAsset",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -347,40 +101,9 @@ interface BeachBarInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "feeTo", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "feeVeTap", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "ids", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "isApprovedForAll",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "masterContractOf",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "nativeTokens",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "onERC1155BatchReceived",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "onERC1155Received",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "pendingOwner",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "pendingTokenOwner",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "permitToken",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -395,151 +118,34 @@ interface BeachBarInterface extends ethers.utils.Interface {
     functionFragment: "registerMixologist",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "safeBatchTransferFrom",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "safeTransferFrom",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setApprovalForAll",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "setFeeTo", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setFeeVeTap",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "setSwapper", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "supportsInterface",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "swappers", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "tapAssetId", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "tapToken", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "toAmount", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "toShare", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "tokenOwner", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "totalSupply",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "transfer", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "transferMultiple",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "uri", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "uriBuilder", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "withdrawAllProtocolFees",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "wrappedNative",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "yieldBox", data: BytesLike): Result;
 
   events: {
-    "ApprovalForAll(address,address,bool)": EventFragment;
-    "AssetRegistered(uint8,address,address,uint256,uint256)": EventFragment;
-    "LogDeploy(address,bytes,address)": EventFragment;
-    "OwnershipTransferred(uint256,address,address)": EventFragment;
-    "TokenCreated(address,string,string,uint8,uint256)": EventFragment;
-    "TransferBatch(address,address,address,uint256[],uint256[])": EventFragment;
-    "TransferSingle(address,address,address,uint256,uint256)": EventFragment;
-    "URI(string,uint256)": EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "AssetRegistered"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "LogDeploy"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "TokenCreated"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "TransferBatch"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "TransferSingle"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "URI"): EventFragment;
 }
 
-export type ApprovalForAllEvent = TypedEvent<
-  [string, string, boolean] & {
-    _owner: string;
-    _operator: string;
-    _approved: boolean;
-  }
->;
-
-export type AssetRegisteredEvent = TypedEvent<
-  [number, string, string, BigNumber, BigNumber] & {
-    tokenType: number;
-    contractAddress: string;
-    strategy: string;
-    tokenId: BigNumber;
-    assetId: BigNumber;
-  }
->;
-
-export type LogDeployEvent = TypedEvent<
-  [string, string, string] & {
-    masterContract: string;
-    data: string;
-    cloneAddress: string;
-  }
->;
-
-export type OwnershipTransferred_uint256_address_address_Event = TypedEvent<
-  [BigNumber, string, string] & {
-    tokenId: BigNumber;
-    previousTokenOwner: string;
-    newTokenOwner: string;
-  }
->;
-
-export type OwnershipTransferred_address_address_Event = TypedEvent<
+export type OwnershipTransferredEvent = TypedEvent<
   [string, string] & { previousOwner: string; newOwner: string }
->;
-
-export type TokenCreatedEvent = TypedEvent<
-  [string, string, string, number, BigNumber] & {
-    creator: string;
-    name: string;
-    symbol: string;
-    decimals: number;
-    tokenId: BigNumber;
-  }
->;
-
-export type TransferBatchEvent = TypedEvent<
-  [string, string, string, BigNumber[], BigNumber[]] & {
-    _operator: string;
-    _from: string;
-    _to: string;
-    _ids: BigNumber[];
-    _values: BigNumber[];
-  }
->;
-
-export type TransferSingleEvent = TypedEvent<
-  [string, string, string, BigNumber, BigNumber] & {
-    _operator: string;
-    _from: string;
-    _to: string;
-    _id: BigNumber;
-    _value: BigNumber;
-  }
->;
-
-export type URIEvent = TypedEvent<
-  [string, BigNumber] & { _value: string; _id: BigNumber }
 >;
 
 export class BeachBar extends BaseContract {
@@ -586,109 +192,7 @@ export class BeachBar extends BaseContract {
   interface: BeachBarInterface;
 
   functions: {
-    amountOf(
-      user: string,
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { amount: BigNumber }>;
-
-    "amountOf(address,uint256)"(
-      user: string,
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { amount: BigNumber }>;
-
-    assetCount(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "assetCount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    assets(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [number, string, string, BigNumber] & {
-        tokenType: number;
-        contractAddress: string;
-        strategy: string;
-        tokenId: BigNumber;
-      }
-    >;
-
-    "assets(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [number, string, string, BigNumber] & {
-        tokenType: number;
-        contractAddress: string;
-        strategy: string;
-        tokenId: BigNumber;
-      }
-    >;
-
-    balanceOf(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "balanceOf(address,uint256)"(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    balanceOfBatch(
-      owners: string[],
-      ids: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<[BigNumber[]] & { balances: BigNumber[] }>;
-
-    "balanceOfBatch(address[],uint256[])"(
-      owners: string[],
-      ids: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<[BigNumber[]] & { balances: BigNumber[] }>;
-
-    batch(
-      calls: BytesLike[],
-      revertOnFail: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "batch(bytes[],bool)"(
-      calls: BytesLike[],
-      revertOnFail: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    batchTransfer(
-      from: string,
-      to: string,
-      assetIds_: BigNumberish[],
-      shares_: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "batchTransfer(address,address,uint256[],uint256[])"(
-      from: string,
-      to: string,
-      assetIds_: BigNumberish[],
-      shares_: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    burn(
-      tokenId: BigNumberish,
-      from: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "burn(uint256,address,uint256)"(
-      tokenId: BigNumberish,
-      from: string,
-      amount: BigNumberish,
+    claimOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -696,147 +200,15 @@ export class BeachBar extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "claimOwnership(uint256)"(
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    clonesOf(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    "clonesOf(address,uint256)"(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    clonesOfCount(
-      masterContract: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { cloneCount: BigNumber }>;
-
-    "clonesOfCount(address)"(
-      masterContract: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { cloneCount: BigNumber }>;
-
-    createToken(
-      name: string,
-      symbol: string,
-      decimals: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "createToken(string,string,uint8)"(
-      name: string,
-      symbol: string,
-      decimals: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    decimals(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[number]>;
-
-    "decimals(uint256)"(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[number]>;
-
-    deploy(
-      masterContract: string,
-      data: BytesLike,
-      useCreate2: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "deploy(address,bytes,bool)"(
-      masterContract: string,
-      data: BytesLike,
-      useCreate2: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "deposit(uint256,address,address,uint256,uint256)"(
-      assetId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "deposit(uint8,address,address,uint256,address,address,uint256,uint256)"(
-      tokenType: BigNumberish,
-      contractAddress: string,
-      strategy: string,
-      tokenId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    depositAsset(
-      assetId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "depositAsset(uint256,address,address,uint256,uint256)"(
-      assetId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "depositETH(uint256,address,uint256)"(
-      assetId: BigNumberish,
-      to: string,
-      amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "depositETH(address,address,uint256)"(
-      strategy: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    depositETHAsset(
-      assetId: BigNumberish,
-      to: string,
-      amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "depositETHAsset(uint256,address,uint256)"(
-      assetId: BigNumberish,
-      to: string,
-      amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     executeMixologistFn(
-      mc: string,
-      data: BytesLike,
+      mc: string[],
+      data: BytesLike[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "executeMixologistFn(address,bytes)"(
-      mc: string,
-      data: BytesLike,
+    "executeMixologistFn(address[],bytes[])"(
+      mc: string[],
+      data: BytesLike[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -848,123 +220,6 @@ export class BeachBar extends BaseContract {
 
     "feeVeTap()"(overrides?: CallOverrides): Promise<[string]>;
 
-    ids(
-      arg0: BigNumberish,
-      arg1: string,
-      arg2: string,
-      arg3: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "ids(uint8,address,address,uint256)"(
-      arg0: BigNumberish,
-      arg1: string,
-      arg2: string,
-      arg3: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    isApprovedForAll(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
-    "isApprovedForAll(address,address)"(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
-    masterContractOf(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    "masterContractOf(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    mint(
-      tokenId: BigNumberish,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "mint(uint256,address,uint256)"(
-      tokenId: BigNumberish,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    name(assetId: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
-
-    "name(uint256)"(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    nativeTokens(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [string, string, number] & {
-        name: string;
-        symbol: string;
-        decimals: number;
-      }
-    >;
-
-    "nativeTokens(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [string, string, number] & {
-        name: string;
-        symbol: string;
-        decimals: number;
-      }
-    >;
-
-    onERC1155BatchReceived(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish[],
-      arg3: BigNumberish[],
-      arg4: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish[],
-      arg3: BigNumberish[],
-      arg4: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    onERC1155Received(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish,
-      arg3: BigNumberish,
-      arg4: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    "onERC1155Received(address,address,uint256,uint256,bytes)"(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish,
-      arg3: BigNumberish,
-      arg4: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
@@ -973,53 +228,17 @@ export class BeachBar extends BaseContract {
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<[string]>;
 
-    pendingTokenOwner(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    "pendingTokenOwner(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    permitToken(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "permitToken(address,address,address,uint256,uint256,uint8,bytes32,bytes32)"(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     registerAsset(
-      tokenType: BigNumberish,
       contractAddress: string,
       strategy: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "registerAsset(uint8,address,address,uint256)"(
-      tokenType: BigNumberish,
+    "registerAsset(address,address,uint256)"(
       contractAddress: string,
       strategy: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -1047,54 +266,6 @@ export class BeachBar extends BaseContract {
       data: BytesLike,
       useCreate2: boolean,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    safeBatchTransferFrom(
-      from: string,
-      to: string,
-      ids: BigNumberish[],
-      values: BigNumberish[],
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)"(
-      from: string,
-      to: string,
-      ids: BigNumberish[],
-      values: BigNumberish[],
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    safeTransferFrom(
-      from: string,
-      to: string,
-      id: BigNumberish,
-      value: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "safeTransferFrom(address,address,uint256,uint256,bytes)"(
-      from: string,
-      to: string,
-      id: BigNumberish,
-      value: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    setApprovalForAll(
-      operator: string,
-      approved: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "setApprovalForAll(address,bool)"(
-      operator: string,
-      approved: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     setFeeTo(
@@ -1129,29 +300,12 @@ export class BeachBar extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    supportsInterface(
-      interfaceID: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
-    "supportsInterface(bytes4)"(
-      interfaceID: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
     swappers(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
 
     "swappers(address)"(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
-
-    symbol(assetId: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
-
-    "symbol(uint256)"(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
 
     tapAssetId(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -1161,83 +315,10 @@ export class BeachBar extends BaseContract {
 
     "tapToken()"(overrides?: CallOverrides): Promise<[string]>;
 
-    toAmount(
-      assetId: BigNumberish,
-      share: BigNumberish,
-      roundUp: boolean,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { amount: BigNumber }>;
-
-    "toAmount(uint256,uint256,bool)"(
-      assetId: BigNumberish,
-      share: BigNumberish,
-      roundUp: boolean,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { amount: BigNumber }>;
-
-    toShare(
-      assetId: BigNumberish,
-      amount: BigNumberish,
-      roundUp: boolean,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { share: BigNumber }>;
-
-    "toShare(uint256,uint256,bool)"(
-      assetId: BigNumberish,
-      amount: BigNumberish,
-      roundUp: boolean,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { share: BigNumber }>;
-
-    tokenOwner(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    "tokenOwner(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    totalSupply(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "totalSupply(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    transfer(
-      from: string,
-      to: string,
-      assetId: BigNumberish,
-      share: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "transfer(address,address,uint256,uint256)"(
-      from: string,
-      to: string,
-      assetId: BigNumberish,
-      share: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    transferMultiple(
-      from: string,
-      tos: string[],
-      assetId: BigNumberish,
-      shares: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "transferMultiple(address,address[],uint256,uint256[])"(
-      from: string,
-      tos: string[],
-      assetId: BigNumberish,
-      shares: BigNumberish[],
+    transferOwnership(
+      newOwner: string,
+      direct: boolean,
+      renounce: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -1245,44 +326,6 @@ export class BeachBar extends BaseContract {
       newOwner: string,
       direct: boolean,
       renounce: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "transferOwnership(uint256,address,bool,bool)"(
-      tokenId: BigNumberish,
-      newTokenOwner: string,
-      direct: boolean,
-      renounce: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    uri(assetId: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
-
-    "uri(uint256)"(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    uriBuilder(overrides?: CallOverrides): Promise<[string]>;
-
-    "uriBuilder()"(overrides?: CallOverrides): Promise<[string]>;
-
-    "withdraw(uint256,address,address,uint256,uint256,bool)"(
-      assetId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
-      withdrawNative: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "withdraw(uint256,address,address,uint256,uint256)"(
-      assetId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -1296,114 +339,12 @@ export class BeachBar extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    wrappedNative(overrides?: CallOverrides): Promise<[string]>;
+    yieldBox(overrides?: CallOverrides): Promise<[string]>;
 
-    "wrappedNative()"(overrides?: CallOverrides): Promise<[string]>;
+    "yieldBox()"(overrides?: CallOverrides): Promise<[string]>;
   };
 
-  amountOf(
-    user: string,
-    assetId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "amountOf(address,uint256)"(
-    user: string,
-    assetId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  assetCount(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "assetCount()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  assets(
-    arg0: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<
-    [number, string, string, BigNumber] & {
-      tokenType: number;
-      contractAddress: string;
-      strategy: string;
-      tokenId: BigNumber;
-    }
-  >;
-
-  "assets(uint256)"(
-    arg0: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<
-    [number, string, string, BigNumber] & {
-      tokenType: number;
-      contractAddress: string;
-      strategy: string;
-      tokenId: BigNumber;
-    }
-  >;
-
-  balanceOf(
-    arg0: string,
-    arg1: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "balanceOf(address,uint256)"(
-    arg0: string,
-    arg1: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  balanceOfBatch(
-    owners: string[],
-    ids: BigNumberish[],
-    overrides?: CallOverrides
-  ): Promise<BigNumber[]>;
-
-  "balanceOfBatch(address[],uint256[])"(
-    owners: string[],
-    ids: BigNumberish[],
-    overrides?: CallOverrides
-  ): Promise<BigNumber[]>;
-
-  batch(
-    calls: BytesLike[],
-    revertOnFail: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "batch(bytes[],bool)"(
-    calls: BytesLike[],
-    revertOnFail: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  batchTransfer(
-    from: string,
-    to: string,
-    assetIds_: BigNumberish[],
-    shares_: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "batchTransfer(address,address,uint256[],uint256[])"(
-    from: string,
-    to: string,
-    assetIds_: BigNumberish[],
-    shares_: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  burn(
-    tokenId: BigNumberish,
-    from: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "burn(uint256,address,uint256)"(
-    tokenId: BigNumberish,
-    from: string,
-    amount: BigNumberish,
+  claimOwnership(
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -1411,144 +352,15 @@ export class BeachBar extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "claimOwnership(uint256)"(
-    tokenId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  clonesOf(
-    arg0: string,
-    arg1: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  "clonesOf(address,uint256)"(
-    arg0: string,
-    arg1: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  clonesOfCount(
-    masterContract: string,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "clonesOfCount(address)"(
-    masterContract: string,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  createToken(
-    name: string,
-    symbol: string,
-    decimals: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "createToken(string,string,uint8)"(
-    name: string,
-    symbol: string,
-    decimals: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  decimals(assetId: BigNumberish, overrides?: CallOverrides): Promise<number>;
-
-  "decimals(uint256)"(
-    assetId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<number>;
-
-  deploy(
-    masterContract: string,
-    data: BytesLike,
-    useCreate2: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "deploy(address,bytes,bool)"(
-    masterContract: string,
-    data: BytesLike,
-    useCreate2: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "deposit(uint256,address,address,uint256,uint256)"(
-    assetId: BigNumberish,
-    from: string,
-    to: string,
-    amount: BigNumberish,
-    share: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "deposit(uint8,address,address,uint256,address,address,uint256,uint256)"(
-    tokenType: BigNumberish,
-    contractAddress: string,
-    strategy: string,
-    tokenId: BigNumberish,
-    from: string,
-    to: string,
-    amount: BigNumberish,
-    share: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  depositAsset(
-    assetId: BigNumberish,
-    from: string,
-    to: string,
-    amount: BigNumberish,
-    share: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "depositAsset(uint256,address,address,uint256,uint256)"(
-    assetId: BigNumberish,
-    from: string,
-    to: string,
-    amount: BigNumberish,
-    share: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "depositETH(uint256,address,uint256)"(
-    assetId: BigNumberish,
-    to: string,
-    amount: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "depositETH(address,address,uint256)"(
-    strategy: string,
-    to: string,
-    amount: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  depositETHAsset(
-    assetId: BigNumberish,
-    to: string,
-    amount: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "depositETHAsset(uint256,address,uint256)"(
-    assetId: BigNumberish,
-    to: string,
-    amount: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   executeMixologistFn(
-    mc: string,
-    data: BytesLike,
+    mc: string[],
+    data: BytesLike[],
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "executeMixologistFn(address,bytes)"(
-    mc: string,
-    data: BytesLike,
+  "executeMixologistFn(address[],bytes[])"(
+    mc: string[],
+    data: BytesLike[],
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -1560,120 +372,6 @@ export class BeachBar extends BaseContract {
 
   "feeVeTap()"(overrides?: CallOverrides): Promise<string>;
 
-  ids(
-    arg0: BigNumberish,
-    arg1: string,
-    arg2: string,
-    arg3: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "ids(uint8,address,address,uint256)"(
-    arg0: BigNumberish,
-    arg1: string,
-    arg2: string,
-    arg3: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  isApprovedForAll(
-    arg0: string,
-    arg1: string,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  "isApprovedForAll(address,address)"(
-    arg0: string,
-    arg1: string,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  masterContractOf(arg0: string, overrides?: CallOverrides): Promise<string>;
-
-  "masterContractOf(address)"(
-    arg0: string,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  mint(
-    tokenId: BigNumberish,
-    to: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "mint(uint256,address,uint256)"(
-    tokenId: BigNumberish,
-    to: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  name(assetId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-  "name(uint256)"(
-    assetId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  nativeTokens(
-    arg0: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<
-    [string, string, number] & {
-      name: string;
-      symbol: string;
-      decimals: number;
-    }
-  >;
-
-  "nativeTokens(uint256)"(
-    arg0: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<
-    [string, string, number] & {
-      name: string;
-      symbol: string;
-      decimals: number;
-    }
-  >;
-
-  onERC1155BatchReceived(
-    arg0: string,
-    arg1: string,
-    arg2: BigNumberish[],
-    arg3: BigNumberish[],
-    arg4: BytesLike,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
-    arg0: string,
-    arg1: string,
-    arg2: BigNumberish[],
-    arg3: BigNumberish[],
-    arg4: BytesLike,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  onERC1155Received(
-    arg0: string,
-    arg1: string,
-    arg2: BigNumberish,
-    arg3: BigNumberish,
-    arg4: BytesLike,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  "onERC1155Received(address,address,uint256,uint256,bytes)"(
-    arg0: string,
-    arg1: string,
-    arg2: BigNumberish,
-    arg3: BigNumberish,
-    arg4: BytesLike,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
   owner(overrides?: CallOverrides): Promise<string>;
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -1682,53 +380,17 @@ export class BeachBar extends BaseContract {
 
   "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
 
-  pendingTokenOwner(
-    arg0: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  "pendingTokenOwner(uint256)"(
-    arg0: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  permitToken(
-    token: string,
-    from: string,
-    to: string,
-    amount: BigNumberish,
-    deadline: BigNumberish,
-    v: BigNumberish,
-    r: BytesLike,
-    s: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "permitToken(address,address,address,uint256,uint256,uint8,bytes32,bytes32)"(
-    token: string,
-    from: string,
-    to: string,
-    amount: BigNumberish,
-    deadline: BigNumberish,
-    v: BigNumberish,
-    r: BytesLike,
-    s: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   registerAsset(
-    tokenType: BigNumberish,
     contractAddress: string,
     strategy: string,
-    tokenId: BigNumberish,
+    id: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "registerAsset(uint8,address,address,uint256)"(
-    tokenType: BigNumberish,
+  "registerAsset(address,address,uint256)"(
     contractAddress: string,
     strategy: string,
-    tokenId: BigNumberish,
+    id: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -1756,54 +418,6 @@ export class BeachBar extends BaseContract {
     data: BytesLike,
     useCreate2: boolean,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  safeBatchTransferFrom(
-    from: string,
-    to: string,
-    ids: BigNumberish[],
-    values: BigNumberish[],
-    data: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)"(
-    from: string,
-    to: string,
-    ids: BigNumberish[],
-    values: BigNumberish[],
-    data: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  safeTransferFrom(
-    from: string,
-    to: string,
-    id: BigNumberish,
-    value: BigNumberish,
-    data: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "safeTransferFrom(address,address,uint256,uint256,bytes)"(
-    from: string,
-    to: string,
-    id: BigNumberish,
-    value: BigNumberish,
-    data: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  setApprovalForAll(
-    operator: string,
-    approved: boolean,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "setApprovalForAll(address,bool)"(
-    operator: string,
-    approved: boolean,
-    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   setFeeTo(
@@ -1838,29 +452,12 @@ export class BeachBar extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  supportsInterface(
-    interfaceID: BytesLike,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  "supportsInterface(bytes4)"(
-    interfaceID: BytesLike,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
   swappers(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
   "swappers(address)"(
     arg0: string,
     overrides?: CallOverrides
   ): Promise<boolean>;
-
-  symbol(assetId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-  "symbol(uint256)"(
-    assetId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
 
   tapAssetId(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1870,80 +467,10 @@ export class BeachBar extends BaseContract {
 
   "tapToken()"(overrides?: CallOverrides): Promise<string>;
 
-  toAmount(
-    assetId: BigNumberish,
-    share: BigNumberish,
-    roundUp: boolean,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "toAmount(uint256,uint256,bool)"(
-    assetId: BigNumberish,
-    share: BigNumberish,
-    roundUp: boolean,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  toShare(
-    assetId: BigNumberish,
-    amount: BigNumberish,
-    roundUp: boolean,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "toShare(uint256,uint256,bool)"(
-    assetId: BigNumberish,
-    amount: BigNumberish,
-    roundUp: boolean,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  tokenOwner(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-  "tokenOwner(uint256)"(
-    arg0: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  totalSupply(
-    arg0: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "totalSupply(uint256)"(
-    arg0: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  transfer(
-    from: string,
-    to: string,
-    assetId: BigNumberish,
-    share: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "transfer(address,address,uint256,uint256)"(
-    from: string,
-    to: string,
-    assetId: BigNumberish,
-    share: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  transferMultiple(
-    from: string,
-    tos: string[],
-    assetId: BigNumberish,
-    shares: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "transferMultiple(address,address[],uint256,uint256[])"(
-    from: string,
-    tos: string[],
-    assetId: BigNumberish,
-    shares: BigNumberish[],
+  transferOwnership(
+    newOwner: string,
+    direct: boolean,
+    renounce: boolean,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -1951,44 +478,6 @@ export class BeachBar extends BaseContract {
     newOwner: string,
     direct: boolean,
     renounce: boolean,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "transferOwnership(uint256,address,bool,bool)"(
-    tokenId: BigNumberish,
-    newTokenOwner: string,
-    direct: boolean,
-    renounce: boolean,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  uri(assetId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-  "uri(uint256)"(
-    assetId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  uriBuilder(overrides?: CallOverrides): Promise<string>;
-
-  "uriBuilder()"(overrides?: CallOverrides): Promise<string>;
-
-  "withdraw(uint256,address,address,uint256,uint256,bool)"(
-    assetId: BigNumberish,
-    from: string,
-    to: string,
-    amount: BigNumberish,
-    share: BigNumberish,
-    withdrawNative: boolean,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "withdraw(uint256,address,address,uint256,uint256)"(
-    assetId: BigNumberish,
-    from: string,
-    to: string,
-    amount: BigNumberish,
-    share: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -2002,275 +491,30 @@ export class BeachBar extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  wrappedNative(overrides?: CallOverrides): Promise<string>;
+  yieldBox(overrides?: CallOverrides): Promise<string>;
 
-  "wrappedNative()"(overrides?: CallOverrides): Promise<string>;
+  "yieldBox()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
-    amountOf(
-      user: string,
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "amountOf(address,uint256)"(
-      user: string,
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    assetCount(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "assetCount()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    assets(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [number, string, string, BigNumber] & {
-        tokenType: number;
-        contractAddress: string;
-        strategy: string;
-        tokenId: BigNumber;
-      }
-    >;
-
-    "assets(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [number, string, string, BigNumber] & {
-        tokenType: number;
-        contractAddress: string;
-        strategy: string;
-        tokenId: BigNumber;
-      }
-    >;
-
-    balanceOf(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "balanceOf(address,uint256)"(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    balanceOfBatch(
-      owners: string[],
-      ids: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<BigNumber[]>;
-
-    "balanceOfBatch(address[],uint256[])"(
-      owners: string[],
-      ids: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<BigNumber[]>;
-
-    batch(
-      calls: BytesLike[],
-      revertOnFail: boolean,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "batch(bytes[],bool)"(
-      calls: BytesLike[],
-      revertOnFail: boolean,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    batchTransfer(
-      from: string,
-      to: string,
-      assetIds_: BigNumberish[],
-      shares_: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "batchTransfer(address,address,uint256[],uint256[])"(
-      from: string,
-      to: string,
-      assetIds_: BigNumberish[],
-      shares_: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    burn(
-      tokenId: BigNumberish,
-      from: string,
-      amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "burn(uint256,address,uint256)"(
-      tokenId: BigNumberish,
-      from: string,
-      amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    claimOwnership(overrides?: CallOverrides): Promise<void>;
 
     "claimOwnership()"(overrides?: CallOverrides): Promise<void>;
 
-    "claimOwnership(uint256)"(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    clonesOf(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    "clonesOf(address,uint256)"(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    clonesOfCount(
-      masterContract: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "clonesOfCount(address)"(
-      masterContract: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    createToken(
-      name: string,
-      symbol: string,
-      decimals: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "createToken(string,string,uint8)"(
-      name: string,
-      symbol: string,
-      decimals: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    decimals(assetId: BigNumberish, overrides?: CallOverrides): Promise<number>;
-
-    "decimals(uint256)"(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<number>;
-
-    deploy(
-      masterContract: string,
-      data: BytesLike,
-      useCreate2: boolean,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    "deploy(address,bytes,bool)"(
-      masterContract: string,
-      data: BytesLike,
-      useCreate2: boolean,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    "deposit(uint256,address,address,uint256,uint256)"(
-      assetId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
-    >;
-
-    "deposit(uint8,address,address,uint256,address,address,uint256,uint256)"(
-      tokenType: BigNumberish,
-      contractAddress: string,
-      strategy: string,
-      tokenId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
-    >;
-
-    depositAsset(
-      assetId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
-    >;
-
-    "depositAsset(uint256,address,address,uint256,uint256)"(
-      assetId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
-    >;
-
-    "depositETH(uint256,address,uint256)"(
-      assetId: BigNumberish,
-      to: string,
-      amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
-    >;
-
-    "depositETH(address,address,uint256)"(
-      strategy: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
-    >;
-
-    depositETHAsset(
-      assetId: BigNumberish,
-      to: string,
-      amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
-    >;
-
-    "depositETHAsset(uint256,address,uint256)"(
-      assetId: BigNumberish,
-      to: string,
-      amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
-    >;
-
     executeMixologistFn(
-      mc: string,
-      data: BytesLike,
+      mc: string[],
+      data: BytesLike[],
       overrides?: CallOverrides
-    ): Promise<[boolean, string] & { success: boolean; result: string }>;
+    ): Promise<
+      [boolean[], string[]] & { success: boolean[]; result: string[] }
+    >;
 
-    "executeMixologistFn(address,bytes)"(
-      mc: string,
-      data: BytesLike,
+    "executeMixologistFn(address[],bytes[])"(
+      mc: string[],
+      data: BytesLike[],
       overrides?: CallOverrides
-    ): Promise<[boolean, string] & { success: boolean; result: string }>;
+    ): Promise<
+      [boolean[], string[]] & { success: boolean[]; result: string[] }
+    >;
 
     feeTo(overrides?: CallOverrides): Promise<string>;
 
@@ -2280,120 +524,6 @@ export class BeachBar extends BaseContract {
 
     "feeVeTap()"(overrides?: CallOverrides): Promise<string>;
 
-    ids(
-      arg0: BigNumberish,
-      arg1: string,
-      arg2: string,
-      arg3: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "ids(uint8,address,address,uint256)"(
-      arg0: BigNumberish,
-      arg1: string,
-      arg2: string,
-      arg3: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    isApprovedForAll(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    "isApprovedForAll(address,address)"(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    masterContractOf(arg0: string, overrides?: CallOverrides): Promise<string>;
-
-    "masterContractOf(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    mint(
-      tokenId: BigNumberish,
-      to: string,
-      amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "mint(uint256,address,uint256)"(
-      tokenId: BigNumberish,
-      to: string,
-      amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    name(assetId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-    "name(uint256)"(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    nativeTokens(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [string, string, number] & {
-        name: string;
-        symbol: string;
-        decimals: number;
-      }
-    >;
-
-    "nativeTokens(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [string, string, number] & {
-        name: string;
-        symbol: string;
-        decimals: number;
-      }
-    >;
-
-    onERC1155BatchReceived(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish[],
-      arg3: BigNumberish[],
-      arg4: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish[],
-      arg3: BigNumberish[],
-      arg4: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    onERC1155Received(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish,
-      arg3: BigNumberish,
-      arg4: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    "onERC1155Received(address,address,uint256,uint256,bytes)"(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish,
-      arg3: BigNumberish,
-      arg4: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
     owner(overrides?: CallOverrides): Promise<string>;
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -2402,53 +532,17 @@ export class BeachBar extends BaseContract {
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
 
-    pendingTokenOwner(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    "pendingTokenOwner(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    permitToken(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "permitToken(address,address,address,uint256,uint256,uint8,bytes32,bytes32)"(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     registerAsset(
-      tokenType: BigNumberish,
       contractAddress: string,
       strategy: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "registerAsset(uint8,address,address,uint256)"(
-      tokenType: BigNumberish,
+    "registerAsset(address,address,uint256)"(
       contractAddress: string,
       strategy: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -2475,54 +569,6 @@ export class BeachBar extends BaseContract {
       mc: string,
       data: BytesLike,
       useCreate2: boolean,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    safeBatchTransferFrom(
-      from: string,
-      to: string,
-      ids: BigNumberish[],
-      values: BigNumberish[],
-      data: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)"(
-      from: string,
-      to: string,
-      ids: BigNumberish[],
-      values: BigNumberish[],
-      data: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    safeTransferFrom(
-      from: string,
-      to: string,
-      id: BigNumberish,
-      value: BigNumberish,
-      data: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "safeTransferFrom(address,address,uint256,uint256,bytes)"(
-      from: string,
-      to: string,
-      id: BigNumberish,
-      value: BigNumberish,
-      data: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setApprovalForAll(
-      operator: string,
-      approved: boolean,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setApprovalForAll(address,bool)"(
-      operator: string,
-      approved: boolean,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -2552,29 +598,12 @@ export class BeachBar extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    supportsInterface(
-      interfaceID: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    "supportsInterface(bytes4)"(
-      interfaceID: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     swappers(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
     "swappers(address)"(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<boolean>;
-
-    symbol(assetId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-    "symbol(uint256)"(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
 
     tapAssetId(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2584,80 +613,10 @@ export class BeachBar extends BaseContract {
 
     "tapToken()"(overrides?: CallOverrides): Promise<string>;
 
-    toAmount(
-      assetId: BigNumberish,
-      share: BigNumberish,
-      roundUp: boolean,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "toAmount(uint256,uint256,bool)"(
-      assetId: BigNumberish,
-      share: BigNumberish,
-      roundUp: boolean,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    toShare(
-      assetId: BigNumberish,
-      amount: BigNumberish,
-      roundUp: boolean,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "toShare(uint256,uint256,bool)"(
-      assetId: BigNumberish,
-      amount: BigNumberish,
-      roundUp: boolean,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    tokenOwner(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-    "tokenOwner(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    totalSupply(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "totalSupply(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    transfer(
-      from: string,
-      to: string,
-      assetId: BigNumberish,
-      share: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "transfer(address,address,uint256,uint256)"(
-      from: string,
-      to: string,
-      assetId: BigNumberish,
-      share: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    transferMultiple(
-      from: string,
-      tos: string[],
-      assetId: BigNumberish,
-      shares: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "transferMultiple(address,address[],uint256,uint256[])"(
-      from: string,
-      tos: string[],
-      assetId: BigNumberish,
-      shares: BigNumberish[],
+    transferOwnership(
+      newOwner: string,
+      direct: boolean,
+      renounce: boolean,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -2667,48 +626,6 @@ export class BeachBar extends BaseContract {
       renounce: boolean,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    "transferOwnership(uint256,address,bool,bool)"(
-      tokenId: BigNumberish,
-      newTokenOwner: string,
-      direct: boolean,
-      renounce: boolean,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    uri(assetId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-    "uri(uint256)"(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    uriBuilder(overrides?: CallOverrides): Promise<string>;
-
-    "uriBuilder()"(overrides?: CallOverrides): Promise<string>;
-
-    "withdraw(uint256,address,address,uint256,uint256,bool)"(
-      assetId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
-      withdrawNative: boolean,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
-    >;
-
-    "withdraw(uint256,address,address,uint256,uint256)"(
-      assetId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
-    >;
 
     withdrawAllProtocolFees(
       swappers_: string[],
@@ -2720,91 +637,12 @@ export class BeachBar extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    wrappedNative(overrides?: CallOverrides): Promise<string>;
+    yieldBox(overrides?: CallOverrides): Promise<string>;
 
-    "wrappedNative()"(overrides?: CallOverrides): Promise<string>;
+    "yieldBox()"(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
-    "ApprovalForAll(address,address,bool)"(
-      _owner?: string | null,
-      _operator?: string | null,
-      _approved?: null
-    ): TypedEventFilter<
-      [string, string, boolean],
-      { _owner: string; _operator: string; _approved: boolean }
-    >;
-
-    ApprovalForAll(
-      _owner?: string | null,
-      _operator?: string | null,
-      _approved?: null
-    ): TypedEventFilter<
-      [string, string, boolean],
-      { _owner: string; _operator: string; _approved: boolean }
-    >;
-
-    "AssetRegistered(uint8,address,address,uint256,uint256)"(
-      tokenType?: BigNumberish | null,
-      contractAddress?: string | null,
-      strategy?: null,
-      tokenId?: BigNumberish | null,
-      assetId?: null
-    ): TypedEventFilter<
-      [number, string, string, BigNumber, BigNumber],
-      {
-        tokenType: number;
-        contractAddress: string;
-        strategy: string;
-        tokenId: BigNumber;
-        assetId: BigNumber;
-      }
-    >;
-
-    AssetRegistered(
-      tokenType?: BigNumberish | null,
-      contractAddress?: string | null,
-      strategy?: null,
-      tokenId?: BigNumberish | null,
-      assetId?: null
-    ): TypedEventFilter<
-      [number, string, string, BigNumber, BigNumber],
-      {
-        tokenType: number;
-        contractAddress: string;
-        strategy: string;
-        tokenId: BigNumber;
-        assetId: BigNumber;
-      }
-    >;
-
-    "LogDeploy(address,bytes,address)"(
-      masterContract?: string | null,
-      data?: null,
-      cloneAddress?: string | null
-    ): TypedEventFilter<
-      [string, string, string],
-      { masterContract: string; data: string; cloneAddress: string }
-    >;
-
-    LogDeploy(
-      masterContract?: string | null,
-      data?: null,
-      cloneAddress?: string | null
-    ): TypedEventFilter<
-      [string, string, string],
-      { masterContract: string; data: string; cloneAddress: string }
-    >;
-
-    "OwnershipTransferred(uint256,address,address)"(
-      tokenId?: BigNumberish | null,
-      previousTokenOwner?: string | null,
-      newTokenOwner?: string | null
-    ): TypedEventFilter<
-      [BigNumber, string, string],
-      { tokenId: BigNumber; previousTokenOwner: string; newTokenOwner: string }
-    >;
-
     "OwnershipTransferred(address,address)"(
       previousOwner?: string | null,
       newOwner?: string | null
@@ -2813,212 +651,17 @@ export class BeachBar extends BaseContract {
       { previousOwner: string; newOwner: string }
     >;
 
-    "TokenCreated(address,string,string,uint8,uint256)"(
-      creator?: string | null,
-      name?: null,
-      symbol?: null,
-      decimals?: null,
-      tokenId?: null
+    OwnershipTransferred(
+      previousOwner?: string | null,
+      newOwner?: string | null
     ): TypedEventFilter<
-      [string, string, string, number, BigNumber],
-      {
-        creator: string;
-        name: string;
-        symbol: string;
-        decimals: number;
-        tokenId: BigNumber;
-      }
-    >;
-
-    TokenCreated(
-      creator?: string | null,
-      name?: null,
-      symbol?: null,
-      decimals?: null,
-      tokenId?: null
-    ): TypedEventFilter<
-      [string, string, string, number, BigNumber],
-      {
-        creator: string;
-        name: string;
-        symbol: string;
-        decimals: number;
-        tokenId: BigNumber;
-      }
-    >;
-
-    "TransferBatch(address,address,address,uint256[],uint256[])"(
-      _operator?: string | null,
-      _from?: string | null,
-      _to?: string | null,
-      _ids?: null,
-      _values?: null
-    ): TypedEventFilter<
-      [string, string, string, BigNumber[], BigNumber[]],
-      {
-        _operator: string;
-        _from: string;
-        _to: string;
-        _ids: BigNumber[];
-        _values: BigNumber[];
-      }
-    >;
-
-    TransferBatch(
-      _operator?: string | null,
-      _from?: string | null,
-      _to?: string | null,
-      _ids?: null,
-      _values?: null
-    ): TypedEventFilter<
-      [string, string, string, BigNumber[], BigNumber[]],
-      {
-        _operator: string;
-        _from: string;
-        _to: string;
-        _ids: BigNumber[];
-        _values: BigNumber[];
-      }
-    >;
-
-    "TransferSingle(address,address,address,uint256,uint256)"(
-      _operator?: string | null,
-      _from?: string | null,
-      _to?: string | null,
-      _id?: null,
-      _value?: null
-    ): TypedEventFilter<
-      [string, string, string, BigNumber, BigNumber],
-      {
-        _operator: string;
-        _from: string;
-        _to: string;
-        _id: BigNumber;
-        _value: BigNumber;
-      }
-    >;
-
-    TransferSingle(
-      _operator?: string | null,
-      _from?: string | null,
-      _to?: string | null,
-      _id?: null,
-      _value?: null
-    ): TypedEventFilter<
-      [string, string, string, BigNumber, BigNumber],
-      {
-        _operator: string;
-        _from: string;
-        _to: string;
-        _id: BigNumber;
-        _value: BigNumber;
-      }
-    >;
-
-    "URI(string,uint256)"(
-      _value?: null,
-      _id?: BigNumberish | null
-    ): TypedEventFilter<
-      [string, BigNumber],
-      { _value: string; _id: BigNumber }
-    >;
-
-    URI(
-      _value?: null,
-      _id?: BigNumberish | null
-    ): TypedEventFilter<
-      [string, BigNumber],
-      { _value: string; _id: BigNumber }
+      [string, string],
+      { previousOwner: string; newOwner: string }
     >;
   };
 
   estimateGas: {
-    amountOf(
-      user: string,
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "amountOf(address,uint256)"(
-      user: string,
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    assetCount(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "assetCount()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    assets(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-
-    "assets(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    balanceOf(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "balanceOf(address,uint256)"(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    balanceOfBatch(
-      owners: string[],
-      ids: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "balanceOfBatch(address[],uint256[])"(
-      owners: string[],
-      ids: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    batch(
-      calls: BytesLike[],
-      revertOnFail: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "batch(bytes[],bool)"(
-      calls: BytesLike[],
-      revertOnFail: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    batchTransfer(
-      from: string,
-      to: string,
-      assetIds_: BigNumberish[],
-      shares_: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "batchTransfer(address,address,uint256[],uint256[])"(
-      from: string,
-      to: string,
-      assetIds_: BigNumberish[],
-      shares_: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    burn(
-      tokenId: BigNumberish,
-      from: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "burn(uint256,address,uint256)"(
-      tokenId: BigNumberish,
-      from: string,
-      amount: BigNumberish,
+    claimOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -3026,147 +669,15 @@ export class BeachBar extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "claimOwnership(uint256)"(
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    clonesOf(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "clonesOf(address,uint256)"(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    clonesOfCount(
-      masterContract: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "clonesOfCount(address)"(
-      masterContract: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    createToken(
-      name: string,
-      symbol: string,
-      decimals: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "createToken(string,string,uint8)"(
-      name: string,
-      symbol: string,
-      decimals: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    decimals(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "decimals(uint256)"(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    deploy(
-      masterContract: string,
-      data: BytesLike,
-      useCreate2: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "deploy(address,bytes,bool)"(
-      masterContract: string,
-      data: BytesLike,
-      useCreate2: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "deposit(uint256,address,address,uint256,uint256)"(
-      assetId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "deposit(uint8,address,address,uint256,address,address,uint256,uint256)"(
-      tokenType: BigNumberish,
-      contractAddress: string,
-      strategy: string,
-      tokenId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    depositAsset(
-      assetId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "depositAsset(uint256,address,address,uint256,uint256)"(
-      assetId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "depositETH(uint256,address,uint256)"(
-      assetId: BigNumberish,
-      to: string,
-      amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "depositETH(address,address,uint256)"(
-      strategy: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    depositETHAsset(
-      assetId: BigNumberish,
-      to: string,
-      amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "depositETHAsset(uint256,address,uint256)"(
-      assetId: BigNumberish,
-      to: string,
-      amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     executeMixologistFn(
-      mc: string,
-      data: BytesLike,
+      mc: string[],
+      data: BytesLike[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "executeMixologistFn(address,bytes)"(
-      mc: string,
-      data: BytesLike,
+    "executeMixologistFn(address[],bytes[])"(
+      mc: string[],
+      data: BytesLike[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -3178,111 +689,6 @@ export class BeachBar extends BaseContract {
 
     "feeVeTap()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    ids(
-      arg0: BigNumberish,
-      arg1: string,
-      arg2: string,
-      arg3: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "ids(uint8,address,address,uint256)"(
-      arg0: BigNumberish,
-      arg1: string,
-      arg2: string,
-      arg3: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    isApprovedForAll(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "isApprovedForAll(address,address)"(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    masterContractOf(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "masterContractOf(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    mint(
-      tokenId: BigNumberish,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "mint(uint256,address,uint256)"(
-      tokenId: BigNumberish,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    name(assetId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-
-    "name(uint256)"(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    nativeTokens(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "nativeTokens(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    onERC1155BatchReceived(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish[],
-      arg3: BigNumberish[],
-      arg4: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish[],
-      arg3: BigNumberish[],
-      arg4: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    onERC1155Received(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish,
-      arg3: BigNumberish,
-      arg4: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "onERC1155Received(address,address,uint256,uint256,bytes)"(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish,
-      arg3: BigNumberish,
-      arg4: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3291,53 +697,17 @@ export class BeachBar extends BaseContract {
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    pendingTokenOwner(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "pendingTokenOwner(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    permitToken(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "permitToken(address,address,address,uint256,uint256,uint8,bytes32,bytes32)"(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     registerAsset(
-      tokenType: BigNumberish,
       contractAddress: string,
       strategy: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "registerAsset(uint8,address,address,uint256)"(
-      tokenType: BigNumberish,
+    "registerAsset(address,address,uint256)"(
       contractAddress: string,
       strategy: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -3365,54 +735,6 @@ export class BeachBar extends BaseContract {
       data: BytesLike,
       useCreate2: boolean,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    safeBatchTransferFrom(
-      from: string,
-      to: string,
-      ids: BigNumberish[],
-      values: BigNumberish[],
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)"(
-      from: string,
-      to: string,
-      ids: BigNumberish[],
-      values: BigNumberish[],
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    safeTransferFrom(
-      from: string,
-      to: string,
-      id: BigNumberish,
-      value: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "safeTransferFrom(address,address,uint256,uint256,bytes)"(
-      from: string,
-      to: string,
-      id: BigNumberish,
-      value: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    setApprovalForAll(
-      operator: string,
-      approved: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "setApprovalForAll(address,bool)"(
-      operator: string,
-      approved: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     setFeeTo(
@@ -3447,30 +769,10 @@ export class BeachBar extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    supportsInterface(
-      interfaceID: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "supportsInterface(bytes4)"(
-      interfaceID: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     swappers(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     "swappers(address)"(
       arg0: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    symbol(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "symbol(uint256)"(
-      assetId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -3482,83 +784,10 @@ export class BeachBar extends BaseContract {
 
     "tapToken()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    toAmount(
-      assetId: BigNumberish,
-      share: BigNumberish,
-      roundUp: boolean,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "toAmount(uint256,uint256,bool)"(
-      assetId: BigNumberish,
-      share: BigNumberish,
-      roundUp: boolean,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    toShare(
-      assetId: BigNumberish,
-      amount: BigNumberish,
-      roundUp: boolean,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "toShare(uint256,uint256,bool)"(
-      assetId: BigNumberish,
-      amount: BigNumberish,
-      roundUp: boolean,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    tokenOwner(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "tokenOwner(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    totalSupply(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "totalSupply(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    transfer(
-      from: string,
-      to: string,
-      assetId: BigNumberish,
-      share: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "transfer(address,address,uint256,uint256)"(
-      from: string,
-      to: string,
-      assetId: BigNumberish,
-      share: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    transferMultiple(
-      from: string,
-      tos: string[],
-      assetId: BigNumberish,
-      shares: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "transferMultiple(address,address[],uint256,uint256[])"(
-      from: string,
-      tos: string[],
-      assetId: BigNumberish,
-      shares: BigNumberish[],
+    transferOwnership(
+      newOwner: string,
+      direct: boolean,
+      renounce: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -3566,44 +795,6 @@ export class BeachBar extends BaseContract {
       newOwner: string,
       direct: boolean,
       renounce: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "transferOwnership(uint256,address,bool,bool)"(
-      tokenId: BigNumberish,
-      newTokenOwner: string,
-      direct: boolean,
-      renounce: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    uri(assetId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-
-    "uri(uint256)"(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    uriBuilder(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "uriBuilder()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "withdraw(uint256,address,address,uint256,uint256,bool)"(
-      assetId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
-      withdrawNative: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "withdraw(uint256,address,address,uint256,uint256)"(
-      assetId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -3617,101 +808,13 @@ export class BeachBar extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    wrappedNative(overrides?: CallOverrides): Promise<BigNumber>;
+    yieldBox(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "wrappedNative()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "yieldBox()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    amountOf(
-      user: string,
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "amountOf(address,uint256)"(
-      user: string,
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    assetCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "assetCount()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    assets(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "assets(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    balanceOf(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "balanceOf(address,uint256)"(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    balanceOfBatch(
-      owners: string[],
-      ids: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "balanceOfBatch(address[],uint256[])"(
-      owners: string[],
-      ids: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    batch(
-      calls: BytesLike[],
-      revertOnFail: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "batch(bytes[],bool)"(
-      calls: BytesLike[],
-      revertOnFail: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    batchTransfer(
-      from: string,
-      to: string,
-      assetIds_: BigNumberish[],
-      shares_: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "batchTransfer(address,address,uint256[],uint256[])"(
-      from: string,
-      to: string,
-      assetIds_: BigNumberish[],
-      shares_: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    burn(
-      tokenId: BigNumberish,
-      from: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "burn(uint256,address,uint256)"(
-      tokenId: BigNumberish,
-      from: string,
-      amount: BigNumberish,
+    claimOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -3719,147 +822,15 @@ export class BeachBar extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "claimOwnership(uint256)"(
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    clonesOf(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "clonesOf(address,uint256)"(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    clonesOfCount(
-      masterContract: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "clonesOfCount(address)"(
-      masterContract: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    createToken(
-      name: string,
-      symbol: string,
-      decimals: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "createToken(string,string,uint8)"(
-      name: string,
-      symbol: string,
-      decimals: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    decimals(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "decimals(uint256)"(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    deploy(
-      masterContract: string,
-      data: BytesLike,
-      useCreate2: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "deploy(address,bytes,bool)"(
-      masterContract: string,
-      data: BytesLike,
-      useCreate2: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "deposit(uint256,address,address,uint256,uint256)"(
-      assetId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "deposit(uint8,address,address,uint256,address,address,uint256,uint256)"(
-      tokenType: BigNumberish,
-      contractAddress: string,
-      strategy: string,
-      tokenId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    depositAsset(
-      assetId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "depositAsset(uint256,address,address,uint256,uint256)"(
-      assetId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "depositETH(uint256,address,uint256)"(
-      assetId: BigNumberish,
-      to: string,
-      amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "depositETH(address,address,uint256)"(
-      strategy: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    depositETHAsset(
-      assetId: BigNumberish,
-      to: string,
-      amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "depositETHAsset(uint256,address,uint256)"(
-      assetId: BigNumberish,
-      to: string,
-      amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     executeMixologistFn(
-      mc: string,
-      data: BytesLike,
+      mc: string[],
+      data: BytesLike[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "executeMixologistFn(address,bytes)"(
-      mc: string,
-      data: BytesLike,
+    "executeMixologistFn(address[],bytes[])"(
+      mc: string[],
+      data: BytesLike[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -3871,114 +842,6 @@ export class BeachBar extends BaseContract {
 
     "feeVeTap()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    ids(
-      arg0: BigNumberish,
-      arg1: string,
-      arg2: string,
-      arg3: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "ids(uint8,address,address,uint256)"(
-      arg0: BigNumberish,
-      arg1: string,
-      arg2: string,
-      arg3: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    isApprovedForAll(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "isApprovedForAll(address,address)"(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    masterContractOf(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "masterContractOf(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    mint(
-      tokenId: BigNumberish,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "mint(uint256,address,uint256)"(
-      tokenId: BigNumberish,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    name(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "name(uint256)"(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    nativeTokens(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "nativeTokens(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    onERC1155BatchReceived(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish[],
-      arg3: BigNumberish[],
-      arg4: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish[],
-      arg3: BigNumberish[],
-      arg4: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    onERC1155Received(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish,
-      arg3: BigNumberish,
-      arg4: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "onERC1155Received(address,address,uint256,uint256,bytes)"(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish,
-      arg3: BigNumberish,
-      arg4: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -3987,53 +850,17 @@ export class BeachBar extends BaseContract {
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    pendingTokenOwner(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "pendingTokenOwner(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    permitToken(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "permitToken(address,address,address,uint256,uint256,uint8,bytes32,bytes32)"(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      deadline: BigNumberish,
-      v: BigNumberish,
-      r: BytesLike,
-      s: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     registerAsset(
-      tokenType: BigNumberish,
       contractAddress: string,
       strategy: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "registerAsset(uint8,address,address,uint256)"(
-      tokenType: BigNumberish,
+    "registerAsset(address,address,uint256)"(
       contractAddress: string,
       strategy: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -4061,54 +888,6 @@ export class BeachBar extends BaseContract {
       data: BytesLike,
       useCreate2: boolean,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    safeBatchTransferFrom(
-      from: string,
-      to: string,
-      ids: BigNumberish[],
-      values: BigNumberish[],
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)"(
-      from: string,
-      to: string,
-      ids: BigNumberish[],
-      values: BigNumberish[],
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    safeTransferFrom(
-      from: string,
-      to: string,
-      id: BigNumberish,
-      value: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "safeTransferFrom(address,address,uint256,uint256,bytes)"(
-      from: string,
-      to: string,
-      id: BigNumberish,
-      value: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setApprovalForAll(
-      operator: string,
-      approved: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setApprovalForAll(address,bool)"(
-      operator: string,
-      approved: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     setFeeTo(
@@ -4141,16 +920,6 @@ export class BeachBar extends BaseContract {
       swapper: string,
       enable: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    supportsInterface(
-      interfaceID: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "supportsInterface(bytes4)"(
-      interfaceID: BytesLike,
-      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     swappers(
@@ -4163,16 +932,6 @@ export class BeachBar extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    symbol(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "symbol(uint256)"(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     tapAssetId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "tapAssetId()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -4181,83 +940,10 @@ export class BeachBar extends BaseContract {
 
     "tapToken()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    toAmount(
-      assetId: BigNumberish,
-      share: BigNumberish,
-      roundUp: boolean,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "toAmount(uint256,uint256,bool)"(
-      assetId: BigNumberish,
-      share: BigNumberish,
-      roundUp: boolean,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    toShare(
-      assetId: BigNumberish,
-      amount: BigNumberish,
-      roundUp: boolean,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "toShare(uint256,uint256,bool)"(
-      assetId: BigNumberish,
-      amount: BigNumberish,
-      roundUp: boolean,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    tokenOwner(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "tokenOwner(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    totalSupply(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "totalSupply(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    transfer(
-      from: string,
-      to: string,
-      assetId: BigNumberish,
-      share: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "transfer(address,address,uint256,uint256)"(
-      from: string,
-      to: string,
-      assetId: BigNumberish,
-      share: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    transferMultiple(
-      from: string,
-      tos: string[],
-      assetId: BigNumberish,
-      shares: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "transferMultiple(address,address[],uint256,uint256[])"(
-      from: string,
-      tos: string[],
-      assetId: BigNumberish,
-      shares: BigNumberish[],
+    transferOwnership(
+      newOwner: string,
+      direct: boolean,
+      renounce: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -4265,47 +951,6 @@ export class BeachBar extends BaseContract {
       newOwner: string,
       direct: boolean,
       renounce: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "transferOwnership(uint256,address,bool,bool)"(
-      tokenId: BigNumberish,
-      newTokenOwner: string,
-      direct: boolean,
-      renounce: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    uri(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "uri(uint256)"(
-      assetId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    uriBuilder(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "uriBuilder()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "withdraw(uint256,address,address,uint256,uint256,bool)"(
-      assetId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
-      withdrawNative: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "withdraw(uint256,address,address,uint256,uint256)"(
-      assetId: BigNumberish,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      share: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -4319,8 +964,8 @@ export class BeachBar extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    wrappedNative(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    yieldBox(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "wrappedNative()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "yieldBox()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }
