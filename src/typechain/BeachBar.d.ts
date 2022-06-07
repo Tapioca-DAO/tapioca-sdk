@@ -26,9 +26,9 @@ interface BeachBarInterface extends ethers.utils.Interface {
     "executeMixologistFn(address[],bytes[])": FunctionFragment;
     "feeTo()": FunctionFragment;
     "feeVeTap()": FunctionFragment;
+    "masterContractLength()": FunctionFragment;
     "owner()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
-    "registerAsset(address,address,uint256)": FunctionFragment;
     "registerMasterContract(address,uint8)": FunctionFragment;
     "registerMixologist(address,bytes,bool)": FunctionFragment;
     "setFeeTo(address)": FunctionFragment;
@@ -53,14 +53,14 @@ interface BeachBarInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "feeTo", values?: undefined): string;
   encodeFunctionData(functionFragment: "feeVeTap", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "masterContractLength",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "pendingOwner",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "registerAsset",
-    values: [string, string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "registerMasterContract",
@@ -106,13 +106,13 @@ interface BeachBarInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "feeTo", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "feeVeTap", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "masterContractLength",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "pendingOwner",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "registerAsset",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -147,14 +147,48 @@ interface BeachBarInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "yieldBox", data: BytesLike): Result;
 
   events: {
+    "FeeToUpdate(address)": EventFragment;
+    "FeeVeTapUpdate(address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
+    "ProtocolWithdrawal(address[],uint256)": EventFragment;
+    "RegisterMasterContract(address,uint8)": EventFragment;
+    "RegisterMixologist(address,address)": EventFragment;
+    "SwapperUpdate(address,bool)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "FeeToUpdate"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "FeeVeTapUpdate"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ProtocolWithdrawal"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RegisterMasterContract"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RegisterMixologist"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "SwapperUpdate"): EventFragment;
 }
+
+export type FeeToUpdateEvent = TypedEvent<[string] & { newFeeTo: string }>;
+
+export type FeeVeTapUpdateEvent = TypedEvent<
+  [string] & { newFeeVeTap: string }
+>;
 
 export type OwnershipTransferredEvent = TypedEvent<
   [string, string] & { previousOwner: string; newOwner: string }
+>;
+
+export type ProtocolWithdrawalEvent = TypedEvent<
+  [string[], BigNumber] & { markets: string[]; timestamp: BigNumber }
+>;
+
+export type RegisterMasterContractEvent = TypedEvent<
+  [string, number] & { location: string; risk: number }
+>;
+
+export type RegisterMixologistEvent = TypedEvent<
+  [string, string] & { location: string; masterContract: string }
+>;
+
+export type SwapperUpdateEvent = TypedEvent<
+  [string, boolean] & { swapper: string; isRegistered: boolean }
 >;
 
 export class BeachBar extends BaseContract {
@@ -229,6 +263,10 @@ export class BeachBar extends BaseContract {
 
     "feeVeTap()"(overrides?: CallOverrides): Promise<[string]>;
 
+    masterContractLength(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "masterContractLength()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
@@ -236,20 +274,6 @@ export class BeachBar extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<[string]>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<[string]>;
-
-    registerAsset(
-      contractAddress: string,
-      strategy: string,
-      id: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "registerAsset(address,address,uint256)"(
-      contractAddress: string,
-      strategy: string,
-      id: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
 
     registerMasterContract(
       mcAddress: string,
@@ -389,6 +413,10 @@ export class BeachBar extends BaseContract {
 
   "feeVeTap()"(overrides?: CallOverrides): Promise<string>;
 
+  masterContractLength(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "masterContractLength()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   owner(overrides?: CallOverrides): Promise<string>;
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -396,20 +424,6 @@ export class BeachBar extends BaseContract {
   pendingOwner(overrides?: CallOverrides): Promise<string>;
 
   "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
-
-  registerAsset(
-    contractAddress: string,
-    strategy: string,
-    id: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "registerAsset(address,address,uint256)"(
-    contractAddress: string,
-    strategy: string,
-    id: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
 
   registerMasterContract(
     mcAddress: string,
@@ -545,6 +559,10 @@ export class BeachBar extends BaseContract {
 
     "feeVeTap()"(overrides?: CallOverrides): Promise<string>;
 
+    masterContractLength(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "masterContractLength()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     owner(overrides?: CallOverrides): Promise<string>;
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -552,20 +570,6 @@ export class BeachBar extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<string>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
-
-    registerAsset(
-      contractAddress: string,
-      strategy: string,
-      id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "registerAsset(address,address,uint256)"(
-      contractAddress: string,
-      strategy: string,
-      id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
 
     registerMasterContract(
       mcAddress: string,
@@ -584,14 +588,14 @@ export class BeachBar extends BaseContract {
       data: BytesLike,
       useCreate2: boolean,
       overrides?: CallOverrides
-    ): Promise<void>;
+    ): Promise<string>;
 
     "registerMixologist(address,bytes,bool)"(
       mc: string,
       data: BytesLike,
       useCreate2: boolean,
       overrides?: CallOverrides
-    ): Promise<void>;
+    ): Promise<string>;
 
     setFeeTo(feeTo_: string, overrides?: CallOverrides): Promise<void>;
 
@@ -668,6 +672,22 @@ export class BeachBar extends BaseContract {
   };
 
   filters: {
+    "FeeToUpdate(address)"(
+      newFeeTo?: null
+    ): TypedEventFilter<[string], { newFeeTo: string }>;
+
+    FeeToUpdate(
+      newFeeTo?: null
+    ): TypedEventFilter<[string], { newFeeTo: string }>;
+
+    "FeeVeTapUpdate(address)"(
+      newFeeVeTap?: null
+    ): TypedEventFilter<[string], { newFeeVeTap: string }>;
+
+    FeeVeTapUpdate(
+      newFeeVeTap?: null
+    ): TypedEventFilter<[string], { newFeeVeTap: string }>;
+
     "OwnershipTransferred(address,address)"(
       previousOwner?: string | null,
       newOwner?: string | null
@@ -682,6 +702,64 @@ export class BeachBar extends BaseContract {
     ): TypedEventFilter<
       [string, string],
       { previousOwner: string; newOwner: string }
+    >;
+
+    "ProtocolWithdrawal(address[],uint256)"(
+      markets?: null,
+      timestamp?: null
+    ): TypedEventFilter<
+      [string[], BigNumber],
+      { markets: string[]; timestamp: BigNumber }
+    >;
+
+    ProtocolWithdrawal(
+      markets?: null,
+      timestamp?: null
+    ): TypedEventFilter<
+      [string[], BigNumber],
+      { markets: string[]; timestamp: BigNumber }
+    >;
+
+    "RegisterMasterContract(address,uint8)"(
+      location?: null,
+      risk?: null
+    ): TypedEventFilter<[string, number], { location: string; risk: number }>;
+
+    RegisterMasterContract(
+      location?: null,
+      risk?: null
+    ): TypedEventFilter<[string, number], { location: string; risk: number }>;
+
+    "RegisterMixologist(address,address)"(
+      location?: null,
+      masterContract?: null
+    ): TypedEventFilter<
+      [string, string],
+      { location: string; masterContract: string }
+    >;
+
+    RegisterMixologist(
+      location?: null,
+      masterContract?: null
+    ): TypedEventFilter<
+      [string, string],
+      { location: string; masterContract: string }
+    >;
+
+    "SwapperUpdate(address,bool)"(
+      swapper?: null,
+      isRegistered?: null
+    ): TypedEventFilter<
+      [string, boolean],
+      { swapper: string; isRegistered: boolean }
+    >;
+
+    SwapperUpdate(
+      swapper?: null,
+      isRegistered?: null
+    ): TypedEventFilter<
+      [string, boolean],
+      { swapper: string; isRegistered: boolean }
     >;
   };
 
@@ -714,6 +792,10 @@ export class BeachBar extends BaseContract {
 
     "feeVeTap()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    masterContractLength(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "masterContractLength()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -721,20 +803,6 @@ export class BeachBar extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    registerAsset(
-      contractAddress: string,
-      strategy: string,
-      id: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "registerAsset(address,address,uint256)"(
-      contractAddress: string,
-      strategy: string,
-      id: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
 
     registerMasterContract(
       mcAddress: string,
@@ -871,6 +939,14 @@ export class BeachBar extends BaseContract {
 
     "feeVeTap()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    masterContractLength(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "masterContractLength()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -878,20 +954,6 @@ export class BeachBar extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    registerAsset(
-      contractAddress: string,
-      strategy: string,
-      id: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "registerAsset(address,address,uint256)"(
-      contractAddress: string,
-      strategy: string,
-      id: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
 
     registerMasterContract(
       mcAddress: string,
