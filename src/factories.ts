@@ -1,4 +1,6 @@
 import {
+    YieldBox,
+    YieldBox__factory,
     BeachBar,
     BeachBar__factory,
     ERC20,
@@ -10,6 +12,9 @@ import {
     MixologistHelper__factory,
     Mixologist__factory,
 } from './typechain';
+
+export type IYieldBox = YieldBox;
+export const YieldBoxFactory = YieldBox__factory;
 
 export type IBeachBar = BeachBar;
 export const BeachBarFactory = BeachBar__factory;

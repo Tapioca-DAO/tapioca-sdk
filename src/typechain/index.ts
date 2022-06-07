@@ -3,12 +3,14 @@
 /* eslint-disable */
 export type { ERC20 } from "./ERC20";
 export type { BeachBar } from "./BeachBar";
+export type { YieldBox } from "./YieldBox";
 export type { ERC20Mock } from "./ERC20Mock";
 export type { Mixologist } from "./Mixologist";
 export type { MixologistHelper } from "./MixologistHelper";
 
 export { ERC20__factory } from "./factories/ERC20__factory";
 export { BeachBar__factory } from "./factories/BeachBar__factory";
+export { YieldBox__factory } from "./factories/YieldBox__factory";
 export { ERC20Mock__factory } from "./factories/ERC20Mock__factory";
 export { Mixologist__factory } from "./factories/Mixologist__factory";
 export { MixologistHelper__factory } from "./factories/MixologistHelper__factory";

@@ -5,12 +5,14 @@ import {
     BeachBarFactory,
     ERC20MockFactory,
     MixologistFactory,
+    YieldBoxFactory,
 } from './factories';
 
 const addresses__TEST = __deployments;
 
 export const loadContract__TEST = (signer: Signer | Provider) => {
     return {
+        yieldBox: YieldBoxFactory.connect(addresses__TEST.yieldBox, signer),
         beachbar: BeachBarFactory.connect(addresses__TEST.bar, signer),
         mixologist: MixologistFactory.connect(
             addresses__TEST.wethUsdcMixologist,
