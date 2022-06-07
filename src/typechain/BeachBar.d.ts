@@ -37,6 +37,7 @@ interface BeachBarInterface extends ethers.utils.Interface {
     "swappers(address)": FunctionFragment;
     "tapAssetId()": FunctionFragment;
     "tapToken()": FunctionFragment;
+    "tapiocaMarkets()": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
     "withdrawAllProtocolFees(address[])": FunctionFragment;
     "yieldBox()": FunctionFragment;
@@ -81,6 +82,10 @@ interface BeachBarInterface extends ethers.utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "tapToken", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "tapiocaMarkets",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [string, boolean, boolean]
@@ -127,6 +132,10 @@ interface BeachBarInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "swappers", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "tapAssetId", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "tapToken", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "tapiocaMarkets",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
     data: BytesLike
@@ -315,6 +324,14 @@ export class BeachBar extends BaseContract {
 
     "tapToken()"(overrides?: CallOverrides): Promise<[string]>;
 
+    tapiocaMarkets(
+      overrides?: CallOverrides
+    ): Promise<[string[]] & { markets: string[] }>;
+
+    "tapiocaMarkets()"(
+      overrides?: CallOverrides
+    ): Promise<[string[]] & { markets: string[] }>;
+
     transferOwnership(
       newOwner: string,
       direct: boolean,
@@ -467,6 +484,10 @@ export class BeachBar extends BaseContract {
 
   "tapToken()"(overrides?: CallOverrides): Promise<string>;
 
+  tapiocaMarkets(overrides?: CallOverrides): Promise<string[]>;
+
+  "tapiocaMarkets()"(overrides?: CallOverrides): Promise<string[]>;
+
   transferOwnership(
     newOwner: string,
     direct: boolean,
@@ -612,6 +633,10 @@ export class BeachBar extends BaseContract {
     tapToken(overrides?: CallOverrides): Promise<string>;
 
     "tapToken()"(overrides?: CallOverrides): Promise<string>;
+
+    tapiocaMarkets(overrides?: CallOverrides): Promise<string[]>;
+
+    "tapiocaMarkets()"(overrides?: CallOverrides): Promise<string[]>;
 
     transferOwnership(
       newOwner: string,
@@ -784,6 +809,10 @@ export class BeachBar extends BaseContract {
 
     "tapToken()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    tapiocaMarkets(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "tapiocaMarkets()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     transferOwnership(
       newOwner: string,
       direct: boolean,
@@ -939,6 +968,12 @@ export class BeachBar extends BaseContract {
     tapToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "tapToken()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    tapiocaMarkets(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "tapiocaMarkets()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     transferOwnership(
       newOwner: string,
