@@ -8,7 +8,9 @@ import {
     YieldBoxFactory,
 } from './factories';
 
-const addresses__TEST = __deployments;
+const RINKEBY = '4';
+
+const addresses__TEST = __deployments[RINKEBY];
 
 export const loadContract__TEST = (signer: Signer | Provider) => {
     return {
