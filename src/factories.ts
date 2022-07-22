@@ -1,8 +1,20 @@
 import {
+    BeachBar,
+    BeachBar__factory,
+    ERC20,
+    ERC20Mock,
+    ERC20Mock__factory,
+    ERC20__factory,
+    Mixologist,
+    MixologistHelper,
+    MixologistHelper__factory,
+    Mixologist__factory,
     TapiocaOFT,
     TapiocaOFT__factory,
     TapiocaWrapper,
     TapiocaWrapper__factory,
+    YieldBox,
+    YieldBox__factory,
 } from './typechain';
 
 export type IYieldBox = YieldBox;
