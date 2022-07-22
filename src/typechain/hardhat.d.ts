@@ -13,60 +13,24 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
-      name: "ERC20",
+      name: "TapiocaOFT",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ERC20__factory>;
+    ): Promise<Contracts.TapiocaOFT__factory>;
     getContractFactory(
-      name: "BeachBar",
+      name: "TapiocaWrapper",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.BeachBar__factory>;
-    getContractFactory(
-      name: "YieldBox",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.YieldBox__factory>;
-    getContractFactory(
-      name: "ERC20Mock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ERC20Mock__factory>;
-    getContractFactory(
-      name: "Mixologist",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Mixologist__factory>;
-    getContractFactory(
-      name: "MixologistHelper",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MixologistHelper__factory>;
+    ): Promise<Contracts.TapiocaWrapper__factory>;
 
     getContractAt(
-      name: "ERC20",
+      name: "TapiocaOFT",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.ERC20>;
+    ): Promise<Contracts.TapiocaOFT>;
     getContractAt(
-      name: "BeachBar",
+      name: "TapiocaWrapper",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.BeachBar>;
-    getContractAt(
-      name: "YieldBox",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.YieldBox>;
-    getContractAt(
-      name: "ERC20Mock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ERC20Mock>;
-    getContractAt(
-      name: "Mixologist",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.Mixologist>;
-    getContractAt(
-      name: "MixologistHelper",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.MixologistHelper>;
+    ): Promise<Contracts.TapiocaWrapper>;
 
     // default types
     getContractFactory(
