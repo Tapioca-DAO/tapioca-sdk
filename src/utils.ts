@@ -5,6 +5,7 @@ import {
     BeachBarFactory,
     ERC20MockFactory,
     MixologistFactory,
+    TapiocaOFTFactory,
     YieldBoxFactory,
 } from './factories';
 
@@ -27,5 +28,9 @@ export const loadContract__TEST = (signer: Signer | Provider) => {
         tap: ERC20MockFactory.connect(addresses__TEST.tap, signer),
         usdc: ERC20MockFactory.connect(addresses__TEST.usdc, signer),
         weth: ERC20MockFactory.connect(addresses__TEST.weth, signer),
+        tapiocaWrapper: TapiocaOFTFactory.connect(
+            addresses__TEST.tapiocaWrapper,
+            signer,
+        ),
     };
 };
