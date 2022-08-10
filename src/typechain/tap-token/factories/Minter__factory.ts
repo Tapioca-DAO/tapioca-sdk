@@ -88,7 +88,6 @@ const _abi = [
     ],
     stateMutability: "nonpayable",
     type: "function",
-    gas: 2989,
   },
   {
     name: "commit_transfer_ownership",
@@ -101,7 +100,6 @@ const _abi = [
     ],
     stateMutability: "nonpayable",
     type: "function",
-    gas: 37654,
   },
   {
     name: "apply_transfer_ownership",
@@ -109,7 +107,6 @@ const _abi = [
     inputs: [],
     stateMutability: "nonpayable",
     type: "function",
-    gas: 38510,
   },
   {
     name: "mint",
@@ -122,7 +119,6 @@ const _abi = [
     ],
     stateMutability: "nonpayable",
     type: "function",
-    gas: 101618,
   },
   {
     name: "mint_many",
@@ -135,7 +131,6 @@ const _abi = [
     ],
     stateMutability: "nonpayable",
     type: "function",
-    gas: 420712,
   },
   {
     name: "mint_for",
@@ -152,7 +147,6 @@ const _abi = [
     ],
     stateMutability: "nonpayable",
     type: "function",
-    gas: 102860,
   },
   {
     name: "toggle_approve_mint",
@@ -165,7 +159,6 @@ const _abi = [
     ],
     stateMutability: "nonpayable",
     type: "function",
-    gas: 36787,
   },
   {
     name: "token",
@@ -178,7 +171,6 @@ const _abi = [
     inputs: [],
     stateMutability: "view",
     type: "function",
-    gas: 1301,
   },
   {
     name: "controller",
@@ -191,7 +183,6 @@ const _abi = [
     inputs: [],
     stateMutability: "view",
     type: "function",
-    gas: 1331,
   },
   {
     name: "admin",
@@ -204,7 +195,6 @@ const _abi = [
     inputs: [],
     stateMutability: "view",
     type: "function",
-    gas: 1361,
   },
   {
     name: "future_admin",
@@ -217,7 +207,6 @@ const _abi = [
     inputs: [],
     stateMutability: "view",
     type: "function",
-    gas: 1391,
   },
   {
     name: "minted",
@@ -239,7 +228,6 @@ const _abi = [
     ],
     stateMutability: "view",
     type: "function",
-    gas: 1851,
   },
   {
     name: "allowed_to_mint_for",
@@ -261,7 +249,6 @@ const _abi = [
     ],
     stateMutability: "view",
     type: "function",
-    gas: 1881,
   },
 ];
 
