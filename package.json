@@ -1,60 +1,60 @@
 {
-  "version": "0.2.2",
-  "license": "MIT",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
-  "engines": {
-    "node": ">=12"
-  },
-  "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build && npm run copy-dts",
-    "test": "tsdx test",
-    "lint": "tsdx lint",
-    "prepare": "npm run build",
-    "size": "size-limit",
-    "analyze": "size-limit --why",
-    "publish": "npm run prepare && npm publish",
-    "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" dist"
-  },
-  "peerDependencies": {},
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
-  },
-  "name": "tapioca-sdk",
-  "author": "0xRektora",
-  "module": "dist/tapioca-sdk.esm.js",
-  "size-limit": [
-    {
-      "path": "dist/tapioca-sdk.cjs.production.min.js",
-      "limit": "10 KB"
+    "version": "0.2.2",
+    "license": "MIT",
+    "main": "dist/index.js",
+    "typings": "dist/index.d.ts",
+    "files": [
+        "dist",
+        "src"
+    ],
+    "engines": {
+        "node": ">=12"
     },
-    {
-      "path": "dist/tapioca-sdk.esm.js",
-      "limit": "10 KB"
+    "scripts": {
+        "start": "tsdx watch",
+        "build": "tsdx build && npm run copy-dts",
+        "test": "tsdx test",
+        "lint": "tsdx lint",
+        "prepare": "npm run build",
+        "size": "size-limit",
+        "analyze": "size-limit --why",
+        "publish": "npm run prepare && npm publish",
+        "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" dist"
+    },
+    "peerDependencies": {},
+    "husky": {
+        "hooks": {
+            "pre-commit": "tsdx lint"
+        }
+    },
+    "name": "tapioca-sdk",
+    "author": "0xRektora",
+    "module": "dist/tapioca-sdk.esm.js",
+    "size-limit": [
+        {
+            "path": "dist/tapioca-sdk.cjs.production.min.js",
+            "limit": "350 KB"
+        },
+        {
+            "path": "dist/tapioca-sdk.esm.js",
+            "limit": "350 KB"
+        }
+    ],
+    "dependencies": {
+        "ethers": "^5.5.1"
+    },
+    "devDependencies": {
+        "@size-limit/preset-small-lib": "^7.0.8",
+        "copyfiles": "^2.4.1",
+        "eslint": "^8.12.0",
+        "husky": "^7.0.4",
+        "prettier": "^2.6.1",
+        "size-limit": "^7.0.8",
+        "tsdx": "^0.14.1",
+        "tslib": "^2.3.1",
+        "typescript": "^4.6.3"
+    },
+    "resolutions": {
+        "tsdx/typescript": "^4.6.3"
     }
-  ],
-  "dependencies": {
-    "ethers": "^5.5.1"
-  },
-  "devDependencies": {
-    "@size-limit/preset-small-lib": "^7.0.8",
-    "copyfiles": "^2.4.1",
-    "eslint": "^8.12.0",
-    "husky": "^7.0.4",
-    "prettier": "^2.6.1",
-    "size-limit": "^7.0.8",
-    "tsdx": "^0.14.1",
-    "tslib": "^2.3.1",
-    "typescript": "^4.6.3"
-  },
-  "resolutions": {
-    "tsdx/typescript": "^4.6.3"
-  }
 }
