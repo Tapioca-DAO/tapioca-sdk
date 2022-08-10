@@ -95,7 +95,6 @@ export const getGaugeWeight = async (
 export const getUsedPower = async (signer: Signer) => {
     const contracts = loadGovernanceContracts(signer);
     const signerAddress = await signer.getAddress();
-    g;
     return await contracts.gaugeController['vote_user_power(address)'](
         signerAddress,
     );
