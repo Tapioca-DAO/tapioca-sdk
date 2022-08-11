@@ -1,5 +1,4 @@
 import { Signer } from 'ethers';
-import __deployments from './addresses.json';
 
 import { loadGovernanceContracts } from './utils';
 
