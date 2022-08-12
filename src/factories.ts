@@ -15,6 +15,18 @@ import {
     TapiocaWrapper__factory,
     YieldBox,
     YieldBox__factory,
+    FeeDistributor,
+    FeeDistributor__factory,
+    GaugeController,
+    GaugeController__factory,
+    LiquidityGauge,
+    LiquidityGauge__factory,
+    Minter,
+    Minter__factory,
+    TapOFT,
+    TapOFT__factory,
+    VeTap,
+    VeTap__factory,
 } from './typechain';
 
 export type IYieldBox = YieldBox;
@@ -40,3 +52,21 @@ export const TapiocaWrapperFactory = TapiocaWrapper__factory;
 
 export type ITapiocaOFT = TapiocaOFT;
 export const TapiocaOFTFactory = TapiocaOFT__factory;
+
+export type IFeeDistributor = FeeDistributor;
+export const FeeDistributorFactory = FeeDistributor__factory;
+
+export type IGaugeController = GaugeController;
+export const GaugeControllerFactory = GaugeController__factory;
+
+export type ILiquidityGauge = LiquidityGauge;
+export const LiquidityGaugeFactory = LiquidityGauge__factory;
+
+export type IMinter = Minter;
+export const MinterFactory = Minter__factory;
+
+export type ITapOFT = TapOFT;
+export const TapOFTFactory = TapOFT__factory;
+
+export type IVeTap = VeTap;
+export const VeTapFactory = VeTap__factory;
