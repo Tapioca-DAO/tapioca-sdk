@@ -12,6 +12,7 @@ module.exports = {
         ecmaVersion: 12,
     },
     rules: {
+        '@typescript-eslint/no-explicit-any': ['off'],
         'prettier/prettier': [
             'error',
             {
