@@ -3,6 +3,6 @@
 /* eslint-disable */
 export type { TapiocaOFT } from "./TapiocaOFT";
 export type { TapiocaWrapper } from "./TapiocaWrapper";
-
+export * as factories from "./factories";
 export { TapiocaOFT__factory } from "./factories/TapiocaOFT__factory";
 export { TapiocaWrapper__factory } from "./factories/TapiocaWrapper__factory";

@@ -17,6 +17,9 @@
 		"feeCollector": "0x4baFc824ce8EBd42d15C82ce21c6Ab711228E085",
 		"__uniFactory": "0x7643B9236339D44B1c34c9429ed7c398352eA02B",
 		"__uniRouter": "0xe74d60592EEcA33C725d6ca71Dd340eFaBdf4745",
-		"tapiocaWrapper": "0x1566b0344b8Ff1ee1f38beF0037fe1935A7C1268"
+		"tapiocaWrapper": "0x55981E84cfA54F6fdAa5Dd5a98463A08D58f5781"
+	},
+	"80001": {
+		"tapiocaWrapper": "0xdc7CF0F770694Ed87F6ed4e956F2aff8CcD9Aca5"
 	}
 }
