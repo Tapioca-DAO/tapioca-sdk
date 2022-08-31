@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { glob, runTypeChain } from 'typechain';
 import writeJsonFile from 'write-json-file';
-import _ from 'lodash';
+import _merge from 'lodash/merge';
 
 const ADDRESSES = 'tapioca-sdk/src/ADDRESSES.json';
 
@@ -41,7 +41,7 @@ const mergeDeployments = async (_deployments: TDeployment) => {
     }
 
     // Merge prev and new deployments
-    const deployments: TDeployment = _.merge(__deployments.prev, _deployments);
+    const deployments: TDeployment = _merge(__deployments.prev, _deployments);
 
     // Write merged deployments to file
     await writeJsonFile(ADDRESSES, deployments);
