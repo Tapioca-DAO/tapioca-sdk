@@ -1,5 +1,5 @@
 {
-    "version": "0.2.2",
+    "version": "1.0.1",
     "license": "MIT",
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
@@ -16,12 +16,9 @@
         "test": "tsdx test",
         "lint": "npx eslint .",
         "prepare": "npm run build",
-        "size": "size-limit",
-        "analyze": "size-limit --why",
         "publish": "npm run prepare && npm publish",
         "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" dist"
     },
-    "peerDependencies": {},
     "husky": {
         "hooks": {
             "pre-commit": "npx eslint ."
@@ -30,23 +27,17 @@
     "name": "tapioca-sdk",
     "author": "0xRektora",
     "module": "dist/tapioca-sdk.esm.js",
-    "size-limit": [
-        {
-            "path": "dist/tapioca-sdk.cjs.production.min.js",
-            "limit": "350 KB"
-        },
-        {
-            "path": "dist/tapioca-sdk.esm.js",
-            "limit": "350 KB"
-        }
-    ],
     "dependencies": {
-        "ethers": "^5.6.9"
+        "ethers": "^5.6.9",
+        "lodash": "^4.17.21",
+        "lodash-es": "^4.17.21",
+        "typechain": "^8.1.0",
+        "write-json-file": "4.3.0"
     },
     "devDependencies": {
-        "@size-limit/preset-big-lib": "^8.0.0",
         "@types/chai": "^4.3.3",
         "@types/jest": "^28.1.6",
+        "@types/lodash": "^4.14.184",
         "@typescript-eslint/eslint-plugin": "^5.33.0",
         "@typescript-eslint/parser": "^5.33.0",
         "chai": "^4.3.6",
@@ -56,7 +47,6 @@
         "eslint-plugin-prettier": "^4.2.1",
         "husky": "^7.0.4",
         "prettier": "^2.7.1",
-        "size-limit": "^7.0.8",
         "tsdx": "^0.14.1",
         "tslib": "^2.3.1",
         "typescript": "^4.7.4"
