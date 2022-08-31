@@ -11,17 +11,18 @@ export type TDeployment = {
         [project: string]: TContract[];
     };
 };
+type TProjectCaller = 'TapiocaZ' | 'Tap-Token' | 'Tapioca-Bar';
 
 /**
  *
  * @param parmas {Object} - Params object
- * @param parmas.projectCaller {string} - The name of the project that is calling the script. Should be the Github repo name (e.g. 'TapiocaZ')
+ * @param parmas.projectCaller {TProjectCaller} - The name of the project that is calling the script. Should be the Github repo name (e.g. 'TapiocaZ')
  * @param parmas.contractNames {string[]} - Contract to include in the typing generation. Used to exclude external contracts and interfaces (e.g UniV2)
  * @param parmas.artifactPath {string} - Path to the artifacts folder
  * @param parmas.__deployments {?TDeployment} - The deployments to merge with the previous deployments
  */
 export const exportSDK = async (params: {
-    projectCaller: string;
+    projectCaller: TProjectCaller;
     contractNames: string[];
     artifactPath: string;
     _deployments?: TDeployment;
@@ -48,7 +49,7 @@ const mergeDeployments = async (_deployments: TDeployment) => {
 };
 
 const generateTypings = async (
-    projectCaller: string,
+    projectCaller: TProjectCaller,
     artifactPath: string,
     contractNames: string[],
 ) => {
