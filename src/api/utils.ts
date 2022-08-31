@@ -1,5 +1,5 @@
 import _find from 'lodash/find';
-import LZ_ENDPOINTS from '../src/LZ_ENDPOINTS';
+import LZ_ENDPOINTS from '../LZ_ENDPOINTS';
 
 export const getLZEndpointBy = (
     getBy: 'chainId' | 'lzChainId' | 'name',
