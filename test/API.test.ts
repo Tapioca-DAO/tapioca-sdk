@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { getLZEndpointBy } from '../api/utils';
+import { API } from '../src/api';
 
 describe('API', () => {
     describe('utils', () => {
@@ -11,17 +11,17 @@ describe('API', () => {
         };
         it('Should get the chain info for a given chain id', () => {
             const chainId = '4';
-            const chainInfo = getLZEndpointBy('chainId', chainId);
+            const chainInfo = API.utils.getLZEndpointBy('chainId', chainId);
             expect(chainInfo).to.to.deep.equal(rinkebyInfo);
         });
         it('Should get the chain info for a given lzChainId', () => {
             const lzChainId = '10001';
-            const chainInfo = getLZEndpointBy('lzChainId', lzChainId);
+            const chainInfo = API.utils.getLZEndpointBy('lzChainId', lzChainId);
             expect(chainInfo).to.to.deep.equal(rinkebyInfo);
         });
         it('Should get the chain info for a given chain name', () => {
             const chainName = 'rinkeby';
-            const chainInfo = getLZEndpointBy('name', chainName);
+            const chainInfo = API.utils.getLZEndpointBy('name', chainName);
             expect(chainInfo).to.to.deep.equal(rinkebyInfo);
         });
     });
