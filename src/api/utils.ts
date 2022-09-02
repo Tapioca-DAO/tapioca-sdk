@@ -1,15 +1,14 @@
 import _find from 'lodash/find';
-import _pick from 'lodash/pick';
 import SUPPORTED_CHAINS from '../SUPPORTED_CHAINS';
 
 /**
  * Returns a list of supported LZ chain IDs
  **/
-export const getLZChainIDs = () => _pick(SUPPORTED_CHAINS, ['lzChainId']);
+export const getLZChainIDs = () => SUPPORTED_CHAINS.map((e) => e.lzChainId);
 /**
  * Returns a list of supported EVM chain IDs
  **/
-export const getChainIDs = () => _pick(SUPPORTED_CHAINS, ['chainId']);
+export const getChainIDs = () => SUPPORTED_CHAINS.map((e) => e.chainId);
 
 /**
  * Returns a chain info for a given `chainId` or `lzChainId` or `name`.
@@ -26,4 +25,4 @@ export const getChainBy = (
 /**
  * Returns the object containing the chain info.
  **/
-export const getLZChain = () => SUPPORTED_CHAINS;
+export const getSupportedChains = () => SUPPORTED_CHAINS;
