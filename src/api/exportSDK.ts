@@ -21,7 +21,7 @@ export type TProjectCaller = 'TapiocaZ' | 'Tap-Token' | 'Tapioca-Bar';
  * @param parmas.artifactPath {string} - Path to the artifacts folder
  * @param parmas.__deployments {?TDeployment} - The deployments to merge with the previous deployments
  */
-export const exportSDK = async (params: {
+export const run = async (params: {
     projectCaller: TProjectCaller;
     contractNames: string[];
     artifactPath: string;
