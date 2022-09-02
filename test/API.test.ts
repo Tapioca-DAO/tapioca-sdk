@@ -11,17 +11,17 @@ describe('API', () => {
         };
         it('Should get the chain info for a given chain id', () => {
             const chainId = '4';
-            const chainInfo = API.utils.getLZEndpointBy('chainId', chainId);
+            const chainInfo = API.utils.getChainBy('chainId', chainId);
             expect(chainInfo).to.to.deep.equal(rinkebyInfo);
         });
         it('Should get the chain info for a given lzChainId', () => {
             const lzChainId = '10001';
-            const chainInfo = API.utils.getLZEndpointBy('lzChainId', lzChainId);
+            const chainInfo = API.utils.getChainBy('lzChainId', lzChainId);
             expect(chainInfo).to.to.deep.equal(rinkebyInfo);
         });
         it('Should get the chain info for a given chain name', () => {
             const chainName = 'rinkeby';
-            const chainInfo = API.utils.getLZEndpointBy('name', chainName);
+            const chainInfo = API.utils.getChainBy('name', chainName);
             expect(chainInfo).to.to.deep.equal(rinkebyInfo);
         });
     });

@@ -1,11 +1,11 @@
-type TLZ_Endpoint = {
+export type TSupportedChain = {
     name: string;
     address: string;
     chainId: string;
     lzChainId: string;
 };
 
-const LZ_ENDPOINTS: TLZ_Endpoint[] = [
+const SUPPORTED_CHAINS: TSupportedChain[] = [
     {
         name: 'rinkeby',
         address: '0x79a63d6d8BBD5c6dfc774dA79bCcD948EAcb53FA',
@@ -20,4 +20,4 @@ const LZ_ENDPOINTS: TLZ_Endpoint[] = [
     },
 ];
 
-export default LZ_ENDPOINTS;
+export default SUPPORTED_CHAINS;
