@@ -1,11 +1,4 @@
-export type TSupportedChain = {
-    name: string;
-    address: string;
-    chainId: string;
-    lzChainId: string;
-};
-
-const SUPPORTED_CHAINS: TSupportedChain[] = [
+const SUPPORTED_CHAINS = [
     {
         name: 'rinkeby',
         address: '0x79a63d6d8BBD5c6dfc774dA79bCcD948EAcb53FA',
@@ -18,6 +11,6 @@ const SUPPORTED_CHAINS: TSupportedChain[] = [
         chainId: '80001',
         lzChainId: '10009',
     },
-];
+] as const;
 
 export default SUPPORTED_CHAINS;
