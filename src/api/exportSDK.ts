@@ -11,7 +11,7 @@ export type TDeployment = {
         [project: string]: TContract[];
     };
 };
-type TProjectCaller = 'TapiocaZ' | 'Tap-Token' | 'Tapioca-Bar';
+export type TProjectCaller = 'TapiocaZ' | 'Tap-Token' | 'Tapioca-Bar';
 
 /**
  *
