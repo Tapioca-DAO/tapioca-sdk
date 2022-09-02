@@ -51,7 +51,9 @@ const mergeDeployments = async (
     // Read previous deployments
     let __deployments: TDeployment | undefined;
     try {
-        __deployments = JSON.parse(fs.readFileSync(ADDRESSES, 'utf-8'));
+        if (fs.existsSync(ADDRESSES)) {
+            __deployments = JSON.parse(fs.readFileSync(ADDRESSES, 'utf-8'));
+        }
     } catch (e) {
         console.log(`[-] Error reading ${ADDRESSES}`);
     }
