@@ -1,5 +1,11 @@
 const SUPPORTED_CHAINS = [
     {
+        name: 'optimism',
+        address: '0x3c2269811836af69497E5F486A85D7316753cf62',
+        chainId: '10',
+        lzChainId: '11',
+    },
+    {
         name: 'rinkeby',
         address: '0x79a63d6d8BBD5c6dfc774dA79bCcD948EAcb53FA',
         chainId: '4',
