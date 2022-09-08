@@ -16,7 +16,7 @@
         "test": "tsdx test",
         "lint": "npx eslint .",
         "prepare": "npm run build",
-        "publish": "npm run prepare && npm publish",
+        "deploy": "npm run prepare && npm publish",
         "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" dist",
         "copy-sol": "copyfiles -u 1 \"src/**/*.sol\" dist"
     },
