@@ -12,12 +12,13 @@
     },
     "scripts": {
         "start": "tsdx watch",
-        "build": "tsdx build && npm run copy-dts",
+        "build": "tsdx build && npm run copy-dts && npm run copy-sol",
         "test": "tsdx test",
         "lint": "npx eslint .",
         "prepare": "npm run build",
         "publish": "npm run prepare && npm publish",
-        "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" dist"
+        "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" dist",
+        "copy-sol": "copyfiles -u 1 \"src/**/*.sol\" dist"
     },
     "husky": {
         "hooks": {
