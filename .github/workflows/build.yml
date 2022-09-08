@@ -10,6 +10,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '12.x'
-      - run: npm ci
-      - run: npm run build
-      - run: npm test
+      - run: yarn install --immutable
+      - run: yarn run build
+      - run: yarn run test
