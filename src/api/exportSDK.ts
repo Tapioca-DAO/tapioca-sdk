@@ -2,24 +2,22 @@ import fs from 'fs';
 import { glob, runTypeChain } from 'typechain';
 import writeJsonFile from 'write-json-file';
 import _merge from 'lodash/merge';
-import { getChainIDs, getSupportedChains } from './utils';
+import { getChainIDs } from './utils';
 
 // Helper types
 type HLP_TChain = ReturnType<typeof getChainIDs>[number];
-type HLP_TChainName = ReturnType<typeof getSupportedChains>[number]['name'];
 
 const ADDRESSES = 'tapioca-sdk/src/ADDRESSES.json';
 
 export type TContract = { name: string; address: string; meta: any };
 export type TProjectDeployment = {
-    [chainID in HLP_TChain]: TContract[];
+    [chainID in HLP_TChain]?: TContract[];
 };
-export type TDeployment = {
-    [project in HLP_TChainName]: {
-        [chainID in HLP_TChain]: TContract[];
-    };
-};
+
 export type TProjectCaller = 'TapiocaZ' | 'Tap-Token' | 'Tapioca-Bar';
+export type TDeployment = {
+    [project in TProjectCaller]?: TProjectDeployment;
+};
 
 /**
  *
