@@ -12,6 +12,8 @@ const ADDRESSES = 'tapioca-sdk/src/ADDRESSES.json';
 export type TContract = { name: string; address: string; meta: any };
 export type TProjectDeployment = {
     [chainID in HLP_TChain]?: TContract[];
+} & {
+    [chainId: string]: TContract[];
 };
 
 export type TProjectCaller = 'TapiocaZ' | 'Tap-Token' | 'Tapioca-Bar';
