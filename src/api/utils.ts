@@ -1,8 +1,12 @@
 import fs from 'fs';
 import _find from 'lodash/find';
 import _merge from 'lodash/merge';
+import {
+    DEPLOYMENT_SDK_PATH,
+    TProjectCaller,
+    TProjectDeployment,
+} from '../shared';
 import SUPPORTED_CHAINS from '../SUPPORTED_CHAINS';
-import { TProjectDeployment } from './exportSDK';
 
 /**
  * Returns a list of supported LZ chain IDs
@@ -56,4 +60,16 @@ export const saveDeploymentOnDisk = async (data: TProjectDeployment) => {
     // Merge prev and new deployments
     const deployments: TProjectDeployment = _merge(__deployments, data);
     return deployments;
+};
+
+/**
+ * Returns the contract deployments of a project given a [chainId].
+ * @param projectCaller The project caller
+ * @param chainId The chain ID
+ **/
+export const getDeployment = (project: TProjectCaller, chainId: string) => {
+    const deployments = JSON.parse(
+        fs.readFileSync(DEPLOYMENT_SDK_PATH, 'utf-8'),
+    );
+    return deployments[project][chainId];
 };

@@ -1,26 +1,13 @@
 import fs from 'fs';
+import _merge from 'lodash/merge';
 import { glob, runTypeChain } from 'typechain';
 import writeJsonFile from 'write-json-file';
-import _merge from 'lodash/merge';
-import { getChainIDs } from './utils';
-
-// Helper types
-type HLP_TChain = ReturnType<typeof getChainIDs>[number];
-
-const ADDRESSES = 'tapioca-sdk/src/ADDRESSES.json';
-
-export type TContract = { name: string; address: string; meta: any };
-export type TProjectDeployment = {
-    [chainID in HLP_TChain]?: TContract[];
-} & {
-    [chainId: string]: TContract[];
-};
-
-export type TProjectCaller = 'TapiocaZ' | 'Tap-Token' | 'Tapioca-Bar';
-export type TDeployment = {
-    [project in TProjectCaller]?: TProjectDeployment;
-};
-
+import {
+    DEPLOYMENT_SDK_PATH,
+    TDeployment,
+    TProjectCaller,
+    TProjectDeployment,
+} from '../shared';
 /**
  *
  * @param params {Object} - Params object
@@ -39,7 +26,7 @@ export const run = async (params: {
     if (_deployments) {
         const deployments = await mergeDeployments(projectCaller, _deployments);
         // Write merged deployments to file
-        await writeJsonFile(ADDRESSES, deployments);
+        await writeJsonFile(DEPLOYMENT_SDK_PATH, deployments);
     }
     await generateTypings(projectCaller, artifactPath, contractNames);
 };
@@ -51,11 +38,13 @@ const mergeDeployments = async (
     // Read previous deployments
     let __deployments: TDeployment | undefined;
     try {
-        if (fs.existsSync(ADDRESSES)) {
-            __deployments = JSON.parse(fs.readFileSync(ADDRESSES, 'utf-8'));
+        if (fs.existsSync(DEPLOYMENT_SDK_PATH)) {
+            __deployments = JSON.parse(
+                fs.readFileSync(DEPLOYMENT_SDK_PATH, 'utf-8'),
+            );
         }
     } catch (e) {
-        console.log(`[-] Error reading ${ADDRESSES}`);
+        console.log(`[-] Error reading ${DEPLOYMENT_SDK_PATH}`);
     }
 
     // If no deployment, create a new one for this project
