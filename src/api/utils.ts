@@ -1,5 +1,8 @@
+import fs from 'fs';
 import _find from 'lodash/find';
+import _merge from 'lodash/merge';
 import SUPPORTED_CHAINS from '../SUPPORTED_CHAINS';
+import { TProjectDeployment } from './exportSDK';
 
 /**
  * Returns a list of supported LZ chain IDs
@@ -26,3 +29,31 @@ export const getChainBy = (
  * Returns the object containing the chain info.
  **/
 export const getSupportedChains = () => SUPPORTED_CHAINS;
+
+/**
+ * Relative to the Hardhat project root
+ */
+export const PROJECT_RELATIVE_DEPLOYMENT_PATH = './deployments.json';
+
+export const saveDeploymentOnDisk = async (data: TProjectDeployment) => {
+    // Read previous deployments
+    let __deployments: TProjectDeployment | undefined;
+    try {
+        if (fs.existsSync(PROJECT_RELATIVE_DEPLOYMENT_PATH)) {
+            __deployments = JSON.parse(
+                fs.readFileSync(PROJECT_RELATIVE_DEPLOYMENT_PATH, 'utf-8'),
+            );
+        }
+    } catch (e) {
+        console.log(
+            `[-] Can not read ${PROJECT_RELATIVE_DEPLOYMENT_PATH}, creating a new one.`,
+        );
+    }
+
+    // If no deployment, create a new one for this project
+    if (!__deployments) __deployments = {} as TProjectDeployment;
+
+    // Merge prev and new deployments
+    const deployments: TProjectDeployment = _merge(__deployments, data);
+    return deployments;
+};
