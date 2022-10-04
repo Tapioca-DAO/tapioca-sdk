@@ -39,6 +39,9 @@ export const getSupportedChains = () => SUPPORTED_CHAINS;
  */
 export const PROJECT_RELATIVE_DEPLOYMENT_PATH = './deployments.json';
 
+/**
+ * Save a deployment on the Hardhat project root
+ */
 export const saveDeploymentOnDisk = async (data: TProjectDeployment) => {
     // Read previous deployments
     let __deployments: TProjectDeployment | undefined;
@@ -56,9 +59,20 @@ export const saveDeploymentOnDisk = async (data: TProjectDeployment) => {
 
     // If no deployment, create a new one for this project
     if (!__deployments) __deployments = {} as TProjectDeployment;
+    else {
+        // Save previous deployments in a backup file
+        fs.writeFileSync(
+            `${PROJECT_RELATIVE_DEPLOYMENT_PATH}.bak`,
+            JSON.stringify(__deployments),
+        );
+    }
 
     // Merge prev and new deployments
     const deployments: TProjectDeployment = _merge(__deployments, data);
+    fs.writeFileSync(
+        PROJECT_RELATIVE_DEPLOYMENT_PATH,
+        JSON.stringify(deployments),
+    );
     return deployments;
 };
 
