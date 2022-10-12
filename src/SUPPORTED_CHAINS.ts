@@ -6,10 +6,10 @@ const SUPPORTED_CHAINS = [
         lzChainId: '11',
     },
     {
-        name: 'rinkeby',
-        address: '0x79a63d6d8BBD5c6dfc774dA79bCcD948EAcb53FA',
-        chainId: '4',
-        lzChainId: '10001',
+        name: 'goerli',
+        address: '0xbfD2135BFfbb0B5378b56643c2Df8a87552Bfa23',
+        chainId: '5',
+        lzChainId: '10121',
     },
     {
         name: 'mumbai',
