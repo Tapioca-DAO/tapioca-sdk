@@ -1,8 +1,10 @@
 // API
 import * as API from './api/index';
+export * from './api/index';
 
 // Types
 import * as typechain from './typechain';
+export * from './typechain';
 
-export const SDK = { API, typechain };
-export default { ...SDK };
+const SDK = { API, typechain };
+export default SDK;
