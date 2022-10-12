@@ -1,5 +1,8 @@
 // API
-export * from './api/index';
+import * as API from './api/index';
 
 // Types
-export * from './typechain';
+import * as typechain from './typechain';
+
+const SDK = { API, typechain };
+export default SDK;
