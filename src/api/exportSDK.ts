@@ -79,7 +79,7 @@ const generateTypings = async (
         cwd,
         filesToProcess: allFiles,
         allFiles,
-        outDir: `tapioca-sdk/src/typechain/${projectCaller}`,
+        outDir: `gitsub_tapioca-sdk/src/typechain/${projectCaller}`,
         target: 'ethers-v5',
         flags: {
             alwaysGenerateOverloads: true,
