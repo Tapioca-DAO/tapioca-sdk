@@ -77,6 +77,7 @@ export const saveDeploymentOnDisk = async (data: TProjectDeployment) => {
             if (_isArray(a)) {
                 return a.concat(b);
             }
+            return _merge(a, b);
         },
     );
     fs.writeFileSync(
