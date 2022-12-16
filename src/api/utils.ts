@@ -1,8 +1,12 @@
 import fs from 'fs';
 import _find from 'lodash/find';
 import _merge from 'lodash/merge';
+import _mergeWith from 'lodash/mergeWith';
+import _isArray from 'lodash/isArray';
+import _unionBy from 'lodash/unionBy';
 import {
     DEPLOYMENT_SDK_PATH,
+    TContract,
     TProjectCaller,
     TProjectDeployment,
 } from '../shared';
@@ -68,7 +72,16 @@ export const saveDeploymentOnDisk = async (data: TProjectDeployment) => {
     }
 
     // Merge prev and new deployments
-    const deployments: TProjectDeployment = _merge(__deployments, data);
+    const deployments: TProjectDeployment = _mergeWith(
+        __deployments,
+        data,
+        (a: any, b: any) => {
+            if (_isArray(a)) {
+                return _unionBy(a, b, (item: TContract) => item.address);
+            }
+            return _merge(a, b);
+        },
+    );
     fs.writeFileSync(
         PROJECT_RELATIVE_DEPLOYMENT_PATH,
         JSON.stringify(deployments),

@@ -1,5 +1,5 @@
 {
-    "version": "1.1.10",
+    "version": "1.1.13",
     "license": "MIT",
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
@@ -13,7 +13,7 @@
     "scripts": {
         "start": "tsdx watch",
         "build": "tsdx build && npm run copy-dts && npm run copy-sol",
-        "test": "tsdx test",
+        "test": "tsdx test --passWithNoTests",
         "lint": "npx eslint .",
         "prepare": "npm run build",
         "deploy": "npm run prepare && npm publish",
