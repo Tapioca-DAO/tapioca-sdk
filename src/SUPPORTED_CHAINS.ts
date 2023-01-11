@@ -4,7 +4,7 @@ const SUPPORTED_CHAINS = [
         name: 'goerli',
         address: '0xbfD2135BFfbb0B5378b56643c2Df8a87552Bfa23',
         chainId: '5',
-        lzChainId: '10021',
+        lzChainId: '10121',
         rpc: 'https://eth-goerli.g.alchemy.com/v2/<api_key>',
         tags: ['testnet'],
     },
