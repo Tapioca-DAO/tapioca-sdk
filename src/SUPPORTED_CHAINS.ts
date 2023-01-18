@@ -5,7 +5,7 @@ const SUPPORTED_CHAINS = [
         address: '0xbfD2135BFfbb0B5378b56643c2Df8a87552Bfa23',
         chainId: '5',
         lzChainId: '10121',
-        rpc: 'https://rpc.ankr.com/eth_goerli',
+        rpc: 'https://eth-goerli.g.alchemy.com/v2/<api_key>',
         tags: ['testnet'],
     },
     {
@@ -28,8 +28,8 @@ const SUPPORTED_CHAINS = [
         name: 'mumbai',
         address: '0xf69186dfBa60DdB133E91E9A4B5673624293d8F8',
         chainId: '80001',
-        lzChainId: '10009',
-        rpc: 'https://rpc-mumbai.maticvigil.com/',
+        lzChainId: '10109',
+        rpc: 'https://polygon-mumbai.g.alchemy.com/v2/<api_key>',
         tags: ['testnet'],
     },
     {
@@ -45,7 +45,7 @@ const SUPPORTED_CHAINS = [
         address: '0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab',
         chainId: '421613',
         lzChainId: '10143',
-        rpc: 'https://goerli-rollup.arbitrum.io/rpc/',
+        rpc: 'https://arb-goerli.g.alchemy.com/v2/<api_key>',
         tags: ['testnet'],
     },
     {
@@ -53,15 +53,7 @@ const SUPPORTED_CHAINS = [
         address: '0xae92d5aD7583AD66E49A0c67BAd18F6ba52dDDc1',
         chainId: '420',
         lzChainId: '10132',
-        rpc: 'https://goerli.optimism.io/',
-        tags: ['testnet'],
-    },
-    {
-        name: 'harmony_testnet',
-        address: '0xae92d5aD7583AD66E49A0c67BAd18F6ba52dDDc1',
-        chainId: '1666700000',
-        lzChainId: '10133',
-        rpc: 'https://api.s0.b.hmny.io',
+        rpc: 'https://opt-goerli.g.alchemy.com/v2/<api_key>',
         tags: ['testnet'],
     },
     {
@@ -76,7 +68,7 @@ const SUPPORTED_CHAINS = [
     //mainnets
     {
         name: 'ethereum',
-        address: '0xae92d5aD7583AD66E49A0c67BAd18F6ba52dDDc1',
+        address: '0x66A71Dcef29A0fFBDBE3c6a460a3B5BC225Cd675',
         chainId: '1',
         lzChainId: '101',
         rpc: 'https://eth-mainnet.g.alchemy.com/v2/<api_key>',
@@ -103,7 +95,7 @@ const SUPPORTED_CHAINS = [
         address: '0x3c2269811836af69497E5F486A85D7316753cf62',
         chainId: '0x89',
         lzChainId: '109',
-        rpc: 'https://rpc-mainnet.maticvigil.com',
+        rpc: 'https://polygon-mainnet.g.alchemy.com/v2/<api_key>',
         tags: ['mainnet'],
     },
     {
@@ -111,14 +103,14 @@ const SUPPORTED_CHAINS = [
         address: '0x3c2269811836af69497E5F486A85D7316753cf62',
         chainId: '42161',
         lzChainId: '110',
-        rpc: 'https://rpc.ankr.com/arbitrum',
+        rpc: 'https://arb-mainnet.g.alchemy.com/v2/<api_key>',
         tags: ['mainnet'],
     },
     {
         name: 'optimism',
         address: '0x3c2269811836af69497E5F486A85D7316753cf62',
         chainId: '10',
-        lzChainId: '11',
+        lzChainId: '111',
         rpc: 'https://opt-mainnet.g.alchemy.com/v2/<api_key>',
         tags: ['mainnet'],
     },
