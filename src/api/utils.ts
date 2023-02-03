@@ -7,6 +7,7 @@ import _unionBy from 'lodash/unionBy';
 import {
     DEPLOYMENT_SDK_PATH,
     TContract,
+    TDeployment,
     TProjectCaller,
     TProjectDeployment,
 } from '../shared';
@@ -94,9 +95,63 @@ export const saveDeploymentOnDisk = async (data: TProjectDeployment) => {
  * @param projectCaller The project caller
  * @param chainId The chain ID
  **/
-export const getDeployment = (project: TProjectCaller, chainId: string) => {
+export const readSDKDeployments = (
+    project: TProjectCaller,
+    chainId: string,
+) => {
     const deployments = JSON.parse(
         fs.readFileSync(DEPLOYMENT_SDK_PATH, 'utf-8'),
     );
-    return deployments[project][chainId];
+    return (deployments as TDeployment)[project]?.[chainId];
+};
+
+/**
+ * Returns the contract deployments of a project given a [chainId] and [project].
+ * @param projectCaller The project caller
+ * @param chainId The chain ID
+ * @param local If true, read the local deployments file, if not read the SDK deployments file
+ * @returns The contract deployments
+ **/
+export const getDeployments = (
+    project: TProjectCaller,
+    chainId: string,
+    local: boolean,
+) => {
+    if (local) {
+        return JSON.parse(
+            fs.readFileSync(PROJECT_RELATIVE_DEPLOYMENT_PATH, 'utf8'),
+        )[chainId] as TContract[];
+    }
+    return readSDKDeployments(project, chainId);
+};
+
+/**
+ * Returns the contract deployment of a project given a [chainId] and a [contractName].
+ * @param projectCaller The project caller
+ * @param contractName The contract name
+ * @param chainId The chain ID
+ * @throws Error if contract not found
+ * @returns The contract deployment
+ **/
+export const getDeployment = async (
+    project: TProjectCaller,
+    contractName: string,
+    chainId: string,
+) => {
+    let deployments: TContract[] = [];
+
+    try {
+        deployments = getDeployments(project, chainId, true) ?? [];
+        if (deployments.length === 0)
+            throw new Error('No local deployments found, trying SDK...');
+    } catch (e) {
+        deployments = getDeployments(project, chainId, false) ?? [];
+    }
+
+    const deployment = _find(deployments, { name: contractName });
+    if (!deployment) {
+        throw new Error('[-] Contract not found');
+    }
+
+    return deployment;
 };
