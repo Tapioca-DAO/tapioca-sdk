@@ -68,7 +68,7 @@ export const saveDeploymentOnDisk = async (data: TProjectDeployment) => {
         // Save previous deployments in a backup file
         fs.writeFileSync(
             `${PROJECT_RELATIVE_DEPLOYMENT_PATH}.bak`,
-            JSON.stringify(__deployments),
+            JSON.stringify(__deployments, null, 4),
         );
     }
 
@@ -85,7 +85,7 @@ export const saveDeploymentOnDisk = async (data: TProjectDeployment) => {
     );
     fs.writeFileSync(
         PROJECT_RELATIVE_DEPLOYMENT_PATH,
-        JSON.stringify(deployments),
+        JSON.stringify(deployments, null, 4),
     );
     return deployments;
 };
