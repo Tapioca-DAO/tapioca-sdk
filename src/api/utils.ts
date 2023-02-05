@@ -139,16 +139,17 @@ export const getDeployment = async (
     chainId: string,
 ) => {
     let deployments: TContract[] = [];
-
+    let deployment: TContract | undefined;
     try {
         deployments = getDeployments(project, chainId, true) ?? [];
-        if (deployments.length === 0)
+        deployment = _find(deployments, { name: contractName });
+        if (!deployment)
             throw new Error('No local deployments found, trying SDK...');
     } catch (e) {
         deployments = getDeployments(project, chainId, false) ?? [];
+        deployment = _find(deployments, { name: contractName });
     }
 
-    const deployment = _find(deployments, { name: contractName });
     if (!deployment) {
         throw new Error('[-] Contract not found');
     }
