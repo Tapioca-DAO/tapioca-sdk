@@ -133,7 +133,7 @@ export const getDeployments = (
  * @throws Error if contract not found
  * @returns The contract deployment
  **/
-export const getDeployment = async (
+export const getDeployment = (
     project: TProjectCaller,
     contractName: string,
     chainId: string,
