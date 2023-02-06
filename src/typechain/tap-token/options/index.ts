@@ -6,3 +6,4 @@ export type { mocks };
 import type * as oTapSol from "./oTAP.sol";
 export type { oTapSol };
 export type { TapiocaOptionBroker } from "./TapiocaOptionBroker";
+export type { TapiocaOptionLiquidityProvision } from "./TapiocaOptionLiquidityProvision";

@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export { OracleMock__factory } from "./OracleMock__factory";
+export { TapiocaOptionBrokerMock__factory } from "./TapiocaOptionBrokerMock__factory";

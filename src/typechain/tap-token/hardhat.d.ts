@@ -17,6 +17,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.OracleMock__factory>;
     getContractFactory(
+      name: "TapiocaOptionBrokerMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TapiocaOptionBrokerMock__factory>;
+    getContractFactory(
       name: "OTAP",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.OTAP__factory>;
@@ -24,6 +28,10 @@ declare module "hardhat/types/runtime" {
       name: "TapiocaOptionBroker",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapiocaOptionBroker__factory>;
+    getContractFactory(
+      name: "TapiocaOptionLiquidityProvision",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TapiocaOptionLiquidityProvision__factory>;
     getContractFactory(
       name: "ERC20Mock",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -43,6 +51,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.OracleMock>;
     getContractAt(
+      name: "TapiocaOptionBrokerMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TapiocaOptionBrokerMock>;
+    getContractAt(
       name: "OTAP",
       address: string,
       signer?: ethers.Signer
@@ -52,6 +65,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TapiocaOptionBroker>;
+    getContractAt(
+      name: "TapiocaOptionLiquidityProvision",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TapiocaOptionLiquidityProvision>;
     getContractAt(
       name: "ERC20Mock",
       address: string,

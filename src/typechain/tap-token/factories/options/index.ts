@@ -4,3 +4,4 @@
 export * as mocks from "./mocks";
 export * as oTapSol from "./oTAP.sol";
 export { TapiocaOptionBroker__factory } from "./TapiocaOptionBroker__factory";
+export { TapiocaOptionLiquidityProvision__factory } from "./TapiocaOptionLiquidityProvision__factory";
