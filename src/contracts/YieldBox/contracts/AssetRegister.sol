@@ -49,7 +49,7 @@ contract AssetRegister is ERC1155 {
             // Only do these checks if a new asset needs to be created
             require(tokenId == 0 || tokenType != TokenType.ERC20, "YieldBox: No tokenId for ERC20");
             require(
-                strategy == NO_STRATEGY ||
+                tokenType == TokenType.Native ||
                     (tokenType == strategy.tokenType() && contractAddress == strategy.contractAddress() && tokenId == strategy.tokenId()),
                 "YieldBox: Strategy mismatch"
             );
@@ -69,12 +69,7 @@ contract AssetRegister is ERC1155 {
         }
     }
 
-    function registerAsset(
-        TokenType tokenType,
-        address contractAddress,
-        IStrategy strategy,
-        uint256 tokenId
-    ) public returns (uint256 assetId) {
+    function registerAsset(TokenType tokenType, address contractAddress, IStrategy strategy, uint256 tokenId) public returns (uint256 assetId) {
         // Native assets can only be added internally by the NativeTokenFactory
         require(
             tokenType == TokenType.ERC20 || tokenType == TokenType.ERC721 || tokenType == TokenType.ERC1155,

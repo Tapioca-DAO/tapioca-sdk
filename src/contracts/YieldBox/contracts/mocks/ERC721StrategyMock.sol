@@ -8,7 +8,6 @@ import "../interfaces/IStrategy.sol";
 import "../interfaces/IYieldBox.sol";
 import "../ERC721Receiver.sol";
 
-
 // solhint-disable const-name-snakecase
 // solhint-disable no-empty-blocks
 
@@ -59,8 +58,7 @@ contract ERC721StrategyMock is IStrategy, ERC721Receiver {
     /// When a strategy keeps a little reserve for cheap withdrawals and the requested withdrawal goes over this amount,
     /// the strategy should divest enough from the strategy to complete the withdrawal and rebalance the reserve.
     /// Only accept this call from the YieldBox
-    function withdraw(address to, uint256 amount) external override {
+    function withdraw(address to, uint256) external override {
         IERC721(contractAddress).safeTransferFrom(address(this), to, tokenId);
-
     }
 }

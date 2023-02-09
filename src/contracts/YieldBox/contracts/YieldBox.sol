@@ -29,6 +29,7 @@ import "@boringcrypto/boring-solidity/contracts/interfaces/IERC721.sol";
 import "@boringcrypto/boring-solidity/contracts/interfaces/IERC1155.sol";
 import "@boringcrypto/boring-solidity/contracts/libraries/Base64.sol";
 import "@boringcrypto/boring-solidity/contracts/Domain.sol";
+import "./ERC721TokenReceiver.sol";
 import "./ERC1155TokenReceiver.sol";
 import "./ERC1155.sol";
 import "@boringcrypto/boring-solidity/contracts/BoringBatchable.sol";
@@ -37,7 +38,6 @@ import "./AssetRegister.sol";
 import "./NativeTokenFactory.sol";
 import "./YieldBoxRebase.sol";
 import "./YieldBoxURIBuilder.sol";
-import "./ERC721Receiver.sol";
 
 // solhint-disable no-empty-blocks
 
@@ -46,13 +46,11 @@ import "./ERC721Receiver.sol";
 /// @notice The YieldBox is a vault for tokens. The stored tokens can assigned to strategies.
 /// Yield from this will go to the token depositors.
 /// Any funds transfered directly onto the YieldBox will be lost, use the deposit function instead.
-contract YieldBox is BoringBatchable, NativeTokenFactory, ERC1155TokenReceiver, ERC721Receiver {
+contract YieldBox is BoringBatchable, NativeTokenFactory, ERC721TokenReceiver, ERC1155TokenReceiver {
     using BoringAddress for address;
     using BoringERC20 for IERC20;
     using BoringERC20 for IWrappedNative;
     using YieldBoxRebase for uint256;
-
-    mapping(uint256 => uint256) public totalAmounts; // Asset => total amount
 
     // ************** //
     // *** EVENTS *** //
@@ -76,19 +74,10 @@ contract YieldBox is BoringBatchable, NativeTokenFactory, ERC1155TokenReceiver, 
     // *** INTERNAL FUNCTIONS *** //
     // ************************** //
 
-    /// @dev Returns the total balance of `token` this contracts holds,
+    /// @dev Returns the total balance of `token` the strategy contract holds,
     /// plus the total amount this contract thinks the strategy holds.
-    function _tokenBalanceOf(Asset memory asset) internal view returns (uint256 amount) {
-        if (asset.strategy == NO_STRATEGY) {
-            if (asset.tokenType == TokenType.ERC20 || asset.tokenType == TokenType.ERC1155) {
-                uint256 assetId = ids[asset.tokenType][asset.contractAddress][asset.strategy][asset.tokenId];
-                return totalAmounts[assetId];
-            } else {
-                return IERC721(asset.contractAddress).ownerOf(asset.tokenId) == address(this) ? 1 : 0;
-            }
-        } else {
-            return asset.strategy.currentBalance();
-        }
+    function _tokenBalanceOf(Asset storage asset) internal view returns (uint256 amount) {
+        return asset.strategy.currentBalance();
     }
 
     // ************************ //
@@ -112,8 +101,7 @@ contract YieldBox is BoringBatchable, NativeTokenFactory, ERC1155TokenReceiver, 
     ) public allowed(from) returns (uint256 amountOut, uint256 shareOut) {
         // Checks
         Asset storage asset = assets[assetId];
-        require(asset.tokenType != TokenType.Native, "YieldBox: can't deposit Native");
-        require(asset.tokenType != TokenType.ERC721, "YieldBox: use depositNFT");
+        require(asset.tokenType != TokenType.Native && asset.tokenType != TokenType.ERC721, "YieldBox: can't deposit type");
 
         // Effects
         uint256 totalAmount = _tokenBalanceOf(asset);
@@ -127,26 +115,21 @@ contract YieldBox is BoringBatchable, NativeTokenFactory, ERC1155TokenReceiver, 
 
         _mint(to, assetId, share);
 
-        address destination = asset.strategy == NO_STRATEGY ? address(this) : address(asset.strategy);
-
         // Interactions
         if (asset.tokenType == TokenType.ERC20) {
-            IERC20(asset.contractAddress).safeTransferFrom(from, destination, amount);
+            // For ERC20 tokens, use the safe helper function to deal with broken ERC20 implementations. This actually calls transferFrom on the ERC20 contract.
+            IERC20(asset.contractAddress).safeTransferFrom(from, address(asset.strategy), amount);
         } else {
             // ERC1155
             // When depositing yieldBox tokens into the yieldBox, things can be simplified
             if (asset.contractAddress == address(this)) {
-                _transferSingle(from, destination, asset.tokenId, amount);
+                _transferSingle(from, address(asset.strategy), asset.tokenId, amount);
             } else {
-                IERC1155(asset.contractAddress).safeTransferFrom(from, destination, asset.tokenId, amount, "");
+                IERC1155(asset.contractAddress).safeTransferFrom(from, address(asset.strategy), asset.tokenId, amount, "");
             }
         }
 
-        if (asset.strategy != NO_STRATEGY) {
-            asset.strategy.deposited(amount);
-        } else {
-            totalAmounts[assetId] += amount;
-        }
+        asset.strategy.deposited(amount);
 
         return (amount, share);
     }
@@ -156,12 +139,8 @@ contract YieldBox is BoringBatchable, NativeTokenFactory, ERC1155TokenReceiver, 
     /// @param from which account to pull the tokens.
     /// @param to which account to push the tokens.
     /// @return amountOut The amount deposited.
-    /// @return shareOut The deposited amount represented in shares.
-    function depositNFTAsset(
-        uint256 assetId,
-        address from,
-        address to
-    ) public allowed(from) returns (uint256 amountOut, uint256 shareOut) {
+    /// @return shareOut The deposited amount repesented in shares.
+    function depositNFTAsset(uint256 assetId, address from, address to) public allowed(from) returns (uint256 amountOut, uint256 shareOut) {
         // Checks
         Asset storage asset = assets[assetId];
         require(asset.tokenType == TokenType.ERC721, "YieldBox: not ERC721");
@@ -169,20 +148,19 @@ contract YieldBox is BoringBatchable, NativeTokenFactory, ERC1155TokenReceiver, 
         // Effects
         _mint(to, assetId, 1);
 
-        address destination = asset.strategy == NO_STRATEGY ? address(this) : address(asset.strategy);
-
         // Interactions
-        IERC721(asset.contractAddress).ownerOf(asset.tokenId); // Prevent IERC721/IERC20 `safeTransferFrom()` confusion
-        IERC721(asset.contractAddress).safeTransferFrom(from, destination, asset.tokenId);
+        IERC721(asset.contractAddress).safeTransferFrom(from, address(asset.strategy), asset.tokenId);
 
-        if (asset.strategy != NO_STRATEGY) {
-            asset.strategy.deposited(1);
-        }
+        asset.strategy.deposited(1);
 
         return (1, 1);
     }
 
-    function depositETHAsset(uint256 assetId, address to)
+    function depositETHAsset(
+        uint256 assetId,
+        address to,
+        uint256 amount
+    )
         public
         payable
         returns (
@@ -192,29 +170,21 @@ contract YieldBox is BoringBatchable, NativeTokenFactory, ERC1155TokenReceiver, 
         )
     {
         // Checks
-        require(msg.value > 0, "YieldBox: no ETH sent");
         Asset storage asset = assets[assetId];
         require(asset.tokenType == TokenType.ERC20 && asset.contractAddress == address(wrappedNative), "YieldBox: not wrappedNative");
 
         // Effects
-        uint256 share = msg.value._toShares(totalSupply[assetId], _tokenBalanceOf(asset), false);
+        uint256 share = amount._toShares(totalSupply[assetId], _tokenBalanceOf(asset), false);
 
         _mint(to, assetId, share);
 
         // Interactions
-        wrappedNative.deposit{ value: msg.value }();
-        if (asset.strategy != NO_STRATEGY) {
-            // Strategies always receive wrappedNative (supporting both wrapped and raw native tokens adds too much complexity)
-            wrappedNative.safeTransfer(address(asset.strategy), msg.value);
-        }
+        wrappedNative.deposit{ value: amount }();
+        // Strategies always receive wrappedNative (supporting both wrapped and raw native tokens adds too much complexity)
+        wrappedNative.safeTransfer(address(asset.strategy), amount);
+        asset.strategy.deposited(amount);
 
-        if (asset.strategy != NO_STRATEGY) {
-            asset.strategy.deposited(msg.value);
-        } else {
-            totalAmounts[assetId] += msg.value;
-        }
-
-        return (msg.value, share);
+        return (amount, share);
     }
 
     /// @notice Withdraws an amount of `token` from a user account.
@@ -233,7 +203,6 @@ contract YieldBox is BoringBatchable, NativeTokenFactory, ERC1155TokenReceiver, 
         // Checks
         Asset storage asset = assets[assetId];
         require(asset.tokenType != TokenType.Native, "YieldBox: can't withdraw Native");
-        require(asset.tokenType != TokenType.ERC721, "YieldBox: use withdrawNFT");
 
         // Effects
         uint256 totalAmount = _tokenBalanceOf(asset);
@@ -248,77 +217,21 @@ contract YieldBox is BoringBatchable, NativeTokenFactory, ERC1155TokenReceiver, 
         _burn(from, assetId, share);
 
         // Interactions
-        if (asset.strategy == NO_STRATEGY) {
-            if (asset.tokenType == TokenType.ERC20) {
-                // Native tokens are always unwrapped when withdrawn
-                if (asset.contractAddress == address(wrappedNative)) {
-                    wrappedNative.withdraw(amount);
-                    to.sendNative(amount);
-                } else {
-                    IERC20(asset.contractAddress).safeTransfer(to, amount);
-                }
-            } else {
-                // IERC1155
-                IERC1155(asset.contractAddress).safeTransferFrom(address(this), to, asset.tokenId, amount, "");
-            }
-
-            totalAmounts[assetId] -= amount;
-        } else {
-            asset.strategy.withdraw(to, amount);
-        }
+        asset.strategy.withdraw(to, amount);
 
         return (amount, share);
     }
-
-    /// @notice Withdraws an NFT from a user account.
-    /// @param assetId The id of the asset.
-    /// @param from which user to pull the NFT.
-    /// @param to which user to push the NFT.
-    function withdrawNFT(
-        uint256 assetId,
-        address from,
-        address to
-    ) public allowed(from) returns (uint256 amountOut, uint256 shareOut) {
-        // Checks
-        Asset storage asset = assets[assetId];
-        require(asset.tokenType == TokenType.ERC721, "YieldBox: use withdraw");
-
-        // Effects
-        // Unauthorized users can't withdraw NFTs as it an underflow revert would occur
-        _burn(from, assetId, 1);
-
-        // Interactions
-        if (asset.strategy == NO_STRATEGY) {
-            IERC721(asset.contractAddress).safeTransferFrom(address(this), to, asset.tokenId);
-        } else {
-            asset.strategy.withdraw(to, 1);
-        }
-
-        return (1, 1);
-    }
-
-    function _requireTransferAllowed(address from) internal view override allowed(from) {}
 
     /// @notice Transfer shares from a user account to another one.
     /// @param from which user to pull the tokens.
     /// @param to which user to push the tokens.
     /// @param assetId The id of the asset.
     /// @param share The amount of `token` in shares.
-    function transfer(
-        address from,
-        address to,
-        uint256 assetId,
-        uint256 share
-    ) public allowed(from) {
+    function transfer(address from, address to, uint256 assetId, uint256 share) public allowed(from) {
         _transferSingle(from, to, assetId, share);
     }
 
-    function batchTransfer(
-        address from,
-        address to,
-        uint256[] calldata assetIds_,
-        uint256[] calldata shares_
-    ) public allowed(from) {
+    function batchTransfer(address from, address to, uint256[] calldata assetIds_, uint256[] calldata shares_) public allowed(from) {
         _transferBatch(from, to, assetIds_, shares_);
     }
 
@@ -327,12 +240,7 @@ contract YieldBox is BoringBatchable, NativeTokenFactory, ERC1155TokenReceiver, 
     /// @param from which user to pull the tokens.
     /// @param tos The receivers of the tokens.
     /// @param shares The amount of `token` in shares for each receiver in `tos`.
-    function transferMultiple(
-        address from,
-        address[] calldata tos,
-        uint256 assetId,
-        uint256[] calldata shares
-    ) public allowed(from) {
+    function transferMultiple(address from, address[] calldata tos, uint256 assetId, uint256[] calldata shares) public allowed(from) {
         // Checks
         uint256 len = tos.length;
         for (uint256 i = 0; i < len; i++) {
@@ -354,7 +262,6 @@ contract YieldBox is BoringBatchable, NativeTokenFactory, ERC1155TokenReceiver, 
     function setApprovalForAll(address operator, bool approved) external override {
         // Checks
         require(operator != address(0), "YieldBox: operator not set"); // Important for security
-        require(masterContractOf[msg.sender] == address(0), "YieldBox: user is clone");
         require(operator != address(this), "YieldBox: can't approve yieldBox");
 
         // Effects
@@ -382,6 +289,7 @@ contract YieldBox is BoringBatchable, NativeTokenFactory, ERC1155TokenReceiver, 
     }
 
     // Included to support unwrapping wrapped native tokens such as WETH
+    // TODO: Probably not needed anymore
     receive() external payable {}
 
     // Helper functions
@@ -396,11 +304,7 @@ contract YieldBox is BoringBatchable, NativeTokenFactory, ERC1155TokenReceiver, 
     /// @param amount The `token` amount.
     /// @param roundUp If the result `share` should be rounded up.
     /// @return share The token amount represented in shares.
-    function toShare(
-        uint256 assetId,
-        uint256 amount,
-        bool roundUp
-    ) external view returns (uint256 share) {
+    function toShare(uint256 assetId, uint256 amount, bool roundUp) external view returns (uint256 share) {
         if (assets[assetId].tokenType == TokenType.Native || assets[assetId].tokenType == TokenType.ERC721) {
             share = amount;
         } else {
@@ -413,11 +317,7 @@ contract YieldBox is BoringBatchable, NativeTokenFactory, ERC1155TokenReceiver, 
     /// @param share The amount of shares.
     /// @param roundUp If the result should be rounded up.
     /// @return amount The share amount back into native representation.
-    function toAmount(
-        uint256 assetId,
-        uint256 share,
-        bool roundUp
-    ) external view returns (uint256 amount) {
+    function toAmount(uint256 assetId, uint256 share, bool roundUp) external view returns (uint256 amount) {
         if (assets[assetId].tokenType == TokenType.Native || assets[assetId].tokenType == TokenType.ERC721) {
             amount = share;
         } else {
@@ -454,17 +354,7 @@ contract YieldBox is BoringBatchable, NativeTokenFactory, ERC1155TokenReceiver, 
         }
     }
 
-    function depositNFT(
-        address contractAddress,
-        IStrategy strategy,
-        uint256 tokenId,
-        address from,
-        address to
-    ) public returns (uint256 amountOut, uint256 shareOut) {
-        return depositNFTAsset(registerAsset(TokenType.ERC721, contractAddress, strategy, tokenId), from, to);
-    }
-
-    function depositETH(IStrategy strategy, address to) public payable returns (uint256 amountOut, uint256 shareOut) {
-        return depositETHAsset(registerAsset(TokenType.ERC20, address(wrappedNative), strategy, 0), to);
+    function depositETH(IStrategy strategy, address to, uint256 amount) public payable returns (uint256 amountOut, uint256 shareOut) {
+        return depositETHAsset(registerAsset(TokenType.ERC20, address(wrappedNative), strategy, 0), to, amount);
     }
 }

@@ -12,26 +12,6 @@ struct Pair {
     uint256 kLast;
 }
 
-library Math {
-    function min(uint256 x, uint256 y) internal pure returns (uint256 z) {
-        z = x < y ? x : y;
-    }
-
-    // babylonian method (https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Babylonian_method)
-    function sqrt(uint256 y) internal pure returns (uint256 z) {
-        if (y > 3) {
-            z = y;
-            uint256 x = y / 2 + 1;
-            while (x < z) {
-                z = x;
-                x = (y / x + x) / 2;
-            }
-        } else if (y != 0) {
-            z = 1;
-        }
-    }
-}
-
 contract YieldSwap {
     using BoringMath for uint256;
 
@@ -41,7 +21,7 @@ contract YieldSwap {
         yieldBox = _yieldBox;
     }
 
-    uint256 public constant MINIMUM_LIQUIDITY = 10**3;
+    uint256 public constant MINIMUM_LIQUIDITY = 10 ** 3;
 
     Pair[] public pairs;
     mapping(uint256 => mapping(uint256 => uint256)) public pairLookup;
@@ -103,12 +83,7 @@ contract YieldSwap {
         pair.reserve1 = yieldBox.balanceOf(address(this), pair.asset1).to128();
     }
 
-    function swap(
-        uint256 pairId,
-        uint256 share0Out,
-        uint256 share1Out,
-        address to
-    ) external {
+    function swap(uint256 pairId, uint256 share0Out, uint256 share1Out, address to) external {
         Pair storage pair = pairs[pairId];
 
         require(share0Out > 0 || share1Out > 0, "YieldSwap: Output too low");

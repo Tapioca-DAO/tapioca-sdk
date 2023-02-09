@@ -2,7 +2,6 @@
 pragma solidity ^0.8.9;
 import "./AssetRegister.sol";
 import "./BoringMath.sol";
-import "@boringcrypto/boring-solidity/contracts/BoringFactory.sol";
 
 struct NativeToken {
     string name;
@@ -19,7 +18,8 @@ struct NativeToken {
 /// - simplified approval
 /// - no hidden features, all these tokens behave the same
 /// TODO: MintBatch? BurnBatch?
-contract NativeTokenFactory is AssetRegister, BoringFactory {
+
+contract NativeTokenFactory is AssetRegister {
     using BoringMath for uint256;
 
     mapping(uint256 => NativeToken) public nativeTokens;
@@ -36,12 +36,8 @@ contract NativeTokenFactory is AssetRegister, BoringFactory {
     /// Modifier to check if the msg.sender is allowed to use funds belonging to the 'from' address.
     /// If 'from' is msg.sender, it's allowed.
     /// If 'msg.sender' is an address (an operator) that is approved by 'from', it's allowed.
-    /// If 'msg.sender' is a clone of a masterContract that is approved by 'from', it's allowed.
     modifier allowed(address from) {
-        if (from != msg.sender && !isApprovedForAll[from][msg.sender]) {
-            address masterContract = masterContractOf[msg.sender];
-            require(masterContract != address(0) && isApprovedForAll[from][masterContract], "YieldBox: Not approved");
-        }
+        _requireTransferAllowed(from);
         _;
     }
 
@@ -58,12 +54,7 @@ contract NativeTokenFactory is AssetRegister, BoringFactory {
     /// @param newOwner Address of the new owner.
     /// @param direct True if `newOwner` should be set immediately. False if `newOwner` needs to use `claimOwnership`.
     /// @param renounce Allows the `newOwner` to be `address(0)` if `direct` and `renounce` is True. Has no effect otherwise.
-    function transferOwnership(
-        uint256 tokenId,
-        address newOwner,
-        bool direct,
-        bool renounce
-    ) public onlyOwner(tokenId) {
+    function transferOwnership(uint256 tokenId, address newOwner, bool direct, bool renounce) public onlyOwner(tokenId) {
         if (direct) {
             // Checks
             require(newOwner != address(0) || renounce, "NTF: zero address");
@@ -97,12 +88,7 @@ contract NativeTokenFactory is AssetRegister, BoringFactory {
     /// @param name The name of the token.
     /// @param symbol The symbol of the token.
     /// @param decimals The number of decimals of the token (this is just for display purposes). Should be set to 18 in normal cases.
-    function createToken(
-        string calldata name,
-        string calldata symbol,
-        uint8 decimals,
-        string calldata uri
-    ) public returns (uint32 tokenId) {
+    function createToken(string calldata name, string calldata symbol, uint8 decimals, string calldata uri) public returns (uint32 tokenId) {
         // To keep each Token unique in the AssetRegister, we use the assetId as the tokenId. So for native assets, the tokenId is always equal to the assetId.
         tokenId = assets.length.to32();
         _registerAsset(TokenType.Native, address(0), NO_STRATEGY, tokenId);
@@ -120,23 +106,42 @@ contract NativeTokenFactory is AssetRegister, BoringFactory {
     /// @param tokenId The token to be minted.
     /// @param to The account to transfer the minted tokens to.
     /// @param amount The amount of tokens to mint.
-    function mint(
-        uint256 tokenId,
-        address to,
-        uint256 amount
-    ) public onlyOwner(tokenId) {
+    /// @dev For security reasons, operators are not allowed to mint. Only the actual owner can do this. Of course the owner can be a contract.
+    function mint(uint256 tokenId, address to, uint256 amount) public onlyOwner(tokenId) {
         _mint(to, tokenId, amount);
     }
 
-    /// @notice Burns tokens. Only the holder of tokens can burn them.
+    /// @notice Burns tokens. Only the holder of tokens can burn them or an approved operator.
     /// @param tokenId The token to be burned.
     /// @param amount The amount of tokens to burn.
-    function burn(
-        uint256 tokenId,
-        address from,
-        uint256 amount
-    ) public allowed(from) {
+    function burn(uint256 tokenId, address from, uint256 amount) public allowed(from) {
         require(assets[tokenId].tokenType == TokenType.Native, "NTF: Not native");
-        _burn(msg.sender, tokenId, amount);
+        _burn(from, tokenId, amount);
+    }
+
+    /// @notice The `owner` can mint tokens. If a fixed supply is needed, the `owner` should mint the totalSupply and renounce ownership.
+    /// @param tokenId The token to be minted.
+    /// @param tos The accounts to transfer the minted tokens to.
+    /// @param amounts The amounts of tokens to mint.
+    /// @dev If the tos array is longer than the amounts array there will be an out of bounds error. If the amounts array is longer, the extra amounts are simply ignored.
+    /// @dev For security reasons, operators are not allowed to mint. Only the actual owner can do this. Of course the owner can be a contract.
+    function batchMint(uint256 tokenId, address[] calldata tos, uint256[] calldata amounts) public onlyOwner(tokenId) {
+        uint256 len = tos.length;
+        for (uint256 i = 0; i < len; i++) {
+            _mint(tos[i], tokenId, amounts[i]);
+        }
+    }
+
+    /// @notice Burns tokens. This is only useful to be used by an operator.
+    /// @param tokenId The token to be burned.
+    /// @param froms The accounts to burn tokens from.
+    /// @param amounts The amounts of tokens to burn.
+    function batchBurn(uint256 tokenId, address[] calldata froms, uint256[] calldata amounts) public {
+        require(assets[tokenId].tokenType == TokenType.Native, "NTF: Not native");
+        uint256 len = froms.length;
+        for (uint256 i = 0; i < len; i++) {
+            _requireTransferAllowed(froms[i]);
+            _burn(froms[i], tokenId, amounts[i]);
+        }
     }
 }
