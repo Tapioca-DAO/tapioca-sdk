@@ -38,7 +38,7 @@ contract MasterContractFullCycleMock is IMasterContract {
         yieldBox.withdraw(3, deployer, deployer, 1000, 0);
         yieldBox.withdraw(3, deployer, deployer, 0, 1000_00000000);
 
-        yieldBox.depositETH{ value: 1000 }(ZERO, deployer);
+        yieldBox.depositETH{ value: 1000 }(ZERO, deployer, 1000);
         yieldBox.withdraw(4, deployer, deployer, 1000, 0);
 
         yieldBox.deposit(TokenType.ERC20, token, tokenStrategy, 0, deployer, deployer, 1000, 0);
@@ -51,7 +51,7 @@ contract MasterContractFullCycleMock is IMasterContract {
         yieldBox.withdraw(6, deployer, deployer, 1000, 0);
         yieldBox.withdraw(6, deployer, deployer, 0, 1000_00000000);
 
-        yieldBox.depositETH{ value: 1000 }(ethStrategy, deployer);
+        yieldBox.depositETH{ value: 1000 }(ethStrategy, deployer, 1000);
         yieldBox.withdraw(7, deployer, deployer, 1000, 0);
     }
 }

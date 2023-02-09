@@ -33,11 +33,7 @@ contract ERC1155 is IERC1155 {
         }
     }
 
-    function _mint(
-        address to,
-        uint256 id,
-        uint256 value
-    ) internal {
+    function _mint(address to, uint256 id, uint256 value) internal {
         require(to != address(0), "No 0 address");
 
         balanceOf[to][id] += value;
@@ -46,11 +42,7 @@ contract ERC1155 is IERC1155 {
         emit TransferSingle(msg.sender, address(0), to, id, value);
     }
 
-    function _burn(
-        address from,
-        uint256 id,
-        uint256 value
-    ) internal {
+    function _burn(address from, uint256 id, uint256 value) internal {
         require(from != address(0), "No 0 address");
 
         balanceOf[from][id] -= value;
@@ -59,12 +51,7 @@ contract ERC1155 is IERC1155 {
         emit TransferSingle(msg.sender, from, address(0), id, value);
     }
 
-    function _transferSingle(
-        address from,
-        address to,
-        uint256 id,
-        uint256 value
-    ) internal {
+    function _transferSingle(address from, address to, uint256 id, uint256 value) internal {
         require(to != address(0), "No 0 address");
 
         balanceOf[from][id] -= value;
@@ -73,15 +60,11 @@ contract ERC1155 is IERC1155 {
         emit TransferSingle(msg.sender, from, to, id, value);
     }
 
-    function _transferBatch(
-        address from,
-        address to,
-        uint256[] calldata ids,
-        uint256[] calldata values
-    ) internal {
+    function _transferBatch(address from, address to, uint256[] calldata ids, uint256[] calldata values) internal {
         require(to != address(0), "No 0 address");
 
-        for (uint256 i = 0; i < ids.length; i++) {
+        uint256 len = ids.length;
+        for (uint256 i = 0; i < len; i++) {
             uint256 id = ids[i];
             uint256 value = values[i];
             balanceOf[from][id] -= value;
@@ -95,13 +78,7 @@ contract ERC1155 is IERC1155 {
         require(from == msg.sender || isApprovedForAll[from][msg.sender] == true, "Transfer not allowed");
     }
 
-    function safeTransferFrom(
-        address from,
-        address to,
-        uint256 id,
-        uint256 value,
-        bytes calldata data
-    ) external override {
+    function safeTransferFrom(address from, address to, uint256 id, uint256 value, bytes calldata data) external override {
         _requireTransferAllowed(from);
 
         _transferSingle(from, to, id, value);
@@ -142,9 +119,7 @@ contract ERC1155 is IERC1155 {
         emit ApprovalForAll(msg.sender, operator, approved);
     }
 
-    function uri(
-        uint256 /*assetId*/
-    ) external view virtual returns (string memory) {
+    function uri(uint256 /*assetId*/) external view virtual returns (string memory) {
         return "";
     }
 }
