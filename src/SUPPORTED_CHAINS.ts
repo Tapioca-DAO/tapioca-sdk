@@ -35,9 +35,9 @@ const SUPPORTED_CHAINS = [
     {
         name: 'fantom_testnet',
         address: '0x7dcAD72640F835B0FA36EFD3D6d3ec902C7E5acf',
-        chainId: '0xfa2',
+        chainId: '4002',
         lzChainId: '10112',
-        rpc: 'https://rpc.testnet.fantom.network/',
+        rpc: 'https://rpc.ankr.com/fantom_testnet',
         tags: ['testnet'],
     },
     {
