@@ -272,13 +272,13 @@
 		],
 		"4002": [
 			{
-				"name": "YieldBoxURIBuilder",
-				"address": "0x9c30eb4C1e7d5c13085261571502C00728cE897D",
+				"name": "WETH9Mock",
+				"address": "0x95c7E83D6d44F3d81cb60FB4e5472dC5C0415571",
 				"meta": {}
 			},
 			{
-				"name": "YieldBox",
-				"address": "0x8ba3C4887C6B45ea256BcD4E3E1f6eb0131974CB",
+				"name": "ERC20FactoryMock",
+				"address": "0x667e8fB73Ba84599Dc1A8d7e1A0f003CF1A8Db76",
 				"meta": {
 					"constructorArguments": [
 						"0x0000000000000000000000000000000000000000",
@@ -287,8 +287,8 @@
 				}
 			},
 			{
-				"name": "BeachBar",
-				"address": "0xB6E97174A4Bf43149f5b69fE917E692bC66ee5fE",
+				"name": "ERC20Mock-FTM",
+				"address": "0xd9da4265fa5957a119c4fC8c36a36b5e50eDc33B",
 				"meta": {
 					"constructorArguments": [
 						"0x8ba3C4887C6B45ea256BcD4E3E1f6eb0131974CB",
@@ -297,18 +297,18 @@
 				}
 			},
 			{
-				"name": "MediumRiskMC",
-				"address": "0x365b6FB3f37c8f963c8d9d8b815e9a8cF81Df594",
+				"name": "OracleMockFactory",
+				"address": "0x162cD095d04C65d3C0600C2253B9621E64a3cFAc",
 				"meta": {}
 			},
 			{
-				"name": "SingularityHelper",
-				"address": "0xd428690148436dA9c7422698eEe15F51C8cec871",
+				"name": "YieldBoxURIBuilder",
+				"address": "0x2CCFd66f76E73EEF0Ac76D7C03d0E367a03B7B2e",
 				"meta": {}
 			},
 			{
-				"name": "MultiSwapper",
-				"address": "0x2AF85871Fcc93baAC1E53ccAce1f9937118C25b7",
+				"name": "YieldBox",
+				"address": "0xA24eaCCd49f0dFB8Eb8629CB7E8Ee956173A4293",
 				"meta": {
 					"constructorArguments": [
 						"0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f",
@@ -318,8 +318,8 @@
 				}
 			},
 			{
-				"name": "USD0",
-				"address": "0xBD46Fa5C363E222c4cEf7589100F6486926C0D56",
+				"name": "ERC20WithoutStrategy-TOFT-AVAX",
+				"address": "0xF191A3c62854C5F328C7550575f559DA9898f663",
 				"meta": {
 					"constructorArguments": [
 						"0x7dcAD72640F835B0FA36EFD3D6d3ec902C7E5acf"
@@ -327,18 +327,18 @@
 				}
 			},
 			{
-				"address": "0xAb1237136f2eC766Ee8F69B2C47bd8FA00a5566E",
+				"address": "0x6a735Ae4B3beCa4BbE4b4fD1BD11D31dB9CE66bf",
 				"meta": {
 					"constructorArguments": [
 						"0x803147a1f65f9b838e7be39bac1a4f51e6d29a18",
 						"0xB6E97174A4Bf43149f5b69fE917E692bC66ee5fE"
 					]
 				},
-				"name": "CurveSwapper"
+				"name": "ERC20WithoutStrategy-TOFT-WETH"
 			},
 			{
-				"name": "CurveStableToUsdoBidder",
-				"address": "0x7bC1f16f9D23a25093990EF790aeB3DD8b308F1E",
+				"name": "ERC20WithoutStrategy-TOFT-MATIC",
+				"address": "0xeB8611F1bBA1D29C3E880C3535d89B15fC1e1414",
 				"meta": {
 					"constructorArguments": [
 						"0xAb1237136f2eC766Ee8F69B2C47bd8FA00a5566E",
@@ -347,23 +347,23 @@
 				}
 			},
 			{
-				"name": "SGLLiquidation",
-				"address": "0x37894A138e4f9Fd02BB3576be3f36f2A79c708B6",
+				"name": "ERC20WithoutStrategy-TAP",
+				"address": "0xeadA6AA17da83a206510F6818cBaF2B1bb1cD952",
 				"meta": {}
 			},
 			{
-				"name": "SGLLendingBorrowing",
-				"address": "0x5d405f701fb11f749e2D8D5D73A70181Ef25d457",
+				"name": "OracleMock",
+				"address": "0xAC6222C685eB76600668942cF59358602456Da99",
 				"meta": {}
 			},
 			{
-				"name": "sgl_ETH",
-				"address": "0x356A38dEE9245A1D7b72E32B0e51CB96d726a080",
+				"name": "MarketsProxy",
+				"address": "0x71f524A2ED8B20e6465EE08d5A8Cc2Bc5C8acBca",
 				"meta": {}
 			},
 			{
-				"name": "lq_ETH",
-				"address": "0xd2889C65AeEf0a48B0cD054F018632B5339Df568",
+				"name": "ERC20WithoutStrategy-TOFT-FTM",
+				"address": "0xcfa9Fbc204a5724fC9f5DCD3B190e2760B9955F1",
 				"meta": {
 					"constructorArguments": {
 						"activationTime": 600,
@@ -378,8 +378,8 @@
 				}
 			},
 			{
-				"name": "minterSGL_ETH",
-				"address": "0x4FEbAA8707853E60F749656bd3843bD2137f9673",
+				"name": "USD0",
+				"address": "0xd4F17F7E852e44fE7bfC3096D68ce2b7daA3E83B",
 				"meta": {
 					"constructorArguments": [
 						"0xB6E97174A4Bf43149f5b69fE917E692bC66ee5fE",
@@ -399,6 +399,230 @@
 						]
 					]
 				}
+			}
+		],
+		"43113": [
+			{
+				"address": "0x71E4364611BDCc8865c61f2e8F979644Ba0ec7f7",
+				"meta": {},
+				"name": "WETH9Mock"
+			},
+			{
+				"address": "0x80F91F0d1bF4cBaf26886De4d4a4E4C99968660d",
+				"meta": {},
+				"name": "ERC20FactoryMock"
+			},
+			{
+				"address": "0xDfb0eE3A7de3AFc394aEB63AC5761e615e8FA692",
+				"meta": {},
+				"name": "ERC20Mock-AVAX"
+			},
+			{
+				"address": "0x4da7E36B2A1E51409526Cc1E63C67cAA93f4fD13",
+				"meta": {},
+				"name": "OracleMockFactory"
+			},
+			{
+				"address": "0x63aC63063dE8255E92f9a9f8E81254104Ec20785",
+				"meta": {},
+				"name": "YieldBoxURIBuilder"
+			},
+			{
+				"address": "0x538c2189ea266069031622e70441bc73A613e9Ed",
+				"meta": {},
+				"name": "YieldBox"
+			},
+			{
+				"address": "0xa33e61894D266bf602d71F33fe741616c1F83A9d",
+				"meta": {},
+				"name": "ERC20WithoutStrategy-TOFT-WETH"
+			},
+			{
+				"address": "0x3020Fd33BAB76De7057F637ac3A314dd5118FeaA",
+				"meta": {},
+				"name": "ERC20WithoutStrategy-TOFT-AVAX"
+			},
+			{
+				"address": "0xdCf35763e643Adb8Db5D502F7b8246737faDac7f",
+				"meta": {},
+				"name": "ERC20WithoutStrategy-TOFT-MATIC"
+			},
+			{
+				"address": "0xC4007F1A61A76A241d01f141112d805eBF07E640",
+				"meta": {},
+				"name": "ERC20WithoutStrategy-TAP"
+			},
+			{
+				"address": "0xC83D48DA75720fDa857dCd21DdD44254FdD962a3",
+				"meta": {},
+				"name": "MarketsProxy"
+			},
+			{
+				"address": "0x4bdE7F9f62421082866996355654c11F883fDbb1",
+				"meta": {},
+				"name": "ERC20WithoutStrategy-TOFT-FTM"
+			},
+			{
+				"address": "0x2Bd2DD6aD7AA00fF6C2A4db7aB67735451242A98",
+				"meta": {},
+				"name": "USD0"
+			}
+		],
+		"421613": [
+			{
+				"address": "0x7B30C951cFF9B5648A08FeC08A588e3b143a095B",
+				"meta": {},
+				"name": "WETH9Mock"
+			},
+			{
+				"address": "0x50a6D2DcAA66128161d743D4925CB43bccD53631",
+				"meta": {},
+				"name": "ERC20FactoryMock"
+			},
+			{
+				"address": "0x1d290b8F780dE9647a363f763a8D107f6F19491B",
+				"meta": {},
+				"name": "ERC20Mock-USDC"
+			},
+			{
+				"address": "0x8a1BC8e139eAefd78296773Fadd340909c610A76",
+				"meta": {},
+				"name": "OracleMockFactory"
+			},
+			{
+				"address": "0x8E4030e49A60313d3E51125a3AFe2a642D5375EB",
+				"meta": {},
+				"name": "YieldBoxURIBuilder"
+			},
+			{
+				"address": "0x93cF32C5fF98c0758b32dF9F6DB9e4f4faaCe736",
+				"meta": {},
+				"name": "YieldBox"
+			},
+			{
+				"address": "0xDA535a926560de4F6130e878Ea0BD81F076e3b74",
+				"meta": {},
+				"name": "ERC20WithoutStrategy-TOFT-WETH"
+			},
+			{
+				"address": "0xbD5c3Af44fc4C6C3dbAa500DbE77aC4049194058",
+				"meta": {},
+				"name": "ERC20WithoutStrategy-TOFT-AVAX"
+			},
+			{
+				"address": "0xcCD1F3Fb54fcB421Ed321e916560877890363f4a",
+				"meta": {},
+				"name": "ERC20WithoutStrategy-TOFT-MATIC"
+			},
+			{
+				"address": "0xEc473BCA9d74866e055C1761994cdb5139f778c2",
+				"meta": {},
+				"name": "ERC20WithoutStrategy-TAP"
+			},
+			{
+				"address": "0x8d0AbE838d85F14E93C51bd04b26A6dCCcc88584",
+				"meta": {},
+				"name": "Penrose"
+			},
+			{
+				"address": "0x678488290Fa0240160cB159c3Dda2748d5413a5D",
+				"meta": {},
+				"name": "MarketsHelper"
+			},
+			{
+				"address": "0x127652Bd7Cca30FD0d425c9891721aBD32F092f8",
+				"meta": {},
+				"name": "MultiSwapper"
+			},
+			{
+				"address": "0x5DD466Ffa26F2F038FD958648Df0C52015cAce31",
+				"meta": {},
+				"name": "CurveSwapper"
+			},
+			{
+				"address": "0x8aE4a048682C9873cE54daD4a984fbB3cDb66C56",
+				"meta": {},
+				"name": "CurveStableToUsdoBidder"
+			},
+			{
+				"address": "0xc3FA6a21D5583512fF58232aF244665d0C035665",
+				"meta": {},
+				"name": "SGLLiquidation"
+			},
+			{
+				"address": "0xfb7BDaD93B0BF7E3F52BFDc09a3196dc43C9ddff",
+				"meta": {},
+				"name": "SGLLendingBorrowing"
+			},
+			{
+				"address": "0x1901B53163A77055d662d61Caac685214676263d",
+				"meta": {},
+				"name": "ProxyDeployer"
+			},
+			{
+				"address": "0xD441B51FeBEB9633831947547fbdfb5b662617FF",
+				"meta": {},
+				"name": "MarketsProxy"
+			},
+			{
+				"address": "0x9A50a3D30fA5dD1D5cd08d06e2B70Da5382B29f6",
+				"meta": {},
+				"name": "ERC20WithoutStrategy-TOFT-FTM"
+			},
+			{
+				"address": "0xAF933E0E75E0576511e17b173cc6e3D0a09DB764",
+				"meta": {},
+				"name": "USD0"
+			},
+			{
+				"address": "0x0A817fC40C3457Ce64Db4907500eF6cC701EF19B",
+				"meta": {},
+				"name": "MediumRiskMC"
+			},
+			{
+				"address": "0x3D87108E56062CdeEe30a9039C079ECd4B288b77",
+				"meta": {},
+				"name": "BigBangMediumRiskMC"
+			},
+			{
+				"address": "0xB788ECe040812D15c8063975dAFCb3f607198253",
+				"meta": {},
+				"name": "sgl_TMATIC"
+			},
+			{
+				"address": "0x0C24013AD716d72080cCF813dF7dF26ce105666C",
+				"meta": {},
+				"name": "lq_TMATIC"
+			},
+			{
+				"address": "0xB76b47600f9C2D729A43Fe4b3498debE44aAed48",
+				"meta": {},
+				"name": "sgl_TAVAX"
+			},
+			{
+				"address": "0x86a1680e6CEeCce54dB96B52330A56CD62213F9B",
+				"meta": {},
+				"name": "lq_TAVAX"
+			},
+			{
+				"address": "0xa128f20C91C0374f8F5CD0921E4585BfF26f3107",
+				"meta": {},
+				"name": "sgl_TFTM"
+			},
+			{
+				"address": "0xbE735aFD435710F25808d577D2CdaC0C3E1854c5",
+				"meta": {},
+				"name": "lq_TFTM"
+			},
+			{
+				"address": "0xc5741d32977BB3c9A0e4Fe8F9A566BA41A018674",
+				"meta": {},
+				"name": "sgl_TWETH"
+			},
+			{
+				"address": "0x99246ee5020935512627Bb7bE107dE8bA6f5eF1F",
+				"meta": {},
+				"name": "lq_TWETH"
 			}
 		]
 	},

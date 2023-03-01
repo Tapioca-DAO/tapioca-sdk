@@ -13,60 +13,114 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
-      name: "ERC20",
+      name: "LiquidationQueue",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ERC20__factory>;
+    ): Promise<Contracts.LiquidationQueue__factory>;
     getContractFactory(
-      name: "BeachBar",
+      name: "MarketsHelper",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.BeachBar__factory>;
+    ): Promise<Contracts.MarketsHelper__factory>;
+    getContractFactory(
+      name: "MarketsProxy",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MarketsProxy__factory>;
+    getContractFactory(
+      name: "Penrose",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Penrose__factory>;
+    getContractFactory(
+      name: "ProxyDeployer",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ProxyDeployer__factory>;
+    getContractFactory(
+      name: "SGLLendingBorrowing",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SGLLendingBorrowing__factory>;
+    getContractFactory(
+      name: "SGLLiquidation",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SGLLiquidation__factory>;
+    getContractFactory(
+      name: "Singularity",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Singularity__factory>;
+    getContractFactory(
+      name: "MultiSwapper",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MultiSwapper__factory>;
+    getContractFactory(
+      name: "BigBang",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BigBang__factory>;
+    getContractFactory(
+      name: "USD0",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.USD0__factory>;
     getContractFactory(
       name: "YieldBox",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.YieldBox__factory>;
-    getContractFactory(
-      name: "ERC20Mock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ERC20Mock__factory>;
-    getContractFactory(
-      name: "Mixologist",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Mixologist__factory>;
-    getContractFactory(
-      name: "MixologistHelper",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MixologistHelper__factory>;
 
     getContractAt(
-      name: "ERC20",
+      name: "LiquidationQueue",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.ERC20>;
+    ): Promise<Contracts.LiquidationQueue>;
     getContractAt(
-      name: "BeachBar",
+      name: "MarketsHelper",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.BeachBar>;
+    ): Promise<Contracts.MarketsHelper>;
+    getContractAt(
+      name: "MarketsProxy",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MarketsProxy>;
+    getContractAt(
+      name: "Penrose",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Penrose>;
+    getContractAt(
+      name: "ProxyDeployer",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ProxyDeployer>;
+    getContractAt(
+      name: "SGLLendingBorrowing",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SGLLendingBorrowing>;
+    getContractAt(
+      name: "SGLLiquidation",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SGLLiquidation>;
+    getContractAt(
+      name: "Singularity",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Singularity>;
+    getContractAt(
+      name: "MultiSwapper",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MultiSwapper>;
+    getContractAt(
+      name: "BigBang",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BigBang>;
+    getContractAt(
+      name: "USD0",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.USD0>;
     getContractAt(
       name: "YieldBox",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.YieldBox>;
-    getContractAt(
-      name: "ERC20Mock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ERC20Mock>;
-    getContractAt(
-      name: "Mixologist",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.Mixologist>;
-    getContractAt(
-      name: "MixologistHelper",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.MixologistHelper>;
 
     // default types
     getContractFactory(
