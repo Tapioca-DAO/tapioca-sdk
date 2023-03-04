@@ -77,6 +77,9 @@ export const saveDeploymentOnDisk = (data: TProjectDeployment) => {
         __deployments,
         data,
         (a: any, b: any) => {
+            if (!a) a = [];
+            if (!b) b = [];
+
             if (_isArray(a)) {
                 return _unionBy(a, b, (item: TContract) => item.address);
             }
