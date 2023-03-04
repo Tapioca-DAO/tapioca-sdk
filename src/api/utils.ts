@@ -47,7 +47,7 @@ export const PROJECT_RELATIVE_DEPLOYMENT_PATH = './deployments.json';
 /**
  * Save a deployment on the Hardhat project root
  */
-export const saveDeploymentOnDisk = async (data: TProjectDeployment) => {
+export const saveDeploymentOnDisk = (data: TProjectDeployment) => {
     // Read previous deployments
     let __deployments: TProjectDeployment | undefined;
     try {
