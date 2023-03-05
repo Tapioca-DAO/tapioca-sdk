@@ -13,7 +13,6 @@ contract MasterContractFullCycleMock is IMasterContract {
     IStrategy public tokenStrategy;
     IStrategy public erc1155Strategy;
     IStrategy public ethStrategy;
-    IStrategy private constant ZERO = IStrategy(address(0));
 
     constructor(YieldBox _yieldBox) {
         yieldBox = _yieldBox;
@@ -28,30 +27,19 @@ contract MasterContractFullCycleMock is IMasterContract {
     }
 
     function run() public payable {
-        yieldBox.deposit(TokenType.ERC20, token, ZERO, 0, deployer, deployer, 1000, 0);
-        yieldBox.deposit(TokenType.ERC20, token, ZERO, 0, deployer, deployer, 0, 1000_00000000);
-        yieldBox.withdraw(2, deployer, deployer, 1000, 0);
-        yieldBox.withdraw(2, deployer, deployer, 0, 1000_00000000);
-
-        yieldBox.deposit(TokenType.ERC1155, erc1155, ZERO, 42, deployer, deployer, 1000, 0);
-        yieldBox.deposit(TokenType.ERC1155, erc1155, ZERO, 42, deployer, deployer, 0, 1000_00000000);
-        yieldBox.withdraw(3, deployer, deployer, 1000, 0);
-        yieldBox.withdraw(3, deployer, deployer, 0, 1000_00000000);
-
-        yieldBox.depositETH{ value: 1000 }(ZERO, deployer, 1000);
-        yieldBox.withdraw(4, deployer, deployer, 1000, 0);
-
         yieldBox.deposit(TokenType.ERC20, token, tokenStrategy, 0, deployer, deployer, 1000, 0);
         yieldBox.deposit(TokenType.ERC20, token, tokenStrategy, 0, deployer, deployer, 0, 1000_00000000);
-        yieldBox.withdraw(5, deployer, deployer, 1000, 0);
-        yieldBox.withdraw(5, deployer, deployer, 0, 1000_00000000);
+        uint256 id = yieldBox.ids(TokenType.ERC20, token, tokenStrategy, 0);
+        yieldBox.withdraw(id, deployer, deployer, 1000, 0);
+        yieldBox.withdraw(id, deployer, deployer, 0, 1000_00000000);
 
         yieldBox.deposit(TokenType.ERC1155, erc1155, erc1155Strategy, 42, deployer, deployer, 1000, 0);
         yieldBox.deposit(TokenType.ERC1155, erc1155, erc1155Strategy, 42, deployer, deployer, 0, 1000_00000000);
-        yieldBox.withdraw(6, deployer, deployer, 1000, 0);
-        yieldBox.withdraw(6, deployer, deployer, 0, 1000_00000000);
+        id = yieldBox.ids(TokenType.ERC1155, erc1155, erc1155Strategy, 42);
+        yieldBox.withdraw(id, deployer, deployer, 1000, 0);
+        yieldBox.withdraw(id, deployer, deployer, 0, 1000_00000000);
 
         yieldBox.depositETH{ value: 1000 }(ethStrategy, deployer, 1000);
-        yieldBox.withdraw(7, deployer, deployer, 1000, 0);
+        yieldBox.withdraw(id + 1, deployer, deployer, 1000, 0);
     }
 }

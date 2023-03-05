@@ -15,6 +15,8 @@ struct Asset {
 contract AssetRegister is ERC1155 {
     using BoringAddress for address;
 
+    mapping(address => mapping(address => mapping(uint256 => bool))) public isApprovedForAsset;
+
     event AssetRegistered(
         TokenType indexed tokenType,
         address indexed contractAddress,
@@ -22,6 +24,7 @@ contract AssetRegister is ERC1155 {
         uint256 indexed tokenId,
         uint256 assetId
     );
+    event ApprovalForAsset(address indexed sender, address indexed operator, uint256 assetId, bool approved);
 
     // ids start at 1 so that id 0 means it's not yet registered
     mapping(TokenType => mapping(address => mapping(IStrategy => mapping(uint256 => uint256)))) public ids;
@@ -76,5 +79,12 @@ contract AssetRegister is ERC1155 {
             "AssetManager: cannot add Native"
         );
         assetId = _registerAsset(tokenType, contractAddress, strategy, tokenId);
+    }
+
+    function setApprovalForAsset(address operator, uint256 assetId, bool approved) external virtual {
+        require(assetId < assetCount(), "AssetManager: asset not valid");
+        isApprovedForAsset[msg.sender][operator][assetId] = approved;
+
+        emit ApprovalForAsset(msg.sender, operator, assetId, approved);
     }
 }

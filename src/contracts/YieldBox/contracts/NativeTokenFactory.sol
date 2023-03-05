@@ -17,7 +17,6 @@ struct NativeToken {
 /// - low and predictable gas usage
 /// - simplified approval
 /// - no hidden features, all these tokens behave the same
-/// TODO: MintBatch? BurnBatch?
 
 contract NativeTokenFactory is AssetRegister {
     using BoringMath for uint256;
@@ -36,8 +35,8 @@ contract NativeTokenFactory is AssetRegister {
     /// Modifier to check if the msg.sender is allowed to use funds belonging to the 'from' address.
     /// If 'from' is msg.sender, it's allowed.
     /// If 'msg.sender' is an address (an operator) that is approved by 'from', it's allowed.
-    modifier allowed(address from) {
-        _requireTransferAllowed(from);
+    modifier allowed(address _from, uint256 _id) {
+        _requireTransferAllowed(_from, isApprovedForAsset[_from][msg.sender][_id]);
         _;
     }
 
@@ -114,7 +113,7 @@ contract NativeTokenFactory is AssetRegister {
     /// @notice Burns tokens. Only the holder of tokens can burn them or an approved operator.
     /// @param tokenId The token to be burned.
     /// @param amount The amount of tokens to burn.
-    function burn(uint256 tokenId, address from, uint256 amount) public allowed(from) {
+    function burn(uint256 tokenId, address from, uint256 amount) public allowed(from, tokenId) {
         require(assets[tokenId].tokenType == TokenType.Native, "NTF: Not native");
         _burn(from, tokenId, amount);
     }
@@ -140,7 +139,7 @@ contract NativeTokenFactory is AssetRegister {
         require(assets[tokenId].tokenType == TokenType.Native, "NTF: Not native");
         uint256 len = froms.length;
         for (uint256 i = 0; i < len; i++) {
-            _requireTransferAllowed(froms[i]);
+            _requireTransferAllowed(froms[i], isApprovedForAsset[froms[i]][msg.sender][tokenId]);
             _burn(froms[i], tokenId, amounts[i]);
         }
     }
