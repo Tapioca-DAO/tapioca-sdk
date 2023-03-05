@@ -11,6 +11,7 @@ contract ERC1155 is IERC1155 {
     using BoringAddress for address;
 
     // mappings
+
     mapping(address => mapping(address => bool)) public override isApprovedForAll; // map of operator approval
     mapping(address => mapping(uint256 => uint256)) public override balanceOf; // map of tokens owned by
     mapping(uint256 => uint256) public totalSupply; // totalSupply per token
@@ -74,12 +75,12 @@ contract ERC1155 is IERC1155 {
         emit TransferBatch(msg.sender, from, to, ids, values);
     }
 
-    function _requireTransferAllowed(address from) internal view virtual {
-        require(from == msg.sender || isApprovedForAll[from][msg.sender] == true, "Transfer not allowed");
+    function _requireTransferAllowed(address _from, bool _approved) internal view virtual {
+        require(_from == msg.sender || _approved || isApprovedForAll[_from][msg.sender] == true, "Transfer not allowed");
     }
 
     function safeTransferFrom(address from, address to, uint256 id, uint256 value, bytes calldata data) external override {
-        _requireTransferAllowed(from);
+        _requireTransferAllowed(from, false);
 
         _transferSingle(from, to, id, value);
 
@@ -100,7 +101,7 @@ contract ERC1155 is IERC1155 {
         bytes calldata data
     ) external override {
         require(ids.length == values.length, "ERC1155: Length mismatch");
-        _requireTransferAllowed(from);
+        _requireTransferAllowed(from, false);
 
         _transferBatch(from, to, ids, values);
 
