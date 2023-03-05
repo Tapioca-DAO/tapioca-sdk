@@ -68,7 +68,7 @@ abstract contract ERC721Permit is ERC721, EIP712 {
         bytes32 hash = _hashTypedDataV4(structHash);
 
         address signer = ECDSA.recover(hash, v, r, s);
-        require(signer == owner, 'ERC20Permit: invalid signature');
+        require(signer == owner, 'ERC721Permit: invalid signature');
 
         _approve(spender, tokenId);
     }
