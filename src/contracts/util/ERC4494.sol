@@ -52,7 +52,7 @@ abstract contract ERC721Permit is ERC721, EIP712 {
         bytes32 r,
         bytes32 s
     ) public virtual {
-        require(block.timestamp <= deadline, 'ERC20Permit: expired deadline');
+        require(block.timestamp <= deadline, 'ERC721Permit: expired deadline');
 
         address owner = ownerOf(tokenId);
         bytes32 structHash = keccak256(
