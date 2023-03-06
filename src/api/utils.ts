@@ -12,6 +12,60 @@ import {
     TProjectDeployment,
 } from '../shared';
 import SUPPORTED_CHAINS from '../SUPPORTED_CHAINS';
+import { ethers } from 'ethers';
+
+export interface IOftItem {
+    address: string;
+    chain: string;
+    lzChain: string;
+}
+
+export interface INetworkMapping {
+    [key: string]: string;
+}
+
+/**
+ * Returns a mapping between chain id and LZ chain id
+ **/
+export const networkMapping: INetworkMapping = {
+    '43113': '10106',
+    '80001': '10109',
+    '421613': '10143',
+    '0xfa2': '10112',
+    '4002': '10112',
+};
+
+/**
+ * Returns a list of all available OFTs packet types Tapioca uses
+ **/
+export const packetTypes = [0, 1, 2, 770, 771, 772, 773];
+
+
+/**
+ * Filters deployments by a specific name and returns tasks' information
+ **/
+export const filterDeploymentsByVal = (
+    deployments: TProjectDeployment,
+    val: string,
+) => {
+    const result: IOftItem[] = [];
+
+    Object.values(deployments).forEach((contracts, index) => {
+        const item = contracts.find(
+            (a) => a.name.toLowerCase() == val.toLowerCase(),
+        );
+        if (item !== undefined) {
+            const chain: string = Object.keys(deployments)[index];
+            result.push({
+                address: item.address,
+                lzChain: networkMapping[chain],
+                chain: chain,
+            });
+        }
+    });
+
+    return result;
+};
 
 /**
  * Returns a list of supported LZ chain IDs
@@ -43,6 +97,16 @@ export const getSupportedChains = () => SUPPORTED_CHAINS;
  * Relative to the Hardhat project root
  */
 export const PROJECT_RELATIVE_DEPLOYMENT_PATH = './deployments.json';
+
+/**
+ * Reads deployments from disk
+ */
+export const readDeployments = () => {
+    const __deployments: TProjectDeployment = JSON.parse(
+        fs.readFileSync(PROJECT_RELATIVE_DEPLOYMENT_PATH, 'utf-8'),
+    );
+    return __deployments;
+};
 
 /**
  * Save a deployment on the Hardhat project root
@@ -158,4 +222,86 @@ export const getDeployment = (
     }
 
     return deployment;
+};
+
+/**
+ * Returns a list of OFTs together with their possible configurations
+ * @param deployments The project deployments
+ * @param startsWith Filter for deploment name
+ * @param oftFactory __factory type of the contract for ABI retrieval
+ **/
+export const getTapiocaOftEnties = (
+    deployments: TProjectDeployment,
+    startsWith: string,
+    oftFactory: any,
+) => {
+    const [firstDeployment] = Object.values(deployments);
+    const tOftEntries = firstDeployment.filter((item) =>
+        item.name.startsWith(startsWith),
+    );
+
+    const tOfts: IOftItem[][] = [];
+    tOftEntries.forEach((tOftEntry) => {
+        const toftArray: IOftItem[] = filterDeploymentsByVal(
+            deployments,
+            tOftEntry.name,
+        );
+        tOfts.push(toftArray);
+    });
+
+    const items = [];
+    for (let i = 0; i < tOfts.length; i++) {
+        const toftArray = tOfts[i];
+
+        for (let j = 0; j < toftArray.length; j++) {
+            for (let k = 0; k < toftArray.length; k++) {
+                if (j == k) continue;
+
+                const trustedRemotePath = ethers.utils.solidityPack(
+                    ['address', 'address'],
+                    [toftArray[k].address, toftArray[j].address],
+                );
+                const trustedRemoteTx = oftFactory.interface.encodeFunctionData(
+                    'setTrustedRemote',
+                    [toftArray[k].lzChain, trustedRemotePath],
+                );
+                const customAdaptersTx =
+                    oftFactory.interface.encodeFunctionData(
+                        'setUseCustomAdapterParams',
+                        [true],
+                    );
+
+                const packetTypesTxs = [];
+                for (
+                    let packetIndex = 0;
+                    packetIndex < packetTypes.length;
+                    packetIndex++
+                ) {
+                    const minDstTx = oftFactory.interface.encodeFunctionData(
+                        'setMinDstGas',
+                        [
+                            toftArray[k].lzChain,
+                            packetTypes[packetIndex],
+                            200000,
+                        ],
+                    );
+                    packetTypesTxs.push(minDstTx);
+                }
+
+                items.push({
+                    trustedRemotePath: trustedRemotePath,
+                    trustedRemoteTx: trustedRemoteTx,
+                    customAdaptersTx: customAdaptersTx,
+                    packetTypesTxs: packetTypesTxs,
+                    srChain: toftArray[j].chain,
+                    dstChain: toftArray[k].chain,
+                    srcLzChain: toftArray[j].lzChain,
+                    dstLzChain: toftArray[k].lzChain,
+                    srcAddress: toftArray[j].address,
+                    dstAddress: toftArray[k].address,
+                });
+            }
+        }
+    }
+    return items;
 };
