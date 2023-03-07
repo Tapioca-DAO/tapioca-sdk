@@ -14,7 +14,7 @@
         "start": "tsdx watch",
         "build": "tsdx build && npm run copy-dts && npm run copy-sol",
         "test": "tsdx test --passWithNoTests",
-        "lint": "npx eslint ./**/*.ts --fix",
+        "lint": "eslint ./**/*.ts --fix",
         "prepare": "husky install && npm run build",
         "deploy": "npm run prepare && npm publish",
         "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" dist",
