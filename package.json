@@ -25,7 +25,6 @@
     "module": "dist/tapioca-sdk.esm.js",
     "dependencies": {
         "ethers": "^5.6.9",
-        "level": "^8.0.0",
         "lodash": "^4.17.21",
         "lodash-es": "^4.17.21",
         "typechain": "^8.1.0",
