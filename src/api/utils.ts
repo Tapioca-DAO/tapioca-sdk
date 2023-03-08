@@ -40,7 +40,6 @@ export const networkMapping: INetworkMapping = {
  **/
 export const packetTypes = [0, 1, 2, 770, 771, 772, 773];
 
-
 /**
  * Filters deployments by a specific name and returns tasks' information
  **/
