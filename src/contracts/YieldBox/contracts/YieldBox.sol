@@ -235,6 +235,50 @@ contract YieldBox is YieldBoxPermit, BoringBatchable, NativeTokenFactory, ERC721
         Asset storage asset = assets[assetId];
         require(asset.tokenType != TokenType.Native, "YieldBox: can't withdraw Native");
 
+        // Handle ERC721 separately
+        if (asset.tokenType == TokenType.ERC721) {
+            return _withdrawNFT(asset, assetId, from, to);
+        }
+
+        return _withdrawFungible(asset, assetId, from, to, amount, share);
+    }
+
+    /// @notice Handles burning and withdrawal of ERC20 and 1155 tokens.
+    /// @param asset The asset to withdraw.
+    /// @param assetId The id of the asset.
+    /// @param from which user to pull the tokens.
+    /// @param to which user to push the tokens.
+    function _withdrawNFT(
+        Asset storage asset,
+        uint256 assetId,
+        address from,
+        address to
+    ) internal returns (uint256 amountOut, uint256 shareOut) {
+        _burn(from, assetId, 1);
+
+        // Interactions
+        asset.strategy.withdraw(to, 1);
+
+        emit Withdraw(msg.sender, from, to, assetId, 1, 1, 1, 1);
+
+        return (1, 1);
+    }
+
+    /// @notice Handles burning and withdrawal of ERC20 and 1155 tokens.
+    /// @param asset The asset to withdraw.
+    /// @param assetId The id of the asset.
+    /// @param from which user to pull the tokens.
+    /// @param to which user to push the tokens.
+    /// @param amount of tokens. Either one of `amount` or `share` needs to be supplied.
+    /// @param share Like above, but `share` takes precedence over `amount`.
+    function _withdrawFungible(
+        Asset storage asset,
+        uint256 assetId,
+        address from,
+        address to,
+        uint256 amount,
+        uint256 share
+    ) internal returns (uint256 amountOut, uint256 shareOut) {
         // Effects
         uint256 totalAmount = _tokenBalanceOf(asset);
         if (share == 0) {
@@ -316,9 +360,20 @@ contract YieldBox is YieldBoxPermit, BoringBatchable, NativeTokenFactory, ERC721
         require(operator != address(this), "YieldBox: can't approve yieldBox");
 
         // Effects
-        isApprovedForAll[msg.sender][operator] = approved;
+        _setApprovalForAll(msg.sender, operator, approved);
+    }
 
-        emit ApprovalForAll(msg.sender, operator, approved);
+    /// @notice Update approval status for an operator
+    /// @param _owner The YieldBox account owner
+    /// @param operator The address approved to perform actions on your behalf
+    /// @param approved True/False
+    function _setApprovalForAll(
+        address _owner,
+        address operator,
+        bool approved
+    ) internal override{
+        isApprovedForAll[_owner][operator] = approved;
+        emit ApprovalForAll(_owner, operator, approved);
     }
 
     /// @notice Update approval status for an operator and for a specific asset
@@ -335,6 +390,7 @@ contract YieldBox is YieldBoxPermit, BoringBatchable, NativeTokenFactory, ERC721
         require(operator != address(this), "YieldBox: can't approve yieldBox");
         require(assetId < assetCount(), "YieldBox: asset not valid");
 
+        // Effects
         _setApprovalForAsset(msg.sender, operator, assetId, approved);
     }
 
