@@ -1,60 +1,29 @@
-import fs from 'fs';
-import _merge from 'lodash/merge';
 import { glob, runTypeChain } from 'typechain';
-import writeJsonFile from 'write-json-file';
-import {
-    DEPLOYMENT_SDK_PATH,
-    TDeployment,
-    TProjectCaller,
-    TProjectDeployment,
-} from '../shared';
+import { TGlobalDeployment, TLocalDeployment, TProjectCaller } from '../shared';
+import { saveGlobally } from './db';
+
 /**
+ * Export project local database and merge it with the global database, then generate typings
  *
  * @param params {Object} - Params object
  * @param params.projectCaller {TProjectCaller} - The name of the project that is calling the script. Should be the Github repo name (e.g. 'TapiocaZ')
  * @param params.contractNames {string[]} - Contract to include in the typing generation. Used to exclude external contracts and interfaces (e.g UniV2)
  * @param params.artifactPath {string} - Path to the artifacts folder
- * @param params.__deployments {?TDeployment} - The deployments to merge with the previous deployments
+ * @param params.__deployments {?TGlobalDeployment} - The deployments to merge with the previous deployments
  */
 export const run = async (params: {
     projectCaller: TProjectCaller;
     contractNames: string[];
     artifactPath: string;
-    _deployments?: TProjectDeployment;
+    deployment?: { data: TLocalDeployment; tag: string };
 }) => {
-    const { projectCaller, contractNames, artifactPath, _deployments } = params;
-    if (_deployments) {
-        const deployments = await mergeDeployments(projectCaller, _deployments);
-        // Write merged deployments to file
-        await writeJsonFile(DEPLOYMENT_SDK_PATH, deployments);
+    const { projectCaller, contractNames, artifactPath, deployment } = params;
+
+    if (deployment?.data) {
+        saveGlobally(deployment.data, deployment.tag, projectCaller);
     }
+
     await generateTypings(projectCaller, artifactPath, contractNames);
-};
-
-const mergeDeployments = async (
-    projectCaller: TProjectCaller,
-    project_deployments: TProjectDeployment,
-) => {
-    // Read previous deployments
-    let __deployments: TDeployment | undefined;
-    try {
-        if (fs.existsSync(DEPLOYMENT_SDK_PATH)) {
-            __deployments = JSON.parse(
-                fs.readFileSync(DEPLOYMENT_SDK_PATH, 'utf-8'),
-            );
-        }
-    } catch (e) {
-        console.log(`[-] Error reading ${DEPLOYMENT_SDK_PATH}`);
-    }
-
-    // If no deployment, create a new one for this project
-    if (!__deployments) __deployments = {} as TDeployment;
-
-    // Merge prev and new deployments
-    const deployments: TDeployment = _merge(__deployments, {
-        [projectCaller]: project_deployments,
-    });
-    return deployments;
 };
 
 const _parseFiles = (
