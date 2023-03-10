@@ -42,9 +42,9 @@ export const LOCAL_DB_PATH = './local__db';
  * @throws Error if the contract is not found
  */
 export const getLocalDeployment = (
-    tag: string,
     chainId: string,
     contractName: string,
+    tag = 'default',
 ) => {
     const deployments =
         readDeployment('local', {
@@ -76,10 +76,10 @@ export const getLocalDeployment = (
  * @throws Error if the contract is not found
  */
 export const getGlobalDeployment = (
-    tag: string,
     project: TProjectCaller,
     chainId: string,
     contractName: string,
+    tag = 'default',
 ) => {
     const deployments = readDeployment('global', { tag, project, chainId });
     const contract = _find(deployments, { name: contractName }) as
@@ -104,9 +104,8 @@ export const getGlobalDeployment = (
  * @param data The deployment to save
  * @param tag The tag to save the deployment under
  */
-export const saveLocally = (data: TLocalDeployment, tag?: string) => {
+export const saveLocally = (data: TLocalDeployment, tag = 'default') => {
     const db = readDB('local');
-    tag = tag || 'default';
     const prevDep = db[tag] || {}; // Read previous deployments
 
     // Save previous deployments in a backup file
@@ -123,10 +122,9 @@ export const saveLocally = (data: TLocalDeployment, tag?: string) => {
 export const saveGlobally = (
     data: TLocalDeployment,
     project: TProjectCaller,
-    tag?: string,
+    tag = 'default',
 ) => {
     const db = readDB('global');
-    tag = tag || 'default';
     const prevDep = db[tag]?.[project] || {}; // Read previous deployments
 
     // Save previous deployments in a backup file
