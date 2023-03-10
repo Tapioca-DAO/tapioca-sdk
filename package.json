@@ -1,5 +1,5 @@
 {
-    "version": "1.1.33",
+    "version": "1.2.0",
     "license": "MIT",
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
@@ -12,13 +12,14 @@
     },
     "scripts": {
         "start": "tsdx watch",
-        "build": "tsdx build && npm run copy-dts && npm run copy-sol",
+        "build": "tsdx build --transpileOnly && npm run copy-dts && npm run copy-sol && npm run copy-json",
         "test": "tsdx test --passWithNoTests",
         "lint": "eslint ./**/*.ts --fix",
         "prepare": "husky install && npm run build",
         "deploy": "npm run prepare && npm publish",
         "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" dist",
-        "copy-sol": "copyfiles -u 1 \"src/**/*.sol\" dist"
+        "copy-sol": "copyfiles -u 1 \"src/**/*.sol\" dist",
+        "copy-json": "copyfiles -u 1 \"src/**/*.json\" dist"
     },
     "name": "tapioca-sdk",
     "author": "0xRektora",
