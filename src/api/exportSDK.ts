@@ -15,7 +15,7 @@ export const run = async (params: {
     projectCaller: TProjectCaller;
     contractNames: string[];
     artifactPath: string;
-    deployment?: { data: TLocalDeployment; tag: string };
+    deployment?: { data: TLocalDeployment; tag?: string };
 }) => {
     const { projectCaller, contractNames, artifactPath, deployment } = params;
 
