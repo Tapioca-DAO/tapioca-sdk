@@ -20,7 +20,7 @@ export const run = async (params: {
     const { projectCaller, contractNames, artifactPath, deployment } = params;
 
     if (deployment?.data) {
-        saveGlobally(deployment.data, deployment.tag, projectCaller);
+        saveGlobally(deployment.data, projectCaller, deployment.tag);
     }
 
     await generateTypings(projectCaller, artifactPath, contractNames);
