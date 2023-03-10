@@ -1,5 +1,5 @@
 {
-    "version": "1.2.0",
+    "version": "1.2.1",
     "license": "MIT",
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
@@ -18,7 +18,8 @@
         "prepare": "husky install && npm run build",
         "deploy": "npm run prepare && npm publish",
         "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" dist",
-        "copy-sol": "copyfiles -u 1 \"src/**/*.sol\" dist"
+        "copy-sol": "copyfiles -u 1 \"src/**/*.sol\" dist",
+        "copy-json": "copyfiles -u 1 \"src/**/*.json\" dist"
     },
     "name": "tapioca-sdk",
     "author": "0xRektora",
