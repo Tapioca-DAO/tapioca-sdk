@@ -104,8 +104,9 @@ export const getGlobalDeployment = (
  * @param data The deployment to save
  * @param tag The tag to save the deployment under
  */
-export const saveLocally = (data: TLocalDeployment, tag: string) => {
+export const saveLocally = (data: TLocalDeployment, tag?: string) => {
     const db = readDB('local');
+    tag = tag || 'default';
     const prevDep = db[tag] || {}; // Read previous deployments
 
     // Save previous deployments in a backup file
@@ -121,10 +122,11 @@ export const saveLocally = (data: TLocalDeployment, tag: string) => {
 
 export const saveGlobally = (
     data: TLocalDeployment,
-    tag: string,
     project: TProjectCaller,
+    tag?: string,
 ) => {
     const db = readDB('global');
+    tag = tag || 'default';
     const prevDep = db[tag]?.[project] || {}; // Read previous deployments
 
     // Save previous deployments in a backup file
