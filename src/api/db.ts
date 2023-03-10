@@ -46,7 +46,12 @@ export const getLocalDeployment = (
     chainId: string,
     contractName: string,
 ) => {
-    const deployments = readDeployment('local', { tag, chainId });
+    const deployments =
+        readDeployment('local', {
+            tag,
+            chainId,
+        }) ?? ([] as TContract[]);
+
     const contract = _find(deployments, { name: contractName }) as
         | TContract
         | undefined;

@@ -1,5 +1,5 @@
 import { glob, runTypeChain } from 'typechain';
-import { TGlobalDeployment, TLocalDeployment, TProjectCaller } from '../shared';
+import { TLocalDeployment, TProjectCaller } from '../shared';
 import { saveGlobally } from './db';
 
 /**
