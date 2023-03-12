@@ -4,12 +4,14 @@ import 'hardhat/types/runtime';
 import '@nomicfoundation/hardhat-toolbox/src/index';
 
 import * as exportSDK from '../../api/exportSDK';
+import * as config from '../../api/config';
 import * as utils from '../../api/utils';
 import * as db from '../../api/db';
 import { TProjectCaller } from '../../shared';
 
 const SDK = {
     exportSDK,
+    config,
     utils,
     db,
 } as const;
