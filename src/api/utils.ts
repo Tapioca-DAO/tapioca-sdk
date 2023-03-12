@@ -1,6 +1,6 @@
 import { ethers } from 'ethers';
 import _find from 'lodash/find';
-import { TLocalDeployment } from '../shared';
+import { TContract, TLocalDeployment, TProjectCaller } from '../shared';
 import SUPPORTED_CHAINS from '../SUPPORTED_CHAINS';
 import { TapiocaOFT__factory } from '../typechain';
 import {
@@ -9,6 +9,7 @@ import {
     PACKET_TYPES,
     TAPIOCA_PROJECTS,
 } from './config';
+import * as db from './db';
 
 /**
  * A representation of an OFT contract
@@ -50,6 +51,27 @@ export const getSupportedChains = () => SUPPORTED_CHAINS;
  * Returns A list of Tapioca projects
  */
 export const getTapiocaProjects = () => TAPIOCA_PROJECTS;
+
+/**
+ * Returns a list of contract names
+ * @param chainId The chain ID
+ * @param project The project name
+ * @param options The options
+ * @param options.tag The tag to use
+ * @param options.type The type of deployment to use
+ */
+export const getContractNamesForChain = (
+    chainId: string,
+    project: TProjectCaller,
+    options: { tag?: string; type: 'local' | 'global' },
+) => {
+    const deployments = db.readDeployment(options.type, {
+        tag: options.tag,
+        chainId,
+        project,
+    }) as TContract[];
+    return deployments.map((e) => e.name);
+};
 
 /*
  ******************

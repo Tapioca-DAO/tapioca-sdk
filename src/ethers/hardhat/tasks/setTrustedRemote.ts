@@ -1,64 +1,56 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
-import { TLocalDeployment } from '../../../shared';
-import { TapiocaOFT__factory } from '../../../typechain';
+import { glob, runTypeChain } from 'typechain';
 
-// npx hardhat setTrustedRemote --network arbitrum_goerli --contract 'MarketsProxy'
+//to fantom_testnet
+//  npx hardhat setTrustedRemote --contractName 'TapOFT' --lz-chain 1 --src 0x2 --dst 0x1  --tag '1.0'
+
 export const setTrustedRemote__task = async (
-    taskArgs: { contract: string; tag?: string },
+    taskArgs: {
+        contractName: string;
+        src: string;
+        dst: string;
+        lzChain?: string;
+        tag?: string;
+    },
     hre: HardhatRuntimeEnvironment,
 ) => {
-    const { contract, tag } = taskArgs;
-    const currentChainId = String(hre.network.config.chainId);
+    console.log('[+] Setting trusted remote for', taskArgs.contractName);
 
-    console.log('[+] Setting adapter params for contract: ', contract);
-
-    const oftFactory = (await hre.ethers.getContractFactory(
-        contract as 'TapiocaOFT',
-    )) as TapiocaOFT__factory;
-
-    const deployments = hre.SDK.db.readDeployment('local', {
-        tag,
-        project: hre.config.SDK.project,
-    }) as TLocalDeployment;
-
-    const oftEntryData = hre.SDK.utils.getTapiocaOFTEntities(
-        deployments,
-        taskArgs.contract,
-        oftFactory,
+    const deployment = hre.SDK.db.getLocalDeployment(
+        String(hre.network.config.chainId),
+        taskArgs.contractName,
+        taskArgs.tag,
+    );
+    const contract = await hre.ethers.getContractAt(
+        deployment.name,
+        deployment.address,
     );
 
-    const chainTransactions = oftEntryData.filter(
-        (a: { srChain: string }) => a.srChain == currentChainId,
-    );
-
-    console.log(`[+] Total entries: ${chainTransactions.length}`);
-    chainTransactions.forEach((e) => {
-        console.log(
-            '\t',
-            '* Setting ',
-            // @ts-ignore
-            hre.SDK.config.NETWORK_MAPPING_CHAIN_TO_LZ[e.srChain],
-            '->',
-            // @ts-ignore
-            hre.SDK.config.NETWORK_MAPPING_CHAIN_TO_LZ[e.dstLzChain],
-        );
-    });
-
-    let sum = 0;
-    for (let i = 0; i < chainTransactions.length; i++) {
-        const crtTx = chainTransactions[i];
-        const ctr = await hre.ethers.getContractAt(
-            taskArgs.contract,
-            crtTx.srcAddress,
-        );
-        await (
-            await ctr.setTrustedRemote(
-                crtTx.dstLzChain,
-                crtTx.trustedRemotePath,
+    if (!deployment) {
+        const availContract = hre.SDK.utils
+            .getContractNamesForChain(
+                String(hre.network.config.chainId),
+                hre.userConfig.SDK.project,
+                {
+                    tag: taskArgs.tag,
+                    type: 'local',
+                },
             )
-        ).wait(2);
-        console.log(`\t* Executed ${i}`);
-        sum += 1;
+            .map((e) => `\t- ${e}\n`);
+        throw new Error(
+            `[-] SDK: Contract not found, available contracts:\n${availContract}`,
+        );
     }
-    console.log(`[+] Executed ${sum} transactions`);
+
+    const path = hre.ethers.utils.solidityPack(
+        ['address', 'address'],
+        [taskArgs.dst, taskArgs.src],
+    );
+
+    console.log(
+        `[+] Setting trusted for ${deployment.name} remote with path ${path}`,
+    );
+    await contract.setTrustedRemote(taskArgs.lzChain, path);
+
+    console.log('[+] Done');
 };
