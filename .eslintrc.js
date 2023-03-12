@@ -32,5 +32,6 @@ module.exports = {
         'key-spacing': ['error', { afterColon: true }],
         'no-multi-spaces': ['error'],
         'no-multiple-empty-lines': ['error', { max: 2 }],
+        '@typescript-eslint/ban-ts-comment': 'off',
     },
 };
