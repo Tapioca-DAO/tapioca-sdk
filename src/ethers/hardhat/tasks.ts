@@ -26,10 +26,6 @@ addCliParams(
                 getTapiocaProjects().join(', '),
         )
         .addOptionalParam(
-            'tag',
-            'The tag to lookup, if not specified, "default" will be used',
-        )
-        .addOptionalParam(
             'contractName',
             'The name of the contract to lookup, if not specified, all contracts will be returned',
         ),
@@ -62,9 +58,5 @@ addCliParams(
             'Name of the contract to set trusted remote for',
         )
         .addParam('src', 'TapOFT source address')
-        .addParam('dst', 'TapOFT destination address')
-        .addOptionalParam(
-            'lzChain',
-            'LZ destination chain id for trusted remotes. Default to current network',
-        ),
+        .addParam('dst', 'TapOFT destination address'),
 );

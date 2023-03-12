@@ -1,29 +1,24 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
-import { glob, runTypeChain } from 'typechain';
+import { TapOFT } from '../../../typechain/tap-token';
+import { getLocalContract } from '../utils';
 
 //to fantom_testnet
-//  npx hardhat setTrustedRemote --contractName 'TapOFT' --lz-chain 1 --src 0x2 --dst 0x1  --tag '1.0'
-
+//  npx hardhat setTrustedRemote --contractName 'TapOFT'  --src 0x2 --dst 0x1  --tag '1.0'
 export const setTrustedRemote__task = async (
     taskArgs: {
         contractName: string;
         src: string;
         dst: string;
-        lzChain?: string;
         tag?: string;
     },
     hre: HardhatRuntimeEnvironment,
 ) => {
     console.log('[+] Setting trusted remote for', taskArgs.contractName);
 
-    const deployment = hre.SDK.db.getLocalDeployment(
-        String(hre.network.config.chainId),
+    const { contract, deployment } = await getLocalContract<TapOFT>(
+        hre,
         taskArgs.contractName,
         taskArgs.tag,
-    );
-    const contract = await hre.ethers.getContractAt(
-        deployment.name,
-        deployment.address,
     );
 
     if (!deployment) {
@@ -50,7 +45,13 @@ export const setTrustedRemote__task = async (
     console.log(
         `[+] Setting trusted for ${deployment.name} remote with path ${path}`,
     );
-    await contract.setTrustedRemote(taskArgs.lzChain, path);
+    const lzChain =
+        hre.SDK.config.NETWORK_MAPPING_CHAIN_TO_LZ[
+            String(
+                hre.network.config.chainId,
+            ) as keyof typeof hre.SDK.config.NETWORK_MAPPING_CHAIN_TO_LZ
+        ];
+    await contract.setTrustedRemote(lzChain, path);
 
     console.log('[+] Done');
 };

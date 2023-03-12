@@ -52,6 +52,11 @@ export const getSupportedChains = () => SUPPORTED_CHAINS;
  */
 export const getTapiocaProjects = () => TAPIOCA_PROJECTS;
 
+/*
+ ******************
+ * Deployment
+ ******************
+ */
 /**
  * Returns a list of contract names
  * @param chainId The chain ID
@@ -72,12 +77,6 @@ export const getContractNamesForChain = (
     }) as TContract[];
     return deployments.map((e) => e.name);
 };
-
-/*
- ******************
- * Deployment
- ******************
- */
 
 /**
  * Filters deployments by a specific name and returns tasks' information
