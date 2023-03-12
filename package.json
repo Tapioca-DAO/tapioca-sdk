@@ -46,7 +46,11 @@
         "prettier": "^2.7.1",
         "tsdx": "^0.14.1",
         "tslib": "^2.4.0",
-        "typescript": "^4.8.2"
+        "typescript": "^4.8.2",
+        "hardhat": "^2.13.0"
+    },
+    "peerDependencies": {
+        "hardhat": "2.x"
     },
     "resolutions": {
         "tsdx/typescript": "^4.6.3"
