@@ -3,7 +3,12 @@ import _find from 'lodash/find';
 import { TLocalDeployment } from '../shared';
 import SUPPORTED_CHAINS from '../SUPPORTED_CHAINS';
 import { TapiocaOFT__factory } from '../typechain';
-import { EChainID, NETWORK_MAPPING_CHAIN_TO_LZ, PACKET_TYPES } from './config';
+import {
+    EChainID,
+    NETWORK_MAPPING_CHAIN_TO_LZ,
+    PACKET_TYPES,
+    TAPIOCA_PROJECTS,
+} from './config';
 
 /**
  * A representation of an OFT contract
@@ -39,6 +44,12 @@ export const getChainBy = (
  * Returns the object containing the chain info.
  **/
 export const getSupportedChains = () => SUPPORTED_CHAINS;
+
+/**
+ *
+ * Returns A list of Tapioca projects
+ */
+export const getTapiocaProjects = () => TAPIOCA_PROJECTS;
 
 /*
  ******************

@@ -1,10 +1,11 @@
+import { TAPIOCA_PROJECTS } from './api/config';
 import { getChainIDs } from './api/utils';
 
 // Helper type of the supported chain IDs
 export type HLP_TChain = ReturnType<typeof getChainIDs>[number];
 
 // The project caller is the name of the project that is calling the SDK
-export type TProjectCaller = 'TapiocaZ' | 'Tap-Token' | 'Tapioca-Bar';
+export type TProjectCaller = typeof TAPIOCA_PROJECTS[number];
 
 // A contract is a deployed contract
 export type TContract = {

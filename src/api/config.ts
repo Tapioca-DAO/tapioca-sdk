@@ -131,3 +131,9 @@ export const NETWORK_MAPPING_LZ_TO_CHAIN: INetworkMappingLZToChain = {
     [ELZChainID.OPTIMISM_GOERLI]: EChainID.OPTIMISM_GOERLI,
     [ELZChainID.HARMONY_TESTNET]: EChainID.HARMONY_TESTNET,
 };
+
+export const TAPIOCA_PROJECTS = [
+    'tapiocaz',
+    'tap-token',
+    'tapioca-bar',
+] as const;
