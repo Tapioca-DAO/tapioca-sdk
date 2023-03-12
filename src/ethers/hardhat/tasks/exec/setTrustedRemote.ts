@@ -1,9 +1,9 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
-import { TapOFT } from '../../../typechain/tap-token';
-import { getLocalContract } from '../utils';
+import { TapOFT } from '../../../../typechain/tap-token';
+import { getLocalContract } from '../../utils';
 
-//to fantom_testnet
-//  npx hardhat setTrustedRemote --contractName 'TapOFT'  --src 0x2 --dst 0x1  --tag '1.0'
+// to fantom_testnet
+// npx hardhat setTrustedRemote --contractName 'TapOFT'  --src 0x2 --dst 0x1  --tag '1.0'
 export const setTrustedRemote__task = async (
     taskArgs: {
         contractName: string;

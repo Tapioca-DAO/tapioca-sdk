@@ -1,10 +1,10 @@
 import { task } from 'hardhat/config';
 import { getTapiocaProjects } from '../../api/utils';
-import { getDeployment__task } from './tasks/getDeployment';
-import { batchSetAdapterParam__task } from './tasks/batchSetAdapterParam';
-import { BatchSetTrustedRemote__task } from './tasks/batchSetTrustedRemote';
-import { setTrustedRemote__task } from './tasks/setTrustedRemote';
+import { getDeployment__task } from './tasks/view/getDeployment';
+import { setTrustedRemote__task } from './tasks/exec/setTrustedRemote';
 import { ConfigurableTaskDefinition } from 'hardhat/types';
+import { batchSetAdapterParam__task } from './tasks/exec/batchSetAdapterParam';
+import { BatchSetTrustedRemote__task } from './tasks/exec/batchSetTrustedRemote';
 
 const addCliParams = (task: ConfigurableTaskDefinition) => {
     return task.addOptionalParam(

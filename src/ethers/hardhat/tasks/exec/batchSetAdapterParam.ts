@@ -1,6 +1,6 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
-import { TLocalDeployment } from '../../../shared';
-import { TapiocaOFT__factory } from '../../../typechain';
+import { TLocalDeployment } from '../../../../shared';
+import { TapiocaOFT__factory } from '../../../../typechain';
 
 // npx hardhat batchSetAdapterParam --network arbitrum_goerli --contract 'USD0'
 export const batchSetAdapterParam__task = async (

@@ -1,6 +1,6 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
-import { TLocalDeployment } from '../../../shared';
-import { TapiocaOFT__factory } from '../../../typechain';
+import { TLocalDeployment } from '../../../../shared';
+import { TapiocaOFT__factory } from '../../../../typechain';
 
 // npx hardhat BatchSetTrustedRemote --network arbitrum_goerli --contract 'MarketsProxy'
 export const BatchSetTrustedRemote__task = async (

@@ -1,5 +1,5 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
-import { TProjectCaller } from '../../../shared';
+import { TProjectCaller } from '../../../../shared';
 
 export const getDeployment__task = async function (
     taskArgs: {
