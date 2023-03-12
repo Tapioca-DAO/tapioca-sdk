@@ -1,6 +1,9 @@
 // API
 import API from './api/index';
 
+// Ethers
+import './ethers';
+
 // Types
 import * as typechain from './typechain';
 
