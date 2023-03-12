@@ -1,6 +1,7 @@
 import { task } from 'hardhat/config';
 import { getTapiocaProjects } from '../../api/utils';
 import { getDeployment__task } from './tasks/getDeployment';
+import { setAdapterParam__task } from './tasks/setAdapterParam';
 
 task(
     'getDeployment',
@@ -21,3 +22,9 @@ task(
         'contractName',
         'The name of the contract to lookup, if not specified, all contracts will be returned',
     );
+
+task(
+    'setAdapterParam',
+    'Sets OFT to use adapter params and the minimum destination gas between all available tOFT contracts for the current chain',
+    setAdapterParam__task,
+).addParam('contract', 'Contract name to filter by');
