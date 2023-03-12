@@ -2,15 +2,15 @@ import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { TLocalDeployment } from '../../../shared';
 import { TapiocaOFT__factory } from '../../../typechain';
 
-// npx hardhat setAdapterParam --network arbitrum_goerli --contract 'USD0'
-export const setAdapterParam__task = async (
+// npx hardhat setTrustedRemote --network arbitrum_goerli --contract 'MarketsProxy'
+export const setTrustedRemote__task = async (
     taskArgs: { contract: string; tag?: string },
     hre: HardhatRuntimeEnvironment,
 ) => {
     const { contract, tag } = taskArgs;
+    const currentChainId = String(hre.network.config.chainId);
 
     console.log('[+] Setting adapter params for contract: ', contract);
-    const currentChainId = String(hre.network.config.chainId);
 
     const oftFactory = (await hre.ethers.getContractFactory(
         contract as 'TapiocaOFT',
@@ -26,9 +26,6 @@ export const setAdapterParam__task = async (
         taskArgs.contract,
         oftFactory,
     );
-    if (!oftEntryData) {
-        throw new Error('[-] SDK: Contract not found');
-    }
 
     const chainTransactions = oftEntryData.filter(
         (a: { srChain: string }) => a.srChain == currentChainId,
@@ -54,22 +51,12 @@ export const setAdapterParam__task = async (
             taskArgs.contract,
             crtTx.srcAddress,
         );
-
-        await (await ctr.setUseCustomAdapterParams(true)).wait(2);
-
-        for (
-            let packetIndex = 0;
-            packetIndex < crtTx.packetTypesTxs.length;
-            packetIndex++
-        ) {
-            await (
-                await ctr.setMinDstGas(
-                    crtTx.dstLzChain,
-                    crtTx.packetTypesTxs[packetIndex],
-                    200000,
-                )
-            ).wait(2);
-        }
+        await (
+            await ctr.setTrustedRemote(
+                crtTx.dstLzChain,
+                crtTx.trustedRemotePath,
+            )
+        ).wait(2);
         console.log(`\t* Executed ${i}`);
         sum += 1;
     }

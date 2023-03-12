@@ -2,6 +2,7 @@ import { task } from 'hardhat/config';
 import { getTapiocaProjects } from '../../api/utils';
 import { getDeployment__task } from './tasks/getDeployment';
 import { setAdapterParam__task } from './tasks/setAdapterParam';
+import { setTrustedRemote__task } from './tasks/setTrustedRemote';
 
 task(
     'getDeployment',
@@ -27,4 +28,10 @@ task(
     'setAdapterParam',
     'Sets OFT to use adapter params and the minimum destination gas between all available tOFT contracts for the current chain',
     setAdapterParam__task,
+).addParam('contract', 'Contract name to filter by');
+
+task(
+    'setTrustedRemote',
+    'Set trusted remote between all available tOFT contracts for the current chain',
+    setTrustedRemote__task,
 ).addParam('contract', 'Contract name to filter by');
