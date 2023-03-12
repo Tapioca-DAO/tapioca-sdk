@@ -149,6 +149,54 @@ export const saveGlobally = (
  */
 
 /**
+ * Helper to build a local deployment object
+ *
+ * @param options The options to build the local deployment
+ * @param options.tag The tag to save the deployment under
+ * @param options.chainId The chain ID to save the deployment under
+ * @param options.contracts The contracts to save
+ * @returns The local deployment
+ */
+export function buildLocalDeployment(options: {
+    tag?: string;
+    chainId: string;
+    contracts: TContract[];
+}) {
+    const { tag, chainId, contracts } = options;
+    return {
+        [tag ?? 'default']: {
+            [chainId]: contracts,
+        },
+    };
+}
+
+/**
+ * Helper to build a global deployment object
+ *
+ * @param options The options to build the global deployment
+ * @param options.tag The tag to save the deployment under
+ * @param options.project The project to save the deployment under
+ * @param options.chainId The chain ID to save the deployment under
+ * @param options.contracts The contracts to save
+ * @returns The global deployment
+ */
+export function buildGlobalDeployment(options: {
+    tag?: string;
+    project: TProjectCaller;
+    chainId: string;
+    contracts: TContract[];
+}) {
+    const { tag, project, chainId, contracts } = options;
+    return {
+        [tag ?? 'default']: {
+            [project]: {
+                [chainId]: contracts,
+            },
+        },
+    };
+}
+
+/**
  * Read the local or global deployment and return a specific format
  */
 export function readDeployment(
