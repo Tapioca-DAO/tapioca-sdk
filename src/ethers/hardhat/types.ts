@@ -1,9 +1,9 @@
+import { HardhatConfig, HardhatUserConfig } from 'hardhat/types';
+import '@nomicfoundation/hardhat-toolbox/dist/src';
 import { extendEnvironment } from 'hardhat/config';
+import { extendConfig } from 'hardhat/config';
 import 'hardhat/types/config';
 import 'hardhat/types/runtime';
-import '@nomicfoundation/hardhat-toolbox/src/index';
-import { extendConfig } from 'hardhat/config';
-import { HardhatConfig, HardhatUserConfig } from 'hardhat/types';
 
 import * as exportSDK from '../../api/exportSDK';
 import * as config from '../../api/config';
