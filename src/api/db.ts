@@ -149,19 +149,19 @@ export const saveGlobally = (
  */
 
 /**
- * Helper to build a local deployment object
+ * Helper to build a local database object
  *
- * @param options The options to build the local deployment
- * @param options.tag The tag to save the deployment under
- * @param options.chainId The chain ID to save the deployment under
+ * @param options The options to build the local database
+ * @param options.tag The tag to save the database under
+ * @param options.chainId The chain ID to save the database under
  * @param options.contracts The contracts to save
- * @returns The local deployment
+ * @returns The local database
  */
-export function buildLocalDeployment(options: {
+export function buildLocalDatabase(options: {
     tag?: string;
     chainId: string;
     contracts: TContract[];
-}) {
+}): TLocalDatabase {
     const { tag, chainId, contracts } = options;
     return {
         [tag ?? 'default']: {
@@ -171,21 +171,21 @@ export function buildLocalDeployment(options: {
 }
 
 /**
- * Helper to build a global deployment object
+ * Helper to build a global database object
  *
- * @param options The options to build the global deployment
- * @param options.tag The tag to save the deployment under
- * @param options.project The project to save the deployment under
- * @param options.chainId The chain ID to save the deployment under
+ * @param options The options to build the global database
+ * @param options.tag The tag to save the database under
+ * @param options.project The project to save the database under
+ * @param options.chainId The chain ID to save the database under
  * @param options.contracts The contracts to save
- * @returns The global deployment
+ * @returns The global database
  */
-export function buildGlobalDeployment(options: {
+export function buildGlobalDatabase(options: {
     tag?: string;
     project: TProjectCaller;
     chainId: string;
     contracts: TContract[];
-}) {
+}): TGlobalDatabase {
     const { tag, project, chainId, contracts } = options;
     return {
         [tag ?? 'default']: {
