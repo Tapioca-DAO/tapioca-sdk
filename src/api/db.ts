@@ -248,7 +248,7 @@ function mergeDeployments(newest: TLocalDeployment, old: TLocalDeployment) {
         if (!b) b = [];
 
         if (_isArray(a)) {
-            return _unionBy(a, b, (item: TContract) => item.address);
+            return _unionBy(a, b, (item: TContract) => item.name);
         }
         return _merge(a, b);
     });
