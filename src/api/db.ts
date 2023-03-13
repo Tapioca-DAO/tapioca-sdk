@@ -7,6 +7,7 @@ import _unionBy from 'lodash/unionBy';
 import {
     TContract,
     TGlobalDatabase,
+    TGlobalDeployment,
     TLocalDatabase,
     TLocalDeployment,
     TProjectCaller,
@@ -138,7 +139,7 @@ export const saveGlobally = (
 export const buildLocalDeployment = (options: {
     chainId: string;
     contracts: TContract[];
-}) => {
+}): TLocalDeployment => {
     const { chainId, contracts } = options;
     return {
         [chainId]: contracts,
@@ -157,7 +158,7 @@ export const buildGlobalDeployment = (options: {
     project: TProjectCaller;
     chainId: string;
     contracts: TContract[];
-}) => {
+}): TGlobalDeployment => {
     const { project, chainId, contracts } = options;
     return {
         [project]: {
