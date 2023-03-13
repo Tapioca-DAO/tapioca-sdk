@@ -105,7 +105,7 @@ export const getGlobalDeployment = (
  * @param tag The tag to save the deployment under
  */
 export const saveLocally = (data: TLocalDeployment, tag = 'default') => {
-    const db = readDB('local');
+    const db = readDB('local') ?? {};
     const prevDep = db[tag] || {}; // Read previous deployments
 
     // Save previous deployments in a backup file
@@ -124,7 +124,7 @@ export const saveGlobally = (
     project: TProjectCaller,
     tag = 'default',
 ) => {
-    const db = readDB('global');
+    const db = readDB('global') ?? {};
     const prevDep = db[tag]?.[project] || {}; // Read previous deployments
 
     // Save previous deployments in a backup file
@@ -206,16 +206,16 @@ export function readDeployment(
     const { tag, chainId, project } = options;
     if (type === 'local') {
         if (!tag) return readDB(type);
-        if (!chainId) return readDB(type)[tag];
+        if (!chainId) return readDB(type)?.[tag];
 
-        return readDB(type)[tag][chainId];
+        return readDB(type)?.[tag][chainId];
     }
 
     if (!tag) return readDB(type);
-    if (!project) return readDB(type)[tag];
-    if (!chainId) return readDB(type)[tag][project];
+    if (!project) return readDB(type)?.[tag];
+    if (!chainId) return readDB(type)?.[tag][project];
 
-    return readDB(type)[tag][project]?.[chainId];
+    return readDB(type)?.[tag][project]?.[chainId];
 }
 /**
  * merge 2 deployments, handles arrays
@@ -243,9 +243,13 @@ function mergeDeployments(newest: TLocalDeployment, old: TLocalDeployment) {
 function readDB<A extends 'local' | 'global'>(type: A) {
     const path = type === 'local' ? LOCAL_DB_PATH : GLOBAL_DB_PATH;
 
-    return JSON.parse(FS.readFileSync(path, 'utf8')) as A extends 'local'
-        ? TLocalDatabase
-        : TGlobalDatabase;
+    try {
+        return JSON.parse(FS.readFileSync(path, 'utf8')) as A extends 'local'
+            ? TLocalDatabase
+            : TGlobalDatabase;
+    } catch (e) {
+        return undefined;
+    }
 }
 
 /**
