@@ -243,14 +243,14 @@ export function readDeployment(
  * @returns The merged deployment
  */
 function mergeDeployments(newest: TLocalDeployment, old: TLocalDeployment) {
-    return _mergeWith(old, newest, (a: any, b: any) => {
-        if (!a) a = [];
-        if (!b) b = [];
+    return _mergeWith(old, newest, (_old: any, _new: any) => {
+        if (!_old) _old = [];
+        if (!_new) _new = [];
 
-        if (_isArray(a)) {
-            return _unionBy(a, b, (item: TContract) => item.name);
+        if (_isArray(_old)) {
+            return _unionBy(_new, _old, (item: TContract) => item.name);
         }
-        return _merge(a, b);
+        return _merge(_old, _new);
     });
 }
 
