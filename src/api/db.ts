@@ -35,11 +35,6 @@ export const LOCAL_DB_PATH = './local__db';
  * @param tag The tag to read the database under
  * @param chainId The chain ID to read the database under
  * @returns The contract
- *
- * @throws Error if the database is not found
- * @throws Error if the tag is not found
- * @throws Error if the chain ID is not found
- * @throws Error if the contract is not found
  */
 export const getLocalDeployment = (
     chainId: string,
@@ -56,11 +51,6 @@ export const getLocalDeployment = (
         | TContract
         | undefined;
 
-    if (!contract) {
-        throw new Error(
-            `[+] Deployment ${contractName} not found in local deployment with tag ${tag} for chain ${chainId}`,
-        );
-    }
     return contract;
 };
 
@@ -69,11 +59,6 @@ export const getLocalDeployment = (
  * @param tag The tag to read the database under
  * @param chainId The chain ID to read the database under
  * @returns The contract
- *
- * @throws Error if the database is not found
- * @throws Error if the tag is not found
- * @throws Error if the chain ID is not found
- * @throws Error if the contract is not found
  */
 export const getGlobalDeployment = (
     project: TProjectCaller,
@@ -86,11 +71,6 @@ export const getGlobalDeployment = (
         | TContract
         | undefined;
 
-    if (!contract) {
-        throw new Error(
-            `[+] Deployment ${contractName} not found in global deployment for project ${project} with tag ${tag} for chain ${chainId}`,
-        );
-    }
     return contract;
 };
 /*
