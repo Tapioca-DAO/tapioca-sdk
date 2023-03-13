@@ -129,6 +129,44 @@ export const saveGlobally = (
  */
 
 /**
+ * Helper to build a local deployment object.
+ *
+ * @param options The options to build the local deployment
+ * @param options.chainId The chain ID to save the deployment under
+ * @param options.contracts The contracts to save
+ */
+export const buildLocalDeployment = (options: {
+    chainId: string;
+    contracts: TContract[];
+}) => {
+    const { chainId, contracts } = options;
+    return {
+        [chainId]: contracts,
+    };
+};
+
+/**
+ * Helper to build a global deployment object.
+ *
+ * @param options The options to build the global deployment
+ * @param options.project The project to save the deployment under
+ * @param options.chainId The chain ID to save the deployment under
+ * @param options.contracts The contracts to save
+ */
+export const buildGlobalDeployment = (options: {
+    project: TProjectCaller;
+    chainId: string;
+    contracts: TContract[];
+}) => {
+    const { project, chainId, contracts } = options;
+    return {
+        [project]: {
+            [chainId]: contracts,
+        },
+    };
+};
+
+/**
  * Helper to build a local database object
  *
  * @param options The options to build the local database
