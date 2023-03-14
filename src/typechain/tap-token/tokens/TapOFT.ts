@@ -28,26 +28,49 @@ import type {
   PromiseOrValue,
 } from "../common";
 
+export declare namespace ICommonOFT {
+  export type LzCallParamsStruct = {
+    refundAddress: PromiseOrValue<string>;
+    zroPaymentAddress: PromiseOrValue<string>;
+    adapterParams: PromiseOrValue<BytesLike>;
+  };
+
+  export type LzCallParamsStructOutput = [string, string, string] & {
+    refundAddress: string;
+    zroPaymentAddress: string;
+    adapterParams: string;
+  };
+}
+
 export interface TapOFTInterface extends utils.Interface {
   functions: {
+    "DEFAULT_PAYLOAD_SIZE_LIMIT()": FunctionFragment;
+    "DOMAIN_SEPARATOR()": FunctionFragment;
     "INITIAL_SUPPLY()": FunctionFragment;
     "NO_EXTRA_GAS()": FunctionFragment;
     "PT_SEND()": FunctionFragment;
+    "PT_SEND_AND_CALL()": FunctionFragment;
     "WEEK()": FunctionFragment;
     "allowance(address,address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
+    "batch(bytes[],bool)": FunctionFragment;
+    "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)": FunctionFragment;
     "circulatingSupply()": FunctionFragment;
+    "creditedPackets(uint16,bytes,uint64)": FunctionFragment;
     "decimals()": FunctionFragment;
     "decreaseAllowance(address,uint256)": FunctionFragment;
     "dso_supply()": FunctionFragment;
+    "emissionForWeek(uint256)": FunctionFragment;
     "emissionsStartTime()": FunctionFragment;
     "emitForWeek()": FunctionFragment;
-    "estimateSendFee(uint16,bytes,uint256,bool,bytes)": FunctionFragment;
+    "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)": FunctionFragment;
+    "estimateSendFee(uint16,bytes32,uint256,bool,bytes)": FunctionFragment;
     "extractTAP(address,uint256)": FunctionFragment;
     "failedMessages(uint16,bytes,uint64)": FunctionFragment;
     "forceResumeReceive(uint16,bytes)": FunctionFragment;
     "getConfig(uint16,uint16,address,uint256)": FunctionFragment;
+    "getCurrentWeek()": FunctionFragment;
     "getCurrentWeekEmission()": FunctionFragment;
     "getTrustedRemoteAddress(uint16)": FunctionFragment;
     "governanceChainIdentifier()": FunctionFragment;
@@ -60,24 +83,29 @@ export interface TapOFTInterface extends utils.Interface {
     "minter()": FunctionFragment;
     "name()": FunctionFragment;
     "nonblockingLzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
+    "nonces(address)": FunctionFragment;
     "owner()": FunctionFragment;
-    "pauseSendTokens(bool)": FunctionFragment;
     "paused()": FunctionFragment;
+    "payloadSizeLimitLookup(uint16)": FunctionFragment;
+    "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "precrime()": FunctionFragment;
     "removeTAP(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
-    "sendFrom(address,uint16,bytes,uint256,address,address,bytes)": FunctionFragment;
+    "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
+    "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
     "setGovernanceChainIdentifier(uint256)": FunctionFragment;
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
     "setMinter(address)": FunctionFragment;
+    "setPayloadSizeLimit(uint16,uint256)": FunctionFragment;
     "setPrecrime(address)": FunctionFragment;
     "setReceiveVersion(uint16)": FunctionFragment;
     "setSendVersion(uint16)": FunctionFragment;
     "setTrustedRemote(uint16,bytes)": FunctionFragment;
     "setTrustedRemoteAddress(uint16,bytes)": FunctionFragment;
     "setUseCustomAdapterParams(bool)": FunctionFragment;
+    "sharedDecimals()": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
     "timestampToWeek(uint256)": FunctionFragment;
@@ -87,17 +115,24 @@ export interface TapOFTInterface extends utils.Interface {
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "trustedRemoteLookup(uint16)": FunctionFragment;
+    "updatePause(bool)": FunctionFragment;
     "useCustomAdapterParams()": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "DEFAULT_PAYLOAD_SIZE_LIMIT"
+      | "DEFAULT_PAYLOAD_SIZE_LIMIT()"
+      | "DOMAIN_SEPARATOR"
+      | "DOMAIN_SEPARATOR()"
       | "INITIAL_SUPPLY"
       | "INITIAL_SUPPLY()"
       | "NO_EXTRA_GAS"
       | "NO_EXTRA_GAS()"
       | "PT_SEND"
       | "PT_SEND()"
+      | "PT_SEND_AND_CALL"
+      | "PT_SEND_AND_CALL()"
       | "WEEK"
       | "WEEK()"
       | "allowance"
@@ -106,20 +141,30 @@ export interface TapOFTInterface extends utils.Interface {
       | "approve(address,uint256)"
       | "balanceOf"
       | "balanceOf(address)"
+      | "batch"
+      | "batch(bytes[],bool)"
+      | "callOnOFTReceived"
+      | "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)"
       | "circulatingSupply"
       | "circulatingSupply()"
+      | "creditedPackets"
+      | "creditedPackets(uint16,bytes,uint64)"
       | "decimals"
       | "decimals()"
       | "decreaseAllowance"
       | "decreaseAllowance(address,uint256)"
       | "dso_supply"
       | "dso_supply()"
+      | "emissionForWeek"
+      | "emissionForWeek(uint256)"
       | "emissionsStartTime"
       | "emissionsStartTime()"
       | "emitForWeek"
       | "emitForWeek()"
+      | "estimateSendAndCallFee"
+      | "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)"
       | "estimateSendFee"
-      | "estimateSendFee(uint16,bytes,uint256,bool,bytes)"
+      | "estimateSendFee(uint16,bytes32,uint256,bool,bytes)"
       | "extractTAP"
       | "extractTAP(address,uint256)"
       | "failedMessages"
@@ -128,6 +173,8 @@ export interface TapOFTInterface extends utils.Interface {
       | "forceResumeReceive(uint16,bytes)"
       | "getConfig"
       | "getConfig(uint16,uint16,address,uint256)"
+      | "getCurrentWeek"
+      | "getCurrentWeek()"
       | "getCurrentWeekEmission"
       | "getCurrentWeekEmission()"
       | "getTrustedRemoteAddress"
@@ -152,12 +199,16 @@ export interface TapOFTInterface extends utils.Interface {
       | "name()"
       | "nonblockingLzReceive"
       | "nonblockingLzReceive(uint16,bytes,uint64,bytes)"
+      | "nonces"
+      | "nonces(address)"
       | "owner"
       | "owner()"
-      | "pauseSendTokens"
-      | "pauseSendTokens(bool)"
       | "paused"
       | "paused()"
+      | "payloadSizeLimitLookup"
+      | "payloadSizeLimitLookup(uint16)"
+      | "permit"
+      | "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)"
       | "precrime"
       | "precrime()"
       | "removeTAP"
@@ -166,8 +217,10 @@ export interface TapOFTInterface extends utils.Interface {
       | "renounceOwnership()"
       | "retryMessage"
       | "retryMessage(uint16,bytes,uint64,bytes)"
+      | "sendAndCall"
+      | "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))"
       | "sendFrom"
-      | "sendFrom(address,uint16,bytes,uint256,address,address,bytes)"
+      | "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"
       | "setConfig"
       | "setConfig(uint16,uint16,uint256,bytes)"
       | "setGovernanceChainIdentifier"
@@ -176,6 +229,8 @@ export interface TapOFTInterface extends utils.Interface {
       | "setMinDstGas(uint16,uint16,uint256)"
       | "setMinter"
       | "setMinter(address)"
+      | "setPayloadSizeLimit"
+      | "setPayloadSizeLimit(uint16,uint256)"
       | "setPrecrime"
       | "setPrecrime(address)"
       | "setReceiveVersion"
@@ -188,6 +243,8 @@ export interface TapOFTInterface extends utils.Interface {
       | "setTrustedRemoteAddress(uint16,bytes)"
       | "setUseCustomAdapterParams"
       | "setUseCustomAdapterParams(bool)"
+      | "sharedDecimals"
+      | "sharedDecimals()"
       | "supportsInterface"
       | "supportsInterface(bytes4)"
       | "symbol"
@@ -206,10 +263,28 @@ export interface TapOFTInterface extends utils.Interface {
       | "transferOwnership(address)"
       | "trustedRemoteLookup"
       | "trustedRemoteLookup(uint16)"
+      | "updatePause"
+      | "updatePause(bool)"
       | "useCustomAdapterParams"
       | "useCustomAdapterParams()"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "DEFAULT_PAYLOAD_SIZE_LIMIT",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "DEFAULT_PAYLOAD_SIZE_LIMIT()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "DOMAIN_SEPARATOR",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "DOMAIN_SEPARATOR()",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "INITIAL_SUPPLY",
     values?: undefined
@@ -228,6 +303,14 @@ export interface TapOFTInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "PT_SEND", values?: undefined): string;
   encodeFunctionData(functionFragment: "PT_SEND()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "PT_SEND_AND_CALL",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PT_SEND_AND_CALL()",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "WEEK", values?: undefined): string;
   encodeFunctionData(functionFragment: "WEEK()", values?: undefined): string;
   encodeFunctionData(
@@ -255,12 +338,62 @@ export interface TapOFTInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "batch",
+    values: [PromiseOrValue<BytesLike>[], PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "batch(bytes[],bool)",
+    values: [PromiseOrValue<BytesLike>[], PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "callOnOFTReceived",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "circulatingSupply",
     values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "circulatingSupply()",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "creditedPackets",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "creditedPackets(uint16,bytes,uint64)",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
   encodeFunctionData(
@@ -284,6 +417,14 @@ export interface TapOFTInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "emissionForWeek",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "emissionForWeek(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "emissionsStartTime",
     values?: undefined
   ): string;
@@ -300,6 +441,30 @@ export interface TapOFTInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "estimateSendAndCallFee",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<boolean>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<boolean>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "estimateSendFee",
     values: [
       PromiseOrValue<BigNumberish>,
@@ -310,7 +475,7 @@ export interface TapOFTInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "estimateSendFee(uint16,bytes,uint256,bool,bytes)",
+    functionFragment: "estimateSendFee(uint16,bytes32,uint256,bool,bytes)",
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
@@ -368,6 +533,14 @@ export interface TapOFTInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCurrentWeek",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCurrentWeek()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "getCurrentWeekEmission",
@@ -473,18 +646,50 @@ export interface TapOFTInterface extends utils.Interface {
       PromiseOrValue<BytesLike>
     ]
   ): string;
+  encodeFunctionData(
+    functionFragment: "nonces",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "nonces(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "pauseSendTokens",
-    values: [PromiseOrValue<boolean>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "pauseSendTokens(bool)",
-    values: [PromiseOrValue<boolean>]
-  ): string;
   encodeFunctionData(functionFragment: "paused", values?: undefined): string;
   encodeFunctionData(functionFragment: "paused()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "payloadSizeLimitLookup",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "payloadSizeLimitLookup(uint16)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "permit",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
   encodeFunctionData(functionFragment: "precrime", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "precrime()",
@@ -525,27 +730,47 @@ export interface TapOFTInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "sendAndCall",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      ICommonOFT.LzCallParamsStruct
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      ICommonOFT.LzCallParamsStruct
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "sendFrom",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>
+      ICommonOFT.LzCallParamsStruct
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "sendFrom(address,uint16,bytes,uint256,address,address,bytes)",
+    functionFragment: "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>
+      ICommonOFT.LzCallParamsStruct
     ]
   ): string;
   encodeFunctionData(
@@ -599,6 +824,14 @@ export interface TapOFTInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "setPayloadSizeLimit",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setPayloadSizeLimit(uint16,uint256)",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "setPrecrime",
     values: [PromiseOrValue<string>]
   ): string;
@@ -645,6 +878,14 @@ export interface TapOFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "setUseCustomAdapterParams(bool)",
     values: [PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "sharedDecimals",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "sharedDecimals()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "supportsInterface",
@@ -715,6 +956,14 @@ export interface TapOFTInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
+    functionFragment: "updatePause",
+    values: [PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updatePause(bool)",
+    values: [PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "useCustomAdapterParams",
     values?: undefined
   ): string;
@@ -723,6 +972,22 @@ export interface TapOFTInterface extends utils.Interface {
     values?: undefined
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "DEFAULT_PAYLOAD_SIZE_LIMIT",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "DEFAULT_PAYLOAD_SIZE_LIMIT()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "DOMAIN_SEPARATOR",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "DOMAIN_SEPARATOR()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "INITIAL_SUPPLY",
     data: BytesLike
@@ -741,6 +1006,14 @@ export interface TapOFTInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "PT_SEND", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "PT_SEND()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "PT_SEND_AND_CALL",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "PT_SEND_AND_CALL()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "WEEK", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "WEEK()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
@@ -758,12 +1031,33 @@ export interface TapOFTInterface extends utils.Interface {
     functionFragment: "balanceOf(address)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "batch", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "batch(bytes[],bool)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "callOnOFTReceived",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "circulatingSupply",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "circulatingSupply()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "creditedPackets",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "creditedPackets(uint16,bytes,uint64)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
@@ -779,6 +1073,14 @@ export interface TapOFTInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "dso_supply", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "dso_supply()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "emissionForWeek",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "emissionForWeek(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -798,11 +1100,19 @@ export interface TapOFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "estimateSendAndCallFee",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "estimateSendFee",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "estimateSendFee(uint16,bytes,uint256,bool,bytes)",
+    functionFragment: "estimateSendFee(uint16,bytes32,uint256,bool,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "extractTAP", data: BytesLike): Result;
@@ -829,6 +1139,14 @@ export interface TapOFTInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "getConfig", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getConfig(uint16,uint16,address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCurrentWeek",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCurrentWeek()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -909,18 +1227,28 @@ export interface TapOFTInterface extends utils.Interface {
     functionFragment: "nonblockingLzReceive(uint16,bytes,uint64,bytes)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "nonces(address)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "pauseSendTokens",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "pauseSendTokens(bool)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "paused()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "payloadSizeLimitLookup",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "payloadSizeLimitLookup(uint16)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "permit", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "precrime", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "precrime()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "removeTAP", data: BytesLike): Result;
@@ -944,9 +1272,17 @@ export interface TapOFTInterface extends utils.Interface {
     functionFragment: "retryMessage(uint16,bytes,uint64,bytes)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "sendAndCall",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "sendFrom", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "sendFrom(address,uint16,bytes,uint256,address,address,bytes)",
+    functionFragment: "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "setConfig", data: BytesLike): Result;
@@ -973,6 +1309,14 @@ export interface TapOFTInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "setMinter", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setMinter(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setPayloadSizeLimit",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setPayloadSizeLimit(uint16,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1021,6 +1365,14 @@ export interface TapOFTInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setUseCustomAdapterParams(bool)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "sharedDecimals",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "sharedDecimals()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1081,6 +1433,14 @@ export interface TapOFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "updatePause",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updatePause(bool)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "useCustomAdapterParams",
     data: BytesLike
   ): Result;
@@ -1092,22 +1452,24 @@ export interface TapOFTInterface extends utils.Interface {
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "Burned(address,uint256)": EventFragment;
+    "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
+    "Emitted(uint256,uint256)": EventFragment;
     "GovernanceChainIdentifierUpdated(uint256,uint256)": EventFragment;
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)": EventFragment;
     "Minted(address,address,uint256)": EventFragment;
     "MinterUpdated(address,address)": EventFragment;
+    "NonContractAddress(address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
-    "Paused(address)": EventFragment;
+    "PausedUpdated(bool,bool)": EventFragment;
     "ReceiveFromChain(uint16,address,uint256)": EventFragment;
     "RetryMessageSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
-    "SendToChain(uint16,address,bytes,uint256)": EventFragment;
+    "SendToChain(uint16,address,bytes32,uint256)": EventFragment;
     "SetMinDstGas(uint16,uint16,uint256)": EventFragment;
     "SetPrecrime(address)": EventFragment;
     "SetTrustedRemote(uint16,bytes)": EventFragment;
     "SetTrustedRemoteAddress(uint16,bytes)": EventFragment;
     "SetUseCustomAdapterParams(bool)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
-    "Unpaused(address)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
@@ -1116,6 +1478,12 @@ export interface TapOFTInterface extends utils.Interface {
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Burned"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Burned(address,uint256)"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "CallOFTReceivedSuccess"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Emitted"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Emitted(uint256,uint256)"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "GovernanceChainIdentifierUpdated"
   ): EventFragment;
@@ -1134,12 +1502,16 @@ export interface TapOFTInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "MinterUpdated(address,address)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NonContractAddress"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "NonContractAddress(address)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "OwnershipTransferred(address,address)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Paused"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Paused(address)"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "PausedUpdated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "PausedUpdated(bool,bool)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ReceiveFromChain"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ReceiveFromChain(uint16,address,uint256)"
@@ -1150,7 +1522,7 @@ export interface TapOFTInterface extends utils.Interface {
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SendToChain"): EventFragment;
   getEvent(
-    nameOrSignatureOrTopic: "SendToChain(uint16,address,bytes,uint256)"
+    nameOrSignatureOrTopic: "SendToChain(uint16,address,bytes32,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SetMinDstGas"): EventFragment;
   getEvent(
@@ -1174,8 +1546,6 @@ export interface TapOFTInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "Transfer(address,address,uint256)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Unpaused"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Unpaused(address)"): EventFragment;
 }
 
 export interface ApprovalEventObject {
@@ -1197,6 +1567,31 @@ export interface BurnedEventObject {
 export type BurnedEvent = TypedEvent<[string, BigNumber], BurnedEventObject>;
 
 export type BurnedEventFilter = TypedEventFilter<BurnedEvent>;
+
+export interface CallOFTReceivedSuccessEventObject {
+  _srcChainId: number;
+  _srcAddress: string;
+  _nonce: BigNumber;
+  _hash: string;
+}
+export type CallOFTReceivedSuccessEvent = TypedEvent<
+  [number, string, BigNumber, string],
+  CallOFTReceivedSuccessEventObject
+>;
+
+export type CallOFTReceivedSuccessEventFilter =
+  TypedEventFilter<CallOFTReceivedSuccessEvent>;
+
+export interface EmittedEventObject {
+  week: BigNumber;
+  amount: BigNumber;
+}
+export type EmittedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  EmittedEventObject
+>;
+
+export type EmittedEventFilter = TypedEventFilter<EmittedEvent>;
 
 export interface GovernanceChainIdentifierUpdatedEventObject {
   _old: BigNumber;
@@ -1247,6 +1642,17 @@ export type MinterUpdatedEvent = TypedEvent<
 
 export type MinterUpdatedEventFilter = TypedEventFilter<MinterUpdatedEvent>;
 
+export interface NonContractAddressEventObject {
+  _address: string;
+}
+export type NonContractAddressEvent = TypedEvent<
+  [string],
+  NonContractAddressEventObject
+>;
+
+export type NonContractAddressEventFilter =
+  TypedEventFilter<NonContractAddressEvent>;
+
 export interface OwnershipTransferredEventObject {
   previousOwner: string;
   newOwner: string;
@@ -1259,12 +1665,16 @@ export type OwnershipTransferredEvent = TypedEvent<
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
 
-export interface PausedEventObject {
-  account: string;
+export interface PausedUpdatedEventObject {
+  oldState: boolean;
+  newState: boolean;
 }
-export type PausedEvent = TypedEvent<[string], PausedEventObject>;
+export type PausedUpdatedEvent = TypedEvent<
+  [boolean, boolean],
+  PausedUpdatedEventObject
+>;
 
-export type PausedEventFilter = TypedEventFilter<PausedEvent>;
+export type PausedUpdatedEventFilter = TypedEventFilter<PausedUpdatedEvent>;
 
 export interface ReceiveFromChainEventObject {
   _srcChainId: number;
@@ -1372,13 +1782,6 @@ export type TransferEvent = TypedEvent<
 
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 
-export interface UnpausedEventObject {
-  account: string;
-}
-export type UnpausedEvent = TypedEvent<[string], UnpausedEventObject>;
-
-export type UnpausedEventFilter = TypedEventFilter<UnpausedEvent>;
-
 export interface TapOFT extends BaseContract {
   contractName: "TapOFT";
 
@@ -1408,6 +1811,16 @@ export interface TapOFT extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    DEFAULT_PAYLOAD_SIZE_LIMIT(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "DEFAULT_PAYLOAD_SIZE_LIMIT()"(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<[string]>;
+
+    "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<[string]>;
+
     INITIAL_SUPPLY(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "INITIAL_SUPPLY()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -1419,6 +1832,10 @@ export interface TapOFT extends BaseContract {
     PT_SEND(overrides?: CallOverrides): Promise<[number]>;
 
     "PT_SEND()"(overrides?: CallOverrides): Promise<[number]>;
+
+    PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<[number]>;
+
+    "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<[number]>;
 
     WEEK(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -1458,9 +1875,59 @@ export interface TapOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
+    batch(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "batch(bytes[],bool)"(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    callOnOFTReceived(
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _from: PromiseOrValue<BytesLike>,
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _gasForCall: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)"(
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _from: PromiseOrValue<BytesLike>,
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _gasForCall: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     circulatingSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "circulatingSupply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    creditedPackets(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BytesLike>,
+      arg2: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "creditedPackets(uint16,bytes,uint64)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BytesLike>,
+      arg2: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
     decimals(overrides?: CallOverrides): Promise<[number]>;
 
@@ -1482,6 +1949,16 @@ export interface TapOFT extends BaseContract {
 
     "dso_supply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    emissionForWeek(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "emissionForWeek(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     emissionsStartTime(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "emissionsStartTime()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -1494,6 +1971,32 @@ export interface TapOFT extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    estimateSendAndCallFee(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
+      _useZro: PromiseOrValue<boolean>,
+      _adapterParams: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
+    >;
+
+    "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)"(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
+      _useZro: PromiseOrValue<boolean>,
+      _adapterParams: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
+    >;
+
     estimateSendFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
@@ -1505,7 +2008,7 @@ export interface TapOFT extends BaseContract {
       [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
     >;
 
-    "estimateSendFee(uint16,bytes,uint256,bool,bytes)"(
+    "estimateSendFee(uint16,bytes32,uint256,bool,bytes)"(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
@@ -1569,6 +2072,10 @@ export interface TapOFT extends BaseContract {
       _configType: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
+
+    getCurrentWeek(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "getCurrentWeek()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     getCurrentWeekEmission(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -1680,23 +2187,55 @@ export interface TapOFT extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    nonces(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "nonces(address)"(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
 
-    pauseSendTokens(
-      pause: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "pauseSendTokens(bool)"(
-      pause: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     paused(overrides?: CallOverrides): Promise<[boolean]>;
 
     "paused()"(overrides?: CallOverrides): Promise<[boolean]>;
+
+    payloadSizeLimitLookup(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "payloadSizeLimitLookup(uint16)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    permit(
+      owner: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      value: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)"(
+      owner: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      value: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     precrime(overrides?: CallOverrides): Promise<[string]>;
 
@@ -1736,25 +2275,43 @@ export interface TapOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    sendAndCall(
+      _from: PromiseOrValue<string>,
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))"(
+      _from: PromiseOrValue<string>,
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     sendFrom(
       _from: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "sendFrom(address,uint16,bytes,uint256,address,address,bytes)"(
+    "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"(
       _from: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1805,6 +2362,18 @@ export interface TapOFT extends BaseContract {
 
     "setMinter(address)"(
       _minter: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setPayloadSizeLimit(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _size: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setPayloadSizeLimit(uint16,uint256)"(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _size: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1871,6 +2440,10 @@ export interface TapOFT extends BaseContract {
       _useCustomAdapterParams: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    sharedDecimals(overrides?: CallOverrides): Promise<[number]>;
+
+    "sharedDecimals()"(overrides?: CallOverrides): Promise<[number]>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
@@ -1950,10 +2523,28 @@ export interface TapOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
+    updatePause(
+      val: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "updatePause(bool)"(
+      val: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     useCustomAdapterParams(overrides?: CallOverrides): Promise<[boolean]>;
 
     "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<[boolean]>;
   };
+
+  DEFAULT_PAYLOAD_SIZE_LIMIT(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "DEFAULT_PAYLOAD_SIZE_LIMIT()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
+
+  "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
 
   INITIAL_SUPPLY(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1966,6 +2557,10 @@ export interface TapOFT extends BaseContract {
   PT_SEND(overrides?: CallOverrides): Promise<number>;
 
   "PT_SEND()"(overrides?: CallOverrides): Promise<number>;
+
+  PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<number>;
+
+  "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<number>;
 
   WEEK(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2005,9 +2600,59 @@ export interface TapOFT extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  batch(
+    calls: PromiseOrValue<BytesLike>[],
+    revertOnFail: PromiseOrValue<boolean>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "batch(bytes[],bool)"(
+    calls: PromiseOrValue<BytesLike>[],
+    revertOnFail: PromiseOrValue<boolean>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  callOnOFTReceived(
+    _srcChainId: PromiseOrValue<BigNumberish>,
+    _srcAddress: PromiseOrValue<BytesLike>,
+    _nonce: PromiseOrValue<BigNumberish>,
+    _from: PromiseOrValue<BytesLike>,
+    _to: PromiseOrValue<string>,
+    _amount: PromiseOrValue<BigNumberish>,
+    _payload: PromiseOrValue<BytesLike>,
+    _gasForCall: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)"(
+    _srcChainId: PromiseOrValue<BigNumberish>,
+    _srcAddress: PromiseOrValue<BytesLike>,
+    _nonce: PromiseOrValue<BigNumberish>,
+    _from: PromiseOrValue<BytesLike>,
+    _to: PromiseOrValue<string>,
+    _amount: PromiseOrValue<BigNumberish>,
+    _payload: PromiseOrValue<BytesLike>,
+    _gasForCall: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   circulatingSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
   "circulatingSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  creditedPackets(
+    arg0: PromiseOrValue<BigNumberish>,
+    arg1: PromiseOrValue<BytesLike>,
+    arg2: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "creditedPackets(uint16,bytes,uint64)"(
+    arg0: PromiseOrValue<BigNumberish>,
+    arg1: PromiseOrValue<BytesLike>,
+    arg2: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   decimals(overrides?: CallOverrides): Promise<number>;
 
@@ -2029,6 +2674,16 @@ export interface TapOFT extends BaseContract {
 
   "dso_supply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  emissionForWeek(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "emissionForWeek(uint256)"(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   emissionsStartTime(overrides?: CallOverrides): Promise<BigNumber>;
 
   "emissionsStartTime()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2041,6 +2696,32 @@ export interface TapOFT extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  estimateSendAndCallFee(
+    _dstChainId: PromiseOrValue<BigNumberish>,
+    _toAddress: PromiseOrValue<BytesLike>,
+    _amount: PromiseOrValue<BigNumberish>,
+    _payload: PromiseOrValue<BytesLike>,
+    _dstGasForCall: PromiseOrValue<BigNumberish>,
+    _useZro: PromiseOrValue<boolean>,
+    _adapterParams: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
+  >;
+
+  "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)"(
+    _dstChainId: PromiseOrValue<BigNumberish>,
+    _toAddress: PromiseOrValue<BytesLike>,
+    _amount: PromiseOrValue<BigNumberish>,
+    _payload: PromiseOrValue<BytesLike>,
+    _dstGasForCall: PromiseOrValue<BigNumberish>,
+    _useZro: PromiseOrValue<boolean>,
+    _adapterParams: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
+  >;
+
   estimateSendFee(
     _dstChainId: PromiseOrValue<BigNumberish>,
     _toAddress: PromiseOrValue<BytesLike>,
@@ -2052,7 +2733,7 @@ export interface TapOFT extends BaseContract {
     [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
   >;
 
-  "estimateSendFee(uint16,bytes,uint256,bool,bytes)"(
+  "estimateSendFee(uint16,bytes32,uint256,bool,bytes)"(
     _dstChainId: PromiseOrValue<BigNumberish>,
     _toAddress: PromiseOrValue<BytesLike>,
     _amount: PromiseOrValue<BigNumberish>,
@@ -2116,6 +2797,10 @@ export interface TapOFT extends BaseContract {
     _configType: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
+
+  getCurrentWeek(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "getCurrentWeek()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   getCurrentWeekEmission(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2225,23 +2910,55 @@ export interface TapOFT extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  nonces(
+    owner: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "nonces(address)"(
+    owner: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   owner(overrides?: CallOverrides): Promise<string>;
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
 
-  pauseSendTokens(
-    pause: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "pauseSendTokens(bool)"(
-    pause: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   paused(overrides?: CallOverrides): Promise<boolean>;
 
   "paused()"(overrides?: CallOverrides): Promise<boolean>;
+
+  payloadSizeLimitLookup(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "payloadSizeLimitLookup(uint16)"(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  permit(
+    owner: PromiseOrValue<string>,
+    spender: PromiseOrValue<string>,
+    value: PromiseOrValue<BigNumberish>,
+    deadline: PromiseOrValue<BigNumberish>,
+    v: PromiseOrValue<BigNumberish>,
+    r: PromiseOrValue<BytesLike>,
+    s: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)"(
+    owner: PromiseOrValue<string>,
+    spender: PromiseOrValue<string>,
+    value: PromiseOrValue<BigNumberish>,
+    deadline: PromiseOrValue<BigNumberish>,
+    v: PromiseOrValue<BigNumberish>,
+    r: PromiseOrValue<BytesLike>,
+    s: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   precrime(overrides?: CallOverrides): Promise<string>;
 
@@ -2281,25 +2998,43 @@ export interface TapOFT extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  sendAndCall(
+    _from: PromiseOrValue<string>,
+    _dstChainId: PromiseOrValue<BigNumberish>,
+    _toAddress: PromiseOrValue<BytesLike>,
+    _amount: PromiseOrValue<BigNumberish>,
+    _payload: PromiseOrValue<BytesLike>,
+    _dstGasForCall: PromiseOrValue<BigNumberish>,
+    _callParams: ICommonOFT.LzCallParamsStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))"(
+    _from: PromiseOrValue<string>,
+    _dstChainId: PromiseOrValue<BigNumberish>,
+    _toAddress: PromiseOrValue<BytesLike>,
+    _amount: PromiseOrValue<BigNumberish>,
+    _payload: PromiseOrValue<BytesLike>,
+    _dstGasForCall: PromiseOrValue<BigNumberish>,
+    _callParams: ICommonOFT.LzCallParamsStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   sendFrom(
     _from: PromiseOrValue<string>,
     _dstChainId: PromiseOrValue<BigNumberish>,
     _toAddress: PromiseOrValue<BytesLike>,
     _amount: PromiseOrValue<BigNumberish>,
-    _refundAddress: PromiseOrValue<string>,
-    _zroPaymentAddress: PromiseOrValue<string>,
-    _adapterParams: PromiseOrValue<BytesLike>,
+    _callParams: ICommonOFT.LzCallParamsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "sendFrom(address,uint16,bytes,uint256,address,address,bytes)"(
+  "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"(
     _from: PromiseOrValue<string>,
     _dstChainId: PromiseOrValue<BigNumberish>,
     _toAddress: PromiseOrValue<BytesLike>,
     _amount: PromiseOrValue<BigNumberish>,
-    _refundAddress: PromiseOrValue<string>,
-    _zroPaymentAddress: PromiseOrValue<string>,
-    _adapterParams: PromiseOrValue<BytesLike>,
+    _callParams: ICommonOFT.LzCallParamsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -2350,6 +3085,18 @@ export interface TapOFT extends BaseContract {
 
   "setMinter(address)"(
     _minter: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setPayloadSizeLimit(
+    _dstChainId: PromiseOrValue<BigNumberish>,
+    _size: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setPayloadSizeLimit(uint16,uint256)"(
+    _dstChainId: PromiseOrValue<BigNumberish>,
+    _size: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -2416,6 +3163,10 @@ export interface TapOFT extends BaseContract {
     _useCustomAdapterParams: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  sharedDecimals(overrides?: CallOverrides): Promise<number>;
+
+  "sharedDecimals()"(overrides?: CallOverrides): Promise<number>;
 
   supportsInterface(
     interfaceId: PromiseOrValue<BytesLike>,
@@ -2495,11 +3246,31 @@ export interface TapOFT extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
+  updatePause(
+    val: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "updatePause(bool)"(
+    val: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   useCustomAdapterParams(overrides?: CallOverrides): Promise<boolean>;
 
   "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<boolean>;
 
   callStatic: {
+    DEFAULT_PAYLOAD_SIZE_LIMIT(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "DEFAULT_PAYLOAD_SIZE_LIMIT()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
+
+    "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
+
     INITIAL_SUPPLY(overrides?: CallOverrides): Promise<BigNumber>;
 
     "INITIAL_SUPPLY()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2511,6 +3282,10 @@ export interface TapOFT extends BaseContract {
     PT_SEND(overrides?: CallOverrides): Promise<number>;
 
     "PT_SEND()"(overrides?: CallOverrides): Promise<number>;
+
+    PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<number>;
+
+    "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<number>;
 
     WEEK(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2550,9 +3325,59 @@ export interface TapOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    batch(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "batch(bytes[],bool)"(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    callOnOFTReceived(
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _from: PromiseOrValue<BytesLike>,
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _gasForCall: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)"(
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _from: PromiseOrValue<BytesLike>,
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _gasForCall: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     circulatingSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     "circulatingSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    creditedPackets(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BytesLike>,
+      arg2: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "creditedPackets(uint16,bytes,uint64)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BytesLike>,
+      arg2: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     decimals(overrides?: CallOverrides): Promise<number>;
 
@@ -2574,6 +3399,16 @@ export interface TapOFT extends BaseContract {
 
     "dso_supply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    emissionForWeek(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "emissionForWeek(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     emissionsStartTime(overrides?: CallOverrides): Promise<BigNumber>;
 
     "emissionsStartTime()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2581,6 +3416,32 @@ export interface TapOFT extends BaseContract {
     emitForWeek(overrides?: CallOverrides): Promise<BigNumber>;
 
     "emitForWeek()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    estimateSendAndCallFee(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
+      _useZro: PromiseOrValue<boolean>,
+      _adapterParams: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
+    >;
+
+    "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)"(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
+      _useZro: PromiseOrValue<boolean>,
+      _adapterParams: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
+    >;
 
     estimateSendFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -2593,7 +3454,7 @@ export interface TapOFT extends BaseContract {
       [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
     >;
 
-    "estimateSendFee(uint16,bytes,uint256,bool,bytes)"(
+    "estimateSendFee(uint16,bytes32,uint256,bool,bytes)"(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
@@ -2657,6 +3518,10 @@ export interface TapOFT extends BaseContract {
       _configType: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    getCurrentWeek(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "getCurrentWeek()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     getCurrentWeekEmission(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2768,23 +3633,55 @@ export interface TapOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    nonces(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "nonces(address)"(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     owner(overrides?: CallOverrides): Promise<string>;
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
 
-    pauseSendTokens(
-      pause: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "pauseSendTokens(bool)"(
-      pause: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     paused(overrides?: CallOverrides): Promise<boolean>;
 
     "paused()"(overrides?: CallOverrides): Promise<boolean>;
+
+    payloadSizeLimitLookup(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "payloadSizeLimitLookup(uint16)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    permit(
+      owner: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      value: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)"(
+      owner: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      value: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     precrime(overrides?: CallOverrides): Promise<string>;
 
@@ -2820,25 +3717,43 @@ export interface TapOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    sendAndCall(
+      _from: PromiseOrValue<string>,
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))"(
+      _from: PromiseOrValue<string>,
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     sendFrom(
       _from: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "sendFrom(address,uint16,bytes,uint256,address,address,bytes)"(
+    "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"(
       _from: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -2889,6 +3804,18 @@ export interface TapOFT extends BaseContract {
 
     "setMinter(address)"(
       _minter: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setPayloadSizeLimit(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _size: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setPayloadSizeLimit(uint16,uint256)"(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _size: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -2955,6 +3882,10 @@ export interface TapOFT extends BaseContract {
       _useCustomAdapterParams: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    sharedDecimals(overrides?: CallOverrides): Promise<number>;
+
+    "sharedDecimals()"(overrides?: CallOverrides): Promise<number>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
@@ -3034,6 +3965,16 @@ export interface TapOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
+    updatePause(
+      val: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "updatePause(bool)"(
+      val: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     useCustomAdapterParams(overrides?: CallOverrides): Promise<boolean>;
 
     "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<boolean>;
@@ -3059,6 +4000,22 @@ export interface TapOFT extends BaseContract {
       _from?: PromiseOrValue<string> | null,
       _amount?: null
     ): BurnedEventFilter;
+
+    "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"(
+      _srcChainId?: PromiseOrValue<BigNumberish> | null,
+      _srcAddress?: null,
+      _nonce?: null,
+      _hash?: null
+    ): CallOFTReceivedSuccessEventFilter;
+    CallOFTReceivedSuccess(
+      _srcChainId?: PromiseOrValue<BigNumberish> | null,
+      _srcAddress?: null,
+      _nonce?: null,
+      _hash?: null
+    ): CallOFTReceivedSuccessEventFilter;
+
+    "Emitted(uint256,uint256)"(week?: null, amount?: null): EmittedEventFilter;
+    Emitted(week?: null, amount?: null): EmittedEventFilter;
 
     "GovernanceChainIdentifierUpdated(uint256,uint256)"(
       _old?: null,
@@ -3104,6 +4061,11 @@ export interface TapOFT extends BaseContract {
       _new?: PromiseOrValue<string> | null
     ): MinterUpdatedEventFilter;
 
+    "NonContractAddress(address)"(
+      _address?: null
+    ): NonContractAddressEventFilter;
+    NonContractAddress(_address?: null): NonContractAddressEventFilter;
+
     "OwnershipTransferred(address,address)"(
       previousOwner?: PromiseOrValue<string> | null,
       newOwner?: PromiseOrValue<string> | null
@@ -3113,8 +4075,11 @@ export interface TapOFT extends BaseContract {
       newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
 
-    "Paused(address)"(account?: null): PausedEventFilter;
-    Paused(account?: null): PausedEventFilter;
+    "PausedUpdated(bool,bool)"(
+      oldState?: null,
+      newState?: null
+    ): PausedUpdatedEventFilter;
+    PausedUpdated(oldState?: null, newState?: null): PausedUpdatedEventFilter;
 
     "ReceiveFromChain(uint16,address,uint256)"(
       _srcChainId?: PromiseOrValue<BigNumberish> | null,
@@ -3140,16 +4105,16 @@ export interface TapOFT extends BaseContract {
       _payloadHash?: null
     ): RetryMessageSuccessEventFilter;
 
-    "SendToChain(uint16,address,bytes,uint256)"(
+    "SendToChain(uint16,address,bytes32,uint256)"(
       _dstChainId?: PromiseOrValue<BigNumberish> | null,
       _from?: PromiseOrValue<string> | null,
-      _toAddress?: null,
+      _toAddress?: PromiseOrValue<BytesLike> | null,
       _amount?: null
     ): SendToChainEventFilter;
     SendToChain(
       _dstChainId?: PromiseOrValue<BigNumberish> | null,
       _from?: PromiseOrValue<string> | null,
-      _toAddress?: null,
+      _toAddress?: PromiseOrValue<BytesLike> | null,
       _amount?: null
     ): SendToChainEventFilter;
 
@@ -3202,12 +4167,19 @@ export interface TapOFT extends BaseContract {
       to?: PromiseOrValue<string> | null,
       value?: null
     ): TransferEventFilter;
-
-    "Unpaused(address)"(account?: null): UnpausedEventFilter;
-    Unpaused(account?: null): UnpausedEventFilter;
   };
 
   estimateGas: {
+    DEFAULT_PAYLOAD_SIZE_LIMIT(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "DEFAULT_PAYLOAD_SIZE_LIMIT()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     INITIAL_SUPPLY(overrides?: CallOverrides): Promise<BigNumber>;
 
     "INITIAL_SUPPLY()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3219,6 +4191,10 @@ export interface TapOFT extends BaseContract {
     PT_SEND(overrides?: CallOverrides): Promise<BigNumber>;
 
     "PT_SEND()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     WEEK(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3258,9 +4234,59 @@ export interface TapOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    batch(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "batch(bytes[],bool)"(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    callOnOFTReceived(
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _from: PromiseOrValue<BytesLike>,
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _gasForCall: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)"(
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _from: PromiseOrValue<BytesLike>,
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _gasForCall: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     circulatingSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     "circulatingSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    creditedPackets(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BytesLike>,
+      arg2: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "creditedPackets(uint16,bytes,uint64)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BytesLike>,
+      arg2: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     decimals(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3282,6 +4308,16 @@ export interface TapOFT extends BaseContract {
 
     "dso_supply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    emissionForWeek(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "emissionForWeek(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     emissionsStartTime(overrides?: CallOverrides): Promise<BigNumber>;
 
     "emissionsStartTime()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3294,6 +4330,28 @@ export interface TapOFT extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    estimateSendAndCallFee(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
+      _useZro: PromiseOrValue<boolean>,
+      _adapterParams: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)"(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
+      _useZro: PromiseOrValue<boolean>,
+      _adapterParams: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     estimateSendFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
@@ -3303,7 +4361,7 @@ export interface TapOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "estimateSendFee(uint16,bytes,uint256,bool,bytes)"(
+    "estimateSendFee(uint16,bytes32,uint256,bool,bytes)"(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
@@ -3365,6 +4423,10 @@ export interface TapOFT extends BaseContract {
       _configType: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    getCurrentWeek(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "getCurrentWeek()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     getCurrentWeekEmission(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3476,23 +4538,55 @@ export interface TapOFT extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    nonces(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "nonces(address)"(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    pauseSendTokens(
-      pause: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "pauseSendTokens(bool)"(
-      pause: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     paused(overrides?: CallOverrides): Promise<BigNumber>;
 
     "paused()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    payloadSizeLimitLookup(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "payloadSizeLimitLookup(uint16)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    permit(
+      owner: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      value: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)"(
+      owner: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      value: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     precrime(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3532,25 +4626,43 @@ export interface TapOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    sendAndCall(
+      _from: PromiseOrValue<string>,
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))"(
+      _from: PromiseOrValue<string>,
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     sendFrom(
       _from: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "sendFrom(address,uint16,bytes,uint256,address,address,bytes)"(
+    "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"(
       _from: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -3601,6 +4713,18 @@ export interface TapOFT extends BaseContract {
 
     "setMinter(address)"(
       _minter: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setPayloadSizeLimit(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _size: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setPayloadSizeLimit(uint16,uint256)"(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _size: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -3667,6 +4791,10 @@ export interface TapOFT extends BaseContract {
       _useCustomAdapterParams: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    sharedDecimals(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "sharedDecimals()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
@@ -3746,12 +4874,36 @@ export interface TapOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    updatePause(
+      val: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "updatePause(bool)"(
+      val: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     useCustomAdapterParams(overrides?: CallOverrides): Promise<BigNumber>;
 
     "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
+    DEFAULT_PAYLOAD_SIZE_LIMIT(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "DEFAULT_PAYLOAD_SIZE_LIMIT()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "DOMAIN_SEPARATOR()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     INITIAL_SUPPLY(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "INITIAL_SUPPLY()"(
@@ -3765,6 +4917,12 @@ export interface TapOFT extends BaseContract {
     PT_SEND(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "PT_SEND()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "PT_SEND_AND_CALL()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     WEEK(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -3804,9 +4962,59 @@ export interface TapOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    batch(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "batch(bytes[],bool)"(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    callOnOFTReceived(
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _from: PromiseOrValue<BytesLike>,
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _gasForCall: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)"(
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _from: PromiseOrValue<BytesLike>,
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _gasForCall: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     circulatingSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "circulatingSupply()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    creditedPackets(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BytesLike>,
+      arg2: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "creditedPackets(uint16,bytes,uint64)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BytesLike>,
+      arg2: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -3830,6 +5038,16 @@ export interface TapOFT extends BaseContract {
 
     "dso_supply()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    emissionForWeek(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "emissionForWeek(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     emissionsStartTime(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -3846,6 +5064,28 @@ export interface TapOFT extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    estimateSendAndCallFee(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
+      _useZro: PromiseOrValue<boolean>,
+      _adapterParams: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)"(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
+      _useZro: PromiseOrValue<boolean>,
+      _adapterParams: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     estimateSendFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
@@ -3855,7 +5095,7 @@ export interface TapOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "estimateSendFee(uint16,bytes,uint256,bool,bytes)"(
+    "estimateSendFee(uint16,bytes32,uint256,bool,bytes)"(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
@@ -3915,6 +5155,12 @@ export interface TapOFT extends BaseContract {
       _chainId: PromiseOrValue<BigNumberish>,
       arg2: PromiseOrValue<string>,
       _configType: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getCurrentWeek(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "getCurrentWeek()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -4034,23 +5280,55 @@ export interface TapOFT extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    nonces(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "nonces(address)"(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    pauseSendTokens(
-      pause: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "pauseSendTokens(bool)"(
-      pause: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     paused(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "paused()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    payloadSizeLimitLookup(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "payloadSizeLimitLookup(uint16)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    permit(
+      owner: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      value: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)"(
+      owner: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      value: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     precrime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -4090,25 +5368,43 @@ export interface TapOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    sendAndCall(
+      _from: PromiseOrValue<string>,
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))"(
+      _from: PromiseOrValue<string>,
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     sendFrom(
       _from: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "sendFrom(address,uint16,bytes,uint256,address,address,bytes)"(
+    "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"(
       _from: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -4159,6 +5455,18 @@ export interface TapOFT extends BaseContract {
 
     "setMinter(address)"(
       _minter: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setPayloadSizeLimit(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _size: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setPayloadSizeLimit(uint16,uint256)"(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _size: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -4224,6 +5532,12 @@ export interface TapOFT extends BaseContract {
     "setUseCustomAdapterParams(bool)"(
       _useCustomAdapterParams: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    sharedDecimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "sharedDecimals()"(
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     supportsInterface(
@@ -4302,6 +5616,16 @@ export interface TapOFT extends BaseContract {
     "trustedRemoteLookup(uint16)"(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    updatePause(
+      val: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "updatePause(bool)"(
+      val: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     useCustomAdapterParams(

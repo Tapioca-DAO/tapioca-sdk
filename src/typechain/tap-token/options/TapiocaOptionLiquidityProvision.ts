@@ -9,6 +9,7 @@ import type {
   CallOverrides,
   ContractTransaction,
   Overrides,
+  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -61,9 +62,11 @@ export type SingularityPoolStructOutput = [BigNumber, BigNumber, BigNumber] & {
 export interface TapiocaOptionLiquidityProvisionInterface
   extends utils.Interface {
   functions: {
+    "DOMAIN_SEPARATOR()": FunctionFragment;
     "activeSingularities(address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
+    "batch(bytes[],bool)": FunctionFragment;
     "claimOwnership()": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
     "getLock(uint256)": FunctionFragment;
@@ -75,11 +78,13 @@ export interface TapiocaOptionLiquidityProvisionInterface
     "lock(address,address,address,uint128,uint128)": FunctionFragment;
     "lockPositions(uint256)": FunctionFragment;
     "name()": FunctionFragment;
+    "nonces(address)": FunctionFragment;
     "onERC1155Received(address,address,uint256,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
     "paused()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
+    "permit(address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "registerSingularity(address,uint256,uint256)": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,bytes)": FunctionFragment;
@@ -101,12 +106,16 @@ export interface TapiocaOptionLiquidityProvisionInterface
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "DOMAIN_SEPARATOR"
+      | "DOMAIN_SEPARATOR()"
       | "activeSingularities"
       | "activeSingularities(address)"
       | "approve"
       | "approve(address,uint256)"
       | "balanceOf"
       | "balanceOf(address)"
+      | "batch"
+      | "batch(bytes[],bool)"
       | "claimOwnership"
       | "claimOwnership()"
       | "getApproved"
@@ -129,6 +138,8 @@ export interface TapiocaOptionLiquidityProvisionInterface
       | "lockPositions(uint256)"
       | "name"
       | "name()"
+      | "nonces"
+      | "nonces(address)"
       | "onERC1155Received"
       | "onERC1155Received(address,address,uint256,uint256,bytes)"
       | "owner"
@@ -139,6 +150,8 @@ export interface TapiocaOptionLiquidityProvisionInterface
       | "paused()"
       | "pendingOwner"
       | "pendingOwner()"
+      | "permit"
+      | "permit(address,uint256,uint256,uint8,bytes32,bytes32)"
       | "registerSingularity"
       | "registerSingularity(address,uint256,uint256)"
       | "safeTransferFrom(address,address,uint256)"
@@ -174,6 +187,14 @@ export interface TapiocaOptionLiquidityProvisionInterface
   ): FunctionFragment;
 
   encodeFunctionData(
+    functionFragment: "DOMAIN_SEPARATOR",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "DOMAIN_SEPARATOR()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "activeSingularities",
     values: [PromiseOrValue<string>]
   ): string;
@@ -196,6 +217,14 @@ export interface TapiocaOptionLiquidityProvisionInterface
   encodeFunctionData(
     functionFragment: "balanceOf(address)",
     values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "batch",
+    values: [PromiseOrValue<BytesLike>[], PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "batch(bytes[],bool)",
+    values: [PromiseOrValue<BytesLike>[], PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "claimOwnership",
@@ -292,6 +321,14 @@ export interface TapiocaOptionLiquidityProvisionInterface
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(functionFragment: "name()", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "nonces",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "nonces(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "onERC1155Received",
     values: [
       PromiseOrValue<string>,
@@ -330,6 +367,28 @@ export interface TapiocaOptionLiquidityProvisionInterface
   encodeFunctionData(
     functionFragment: "pendingOwner()",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "permit",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "permit(address,uint256,uint256,uint8,bytes32,bytes32)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "registerSingularity",
@@ -493,6 +552,14 @@ export interface TapiocaOptionLiquidityProvisionInterface
   ): string;
 
   decodeFunctionResult(
+    functionFragment: "DOMAIN_SEPARATOR",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "DOMAIN_SEPARATOR()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "activeSingularities",
     data: BytesLike
   ): Result;
@@ -508,6 +575,11 @@ export interface TapiocaOptionLiquidityProvisionInterface
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "balanceOf(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "batch", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "batch(bytes[],bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -586,6 +658,11 @@ export interface TapiocaOptionLiquidityProvisionInterface
   ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "nonces(address)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "onERC1155Received",
     data: BytesLike
@@ -609,6 +686,11 @@ export interface TapiocaOptionLiquidityProvisionInterface
   ): Result;
   decodeFunctionResult(
     functionFragment: "pendingOwner()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "permit", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "permit(address,uint256,uint256,uint8,bytes32,bytes32)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -947,6 +1029,10 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<[string]>;
+
+    "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<[string]>;
+
     activeSingularities(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -990,6 +1076,18 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
+
+    batch(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "batch(bytes[],bool)"(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     claimOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1111,6 +1209,16 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "name()"(overrides?: CallOverrides): Promise<[string]>;
 
+    nonces(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "nonces(address)"(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     onERC1155Received(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
@@ -1150,6 +1258,26 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<[string]>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<[string]>;
+
+    permit(
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "permit(address,uint256,uint256,uint8,bytes32,bytes32)"(
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     registerSingularity(
       singularity: PromiseOrValue<string>,
@@ -1317,6 +1445,10 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     "yieldBox()"(overrides?: CallOverrides): Promise<[string]>;
   };
 
+  DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
+
+  "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
+
   activeSingularities(
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
@@ -1360,6 +1492,18 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     owner: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
+
+  batch(
+    calls: PromiseOrValue<BytesLike>[],
+    revertOnFail: PromiseOrValue<boolean>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "batch(bytes[],bool)"(
+    calls: PromiseOrValue<BytesLike>[],
+    revertOnFail: PromiseOrValue<boolean>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   claimOwnership(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1481,6 +1625,16 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
   "name()"(overrides?: CallOverrides): Promise<string>;
 
+  nonces(
+    owner: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "nonces(address)"(
+    owner: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   onERC1155Received(
     arg0: PromiseOrValue<string>,
     arg1: PromiseOrValue<string>,
@@ -1520,6 +1674,26 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
   pendingOwner(overrides?: CallOverrides): Promise<string>;
 
   "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
+
+  permit(
+    spender: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
+    deadline: PromiseOrValue<BigNumberish>,
+    v: PromiseOrValue<BigNumberish>,
+    r: PromiseOrValue<BytesLike>,
+    s: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "permit(address,uint256,uint256,uint8,bytes32,bytes32)"(
+    spender: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
+    deadline: PromiseOrValue<BigNumberish>,
+    v: PromiseOrValue<BigNumberish>,
+    r: PromiseOrValue<BytesLike>,
+    s: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   registerSingularity(
     singularity: PromiseOrValue<string>,
@@ -1685,6 +1859,10 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
   "yieldBox()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
+    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
+
+    "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
+
     activeSingularities(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -1728,6 +1906,18 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    batch(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "batch(bytes[],bool)"(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     claimOwnership(overrides?: CallOverrides): Promise<void>;
 
@@ -1845,6 +2035,16 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "name()"(overrides?: CallOverrides): Promise<string>;
 
+    nonces(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "nonces(address)"(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     onERC1155Received(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
@@ -1884,6 +2084,26 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<string>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
+
+    permit(
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "permit(address,uint256,uint256,uint8,bytes32,bytes32)"(
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     registerSingularity(
       singularity: PromiseOrValue<string>,
@@ -2156,6 +2376,10 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
   };
 
   estimateGas: {
+    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     activeSingularities(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -2186,6 +2410,18 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     "balanceOf(address)"(
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    batch(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "batch(bytes[],bool)"(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     claimOwnership(
@@ -2290,6 +2526,16 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "name()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    nonces(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "nonces(address)"(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     onERC1155Received(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
@@ -2329,6 +2575,26 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    permit(
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "permit(address,uint256,uint256,uint8,bytes32,bytes32)"(
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     registerSingularity(
       singularity: PromiseOrValue<string>,
@@ -2495,6 +2761,12 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
   };
 
   populateTransaction: {
+    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "DOMAIN_SEPARATOR()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     activeSingularities(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -2525,6 +2797,18 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     "balanceOf(address)"(
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    batch(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "batch(bytes[],bool)"(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     claimOwnership(
@@ -2635,6 +2919,16 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    nonces(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "nonces(address)"(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     onERC1155Received(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
@@ -2674,6 +2968,26 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    permit(
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "permit(address,uint256,uint256,uint8,bytes32,bytes32)"(
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     registerSingularity(
       singularity: PromiseOrValue<string>,

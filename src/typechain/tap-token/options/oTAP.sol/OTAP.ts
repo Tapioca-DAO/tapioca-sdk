@@ -9,6 +9,7 @@ import type {
   CallOverrides,
   ContractTransaction,
   Overrides,
+  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -41,11 +42,15 @@ export type TapOptionStructOutput = [BigNumber, BigNumber, BigNumber] & {
 
 export interface OTAPInterface extends utils.Interface {
   functions: {
+    "DOMAIN_SEPARATOR()": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "attributes(uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
+    "batch(bytes[],bool)": FunctionFragment;
     "broker()": FunctionFragment;
     "brokerClaim()": FunctionFragment;
+    "burn(uint256)": FunctionFragment;
+    "exists(uint256)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "isApprovedOrOwner(address,uint256)": FunctionFragment;
@@ -53,8 +58,10 @@ export interface OTAPInterface extends utils.Interface {
     "mintedOTAP()": FunctionFragment;
     "mintedTAP()": FunctionFragment;
     "name()": FunctionFragment;
+    "nonces(address)": FunctionFragment;
     "options(uint256)": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
+    "permit(address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,bytes)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
@@ -68,16 +75,24 @@ export interface OTAPInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "DOMAIN_SEPARATOR"
+      | "DOMAIN_SEPARATOR()"
       | "approve"
       | "approve(address,uint256)"
       | "attributes"
       | "attributes(uint256)"
       | "balanceOf"
       | "balanceOf(address)"
+      | "batch"
+      | "batch(bytes[],bool)"
       | "broker"
       | "broker()"
       | "brokerClaim"
       | "brokerClaim()"
+      | "burn"
+      | "burn(uint256)"
+      | "exists"
+      | "exists(uint256)"
       | "getApproved"
       | "getApproved(uint256)"
       | "isApprovedForAll"
@@ -92,10 +107,14 @@ export interface OTAPInterface extends utils.Interface {
       | "mintedTAP()"
       | "name"
       | "name()"
+      | "nonces"
+      | "nonces(address)"
       | "options"
       | "options(uint256)"
       | "ownerOf"
       | "ownerOf(uint256)"
+      | "permit"
+      | "permit(address,uint256,uint256,uint8,bytes32,bytes32)"
       | "safeTransferFrom(address,address,uint256)"
       | "safeTransferFrom(address,address,uint256,bytes)"
       | "setApprovalForAll"
@@ -114,6 +133,14 @@ export interface OTAPInterface extends utils.Interface {
       | "transferFrom(address,address,uint256)"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "DOMAIN_SEPARATOR",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "DOMAIN_SEPARATOR()",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "approve",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
@@ -138,6 +165,14 @@ export interface OTAPInterface extends utils.Interface {
     functionFragment: "balanceOf(address)",
     values: [PromiseOrValue<string>]
   ): string;
+  encodeFunctionData(
+    functionFragment: "batch",
+    values: [PromiseOrValue<BytesLike>[], PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "batch(bytes[],bool)",
+    values: [PromiseOrValue<BytesLike>[], PromiseOrValue<boolean>]
+  ): string;
   encodeFunctionData(functionFragment: "broker", values?: undefined): string;
   encodeFunctionData(functionFragment: "broker()", values?: undefined): string;
   encodeFunctionData(
@@ -147,6 +182,22 @@ export interface OTAPInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "brokerClaim()",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "burn",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "burn(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "exists",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "exists(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getApproved",
@@ -206,6 +257,14 @@ export interface OTAPInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(functionFragment: "name()", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "nonces",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "nonces(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "options",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
@@ -220,6 +279,28 @@ export interface OTAPInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "ownerOf(uint256)",
     values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "permit",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "permit(address,uint256,uint256,uint8,bytes32,bytes32)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "safeTransferFrom(address,address,uint256)",
@@ -297,6 +378,14 @@ export interface OTAPInterface extends utils.Interface {
     ]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "DOMAIN_SEPARATOR",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "DOMAIN_SEPARATOR()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "approve(address,uint256)",
@@ -312,6 +401,11 @@ export interface OTAPInterface extends utils.Interface {
     functionFragment: "balanceOf(address)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "batch", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "batch(bytes[],bool)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "broker", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "broker()", data: BytesLike): Result;
   decodeFunctionResult(
@@ -320,6 +414,16 @@ export interface OTAPInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "brokerClaim()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "burn(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "exists", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "exists(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -363,6 +467,11 @@ export interface OTAPInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "nonces(address)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "options", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "options(uint256)",
@@ -371,6 +480,11 @@ export interface OTAPInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "ownerOf(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "permit", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "permit(address,uint256,uint256,uint8,bytes32,bytes32)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -429,6 +543,7 @@ export interface OTAPInterface extends utils.Interface {
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalForAll(address,address,bool)": EventFragment;
+    "Burn(address,uint256,tuple)": EventFragment;
     "Mint(address,uint256,tuple)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
@@ -440,6 +555,10 @@ export interface OTAPInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ApprovalForAll(address,address,bool)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Burn"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "Burn(address,uint256,tuple)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Mint"): EventFragment;
   getEvent(
@@ -474,6 +593,18 @@ export type ApprovalForAllEvent = TypedEvent<
 >;
 
 export type ApprovalForAllEventFilter = TypedEventFilter<ApprovalForAllEvent>;
+
+export interface BurnEventObject {
+  from: string;
+  tokenId: BigNumber;
+  option: TapOptionStructOutput;
+}
+export type BurnEvent = TypedEvent<
+  [string, BigNumber, TapOptionStructOutput],
+  BurnEventObject
+>;
+
+export type BurnEventFilter = TypedEventFilter<BurnEvent>;
 
 export interface MintEventObject {
   to: string;
@@ -528,6 +659,10 @@ export interface OTAP extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<[string]>;
+
+    "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<[string]>;
+
     approve(
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
@@ -541,14 +676,14 @@ export interface OTAP extends BaseContract {
     ): Promise<ContractTransaction>;
 
     attributes(
-      tokenId: PromiseOrValue<BigNumberish>,
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[string, TapOptionStructOutput] & { owner: string }>;
+    ): Promise<[string, TapOptionStructOutput]>;
 
     "attributes(uint256)"(
-      tokenId: PromiseOrValue<BigNumberish>,
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[string, TapOptionStructOutput] & { owner: string }>;
+    ): Promise<[string, TapOptionStructOutput]>;
 
     balanceOf(
       owner: PromiseOrValue<string>,
@@ -559,6 +694,18 @@ export interface OTAP extends BaseContract {
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
+
+    batch(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "batch(bytes[],bool)"(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     broker(overrides?: CallOverrides): Promise<[string]>;
 
@@ -571,6 +718,26 @@ export interface OTAP extends BaseContract {
     "brokerClaim()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    burn(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "burn(uint256)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    exists(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "exists(uint256)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
     getApproved(
       tokenId: PromiseOrValue<BigNumberish>,
@@ -595,14 +762,14 @@ export interface OTAP extends BaseContract {
     ): Promise<[boolean]>;
 
     isApprovedOrOwner(
-      spender: PromiseOrValue<string>,
-      tokenId: PromiseOrValue<BigNumberish>,
+      _spender: PromiseOrValue<string>,
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
     "isApprovedOrOwner(address,uint256)"(
-      spender: PromiseOrValue<string>,
-      tokenId: PromiseOrValue<BigNumberish>,
+      _spender: PromiseOrValue<string>,
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
@@ -633,6 +800,16 @@ export interface OTAP extends BaseContract {
     name(overrides?: CallOverrides): Promise<[string]>;
 
     "name()"(overrides?: CallOverrides): Promise<[string]>;
+
+    nonces(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "nonces(address)"(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     options(
       arg0: PromiseOrValue<BigNumberish>,
@@ -665,6 +842,26 @@ export interface OTAP extends BaseContract {
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
+
+    permit(
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "permit(address,uint256,uint256,uint8,bytes32,bytes32)"(
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: PromiseOrValue<string>,
@@ -754,6 +951,10 @@ export interface OTAP extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
+  DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
+
+  "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
+
   approve(
     to: PromiseOrValue<string>,
     tokenId: PromiseOrValue<BigNumberish>,
@@ -767,14 +968,14 @@ export interface OTAP extends BaseContract {
   ): Promise<ContractTransaction>;
 
   attributes(
-    tokenId: PromiseOrValue<BigNumberish>,
+    _tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
-  ): Promise<[string, TapOptionStructOutput] & { owner: string }>;
+  ): Promise<[string, TapOptionStructOutput]>;
 
   "attributes(uint256)"(
-    tokenId: PromiseOrValue<BigNumberish>,
+    _tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
-  ): Promise<[string, TapOptionStructOutput] & { owner: string }>;
+  ): Promise<[string, TapOptionStructOutput]>;
 
   balanceOf(
     owner: PromiseOrValue<string>,
@@ -785,6 +986,18 @@ export interface OTAP extends BaseContract {
     owner: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
+
+  batch(
+    calls: PromiseOrValue<BytesLike>[],
+    revertOnFail: PromiseOrValue<boolean>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "batch(bytes[],bool)"(
+    calls: PromiseOrValue<BytesLike>[],
+    revertOnFail: PromiseOrValue<boolean>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   broker(overrides?: CallOverrides): Promise<string>;
 
@@ -797,6 +1010,26 @@ export interface OTAP extends BaseContract {
   "brokerClaim()"(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  burn(
+    _tokenId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "burn(uint256)"(
+    _tokenId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  exists(
+    _tokenId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "exists(uint256)"(
+    _tokenId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   getApproved(
     tokenId: PromiseOrValue<BigNumberish>,
@@ -821,14 +1054,14 @@ export interface OTAP extends BaseContract {
   ): Promise<boolean>;
 
   isApprovedOrOwner(
-    spender: PromiseOrValue<string>,
-    tokenId: PromiseOrValue<BigNumberish>,
+    _spender: PromiseOrValue<string>,
+    _tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
   "isApprovedOrOwner(address,uint256)"(
-    spender: PromiseOrValue<string>,
-    tokenId: PromiseOrValue<BigNumberish>,
+    _spender: PromiseOrValue<string>,
+    _tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
@@ -859,6 +1092,16 @@ export interface OTAP extends BaseContract {
   name(overrides?: CallOverrides): Promise<string>;
 
   "name()"(overrides?: CallOverrides): Promise<string>;
+
+  nonces(
+    owner: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "nonces(address)"(
+    owner: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   options(
     arg0: PromiseOrValue<BigNumberish>,
@@ -891,6 +1134,26 @@ export interface OTAP extends BaseContract {
     tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
+
+  permit(
+    spender: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
+    deadline: PromiseOrValue<BigNumberish>,
+    v: PromiseOrValue<BigNumberish>,
+    r: PromiseOrValue<BytesLike>,
+    s: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "permit(address,uint256,uint256,uint8,bytes32,bytes32)"(
+    spender: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
+    deadline: PromiseOrValue<BigNumberish>,
+    v: PromiseOrValue<BigNumberish>,
+    r: PromiseOrValue<BytesLike>,
+    s: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   "safeTransferFrom(address,address,uint256)"(
     from: PromiseOrValue<string>,
@@ -980,6 +1243,10 @@ export interface OTAP extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
+
+    "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
+
     approve(
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
@@ -993,14 +1260,14 @@ export interface OTAP extends BaseContract {
     ): Promise<void>;
 
     attributes(
-      tokenId: PromiseOrValue<BigNumberish>,
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[string, TapOptionStructOutput] & { owner: string }>;
+    ): Promise<[string, TapOptionStructOutput]>;
 
     "attributes(uint256)"(
-      tokenId: PromiseOrValue<BigNumberish>,
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[string, TapOptionStructOutput] & { owner: string }>;
+    ): Promise<[string, TapOptionStructOutput]>;
 
     balanceOf(
       owner: PromiseOrValue<string>,
@@ -1012,6 +1279,18 @@ export interface OTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    batch(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "batch(bytes[],bool)"(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     broker(overrides?: CallOverrides): Promise<string>;
 
     "broker()"(overrides?: CallOverrides): Promise<string>;
@@ -1019,6 +1298,26 @@ export interface OTAP extends BaseContract {
     brokerClaim(overrides?: CallOverrides): Promise<void>;
 
     "brokerClaim()"(overrides?: CallOverrides): Promise<void>;
+
+    burn(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "burn(uint256)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    exists(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "exists(uint256)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     getApproved(
       tokenId: PromiseOrValue<BigNumberish>,
@@ -1043,14 +1342,14 @@ export interface OTAP extends BaseContract {
     ): Promise<boolean>;
 
     isApprovedOrOwner(
-      spender: PromiseOrValue<string>,
-      tokenId: PromiseOrValue<BigNumberish>,
+      _spender: PromiseOrValue<string>,
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     "isApprovedOrOwner(address,uint256)"(
-      spender: PromiseOrValue<string>,
-      tokenId: PromiseOrValue<BigNumberish>,
+      _spender: PromiseOrValue<string>,
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -1081,6 +1380,16 @@ export interface OTAP extends BaseContract {
     name(overrides?: CallOverrides): Promise<string>;
 
     "name()"(overrides?: CallOverrides): Promise<string>;
+
+    nonces(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "nonces(address)"(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     options(
       arg0: PromiseOrValue<BigNumberish>,
@@ -1113,6 +1422,26 @@ export interface OTAP extends BaseContract {
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    permit(
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "permit(address,uint256,uint256,uint8,bytes32,bytes32)"(
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: PromiseOrValue<string>,
@@ -1225,6 +1554,17 @@ export interface OTAP extends BaseContract {
       approved?: null
     ): ApprovalForAllEventFilter;
 
+    "Burn(address,uint256,tuple)"(
+      from?: PromiseOrValue<string> | null,
+      tokenId?: PromiseOrValue<BigNumberish> | null,
+      option?: null
+    ): BurnEventFilter;
+    Burn(
+      from?: PromiseOrValue<string> | null,
+      tokenId?: PromiseOrValue<BigNumberish> | null,
+      option?: null
+    ): BurnEventFilter;
+
     "Mint(address,uint256,tuple)"(
       to?: PromiseOrValue<string> | null,
       tokenId?: PromiseOrValue<BigNumberish> | null,
@@ -1249,6 +1589,10 @@ export interface OTAP extends BaseContract {
   };
 
   estimateGas: {
+    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     approve(
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
@@ -1262,12 +1606,12 @@ export interface OTAP extends BaseContract {
     ): Promise<BigNumber>;
 
     attributes(
-      tokenId: PromiseOrValue<BigNumberish>,
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "attributes(uint256)"(
-      tokenId: PromiseOrValue<BigNumberish>,
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1281,6 +1625,18 @@ export interface OTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    batch(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "batch(bytes[],bool)"(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     broker(overrides?: CallOverrides): Promise<BigNumber>;
 
     "broker()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1291,6 +1647,26 @@ export interface OTAP extends BaseContract {
 
     "brokerClaim()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    burn(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "burn(uint256)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    exists(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "exists(uint256)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getApproved(
@@ -1316,14 +1692,14 @@ export interface OTAP extends BaseContract {
     ): Promise<BigNumber>;
 
     isApprovedOrOwner(
-      spender: PromiseOrValue<string>,
-      tokenId: PromiseOrValue<BigNumberish>,
+      _spender: PromiseOrValue<string>,
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "isApprovedOrOwner(address,uint256)"(
-      spender: PromiseOrValue<string>,
-      tokenId: PromiseOrValue<BigNumberish>,
+      _spender: PromiseOrValue<string>,
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1355,6 +1731,16 @@ export interface OTAP extends BaseContract {
 
     "name()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    nonces(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "nonces(address)"(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     options(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1373,6 +1759,26 @@ export interface OTAP extends BaseContract {
     "ownerOf(uint256)"(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    permit(
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "permit(address,uint256,uint256,uint8,bytes32,bytes32)"(
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "safeTransferFrom(address,address,uint256)"(
@@ -1464,6 +1870,12 @@ export interface OTAP extends BaseContract {
   };
 
   populateTransaction: {
+    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "DOMAIN_SEPARATOR()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     approve(
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
@@ -1477,12 +1889,12 @@ export interface OTAP extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     attributes(
-      tokenId: PromiseOrValue<BigNumberish>,
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "attributes(uint256)"(
-      tokenId: PromiseOrValue<BigNumberish>,
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1496,6 +1908,18 @@ export interface OTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    batch(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "batch(bytes[],bool)"(
+      calls: PromiseOrValue<BytesLike>[],
+      revertOnFail: PromiseOrValue<boolean>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     broker(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "broker()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1506,6 +1930,26 @@ export interface OTAP extends BaseContract {
 
     "brokerClaim()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    burn(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "burn(uint256)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    exists(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "exists(uint256)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getApproved(
@@ -1531,14 +1975,14 @@ export interface OTAP extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     isApprovedOrOwner(
-      spender: PromiseOrValue<string>,
-      tokenId: PromiseOrValue<BigNumberish>,
+      _spender: PromiseOrValue<string>,
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "isApprovedOrOwner(address,uint256)"(
-      spender: PromiseOrValue<string>,
-      tokenId: PromiseOrValue<BigNumberish>,
+      _spender: PromiseOrValue<string>,
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1570,6 +2014,16 @@ export interface OTAP extends BaseContract {
 
     "name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    nonces(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "nonces(address)"(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     options(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1588,6 +2042,26 @@ export interface OTAP extends BaseContract {
     "ownerOf(uint256)"(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    permit(
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "permit(address,uint256,uint256,uint8,bytes32,bytes32)"(
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "safeTransferFrom(address,address,uint256)"(

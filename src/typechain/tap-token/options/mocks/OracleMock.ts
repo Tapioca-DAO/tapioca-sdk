@@ -183,12 +183,12 @@ export interface OracleMock extends BaseContract {
     "_name()"(overrides?: CallOverrides): Promise<[string]>;
 
     get(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { success: boolean; _rate: BigNumber }>;
 
     "get(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { success: boolean; _rate: BigNumber }>;
 
@@ -197,32 +197,32 @@ export interface OracleMock extends BaseContract {
     "mockValue()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     name(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     "name(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     peek(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
     "peek(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
     peekSpot(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { rate: BigNumber }>;
 
     "peekSpot(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { rate: BigNumber }>;
 
@@ -237,12 +237,12 @@ export interface OracleMock extends BaseContract {
     ): Promise<ContractTransaction>;
 
     symbol(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     "symbol(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[string]>;
   };
@@ -252,12 +252,12 @@ export interface OracleMock extends BaseContract {
   "_name()"(overrides?: CallOverrides): Promise<string>;
 
   get(
-    data: PromiseOrValue<BytesLike>,
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<[boolean, BigNumber] & { success: boolean; _rate: BigNumber }>;
 
   "get(bytes)"(
-    data: PromiseOrValue<BytesLike>,
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<[boolean, BigNumber] & { success: boolean; _rate: BigNumber }>;
 
@@ -266,32 +266,32 @@ export interface OracleMock extends BaseContract {
   "mockValue()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   name(
-    data: PromiseOrValue<BytesLike>,
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   "name(bytes)"(
-    data: PromiseOrValue<BytesLike>,
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   peek(
-    data: PromiseOrValue<BytesLike>,
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
   "peek(bytes)"(
-    data: PromiseOrValue<BytesLike>,
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
   peekSpot(
-    data: PromiseOrValue<BytesLike>,
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   "peekSpot(bytes)"(
-    data: PromiseOrValue<BytesLike>,
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -306,12 +306,12 @@ export interface OracleMock extends BaseContract {
   ): Promise<ContractTransaction>;
 
   symbol(
-    data: PromiseOrValue<BytesLike>,
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   "symbol(bytes)"(
-    data: PromiseOrValue<BytesLike>,
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -321,12 +321,12 @@ export interface OracleMock extends BaseContract {
     "_name()"(overrides?: CallOverrides): Promise<string>;
 
     get(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { success: boolean; _rate: BigNumber }>;
 
     "get(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { success: boolean; _rate: BigNumber }>;
 
@@ -335,32 +335,32 @@ export interface OracleMock extends BaseContract {
     "mockValue()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     name(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     "name(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     peek(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
     "peek(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
     peekSpot(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "peekSpot(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -375,12 +375,12 @@ export interface OracleMock extends BaseContract {
     ): Promise<void>;
 
     symbol(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     "symbol(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string>;
   };
@@ -393,12 +393,12 @@ export interface OracleMock extends BaseContract {
     "_name()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     get(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "get(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -407,32 +407,32 @@ export interface OracleMock extends BaseContract {
     "mockValue()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     name(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "name(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     peek(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "peek(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     peekSpot(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "peekSpot(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -447,12 +447,12 @@ export interface OracleMock extends BaseContract {
     ): Promise<BigNumber>;
 
     symbol(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "symbol(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
@@ -463,12 +463,12 @@ export interface OracleMock extends BaseContract {
     "_name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     get(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "get(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -477,32 +477,32 @@ export interface OracleMock extends BaseContract {
     "mockValue()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     name(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "name(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     peek(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "peek(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     peekSpot(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "peekSpot(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -517,12 +517,12 @@ export interface OracleMock extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     symbol(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "symbol(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

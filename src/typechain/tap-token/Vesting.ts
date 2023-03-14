@@ -34,27 +34,16 @@ export interface VestingInterface extends utils.Interface {
     "claimable(address)": FunctionFragment;
     "claimable()": FunctionFragment;
     "cliff()": FunctionFragment;
-    "conservator()": FunctionFragment;
     "duration()": FunctionFragment;
-    "emergencyRevoke(address)": FunctionFragment;
-    "emergencyRevoke()": FunctionFragment;
-    "init(uint256)": FunctionFragment;
+    "init(address,uint256)": FunctionFragment;
     "owner()": FunctionFragment;
-    "paused()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
     "registerUser(address,uint256)": FunctionFragment;
-    "requestEmergencyRevoke()": FunctionFragment;
-    "requestEmergencyRevoke(address)": FunctionFragment;
-    "revokeRequestedAt()": FunctionFragment;
-    "revokeTimeWindow()": FunctionFragment;
-    "revoked()": FunctionFragment;
     "seeded()": FunctionFragment;
-    "setConservator(address)": FunctionFragment;
     "start()": FunctionFragment;
     "token()": FunctionFragment;
     "totalClaimed()": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
-    "updatePause(bool)": FunctionFragment;
     "users(address)": FunctionFragment;
     "vested(address)": FunctionFragment;
     "vested()": FunctionFragment;
@@ -70,34 +59,18 @@ export interface VestingInterface extends utils.Interface {
       | "claimable()"
       | "cliff"
       | "cliff()"
-      | "conservator"
-      | "conservator()"
       | "duration"
       | "duration()"
-      | "emergencyRevoke(address)"
-      | "emergencyRevoke()"
       | "init"
-      | "init(uint256)"
+      | "init(address,uint256)"
       | "owner"
       | "owner()"
-      | "paused"
-      | "paused()"
       | "pendingOwner"
       | "pendingOwner()"
       | "registerUser"
       | "registerUser(address,uint256)"
-      | "requestEmergencyRevoke()"
-      | "requestEmergencyRevoke(address)"
-      | "revokeRequestedAt"
-      | "revokeRequestedAt()"
-      | "revokeTimeWindow"
-      | "revokeTimeWindow()"
-      | "revoked"
-      | "revoked()"
       | "seeded"
       | "seeded()"
-      | "setConservator"
-      | "setConservator(address)"
       | "start"
       | "start()"
       | "token"
@@ -106,8 +79,6 @@ export interface VestingInterface extends utils.Interface {
       | "totalClaimed()"
       | "transferOwnership"
       | "transferOwnership(address,bool,bool)"
-      | "updatePause"
-      | "updatePause(bool)"
       | "users"
       | "users(address)"
       | "vested(address)"
@@ -134,39 +105,21 @@ export interface VestingInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "cliff", values?: undefined): string;
   encodeFunctionData(functionFragment: "cliff()", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "conservator",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "conservator()",
-    values?: undefined
-  ): string;
   encodeFunctionData(functionFragment: "duration", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "duration()",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "emergencyRevoke(address)",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "emergencyRevoke()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "init",
-    values: [PromiseOrValue<BigNumberish>]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "init(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
+    functionFragment: "init(address,uint256)",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "paused", values?: undefined): string;
-  encodeFunctionData(functionFragment: "paused()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "pendingOwner",
     values?: undefined
@@ -183,42 +136,8 @@ export interface VestingInterface extends utils.Interface {
     functionFragment: "registerUser(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(
-    functionFragment: "requestEmergencyRevoke()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "requestEmergencyRevoke(address)",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "revokeRequestedAt",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "revokeRequestedAt()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "revokeTimeWindow",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "revokeTimeWindow()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "revoked", values?: undefined): string;
-  encodeFunctionData(functionFragment: "revoked()", values?: undefined): string;
   encodeFunctionData(functionFragment: "seeded", values?: undefined): string;
   encodeFunctionData(functionFragment: "seeded()", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "setConservator",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setConservator(address)",
-    values: [PromiseOrValue<string>]
-  ): string;
   encodeFunctionData(functionFragment: "start", values?: undefined): string;
   encodeFunctionData(functionFragment: "start()", values?: undefined): string;
   encodeFunctionData(functionFragment: "token", values?: undefined): string;
@@ -246,14 +165,6 @@ export interface VestingInterface extends utils.Interface {
       PromiseOrValue<boolean>,
       PromiseOrValue<boolean>
     ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "updatePause",
-    values: [PromiseOrValue<boolean>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "updatePause(bool)",
-    values: [PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "users",
@@ -289,33 +200,15 @@ export interface VestingInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "cliff", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "cliff()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "conservator",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "conservator()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "duration", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "duration()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "emergencyRevoke(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "emergencyRevoke()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "init", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "init(uint256)",
+    functionFragment: "init(address,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "paused()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "pendingOwner",
     data: BytesLike
@@ -332,42 +225,8 @@ export interface VestingInterface extends utils.Interface {
     functionFragment: "registerUser(address,uint256)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "requestEmergencyRevoke()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "requestEmergencyRevoke(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "revokeRequestedAt",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "revokeRequestedAt()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "revokeTimeWindow",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "revokeTimeWindow()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "revoked", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "revoked()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "seeded", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "seeded()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "setConservator",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setConservator(address)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "start", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "start()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "token", data: BytesLike): Result;
@@ -388,14 +247,6 @@ export interface VestingInterface extends utils.Interface {
     functionFragment: "transferOwnership(address,bool,bool)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "updatePause",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "updatePause(bool)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "users", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "users(address)",
@@ -409,33 +260,15 @@ export interface VestingInterface extends utils.Interface {
 
   events: {
     "Claimed(address,uint256)": EventFragment;
-    "ConservatorUpdated(address,address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
-    "PausedUpdated(bool,bool)": EventFragment;
-    "RevokeCompleted(address,uint256)": EventFragment;
-    "RevokeRequested(address,uint256)": EventFragment;
     "UserRegistered(address,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Claimed"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Claimed(address,uint256)"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "ConservatorUpdated"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "ConservatorUpdated(address,address)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "OwnershipTransferred(address,address)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "PausedUpdated"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "PausedUpdated(bool,bool)"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "RevokeCompleted"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "RevokeCompleted(address,uint256)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "RevokeRequested"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "RevokeRequested(address,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "UserRegistered"): EventFragment;
   getEvent(
@@ -451,18 +284,6 @@ export type ClaimedEvent = TypedEvent<[string, BigNumber], ClaimedEventObject>;
 
 export type ClaimedEventFilter = TypedEventFilter<ClaimedEvent>;
 
-export interface ConservatorUpdatedEventObject {
-  old: string;
-  _new: string;
-}
-export type ConservatorUpdatedEvent = TypedEvent<
-  [string, string],
-  ConservatorUpdatedEventObject
->;
-
-export type ConservatorUpdatedEventFilter =
-  TypedEventFilter<ConservatorUpdatedEvent>;
-
 export interface OwnershipTransferredEventObject {
   previousOwner: string;
   newOwner: string;
@@ -474,39 +295,6 @@ export type OwnershipTransferredEvent = TypedEvent<
 
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
-
-export interface PausedUpdatedEventObject {
-  oldState: boolean;
-  newState: boolean;
-}
-export type PausedUpdatedEvent = TypedEvent<
-  [boolean, boolean],
-  PausedUpdatedEventObject
->;
-
-export type PausedUpdatedEventFilter = TypedEventFilter<PausedUpdatedEvent>;
-
-export interface RevokeCompletedEventObject {
-  user: string;
-  timestamp: BigNumber;
-}
-export type RevokeCompletedEvent = TypedEvent<
-  [string, BigNumber],
-  RevokeCompletedEventObject
->;
-
-export type RevokeCompletedEventFilter = TypedEventFilter<RevokeCompletedEvent>;
-
-export interface RevokeRequestedEventObject {
-  user: string;
-  timestamp: BigNumber;
-}
-export type RevokeRequestedEvent = TypedEvent<
-  [string, BigNumber],
-  RevokeRequestedEventObject
->;
-
-export type RevokeRequestedEventFilter = TypedEventFilter<RevokeRequestedEvent>;
 
 export interface UserRegisteredEventObject {
   user: string;
@@ -575,29 +363,18 @@ export interface Vesting extends BaseContract {
 
     "cliff()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    conservator(overrides?: CallOverrides): Promise<[string]>;
-
-    "conservator()"(overrides?: CallOverrides): Promise<[string]>;
-
     duration(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "duration()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "emergencyRevoke(address)"(
-      _user: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "emergencyRevoke()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     init(
+      _token: PromiseOrValue<string>,
       _seededAmount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "init(uint256)"(
+    "init(address,uint256)"(
+      _token: PromiseOrValue<string>,
       _seededAmount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -605,10 +382,6 @@ export interface Vesting extends BaseContract {
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
-
-    paused(overrides?: CallOverrides): Promise<[boolean]>;
-
-    "paused()"(overrides?: CallOverrides): Promise<[boolean]>;
 
     pendingOwner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -626,40 +399,9 @@ export interface Vesting extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "requestEmergencyRevoke()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "requestEmergencyRevoke(address)"(
-      _user: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    revokeRequestedAt(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "revokeRequestedAt()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    revokeTimeWindow(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "revokeTimeWindow()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    revoked(overrides?: CallOverrides): Promise<[boolean]>;
-
-    "revoked()"(overrides?: CallOverrides): Promise<[boolean]>;
-
     seeded(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "seeded()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    setConservator(
-      _conservator: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setConservator(address)"(
-      _conservator: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
 
     start(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -684,16 +426,6 @@ export interface Vesting extends BaseContract {
       newOwner: PromiseOrValue<string>,
       direct: PromiseOrValue<boolean>,
       renounce: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    updatePause(
-      val: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "updatePause(bool)"(
-      val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -756,29 +488,18 @@ export interface Vesting extends BaseContract {
 
   "cliff()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-  conservator(overrides?: CallOverrides): Promise<string>;
-
-  "conservator()"(overrides?: CallOverrides): Promise<string>;
-
   duration(overrides?: CallOverrides): Promise<BigNumber>;
 
   "duration()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-  "emergencyRevoke(address)"(
-    _user: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "emergencyRevoke()"(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   init(
+    _token: PromiseOrValue<string>,
     _seededAmount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "init(uint256)"(
+  "init(address,uint256)"(
+    _token: PromiseOrValue<string>,
     _seededAmount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -786,10 +507,6 @@ export interface Vesting extends BaseContract {
   owner(overrides?: CallOverrides): Promise<string>;
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
-
-  paused(overrides?: CallOverrides): Promise<boolean>;
-
-  "paused()"(overrides?: CallOverrides): Promise<boolean>;
 
   pendingOwner(overrides?: CallOverrides): Promise<string>;
 
@@ -807,40 +524,9 @@ export interface Vesting extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "requestEmergencyRevoke()"(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "requestEmergencyRevoke(address)"(
-    _user: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  revokeRequestedAt(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "revokeRequestedAt()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  revokeTimeWindow(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "revokeTimeWindow()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  revoked(overrides?: CallOverrides): Promise<boolean>;
-
-  "revoked()"(overrides?: CallOverrides): Promise<boolean>;
-
   seeded(overrides?: CallOverrides): Promise<BigNumber>;
 
   "seeded()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  setConservator(
-    _conservator: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setConservator(address)"(
-    _conservator: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
 
   start(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -865,16 +551,6 @@ export interface Vesting extends BaseContract {
     newOwner: PromiseOrValue<string>,
     direct: PromiseOrValue<boolean>,
     renounce: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  updatePause(
-    val: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "updatePause(bool)"(
-    val: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -929,27 +605,18 @@ export interface Vesting extends BaseContract {
 
     "cliff()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    conservator(overrides?: CallOverrides): Promise<string>;
-
-    "conservator()"(overrides?: CallOverrides): Promise<string>;
-
     duration(overrides?: CallOverrides): Promise<BigNumber>;
 
     "duration()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "emergencyRevoke(address)"(
-      _user: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "emergencyRevoke()"(overrides?: CallOverrides): Promise<void>;
-
     init(
+      _token: PromiseOrValue<string>,
       _seededAmount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "init(uint256)"(
+    "init(address,uint256)"(
+      _token: PromiseOrValue<string>,
       _seededAmount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -957,10 +624,6 @@ export interface Vesting extends BaseContract {
     owner(overrides?: CallOverrides): Promise<string>;
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
-
-    paused(overrides?: CallOverrides): Promise<boolean>;
-
-    "paused()"(overrides?: CallOverrides): Promise<boolean>;
 
     pendingOwner(overrides?: CallOverrides): Promise<string>;
 
@@ -978,38 +641,9 @@ export interface Vesting extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "requestEmergencyRevoke()"(overrides?: CallOverrides): Promise<void>;
-
-    "requestEmergencyRevoke(address)"(
-      _user: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    revokeRequestedAt(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "revokeRequestedAt()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    revokeTimeWindow(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "revokeTimeWindow()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    revoked(overrides?: CallOverrides): Promise<boolean>;
-
-    "revoked()"(overrides?: CallOverrides): Promise<boolean>;
-
     seeded(overrides?: CallOverrides): Promise<BigNumber>;
 
     "seeded()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    setConservator(
-      _conservator: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setConservator(address)"(
-      _conservator: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     start(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1034,16 +668,6 @@ export interface Vesting extends BaseContract {
       newOwner: PromiseOrValue<string>,
       direct: PromiseOrValue<boolean>,
       renounce: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    updatePause(
-      val: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "updatePause(bool)"(
-      val: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1089,15 +713,6 @@ export interface Vesting extends BaseContract {
       amount?: null
     ): ClaimedEventFilter;
 
-    "ConservatorUpdated(address,address)"(
-      old?: PromiseOrValue<string> | null,
-      _new?: PromiseOrValue<string> | null
-    ): ConservatorUpdatedEventFilter;
-    ConservatorUpdated(
-      old?: PromiseOrValue<string> | null,
-      _new?: PromiseOrValue<string> | null
-    ): ConservatorUpdatedEventFilter;
-
     "OwnershipTransferred(address,address)"(
       previousOwner?: PromiseOrValue<string> | null,
       newOwner?: PromiseOrValue<string> | null
@@ -1106,30 +721,6 @@ export interface Vesting extends BaseContract {
       previousOwner?: PromiseOrValue<string> | null,
       newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
-
-    "PausedUpdated(bool,bool)"(
-      oldState?: null,
-      newState?: null
-    ): PausedUpdatedEventFilter;
-    PausedUpdated(oldState?: null, newState?: null): PausedUpdatedEventFilter;
-
-    "RevokeCompleted(address,uint256)"(
-      user?: PromiseOrValue<string> | null,
-      timestamp?: null
-    ): RevokeCompletedEventFilter;
-    RevokeCompleted(
-      user?: PromiseOrValue<string> | null,
-      timestamp?: null
-    ): RevokeCompletedEventFilter;
-
-    "RevokeRequested(address,uint256)"(
-      user?: PromiseOrValue<string> | null,
-      timestamp?: null
-    ): RevokeRequestedEventFilter;
-    RevokeRequested(
-      user?: PromiseOrValue<string> | null,
-      timestamp?: null
-    ): RevokeRequestedEventFilter;
 
     "UserRegistered(address,uint256)"(
       user?: PromiseOrValue<string> | null,
@@ -1169,29 +760,18 @@ export interface Vesting extends BaseContract {
 
     "cliff()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    conservator(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "conservator()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     duration(overrides?: CallOverrides): Promise<BigNumber>;
 
     "duration()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "emergencyRevoke(address)"(
-      _user: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "emergencyRevoke()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     init(
+      _token: PromiseOrValue<string>,
       _seededAmount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "init(uint256)"(
+    "init(address,uint256)"(
+      _token: PromiseOrValue<string>,
       _seededAmount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -1199,10 +779,6 @@ export interface Vesting extends BaseContract {
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    paused(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "paused()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1220,40 +796,9 @@ export interface Vesting extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "requestEmergencyRevoke()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "requestEmergencyRevoke(address)"(
-      _user: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    revokeRequestedAt(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "revokeRequestedAt()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    revokeTimeWindow(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "revokeTimeWindow()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    revoked(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "revoked()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     seeded(overrides?: CallOverrides): Promise<BigNumber>;
 
     "seeded()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    setConservator(
-      _conservator: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setConservator(address)"(
-      _conservator: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
 
     start(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1278,16 +823,6 @@ export interface Vesting extends BaseContract {
       newOwner: PromiseOrValue<string>,
       direct: PromiseOrValue<boolean>,
       renounce: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    updatePause(
-      val: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "updatePause(bool)"(
-      val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1337,29 +872,18 @@ export interface Vesting extends BaseContract {
 
     "cliff()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    conservator(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "conservator()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     duration(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "duration()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "emergencyRevoke(address)"(
-      _user: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "emergencyRevoke()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     init(
+      _token: PromiseOrValue<string>,
       _seededAmount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "init(uint256)"(
+    "init(address,uint256)"(
+      _token: PromiseOrValue<string>,
       _seededAmount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -1367,10 +891,6 @@ export interface Vesting extends BaseContract {
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    paused(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "paused()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -1388,44 +908,9 @@ export interface Vesting extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "requestEmergencyRevoke()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "requestEmergencyRevoke(address)"(
-      _user: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    revokeRequestedAt(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "revokeRequestedAt()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    revokeTimeWindow(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "revokeTimeWindow()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    revoked(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "revoked()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     seeded(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "seeded()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    setConservator(
-      _conservator: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setConservator(address)"(
-      _conservator: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
 
     start(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -1450,16 +935,6 @@ export interface Vesting extends BaseContract {
       newOwner: PromiseOrValue<string>,
       direct: PromiseOrValue<boolean>,
       renounce: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    updatePause(
-      val: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "updatePause(bool)"(
-      val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
