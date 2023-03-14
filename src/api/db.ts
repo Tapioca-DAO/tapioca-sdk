@@ -32,6 +32,17 @@ export const LOCAL_DB_PATH = './local__db';
  */
 
 /**
+ * Read a deployment from the local database
+ *
+ * @param tag The tag to read the database under
+ * @param chainId The chain ID to read the database under
+ * @returns List of deployed contracts
+ */
+export const loadLocalDeployment = (tag: string, chainId: string) => {
+    return (readDeployment('local', { tag, chainId }) as TContract[]) ?? [];
+};
+
+/**
  * Get a deployed contract on the local database
  * @param tag The tag to read the database under
  * @param chainId The chain ID to read the database under
