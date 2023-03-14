@@ -19,6 +19,9 @@ export const getLocalContract = async <T extends Contract>(
         contractName,
         tag,
     );
+    if (!deployment) {
+        throw new Error(`[-] SDK: Contract ${contractName} not found`);
+    }
     const contract = (await hre.ethers.getContractAt(
         deployment.name,
         deployment.address,
