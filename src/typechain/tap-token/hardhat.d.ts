@@ -33,6 +33,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapiocaOptionLiquidityProvision__factory>;
     getContractFactory(
+      name: "TapiocaDeployer",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TapiocaDeployer__factory>;
+    getContractFactory(
       name: "ERC20Mock",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC20Mock__factory>;
@@ -70,6 +74,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TapiocaOptionLiquidityProvision>;
+    getContractAt(
+      name: "TapiocaDeployer",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TapiocaDeployer>;
     getContractAt(
       name: "ERC20Mock",
       address: string,

@@ -3,4 +3,5 @@
 /* eslint-disable */
 export * as options from "./options";
 export * as tokens from "./tokens";
+export { TapiocaDeployer__factory } from "./TapiocaDeployer__factory";
 export { Vesting__factory } from "./Vesting__factory";
