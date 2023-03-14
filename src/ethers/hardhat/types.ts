@@ -6,12 +6,14 @@ import 'hardhat/types/config';
 import 'hardhat/types/runtime';
 
 import * as exportSDK from '../../api/exportSDK';
+import { DeployerVM } from './DeployerVM';
 import * as config from '../../api/config';
 import * as utils from '../../api/utils';
 import * as db from '../../api/db';
 import { TProjectCaller } from '../../shared';
 
 const SDK = {
+    DeployerVM,
     exportSDK,
     config,
     utils,
