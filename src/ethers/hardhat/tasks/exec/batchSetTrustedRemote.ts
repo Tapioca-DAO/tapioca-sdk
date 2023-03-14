@@ -1,6 +1,8 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { TLocalDeployment } from '../../../../shared';
 import { TapiocaOFT__factory } from '../../../../typechain';
+import { Multicall3 } from '../../../../typechain/utils/MultiCall';
+import { Multicall3__factory } from '../../../../typechain/utils/MultiCall/factories';
 
 // npx hardhat BatchSetTrustedRemote --network arbitrum_goerli --contract 'MarketsProxy'
 export const BatchSetTrustedRemote__task = async (
@@ -44,21 +46,26 @@ export const BatchSetTrustedRemote__task = async (
         );
     });
 
-    let sum = 0;
-    for (let i = 0; i < chainTransactions.length; i++) {
-        const crtTx = chainTransactions[i];
+    const calls: Multicall3.Call3Struct[] = [];
+    for (const entry of chainTransactions) {
         const ctr = await hre.ethers.getContractAt(
             taskArgs.contract,
-            crtTx.srcAddress,
+            entry.srcAddress,
         );
-        await (
-            await ctr.setTrustedRemote(
-                crtTx.dstLzChain,
-                crtTx.trustedRemotePath,
-            )
-        ).wait(2);
-        console.log(`\t* Executed ${i}`);
-        sum += 1;
+        calls.push({
+            target: entry.srcAddress,
+            callData: ctr.interface.encodeFunctionData('setTrustedRemote', [
+                entry.dstLzChain,
+                entry.trustedRemotePath,
+            ]),
+            allowFailure: false,
+        });
     }
-    console.log(`[+] Executed ${sum} transactions`);
+    const multicall = Multicall3__factory.connect(
+        hre.SDK.config.MULTICALL_ADDRESS,
+        hre.ethers.provider,
+    );
+
+    const tx = await (await multicall.aggregate3(calls)).wait(3);
+    console.log('[+] Batch call Tx: ', tx.transactionHash);
 };

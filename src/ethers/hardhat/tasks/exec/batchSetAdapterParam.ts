@@ -1,6 +1,8 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { TLocalDeployment } from '../../../../shared';
 import { TapiocaOFT__factory } from '../../../../typechain';
+import { Multicall3 } from '../../../../typechain/utils/MultiCall';
+import { Multicall3__factory } from '../../../../typechain/utils/MultiCall/factories';
 
 // npx hardhat batchSetAdapterParam --network arbitrum_goerli --contract 'USD0'
 export const batchSetAdapterParam__task = async (
@@ -47,31 +49,38 @@ export const batchSetAdapterParam__task = async (
         );
     });
 
-    let sum = 0;
-    for (let i = 0; i < chainTransactions.length; i++) {
-        const crtTx = chainTransactions[i];
+    const calls: Multicall3.Call3Struct[] = [];
+    for (const entry of chainTransactions) {
         const ctr = await hre.ethers.getContractAt(
             taskArgs.contract,
-            crtTx.srcAddress,
+            entry.srcAddress,
         );
-
-        await (await ctr.setUseCustomAdapterParams(true)).wait(2);
-
-        for (
-            let packetIndex = 0;
-            packetIndex < crtTx.packetTypesTxs.length;
-            packetIndex++
-        ) {
-            await (
-                await ctr.setMinDstGas(
-                    crtTx.dstLzChain,
-                    crtTx.packetTypesTxs[packetIndex],
+        calls.push({
+            target: entry.srcAddress,
+            callData: ctr.interface.encodeFunctionData(
+                'setUseCustomAdapterParams',
+                [true],
+            ),
+            allowFailure: false,
+        });
+        for (const packetType of entry.packetTypesTxs) {
+            calls.push({
+                target: entry.srcAddress,
+                callData: ctr.interface.encodeFunctionData('setMinDstGas', [
+                    entry.dstLzChain,
+                    packetType,
                     200000,
-                )
-            ).wait(2);
+                ]),
+                allowFailure: false,
+            });
         }
-        console.log(`\t* Executed ${i}`);
-        sum += 1;
     }
-    console.log(`[+] Executed ${sum} transactions`);
+
+    const multicall = Multicall3__factory.connect(
+        hre.SDK.config.MULTICALL_ADDRESS,
+        hre.ethers.provider,
+    );
+
+    const tx = await (await multicall.aggregate3(calls)).wait(3);
+    console.log('[+] Batch call Tx: ', tx.transactionHash);
 };
