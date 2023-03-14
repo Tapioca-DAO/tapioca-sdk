@@ -119,8 +119,9 @@ export const saveGlobally = (
     const db = readDB('global') ?? {};
     const prevDep = db[tag]?.[project] || {}; // Read previous deployments
 
+    const saveDbPath = './gitsub_tapioca-sdk/src/global__db';
     // Save previous deployments in a backup file
-    if (db[tag]?.[project]) writeDB('global', db, `${GLOBAL_DB_PATH}.bak`);
+    if (db[tag]?.[project]) writeDB('global', db, `${saveDbPath}.bak`);
 
     // Merge prev and new deployments
     const deployments = mergeDeployments(data, prevDep);
@@ -129,7 +130,7 @@ export const saveGlobally = (
     writeDB(
         'global',
         { ...db, [tag]: { ...db[tag], ...deployments } },
-        GLOBAL_DB_PATH,
+        saveDbPath,
     );
     return deployments;
 };
