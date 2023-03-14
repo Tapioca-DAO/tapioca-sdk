@@ -22,6 +22,7 @@ export interface TDeploymentVMContract extends TContract {
 }
 
 interface IConstructorOptions {
+    bytecodeSizeLimit: number; // Limit of bytecode size for a single transaction, error happened on Arb Goerli with Alchemy RPC
     multicall: Multicall3;
     tag?: string;
 }
@@ -38,12 +39,12 @@ export interface IDeployerVMAdd<T extends ContractFactory>
  * Class to deploy contracts using the TapiocaDeployer & Multicall3 to aggregate deployments in a single transaction.
  * @param hre HardhatRuntimeEnvironment instance of Hardhat.
  * @param options Options to use.
+ * @param options.bytecodeSizeLimit Limit of bytecode size for a single transaction, if RPC provider is not able to handle it, error will be thrown.
  * @param options.tag Tag to use for the deployment. If not provided, 'default' will be used (Per SDK).
  * @param options.multicall Multicall3 instance to use for the deployment.
  *
  */
 export class DeployerVM {
-    private readonly bytecodeSizeLimit = 100_000; // Limit of bytecode size for a single transaction, error happened on Arb Goerli with Alchemy RPC
     private tapiocaDeployer?: TapiocaDeployer;
 
     hre: HardhatRuntimeEnvironment;
@@ -296,7 +297,7 @@ export class DeployerVM {
             // Check if we need to create a new batch
             if (
                 currentByteCodeSize + callData.length >
-                this.bytecodeSizeLimit
+                this.options.bytecodeSizeLimit
             ) {
                 currentByteCodeSize = 0;
                 currentBatch++;
