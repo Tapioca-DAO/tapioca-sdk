@@ -5,6 +5,7 @@ import { setTrustedRemote__task } from './tasks/exec/setTrustedRemote';
 import { ConfigurableTaskDefinition } from 'hardhat/types';
 import { batchSetAdapterParam__task } from './tasks/exec/batchSetAdapterParam';
 import { BatchSetTrustedRemote__task } from './tasks/exec/batchSetTrustedRemote';
+import { getChains__task } from './tasks/view/getChains';
 
 const addCliParams = (task: ConfigurableTaskDefinition) => {
     return task.addOptionalParam(
@@ -13,6 +14,9 @@ const addCliParams = (task: ConfigurableTaskDefinition) => {
     );
 };
 
+/**
+ * Getter tasks
+ */
 addCliParams(
     task(
         'getDeployment',
@@ -30,6 +34,21 @@ addCliParams(
             'The name of the contract to lookup, if not specified, all contracts will be returned',
         ),
 );
+
+task(
+    'getChains',
+    'Get a list of supported chains. If no filter used, returns all chains',
+    getChains__task,
+)
+    .addOptionalParam(
+        'filter',
+        'Type of filter to use, can be one of: "chainId", "lzChainId", "name"',
+    )
+    .addOptionalParam('value', 'Value to filter by');
+
+/**
+ * Exec tasks
+ */
 
 addCliParams(
     task(
