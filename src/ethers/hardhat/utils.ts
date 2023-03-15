@@ -1,5 +1,8 @@
 import { Contract } from 'ethers';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
+import { TapiocaWrapper } from '../../typechain';
+import { TapiocaWrapperInterface } from '../../typechain/TapiocaZ/TapiocaWrapper';
+import { Multicall3 } from '../../typechain/utils/MultiCall';
 
 /**
  * Get a local contract
@@ -27,4 +30,14 @@ export const getLocalContract = async <T extends Contract>(
         deployment.address,
     )) as T;
     return { contract, deployment };
+};
+
+export const transformMulticallToTapiocaWrapper = (
+    multicalls: Multicall3.Call3Struct[],
+): TapiocaWrapper.ExecutionCallStruct[] => {
+    return multicalls.map((m) => ({
+        toft: m.target,
+        bytecode: m.callData,
+        revertOnFailure: m.allowFailure,
+    }));
 };

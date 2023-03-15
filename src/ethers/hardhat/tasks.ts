@@ -55,7 +55,9 @@ addCliParams(
         'batchSetAdapterParam',
         'Sets OFT to use adapter params and the minimum destination gas between all available tOFT contracts for the current chain',
         batchSetAdapterParam__task,
-    ).addParam('contract', 'Contract name to filter by'),
+    )
+        .addParam('contract', 'Contract name to filter by')
+        .addOptionalParam('isToft', 'Use if contract is tOFT'),
 );
 
 addCliParams(
@@ -63,7 +65,9 @@ addCliParams(
         'BatchSetTrustedRemote',
         'Set trusted remote between all available tOFT contracts for the current chain',
         BatchSetTrustedRemote__task,
-    ).addParam('contract', 'Contract name to filter by'),
+    )
+        .addParam('contract', 'Contract name to filter by')
+        .addOptionalParam('isToft', 'Use if contract is tOFT'),
 );
 
 addCliParams(
@@ -77,5 +81,6 @@ addCliParams(
             'Name of the contract to set trusted remote for',
         )
         .addParam('src', 'TapOFT source address')
-        .addParam('dst', 'TapOFT destination address'),
+        .addParam('dst', 'TapOFT destination address')
+        .addOptionalParam('isToft', 'Use if contract is tOFT'),
 );

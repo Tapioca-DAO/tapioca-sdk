@@ -1,4 +1,5 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
+import { TapiocaWrapper } from '../../../../typechain';
 import { TapOFT } from '../../../../typechain/tap-token';
 import { getLocalContract } from '../../utils';
 
@@ -9,6 +10,7 @@ export const setTrustedRemote__task = async (
         contractName: string;
         src: string;
         dst: string;
+        isToft?: string;
         tag?: string;
     },
     hre: HardhatRuntimeEnvironment,
@@ -51,7 +53,24 @@ export const setTrustedRemote__task = async (
                 hre.network.config.chainId,
             ) as keyof typeof hre.SDK.config.NETWORK_MAPPING_CHAIN_TO_LZ
         ];
-    await contract.setTrustedRemote(lzChain, path);
+
+    if (taskArgs.isToft) {
+        const tapiocaWrapper = await getLocalContract<TapiocaWrapper>(
+            hre,
+            'TapiocaWrapper',
+            taskArgs.tag,
+        );
+        await tapiocaWrapper.contract.executeTOFT(
+            contract.address,
+            contract.interface.encodeFunctionData('setTrustedRemote', [
+                lzChain,
+                path,
+            ]),
+            true,
+        );
+    } else {
+        await contract.setTrustedRemote(lzChain, path);
+    }
 
     console.log('[+] Done');
 };
