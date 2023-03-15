@@ -2,6 +2,7 @@ import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { TapiocaOFT__factory, TapiocaWrapper } from '../../../../typechain';
 import { getLocalContract } from '../../utils';
 
+// TODO use the new task arg system
 // to fantom_testnet
 // npx hardhat setTrustedRemote --src 0x2 --dst 0x1  --tag '1.0'
 export const setTrustedRemote__task = async (

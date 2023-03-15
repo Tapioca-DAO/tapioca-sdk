@@ -7,6 +7,7 @@ import {
     transformMulticallToTapiocaWrapper,
 } from '../../utils';
 
+// TODO use the new task arg system
 export const setAdapterParam__task = async (
     taskArgs: {
         src: string;

@@ -9,8 +9,8 @@ import {
     transformMulticallToTapiocaWrapper,
 } from '../../utils';
 
-// npx hardhat BatchSetTrustedRemote --network arbitrum_goerli
-export const BatchSetTrustedRemote__task = async (
+// npx hardhat batchSetTrustedRemote --network arbitrum_goerli
+export const batchSetTrustedRemote__task = async (
     taskArgs: { isToft?: boolean },
     hre: HardhatRuntimeEnvironment,
 ) => {

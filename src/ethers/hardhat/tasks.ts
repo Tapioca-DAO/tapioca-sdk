@@ -1,7 +1,7 @@
 import { task } from 'hardhat/config';
 import { ConfigurableTaskDefinition } from 'hardhat/types';
 import { batchSetAdapterParam__task } from './tasks/exec/batchSetAdapterParam';
-import { BatchSetTrustedRemote__task } from './tasks/exec/batchSetTrustedRemote';
+import { batchSetTrustedRemote__task } from './tasks/exec/batchSetTrustedRemote';
 import { setAdapterParam__task } from './tasks/exec/setAdapterParam';
 import { setTrustedRemote__task } from './tasks/exec/setTrustedRemote';
 import { getChains__task } from './tasks/view/getChains';
@@ -45,7 +45,7 @@ task(
 task(
     'BatchSetTrustedRemote',
     'Set trusted remote between all available tOFT contracts for the current chain',
-    BatchSetTrustedRemote__task,
+    batchSetTrustedRemote__task,
 )
     .addParam('contract', 'Contract name to filter by')
     .addOptionalParam('isToft', 'Use if contract is tOFT');
