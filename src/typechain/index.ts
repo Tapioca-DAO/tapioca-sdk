@@ -1,4 +1,4 @@
-export * as TapiocaZ from './TapiocaZ';
-export *  as TapToken from './tap-token';
-export *  as TapiocaBar from './Tapioca-Bar';
-export * as Multicall from './utils/MultiCall';
+export * as TapiocaZ from './TapiocaZ/factories';
+export *  as TapToken from './tap-token/factories';
+export *  as TapiocaBar from './Tapioca-Bar/factories';
+export * as Multicall from './utils/MultiCall/factories';
