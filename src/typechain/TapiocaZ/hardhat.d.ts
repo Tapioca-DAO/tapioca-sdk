@@ -13,6 +13,14 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "BaseTOFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseTOFT__factory>;
+    getContractFactory(
+      name: "MTapiocaOFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MTapiocaOFT__factory>;
+    getContractFactory(
       name: "TapiocaOFT",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapiocaOFT__factory>;
@@ -21,6 +29,16 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapiocaWrapper__factory>;
 
+    getContractAt(
+      name: "BaseTOFT",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseTOFT>;
+    getContractAt(
+      name: "MTapiocaOFT",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MTapiocaOFT>;
     getContractAt(
       name: "TapiocaOFT",
       address: string,
