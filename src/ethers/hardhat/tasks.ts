@@ -92,3 +92,15 @@ addCliParams(
         .addParam('dst', 'TapOFT destination address')
         .addOptionalParam('isToft', 'Use if contract is tOFT'),
 );
+
+addCliParams(
+    task(
+        'toftSendFrom',
+        'Calls toftSendFrom on tOFT contract',
+        setAdapterParam__task,
+    )
+        .addParam('contractName', 'Name of the contract')
+        .addParam('src', 'Name of the source chain')
+        .addParam('dst', 'Name of the destination chain')
+        .addParam('value', 'Amount to send, (ex: 1.45)'),
+);

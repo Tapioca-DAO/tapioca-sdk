@@ -1,6 +1,5 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { TapiocaOFT__factory, TapiocaWrapper } from '../../../../typechain';
-import { TapOFT } from '../../../../typechain/tap-token';
 import { getLocalContract } from '../../utils';
 
 // to fantom_testnet
