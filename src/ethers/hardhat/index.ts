@@ -1,3 +1,3 @@
-import './types';
-import './tasks';
 import './DeployerVM';
+import './tasks';
+import './types';

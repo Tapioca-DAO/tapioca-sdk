@@ -29,13 +29,14 @@ export const getLZChainIDs = () => SUPPORTED_CHAINS.map((e) => e.lzChainId);
  **/
 export const getChainIDs = () => SUPPORTED_CHAINS.map((e) => e.chainId);
 
+export type TGET_CHAIN_BY_FILTER = 'chainId' | 'lzChainId' | 'name';
 /**
  * Returns a chain info for a given `chainId` or `lzChainId` or `name`.
  * @param getBy - The filter to use.
  * @param value - The value to filter by.
  **/
 export const getChainBy = (
-    getBy: 'chainId' | 'lzChainId' | 'name',
+    getBy: TGET_CHAIN_BY_FILTER,
     value: keyof typeof SUPPORTED_CHAINS | string,
 ) => {
     return _find(SUPPORTED_CHAINS, (e) => e[getBy] === value);
