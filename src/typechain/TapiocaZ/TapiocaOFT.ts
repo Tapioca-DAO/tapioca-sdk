@@ -42,6 +42,27 @@ export declare namespace ICommonOFT {
   };
 }
 
+export declare namespace BaseTOFT {
+  export type SendOptionsStruct = {
+    extraGasLimit: PromiseOrValue<BigNumberish>;
+    zroPaymentAddress: PromiseOrValue<string>;
+    strategyDeposit: PromiseOrValue<boolean>;
+    wrap: PromiseOrValue<boolean>;
+  };
+
+  export type SendOptionsStructOutput = [
+    BigNumber,
+    string,
+    boolean,
+    boolean
+  ] & {
+    extraGasLimit: BigNumber;
+    zroPaymentAddress: string;
+    strategyDeposit: boolean;
+    wrap: boolean;
+  };
+}
+
 export interface TapiocaOFTInterface extends utils.Interface {
   functions: {
     "DEFAULT_PAYLOAD_SIZE_LIMIT()": FunctionFragment;
@@ -92,7 +113,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
-    "sendToYB(uint256,uint256,uint16,uint256,address,bool)": FunctionFragment;
+    "sendToYB(uint256,uint256,uint16,(uint256,address,bool,bool))": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
     "setPayloadSizeLimit(uint16,uint256)": FunctionFragment;
@@ -220,7 +241,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
       | "sendFrom"
       | "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"
       | "sendToYB"
-      | "sendToYB(uint256,uint256,uint16,uint256,address,bool)"
+      | "sendToYB(uint256,uint256,uint16,(uint256,address,bool,bool))"
       | "setConfig"
       | "setConfig(uint16,uint16,uint256,bytes)"
       | "setMinDstGas"
@@ -800,20 +821,16 @@ export interface TapiocaOFTInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<boolean>
+      BaseTOFT.SendOptionsStruct
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "sendToYB(uint256,uint256,uint16,uint256,address,bool)",
+    functionFragment: "sendToYB(uint256,uint256,uint16,(uint256,address,bool,bool))",
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<boolean>
+      BaseTOFT.SendOptionsStruct
     ]
   ): string;
   encodeFunctionData(
@@ -1347,7 +1364,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "sendToYB", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "sendToYB(uint256,uint256,uint16,uint256,address,bool)",
+    functionFragment: "sendToYB(uint256,uint256,uint16,(uint256,address,bool,bool))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "setConfig", data: BytesLike): Result;
@@ -2363,19 +2380,15 @@ export interface TapiocaOFT extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      extraGasLimit: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      strategyDeposit: PromiseOrValue<boolean>,
+      options: BaseTOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "sendToYB(uint256,uint256,uint16,uint256,address,bool)"(
+    "sendToYB(uint256,uint256,uint16,(uint256,address,bool,bool))"(
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      extraGasLimit: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      strategyDeposit: PromiseOrValue<boolean>,
+      options: BaseTOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -3114,19 +3127,15 @@ export interface TapiocaOFT extends BaseContract {
     amount: PromiseOrValue<BigNumberish>,
     assetId: PromiseOrValue<BigNumberish>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
-    extraGasLimit: PromiseOrValue<BigNumberish>,
-    zroPaymentAddress: PromiseOrValue<string>,
-    strategyDeposit: PromiseOrValue<boolean>,
+    options: BaseTOFT.SendOptionsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "sendToYB(uint256,uint256,uint16,uint256,address,bool)"(
+  "sendToYB(uint256,uint256,uint16,(uint256,address,bool,bool))"(
     amount: PromiseOrValue<BigNumberish>,
     assetId: PromiseOrValue<BigNumberish>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
-    extraGasLimit: PromiseOrValue<BigNumberish>,
-    zroPaymentAddress: PromiseOrValue<string>,
-    strategyDeposit: PromiseOrValue<boolean>,
+    options: BaseTOFT.SendOptionsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3859,19 +3868,15 @@ export interface TapiocaOFT extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      extraGasLimit: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      strategyDeposit: PromiseOrValue<boolean>,
+      options: BaseTOFT.SendOptionsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "sendToYB(uint256,uint256,uint16,uint256,address,bool)"(
+    "sendToYB(uint256,uint256,uint16,(uint256,address,bool,bool))"(
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      extraGasLimit: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      strategyDeposit: PromiseOrValue<boolean>,
+      options: BaseTOFT.SendOptionsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4778,19 +4783,15 @@ export interface TapiocaOFT extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      extraGasLimit: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      strategyDeposit: PromiseOrValue<boolean>,
+      options: BaseTOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "sendToYB(uint256,uint256,uint16,uint256,address,bool)"(
+    "sendToYB(uint256,uint256,uint16,(uint256,address,bool,bool))"(
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      extraGasLimit: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      strategyDeposit: PromiseOrValue<boolean>,
+      options: BaseTOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5540,19 +5541,15 @@ export interface TapiocaOFT extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      extraGasLimit: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      strategyDeposit: PromiseOrValue<boolean>,
+      options: BaseTOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "sendToYB(uint256,uint256,uint16,uint256,address,bool)"(
+    "sendToYB(uint256,uint256,uint16,(uint256,address,bool,bool))"(
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      extraGasLimit: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      strategyDeposit: PromiseOrValue<boolean>,
+      options: BaseTOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

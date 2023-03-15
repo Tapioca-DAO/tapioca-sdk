@@ -28,9 +28,24 @@ import type {
   PromiseOrValue,
 } from "./common";
 
+export declare namespace TapiocaWrapper {
+  export type ExecutionCallStruct = {
+    toft: PromiseOrValue<string>;
+    bytecode: PromiseOrValue<BytesLike>;
+    revertOnFailure: PromiseOrValue<boolean>;
+  };
+
+  export type ExecutionCallStructOutput = [string, string, boolean] & {
+    toft: string;
+    bytecode: string;
+    revertOnFailure: boolean;
+  };
+}
+
 export interface TapiocaWrapperInterface extends utils.Interface {
   functions: {
     "createTOFT(address,bytes,bytes32,bool)": FunctionFragment;
+    "executeCalls((address,bytes,bool)[])": FunctionFragment;
     "executeTOFT(address,bytes,bool)": FunctionFragment;
     "harvestFees()": FunctionFragment;
     "harvestableTapiocaOFTsLength()": FunctionFragment;
@@ -49,6 +64,8 @@ export interface TapiocaWrapperInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "createTOFT"
       | "createTOFT(address,bytes,bytes32,bool)"
+      | "executeCalls"
+      | "executeCalls((address,bytes,bool)[])"
       | "executeTOFT"
       | "executeTOFT(address,bytes,bool)"
       | "harvestFees"
@@ -92,6 +109,14 @@ export interface TapiocaWrapperInterface extends utils.Interface {
       PromiseOrValue<BytesLike>,
       PromiseOrValue<boolean>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "executeCalls",
+    values: [TapiocaWrapper.ExecutionCallStruct[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "executeCalls((address,bytes,bool)[])",
+    values: [TapiocaWrapper.ExecutionCallStruct[]]
   ): string;
   encodeFunctionData(
     functionFragment: "executeTOFT",
@@ -189,6 +214,14 @@ export interface TapiocaWrapperInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "createTOFT", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "createTOFT(address,bytes,bytes32,bool)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "executeCalls",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "executeCalls((address,bytes,bool)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -364,6 +397,16 @@ export interface TapiocaWrapper extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    executeCalls(
+      _call: TapiocaWrapper.ExecutionCallStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "executeCalls((address,bytes,bool)[])"(
+      _call: TapiocaWrapper.ExecutionCallStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     executeTOFT(
       _toft: PromiseOrValue<string>,
       _bytecode: PromiseOrValue<BytesLike>,
@@ -471,6 +514,16 @@ export interface TapiocaWrapper extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  executeCalls(
+    _call: TapiocaWrapper.ExecutionCallStruct[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "executeCalls((address,bytes,bool)[])"(
+    _call: TapiocaWrapper.ExecutionCallStruct[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   executeTOFT(
     _toft: PromiseOrValue<string>,
     _bytecode: PromiseOrValue<BytesLike>,
@@ -575,6 +628,16 @@ export interface TapiocaWrapper extends BaseContract {
       _linked: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    executeCalls(
+      _call: TapiocaWrapper.ExecutionCallStruct[],
+      overrides?: CallOverrides
+    ): Promise<[boolean, string[]] & { success: boolean; results: string[] }>;
+
+    "executeCalls((address,bytes,bool)[])"(
+      _call: TapiocaWrapper.ExecutionCallStruct[],
+      overrides?: CallOverrides
+    ): Promise<[boolean, string[]] & { success: boolean; results: string[] }>;
 
     executeTOFT(
       _toft: PromiseOrValue<string>,
@@ -708,6 +771,16 @@ export interface TapiocaWrapper extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    executeCalls(
+      _call: TapiocaWrapper.ExecutionCallStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "executeCalls((address,bytes,bool)[])"(
+      _call: TapiocaWrapper.ExecutionCallStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     executeTOFT(
       _toft: PromiseOrValue<string>,
       _bytecode: PromiseOrValue<BytesLike>,
@@ -812,6 +885,16 @@ export interface TapiocaWrapper extends BaseContract {
       _salt: PromiseOrValue<BytesLike>,
       _linked: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    executeCalls(
+      _call: TapiocaWrapper.ExecutionCallStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "executeCalls((address,bytes,bool)[])"(
+      _call: TapiocaWrapper.ExecutionCallStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     executeTOFT(
