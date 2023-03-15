@@ -1,5 +1,8 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
-import { TapiocaOFT__factory, TapiocaWrapper } from '../../../../typechain';
+import {
+    TapiocaOFT__factory,
+    TapiocaWrapper,
+} from '../../../../typechain/TapiocaZ';
 import { Multicall3 } from '../../../../typechain/utils/MultiCall';
 import { Multicall3__factory } from '../../../../typechain/utils/MultiCall/factories';
 import {

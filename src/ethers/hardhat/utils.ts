@@ -1,9 +1,9 @@
 import { Contract } from 'ethers';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
-import { TContract, TLocalDeployment, TProjectCaller } from '../../shared';
-import { TapiocaWrapper } from '../../typechain';
-import { Multicall3 } from '../../typechain/utils/MultiCall';
 import inquirer from 'inquirer';
+import { TContract, TLocalDeployment, TProjectCaller } from '../../shared';
+import { TapiocaWrapper } from '../../typechain/TapiocaZ';
+import { Multicall3 } from '../../typechain/utils/MultiCall';
 
 /**
  * Get a local contract
