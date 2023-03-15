@@ -6,6 +6,7 @@ import { ConfigurableTaskDefinition } from 'hardhat/types';
 import { batchSetAdapterParam__task } from './tasks/exec/batchSetAdapterParam';
 import { BatchSetTrustedRemote__task } from './tasks/exec/batchSetTrustedRemote';
 import { getChains__task } from './tasks/view/getChains';
+import { setAdapterParam__task } from './tasks/exec/setAdapterParam';
 
 const addCliParams = (task: ConfigurableTaskDefinition) => {
     return task.addOptionalParam(
@@ -76,10 +77,17 @@ addCliParams(
         'Calls setTrustedRemote on TapOFT contract',
         setTrustedRemote__task,
     )
-        .addParam(
-            'contractName',
-            'Name of the contract to set trusted remote for',
-        )
+        .addParam('src', 'TapOFT source address')
+        .addParam('dst', 'TapOFT destination address')
+        .addOptionalParam('isToft', 'Use if contract is tOFT'),
+);
+
+addCliParams(
+    task(
+        'setAdapterParam',
+        'Set min dest gas on dst with specific packet types on a TapOFT contract',
+        setAdapterParam__task,
+    )
         .addParam('src', 'TapOFT source address')
         .addParam('dst', 'TapOFT destination address')
         .addOptionalParam('isToft', 'Use if contract is tOFT'),

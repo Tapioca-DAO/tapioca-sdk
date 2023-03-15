@@ -1,7 +1,6 @@
 import { Contract } from 'ethers';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { TapiocaWrapper } from '../../typechain';
-import { TapiocaWrapperInterface } from '../../typechain/TapiocaZ/TapiocaWrapper';
 import { Multicall3 } from '../../typechain/utils/MultiCall';
 
 /**
@@ -17,13 +16,21 @@ export const getLocalContract = async <T extends Contract>(
     contractName: string,
     tag?: string,
 ) => {
+    const chainId = String(hre.network.config.chainId);
     const deployment = hre.SDK.db.getLocalDeployment(
-        String(hre.network.config.chainId),
+        chainId,
         contractName,
         tag,
     );
     if (!deployment) {
-        throw new Error(`[-] SDK: Contract ${contractName} not found`);
+        const availContract = hre.SDK.utils.getContractNamesForChain(
+            chainId,
+            hre.userConfig.SDK.project,
+            { tag, type: 'local' },
+        );
+        throw new Error(
+            `[-] SDK: Contract ${contractName} not found, available contracts: ${availContract}`,
+        );
     }
     const contract = (await hre.ethers.getContractAt(
         deployment.name,

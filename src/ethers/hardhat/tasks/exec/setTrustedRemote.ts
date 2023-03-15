@@ -1,13 +1,12 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
-import { TapiocaWrapper } from '../../../../typechain';
+import { TapiocaOFT__factory, TapiocaWrapper } from '../../../../typechain';
 import { TapOFT } from '../../../../typechain/tap-token';
 import { getLocalContract } from '../../utils';
 
 // to fantom_testnet
-// npx hardhat setTrustedRemote --contractName 'TapOFT'  --src 0x2 --dst 0x1  --tag '1.0'
+// npx hardhat setTrustedRemote --src 0x2 --dst 0x1  --tag '1.0'
 export const setTrustedRemote__task = async (
     taskArgs: {
-        contractName: string;
         src: string;
         dst: string;
         isToft?: string;
@@ -15,38 +14,18 @@ export const setTrustedRemote__task = async (
     },
     hre: HardhatRuntimeEnvironment,
 ) => {
-    console.log('[+] Setting trusted remote for', taskArgs.contractName);
+    console.log('[+] Setting trusted remote for', taskArgs.src);
 
-    const { contract, deployment } = await getLocalContract<TapOFT>(
-        hre,
-        taskArgs.contractName,
-        taskArgs.tag,
+    const contract = TapiocaOFT__factory.connect(
+        taskArgs.src,
+        hre.ethers.provider,
     );
-
-    if (!deployment) {
-        const availContract = hre.SDK.utils
-            .getContractNamesForChain(
-                String(hre.network.config.chainId),
-                hre.userConfig.SDK.project,
-                {
-                    tag: taskArgs.tag,
-                    type: 'local',
-                },
-            )
-            .map((e) => `\t- ${e}\n`);
-        throw new Error(
-            `[-] SDK: Contract not found, available contracts:\n${availContract}`,
-        );
-    }
 
     const path = hre.ethers.utils.solidityPack(
         ['address', 'address'],
         [taskArgs.dst, taskArgs.src],
     );
 
-    console.log(
-        `[+] Setting trusted for ${deployment.name} remote with path ${path}`,
-    );
     const lzChain =
         hre.SDK.config.NETWORK_MAPPING_CHAIN_TO_LZ[
             String(
