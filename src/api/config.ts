@@ -25,6 +25,18 @@ export enum EPacketType {
 }
 
 /**
+ * Map a packet type to a minimum gas amount
+ */
+export const MIN_GAS_FOR_PACKET_TYPE = {
+    [EPacketType.PT_SEND]: 200_000,
+    [EPacketType.PT_SEND_AND_CALL]: 200_000,
+    [EPacketType.PT_YB_SEND_STRAT]: 200_000,
+    [EPacketType.PT_YB_RETRIEVE_STRAT]: 200_000,
+    [EPacketType.PT_YB_DEPOSIT]: 200_000,
+    [EPacketType.PT_YB_WITHDRAW]: 200_000,
+};
+
+/**
  * Tapioca supported chain IDs
  */
 export enum EChainID {
