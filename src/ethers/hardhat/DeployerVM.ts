@@ -256,7 +256,7 @@ export class DeployerVM {
      * Load already deployed contracts.
      * @param deps List of deployed contracts
      */
-    load(deps: TDeploymentVMContract[]) {
+    load(deps: TContract[]) {
         this.executed = true;
         this.depList = deps;
         return this;
