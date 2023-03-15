@@ -1,7 +1,9 @@
 import { Contract } from 'ethers';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
+import { TContract, TLocalDeployment, TProjectCaller } from '../../shared';
 import { TapiocaWrapper } from '../../typechain';
 import { Multicall3 } from '../../typechain/utils/MultiCall';
+import inquirer from 'inquirer';
 
 /**
  * Get a local contract
@@ -47,4 +49,92 @@ export const transformMulticallToTapiocaWrapper = (
         bytecode: m.callData,
         revertOnFailure: m.allowFailure,
     }));
+};
+
+/**
+ * Ask for a tag, if there is no tag, return undefined
+ * @param hre Hardhat runtime environment
+ * @param type Type of tag to ask for, local or global
+ * @returns The tag or undefined
+ */
+export const askForTag = async (
+    hre: HardhatRuntimeEnvironment,
+    type: 'local' | 'global',
+) => {
+    const tags = Object.keys(
+        (hre.SDK.db.readDeployment(type, {}) as TLocalDeployment) ?? {},
+    );
+    if (tags.length === 0) {
+        return;
+    }
+    const { tag } = await inquirer.prompt({
+        type: 'list',
+        name: 'tag',
+        message: `Which ${type} tag to use?`,
+        choices: tags,
+    });
+    return tag as string;
+};
+
+/**
+ * Ask for a project
+ * @param hre Hardhat runtime environment
+ * @returns The project
+ */
+export const askForProject = async (hre: HardhatRuntimeEnvironment) => {
+    const choices = hre.SDK.config.TAPIOCA_PROJECTS;
+
+    const { project } = await inquirer.prompt({
+        type: 'list',
+        name: 'project',
+        message: 'Choose a project',
+        choices,
+    });
+    return project as TProjectCaller;
+};
+
+/**
+ * Ask for one or many deployment. Choose between local and global, and then ask for a project and a tag.
+ * @param hre Hardhat runtime environment
+ * @returns The project
+ */
+export const askForDeployment = async (
+    hre: HardhatRuntimeEnvironment,
+    type: 'local' | 'global',
+) => {
+    const tag = await askForTag(hre, type);
+    const project = await askForProject(hre);
+    const { specific } = await inquirer.prompt({
+        type: 'list',
+        name: 'specific',
+        message: 'Choose a specific contract deployment?',
+        choices: ['All', 'Specific'],
+    });
+
+    const deployments = hre.SDK.db.readDeployment(type, {
+        project,
+        tag,
+        chainId: String(hre.network.config.chainId),
+    }) as TContract[];
+
+    if (specific === 'Specific') {
+        const choices = deployments.map((e) => e.name);
+
+        const { contractName } = await inquirer.prompt({
+            type: 'list',
+            name: 'contractName',
+            message: 'Choose a contract',
+            choices,
+        });
+
+        return {
+            deployments: [
+                deployments.find((e) => e.name === contractName) as TContract,
+            ],
+            project,
+            tag,
+        };
+    }
+
+    return { deployments, project, tag };
 };

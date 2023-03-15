@@ -4,22 +4,26 @@ import { TapiocaOFT__factory, TapiocaWrapper } from '../../../../typechain';
 import { Multicall3 } from '../../../../typechain/utils/MultiCall';
 import { Multicall3__factory } from '../../../../typechain/utils/MultiCall/factories';
 import {
+    askForDeployment,
     getLocalContract,
     transformMulticallToTapiocaWrapper,
 } from '../../utils';
 
-// npx hardhat batchSetAdapterParam --network arbitrum_goerli --contract 'USD0'
+// npx hardhat batchSetAdapterParam --network arbitrum_goerli --isToft?
 export const batchSetAdapterParam__task = async (
-    taskArgs: { contract: string; isToft?: boolean; tag?: string },
+    taskArgs: { isToft?: boolean },
     hre: HardhatRuntimeEnvironment,
 ) => {
-    const { contract, tag } = taskArgs;
+    const {
+        deployments: [deployment],
+        tag,
+    } = await askForDeployment(hre, 'local');
 
-    console.log('[+] Setting adapter params for contract: ', contract);
+    console.log('[+] Setting adapter params for contract: ', deployment.name);
     const currentChainId = String(hre.network.config.chainId);
 
     const oftFactory = (await hre.ethers.getContractFactory(
-        contract as 'TapiocaOFT',
+        'TapiocaOFT',
     )) as TapiocaOFT__factory;
 
     const deployments = hre.SDK.db.readDeployment('local', {
@@ -29,7 +33,7 @@ export const batchSetAdapterParam__task = async (
 
     const oftEntryData = hre.SDK.utils.getTapiocaOFTEntities(
         deployments,
-        taskArgs.contract,
+        deployment.name,
         oftFactory,
     );
     if (!oftEntryData) {
@@ -56,7 +60,7 @@ export const batchSetAdapterParam__task = async (
     const calls: Multicall3.Call3Struct[] = [];
     for (const entry of chainTransactions) {
         const ctr = await hre.ethers.getContractAt(
-            taskArgs.contract,
+            'TapiocaOFT',
             entry.srcAddress,
         );
         calls.push({
