@@ -30,7 +30,7 @@ import type {
 
 export interface TapiocaWrapperInterface extends utils.Interface {
   functions: {
-    "createTOFT(address,bytes,bytes32)": FunctionFragment;
+    "createTOFT(address,bytes,bytes32,bool)": FunctionFragment;
     "executeTOFT(address,bytes,bool)": FunctionFragment;
     "harvestFees()": FunctionFragment;
     "harvestableTapiocaOFTsLength()": FunctionFragment;
@@ -48,7 +48,7 @@ export interface TapiocaWrapperInterface extends utils.Interface {
   getFunction(
     nameOrSignatureOrTopic:
       | "createTOFT"
-      | "createTOFT(address,bytes,bytes32)"
+      | "createTOFT(address,bytes,bytes32,bool)"
       | "executeTOFT"
       | "executeTOFT(address,bytes,bool)"
       | "harvestFees"
@@ -80,15 +80,17 @@ export interface TapiocaWrapperInterface extends utils.Interface {
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BytesLike>,
-      PromiseOrValue<BytesLike>
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<boolean>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "createTOFT(address,bytes,bytes32)",
+    functionFragment: "createTOFT(address,bytes,bytes32,bool)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BytesLike>,
-      PromiseOrValue<BytesLike>
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<boolean>
     ]
   ): string;
   encodeFunctionData(
@@ -186,7 +188,7 @@ export interface TapiocaWrapperInterface extends utils.Interface {
 
   decodeFunctionResult(functionFragment: "createTOFT", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "createTOFT(address,bytes,bytes32)",
+    functionFragment: "createTOFT(address,bytes,bytes32,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -350,13 +352,15 @@ export interface TapiocaWrapper extends BaseContract {
       _erc20: PromiseOrValue<string>,
       _bytecode: PromiseOrValue<BytesLike>,
       _salt: PromiseOrValue<BytesLike>,
+      _linked: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "createTOFT(address,bytes,bytes32)"(
+    "createTOFT(address,bytes,bytes32,bool)"(
       _erc20: PromiseOrValue<string>,
       _bytecode: PromiseOrValue<BytesLike>,
       _salt: PromiseOrValue<BytesLike>,
+      _linked: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -455,13 +459,15 @@ export interface TapiocaWrapper extends BaseContract {
     _erc20: PromiseOrValue<string>,
     _bytecode: PromiseOrValue<BytesLike>,
     _salt: PromiseOrValue<BytesLike>,
+    _linked: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "createTOFT(address,bytes,bytes32)"(
+  "createTOFT(address,bytes,bytes32,bool)"(
     _erc20: PromiseOrValue<string>,
     _bytecode: PromiseOrValue<BytesLike>,
     _salt: PromiseOrValue<BytesLike>,
+    _linked: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -558,13 +564,15 @@ export interface TapiocaWrapper extends BaseContract {
       _erc20: PromiseOrValue<string>,
       _bytecode: PromiseOrValue<BytesLike>,
       _salt: PromiseOrValue<BytesLike>,
+      _linked: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "createTOFT(address,bytes,bytes32)"(
+    "createTOFT(address,bytes,bytes32,bool)"(
       _erc20: PromiseOrValue<string>,
       _bytecode: PromiseOrValue<BytesLike>,
       _salt: PromiseOrValue<BytesLike>,
+      _linked: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -688,13 +696,15 @@ export interface TapiocaWrapper extends BaseContract {
       _erc20: PromiseOrValue<string>,
       _bytecode: PromiseOrValue<BytesLike>,
       _salt: PromiseOrValue<BytesLike>,
+      _linked: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "createTOFT(address,bytes,bytes32)"(
+    "createTOFT(address,bytes,bytes32,bool)"(
       _erc20: PromiseOrValue<string>,
       _bytecode: PromiseOrValue<BytesLike>,
       _salt: PromiseOrValue<BytesLike>,
+      _linked: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -792,13 +802,15 @@ export interface TapiocaWrapper extends BaseContract {
       _erc20: PromiseOrValue<string>,
       _bytecode: PromiseOrValue<BytesLike>,
       _salt: PromiseOrValue<BytesLike>,
+      _linked: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "createTOFT(address,bytes,bytes32)"(
+    "createTOFT(address,bytes,bytes32,bool)"(
       _erc20: PromiseOrValue<string>,
       _bytecode: PromiseOrValue<BytesLike>,
       _salt: PromiseOrValue<BytesLike>,
+      _linked: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
