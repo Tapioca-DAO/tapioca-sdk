@@ -28,9 +28,9 @@ task(
     'getChains',
     'Get a list of supported chains. If no filter used, returns all chains',
     getChains__task,
-).addOptionalParam(
+).addFlag(
     'filter',
-    'Type of filter to use, can be one of: "chainId", "lzChainId", "name"',
+    'Use if you want to filter the list of chains by the current network',
 );
 
 /**
