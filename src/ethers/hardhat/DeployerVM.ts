@@ -2,7 +2,10 @@ import { ContractFactory } from 'ethers';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { v4 as uuidv4 } from 'uuid';
 import { TContract } from '../../shared';
-import { TapiocaDeployer } from '../../typechain/tap-token';
+import {
+    TapiocaDeployer,
+    TapiocaDeployer__factory,
+} from '../../typechain/tap-token';
 import { Multicall3 } from '../../typechain/utils/MultiCall';
 
 interface IDependentOn {
@@ -408,9 +411,9 @@ export class DeployerVM {
         // Deploy TapiocaDeployer if not deployed
         if (!deployment) {
             // Deploy TapiocaDeployer
-            const tapiocaDeployer = await (
-                await this.hre.ethers.getContractFactory('TapiocaDeployer')
-            ).deploy();
+            const tapiocaDeployer =
+                await new TapiocaDeployer__factory().deploy();
+
             await tapiocaDeployer.deployTransaction.wait(3);
 
             // Save deployment
