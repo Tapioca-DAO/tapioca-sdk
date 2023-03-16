@@ -71,8 +71,17 @@ export const askForTag = async (
         type: 'list',
         name: 'tag',
         message: `Which ${type} tag to use?`,
-        choices: tags,
+        choices: [...tags, 'new'],
     });
+    if (tag === 'new') {
+        const { newTag } = await inquirer.prompt({
+            type: 'input',
+            name: 'newTag',
+            message: 'Name of the new tag',
+        });
+        return newTag as string;
+    }
+
     return tag as string;
 };
 
