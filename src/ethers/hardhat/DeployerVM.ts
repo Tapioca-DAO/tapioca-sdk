@@ -424,8 +424,8 @@ export class DeployerVM {
                 chainId: String(this.hre.network.config.chainId),
                 contracts: [
                     {
-                        address: tapiocaDeployer.address,
                         name: 'TapiocaDeployer',
+                        address: tapiocaDeployer.address,
                         meta: {},
                     },
                 ],
