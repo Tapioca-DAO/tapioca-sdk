@@ -57,8 +57,12 @@ export const loadGlobalDeployment = (
     chainId: string,
 ) => {
     return (
-        (readDeployment('global', { tag, chainId, project }) as TContract[]) ??
-        []
+        (readDeployment('global', {
+            tag,
+            chainId,
+            project,
+            customPath: SUBREPO_GLOBAL_DB_PATH,
+        }) as TContract[]) ?? []
     );
 };
 
@@ -145,7 +149,7 @@ export const saveGlobally = (
     const db = readDB('global') ?? {};
     const prevDep = db[tag]?.[project] || {}; // Read previous deployments
 
-    const saveDbPath = './gitsub_tapioca-sdk/src/global__db';
+    const saveDbPath = SUBREPO_GLOBAL_DB_PATH;
     // Save previous deployments in a backup file
     if (db[tag]?.[project]) writeDB('global', db, `${saveDbPath}.bak`);
 
