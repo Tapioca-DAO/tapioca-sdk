@@ -148,7 +148,10 @@ export const saveGlobally = (
     // Save the new deployment
     writeDB(
         'global',
-        { ...db, [tag]: { ...db[tag], ...deployments } },
+        {
+            ...db,
+            [tag]: { ...db[tag], [project]: deployments },
+        },
         saveDbPath,
     );
     return deployments;

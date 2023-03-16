@@ -11,10 +11,6 @@ export const exportSDK__task = async ({}, hre: HardhatRuntimeEnvironment) => {
         tag,
     }) as TLocalDeployment;
 
-    if (!tag) {
-        console.log('[-] No local deployment found. Skipping to typechain');
-    }
-
     const allContracts = (await hre.artifacts.getAllFullyQualifiedNames())
         .filter((e) => e.startsWith('contracts/'))
         .map((e) => e.split(':')[1])
