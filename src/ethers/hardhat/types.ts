@@ -40,6 +40,12 @@ declare module 'hardhat/types/config' {
 extendEnvironment((hre) => {
     // copy reference of config.tracer to tracer
     hre.SDK = SDK;
+    if (hre.network.name === 'hardhat') {
+        console.error(
+            '\x1b[31m',
+            '/!\\ SDK: Currently in Hardhat local network, Tx might not automine and you might get stuck /!\\',
+        );
+    }
 });
 
 extendConfig(
