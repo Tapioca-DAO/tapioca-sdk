@@ -403,8 +403,7 @@ export class DeployerVM {
         // Get deployer deployment
         let deployment: TContract | undefined;
         try {
-            deployment = this.hre.SDK.db.getGlobalDeployment(
-                'tap-token',
+            deployment = this.hre.SDK.db.getLocalDeployment(
                 String(this.hre.network.config.chainId),
                 'TapiocaDeployer',
                 this.options.tag,
