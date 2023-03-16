@@ -1,6 +1,7 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import inquirer from 'inquirer';
 import { ERC20Mock__factory } from '../../../../typechain/tap-token';
+import { askForTag } from '../../utils';
 
 // TODO add a task to free mint
 export const deployERC20Mock__task = async (
@@ -10,6 +11,10 @@ export const deployERC20Mock__task = async (
     hre: HardhatRuntimeEnvironment,
 ) => {
     const { save } = taskArgs;
+    let tag = '';
+    if (save) {
+        tag = await askForTag(hre, 'local');
+    }
 
     const ERC20Mock = new ERC20Mock__factory(
         (await hre.ethers.getSigners())[0],
@@ -43,11 +48,6 @@ export const deployERC20Mock__task = async (
     console.log(`[+] Deployed ${name} at ${ercMock.address}`);
 
     if (save) {
-        const { tag } = await inquirer.prompt({
-            type: 'input',
-            name: 'tag',
-            message: 'Tag of the deployment:',
-        });
         hre.SDK.db.saveLocally(
             hre.SDK.db.buildLocalDeployment({
                 chainId: String(hre.network.config.chainId),

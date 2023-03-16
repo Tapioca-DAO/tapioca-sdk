@@ -65,7 +65,7 @@ export const askForTag = async (
         (hre.SDK.db.readDeployment(type, {}) as TLocalDeployment) ?? {},
     );
     if (tags.length === 0) {
-        return;
+        return 'default';
     }
     const { tag } = await inquirer.prompt({
         type: 'list',
