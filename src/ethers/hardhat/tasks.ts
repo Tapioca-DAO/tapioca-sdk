@@ -2,6 +2,7 @@ import { task } from 'hardhat/config';
 import { ConfigurableTaskDefinition } from 'hardhat/types';
 import { batchSetAdapterParam__task } from './tasks/exec/batchSetAdapterParam';
 import { batchSetTrustedRemote__task } from './tasks/exec/batchSetTrustedRemote';
+import { deployERC20Mock__task } from './tasks/exec/deployERC20Mock';
 import { setAdapterParam__task } from './tasks/exec/setAdapterParam';
 import { setTrustedRemote__task } from './tasks/exec/setTrustedRemote';
 import { getChains__task } from './tasks/view/getChains';
@@ -43,12 +44,18 @@ task(
 ).addFlag('isToft', 'Use if contract is tOFT');
 
 task(
-    'BatchSetTrustedRemote',
+    'batchSetTrustedRemote',
     'Set trusted remote between all available tOFT contracts for the current chain',
     batchSetTrustedRemote__task,
 )
     .addParam('contract', 'Contract name to filter by')
     .addOptionalParam('isToft', 'Use if contract is tOFT');
+
+task(
+    'deployERC20Mock',
+    'Deploys an ERC20 mock contract',
+    deployERC20Mock__task,
+).addFlag('save', 'Save the deployment to the local database');
 
 addCliParams(
     task(
