@@ -335,6 +335,7 @@ export class DeployerVM {
         ]);
     }
 
+    // TODO - Check if it's deployed on the global deployment file, if not, ask to deploy it
     /**
      * Build the creation code for each contract in the queue. For each contract, we check if it has dependencies, and build them deterministically.
      */

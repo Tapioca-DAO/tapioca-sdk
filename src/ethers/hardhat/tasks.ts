@@ -47,9 +47,7 @@ task(
     'batchSetTrustedRemote',
     'Set trusted remote between all available tOFT contracts for the current chain',
     batchSetTrustedRemote__task,
-)
-    .addParam('contract', 'Contract name to filter by')
-    .addOptionalParam('isToft', 'Use if contract is tOFT');
+).addFlag('isToft', 'Use if contract is tOFT');
 
 task(
     'deployERC20Mock',
