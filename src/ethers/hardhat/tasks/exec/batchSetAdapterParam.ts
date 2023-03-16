@@ -49,15 +49,14 @@ export const batchSetAdapterParam__task = async (
     );
 
     console.log(`[+] Total entries: ${chainTransactions.length}`);
+    const chains = hre.SDK.utils.getSupportedChains();
     chainTransactions.forEach((e) => {
         console.log(
             '\t',
             '* Setting ',
-            // @ts-ignore
-            hre.SDK.config.NETWORK_MAPPING_CHAIN_TO_LZ[e.srChain],
+            chains.find((c) => c.chainId == e.srChain)?.name,
             '->',
-            // @ts-ignore
-            hre.SDK.config.NETWORK_MAPPING_CHAIN_TO_LZ[e.dstLzChain],
+            chains.find((c) => c.chainId == e.dstChain)?.name,
         );
     });
 

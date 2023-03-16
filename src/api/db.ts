@@ -230,6 +230,9 @@ export function buildGlobalDatabase(options: {
 
 /**
  * Read the local or global deployment and return a specific format
+ * If no tag is provided, the whole database is returned
+ * If no chainId is provided, the whole tag is returned
+ * If global & no project is provided, the whole tag is returned
  */
 export function readDeployment(
     type: 'local' | 'global',

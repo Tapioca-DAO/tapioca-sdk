@@ -18,6 +18,7 @@ interface IDeploymentQueue {
     contract: ContractFactory;
     args: unknown[];
     dependsOn?: IDependentOn[];
+    meta: any;
 }
 
 export interface TDeploymentVMContract extends TContract {
@@ -115,6 +116,7 @@ export class DeployerVM {
                 name: contract.deploymentName,
                 address: contract.deterministicAddress,
                 meta: {
+                    ...contract.meta,
                     args: contract.args,
                     salt: contract.salt,
                     create2: true,
