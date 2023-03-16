@@ -44,6 +44,24 @@ export const loadLocalDeployment = (tag: string, chainId: string) => {
 };
 
 /**
+ * Read a deployment from the local database
+ *
+ * @param tag The tag to read the database under
+ * @param chainId The chain ID to read the database under
+ * @returns List of deployed contracts
+ */
+export const loadGlobalDeployment = (
+    tag: string,
+    project: TProjectCaller,
+    chainId: string,
+) => {
+    return (
+        (readDeployment('global', { tag, chainId, project }) as TContract[]) ??
+        []
+    );
+};
+
+/**
  * Get a deployed contract on the local database
  * @param tag The tag to read the database under
  * @param chainId The chain ID to read the database under

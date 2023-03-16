@@ -5,6 +5,7 @@ import { batchSetTrustedRemote__task } from './tasks/exec/batchSetTrustedRemote'
 import { deployERC20Mock__task } from './tasks/exec/deployERC20Mock';
 import { setAdapterParam__task } from './tasks/exec/setAdapterParam';
 import { setTrustedRemote__task } from './tasks/exec/setTrustedRemote';
+import { toftSendFrom__task } from './tasks/exec/toftSendFrom';
 import { getChains__task } from './tasks/view/getChains';
 import { getDeployment__task } from './tasks/view/getDeployment';
 
@@ -81,7 +82,7 @@ addCliParams(
     task(
         'toftSendFrom',
         'Calls toftSendFrom on tOFT contract',
-        setAdapterParam__task,
+        toftSendFrom__task,
     )
         .addParam('contractName', 'Name of the contract')
         .addParam('src', 'Name of the source chain')
