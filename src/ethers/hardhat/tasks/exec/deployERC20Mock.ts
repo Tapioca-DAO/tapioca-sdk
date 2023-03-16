@@ -28,7 +28,7 @@ export const deployERC20Mock__task = async (
         },
         {
             type: 'input',
-            name: 'name',
+            name: 'decimals',
             message: 'Decimals of the token:',
         },
     ]);
