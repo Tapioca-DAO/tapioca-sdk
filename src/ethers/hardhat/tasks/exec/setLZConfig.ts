@@ -77,6 +77,7 @@ async function getLinkedContract(
     tag: string,
     contractToConf: TContract,
 ) {
+    // TODO - Could be a util
     const targets: { lzChainId: string; contract: TContract }[] = [];
     const localDeployments = hre.SDK.db.readDeployment('local', {
         tag,
