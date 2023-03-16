@@ -71,11 +71,12 @@ export const getContractNamesForChain = (
     project: TProjectCaller,
     options: { tag?: string; type: 'local' | 'global' },
 ) => {
-    const deployments = db.readDeployment(options.type, {
-        tag: options.tag,
-        chainId,
-        project,
-    }) as TContract[];
+    const deployments =
+        (db.readDeployment(options.type, {
+            tag: options.tag,
+            chainId,
+            project,
+        }) as TContract[]) ?? [];
     return deployments.map((e) => e.name);
 };
 
