@@ -43,7 +43,8 @@ extendEnvironment((hre) => {
     if (hre.network.name === 'hardhat') {
         console.error(
             '\x1b[31m',
-            '/!\\ SDK: Currently in Hardhat local network, Tx might not automine and you might get stuck /!\\',
+            '/!\\ SDK: Currently in Hardhat local network /!\\',
+            '\n Tx related to the SDK might get stuck if the local network does not automine',
         );
     }
 });
