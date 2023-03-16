@@ -412,7 +412,9 @@ export class DeployerVM {
         if (!deployment) {
             // Deploy TapiocaDeployer
             const tapiocaDeployer = await new TapiocaDeployer__factory(
-                this.hre.network.provider,
+                (
+                    await this.hre.ethers.getSigners()
+                )[0],
             ).deploy();
 
             await tapiocaDeployer.deployTransaction.wait(3);
