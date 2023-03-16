@@ -157,14 +157,8 @@ export const saveGlobally = (
     const deployments = mergeDeployments(data, prevDep);
 
     // Save the new deployment
-    writeDB(
-        'global',
-        {
-            ...db,
-            [tag]: { ...db[tag], [project]: deployments },
-        },
-        saveDbPath,
-    );
+    db[tag][project] = deployments;
+    writeDB('global', db, saveDbPath);
     return deployments;
 };
 
