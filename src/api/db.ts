@@ -22,6 +22,7 @@ import {
 
 // In the repo node module
 export const GLOBAL_DB_PATH = './node_modules/tapioca-sdk/src/global__db';
+export const SUBREPO_GLOBAL_DB_PATH = './gitsub_tapioca-sdk/src/global__db';
 
 // Relative to the Hardhat project root
 export const LOCAL_DB_PATH = './local__db';
@@ -96,8 +97,14 @@ export const getGlobalDeployment = (
     chainId: string,
     contractName: string,
     tag = 'default',
+    customPath?: string,
 ) => {
-    const deployments = readDeployment('global', { tag, project, chainId });
+    const deployments = readDeployment('global', {
+        tag,
+        project,
+        chainId,
+        customPath,
+    });
     const contract = _find(deployments, { name: contractName }) as
         | TContract
         | undefined;
@@ -257,21 +264,26 @@ export function buildGlobalDatabase(options: {
  */
 export function readDeployment(
     type: 'local' | 'global',
-    options: { tag?: string; chainId?: string; project?: TProjectCaller },
+    options: {
+        tag?: string;
+        chainId?: string;
+        project?: TProjectCaller;
+        customPath?: string;
+    },
 ) {
     const { tag, chainId, project } = options;
     if (type === 'local') {
-        if (!tag) return readDB(type);
-        if (!chainId) return readDB(type)?.[tag];
+        if (!tag) return readDB(type, options.customPath);
+        if (!chainId) return readDB(type, options.customPath)?.[tag];
 
-        return readDB(type)?.[tag][chainId];
+        return readDB(type, options.customPath)?.[tag][chainId];
     }
 
-    if (!tag) return readDB(type);
-    if (!project) return readDB(type)?.[tag];
-    if (!chainId) return readDB(type)?.[tag][project];
+    if (!tag) return readDB(type, options.customPath);
+    if (!project) return readDB(type, options.customPath)?.[tag];
+    if (!chainId) return readDB(type, options.customPath)?.[tag][project];
 
-    return readDB(type)?.[tag][project]?.[chainId];
+    return readDB(type, options.customPath)?.[tag][project]?.[chainId];
 }
 /**
  * merge 2 deployments, handles arrays
@@ -296,8 +308,12 @@ function mergeDeployments(newest: TLocalDeployment, old: TLocalDeployment) {
  * @param type The type of database to read
  * @returns The database
  */
-function readDB<A extends 'local' | 'global'>(type: A) {
-    const path = type === 'local' ? LOCAL_DB_PATH : GLOBAL_DB_PATH;
+function readDB<A extends 'local' | 'global'>(type: A, customPath?: string) {
+    let path = LOCAL_DB_PATH;
+    path = type === 'local' ? LOCAL_DB_PATH : GLOBAL_DB_PATH;
+    if (customPath) {
+        path = customPath;
+    }
 
     try {
         return JSON.parse(FS.readFileSync(path, 'utf8')) as A extends 'local'
