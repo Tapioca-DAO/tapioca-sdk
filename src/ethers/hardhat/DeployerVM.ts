@@ -437,9 +437,9 @@ export class DeployerVM {
         }
 
         // Return TapiocaDeployer
-        return this.hre.ethers.getContractAt(
-            'TapiocaDeployer',
+        return TapiocaDeployer__factory.connect(
             deployment.address,
+            (await this.hre.ethers.getSigners())[0],
         );
     }
 
