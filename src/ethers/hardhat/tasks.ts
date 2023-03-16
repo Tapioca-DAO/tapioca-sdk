@@ -3,6 +3,7 @@ import { ConfigurableTaskDefinition } from 'hardhat/types';
 import { batchSetAdapterParam__task } from './tasks/exec/batchSetAdapterParam';
 import { batchSetTrustedRemote__task } from './tasks/exec/batchSetTrustedRemote';
 import { deployERC20Mock__task } from './tasks/exec/deployERC20Mock';
+import { exportSDK__task } from './tasks/exec/exportSDK';
 import { setLZConfig__task } from './tasks/exec/setLZConfig';
 import { toftSendFrom__task } from './tasks/exec/toftSendFrom';
 import { getChains__task } from './tasks/view/getChains';
@@ -36,6 +37,12 @@ task(
 /**
  * Exec tasks
  */
+
+task(
+    'exportSDK',
+    'Generate and export the typings and/or addresses for the SDK.',
+    exportSDK__task,
+).addOptionalParam('tag', 'The tag of the deployment.');
 
 task(
     'batchSetAdapterParam',
