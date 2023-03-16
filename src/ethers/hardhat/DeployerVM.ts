@@ -411,8 +411,9 @@ export class DeployerVM {
         // Deploy TapiocaDeployer if not deployed
         if (!deployment) {
             // Deploy TapiocaDeployer
-            const tapiocaDeployer =
-                await new TapiocaDeployer__factory().deploy();
+            const tapiocaDeployer = await new TapiocaDeployer__factory(
+                this.hre.network.provider,
+            ).deploy();
 
             await tapiocaDeployer.deployTransaction.wait(3);
 
