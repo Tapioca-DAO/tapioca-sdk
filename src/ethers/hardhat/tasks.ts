@@ -3,8 +3,7 @@ import { ConfigurableTaskDefinition } from 'hardhat/types';
 import { batchSetAdapterParam__task } from './tasks/exec/batchSetAdapterParam';
 import { batchSetTrustedRemote__task } from './tasks/exec/batchSetTrustedRemote';
 import { deployERC20Mock__task } from './tasks/exec/deployERC20Mock';
-import { setAdapterParam__task } from './tasks/exec/setAdapterParam';
-import { setTrustedRemote__task } from './tasks/exec/setTrustedRemote';
+import { setLZConfig__task } from './tasks/exec/setLZConfig';
 import { toftSendFrom__task } from './tasks/exec/toftSendFrom';
 import { getChains__task } from './tasks/view/getChains';
 import { getDeployment__task } from './tasks/view/getDeployment';
@@ -56,26 +55,9 @@ task(
     deployERC20Mock__task,
 ).addFlag('save', 'Save the deployment to the local database');
 
-addCliParams(
-    task(
-        'setTrustedRemote',
-        'Calls setTrustedRemote on TapOFT contract',
-        setTrustedRemote__task,
-    )
-        .addParam('src', 'TapOFT source address')
-        .addParam('dst', 'TapOFT destination address')
-        .addOptionalParam('isToft', 'Use if contract is tOFT'),
-);
-
-addCliParams(
-    task(
-        'setAdapterParam',
-        'Set min dest gas on dst with specific packet types on a TapOFT contract',
-        setAdapterParam__task,
-    )
-        .addParam('src', 'TapOFT source address')
-        .addParam('dst', 'TapOFT destination address')
-        .addOptionalParam('isToft', 'Use if contract is tOFT'),
+task('setLZConfig', 'Set an LZ app config', setLZConfig__task).addFlag(
+    'isToft',
+    'If the contract to configure is TOFT',
 );
 
 addCliParams(
