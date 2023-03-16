@@ -9,6 +9,7 @@ export const exportSDK__task = async ({}, hre: HardhatRuntimeEnvironment) => {
     const tag = await hre.SDK.hardhatUtils.askForTag(hre, 'local');
     const data = hre.SDK.db.readDeployment('local', {
         tag,
+        customPath: hre.SDK.db.SUBREPO_GLOBAL_DB_PATH,
     }) as TLocalDeployment;
 
     const allContracts = (await hre.artifacts.getAllFullyQualifiedNames())
