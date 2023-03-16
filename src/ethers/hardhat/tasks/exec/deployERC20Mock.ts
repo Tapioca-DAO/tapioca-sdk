@@ -40,6 +40,7 @@ export const deployERC20Mock__task = async (
         decimals,
     );
     await ercMock.deployTransaction.wait(3);
+    console.log(`[+] Deployed ${name} at ${ercMock.address}`);
 
     if (save) {
         const { tag } = await inquirer.prompt({
