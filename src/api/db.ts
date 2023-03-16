@@ -13,6 +13,7 @@ import {
     TProjectCaller,
 } from '../shared';
 
+// TODO - Add a way to overwrite previous deps when merging to not shuffle the order (to not scramble Git diffs)
 /*
  ******************
  * CONSTANTS
