@@ -171,10 +171,16 @@ export class DeployerVM {
             );
         }
         // Execute the calls
-        for (const call of calls) {
-            const tx = await this.options.multicall.aggregate3(call);
-            console.log(`[+] Execution batch hash: ${tx.hash}`);
-            await tx.wait(wait);
+        try {
+            for (const call of calls) {
+                const tx = await this.options.multicall.aggregate3(call);
+                console.log(`[+] Execution batch hash: ${tx.hash}`);
+                await tx.wait(wait);
+            }
+        } catch (e) {
+            console.log(
+                '[-] Error while executing deployment queue, try changing the bytecodeSizeLimit',
+            );
         }
 
         this.executed = true;
