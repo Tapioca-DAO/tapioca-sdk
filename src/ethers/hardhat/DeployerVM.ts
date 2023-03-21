@@ -284,6 +284,8 @@ export class DeployerVM {
     private async getBuildCalls(): Promise<Multicall3.Call3Struct[][]> {
         console.log('[+] Populating build queue');
         await this.populateBuildQueue();
+        console.log('[+] Running static simulations');
+        await this.runStaticSimulation();
         console.log('[+] Building call queue');
         const tapiocaDeployer = await this.getTapiocaDeployer();
 
@@ -385,6 +387,22 @@ export class DeployerVM {
                 });
             }
         }
+    }
+
+    /**
+     * Used to check for reverts
+     */
+    private async runStaticSimulation() {
+        // Run asynchronously
+        await Promise.all(
+            this.buildQueue.map(async (e) => {
+                return (await this.getTapiocaDeployer()).callStatic.deploy(
+                    0,
+                    e.salt,
+                    e.creationCode,
+                );
+            }),
+        );
     }
 
     private computeDeterministicAddress(
