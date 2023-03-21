@@ -146,19 +146,19 @@ export const saveGlobally = (
     project: TProjectCaller,
     tag = 'default',
 ) => {
-    const db = readDB('global') ?? {};
+    const db = readDB('global', SUBREPO_GLOBAL_DB_PATH) ?? {};
     const prevDep = db[tag]?.[project] || {}; // Read previous deployments
 
-    const saveDbPath = SUBREPO_GLOBAL_DB_PATH;
     // Save previous deployments in a backup file
-    if (db[tag]?.[project]) writeDB('global', db, `${saveDbPath}.bak`);
+    if (db[tag]?.[project])
+        writeDB('global', db, `${SUBREPO_GLOBAL_DB_PATH}.bak`);
 
     // Merge prev and new deployments
     const deployments = mergeDeployments(data, prevDep);
 
     // Save the new deployment
     db[tag][project] = deployments;
-    writeDB('global', db, saveDbPath);
+    writeDB('global', db, SUBREPO_GLOBAL_DB_PATH);
     return deployments;
 };
 
