@@ -12,7 +12,8 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "tsdx build --transpileOnly && npm run copy-dts && npm run copy-sol && npm run copy-json",
+    "build": "tsdx build --transpileOnly && npm run copy-dts && npm run copy-sol && npm run copy-json && npm run copy:sandbox",
+    "copy:sandbox": "cp -r dist/ sandbox/dist",
     "test": "tsdx test --passWithNoTests",
     "lint": "eslint ./**/*.ts --fix",
     "prepare": "husky install && npm run build",
@@ -56,8 +57,8 @@
   },
   "peerDependencies": {
     "@nomicfoundation/hardhat-toolbox": "2.x",
-    "inquirer": "8.x",
-    "hardhat": "2.x"
+    "hardhat": "2.x",
+    "inquirer": "8.x"
   },
   "resolutions": {
     "tsdx/typescript": "^4.6.3"
