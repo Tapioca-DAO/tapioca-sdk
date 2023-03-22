@@ -13,9 +13,11 @@ import {
     transformMulticallToTapiocaWrapper,
 } from '../../utils';
 
-// npx hardhat batchSetAdapterParam --network arbitrum_goerli --isToft?
+import { OFT_TOKEN_TYPES } from '../../../../api/config';
+
+// npx hardhat batchSetAdapterParam --network arbitrum_goerli --type 0/1/2/3
 export const batchSetAdapterParam__task = async (
-    taskArgs: { isToft?: boolean },
+    taskArgs: { type: number },
     hre: HardhatRuntimeEnvironment,
 ) => {
     const {
@@ -26,8 +28,10 @@ export const batchSetAdapterParam__task = async (
     console.log('[+] Setting adapter params for contract: ', deployment.name);
     const currentChainId = String(hre.network.config.chainId);
 
+    const type: OFT_TOKEN_TYPES = taskArgs.type;
+
     const oftFactory = (await hre.ethers.getContractFactory(
-        'TapiocaOFT',
+        'TapiocaOFT', //valid for all OFT types
     )) as TapiocaOFT__factory;
 
     const deployments = hre.SDK.db.readDeployment('local', {
@@ -60,9 +64,25 @@ export const batchSetAdapterParam__task = async (
         );
     });
 
+    let contract: string;
+    switch (type) {
+        case OFT_TOKEN_TYPES.TOFT:
+            contract = 'TapiocaOFT';
+            break;
+        case OFT_TOKEN_TYPES.USDO:
+            contract = 'USDO';
+            break;
+        case OFT_TOKEN_TYPES.TAP:
+            contract = 'TapOFT';
+            break;
+        case OFT_TOKEN_TYPES.MarketsProxy:
+            contract = 'MarketsProxy';
+            break;
+    }
+
     const calls: Multicall3.Call3Struct[] = [];
     for (const entry of chainTransactions) {
-        const ctr = await hre.ethers.getContractAt('TapOFT', entry.srcAddress);
+        const ctr = await hre.ethers.getContractAt(contract, entry.srcAddress);
         calls.push({
             target: entry.srcAddress,
             callData: ctr.interface.encodeFunctionData(
@@ -85,7 +105,7 @@ export const batchSetAdapterParam__task = async (
     }
 
     // Special case if it's a TOFT
-    if (taskArgs.isToft) {
+    if (type == OFT_TOKEN_TYPES.TOFT) {
         const tapiocaWrapper = await getLocalContract<TapiocaWrapper>(
             hre,
             'TapiocaWrapper',
