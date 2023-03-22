@@ -13,9 +13,11 @@ import {
     transformMulticallToTapiocaWrapper,
 } from '../../utils';
 
+import { OFT_TOKEN_TYPES } from '../../../../api/config';
+
 // npx hardhat batchSetTrustedRemote --network arbitrum_goerli --isToft?
 export const batchSetTrustedRemote__task = async (
-    taskArgs: { isToft?: boolean },
+     taskArgs: { type: number },
     hre: HardhatRuntimeEnvironment,
 ) => {
     const {
@@ -23,6 +25,8 @@ export const batchSetTrustedRemote__task = async (
         tag,
     } = await askForDeployment(hre, 'local');
     const currentChainId = String(hre.network.config.chainId);
+
+    const type: OFT_TOKEN_TYPES = taskArgs.type;
 
     console.log('[+] Setting adapter params for contract: ', deployment.name);
 
@@ -57,12 +61,25 @@ export const batchSetTrustedRemote__task = async (
         );
     });
 
+    let contract: string;
+    switch (type) {
+        case OFT_TOKEN_TYPES.TOFT:
+            contract = 'TapiocaOFT';
+            break;
+        case OFT_TOKEN_TYPES.USDO:
+            contract = 'USDO';
+            break;
+        case OFT_TOKEN_TYPES.TAP:
+            contract = 'TapOFT';
+            break;
+        case OFT_TOKEN_TYPES.MarketsProxy:
+            contract = 'MarketsProxy';
+            break;
+    }
+
     const calls: Multicall3.Call3Struct[] = [];
     for (const entry of chainTransactions) {
-        const ctr = await hre.ethers.getContractAt(
-            'TapiocaOFT',
-            entry.srcAddress,
-        );
+        const ctr = await hre.ethers.getContractAt(contract, entry.srcAddress);
         calls.push({
             target: entry.srcAddress,
             callData: ctr.interface.encodeFunctionData('setTrustedRemote', [
@@ -74,7 +91,7 @@ export const batchSetTrustedRemote__task = async (
     }
 
     // Special case for TapiocaOFT
-    if (taskArgs.isToft) {
+    if (type == OFT_TOKEN_TYPES.TOFT) {
         const tapiocaWrapper = await getLocalContract<TapiocaWrapper>(
             hre,
             'TapiocaWrapper',
