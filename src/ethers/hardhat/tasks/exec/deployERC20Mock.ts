@@ -16,9 +16,8 @@ export const deployERC20Mock__task = async (
         tag = await askForTag(hre, 'local');
     }
 
-    const ERC20Mock = new ERC20Mock__factory(
-        (await hre.ethers.getSigners())[0],
-    );
+    const signer = (await hre.ethers.getSigners())[0];
+    const ERC20Mock = new ERC20Mock__factory(signer);
 
     const { name, symbol, decimals } = await inquirer.prompt([
         {
@@ -43,6 +42,7 @@ export const deployERC20Mock__task = async (
         symbol,
         hre.ethers.BigNumber.from((1e18).toString()).mul(1_000_000_000),
         decimals,
+        signer.address,
     );
     await ercMock.deployTransaction.wait(3);
     console.log(`[+] Deployed ${name} at ${ercMock.address}`);
