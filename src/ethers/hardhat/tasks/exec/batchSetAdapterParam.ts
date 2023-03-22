@@ -62,10 +62,7 @@ export const batchSetAdapterParam__task = async (
 
     const calls: Multicall3.Call3Struct[] = [];
     for (const entry of chainTransactions) {
-        const ctr = await hre.ethers.getContractAt(
-            'TapiocaOFT',
-            entry.srcAddress,
-        );
+        const ctr = await hre.ethers.getContractAt('TapOFT', entry.srcAddress);
         calls.push({
             target: entry.srcAddress,
             callData: ctr.interface.encodeFunctionData(

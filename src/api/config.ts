@@ -144,6 +144,12 @@ export const NETWORK_MAPPING_LZ_TO_CHAIN: INetworkMappingLZToChain = {
     [ELZChainID.HARMONY_TESTNET]: EChainID.HARMONY_TESTNET,
 };
 
+export enum TAPIOCA_PROJECTS_NAME {
+    TapiocaZ = 'tapiocaz',
+    TapToken = 'tap-token',
+    TapiocaBar = 'tapioca-bar',
+}
+
 export const TAPIOCA_PROJECTS = [
     'tapiocaz',
     'tap-token',
