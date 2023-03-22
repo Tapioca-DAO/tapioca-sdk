@@ -45,24 +45,6 @@ task(
 ).addOptionalParam('tag', 'The tag of the deployment.');
 
 task(
-    'batchSetAdapterParam',
-    'Sets OFT to use adapter params and the minimum destination gas between all available tOFT contracts for the current chain',
-    batchSetAdapterParam__task,
-).addParam(
-    'type',
-    'Contract type TOFT = 0, MarketsProxy = 1, USDO = 2, TAP = 3',
-);
-
-task(
-    'batchSetTrustedRemote',
-    'Set trusted remote between all available tOFT contracts for the current chain',
-    batchSetTrustedRemote__task,
-).addParam(
-    'type',
-    'Contract type TOFT = 0, MarketsProxy = 1, USDO = 2, TAP = 3',
-);
-
-task(
     'deployERC20Mock',
     'Deploys an ERC20 mock contract',
     deployERC20Mock__task,
