@@ -156,11 +156,11 @@ export class DeployerVM {
      * Execute the current build queue and deploy the contracts, using Multicall3 to aggregate the calls.
      * @param wait Number of blocks to wait for the transaction to be mined. Default: 0
      */
-    async execute(wait = 0) {
+    async execute(wait = 0, runSimulations = true) {
         if (this.executed) {
             throw new Error('[-] Deployment queue has already been executed');
         }
-        const calls = await this.getBuildCalls();
+        const calls = await this.getBuildCalls(runSimulations);
 
         console.log('[+] Executing deployment queue');
         if (calls.length > 1) {
@@ -287,11 +287,15 @@ export class DeployerVM {
     // ***********
     // Utils
     // ***********
-    private async getBuildCalls(): Promise<Multicall3.Call3Struct[][]> {
+    private async getBuildCalls(
+        runSimulations = true,
+    ): Promise<Multicall3.Call3Struct[][]> {
         console.log('[+] Populating build queue');
         await this.populateBuildQueue();
-        console.log('[+] Running static simulations');
-        await this.runStaticSimulation();
+        if (runSimulations) {
+            console.log('[+] Running static simulations');
+            await this.runStaticSimulation();
+        }
         console.log('[+] Building call queue');
         const tapiocaDeployer = await this.getTapiocaDeployer();
 
