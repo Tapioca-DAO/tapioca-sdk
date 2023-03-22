@@ -1,21 +1,21 @@
 import * as dotenv from 'dotenv';
 
 // Plugins
-import { HardhatUserConfig } from 'hardhat/config';
-import '@nomicfoundation/hardhat-toolbox';
 import '@nomicfoundation/hardhat-chai-matchers';
+import '@nomicfoundation/hardhat-toolbox';
 import '@nomiclabs/hardhat-etherscan';
-import 'hardhat-deploy';
-import 'hardhat-contract-sizer';
 import '@primitivefi/hardhat-dodoc';
-import 'typechain';
 import '@typechain/hardhat';
+import 'hardhat-contract-sizer';
+import 'hardhat-deploy';
 import 'hardhat-tracer';
+import { HardhatUserConfig } from 'hardhat/config';
+import 'typechain';
 import 'tapioca-sdk';
 
 // Utils
-import SDK from 'tapioca-sdk';
 import { HttpNetworkConfig } from 'hardhat/types';
+import SDK from 'tapioca-sdk';
 
 dotenv.config();
 declare global {
