@@ -156,7 +156,7 @@ export class DeployerVM {
      * Execute the current build queue and deploy the contracts, using Multicall3 to aggregate the calls.
      * @param wait Number of blocks to wait for the transaction to be mined. Default: 0
      */
-    async execute(wait = 0, runSimulations=true) {
+    async execute(wait = 0, runSimulations = true) {
         if (this.executed) {
             throw new Error('[-] Deployment queue has already been executed');
         }
