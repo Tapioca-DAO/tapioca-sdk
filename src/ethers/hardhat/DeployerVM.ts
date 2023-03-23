@@ -6,7 +6,8 @@ import {
     TapiocaDeployer,
     TapiocaDeployer__factory,
 } from '../../typechain/tap-token';
-import { Multicall3 } from '../../typechain/utils/MultiCall';
+import { MulticallWithReason } from '../../typechain/utils/MultiCall';
+import { MulticallWithReason__factory } from '../../typechain/utils/MultiCall/factories';
 
 interface IDependentOn {
     deploymentName: string;
@@ -27,7 +28,7 @@ export interface TDeploymentVMContract extends TContract {
 
 interface IConstructorOptions {
     bytecodeSizeLimit: number; // Limit of bytecode size for a single transaction, error happened on Arb Goerli with Alchemy RPC
-    multicall: Multicall3;
+    multicall: MulticallWithReason;
     tag?: string;
 }
 
@@ -40,16 +41,17 @@ export interface IDeployerVMAdd<T extends ContractFactory>
 // TODO - Ability to load already deployed contract (To verify?)
 // TODO - Ability to add arbitrary calls in between deployments?
 /**
- * Class to deploy contracts using the TapiocaDeployer & Multicall3 to aggregate deployments in a single transaction.
+ * Class to deploy contracts using the TapiocaDeployer & MulticallWithReason to aggregate deployments in a single transaction.
  * @param hre HardhatRuntimeEnvironment instance of Hardhat.
  * @param options Options to use.
  * @param options.bytecodeSizeLimit Limit of bytecode size for a single transaction, if RPC provider is not able to handle it, error will be thrown.
  * @param options.tag Tag to use for the deployment. If not provided, 'default' will be used (Per SDK).
- * @param options.multicall Multicall3 instance to use for the deployment.
+ * @param options.multicall MulticallWithReason instance to use for the deployment.
  *
  */
 export class DeployerVM {
     private tapiocaDeployer?: TapiocaDeployer;
+    private multicallWithReason?: MulticallWithReason;
 
     hre: HardhatRuntimeEnvironment;
     options: IConstructorOptions;
@@ -153,7 +155,7 @@ export class DeployerVM {
     }
 
     /**
-     * Execute the current build queue and deploy the contracts, using Multicall3 to aggregate the calls.
+     * Execute the current build queue and deploy the contracts, using MulticallWithReason to aggregate the calls.
      * @param wait Number of blocks to wait for the transaction to be mined. Default: 0
      */
     async execute(wait = 0, runSimulations = true) {
@@ -173,7 +175,7 @@ export class DeployerVM {
         // Execute the calls
         try {
             for (const call of calls) {
-                const tx = await this.options.multicall.aggregate3(call);
+                const tx = await this.options.multicall.multicall(call);
                 console.log(`[+] Execution batch hash: ${tx.hash}`);
                 await tx.wait(wait);
             }
@@ -289,7 +291,7 @@ export class DeployerVM {
     // ***********
     private async getBuildCalls(
         runSimulations = true,
-    ): Promise<Multicall3.Call3Struct[][]> {
+    ): Promise<MulticallWithReason.Call3Struct[][]> {
         console.log('[+] Populating build queue');
         await this.populateBuildQueue();
         if (runSimulations) {
@@ -302,7 +304,7 @@ export class DeployerVM {
         // Build the calls
         let currentByteCodeSize = 0;
         let currentBatch = 0;
-        const calls: Multicall3.Call3Struct[][] = [[]];
+        const calls: MulticallWithReason.Call3Struct[][] = [[]];
         for (const build of this.buildQueue) {
             // We'll batch the calls to avoid hitting the gas limit
             const callData = this.buildDeployerCode(
@@ -425,6 +427,54 @@ export class DeployerVM {
             this.hre.ethers.utils.keccak256(bytecode),
         );
     }
+    private async getMulticallWithReason(): Promise<MulticallWithReason> {
+        if (this.multicallWithReason) return this.multicallWithReason;
+
+        // Get deployer deployment
+        let deployment: TContract | undefined;
+        try {
+            deployment = this.hre.SDK.db.getLocalDeployment(
+                String(this.hre.network.config.chainId),
+                'MulticallWithReason',
+                this.options.tag,
+            );
+        } catch (e) {}
+
+        // Deploy MulticallWithReason if not deployed
+        if (!deployment) {
+            // Deploy MulticallWithReason
+            const multicallWithReason = await new MulticallWithReason__factory(
+                (
+                    await this.hre.ethers.getSigners()
+                )[0],
+            ).deploy();
+
+            await multicallWithReason.deployTransaction.wait(3);
+
+            // Save deployment
+            const dep = this.hre.SDK.db.buildLocalDeployment({
+                chainId: String(this.hre.network.config.chainId),
+                contracts: [
+                    {
+                        name: 'MulticallWithReason',
+                        address: multicallWithReason.address,
+                        meta: {},
+                    },
+                ],
+            });
+            this.hre.SDK.db.saveLocally(dep, this.options.tag);
+
+            this.multicallWithReason = multicallWithReason;
+            return multicallWithReason;
+        }
+
+        // Return TapiocaDeployer
+        return MulticallWithReason__factory.connect(
+            deployment.address,
+            (await this.hre.ethers.getSigners())[0],
+        );
+    }
+
     private async getTapiocaDeployer(): Promise<TapiocaDeployer> {
         if (this.tapiocaDeployer) return this.tapiocaDeployer;
 

@@ -4,7 +4,7 @@ import { getLocalContract } from '../../utils';
 
 // TODO use the new task arg system
 // to fantom_testnet
-// npx hardhat toftSendFrom --contract-name USD0 --src-chain goerli --dst arbitrum_goerli --value 1.34 --tag '1.0'
+// npx hardhat toftSendFrom --contract-name USDO --src-chain goerli --dst arbitrum_goerli --value 1.34 --tag '1.0'
 export const toftSendFrom__task = async (
     taskArgs: {
         contractName: string;

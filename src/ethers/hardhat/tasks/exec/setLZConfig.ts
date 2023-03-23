@@ -4,7 +4,7 @@ import { EChainID } from '../../../../api/config';
 import { TContract, TLocalDeployment } from '../../../../shared';
 import { Multicall, TapiocaZ } from '../../../../typechain';
 import { TapiocaWrapper } from '../../../../typechain/TapiocaZ';
-import { Multicall3 } from '../../../../typechain/utils/MultiCall';
+import { MulticallWithReason } from '../../../../typechain/utils/MultiCall';
 
 /**
  * Configure the LZ app in one go
@@ -23,7 +23,7 @@ export const setLZConfig__task = async (
     console.log(hre.SDK.config.PACKET_TYPES);
 
     const signer = (await hre.ethers.getSigners())[0];
-    const multicall = Multicall.Multicall3__factory.connect(
+    const multicall = Multicall.MulticallWithReason__factory.connect(
         hre.SDK.config.MULTICALL_ADDRESS,
         signer,
     );
@@ -42,6 +42,7 @@ export const setLZConfig__task = async (
     });
 
     // Build calls
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const contractToConf = choices.find((e) => e.name === toConfigure)!;
     const targets = await getLinkedContract(hre, tag, contractToConf);
     const calls = buildCalls(hre, contractToConf, targets);
@@ -65,7 +66,7 @@ export const setLZConfig__task = async (
     } else {
         console.log('[+] Using Multicall');
 
-        const tx = await multicall.aggregate3(calls);
+        const tx = await multicall.multicall(calls);
         console.log('[+] Tx sent: ', tx.hash);
         await tx.wait(3);
         console.log('[+] Tx mined!');
@@ -108,8 +109,8 @@ async function getLinkedContract(
         message: `Do you want to configure ${contractToConf.name} on ${targets
             .map(
                 (e) =>
-                    supportedChain.find((c) => c.lzChainId === e.lzChainId)!
-                        .name,
+                    supportedChain.find((c) => c.lzChainId === e.lzChainId)
+                        ?.name,
             )
             .join(', ')}?`,
         name: 'isOk',
@@ -128,7 +129,7 @@ function buildCalls(
     targets: Awaited<ReturnType<typeof getLinkedContract>>,
 ) {
     // Build calls
-    const calls: Multicall3.Call3Struct[] = [];
+    const calls: MulticallWithReason.Call3Struct[] = [];
     console.log('[+] UseCustomAdapter ');
     calls.push({
         target: contractToConf.address,

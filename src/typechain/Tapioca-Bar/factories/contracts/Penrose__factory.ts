@@ -809,7 +809,7 @@ const _abi = [
     name: "usdoToken",
     outputs: [
       {
-        internalType: "contract IUSD0",
+        internalType: "contract IUSDO",
         name: "",
         type: "address",
       },

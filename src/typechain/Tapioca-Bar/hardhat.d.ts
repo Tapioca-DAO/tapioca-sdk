@@ -53,7 +53,7 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BigBang__factory>;
     getContractFactory(
-      name: "USD0",
+      name: "USDO",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.USD0__factory>;
     getContractFactory(
@@ -112,10 +112,10 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.BigBang>;
     getContractAt(
-      name: "USD0",
+      name: "USDO",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.USD0>;
+    ): Promise<Contracts.USDO>;
     getContractAt(
       name: "YieldBox",
       address: string,

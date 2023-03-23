@@ -2,4 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { BigBang } from "./BigBang";
-export type { USD0 } from "./USD0";
+export type { USDO } from "./USDO";

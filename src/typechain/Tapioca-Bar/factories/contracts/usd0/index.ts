@@ -2,4 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export { BigBang__factory } from "./BigBang__factory";
-export { USD0__factory } from "./USD0__factory";
+export { USDO__factory } from "./USDO__factory";
