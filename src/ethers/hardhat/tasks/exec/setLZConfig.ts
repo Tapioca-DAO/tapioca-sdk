@@ -10,7 +10,7 @@ import { Multicall3 } from '../../../../typechain/utils/MultiCall';
  * Configure the LZ app in one go
  */
 export const setLZConfig__task = async (
-    taskArgs: { isToft?: boolean, debugMode: boolean },
+    taskArgs: { isToft?: boolean; debugMode: boolean },
     hre: HardhatRuntimeEnvironment,
 ) => {
     console.log('[+] Setting omni config');
@@ -24,9 +24,13 @@ export const setLZConfig__task = async (
 
     const signer = (await hre.ethers.getSigners())[0];
     const multicall = Multicall.Multicall3__factory.connect(
-        hre.SDK.config.MULTICALL_ADDRESS,
+        hre.SDK.config.MULTICALL_ADDRESSES[hre.network.config.chainId],
         signer,
     );
+
+    if (!multicall) {
+        throw '[-] Multicall not found';
+    }
 
     const tag = await hre.SDK.hardhatUtils.askForTag(hre, 'local');
     const choices = hre.SDK.db.loadLocalDeployment(
