@@ -3,7 +3,7 @@ import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import inquirer from 'inquirer';
 import { TContract, TLocalDeployment, TProjectCaller } from '../../shared';
 import { TapiocaWrapper } from '../../typechain/TapiocaZ';
-import { MulticallWithReason } from '../../typechain/utils/MultiCall';
+import { Multicall3 } from '../../typechain/utils/MultiCall';
 
 /**
  * Get a local contract
@@ -42,7 +42,7 @@ export const getLocalContract = async <T extends Contract>(
 };
 
 export const transformMulticallToTapiocaWrapper = (
-    multicalls: MulticallWithReason.Call3Struct[],
+    multicalls: Multicall3.Call3Struct[],
 ): TapiocaWrapper.ExecutionCallStruct[] => {
     return multicalls.map((m) => ({
         toft: m.target,
