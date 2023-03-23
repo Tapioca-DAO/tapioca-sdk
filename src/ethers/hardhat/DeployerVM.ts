@@ -312,6 +312,7 @@ export class DeployerVM {
                 0,
                 build.salt,
                 build.creationCode,
+                build.deploymentName,
             );
             // Check if we need to create a new batch
             if (
@@ -343,11 +344,13 @@ export class DeployerVM {
         amount: number,
         salt: string,
         creationCode: string,
+        contractName: string,
     ) {
         return tapiocaDeployer.interface.encodeFunctionData('deploy', [
             amount,
             salt,
             creationCode,
+            contractName,
         ]);
     }
 
