@@ -415,6 +415,7 @@ export class DeployerVM {
                     0,
                     e.salt,
                     e.creationCode,
+                    e.deploymentName,
                 );
             }),
         );
