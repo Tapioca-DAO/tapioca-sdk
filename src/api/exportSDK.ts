@@ -43,6 +43,7 @@ const generateTypings = async (
     const cwd = process.cwd();
 
     const allFiles = _parseFiles(cwd, artifactPath, contractNames);
+    console.log(allFiles);
 
     await runTypeChain({
         cwd,
