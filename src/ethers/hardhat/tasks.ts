@@ -1,7 +1,5 @@
 import { task } from 'hardhat/config';
 import { ConfigurableTaskDefinition } from 'hardhat/types';
-import { batchSetAdapterParam__task } from './tasks/exec/batchSetAdapterParam';
-import { batchSetTrustedRemote__task } from './tasks/exec/batchSetTrustedRemote';
 import { deployERC20Mock__task } from './tasks/exec/deployERC20Mock';
 import { exportSDK__task } from './tasks/exec/exportSDK';
 import { setLZConfig__task } from './tasks/exec/setLZConfig';
@@ -50,10 +48,9 @@ task(
     deployERC20Mock__task,
 ).addFlag('save', 'Save the deployment to the local database');
 
-task('setLZConfig', 'Set an LZ app config', setLZConfig__task).addFlag(
-    'isToft',
-    'If the contract to configure is TOFT',
-);
+task('setLZConfig', 'Set an LZ app config', setLZConfig__task)
+    .addParam('debugMode', 'true/false')
+    .addFlag('isToft', 'If the contract to configure is TOFT');
 
 addCliParams(
     task(

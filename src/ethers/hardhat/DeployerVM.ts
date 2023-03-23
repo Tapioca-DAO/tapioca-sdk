@@ -502,7 +502,7 @@ export class DeployerVM {
                 this.options.tag,
             );
         } catch (e) {
-             if (this.options.debugMode) {
+            if (this.options.debugMode) {
                 console.log(`[-] Failed with error: ${e}`);
             }
         }
