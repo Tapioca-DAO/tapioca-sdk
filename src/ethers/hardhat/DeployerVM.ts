@@ -29,6 +29,7 @@ export interface TDeploymentVMContract extends TContract {
 interface IConstructorOptions {
     bytecodeSizeLimit: number; // Limit of bytecode size for a single transaction, error happened on Arb Goerli with Alchemy RPC
     multicall: MulticallWithReason;
+    debugMode: boolean;
     tag?: string;
 }
 
@@ -180,9 +181,13 @@ export class DeployerVM {
                 await tx.wait(wait);
             }
         } catch (e) {
-            console.log(
-                '[-] Error while executing deployment queue, try changing the bytecodeSizeLimit',
-            );
+            if (this.options.debugMode) {
+                console.log(`[-] Failed with error: ${e}`);
+            } else {
+                console.log(
+                    '[-] Error while executing deployment queue, try changing the bytecodeSizeLimit',
+                );
+            }
         }
 
         this.executed = true;
@@ -442,7 +447,11 @@ export class DeployerVM {
                 'MulticallWithReason',
                 this.options.tag,
             );
-        } catch (e) {}
+        } catch (e) {
+            if (this.options.debugMode) {
+                console.log(`[-] Failed with error: ${e}`);
+            }
+        }
 
         // Deploy MulticallWithReason if not deployed
         if (!deployment) {
@@ -490,7 +499,11 @@ export class DeployerVM {
                 'TapiocaDeployer',
                 this.options.tag,
             );
-        } catch (e) {}
+        } catch (e) {
+             if (this.options.debugMode) {
+                console.log(`[-] Failed with error: ${e}`);
+            }
+        }
 
         // Deploy TapiocaDeployer if not deployed
         if (!deployment) {
