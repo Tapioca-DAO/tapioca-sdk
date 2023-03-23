@@ -4,13 +4,13 @@ import { EChainID } from '../../../../api/config';
 import { TContract, TLocalDeployment } from '../../../../shared';
 import { Multicall, TapiocaZ } from '../../../../typechain';
 import { TapiocaWrapper } from '../../../../typechain/TapiocaZ';
-import { MulticallWithReason } from '../../../../typechain/utils/MultiCall';
+import { Multicall3 } from '../../../../typechain/utils/MultiCall';
 
 /**
  * Configure the LZ app in one go
  */
 export const setLZConfig__task = async (
-    taskArgs: { isToft?: boolean },
+    taskArgs: { isToft?: boolean, debugMode: boolean },
     hre: HardhatRuntimeEnvironment,
 ) => {
     console.log('[+] Setting omni config');
@@ -23,7 +23,7 @@ export const setLZConfig__task = async (
     console.log(hre.SDK.config.PACKET_TYPES);
 
     const signer = (await hre.ethers.getSigners())[0];
-    const multicall = Multicall.MulticallWithReason__factory.connect(
+    const multicall = Multicall.Multicall3__factory.connect(
         hre.SDK.config.MULTICALL_ADDRESS,
         signer,
     );
@@ -66,7 +66,9 @@ export const setLZConfig__task = async (
     } else {
         console.log('[+] Using Multicall');
 
-        const tx = await multicall.multicall(calls);
+        const tx = taskArgs.debugMode
+            ? await multicall.multicall(calls)
+            : await multicall.aggregate3(calls);
         console.log('[+] Tx sent: ', tx.hash);
         await tx.wait(3);
         console.log('[+] Tx mined!');
@@ -129,7 +131,7 @@ function buildCalls(
     targets: Awaited<ReturnType<typeof getLinkedContract>>,
 ) {
     // Build calls
-    const calls: MulticallWithReason.Call3Struct[] = [];
+    const calls: Multicall3.Call3Struct[] = [];
     console.log('[+] UseCustomAdapter ');
     calls.push({
         target: contractToConf.address,

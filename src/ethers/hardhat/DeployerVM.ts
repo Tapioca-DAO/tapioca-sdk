@@ -6,8 +6,8 @@ import {
     TapiocaDeployer,
     TapiocaDeployer__factory,
 } from '../../typechain/tap-token';
-import { MulticallWithReason } from '../../typechain/utils/MultiCall';
-import { MulticallWithReason__factory } from '../../typechain/utils/MultiCall/factories';
+import { Multicall3 } from '../../typechain/utils/MultiCall';
+import { Multicall3__factory } from '../../typechain/utils/MultiCall/factories';
 
 interface IDependentOn {
     deploymentName: string;
@@ -28,7 +28,7 @@ export interface TDeploymentVMContract extends TContract {
 
 interface IConstructorOptions {
     bytecodeSizeLimit: number; // Limit of bytecode size for a single transaction, error happened on Arb Goerli with Alchemy RPC
-    multicall: MulticallWithReason;
+    multicall: Multicall3;
     debugMode: boolean;
     tag?: string;
 }
@@ -42,17 +42,17 @@ export interface IDeployerVMAdd<T extends ContractFactory>
 // TODO - Ability to load already deployed contract (To verify?)
 // TODO - Ability to add arbitrary calls in between deployments?
 /**
- * Class to deploy contracts using the TapiocaDeployer & MulticallWithReason to aggregate deployments in a single transaction.
+ * Class to deploy contracts using the TapiocaDeployer & Multicall3 to aggregate deployments in a single transaction.
  * @param hre HardhatRuntimeEnvironment instance of Hardhat.
  * @param options Options to use.
  * @param options.bytecodeSizeLimit Limit of bytecode size for a single transaction, if RPC provider is not able to handle it, error will be thrown.
  * @param options.tag Tag to use for the deployment. If not provided, 'default' will be used (Per SDK).
- * @param options.multicall MulticallWithReason instance to use for the deployment.
+ * @param options.multicall Multicall3 instance to use for the deployment.
  *
  */
 export class DeployerVM {
     private tapiocaDeployer?: TapiocaDeployer;
-    private multicallWithReason?: MulticallWithReason;
+    private multicall?: Multicall3;
 
     hre: HardhatRuntimeEnvironment;
     options: IConstructorOptions;
@@ -156,7 +156,7 @@ export class DeployerVM {
     }
 
     /**
-     * Execute the current build queue and deploy the contracts, using MulticallWithReason to aggregate the calls.
+     * Execute the current build queue and deploy the contracts, using Multicall3 to aggregate the calls.
      * @param wait Number of blocks to wait for the transaction to be mined. Default: 0
      */
     async execute(wait = 0, runSimulations = true) {
@@ -176,7 +176,9 @@ export class DeployerVM {
         // Execute the calls
         try {
             for (const call of calls) {
-                const tx = await this.options.multicall.multicall(call);
+                const tx = this.options.debugMode
+                    ? await this.options.multicall.multicall(call)
+                    : await this.options.multicall.aggregate3(call);
                 console.log(`[+] Execution batch hash: ${tx.hash}`);
                 await tx.wait(wait);
             }
@@ -296,7 +298,7 @@ export class DeployerVM {
     // ***********
     private async getBuildCalls(
         runSimulations = true,
-    ): Promise<MulticallWithReason.Call3Struct[][]> {
+    ): Promise<Multicall3.Call3Struct[][]> {
         console.log('[+] Populating build queue');
         await this.populateBuildQueue();
         if (runSimulations) {
@@ -309,7 +311,7 @@ export class DeployerVM {
         // Build the calls
         let currentByteCodeSize = 0;
         let currentBatch = 0;
-        const calls: MulticallWithReason.Call3Struct[][] = [[]];
+        const calls: Multicall3.Call3Struct[][] = [[]];
         for (const build of this.buildQueue) {
             // We'll batch the calls to avoid hitting the gas limit
             const callData = this.buildDeployerCode(
@@ -436,15 +438,15 @@ export class DeployerVM {
             this.hre.ethers.utils.keccak256(bytecode),
         );
     }
-    private async getMulticallWithReason(): Promise<MulticallWithReason> {
-        if (this.multicallWithReason) return this.multicallWithReason;
+    private async getMulticall(): Promise<Multicall3> {
+        if (this.multicall) return this.multicall;
 
         // Get deployer deployment
         let deployment: TContract | undefined;
         try {
             deployment = this.hre.SDK.db.getLocalDeployment(
                 String(this.hre.network.config.chainId),
-                'MulticallWithReason',
+                'Multicall3',
                 this.options.tag,
             );
         } catch (e) {
@@ -453,36 +455,36 @@ export class DeployerVM {
             }
         }
 
-        // Deploy MulticallWithReason if not deployed
+        // Deploy Multicall3 if not deployed
         if (!deployment) {
-            // Deploy MulticallWithReason
-            const multicallWithReason = await new MulticallWithReason__factory(
+            // Deploy Multicall3
+            const multicall = await new Multicall3__factory(
                 (
                     await this.hre.ethers.getSigners()
                 )[0],
             ).deploy();
 
-            await multicallWithReason.deployTransaction.wait(3);
+            await multicall.deployTransaction.wait(3);
 
             // Save deployment
             const dep = this.hre.SDK.db.buildLocalDeployment({
                 chainId: String(this.hre.network.config.chainId),
                 contracts: [
                     {
-                        name: 'MulticallWithReason',
-                        address: multicallWithReason.address,
+                        name: 'Multicall3',
+                        address: multicall.address,
                         meta: {},
                     },
                 ],
             });
             this.hre.SDK.db.saveLocally(dep, this.options.tag);
 
-            this.multicallWithReason = multicallWithReason;
-            return multicallWithReason;
+            this.multicall = multicall;
+            return multicall;
         }
 
         // Return TapiocaDeployer
-        return MulticallWithReason__factory.connect(
+        return Multicall3__factory.connect(
             deployment.address,
             (await this.hre.ethers.getSigners())[0],
         );
