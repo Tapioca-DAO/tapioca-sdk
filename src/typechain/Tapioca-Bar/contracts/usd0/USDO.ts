@@ -28,11 +28,27 @@ import type {
   PromiseOrValue,
 } from "../../common";
 
-export interface USD0Interface extends utils.Interface {
+export declare namespace ICommonOFT {
+  export type LzCallParamsStruct = {
+    refundAddress: PromiseOrValue<string>;
+    zroPaymentAddress: PromiseOrValue<string>;
+    adapterParams: PromiseOrValue<BytesLike>;
+  };
+
+  export type LzCallParamsStructOutput = [string, string, string] & {
+    refundAddress: string;
+    zroPaymentAddress: string;
+    adapterParams: string;
+  };
+}
+
+export interface USDOInterface extends utils.Interface {
   functions: {
+    "DEFAULT_PAYLOAD_SIZE_LIMIT()": FunctionFragment;
     "MINT_WINDOW()": FunctionFragment;
     "NO_EXTRA_GAS()": FunctionFragment;
     "PT_SEND()": FunctionFragment;
+    "PT_SEND_AND_CALL()": FunctionFragment;
     "PT_YB_DEPOSIT()": FunctionFragment;
     "PT_YB_RETRIEVE_STRAT()": FunctionFragment;
     "PT_YB_SEND_STRAT()": FunctionFragment;
@@ -43,11 +59,14 @@ export interface USD0Interface extends utils.Interface {
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "burn(address,uint256)": FunctionFragment;
+    "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)": FunctionFragment;
     "circulatingSupply()": FunctionFragment;
     "conservator()": FunctionFragment;
+    "creditedPackets(uint16,bytes,uint64)": FunctionFragment;
     "decimals()": FunctionFragment;
     "decreaseAllowance(address,uint256)": FunctionFragment;
-    "estimateSendFee(uint16,bytes,uint256,bool,bytes)": FunctionFragment;
+    "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)": FunctionFragment;
+    "estimateSendFee(uint16,bytes32,uint256,bool,bytes)": FunctionFragment;
     "failedMessages(uint16,bytes,uint64)": FunctionFragment;
     "flashFee(address,uint256)": FunctionFragment;
     "flashLoan(address,address,uint256,bytes)": FunctionFragment;
@@ -70,11 +89,13 @@ export interface USD0Interface extends utils.Interface {
     "nonblockingLzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "paused()": FunctionFragment;
+    "payloadSizeLimitLookup(uint16)": FunctionFragment;
     "precrime()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
-    "sendFrom(address,uint16,bytes,uint256,address,address,bytes)": FunctionFragment;
+    "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
+    "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
     "sendToYB(uint256,uint256,uint16,uint256,address,bool)": FunctionFragment;
     "setBurnerStatus(address,bool)": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
@@ -84,12 +105,14 @@ export interface USD0Interface extends utils.Interface {
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
     "setMintLimit(uint256)": FunctionFragment;
     "setMinterStatus(address,bool)": FunctionFragment;
+    "setPayloadSizeLimit(uint16,uint256)": FunctionFragment;
     "setPrecrime(address)": FunctionFragment;
     "setReceiveVersion(uint16)": FunctionFragment;
     "setSendVersion(uint16)": FunctionFragment;
     "setTrustedRemote(uint16,bytes)": FunctionFragment;
     "setTrustedRemoteAddress(uint16,bytes)": FunctionFragment;
     "setUseCustomAdapterParams(bool)": FunctionFragment;
+    "sharedDecimals()": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
     "token()": FunctionFragment;
@@ -105,174 +128,107 @@ export interface USD0Interface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "DEFAULT_PAYLOAD_SIZE_LIMIT"
       | "MINT_WINDOW"
-      | "MINT_WINDOW()"
       | "NO_EXTRA_GAS"
-      | "NO_EXTRA_GAS()"
       | "PT_SEND"
-      | "PT_SEND()"
+      | "PT_SEND_AND_CALL"
       | "PT_YB_DEPOSIT"
-      | "PT_YB_DEPOSIT()"
       | "PT_YB_RETRIEVE_STRAT"
-      | "PT_YB_RETRIEVE_STRAT()"
       | "PT_YB_SEND_STRAT"
-      | "PT_YB_SEND_STRAT()"
       | "PT_YB_WITHDRAW"
-      | "PT_YB_WITHDRAW()"
       | "allowance"
-      | "allowance(address,address)"
       | "allowedBurner"
-      | "allowedBurner(uint256,address)"
       | "allowedMinter"
-      | "allowedMinter(uint256,address)"
       | "approve"
-      | "approve(address,uint256)"
       | "balanceOf"
-      | "balanceOf(address)"
       | "burn"
-      | "burn(address,uint256)"
+      | "callOnOFTReceived"
       | "circulatingSupply"
-      | "circulatingSupply()"
       | "conservator"
-      | "conservator()"
+      | "creditedPackets"
       | "decimals"
-      | "decimals()"
       | "decreaseAllowance"
-      | "decreaseAllowance(address,uint256)"
+      | "estimateSendAndCallFee"
       | "estimateSendFee"
-      | "estimateSendFee(uint16,bytes,uint256,bool,bytes)"
       | "failedMessages"
-      | "failedMessages(uint16,bytes,uint64)"
       | "flashFee"
-      | "flashFee(address,uint256)"
       | "flashLoan"
-      | "flashLoan(address,address,uint256,bytes)"
       | "flashMintFee"
-      | "flashMintFee()"
       | "forceResumeReceive"
-      | "forceResumeReceive(uint16,bytes)"
       | "freeMint"
-      | "freeMint(uint256)"
       | "getConfig"
-      | "getConfig(uint16,uint16,address,uint256)"
       | "getTrustedRemoteAddress"
-      | "getTrustedRemoteAddress(uint16)"
       | "increaseAllowance"
-      | "increaseAllowance(address,uint256)"
       | "isTrustedRemote"
-      | "isTrustedRemote(uint16,bytes)"
       | "lzEndpoint"
-      | "lzEndpoint()"
       | "lzReceive"
-      | "lzReceive(uint16,bytes,uint64,bytes)"
       | "maxFlashLoan"
-      | "maxFlashLoan(address)"
       | "maxFlashMint"
-      | "maxFlashMint()"
       | "minDstGasLookup"
-      | "minDstGasLookup(uint16,uint16)"
       | "mint"
-      | "mint(address,uint256)"
       | "mintLimit"
-      | "mintLimit()"
       | "mintedAt"
-      | "mintedAt(address)"
       | "name"
-      | "name()"
       | "nonblockingLzReceive"
-      | "nonblockingLzReceive(uint16,bytes,uint64,bytes)"
       | "owner"
-      | "owner()"
       | "paused"
-      | "paused()"
+      | "payloadSizeLimitLookup"
       | "precrime"
-      | "precrime()"
       | "renounceOwnership"
-      | "renounceOwnership()"
       | "retrieveFromYB"
-      | "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)"
       | "retryMessage"
-      | "retryMessage(uint16,bytes,uint64,bytes)"
+      | "sendAndCall"
       | "sendFrom"
-      | "sendFrom(address,uint16,bytes,uint256,address,address,bytes)"
       | "sendToYB"
-      | "sendToYB(uint256,uint256,uint16,uint256,address,bool)"
       | "setBurnerStatus"
-      | "setBurnerStatus(address,bool)"
       | "setConfig"
-      | "setConfig(uint16,uint16,uint256,bytes)"
       | "setConservator"
-      | "setConservator(address)"
       | "setFlashMintFee"
-      | "setFlashMintFee(uint256)"
       | "setMaxFlashMintable"
-      | "setMaxFlashMintable(uint256)"
       | "setMinDstGas"
-      | "setMinDstGas(uint16,uint16,uint256)"
       | "setMintLimit"
-      | "setMintLimit(uint256)"
       | "setMinterStatus"
-      | "setMinterStatus(address,bool)"
+      | "setPayloadSizeLimit"
       | "setPrecrime"
-      | "setPrecrime(address)"
       | "setReceiveVersion"
-      | "setReceiveVersion(uint16)"
       | "setSendVersion"
-      | "setSendVersion(uint16)"
       | "setTrustedRemote"
-      | "setTrustedRemote(uint16,bytes)"
       | "setTrustedRemoteAddress"
-      | "setTrustedRemoteAddress(uint16,bytes)"
       | "setUseCustomAdapterParams"
-      | "setUseCustomAdapterParams(bool)"
+      | "sharedDecimals"
       | "supportsInterface"
-      | "supportsInterface(bytes4)"
       | "symbol"
-      | "symbol()"
       | "token"
-      | "token()"
       | "totalSupply"
-      | "totalSupply()"
       | "transfer"
-      | "transfer(address,uint256)"
       | "transferFrom"
-      | "transferFrom(address,address,uint256)"
       | "transferOwnership"
-      | "transferOwnership(address)"
       | "trustedRemoteLookup"
-      | "trustedRemoteLookup(uint16)"
       | "updatePause"
-      | "updatePause(bool)"
       | "useCustomAdapterParams"
-      | "useCustomAdapterParams()"
       | "yieldBox"
-      | "yieldBox()"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "MINT_WINDOW",
+    functionFragment: "DEFAULT_PAYLOAD_SIZE_LIMIT",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "MINT_WINDOW()",
+    functionFragment: "MINT_WINDOW",
     values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "NO_EXTRA_GAS",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "PT_SEND", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "NO_EXTRA_GAS()",
+    functionFragment: "PT_SEND_AND_CALL",
     values?: undefined
   ): string;
-  encodeFunctionData(functionFragment: "PT_SEND", values?: undefined): string;
-  encodeFunctionData(functionFragment: "PT_SEND()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "PT_YB_DEPOSIT",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "PT_YB_DEPOSIT()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -280,15 +236,7 @@ export interface USD0Interface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "PT_YB_RETRIEVE_STRAT()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "PT_YB_SEND_STRAT",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "PT_YB_SEND_STRAT()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -296,15 +244,7 @@ export interface USD0Interface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "PT_YB_WITHDRAW()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "allowance",
-    values: [PromiseOrValue<string>, PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "allowance(address,address)",
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
@@ -312,15 +252,7 @@ export interface USD0Interface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "allowedBurner(uint256,address)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "allowedMinter",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "allowedMinter(uint256,address)",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
@@ -328,15 +260,7 @@ export interface USD0Interface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "approve(address,uint256)",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "balanceOf",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "balanceOf(address)",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
@@ -344,15 +268,20 @@ export interface USD0Interface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "burn(address,uint256)",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+    functionFragment: "callOnOFTReceived",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "circulatingSupply",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "circulatingSupply()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -360,25 +289,23 @@ export interface USD0Interface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "conservator()",
-    values?: undefined
+    functionFragment: "creditedPackets",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "decimals()",
-    values?: undefined
-  ): string;
   encodeFunctionData(
     functionFragment: "decreaseAllowance",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "estimateSendFee",
+    functionFragment: "estimateSendAndCallFee",
     values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<BigNumberish>,
@@ -387,7 +314,7 @@ export interface USD0Interface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "estimateSendFee(uint16,bytes,uint256,bool,bytes)",
+    functionFragment: "estimateSendFee",
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
@@ -405,19 +332,7 @@ export interface USD0Interface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "failedMessages(uint16,bytes,uint64)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "flashFee",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "flashFee(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
@@ -430,20 +345,7 @@ export interface USD0Interface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "flashLoan(address,address,uint256,bytes)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "flashMintFee",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "flashMintFee()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -451,15 +353,7 @@ export interface USD0Interface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
-    functionFragment: "forceResumeReceive(uint16,bytes)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "freeMint",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "freeMint(uint256)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
@@ -472,20 +366,7 @@ export interface USD0Interface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "getConfig(uint16,uint16,address,uint256)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "getTrustedRemoteAddress",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getTrustedRemoteAddress(uint16)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
@@ -493,23 +374,11 @@ export interface USD0Interface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "increaseAllowance(address,uint256)",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "isTrustedRemote",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
-    functionFragment: "isTrustedRemote(uint16,bytes)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "lzEndpoint",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "lzEndpoint()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -522,20 +391,7 @@ export interface USD0Interface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "lzReceive(uint16,bytes,uint64,bytes)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "maxFlashLoan",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "maxFlashLoan(address)",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
@@ -543,40 +399,19 @@ export interface USD0Interface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "maxFlashMint()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "minDstGasLookup",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "minDstGasLookup(uint16,uint16)",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "mint",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(
-    functionFragment: "mint(address,uint256)",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
   encodeFunctionData(functionFragment: "mintLimit", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "mintLimit()",
-    values?: undefined
-  ): string;
   encodeFunctionData(
     functionFragment: "mintedAt",
     values: [PromiseOrValue<string>]
   ): string;
-  encodeFunctionData(
-    functionFragment: "mintedAt(address)",
-    values: [PromiseOrValue<string>]
-  ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
-  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "nonblockingLzReceive",
     values: [
@@ -586,45 +421,19 @@ export interface USD0Interface extends utils.Interface {
       PromiseOrValue<BytesLike>
     ]
   ): string;
-  encodeFunctionData(
-    functionFragment: "nonblockingLzReceive(uint16,bytes,uint64,bytes)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
-  encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
   encodeFunctionData(functionFragment: "paused", values?: undefined): string;
-  encodeFunctionData(functionFragment: "paused()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "precrime", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "precrime()",
-    values?: undefined
+    functionFragment: "payloadSizeLimitLookup",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
+  encodeFunctionData(functionFragment: "precrime", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "renounceOwnership()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "retrieveFromYB",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<boolean>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)",
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
@@ -644,12 +453,15 @@ export interface USD0Interface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "retryMessage(uint16,bytes,uint64,bytes)",
+    functionFragment: "sendAndCall",
     values: [
+      PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      ICommonOFT.LzCallParamsStruct
     ]
   ): string;
   encodeFunctionData(
@@ -659,21 +471,7 @@ export interface USD0Interface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "sendFrom(address,uint16,bytes,uint256,address,address,bytes)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>
+      ICommonOFT.LzCallParamsStruct
     ]
   ): string;
   encodeFunctionData(
@@ -688,22 +486,7 @@ export interface USD0Interface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "sendToYB(uint256,uint256,uint16,uint256,address,bool)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<boolean>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "setBurnerStatus",
-    values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setBurnerStatus(address,bool)",
     values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
@@ -716,20 +499,7 @@ export interface USD0Interface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "setConfig(uint16,uint16,uint256,bytes)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "setConservator",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setConservator(address)",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
@@ -737,15 +507,7 @@ export interface USD0Interface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "setFlashMintFee(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "setMaxFlashMintable",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setMaxFlashMintable(uint256)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
@@ -757,19 +519,7 @@ export interface USD0Interface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "setMinDstGas(uint16,uint16,uint256)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "setMintLimit",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setMintLimit(uint256)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
@@ -777,15 +527,11 @@ export interface USD0Interface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
-    functionFragment: "setMinterStatus(address,bool)",
-    values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
+    functionFragment: "setPayloadSizeLimit",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setPrecrime",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setPrecrime(address)",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
@@ -793,15 +539,7 @@ export interface USD0Interface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "setReceiveVersion(uint16)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "setSendVersion",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setSendVersion(uint16)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
@@ -809,15 +547,7 @@ export interface USD0Interface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
-    functionFragment: "setTrustedRemote(uint16,bytes)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "setTrustedRemoteAddress",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setTrustedRemoteAddress(uint16,bytes)",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
@@ -825,27 +555,17 @@ export interface USD0Interface extends utils.Interface {
     values: [PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
-    functionFragment: "setUseCustomAdapterParams(bool)",
-    values: [PromiseOrValue<boolean>]
+    functionFragment: "sharedDecimals",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "supportsInterface",
     values: [PromiseOrValue<BytesLike>]
   ): string;
-  encodeFunctionData(
-    functionFragment: "supportsInterface(bytes4)",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
   encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
-  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
   encodeFunctionData(functionFragment: "token", values?: undefined): string;
-  encodeFunctionData(functionFragment: "token()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "totalSupply",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "totalSupply()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -853,19 +573,7 @@ export interface USD0Interface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "transfer(address,uint256)",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "transferFrom",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferFrom(address,address,uint256)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -877,15 +585,7 @@ export interface USD0Interface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "transferOwnership(address)",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "trustedRemoteLookup",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "trustedRemoteLookup(uint16)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
@@ -893,47 +593,30 @@ export interface USD0Interface extends utils.Interface {
     values: [PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
-    functionFragment: "updatePause(bool)",
-    values: [PromiseOrValue<boolean>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "useCustomAdapterParams",
     values?: undefined
   ): string;
-  encodeFunctionData(
-    functionFragment: "useCustomAdapterParams()",
-    values?: undefined
-  ): string;
   encodeFunctionData(functionFragment: "yieldBox", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "yieldBox()",
-    values?: undefined
-  ): string;
 
   decodeFunctionResult(
-    functionFragment: "MINT_WINDOW",
+    functionFragment: "DEFAULT_PAYLOAD_SIZE_LIMIT",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "MINT_WINDOW()",
+    functionFragment: "MINT_WINDOW",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "NO_EXTRA_GAS",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "PT_SEND", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "NO_EXTRA_GAS()",
+    functionFragment: "PT_SEND_AND_CALL",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "PT_SEND", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "PT_SEND()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "PT_YB_DEPOSIT",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "PT_YB_DEPOSIT()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -941,59 +624,27 @@ export interface USD0Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "PT_YB_RETRIEVE_STRAT()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "PT_YB_SEND_STRAT",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "PT_YB_SEND_STRAT()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "PT_YB_WITHDRAW",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "PT_YB_WITHDRAW()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "allowance(address,address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "allowedBurner",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "allowedBurner(uint256,address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "allowedMinter",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "allowedMinter(uint256,address)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "approve(address,uint256)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "balanceOf(address)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "burn(address,uint256)",
+    functionFragment: "callOnOFTReceived",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1001,25 +652,20 @@ export interface USD0Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "circulatingSupply()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "conservator",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "conservator()",
+    functionFragment: "creditedPackets",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "decreaseAllowance",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "decreaseAllowance(address,uint256)",
+    functionFragment: "estimateSendAndCallFee",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1027,59 +673,23 @@ export interface USD0Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "estimateSendFee(uint16,bytes,uint256,bool,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "failedMessages",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "failedMessages(uint16,bytes,uint64)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "flashFee", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "flashFee(address,uint256)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "flashLoan", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "flashLoan(address,address,uint256,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "flashMintFee",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "flashMintFee()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "forceResumeReceive",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "forceResumeReceive(uint16,bytes)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "freeMint", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "freeMint(uint256)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "getConfig", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "getConfig(uint16,uint16,address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "getTrustedRemoteAddress",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getTrustedRemoteAddress(uint16)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1087,33 +697,13 @@ export interface USD0Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "increaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "isTrustedRemote",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "isTrustedRemote(uint16,bytes)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "lzEndpoint", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "lzEndpoint()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "lzReceive", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "lzReceive(uint16,bytes,uint64,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "maxFlashLoan",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "maxFlashLoan(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1121,54 +711,26 @@ export interface USD0Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "maxFlashMint()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "minDstGasLookup",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "minDstGasLookup(uint16,uint16)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "mint(address,uint256)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "mintLimit", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "mintLimit()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "mintedAt", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "mintedAt(address)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "nonblockingLzReceive",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "nonblockingLzReceive(uint16,bytes,uint64,bytes)",
+    functionFragment: "payloadSizeLimitLookup",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "paused()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "precrime", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "precrime()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1176,46 +738,22 @@ export interface USD0Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "retryMessage",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "retryMessage(uint16,bytes,uint64,bytes)",
+    functionFragment: "sendAndCall",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "sendFrom", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "sendFrom(address,uint16,bytes,uint256,address,address,bytes)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "sendToYB", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "sendToYB(uint256,uint256,uint16,uint256,address,bool)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "setBurnerStatus",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "setBurnerStatus(address,bool)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "setConfig", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "setConfig(uint16,uint16,uint256,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "setConservator",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setConservator(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1223,15 +761,7 @@ export interface USD0Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setFlashMintFee(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "setMaxFlashMintable",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setMaxFlashMintable(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1239,15 +769,7 @@ export interface USD0Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setMinDstGas(uint16,uint16,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "setMintLimit",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setMintLimit(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1255,7 +777,7 @@ export interface USD0Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setMinterStatus(address,bool)",
+    functionFragment: "setPayloadSizeLimit",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1263,15 +785,7 @@ export interface USD0Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setPrecrime(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "setReceiveVersion",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setReceiveVersion(uint16)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1279,15 +793,7 @@ export interface USD0Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setSendVersion(uint16)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "setTrustedRemote",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setTrustedRemote(uint16,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1295,48 +801,26 @@ export interface USD0Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setTrustedRemoteAddress(uint16,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "setUseCustomAdapterParams",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setUseCustomAdapterParams(bool)",
+    functionFragment: "sharedDecimals",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "supportsInterface",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "supportsInterface(bytes4)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "token", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "token()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "totalSupply",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "totalSupply()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "transfer", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "transfer(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "transferFrom",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferFrom(address,address,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1344,15 +828,7 @@ export interface USD0Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "transferOwnership(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "trustedRemoteLookup",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "trustedRemoteLookup(uint16)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1360,33 +836,26 @@ export interface USD0Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "updatePause(bool)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "useCustomAdapterParams",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "useCustomAdapterParams()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "yieldBox", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "yieldBox()", data: BytesLike): Result;
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "Burned(address,uint256)": EventFragment;
+    "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
     "FlashMintFeeUpdated(uint256,uint256)": EventFragment;
     "MaxFlashMintUpdated(uint256,uint256)": EventFragment;
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)": EventFragment;
     "Minted(address,uint256)": EventFragment;
+    "NonContractAddress(address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "PausedUpdated(bool,bool)": EventFragment;
     "ReceiveFromChain(uint16,address,uint256)": EventFragment;
     "RetryMessageSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
-    "SendToChain(uint16,address,bytes,uint256)": EventFragment;
+    "SendToChain(uint16,address,bytes32,uint256)": EventFragment;
     "SetBurnerStatus(address,bool)": EventFragment;
     "SetMinDstGas(uint16,uint16,uint256)": EventFragment;
     "SetMinterStatus(address,bool)": EventFragment;
@@ -1400,81 +869,29 @@ export interface USD0Interface extends utils.Interface {
   };
 
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "Approval(address,address,uint256)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Burned"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Burned(address,uint256)"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "CallOFTReceivedSuccess"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ConservatorUpdated"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "ConservatorUpdated(address,address)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "FlashMintFeeUpdated"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "FlashMintFeeUpdated(uint256,uint256)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MaxFlashMintUpdated"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "MaxFlashMintUpdated(uint256,uint256)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MessageFailed"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "MessageFailed(uint16,bytes,uint64,bytes,bytes)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Minted"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Minted(address,uint256)"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NonContractAddress"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "OwnershipTransferred(address,address)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "PausedUpdated"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "PausedUpdated(bool,bool)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ReceiveFromChain"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "ReceiveFromChain(uint16,address,uint256)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RetryMessageSuccess"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "RetryMessageSuccess(uint16,bytes,uint64,bytes32)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SendToChain"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "SendToChain(uint16,address,bytes,uint256)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SetBurnerStatus"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "SetBurnerStatus(address,bool)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SetMinDstGas"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "SetMinDstGas(uint16,uint16,uint256)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SetMinterStatus"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "SetMinterStatus(address,bool)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SetPrecrime"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "SetPrecrime(address)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SetTrustedRemote"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "SetTrustedRemote(uint16,bytes)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SetTrustedRemoteAddress"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "SetTrustedRemoteAddress(uint16,bytes)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SetUseCustomAdapterParams"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "SetUseCustomAdapterParams(bool)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "Transfer(address,address,uint256)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "YieldBoxDeposit"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "YieldBoxDeposit(uint256)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "YieldBoxRetrieval"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "YieldBoxRetrieval(uint256)"): EventFragment;
 }
 
 export interface ApprovalEventObject {
@@ -1496,6 +913,20 @@ export interface BurnedEventObject {
 export type BurnedEvent = TypedEvent<[string, BigNumber], BurnedEventObject>;
 
 export type BurnedEventFilter = TypedEventFilter<BurnedEvent>;
+
+export interface CallOFTReceivedSuccessEventObject {
+  _srcChainId: number;
+  _srcAddress: string;
+  _nonce: BigNumber;
+  _hash: string;
+}
+export type CallOFTReceivedSuccessEvent = TypedEvent<
+  [number, string, BigNumber, string],
+  CallOFTReceivedSuccessEventObject
+>;
+
+export type CallOFTReceivedSuccessEventFilter =
+  TypedEventFilter<CallOFTReceivedSuccessEvent>;
 
 export interface ConservatorUpdatedEventObject {
   old: string;
@@ -1554,6 +985,17 @@ export interface MintedEventObject {
 export type MintedEvent = TypedEvent<[string, BigNumber], MintedEventObject>;
 
 export type MintedEventFilter = TypedEventFilter<MintedEvent>;
+
+export interface NonContractAddressEventObject {
+  _address: string;
+}
+export type NonContractAddressEvent = TypedEvent<
+  [string],
+  NonContractAddressEventObject
+>;
+
+export type NonContractAddressEventFilter =
+  TypedEventFilter<NonContractAddressEvent>;
 
 export interface OwnershipTransferredEventObject {
   previousOwner: string;
@@ -1727,14 +1169,12 @@ export type YieldBoxRetrievalEvent = TypedEvent<
 export type YieldBoxRetrievalEventFilter =
   TypedEventFilter<YieldBoxRetrievalEvent>;
 
-export interface USD0 extends BaseContract {
-  contractName: "USD0";
-
+export interface USDO extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: USD0Interface;
+  interface: USDOInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -1756,41 +1196,25 @@ export interface USD0 extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    MINT_WINDOW(overrides?: CallOverrides): Promise<[BigNumber]>;
+    DEFAULT_PAYLOAD_SIZE_LIMIT(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "MINT_WINDOW()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+    MINT_WINDOW(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     NO_EXTRA_GAS(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "NO_EXTRA_GAS()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     PT_SEND(overrides?: CallOverrides): Promise<[number]>;
 
-    "PT_SEND()"(overrides?: CallOverrides): Promise<[number]>;
+    PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<[number]>;
 
     PT_YB_DEPOSIT(overrides?: CallOverrides): Promise<[number]>;
 
-    "PT_YB_DEPOSIT()"(overrides?: CallOverrides): Promise<[number]>;
-
     PT_YB_RETRIEVE_STRAT(overrides?: CallOverrides): Promise<[number]>;
-
-    "PT_YB_RETRIEVE_STRAT()"(overrides?: CallOverrides): Promise<[number]>;
 
     PT_YB_SEND_STRAT(overrides?: CallOverrides): Promise<[number]>;
 
-    "PT_YB_SEND_STRAT()"(overrides?: CallOverrides): Promise<[number]>;
-
     PT_YB_WITHDRAW(overrides?: CallOverrides): Promise<[number]>;
 
-    "PT_YB_WITHDRAW()"(overrides?: CallOverrides): Promise<[number]>;
-
     allowance(
-      owner: PromiseOrValue<string>,
-      spender: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "allowance(address,address)"(
       owner: PromiseOrValue<string>,
       spender: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -1802,19 +1226,7 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
-    "allowedBurner(uint256,address)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
     allowedMinter(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
-    "allowedMinter(uint256,address)"(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -1826,18 +1238,7 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "approve(address,uint256)"(
-      spender: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     balanceOf(
-      account: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "balanceOf(address)"(
       account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
@@ -1848,23 +1249,30 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "burn(address,uint256)"(
-      _from: PromiseOrValue<string>,
+    callOnOFTReceived(
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _from: PromiseOrValue<BytesLike>,
+      _to: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _gasForCall: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     circulatingSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "circulatingSupply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     conservator(overrides?: CallOverrides): Promise<[string]>;
 
-    "conservator()"(overrides?: CallOverrides): Promise<[string]>;
+    creditedPackets(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BytesLike>,
+      arg2: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
     decimals(overrides?: CallOverrides): Promise<[number]>;
-
-    "decimals()"(overrides?: CallOverrides): Promise<[number]>;
 
     decreaseAllowance(
       spender: PromiseOrValue<string>,
@@ -1872,16 +1280,12 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "decreaseAllowance(address,uint256)"(
-      spender: PromiseOrValue<string>,
-      subtractedValue: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    estimateSendFee(
+    estimateSendAndCallFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
       _useZro: PromiseOrValue<boolean>,
       _adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -1889,7 +1293,7 @@ export interface USD0 extends BaseContract {
       [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
     >;
 
-    "estimateSendFee(uint16,bytes,uint256,bool,bytes)"(
+    estimateSendFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
@@ -1907,20 +1311,7 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    "failedMessages(uint16,bytes,uint64)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BytesLike>,
-      arg2: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
     flashFee(
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "flashFee(address,uint256)"(
       token: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1934,17 +1325,7 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "flashLoan(address,address,uint256,bytes)"(
-      receiver: PromiseOrValue<string>,
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     flashMintFee(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "flashMintFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     forceResumeReceive(
       _srcChainId: PromiseOrValue<BigNumberish>,
@@ -1952,18 +1333,7 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "forceResumeReceive(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     freeMint(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "freeMint(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -1976,31 +1346,12 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    "getConfig(uint16,uint16,address,uint256)"(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<string>,
-      _configType: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
     getTrustedRemoteAddress(
       _remoteChainId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    "getTrustedRemoteAddress(uint16)"(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
     increaseAllowance(
-      spender: PromiseOrValue<string>,
-      addedValue: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "increaseAllowance(address,uint256)"(
       spender: PromiseOrValue<string>,
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2012,25 +1363,9 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
-    "isTrustedRemote(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
     lzEndpoint(overrides?: CallOverrides): Promise<[string]>;
 
-    "lzEndpoint()"(overrides?: CallOverrides): Promise<[string]>;
-
     lzReceive(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "lzReceive(uint16,bytes,uint64,bytes)"(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
       _nonce: PromiseOrValue<BigNumberish>,
@@ -2043,22 +1378,9 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    "maxFlashLoan(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     maxFlashMint(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "maxFlashMint()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     minDstGasLookup(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "minDstGasLookup(uint16,uint16)"(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -2070,29 +1392,14 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "mint(address,uint256)"(
-      _to: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     mintLimit(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "mintLimit()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     mintedAt(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    "mintedAt(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     name(overrides?: CallOverrides): Promise<[string]>;
-
-    "name()"(overrides?: CallOverrides): Promise<[string]>;
 
     nonblockingLzReceive(
       _srcChainId: PromiseOrValue<BigNumberish>,
@@ -2102,45 +1409,22 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "nonblockingLzReceive(uint16,bytes,uint64,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     owner(overrides?: CallOverrides): Promise<[string]>;
-
-    "owner()"(overrides?: CallOverrides): Promise<[string]>;
 
     paused(overrides?: CallOverrides): Promise<[boolean]>;
 
-    "paused()"(overrides?: CallOverrides): Promise<[boolean]>;
+    payloadSizeLimitLookup(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     precrime(overrides?: CallOverrides): Promise<[string]>;
-
-    "precrime()"(overrides?: CallOverrides): Promise<[string]>;
 
     renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "renounceOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     retrieveFromYB(
-      amount: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      airdropAdapterParam: PromiseOrValue<BytesLike>,
-      strategyWithdrawal: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)"(
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -2158,11 +1442,14 @@ export interface USD0 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "retryMessage(uint16,bytes,uint64,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
+    sendAndCall(
+      _from: PromiseOrValue<string>,
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _amount: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2171,34 +1458,11 @@ export interface USD0 extends BaseContract {
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "sendFrom(address,uint16,bytes,uint256,address,address,bytes)"(
-      _from: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     sendToYB(
-      amount: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      extraGasLimit: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      strategyDeposit: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "sendToYB(uint256,uint256,uint16,uint256,address,bool)"(
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -2214,21 +1478,7 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setBurnerStatus(address,bool)"(
-      _for: PromiseOrValue<string>,
-      _status: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     setConfig(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      _configType: PromiseOrValue<BigNumberish>,
-      _config: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setConfig(uint16,uint16,uint256,bytes)"(
       _version: PromiseOrValue<BigNumberish>,
       _chainId: PromiseOrValue<BigNumberish>,
       _configType: PromiseOrValue<BigNumberish>,
@@ -2241,27 +1491,12 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setConservator(address)"(
-      _conservator: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     setFlashMintFee(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setFlashMintFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     setMaxFlashMintable(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setMaxFlashMintable(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2273,19 +1508,7 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setMinDstGas(uint16,uint16,uint256)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _packetType: PromiseOrValue<BigNumberish>,
-      _minGas: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     setMintLimit(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setMintLimit(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2296,18 +1519,13 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setMinterStatus(address,bool)"(
-      _for: PromiseOrValue<string>,
-      _status: PromiseOrValue<boolean>,
+    setPayloadSizeLimit(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _size: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setPrecrime(
-      _precrime: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setPrecrime(address)"(
       _precrime: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2317,28 +1535,12 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setReceiveVersion(uint16)"(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     setSendVersion(
       _version: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setSendVersion(uint16)"(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     setTrustedRemote(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _path: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setTrustedRemote(uint16,bytes)"(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _path: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2350,51 +1552,25 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setTrustedRemoteAddress(uint16,bytes)"(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      _remoteAddress: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     setUseCustomAdapterParams(
       _useCustomAdapterParams: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setUseCustomAdapterParams(bool)"(
-      _useCustomAdapterParams: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
+    sharedDecimals(overrides?: CallOverrides): Promise<[number]>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
-    "supportsInterface(bytes4)"(
-      interfaceId: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
     symbol(overrides?: CallOverrides): Promise<[string]>;
-
-    "symbol()"(overrides?: CallOverrides): Promise<[string]>;
 
     token(overrides?: CallOverrides): Promise<[string]>;
 
-    "token()"(overrides?: CallOverrides): Promise<[string]>;
-
     totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "totalSupply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     transfer(
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "transfer(address,uint256)"(
       to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2407,19 +1583,7 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "transferFrom(address,address,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     transferOwnership(
-      newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2429,65 +1593,35 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    "trustedRemoteLookup(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
     updatePause(
-      val: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "updatePause(bool)"(
       val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     useCustomAdapterParams(overrides?: CallOverrides): Promise<[boolean]>;
 
-    "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<[boolean]>;
-
     yieldBox(overrides?: CallOverrides): Promise<[string]>;
-
-    "yieldBox()"(overrides?: CallOverrides): Promise<[string]>;
   };
+
+  DEFAULT_PAYLOAD_SIZE_LIMIT(overrides?: CallOverrides): Promise<BigNumber>;
 
   MINT_WINDOW(overrides?: CallOverrides): Promise<BigNumber>;
 
-  "MINT_WINDOW()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   NO_EXTRA_GAS(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "NO_EXTRA_GAS()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   PT_SEND(overrides?: CallOverrides): Promise<number>;
 
-  "PT_SEND()"(overrides?: CallOverrides): Promise<number>;
+  PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<number>;
 
   PT_YB_DEPOSIT(overrides?: CallOverrides): Promise<number>;
 
-  "PT_YB_DEPOSIT()"(overrides?: CallOverrides): Promise<number>;
-
   PT_YB_RETRIEVE_STRAT(overrides?: CallOverrides): Promise<number>;
-
-  "PT_YB_RETRIEVE_STRAT()"(overrides?: CallOverrides): Promise<number>;
 
   PT_YB_SEND_STRAT(overrides?: CallOverrides): Promise<number>;
 
-  "PT_YB_SEND_STRAT()"(overrides?: CallOverrides): Promise<number>;
-
   PT_YB_WITHDRAW(overrides?: CallOverrides): Promise<number>;
 
-  "PT_YB_WITHDRAW()"(overrides?: CallOverrides): Promise<number>;
-
   allowance(
-    owner: PromiseOrValue<string>,
-    spender: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "allowance(address,address)"(
     owner: PromiseOrValue<string>,
     spender: PromiseOrValue<string>,
     overrides?: CallOverrides
@@ -2499,19 +1633,7 @@ export interface USD0 extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  "allowedBurner(uint256,address)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
   allowedMinter(
-    arg0: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  "allowedMinter(uint256,address)"(
     arg0: PromiseOrValue<BigNumberish>,
     arg1: PromiseOrValue<string>,
     overrides?: CallOverrides
@@ -2523,18 +1645,7 @@ export interface USD0 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "approve(address,uint256)"(
-    spender: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   balanceOf(
-    account: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "balanceOf(address)"(
     account: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
@@ -2545,23 +1656,30 @@ export interface USD0 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "burn(address,uint256)"(
-    _from: PromiseOrValue<string>,
+  callOnOFTReceived(
+    _srcChainId: PromiseOrValue<BigNumberish>,
+    _srcAddress: PromiseOrValue<BytesLike>,
+    _nonce: PromiseOrValue<BigNumberish>,
+    _from: PromiseOrValue<BytesLike>,
+    _to: PromiseOrValue<string>,
     _amount: PromiseOrValue<BigNumberish>,
+    _payload: PromiseOrValue<BytesLike>,
+    _gasForCall: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   circulatingSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
-  "circulatingSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   conservator(overrides?: CallOverrides): Promise<string>;
 
-  "conservator()"(overrides?: CallOverrides): Promise<string>;
+  creditedPackets(
+    arg0: PromiseOrValue<BigNumberish>,
+    arg1: PromiseOrValue<BytesLike>,
+    arg2: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   decimals(overrides?: CallOverrides): Promise<number>;
-
-  "decimals()"(overrides?: CallOverrides): Promise<number>;
 
   decreaseAllowance(
     spender: PromiseOrValue<string>,
@@ -2569,16 +1687,12 @@ export interface USD0 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "decreaseAllowance(address,uint256)"(
-    spender: PromiseOrValue<string>,
-    subtractedValue: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  estimateSendFee(
+  estimateSendAndCallFee(
     _dstChainId: PromiseOrValue<BigNumberish>,
     _toAddress: PromiseOrValue<BytesLike>,
     _amount: PromiseOrValue<BigNumberish>,
+    _payload: PromiseOrValue<BytesLike>,
+    _dstGasForCall: PromiseOrValue<BigNumberish>,
     _useZro: PromiseOrValue<boolean>,
     _adapterParams: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
@@ -2586,7 +1700,7 @@ export interface USD0 extends BaseContract {
     [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
   >;
 
-  "estimateSendFee(uint16,bytes,uint256,bool,bytes)"(
+  estimateSendFee(
     _dstChainId: PromiseOrValue<BigNumberish>,
     _toAddress: PromiseOrValue<BytesLike>,
     _amount: PromiseOrValue<BigNumberish>,
@@ -2604,20 +1718,7 @@ export interface USD0 extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  "failedMessages(uint16,bytes,uint64)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<BytesLike>,
-    arg2: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
   flashFee(
-    token: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "flashFee(address,uint256)"(
     token: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -2631,17 +1732,7 @@ export interface USD0 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "flashLoan(address,address,uint256,bytes)"(
-    receiver: PromiseOrValue<string>,
-    token: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    data: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   flashMintFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "flashMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   forceResumeReceive(
     _srcChainId: PromiseOrValue<BigNumberish>,
@@ -2649,18 +1740,7 @@ export interface USD0 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "forceResumeReceive(uint16,bytes)"(
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _srcAddress: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   freeMint(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "freeMint(uint256)"(
     _val: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -2673,31 +1753,12 @@ export interface USD0 extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  "getConfig(uint16,uint16,address,uint256)"(
-    _version: PromiseOrValue<BigNumberish>,
-    _chainId: PromiseOrValue<BigNumberish>,
-    arg2: PromiseOrValue<string>,
-    _configType: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
   getTrustedRemoteAddress(
     _remoteChainId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
 
-  "getTrustedRemoteAddress(uint16)"(
-    _remoteChainId: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
   increaseAllowance(
-    spender: PromiseOrValue<string>,
-    addedValue: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "increaseAllowance(address,uint256)"(
     spender: PromiseOrValue<string>,
     addedValue: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2709,25 +1770,9 @@ export interface USD0 extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  "isTrustedRemote(uint16,bytes)"(
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _srcAddress: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
   lzEndpoint(overrides?: CallOverrides): Promise<string>;
 
-  "lzEndpoint()"(overrides?: CallOverrides): Promise<string>;
-
   lzReceive(
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _srcAddress: PromiseOrValue<BytesLike>,
-    _nonce: PromiseOrValue<BigNumberish>,
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "lzReceive(uint16,bytes,uint64,bytes)"(
     _srcChainId: PromiseOrValue<BigNumberish>,
     _srcAddress: PromiseOrValue<BytesLike>,
     _nonce: PromiseOrValue<BigNumberish>,
@@ -2740,22 +1785,9 @@ export interface USD0 extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  "maxFlashLoan(address)"(
-    arg0: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   maxFlashMint(overrides?: CallOverrides): Promise<BigNumber>;
 
-  "maxFlashMint()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   minDstGasLookup(
-    arg0: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "minDstGasLookup(uint16,uint16)"(
     arg0: PromiseOrValue<BigNumberish>,
     arg1: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -2767,29 +1799,14 @@ export interface USD0 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "mint(address,uint256)"(
-    _to: PromiseOrValue<string>,
-    _amount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   mintLimit(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "mintLimit()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   mintedAt(
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  "mintedAt(address)"(
-    arg0: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   name(overrides?: CallOverrides): Promise<string>;
-
-  "name()"(overrides?: CallOverrides): Promise<string>;
 
   nonblockingLzReceive(
     _srcChainId: PromiseOrValue<BigNumberish>,
@@ -2799,45 +1816,22 @@ export interface USD0 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "nonblockingLzReceive(uint16,bytes,uint64,bytes)"(
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _srcAddress: PromiseOrValue<BytesLike>,
-    _nonce: PromiseOrValue<BigNumberish>,
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   owner(overrides?: CallOverrides): Promise<string>;
-
-  "owner()"(overrides?: CallOverrides): Promise<string>;
 
   paused(overrides?: CallOverrides): Promise<boolean>;
 
-  "paused()"(overrides?: CallOverrides): Promise<boolean>;
+  payloadSizeLimitLookup(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   precrime(overrides?: CallOverrides): Promise<string>;
-
-  "precrime()"(overrides?: CallOverrides): Promise<string>;
 
   renounceOwnership(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "renounceOwnership()"(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   retrieveFromYB(
-    amount: PromiseOrValue<BigNumberish>,
-    assetId: PromiseOrValue<BigNumberish>,
-    lzDstChainId: PromiseOrValue<BigNumberish>,
-    zroPaymentAddress: PromiseOrValue<string>,
-    airdropAdapterParam: PromiseOrValue<BytesLike>,
-    strategyWithdrawal: PromiseOrValue<boolean>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)"(
     amount: PromiseOrValue<BigNumberish>,
     assetId: PromiseOrValue<BigNumberish>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -2855,11 +1849,14 @@ export interface USD0 extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "retryMessage(uint16,bytes,uint64,bytes)"(
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _srcAddress: PromiseOrValue<BytesLike>,
-    _nonce: PromiseOrValue<BigNumberish>,
+  sendAndCall(
+    _from: PromiseOrValue<string>,
+    _dstChainId: PromiseOrValue<BigNumberish>,
+    _toAddress: PromiseOrValue<BytesLike>,
+    _amount: PromiseOrValue<BigNumberish>,
     _payload: PromiseOrValue<BytesLike>,
+    _dstGasForCall: PromiseOrValue<BigNumberish>,
+    _callParams: ICommonOFT.LzCallParamsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -2868,34 +1865,11 @@ export interface USD0 extends BaseContract {
     _dstChainId: PromiseOrValue<BigNumberish>,
     _toAddress: PromiseOrValue<BytesLike>,
     _amount: PromiseOrValue<BigNumberish>,
-    _refundAddress: PromiseOrValue<string>,
-    _zroPaymentAddress: PromiseOrValue<string>,
-    _adapterParams: PromiseOrValue<BytesLike>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "sendFrom(address,uint16,bytes,uint256,address,address,bytes)"(
-    _from: PromiseOrValue<string>,
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _toAddress: PromiseOrValue<BytesLike>,
-    _amount: PromiseOrValue<BigNumberish>,
-    _refundAddress: PromiseOrValue<string>,
-    _zroPaymentAddress: PromiseOrValue<string>,
-    _adapterParams: PromiseOrValue<BytesLike>,
+    _callParams: ICommonOFT.LzCallParamsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   sendToYB(
-    amount: PromiseOrValue<BigNumberish>,
-    assetId: PromiseOrValue<BigNumberish>,
-    lzDstChainId: PromiseOrValue<BigNumberish>,
-    extraGasLimit: PromiseOrValue<BigNumberish>,
-    zroPaymentAddress: PromiseOrValue<string>,
-    strategyDeposit: PromiseOrValue<boolean>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "sendToYB(uint256,uint256,uint16,uint256,address,bool)"(
     amount: PromiseOrValue<BigNumberish>,
     assetId: PromiseOrValue<BigNumberish>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -2911,21 +1885,7 @@ export interface USD0 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setBurnerStatus(address,bool)"(
-    _for: PromiseOrValue<string>,
-    _status: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   setConfig(
-    _version: PromiseOrValue<BigNumberish>,
-    _chainId: PromiseOrValue<BigNumberish>,
-    _configType: PromiseOrValue<BigNumberish>,
-    _config: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setConfig(uint16,uint16,uint256,bytes)"(
     _version: PromiseOrValue<BigNumberish>,
     _chainId: PromiseOrValue<BigNumberish>,
     _configType: PromiseOrValue<BigNumberish>,
@@ -2938,27 +1898,12 @@ export interface USD0 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setConservator(address)"(
-    _conservator: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   setFlashMintFee(
     _val: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setFlashMintFee(uint256)"(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   setMaxFlashMintable(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setMaxFlashMintable(uint256)"(
     _val: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -2970,19 +1915,7 @@ export interface USD0 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setMinDstGas(uint16,uint16,uint256)"(
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _packetType: PromiseOrValue<BigNumberish>,
-    _minGas: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   setMintLimit(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setMintLimit(uint256)"(
     _val: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -2993,18 +1926,13 @@ export interface USD0 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setMinterStatus(address,bool)"(
-    _for: PromiseOrValue<string>,
-    _status: PromiseOrValue<boolean>,
+  setPayloadSizeLimit(
+    _dstChainId: PromiseOrValue<BigNumberish>,
+    _size: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setPrecrime(
-    _precrime: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setPrecrime(address)"(
     _precrime: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -3014,28 +1942,12 @@ export interface USD0 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setReceiveVersion(uint16)"(
-    _version: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   setSendVersion(
     _version: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setSendVersion(uint16)"(
-    _version: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   setTrustedRemote(
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _path: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setTrustedRemote(uint16,bytes)"(
     _srcChainId: PromiseOrValue<BigNumberish>,
     _path: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -3047,51 +1959,25 @@ export interface USD0 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setTrustedRemoteAddress(uint16,bytes)"(
-    _remoteChainId: PromiseOrValue<BigNumberish>,
-    _remoteAddress: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   setUseCustomAdapterParams(
     _useCustomAdapterParams: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setUseCustomAdapterParams(bool)"(
-    _useCustomAdapterParams: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
+  sharedDecimals(overrides?: CallOverrides): Promise<number>;
 
   supportsInterface(
     interfaceId: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  "supportsInterface(bytes4)"(
-    interfaceId: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
   symbol(overrides?: CallOverrides): Promise<string>;
-
-  "symbol()"(overrides?: CallOverrides): Promise<string>;
 
   token(overrides?: CallOverrides): Promise<string>;
 
-  "token()"(overrides?: CallOverrides): Promise<string>;
-
   totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
-  "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   transfer(
-    to: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "transfer(address,uint256)"(
     to: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -3104,19 +1990,7 @@ export interface USD0 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "transferFrom(address,address,uint256)"(
-    from: PromiseOrValue<string>,
-    to: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   transferOwnership(
-    newOwner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "transferOwnership(address)"(
     newOwner: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -3126,65 +2000,35 @@ export interface USD0 extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  "trustedRemoteLookup(uint16)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
   updatePause(
-    val: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "updatePause(bool)"(
     val: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   useCustomAdapterParams(overrides?: CallOverrides): Promise<boolean>;
 
-  "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<boolean>;
-
   yieldBox(overrides?: CallOverrides): Promise<string>;
 
-  "yieldBox()"(overrides?: CallOverrides): Promise<string>;
-
   callStatic: {
-    MINT_WINDOW(overrides?: CallOverrides): Promise<BigNumber>;
+    DEFAULT_PAYLOAD_SIZE_LIMIT(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "MINT_WINDOW()"(overrides?: CallOverrides): Promise<BigNumber>;
+    MINT_WINDOW(overrides?: CallOverrides): Promise<BigNumber>;
 
     NO_EXTRA_GAS(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "NO_EXTRA_GAS()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     PT_SEND(overrides?: CallOverrides): Promise<number>;
 
-    "PT_SEND()"(overrides?: CallOverrides): Promise<number>;
+    PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<number>;
 
     PT_YB_DEPOSIT(overrides?: CallOverrides): Promise<number>;
 
-    "PT_YB_DEPOSIT()"(overrides?: CallOverrides): Promise<number>;
-
     PT_YB_RETRIEVE_STRAT(overrides?: CallOverrides): Promise<number>;
-
-    "PT_YB_RETRIEVE_STRAT()"(overrides?: CallOverrides): Promise<number>;
 
     PT_YB_SEND_STRAT(overrides?: CallOverrides): Promise<number>;
 
-    "PT_YB_SEND_STRAT()"(overrides?: CallOverrides): Promise<number>;
-
     PT_YB_WITHDRAW(overrides?: CallOverrides): Promise<number>;
 
-    "PT_YB_WITHDRAW()"(overrides?: CallOverrides): Promise<number>;
-
     allowance(
-      owner: PromiseOrValue<string>,
-      spender: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "allowance(address,address)"(
       owner: PromiseOrValue<string>,
       spender: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -3196,19 +2040,7 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    "allowedBurner(uint256,address)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     allowedMinter(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    "allowedMinter(uint256,address)"(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -3220,18 +2052,7 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    "approve(address,uint256)"(
-      spender: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     balanceOf(
-      account: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "balanceOf(address)"(
       account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -3242,23 +2063,30 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "burn(address,uint256)"(
-      _from: PromiseOrValue<string>,
+    callOnOFTReceived(
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _from: PromiseOrValue<BytesLike>,
+      _to: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _gasForCall: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     circulatingSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "circulatingSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     conservator(overrides?: CallOverrides): Promise<string>;
 
-    "conservator()"(overrides?: CallOverrides): Promise<string>;
+    creditedPackets(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BytesLike>,
+      arg2: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     decimals(overrides?: CallOverrides): Promise<number>;
-
-    "decimals()"(overrides?: CallOverrides): Promise<number>;
 
     decreaseAllowance(
       spender: PromiseOrValue<string>,
@@ -3266,16 +2094,12 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    "decreaseAllowance(address,uint256)"(
-      spender: PromiseOrValue<string>,
-      subtractedValue: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    estimateSendFee(
+    estimateSendAndCallFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
       _useZro: PromiseOrValue<boolean>,
       _adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -3283,7 +2107,7 @@ export interface USD0 extends BaseContract {
       [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
     >;
 
-    "estimateSendFee(uint16,bytes,uint256,bool,bytes)"(
+    estimateSendFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
@@ -3301,20 +2125,7 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    "failedMessages(uint16,bytes,uint64)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BytesLike>,
-      arg2: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
     flashFee(
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "flashFee(address,uint256)"(
       token: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -3328,17 +2139,7 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    "flashLoan(address,address,uint256,bytes)"(
-      receiver: PromiseOrValue<string>,
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     flashMintFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "flashMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     forceResumeReceive(
       _srcChainId: PromiseOrValue<BigNumberish>,
@@ -3346,18 +2147,7 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "forceResumeReceive(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     freeMint(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "freeMint(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -3370,31 +2160,12 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    "getConfig(uint16,uint16,address,uint256)"(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<string>,
-      _configType: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
     getTrustedRemoteAddress(
       _remoteChainId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
 
-    "getTrustedRemoteAddress(uint16)"(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
     increaseAllowance(
-      spender: PromiseOrValue<string>,
-      addedValue: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    "increaseAllowance(address,uint256)"(
       spender: PromiseOrValue<string>,
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -3406,25 +2177,9 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    "isTrustedRemote(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     lzEndpoint(overrides?: CallOverrides): Promise<string>;
 
-    "lzEndpoint()"(overrides?: CallOverrides): Promise<string>;
-
     lzReceive(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "lzReceive(uint16,bytes,uint64,bytes)"(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
       _nonce: PromiseOrValue<BigNumberish>,
@@ -3437,22 +2192,9 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "maxFlashLoan(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     maxFlashMint(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "maxFlashMint()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     minDstGasLookup(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "minDstGasLookup(uint16,uint16)"(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -3464,29 +2206,14 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "mint(address,uint256)"(
-      _to: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     mintLimit(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "mintLimit()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     mintedAt(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "mintedAt(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     name(overrides?: CallOverrides): Promise<string>;
-
-    "name()"(overrides?: CallOverrides): Promise<string>;
 
     nonblockingLzReceive(
       _srcChainId: PromiseOrValue<BigNumberish>,
@@ -3496,41 +2223,20 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "nonblockingLzReceive(uint16,bytes,uint64,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     owner(overrides?: CallOverrides): Promise<string>;
-
-    "owner()"(overrides?: CallOverrides): Promise<string>;
 
     paused(overrides?: CallOverrides): Promise<boolean>;
 
-    "paused()"(overrides?: CallOverrides): Promise<boolean>;
+    payloadSizeLimitLookup(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     precrime(overrides?: CallOverrides): Promise<string>;
 
-    "precrime()"(overrides?: CallOverrides): Promise<string>;
-
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
-    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
-
     retrieveFromYB(
-      amount: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      airdropAdapterParam: PromiseOrValue<BytesLike>,
-      strategyWithdrawal: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)"(
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3548,11 +2254,14 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "retryMessage(uint16,bytes,uint64,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
+    sendAndCall(
+      _from: PromiseOrValue<string>,
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _amount: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3561,34 +2270,11 @@ export interface USD0 extends BaseContract {
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "sendFrom(address,uint16,bytes,uint256,address,address,bytes)"(
-      _from: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
     sendToYB(
-      amount: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      extraGasLimit: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      strategyDeposit: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "sendToYB(uint256,uint256,uint16,uint256,address,bool)"(
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3604,21 +2290,7 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setBurnerStatus(address,bool)"(
-      _for: PromiseOrValue<string>,
-      _status: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     setConfig(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      _configType: PromiseOrValue<BigNumberish>,
-      _config: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setConfig(uint16,uint16,uint256,bytes)"(
       _version: PromiseOrValue<BigNumberish>,
       _chainId: PromiseOrValue<BigNumberish>,
       _configType: PromiseOrValue<BigNumberish>,
@@ -3631,27 +2303,12 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setConservator(address)"(
-      _conservator: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     setFlashMintFee(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setFlashMintFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     setMaxFlashMintable(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setMaxFlashMintable(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -3663,19 +2320,7 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setMinDstGas(uint16,uint16,uint256)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _packetType: PromiseOrValue<BigNumberish>,
-      _minGas: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     setMintLimit(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setMintLimit(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -3686,18 +2331,13 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setMinterStatus(address,bool)"(
-      _for: PromiseOrValue<string>,
-      _status: PromiseOrValue<boolean>,
+    setPayloadSizeLimit(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _size: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     setPrecrime(
-      _precrime: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setPrecrime(address)"(
       _precrime: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -3707,28 +2347,12 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setReceiveVersion(uint16)"(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     setSendVersion(
       _version: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setSendVersion(uint16)"(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     setTrustedRemote(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _path: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setTrustedRemote(uint16,bytes)"(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _path: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -3740,51 +2364,25 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setTrustedRemoteAddress(uint16,bytes)"(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      _remoteAddress: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     setUseCustomAdapterParams(
       _useCustomAdapterParams: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setUseCustomAdapterParams(bool)"(
-      _useCustomAdapterParams: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    sharedDecimals(overrides?: CallOverrides): Promise<number>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    "supportsInterface(bytes4)"(
-      interfaceId: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     symbol(overrides?: CallOverrides): Promise<string>;
-
-    "symbol()"(overrides?: CallOverrides): Promise<string>;
 
     token(overrides?: CallOverrides): Promise<string>;
 
-    "token()"(overrides?: CallOverrides): Promise<string>;
-
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     transfer(
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    "transfer(address,uint256)"(
       to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -3797,19 +2395,7 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    "transferFrom(address,address,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     transferOwnership(
-      newOwner: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -3819,28 +2405,14 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    "trustedRemoteLookup(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
     updatePause(
-      val: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "updatePause(bool)"(
       val: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     useCustomAdapterParams(overrides?: CallOverrides): Promise<boolean>;
 
-    "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<boolean>;
-
     yieldBox(overrides?: CallOverrides): Promise<string>;
-
-    "yieldBox()"(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
@@ -3863,6 +2435,19 @@ export interface USD0 extends BaseContract {
       _from?: PromiseOrValue<string> | null,
       _amount?: null
     ): BurnedEventFilter;
+
+    "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"(
+      _srcChainId?: PromiseOrValue<BigNumberish> | null,
+      _srcAddress?: null,
+      _nonce?: null,
+      _hash?: null
+    ): CallOFTReceivedSuccessEventFilter;
+    CallOFTReceivedSuccess(
+      _srcChainId?: PromiseOrValue<BigNumberish> | null,
+      _srcAddress?: null,
+      _nonce?: null,
+      _hash?: null
+    ): CallOFTReceivedSuccessEventFilter;
 
     "ConservatorUpdated(address,address)"(
       old?: PromiseOrValue<string> | null,
@@ -3915,6 +2500,11 @@ export interface USD0 extends BaseContract {
       _amount?: null
     ): MintedEventFilter;
 
+    "NonContractAddress(address)"(
+      _address?: null
+    ): NonContractAddressEventFilter;
+    NonContractAddress(_address?: null): NonContractAddressEventFilter;
+
     "OwnershipTransferred(address,address)"(
       previousOwner?: PromiseOrValue<string> | null,
       newOwner?: PromiseOrValue<string> | null
@@ -3954,16 +2544,16 @@ export interface USD0 extends BaseContract {
       _payloadHash?: null
     ): RetryMessageSuccessEventFilter;
 
-    "SendToChain(uint16,address,bytes,uint256)"(
+    "SendToChain(uint16,address,bytes32,uint256)"(
       _dstChainId?: PromiseOrValue<BigNumberish> | null,
       _from?: PromiseOrValue<string> | null,
-      _toAddress?: null,
+      _toAddress?: PromiseOrValue<BytesLike> | null,
       _amount?: null
     ): SendToChainEventFilter;
     SendToChain(
       _dstChainId?: PromiseOrValue<BigNumberish> | null,
       _from?: PromiseOrValue<string> | null,
-      _toAddress?: null,
+      _toAddress?: PromiseOrValue<BytesLike> | null,
       _amount?: null
     ): SendToChainEventFilter;
 
@@ -4043,41 +2633,25 @@ export interface USD0 extends BaseContract {
   };
 
   estimateGas: {
-    MINT_WINDOW(overrides?: CallOverrides): Promise<BigNumber>;
+    DEFAULT_PAYLOAD_SIZE_LIMIT(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "MINT_WINDOW()"(overrides?: CallOverrides): Promise<BigNumber>;
+    MINT_WINDOW(overrides?: CallOverrides): Promise<BigNumber>;
 
     NO_EXTRA_GAS(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "NO_EXTRA_GAS()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     PT_SEND(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "PT_SEND()"(overrides?: CallOverrides): Promise<BigNumber>;
+    PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<BigNumber>;
 
     PT_YB_DEPOSIT(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "PT_YB_DEPOSIT()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     PT_YB_RETRIEVE_STRAT(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "PT_YB_RETRIEVE_STRAT()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     PT_YB_SEND_STRAT(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "PT_YB_SEND_STRAT()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     PT_YB_WITHDRAW(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "PT_YB_WITHDRAW()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     allowance(
-      owner: PromiseOrValue<string>,
-      spender: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "allowance(address,address)"(
       owner: PromiseOrValue<string>,
       spender: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -4089,19 +2663,7 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "allowedBurner(uint256,address)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     allowedMinter(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "allowedMinter(uint256,address)"(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -4113,18 +2675,7 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "approve(address,uint256)"(
-      spender: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     balanceOf(
-      account: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "balanceOf(address)"(
       account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -4135,23 +2686,30 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "burn(address,uint256)"(
-      _from: PromiseOrValue<string>,
+    callOnOFTReceived(
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _from: PromiseOrValue<BytesLike>,
+      _to: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _gasForCall: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     circulatingSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "circulatingSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     conservator(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "conservator()"(overrides?: CallOverrides): Promise<BigNumber>;
+    creditedPackets(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BytesLike>,
+      arg2: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     decimals(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     decreaseAllowance(
       spender: PromiseOrValue<string>,
@@ -4159,22 +2717,18 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "decreaseAllowance(address,uint256)"(
-      spender: PromiseOrValue<string>,
-      subtractedValue: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    estimateSendFee(
+    estimateSendAndCallFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
       _useZro: PromiseOrValue<boolean>,
       _adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "estimateSendFee(uint16,bytes,uint256,bool,bytes)"(
+    estimateSendFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
@@ -4190,34 +2744,13 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "failedMessages(uint16,bytes,uint64)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BytesLike>,
-      arg2: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     flashFee(
       token: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "flashFee(address,uint256)"(
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     flashLoan(
-      receiver: PromiseOrValue<string>,
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "flashLoan(address,address,uint256,bytes)"(
       receiver: PromiseOrValue<string>,
       token: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
@@ -4227,26 +2760,13 @@ export interface USD0 extends BaseContract {
 
     flashMintFee(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "flashMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     forceResumeReceive(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "forceResumeReceive(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     freeMint(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "freeMint(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -4259,31 +2779,12 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "getConfig(uint16,uint16,address,uint256)"(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<string>,
-      _configType: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     getTrustedRemoteAddress(
       _remoteChainId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "getTrustedRemoteAddress(uint16)"(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     increaseAllowance(
-      spender: PromiseOrValue<string>,
-      addedValue: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "increaseAllowance(address,uint256)"(
       spender: PromiseOrValue<string>,
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -4295,25 +2796,9 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "isTrustedRemote(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     lzEndpoint(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "lzEndpoint()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     lzReceive(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "lzReceive(uint16,bytes,uint64,bytes)"(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
       _nonce: PromiseOrValue<BigNumberish>,
@@ -4326,22 +2811,9 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "maxFlashLoan(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     maxFlashMint(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "maxFlashMint()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     minDstGasLookup(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "minDstGasLookup(uint16,uint16)"(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -4353,29 +2825,14 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "mint(address,uint256)"(
-      _to: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     mintLimit(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "mintLimit()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     mintedAt(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "mintedAt(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     name(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "name()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nonblockingLzReceive(
       _srcChainId: PromiseOrValue<BigNumberish>,
@@ -4385,45 +2842,22 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "nonblockingLzReceive(uint16,bytes,uint64,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     owner(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     paused(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "paused()"(overrides?: CallOverrides): Promise<BigNumber>;
+    payloadSizeLimitLookup(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     precrime(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "precrime()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "renounceOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     retrieveFromYB(
-      amount: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      airdropAdapterParam: PromiseOrValue<BytesLike>,
-      strategyWithdrawal: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)"(
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -4441,11 +2875,14 @@ export interface USD0 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "retryMessage(uint16,bytes,uint64,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
+    sendAndCall(
+      _from: PromiseOrValue<string>,
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _amount: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4454,34 +2891,11 @@ export interface USD0 extends BaseContract {
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "sendFrom(address,uint16,bytes,uint256,address,address,bytes)"(
-      _from: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     sendToYB(
-      amount: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      extraGasLimit: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      strategyDeposit: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "sendToYB(uint256,uint256,uint16,uint256,address,bool)"(
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -4497,21 +2911,7 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setBurnerStatus(address,bool)"(
-      _for: PromiseOrValue<string>,
-      _status: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     setConfig(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      _configType: PromiseOrValue<BigNumberish>,
-      _config: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setConfig(uint16,uint16,uint256,bytes)"(
       _version: PromiseOrValue<BigNumberish>,
       _chainId: PromiseOrValue<BigNumberish>,
       _configType: PromiseOrValue<BigNumberish>,
@@ -4524,27 +2924,12 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setConservator(address)"(
-      _conservator: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     setFlashMintFee(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setFlashMintFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     setMaxFlashMintable(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setMaxFlashMintable(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -4556,19 +2941,7 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setMinDstGas(uint16,uint16,uint256)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _packetType: PromiseOrValue<BigNumberish>,
-      _minGas: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     setMintLimit(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setMintLimit(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -4579,18 +2952,13 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setMinterStatus(address,bool)"(
-      _for: PromiseOrValue<string>,
-      _status: PromiseOrValue<boolean>,
+    setPayloadSizeLimit(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _size: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setPrecrime(
-      _precrime: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setPrecrime(address)"(
       _precrime: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -4600,28 +2968,12 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setReceiveVersion(uint16)"(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     setSendVersion(
       _version: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setSendVersion(uint16)"(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     setTrustedRemote(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _path: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setTrustedRemote(uint16,bytes)"(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _path: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -4633,51 +2985,25 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setTrustedRemoteAddress(uint16,bytes)"(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      _remoteAddress: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     setUseCustomAdapterParams(
       _useCustomAdapterParams: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setUseCustomAdapterParams(bool)"(
-      _useCustomAdapterParams: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
+    sharedDecimals(overrides?: CallOverrides): Promise<BigNumber>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "supportsInterface(bytes4)"(
-      interfaceId: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     symbol(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "symbol()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     token(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "token()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     transfer(
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "transfer(address,uint256)"(
       to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -4690,19 +3016,7 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "transferFrom(address,address,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     transferOwnership(
-      newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -4712,74 +3026,40 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "trustedRemoteLookup(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     updatePause(
-      val: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "updatePause(bool)"(
       val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     useCustomAdapterParams(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     yieldBox(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "yieldBox()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    MINT_WINDOW(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    DEFAULT_PAYLOAD_SIZE_LIMIT(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    "MINT_WINDOW()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    MINT_WINDOW(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     NO_EXTRA_GAS(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "NO_EXTRA_GAS()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     PT_SEND(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "PT_SEND()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     PT_YB_DEPOSIT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "PT_YB_DEPOSIT()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     PT_YB_RETRIEVE_STRAT(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "PT_YB_RETRIEVE_STRAT()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     PT_YB_SEND_STRAT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "PT_YB_SEND_STRAT()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
 
     PT_YB_WITHDRAW(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "PT_YB_WITHDRAW()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     allowance(
-      owner: PromiseOrValue<string>,
-      spender: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "allowance(address,address)"(
       owner: PromiseOrValue<string>,
       spender: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -4791,19 +3071,7 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "allowedBurner(uint256,address)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     allowedMinter(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "allowedMinter(uint256,address)"(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -4815,18 +3083,7 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "approve(address,uint256)"(
-      spender: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     balanceOf(
-      account: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "balanceOf(address)"(
       account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -4837,25 +3094,30 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "burn(address,uint256)"(
-      _from: PromiseOrValue<string>,
+    callOnOFTReceived(
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _from: PromiseOrValue<BytesLike>,
+      _to: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _gasForCall: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     circulatingSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "circulatingSupply()"(
+    conservator(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    creditedPackets(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BytesLike>,
+      arg2: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    conservator(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "conservator()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     decreaseAllowance(
       spender: PromiseOrValue<string>,
@@ -4863,22 +3125,18 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "decreaseAllowance(address,uint256)"(
-      spender: PromiseOrValue<string>,
-      subtractedValue: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    estimateSendFee(
+    estimateSendAndCallFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
       _useZro: PromiseOrValue<boolean>,
       _adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "estimateSendFee(uint16,bytes,uint256,bool,bytes)"(
+    estimateSendFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
@@ -4894,20 +3152,7 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "failedMessages(uint16,bytes,uint64)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BytesLike>,
-      arg2: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     flashFee(
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "flashFee(address,uint256)"(
       token: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -4921,17 +3166,7 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "flashLoan(address,address,uint256,bytes)"(
-      receiver: PromiseOrValue<string>,
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     flashMintFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "flashMintFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     forceResumeReceive(
       _srcChainId: PromiseOrValue<BigNumberish>,
@@ -4939,18 +3174,7 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "forceResumeReceive(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     freeMint(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "freeMint(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -4963,31 +3187,12 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "getConfig(uint16,uint16,address,uint256)"(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<string>,
-      _configType: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     getTrustedRemoteAddress(
       _remoteChainId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "getTrustedRemoteAddress(uint16)"(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     increaseAllowance(
-      spender: PromiseOrValue<string>,
-      addedValue: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "increaseAllowance(address,uint256)"(
       spender: PromiseOrValue<string>,
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -4999,25 +3204,9 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "isTrustedRemote(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     lzEndpoint(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "lzEndpoint()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     lzReceive(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "lzReceive(uint16,bytes,uint64,bytes)"(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
       _nonce: PromiseOrValue<BigNumberish>,
@@ -5030,22 +3219,9 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "maxFlashLoan(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     maxFlashMint(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "maxFlashMint()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     minDstGasLookup(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "minDstGasLookup(uint16,uint16)"(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -5057,29 +3233,14 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "mint(address,uint256)"(
-      _to: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     mintLimit(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "mintLimit()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     mintedAt(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "mintedAt(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     nonblockingLzReceive(
       _srcChainId: PromiseOrValue<BigNumberish>,
@@ -5089,45 +3250,22 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "nonblockingLzReceive(uint16,bytes,uint64,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     paused(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "paused()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    payloadSizeLimitLookup(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     precrime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "precrime()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "renounceOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     retrieveFromYB(
-      amount: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      airdropAdapterParam: PromiseOrValue<BytesLike>,
-      strategyWithdrawal: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)"(
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -5145,11 +3283,14 @@ export interface USD0 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "retryMessage(uint16,bytes,uint64,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
+    sendAndCall(
+      _from: PromiseOrValue<string>,
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _amount: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
+      _dstGasForCall: PromiseOrValue<BigNumberish>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -5158,34 +3299,11 @@ export interface USD0 extends BaseContract {
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "sendFrom(address,uint16,bytes,uint256,address,address,bytes)"(
-      _from: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
+      _callParams: ICommonOFT.LzCallParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     sendToYB(
-      amount: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      extraGasLimit: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      strategyDeposit: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "sendToYB(uint256,uint256,uint16,uint256,address,bool)"(
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -5201,21 +3319,7 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setBurnerStatus(address,bool)"(
-      _for: PromiseOrValue<string>,
-      _status: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     setConfig(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      _configType: PromiseOrValue<BigNumberish>,
-      _config: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setConfig(uint16,uint16,uint256,bytes)"(
       _version: PromiseOrValue<BigNumberish>,
       _chainId: PromiseOrValue<BigNumberish>,
       _configType: PromiseOrValue<BigNumberish>,
@@ -5228,27 +3332,12 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setConservator(address)"(
-      _conservator: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     setFlashMintFee(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setFlashMintFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     setMaxFlashMintable(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setMaxFlashMintable(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -5260,19 +3349,7 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setMinDstGas(uint16,uint16,uint256)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _packetType: PromiseOrValue<BigNumberish>,
-      _minGas: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     setMintLimit(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setMintLimit(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -5283,18 +3360,13 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setMinterStatus(address,bool)"(
-      _for: PromiseOrValue<string>,
-      _status: PromiseOrValue<boolean>,
+    setPayloadSizeLimit(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _size: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setPrecrime(
-      _precrime: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setPrecrime(address)"(
       _precrime: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -5304,28 +3376,12 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setReceiveVersion(uint16)"(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     setSendVersion(
       _version: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setSendVersion(uint16)"(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     setTrustedRemote(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _path: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setTrustedRemote(uint16,bytes)"(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _path: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -5337,51 +3393,25 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setTrustedRemoteAddress(uint16,bytes)"(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      _remoteAddress: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     setUseCustomAdapterParams(
       _useCustomAdapterParams: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setUseCustomAdapterParams(bool)"(
-      _useCustomAdapterParams: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
+    sharedDecimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "supportsInterface(bytes4)"(
-      interfaceId: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "symbol()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     token(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "token()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "totalSupply()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     transfer(
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "transfer(address,uint256)"(
       to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -5394,19 +3424,7 @@ export interface USD0 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "transferFrom(address,address,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     transferOwnership(
-      newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -5416,17 +3434,7 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "trustedRemoteLookup(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     updatePause(
-      val: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "updatePause(bool)"(
       val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -5435,12 +3443,6 @@ export interface USD0 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "useCustomAdapterParams()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     yieldBox(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "yieldBox()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

@@ -26,7 +26,7 @@ export type { MultiSwapper } from "./contracts/swappers/MultiSwapper";
 export { MultiSwapper__factory } from "./factories/contracts/swappers/MultiSwapper__factory";
 export type { BigBang } from "./contracts/usd0/BigBang";
 export { BigBang__factory } from "./factories/contracts/usd0/BigBang__factory";
-export type { USD0 } from "./contracts/usd0/USD0";
+export type { USDO } from "./contracts/usd0/USDO";
 export { USD0__factory } from "./factories/contracts/usd0/USD0__factory";
 export type { YieldBox } from "./yieldbox/contracts/YieldBox";
 export { YieldBox__factory } from "./factories/yieldbox/contracts/YieldBox__factory";
