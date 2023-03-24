@@ -20,6 +20,7 @@ interface IDeploymentQueue {
     args: unknown[];
     dependsOn?: IDependentOn[];
     meta?: any;
+    runStaticSimulation: boolean;
 }
 
 export interface TDeploymentVMContract extends TContract {
@@ -72,6 +73,7 @@ export class DeployerVM {
         deterministicAddress: string;
         creationCode: string;
         salt: string;
+        runStaticSimulations: boolean;
     })[] = [];
 
     /**
@@ -406,6 +408,7 @@ export class DeployerVM {
                         ),
                     creationCode,
                     salt,
+                    runStaticSimulations: contract.runStaticSimulation ?? true,
                 });
             }
         }
@@ -417,14 +420,16 @@ export class DeployerVM {
     private async runStaticSimulation() {
         // Run asynchronously
         await Promise.all(
-            this.buildQueue.map(async (e) => {
-                return (await this.getTapiocaDeployer()).callStatic.deploy(
-                    0,
-                    e.salt,
-                    e.creationCode,
-                    e.deploymentName,
-                );
-            }),
+            this.buildQueue
+                .filter((a) => a.runStaticSimulations)
+                .map(async (e) => {
+                    return (await this.getTapiocaDeployer()).callStatic.deploy(
+                        0,
+                        e.salt,
+                        e.creationCode,
+                        e.deploymentName,
+                    );
+                }),
         );
     }
 
