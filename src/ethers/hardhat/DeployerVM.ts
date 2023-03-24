@@ -20,7 +20,7 @@ interface IDeploymentQueue {
     args: unknown[];
     dependsOn?: IDependentOn[];
     meta?: any;
-    runStaticSimulation: boolean;
+    runStaticSimulation?: boolean;
 }
 
 export interface TDeploymentVMContract extends TContract {
