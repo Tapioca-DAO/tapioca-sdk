@@ -3,6 +3,7 @@ import inquirer from 'inquirer';
 import { EChainID } from '../../../../api/config';
 import { TContract, TLocalDeployment } from '../../../../shared';
 import { Multicall, TapiocaZ } from '../../../../typechain';
+import { USDO__factory } from '../../../../typechain/Tapioca-Bar/factories/contracts/usd0';
 import { TapiocaWrapper } from '../../../../typechain/TapiocaZ';
 import { Multicall3 } from '../../../../typechain/utils/MultiCall';
 import { MultisigMock } from '../../../../typechain/utils/MultisigMock';
@@ -88,27 +89,64 @@ export const setLZConfig__task = async (
             );
         multisigTarget = multicall.address;
     }
-    await submitThroughMultisig(multisig, multisigTx, multisigTarget);
+    console.log('[+] Submitting calls through the Multisig contract');
+    await submitThroughMultisig(hre, multisig, multicall, contractToConf.address, multisigTx, multisigTarget, taskArgs.debugMode);
 };
 
 async function submitThroughMultisig(
+    hre: HardhatRuntimeEnvironment,
     multisig: MultisigMock,
+    multicall: Multicall3,
+    contractToConf: string,
     callData: string,
     target: string,
+    debugMode?: boolean,
 ) {
-    let tx = await multisig.submitTransaction(target, 0, callData);
+    let transferOwnershipABI = ["function transferOwnership(address newOwner)"];
+    let iTransferOwnership = new hre.ethers.utils.Interface(transferOwnershipABI);
+    let transferOwnershipCalldata = iTransferOwnership.encodeFunctionData("transferOwnership", [multicall.address]);
+
+    //transfer ownership to the multicall contract
+    console.log('   [+] Changing owner to: ', multicall.address);
+    let tx = await multisig.submitTransaction(contractToConf, 0, transferOwnershipCalldata);
+    tx.wait(3);
+    let txCount = await multisig.getTransactionCount();
+    let lastTx = txCount.sub(1);
+    tx = await multisig.confirmTransaction(lastTx);
+    tx.wait(3);
+    tx = await multisig.executeTransaction(lastTx);
+    tx.wait(3);
+    console.log('   [+] Owner changed by tx: ', tx.hash);
+
+    console.log("\n");
+
+    tx = await multisig.submitTransaction(target, 0, callData);
     console.log('[+] Multisig tx submitted: ', tx.hash);
     tx.wait(3);
     console.log('[+] Multisig tx mined: ', tx.hash);
-    const txCount = await multisig.getTransactionCount();
-    tx = await multisig.confirmTransaction(txCount.sub(1));
+    txCount = await multisig.getTransactionCount();
+    lastTx = txCount.sub(1);
+    tx = await multisig.confirmTransaction(lastTx);
     console.log('[+] Multisig tx confirmation submitted: ', tx.hash);
     tx.wait(3);
     console.log('[+] Multisig tx confirmation mined: ', tx.hash);
-    tx = await multisig.executeTransaction(txCount.sub(1));
+    tx = await multisig.executeTransaction(lastTx);
     console.log('[+] Multisig tx execution submitted: ', tx.hash);
     tx.wait(3);
     console.log('[+] Multisig tx execution mined: ', tx.hash);
+
+    //transfer ownership back to the multisig
+    console.log('[+] Reverting to initial owner');
+    transferOwnershipCalldata = iTransferOwnership.encodeFunctionData("transferOwnership", [multisig.address]);
+    const calls: Multicall3.Call3Struct[] = [];
+    calls.push({
+        target: contractToConf,
+        callData: transferOwnershipCalldata,
+        allowFailure: false,
+    });
+    tx = debugMode ? await multicall.multicall(calls) : await multicall.aggregate3(calls);
+    tx.wait(3);
+    console.log('[+] Reverted to initial owner through tx: ', tx.hash);
 }
 
 async function getLinkedContract(
