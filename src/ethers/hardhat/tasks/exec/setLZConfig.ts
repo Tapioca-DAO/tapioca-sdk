@@ -5,12 +5,14 @@ import { TContract, TLocalDeployment } from '../../../../shared';
 import { Multicall, TapiocaZ } from '../../../../typechain';
 import { TapiocaWrapper } from '../../../../typechain/TapiocaZ';
 import { Multicall3 } from '../../../../typechain/utils/MultiCall';
+import { MultisigMock } from '../../../../typechain/utils/MultisigMock';
+import { MultisigMock__factory } from '../../../../typechain/utils/MultisigMock/factories/MultisigMock__factory';
 
 /**
  * Configure the LZ app in one go
  */
 export const setLZConfig__task = async (
-    taskArgs: { isToft?: boolean; debugMode: boolean },
+    taskArgs: { isToft?: boolean; debugMode?: boolean; multisig: string },
     hre: HardhatRuntimeEnvironment,
 ) => {
     console.log('[+] Setting omni config');
@@ -32,26 +34,36 @@ export const setLZConfig__task = async (
         throw '[-] Multicall not found';
     }
 
+
     const tag = await hre.SDK.hardhatUtils.askForTag(hre, 'local');
     const choices = hre.SDK.db.loadLocalDeployment(
         tag,
         String(hre.network.config.chainId),
     );
 
+    if (!taskArgs.multisig) {
+        throw '[-] Multisig not found';
+    }
+    const multisig = MultisigMock__factory.connect(taskArgs.multisig, signer);
+
     const { toConfigure } = await inquirer.prompt({
         type: 'list',
         message: 'Select target to configure',
         name: 'toConfigure',
-        choices: choices.map((e) => e.name),
+        choices: choices.map((e: TContract) => e.name),
     });
 
     // Build calls
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const contractToConf = choices.find((e) => e.name === toConfigure)!;
+    const contractToConf = choices.find(
+        (e: TContract) => e.name === toConfigure,
+    )!;
     const targets = await getLinkedContract(hre, tag, contractToConf);
     const calls = buildCalls(hre, contractToConf, targets);
 
     // Execute calls
+    let multisigTarget: string;
+    let multisigTx: string;
     if (taskArgs.isToft) {
         console.log('[+] Using TapiocaWrapper (TOFT)');
 
@@ -61,23 +73,43 @@ export const setLZConfig__task = async (
                 'TapiocaWrapper',
                 tag,
             );
-        const tx = await tapiocaWrapper.executeCalls(
-            hre.SDK.hardhatUtils.transformMulticallToTapiocaWrapper(calls),
+        multisigTx = tapiocaWrapper.interface.encodeFunctionData(
+            'executeCalls',
+            [hre.SDK.hardhatUtils.transformMulticallToTapiocaWrapper(calls)],
         );
-        console.log('[+] Tx sent: ', tx.hash);
-        await tx.wait(3);
-        console.log('[+] Tx mined!');
+        multisigTarget = tapiocaWrapper.address;
     } else {
         console.log('[+] Using Multicall');
 
-        const tx = taskArgs.debugMode
-            ? await multicall.multicall(calls)
-            : await multicall.aggregate3(calls);
-        console.log('[+] Tx sent: ', tx.hash);
-        await tx.wait(3);
-        console.log('[+] Tx mined!');
+        multisigTx =
+            Multicall.Multicall3__factory.createInterface().encodeFunctionData(
+                taskArgs.debugMode ? 'multicall' : 'aggregate3',
+                [calls],
+            );
+        multisigTarget = multicall.address;
     }
+    await submitThroughMultisig(multisig, multisigTx, multisigTarget);
 };
+
+async function submitThroughMultisig(
+    multisig: MultisigMock,
+    callData: string,
+    target: string,
+) {
+    let tx = await multisig.submitTransaction(target, 0, callData);
+    console.log('[+] Multisig tx submitted: ', tx.hash);
+    tx.wait(3);
+    console.log('[+] Multisig tx mined: ', tx.hash);
+    const txCount = await multisig.getTransactionCount();
+    tx = await multisig.confirmTransaction(txCount.sub(1));
+    console.log('[+] Multisig tx confirmation submitted: ', tx.hash);
+    tx.wait(3);
+    console.log('[+] Multisig tx confirmation mined: ', tx.hash);
+    tx = await multisig.executeTransaction(txCount.sub(1));
+    console.log('[+] Multisig tx execution submitted: ', tx.hash);
+    tx.wait(3);
+    console.log('[+] Multisig tx execution mined: ', tx.hash);
+}
 
 async function getLinkedContract(
     hre: HardhatRuntimeEnvironment,
@@ -102,7 +134,7 @@ async function getLinkedContract(
             targets.push({
                 lzChainId:
                     hre.SDK.config.NETWORK_MAPPING_CHAIN_TO_LZ[
-                        chainId as EChainID
+                    chainId as EChainID
                     ],
                 contract: linked,
             });

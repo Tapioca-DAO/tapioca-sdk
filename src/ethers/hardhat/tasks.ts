@@ -49,7 +49,8 @@ task(
 ).addFlag('save', 'Save the deployment to the local database');
 
 task('setLZConfig', 'Set an LZ app config', setLZConfig__task)
-    .addParam('debugMode', 'true/false')
+    .addParam('multisig', 'Multisig address')
+    .addOptionalParam('debugMode', 'true/false')
     .addFlag('isToft', 'If the contract to configure is TOFT');
 
 addCliParams(
