@@ -109,30 +109,30 @@ async function submitThroughMultisig(
     //transfer ownership to the multicall contract
     console.log('   [+] Changing owner to: ', multicall.address);
     let tx = await multisig.submitTransaction(contractToConf, 0, transferOwnershipCalldata);
-    tx.wait(3);
+    await tx.wait(3);
     let txCount = await multisig.getTransactionCount();
     let lastTx = txCount.sub(1);
     tx = await multisig.confirmTransaction(lastTx);
-    tx.wait(3);
+    await tx.wait(3);
     tx = await multisig.executeTransaction(lastTx);
-    tx.wait(3);
+    await tx.wait(3);
     console.log('   [+] Owner changed by tx: ', tx.hash);
 
     console.log("\n");
 
     tx = await multisig.submitTransaction(target, 0, callData);
     console.log('[+] Multisig tx submitted: ', tx.hash);
-    tx.wait(3);
+    await tx.wait(3);
     console.log('[+] Multisig tx mined: ', tx.hash);
     txCount = await multisig.getTransactionCount();
     lastTx = txCount.sub(1);
     tx = await multisig.confirmTransaction(lastTx);
     console.log('[+] Multisig tx confirmation submitted: ', tx.hash);
-    tx.wait(3);
+    await tx.wait(3);
     console.log('[+] Multisig tx confirmation mined: ', tx.hash);
     tx = await multisig.executeTransaction(lastTx);
     console.log('[+] Multisig tx execution submitted: ', tx.hash);
-    tx.wait(3);
+    await tx.wait(3);
     console.log('[+] Multisig tx execution mined: ', tx.hash);
 
     //transfer ownership back to the multisig
@@ -145,7 +145,7 @@ async function submitThroughMultisig(
         allowFailure: false,
     });
     tx = debugMode ? await multicall.multicall(calls) : await multicall.aggregate3(calls);
-    tx.wait(3);
+    await tx.wait(3);
     console.log('[+] Reverted to initial owner through tx: ', tx.hash);
 }
 
