@@ -3,14 +3,17 @@ import inquirer from 'inquirer';
 import { EChainID } from '../../../../api/config';
 import { TContract, TLocalDeployment } from '../../../../shared';
 import { Multicall, TapiocaZ } from '../../../../typechain';
+import { USDO__factory } from '../../../../typechain/Tapioca-Bar/factories/contracts/usd0';
 import { TapiocaWrapper } from '../../../../typechain/TapiocaZ';
 import { Multicall3 } from '../../../../typechain/utils/MultiCall';
+import { MultisigMock } from '../../../../typechain/utils/MultisigMock';
+import { MultisigMock__factory } from '../../../../typechain/utils/MultisigMock/factories/MultisigMock__factory';
 
 /**
  * Configure the LZ app in one go
  */
 export const setLZConfig__task = async (
-    taskArgs: { isToft?: boolean; debugMode: boolean },
+    taskArgs: { isToft?: boolean; debugMode?: boolean; multisig: string },
     hre: HardhatRuntimeEnvironment,
 ) => {
     console.log('[+] Setting omni config');
@@ -32,26 +35,36 @@ export const setLZConfig__task = async (
         throw '[-] Multicall not found';
     }
 
+
     const tag = await hre.SDK.hardhatUtils.askForTag(hre, 'local');
     const choices = hre.SDK.db.loadLocalDeployment(
         tag,
         String(hre.network.config.chainId),
     );
 
+    if (!taskArgs.multisig) {
+        throw '[-] Multisig not found';
+    }
+    const multisig = MultisigMock__factory.connect(taskArgs.multisig, signer);
+
     const { toConfigure } = await inquirer.prompt({
         type: 'list',
         message: 'Select target to configure',
         name: 'toConfigure',
-        choices: choices.map((e) => e.name),
+        choices: choices.map((e: TContract) => e.name),
     });
 
     // Build calls
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const contractToConf = choices.find((e) => e.name === toConfigure)!;
+    const contractToConf = choices.find(
+        (e: TContract) => e.name === toConfigure,
+    )!;
     const targets = await getLinkedContract(hre, tag, contractToConf);
     const calls = buildCalls(hre, contractToConf, targets);
 
     // Execute calls
+    let multisigTarget: string;
+    let multisigTx: string;
     if (taskArgs.isToft) {
         console.log('[+] Using TapiocaWrapper (TOFT)');
 
@@ -61,23 +74,80 @@ export const setLZConfig__task = async (
                 'TapiocaWrapper',
                 tag,
             );
-        const tx = await tapiocaWrapper.executeCalls(
-            hre.SDK.hardhatUtils.transformMulticallToTapiocaWrapper(calls),
+        multisigTx = tapiocaWrapper.interface.encodeFunctionData(
+            'executeCalls',
+            [hre.SDK.hardhatUtils.transformMulticallToTapiocaWrapper(calls)],
         );
-        console.log('[+] Tx sent: ', tx.hash);
-        await tx.wait(3);
-        console.log('[+] Tx mined!');
+        multisigTarget = tapiocaWrapper.address;
     } else {
         console.log('[+] Using Multicall');
 
-        const tx = taskArgs.debugMode
-            ? await multicall.multicall(calls)
-            : await multicall.aggregate3(calls);
-        console.log('[+] Tx sent: ', tx.hash);
-        await tx.wait(3);
-        console.log('[+] Tx mined!');
+        multisigTx =
+            Multicall.Multicall3__factory.createInterface().encodeFunctionData(
+                taskArgs.debugMode ? 'multicall' : 'aggregate3',
+                [calls],
+            );
+        multisigTarget = multicall.address;
     }
+    console.log('[+] Submitting calls through the Multisig contract');
+    await submitThroughMultisig(hre, multisig, multicall, contractToConf.address, multisigTx, multisigTarget, taskArgs.debugMode);
 };
+
+async function submitThroughMultisig(
+    hre: HardhatRuntimeEnvironment,
+    multisig: MultisigMock,
+    multicall: Multicall3,
+    contractToConf: string,
+    callData: string,
+    target: string,
+    debugMode?: boolean,
+) {
+    let transferOwnershipABI = ["function transferOwnership(address newOwner)"];
+    let iTransferOwnership = new hre.ethers.utils.Interface(transferOwnershipABI);
+    let transferOwnershipCalldata = iTransferOwnership.encodeFunctionData("transferOwnership", [multicall.address]);
+
+    //transfer ownership to the multicall contract
+    console.log('   [+] Changing owner to: ', multicall.address);
+    let tx = await multisig.submitTransaction(contractToConf, 0, transferOwnershipCalldata);
+    tx.wait(3);
+    let txCount = await multisig.getTransactionCount();
+    let lastTx = txCount.sub(1);
+    tx = await multisig.confirmTransaction(lastTx);
+    tx.wait(3);
+    tx = await multisig.executeTransaction(lastTx);
+    tx.wait(3);
+    console.log('   [+] Owner changed by tx: ', tx.hash);
+
+    console.log("\n");
+
+    tx = await multisig.submitTransaction(target, 0, callData);
+    console.log('[+] Multisig tx submitted: ', tx.hash);
+    tx.wait(3);
+    console.log('[+] Multisig tx mined: ', tx.hash);
+    txCount = await multisig.getTransactionCount();
+    lastTx = txCount.sub(1);
+    tx = await multisig.confirmTransaction(lastTx);
+    console.log('[+] Multisig tx confirmation submitted: ', tx.hash);
+    tx.wait(3);
+    console.log('[+] Multisig tx confirmation mined: ', tx.hash);
+    tx = await multisig.executeTransaction(lastTx);
+    console.log('[+] Multisig tx execution submitted: ', tx.hash);
+    tx.wait(3);
+    console.log('[+] Multisig tx execution mined: ', tx.hash);
+
+    //transfer ownership back to the multisig
+    console.log('[+] Reverting to initial owner');
+    transferOwnershipCalldata = iTransferOwnership.encodeFunctionData("transferOwnership", [multisig.address]);
+    const calls: Multicall3.Call3Struct[] = [];
+    calls.push({
+        target: contractToConf,
+        callData: transferOwnershipCalldata,
+        allowFailure: false,
+    });
+    tx = debugMode ? await multicall.multicall(calls) : await multicall.aggregate3(calls);
+    tx.wait(3);
+    console.log('[+] Reverted to initial owner through tx: ', tx.hash);
+}
 
 async function getLinkedContract(
     hre: HardhatRuntimeEnvironment,
@@ -102,7 +172,7 @@ async function getLinkedContract(
             targets.push({
                 lzChainId:
                     hre.SDK.config.NETWORK_MAPPING_CHAIN_TO_LZ[
-                        chainId as EChainID
+                    chainId as EChainID
                     ],
                 contract: linked,
             });
