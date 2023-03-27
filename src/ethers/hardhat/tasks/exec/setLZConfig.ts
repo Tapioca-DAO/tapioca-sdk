@@ -1,9 +1,9 @@
+import '@nomicfoundation/hardhat-toolbox/dist/src/index';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import inquirer from 'inquirer';
 import { EChainID } from '../../../../api/config';
 import { TContract, TLocalDeployment } from '../../../../shared';
 import { Multicall, TapiocaZ } from '../../../../typechain';
-import { USDO__factory } from '../../../../typechain/Tapioca-Bar/factories/contracts/usd0';
 import { TapiocaWrapper } from '../../../../typechain/TapiocaZ';
 import { Multicall3 } from '../../../../typechain/utils/MultiCall';
 import { MultisigMock } from '../../../../typechain/utils/MultisigMock';
@@ -27,14 +27,14 @@ export const setLZConfig__task = async (
 
     const signer = (await hre.ethers.getSigners())[0];
     const multicall = Multicall.Multicall3__factory.connect(
-        hre.SDK.config.MULTICALL_ADDRESSES[hre.network.config.chainId],
+        //@ts-ignore
+        hre.SDK.config.MULTICALL_ADDRESSES[String(hre.network.config.chainId)],
         signer,
     );
 
     if (!multicall) {
         throw '[-] Multicall not found';
     }
-
 
     const tag = await hre.SDK.hardhatUtils.askForTag(hre, 'local');
     const choices = hre.SDK.db.loadLocalDeployment(
@@ -84,13 +84,23 @@ export const setLZConfig__task = async (
 
         multisigTx =
             Multicall.Multicall3__factory.createInterface().encodeFunctionData(
+                // TODO better way to do this without ts-ignore is to use abi encoder
+                // @ts-ignore
                 taskArgs.debugMode ? 'multicall' : 'aggregate3',
                 [calls],
             );
         multisigTarget = multicall.address;
     }
     console.log('[+] Submitting calls through the Multisig contract');
-    await submitThroughMultisig(hre, multisig, multicall, contractToConf.address, multisigTx, multisigTarget, taskArgs.debugMode);
+    await submitThroughMultisig(
+        hre,
+        multisig,
+        multicall,
+        contractToConf.address,
+        multisigTx,
+        multisigTarget,
+        taskArgs.debugMode,
+    );
 };
 
 async function submitThroughMultisig(
@@ -102,13 +112,24 @@ async function submitThroughMultisig(
     target: string,
     debugMode?: boolean,
 ) {
-    let transferOwnershipABI = ["function transferOwnership(address newOwner)"];
-    let iTransferOwnership = new hre.ethers.utils.Interface(transferOwnershipABI);
-    let transferOwnershipCalldata = iTransferOwnership.encodeFunctionData("transferOwnership", [multicall.address]);
+    const transferOwnershipABI = [
+        'function transferOwnership(address newOwner)',
+    ];
+    const iTransferOwnership = new hre.ethers.utils.Interface(
+        transferOwnershipABI,
+    );
+    let transferOwnershipCalldata = iTransferOwnership.encodeFunctionData(
+        'transferOwnership',
+        [multicall.address],
+    );
 
     //transfer ownership to the multicall contract
     console.log('   [+] Changing owner to: ', multicall.address);
-    let tx = await multisig.submitTransaction(contractToConf, 0, transferOwnershipCalldata);
+    let tx = await multisig.submitTransaction(
+        contractToConf,
+        0,
+        transferOwnershipCalldata,
+    );
     await tx.wait(3);
     let txCount = await multisig.getTransactionCount();
     let lastTx = txCount.sub(1);
@@ -118,7 +139,7 @@ async function submitThroughMultisig(
     await tx.wait(3);
     console.log('   [+] Owner changed by tx: ', tx.hash);
 
-    console.log("\n");
+    console.log('\n');
 
     tx = await multisig.submitTransaction(target, 0, callData);
     console.log('[+] Multisig tx submitted: ', tx.hash);
@@ -137,14 +158,19 @@ async function submitThroughMultisig(
 
     //transfer ownership back to the multisig
     console.log('[+] Reverting to initial owner');
-    transferOwnershipCalldata = iTransferOwnership.encodeFunctionData("transferOwnership", [multisig.address]);
+    transferOwnershipCalldata = iTransferOwnership.encodeFunctionData(
+        'transferOwnership',
+        [multisig.address],
+    );
     const calls: Multicall3.Call3Struct[] = [];
     calls.push({
         target: contractToConf,
         callData: transferOwnershipCalldata,
         allowFailure: false,
     });
-    tx = debugMode ? await multicall.multicall(calls) : await multicall.aggregate3(calls);
+    tx = debugMode
+        ? await multicall.multicall(calls)
+        : await multicall.aggregate3(calls);
     await tx.wait(3);
     console.log('[+] Reverted to initial owner through tx: ', tx.hash);
 }
@@ -172,7 +198,7 @@ async function getLinkedContract(
             targets.push({
                 lzChainId:
                     hre.SDK.config.NETWORK_MAPPING_CHAIN_TO_LZ[
-                    chainId as EChainID
+                        chainId as EChainID
                     ],
                 contract: linked,
             });
