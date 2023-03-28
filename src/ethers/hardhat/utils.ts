@@ -4,6 +4,7 @@ import inquirer from 'inquirer';
 import { TContract, TLocalDeployment, TProjectCaller } from '../../shared';
 import { TapiocaWrapper } from '../../typechain/TapiocaZ';
 import { Multicall3 } from '../../typechain/utils/MultiCall';
+import { getSupportedChains } from '../../api/utils';
 
 /**
  * Get a local contract
@@ -146,4 +147,22 @@ export const askForDeployment = async (
     }
 
     return { deployments, project, tag };
+};
+
+/**
+ * Ask for a chain
+ * @returns The chain
+ */
+export const askForChain = async () => {
+    const supportedChains = getSupportedChains();
+    const choices = supportedChains.map((e) => e.name);
+
+    const { chain } = await inquirer.prompt({
+        type: 'list',
+        name: 'chain',
+        message: 'Choose a chain',
+        choices,
+    });
+
+    return supportedChains.find((e) => e.name === chain);
 };
