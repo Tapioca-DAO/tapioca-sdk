@@ -100,6 +100,7 @@ export const setLZConfig__task = async (
         multisigTx,
         multisigTarget,
         taskArgs.debugMode,
+        taskArgs.isToft,
     );
 };
 
@@ -111,6 +112,7 @@ async function submitThroughMultisig(
     callData: string,
     target: string,
     debugMode?: boolean,
+    isToft?: boolean,
 ) {
     const transferOwnershipABI = [
         'function transferOwnership(address newOwner)',
@@ -123,30 +125,32 @@ async function submitThroughMultisig(
         [multicall.address],
     );
 
-    //transfer ownership to the multicall contract
-    console.log('   [+] Changing owner to: ', multicall.address);
-    let tx = await multisig.submitTransaction(
-        contractToConf,
-        0,
-        transferOwnershipCalldata,
-    );
-    await tx.wait(3);
-    let txCount = await multisig.getTransactionCount();
-    let lastTx = txCount.sub(1);
-    tx = await multisig.confirmTransaction(lastTx);
-    await tx.wait(3);
-    tx = await multisig.executeTransaction(lastTx);
-    await tx.wait(3);
-    console.log('   [+] Owner changed by tx: ', tx.hash);
+    if (!isToft) {
+        //transfer ownership to the multicall contract
+        console.log('   [+] Changing owner to: ', multicall.address);
+        let tx = await multisig.submitTransaction(
+            contractToConf,
+            0,
+            transferOwnershipCalldata,
+        );
+        await tx.wait(3);
+        const txCount = await multisig.getTransactionCount();
+        const lastTx = txCount.sub(1);
+        tx = await multisig.confirmTransaction(lastTx);
+        await tx.wait(3);
+        tx = await multisig.executeTransaction(lastTx);
+        await tx.wait(3);
+        console.log('   [+] Owner changed by tx: ', tx.hash);
 
-    console.log('\n');
+        console.log('\n');
+    }
 
-    tx = await multisig.submitTransaction(target, 0, callData);
+    let tx = await multisig.submitTransaction(target, 0, callData);
     console.log('[+] Multisig tx submitted: ', tx.hash);
     await tx.wait(3);
     console.log('[+] Multisig tx mined: ', tx.hash);
-    txCount = await multisig.getTransactionCount();
-    lastTx = txCount.sub(1);
+    const txCount = await multisig.getTransactionCount();
+    const lastTx = txCount.sub(1);
     tx = await multisig.confirmTransaction(lastTx);
     console.log('[+] Multisig tx confirmation submitted: ', tx.hash);
     await tx.wait(3);
@@ -157,22 +161,25 @@ async function submitThroughMultisig(
     console.log('[+] Multisig tx execution mined: ', tx.hash);
 
     //transfer ownership back to the multisig
-    console.log('[+] Reverting to initial owner');
-    transferOwnershipCalldata = iTransferOwnership.encodeFunctionData(
-        'transferOwnership',
-        [multisig.address],
-    );
-    const calls: Multicall3.Call3Struct[] = [];
-    calls.push({
-        target: contractToConf,
-        callData: transferOwnershipCalldata,
-        allowFailure: false,
-    });
-    tx = debugMode
-        ? await multicall.multicall(calls)
-        : await multicall.aggregate3(calls);
-    await tx.wait(3);
-    console.log('[+] Reverted to initial owner through tx: ', tx.hash);
+
+    if (!isToft) {
+        console.log('[+] Reverting to initial owner');
+        transferOwnershipCalldata = iTransferOwnership.encodeFunctionData(
+            'transferOwnership',
+            [multisig.address],
+        );
+        const calls: Multicall3.Call3Struct[] = [];
+        calls.push({
+            target: contractToConf,
+            callData: transferOwnershipCalldata,
+            allowFailure: false,
+        });
+        tx = debugMode
+            ? await multicall.multicall(calls)
+            : await multicall.aggregate3(calls);
+        await tx.wait(3);
+        console.log('[+] Reverted to initial owner through tx: ', tx.hash);
+    }
 }
 
 async function getLinkedContract(
