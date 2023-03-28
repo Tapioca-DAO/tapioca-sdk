@@ -1,9 +1,9 @@
+import '@nomicfoundation/hardhat-toolbox/dist/src/index';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import inquirer from 'inquirer';
 import { EChainID } from '../../../../api/config';
 import { TContract, TLocalDeployment } from '../../../../shared';
 import { Multicall, TapiocaZ } from '../../../../typechain';
-import { USDO__factory } from '../../../../typechain/Tapioca-Bar/factories/contracts/usd0';
 import { TapiocaWrapper } from '../../../../typechain/TapiocaZ';
 import { Multicall3 } from '../../../../typechain/utils/MultiCall';
 import { MultisigMock } from '../../../../typechain/utils/MultisigMock';
@@ -27,7 +27,8 @@ export const setLZConfig__task = async (
 
     const signer = (await hre.ethers.getSigners())[0];
     const multicall = Multicall.Multicall3__factory.connect(
-        hre.SDK.config.MULTICALL_ADDRESSES[hre.network.config.chainId],
+        //@ts-ignore
+        hre.SDK.config.MULTICALL_ADDRESSES[String(hre.network.config.chainId)],
         signer,
     );
 
@@ -83,6 +84,8 @@ export const setLZConfig__task = async (
 
         multisigTx =
             Multicall.Multicall3__factory.createInterface().encodeFunctionData(
+                // TODO better way to do this without ts-ignore is to use abi encoder
+                // @ts-ignore
                 taskArgs.debugMode ? 'multicall' : 'aggregate3',
                 [calls],
             );
@@ -158,6 +161,7 @@ async function submitThroughMultisig(
     console.log('[+] Multisig tx execution mined: ', tx.hash);
 
     //transfer ownership back to the multisig
+
     if (!isToft) {
         console.log('[+] Reverting to initial owner');
         transferOwnershipCalldata = iTransferOwnership.encodeFunctionData(
