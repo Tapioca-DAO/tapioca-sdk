@@ -275,14 +275,20 @@ export class DeployerVM {
             [to],
         );
 
-        if (fromMultisig === true) {
+        if (fromMultisig) {
+            console.log(
+                '[+] Performing ownership transferal through the Multisig',
+            );
             const from = await ownableContract.owner();
             await this.submitTransactionThroughMultisig(
                 target.address,
                 calldata,
                 from,
             );
-        } else if (fromMulticall === true) {
+        } else if (fromMulticall) {
+            console.log(
+                '[+] Performing ownership transferal through the Multicall',
+            );
             const calls: Multicall3.Call3Struct[] = [];
             calls.push({
                 target: target.address,
@@ -294,12 +300,11 @@ export class DeployerVM {
             ).multicall(calls);
             await multicallTx.wait(3);
         } else {
+            console.log('[+] Performing ownership transferal directly');
             await ownableContract.connect(signer).transferOwnership(to);
         }
 
-        console.log(
-            `[+] Ownership transferred. New owner is: ${await ownableContract.owner()}\n`,
-        );
+        console.log('[+] Ownership transferred\n');
     }
 
     /**
@@ -315,6 +320,7 @@ export class DeployerVM {
     ) {
         if (!multisigAddress) {
             const multisig = await this.getMultisig();
+            console.log(`[+] Using Multisig ${multisig.address}`);
             multisigAddress = multisig.address;
         }
 

@@ -6,6 +6,8 @@ import { setLZConfig__task } from './tasks/exec/setLZConfig';
 import { toftSendFrom__task } from './tasks/exec/toftSendFrom';
 import { getChains__task } from './tasks/view/getChains';
 import { getDeployment__task } from './tasks/view/getDeployment';
+import { transferOwnership__task } from './tasks/exec/transferOwnership';
+
 
 const addCliParams = (task: ConfigurableTaskDefinition) => {
     return task.addOptionalParam(
@@ -45,6 +47,13 @@ task(
     'Generate and export the typings and/or addresses for the SDK.',
     exportSDK__task,
 ).addOptionalParam('tag', 'The tag of the deployment.');
+
+task('transferOwnership', 'Transfer ownership.', transferOwnership__task)
+    .addParam('to', 'The new owner.')
+    .addParam('targetAddress', 'Contract address to call transferOwnership for')
+    .addParam('targetName', 'Contract name to call transferOwnership for')
+    .addOptionalParam('fromMultisig', 'True if current owner is a multisig')
+    .addOptionalParam('fromMulticall', 'True if current owner is a multicall');
 
 addDebugModeParams(
     task(
