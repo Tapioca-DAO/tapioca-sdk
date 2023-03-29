@@ -84,7 +84,6 @@ export interface BaseTOFTInterface extends utils.Interface {
     "decimals()": FunctionFragment;
     "decreaseAllowance(address,uint256)": FunctionFragment;
     "erc20()": FunctionFragment;
-    "estimateFees(uint256,uint256,uint256)": FunctionFragment;
     "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)": FunctionFragment;
     "estimateSendFee(uint16,bytes32,uint256,bool,bytes)": FunctionFragment;
     "failedMessages(uint16,bytes,uint64)": FunctionFragment;
@@ -126,7 +125,6 @@ export interface BaseTOFTInterface extends utils.Interface {
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
     "token()": FunctionFragment;
-    "totalFees()": FunctionFragment;
     "totalSupply()": FunctionFragment;
     "transfer(address,uint256)": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
@@ -176,8 +174,6 @@ export interface BaseTOFTInterface extends utils.Interface {
       | "decreaseAllowance(address,uint256)"
       | "erc20"
       | "erc20()"
-      | "estimateFees"
-      | "estimateFees(uint256,uint256,uint256)"
       | "estimateSendAndCallFee"
       | "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)"
       | "estimateSendFee"
@@ -260,8 +256,6 @@ export interface BaseTOFTInterface extends utils.Interface {
       | "symbol()"
       | "token"
       | "token()"
-      | "totalFees"
-      | "totalFees()"
       | "totalSupply"
       | "totalSupply()"
       | "transfer"
@@ -441,22 +435,6 @@ export interface BaseTOFTInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "erc20", values?: undefined): string;
   encodeFunctionData(functionFragment: "erc20()", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "estimateFees",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "estimateFees(uint256,uint256,uint256)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
   encodeFunctionData(
     functionFragment: "estimateSendAndCallFee",
     values: [
@@ -917,11 +895,6 @@ export interface BaseTOFTInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
   encodeFunctionData(functionFragment: "token", values?: undefined): string;
   encodeFunctionData(functionFragment: "token()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "totalFees", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "totalFees()",
-    values?: undefined
-  ): string;
   encodeFunctionData(
     functionFragment: "totalSupply",
     values?: undefined
@@ -1106,14 +1079,6 @@ export interface BaseTOFTInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "erc20", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "erc20()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "estimateFees",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "estimateFees(uint256,uint256,uint256)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "estimateSendAndCallFee",
     data: BytesLike
@@ -1382,11 +1347,6 @@ export interface BaseTOFTInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "token", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "token()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "totalFees", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "totalFees()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "totalSupply",
     data: BytesLike
@@ -1438,7 +1398,6 @@ export interface BaseTOFTInterface extends utils.Interface {
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
-    "HarvestFees(uint256)": EventFragment;
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)": EventFragment;
     "NonContractAddress(address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
@@ -1465,8 +1424,6 @@ export interface BaseTOFTInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "HarvestFees"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "HarvestFees(uint256)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MessageFailed"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "MessageFailed(uint16,bytes,uint64,bytes,bytes)"
@@ -1552,13 +1509,6 @@ export type CallOFTReceivedSuccessEvent = TypedEvent<
 
 export type CallOFTReceivedSuccessEventFilter =
   TypedEventFilter<CallOFTReceivedSuccessEvent>;
-
-export interface HarvestFeesEventObject {
-  _amount: BigNumber;
-}
-export type HarvestFeesEvent = TypedEvent<[BigNumber], HarvestFeesEventObject>;
-
-export type HarvestFeesEventFilter = TypedEventFilter<HarvestFeesEvent>;
 
 export interface MessageFailedEventObject {
   _srcChainId: number;
@@ -1922,20 +1872,6 @@ export interface BaseTOFT extends BaseContract {
     erc20(overrides?: CallOverrides): Promise<[string]>;
 
     "erc20()"(overrides?: CallOverrides): Promise<[string]>;
-
-    estimateFees(
-      _feeBps: PromiseOrValue<BigNumberish>,
-      _feeFraction: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "estimateFees(uint256,uint256,uint256)"(
-      _feeBps: PromiseOrValue<BigNumberish>,
-      _feeFraction: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
 
     estimateSendAndCallFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -2407,10 +2343,6 @@ export interface BaseTOFT extends BaseContract {
 
     "token()"(overrides?: CallOverrides): Promise<[string]>;
 
-    totalFees(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "totalFees()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -2613,20 +2545,6 @@ export interface BaseTOFT extends BaseContract {
   erc20(overrides?: CallOverrides): Promise<string>;
 
   "erc20()"(overrides?: CallOverrides): Promise<string>;
-
-  estimateFees(
-    _feeBps: PromiseOrValue<BigNumberish>,
-    _feeFraction: PromiseOrValue<BigNumberish>,
-    _amount: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "estimateFees(uint256,uint256,uint256)"(
-    _feeBps: PromiseOrValue<BigNumberish>,
-    _feeFraction: PromiseOrValue<BigNumberish>,
-    _amount: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
 
   estimateSendAndCallFee(
     _dstChainId: PromiseOrValue<BigNumberish>,
@@ -3098,10 +3016,6 @@ export interface BaseTOFT extends BaseContract {
 
   "token()"(overrides?: CallOverrides): Promise<string>;
 
-  totalFees(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "totalFees()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
   "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3306,20 +3220,6 @@ export interface BaseTOFT extends BaseContract {
     erc20(overrides?: CallOverrides): Promise<string>;
 
     "erc20()"(overrides?: CallOverrides): Promise<string>;
-
-    estimateFees(
-      _feeBps: PromiseOrValue<BigNumberish>,
-      _feeFraction: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "estimateFees(uint256,uint256,uint256)"(
-      _feeBps: PromiseOrValue<BigNumberish>,
-      _feeFraction: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
 
     estimateSendAndCallFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -3787,10 +3687,6 @@ export interface BaseTOFT extends BaseContract {
 
     "token()"(overrides?: CallOverrides): Promise<string>;
 
-    totalFees(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "totalFees()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3874,9 +3770,6 @@ export interface BaseTOFT extends BaseContract {
       _nonce?: null,
       _hash?: null
     ): CallOFTReceivedSuccessEventFilter;
-
-    "HarvestFees(uint256)"(_amount?: null): HarvestFeesEventFilter;
-    HarvestFees(_amount?: null): HarvestFeesEventFilter;
 
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)"(
       _srcChainId?: null,
@@ -4169,20 +4062,6 @@ export interface BaseTOFT extends BaseContract {
     erc20(overrides?: CallOverrides): Promise<BigNumber>;
 
     "erc20()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    estimateFees(
-      _feeBps: PromiseOrValue<BigNumberish>,
-      _feeFraction: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "estimateFees(uint256,uint256,uint256)"(
-      _feeBps: PromiseOrValue<BigNumberish>,
-      _feeFraction: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
 
     estimateSendAndCallFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -4646,10 +4525,6 @@ export interface BaseTOFT extends BaseContract {
 
     "token()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    totalFees(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "totalFees()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -4871,20 +4746,6 @@ export interface BaseTOFT extends BaseContract {
     erc20(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "erc20()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    estimateFees(
-      _feeBps: PromiseOrValue<BigNumberish>,
-      _feeFraction: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "estimateFees(uint256,uint256,uint256)"(
-      _feeBps: PromiseOrValue<BigNumberish>,
-      _feeFraction: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
 
     estimateSendAndCallFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -5349,10 +5210,6 @@ export interface BaseTOFT extends BaseContract {
     token(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "token()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    totalFees(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "totalFees()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

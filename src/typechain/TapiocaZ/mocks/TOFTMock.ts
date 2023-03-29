@@ -26,7 +26,7 @@ import type {
   TypedListener,
   OnEvent,
   PromiseOrValue,
-} from "./common";
+} from "../common";
 
 export declare namespace ICommonOFT {
   export type LzCallParamsStruct = {
@@ -63,7 +63,7 @@ export declare namespace BaseTOFT {
   };
 }
 
-export interface MTapiocaOFTInterface extends utils.Interface {
+export interface TOFTMockInterface extends utils.Interface {
   functions: {
     "DEFAULT_PAYLOAD_SIZE_LIMIT()": FunctionFragment;
     "DOMAIN_SEPARATOR()": FunctionFragment;
@@ -77,20 +77,18 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     "allowance(address,address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
-    "balancers(address)": FunctionFragment;
     "batch(bytes[],bool)": FunctionFragment;
     "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)": FunctionFragment;
     "circulatingSupply()": FunctionFragment;
-    "connectedChains(uint256)": FunctionFragment;
     "creditedPackets(uint16,bytes,uint64)": FunctionFragment;
     "decimals()": FunctionFragment;
     "decreaseAllowance(address,uint256)": FunctionFragment;
     "erc20()": FunctionFragment;
     "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)": FunctionFragment;
     "estimateSendFee(uint16,bytes32,uint256,bool,bytes)": FunctionFragment;
-    "extractUnderlying(uint256)": FunctionFragment;
     "failedMessages(uint16,bytes,uint64)": FunctionFragment;
     "forceResumeReceive(uint16,bytes)": FunctionFragment;
+    "freeMint(address,uint256)": FunctionFragment;
     "getConfig(uint16,uint16,address,uint256)": FunctionFragment;
     "getLzChainId()": FunctionFragment;
     "getTrustedRemoteAddress(uint16)": FunctionFragment;
@@ -127,19 +125,13 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     "sharedDecimals()": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
-    "tapiocaWrapper()": FunctionFragment;
     "token()": FunctionFragment;
     "totalSupply()": FunctionFragment;
     "transfer(address,uint256)": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "trustedRemoteLookup(uint16)": FunctionFragment;
-    "unwrap(address,uint256)": FunctionFragment;
-    "updateBalancerState(address,bool)": FunctionFragment;
-    "updateConnectedChain(uint256,bool)": FunctionFragment;
     "useCustomAdapterParams()": FunctionFragment;
-    "wrap(address,uint256)": FunctionFragment;
-    "wrapNative(address)": FunctionFragment;
     "yieldBox()": FunctionFragment;
   };
 
@@ -169,16 +161,12 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       | "approve(address,uint256)"
       | "balanceOf"
       | "balanceOf(address)"
-      | "balancers"
-      | "balancers(address)"
       | "batch"
       | "batch(bytes[],bool)"
       | "callOnOFTReceived"
       | "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)"
       | "circulatingSupply"
       | "circulatingSupply()"
-      | "connectedChains"
-      | "connectedChains(uint256)"
       | "creditedPackets"
       | "creditedPackets(uint16,bytes,uint64)"
       | "decimals"
@@ -191,12 +179,12 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       | "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)"
       | "estimateSendFee"
       | "estimateSendFee(uint16,bytes32,uint256,bool,bytes)"
-      | "extractUnderlying"
-      | "extractUnderlying(uint256)"
       | "failedMessages"
       | "failedMessages(uint16,bytes,uint64)"
       | "forceResumeReceive"
       | "forceResumeReceive(uint16,bytes)"
+      | "freeMint"
+      | "freeMint(address,uint256)"
       | "getConfig"
       | "getConfig(uint16,uint16,address,uint256)"
       | "getLzChainId"
@@ -269,8 +257,6 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       | "supportsInterface(bytes4)"
       | "symbol"
       | "symbol()"
-      | "tapiocaWrapper"
-      | "tapiocaWrapper()"
       | "token"
       | "token()"
       | "totalSupply"
@@ -283,18 +269,8 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       | "transferOwnership(address)"
       | "trustedRemoteLookup"
       | "trustedRemoteLookup(uint16)"
-      | "unwrap"
-      | "unwrap(address,uint256)"
-      | "updateBalancerState"
-      | "updateBalancerState(address,bool)"
-      | "updateConnectedChain"
-      | "updateConnectedChain(uint256,bool)"
       | "useCustomAdapterParams"
       | "useCustomAdapterParams()"
-      | "wrap"
-      | "wrap(address,uint256)"
-      | "wrapNative"
-      | "wrapNative(address)"
       | "yieldBox"
       | "yieldBox()"
   ): FunctionFragment;
@@ -390,14 +366,6 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "balancers",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "balancers(address)",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "batch",
     values: [PromiseOrValue<BytesLike>[], PromiseOrValue<boolean>]
   ): string;
@@ -438,14 +406,6 @@ export interface MTapiocaOFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "circulatingSupply()",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "connectedChains",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "connectedChains(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "creditedPackets",
@@ -523,14 +483,6 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "extractUnderlying",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "extractUnderlying(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "failedMessages",
     values: [
       PromiseOrValue<BigNumberish>,
@@ -553,6 +505,14 @@ export interface MTapiocaOFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "forceResumeReceive(uint16,bytes)",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "freeMint",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "freeMint(address,uint256)",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getConfig",
@@ -944,14 +904,6 @@ export interface MTapiocaOFTInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
   encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "tapiocaWrapper",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "tapiocaWrapper()",
-    values?: undefined
-  ): string;
   encodeFunctionData(functionFragment: "token", values?: undefined): string;
   encodeFunctionData(functionFragment: "token()", values?: undefined): string;
   encodeFunctionData(
@@ -1003,52 +955,12 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "unwrap",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "unwrap(address,uint256)",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "updateBalancerState",
-    values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "updateBalancerState(address,bool)",
-    values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "updateConnectedChain",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "updateConnectedChain(uint256,bool)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "useCustomAdapterParams",
     values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "useCustomAdapterParams()",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "wrap",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "wrap(address,uint256)",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "wrapNative",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "wrapNative(address)",
-    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "yieldBox", values?: undefined): string;
   encodeFunctionData(
@@ -1137,11 +1049,6 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     functionFragment: "balanceOf(address)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "balancers", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "balancers(address)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "batch", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "batch(bytes[],bool)",
@@ -1161,14 +1068,6 @@ export interface MTapiocaOFTInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "circulatingSupply()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "connectedChains",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "connectedChains(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1208,14 +1107,6 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "extractUnderlying",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "extractUnderlying(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "failedMessages",
     data: BytesLike
   ): Result;
@@ -1229,6 +1120,11 @@ export interface MTapiocaOFTInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "forceResumeReceive(uint16,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "freeMint", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "freeMint(address,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "getConfig", data: BytesLike): Result;
@@ -1465,14 +1361,6 @@ export interface MTapiocaOFTInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "tapiocaWrapper",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "tapiocaWrapper()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "token", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "token()", data: BytesLike): Result;
   decodeFunctionResult(
@@ -1512,27 +1400,6 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     functionFragment: "trustedRemoteLookup(uint16)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "unwrap", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "unwrap(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "updateBalancerState",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "updateBalancerState(address,bool)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "updateConnectedChain",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "updateConnectedChain(uint256,bool)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "useCustomAdapterParams",
     data: BytesLike
@@ -1541,28 +1408,15 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     functionFragment: "useCustomAdapterParams()",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "wrap", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "wrap(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "wrapNative", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "wrapNative(address)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "yieldBox", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "yieldBox()", data: BytesLike): Result;
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
-    "BalancerStatusUpdated(address,bool,bool)": EventFragment;
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
-    "ConnectedChainStatusUpdated(uint256,bool,bool)": EventFragment;
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)": EventFragment;
     "NonContractAddress(address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
-    "Rebalancing(address,uint256,bool)": EventFragment;
     "ReceiveFromChain(uint16,address,uint256)": EventFragment;
     "RetryMessageSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
     "SendToChain(uint16,address,bytes32,uint256)": EventFragment;
@@ -1582,19 +1436,9 @@ export interface MTapiocaOFTInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "Approval(address,address,uint256)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "BalancerStatusUpdated"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "BalancerStatusUpdated(address,bool,bool)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "CallOFTReceivedSuccess"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"
-  ): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "ConnectedChainStatusUpdated"
-  ): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "ConnectedChainStatusUpdated(uint256,bool,bool)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MessageFailed"): EventFragment;
   getEvent(
@@ -1607,10 +1451,6 @@ export interface MTapiocaOFTInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "OwnershipTransferred(address,address)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Rebalancing"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "Rebalancing(address,uint256,bool)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ReceiveFromChain"): EventFragment;
   getEvent(
@@ -1672,19 +1512,6 @@ export type ApprovalEvent = TypedEvent<
 
 export type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
 
-export interface BalancerStatusUpdatedEventObject {
-  _balancer: string;
-  _bool: boolean;
-  _new: boolean;
-}
-export type BalancerStatusUpdatedEvent = TypedEvent<
-  [string, boolean, boolean],
-  BalancerStatusUpdatedEventObject
->;
-
-export type BalancerStatusUpdatedEventFilter =
-  TypedEventFilter<BalancerStatusUpdatedEvent>;
-
 export interface CallOFTReceivedSuccessEventObject {
   _srcChainId: number;
   _srcAddress: string;
@@ -1698,19 +1525,6 @@ export type CallOFTReceivedSuccessEvent = TypedEvent<
 
 export type CallOFTReceivedSuccessEventFilter =
   TypedEventFilter<CallOFTReceivedSuccessEvent>;
-
-export interface ConnectedChainStatusUpdatedEventObject {
-  _chain: BigNumber;
-  _old: boolean;
-  _new: boolean;
-}
-export type ConnectedChainStatusUpdatedEvent = TypedEvent<
-  [BigNumber, boolean, boolean],
-  ConnectedChainStatusUpdatedEventObject
->;
-
-export type ConnectedChainStatusUpdatedEventFilter =
-  TypedEventFilter<ConnectedChainStatusUpdatedEvent>;
 
 export interface MessageFailedEventObject {
   _srcChainId: number;
@@ -1748,18 +1562,6 @@ export type OwnershipTransferredEvent = TypedEvent<
 
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
-
-export interface RebalancingEventObject {
-  _balancer: string;
-  _amount: BigNumber;
-  _isNative: boolean;
-}
-export type RebalancingEvent = TypedEvent<
-  [string, BigNumber, boolean],
-  RebalancingEventObject
->;
-
-export type RebalancingEventFilter = TypedEventFilter<RebalancingEvent>;
 
 export interface ReceiveFromChainEventObject {
   _srcChainId: number;
@@ -1912,14 +1714,14 @@ export type YieldBoxRetrievalEvent = TypedEvent<
 export type YieldBoxRetrievalEventFilter =
   TypedEventFilter<YieldBoxRetrievalEvent>;
 
-export interface MTapiocaOFT extends BaseContract {
-  contractName: "MTapiocaOFT";
+export interface TOFTMock extends BaseContract {
+  contractName: "TOFTMock";
 
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: MTapiocaOFTInterface;
+  interface: TOFTMockInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -2013,16 +1815,6 @@ export interface MTapiocaOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    balancers(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
-    "balancers(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
     batch(
       calls: PromiseOrValue<BytesLike>[],
       revertOnFail: PromiseOrValue<boolean>,
@@ -2062,16 +1854,6 @@ export interface MTapiocaOFT extends BaseContract {
     circulatingSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "circulatingSupply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    connectedChains(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
-    "connectedChains(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
 
     creditedPackets(
       arg0: PromiseOrValue<BigNumberish>,
@@ -2155,16 +1937,6 @@ export interface MTapiocaOFT extends BaseContract {
       [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
     >;
 
-    extractUnderlying(
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "extractUnderlying(uint256)"(
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     failedMessages(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
@@ -2188,6 +1960,18 @@ export interface MTapiocaOFT extends BaseContract {
     "forceResumeReceive(uint16,bytes)"(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    freeMint(
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "freeMint(address,uint256)"(
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2583,10 +2367,6 @@ export interface MTapiocaOFT extends BaseContract {
 
     "symbol()"(overrides?: CallOverrides): Promise<[string]>;
 
-    tapiocaWrapper(overrides?: CallOverrides): Promise<[string]>;
-
-    "tapiocaWrapper()"(overrides?: CallOverrides): Promise<[string]>;
-
     token(overrides?: CallOverrides): Promise<[string]>;
 
     "token()"(overrides?: CallOverrides): Promise<[string]>;
@@ -2641,67 +2421,9 @@ export interface MTapiocaOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    unwrap(
-      _toAddress: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "unwrap(address,uint256)"(
-      _toAddress: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    updateBalancerState(
-      _balancer: PromiseOrValue<string>,
-      _status: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "updateBalancerState(address,bool)"(
-      _balancer: PromiseOrValue<string>,
-      _status: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    updateConnectedChain(
-      _chain: PromiseOrValue<BigNumberish>,
-      _status: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "updateConnectedChain(uint256,bool)"(
-      _chain: PromiseOrValue<BigNumberish>,
-      _status: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     useCustomAdapterParams(overrides?: CallOverrides): Promise<[boolean]>;
 
     "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<[boolean]>;
-
-    wrap(
-      _toAddress: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "wrap(address,uint256)"(
-      _toAddress: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    wrapNative(
-      _toAddress: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "wrapNative(address)"(
-      _toAddress: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
 
     yieldBox(overrides?: CallOverrides): Promise<[string]>;
 
@@ -2778,16 +2500,6 @@ export interface MTapiocaOFT extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  balancers(
-    arg0: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  "balancers(address)"(
-    arg0: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
   batch(
     calls: PromiseOrValue<BytesLike>[],
     revertOnFail: PromiseOrValue<boolean>,
@@ -2827,16 +2539,6 @@ export interface MTapiocaOFT extends BaseContract {
   circulatingSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
   "circulatingSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  connectedChains(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  "connectedChains(uint256)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
 
   creditedPackets(
     arg0: PromiseOrValue<BigNumberish>,
@@ -2920,16 +2622,6 @@ export interface MTapiocaOFT extends BaseContract {
     [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
   >;
 
-  extractUnderlying(
-    _amount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "extractUnderlying(uint256)"(
-    _amount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   failedMessages(
     arg0: PromiseOrValue<BigNumberish>,
     arg1: PromiseOrValue<BytesLike>,
@@ -2953,6 +2645,18 @@ export interface MTapiocaOFT extends BaseContract {
   "forceResumeReceive(uint16,bytes)"(
     _srcChainId: PromiseOrValue<BigNumberish>,
     _srcAddress: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  freeMint(
+    _to: PromiseOrValue<string>,
+    _amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "freeMint(address,uint256)"(
+    _to: PromiseOrValue<string>,
+    _amount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3348,10 +3052,6 @@ export interface MTapiocaOFT extends BaseContract {
 
   "symbol()"(overrides?: CallOverrides): Promise<string>;
 
-  tapiocaWrapper(overrides?: CallOverrides): Promise<string>;
-
-  "tapiocaWrapper()"(overrides?: CallOverrides): Promise<string>;
-
   token(overrides?: CallOverrides): Promise<string>;
 
   "token()"(overrides?: CallOverrides): Promise<string>;
@@ -3406,67 +3106,9 @@ export interface MTapiocaOFT extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  unwrap(
-    _toAddress: PromiseOrValue<string>,
-    _amount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "unwrap(address,uint256)"(
-    _toAddress: PromiseOrValue<string>,
-    _amount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  updateBalancerState(
-    _balancer: PromiseOrValue<string>,
-    _status: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "updateBalancerState(address,bool)"(
-    _balancer: PromiseOrValue<string>,
-    _status: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  updateConnectedChain(
-    _chain: PromiseOrValue<BigNumberish>,
-    _status: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "updateConnectedChain(uint256,bool)"(
-    _chain: PromiseOrValue<BigNumberish>,
-    _status: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   useCustomAdapterParams(overrides?: CallOverrides): Promise<boolean>;
 
   "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<boolean>;
-
-  wrap(
-    _toAddress: PromiseOrValue<string>,
-    _amount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "wrap(address,uint256)"(
-    _toAddress: PromiseOrValue<string>,
-    _amount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  wrapNative(
-    _toAddress: PromiseOrValue<string>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "wrapNative(address)"(
-    _toAddress: PromiseOrValue<string>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
 
   yieldBox(overrides?: CallOverrides): Promise<string>;
 
@@ -3545,16 +3187,6 @@ export interface MTapiocaOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    balancers(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    "balancers(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     batch(
       calls: PromiseOrValue<BytesLike>[],
       revertOnFail: PromiseOrValue<boolean>,
@@ -3594,16 +3226,6 @@ export interface MTapiocaOFT extends BaseContract {
     circulatingSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     "circulatingSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    connectedChains(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    "connectedChains(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
 
     creditedPackets(
       arg0: PromiseOrValue<BigNumberish>,
@@ -3687,16 +3309,6 @@ export interface MTapiocaOFT extends BaseContract {
       [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
     >;
 
-    extractUnderlying(
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "extractUnderlying(uint256)"(
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     failedMessages(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
@@ -3720,6 +3332,18 @@ export interface MTapiocaOFT extends BaseContract {
     "forceResumeReceive(uint16,bytes)"(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    freeMint(
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "freeMint(address,uint256)"(
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4111,10 +3735,6 @@ export interface MTapiocaOFT extends BaseContract {
 
     "symbol()"(overrides?: CallOverrides): Promise<string>;
 
-    tapiocaWrapper(overrides?: CallOverrides): Promise<string>;
-
-    "tapiocaWrapper()"(overrides?: CallOverrides): Promise<string>;
-
     token(overrides?: CallOverrides): Promise<string>;
 
     "token()"(overrides?: CallOverrides): Promise<string>;
@@ -4169,67 +3789,9 @@ export interface MTapiocaOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    unwrap(
-      _toAddress: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "unwrap(address,uint256)"(
-      _toAddress: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    updateBalancerState(
-      _balancer: PromiseOrValue<string>,
-      _status: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "updateBalancerState(address,bool)"(
-      _balancer: PromiseOrValue<string>,
-      _status: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    updateConnectedChain(
-      _chain: PromiseOrValue<BigNumberish>,
-      _status: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "updateConnectedChain(uint256,bool)"(
-      _chain: PromiseOrValue<BigNumberish>,
-      _status: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     useCustomAdapterParams(overrides?: CallOverrides): Promise<boolean>;
 
     "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<boolean>;
-
-    wrap(
-      _toAddress: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "wrap(address,uint256)"(
-      _toAddress: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    wrapNative(
-      _toAddress: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "wrapNative(address)"(
-      _toAddress: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     yieldBox(overrides?: CallOverrides): Promise<string>;
 
@@ -4248,17 +3810,6 @@ export interface MTapiocaOFT extends BaseContract {
       value?: null
     ): ApprovalEventFilter;
 
-    "BalancerStatusUpdated(address,bool,bool)"(
-      _balancer?: PromiseOrValue<string> | null,
-      _bool?: null,
-      _new?: null
-    ): BalancerStatusUpdatedEventFilter;
-    BalancerStatusUpdated(
-      _balancer?: PromiseOrValue<string> | null,
-      _bool?: null,
-      _new?: null
-    ): BalancerStatusUpdatedEventFilter;
-
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"(
       _srcChainId?: PromiseOrValue<BigNumberish> | null,
       _srcAddress?: null,
@@ -4271,17 +3822,6 @@ export interface MTapiocaOFT extends BaseContract {
       _nonce?: null,
       _hash?: null
     ): CallOFTReceivedSuccessEventFilter;
-
-    "ConnectedChainStatusUpdated(uint256,bool,bool)"(
-      _chain?: null,
-      _old?: null,
-      _new?: null
-    ): ConnectedChainStatusUpdatedEventFilter;
-    ConnectedChainStatusUpdated(
-      _chain?: null,
-      _old?: null,
-      _new?: null
-    ): ConnectedChainStatusUpdatedEventFilter;
 
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)"(
       _srcChainId?: null,
@@ -4311,17 +3851,6 @@ export interface MTapiocaOFT extends BaseContract {
       previousOwner?: PromiseOrValue<string> | null,
       newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
-
-    "Rebalancing(address,uint256,bool)"(
-      _balancer?: PromiseOrValue<string> | null,
-      _amount?: null,
-      _isNative?: null
-    ): RebalancingEventFilter;
-    Rebalancing(
-      _balancer?: PromiseOrValue<string> | null,
-      _amount?: null,
-      _isNative?: null
-    ): RebalancingEventFilter;
 
     "ReceiveFromChain(uint16,address,uint256)"(
       _srcChainId?: PromiseOrValue<BigNumberish> | null,
@@ -4512,16 +4041,6 @@ export interface MTapiocaOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    balancers(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "balancers(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     batch(
       calls: PromiseOrValue<BytesLike>[],
       revertOnFail: PromiseOrValue<boolean>,
@@ -4561,16 +4080,6 @@ export interface MTapiocaOFT extends BaseContract {
     circulatingSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     "circulatingSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    connectedChains(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "connectedChains(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
 
     creditedPackets(
       arg0: PromiseOrValue<BigNumberish>,
@@ -4646,16 +4155,6 @@ export interface MTapiocaOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    extractUnderlying(
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "extractUnderlying(uint256)"(
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     failedMessages(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
@@ -4679,6 +4178,18 @@ export interface MTapiocaOFT extends BaseContract {
     "forceResumeReceive(uint16,bytes)"(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    freeMint(
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "freeMint(address,uint256)"(
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5074,10 +4585,6 @@ export interface MTapiocaOFT extends BaseContract {
 
     "symbol()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    tapiocaWrapper(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "tapiocaWrapper()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     token(overrides?: CallOverrides): Promise<BigNumber>;
 
     "token()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -5132,67 +4639,9 @@ export interface MTapiocaOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    unwrap(
-      _toAddress: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "unwrap(address,uint256)"(
-      _toAddress: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    updateBalancerState(
-      _balancer: PromiseOrValue<string>,
-      _status: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "updateBalancerState(address,bool)"(
-      _balancer: PromiseOrValue<string>,
-      _status: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    updateConnectedChain(
-      _chain: PromiseOrValue<BigNumberish>,
-      _status: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "updateConnectedChain(uint256,bool)"(
-      _chain: PromiseOrValue<BigNumberish>,
-      _status: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     useCustomAdapterParams(overrides?: CallOverrides): Promise<BigNumber>;
 
     "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    wrap(
-      _toAddress: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "wrap(address,uint256)"(
-      _toAddress: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    wrapNative(
-      _toAddress: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "wrapNative(address)"(
-      _toAddress: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
 
     yieldBox(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -5286,16 +4735,6 @@ export interface MTapiocaOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    balancers(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "balancers(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     batch(
       calls: PromiseOrValue<BytesLike>[],
       revertOnFail: PromiseOrValue<boolean>,
@@ -5335,16 +4774,6 @@ export interface MTapiocaOFT extends BaseContract {
     circulatingSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "circulatingSupply()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    connectedChains(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "connectedChains(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -5422,16 +4851,6 @@ export interface MTapiocaOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    extractUnderlying(
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "extractUnderlying(uint256)"(
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     failedMessages(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
@@ -5455,6 +4874,18 @@ export interface MTapiocaOFT extends BaseContract {
     "forceResumeReceive(uint16,bytes)"(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    freeMint(
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "freeMint(address,uint256)"(
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -5852,12 +5283,6 @@ export interface MTapiocaOFT extends BaseContract {
 
     "symbol()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    tapiocaWrapper(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "tapiocaWrapper()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     token(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "token()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -5912,70 +5337,12 @@ export interface MTapiocaOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    unwrap(
-      _toAddress: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "unwrap(address,uint256)"(
-      _toAddress: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    updateBalancerState(
-      _balancer: PromiseOrValue<string>,
-      _status: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "updateBalancerState(address,bool)"(
-      _balancer: PromiseOrValue<string>,
-      _status: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    updateConnectedChain(
-      _chain: PromiseOrValue<BigNumberish>,
-      _status: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "updateConnectedChain(uint256,bool)"(
-      _chain: PromiseOrValue<BigNumberish>,
-      _status: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     useCustomAdapterParams(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "useCustomAdapterParams()"(
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    wrap(
-      _toAddress: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "wrap(address,uint256)"(
-      _toAddress: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    wrapNative(
-      _toAddress: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "wrapNative(address)"(
-      _toAddress: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     yieldBox(overrides?: CallOverrides): Promise<PopulatedTransaction>;

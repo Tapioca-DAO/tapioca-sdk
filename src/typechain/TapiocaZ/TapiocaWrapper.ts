@@ -50,14 +50,12 @@ export interface TapiocaWrapperInterface extends utils.Interface {
     "harvestFees()": FunctionFragment;
     "harvestableTapiocaOFTsLength()": FunctionFragment;
     "lastTOFT()": FunctionFragment;
-    "mngmtFee()": FunctionFragment;
-    "mngmtFeeFraction()": FunctionFragment;
     "owner()": FunctionFragment;
-    "setMngmtFee(uint256)": FunctionFragment;
-    "setOwner(address)": FunctionFragment;
+    "renounceOwnership()": FunctionFragment;
     "tapiocaOFTLength()": FunctionFragment;
     "tapiocaOFTs(uint256)": FunctionFragment;
     "tapiocaOFTsByErc20(address)": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
   };
 
   getFunction(
@@ -74,22 +72,18 @@ export interface TapiocaWrapperInterface extends utils.Interface {
       | "harvestableTapiocaOFTsLength()"
       | "lastTOFT"
       | "lastTOFT()"
-      | "mngmtFee"
-      | "mngmtFee()"
-      | "mngmtFeeFraction"
-      | "mngmtFeeFraction()"
       | "owner"
       | "owner()"
-      | "setMngmtFee"
-      | "setMngmtFee(uint256)"
-      | "setOwner"
-      | "setOwner(address)"
+      | "renounceOwnership"
+      | "renounceOwnership()"
       | "tapiocaOFTLength"
       | "tapiocaOFTLength()"
       | "tapiocaOFTs"
       | "tapiocaOFTs(uint256)"
       | "tapiocaOFTsByErc20"
       | "tapiocaOFTsByErc20(address)"
+      | "transferOwnership"
+      | "transferOwnership(address)"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -155,36 +149,15 @@ export interface TapiocaWrapperInterface extends utils.Interface {
     functionFragment: "lastTOFT()",
     values?: undefined
   ): string;
-  encodeFunctionData(functionFragment: "mngmtFee", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "mngmtFee()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "mngmtFeeFraction",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "mngmtFeeFraction()",
-    values?: undefined
-  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "setMngmtFee",
-    values: [PromiseOrValue<BigNumberish>]
+    functionFragment: "renounceOwnership",
+    values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "setMngmtFee(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setOwner",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setOwner(address)",
-    values: [PromiseOrValue<string>]
+    functionFragment: "renounceOwnership()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "tapiocaOFTLength",
@@ -208,6 +181,14 @@ export interface TapiocaWrapperInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "tapiocaOFTsByErc20(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership(address)",
     values: [PromiseOrValue<string>]
   ): string;
 
@@ -250,29 +231,14 @@ export interface TapiocaWrapperInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "lastTOFT", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "lastTOFT()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "mngmtFee", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "mngmtFee()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "mngmtFeeFraction",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "mngmtFeeFraction()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "setMngmtFee",
+    functionFragment: "renounceOwnership",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setMngmtFee(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "setOwner", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "setOwner(address)",
+    functionFragment: "renounceOwnership()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -299,11 +265,19 @@ export interface TapiocaWrapperInterface extends utils.Interface {
     functionFragment: "tapiocaOFTsByErc20(address)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership(address)",
+    data: BytesLike
+  ): Result;
 
   events: {
     "CreateOFT(address,address)": EventFragment;
     "HarvestFees(address)": EventFragment;
-    "OwnerUpdated(address,address)": EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
     "SetFees(uint256)": EventFragment;
   };
 
@@ -311,9 +285,9 @@ export interface TapiocaWrapperInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "CreateOFT(address,address)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "HarvestFees"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "HarvestFees(address)"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "OwnerUpdated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
-    nameOrSignatureOrTopic: "OwnerUpdated(address,address)"
+    nameOrSignatureOrTopic: "OwnershipTransferred(address,address)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SetFees"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SetFees(uint256)"): EventFragment;
@@ -334,16 +308,17 @@ export type HarvestFeesEvent = TypedEvent<[string], HarvestFeesEventObject>;
 
 export type HarvestFeesEventFilter = TypedEventFilter<HarvestFeesEvent>;
 
-export interface OwnerUpdatedEventObject {
-  user: string;
+export interface OwnershipTransferredEventObject {
+  previousOwner: string;
   newOwner: string;
 }
-export type OwnerUpdatedEvent = TypedEvent<
+export type OwnershipTransferredEvent = TypedEvent<
   [string, string],
-  OwnerUpdatedEventObject
+  OwnershipTransferredEventObject
 >;
 
-export type OwnerUpdatedEventFilter = TypedEventFilter<OwnerUpdatedEvent>;
+export type OwnershipTransferredEventFilter =
+  TypedEventFilter<OwnershipTransferredEvent>;
 
 export interface SetFeesEventObject {
   _newFee: BigNumber;
@@ -441,35 +416,15 @@ export interface TapiocaWrapper extends BaseContract {
 
     "lastTOFT()"(overrides?: CallOverrides): Promise<[string]>;
 
-    mngmtFee(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "mngmtFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    mngmtFeeFraction(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "mngmtFeeFraction()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
 
-    setMngmtFee(
-      _mngmtFee: PromiseOrValue<BigNumberish>,
+    renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setMngmtFee(uint256)"(
-      _mngmtFee: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setOwner(
-      newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setOwner(address)"(
-      newOwner: PromiseOrValue<string>,
+    "renounceOwnership()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -496,6 +451,16 @@ export interface TapiocaWrapper extends BaseContract {
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[string]>;
+
+    transferOwnership(
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "transferOwnership(address)"(
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
 
   createTOFT(
@@ -556,35 +521,15 @@ export interface TapiocaWrapper extends BaseContract {
 
   "lastTOFT()"(overrides?: CallOverrides): Promise<string>;
 
-  mngmtFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "mngmtFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  mngmtFeeFraction(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "mngmtFeeFraction()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   owner(overrides?: CallOverrides): Promise<string>;
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
 
-  setMngmtFee(
-    _mngmtFee: PromiseOrValue<BigNumberish>,
+  renounceOwnership(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setMngmtFee(uint256)"(
-    _mngmtFee: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setOwner(
-    newOwner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setOwner(address)"(
-    newOwner: PromiseOrValue<string>,
+  "renounceOwnership()"(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -611,6 +556,16 @@ export interface TapiocaWrapper extends BaseContract {
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<string>;
+
+  transferOwnership(
+    newOwner: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "transferOwnership(address)"(
+    newOwner: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   callStatic: {
     createTOFT(
@@ -667,37 +622,13 @@ export interface TapiocaWrapper extends BaseContract {
 
     "lastTOFT()"(overrides?: CallOverrides): Promise<string>;
 
-    mngmtFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "mngmtFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    mngmtFeeFraction(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "mngmtFeeFraction()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     owner(overrides?: CallOverrides): Promise<string>;
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
 
-    setMngmtFee(
-      _mngmtFee: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
-    "setMngmtFee(uint256)"(
-      _mngmtFee: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setOwner(
-      newOwner: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setOwner(address)"(
-      newOwner: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
 
     tapiocaOFTLength(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -722,6 +653,16 @@ export interface TapiocaWrapper extends BaseContract {
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    transferOwnership(
+      newOwner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "transferOwnership(address)"(
+      newOwner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
@@ -741,14 +682,14 @@ export interface TapiocaWrapper extends BaseContract {
       _caller?: PromiseOrValue<string> | null
     ): HarvestFeesEventFilter;
 
-    "OwnerUpdated(address,address)"(
-      user?: PromiseOrValue<string> | null,
+    "OwnershipTransferred(address,address)"(
+      previousOwner?: PromiseOrValue<string> | null,
       newOwner?: PromiseOrValue<string> | null
-    ): OwnerUpdatedEventFilter;
-    OwnerUpdated(
-      user?: PromiseOrValue<string> | null,
+    ): OwnershipTransferredEventFilter;
+    OwnershipTransferred(
+      previousOwner?: PromiseOrValue<string> | null,
       newOwner?: PromiseOrValue<string> | null
-    ): OwnerUpdatedEventFilter;
+    ): OwnershipTransferredEventFilter;
 
     "SetFees(uint256)"(_newFee?: null): SetFeesEventFilter;
     SetFees(_newFee?: null): SetFeesEventFilter;
@@ -813,35 +754,15 @@ export interface TapiocaWrapper extends BaseContract {
 
     "lastTOFT()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    mngmtFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "mngmtFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    mngmtFeeFraction(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "mngmtFeeFraction()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    setMngmtFee(
-      _mngmtFee: PromiseOrValue<BigNumberish>,
+    renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setMngmtFee(uint256)"(
-      _mngmtFee: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setOwner(
-      newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setOwner(address)"(
-      newOwner: PromiseOrValue<string>,
+    "renounceOwnership()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -867,6 +788,16 @@ export interface TapiocaWrapper extends BaseContract {
     "tapiocaOFTsByErc20(address)"(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    transferOwnership(
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "transferOwnership(address)"(
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
@@ -931,37 +862,15 @@ export interface TapiocaWrapper extends BaseContract {
 
     "lastTOFT()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    mngmtFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "mngmtFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    mngmtFeeFraction(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "mngmtFeeFraction()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    setMngmtFee(
-      _mngmtFee: PromiseOrValue<BigNumberish>,
+    renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setMngmtFee(uint256)"(
-      _mngmtFee: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setOwner(
-      newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setOwner(address)"(
-      newOwner: PromiseOrValue<string>,
+    "renounceOwnership()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -989,6 +898,16 @@ export interface TapiocaWrapper extends BaseContract {
     "tapiocaOFTsByErc20(address)"(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    transferOwnership(
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "transferOwnership(address)"(
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

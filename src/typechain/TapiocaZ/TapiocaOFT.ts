@@ -84,7 +84,6 @@ export interface TapiocaOFTInterface extends utils.Interface {
     "decimals()": FunctionFragment;
     "decreaseAllowance(address,uint256)": FunctionFragment;
     "erc20()": FunctionFragment;
-    "estimateFees(uint256,uint256,uint256)": FunctionFragment;
     "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)": FunctionFragment;
     "estimateSendFee(uint16,bytes32,uint256,bool,bytes)": FunctionFragment;
     "failedMessages(uint16,bytes,uint64)": FunctionFragment;
@@ -92,7 +91,6 @@ export interface TapiocaOFTInterface extends utils.Interface {
     "getConfig(uint16,uint16,address,uint256)": FunctionFragment;
     "getLzChainId()": FunctionFragment;
     "getTrustedRemoteAddress(uint16)": FunctionFragment;
-    "harvestFees()": FunctionFragment;
     "hostChainID()": FunctionFragment;
     "increaseAllowance(address,uint256)": FunctionFragment;
     "isHostChain()": FunctionFragment;
@@ -128,7 +126,6 @@ export interface TapiocaOFTInterface extends utils.Interface {
     "symbol()": FunctionFragment;
     "tapiocaWrapper()": FunctionFragment;
     "token()": FunctionFragment;
-    "totalFees()": FunctionFragment;
     "totalSupply()": FunctionFragment;
     "transfer(address,uint256)": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
@@ -138,7 +135,6 @@ export interface TapiocaOFTInterface extends utils.Interface {
     "useCustomAdapterParams()": FunctionFragment;
     "wrap(address,uint256)": FunctionFragment;
     "wrapNative(address)": FunctionFragment;
-    "wrappedAmount(uint256)": FunctionFragment;
     "yieldBox()": FunctionFragment;
   };
 
@@ -182,8 +178,6 @@ export interface TapiocaOFTInterface extends utils.Interface {
       | "decreaseAllowance(address,uint256)"
       | "erc20"
       | "erc20()"
-      | "estimateFees"
-      | "estimateFees(uint256,uint256,uint256)"
       | "estimateSendAndCallFee"
       | "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)"
       | "estimateSendFee"
@@ -198,8 +192,6 @@ export interface TapiocaOFTInterface extends utils.Interface {
       | "getLzChainId()"
       | "getTrustedRemoteAddress"
       | "getTrustedRemoteAddress(uint16)"
-      | "harvestFees"
-      | "harvestFees()"
       | "hostChainID"
       | "hostChainID()"
       | "increaseAllowance"
@@ -270,8 +262,6 @@ export interface TapiocaOFTInterface extends utils.Interface {
       | "tapiocaWrapper()"
       | "token"
       | "token()"
-      | "totalFees"
-      | "totalFees()"
       | "totalSupply"
       | "totalSupply()"
       | "transfer"
@@ -290,8 +280,6 @@ export interface TapiocaOFTInterface extends utils.Interface {
       | "wrap(address,uint256)"
       | "wrapNative"
       | "wrapNative(address)"
-      | "wrappedAmount"
-      | "wrappedAmount(uint256)"
       | "yieldBox"
       | "yieldBox()"
   ): FunctionFragment;
@@ -460,22 +448,6 @@ export interface TapiocaOFTInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "erc20", values?: undefined): string;
   encodeFunctionData(functionFragment: "erc20()", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "estimateFees",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "estimateFees(uint256,uint256,uint256)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "estimateSendAndCallFee",
     values: [
       PromiseOrValue<BigNumberish>,
@@ -576,14 +548,6 @@ export interface TapiocaOFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "getTrustedRemoteAddress(uint16)",
     values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "harvestFees",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "harvestFees()",
-    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "hostChainID",
@@ -951,11 +915,6 @@ export interface TapiocaOFTInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "token", values?: undefined): string;
   encodeFunctionData(functionFragment: "token()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "totalFees", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "totalFees()",
-    values?: undefined
-  ): string;
   encodeFunctionData(
     functionFragment: "totalSupply",
     values?: undefined
@@ -1035,14 +994,6 @@ export interface TapiocaOFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "wrapNative(address)",
     values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "wrappedAmount",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "wrappedAmount(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "yieldBox", values?: undefined): string;
   encodeFunctionData(
@@ -1173,14 +1124,6 @@ export interface TapiocaOFTInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "erc20", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "erc20()", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "estimateFees",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "estimateFees(uint256,uint256,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "estimateSendAndCallFee",
     data: BytesLike
   ): Result;
@@ -1231,14 +1174,6 @@ export interface TapiocaOFTInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "getTrustedRemoteAddress(uint16)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "harvestFees",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "harvestFees()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1464,11 +1399,6 @@ export interface TapiocaOFTInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "token", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "token()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "totalFees", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "totalFees()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "totalSupply",
     data: BytesLike
@@ -1529,21 +1459,12 @@ export interface TapiocaOFTInterface extends utils.Interface {
     functionFragment: "wrapNative(address)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "wrappedAmount",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "wrappedAmount(uint256)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "yieldBox", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "yieldBox()", data: BytesLike): Result;
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
-    "HarvestFees(uint256)": EventFragment;
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)": EventFragment;
     "NonContractAddress(address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
@@ -1570,8 +1491,6 @@ export interface TapiocaOFTInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "HarvestFees"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "HarvestFees(uint256)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MessageFailed"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "MessageFailed(uint16,bytes,uint64,bytes,bytes)"
@@ -1657,13 +1576,6 @@ export type CallOFTReceivedSuccessEvent = TypedEvent<
 
 export type CallOFTReceivedSuccessEventFilter =
   TypedEventFilter<CallOFTReceivedSuccessEvent>;
-
-export interface HarvestFeesEventObject {
-  _amount: BigNumber;
-}
-export type HarvestFeesEvent = TypedEvent<[BigNumber], HarvestFeesEventObject>;
-
-export type HarvestFeesEventFilter = TypedEventFilter<HarvestFeesEvent>;
 
 export interface MessageFailedEventObject {
   _srcChainId: number;
@@ -2028,20 +1940,6 @@ export interface TapiocaOFT extends BaseContract {
 
     "erc20()"(overrides?: CallOverrides): Promise<[string]>;
 
-    estimateFees(
-      _feeBps: PromiseOrValue<BigNumberish>,
-      _feeFraction: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "estimateFees(uint256,uint256,uint256)"(
-      _feeBps: PromiseOrValue<BigNumberish>,
-      _feeFraction: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     estimateSendAndCallFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
@@ -2145,14 +2043,6 @@ export interface TapiocaOFT extends BaseContract {
       _remoteChainId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
-
-    harvestFees(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "harvestFees()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
 
     hostChainID(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -2524,10 +2414,6 @@ export interface TapiocaOFT extends BaseContract {
 
     "token()"(overrides?: CallOverrides): Promise<[string]>;
 
-    totalFees(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "totalFees()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -2615,16 +2501,6 @@ export interface TapiocaOFT extends BaseContract {
       _toAddress: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
-
-    wrappedAmount(
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "wrappedAmount(uint256)"(
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
 
     yieldBox(overrides?: CallOverrides): Promise<[string]>;
 
@@ -2775,20 +2651,6 @@ export interface TapiocaOFT extends BaseContract {
 
   "erc20()"(overrides?: CallOverrides): Promise<string>;
 
-  estimateFees(
-    _feeBps: PromiseOrValue<BigNumberish>,
-    _feeFraction: PromiseOrValue<BigNumberish>,
-    _amount: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "estimateFees(uint256,uint256,uint256)"(
-    _feeBps: PromiseOrValue<BigNumberish>,
-    _feeFraction: PromiseOrValue<BigNumberish>,
-    _amount: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   estimateSendAndCallFee(
     _dstChainId: PromiseOrValue<BigNumberish>,
     _toAddress: PromiseOrValue<BytesLike>,
@@ -2892,14 +2754,6 @@ export interface TapiocaOFT extends BaseContract {
     _remoteChainId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
-
-  harvestFees(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "harvestFees()"(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
 
   hostChainID(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3271,10 +3125,6 @@ export interface TapiocaOFT extends BaseContract {
 
   "token()"(overrides?: CallOverrides): Promise<string>;
 
-  totalFees(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "totalFees()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
   "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3362,16 +3212,6 @@ export interface TapiocaOFT extends BaseContract {
     _toAddress: PromiseOrValue<string>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
-
-  wrappedAmount(
-    _amount: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "wrappedAmount(uint256)"(
-    _amount: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
 
   yieldBox(overrides?: CallOverrides): Promise<string>;
 
@@ -3524,20 +3364,6 @@ export interface TapiocaOFT extends BaseContract {
 
     "erc20()"(overrides?: CallOverrides): Promise<string>;
 
-    estimateFees(
-      _feeBps: PromiseOrValue<BigNumberish>,
-      _feeFraction: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "estimateFees(uint256,uint256,uint256)"(
-      _feeBps: PromiseOrValue<BigNumberish>,
-      _feeFraction: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     estimateSendAndCallFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
@@ -3641,10 +3467,6 @@ export interface TapiocaOFT extends BaseContract {
       _remoteChainId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
-
-    harvestFees(overrides?: CallOverrides): Promise<void>;
-
-    "harvestFees()"(overrides?: CallOverrides): Promise<void>;
 
     hostChainID(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -4012,10 +3834,6 @@ export interface TapiocaOFT extends BaseContract {
 
     "token()"(overrides?: CallOverrides): Promise<string>;
 
-    totalFees(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "totalFees()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -4104,16 +3922,6 @@ export interface TapiocaOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    wrappedAmount(
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "wrappedAmount(uint256)"(
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     yieldBox(overrides?: CallOverrides): Promise<string>;
 
     "yieldBox()"(overrides?: CallOverrides): Promise<string>;
@@ -4143,9 +3951,6 @@ export interface TapiocaOFT extends BaseContract {
       _nonce?: null,
       _hash?: null
     ): CallOFTReceivedSuccessEventFilter;
-
-    "HarvestFees(uint256)"(_amount?: null): HarvestFeesEventFilter;
-    HarvestFees(_amount?: null): HarvestFeesEventFilter;
 
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)"(
       _srcChainId?: null,
@@ -4439,20 +4244,6 @@ export interface TapiocaOFT extends BaseContract {
 
     "erc20()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    estimateFees(
-      _feeBps: PromiseOrValue<BigNumberish>,
-      _feeFraction: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "estimateFees(uint256,uint256,uint256)"(
-      _feeBps: PromiseOrValue<BigNumberish>,
-      _feeFraction: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     estimateSendAndCallFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
@@ -4547,14 +4338,6 @@ export interface TapiocaOFT extends BaseContract {
     "getTrustedRemoteAddress(uint16)"(
       _remoteChainId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    harvestFees(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "harvestFees()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     hostChainID(overrides?: CallOverrides): Promise<BigNumber>;
@@ -4927,10 +4710,6 @@ export interface TapiocaOFT extends BaseContract {
 
     "token()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    totalFees(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "totalFees()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -5017,16 +4796,6 @@ export interface TapiocaOFT extends BaseContract {
     "wrapNative(address)"(
       _toAddress: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    wrappedAmount(
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "wrappedAmount(uint256)"(
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     yieldBox(overrides?: CallOverrides): Promise<BigNumber>;
@@ -5197,20 +4966,6 @@ export interface TapiocaOFT extends BaseContract {
 
     "erc20()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    estimateFees(
-      _feeBps: PromiseOrValue<BigNumberish>,
-      _feeFraction: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "estimateFees(uint256,uint256,uint256)"(
-      _feeBps: PromiseOrValue<BigNumberish>,
-      _feeFraction: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     estimateSendAndCallFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
@@ -5305,14 +5060,6 @@ export interface TapiocaOFT extends BaseContract {
     "getTrustedRemoteAddress(uint16)"(
       _remoteChainId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    harvestFees(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "harvestFees()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     hostChainID(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -5689,10 +5436,6 @@ export interface TapiocaOFT extends BaseContract {
 
     "token()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    totalFees(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "totalFees()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -5783,16 +5526,6 @@ export interface TapiocaOFT extends BaseContract {
     "wrapNative(address)"(
       _toAddress: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    wrappedAmount(
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "wrappedAmount(uint256)"(
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     yieldBox(overrides?: CallOverrides): Promise<PopulatedTransaction>;

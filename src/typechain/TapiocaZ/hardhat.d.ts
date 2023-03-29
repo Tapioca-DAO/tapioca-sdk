@@ -13,9 +13,37 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "Balancer",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Balancer__factory>;
+    getContractFactory(
       name: "BaseTOFT",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BaseTOFT__factory>;
+    getContractFactory(
+      name: "ERC20Mock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC20Mock__factory>;
+    getContractFactory(
+      name: "LZEndpointMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.LZEndpointMock__factory>;
+    getContractFactory(
+      name: "StargateRouterETHMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.StargateRouterETHMock__factory>;
+    getContractFactory(
+      name: "StargateRouterMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.StargateRouterMock__factory>;
+    getContractFactory(
+      name: "TOFTMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TOFTMock__factory>;
+    getContractFactory(
+      name: "YieldBoxMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.YieldBoxMock__factory>;
     getContractFactory(
       name: "MTapiocaOFT",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -30,10 +58,45 @@ declare module "hardhat/types/runtime" {
     ): Promise<Contracts.TapiocaWrapper__factory>;
 
     getContractAt(
+      name: "Balancer",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Balancer>;
+    getContractAt(
       name: "BaseTOFT",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.BaseTOFT>;
+    getContractAt(
+      name: "ERC20Mock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20Mock>;
+    getContractAt(
+      name: "LZEndpointMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.LZEndpointMock>;
+    getContractAt(
+      name: "StargateRouterETHMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.StargateRouterETHMock>;
+    getContractAt(
+      name: "StargateRouterMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.StargateRouterMock>;
+    getContractAt(
+      name: "TOFTMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TOFTMock>;
+    getContractAt(
+      name: "YieldBoxMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.YieldBoxMock>;
     getContractAt(
       name: "MTapiocaOFT",
       address: string,
