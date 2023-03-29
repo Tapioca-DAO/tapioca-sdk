@@ -1,13 +1,17 @@
 import { ContractFactory } from 'ethers';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { v4 as uuidv4 } from 'uuid';
+import { TAPIOCA_PROJECTS, TAPIOCA_PROJECTS_NAME } from '../../api/config';
 import { TContract } from '../../shared';
 import {
     TapiocaDeployer,
     TapiocaDeployer__factory,
 } from '../../typechain/tap-token';
+import { IOwnable__factory } from '../../typechain/utils/IOwnable/factories';
 import { Multicall3 } from '../../typechain/utils/MultiCall';
 import { Multicall3__factory } from '../../typechain/utils/MultiCall/factories';
+import { MultisigMock } from '../../typechain/utils/MultisigMock';
+import { MultisigMock__factory } from '../../typechain/utils/MultisigMock/factories';
 
 interface IDependentOn {
     deploymentName: string;
@@ -29,7 +33,6 @@ export interface TDeploymentVMContract extends TContract {
 
 interface IConstructorOptions {
     bytecodeSizeLimit: number; // Limit of bytecode size for a single transaction, error happened on Arb Goerli with Alchemy RPC
-    multicall: Multicall3;
     debugMode: boolean;
     tag?: string;
 }
@@ -48,12 +51,12 @@ export interface IDeployerVMAdd<T extends ContractFactory>
  * @param options Options to use.
  * @param options.bytecodeSizeLimit Limit of bytecode size for a single transaction, if RPC provider is not able to handle it, error will be thrown.
  * @param options.tag Tag to use for the deployment. If not provided, 'default' will be used (Per SDK).
- * @param options.multicall Multicall3 instance to use for the deployment.
  *
  */
 export class DeployerVM {
     private tapiocaDeployer?: TapiocaDeployer;
     private multicall?: Multicall3;
+    private multisig?: MultisigMock;
 
     hre: HardhatRuntimeEnvironment;
     options: IConstructorOptions;
@@ -175,12 +178,22 @@ export class DeployerVM {
                 ' transactions',
             );
         }
+
+        if (!this.multicall) {
+            console.log('\n[+] Multicall3 not set');
+            await this.getMulticall();
+            console.log(
+                `[+] Multicall3 deployed at: ${this.multicall.address}`,
+            );
+            console.log('\n');
+        }
+
         // Execute the calls
         try {
             for (const call of calls) {
                 const tx = this.options.debugMode
-                    ? await this.options.multicall.multicall(call)
-                    : await this.options.multicall.aggregate3(call);
+                    ? await this.multicall.multicall(call)
+                    : await this.multicall.aggregate3(call);
                 console.log(`[+] Execution batch hash: ${tx.hash}`);
                 await tx.wait(wait);
             }
@@ -198,6 +211,90 @@ export class DeployerVM {
         console.log('[+] Deployment queue executed');
 
         return this;
+    }
+
+    /**
+     * Transfers ownership for a contract which inherits OZ Ownable
+     * @param to The new owner address
+     * @param target Target contract to apply the operation for
+     * @param fromMultisig Needs to be true if the current owner is a multisig
+     */
+    async transferOwnership(
+        to: string,
+        target: string,
+        fromMultisig?: boolean,
+    ) {
+        console.log(`[+] Transfering ownership to ${to}...`);
+
+        // Get deployer deployment
+        let deployment: TContract | undefined;
+        try {
+            deployment = this.hre.SDK.db.getLocalDeployment(
+                String(this.hre.network.config.chainId),
+                target,
+                this.options.tag,
+            );
+        } catch (e) {
+            if (this.options.debugMode) {
+                console.log(`[-] Failed with error: ${e}`);
+            }
+        }
+        if (!deployment) {
+            throw '[-] Deployment does not exist';
+        }
+        const signer = (await this.hre.ethers.getSigners())[0];
+
+        const ownableContract = IOwnable__factory.connect(
+            deployment.address,
+            signer,
+        );
+
+        if (fromMultisig) {
+            const calldata = ownableContract.interface.encodeFunctionData(
+                'transferOwnership',
+                [to],
+            );
+            const from = await ownableContract.owner();
+            await this.submitTransactionThroughMultisig(from, target, calldata);
+            return;
+        }
+
+        await ownableContract.connect(signer).transferOwnership(to);
+
+        console.log(
+            `[+] Ownership transferred. New owner is: ${await ownableContract.owner()}`,
+        );
+    }
+
+    /**
+     * Transfers ownership for a contract which inherits OZ Ownable
+     * @param multisigAddress The Multisig address
+     * @param target Target contract to apply the operation for
+     * @param calldata Transaction data
+     */
+    async submitTransactionThroughMultisig(
+        multisigAddress: string,
+        target: string,
+        calldata: string,
+    ) {
+        const signer = (await this.hre.ethers.getSigners())[0];
+        const multisig = MultisigMock__factory.connect(multisigAddress, signer);
+
+        console.log('\n[+] Executing through Multisig');
+
+        let tx = await multisig.submitTransaction(target, 0, calldata);
+        await tx.wait(3);
+        console.log('   [+] Transaction submitted through multisig: ', tx.hash);
+        const txCount = await multisig.getTransactionCount();
+        const lastTx = txCount.sub(1);
+        tx = await multisig.confirmTransaction(lastTx);
+        await tx.wait(3);
+        console.log('   [+] Transaction confirmed: ', tx.hash);
+        tx = await multisig.executeTransaction(lastTx);
+        await tx.wait(3);
+        console.log('   [+] Transaction executed: ', tx.hash);
+
+        console.log('[+] Multisig execution finished \n');
     }
 
     /**
@@ -294,6 +391,160 @@ export class DeployerVM {
         this.depList = [];
         return this;
     }
+
+    /**
+     * Retrieves the Multicall3 contract
+     * If the contract doesn't exist, it will be deployed and saved globally
+     */
+    getMulticall = async (): Promise<Multicall3> => {
+        if (this.multicall) return this.multicall;
+
+        const project = TAPIOCA_PROJECTS[3];
+        const _tag = this.options.tag ?? 'default';
+
+        // Get deployer deployment
+        let deployment: TContract | undefined;
+        try {
+            deployment = this.hre.SDK.db.getGlobalDeployment(
+                project,
+                String(this.hre.network.config.chainId),
+                'Multicall3',
+                _tag,
+                this.hre.SDK.db.SUBREPO_GLOBAL_DB_PATH,
+            );
+            console.log('[+] Previous Multicall3 deployment exists.');
+            const _multicall = Multicall3__factory.connect(
+                deployment.address,
+                (await this.hre.ethers.getSigners())[0],
+            );
+            this.multicall = _multicall;
+        } catch (e) {
+            if (this.options.debugMode) {
+                console.log(
+                    `[-] Failed retrieving Multicall3 deployemnt with error: ${e}`,
+                );
+            }
+        }
+
+        // Deploy Multicall3 if not deployed
+        if (!deployment) {
+            // Deploy Multicall3
+            console.log('[+] Deploying Multicall3');
+            const multicall = await new Multicall3__factory(
+                (
+                    await this.hre.ethers.getSigners()
+                )[0],
+            ).deploy();
+
+            await multicall.deployTransaction.wait(3);
+            console.log('[+] Deployed');
+
+            // Save deployment
+            console.log('[+] Saving Multicall3 deployment');
+            const dep = this.hre.SDK.db.buildLocalDeployment({
+                chainId: String(this.hre.network.config.chainId),
+                contracts: [
+                    {
+                        name: 'Multicall3',
+                        address: multicall.address,
+                        meta: {},
+                    },
+                ],
+            });
+            this.hre.SDK.db.saveGlobally(dep, project, _tag);
+            console.log('[+] Saved');
+
+            const _multicall = Multicall3__factory.connect(
+                multicall.address,
+                (await this.hre.ethers.getSigners())[0],
+            );
+            this.multicall = _multicall;
+            return _multicall;
+        }
+
+        // Return Multicall
+        return Multicall3__factory.connect(
+            deployment.address,
+            (await this.hre.ethers.getSigners())[0],
+        );
+    };
+
+    /**
+     * Retrieves the MultisigMock contract
+     * If the contract doesn't exist, it will be deployed and saved globally
+     */
+    getMultisig = async (): Promise<MultisigMock> => {
+        if (this.multisig) return this.multisig;
+
+        const project = TAPIOCA_PROJECTS[3];
+        const _tag = this.options.tag ?? 'default';
+
+        // Get deployer deployment
+        let deployment: TContract | undefined;
+        try {
+            deployment = this.hre.SDK.db.getGlobalDeployment(
+                project,
+                String(this.hre.network.config.chainId),
+                'MultisigMock',
+                _tag,
+                this.hre.SDK.db.SUBREPO_GLOBAL_DB_PATH,
+            );
+            console.log('[+] Previous MultisigMock deployment exists.');
+            const _multisig = MultisigMock__factory.connect(
+                deployment.address,
+                (await this.hre.ethers.getSigners())[0],
+            );
+            this.multisig = _multisig;
+        } catch (e) {
+            if (this.options.debugMode) {
+                console.log(
+                    `[-] Failed retrieving MultisigMock deployemnt with error: ${e}`,
+                );
+            }
+        }
+
+        // Deploy Multicall3 if not deployed
+        if (!deployment) {
+            // Deploy Multicall3
+            console.log('[+] Deploying MultisigMock');
+            const multisig = await new MultisigMock__factory(
+                (
+                    await this.hre.ethers.getSigners()
+                )[0],
+            ).deploy(1);
+
+            await multisig.deployTransaction.wait(3);
+            console.log('[+] Deployed');
+
+            // Save deployment
+            console.log('[+] Saving MultisigMock deployment');
+            const dep = this.hre.SDK.db.buildLocalDeployment({
+                chainId: String(this.hre.network.config.chainId),
+                contracts: [
+                    {
+                        name: 'MultisigMock',
+                        address: multisig.address,
+                        meta: {},
+                    },
+                ],
+            });
+            this.hre.SDK.db.saveGlobally(dep, project, _tag);
+            console.log('[+] Saved');
+
+            const _multisig = MultisigMock__factory.connect(
+                multisig.address,
+                (await this.hre.ethers.getSigners())[0],
+            );
+            this.multisig = _multisig;
+            return _multisig;
+        }
+
+        // Return Multisig
+        return MultisigMock__factory.connect(
+            deployment.address,
+            (await this.hre.ethers.getSigners())[0],
+        );
+    };
 
     // ***********
     // Utils
@@ -441,57 +692,6 @@ export class DeployerVM {
         return deployer.callStatic['computeAddress(bytes32,bytes32)'](
             salt,
             this.hre.ethers.utils.keccak256(bytecode),
-        );
-    }
-    private async getMulticall(): Promise<Multicall3> {
-        if (this.multicall) return this.multicall;
-
-        // Get deployer deployment
-        let deployment: TContract | undefined;
-        try {
-            deployment = this.hre.SDK.db.getLocalDeployment(
-                String(this.hre.network.config.chainId),
-                'Multicall3',
-                this.options.tag,
-            );
-        } catch (e) {
-            if (this.options.debugMode) {
-                console.log(`[-] Failed with error: ${e}`);
-            }
-        }
-
-        // Deploy Multicall3 if not deployed
-        if (!deployment) {
-            // Deploy Multicall3
-            const multicall = await new Multicall3__factory(
-                (
-                    await this.hre.ethers.getSigners()
-                )[0],
-            ).deploy();
-
-            await multicall.deployTransaction.wait(3);
-
-            // Save deployment
-            const dep = this.hre.SDK.db.buildLocalDeployment({
-                chainId: String(this.hre.network.config.chainId),
-                contracts: [
-                    {
-                        name: 'Multicall3',
-                        address: multicall.address,
-                        meta: {},
-                    },
-                ],
-            });
-            this.hre.SDK.db.saveLocally(dep, this.options.tag);
-
-            this.multicall = multicall;
-            return multicall;
-        }
-
-        // Return TapiocaDeployer
-        return Multicall3__factory.connect(
-            deployment.address,
-            (await this.hre.ethers.getSigners())[0],
         );
     }
 
