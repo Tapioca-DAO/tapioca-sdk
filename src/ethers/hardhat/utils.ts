@@ -1,10 +1,11 @@
 import { Contract } from 'ethers';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import inquirer from 'inquirer';
+import { EChainID } from '../../api/config';
+import { getSupportedChains } from '../../api/utils';
 import { TContract, TLocalDeployment, TProjectCaller } from '../../shared';
 import { TapiocaWrapper } from '../../typechain/TapiocaZ';
 import { Multicall3 } from '../../typechain/utils/MultiCall';
-import { getSupportedChains } from '../../api/utils';
 
 /**
  * Get a local contract
@@ -165,4 +166,23 @@ export const askForChain = async () => {
     });
 
     return supportedChains.find((e) => e.name === chain);
+};
+
+export const useNetwork = async (
+    hre: HardhatRuntimeEnvironment,
+    network: EChainID,
+) => {
+    const pk = process.env.PRIVATE_KEY;
+    if (pk === undefined) throw new Error('[-] PRIVATE_KEY env var not set');
+    const info = hre.config.networks?.[network];
+    if (!info)
+        throw new Error(`[-] Hardhat network config not found for ${network} `);
+
+    const chain = hre.SDK.utils.getChainBy('name', network)!;
+    const provider = new hre.ethers.providers.JsonRpcProvider(
+        { url: chain.rpc },
+        { chainId: Number(chain.chainId), name: `rpc-${info.chainId}` },
+    );
+
+    return new hre.ethers.Wallet(pk, provider);
 };
