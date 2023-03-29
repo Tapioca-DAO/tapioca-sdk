@@ -44,16 +44,20 @@ const generateTypings = async (
 
     const allFiles = _parseFiles(cwd, artifactPath, contractNames);
 
-    await runTypeChain({
-        cwd,
-        filesToProcess: allFiles,
-        allFiles,
-        outDir: `gitsub_tapioca-sdk/src/typechain/${projectCaller}`,
-        target: 'ethers-v5',
-        flags: {
-            alwaysGenerateOverloads: true,
-            environment: 'hardhat',
-            discriminateTypes: true,
-        },
-    });
+    await Promise.all(
+        allFiles.map(async (file) =>
+            runTypeChain({
+                cwd,
+                allFiles,
+                filesToProcess: [file],
+                outDir: `gitsub_tapioca-sdk/src/typechain/${projectCaller}`,
+                target: 'ethers-v5',
+                flags: {
+                    alwaysGenerateOverloads: true,
+                    environment: 'hardhat',
+                    discriminateTypes: true,
+                },
+            }),
+        ),
+    );
 };
