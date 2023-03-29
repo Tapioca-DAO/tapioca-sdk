@@ -166,12 +166,14 @@ export enum TAPIOCA_PROJECTS_NAME {
     TapiocaZ = 'tapiocaz',
     TapToken = 'tap-token',
     TapiocaBar = 'tapioca-bar',
+    Generic = 'generic',
 }
 
 export const TAPIOCA_PROJECTS = [
     'tapiocaz',
     'tap-token',
     'tapioca-bar',
+    'generic',
 ] as const;
 
 export const MULTICALL_ADDRESS = '0xcA11bde05977b3631167028862bE2a173976CA11';

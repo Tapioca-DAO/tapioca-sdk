@@ -7,6 +7,7 @@ import { askForTag } from '../../utils';
 export const deployERC20Mock__task = async (
     taskArgs: {
         save?: boolean;
+        debugMode?: boolean;
     },
     hre: HardhatRuntimeEnvironment,
 ) => {
@@ -63,5 +64,28 @@ export const deployERC20Mock__task = async (
             }),
             tag,
         );
+    }
+
+    try {
+        console.log('[+] Verifying');
+        await hre.run('verify', {
+            address: ercMock.address,
+            constructorArgsParams: [
+                name,
+                symbol,
+                hre.ethers.BigNumber.from((1e18).toString())
+                    .mul(1_000_000_000)
+                    .toString(),
+                decimals,
+                signer.address,
+            ],
+        });
+        console.log('[+] Verified');
+    } catch (err: any) {
+        if (taskArgs.debugMode) {
+            console.log(`[-] Failed to verify; error: ${err.message}\n`);
+        } else {
+            console.log('[-] Failed to verify\n');
+        }
     }
 };

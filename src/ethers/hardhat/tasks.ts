@@ -14,6 +14,10 @@ const addCliParams = (task: ConfigurableTaskDefinition) => {
     );
 };
 
+const addDebugModeParams = (task: ConfigurableTaskDefinition) => {
+    return task.addOptionalParam('debugMode', 'true/false');
+};
+
 /**
  * Getter tasks
  */
@@ -42,16 +46,19 @@ task(
     exportSDK__task,
 ).addOptionalParam('tag', 'The tag of the deployment.');
 
-task(
-    'deployERC20Mock',
-    'Deploys an ERC20 mock contract',
-    deployERC20Mock__task,
-).addFlag('save', 'Save the deployment to the local database');
+addDebugModeParams(
+    task(
+        'deployERC20Mock',
+        'Deploys an ERC20 mock contract',
+        deployERC20Mock__task,
+    ).addFlag('save', 'Save the deployment to the local database'),
+);
 
-task('setLZConfig', 'Set an LZ app config', setLZConfig__task)
-    .addParam('multisig', 'Multisig address')
-    .addOptionalParam('debugMode', 'true/false')
-    .addFlag('isToft', 'If the contract to configure is TOFT');
+addDebugModeParams(
+    task('setLZConfig', 'Set an LZ app config', setLZConfig__task)
+        .addParam('multisig', 'Multisig address')
+        .addFlag('isToft', 'If the contract to configure is TOFT'),
+);
 
 addCliParams(
     task(
