@@ -1,6 +1,7 @@
 import { ContractFactory } from 'ethers';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { v4 as uuidv4 } from 'uuid';
+import { TAPIOCA_PROJECTS, TAPIOCA_PROJECTS_NAME } from '../../api/config';
 import { TContract } from '../../shared';
 import {
     TapiocaDeployer,
@@ -29,7 +30,6 @@ export interface TDeploymentVMContract extends TContract {
 
 interface IConstructorOptions {
     bytecodeSizeLimit: number; // Limit of bytecode size for a single transaction, error happened on Arb Goerli with Alchemy RPC
-    multicall: Multicall3;
     debugMode: boolean;
     tag?: string;
 }
@@ -48,7 +48,6 @@ export interface IDeployerVMAdd<T extends ContractFactory>
  * @param options Options to use.
  * @param options.bytecodeSizeLimit Limit of bytecode size for a single transaction, if RPC provider is not able to handle it, error will be thrown.
  * @param options.tag Tag to use for the deployment. If not provided, 'default' will be used (Per SDK).
- * @param options.multicall Multicall3 instance to use for the deployment.
  *
  */
 export class DeployerVM {
@@ -175,12 +174,22 @@ export class DeployerVM {
                 ' transactions',
             );
         }
+
+        if (!this.multicall) {
+            console.log('\n[+] Multicall3 not set');
+            await this.getMulticall();
+            console.log(
+                `[+] Multicall3 deployed at: ${this.multicall.address}`,
+            );
+            console.log('\n');
+        }
+
         // Execute the calls
         try {
             for (const call of calls) {
                 const tx = this.options.debugMode
-                    ? await this.options.multicall.multicall(call)
-                    : await this.options.multicall.aggregate3(call);
+                    ? await this.multicall.multicall(call)
+                    : await this.multicall.aggregate3(call);
                 console.log(`[+] Execution batch hash: ${tx.hash}`);
                 await tx.wait(wait);
             }
@@ -294,6 +303,79 @@ export class DeployerVM {
         this.depList = [];
         return this;
     }
+
+    getMulticall = async (): Promise<Multicall3> => {
+        if (this.multicall) return this.multicall;
+
+        const project = TAPIOCA_PROJECTS[3];
+        const _tag = this.options.tag ?? 'default';
+
+        // Get deployer deployment
+        let deployment: TContract | undefined;
+        try {
+            deployment = this.hre.SDK.db.getGlobalDeployment(
+                project,
+                String(this.hre.network.config.chainId),
+                'Multicall3',
+                _tag,
+                this.hre.SDK.db.SUBREPO_GLOBAL_DB_PATH,
+            );
+            console.log('[+] Previous Multicall3 deployment exists.');
+            const _multicall = Multicall3__factory.connect(
+                deployment.address,
+                (await this.hre.ethers.getSigners())[0],
+            );
+            this.multicall = _multicall;
+        } catch (e) {
+            if (this.options.debugMode) {
+                console.log(
+                    `[-] Failed retrieving Multicall3 deployemnt with error: ${e}`,
+                );
+            }
+        }
+
+        // Deploy Multicall3 if not deployed
+        if (!deployment) {
+            // Deploy Multicall3
+            console.log('[+] Deploying Multicall3');
+            const multicall = await new Multicall3__factory(
+                (
+                    await this.hre.ethers.getSigners()
+                )[0],
+            ).deploy();
+
+            await multicall.deployTransaction.wait(3);
+            console.log('[+] Deployed');
+
+            // Save deployment
+            console.log('[+] Saving Multicall3 deployment');
+            const dep = this.hre.SDK.db.buildLocalDeployment({
+                chainId: String(this.hre.network.config.chainId),
+                contracts: [
+                    {
+                        name: 'Multicall3',
+                        address: multicall.address,
+                        meta: {},
+                    },
+                ],
+            });
+            this.hre.SDK.db.saveGlobally(dep, project, _tag);
+            console.log('[+] Saved');
+
+            const _multicall = Multicall3__factory.connect(
+                multicall.address,
+                (await this.hre.ethers.getSigners())[0],
+            );
+            this.multicall = _multicall;
+            return _multicall;
+        }
+
+        // Return TapiocaDeployer
+        return Multicall3__factory.connect(
+            deployment.address,
+            (await this.hre.ethers.getSigners())[0],
+        );
+    };
 
     // ***********
     // Utils
@@ -441,57 +523,6 @@ export class DeployerVM {
         return deployer.callStatic['computeAddress(bytes32,bytes32)'](
             salt,
             this.hre.ethers.utils.keccak256(bytecode),
-        );
-    }
-    private async getMulticall(): Promise<Multicall3> {
-        if (this.multicall) return this.multicall;
-
-        // Get deployer deployment
-        let deployment: TContract | undefined;
-        try {
-            deployment = this.hre.SDK.db.getLocalDeployment(
-                String(this.hre.network.config.chainId),
-                'Multicall3',
-                this.options.tag,
-            );
-        } catch (e) {
-            if (this.options.debugMode) {
-                console.log(`[-] Failed with error: ${e}`);
-            }
-        }
-
-        // Deploy Multicall3 if not deployed
-        if (!deployment) {
-            // Deploy Multicall3
-            const multicall = await new Multicall3__factory(
-                (
-                    await this.hre.ethers.getSigners()
-                )[0],
-            ).deploy();
-
-            await multicall.deployTransaction.wait(3);
-
-            // Save deployment
-            const dep = this.hre.SDK.db.buildLocalDeployment({
-                chainId: String(this.hre.network.config.chainId),
-                contracts: [
-                    {
-                        name: 'Multicall3',
-                        address: multicall.address,
-                        meta: {},
-                    },
-                ],
-            });
-            this.hre.SDK.db.saveLocally(dep, this.options.tag);
-
-            this.multicall = multicall;
-            return multicall;
-        }
-
-        // Return TapiocaDeployer
-        return Multicall3__factory.connect(
-            deployment.address,
-            (await this.hre.ethers.getSigners())[0],
         );
     }
 
