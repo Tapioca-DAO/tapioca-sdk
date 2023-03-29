@@ -7,8 +7,11 @@ import {
     TapiocaDeployer,
     TapiocaDeployer__factory,
 } from '../../typechain/tap-token';
+import { IOwnable__factory } from '../../typechain/utils/IOwnable/factories';
 import { Multicall3 } from '../../typechain/utils/MultiCall';
 import { Multicall3__factory } from '../../typechain/utils/MultiCall/factories';
+import { MultisigMock } from '../../typechain/utils/MultisigMock';
+import { MultisigMock__factory } from '../../typechain/utils/MultisigMock/factories';
 
 interface IDependentOn {
     deploymentName: string;
@@ -210,6 +213,90 @@ export class DeployerVM {
     }
 
     /**
+     * Transfers ownership for a contract which inherits OZ Ownable
+     * @param to The new owner address
+     * @param target Target contract to apply the operation for
+     * @param fromMultisig Needs to be true if the current owner is a multisig
+     */
+    async transferOwnership(
+        to: string,
+        target: string,
+        fromMultisig?: boolean,
+    ) {
+        console.log(`[+] Transfering ownership to ${to}...`);
+
+        // Get deployer deployment
+        let deployment: TContract | undefined;
+        try {
+            deployment = this.hre.SDK.db.getLocalDeployment(
+                String(this.hre.network.config.chainId),
+                target,
+                this.options.tag,
+            );
+        } catch (e) {
+            if (this.options.debugMode) {
+                console.log(`[-] Failed with error: ${e}`);
+            }
+        }
+        if (!deployment) {
+            throw '[-] Deployment does not exist';
+        }
+        const signer = (await this.hre.ethers.getSigners())[0];
+
+        const ownableContract = IOwnable__factory.connect(
+            deployment.address,
+            signer,
+        );
+
+        if (fromMultisig) {
+            const calldata = ownableContract.interface.encodeFunctionData(
+                'transferOwnership',
+                [to],
+            );
+            const from = await ownableContract.owner();
+            await this.submitTransactionThroughMultisig(from, target, calldata);
+            return;
+        }
+
+        await ownableContract.connect(signer).transferOwnership(to);
+
+        console.log(
+            `[+] Ownership transferred. New owner is: ${await ownableContract.owner()}`,
+        );
+    }
+
+    /**
+     * Transfers ownership for a contract which inherits OZ Ownable
+     * @param multisigAddress The Multisig address
+     * @param target Target contract to apply the operation for
+     * @param calldata Transaction data
+     */
+    async submitTransactionThroughMultisig(
+        multisigAddress: string,
+        target: string,
+        calldata: string,
+    ) {
+        const signer = (await this.hre.ethers.getSigners())[0];
+        const multisig = MultisigMock__factory.connect(multisigAddress, signer);
+
+        console.log('\n[+] Executing through Multisig');
+
+        let tx = await multisig.submitTransaction(target, 0, calldata);
+        await tx.wait(3);
+        console.log('   [+] Transaction submitted through multisig: ', tx.hash);
+        const txCount = await multisig.getTransactionCount();
+        const lastTx = txCount.sub(1);
+        tx = await multisig.confirmTransaction(lastTx);
+        await tx.wait(3);
+        console.log('   [+] Transaction confirmed: ', tx.hash);
+        tx = await multisig.executeTransaction(lastTx);
+        await tx.wait(3);
+        console.log('   [+] Transaction executed: ', tx.hash);
+
+        console.log('[+] Multisig execution finished \n');
+    }
+
+    /**
      * Save the deployments to the local database.
      */
     save() {
@@ -304,6 +391,10 @@ export class DeployerVM {
         return this;
     }
 
+    /**
+     * Retrieves the Multicall3 contract
+     * If the contract doesn't exist, it will be deployed and saved globally
+     */
     getMulticall = async (): Promise<Multicall3> => {
         if (this.multicall) return this.multicall;
 
@@ -375,6 +466,20 @@ export class DeployerVM {
             deployment.address,
             (await this.hre.ethers.getSigners())[0],
         );
+    };
+
+    //TODO: to be implemented in CU-85zru6ag7
+    //TODO: param needs to be removed
+    /**
+     * Retrieves the MultisigMock contract
+     * If the contract doesn't exist, it will be deployed and saved globally
+     */
+    getMultisig = async (addr: string): Promise<MultisigMock> => {
+        const multisig = MultisigMock__factory.connect(
+            addr,
+            (await this.hre.ethers.getSigners())[0],
+        );
+        return multisig;
     };
 
     // ***********
