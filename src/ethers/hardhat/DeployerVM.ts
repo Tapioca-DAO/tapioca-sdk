@@ -221,8 +221,9 @@ export class DeployerVM {
      */
     async transferOwnership(
         to: string,
-        target: string,
+        target: TContract,
         fromMultisig?: boolean,
+        fromMulticall?: boolean,
     ) {
         console.log(`[+] Transfering ownership to ${to}...`);
 
@@ -231,7 +232,7 @@ export class DeployerVM {
         try {
             deployment = this.hre.SDK.db.getLocalDeployment(
                 String(this.hre.network.config.chainId),
-                target,
+                target.name,
                 this.options.tag,
             );
         } catch (e) {
@@ -239,30 +240,65 @@ export class DeployerVM {
                 console.log(`[-] Failed with error: ${e}`);
             }
         }
+
+        if (!deployment) {
+            //try global__db
+            try {
+                deployment = this.hre.SDK.db.getGlobalDeployment(
+                    TAPIOCA_PROJECTS[3], //generic
+                    String(this.hre.network.config.chainId),
+                    target.name,
+                    'default',
+                    this.hre.SDK.db.SUBREPO_GLOBAL_DB_PATH,
+                );
+            } catch (e) {
+                if (this.options.debugMode) {
+                    console.log(
+                        `[-] Failed retrieving from global__db with error: ${e}`,
+                    );
+                }
+            }
+        }
+
         if (!deployment) {
             throw '[-] Deployment does not exist';
         }
         const signer = (await this.hre.ethers.getSigners())[0];
 
         const ownableContract = IOwnable__factory.connect(
-            deployment.address,
+            target.address,
             signer,
         );
 
-        if (fromMultisig) {
-            const calldata = ownableContract.interface.encodeFunctionData(
-                'transferOwnership',
-                [to],
-            );
+        const calldata = ownableContract.interface.encodeFunctionData(
+            'transferOwnership',
+            [to],
+        );
+
+        if (fromMultisig === true) {
             const from = await ownableContract.owner();
-            await this.submitTransactionThroughMultisig(from, target, calldata);
-            return;
+            await this.submitTransactionThroughMultisig(
+                target.address,
+                calldata,
+                from,
+            );
+        } else if (fromMulticall === true) {
+            const calls: Multicall3.Call3Struct[] = [];
+            calls.push({
+                target: target.address,
+                callData: calldata,
+                allowFailure: false,
+            });
+            const multicallTx = await (
+                await this.getMulticall()
+            ).multicall(calls);
+            await multicallTx.wait(3);
+        } else {
+            await ownableContract.connect(signer).transferOwnership(to);
         }
 
-        await ownableContract.connect(signer).transferOwnership(to);
-
         console.log(
-            `[+] Ownership transferred. New owner is: ${await ownableContract.owner()}`,
+            `[+] Ownership transferred. New owner is: ${await ownableContract.owner()}\n`,
         );
     }
 
@@ -273,10 +309,15 @@ export class DeployerVM {
      * @param calldata Transaction data
      */
     async submitTransactionThroughMultisig(
-        multisigAddress: string,
         target: string,
         calldata: string,
+        multisigAddress?: string,
     ) {
+        if (!multisigAddress) {
+            const multisig = await this.getMultisig();
+            multisigAddress = multisig.address;
+        }
+
         const signer = (await this.hre.ethers.getSigners())[0];
         const multisig = MultisigMock__factory.connect(multisigAddress, signer);
 

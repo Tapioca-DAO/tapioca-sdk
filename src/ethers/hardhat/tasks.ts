@@ -55,9 +55,10 @@ addDebugModeParams(
 );
 
 addDebugModeParams(
-    task('setLZConfig', 'Set an LZ app config', setLZConfig__task)
-        .addParam('multisig', 'Multisig address')
-        .addFlag('isToft', 'If the contract to configure is TOFT'),
+    task('setLZConfig', 'Set an LZ app config', setLZConfig__task).addFlag(
+        'isToft',
+        'If the contract to configure is TOFT',
+    ),
 );
 
 addCliParams(
