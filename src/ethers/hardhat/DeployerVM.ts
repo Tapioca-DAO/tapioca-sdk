@@ -56,6 +56,7 @@ export interface IDeployerVMAdd<T extends ContractFactory>
 export class DeployerVM {
     private tapiocaDeployer?: TapiocaDeployer;
     private multicall?: Multicall3;
+    private multisig?: MultisigMock;
 
     hre: HardhatRuntimeEnvironment;
     options: IConstructorOptions;
@@ -461,25 +462,88 @@ export class DeployerVM {
             return _multicall;
         }
 
-        // Return TapiocaDeployer
+        // Return Multicall
         return Multicall3__factory.connect(
             deployment.address,
             (await this.hre.ethers.getSigners())[0],
         );
     };
 
-    //TODO: to be implemented in CU-85zru6ag7
-    //TODO: param needs to be removed
     /**
      * Retrieves the MultisigMock contract
      * If the contract doesn't exist, it will be deployed and saved globally
      */
-    getMultisig = async (addr: string): Promise<MultisigMock> => {
-        const multisig = MultisigMock__factory.connect(
-            addr,
+    getMultisig = async (): Promise<MultisigMock> => {
+        if (this.multisig) return this.multisig;
+
+        const project = TAPIOCA_PROJECTS[3];
+        const _tag = this.options.tag ?? 'default';
+
+        // Get deployer deployment
+        let deployment: TContract | undefined;
+        try {
+            deployment = this.hre.SDK.db.getGlobalDeployment(
+                project,
+                String(this.hre.network.config.chainId),
+                'MultisigMock',
+                _tag,
+                this.hre.SDK.db.SUBREPO_GLOBAL_DB_PATH,
+            );
+            console.log('[+] Previous MultisigMock deployment exists.');
+            const _multisig = MultisigMock__factory.connect(
+                deployment.address,
+                (await this.hre.ethers.getSigners())[0],
+            );
+            this.multisig = _multisig;
+        } catch (e) {
+            if (this.options.debugMode) {
+                console.log(
+                    `[-] Failed retrieving MultisigMock deployemnt with error: ${e}`,
+                );
+            }
+        }
+
+        // Deploy Multicall3 if not deployed
+        if (!deployment) {
+            // Deploy Multicall3
+            console.log('[+] Deploying MultisigMock');
+            const multisig = await new MultisigMock__factory(
+                (
+                    await this.hre.ethers.getSigners()
+                )[0],
+            ).deploy(1);
+
+            await multisig.deployTransaction.wait(3);
+            console.log('[+] Deployed');
+
+            // Save deployment
+            console.log('[+] Saving MultisigMock deployment');
+            const dep = this.hre.SDK.db.buildLocalDeployment({
+                chainId: String(this.hre.network.config.chainId),
+                contracts: [
+                    {
+                        name: 'MultisigMock',
+                        address: multisig.address,
+                        meta: {},
+                    },
+                ],
+            });
+            this.hre.SDK.db.saveGlobally(dep, project, _tag);
+            console.log('[+] Saved');
+
+            const _multisig = MultisigMock__factory.connect(
+                multisig.address,
+                (await this.hre.ethers.getSigners())[0],
+            );
+            this.multisig = _multisig;
+            return _multisig;
+        }
+
+        // Return Multisig
+        return MultisigMock__factory.connect(
+            deployment.address,
             (await this.hre.ethers.getSigners())[0],
         );
-        return multisig;
     };
 
     // ***********
