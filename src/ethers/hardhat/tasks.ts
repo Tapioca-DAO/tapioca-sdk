@@ -8,7 +8,6 @@ import { getChains__task } from './tasks/view/getChains';
 import { getDeployment__task } from './tasks/view/getDeployment';
 import { transferOwnership__task } from './tasks/exec/transferOwnership';
 
-
 const addCliParams = (task: ConfigurableTaskDefinition) => {
     return task.addOptionalParam(
         'tag',
