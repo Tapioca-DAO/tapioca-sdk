@@ -111,7 +111,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
-    "sendToYB(uint256,uint256,uint16,(uint256,address,bool,bool))": FunctionFragment;
+    "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool,bool))": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
     "setPayloadSizeLimit(uint16,uint256)": FunctionFragment;
@@ -133,7 +133,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
     "trustedRemoteLookup(uint16)": FunctionFragment;
     "unwrap(address,uint256)": FunctionFragment;
     "useCustomAdapterParams()": FunctionFragment;
-    "wrap(address,uint256)": FunctionFragment;
+    "wrap(address,address,uint256)": FunctionFragment;
     "wrapNative(address)": FunctionFragment;
     "yieldBox()": FunctionFragment;
   };
@@ -233,7 +233,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
       | "sendFrom"
       | "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"
       | "sendToYB"
-      | "sendToYB(uint256,uint256,uint16,(uint256,address,bool,bool))"
+      | "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool,bool))"
       | "setConfig"
       | "setConfig(uint16,uint16,uint256,bytes)"
       | "setMinDstGas"
@@ -277,7 +277,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
       | "useCustomAdapterParams"
       | "useCustomAdapterParams()"
       | "wrap"
-      | "wrap(address,uint256)"
+      | "wrap(address,address,uint256)"
       | "wrapNative"
       | "wrapNative(address)"
       | "yieldBox"
@@ -782,6 +782,8 @@ export interface TapiocaOFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "sendToYB",
     values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
@@ -789,8 +791,10 @@ export interface TapiocaOFTInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "sendToYB(uint256,uint256,uint16,(uint256,address,bool,bool))",
+    functionFragment: "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool,bool))",
     values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
@@ -981,11 +985,19 @@ export interface TapiocaOFTInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "wrap",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
-    functionFragment: "wrap(address,uint256)",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+    functionFragment: "wrap(address,address,uint256)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "wrapNative",
@@ -1299,7 +1311,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "sendToYB", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "sendToYB(uint256,uint256,uint16,(uint256,address,bool,bool))",
+    functionFragment: "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool,bool))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "setConfig", data: BytesLike): Result;
@@ -1451,7 +1463,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "wrap", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "wrap(address,uint256)",
+    functionFragment: "wrap(address,address,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "wrapNative", data: BytesLike): Result;
@@ -2267,6 +2279,8 @@ export interface TapiocaOFT extends BaseContract {
     ): Promise<ContractTransaction>;
 
     sendToYB(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -2274,7 +2288,9 @@ export interface TapiocaOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "sendToYB(uint256,uint256,uint16,(uint256,address,bool,bool))"(
+    "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool,bool))"(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -2481,12 +2497,14 @@ export interface TapiocaOFT extends BaseContract {
     "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<[boolean]>;
 
     wrap(
+      _fromAddress: PromiseOrValue<string>,
       _toAddress: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "wrap(address,uint256)"(
+    "wrap(address,address,uint256)"(
+      _fromAddress: PromiseOrValue<string>,
       _toAddress: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2978,6 +2996,8 @@ export interface TapiocaOFT extends BaseContract {
   ): Promise<ContractTransaction>;
 
   sendToYB(
+    _from: PromiseOrValue<string>,
+    _to: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     assetId: PromiseOrValue<BigNumberish>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -2985,7 +3005,9 @@ export interface TapiocaOFT extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "sendToYB(uint256,uint256,uint16,(uint256,address,bool,bool))"(
+  "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool,bool))"(
+    _from: PromiseOrValue<string>,
+    _to: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     assetId: PromiseOrValue<BigNumberish>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3192,12 +3214,14 @@ export interface TapiocaOFT extends BaseContract {
   "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<boolean>;
 
   wrap(
+    _fromAddress: PromiseOrValue<string>,
     _toAddress: PromiseOrValue<string>,
     _amount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "wrap(address,uint256)"(
+  "wrap(address,address,uint256)"(
+    _fromAddress: PromiseOrValue<string>,
     _toAddress: PromiseOrValue<string>,
     _amount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -3687,6 +3711,8 @@ export interface TapiocaOFT extends BaseContract {
     ): Promise<void>;
 
     sendToYB(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3694,7 +3720,9 @@ export interface TapiocaOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "sendToYB(uint256,uint256,uint16,(uint256,address,bool,bool))"(
+    "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool,bool))"(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3901,12 +3929,14 @@ export interface TapiocaOFT extends BaseContract {
     "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<boolean>;
 
     wrap(
+      _fromAddress: PromiseOrValue<string>,
       _toAddress: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "wrap(address,uint256)"(
+    "wrap(address,address,uint256)"(
+      _fromAddress: PromiseOrValue<string>,
       _toAddress: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -4563,6 +4593,8 @@ export interface TapiocaOFT extends BaseContract {
     ): Promise<BigNumber>;
 
     sendToYB(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -4570,7 +4602,9 @@ export interface TapiocaOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "sendToYB(uint256,uint256,uint16,(uint256,address,bool,bool))"(
+    "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool,bool))"(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -4777,12 +4811,14 @@ export interface TapiocaOFT extends BaseContract {
     "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     wrap(
+      _fromAddress: PromiseOrValue<string>,
       _toAddress: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "wrap(address,uint256)"(
+    "wrap(address,address,uint256)"(
+      _fromAddress: PromiseOrValue<string>,
       _toAddress: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -5285,6 +5321,8 @@ export interface TapiocaOFT extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     sendToYB(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -5292,7 +5330,9 @@ export interface TapiocaOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "sendToYB(uint256,uint256,uint16,(uint256,address,bool,bool))"(
+    "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool,bool))"(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -5507,12 +5547,14 @@ export interface TapiocaOFT extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     wrap(
+      _fromAddress: PromiseOrValue<string>,
       _toAddress: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "wrap(address,uint256)"(
+    "wrap(address,address,uint256)"(
+      _fromAddress: PromiseOrValue<string>,
       _toAddress: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }

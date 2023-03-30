@@ -37,9 +37,13 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.StargateRouterMock__factory>;
     getContractFactory(
-      name: "TOFTMock",
+      name: "TapiocaOFTMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TOFTMock__factory>;
+    ): Promise<Contracts.TapiocaOFTMock__factory>;
+    getContractFactory(
+      name: "TOFTMinter",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TOFTMinter__factory>;
     getContractFactory(
       name: "YieldBoxMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -88,10 +92,15 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.StargateRouterMock>;
     getContractAt(
-      name: "TOFTMock",
+      name: "TapiocaOFTMock",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.TOFTMock>;
+    ): Promise<Contracts.TapiocaOFTMock>;
+    getContractAt(
+      name: "TOFTMinter",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TOFTMinter>;
     getContractAt(
       name: "YieldBoxMock",
       address: string,

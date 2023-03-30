@@ -26,7 +26,7 @@ import type {
   TypedListener,
   OnEvent,
   PromiseOrValue,
-} from "./common";
+} from "../common";
 
 export declare namespace ICommonOFT {
   export type LzCallParamsStruct = {
@@ -63,7 +63,7 @@ export declare namespace BaseTOFT {
   };
 }
 
-export interface BaseTOFTInterface extends utils.Interface {
+export interface TapiocaOFTMockInterface extends utils.Interface {
   functions: {
     "DEFAULT_PAYLOAD_SIZE_LIMIT()": FunctionFragment;
     "DOMAIN_SEPARATOR()": FunctionFragment;
@@ -88,6 +88,7 @@ export interface BaseTOFTInterface extends utils.Interface {
     "estimateSendFee(uint16,bytes32,uint256,bool,bytes)": FunctionFragment;
     "failedMessages(uint16,bytes,uint64)": FunctionFragment;
     "forceResumeReceive(uint16,bytes)": FunctionFragment;
+    "freeMint(address,uint256)": FunctionFragment;
     "getConfig(uint16,uint16,address,uint256)": FunctionFragment;
     "getLzChainId()": FunctionFragment;
     "getTrustedRemoteAddress(uint16)": FunctionFragment;
@@ -182,6 +183,8 @@ export interface BaseTOFTInterface extends utils.Interface {
       | "failedMessages(uint16,bytes,uint64)"
       | "forceResumeReceive"
       | "forceResumeReceive(uint16,bytes)"
+      | "freeMint"
+      | "freeMint(address,uint256)"
       | "getConfig"
       | "getConfig(uint16,uint16,address,uint256)"
       | "getLzChainId"
@@ -502,6 +505,14 @@ export interface BaseTOFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "forceResumeReceive(uint16,bytes)",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "freeMint",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "freeMint(address,uint256)",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getConfig",
@@ -1115,6 +1126,11 @@ export interface BaseTOFTInterface extends utils.Interface {
     functionFragment: "forceResumeReceive(uint16,bytes)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "freeMint", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "freeMint(address,uint256)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "getConfig", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getConfig(uint16,uint16,address,uint256)",
@@ -1702,14 +1718,14 @@ export type YieldBoxRetrievalEvent = TypedEvent<
 export type YieldBoxRetrievalEventFilter =
   TypedEventFilter<YieldBoxRetrievalEvent>;
 
-export interface BaseTOFT extends BaseContract {
-  contractName: "BaseTOFT";
+export interface TapiocaOFTMock extends BaseContract {
+  contractName: "TapiocaOFTMock";
 
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: BaseTOFTInterface;
+  interface: TapiocaOFTMockInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -1948,6 +1964,18 @@ export interface BaseTOFT extends BaseContract {
     "forceResumeReceive(uint16,bytes)"(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    freeMint(
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "freeMint(address,uint256)"(
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2628,6 +2656,18 @@ export interface BaseTOFT extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  freeMint(
+    _to: PromiseOrValue<string>,
+    _amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "freeMint(address,uint256)"(
+    _to: PromiseOrValue<string>,
+    _amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   getConfig(
     _version: PromiseOrValue<BigNumberish>,
     _chainId: PromiseOrValue<BigNumberish>,
@@ -3304,6 +3344,18 @@ export interface BaseTOFT extends BaseContract {
     "forceResumeReceive(uint16,bytes)"(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    freeMint(
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "freeMint(address,uint256)"(
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4145,6 +4197,18 @@ export interface BaseTOFT extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    freeMint(
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "freeMint(address,uint256)"(
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     getConfig(
       _version: PromiseOrValue<BigNumberish>,
       _chainId: PromiseOrValue<BigNumberish>,
@@ -4830,6 +4894,18 @@ export interface BaseTOFT extends BaseContract {
     "forceResumeReceive(uint16,bytes)"(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    freeMint(
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "freeMint(address,uint256)"(
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

@@ -5,5 +5,6 @@ export { ERC20Mock__factory } from "./ERC20Mock__factory";
 export { LZEndpointMock__factory } from "./LZEndpointMock__factory";
 export { StargateRouterETHMock__factory } from "./StargateRouterETHMock__factory";
 export { StargateRouterMock__factory } from "./StargateRouterMock__factory";
-export { TOFTMock__factory } from "./TOFTMock__factory";
+export { TOFTMinter__factory } from "./TOFTMinter__factory";
+export { TapiocaOFTMock__factory } from "./TapiocaOFTMock__factory";
 export { YieldBoxMock__factory } from "./YieldBoxMock__factory";

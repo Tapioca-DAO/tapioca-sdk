@@ -5,5 +5,6 @@ export type { ERC20Mock } from "./ERC20Mock";
 export type { LZEndpointMock } from "./LZEndpointMock";
 export type { StargateRouterETHMock } from "./StargateRouterETHMock";
 export type { StargateRouterMock } from "./StargateRouterMock";
-export type { TOFTMock } from "./TOFTMock";
+export type { TOFTMinter } from "./TOFTMinter";
+export type { TapiocaOFTMock } from "./TapiocaOFTMock";
 export type { YieldBoxMock } from "./YieldBoxMock";
