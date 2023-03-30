@@ -301,7 +301,10 @@ export class DeployerVM {
             await multicallTx.wait(3);
         } else {
             console.log('[+] Performing ownership transferal directly');
-            await ownableContract.connect(signer).transferOwnership(to);
+            const tx = await ownableContract
+                .connect(signer)
+                .transferOwnership(to);
+            await tx.wait(3);
         }
 
         console.log('[+] Ownership transferred\n');
@@ -459,12 +462,14 @@ export class DeployerVM {
                 _tag,
                 this.hre.SDK.db.SUBREPO_GLOBAL_DB_PATH,
             );
-            console.log('[+] Previous Multicall3 deployment exists.');
-            const _multicall = Multicall3__factory.connect(
-                deployment.address,
-                (await this.hre.ethers.getSigners())[0],
-            );
-            this.multicall = _multicall;
+            if (deployment) {
+                console.log('[+] Previous Multicall3 deployment exists.');
+                const _multicall = Multicall3__factory.connect(
+                    deployment.address,
+                    (await this.hre.ethers.getSigners())[0],
+                );
+                this.multicall = _multicall;
+            }
         } catch (e) {
             if (this.options.debugMode) {
                 console.log(
@@ -537,11 +542,13 @@ export class DeployerVM {
                 this.hre.SDK.db.SUBREPO_GLOBAL_DB_PATH,
             );
             console.log('[+] Previous MultisigMock deployment exists.');
-            const _multisig = MultisigMock__factory.connect(
-                deployment.address,
-                (await this.hre.ethers.getSigners())[0],
-            );
-            this.multisig = _multisig;
+            if (deployment) {
+                const _multisig = MultisigMock__factory.connect(
+                    deployment.address,
+                    (await this.hre.ethers.getSigners())[0],
+                );
+                this.multisig = _multisig;
+            }
         } catch (e) {
             if (this.options.debugMode) {
                 console.log(

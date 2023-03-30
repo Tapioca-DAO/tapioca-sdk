@@ -59,8 +59,6 @@ export const setLZConfig__task = async (
     const calls = buildCalls(hre, contractToConf, targets);
 
     // Execute calls
-    let multisigTarget: string;
-    let multisigTx: string;
     if (taskArgs.isToft) {
         console.log('[+] Using TapiocaWrapper (TOFT)');
 
@@ -70,37 +68,28 @@ export const setLZConfig__task = async (
                 'TapiocaWrapper',
                 tag,
             );
-        multisigTx = tapiocaWrapper.interface.encodeFunctionData(
-            'executeCalls',
-            [hre.SDK.hardhatUtils.transformMulticallToTapiocaWrapper(calls)],
+        const tx = await tapiocaWrapper.executeCalls(
+            hre.SDK.hardhatUtils.transformMulticallToTapiocaWrapper(calls),
         );
-        multisigTarget = tapiocaWrapper.address;
+        console.log('[+] Tx sent: ', tx.hash);
+        await tx.wait(3);
+        console.log('[+] Tx mined!');
     } else {
-        console.log('[+] Using Multicall');
+        console.log(`[+] Using Multicall ${multicall.address}`);
+        //transfer ownership to the multicall contract
+        await VM.transferOwnership(multicall.address, contractToConf);
 
-        multisigTx =
-            Multicall.Multicall3__factory.createInterface().encodeFunctionData(
-                // TODO better way to do this without ts-ignore is to use abi encoder
-                // @ts-ignore
-                taskArgs.debugMode ? 'multicall' : 'aggregate3',
-                [calls],
-            );
-        multisigTarget = multicall.address;
+        const tx = taskArgs.debugMode
+            ? await multicall.multicall(calls)
+            : await multicall.aggregate3(calls);
+        console.log('[+] Tx sent: ', tx.hash);
+        await tx.wait(3);
+        console.log('[+] Tx mined!');
+
+        //transfer ownership back to the multisig
+        console.log('[+] Reverting to initial owner');
+        await VM.transferOwnership(signer.address, contractToConf, false, true);
     }
-    console.log('[+] Submitting calls through the Multisig contract');
-
-    await submitThroughMultisig(
-        VM,
-        multicall,
-        {
-            name: contractToConf.name,
-            address: contractToConf.address,
-            meta: {},
-        },
-        multisigTx,
-        multisigTarget,
-        taskArgs.isToft,
-    );
 };
 
 //TODO: refactor after CU-85zru6akq; we should be able to use only the `VM.submitThroughMultisig` method directly
