@@ -67,13 +67,6 @@
             ],
             "4002": [
                 {
-                    "name": "Fantom",
-                    "address": "0x3798e782e45D32e54CF28866Ab24a72cfE7EEf92",
-                    "meta": {
-                        "isERC20Mock": true
-                    }
-                },
-                {
                     "name": "TapOFT",
                     "address": "0x1eC9D26C152aDbf835EdA5358Bd9F7224bF2FC69",
                     "meta": {
@@ -105,13 +98,6 @@
                 }
             ],
             "43113": [
-                {
-                    "name": "Avalanche",
-                    "address": "0xBD54fBCDfFD7CC9A4F6f1C98e26F7FDc6D963cd8",
-                    "meta": {
-                        "isERC20Mock": true
-                    }
-                },
                 {
                     "name": "TapOFT",
                     "address": "0x8422ab8C14a3C29113742628fe2Ac660166dC2Eb",
@@ -145,13 +131,6 @@
             ],
             "80001": [
                 {
-                    "name": "Polygon",
-                    "address": "0x8887EEefDC0a709BcAf733c46Af0Df1fc3D56175",
-                    "meta": {
-                        "isERC20Mock": true
-                    }
-                },
-                {
                     "name": "TapOFT",
                     "address": "0x3c72aEb19aF03Bc241418e053e75B510e1337634",
                     "meta": {
@@ -183,13 +162,6 @@
                 }
             ],
             "421613": [
-                {
-                    "name": "Arbitrum",
-                    "address": "0x0ADB0BdEFe61EE2C462e357305c0eFB903127B7e",
-                    "meta": {
-                        "isERC20Mock": true
-                    }
-                },
                 {
                     "name": "TapOFT",
                     "address": "0x0109934b6e2766acF4398478f2Ba377221185374",
