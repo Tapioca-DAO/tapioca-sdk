@@ -162,6 +162,21 @@ export const saveGlobally = (
     return deployments;
 };
 
+/**
+ * Save a list of contracts to the local database
+ *
+ * @param contracts List of contracts to save
+ * @param chainId The chain ID to save the contracts under
+ * @param tag The tag to save the contracts under, defaults to 'default'
+ */
+export const saveContracts = (
+    contracts: TContract[],
+    chainId: string,
+    tag = 'default',
+) => {
+    saveLocally({ [chainId]: contracts }, tag);
+};
+
 /*
  ******************
  * UTILS
