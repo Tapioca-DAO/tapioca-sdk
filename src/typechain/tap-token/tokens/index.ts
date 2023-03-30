@@ -4,3 +4,4 @@
 import type * as mocks from "./mocks";
 export type { mocks };
 export type { TapOFT } from "./TapOFT";
+export type { YieldBoxVaultStrat } from "./YieldBoxVaultStrat";

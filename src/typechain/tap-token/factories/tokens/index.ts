@@ -3,3 +3,4 @@
 /* eslint-disable */
 export * as mocks from "./mocks";
 export { TapOFT__factory } from "./TapOFT__factory";
+export { YieldBoxVaultStrat__factory } from "./YieldBoxVaultStrat__factory";

@@ -13,6 +13,10 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "ERC20WithoutStrategyMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC20WithoutStrategyMock__factory>;
+    getContractFactory(
       name: "OracleMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.OracleMock__factory>;
@@ -20,6 +24,10 @@ declare module "hardhat/types/runtime" {
       name: "TapiocaOptionBrokerMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapiocaOptionBrokerMock__factory>;
+    getContractFactory(
+      name: "YieldBoxMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.YieldBoxMock__factory>;
     getContractFactory(
       name: "OTAP",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -41,14 +49,27 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC20Mock__factory>;
     getContractFactory(
+      name: "LZEndpointMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.LZEndpointMock__factory>;
+    getContractFactory(
       name: "TapOFT",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapOFT__factory>;
+    getContractFactory(
+      name: "YieldBoxVaultStrat",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.YieldBoxVaultStrat__factory>;
     getContractFactory(
       name: "Vesting",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Vesting__factory>;
 
+    getContractAt(
+      name: "ERC20WithoutStrategyMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20WithoutStrategyMock>;
     getContractAt(
       name: "OracleMock",
       address: string,
@@ -59,6 +80,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TapiocaOptionBrokerMock>;
+    getContractAt(
+      name: "YieldBoxMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.YieldBoxMock>;
     getContractAt(
       name: "OTAP",
       address: string,
@@ -85,10 +111,20 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.ERC20Mock>;
     getContractAt(
+      name: "LZEndpointMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.LZEndpointMock>;
+    getContractAt(
       name: "TapOFT",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TapOFT>;
+    getContractAt(
+      name: "YieldBoxVaultStrat",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.YieldBoxVaultStrat>;
     getContractAt(
       name: "Vesting",
       address: string,
