@@ -181,7 +181,7 @@ export const useNetwork = async (
 
     const chain = hre.SDK.utils.getChainBy('name', network)!;
     const provider = new hre.ethers.providers.JsonRpcProvider(
-        { url: chain.rpc },
+        { url: chain.rpc.replace('<api_key>', process.env.ALCHEMY_API_KEY!) },
         { chainId: Number(chain.chainId), name: `rpc-${info.chainId}` },
     );
 
