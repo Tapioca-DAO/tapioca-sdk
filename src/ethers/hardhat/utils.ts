@@ -6,6 +6,7 @@ import { getSupportedChains } from '../../api/utils';
 import { TContract, TLocalDeployment, TProjectCaller } from '../../shared';
 import { TapiocaWrapper } from '../../typechain/TapiocaZ';
 import { Multicall3 } from '../../typechain/utils/MultiCall';
+import SUPPORTED_CHAINS from '../../SUPPORTED_CHAINS';
 
 /**
  * Get a local contract
@@ -170,7 +171,7 @@ export const askForChain = async () => {
 
 export const useNetwork = async (
     hre: HardhatRuntimeEnvironment,
-    network: EChainID,
+    network: (typeof SUPPORTED_CHAINS)[number]['name'],
 ) => {
     const pk = process.env.PRIVATE_KEY;
     if (pk === undefined) throw new Error('[-] PRIVATE_KEY env var not set');
