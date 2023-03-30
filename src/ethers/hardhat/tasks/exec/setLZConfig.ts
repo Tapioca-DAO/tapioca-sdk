@@ -6,14 +6,12 @@ import { TContract, TLocalDeployment } from '../../../../shared';
 import { Multicall, TapiocaZ } from '../../../../typechain';
 import { TapiocaWrapper } from '../../../../typechain/TapiocaZ';
 import { Multicall3 } from '../../../../typechain/utils/MultiCall';
-import { MultisigMock } from '../../../../typechain/utils/MultisigMock';
-import { MultisigMock__factory } from '../../../../typechain/utils/MultisigMock/factories/MultisigMock__factory';
 
 /**
  * Configure the LZ app in one go
  */
 export const setLZConfig__task = async (
-    taskArgs: { isToft?: boolean; debugMode?: boolean; multisig: string },
+    taskArgs: { isToft?: boolean; debugMode?: boolean },
     hre: HardhatRuntimeEnvironment,
 ) => {
     console.log('[+] Setting omni config');
@@ -25,27 +23,25 @@ export const setLZConfig__task = async (
     );
     console.log(hre.SDK.config.PACKET_TYPES);
 
+    const tag = await hre.SDK.hardhatUtils.askForTag(hre, 'local');
+
+    const VM = new hre.SDK.DeployerVM(hre, {
+        bytecodeSizeLimit: 100_000,
+        debugMode: true,
+        tag,
+    });
+
     const signer = (await hre.ethers.getSigners())[0];
-    const multicall = Multicall.Multicall3__factory.connect(
-        //@ts-ignore
-        hre.SDK.config.MULTICALL_ADDRESSES[String(hre.network.config.chainId)],
-        signer,
-    );
+    const multicall: Multicall3 = await VM.getMulticall();
 
     if (!multicall) {
         throw '[-] Multicall not found';
     }
 
-    const tag = await hre.SDK.hardhatUtils.askForTag(hre, 'local');
     const choices = hre.SDK.db.loadLocalDeployment(
         tag,
         String(hre.network.config.chainId),
     );
-
-    if (!taskArgs.multisig) {
-        throw '[-] Multisig not found';
-    }
-    const multisig = MultisigMock__factory.connect(taskArgs.multisig, signer);
 
     const { toConfigure } = await inquirer.prompt({
         type: 'list',
@@ -92,93 +88,48 @@ export const setLZConfig__task = async (
         multisigTarget = multicall.address;
     }
     console.log('[+] Submitting calls through the Multisig contract');
+
     await submitThroughMultisig(
-        hre,
-        multisig,
+        VM,
         multicall,
-        contractToConf.address,
+        {
+            name: contractToConf.name,
+            address: contractToConf.address,
+            meta: {},
+        },
         multisigTx,
         multisigTarget,
-        taskArgs.debugMode,
         taskArgs.isToft,
     );
 };
 
+//TODO: refactor after CU-85zru6akq; we should be able to use only the `VM.submitThroughMultisig` method directly
+//      transferring ownership to the multicall won't be necessary
 async function submitThroughMultisig(
-    hre: HardhatRuntimeEnvironment,
-    multisig: MultisigMock,
+    VM: any,
     multicall: Multicall3,
-    contractToConf: string,
+    contractToConf: TContract,
     callData: string,
     target: string,
-    debugMode?: boolean,
     isToft?: boolean,
 ) {
-    const transferOwnershipABI = [
-        'function transferOwnership(address newOwner)',
-    ];
-    const iTransferOwnership = new hre.ethers.utils.Interface(
-        transferOwnershipABI,
-    );
-    let transferOwnershipCalldata = iTransferOwnership.encodeFunctionData(
-        'transferOwnership',
-        [multicall.address],
-    );
-
     if (!isToft) {
         //transfer ownership to the multicall contract
-        console.log('   [+] Changing owner to: ', multicall.address);
-        let tx = await multisig.submitTransaction(
-            contractToConf,
-            0,
-            transferOwnershipCalldata,
-        );
-        await tx.wait(3);
-        const txCount = await multisig.getTransactionCount();
-        const lastTx = txCount.sub(1);
-        tx = await multisig.confirmTransaction(lastTx);
-        await tx.wait(3);
-        tx = await multisig.executeTransaction(lastTx);
-        await tx.wait(3);
-        console.log('   [+] Owner changed by tx: ', tx.hash);
-
-        console.log('\n');
+        await VM.transferOwnership(multicall.address, contractToConf, true);
     }
 
-    let tx = await multisig.submitTransaction(target, 0, callData);
-    console.log('[+] Multisig tx submitted: ', tx.hash);
-    await tx.wait(3);
-    console.log('[+] Multisig tx mined: ', tx.hash);
-    const txCount = await multisig.getTransactionCount();
-    const lastTx = txCount.sub(1);
-    tx = await multisig.confirmTransaction(lastTx);
-    console.log('[+] Multisig tx confirmation submitted: ', tx.hash);
-    await tx.wait(3);
-    console.log('[+] Multisig tx confirmation mined: ', tx.hash);
-    tx = await multisig.executeTransaction(lastTx);
-    console.log('[+] Multisig tx execution submitted: ', tx.hash);
-    await tx.wait(3);
-    console.log('[+] Multisig tx execution mined: ', tx.hash);
-
-    //transfer ownership back to the multisig
+    await VM.submitTransactionThroughMultisig(target, callData);
 
     if (!isToft) {
+        //transfer ownership back to the multisig
         console.log('[+] Reverting to initial owner');
-        transferOwnershipCalldata = iTransferOwnership.encodeFunctionData(
-            'transferOwnership',
-            [multisig.address],
+        const multisig = await VM.getMultisig();
+        await VM.transferOwnership(
+            multisig.address,
+            contractToConf,
+            false,
+            true,
         );
-        const calls: Multicall3.Call3Struct[] = [];
-        calls.push({
-            target: contractToConf,
-            callData: transferOwnershipCalldata,
-            allowFailure: false,
-        });
-        tx = debugMode
-            ? await multicall.multicall(calls)
-            : await multicall.aggregate3(calls);
-        await tx.wait(3);
-        console.log('[+] Reverted to initial owner through tx: ', tx.hash);
     }
 }
 
