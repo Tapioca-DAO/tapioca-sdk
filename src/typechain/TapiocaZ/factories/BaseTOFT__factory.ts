@@ -52,6 +52,25 @@ const _abi = [
     inputs: [
       {
         indexed: true,
+        internalType: "address",
+        name: "_from",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "_amount",
+        type: "uint256",
+      },
+    ],
+    name: "Borrow",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
         internalType: "uint16",
         name: "_srcChainId",
         type: "uint16",
@@ -76,6 +95,25 @@ const _abi = [
       },
     ],
     name: "CallOFTReceivedSuccess",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "_from",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "_amount",
+        type: "uint256",
+      },
+    ],
+    name: "Lend",
     type: "event",
   },
   {
@@ -505,6 +543,32 @@ const _abi = [
   {
     inputs: [],
     name: "PT_YB_RETRIEVE_STRAT",
+    outputs: [
+      {
+        internalType: "uint16",
+        name: "",
+        type: "uint16",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "PT_YB_SEND_SGL_BORROW",
+    outputs: [
+      {
+        internalType: "uint16",
+        name: "",
+        type: "uint16",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "PT_YB_SEND_SGL_LEND",
     outputs: [
       {
         internalType: "uint16",
@@ -1516,6 +1580,141 @@ const _abi = [
       },
     ],
     name: "sendToYB",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_from",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "borrowAmount",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "_marketHelper",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_market",
+        type: "address",
+      },
+      {
+        internalType: "uint16",
+        name: "lzDstChainId",
+        type: "uint16",
+      },
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "extraGasLimit",
+            type: "uint256",
+          },
+          {
+            internalType: "address",
+            name: "zroPaymentAddress",
+            type: "address",
+          },
+          {
+            internalType: "bool",
+            name: "strategyDeposit",
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "wrap",
+            type: "bool",
+          },
+        ],
+        internalType: "struct BaseTOFT.SendOptions",
+        name: "options",
+        type: "tuple",
+      },
+    ],
+    name: "sendToYBAndBorrow",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_from",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "_marketHelper",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_market",
+        type: "address",
+      },
+      {
+        internalType: "uint16",
+        name: "lzDstChainId",
+        type: "uint16",
+      },
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "extraGasLimit",
+            type: "uint256",
+          },
+          {
+            internalType: "address",
+            name: "zroPaymentAddress",
+            type: "address",
+          },
+          {
+            internalType: "bool",
+            name: "strategyDeposit",
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "wrap",
+            type: "bool",
+          },
+        ],
+        internalType: "struct BaseTOFT.SendOptions",
+        name: "options",
+        type: "tuple",
+      },
+    ],
+    name: "sendToYBAndLend",
     outputs: [],
     stateMutability: "payable",
     type: "function",
