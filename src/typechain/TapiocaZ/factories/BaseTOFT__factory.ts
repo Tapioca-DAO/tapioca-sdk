@@ -245,6 +245,37 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
+        indexed: false,
+        internalType: "address",
+        name: "_target",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "_owner",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "_spender",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "_amount",
+        type: "uint256",
+      },
+    ],
+    name: "SendApproval",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
         indexed: true,
         internalType: "uint16",
         name: "_dstChainId",
@@ -522,6 +553,19 @@ const _abi = [
         internalType: "uint8",
         name: "",
         type: "uint8",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "PT_SEND_APPROVAL",
+    outputs: [
+      {
+        internalType: "uint16",
+        name: "",
+        type: "uint16",
       },
     ],
     stateMutability: "view",
@@ -1470,6 +1514,93 @@ const _abi = [
       },
     ],
     name: "sendAndCall",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint16",
+        name: "lzDstChainId",
+        type: "uint16",
+      },
+      {
+        components: [
+          {
+            internalType: "contract IERC20Permit",
+            name: "target",
+            type: "address",
+          },
+          {
+            internalType: "address",
+            name: "owner",
+            type: "address",
+          },
+          {
+            internalType: "address",
+            name: "spender",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "value",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "deadline",
+            type: "uint256",
+          },
+          {
+            internalType: "uint8",
+            name: "v",
+            type: "uint8",
+          },
+          {
+            internalType: "bytes32",
+            name: "r",
+            type: "bytes32",
+          },
+          {
+            internalType: "bytes32",
+            name: "s",
+            type: "bytes32",
+          },
+        ],
+        internalType: "struct BaseTOFT.IApproval",
+        name: "approval",
+        type: "tuple",
+      },
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "extraGasLimit",
+            type: "uint256",
+          },
+          {
+            internalType: "address",
+            name: "zroPaymentAddress",
+            type: "address",
+          },
+          {
+            internalType: "bool",
+            name: "strategyDeposit",
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "wrap",
+            type: "bool",
+          },
+        ],
+        internalType: "struct BaseTOFT.SendOptions",
+        name: "options",
+        type: "tuple",
+      },
+    ],
+    name: "sendApproval",
     outputs: [],
     stateMutability: "payable",
     type: "function",

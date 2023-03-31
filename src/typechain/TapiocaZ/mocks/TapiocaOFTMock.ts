@@ -43,6 +43,37 @@ export declare namespace ICommonOFT {
 }
 
 export declare namespace BaseTOFT {
+  export type IApprovalStruct = {
+    target: PromiseOrValue<string>;
+    owner: PromiseOrValue<string>;
+    spender: PromiseOrValue<string>;
+    value: PromiseOrValue<BigNumberish>;
+    deadline: PromiseOrValue<BigNumberish>;
+    v: PromiseOrValue<BigNumberish>;
+    r: PromiseOrValue<BytesLike>;
+    s: PromiseOrValue<BytesLike>;
+  };
+
+  export type IApprovalStructOutput = [
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    number,
+    string,
+    string
+  ] & {
+    target: string;
+    owner: string;
+    spender: string;
+    value: BigNumber;
+    deadline: BigNumber;
+    v: number;
+    r: string;
+    s: string;
+  };
+
   export type SendOptionsStruct = {
     extraGasLimit: PromiseOrValue<BigNumberish>;
     zroPaymentAddress: PromiseOrValue<string>;
@@ -70,6 +101,7 @@ export interface TapiocaOFTMockInterface extends utils.Interface {
     "NO_EXTRA_GAS()": FunctionFragment;
     "PT_SEND()": FunctionFragment;
     "PT_SEND_AND_CALL()": FunctionFragment;
+    "PT_SEND_APPROVAL()": FunctionFragment;
     "PT_YB_DEPOSIT()": FunctionFragment;
     "PT_YB_RETRIEVE_STRAT()": FunctionFragment;
     "PT_YB_SEND_SGL_BORROW()": FunctionFragment;
@@ -113,6 +145,7 @@ export interface TapiocaOFTMockInterface extends utils.Interface {
     "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
+    "sendApproval(uint16,(address,address,address,uint256,uint256,uint8,bytes32,bytes32),(uint256,address,bool,bool))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
     "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool,bool))": FunctionFragment;
     "sendToYBAndBorrow(address,address,uint256,uint256,address,address,uint16,(uint256,address,bool,bool))": FunctionFragment;
@@ -151,6 +184,8 @@ export interface TapiocaOFTMockInterface extends utils.Interface {
       | "PT_SEND()"
       | "PT_SEND_AND_CALL"
       | "PT_SEND_AND_CALL()"
+      | "PT_SEND_APPROVAL"
+      | "PT_SEND_APPROVAL()"
       | "PT_YB_DEPOSIT"
       | "PT_YB_DEPOSIT()"
       | "PT_YB_RETRIEVE_STRAT"
@@ -237,6 +272,8 @@ export interface TapiocaOFTMockInterface extends utils.Interface {
       | "retryMessage(uint16,bytes,uint64,bytes)"
       | "sendAndCall"
       | "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))"
+      | "sendApproval"
+      | "sendApproval(uint16,(address,address,address,uint256,uint256,uint8,bytes32,bytes32),(uint256,address,bool,bool))"
       | "sendFrom"
       | "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"
       | "sendToYB"
@@ -319,6 +356,14 @@ export interface TapiocaOFTMockInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "PT_SEND_AND_CALL()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PT_SEND_APPROVAL",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PT_SEND_APPROVAL()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -787,6 +832,22 @@ export interface TapiocaOFTMockInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "sendApproval",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      BaseTOFT.IApprovalStruct,
+      BaseTOFT.SendOptionsStruct
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "sendApproval(uint16,(address,address,address,uint256,uint256,uint8,bytes32,bytes32),(uint256,address,bool,bool))",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      BaseTOFT.IApprovalStruct,
+      BaseTOFT.SendOptionsStruct
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "sendFrom",
     values: [
       PromiseOrValue<string>,
@@ -1085,6 +1146,14 @@ export interface TapiocaOFTMockInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "PT_SEND_APPROVAL",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "PT_SEND_APPROVAL()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "PT_YB_DEPOSIT",
     data: BytesLike
   ): Result;
@@ -1362,6 +1431,14 @@ export interface TapiocaOFTMockInterface extends utils.Interface {
     functionFragment: "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "sendApproval",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "sendApproval(uint16,(address,address,address,uint256,uint256,uint8,bytes32,bytes32),(uint256,address,bool,bool))",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "sendFrom", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))",
@@ -1535,6 +1612,7 @@ export interface TapiocaOFTMockInterface extends utils.Interface {
     "OwnershipTransferred(address,address)": EventFragment;
     "ReceiveFromChain(uint16,address,uint256)": EventFragment;
     "RetryMessageSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
+    "SendApproval(address,address,address,uint256)": EventFragment;
     "SendToChain(uint16,address,bytes32,uint256)": EventFragment;
     "SetMinDstGas(uint16,uint16,uint256)": EventFragment;
     "SetPrecrime(address)": EventFragment;
@@ -1579,6 +1657,10 @@ export interface TapiocaOFTMockInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "RetryMessageSuccess"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "RetryMessageSuccess(uint16,bytes,uint64,bytes32)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "SendApproval"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "SendApproval(address,address,address,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SendToChain"): EventFragment;
   getEvent(
@@ -1725,6 +1807,19 @@ export type RetryMessageSuccessEvent = TypedEvent<
 
 export type RetryMessageSuccessEventFilter =
   TypedEventFilter<RetryMessageSuccessEvent>;
+
+export interface SendApprovalEventObject {
+  _target: string;
+  _owner: string;
+  _spender: string;
+  _amount: BigNumber;
+}
+export type SendApprovalEvent = TypedEvent<
+  [string, string, string, BigNumber],
+  SendApprovalEventObject
+>;
+
+export type SendApprovalEventFilter = TypedEventFilter<SendApprovalEvent>;
 
 export interface SendToChainEventObject {
   _dstChainId: number;
@@ -1900,6 +1995,10 @@ export interface TapiocaOFTMock extends BaseContract {
     PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<[number]>;
 
     "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<[number]>;
+
+    PT_SEND_APPROVAL(overrides?: CallOverrides): Promise<[number]>;
+
+    "PT_SEND_APPROVAL()"(overrides?: CallOverrides): Promise<[number]>;
 
     PT_YB_DEPOSIT(overrides?: CallOverrides): Promise<[number]>;
 
@@ -2353,6 +2452,20 @@ export interface TapiocaOFTMock extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    sendApproval(
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      approval: BaseTOFT.IApprovalStruct,
+      options: BaseTOFT.SendOptionsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "sendApproval(uint16,(address,address,address,uint256,uint256,uint8,bytes32,bytes32),(uint256,address,bool,bool))"(
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      approval: BaseTOFT.IApprovalStruct,
+      options: BaseTOFT.SendOptionsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     sendFrom(
       _from: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -2643,6 +2756,10 @@ export interface TapiocaOFTMock extends BaseContract {
   PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<number>;
 
   "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<number>;
+
+  PT_SEND_APPROVAL(overrides?: CallOverrides): Promise<number>;
+
+  "PT_SEND_APPROVAL()"(overrides?: CallOverrides): Promise<number>;
 
   PT_YB_DEPOSIT(overrides?: CallOverrides): Promise<number>;
 
@@ -3096,6 +3213,20 @@ export interface TapiocaOFTMock extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  sendApproval(
+    lzDstChainId: PromiseOrValue<BigNumberish>,
+    approval: BaseTOFT.IApprovalStruct,
+    options: BaseTOFT.SendOptionsStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "sendApproval(uint16,(address,address,address,uint256,uint256,uint8,bytes32,bytes32),(uint256,address,bool,bool))"(
+    lzDstChainId: PromiseOrValue<BigNumberish>,
+    approval: BaseTOFT.IApprovalStruct,
+    options: BaseTOFT.SendOptionsStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   sendFrom(
     _from: PromiseOrValue<string>,
     _dstChainId: PromiseOrValue<BigNumberish>,
@@ -3388,6 +3519,10 @@ export interface TapiocaOFTMock extends BaseContract {
     PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<number>;
 
     "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<number>;
+
+    PT_SEND_APPROVAL(overrides?: CallOverrides): Promise<number>;
+
+    "PT_SEND_APPROVAL()"(overrides?: CallOverrides): Promise<number>;
 
     PT_YB_DEPOSIT(overrides?: CallOverrides): Promise<number>;
 
@@ -3837,6 +3972,20 @@ export interface TapiocaOFTMock extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    sendApproval(
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      approval: BaseTOFT.IApprovalStruct,
+      options: BaseTOFT.SendOptionsStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "sendApproval(uint16,(address,address,address,uint256,uint256,uint8,bytes32,bytes32),(uint256,address,bool,bool))"(
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      approval: BaseTOFT.IApprovalStruct,
+      options: BaseTOFT.SendOptionsStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     sendFrom(
       _from: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -4204,6 +4353,19 @@ export interface TapiocaOFTMock extends BaseContract {
       _payloadHash?: null
     ): RetryMessageSuccessEventFilter;
 
+    "SendApproval(address,address,address,uint256)"(
+      _target?: null,
+      _owner?: null,
+      _spender?: null,
+      _amount?: null
+    ): SendApprovalEventFilter;
+    SendApproval(
+      _target?: null,
+      _owner?: null,
+      _spender?: null,
+      _amount?: null
+    ): SendApprovalEventFilter;
+
     "SendToChain(uint16,address,bytes32,uint256)"(
       _dstChainId?: PromiseOrValue<BigNumberish> | null,
       _from?: PromiseOrValue<string> | null,
@@ -4318,6 +4480,10 @@ export interface TapiocaOFTMock extends BaseContract {
     PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<BigNumber>;
 
     "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    PT_SEND_APPROVAL(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "PT_SEND_APPROVAL()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     PT_YB_DEPOSIT(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -4763,6 +4929,20 @@ export interface TapiocaOFTMock extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    sendApproval(
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      approval: BaseTOFT.IApprovalStruct,
+      options: BaseTOFT.SendOptionsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "sendApproval(uint16,(address,address,address,uint256,uint256,uint8,bytes32,bytes32),(uint256,address,bool,bool))"(
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      approval: BaseTOFT.IApprovalStruct,
+      options: BaseTOFT.SendOptionsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     sendFrom(
       _from: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -5060,6 +5240,12 @@ export interface TapiocaOFTMock extends BaseContract {
     PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "PT_SEND_AND_CALL()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    PT_SEND_APPROVAL(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "PT_SEND_APPROVAL()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -5522,6 +5708,20 @@ export interface TapiocaOFTMock extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       _dstGasForCall: PromiseOrValue<BigNumberish>,
       _callParams: ICommonOFT.LzCallParamsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    sendApproval(
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      approval: BaseTOFT.IApprovalStruct,
+      options: BaseTOFT.SendOptionsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "sendApproval(uint16,(address,address,address,uint256,uint256,uint8,bytes32,bytes32),(uint256,address,bool,bool))"(
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      approval: BaseTOFT.IApprovalStruct,
+      options: BaseTOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
