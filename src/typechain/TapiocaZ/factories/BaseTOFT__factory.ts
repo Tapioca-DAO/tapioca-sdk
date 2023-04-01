@@ -1528,7 +1528,7 @@ const _abi = [
       {
         components: [
           {
-            internalType: "contract IERC20Permit",
+            internalType: "address",
             name: "target",
             type: "address",
           },
