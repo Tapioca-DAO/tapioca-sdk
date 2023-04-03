@@ -1,0 +1,10 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "Create2",
+  "sourceName": "@openzeppelin/contracts/utils/Create2.sol",
+  "abi": [],
+  "bytecode": "0x60808060405234601757603a9081601d823930815050f35b600080fdfe600080fdfea2646970667358221220f353e945e16a5dd4d0c190e9b022e8833c5849c539e6befb4a4e4830dcce794b64736f6c63430008120033",
+  "deployedBytecode": "0x600080fdfea2646970667358221220f353e945e16a5dd4d0c190e9b022e8833c5849c539e6befb4a4e4830dcce794b64736f6c63430008120033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
