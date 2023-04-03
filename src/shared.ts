@@ -5,7 +5,7 @@ import { getChainIDs } from './api/utils';
 export type HLP_TChain = ReturnType<typeof getChainIDs>[number];
 
 // The project caller is the name of the project that is calling the SDK
-export type TProjectCaller = typeof TAPIOCA_PROJECTS[number];
+export type TProjectCaller = (typeof TAPIOCA_PROJECTS)[number];
 
 // A contract is a deployed contract
 export type TContract = {
