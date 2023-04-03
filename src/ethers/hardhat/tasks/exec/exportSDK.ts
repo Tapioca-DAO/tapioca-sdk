@@ -24,10 +24,19 @@ export const exportSDK__task = async ({}, hre: HardhatRuntimeEnvironment) => {
         default: allContracts,
     });
 
+    const { exportArtifacts } = await inquirer.prompt({
+        type: 'confirm',
+        message: 'Export artifacts?',
+        name: 'exportArtifacts',
+        default: false,
+        askAnswered: true,
+    });
+
     hre.SDK.exportSDK.run({
         projectCaller: hre.config.SDK.project,
         artifactPath: hre.config.paths.artifacts,
         deployment: { data, tag },
         contractNames,
+        exportArtifacts,
     });
 };

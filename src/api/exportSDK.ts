@@ -17,22 +17,26 @@ export const run = async (params: {
     projectCaller: TProjectCaller;
     contractNames: string[];
     artifactPath: string;
-    deployment?: { data: TLocalDeployment; tag?: string };
+    exportArtifacts?: boolean;
+    deployment?: {
+        data: TLocalDeployment;
+        tag?: string;
+    };
 }) => {
-    const { projectCaller, contractNames, artifactPath, deployment } = params;
+    const {
+        projectCaller,
+        contractNames,
+        artifactPath,
+        deployment,
+        exportArtifacts,
+    } = params;
 
-    const { exportArtifacts } = await inquirer.prompt({
-        type: 'confirm',
-        message: 'Export artifacts?',
-        name: 'exportArtifacts',
-        default: false,
-        askAnswered: true,
-    });
     if (exportArtifacts) {
         console.log('[+] Exporting artifacts for tapioca-sdk...');
         fs.copySync(
             'artifacts',
             `gitsub_tapioca-sdk/src/artifacts/${projectCaller}`,
+            { overwrite: true },
         );
     }
 
