@@ -24,10 +24,6 @@ export const exportSDK__task = async ({}, hre: HardhatRuntimeEnvironment) => {
         default: allContracts,
     });
 
-    console.log(
-        '[+] Exporting typechain & deployment files for tapioca-sdk...',
-    );
-
     hre.SDK.exportSDK.run({
         projectCaller: hre.config.SDK.project,
         artifactPath: hre.config.paths.artifacts,
