@@ -26,6 +26,7 @@ export const run = async (params: {
         message: 'Export artifacts?',
         name: 'exportArtifacts',
         default: false,
+        askAnswered: true,
     });
     if (exportArtifacts) {
         console.log('[+] Exporting artifacts for tapioca-sdk...');
