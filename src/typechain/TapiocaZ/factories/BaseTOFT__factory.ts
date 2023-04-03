@@ -1823,11 +1823,6 @@ const _abi = [
         type: "uint16",
       },
       {
-        internalType: "uint256",
-        name: "withdrawLzFeeAmount",
-        type: "uint256",
-      },
-      {
         components: [
           {
             internalType: "uint256",
