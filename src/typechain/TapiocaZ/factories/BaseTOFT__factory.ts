@@ -1753,6 +1753,11 @@ const _abi = [
         type: "uint16",
       },
       {
+        internalType: "uint256",
+        name: "withdrawLzFeeAmount",
+        type: "uint256",
+      },
+      {
         components: [
           {
             internalType: "uint256",
@@ -1816,6 +1821,11 @@ const _abi = [
         internalType: "uint16",
         name: "lzDstChainId",
         type: "uint16",
+      },
+      {
+        internalType: "uint256",
+        name: "withdrawLzFeeAmount",
+        type: "uint256",
       },
       {
         components: [

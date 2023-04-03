@@ -147,8 +147,8 @@ export interface TapiocaOFTInterface extends utils.Interface {
     "sendApproval(uint16,(address,address,address,uint256,uint256,uint8,bytes32,bytes32),(uint256,address,bool,bool))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
     "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool,bool))": FunctionFragment;
-    "sendToYBAndBorrow(address,address,uint256,uint256,address,address,uint16,(uint256,address,bool,bool))": FunctionFragment;
-    "sendToYBAndLend(address,address,uint256,address,address,uint16,(uint256,address,bool,bool))": FunctionFragment;
+    "sendToYBAndBorrow(address,address,uint256,uint256,address,address,uint16,uint256,(uint256,address,bool,bool))": FunctionFragment;
+    "sendToYBAndLend(address,address,uint256,address,address,uint16,uint256,(uint256,address,bool,bool))": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
     "setPayloadSizeLimit(uint16,uint256)": FunctionFragment;
@@ -280,9 +280,9 @@ export interface TapiocaOFTInterface extends utils.Interface {
       | "sendToYB"
       | "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool,bool))"
       | "sendToYBAndBorrow"
-      | "sendToYBAndBorrow(address,address,uint256,uint256,address,address,uint16,(uint256,address,bool,bool))"
+      | "sendToYBAndBorrow(address,address,uint256,uint256,address,address,uint16,uint256,(uint256,address,bool,bool))"
       | "sendToYBAndLend"
-      | "sendToYBAndLend(address,address,uint256,address,address,uint16,(uint256,address,bool,bool))"
+      | "sendToYBAndLend(address,address,uint256,address,address,uint16,uint256,(uint256,address,bool,bool))"
       | "setConfig"
       | "setConfig(uint16,uint16,uint256,bytes)"
       | "setMinDstGas"
@@ -900,11 +900,12 @@ export interface TapiocaOFTInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
       BaseTOFT.SendOptionsStruct
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "sendToYBAndBorrow(address,address,uint256,uint256,address,address,uint16,(uint256,address,bool,bool))",
+    functionFragment: "sendToYBAndBorrow(address,address,uint256,uint256,address,address,uint16,uint256,(uint256,address,bool,bool))",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -912,6 +913,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       BaseTOFT.SendOptionsStruct
     ]
@@ -925,17 +927,19 @@ export interface TapiocaOFTInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
       BaseTOFT.SendOptionsStruct
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "sendToYBAndLend(address,address,uint256,address,address,uint16,(uint256,address,bool,bool))",
+    functionFragment: "sendToYBAndLend(address,address,uint256,address,address,uint16,uint256,(uint256,address,bool,bool))",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       BaseTOFT.SendOptionsStruct
     ]
@@ -1490,7 +1494,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "sendToYBAndBorrow(address,address,uint256,uint256,address,address,uint16,(uint256,address,bool,bool))",
+    functionFragment: "sendToYBAndBorrow(address,address,uint256,uint256,address,address,uint16,uint256,(uint256,address,bool,bool))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1498,7 +1502,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "sendToYBAndLend(address,address,uint256,address,address,uint16,(uint256,address,bool,bool))",
+    functionFragment: "sendToYBAndLend(address,address,uint256,address,address,uint16,uint256,(uint256,address,bool,bool))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "setConfig", data: BytesLike): Result;
@@ -2559,11 +2563,12 @@ export interface TapiocaOFT extends BaseContract {
       _marketHelper: PromiseOrValue<string>,
       _market: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawLzFeeAmount: PromiseOrValue<BigNumberish>,
       options: BaseTOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "sendToYBAndBorrow(address,address,uint256,uint256,address,address,uint16,(uint256,address,bool,bool))"(
+    "sendToYBAndBorrow(address,address,uint256,uint256,address,address,uint16,uint256,(uint256,address,bool,bool))"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
@@ -2571,6 +2576,7 @@ export interface TapiocaOFT extends BaseContract {
       _marketHelper: PromiseOrValue<string>,
       _market: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawLzFeeAmount: PromiseOrValue<BigNumberish>,
       options: BaseTOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2582,17 +2588,19 @@ export interface TapiocaOFT extends BaseContract {
       _marketHelper: PromiseOrValue<string>,
       _market: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawLzFeeAmount: PromiseOrValue<BigNumberish>,
       options: BaseTOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "sendToYBAndLend(address,address,uint256,address,address,uint16,(uint256,address,bool,bool))"(
+    "sendToYBAndLend(address,address,uint256,address,address,uint16,uint256,(uint256,address,bool,bool))"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       _marketHelper: PromiseOrValue<string>,
       _market: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawLzFeeAmount: PromiseOrValue<BigNumberish>,
       options: BaseTOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -3348,11 +3356,12 @@ export interface TapiocaOFT extends BaseContract {
     _marketHelper: PromiseOrValue<string>,
     _market: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
+    withdrawLzFeeAmount: PromiseOrValue<BigNumberish>,
     options: BaseTOFT.SendOptionsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "sendToYBAndBorrow(address,address,uint256,uint256,address,address,uint16,(uint256,address,bool,bool))"(
+  "sendToYBAndBorrow(address,address,uint256,uint256,address,address,uint16,uint256,(uint256,address,bool,bool))"(
     _from: PromiseOrValue<string>,
     _to: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
@@ -3360,6 +3369,7 @@ export interface TapiocaOFT extends BaseContract {
     _marketHelper: PromiseOrValue<string>,
     _market: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
+    withdrawLzFeeAmount: PromiseOrValue<BigNumberish>,
     options: BaseTOFT.SendOptionsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -3371,17 +3381,19 @@ export interface TapiocaOFT extends BaseContract {
     _marketHelper: PromiseOrValue<string>,
     _market: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
+    withdrawLzFeeAmount: PromiseOrValue<BigNumberish>,
     options: BaseTOFT.SendOptionsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "sendToYBAndLend(address,address,uint256,address,address,uint16,(uint256,address,bool,bool))"(
+  "sendToYBAndLend(address,address,uint256,address,address,uint16,uint256,(uint256,address,bool,bool))"(
     _from: PromiseOrValue<string>,
     _to: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     _marketHelper: PromiseOrValue<string>,
     _market: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
+    withdrawLzFeeAmount: PromiseOrValue<BigNumberish>,
     options: BaseTOFT.SendOptionsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -4135,11 +4147,12 @@ export interface TapiocaOFT extends BaseContract {
       _marketHelper: PromiseOrValue<string>,
       _market: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawLzFeeAmount: PromiseOrValue<BigNumberish>,
       options: BaseTOFT.SendOptionsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "sendToYBAndBorrow(address,address,uint256,uint256,address,address,uint16,(uint256,address,bool,bool))"(
+    "sendToYBAndBorrow(address,address,uint256,uint256,address,address,uint16,uint256,(uint256,address,bool,bool))"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
@@ -4147,6 +4160,7 @@ export interface TapiocaOFT extends BaseContract {
       _marketHelper: PromiseOrValue<string>,
       _market: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawLzFeeAmount: PromiseOrValue<BigNumberish>,
       options: BaseTOFT.SendOptionsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -4158,17 +4172,19 @@ export interface TapiocaOFT extends BaseContract {
       _marketHelper: PromiseOrValue<string>,
       _market: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawLzFeeAmount: PromiseOrValue<BigNumberish>,
       options: BaseTOFT.SendOptionsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "sendToYBAndLend(address,address,uint256,address,address,uint16,(uint256,address,bool,bool))"(
+    "sendToYBAndLend(address,address,uint256,address,address,uint16,uint256,(uint256,address,bool,bool))"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       _marketHelper: PromiseOrValue<string>,
       _market: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawLzFeeAmount: PromiseOrValue<BigNumberish>,
       options: BaseTOFT.SendOptionsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -5120,11 +5136,12 @@ export interface TapiocaOFT extends BaseContract {
       _marketHelper: PromiseOrValue<string>,
       _market: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawLzFeeAmount: PromiseOrValue<BigNumberish>,
       options: BaseTOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "sendToYBAndBorrow(address,address,uint256,uint256,address,address,uint16,(uint256,address,bool,bool))"(
+    "sendToYBAndBorrow(address,address,uint256,uint256,address,address,uint16,uint256,(uint256,address,bool,bool))"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
@@ -5132,6 +5149,7 @@ export interface TapiocaOFT extends BaseContract {
       _marketHelper: PromiseOrValue<string>,
       _market: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawLzFeeAmount: PromiseOrValue<BigNumberish>,
       options: BaseTOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -5143,17 +5161,19 @@ export interface TapiocaOFT extends BaseContract {
       _marketHelper: PromiseOrValue<string>,
       _market: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawLzFeeAmount: PromiseOrValue<BigNumberish>,
       options: BaseTOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "sendToYBAndLend(address,address,uint256,address,address,uint16,(uint256,address,bool,bool))"(
+    "sendToYBAndLend(address,address,uint256,address,address,uint16,uint256,(uint256,address,bool,bool))"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       _marketHelper: PromiseOrValue<string>,
       _market: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawLzFeeAmount: PromiseOrValue<BigNumberish>,
       options: BaseTOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -5930,11 +5950,12 @@ export interface TapiocaOFT extends BaseContract {
       _marketHelper: PromiseOrValue<string>,
       _market: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawLzFeeAmount: PromiseOrValue<BigNumberish>,
       options: BaseTOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "sendToYBAndBorrow(address,address,uint256,uint256,address,address,uint16,(uint256,address,bool,bool))"(
+    "sendToYBAndBorrow(address,address,uint256,uint256,address,address,uint16,uint256,(uint256,address,bool,bool))"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
@@ -5942,6 +5963,7 @@ export interface TapiocaOFT extends BaseContract {
       _marketHelper: PromiseOrValue<string>,
       _market: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawLzFeeAmount: PromiseOrValue<BigNumberish>,
       options: BaseTOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -5953,17 +5975,19 @@ export interface TapiocaOFT extends BaseContract {
       _marketHelper: PromiseOrValue<string>,
       _market: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawLzFeeAmount: PromiseOrValue<BigNumberish>,
       options: BaseTOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "sendToYBAndLend(address,address,uint256,address,address,uint16,(uint256,address,bool,bool))"(
+    "sendToYBAndLend(address,address,uint256,address,address,uint16,uint256,(uint256,address,bool,bool))"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       _marketHelper: PromiseOrValue<string>,
       _market: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawLzFeeAmount: PromiseOrValue<BigNumberish>,
       options: BaseTOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
