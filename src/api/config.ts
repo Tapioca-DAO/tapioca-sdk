@@ -22,6 +22,8 @@ export enum EPacketType {
     PT_YB_RETRIEVE_STRAT = 771,
     PT_YB_DEPOSIT = 772,
     PT_YB_WITHDRAW = 773,
+    PT_YB_SEND_SGL_BORROW = 775,
+    PT_SEND_APPROVAL = 790,
 }
 
 /**
@@ -34,6 +36,8 @@ export const MIN_GAS_FOR_PACKET_TYPE = {
     [EPacketType.PT_YB_RETRIEVE_STRAT]: 200_000,
     [EPacketType.PT_YB_DEPOSIT]: 200_000,
     [EPacketType.PT_YB_WITHDRAW]: 200_000,
+    [EPacketType.PT_YB_SEND_SGL_BORROW]: 200_000,
+    [EPacketType.PT_SEND_APPROVAL]: 200_000,
 };
 
 /**
@@ -94,6 +98,8 @@ export const PACKET_TYPES = [
     EPacketType.PT_YB_RETRIEVE_STRAT,
     EPacketType.PT_YB_DEPOSIT,
     EPacketType.PT_YB_WITHDRAW,
+    EPacketType.PT_YB_SEND_SGL_BORROW,
+    EPacketType.PT_SEND_APPROVAL,
 ];
 
 /**
