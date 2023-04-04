@@ -142,7 +142,7 @@ export interface TapiocaOFTMockInterface extends utils.Interface {
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "precrime()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)": FunctionFragment;
+    "retrieveFromYB(address,uint256,uint256,uint16,address,bytes,bool)": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
     "sendApproval(uint16,(address,address,address,uint256,uint256,uint8,bytes32,bytes32),(uint256,address,bool,bool))": FunctionFragment;
@@ -267,7 +267,7 @@ export interface TapiocaOFTMockInterface extends utils.Interface {
       | "renounceOwnership"
       | "renounceOwnership()"
       | "retrieveFromYB"
-      | "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)"
+      | "retrieveFromYB(address,uint256,uint256,uint16,address,bytes,bool)"
       | "retryMessage"
       | "retryMessage(uint16,bytes,uint64,bytes)"
       | "sendAndCall"
@@ -770,6 +770,7 @@ export interface TapiocaOFTMockInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "retrieveFromYB",
     values: [
+      PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
@@ -779,8 +780,9 @@ export interface TapiocaOFTMockInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)",
+    functionFragment: "retrieveFromYB(address,uint256,uint256,uint16,address,bytes,bool)",
     values: [
+      PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
@@ -1414,7 +1416,7 @@ export interface TapiocaOFTMockInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)",
+    functionFragment: "retrieveFromYB(address,uint256,uint256,uint16,address,bytes,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2397,6 +2399,7 @@ export interface TapiocaOFTMock extends BaseContract {
     ): Promise<ContractTransaction>;
 
     retrieveFromYB(
+      _from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -2406,7 +2409,8 @@ export interface TapiocaOFTMock extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)"(
+    "retrieveFromYB(address,uint256,uint256,uint16,address,bytes,bool)"(
+      _from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3160,6 +3164,7 @@ export interface TapiocaOFTMock extends BaseContract {
   ): Promise<ContractTransaction>;
 
   retrieveFromYB(
+    _from: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     assetId: PromiseOrValue<BigNumberish>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3169,7 +3174,8 @@ export interface TapiocaOFTMock extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)"(
+  "retrieveFromYB(address,uint256,uint256,uint16,address,bytes,bool)"(
+    _from: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     assetId: PromiseOrValue<BigNumberish>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3921,6 +3927,7 @@ export interface TapiocaOFTMock extends BaseContract {
     "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
 
     retrieveFromYB(
+      _from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3930,7 +3937,8 @@ export interface TapiocaOFTMock extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)"(
+    "retrieveFromYB(address,uint256,uint256,uint16,address,bytes,bool)"(
+      _from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -4880,6 +4888,7 @@ export interface TapiocaOFTMock extends BaseContract {
     ): Promise<BigNumber>;
 
     retrieveFromYB(
+      _from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -4889,7 +4898,8 @@ export interface TapiocaOFTMock extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)"(
+    "retrieveFromYB(address,uint256,uint256,uint16,address,bytes,bool)"(
+      _from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -5664,6 +5674,7 @@ export interface TapiocaOFTMock extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     retrieveFromYB(
+      _from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -5673,7 +5684,8 @@ export interface TapiocaOFTMock extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)"(
+    "retrieveFromYB(address,uint256,uint256,uint16,address,bytes,bool)"(
+      _from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
