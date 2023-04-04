@@ -3,7 +3,6 @@ import inquirer from 'inquirer';
 import { ERC20Mock__factory } from '../../../../typechain/tap-token';
 import { askForTag } from '../../utils';
 
-// TODO add a task to free mint
 export const deployERC20Mock__task = async (
     taskArgs: {
         save?: boolean;
