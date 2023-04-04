@@ -7,6 +7,7 @@ import { toftSendFrom__task } from './tasks/exec/toftSendFrom';
 import { getChains__task } from './tasks/view/getChains';
 import { getDeployment__task } from './tasks/view/getDeployment';
 import { transferOwnership__task } from './tasks/exec/transferOwnership';
+import { deployMagnetar__task } from './tasks/exec/deployMagnetar';
 
 const addCliParams = (task: ConfigurableTaskDefinition) => {
     return task.addOptionalParam(
@@ -60,6 +61,10 @@ addDebugModeParams(
         'Deploys an ERC20 mock contract',
         deployERC20Mock__task,
     ).addFlag('save', 'Save the deployment to the local database'),
+);
+
+addDebugModeParams(
+    task('deployMagnetar', 'Deploys Magnetar', deployMagnetar__task),
 );
 
 addDebugModeParams(
