@@ -42,6 +42,63 @@ export declare namespace ICommonOFT {
   };
 }
 
+export declare namespace BaseOFT {
+  export type SendOptionsStruct = {
+    extraGasLimit: PromiseOrValue<BigNumberish>;
+    zroPaymentAddress: PromiseOrValue<string>;
+    strategyDeposit: PromiseOrValue<boolean>;
+  };
+
+  export type SendOptionsStructOutput = [BigNumber, string, boolean] & {
+    extraGasLimit: BigNumber;
+    zroPaymentAddress: string;
+    strategyDeposit: boolean;
+  };
+
+  export type ILendParamsStruct = {
+    amount: PromiseOrValue<BigNumberish>;
+    marketHelper: PromiseOrValue<string>;
+    market: PromiseOrValue<string>;
+  };
+
+  export type ILendParamsStructOutput = [BigNumber, string, string] & {
+    amount: BigNumber;
+    marketHelper: string;
+    market: string;
+  };
+
+  export type IApprovalStruct = {
+    target: PromiseOrValue<string>;
+    owner: PromiseOrValue<string>;
+    spender: PromiseOrValue<string>;
+    value: PromiseOrValue<BigNumberish>;
+    deadline: PromiseOrValue<BigNumberish>;
+    v: PromiseOrValue<BigNumberish>;
+    r: PromiseOrValue<BytesLike>;
+    s: PromiseOrValue<BytesLike>;
+  };
+
+  export type IApprovalStructOutput = [
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    number,
+    string,
+    string
+  ] & {
+    target: string;
+    owner: string;
+    spender: string;
+    value: BigNumber;
+    deadline: BigNumber;
+    v: number;
+    r: string;
+    s: string;
+  };
+}
+
 export interface USDOInterface extends utils.Interface {
   functions: {
     "DEFAULT_PAYLOAD_SIZE_LIMIT()": FunctionFragment;
@@ -52,6 +109,7 @@ export interface USDOInterface extends utils.Interface {
     "PT_SEND_AND_CALL()": FunctionFragment;
     "PT_YB_DEPOSIT()": FunctionFragment;
     "PT_YB_RETRIEVE_STRAT()": FunctionFragment;
+    "PT_YB_SEND_SGL_LEND()": FunctionFragment;
     "PT_YB_SEND_STRAT()": FunctionFragment;
     "PT_YB_WITHDRAW()": FunctionFragment;
     "allowance(address,address)": FunctionFragment;
@@ -96,11 +154,11 @@ export interface USDOInterface extends utils.Interface {
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "precrime()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
-    "sendToYB(uint256,uint256,uint16,uint256,address,bool)": FunctionFragment;
+    "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool))": FunctionFragment;
+    "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "setBurnerStatus(address,bool)": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
     "setConservator(address)": FunctionFragment;
@@ -148,6 +206,8 @@ export interface USDOInterface extends utils.Interface {
       | "PT_YB_DEPOSIT()"
       | "PT_YB_RETRIEVE_STRAT"
       | "PT_YB_RETRIEVE_STRAT()"
+      | "PT_YB_SEND_SGL_LEND"
+      | "PT_YB_SEND_SGL_LEND()"
       | "PT_YB_SEND_STRAT"
       | "PT_YB_SEND_STRAT()"
       | "PT_YB_WITHDRAW"
@@ -236,8 +296,6 @@ export interface USDOInterface extends utils.Interface {
       | "precrime()"
       | "renounceOwnership"
       | "renounceOwnership()"
-      | "retrieveFromYB"
-      | "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)"
       | "retryMessage"
       | "retryMessage(uint16,bytes,uint64,bytes)"
       | "sendAndCall"
@@ -245,7 +303,9 @@ export interface USDOInterface extends utils.Interface {
       | "sendFrom"
       | "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"
       | "sendToYB"
-      | "sendToYB(uint256,uint256,uint16,uint256,address,bool)"
+      | "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool))"
+      | "sendToYBAndLend"
+      | "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "setBurnerStatus"
       | "setBurnerStatus(address,bool)"
       | "setConfig"
@@ -358,6 +418,14 @@ export interface USDOInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "PT_YB_RETRIEVE_STRAT()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PT_YB_SEND_SGL_LEND",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PT_YB_SEND_SGL_LEND()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -804,28 +872,6 @@ export interface USDOInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "retrieveFromYB",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<boolean>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<boolean>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "retryMessage",
     values: [
       PromiseOrValue<BigNumberish>,
@@ -890,23 +936,45 @@ export interface USDOInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "sendToYB",
     values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
-      PromiseOrValue<boolean>
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      BaseOFT.SendOptionsStruct
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "sendToYB(uint256,uint256,uint16,uint256,address,bool)",
+    functionFragment: "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool))",
     values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
-      PromiseOrValue<boolean>
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      BaseOFT.SendOptionsStruct
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "sendToYBAndLend",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      BaseOFT.ILendParamsStruct,
+      BaseOFT.SendOptionsStruct,
+      BaseOFT.IApprovalStruct[]
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      BaseOFT.ILendParamsStruct,
+      BaseOFT.SendOptionsStruct,
+      BaseOFT.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
@@ -1196,6 +1264,14 @@ export interface USDOInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "PT_YB_SEND_SGL_LEND",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "PT_YB_SEND_SGL_LEND()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "PT_YB_SEND_STRAT",
     data: BytesLike
   ): Result;
@@ -1470,14 +1546,6 @@ export interface USDOInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "retrieveFromYB",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "retryMessage",
     data: BytesLike
   ): Result;
@@ -1500,7 +1568,15 @@ export interface USDOInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "sendToYB", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "sendToYB(uint256,uint256,uint16,uint256,address,bool)",
+    functionFragment: "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool))",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "sendToYBAndLend",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1702,6 +1778,7 @@ export interface USDOInterface extends utils.Interface {
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
     "FlashMintFeeUpdated(uint256,uint256)": EventFragment;
+    "Lend(address,uint256)": EventFragment;
     "MaxFlashMintUpdated(uint256,uint256)": EventFragment;
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)": EventFragment;
     "Minted(address,uint256)": EventFragment;
@@ -1710,6 +1787,7 @@ export interface USDOInterface extends utils.Interface {
     "PausedUpdated(bool,bool)": EventFragment;
     "ReceiveFromChain(uint16,address,uint256)": EventFragment;
     "RetryMessageSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
+    "SendApproval(address,address,address,uint256)": EventFragment;
     "SendToChain(uint16,address,bytes32,uint256)": EventFragment;
     "SetBurnerStatus(address,bool)": EventFragment;
     "SetMinDstGas(uint16,uint16,uint256)": EventFragment;
@@ -1741,6 +1819,8 @@ export interface USDOInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "FlashMintFeeUpdated(uint256,uint256)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Lend"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Lend(address,uint256)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MaxFlashMintUpdated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "MaxFlashMintUpdated(uint256,uint256)"
@@ -1768,6 +1848,10 @@ export interface USDOInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "RetryMessageSuccess"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "RetryMessageSuccess(uint16,bytes,uint64,bytes32)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "SendApproval"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "SendApproval(address,address,address,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SendToChain"): EventFragment;
   getEvent(
@@ -1867,6 +1951,14 @@ export type FlashMintFeeUpdatedEvent = TypedEvent<
 export type FlashMintFeeUpdatedEventFilter =
   TypedEventFilter<FlashMintFeeUpdatedEvent>;
 
+export interface LendEventObject {
+  _from: string;
+  _amount: BigNumber;
+}
+export type LendEvent = TypedEvent<[string, BigNumber], LendEventObject>;
+
+export type LendEventFilter = TypedEventFilter<LendEvent>;
+
 export interface MaxFlashMintUpdatedEventObject {
   _old: BigNumber;
   _new: BigNumber;
@@ -1961,6 +2053,19 @@ export type RetryMessageSuccessEvent = TypedEvent<
 
 export type RetryMessageSuccessEventFilter =
   TypedEventFilter<RetryMessageSuccessEvent>;
+
+export interface SendApprovalEventObject {
+  _target: string;
+  _owner: string;
+  _spender: string;
+  _amount: BigNumber;
+}
+export type SendApprovalEvent = TypedEvent<
+  [string, string, string, BigNumber],
+  SendApprovalEventObject
+>;
+
+export type SendApprovalEventFilter = TypedEventFilter<SendApprovalEvent>;
 
 export interface SendToChainEventObject {
   _dstChainId: number;
@@ -2146,6 +2251,10 @@ export interface USDO extends BaseContract {
     PT_YB_RETRIEVE_STRAT(overrides?: CallOverrides): Promise<[number]>;
 
     "PT_YB_RETRIEVE_STRAT()"(overrides?: CallOverrides): Promise<[number]>;
+
+    PT_YB_SEND_SGL_LEND(overrides?: CallOverrides): Promise<[number]>;
+
+    "PT_YB_SEND_SGL_LEND()"(overrides?: CallOverrides): Promise<[number]>;
 
     PT_YB_SEND_STRAT(overrides?: CallOverrides): Promise<[number]>;
 
@@ -2619,26 +2728,6 @@ export interface USDO extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    retrieveFromYB(
-      amount: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      airdropAdapterParam: PromiseOrValue<BytesLike>,
-      strategyWithdrawal: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)"(
-      amount: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      airdropAdapterParam: PromiseOrValue<BytesLike>,
-      strategyWithdrawal: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     retryMessage(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -2696,22 +2785,42 @@ export interface USDO extends BaseContract {
     ): Promise<ContractTransaction>;
 
     sendToYB(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      extraGasLimit: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      strategyDeposit: PromiseOrValue<boolean>,
+      options: BaseOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "sendToYB(uint256,uint256,uint16,uint256,address,bool)"(
+    "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool))"(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      extraGasLimit: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      strategyDeposit: PromiseOrValue<boolean>,
+      options: BaseOFT.SendOptionsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    sendToYBAndLend(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lendParams: BaseOFT.ILendParamsStruct,
+      options: BaseOFT.SendOptionsStruct,
+      approvals: BaseOFT.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lendParams: BaseOFT.ILendParamsStruct,
+      options: BaseOFT.SendOptionsStruct,
+      approvals: BaseOFT.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -3007,6 +3116,10 @@ export interface USDO extends BaseContract {
   PT_YB_RETRIEVE_STRAT(overrides?: CallOverrides): Promise<number>;
 
   "PT_YB_RETRIEVE_STRAT()"(overrides?: CallOverrides): Promise<number>;
+
+  PT_YB_SEND_SGL_LEND(overrides?: CallOverrides): Promise<number>;
+
+  "PT_YB_SEND_SGL_LEND()"(overrides?: CallOverrides): Promise<number>;
 
   PT_YB_SEND_STRAT(overrides?: CallOverrides): Promise<number>;
 
@@ -3480,26 +3593,6 @@ export interface USDO extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  retrieveFromYB(
-    amount: PromiseOrValue<BigNumberish>,
-    assetId: PromiseOrValue<BigNumberish>,
-    lzDstChainId: PromiseOrValue<BigNumberish>,
-    zroPaymentAddress: PromiseOrValue<string>,
-    airdropAdapterParam: PromiseOrValue<BytesLike>,
-    strategyWithdrawal: PromiseOrValue<boolean>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)"(
-    amount: PromiseOrValue<BigNumberish>,
-    assetId: PromiseOrValue<BigNumberish>,
-    lzDstChainId: PromiseOrValue<BigNumberish>,
-    zroPaymentAddress: PromiseOrValue<string>,
-    airdropAdapterParam: PromiseOrValue<BytesLike>,
-    strategyWithdrawal: PromiseOrValue<boolean>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   retryMessage(
     _srcChainId: PromiseOrValue<BigNumberish>,
     _srcAddress: PromiseOrValue<BytesLike>,
@@ -3557,22 +3650,42 @@ export interface USDO extends BaseContract {
   ): Promise<ContractTransaction>;
 
   sendToYB(
+    _from: PromiseOrValue<string>,
+    _to: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     assetId: PromiseOrValue<BigNumberish>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
-    extraGasLimit: PromiseOrValue<BigNumberish>,
-    zroPaymentAddress: PromiseOrValue<string>,
-    strategyDeposit: PromiseOrValue<boolean>,
+    options: BaseOFT.SendOptionsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "sendToYB(uint256,uint256,uint16,uint256,address,bool)"(
+  "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool))"(
+    _from: PromiseOrValue<string>,
+    _to: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     assetId: PromiseOrValue<BigNumberish>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
-    extraGasLimit: PromiseOrValue<BigNumberish>,
-    zroPaymentAddress: PromiseOrValue<string>,
-    strategyDeposit: PromiseOrValue<boolean>,
+    options: BaseOFT.SendOptionsStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  sendToYBAndLend(
+    _from: PromiseOrValue<string>,
+    _to: PromiseOrValue<string>,
+    lzDstChainId: PromiseOrValue<BigNumberish>,
+    lendParams: BaseOFT.ILendParamsStruct,
+    options: BaseOFT.SendOptionsStruct,
+    approvals: BaseOFT.IApprovalStruct[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    _from: PromiseOrValue<string>,
+    _to: PromiseOrValue<string>,
+    lzDstChainId: PromiseOrValue<BigNumberish>,
+    lendParams: BaseOFT.ILendParamsStruct,
+    options: BaseOFT.SendOptionsStruct,
+    approvals: BaseOFT.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3870,6 +3983,10 @@ export interface USDO extends BaseContract {
     PT_YB_RETRIEVE_STRAT(overrides?: CallOverrides): Promise<number>;
 
     "PT_YB_RETRIEVE_STRAT()"(overrides?: CallOverrides): Promise<number>;
+
+    PT_YB_SEND_SGL_LEND(overrides?: CallOverrides): Promise<number>;
+
+    "PT_YB_SEND_SGL_LEND()"(overrides?: CallOverrides): Promise<number>;
 
     PT_YB_SEND_STRAT(overrides?: CallOverrides): Promise<number>;
 
@@ -4339,26 +4456,6 @@ export interface USDO extends BaseContract {
 
     "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
 
-    retrieveFromYB(
-      amount: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      airdropAdapterParam: PromiseOrValue<BytesLike>,
-      strategyWithdrawal: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)"(
-      amount: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      airdropAdapterParam: PromiseOrValue<BytesLike>,
-      strategyWithdrawal: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     retryMessage(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -4416,22 +4513,42 @@ export interface USDO extends BaseContract {
     ): Promise<void>;
 
     sendToYB(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      extraGasLimit: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      strategyDeposit: PromiseOrValue<boolean>,
+      options: BaseOFT.SendOptionsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "sendToYB(uint256,uint256,uint16,uint256,address,bool)"(
+    "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool))"(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      extraGasLimit: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      strategyDeposit: PromiseOrValue<boolean>,
+      options: BaseOFT.SendOptionsStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    sendToYBAndLend(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lendParams: BaseOFT.ILendParamsStruct,
+      options: BaseOFT.SendOptionsStruct,
+      approvals: BaseOFT.IApprovalStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lendParams: BaseOFT.ILendParamsStruct,
+      options: BaseOFT.SendOptionsStruct,
+      approvals: BaseOFT.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4748,6 +4865,15 @@ export interface USDO extends BaseContract {
       _new?: null
     ): FlashMintFeeUpdatedEventFilter;
 
+    "Lend(address,uint256)"(
+      _from?: PromiseOrValue<string> | null,
+      _amount?: null
+    ): LendEventFilter;
+    Lend(
+      _from?: PromiseOrValue<string> | null,
+      _amount?: null
+    ): LendEventFilter;
+
     "MaxFlashMintUpdated(uint256,uint256)"(
       _old?: null,
       _new?: null
@@ -4824,6 +4950,19 @@ export interface USDO extends BaseContract {
       _nonce?: null,
       _payloadHash?: null
     ): RetryMessageSuccessEventFilter;
+
+    "SendApproval(address,address,address,uint256)"(
+      _target?: null,
+      _owner?: null,
+      _spender?: null,
+      _amount?: null
+    ): SendApprovalEventFilter;
+    SendApproval(
+      _target?: null,
+      _owner?: null,
+      _spender?: null,
+      _amount?: null
+    ): SendApprovalEventFilter;
 
     "SendToChain(uint16,address,bytes32,uint256)"(
       _dstChainId?: PromiseOrValue<BigNumberish> | null,
@@ -4947,6 +5086,10 @@ export interface USDO extends BaseContract {
     PT_YB_RETRIEVE_STRAT(overrides?: CallOverrides): Promise<BigNumber>;
 
     "PT_YB_RETRIEVE_STRAT()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    PT_YB_SEND_SGL_LEND(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "PT_YB_SEND_SGL_LEND()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     PT_YB_SEND_STRAT(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -5412,26 +5555,6 @@ export interface USDO extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    retrieveFromYB(
-      amount: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      airdropAdapterParam: PromiseOrValue<BytesLike>,
-      strategyWithdrawal: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)"(
-      amount: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      airdropAdapterParam: PromiseOrValue<BytesLike>,
-      strategyWithdrawal: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     retryMessage(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -5489,22 +5612,42 @@ export interface USDO extends BaseContract {
     ): Promise<BigNumber>;
 
     sendToYB(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      extraGasLimit: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      strategyDeposit: PromiseOrValue<boolean>,
+      options: BaseOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "sendToYB(uint256,uint256,uint16,uint256,address,bool)"(
+    "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool))"(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      extraGasLimit: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      strategyDeposit: PromiseOrValue<boolean>,
+      options: BaseOFT.SendOptionsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    sendToYBAndLend(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lendParams: BaseOFT.ILendParamsStruct,
+      options: BaseOFT.SendOptionsStruct,
+      approvals: BaseOFT.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lendParams: BaseOFT.ILendParamsStruct,
+      options: BaseOFT.SendOptionsStruct,
+      approvals: BaseOFT.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5811,6 +5954,14 @@ export interface USDO extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "PT_YB_RETRIEVE_STRAT()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    PT_YB_SEND_SGL_LEND(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "PT_YB_SEND_SGL_LEND()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -6284,26 +6435,6 @@ export interface USDO extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    retrieveFromYB(
-      amount: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      airdropAdapterParam: PromiseOrValue<BytesLike>,
-      strategyWithdrawal: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "retrieveFromYB(uint256,uint256,uint16,address,bytes,bool)"(
-      amount: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      airdropAdapterParam: PromiseOrValue<BytesLike>,
-      strategyWithdrawal: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     retryMessage(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -6361,22 +6492,42 @@ export interface USDO extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     sendToYB(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      extraGasLimit: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      strategyDeposit: PromiseOrValue<boolean>,
+      options: BaseOFT.SendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "sendToYB(uint256,uint256,uint16,uint256,address,bool)"(
+    "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool))"(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      extraGasLimit: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      strategyDeposit: PromiseOrValue<boolean>,
+      options: BaseOFT.SendOptionsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    sendToYBAndLend(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lendParams: BaseOFT.ILendParamsStruct,
+      options: BaseOFT.SendOptionsStruct,
+      approvals: BaseOFT.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      _from: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lendParams: BaseOFT.ILendParamsStruct,
+      options: BaseOFT.SendOptionsStruct,
+      approvals: BaseOFT.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

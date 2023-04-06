@@ -7,6 +7,7 @@ import type * as tests from "./tests";
 export type { tests };
 import type * as uniswapv2 from "./uniswapv2";
 export type { uniswapv2 };
+export type { ERC20MockWithPermit } from "./ERC20MockWithPermit";
 export type { MockSwapper } from "./MockSwapper";
 export type { MultisigMock } from "./MultisigMock";
 export type { PenroseMock } from "./PenroseMock";

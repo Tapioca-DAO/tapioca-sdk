@@ -4,6 +4,7 @@
 export * as curve from "./curve";
 export * as tests from "./tests";
 export * as uniswapv2 from "./uniswapv2";
+export { ERC20MockWithPermit__factory } from "./ERC20MockWithPermit__factory";
 export { MockSwapper__factory } from "./MockSwapper__factory";
 export { MultisigMock__factory } from "./MultisigMock__factory";
 export { PenroseMock__factory } from "./PenroseMock__factory";

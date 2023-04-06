@@ -8,12 +8,17 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
+  Overrides,
   PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
 } from "ethers";
-import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type {
+  FunctionFragment,
+  Result,
+  EventFragment,
+} from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type {
   TypedEventFilter,
@@ -73,9 +78,11 @@ export declare namespace Multicall3 {
 
 export interface Multicall3Interface extends utils.Interface {
   functions: {
+    "addTargets(address[])": FunctionFragment;
     "aggregate((address,bytes)[])": FunctionFragment;
     "aggregate3((address,bool,bytes)[])": FunctionFragment;
     "aggregate3Value((address,bool,uint256,bytes)[])": FunctionFragment;
+    "availableTargets(address)": FunctionFragment;
     "blockAndAggregate((address,bytes)[])": FunctionFragment;
     "getBasefee()": FunctionFragment;
     "getBlockHash(uint256)": FunctionFragment;
@@ -89,18 +96,26 @@ export interface Multicall3Interface extends utils.Interface {
     "getLastBlockHash()": FunctionFragment;
     "multicall((address,bool,bytes)[])": FunctionFragment;
     "multicallValue((address,bool,uint256,bytes)[])": FunctionFragment;
+    "owner()": FunctionFragment;
+    "removeTargets(address[])": FunctionFragment;
+    "renounceOwnership()": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
     "tryAggregate(bool,(address,bytes)[])": FunctionFragment;
     "tryBlockAndAggregate(bool,(address,bytes)[])": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "addTargets"
+      | "addTargets(address[])"
       | "aggregate"
       | "aggregate((address,bytes)[])"
       | "aggregate3"
       | "aggregate3((address,bool,bytes)[])"
       | "aggregate3Value"
       | "aggregate3Value((address,bool,uint256,bytes)[])"
+      | "availableTargets"
+      | "availableTargets(address)"
       | "blockAndAggregate"
       | "blockAndAggregate((address,bytes)[])"
       | "getBasefee"
@@ -127,12 +142,28 @@ export interface Multicall3Interface extends utils.Interface {
       | "multicall((address,bool,bytes)[])"
       | "multicallValue"
       | "multicallValue((address,bool,uint256,bytes)[])"
+      | "owner"
+      | "owner()"
+      | "removeTargets"
+      | "removeTargets(address[])"
+      | "renounceOwnership"
+      | "renounceOwnership()"
+      | "transferOwnership"
+      | "transferOwnership(address)"
       | "tryAggregate"
       | "tryAggregate(bool,(address,bytes)[])"
       | "tryBlockAndAggregate"
       | "tryBlockAndAggregate(bool,(address,bytes)[])"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "addTargets",
+    values: [PromiseOrValue<string>[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "addTargets(address[])",
+    values: [PromiseOrValue<string>[]]
+  ): string;
   encodeFunctionData(
     functionFragment: "aggregate",
     values: [Multicall3.CallStruct[]]
@@ -156,6 +187,14 @@ export interface Multicall3Interface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "aggregate3Value((address,bool,uint256,bytes)[])",
     values: [Multicall3.Call3ValueStruct[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "availableTargets",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "availableTargets(address)",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "blockAndAggregate",
@@ -261,6 +300,32 @@ export interface Multicall3Interface extends utils.Interface {
     functionFragment: "multicallValue((address,bool,uint256,bytes)[])",
     values: [Multicall3.Call3ValueStruct[]]
   ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "removeTargets",
+    values: [PromiseOrValue<string>[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "removeTargets(address[])",
+    values: [PromiseOrValue<string>[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "renounceOwnership",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "renounceOwnership()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(
     functionFragment: "tryAggregate",
     values: [PromiseOrValue<boolean>, Multicall3.CallStruct[]]
@@ -278,6 +343,11 @@ export interface Multicall3Interface extends utils.Interface {
     values: [PromiseOrValue<boolean>, Multicall3.CallStruct[]]
   ): string;
 
+  decodeFunctionResult(functionFragment: "addTargets", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "addTargets(address[])",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "aggregate", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "aggregate((address,bytes)[])",
@@ -294,6 +364,14 @@ export interface Multicall3Interface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "aggregate3Value((address,bool,uint256,bytes)[])",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "availableTargets",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "availableTargets(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -391,6 +469,32 @@ export interface Multicall3Interface extends utils.Interface {
     functionFragment: "multicallValue((address,bool,uint256,bytes)[])",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "removeTargets",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "removeTargets(address[])",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceOwnership()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership(address)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "tryAggregate",
     data: BytesLike
@@ -408,8 +512,27 @@ export interface Multicall3Interface extends utils.Interface {
     data: BytesLike
   ): Result;
 
-  events: {};
+  events: {
+    "OwnershipTransferred(address,address)": EventFragment;
+  };
+
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "OwnershipTransferred(address,address)"
+  ): EventFragment;
 }
+
+export interface OwnershipTransferredEventObject {
+  previousOwner: string;
+  newOwner: string;
+}
+export type OwnershipTransferredEvent = TypedEvent<
+  [string, string],
+  OwnershipTransferredEventObject
+>;
+
+export type OwnershipTransferredEventFilter =
+  TypedEventFilter<OwnershipTransferredEvent>;
 
 export interface Multicall3 extends BaseContract {
   contractName: "Multicall3";
@@ -440,6 +563,16 @@ export interface Multicall3 extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    addTargets(
+      addresses: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "addTargets(address[])"(
+      addresses: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     aggregate(
       calls: Multicall3.CallStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -469,6 +602,16 @@ export interface Multicall3 extends BaseContract {
       calls: Multicall3.Call3ValueStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    availableTargets(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "availableTargets(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
     blockAndAggregate(
       calls: Multicall3.CallStruct[],
@@ -584,6 +727,38 @@ export interface Multicall3 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    owner(overrides?: CallOverrides): Promise<[string]>;
+
+    "owner()"(overrides?: CallOverrides): Promise<[string]>;
+
+    removeTargets(
+      addresses: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "removeTargets(address[])"(
+      addresses: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    transferOwnership(
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "transferOwnership(address)"(
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     tryAggregate(
       requireSuccess: PromiseOrValue<boolean>,
       calls: Multicall3.CallStruct[],
@@ -608,6 +783,16 @@ export interface Multicall3 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
+
+  addTargets(
+    addresses: PromiseOrValue<string>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "addTargets(address[])"(
+    addresses: PromiseOrValue<string>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   aggregate(
     calls: Multicall3.CallStruct[],
@@ -638,6 +823,16 @@ export interface Multicall3 extends BaseContract {
     calls: Multicall3.Call3ValueStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  availableTargets(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "availableTargets(address)"(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   blockAndAggregate(
     calls: Multicall3.CallStruct[],
@@ -721,6 +916,38 @@ export interface Multicall3 extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  owner(overrides?: CallOverrides): Promise<string>;
+
+  "owner()"(overrides?: CallOverrides): Promise<string>;
+
+  removeTargets(
+    addresses: PromiseOrValue<string>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "removeTargets(address[])"(
+    addresses: PromiseOrValue<string>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  renounceOwnership(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "renounceOwnership()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  transferOwnership(
+    newOwner: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "transferOwnership(address)"(
+    newOwner: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   tryAggregate(
     requireSuccess: PromiseOrValue<boolean>,
     calls: Multicall3.CallStruct[],
@@ -746,6 +973,16 @@ export interface Multicall3 extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    addTargets(
+      addresses: PromiseOrValue<string>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "addTargets(address[])"(
+      addresses: PromiseOrValue<string>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     aggregate(
       calls: Multicall3.CallStruct[],
       overrides?: CallOverrides
@@ -779,6 +1016,16 @@ export interface Multicall3 extends BaseContract {
       calls: Multicall3.Call3ValueStruct[],
       overrides?: CallOverrides
     ): Promise<Multicall3.ResultStructOutput[]>;
+
+    availableTargets(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "availableTargets(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     blockAndAggregate(
       calls: Multicall3.CallStruct[],
@@ -876,6 +1123,34 @@ export interface Multicall3 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<Multicall3.ResultStructOutput[]>;
 
+    owner(overrides?: CallOverrides): Promise<string>;
+
+    "owner()"(overrides?: CallOverrides): Promise<string>;
+
+    removeTargets(
+      addresses: PromiseOrValue<string>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "removeTargets(address[])"(
+      addresses: PromiseOrValue<string>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    renounceOwnership(overrides?: CallOverrides): Promise<void>;
+
+    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
+
+    transferOwnership(
+      newOwner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "transferOwnership(address)"(
+      newOwner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     tryAggregate(
       requireSuccess: PromiseOrValue<boolean>,
       calls: Multicall3.CallStruct[],
@@ -913,9 +1188,28 @@ export interface Multicall3 extends BaseContract {
     >;
   };
 
-  filters: {};
+  filters: {
+    "OwnershipTransferred(address,address)"(
+      previousOwner?: PromiseOrValue<string> | null,
+      newOwner?: PromiseOrValue<string> | null
+    ): OwnershipTransferredEventFilter;
+    OwnershipTransferred(
+      previousOwner?: PromiseOrValue<string> | null,
+      newOwner?: PromiseOrValue<string> | null
+    ): OwnershipTransferredEventFilter;
+  };
 
   estimateGas: {
+    addTargets(
+      addresses: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "addTargets(address[])"(
+      addresses: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     aggregate(
       calls: Multicall3.CallStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -944,6 +1238,16 @@ export interface Multicall3 extends BaseContract {
     "aggregate3Value((address,bool,uint256,bytes)[])"(
       calls: Multicall3.Call3ValueStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    availableTargets(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "availableTargets(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     blockAndAggregate(
@@ -1030,6 +1334,38 @@ export interface Multicall3 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    owner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    removeTargets(
+      addresses: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "removeTargets(address[])"(
+      addresses: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    transferOwnership(
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "transferOwnership(address)"(
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     tryAggregate(
       requireSuccess: PromiseOrValue<boolean>,
       calls: Multicall3.CallStruct[],
@@ -1056,6 +1392,16 @@ export interface Multicall3 extends BaseContract {
   };
 
   populateTransaction: {
+    addTargets(
+      addresses: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "addTargets(address[])"(
+      addresses: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     aggregate(
       calls: Multicall3.CallStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -1084,6 +1430,16 @@ export interface Multicall3 extends BaseContract {
     "aggregate3Value((address,bool,uint256,bytes)[])"(
       calls: Multicall3.Call3ValueStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    availableTargets(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "availableTargets(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     blockAndAggregate(
@@ -1186,6 +1542,38 @@ export interface Multicall3 extends BaseContract {
     "multicallValue((address,bool,uint256,bytes)[])"(
       calls: Multicall3.Call3ValueStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    removeTargets(
+      addresses: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "removeTargets(address[])"(
+      addresses: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    transferOwnership(
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "transferOwnership(address)"(
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     tryAggregate(

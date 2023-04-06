@@ -41,6 +41,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.CurvePoolMock__factory>;
     getContractFactory(
+      name: "ERC20MockWithPermit",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC20MockWithPermit__factory>;
+    getContractFactory(
       name: "MockSwapper",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MockSwapper__factory>;
@@ -161,6 +165,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.USDO__factory>;
     getContractFactory(
+      name: "Magnetar",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Magnetar__factory>;
+    getContractFactory(
       name: "ContractThatCannotBeDeployed",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ContractThatCannotBeDeployed__factory>;
@@ -212,6 +220,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.CurvePoolMock>;
+    getContractAt(
+      name: "ERC20MockWithPermit",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20MockWithPermit>;
     getContractAt(
       name: "MockSwapper",
       address: string,
@@ -362,6 +375,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.USDO>;
+    getContractAt(
+      name: "Magnetar",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Magnetar>;
     getContractAt(
       name: "ContractThatCannotBeDeployed",
       address: string,
