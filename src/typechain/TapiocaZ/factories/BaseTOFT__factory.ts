@@ -1606,6 +1606,11 @@ const _abi = [
         type: "uint16",
       },
       {
+        internalType: "bytes",
+        name: "airdropAdapterParams",
+        type: "bytes",
+      },
+      {
         components: [
           {
             internalType: "uint256",

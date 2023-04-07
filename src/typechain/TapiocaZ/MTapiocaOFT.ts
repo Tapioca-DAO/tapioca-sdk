@@ -188,7 +188,7 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
     "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool,bool))": FunctionFragment;
-    "sendToYBAndBorrow(address,address,uint16,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool,bool),(address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool,bool),(address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
     "setPayloadSizeLimit(uint16,uint256)": FunctionFragment;
@@ -322,7 +322,7 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       | "sendToYB"
       | "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool,bool))"
       | "sendToYBAndBorrow"
-      | "sendToYBAndBorrow(address,address,uint16,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool,bool),(address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
+      | "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool,bool),(address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "setConfig"
       | "setConfig(uint16,uint16,uint256,bytes)"
       | "setMinDstGas"
@@ -934,6 +934,7 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
       BaseTOFT.IBorrowParamsStruct,
       BaseTOFT.IWithdrawParamsStruct,
       BaseTOFT.SendOptionsStruct,
@@ -941,11 +942,12 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "sendToYBAndBorrow(address,address,uint16,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool,bool),(address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool,bool),(address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
       BaseTOFT.IBorrowParamsStruct,
       BaseTOFT.IWithdrawParamsStruct,
       BaseTOFT.SendOptionsStruct,
@@ -1515,7 +1517,7 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "sendToYBAndBorrow(address,address,uint16,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool,bool),(address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool,bool),(address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "setConfig", data: BytesLike): Result;
@@ -2642,6 +2644,7 @@ export interface MTapiocaOFT extends BaseContract {
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: BaseTOFT.IBorrowParamsStruct,
       withdrawParams: BaseTOFT.IWithdrawParamsStruct,
       options: BaseTOFT.SendOptionsStruct,
@@ -2649,10 +2652,11 @@ export interface MTapiocaOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "sendToYBAndBorrow(address,address,uint16,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool,bool),(address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool,bool),(address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: BaseTOFT.IBorrowParamsStruct,
       withdrawParams: BaseTOFT.IWithdrawParamsStruct,
       options: BaseTOFT.SendOptionsStruct,
@@ -3441,6 +3445,7 @@ export interface MTapiocaOFT extends BaseContract {
     _from: PromiseOrValue<string>,
     _to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
+    airdropAdapterParams: PromiseOrValue<BytesLike>,
     borrowParams: BaseTOFT.IBorrowParamsStruct,
     withdrawParams: BaseTOFT.IWithdrawParamsStruct,
     options: BaseTOFT.SendOptionsStruct,
@@ -3448,10 +3453,11 @@ export interface MTapiocaOFT extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "sendToYBAndBorrow(address,address,uint16,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool,bool),(address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+  "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool,bool),(address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
     _from: PromiseOrValue<string>,
     _to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
+    airdropAdapterParams: PromiseOrValue<BytesLike>,
     borrowParams: BaseTOFT.IBorrowParamsStruct,
     withdrawParams: BaseTOFT.IWithdrawParamsStruct,
     options: BaseTOFT.SendOptionsStruct,
@@ -4238,6 +4244,7 @@ export interface MTapiocaOFT extends BaseContract {
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: BaseTOFT.IBorrowParamsStruct,
       withdrawParams: BaseTOFT.IWithdrawParamsStruct,
       options: BaseTOFT.SendOptionsStruct,
@@ -4245,10 +4252,11 @@ export interface MTapiocaOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "sendToYBAndBorrow(address,address,uint16,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool,bool),(address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool,bool),(address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: BaseTOFT.IBorrowParamsStruct,
       withdrawParams: BaseTOFT.IWithdrawParamsStruct,
       options: BaseTOFT.SendOptionsStruct,
@@ -5257,6 +5265,7 @@ export interface MTapiocaOFT extends BaseContract {
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: BaseTOFT.IBorrowParamsStruct,
       withdrawParams: BaseTOFT.IWithdrawParamsStruct,
       options: BaseTOFT.SendOptionsStruct,
@@ -5264,10 +5273,11 @@ export interface MTapiocaOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "sendToYBAndBorrow(address,address,uint16,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool,bool),(address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool,bool),(address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: BaseTOFT.IBorrowParamsStruct,
       withdrawParams: BaseTOFT.IWithdrawParamsStruct,
       options: BaseTOFT.SendOptionsStruct,
@@ -6071,6 +6081,7 @@ export interface MTapiocaOFT extends BaseContract {
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: BaseTOFT.IBorrowParamsStruct,
       withdrawParams: BaseTOFT.IWithdrawParamsStruct,
       options: BaseTOFT.SendOptionsStruct,
@@ -6078,10 +6089,11 @@ export interface MTapiocaOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "sendToYBAndBorrow(address,address,uint16,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool,bool),(address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool,bool),(address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: BaseTOFT.IBorrowParamsStruct,
       withdrawParams: BaseTOFT.IWithdrawParamsStruct,
       options: BaseTOFT.SendOptionsStruct,
