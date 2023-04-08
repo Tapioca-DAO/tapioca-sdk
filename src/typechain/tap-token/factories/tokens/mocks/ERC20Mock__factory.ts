@@ -567,6 +567,7 @@ export class ERC20Mock__factory extends ContractFactory {
     } else {
       super(_abi, _bytecode, args[0]);
     }
+    this.contractName = "ERC20Mock";
   }
 
   override deploy(
@@ -609,6 +610,9 @@ export class ERC20Mock__factory extends ContractFactory {
   override connect(signer: Signer): ERC20Mock__factory {
     return super.connect(signer) as ERC20Mock__factory;
   }
+  static readonly contractName: "ERC20Mock";
+
+  public readonly contractName: "ERC20Mock";
 
   static readonly bytecode = _bytecode;
   static readonly abi = _abi;
