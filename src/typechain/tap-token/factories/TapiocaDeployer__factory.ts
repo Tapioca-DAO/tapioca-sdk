@@ -117,6 +117,7 @@ export class TapiocaDeployer__factory extends ContractFactory {
     } else {
       super(_abi, _bytecode, args[0]);
     }
+    this.contractName = "TapiocaDeployer";
   }
 
   override deploy(
@@ -135,6 +136,9 @@ export class TapiocaDeployer__factory extends ContractFactory {
   override connect(signer: Signer): TapiocaDeployer__factory {
     return super.connect(signer) as TapiocaDeployer__factory;
   }
+  static readonly contractName: "TapiocaDeployer";
+
+  public readonly contractName: "TapiocaDeployer";
 
   static readonly bytecode = _bytecode;
   static readonly abi = _abi;

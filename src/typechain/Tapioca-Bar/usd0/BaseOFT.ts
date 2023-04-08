@@ -68,6 +68,7 @@ export declare namespace BaseOFT {
   };
 
   export type IApprovalStruct = {
+    allowFailure: PromiseOrValue<boolean>;
     target: PromiseOrValue<string>;
     owner: PromiseOrValue<string>;
     spender: PromiseOrValue<string>;
@@ -79,6 +80,7 @@ export declare namespace BaseOFT {
   };
 
   export type IApprovalStructOutput = [
+    boolean,
     string,
     string,
     string,
@@ -88,6 +90,7 @@ export declare namespace BaseOFT {
     string,
     string
   ] & {
+    allowFailure: boolean;
     target: string;
     owner: string;
     spender: string;
@@ -143,7 +146,7 @@ export interface BaseOFTInterface extends utils.Interface {
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
     "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool))": FunctionFragment;
-    "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
+    "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
     "setPayloadSizeLimit(uint16,uint256)": FunctionFragment;
@@ -253,7 +256,7 @@ export interface BaseOFTInterface extends utils.Interface {
       | "sendToYB"
       | "sendToYB(address,address,uint256,uint256,uint16,(uint256,address,bool))"
       | "sendToYBAndLend"
-      | "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
+      | "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "setConfig"
       | "setConfig(uint16,uint16,uint256,bytes)"
       | "setMinDstGas"
@@ -780,7 +783,7 @@ export interface BaseOFTInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -1240,7 +1243,7 @@ export interface BaseOFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "setConfig", data: BytesLike): Result;
@@ -2173,7 +2176,7 @@ export interface BaseOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -2834,7 +2837,7 @@ export interface BaseOFT extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+  "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
     _from: PromiseOrValue<string>,
     _to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3493,7 +3496,7 @@ export interface BaseOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -4319,7 +4322,7 @@ export interface BaseOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -4995,7 +4998,7 @@ export interface BaseOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address,bool),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
