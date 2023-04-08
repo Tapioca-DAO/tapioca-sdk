@@ -479,12 +479,22 @@
             ],
             "4002": [
                 {
+                    "name": "Magnetar",
+                    "address": "0x83CE4Ad0d9A178FddCe80e77D260023a082b1701",
+                    "meta": {}
+                },
+                {
                     "name": "Multicall3",
                     "address": "0xa9aAa2B3547071741fe49F3418BcA8F6Ffff9AB8",
                     "meta": {}
                 }
             ],
             "43113": [
+                {
+                    "name": "Magnetar",
+                    "address": "0x144A9e12db27aC69244D624d2beA556e3b4024C3",
+                    "meta": {}
+                },
                 {
                     "name": "MultisigMock",
                     "address": "0x9b61068cF7135a22eA6aEA02FF8602379d5487Aa",
@@ -498,6 +508,11 @@
             ],
             "80001": [
                 {
+                    "name": "Magnetar",
+                    "address": "0xe4Cd86127Cce1250bb75B1933F66a01A1034F25c",
+                    "meta": {}
+                },
+                {
                     "name": "Multicall3",
                     "address": "0xc759e19720e9c7195A8ECddeeDA4bF9321b87835",
                     "meta": {}
@@ -506,7 +521,7 @@
             "421613": [
                 {
                     "name": "Magnetar",
-                    "address": "0x56a98FAa5e04c2ca6652E1D5d9B746b1Fa37826C",
+                    "address": "0x0e3ded13A414871060B241638067Fc190Ad3d110",
                     "meta": {}
                 },
                 {
