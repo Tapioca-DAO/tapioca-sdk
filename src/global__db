@@ -461,7 +461,384 @@
                 }
             ]
         },
-        "tapiocaz": {},
+        "tapiocaz": {
+            "4002": [
+                {
+                    "name": "TapiocaOFT-Fantom",
+                    "address": "0xd3f343F9f20b017B71A4b849D18273252aBC4179",
+                    "meta": {
+                        "isToftHost": true,
+                        "isMerged": false,
+                        "isToft": true,
+                        "args": [
+                            "0x7dcAD72640F835B0FA36EFD3D6d3ec902C7E5acf",
+                            false,
+                            "0xEa71Dc040453d13B735D5054d525dBE4dA56361f",
+                            "0x682D501C8e9E2c1edB96CF68F9B3d19F5bcE6734",
+                            "Fantom",
+                            "FTM",
+                            18,
+                            4002
+                        ]
+                    }
+                },
+                {
+                    "name": "TapiocaOFT-Polygon",
+                    "address": "0x9Ea243fBF86785D7e2F15377eC2FF1C7a34E54B8",
+                    "meta": {
+                        "isToftHost": false,
+                        "isMerged": false,
+                        "isToft": true,
+                        "args": [
+                            "0x7dcAD72640F835B0FA36EFD3D6d3ec902C7E5acf",
+                            false,
+                            "0xF4921326bDb7eB28667B2064FDb938bB5EE4E9D3",
+                            "0x682D501C8e9E2c1edB96CF68F9B3d19F5bcE6734",
+                            "Polygon",
+                            "MATIC",
+                            18,
+                            80001
+                        ]
+                    }
+                },
+                {
+                    "name": "TapiocaOFT-Avalanche",
+                    "address": "0x90abFc536c7662605184d602177389eA7B51E309",
+                    "meta": {
+                        "isToftHost": false,
+                        "isMerged": false,
+                        "isToft": true,
+                        "args": [
+                            "0x7dcAD72640F835B0FA36EFD3D6d3ec902C7E5acf",
+                            false,
+                            "0x9889946ea0A2F9A8B19E8Ba1D174a6E31D31Cd42",
+                            "0x682D501C8e9E2c1edB96CF68F9B3d19F5bcE6734",
+                            "Avalanche",
+                            "AVAX",
+                            18,
+                            43113
+                        ]
+                    }
+                },
+                {
+                    "name": "TapiocaOFT-WETHMock",
+                    "address": "0x39c10A251cdc20F9aFDE9a0f034f8560a2902c07",
+                    "meta": {
+                        "isToftHost": false,
+                        "isMerged": false,
+                        "isToft": true,
+                        "args": [
+                            "0x7dcAD72640F835B0FA36EFD3D6d3ec902C7E5acf",
+                            false,
+                            "0x6aEEb3DEB0cE85e146B7f90CDa6745dB3BD6d6B7",
+                            "0x682D501C8e9E2c1edB96CF68F9B3d19F5bcE6734",
+                            "WETHMock",
+                            "WETHM",
+                            18,
+                            421613
+                        ]
+                    }
+                },
+                {
+                    "name": "TapiocaWrapper",
+                    "address": "0x66E284C8F88A38d08F8f99B63939a969C6F3ef37",
+                    "meta": {
+                        "args": [
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ],
+                        "salt": "0xbce10f8bc02aa7aef1fb4d8f5c2fdfb6f9468be55d12bb1d447b708b714fd2a5",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "TapiocaDeployer",
+                    "address": "0xAef6dcab06B99A45E903DB20DFF4A6596831053A",
+                    "meta": {}
+                }
+            ],
+            "43113": [
+                {
+                    "name": "TapiocaOFT-Fantom",
+                    "address": "0x8F10ABe054dCE63C64309EaB0892B275Cc726cBd",
+                    "meta": {
+                        "isToftHost": false,
+                        "isMerged": false,
+                        "isToft": true,
+                        "args": [
+                            "0x93f54D755A063cE7bB9e6Ac47Eccc8e33411d706",
+                            false,
+                            "0xEa71Dc040453d13B735D5054d525dBE4dA56361f",
+                            "0xd4B8A337e41A20fCF708a4d2205BD61254757ea2",
+                            "Fantom",
+                            "FTM",
+                            18,
+                            4002
+                        ]
+                    }
+                },
+                {
+                    "name": "TapiocaOFT-Polygon",
+                    "address": "0x8C91ee1f5231251b778ABDc198c3BFe58E7b608e",
+                    "meta": {
+                        "isToftHost": false,
+                        "isMerged": false,
+                        "isToft": true,
+                        "args": [
+                            "0x93f54D755A063cE7bB9e6Ac47Eccc8e33411d706",
+                            false,
+                            "0xF4921326bDb7eB28667B2064FDb938bB5EE4E9D3",
+                            "0xd4B8A337e41A20fCF708a4d2205BD61254757ea2",
+                            "Polygon",
+                            "MATIC",
+                            18,
+                            80001
+                        ]
+                    }
+                },
+                {
+                    "name": "TapiocaOFT-Avalanche",
+                    "address": "0x18f8531C6d86833261F8247b45f2d29B7EC80c62",
+                    "meta": {
+                        "isToftHost": true,
+                        "isMerged": false,
+                        "isToft": true,
+                        "args": [
+                            "0x93f54D755A063cE7bB9e6Ac47Eccc8e33411d706",
+                            false,
+                            "0x9889946ea0A2F9A8B19E8Ba1D174a6E31D31Cd42",
+                            "0xd4B8A337e41A20fCF708a4d2205BD61254757ea2",
+                            "Avalanche",
+                            "AVAX",
+                            18,
+                            43113
+                        ]
+                    }
+                },
+                {
+                    "name": "TapiocaOFT-WETHMock",
+                    "address": "0x74552DF0c87e145D82Bae910aC04AB3bDBD6c37f",
+                    "meta": {
+                        "isToftHost": false,
+                        "isMerged": false,
+                        "isToft": true,
+                        "args": [
+                            "0x93f54D755A063cE7bB9e6Ac47Eccc8e33411d706",
+                            false,
+                            "0x6aEEb3DEB0cE85e146B7f90CDa6745dB3BD6d6B7",
+                            "0xd4B8A337e41A20fCF708a4d2205BD61254757ea2",
+                            "WETHMock",
+                            "WETHM",
+                            18,
+                            421613
+                        ]
+                    }
+                },
+                {
+                    "name": "TapiocaWrapper",
+                    "address": "0xB1c82e089197e8E0bCB12793Cd7016dcd52Aa1E3",
+                    "meta": {
+                        "args": [
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ],
+                        "salt": "0x0c74b01b6a72db41a25b00dfd98a6260459220b3c76ea6c1b4ecd414efad1b49",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "TapiocaDeployer",
+                    "address": "0x3FFf7Bd8Cb9E29d79F118C4bf5d2A9c3B0672835",
+                    "meta": {}
+                }
+            ],
+            "80001": [
+                {
+                    "name": "TapiocaOFT-Fantom",
+                    "address": "0x6F0d7286a3aCC3DF8137Df89d4c5a1Af2726cF64",
+                    "meta": {
+                        "isToftHost": false,
+                        "isMerged": false,
+                        "isToft": true,
+                        "args": [
+                            "0xf69186dfBa60DdB133E91E9A4B5673624293d8F8",
+                            false,
+                            "0xEa71Dc040453d13B735D5054d525dBE4dA56361f",
+                            "0x936D57BE0F364b8a17d113c82780dc8e6A9f6B6e",
+                            "Fantom",
+                            "FTM",
+                            18,
+                            4002
+                        ]
+                    }
+                },
+                {
+                    "name": "TapiocaOFT-Polygon",
+                    "address": "0xf892901c0F804C323dA6b6E28A8a0e81D905FFBa",
+                    "meta": {
+                        "isToftHost": true,
+                        "isMerged": false,
+                        "isToft": true,
+                        "args": [
+                            "0xf69186dfBa60DdB133E91E9A4B5673624293d8F8",
+                            false,
+                            "0xF4921326bDb7eB28667B2064FDb938bB5EE4E9D3",
+                            "0x936D57BE0F364b8a17d113c82780dc8e6A9f6B6e",
+                            "Polygon",
+                            "MATIC",
+                            18,
+                            80001
+                        ]
+                    }
+                },
+                {
+                    "name": "TapiocaOFT-Avalanche",
+                    "address": "0x892c66222d325A782e6FBf48824F64b954da3246",
+                    "meta": {
+                        "isToftHost": false,
+                        "isMerged": false,
+                        "isToft": true,
+                        "args": [
+                            "0xf69186dfBa60DdB133E91E9A4B5673624293d8F8",
+                            false,
+                            "0x9889946ea0A2F9A8B19E8Ba1D174a6E31D31Cd42",
+                            "0x936D57BE0F364b8a17d113c82780dc8e6A9f6B6e",
+                            "Avalanche",
+                            "AVAX",
+                            18,
+                            43113
+                        ]
+                    }
+                },
+                {
+                    "name": "TapiocaOFT-WETHMock",
+                    "address": "0xE0C12686a32D33079c1c155CC23e861CcAEE3757",
+                    "meta": {
+                        "isToftHost": false,
+                        "isMerged": false,
+                        "isToft": true,
+                        "args": [
+                            "0xf69186dfBa60DdB133E91E9A4B5673624293d8F8",
+                            false,
+                            "0x6aEEb3DEB0cE85e146B7f90CDa6745dB3BD6d6B7",
+                            "0x936D57BE0F364b8a17d113c82780dc8e6A9f6B6e",
+                            "WETHMock",
+                            "WETHM",
+                            18,
+                            421613
+                        ]
+                    }
+                },
+                {
+                    "name": "TapiocaWrapper",
+                    "address": "0xEFbFd8d4d122C0Ba327eB88279dDb29fe89b559b",
+                    "meta": {
+                        "args": [
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ],
+                        "salt": "0x419f88cf0ca5c4acbb3c3b05d5b689cafddc4f5f9fd0366ee7e19121adfcd9e0",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "TapiocaDeployer",
+                    "address": "0x19b9c5b67b6727a4ea1DBF1383a412ABfcE50d4A",
+                    "meta": {}
+                }
+            ],
+            "421613": [
+                {
+                    "name": "TapiocaOFT-Fantom",
+                    "address": "0xE2d4510a6394DdBAb0FB442b859cb654440F7D1B",
+                    "meta": {
+                        "isToftHost": false,
+                        "isMerged": false,
+                        "isToft": true,
+                        "args": [
+                            "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
+                            false,
+                            "0xEa71Dc040453d13B735D5054d525dBE4dA56361f",
+                            "0x6447f534a79b394fe1e804Ae5C96E027ECc4cA2E",
+                            "Fantom",
+                            "FTM",
+                            18,
+                            4002
+                        ]
+                    }
+                },
+                {
+                    "name": "TapiocaOFT-Polygon",
+                    "address": "0x56b8b08a3aBdcc61a0447DA0712712fE51f3dC95",
+                    "meta": {
+                        "isToftHost": false,
+                        "isMerged": false,
+                        "isToft": true,
+                        "args": [
+                            "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
+                            false,
+                            "0xF4921326bDb7eB28667B2064FDb938bB5EE4E9D3",
+                            "0x6447f534a79b394fe1e804Ae5C96E027ECc4cA2E",
+                            "Polygon",
+                            "MATIC",
+                            18,
+                            80001
+                        ]
+                    }
+                },
+                {
+                    "name": "TapiocaOFT-Avalanche",
+                    "address": "0x8c790F87391426D2B18D8f4b1A46A646Afeba179",
+                    "meta": {
+                        "isToftHost": false,
+                        "isMerged": false,
+                        "isToft": true,
+                        "args": [
+                            "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
+                            false,
+                            "0x9889946ea0A2F9A8B19E8Ba1D174a6E31D31Cd42",
+                            "0x6447f534a79b394fe1e804Ae5C96E027ECc4cA2E",
+                            "Avalanche",
+                            "AVAX",
+                            18,
+                            43113
+                        ]
+                    }
+                },
+                {
+                    "name": "TapiocaOFT-WETHMock",
+                    "address": "0x110BAA8644478822b7CAADAbA1A31e6785c36B63",
+                    "meta": {
+                        "isToftHost": true,
+                        "isMerged": false,
+                        "isToft": true,
+                        "args": [
+                            "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
+                            false,
+                            "0x6aEEb3DEB0cE85e146B7f90CDa6745dB3BD6d6B7",
+                            "0x6447f534a79b394fe1e804Ae5C96E027ECc4cA2E",
+                            "WETHMock",
+                            "WETHM",
+                            18,
+                            421613
+                        ]
+                    }
+                },
+                {
+                    "name": "TapiocaWrapper",
+                    "address": "0x04e0759FBBB81e654cc49C89755cC7Fc0b5881dD",
+                    "meta": {
+                        "args": [
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ],
+                        "salt": "0x2417dde1958319d7525d008e2692730025f90381cccdcbe62cf0cc86cf8d2fc5",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "TapiocaDeployer",
+                    "address": "0xF594211Ec25D4646B567c85D270aC85FFf8443aa",
+                    "meta": {}
+                }
+            ]
+        },
         "generic": {
             "5": [
                 {
