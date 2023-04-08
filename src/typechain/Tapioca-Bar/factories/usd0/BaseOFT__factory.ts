@@ -1490,6 +1490,11 @@ const _abi = [
       {
         components: [
           {
+            internalType: "bool",
+            name: "allowFailure",
+            type: "bool",
+          },
+          {
             internalType: "address",
             name: "target",
             type: "address",

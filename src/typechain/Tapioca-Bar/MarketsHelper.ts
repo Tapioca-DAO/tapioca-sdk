@@ -146,8 +146,8 @@ export declare namespace ISingularity {
 export interface MarketsHelperInterface extends utils.Interface {
   functions: {
     "bigBangMarketInfo(address,address[])": FunctionFragment;
-    "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bytes)": FunctionFragment;
-    "depositAndAddAsset(address,address,uint256,bool)": FunctionFragment;
+    "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bool,bytes)": FunctionFragment;
+    "depositAndAddAsset(address,address,uint256,bool,bool)": FunctionFragment;
     "depositAndRepay(address,uint256,uint256,bool)": FunctionFragment;
     "depositRepayAndRemoveCollateral(address,uint256,uint256,uint256,bool,bool)": FunctionFragment;
     "getAmountForAssetFraction(address,uint256)": FunctionFragment;
@@ -164,9 +164,9 @@ export interface MarketsHelperInterface extends utils.Interface {
       | "bigBangMarketInfo"
       | "bigBangMarketInfo(address,address[])"
       | "depositAddCollateralAndBorrow"
-      | "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bytes)"
+      | "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bool,bytes)"
       | "depositAndAddAsset"
-      | "depositAndAddAsset(address,address,uint256,bool)"
+      | "depositAndAddAsset(address,address,uint256,bool,bool)"
       | "depositAndRepay"
       | "depositAndRepay(address,uint256,uint256,bool)"
       | "depositRepayAndRemoveCollateral"
@@ -204,16 +204,18 @@ export interface MarketsHelperInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<boolean>,
       PromiseOrValue<boolean>,
+      PromiseOrValue<boolean>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bytes)",
+    functionFragment: "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bool,bytes)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<boolean>,
       PromiseOrValue<boolean>,
       PromiseOrValue<boolean>,
       PromiseOrValue<BytesLike>
@@ -225,15 +227,17 @@ export interface MarketsHelperInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<boolean>,
       PromiseOrValue<boolean>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "depositAndAddAsset(address,address,uint256,bool)",
+    functionFragment: "depositAndAddAsset(address,address,uint256,bool,bool)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<boolean>,
       PromiseOrValue<boolean>
     ]
   ): string;
@@ -385,7 +389,7 @@ export interface MarketsHelperInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bytes)",
+    functionFragment: "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bool,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -393,7 +397,7 @@ export interface MarketsHelperInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "depositAndAddAsset(address,address,uint256,bool)",
+    functionFragment: "depositAndAddAsset(address,address,uint256,bool,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -518,17 +522,19 @@ export interface MarketsHelper extends BaseContract {
       _user: PromiseOrValue<string>,
       _collateralAmount: PromiseOrValue<BigNumberish>,
       _borrowAmount: PromiseOrValue<BigNumberish>,
+      extractFromSender: PromiseOrValue<boolean>,
       deposit_: PromiseOrValue<boolean>,
       withdraw_: PromiseOrValue<boolean>,
       _withdrawData: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bytes)"(
+    "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bool,bytes)"(
       market: PromiseOrValue<string>,
       _user: PromiseOrValue<string>,
       _collateralAmount: PromiseOrValue<BigNumberish>,
       _borrowAmount: PromiseOrValue<BigNumberish>,
+      extractFromSender: PromiseOrValue<boolean>,
       deposit_: PromiseOrValue<boolean>,
       withdraw_: PromiseOrValue<boolean>,
       _withdrawData: PromiseOrValue<BytesLike>,
@@ -540,14 +546,16 @@ export interface MarketsHelper extends BaseContract {
       _user: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       deposit_: PromiseOrValue<boolean>,
+      extractFromSender: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "depositAndAddAsset(address,address,uint256,bool)"(
+    "depositAndAddAsset(address,address,uint256,bool,bool)"(
       singularity: PromiseOrValue<string>,
       _user: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       deposit_: PromiseOrValue<boolean>,
+      extractFromSender: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -709,17 +717,19 @@ export interface MarketsHelper extends BaseContract {
     _user: PromiseOrValue<string>,
     _collateralAmount: PromiseOrValue<BigNumberish>,
     _borrowAmount: PromiseOrValue<BigNumberish>,
+    extractFromSender: PromiseOrValue<boolean>,
     deposit_: PromiseOrValue<boolean>,
     withdraw_: PromiseOrValue<boolean>,
     _withdrawData: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bytes)"(
+  "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bool,bytes)"(
     market: PromiseOrValue<string>,
     _user: PromiseOrValue<string>,
     _collateralAmount: PromiseOrValue<BigNumberish>,
     _borrowAmount: PromiseOrValue<BigNumberish>,
+    extractFromSender: PromiseOrValue<boolean>,
     deposit_: PromiseOrValue<boolean>,
     withdraw_: PromiseOrValue<boolean>,
     _withdrawData: PromiseOrValue<BytesLike>,
@@ -731,14 +741,16 @@ export interface MarketsHelper extends BaseContract {
     _user: PromiseOrValue<string>,
     _amount: PromiseOrValue<BigNumberish>,
     deposit_: PromiseOrValue<boolean>,
+    extractFromSender: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "depositAndAddAsset(address,address,uint256,bool)"(
+  "depositAndAddAsset(address,address,uint256,bool,bool)"(
     singularity: PromiseOrValue<string>,
     _user: PromiseOrValue<string>,
     _amount: PromiseOrValue<BigNumberish>,
     deposit_: PromiseOrValue<boolean>,
+    extractFromSender: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -900,17 +912,19 @@ export interface MarketsHelper extends BaseContract {
       _user: PromiseOrValue<string>,
       _collateralAmount: PromiseOrValue<BigNumberish>,
       _borrowAmount: PromiseOrValue<BigNumberish>,
+      extractFromSender: PromiseOrValue<boolean>,
       deposit_: PromiseOrValue<boolean>,
       withdraw_: PromiseOrValue<boolean>,
       _withdrawData: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bytes)"(
+    "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bool,bytes)"(
       market: PromiseOrValue<string>,
       _user: PromiseOrValue<string>,
       _collateralAmount: PromiseOrValue<BigNumberish>,
       _borrowAmount: PromiseOrValue<BigNumberish>,
+      extractFromSender: PromiseOrValue<boolean>,
       deposit_: PromiseOrValue<boolean>,
       withdraw_: PromiseOrValue<boolean>,
       _withdrawData: PromiseOrValue<BytesLike>,
@@ -922,14 +936,16 @@ export interface MarketsHelper extends BaseContract {
       _user: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       deposit_: PromiseOrValue<boolean>,
+      extractFromSender: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "depositAndAddAsset(address,address,uint256,bool)"(
+    "depositAndAddAsset(address,address,uint256,bool,bool)"(
       singularity: PromiseOrValue<string>,
       _user: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       deposit_: PromiseOrValue<boolean>,
+      extractFromSender: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1094,17 +1110,19 @@ export interface MarketsHelper extends BaseContract {
       _user: PromiseOrValue<string>,
       _collateralAmount: PromiseOrValue<BigNumberish>,
       _borrowAmount: PromiseOrValue<BigNumberish>,
+      extractFromSender: PromiseOrValue<boolean>,
       deposit_: PromiseOrValue<boolean>,
       withdraw_: PromiseOrValue<boolean>,
       _withdrawData: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bytes)"(
+    "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bool,bytes)"(
       market: PromiseOrValue<string>,
       _user: PromiseOrValue<string>,
       _collateralAmount: PromiseOrValue<BigNumberish>,
       _borrowAmount: PromiseOrValue<BigNumberish>,
+      extractFromSender: PromiseOrValue<boolean>,
       deposit_: PromiseOrValue<boolean>,
       withdraw_: PromiseOrValue<boolean>,
       _withdrawData: PromiseOrValue<BytesLike>,
@@ -1116,14 +1134,16 @@ export interface MarketsHelper extends BaseContract {
       _user: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       deposit_: PromiseOrValue<boolean>,
+      extractFromSender: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "depositAndAddAsset(address,address,uint256,bool)"(
+    "depositAndAddAsset(address,address,uint256,bool,bool)"(
       singularity: PromiseOrValue<string>,
       _user: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       deposit_: PromiseOrValue<boolean>,
+      extractFromSender: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1286,17 +1306,19 @@ export interface MarketsHelper extends BaseContract {
       _user: PromiseOrValue<string>,
       _collateralAmount: PromiseOrValue<BigNumberish>,
       _borrowAmount: PromiseOrValue<BigNumberish>,
+      extractFromSender: PromiseOrValue<boolean>,
       deposit_: PromiseOrValue<boolean>,
       withdraw_: PromiseOrValue<boolean>,
       _withdrawData: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bytes)"(
+    "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bool,bytes)"(
       market: PromiseOrValue<string>,
       _user: PromiseOrValue<string>,
       _collateralAmount: PromiseOrValue<BigNumberish>,
       _borrowAmount: PromiseOrValue<BigNumberish>,
+      extractFromSender: PromiseOrValue<boolean>,
       deposit_: PromiseOrValue<boolean>,
       withdraw_: PromiseOrValue<boolean>,
       _withdrawData: PromiseOrValue<BytesLike>,
@@ -1308,14 +1330,16 @@ export interface MarketsHelper extends BaseContract {
       _user: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       deposit_: PromiseOrValue<boolean>,
+      extractFromSender: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "depositAndAddAsset(address,address,uint256,bool)"(
+    "depositAndAddAsset(address,address,uint256,bool,bool)"(
       singularity: PromiseOrValue<string>,
       _user: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       deposit_: PromiseOrValue<boolean>,
+      extractFromSender: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

@@ -1,0 +1,37 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "PenroseMock",
+  "sourceName": "contracts/mocks/PenroseMock.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "contract YieldBox",
+          "name": "_yieldBox",
+          "type": "address"
+        },
+        {
+          "internalType": "contract IERC20",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "contract IERC20",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "bytecode": "0x60a034608857601f6100f138819003918201601f19168301916001600160401b03831184841017608d578084926080946040528339810103126088578051906001600160a01b0390818316830360885780605c60206060930160a3565b5060676040820160a3565b50015190811603608857608052604051603a90816100b78239608051815050f35b600080fd5b634e487b7160e01b600052604160045260246000fd5b51906001600160a01b038216820360885756fe600080fdfea26469706673582212208800719c28339a50fa771d787d32194e386d20a36e4d95fb354e474b70ab455764736f6c63430008120033",
+  "deployedBytecode": "0x600080fdfea26469706673582212208800719c28339a50fa771d787d32194e386d20a36e4d95fb354e474b70ab455764736f6c63430008120033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
