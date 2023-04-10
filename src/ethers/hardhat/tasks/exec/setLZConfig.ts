@@ -55,7 +55,12 @@ export const setLZConfig__task = async (
     const contractToConf = choices.find(
         (e: TContract) => e.name === toConfigure,
     )!;
-    const targets = await getLinkedContract(hre, tag, contractToConf, taskArgs.chainId);
+    const targets = await getLinkedContract(
+        hre,
+        tag,
+        contractToConf,
+        taskArgs.chainId,
+    );
 
     const calls = buildCalls(hre, contractToConf, targets);
 
