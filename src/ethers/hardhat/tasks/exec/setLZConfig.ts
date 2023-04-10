@@ -11,7 +11,7 @@ import { Multicall3 } from '../../../../typechain/utils/MultiCall';
  * Configure the LZ app in one go
  */
 export const setLZConfig__task = async (
-    taskArgs: { isToft?: boolean; debugMode?: boolean },
+    taskArgs: { isToft?: boolean; debugMode?: boolean; chainId?: string },
     hre: HardhatRuntimeEnvironment,
 ) => {
     console.log('[+] Setting omni config');
@@ -55,7 +55,8 @@ export const setLZConfig__task = async (
     const contractToConf = choices.find(
         (e: TContract) => e.name === toConfigure,
     )!;
-    const targets = await getLinkedContract(hre, tag, contractToConf);
+    const targets = await getLinkedContract(hre, tag, contractToConf, taskArgs.chainId);
+
     const calls = buildCalls(hre, contractToConf, targets);
 
     // Execute calls
@@ -126,9 +127,10 @@ async function getLinkedContract(
     hre: HardhatRuntimeEnvironment,
     tag: string,
     contractToConf: TContract,
+    chainId?: string,
 ) {
     // TODO - Could be a util
-    const targets: { lzChainId: string; contract: TContract }[] = [];
+    let targets: { lzChainId: string; contract: TContract }[] = [];
     const localDeployments = hre.SDK.db.readDeployment('local', {
         tag,
     }) as TLocalDeployment;
@@ -150,6 +152,10 @@ async function getLinkedContract(
                 contract: linked,
             });
         }
+    }
+
+    if (chainId) {
+        targets = targets.filter((e) => e.lzChainId == chainId);
     }
 
     const supportedChain = hre.SDK.utils.getSupportedChains();
