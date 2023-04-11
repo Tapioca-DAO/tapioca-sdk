@@ -173,6 +173,7 @@ export enum TAPIOCA_PROJECTS_NAME {
     TapToken = 'tap-token',
     TapiocaBar = 'tapioca-bar',
     Generic = 'generic',
+    TapiocaPeriphery = 'tapioca-periphery',
 }
 
 export const TAPIOCA_PROJECTS = [
@@ -180,6 +181,7 @@ export const TAPIOCA_PROJECTS = [
     'tap-token',
     'tapioca-bar',
     'generic',
+    'tapioca-periphery',
 ] as const;
 
 export const MULTICALL_ADDRESS = '0xcA11bde05977b3631167028862bE2a173976CA11';
