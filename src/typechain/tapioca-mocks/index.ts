@@ -4,3 +4,4 @@
 export type { ERC20Mock } from "./ERC20Mock";
 export * as factories from "./factories";
 export { ERC20Mock__factory } from "./factories/ERC20Mock__factory";
+export { OracleMock__factory } from "./factories/OracleMock__factory";
