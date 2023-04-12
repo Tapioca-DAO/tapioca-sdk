@@ -442,6 +442,62 @@ export class DeployerVM {
         return this;
     }
 
+    // ***********
+    // Getters
+    // ***********
+
+    async getTapiocaDeployer(): Promise<TapiocaDeployer> {
+        if (this.tapiocaDeployer) return this.tapiocaDeployer;
+
+        // Get deployer deployment
+        let deployment: TContract | undefined;
+        try {
+            deployment = this.hre.SDK.db.getLocalDeployment(
+                String(this.hre.network.config.chainId),
+                'TapiocaDeployer',
+                this.options.tag,
+            );
+        } catch (e) {
+            if (this.options.debugMode) {
+                console.log(`[-] Failed with error: ${e}`);
+            }
+        }
+
+        // Deploy TapiocaDeployer if not deployed
+        if (!deployment) {
+            // Deploy TapiocaDeployer
+            const tapiocaDeployer = await new TapiocaDeployer__factory(
+                (
+                    await this.hre.ethers.getSigners()
+                )[0],
+            ).deploy();
+
+            await tapiocaDeployer.deployTransaction.wait(3);
+
+            // Save deployment
+            const dep = this.hre.SDK.db.buildLocalDeployment({
+                chainId: String(this.hre.network.config.chainId),
+                contracts: [
+                    {
+                        name: 'TapiocaDeployer',
+                        address: tapiocaDeployer.address,
+                        meta: {},
+                    },
+                ],
+            });
+            this.hre.SDK.db.saveLocally(dep, this.options.tag);
+
+            this.tapiocaDeployer = tapiocaDeployer;
+            return tapiocaDeployer;
+        }
+
+        // Return TapiocaDeployer
+        return TapiocaDeployer__factory.connect(
+            deployment.address,
+            (await this.hre.ethers.getSigners())[0],
+        );
+    }
+
     /**
      * Retrieves the Multicall3 contract
      * If the contract doesn't exist, it will be deployed and saved globally
@@ -748,59 +804,6 @@ export class DeployerVM {
             this.hre.ethers.utils.keccak256(bytecode),
         );
     }
-
-    private async getTapiocaDeployer(): Promise<TapiocaDeployer> {
-        if (this.tapiocaDeployer) return this.tapiocaDeployer;
-
-        // Get deployer deployment
-        let deployment: TContract | undefined;
-        try {
-            deployment = this.hre.SDK.db.getLocalDeployment(
-                String(this.hre.network.config.chainId),
-                'TapiocaDeployer',
-                this.options.tag,
-            );
-        } catch (e) {
-            if (this.options.debugMode) {
-                console.log(`[-] Failed with error: ${e}`);
-            }
-        }
-
-        // Deploy TapiocaDeployer if not deployed
-        if (!deployment) {
-            // Deploy TapiocaDeployer
-            const tapiocaDeployer = await new TapiocaDeployer__factory(
-                (
-                    await this.hre.ethers.getSigners()
-                )[0],
-            ).deploy();
-
-            await tapiocaDeployer.deployTransaction.wait(3);
-
-            // Save deployment
-            const dep = this.hre.SDK.db.buildLocalDeployment({
-                chainId: String(this.hre.network.config.chainId),
-                contracts: [
-                    {
-                        name: 'TapiocaDeployer',
-                        address: tapiocaDeployer.address,
-                        meta: {},
-                    },
-                ],
-            });
-            this.hre.SDK.db.saveLocally(dep, this.options.tag);
-
-            this.tapiocaDeployer = tapiocaDeployer;
-            return tapiocaDeployer;
-        }
-
-        // Return TapiocaDeployer
-        return TapiocaDeployer__factory.connect(
-            deployment.address,
-            (await this.hre.ethers.getSigners())[0],
-        );
-    }
-
     private genSalt() {
         return this.hre.ethers.utils.solidityKeccak256(['string'], [uuidv4()]);
     }
