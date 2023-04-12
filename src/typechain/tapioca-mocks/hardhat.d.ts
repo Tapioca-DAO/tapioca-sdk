@@ -53,6 +53,14 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.OracleMock__factory>;
     getContractFactory(
+      name: "StargateRouterETHMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.StargateRouterETHMock__factory>;
+    getContractFactory(
+      name: "StargateRouterMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.StargateRouterMock__factory>;
+    getContractFactory(
       name: "TapiocaDeployerMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapiocaDeployerMock__factory>;
@@ -76,6 +84,10 @@ declare module "hardhat/types/runtime" {
       name: "VulnMultiSwapper",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.VulnMultiSwapper__factory>;
+    getContractFactory(
+      name: "YieldBoxMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.YieldBoxMock__factory>;
 
     getContractAt(
       name: "ContractThatCannotBeDeployed",
@@ -128,6 +140,16 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.OracleMock>;
     getContractAt(
+      name: "StargateRouterETHMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.StargateRouterETHMock>;
+    getContractAt(
+      name: "StargateRouterMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.StargateRouterMock>;
+    getContractAt(
       name: "TapiocaDeployerMock",
       address: string,
       signer?: ethers.Signer
@@ -157,6 +179,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.VulnMultiSwapper>;
+    getContractAt(
+      name: "YieldBoxMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.YieldBoxMock>;
 
     // default types
     getContractFactory(
