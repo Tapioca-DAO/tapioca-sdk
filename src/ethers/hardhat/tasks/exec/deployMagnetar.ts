@@ -1,6 +1,6 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { TAPIOCA_PROJECTS } from '../../../../api/config';
-import { Magnetar__factory } from '../../../../typechain/Tapioca-Bar/factories/utils/Magnetar/Magnetar__factory';
+import { Magnetar__factory } from '../../../../typechain/tapioca-periphery/factories/Magnetar/Magnetar__factory';
 import { askForTag } from '../../utils';
 
 export const deployMagnetar__task = async (
