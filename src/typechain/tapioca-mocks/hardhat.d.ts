@@ -13,42 +13,15 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
-      name: "ContractThatCannotBeDeployed",
+      name: "OracleMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ContractThatCannotBeDeployed__factory>;
-    getContractFactory(
-      name: "ContractThatReverts",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ContractThatReverts__factory>;
-    getContractFactory(
-      name: "MultisigMock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MultisigMock__factory>;
-    getContractFactory(
-      name: "TapiocaDeployerMock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TapiocaDeployerMock__factory>;
+    ): Promise<Contracts.OracleMock__factory>;
 
     getContractAt(
-      name: "ContractThatCannotBeDeployed",
+      name: "OracleMock",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.ContractThatCannotBeDeployed>;
-    getContractAt(
-      name: "ContractThatReverts",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ContractThatReverts>;
-    getContractAt(
-      name: "MultisigMock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.MultisigMock>;
-    getContractAt(
-      name: "TapiocaDeployerMock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.TapiocaDeployerMock>;
+    ): Promise<Contracts.OracleMock>;
 
     // default types
     getContractFactory(
