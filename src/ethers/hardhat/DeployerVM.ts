@@ -13,8 +13,10 @@ import {
 } from '../../typechain/tapioca-periphery';
 
 //TODO: retrieve from tapioca-mocks or tapioca-periphery
-import { MultisigMock } from '../../typechain/utils/MultisigMock';
-import { MultisigMock__factory } from '../../typechain/utils/MultisigMock/factories';
+import {
+    MultisigMock,
+    MultisigMock__factory,
+} from '../../typechain/tapioca-mocks';
 import { IOwnable__factory } from '../../typechain/utils/IOwnable/factories';
 
 interface IDependentOn {
