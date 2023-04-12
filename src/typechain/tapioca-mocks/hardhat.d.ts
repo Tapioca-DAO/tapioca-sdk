@@ -13,15 +13,15 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
-      name: "OracleMock",
+      name: "ERC20Mock",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.OracleMock__factory>;
+    ): Promise<Contracts.ERC20Mock__factory>;
 
     getContractAt(
-      name: "OracleMock",
+      name: "ERC20Mock",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.OracleMock>;
+    ): Promise<Contracts.ERC20Mock>;
 
     // default types
     getContractFactory(
