@@ -1,0 +1,10 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "Base64",
+  "sourceName": "@boringcrypto/boring-solidity/contracts/libraries/Base64.sol",
+  "abi": [],
+  "bytecode": "0x60808060405234601757603a9081601d823930815050f35b600080fdfe600080fdfea2646970667358221220b42ceb2083c96c0b08a26e4afb347584d84fc076da6e5e1814b94867e139463f64736f6c63430008120033",
+  "deployedBytecode": "0x600080fdfea2646970667358221220b42ceb2083c96c0b08a26e4afb347584d84fc076da6e5e1814b94867e139463f64736f6c63430008120033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
