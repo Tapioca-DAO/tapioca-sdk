@@ -3,4 +3,5 @@
 /* eslint-disable */
 export { ContractThatCannotBeDeployed__factory } from "./ContractThatCannotBeDeployed__factory";
 export { ContractThatReverts__factory } from "./ContractThatReverts__factory";
+export { MultisigMock__factory } from "./MultisigMock__factory";
 export { TapiocaDeployerMock__factory } from "./TapiocaDeployerMock__factory";

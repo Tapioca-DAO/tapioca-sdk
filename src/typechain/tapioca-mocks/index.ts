@@ -3,8 +3,10 @@
 /* eslint-disable */
 export type { ContractThatCannotBeDeployed } from "./ContractThatCannotBeDeployed";
 export type { ContractThatReverts } from "./ContractThatReverts";
+export type { MultisigMock } from "./MultisigMock";
 export type { TapiocaDeployerMock } from "./TapiocaDeployerMock";
 export * as factories from "./factories";
 export { ContractThatCannotBeDeployed__factory } from "./factories/ContractThatCannotBeDeployed__factory";
 export { ContractThatReverts__factory } from "./factories/ContractThatReverts__factory";
+export { MultisigMock__factory } from "./factories/MultisigMock__factory";
 export { TapiocaDeployerMock__factory } from "./factories/TapiocaDeployerMock__factory";

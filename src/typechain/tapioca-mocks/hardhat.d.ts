@@ -21,6 +21,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ContractThatReverts__factory>;
     getContractFactory(
+      name: "MultisigMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MultisigMock__factory>;
+    getContractFactory(
       name: "TapiocaDeployerMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapiocaDeployerMock__factory>;
@@ -35,6 +39,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ContractThatReverts>;
+    getContractAt(
+      name: "MultisigMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MultisigMock>;
     getContractAt(
       name: "TapiocaDeployerMock",
       address: string,
