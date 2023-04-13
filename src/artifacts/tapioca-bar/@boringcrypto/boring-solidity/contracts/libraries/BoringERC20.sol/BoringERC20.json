@@ -1,0 +1,10 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "BoringERC20",
+  "sourceName": "@boringcrypto/boring-solidity/contracts/libraries/BoringERC20.sol",
+  "abi": [],
+  "bytecode": "0x60808060405234601757603a9081601d823930815050f35b600080fdfe600080fdfea26469706673582212208133d6af5319be9f2a0c1fbedf7466c6f17a96bb0d8475995eee1bdac81b08da64736f6c63430008120033",
+  "deployedBytecode": "0x600080fdfea26469706673582212208133d6af5319be9f2a0c1fbedf7466c6f17a96bb0d8475995eee1bdac81b08da64736f6c63430008120033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
