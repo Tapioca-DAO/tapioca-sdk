@@ -1,0 +1,73 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "ERC20Data",
+  "sourceName": "@boringcrypto/boring-solidity/contracts/ERC20.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "allowance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "balanceOf",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "nonces",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b50610177806100206000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c806370a08231146100465780637ecebe0014610078578063dd62ed3e14610098575b600080fd5b6100666100543660046100ec565b60006020819052908152604090205481565b60405190815260200160405180910390f35b6100666100863660046100ec565b60026020526000908152604090205481565b6100666100a636600461010e565b600160209081526000928352604080842090915290825290205481565b803573ffffffffffffffffffffffffffffffffffffffff811681146100e757600080fd5b919050565b6000602082840312156100fe57600080fd5b610107826100c3565b9392505050565b6000806040838503121561012157600080fd5b61012a836100c3565b9150610138602084016100c3565b9050925092905056fea264697066735822122009164626fe4d9b83f271f7f9d6803840234cb8705b3865f29d5c7dc52dcd705f64736f6c63430008090033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c806370a08231146100465780637ecebe0014610078578063dd62ed3e14610098575b600080fd5b6100666100543660046100ec565b60006020819052908152604090205481565b60405190815260200160405180910390f35b6100666100863660046100ec565b60026020526000908152604090205481565b6100666100a636600461010e565b600160209081526000928352604080842090915290825290205481565b803573ffffffffffffffffffffffffffffffffffffffff811681146100e757600080fd5b919050565b6000602082840312156100fe57600080fd5b610107826100c3565b9392505050565b6000806040838503121561012157600080fd5b61012a836100c3565b9150610138602084016100c3565b9050925092905056fea264697066735822122009164626fe4d9b83f271f7f9d6803840234cb8705b3865f29d5c7dc52dcd705f64736f6c63430008090033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
