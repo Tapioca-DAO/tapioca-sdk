@@ -9,6 +9,7 @@ export type { ContractThatCannotBeDeployed } from "./ContractThatCannotBeDeploye
 export type { ContractThatReverts } from "./ContractThatReverts";
 export type { CurvePoolMock } from "./CurvePoolMock";
 export type { ERC20Mock } from "./ERC20Mock";
+export type { LQSingularityMock } from "./LQSingularityMock";
 export type { LZEndpointMock } from "./LZEndpointMock";
 export type { MockSwapper } from "./MockSwapper";
 export type { MultisigMock } from "./MultisigMock";
@@ -27,6 +28,7 @@ export type { FlashBorrowerMock } from "./FlashBorrowerMock.sol/FlashBorrowerMoc
 export { FlashBorrowerMock__factory } from "./factories/FlashBorrowerMock.sol/FlashBorrowerMock__factory";
 export type { FlashMaliciousBorrowerMock } from "./FlashBorrowerMock.sol/FlashMaliciousBorrowerMock";
 export { FlashMaliciousBorrowerMock__factory } from "./factories/FlashBorrowerMock.sol/FlashMaliciousBorrowerMock__factory";
+export { LQSingularityMock__factory } from "./factories/LQSingularityMock__factory";
 export { LZEndpointMock__factory } from "./factories/LZEndpointMock__factory";
 export { MockSwapper__factory } from "./factories/MockSwapper__factory";
 export { MultisigMock__factory } from "./factories/MultisigMock__factory";
