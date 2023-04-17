@@ -28,8 +28,7 @@ export const exportSDK__task = async ({}, hre: HardhatRuntimeEnvironment) => {
         type: 'checkbox',
         message: 'Select artifacts to export',
         name: 'artifactToExport',
-        askAnswered: contractNames,
-        default: contractNames[0],
+        choices: contractNames,
     });
 
     hre.SDK.exportSDK.run({
