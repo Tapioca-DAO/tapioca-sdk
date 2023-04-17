@@ -17,7 +17,7 @@ export const run = async (params: {
     projectCaller: TProjectCaller;
     contractNames: string[];
     artifactPath: string;
-    exportArtifacts?: boolean;
+    artifactToExport?: string[];
     deployment?: {
         data: TLocalDeployment;
         tag?: string;
@@ -28,10 +28,10 @@ export const run = async (params: {
         contractNames,
         artifactPath,
         deployment,
-        exportArtifacts,
+        artifactToExport,
     } = params;
 
-    if (exportArtifacts) {
+    if (artifactToExport?.length) {
         console.log('[+] Exporting artifacts for tapioca-sdk...');
         fs.copySync(
             'artifacts',
