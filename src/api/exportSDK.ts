@@ -30,7 +30,7 @@ export const run = async (params: {
         artifactToExport,
     } = params;
     const cwd = process.cwd();
-    
+
     if (artifactToExport?.length) {
         const artifactFiles = _parseFiles(cwd, artifactPath, artifactToExport);
         console.log('[+] Exporting artifacts for tapioca-sdk...');
