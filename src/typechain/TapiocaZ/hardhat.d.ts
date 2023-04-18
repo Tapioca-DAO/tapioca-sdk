@@ -13,114 +13,69 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
-      name: "Balancer",
+      name: "Magnetar",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Balancer__factory>;
+    ): Promise<Contracts.Magnetar__factory>;
     getContractFactory(
-      name: "BaseTOFT",
+      name: "Multicall3",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.BaseTOFT__factory>;
+    ): Promise<Contracts.Multicall3__factory>;
     getContractFactory(
-      name: "ERC20Mock",
+      name: "CurveSwapper",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ERC20Mock__factory>;
+    ): Promise<Contracts.CurveSwapper__factory>;
     getContractFactory(
-      name: "LZEndpointMock",
+      name: "MultiSwapper",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.LZEndpointMock__factory>;
+    ): Promise<Contracts.MultiSwapper__factory>;
     getContractFactory(
-      name: "StargateRouterETHMock",
+      name: "NonYieldBoxMultiSwapper",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.StargateRouterETHMock__factory>;
+    ): Promise<Contracts.NonYieldBoxMultiSwapper__factory>;
     getContractFactory(
-      name: "StargateRouterMock",
+      name: "UniswapV3Swapper",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.StargateRouterMock__factory>;
+    ): Promise<Contracts.UniswapV3Swapper__factory>;
     getContractFactory(
-      name: "TapiocaOFTMock",
+      name: "TapiocaDeployer",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TapiocaOFTMock__factory>;
-    getContractFactory(
-      name: "TOFTMinter",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TOFTMinter__factory>;
-    getContractFactory(
-      name: "YieldBoxMock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.YieldBoxMock__factory>;
-    getContractFactory(
-      name: "MTapiocaOFT",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MTapiocaOFT__factory>;
-    getContractFactory(
-      name: "TapiocaOFT",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TapiocaOFT__factory>;
-    getContractFactory(
-      name: "TapiocaWrapper",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TapiocaWrapper__factory>;
+    ): Promise<Contracts.TapiocaDeployer__factory>;
 
     getContractAt(
-      name: "Balancer",
+      name: "Magnetar",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.Balancer>;
+    ): Promise<Contracts.Magnetar>;
     getContractAt(
-      name: "BaseTOFT",
+      name: "Multicall3",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.BaseTOFT>;
+    ): Promise<Contracts.Multicall3>;
     getContractAt(
-      name: "ERC20Mock",
+      name: "CurveSwapper",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.ERC20Mock>;
+    ): Promise<Contracts.CurveSwapper>;
     getContractAt(
-      name: "LZEndpointMock",
+      name: "MultiSwapper",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.LZEndpointMock>;
+    ): Promise<Contracts.MultiSwapper>;
     getContractAt(
-      name: "StargateRouterETHMock",
+      name: "NonYieldBoxMultiSwapper",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.StargateRouterETHMock>;
+    ): Promise<Contracts.NonYieldBoxMultiSwapper>;
     getContractAt(
-      name: "StargateRouterMock",
+      name: "UniswapV3Swapper",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.StargateRouterMock>;
+    ): Promise<Contracts.UniswapV3Swapper>;
     getContractAt(
-      name: "TapiocaOFTMock",
+      name: "TapiocaDeployer",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.TapiocaOFTMock>;
-    getContractAt(
-      name: "TOFTMinter",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.TOFTMinter>;
-    getContractAt(
-      name: "YieldBoxMock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.YieldBoxMock>;
-    getContractAt(
-      name: "MTapiocaOFT",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.MTapiocaOFT>;
-    getContractAt(
-      name: "TapiocaOFT",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.TapiocaOFT>;
-    getContractAt(
-      name: "TapiocaWrapper",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.TapiocaWrapper>;
+    ): Promise<Contracts.TapiocaDeployer>;
 
     // default types
     getContractFactory(
