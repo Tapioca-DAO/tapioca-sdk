@@ -25,10 +25,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.LiquidationQueue__factory>;
     getContractFactory(
-      name: "LQSingularityMock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.LQSingularityMock__factory>;
-    getContractFactory(
       name: "MarketsHelper",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MarketsHelper__factory>;
@@ -37,46 +33,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MarketsProxy__factory>;
     getContractFactory(
-      name: "CurvePoolMock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.CurvePoolMock__factory>;
-    getContractFactory(
-      name: "ERC20MockWithPermit",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ERC20MockWithPermit__factory>;
-    getContractFactory(
-      name: "MockSwapper",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MockSwapper__factory>;
-    getContractFactory(
-      name: "MultisigMock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MultisigMock__factory>;
-    getContractFactory(
-      name: "PenroseMock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.PenroseMock__factory>;
-    getContractFactory(
-      name: "VulnMultiSwapper",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.VulnMultiSwapper__factory>;
-    getContractFactory(
-      name: "UniswapV2ERC20",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.UniswapV2ERC20__factory>;
-    getContractFactory(
-      name: "UniswapV2Factory",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.UniswapV2Factory__factory>;
-    getContractFactory(
-      name: "UniswapV2Pair",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.UniswapV2Pair__factory>;
-    getContractFactory(
-      name: "UniswapV2Router02",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.UniswapV2Router02__factory>;
-    getContractFactory(
       name: "Penrose",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Penrose__factory>;
@@ -84,22 +40,6 @@ declare module "hardhat/types/runtime" {
       name: "ProxyDeployer",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ProxyDeployer__factory>;
-    getContractFactory(
-      name: "ERC20FactoryMock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ERC20FactoryMock__factory>;
-    getContractFactory(
-      name: "ERC20Mock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ERC20Mock__factory>;
-    getContractFactory(
-      name: "OracleMock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.OracleMock__factory>;
-    getContractFactory(
-      name: "WETH9Mock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.WETH9Mock__factory>;
     getContractFactory(
       name: "SGLCommon",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -149,41 +89,9 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BigBang__factory>;
     getContractFactory(
-      name: "FlashBorrowerMock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.FlashBorrowerMock__factory>;
-    getContractFactory(
-      name: "FlashMaliciousBorrowerMock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.FlashMaliciousBorrowerMock__factory>;
-    getContractFactory(
-      name: "LZEndpointMock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.LZEndpointMock__factory>;
-    getContractFactory(
       name: "USDO",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.USDO__factory>;
-    getContractFactory(
-      name: "Magnetar",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Magnetar__factory>;
-    getContractFactory(
-      name: "ContractThatCannotBeDeployed",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ContractThatCannotBeDeployed__factory>;
-    getContractFactory(
-      name: "ContractThatReverts",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ContractThatReverts__factory>;
-    getContractFactory(
-      name: "TapiocaDeployerMock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TapiocaDeployerMock__factory>;
-    getContractFactory(
-      name: "Multicall3",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Multicall3__factory>;
 
     getContractAt(
       name: "CurveStableToUsdoBidder",
@@ -201,11 +109,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.LiquidationQueue>;
     getContractAt(
-      name: "LQSingularityMock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.LQSingularityMock>;
-    getContractAt(
       name: "MarketsHelper",
       address: string,
       signer?: ethers.Signer
@@ -216,56 +119,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.MarketsProxy>;
     getContractAt(
-      name: "CurvePoolMock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.CurvePoolMock>;
-    getContractAt(
-      name: "ERC20MockWithPermit",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ERC20MockWithPermit>;
-    getContractAt(
-      name: "MockSwapper",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.MockSwapper>;
-    getContractAt(
-      name: "MultisigMock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.MultisigMock>;
-    getContractAt(
-      name: "PenroseMock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.PenroseMock>;
-    getContractAt(
-      name: "VulnMultiSwapper",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.VulnMultiSwapper>;
-    getContractAt(
-      name: "UniswapV2ERC20",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.UniswapV2ERC20>;
-    getContractAt(
-      name: "UniswapV2Factory",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.UniswapV2Factory>;
-    getContractAt(
-      name: "UniswapV2Pair",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.UniswapV2Pair>;
-    getContractAt(
-      name: "UniswapV2Router02",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.UniswapV2Router02>;
-    getContractAt(
       name: "Penrose",
       address: string,
       signer?: ethers.Signer
@@ -275,26 +128,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ProxyDeployer>;
-    getContractAt(
-      name: "ERC20FactoryMock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ERC20FactoryMock>;
-    getContractAt(
-      name: "ERC20Mock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ERC20Mock>;
-    getContractAt(
-      name: "OracleMock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.OracleMock>;
-    getContractAt(
-      name: "WETH9Mock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.WETH9Mock>;
     getContractAt(
       name: "SGLCommon",
       address: string,
@@ -356,50 +189,10 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.BigBang>;
     getContractAt(
-      name: "FlashBorrowerMock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.FlashBorrowerMock>;
-    getContractAt(
-      name: "FlashMaliciousBorrowerMock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.FlashMaliciousBorrowerMock>;
-    getContractAt(
-      name: "LZEndpointMock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.LZEndpointMock>;
-    getContractAt(
       name: "USDO",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.USDO>;
-    getContractAt(
-      name: "Magnetar",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.Magnetar>;
-    getContractAt(
-      name: "ContractThatCannotBeDeployed",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ContractThatCannotBeDeployed>;
-    getContractAt(
-      name: "ContractThatReverts",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ContractThatReverts>;
-    getContractAt(
-      name: "TapiocaDeployerMock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.TapiocaDeployerMock>;
-    getContractAt(
-      name: "Multicall3",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.Multicall3>;
 
     // default types
     getContractFactory(
