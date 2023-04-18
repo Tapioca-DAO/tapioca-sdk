@@ -1,17 +1,23 @@
 import { ContractFactory } from 'ethers';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { v4 as uuidv4 } from 'uuid';
-import { TAPIOCA_PROJECTS, TAPIOCA_PROJECTS_NAME } from '../../api/config';
+import { TAPIOCA_PROJECTS } from '../../api/config';
 import { TContract } from '../../shared';
 import {
     TapiocaDeployer,
     TapiocaDeployer__factory,
-} from '../../typechain/tap-token';
+} from '../../typechain/tapioca-periphery';
+import {
+    Multicall3,
+    Multicall3__factory,
+} from '../../typechain/tapioca-periphery';
+
+//TODO: retrieve from tapioca-mocks or tapioca-periphery
+import {
+    MultisigMock,
+    MultisigMock__factory,
+} from '../../typechain/tapioca-mocks';
 import { IOwnable__factory } from '../../typechain/utils/IOwnable/factories';
-import { Multicall3 } from '../../typechain/utils/MultiCall';
-import { Multicall3__factory } from '../../typechain/utils/MultiCall/factories';
-import { MultisigMock } from '../../typechain/utils/MultisigMock';
-import { MultisigMock__factory } from '../../typechain/utils/MultisigMock/factories';
 
 interface IDependentOn {
     deploymentName: string;
@@ -191,9 +197,7 @@ export class DeployerVM {
         // Execute the calls
         try {
             for (const call of calls) {
-                const tx = this.options.debugMode
-                    ? await this.multicall.multicall(call)
-                    : await this.multicall.aggregate3(call);
+                const tx = await this.multicall.multicall(call);
                 console.log(`[+] Execution batch hash: ${tx.hash}`);
                 await tx.wait(wait);
             }
@@ -289,7 +293,7 @@ export class DeployerVM {
             console.log(
                 '[+] Performing ownership transferal through the Multicall',
             );
-            const calls: Multicall3.Call3Struct[] = [];
+            const calls: Multicall3.CallStruct[] = [];
             calls.push({
                 target: target.address,
                 callData: calldata,
@@ -605,7 +609,7 @@ export class DeployerVM {
     // ***********
     private async getBuildCalls(
         runSimulations = true,
-    ): Promise<Multicall3.Call3Struct[][]> {
+    ): Promise<Multicall3.CallStruct[][]> {
         console.log('[+] Populating build queue');
         await this.populateBuildQueue();
         if (runSimulations) {
@@ -618,7 +622,7 @@ export class DeployerVM {
         // Build the calls
         let currentByteCodeSize = 0;
         let currentBatch = 0;
-        const calls: Multicall3.Call3Struct[][] = [[]];
+        const calls: Multicall3.CallStruct[][] = [[]];
         for (const build of this.buildQueue) {
             // We'll batch the calls to avoid hitting the gas limit
             const callData = this.buildDeployerCode(

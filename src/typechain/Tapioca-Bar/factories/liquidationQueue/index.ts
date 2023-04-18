@@ -2,5 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as bidders from "./bidders";
-export * as mocks from "./mocks";
 export { LiquidationQueue__factory } from "./LiquidationQueue__factory";
