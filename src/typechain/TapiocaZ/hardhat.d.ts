@@ -13,51 +13,69 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
-      name: "Balancer",
+      name: "Magnetar",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Balancer__factory>;
+    ): Promise<Contracts.Magnetar__factory>;
     getContractFactory(
-      name: "BaseTOFT",
+      name: "Multicall3",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.BaseTOFT__factory>;
+    ): Promise<Contracts.Multicall3__factory>;
     getContractFactory(
-      name: "MTapiocaOFT",
+      name: "CurveSwapper",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MTapiocaOFT__factory>;
+    ): Promise<Contracts.CurveSwapper__factory>;
     getContractFactory(
-      name: "TapiocaOFT",
+      name: "MultiSwapper",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TapiocaOFT__factory>;
+    ): Promise<Contracts.MultiSwapper__factory>;
     getContractFactory(
-      name: "TapiocaWrapper",
+      name: "NonYieldBoxMultiSwapper",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TapiocaWrapper__factory>;
+    ): Promise<Contracts.NonYieldBoxMultiSwapper__factory>;
+    getContractFactory(
+      name: "UniswapV3Swapper",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.UniswapV3Swapper__factory>;
+    getContractFactory(
+      name: "TapiocaDeployer",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TapiocaDeployer__factory>;
 
     getContractAt(
-      name: "Balancer",
+      name: "Magnetar",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.Balancer>;
+    ): Promise<Contracts.Magnetar>;
     getContractAt(
-      name: "BaseTOFT",
+      name: "Multicall3",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.BaseTOFT>;
+    ): Promise<Contracts.Multicall3>;
     getContractAt(
-      name: "MTapiocaOFT",
+      name: "CurveSwapper",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.MTapiocaOFT>;
+    ): Promise<Contracts.CurveSwapper>;
     getContractAt(
-      name: "TapiocaOFT",
+      name: "MultiSwapper",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.TapiocaOFT>;
+    ): Promise<Contracts.MultiSwapper>;
     getContractAt(
-      name: "TapiocaWrapper",
+      name: "NonYieldBoxMultiSwapper",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.TapiocaWrapper>;
+    ): Promise<Contracts.NonYieldBoxMultiSwapper>;
+    getContractAt(
+      name: "UniswapV3Swapper",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.UniswapV3Swapper>;
+    getContractAt(
+      name: "TapiocaDeployer",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TapiocaDeployer>;
 
     // default types
     getContractFactory(
