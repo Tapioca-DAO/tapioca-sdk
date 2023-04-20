@@ -102,6 +102,8 @@ export const PACKET_TYPES = [
     EPacketType.PT_SEND_APPROVAL,
 ];
 
+export const ONFT_PACKET_TYPES = [EPacketType.PT_SEND_AND_CALL];
+
 /**
  * Returns a mapping between chain ID and LZ chain ID
  **/
