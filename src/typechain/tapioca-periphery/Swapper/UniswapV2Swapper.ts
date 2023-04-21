@@ -93,23 +93,24 @@ export declare namespace ISwapper {
   };
 }
 
-export interface CurveSwapperInterface extends utils.Interface {
+export interface UniswapV2SwapperInterface extends utils.Interface {
   functions: {
-    "curvePool()": FunctionFragment;
+    "factory()": FunctionFragment;
     "getDefaultSwapData()": FunctionFragment;
     "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)": FunctionFragment;
     "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)": FunctionFragment;
+    "swapRouter()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "yieldBox()": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "curvePool"
-      | "curvePool()"
+      | "factory"
+      | "factory()"
       | "getDefaultSwapData"
       | "getDefaultSwapData()"
       | "getInputAmount"
@@ -122,17 +123,16 @@ export interface CurveSwapperInterface extends utils.Interface {
       | "renounceOwnership()"
       | "swap"
       | "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"
+      | "swapRouter"
+      | "swapRouter()"
       | "transferOwnership"
       | "transferOwnership(address)"
       | "yieldBox"
       | "yieldBox()"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "curvePool", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "curvePool()",
-    values?: undefined
-  ): string;
+  encodeFunctionData(functionFragment: "factory", values?: undefined): string;
+  encodeFunctionData(functionFragment: "factory()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "getDefaultSwapData",
     values?: undefined
@@ -186,6 +186,14 @@ export interface CurveSwapperInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "swapRouter",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "swapRouter()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [PromiseOrValue<string>]
   ): string;
@@ -199,11 +207,8 @@ export interface CurveSwapperInterface extends utils.Interface {
     values?: undefined
   ): string;
 
-  decodeFunctionResult(functionFragment: "curvePool", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "curvePool()",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "factory", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "factory()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getDefaultSwapData",
     data: BytesLike
@@ -243,6 +248,11 @@ export interface CurveSwapperInterface extends utils.Interface {
     functionFragment: "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "swapRouter", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "swapRouter()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
     data: BytesLike
@@ -276,14 +286,14 @@ export type OwnershipTransferredEvent = TypedEvent<
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
 
-export interface CurveSwapper extends BaseContract {
-  contractName: "CurveSwapper";
+export interface UniswapV2Swapper extends BaseContract {
+  contractName: "UniswapV2Swapper";
 
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: CurveSwapperInterface;
+  interface: UniswapV2SwapperInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -305,35 +315,35 @@ export interface CurveSwapper extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    curvePool(overrides?: CallOverrides): Promise<[string]>;
+    factory(overrides?: CallOverrides): Promise<[string]>;
 
-    "curvePool()"(overrides?: CallOverrides): Promise<[string]>;
+    "factory()"(overrides?: CallOverrides): Promise<[string]>;
 
     getDefaultSwapData(overrides?: CallOverrides): Promise<[string]>;
 
     "getDefaultSwapData()"(overrides?: CallOverrides): Promise<[string]>;
 
     getInputAmount(
-      arg0: ISwapper.SwapDataStruct,
+      swapData: ISwapper.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    ): Promise<[BigNumber] & { amountIn: BigNumber }>;
 
     "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
-      arg0: ISwapper.SwapDataStruct,
+      swapData: ISwapper.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    ): Promise<[BigNumber] & { amountIn: BigNumber }>;
 
     getOutputAmount(
       swapData: ISwapper.SwapDataStruct,
-      dexOptions: PromiseOrValue<BytesLike>,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { amountOut: BigNumber }>;
 
     "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
       swapData: ISwapper.SwapDataStruct,
-      dexOptions: PromiseOrValue<BytesLike>,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { amountOut: BigNumber }>;
 
@@ -365,6 +375,10 @@ export interface CurveSwapper extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    swapRouter(overrides?: CallOverrides): Promise<[string]>;
+
+    "swapRouter()"(overrides?: CallOverrides): Promise<[string]>;
+
     transferOwnership(
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -380,35 +394,35 @@ export interface CurveSwapper extends BaseContract {
     "yieldBox()"(overrides?: CallOverrides): Promise<[string]>;
   };
 
-  curvePool(overrides?: CallOverrides): Promise<string>;
+  factory(overrides?: CallOverrides): Promise<string>;
 
-  "curvePool()"(overrides?: CallOverrides): Promise<string>;
+  "factory()"(overrides?: CallOverrides): Promise<string>;
 
   getDefaultSwapData(overrides?: CallOverrides): Promise<string>;
 
   "getDefaultSwapData()"(overrides?: CallOverrides): Promise<string>;
 
   getInputAmount(
-    arg0: ISwapper.SwapDataStruct,
+    swapData: ISwapper.SwapDataStruct,
     arg1: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
-    arg0: ISwapper.SwapDataStruct,
+    swapData: ISwapper.SwapDataStruct,
     arg1: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   getOutputAmount(
     swapData: ISwapper.SwapDataStruct,
-    dexOptions: PromiseOrValue<BytesLike>,
+    arg1: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
     swapData: ISwapper.SwapDataStruct,
-    dexOptions: PromiseOrValue<BytesLike>,
+    arg1: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -440,6 +454,10 @@ export interface CurveSwapper extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  swapRouter(overrides?: CallOverrides): Promise<string>;
+
+  "swapRouter()"(overrides?: CallOverrides): Promise<string>;
+
   transferOwnership(
     newOwner: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -455,35 +473,35 @@ export interface CurveSwapper extends BaseContract {
   "yieldBox()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
-    curvePool(overrides?: CallOverrides): Promise<string>;
+    factory(overrides?: CallOverrides): Promise<string>;
 
-    "curvePool()"(overrides?: CallOverrides): Promise<string>;
+    "factory()"(overrides?: CallOverrides): Promise<string>;
 
     getDefaultSwapData(overrides?: CallOverrides): Promise<string>;
 
     "getDefaultSwapData()"(overrides?: CallOverrides): Promise<string>;
 
     getInputAmount(
-      arg0: ISwapper.SwapDataStruct,
+      swapData: ISwapper.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
-      arg0: ISwapper.SwapDataStruct,
+      swapData: ISwapper.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getOutputAmount(
       swapData: ISwapper.SwapDataStruct,
-      dexOptions: PromiseOrValue<BytesLike>,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
       swapData: ISwapper.SwapDataStruct,
-      dexOptions: PromiseOrValue<BytesLike>,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -515,6 +533,10 @@ export interface CurveSwapper extends BaseContract {
       [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
     >;
 
+    swapRouter(overrides?: CallOverrides): Promise<string>;
+
+    "swapRouter()"(overrides?: CallOverrides): Promise<string>;
+
     transferOwnership(
       newOwner: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -542,35 +564,35 @@ export interface CurveSwapper extends BaseContract {
   };
 
   estimateGas: {
-    curvePool(overrides?: CallOverrides): Promise<BigNumber>;
+    factory(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "curvePool()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "factory()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     getDefaultSwapData(overrides?: CallOverrides): Promise<BigNumber>;
 
     "getDefaultSwapData()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     getInputAmount(
-      arg0: ISwapper.SwapDataStruct,
+      swapData: ISwapper.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
-      arg0: ISwapper.SwapDataStruct,
+      swapData: ISwapper.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getOutputAmount(
       swapData: ISwapper.SwapDataStruct,
-      dexOptions: PromiseOrValue<BytesLike>,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
       swapData: ISwapper.SwapDataStruct,
-      dexOptions: PromiseOrValue<BytesLike>,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -602,6 +624,10 @@ export interface CurveSwapper extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    swapRouter(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "swapRouter()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     transferOwnership(
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -618,9 +644,9 @@ export interface CurveSwapper extends BaseContract {
   };
 
   populateTransaction: {
-    curvePool(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    factory(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "curvePool()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "factory()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getDefaultSwapData(
       overrides?: CallOverrides
@@ -631,26 +657,26 @@ export interface CurveSwapper extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     getInputAmount(
-      arg0: ISwapper.SwapDataStruct,
+      swapData: ISwapper.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
-      arg0: ISwapper.SwapDataStruct,
+      swapData: ISwapper.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getOutputAmount(
       swapData: ISwapper.SwapDataStruct,
-      dexOptions: PromiseOrValue<BytesLike>,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
       swapData: ISwapper.SwapDataStruct,
-      dexOptions: PromiseOrValue<BytesLike>,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -681,6 +707,10 @@ export interface CurveSwapper extends BaseContract {
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    swapRouter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "swapRouter()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
