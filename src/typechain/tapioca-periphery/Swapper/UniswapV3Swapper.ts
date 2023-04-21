@@ -27,76 +27,151 @@ import type {
   PromiseOrValue,
 } from "../common";
 
+export declare namespace ISwapper {
+  export type SwapTokensDataStruct = {
+    tokenIn: PromiseOrValue<string>;
+    tokenInId: PromiseOrValue<BigNumberish>;
+    tokenOut: PromiseOrValue<string>;
+    tokenOutId: PromiseOrValue<BigNumberish>;
+  };
+
+  export type SwapTokensDataStructOutput = [
+    string,
+    BigNumber,
+    string,
+    BigNumber
+  ] & {
+    tokenIn: string;
+    tokenInId: BigNumber;
+    tokenOut: string;
+    tokenOutId: BigNumber;
+  };
+
+  export type SwapAmountDataStruct = {
+    amountIn: PromiseOrValue<BigNumberish>;
+    shareIn: PromiseOrValue<BigNumberish>;
+    amountOut: PromiseOrValue<BigNumberish>;
+    shareOut: PromiseOrValue<BigNumberish>;
+  };
+
+  export type SwapAmountDataStructOutput = [
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber
+  ] & {
+    amountIn: BigNumber;
+    shareIn: BigNumber;
+    amountOut: BigNumber;
+    shareOut: BigNumber;
+  };
+
+  export type YieldBoxDataStruct = {
+    withdrawFromYb: PromiseOrValue<boolean>;
+    depositToYb: PromiseOrValue<boolean>;
+  };
+
+  export type YieldBoxDataStructOutput = [boolean, boolean] & {
+    withdrawFromYb: boolean;
+    depositToYb: boolean;
+  };
+
+  export type SwapDataStruct = {
+    tokensData: ISwapper.SwapTokensDataStruct;
+    amountData: ISwapper.SwapAmountDataStruct;
+    yieldBoxData: ISwapper.YieldBoxDataStruct;
+  };
+
+  export type SwapDataStructOutput = [
+    ISwapper.SwapTokensDataStructOutput,
+    ISwapper.SwapAmountDataStructOutput,
+    ISwapper.YieldBoxDataStructOutput
+  ] & {
+    tokensData: ISwapper.SwapTokensDataStructOutput;
+    amountData: ISwapper.SwapAmountDataStructOutput;
+    yieldBoxData: ISwapper.YieldBoxDataStructOutput;
+  };
+}
+
 export interface UniswapV3SwapperInterface extends utils.Interface {
   functions: {
     "factory()": FunctionFragment;
-    "getInputAmount(uint256,uint256,bytes)": FunctionFragment;
-    "getOutputAmount(uint256,uint256,bytes)": FunctionFragment;
+    "getDefaultSwapData()": FunctionFragment;
+    "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)": FunctionFragment;
+    "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "poolFee()": FunctionFragment;
+    "renounceOwnership()": FunctionFragment;
     "setPoolFee(uint24)": FunctionFragment;
-    "swap(uint256,uint256,uint256,address,uint256,bytes)": FunctionFragment;
+    "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)": FunctionFragment;
     "swapRouter()": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
       | "factory"
       | "factory()"
+      | "getDefaultSwapData"
+      | "getDefaultSwapData()"
       | "getInputAmount"
-      | "getInputAmount(uint256,uint256,bytes)"
+      | "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"
       | "getOutputAmount"
-      | "getOutputAmount(uint256,uint256,bytes)"
+      | "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"
       | "owner"
       | "owner()"
       | "poolFee"
       | "poolFee()"
+      | "renounceOwnership"
+      | "renounceOwnership()"
       | "setPoolFee"
       | "setPoolFee(uint24)"
       | "swap"
-      | "swap(uint256,uint256,uint256,address,uint256,bytes)"
+      | "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"
       | "swapRouter"
       | "swapRouter()"
+      | "transferOwnership"
+      | "transferOwnership(address)"
   ): FunctionFragment;
 
   encodeFunctionData(functionFragment: "factory", values?: undefined): string;
   encodeFunctionData(functionFragment: "factory()", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "getInputAmount",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
+    functionFragment: "getDefaultSwapData",
+    values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "getInputAmount(uint256,uint256,bytes)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
+    functionFragment: "getDefaultSwapData()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getInputAmount",
+    values: [ISwapper.SwapDataStruct, PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)",
+    values: [ISwapper.SwapDataStruct, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "getOutputAmount",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
+    values: [ISwapper.SwapDataStruct, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
-    functionFragment: "getOutputAmount(uint256,uint256,bytes)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
+    functionFragment: "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)",
+    values: [ISwapper.SwapDataStruct, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
   encodeFunctionData(functionFragment: "poolFee", values?: undefined): string;
   encodeFunctionData(functionFragment: "poolFee()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "renounceOwnership",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "renounceOwnership()",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "setPoolFee",
     values: [PromiseOrValue<BigNumberish>]
@@ -108,22 +183,18 @@ export interface UniswapV3SwapperInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "swap",
     values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
+      ISwapper.SwapDataStruct,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "swap(uint256,uint256,uint256,address,uint256,bytes)",
+    functionFragment: "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)",
     values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
+      ISwapper.SwapDataStruct,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
@@ -135,15 +206,31 @@ export interface UniswapV3SwapperInterface extends utils.Interface {
     functionFragment: "swapRouter()",
     values?: undefined
   ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
 
   decodeFunctionResult(functionFragment: "factory", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "factory()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getDefaultSwapData",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getDefaultSwapData()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "getInputAmount",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getInputAmount(uint256,uint256,bytes)",
+    functionFragment: "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -151,13 +238,21 @@ export interface UniswapV3SwapperInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getOutputAmount(uint256,uint256,bytes)",
+    functionFragment: "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "poolFee", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "poolFee()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceOwnership()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "setPoolFee", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setPoolFee(uint24)",
@@ -165,7 +260,7 @@ export interface UniswapV3SwapperInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "swap", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "swap(uint256,uint256,uint256,address,uint256,bytes)",
+    functionFragment: "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "swapRouter", data: BytesLike): Result;
@@ -173,14 +268,39 @@ export interface UniswapV3SwapperInterface extends utils.Interface {
     functionFragment: "swapRouter()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership(address)",
+    data: BytesLike
+  ): Result;
 
   events: {
+    "OwnershipTransferred(address,address)": EventFragment;
     "PoolFee(uint256,uint256)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "OwnershipTransferred(address,address)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "PoolFee"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "PoolFee(uint256,uint256)"): EventFragment;
 }
+
+export interface OwnershipTransferredEventObject {
+  previousOwner: string;
+  newOwner: string;
+}
+export type OwnershipTransferredEvent = TypedEvent<
+  [string, string],
+  OwnershipTransferredEventObject
+>;
+
+export type OwnershipTransferredEventFilter =
+  TypedEventFilter<OwnershipTransferredEvent>;
 
 export interface PoolFeeEventObject {
   _old: BigNumber;
@@ -226,31 +346,31 @@ export interface UniswapV3Swapper extends BaseContract {
 
     "factory()"(overrides?: CallOverrides): Promise<[string]>;
 
+    getDefaultSwapData(overrides?: CallOverrides): Promise<[string]>;
+
+    "getDefaultSwapData()"(overrides?: CallOverrides): Promise<[string]>;
+
     getInputAmount(
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      shareOut: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+      swapData: ISwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { amountIn: BigNumber }>;
 
-    "getInputAmount(uint256,uint256,bytes)"(
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      shareOut: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+    "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      swapData: ISwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { amountIn: BigNumber }>;
 
     getOutputAmount(
-      tokenInId: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+      swapData: ISwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { amountOut: BigNumber }>;
 
-    "getOutputAmount(uint256,uint256,bytes)"(
-      tokenInId: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+    "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      swapData: ISwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { amountOut: BigNumber }>;
 
@@ -261,6 +381,14 @@ export interface UniswapV3Swapper extends BaseContract {
     poolFee(overrides?: CallOverrides): Promise<[number]>;
 
     "poolFee()"(overrides?: CallOverrides): Promise<[number]>;
+
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     setPoolFee(
       _newFee: PromiseOrValue<BigNumberish>,
@@ -273,59 +401,65 @@ export interface UniswapV3Swapper extends BaseContract {
     ): Promise<ContractTransaction>;
 
     swap(
-      tokenInId: PromiseOrValue<BigNumberish>,
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+      swapData: ISwapper.SwapDataStruct,
       amountOutMin: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+      to: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "swap(uint256,uint256,uint256,address,uint256,bytes)"(
-      tokenInId: PromiseOrValue<BigNumberish>,
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+    "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
+      swapData: ISwapper.SwapDataStruct,
       amountOutMin: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+      to: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     swapRouter(overrides?: CallOverrides): Promise<[string]>;
 
     "swapRouter()"(overrides?: CallOverrides): Promise<[string]>;
+
+    transferOwnership(
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "transferOwnership(address)"(
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
 
   factory(overrides?: CallOverrides): Promise<string>;
 
   "factory()"(overrides?: CallOverrides): Promise<string>;
 
+  getDefaultSwapData(overrides?: CallOverrides): Promise<string>;
+
+  "getDefaultSwapData()"(overrides?: CallOverrides): Promise<string>;
+
   getInputAmount(
-    tokenOutId: PromiseOrValue<BigNumberish>,
-    shareOut: PromiseOrValue<BigNumberish>,
-    dexData: PromiseOrValue<BytesLike>,
+    swapData: ISwapper.SwapDataStruct,
+    arg1: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  "getInputAmount(uint256,uint256,bytes)"(
-    tokenOutId: PromiseOrValue<BigNumberish>,
-    shareOut: PromiseOrValue<BigNumberish>,
-    dexData: PromiseOrValue<BytesLike>,
+  "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+    swapData: ISwapper.SwapDataStruct,
+    arg1: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   getOutputAmount(
-    tokenInId: PromiseOrValue<BigNumberish>,
-    shareIn: PromiseOrValue<BigNumberish>,
-    dexData: PromiseOrValue<BytesLike>,
+    swapData: ISwapper.SwapDataStruct,
+    arg1: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  "getOutputAmount(uint256,uint256,bytes)"(
-    tokenInId: PromiseOrValue<BigNumberish>,
-    shareIn: PromiseOrValue<BigNumberish>,
-    dexData: PromiseOrValue<BytesLike>,
+  "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+    swapData: ISwapper.SwapDataStruct,
+    arg1: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -336,6 +470,14 @@ export interface UniswapV3Swapper extends BaseContract {
   poolFee(overrides?: CallOverrides): Promise<number>;
 
   "poolFee()"(overrides?: CallOverrides): Promise<number>;
+
+  renounceOwnership(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "renounceOwnership()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   setPoolFee(
     _newFee: PromiseOrValue<BigNumberish>,
@@ -348,22 +490,18 @@ export interface UniswapV3Swapper extends BaseContract {
   ): Promise<ContractTransaction>;
 
   swap(
-    tokenInId: PromiseOrValue<BigNumberish>,
-    tokenOutId: PromiseOrValue<BigNumberish>,
-    shareIn: PromiseOrValue<BigNumberish>,
-    to: PromiseOrValue<string>,
+    swapData: ISwapper.SwapDataStruct,
     amountOutMin: PromiseOrValue<BigNumberish>,
-    dexData: PromiseOrValue<BytesLike>,
+    to: PromiseOrValue<string>,
+    data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "swap(uint256,uint256,uint256,address,uint256,bytes)"(
-    tokenInId: PromiseOrValue<BigNumberish>,
-    tokenOutId: PromiseOrValue<BigNumberish>,
-    shareIn: PromiseOrValue<BigNumberish>,
-    to: PromiseOrValue<string>,
+  "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
+    swapData: ISwapper.SwapDataStruct,
     amountOutMin: PromiseOrValue<BigNumberish>,
-    dexData: PromiseOrValue<BytesLike>,
+    to: PromiseOrValue<string>,
+    data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -371,36 +509,46 @@ export interface UniswapV3Swapper extends BaseContract {
 
   "swapRouter()"(overrides?: CallOverrides): Promise<string>;
 
+  transferOwnership(
+    newOwner: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "transferOwnership(address)"(
+    newOwner: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     factory(overrides?: CallOverrides): Promise<string>;
 
     "factory()"(overrides?: CallOverrides): Promise<string>;
 
+    getDefaultSwapData(overrides?: CallOverrides): Promise<string>;
+
+    "getDefaultSwapData()"(overrides?: CallOverrides): Promise<string>;
+
     getInputAmount(
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      shareOut: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+      swapData: ISwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "getInputAmount(uint256,uint256,bytes)"(
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      shareOut: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+    "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      swapData: ISwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getOutputAmount(
-      tokenInId: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+      swapData: ISwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "getOutputAmount(uint256,uint256,bytes)"(
-      tokenInId: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+    "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      swapData: ISwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -412,6 +560,10 @@ export interface UniswapV3Swapper extends BaseContract {
 
     "poolFee()"(overrides?: CallOverrides): Promise<number>;
 
+    renounceOwnership(overrides?: CallOverrides): Promise<void>;
+
+    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
+
     setPoolFee(
       _newFee: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -423,24 +575,20 @@ export interface UniswapV3Swapper extends BaseContract {
     ): Promise<void>;
 
     swap(
-      tokenInId: PromiseOrValue<BigNumberish>,
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+      swapData: ISwapper.SwapDataStruct,
       amountOutMin: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+      to: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
     >;
 
-    "swap(uint256,uint256,uint256,address,uint256,bytes)"(
-      tokenInId: PromiseOrValue<BigNumberish>,
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+    "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
+      swapData: ISwapper.SwapDataStruct,
       amountOutMin: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+      to: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
@@ -449,9 +597,28 @@ export interface UniswapV3Swapper extends BaseContract {
     swapRouter(overrides?: CallOverrides): Promise<string>;
 
     "swapRouter()"(overrides?: CallOverrides): Promise<string>;
+
+    transferOwnership(
+      newOwner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "transferOwnership(address)"(
+      newOwner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
+    "OwnershipTransferred(address,address)"(
+      previousOwner?: PromiseOrValue<string> | null,
+      newOwner?: PromiseOrValue<string> | null
+    ): OwnershipTransferredEventFilter;
+    OwnershipTransferred(
+      previousOwner?: PromiseOrValue<string> | null,
+      newOwner?: PromiseOrValue<string> | null
+    ): OwnershipTransferredEventFilter;
+
     "PoolFee(uint256,uint256)"(_old?: null, _new?: null): PoolFeeEventFilter;
     PoolFee(_old?: null, _new?: null): PoolFeeEventFilter;
   };
@@ -461,31 +628,31 @@ export interface UniswapV3Swapper extends BaseContract {
 
     "factory()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    getDefaultSwapData(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "getDefaultSwapData()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     getInputAmount(
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      shareOut: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+      swapData: ISwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "getInputAmount(uint256,uint256,bytes)"(
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      shareOut: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+    "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      swapData: ISwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getOutputAmount(
-      tokenInId: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+      swapData: ISwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "getOutputAmount(uint256,uint256,bytes)"(
-      tokenInId: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+    "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      swapData: ISwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -497,6 +664,14 @@ export interface UniswapV3Swapper extends BaseContract {
 
     "poolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     setPoolFee(
       _newFee: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -508,28 +683,34 @@ export interface UniswapV3Swapper extends BaseContract {
     ): Promise<BigNumber>;
 
     swap(
-      tokenInId: PromiseOrValue<BigNumberish>,
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+      swapData: ISwapper.SwapDataStruct,
       amountOutMin: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+      to: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "swap(uint256,uint256,uint256,address,uint256,bytes)"(
-      tokenInId: PromiseOrValue<BigNumberish>,
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+    "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
+      swapData: ISwapper.SwapDataStruct,
       amountOutMin: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+      to: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     swapRouter(overrides?: CallOverrides): Promise<BigNumber>;
 
     "swapRouter()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    transferOwnership(
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "transferOwnership(address)"(
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -537,31 +718,35 @@ export interface UniswapV3Swapper extends BaseContract {
 
     "factory()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    getInputAmount(
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      shareOut: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+    getDefaultSwapData(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "getInputAmount(uint256,uint256,bytes)"(
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      shareOut: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+    "getDefaultSwapData()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getInputAmount(
+      swapData: ISwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      swapData: ISwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getOutputAmount(
-      tokenInId: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+      swapData: ISwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "getOutputAmount(uint256,uint256,bytes)"(
-      tokenInId: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+    "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      swapData: ISwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -573,6 +758,14 @@ export interface UniswapV3Swapper extends BaseContract {
 
     "poolFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     setPoolFee(
       _newFee: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -584,27 +777,33 @@ export interface UniswapV3Swapper extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     swap(
-      tokenInId: PromiseOrValue<BigNumberish>,
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+      swapData: ISwapper.SwapDataStruct,
       amountOutMin: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+      to: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "swap(uint256,uint256,uint256,address,uint256,bytes)"(
-      tokenInId: PromiseOrValue<BigNumberish>,
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+    "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
+      swapData: ISwapper.SwapDataStruct,
       amountOutMin: PromiseOrValue<BigNumberish>,
-      dexData: PromiseOrValue<BytesLike>,
+      to: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     swapRouter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "swapRouter()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    transferOwnership(
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "transferOwnership(address)"(
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
   };
 }
