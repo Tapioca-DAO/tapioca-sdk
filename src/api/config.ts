@@ -175,6 +175,7 @@ export enum TAPIOCA_PROJECTS_NAME {
     TapToken = 'tap-token',
     TapiocaBar = 'tapioca-bar',
     Generic = 'generic',
+    PCNFT = 'pcnft',
 }
 
 export const TAPIOCA_PROJECTS = [
