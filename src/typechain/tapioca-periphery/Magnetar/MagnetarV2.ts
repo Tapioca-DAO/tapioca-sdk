@@ -668,7 +668,7 @@ export interface MagnetarV2 extends BaseContract {
       deposit: PromiseOrValue<boolean>,
       withdraw: PromiseOrValue<boolean>,
       withdrawData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bool,bytes)"(
@@ -680,7 +680,7 @@ export interface MagnetarV2 extends BaseContract {
       deposit: PromiseOrValue<boolean>,
       withdraw: PromiseOrValue<boolean>,
       withdrawData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     depositAndAddAsset(
@@ -689,7 +689,7 @@ export interface MagnetarV2 extends BaseContract {
       _amount: PromiseOrValue<BigNumberish>,
       deposit_: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "depositAndAddAsset(address,address,uint256,bool,bool)"(
@@ -698,7 +698,7 @@ export interface MagnetarV2 extends BaseContract {
       _amount: PromiseOrValue<BigNumberish>,
       deposit_: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     depositAndRepay(
@@ -708,7 +708,7 @@ export interface MagnetarV2 extends BaseContract {
       repayAmount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "depositAndRepay(address,address,uint256,uint256,bool,bool)"(
@@ -718,7 +718,7 @@ export interface MagnetarV2 extends BaseContract {
       repayAmount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     depositRepayAndRemoveCollateral(
@@ -730,7 +730,7 @@ export interface MagnetarV2 extends BaseContract {
       deposit: PromiseOrValue<boolean>,
       withdraw: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,bool,bool)"(
@@ -742,7 +742,7 @@ export interface MagnetarV2 extends BaseContract {
       deposit: PromiseOrValue<boolean>,
       withdraw: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     getAmountForAssetFraction(
@@ -805,7 +805,7 @@ export interface MagnetarV2 extends BaseContract {
       borrowAmount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "mintAndLend(address,address,address,uint256,uint256,bool,bool)"(
@@ -816,7 +816,7 @@ export interface MagnetarV2 extends BaseContract {
       borrowAmount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
@@ -832,7 +832,7 @@ export interface MagnetarV2 extends BaseContract {
       collateralShare: PromiseOrValue<BigNumberish>,
       withdraw: PromiseOrValue<boolean>,
       withdrawData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)"(
@@ -844,7 +844,7 @@ export interface MagnetarV2 extends BaseContract {
       collateralShare: PromiseOrValue<BigNumberish>,
       withdraw: PromiseOrValue<boolean>,
       withdrawData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     renounceOwnership(
@@ -909,7 +909,7 @@ export interface MagnetarV2 extends BaseContract {
     deposit: PromiseOrValue<boolean>,
     withdraw: PromiseOrValue<boolean>,
     withdrawData: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bool,bytes)"(
@@ -921,7 +921,7 @@ export interface MagnetarV2 extends BaseContract {
     deposit: PromiseOrValue<boolean>,
     withdraw: PromiseOrValue<boolean>,
     withdrawData: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   depositAndAddAsset(
@@ -930,7 +930,7 @@ export interface MagnetarV2 extends BaseContract {
     _amount: PromiseOrValue<BigNumberish>,
     deposit_: PromiseOrValue<boolean>,
     extractFromSender: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "depositAndAddAsset(address,address,uint256,bool,bool)"(
@@ -939,7 +939,7 @@ export interface MagnetarV2 extends BaseContract {
     _amount: PromiseOrValue<BigNumberish>,
     deposit_: PromiseOrValue<boolean>,
     extractFromSender: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   depositAndRepay(
@@ -949,7 +949,7 @@ export interface MagnetarV2 extends BaseContract {
     repayAmount: PromiseOrValue<BigNumberish>,
     deposit: PromiseOrValue<boolean>,
     extractFromSender: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "depositAndRepay(address,address,uint256,uint256,bool,bool)"(
@@ -959,7 +959,7 @@ export interface MagnetarV2 extends BaseContract {
     repayAmount: PromiseOrValue<BigNumberish>,
     deposit: PromiseOrValue<boolean>,
     extractFromSender: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   depositRepayAndRemoveCollateral(
@@ -971,7 +971,7 @@ export interface MagnetarV2 extends BaseContract {
     deposit: PromiseOrValue<boolean>,
     withdraw: PromiseOrValue<boolean>,
     extractFromSender: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,bool,bool)"(
@@ -983,7 +983,7 @@ export interface MagnetarV2 extends BaseContract {
     deposit: PromiseOrValue<boolean>,
     withdraw: PromiseOrValue<boolean>,
     extractFromSender: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   getAmountForAssetFraction(
@@ -1046,7 +1046,7 @@ export interface MagnetarV2 extends BaseContract {
     borrowAmount: PromiseOrValue<BigNumberish>,
     deposit: PromiseOrValue<boolean>,
     extractFromSender: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "mintAndLend(address,address,address,uint256,uint256,bool,bool)"(
@@ -1057,7 +1057,7 @@ export interface MagnetarV2 extends BaseContract {
     borrowAmount: PromiseOrValue<BigNumberish>,
     deposit: PromiseOrValue<boolean>,
     extractFromSender: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
@@ -1073,7 +1073,7 @@ export interface MagnetarV2 extends BaseContract {
     collateralShare: PromiseOrValue<BigNumberish>,
     withdraw: PromiseOrValue<boolean>,
     withdrawData: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)"(
@@ -1085,7 +1085,7 @@ export interface MagnetarV2 extends BaseContract {
     collateralShare: PromiseOrValue<BigNumberish>,
     withdraw: PromiseOrValue<boolean>,
     withdrawData: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   renounceOwnership(
@@ -1399,7 +1399,7 @@ export interface MagnetarV2 extends BaseContract {
       deposit: PromiseOrValue<boolean>,
       withdraw: PromiseOrValue<boolean>,
       withdrawData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bool,bytes)"(
@@ -1411,7 +1411,7 @@ export interface MagnetarV2 extends BaseContract {
       deposit: PromiseOrValue<boolean>,
       withdraw: PromiseOrValue<boolean>,
       withdrawData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     depositAndAddAsset(
@@ -1420,7 +1420,7 @@ export interface MagnetarV2 extends BaseContract {
       _amount: PromiseOrValue<BigNumberish>,
       deposit_: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "depositAndAddAsset(address,address,uint256,bool,bool)"(
@@ -1429,7 +1429,7 @@ export interface MagnetarV2 extends BaseContract {
       _amount: PromiseOrValue<BigNumberish>,
       deposit_: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     depositAndRepay(
@@ -1439,7 +1439,7 @@ export interface MagnetarV2 extends BaseContract {
       repayAmount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "depositAndRepay(address,address,uint256,uint256,bool,bool)"(
@@ -1449,7 +1449,7 @@ export interface MagnetarV2 extends BaseContract {
       repayAmount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     depositRepayAndRemoveCollateral(
@@ -1461,7 +1461,7 @@ export interface MagnetarV2 extends BaseContract {
       deposit: PromiseOrValue<boolean>,
       withdraw: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,bool,bool)"(
@@ -1473,7 +1473,7 @@ export interface MagnetarV2 extends BaseContract {
       deposit: PromiseOrValue<boolean>,
       withdraw: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getAmountForAssetFraction(
@@ -1536,7 +1536,7 @@ export interface MagnetarV2 extends BaseContract {
       borrowAmount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "mintAndLend(address,address,address,uint256,uint256,bool,bool)"(
@@ -1547,7 +1547,7 @@ export interface MagnetarV2 extends BaseContract {
       borrowAmount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1563,7 +1563,7 @@ export interface MagnetarV2 extends BaseContract {
       collateralShare: PromiseOrValue<BigNumberish>,
       withdraw: PromiseOrValue<boolean>,
       withdrawData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)"(
@@ -1575,7 +1575,7 @@ export interface MagnetarV2 extends BaseContract {
       collateralShare: PromiseOrValue<BigNumberish>,
       withdraw: PromiseOrValue<boolean>,
       withdrawData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     renounceOwnership(
@@ -1641,7 +1641,7 @@ export interface MagnetarV2 extends BaseContract {
       deposit: PromiseOrValue<boolean>,
       withdraw: PromiseOrValue<boolean>,
       withdrawData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bool,bytes)"(
@@ -1653,7 +1653,7 @@ export interface MagnetarV2 extends BaseContract {
       deposit: PromiseOrValue<boolean>,
       withdraw: PromiseOrValue<boolean>,
       withdrawData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     depositAndAddAsset(
@@ -1662,7 +1662,7 @@ export interface MagnetarV2 extends BaseContract {
       _amount: PromiseOrValue<BigNumberish>,
       deposit_: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "depositAndAddAsset(address,address,uint256,bool,bool)"(
@@ -1671,7 +1671,7 @@ export interface MagnetarV2 extends BaseContract {
       _amount: PromiseOrValue<BigNumberish>,
       deposit_: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     depositAndRepay(
@@ -1681,7 +1681,7 @@ export interface MagnetarV2 extends BaseContract {
       repayAmount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "depositAndRepay(address,address,uint256,uint256,bool,bool)"(
@@ -1691,7 +1691,7 @@ export interface MagnetarV2 extends BaseContract {
       repayAmount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     depositRepayAndRemoveCollateral(
@@ -1703,7 +1703,7 @@ export interface MagnetarV2 extends BaseContract {
       deposit: PromiseOrValue<boolean>,
       withdraw: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,bool,bool)"(
@@ -1715,7 +1715,7 @@ export interface MagnetarV2 extends BaseContract {
       deposit: PromiseOrValue<boolean>,
       withdraw: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getAmountForAssetFraction(
@@ -1778,7 +1778,7 @@ export interface MagnetarV2 extends BaseContract {
       borrowAmount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "mintAndLend(address,address,address,uint256,uint256,bool,bool)"(
@@ -1789,7 +1789,7 @@ export interface MagnetarV2 extends BaseContract {
       borrowAmount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1805,7 +1805,7 @@ export interface MagnetarV2 extends BaseContract {
       collateralShare: PromiseOrValue<BigNumberish>,
       withdraw: PromiseOrValue<boolean>,
       withdrawData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)"(
@@ -1817,7 +1817,7 @@ export interface MagnetarV2 extends BaseContract {
       collateralShare: PromiseOrValue<BigNumberish>,
       withdraw: PromiseOrValue<boolean>,
       withdrawData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     renounceOwnership(
