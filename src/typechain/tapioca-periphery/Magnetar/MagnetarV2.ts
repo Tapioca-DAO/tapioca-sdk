@@ -199,6 +199,7 @@ export interface MagnetarV2Interface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "singularityMarketInfo(address,address[])": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "withdrawTo(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)": FunctionFragment;
   };
 
   getFunction(
@@ -235,6 +236,8 @@ export interface MagnetarV2Interface extends utils.Interface {
       | "singularityMarketInfo(address,address[])"
       | "transferOwnership"
       | "transferOwnership(address)"
+      | "withdrawTo"
+      | "withdrawTo(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -465,6 +468,36 @@ export interface MagnetarV2Interface extends utils.Interface {
     functionFragment: "transferOwnership(address)",
     values: [PromiseOrValue<string>]
   ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawTo",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawTo(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "bigBangMarketInfo",
@@ -583,6 +616,11 @@ export interface MagnetarV2Interface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "withdrawTo", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawTo(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)",
     data: BytesLike
   ): Result;
 
@@ -876,6 +914,34 @@ export interface MagnetarV2 extends BaseContract {
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    withdrawTo(
+      yieldBox: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      assetId: PromiseOrValue<BigNumberish>,
+      dstChainId: PromiseOrValue<BigNumberish>,
+      receiver: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
+      adapterParams: PromiseOrValue<BytesLike>,
+      refundAddress: PromiseOrValue<string>,
+      gas: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "withdrawTo(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)"(
+      yieldBox: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      assetId: PromiseOrValue<BigNumberish>,
+      dstChainId: PromiseOrValue<BigNumberish>,
+      receiver: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
+      adapterParams: PromiseOrValue<BytesLike>,
+      refundAddress: PromiseOrValue<string>,
+      gas: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
 
   bigBangMarketInfo(
@@ -1118,6 +1184,34 @@ export interface MagnetarV2 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  withdrawTo(
+    yieldBox: PromiseOrValue<string>,
+    from: PromiseOrValue<string>,
+    assetId: PromiseOrValue<BigNumberish>,
+    dstChainId: PromiseOrValue<BigNumberish>,
+    receiver: PromiseOrValue<BytesLike>,
+    amount: PromiseOrValue<BigNumberish>,
+    share: PromiseOrValue<BigNumberish>,
+    adapterParams: PromiseOrValue<BytesLike>,
+    refundAddress: PromiseOrValue<string>,
+    gas: PromiseOrValue<BigNumberish>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "withdrawTo(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)"(
+    yieldBox: PromiseOrValue<string>,
+    from: PromiseOrValue<string>,
+    assetId: PromiseOrValue<BigNumberish>,
+    dstChainId: PromiseOrValue<BigNumberish>,
+    receiver: PromiseOrValue<BytesLike>,
+    amount: PromiseOrValue<BigNumberish>,
+    share: PromiseOrValue<BigNumberish>,
+    adapterParams: PromiseOrValue<BytesLike>,
+    refundAddress: PromiseOrValue<string>,
+    gas: PromiseOrValue<BigNumberish>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     bigBangMarketInfo(
       who: PromiseOrValue<string>,
@@ -1352,6 +1446,34 @@ export interface MagnetarV2 extends BaseContract {
 
     "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    withdrawTo(
+      yieldBox: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      assetId: PromiseOrValue<BigNumberish>,
+      dstChainId: PromiseOrValue<BigNumberish>,
+      receiver: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
+      adapterParams: PromiseOrValue<BytesLike>,
+      refundAddress: PromiseOrValue<string>,
+      gas: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "withdrawTo(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)"(
+      yieldBox: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      assetId: PromiseOrValue<BigNumberish>,
+      dstChainId: PromiseOrValue<BigNumberish>,
+      receiver: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
+      adapterParams: PromiseOrValue<BytesLike>,
+      refundAddress: PromiseOrValue<string>,
+      gas: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -1607,6 +1729,34 @@ export interface MagnetarV2 extends BaseContract {
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    withdrawTo(
+      yieldBox: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      assetId: PromiseOrValue<BigNumberish>,
+      dstChainId: PromiseOrValue<BigNumberish>,
+      receiver: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
+      adapterParams: PromiseOrValue<BytesLike>,
+      refundAddress: PromiseOrValue<string>,
+      gas: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "withdrawTo(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)"(
+      yieldBox: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      assetId: PromiseOrValue<BigNumberish>,
+      dstChainId: PromiseOrValue<BigNumberish>,
+      receiver: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
+      adapterParams: PromiseOrValue<BytesLike>,
+      refundAddress: PromiseOrValue<string>,
+      gas: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -1848,6 +1998,34 @@ export interface MagnetarV2 extends BaseContract {
     "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    withdrawTo(
+      yieldBox: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      assetId: PromiseOrValue<BigNumberish>,
+      dstChainId: PromiseOrValue<BigNumberish>,
+      receiver: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
+      adapterParams: PromiseOrValue<BytesLike>,
+      refundAddress: PromiseOrValue<string>,
+      gas: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "withdrawTo(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)"(
+      yieldBox: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      assetId: PromiseOrValue<BigNumberish>,
+      dstChainId: PromiseOrValue<BigNumberish>,
+      receiver: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
+      adapterParams: PromiseOrValue<BytesLike>,
+      refundAddress: PromiseOrValue<string>,
+      gas: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }
