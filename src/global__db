@@ -1323,5 +1323,30 @@
                 }
             ]
         }
+    },
+    "prod": {
+        "generic": {
+            "42161": [
+                {
+                    "name": "Multicall3",
+                    "address": "0x1253D49Ec68AFdDFcac544DAc03D4F42Fad7ba87",
+                    "meta": {}
+                }
+            ],
+            "43113": [
+                {
+                    "name": "Multicall3",
+                    "address": "0x3A770a2f79c33dC4B717a11E312837f7723F79F7",
+                    "meta": {}
+                }
+            ],
+            "421613": [
+                {
+                    "name": "Multicall3",
+                    "address": "0x1253D49Ec68AFdDFcac544DAc03D4F42Fad7ba87",
+                    "meta": {}
+                }
+            ]
+        }
     }
 }
