@@ -147,7 +147,7 @@ export const saveGlobally = (
     tag = 'default',
 ) => {
     const db = readDB('global', SUBREPO_GLOBAL_DB_PATH) ?? {};
-    const prevDep = db[tag]?.[project] || {}; // Read previous deployments
+    const prevDep: any = db[tag]?.[project] || { [tag]: {} }; // Read previous deployments
 
     // Save previous deployments in a backup file
     if (db[tag]?.[project])
