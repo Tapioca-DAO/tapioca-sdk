@@ -35,6 +35,8 @@ interface IConstructorOptions {
     bytecodeSizeLimit: number; // Limit of bytecode size for a single transaction, error happened on Arb Goerli with Alchemy RPC
     debugMode: boolean;
     tag?: string;
+    multicall?: Multicall3;
+    multisig?: MultisigMock;
 }
 
 export interface IDeployerVMAdd<T extends ContractFactory>
@@ -245,7 +247,7 @@ export class DeployerVM {
             //try global__db
             try {
                 deployment = this.hre.SDK.db.getGlobalDeployment(
-                    TAPIOCA_PROJECTS[3], //generic
+                    TAPIOCA_PROJECTS_NAME.Generic, //generic
                     String(this.hre.network.config.chainId),
                     target.name,
                     'default',
@@ -465,6 +467,7 @@ export class DeployerVM {
 
         // Deploy TapiocaDeployer if not deployed
         if (!deployment) {
+            console.log('[+] Deploying TapiocaDeployer');
             // Deploy TapiocaDeployer
             const tapiocaDeployer = await new TapiocaDeployer__factory(
                 (
@@ -505,7 +508,7 @@ export class DeployerVM {
     getMulticall = async (): Promise<Multicall3> => {
         if (this.multicall) return this.multicall;
 
-        const project = TAPIOCA_PROJECTS[3];
+        const project = TAPIOCA_PROJECTS_NAME.Generic;
         const _tag = this.options.tag ?? 'default';
 
         // Get deployer deployment
@@ -529,7 +532,7 @@ export class DeployerVM {
         } catch (e) {
             if (this.options.debugMode) {
                 console.log(
-                    `[-] Failed retrieving Multicall3 deployemnt with error: ${e}`,
+                    `[-] Failed retrieving Multicall3 deployment with error: ${e}`,
                 );
             }
         }
@@ -584,7 +587,7 @@ export class DeployerVM {
     getMultisig = async (): Promise<MultisigMock> => {
         if (this.multisig) return this.multisig;
 
-        const project = TAPIOCA_PROJECTS[3];
+        const project = TAPIOCA_PROJECTS_NAME.Generic;
         const _tag = this.options.tag ?? 'default';
 
         // Get deployer deployment
