@@ -95,8 +95,10 @@ export declare namespace ISwapper {
 
 export interface CurveSwapperInterface extends utils.Interface {
   functions: {
+    "buildSwapData(address,address,uint256,uint256,bool,bool)": FunctionFragment;
+    "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)": FunctionFragment;
     "curvePool()": FunctionFragment;
-    "getDefaultSwapData()": FunctionFragment;
+    "getDefaultDexOptions()": FunctionFragment;
     "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)": FunctionFragment;
     "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)": FunctionFragment;
     "owner()": FunctionFragment;
@@ -108,10 +110,12 @@ export interface CurveSwapperInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "buildSwapData(address,address,uint256,uint256,bool,bool)"
+      | "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"
       | "curvePool"
       | "curvePool()"
-      | "getDefaultSwapData"
-      | "getDefaultSwapData()"
+      | "getDefaultDexOptions"
+      | "getDefaultDexOptions()"
       | "getInputAmount"
       | "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"
       | "getOutputAmount"
@@ -128,17 +132,39 @@ export interface CurveSwapperInterface extends utils.Interface {
       | "yieldBox()"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "buildSwapData(address,address,uint256,uint256,bool,bool)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<boolean>,
+      PromiseOrValue<boolean>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<boolean>,
+      PromiseOrValue<boolean>
+    ]
+  ): string;
   encodeFunctionData(functionFragment: "curvePool", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "curvePool()",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "getDefaultSwapData",
+    functionFragment: "getDefaultDexOptions",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "getDefaultSwapData()",
+    functionFragment: "getDefaultDexOptions()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -199,17 +225,25 @@ export interface CurveSwapperInterface extends utils.Interface {
     values?: undefined
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "buildSwapData(address,address,uint256,uint256,bool,bool)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "curvePool", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "curvePool()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getDefaultSwapData",
+    functionFragment: "getDefaultDexOptions",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getDefaultSwapData()",
+    functionFragment: "getDefaultDexOptions()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -305,13 +339,33 @@ export interface CurveSwapper extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    "buildSwapData(address,address,uint256,uint256,bool,bool)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<[ISwapper.SwapDataStructOutput]>;
+
+    "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
+      tokenInId: PromiseOrValue<BigNumberish>,
+      tokenOutId: PromiseOrValue<BigNumberish>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<[ISwapper.SwapDataStructOutput]>;
+
     curvePool(overrides?: CallOverrides): Promise<[string]>;
 
     "curvePool()"(overrides?: CallOverrides): Promise<[string]>;
 
-    getDefaultSwapData(overrides?: CallOverrides): Promise<[string]>;
+    getDefaultDexOptions(overrides?: CallOverrides): Promise<[string]>;
 
-    "getDefaultSwapData()"(overrides?: CallOverrides): Promise<[string]>;
+    "getDefaultDexOptions()"(overrides?: CallOverrides): Promise<[string]>;
 
     getInputAmount(
       arg0: ISwapper.SwapDataStruct,
@@ -380,13 +434,33 @@ export interface CurveSwapper extends BaseContract {
     "yieldBox()"(overrides?: CallOverrides): Promise<[string]>;
   };
 
+  "buildSwapData(address,address,uint256,uint256,bool,bool)"(
+    tokenIn: PromiseOrValue<string>,
+    tokenOut: PromiseOrValue<string>,
+    amountIn: PromiseOrValue<BigNumberish>,
+    shareIn: PromiseOrValue<BigNumberish>,
+    withdrawFromYb: PromiseOrValue<boolean>,
+    depositToYb: PromiseOrValue<boolean>,
+    overrides?: CallOverrides
+  ): Promise<ISwapper.SwapDataStructOutput>;
+
+  "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
+    tokenInId: PromiseOrValue<BigNumberish>,
+    tokenOutId: PromiseOrValue<BigNumberish>,
+    amountIn: PromiseOrValue<BigNumberish>,
+    shareIn: PromiseOrValue<BigNumberish>,
+    withdrawFromYb: PromiseOrValue<boolean>,
+    depositToYb: PromiseOrValue<boolean>,
+    overrides?: CallOverrides
+  ): Promise<ISwapper.SwapDataStructOutput>;
+
   curvePool(overrides?: CallOverrides): Promise<string>;
 
   "curvePool()"(overrides?: CallOverrides): Promise<string>;
 
-  getDefaultSwapData(overrides?: CallOverrides): Promise<string>;
+  getDefaultDexOptions(overrides?: CallOverrides): Promise<string>;
 
-  "getDefaultSwapData()"(overrides?: CallOverrides): Promise<string>;
+  "getDefaultDexOptions()"(overrides?: CallOverrides): Promise<string>;
 
   getInputAmount(
     arg0: ISwapper.SwapDataStruct,
@@ -455,13 +529,33 @@ export interface CurveSwapper extends BaseContract {
   "yieldBox()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
+    "buildSwapData(address,address,uint256,uint256,bool,bool)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<ISwapper.SwapDataStructOutput>;
+
+    "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
+      tokenInId: PromiseOrValue<BigNumberish>,
+      tokenOutId: PromiseOrValue<BigNumberish>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<ISwapper.SwapDataStructOutput>;
+
     curvePool(overrides?: CallOverrides): Promise<string>;
 
     "curvePool()"(overrides?: CallOverrides): Promise<string>;
 
-    getDefaultSwapData(overrides?: CallOverrides): Promise<string>;
+    getDefaultDexOptions(overrides?: CallOverrides): Promise<string>;
 
-    "getDefaultSwapData()"(overrides?: CallOverrides): Promise<string>;
+    "getDefaultDexOptions()"(overrides?: CallOverrides): Promise<string>;
 
     getInputAmount(
       arg0: ISwapper.SwapDataStruct,
@@ -542,13 +636,33 @@ export interface CurveSwapper extends BaseContract {
   };
 
   estimateGas: {
+    "buildSwapData(address,address,uint256,uint256,bool,bool)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
+      tokenInId: PromiseOrValue<BigNumberish>,
+      tokenOutId: PromiseOrValue<BigNumberish>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     curvePool(overrides?: CallOverrides): Promise<BigNumber>;
 
     "curvePool()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getDefaultSwapData(overrides?: CallOverrides): Promise<BigNumber>;
+    getDefaultDexOptions(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "getDefaultSwapData()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "getDefaultDexOptions()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     getInputAmount(
       arg0: ISwapper.SwapDataStruct,
@@ -618,15 +732,35 @@ export interface CurveSwapper extends BaseContract {
   };
 
   populateTransaction: {
+    "buildSwapData(address,address,uint256,uint256,bool,bool)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
+      tokenInId: PromiseOrValue<BigNumberish>,
+      tokenOutId: PromiseOrValue<BigNumberish>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     curvePool(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "curvePool()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    getDefaultSwapData(
+    getDefaultDexOptions(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "getDefaultSwapData()"(
+    "getDefaultDexOptions()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

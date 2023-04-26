@@ -95,8 +95,10 @@ export declare namespace ISwapper {
 
 export interface UniswapV3SwapperInterface extends utils.Interface {
   functions: {
+    "buildSwapData(address,address,uint256,uint256,bool,bool)": FunctionFragment;
+    "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)": FunctionFragment;
     "factory()": FunctionFragment;
-    "getDefaultSwapData()": FunctionFragment;
+    "getDefaultDexOptions()": FunctionFragment;
     "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)": FunctionFragment;
     "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)": FunctionFragment;
     "owner()": FunctionFragment;
@@ -110,10 +112,12 @@ export interface UniswapV3SwapperInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "buildSwapData(address,address,uint256,uint256,bool,bool)"
+      | "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"
       | "factory"
       | "factory()"
-      | "getDefaultSwapData"
-      | "getDefaultSwapData()"
+      | "getDefaultDexOptions"
+      | "getDefaultDexOptions()"
       | "getInputAmount"
       | "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"
       | "getOutputAmount"
@@ -134,14 +138,36 @@ export interface UniswapV3SwapperInterface extends utils.Interface {
       | "transferOwnership(address)"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "buildSwapData(address,address,uint256,uint256,bool,bool)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<boolean>,
+      PromiseOrValue<boolean>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<boolean>,
+      PromiseOrValue<boolean>
+    ]
+  ): string;
   encodeFunctionData(functionFragment: "factory", values?: undefined): string;
   encodeFunctionData(functionFragment: "factory()", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "getDefaultSwapData",
+    functionFragment: "getDefaultDexOptions",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "getDefaultSwapData()",
+    functionFragment: "getDefaultDexOptions()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -215,14 +241,22 @@ export interface UniswapV3SwapperInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
 
-  decodeFunctionResult(functionFragment: "factory", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "factory()", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "getDefaultSwapData",
+    functionFragment: "buildSwapData(address,address,uint256,uint256,bool,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getDefaultSwapData()",
+    functionFragment: "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "factory", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "factory()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getDefaultDexOptions",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getDefaultDexOptions()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -342,13 +376,33 @@ export interface UniswapV3Swapper extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    "buildSwapData(address,address,uint256,uint256,bool,bool)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<[ISwapper.SwapDataStructOutput]>;
+
+    "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
+      tokenInId: PromiseOrValue<BigNumberish>,
+      tokenOutId: PromiseOrValue<BigNumberish>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<[ISwapper.SwapDataStructOutput]>;
+
     factory(overrides?: CallOverrides): Promise<[string]>;
 
     "factory()"(overrides?: CallOverrides): Promise<[string]>;
 
-    getDefaultSwapData(overrides?: CallOverrides): Promise<[string]>;
+    getDefaultDexOptions(overrides?: CallOverrides): Promise<[string]>;
 
-    "getDefaultSwapData()"(overrides?: CallOverrides): Promise<[string]>;
+    "getDefaultDexOptions()"(overrides?: CallOverrides): Promise<[string]>;
 
     getInputAmount(
       swapData: ISwapper.SwapDataStruct,
@@ -431,13 +485,33 @@ export interface UniswapV3Swapper extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
+  "buildSwapData(address,address,uint256,uint256,bool,bool)"(
+    tokenIn: PromiseOrValue<string>,
+    tokenOut: PromiseOrValue<string>,
+    amountIn: PromiseOrValue<BigNumberish>,
+    shareIn: PromiseOrValue<BigNumberish>,
+    withdrawFromYb: PromiseOrValue<boolean>,
+    depositToYb: PromiseOrValue<boolean>,
+    overrides?: CallOverrides
+  ): Promise<ISwapper.SwapDataStructOutput>;
+
+  "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
+    tokenInId: PromiseOrValue<BigNumberish>,
+    tokenOutId: PromiseOrValue<BigNumberish>,
+    amountIn: PromiseOrValue<BigNumberish>,
+    shareIn: PromiseOrValue<BigNumberish>,
+    withdrawFromYb: PromiseOrValue<boolean>,
+    depositToYb: PromiseOrValue<boolean>,
+    overrides?: CallOverrides
+  ): Promise<ISwapper.SwapDataStructOutput>;
+
   factory(overrides?: CallOverrides): Promise<string>;
 
   "factory()"(overrides?: CallOverrides): Promise<string>;
 
-  getDefaultSwapData(overrides?: CallOverrides): Promise<string>;
+  getDefaultDexOptions(overrides?: CallOverrides): Promise<string>;
 
-  "getDefaultSwapData()"(overrides?: CallOverrides): Promise<string>;
+  "getDefaultDexOptions()"(overrides?: CallOverrides): Promise<string>;
 
   getInputAmount(
     swapData: ISwapper.SwapDataStruct,
@@ -520,13 +594,33 @@ export interface UniswapV3Swapper extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    "buildSwapData(address,address,uint256,uint256,bool,bool)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<ISwapper.SwapDataStructOutput>;
+
+    "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
+      tokenInId: PromiseOrValue<BigNumberish>,
+      tokenOutId: PromiseOrValue<BigNumberish>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<ISwapper.SwapDataStructOutput>;
+
     factory(overrides?: CallOverrides): Promise<string>;
 
     "factory()"(overrides?: CallOverrides): Promise<string>;
 
-    getDefaultSwapData(overrides?: CallOverrides): Promise<string>;
+    getDefaultDexOptions(overrides?: CallOverrides): Promise<string>;
 
-    "getDefaultSwapData()"(overrides?: CallOverrides): Promise<string>;
+    "getDefaultDexOptions()"(overrides?: CallOverrides): Promise<string>;
 
     getInputAmount(
       swapData: ISwapper.SwapDataStruct,
@@ -624,13 +718,33 @@ export interface UniswapV3Swapper extends BaseContract {
   };
 
   estimateGas: {
+    "buildSwapData(address,address,uint256,uint256,bool,bool)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
+      tokenInId: PromiseOrValue<BigNumberish>,
+      tokenOutId: PromiseOrValue<BigNumberish>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     factory(overrides?: CallOverrides): Promise<BigNumber>;
 
     "factory()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getDefaultSwapData(overrides?: CallOverrides): Promise<BigNumber>;
+    getDefaultDexOptions(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "getDefaultSwapData()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "getDefaultDexOptions()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     getInputAmount(
       swapData: ISwapper.SwapDataStruct,
@@ -714,15 +828,35 @@ export interface UniswapV3Swapper extends BaseContract {
   };
 
   populateTransaction: {
+    "buildSwapData(address,address,uint256,uint256,bool,bool)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
+      tokenInId: PromiseOrValue<BigNumberish>,
+      tokenOutId: PromiseOrValue<BigNumberish>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     factory(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "factory()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    getDefaultSwapData(
+    getDefaultDexOptions(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "getDefaultSwapData()"(
+    "getDefaultDexOptions()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
