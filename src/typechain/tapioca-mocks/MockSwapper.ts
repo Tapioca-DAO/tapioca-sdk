@@ -93,9 +93,9 @@ export interface MockSwapperInterface extends utils.Interface {
   functions: {
     "buildSwapData(address,address,uint256,uint256,bool,bool)": FunctionFragment;
     "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)": FunctionFragment;
-    "getInputAmount(uint256,uint256,bytes)": FunctionFragment;
-    "getOutputAmount(uint256,uint256,bytes)": FunctionFragment;
-    "swap(uint256,uint256,uint256,address,uint256,bytes)": FunctionFragment;
+    "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)": FunctionFragment;
+    "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)": FunctionFragment;
+    "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)": FunctionFragment;
   };
 
   getFunction(
@@ -103,11 +103,11 @@ export interface MockSwapperInterface extends utils.Interface {
       | "buildSwapData(address,address,uint256,uint256,bool,bool)"
       | "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"
       | "getInputAmount"
-      | "getInputAmount(uint256,uint256,bytes)"
+      | "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"
       | "getOutputAmount"
-      | "getOutputAmount(uint256,uint256,bytes)"
+      | "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"
       | "swap"
-      | "swap(uint256,uint256,uint256,address,uint256,bytes)"
+      | "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -134,55 +134,35 @@ export interface MockSwapperInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getInputAmount",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
+    values: [MockSwapper.SwapDataStruct, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
-    functionFragment: "getInputAmount(uint256,uint256,bytes)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
+    functionFragment: "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)",
+    values: [MockSwapper.SwapDataStruct, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "getOutputAmount",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
+    values: [MockSwapper.SwapDataStruct, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
-    functionFragment: "getOutputAmount(uint256,uint256,bytes)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
+    functionFragment: "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)",
+    values: [MockSwapper.SwapDataStruct, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "swap",
     values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
+      MockSwapper.SwapDataStruct,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "swap(uint256,uint256,uint256,address,uint256,bytes)",
+    functionFragment: "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)",
     values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
+      MockSwapper.SwapDataStruct,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
@@ -200,7 +180,7 @@ export interface MockSwapperInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getInputAmount(uint256,uint256,bytes)",
+    functionFragment: "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -208,12 +188,12 @@ export interface MockSwapperInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getOutputAmount(uint256,uint256,bytes)",
+    functionFragment: "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "swap", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "swap(uint256,uint256,uint256,address,uint256,bytes)",
+    functionFragment: "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)",
     data: BytesLike
   ): Result;
 
@@ -270,50 +250,42 @@ export interface MockSwapper extends BaseContract {
     ): Promise<[MockSwapper.SwapDataStructOutput]>;
 
     getInputAmount(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BytesLike>,
+      arg0: MockSwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    "getInputAmount(uint256,uint256,bytes)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BytesLike>,
+    "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      arg0: MockSwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     getOutputAmount(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BytesLike>,
+      arg0: MockSwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    ): Promise<[BigNumber] & { amountOut: BigNumber }>;
 
-    "getOutputAmount(uint256,uint256,bytes)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BytesLike>,
+    "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      arg0: MockSwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    ): Promise<[BigNumber] & { amountOut: BigNumber }>;
 
     swap(
-      arg0: PromiseOrValue<BigNumberish>,
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+      swapData: MockSwapper.SwapDataStruct,
       amountOutMin: PromiseOrValue<BigNumberish>,
-      arg5: PromiseOrValue<BytesLike>,
+      to: PromiseOrValue<string>,
+      arg3: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "swap(uint256,uint256,uint256,address,uint256,bytes)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+    "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
+      swapData: MockSwapper.SwapDataStruct,
       amountOutMin: PromiseOrValue<BigNumberish>,
-      arg5: PromiseOrValue<BytesLike>,
+      to: PromiseOrValue<string>,
+      arg3: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
@@ -339,50 +311,42 @@ export interface MockSwapper extends BaseContract {
   ): Promise<MockSwapper.SwapDataStructOutput>;
 
   getInputAmount(
-    arg0: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<BigNumberish>,
-    arg2: PromiseOrValue<BytesLike>,
+    arg0: MockSwapper.SwapDataStruct,
+    arg1: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  "getInputAmount(uint256,uint256,bytes)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<BigNumberish>,
-    arg2: PromiseOrValue<BytesLike>,
+  "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+    arg0: MockSwapper.SwapDataStruct,
+    arg1: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   getOutputAmount(
-    arg0: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<BigNumberish>,
-    arg2: PromiseOrValue<BytesLike>,
+    arg0: MockSwapper.SwapDataStruct,
+    arg1: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  "getOutputAmount(uint256,uint256,bytes)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<BigNumberish>,
-    arg2: PromiseOrValue<BytesLike>,
+  "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+    arg0: MockSwapper.SwapDataStruct,
+    arg1: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   swap(
-    arg0: PromiseOrValue<BigNumberish>,
-    tokenOutId: PromiseOrValue<BigNumberish>,
-    arg2: PromiseOrValue<BigNumberish>,
-    to: PromiseOrValue<string>,
+    swapData: MockSwapper.SwapDataStruct,
     amountOutMin: PromiseOrValue<BigNumberish>,
-    arg5: PromiseOrValue<BytesLike>,
+    to: PromiseOrValue<string>,
+    arg3: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "swap(uint256,uint256,uint256,address,uint256,bytes)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    tokenOutId: PromiseOrValue<BigNumberish>,
-    arg2: PromiseOrValue<BigNumberish>,
-    to: PromiseOrValue<string>,
+  "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
+    swapData: MockSwapper.SwapDataStruct,
     amountOutMin: PromiseOrValue<BigNumberish>,
-    arg5: PromiseOrValue<BytesLike>,
+    to: PromiseOrValue<string>,
+    arg3: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -408,52 +372,44 @@ export interface MockSwapper extends BaseContract {
     ): Promise<MockSwapper.SwapDataStructOutput>;
 
     getInputAmount(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BytesLike>,
+      arg0: MockSwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "getInputAmount(uint256,uint256,bytes)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BytesLike>,
+    "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      arg0: MockSwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getOutputAmount(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BytesLike>,
+      arg0: MockSwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "getOutputAmount(uint256,uint256,bytes)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BytesLike>,
+    "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      arg0: MockSwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     swap(
-      arg0: PromiseOrValue<BigNumberish>,
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+      swapData: MockSwapper.SwapDataStruct,
       amountOutMin: PromiseOrValue<BigNumberish>,
-      arg5: PromiseOrValue<BytesLike>,
+      to: PromiseOrValue<string>,
+      arg3: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
     >;
 
-    "swap(uint256,uint256,uint256,address,uint256,bytes)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+    "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
+      swapData: MockSwapper.SwapDataStruct,
       amountOutMin: PromiseOrValue<BigNumberish>,
-      arg5: PromiseOrValue<BytesLike>,
+      to: PromiseOrValue<string>,
+      arg3: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
@@ -484,50 +440,42 @@ export interface MockSwapper extends BaseContract {
     ): Promise<BigNumber>;
 
     getInputAmount(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BytesLike>,
+      arg0: MockSwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "getInputAmount(uint256,uint256,bytes)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BytesLike>,
+    "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      arg0: MockSwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getOutputAmount(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BytesLike>,
+      arg0: MockSwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "getOutputAmount(uint256,uint256,bytes)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BytesLike>,
+    "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      arg0: MockSwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     swap(
-      arg0: PromiseOrValue<BigNumberish>,
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+      swapData: MockSwapper.SwapDataStruct,
       amountOutMin: PromiseOrValue<BigNumberish>,
-      arg5: PromiseOrValue<BytesLike>,
+      to: PromiseOrValue<string>,
+      arg3: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "swap(uint256,uint256,uint256,address,uint256,bytes)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+    "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
+      swapData: MockSwapper.SwapDataStruct,
       amountOutMin: PromiseOrValue<BigNumberish>,
-      arg5: PromiseOrValue<BytesLike>,
+      to: PromiseOrValue<string>,
+      arg3: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
@@ -554,50 +502,42 @@ export interface MockSwapper extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     getInputAmount(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BytesLike>,
+      arg0: MockSwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "getInputAmount(uint256,uint256,bytes)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BytesLike>,
+    "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      arg0: MockSwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getOutputAmount(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BytesLike>,
+      arg0: MockSwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "getOutputAmount(uint256,uint256,bytes)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BytesLike>,
+    "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      arg0: MockSwapper.SwapDataStruct,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     swap(
-      arg0: PromiseOrValue<BigNumberish>,
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+      swapData: MockSwapper.SwapDataStruct,
       amountOutMin: PromiseOrValue<BigNumberish>,
-      arg5: PromiseOrValue<BytesLike>,
+      to: PromiseOrValue<string>,
+      arg3: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "swap(uint256,uint256,uint256,address,uint256,bytes)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      tokenOutId: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+    "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
+      swapData: MockSwapper.SwapDataStruct,
       amountOutMin: PromiseOrValue<BigNumberish>,
-      arg5: PromiseOrValue<BytesLike>,
+      to: PromiseOrValue<string>,
+      arg3: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
