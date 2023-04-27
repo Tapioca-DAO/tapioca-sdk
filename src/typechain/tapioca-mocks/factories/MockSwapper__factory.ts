@@ -21,6 +21,240 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "address",
+        name: "tokenIn",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "tokenOut",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amountIn",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "shareIn",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "withdrawFromYb",
+        type: "bool",
+      },
+      {
+        internalType: "bool",
+        name: "depositToYb",
+        type: "bool",
+      },
+    ],
+    name: "buildSwapData",
+    outputs: [
+      {
+        components: [
+          {
+            components: [
+              {
+                internalType: "address",
+                name: "tokenIn",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "tokenInId",
+                type: "uint256",
+              },
+              {
+                internalType: "address",
+                name: "tokenOut",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "tokenOutId",
+                type: "uint256",
+              },
+            ],
+            internalType: "struct MockSwapper.SwapTokensData",
+            name: "tokensData",
+            type: "tuple",
+          },
+          {
+            components: [
+              {
+                internalType: "uint256",
+                name: "amountIn",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "shareIn",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "amountOut",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "shareOut",
+                type: "uint256",
+              },
+            ],
+            internalType: "struct MockSwapper.SwapAmountData",
+            name: "amountData",
+            type: "tuple",
+          },
+          {
+            components: [
+              {
+                internalType: "bool",
+                name: "withdrawFromYb",
+                type: "bool",
+              },
+              {
+                internalType: "bool",
+                name: "depositToYb",
+                type: "bool",
+              },
+            ],
+            internalType: "struct MockSwapper.YieldBoxData",
+            name: "yieldBoxData",
+            type: "tuple",
+          },
+        ],
+        internalType: "struct MockSwapper.SwapData",
+        name: "",
+        type: "tuple",
+      },
+    ],
+    stateMutability: "pure",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenInId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "tokenOutId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountIn",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "shareIn",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "withdrawFromYb",
+        type: "bool",
+      },
+      {
+        internalType: "bool",
+        name: "depositToYb",
+        type: "bool",
+      },
+    ],
+    name: "buildSwapData",
+    outputs: [
+      {
+        components: [
+          {
+            components: [
+              {
+                internalType: "address",
+                name: "tokenIn",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "tokenInId",
+                type: "uint256",
+              },
+              {
+                internalType: "address",
+                name: "tokenOut",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "tokenOutId",
+                type: "uint256",
+              },
+            ],
+            internalType: "struct MockSwapper.SwapTokensData",
+            name: "tokensData",
+            type: "tuple",
+          },
+          {
+            components: [
+              {
+                internalType: "uint256",
+                name: "amountIn",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "shareIn",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "amountOut",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "shareOut",
+                type: "uint256",
+              },
+            ],
+            internalType: "struct MockSwapper.SwapAmountData",
+            name: "amountData",
+            type: "tuple",
+          },
+          {
+            components: [
+              {
+                internalType: "bool",
+                name: "withdrawFromYb",
+                type: "bool",
+              },
+              {
+                internalType: "bool",
+                name: "depositToYb",
+                type: "bool",
+              },
+            ],
+            internalType: "struct MockSwapper.YieldBoxData",
+            name: "yieldBoxData",
+            type: "tuple",
+          },
+        ],
+        internalType: "struct MockSwapper.SwapData",
+        name: "",
+        type: "tuple",
+      },
+    ],
+    stateMutability: "pure",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "uint256",
         name: "",
         type: "uint256",
@@ -128,7 +362,7 @@ const _abi = [
 ] as const;
 
 const _bytecode =
-  "0x60a03461006957601f61031838819003918201601f19168301916001600160401b0383118484101761006e5780849260209460405283398101031261006957516001600160a01b038116810361006957608052604051610293908161008582396080518160ac0152f35b600080fd5b634e487b7160e01b600052604160045260246000fdfe6040608081526004908136101561001557600080fd5b600091823560e01c928363532bb1921461004657836355a68e101461004b5750505063c6fe95491461004657600080fd5b61021f565b346101e95760c03660031901126101e9576024356064359173ffffffffffffffffffffffffffffffffffffffff938484168094036101e5576084359467ffffffffffffffff9060a435828111610184576100a890369085016101ec565b50507f00000000000000000000000000000000000000000000000000000000000000001693875195638eb22cdd60e01b8752818488015287602488015260016044880152602087606481895afa9687156101db578597610188575b50853b15610184579060848592838b519889948593630208d92960e11b8552308a860152602485015260448401528a60648401525af1801561017a57610154575b5050505082519182526020820152f35b8311610167575050835283808080610144565b634e487b7160e01b825260419052602490fd5b87513d85823e3d90fd5b8480fd5b90965060203d81116101d4575b601f8101601f19168201848111838210176101c15760209183918c528101031261018457519589610103565b634e487b7160e01b875260418652602487fd5b503d610195565b89513d87823e3d90fd5b5080fd5b80fd5b9181601f8401121561021a5782359167ffffffffffffffff831161021a576020838186019501011161021a57565b600080fd5b3461021a57606036600319011261021a5760443567ffffffffffffffff811161021a576102509036906004016101ec565b5050602060405160008152f3fea26469706673582212207e50356ce9bfcc69ae33b69fcd05ec81ad267808651b9ac2246f93d971baaedd64736f6c63430008120033";
+  "0x60a03461006a57601f6105c338819003918201601f19168301916001600160401b0383118484101761006f5780849260209460405283398101031261006a57516001600160a01b038116810361006a5760805260405161053d90816100868239608051816101dd0152f35b600080fd5b634e487b7160e01b600052604160045260246000fdfe60406080815260048036101561001457600080fd5b6000803560e01c9283633fa2ef5e14610319578363532bb1921461005a57836355a68e101461017a5783637b2a8bd21461005f5750505063c6fe95491461005a57600080fd5b61040e565b346101765760c0366003190112610176576101729261007c6103bd565b906100856103d1565b9361008e6104c2565b506100976104c2565b946100a061044c565b92604435845260643560208501526100b661044c565b928084528684015235602083015260243560608301526100d4610498565b93151584521515602084015284526020840152818301525191829182919091610120602060406101408401956060815173ffffffffffffffffffffffffffffffffffffffff808251168852858201518689015284820151168488015201516060860152606083820151805160808801528481015160a08801528381015160c0880152015160e086015201518051151561010085015201511515910152565b0390f35b5080fd5b9250346103165760c0366003190112610316576024356064359173ffffffffffffffffffffffffffffffffffffffff93848416809403610176576084359467ffffffffffffffff9060a4358281116102b5576101d990369085016103e0565b50507f00000000000000000000000000000000000000000000000000000000000000001693875195638eb22cdd60e01b8752818488015287602488015260016044880152602087606481895afa96871561030c5785976102b9575b50853b156102b5579060848592838b519889948593630208d92960e11b8552308a860152602485015260448401528a60648401525af180156102ab57610285575b5050505082519182526020820152f35b8311610298575050835238808080610275565b634e487b7160e01b825260419052602490fd5b87513d85823e3d90fd5b8480fd5b90965060203d8111610305575b601f8101601f19168201848111838210176102f25760209183918c52810103126102b557519538610234565b634e487b7160e01b875260418652602487fd5b503d6102c6565b89513d87823e3d90fd5b80fd5b91346101765760c036600319011261017657359173ffffffffffffffffffffffffffffffffffffffff928381168091036103b9576024359384168094036103b957610172936103666103bd565b9161036f6103d1565b6103776104c2565b506103806104c2565b9561038961044c565b936044358552606435602086015261039f61044c565b9384528684015280602084015260608301526100d4610498565b8280fd5b6084359081151582036103cc57565b600080fd5b60a4359081151582036103cc57565b9181601f840112156103cc5782359167ffffffffffffffff83116103cc57602083818601950101116103cc57565b346103cc5760603660031901126103cc5760443567ffffffffffffffff81116103cc5761043f9036906004016103e0565b5050602060405160008152f35b604051906080820182811067ffffffffffffffff8211176104825760405260006060838281528260208201528260408201520152565b634e487b7160e01b600052604160045260246000fd5b604051906040820182811067ffffffffffffffff8211176104825760405260006020838281520152565b604051906060820182811067ffffffffffffffff82111761048257604052816104e961044c565b81526104f361044c565b60208201526040610502610498565b91015256fea2646970667358221220feeef25b0edc42266f7172cab605292b0610170e9da8912e59c7d0d3f6cbfb2064736f6c63430008120033";
 
 type MockSwapperConstructorParams =
   | [signer?: Signer]
