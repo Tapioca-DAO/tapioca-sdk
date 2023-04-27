@@ -4,6 +4,7 @@
 import type {
   BaseContract,
   BigNumber,
+  BigNumberish,
   BytesLike,
   CallOverrides,
   ContractTransaction,
@@ -26,23 +27,151 @@ import type {
   PromiseOrValue,
 } from "../common";
 
+export declare namespace ISwapper {
+  export type SwapTokensDataStruct = {
+    tokenIn: PromiseOrValue<string>;
+    tokenInId: PromiseOrValue<BigNumberish>;
+    tokenOut: PromiseOrValue<string>;
+    tokenOutId: PromiseOrValue<BigNumberish>;
+  };
+
+  export type SwapTokensDataStructOutput = [
+    string,
+    BigNumber,
+    string,
+    BigNumber
+  ] & {
+    tokenIn: string;
+    tokenInId: BigNumber;
+    tokenOut: string;
+    tokenOutId: BigNumber;
+  };
+
+  export type SwapAmountDataStruct = {
+    amountIn: PromiseOrValue<BigNumberish>;
+    shareIn: PromiseOrValue<BigNumberish>;
+    amountOut: PromiseOrValue<BigNumberish>;
+    shareOut: PromiseOrValue<BigNumberish>;
+  };
+
+  export type SwapAmountDataStructOutput = [
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber
+  ] & {
+    amountIn: BigNumber;
+    shareIn: BigNumber;
+    amountOut: BigNumber;
+    shareOut: BigNumber;
+  };
+
+  export type YieldBoxDataStruct = {
+    withdrawFromYb: PromiseOrValue<boolean>;
+    depositToYb: PromiseOrValue<boolean>;
+  };
+
+  export type YieldBoxDataStructOutput = [boolean, boolean] & {
+    withdrawFromYb: boolean;
+    depositToYb: boolean;
+  };
+
+  export type SwapDataStruct = {
+    tokensData: ISwapper.SwapTokensDataStruct;
+    amountData: ISwapper.SwapAmountDataStruct;
+    yieldBoxData: ISwapper.YieldBoxDataStruct;
+  };
+
+  export type SwapDataStructOutput = [
+    ISwapper.SwapTokensDataStructOutput,
+    ISwapper.SwapAmountDataStructOutput,
+    ISwapper.YieldBoxDataStructOutput
+  ] & {
+    tokensData: ISwapper.SwapTokensDataStructOutput;
+    amountData: ISwapper.SwapAmountDataStructOutput;
+    yieldBoxData: ISwapper.YieldBoxDataStructOutput;
+  };
+}
+
 export interface BaseSwapperInterface extends utils.Interface {
   functions: {
+    "buildSwapData(address,address,uint256,uint256,bool,bool)": FunctionFragment;
+    "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)": FunctionFragment;
+    "getDefaultDexOptions()": FunctionFragment;
+    "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)": FunctionFragment;
+    "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
+    "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "buildSwapData(address,address,uint256,uint256,bool,bool)"
+      | "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"
+      | "getDefaultDexOptions"
+      | "getDefaultDexOptions()"
+      | "getInputAmount"
+      | "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"
+      | "getOutputAmount"
+      | "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"
       | "owner"
       | "owner()"
       | "renounceOwnership"
       | "renounceOwnership()"
+      | "swap"
+      | "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"
       | "transferOwnership"
       | "transferOwnership(address)"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "buildSwapData(address,address,uint256,uint256,bool,bool)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<boolean>,
+      PromiseOrValue<boolean>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<boolean>,
+      PromiseOrValue<boolean>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getDefaultDexOptions",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getDefaultDexOptions()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getInputAmount",
+    values: [ISwapper.SwapDataStruct, PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)",
+    values: [ISwapper.SwapDataStruct, PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getOutputAmount",
+    values: [ISwapper.SwapDataStruct, PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)",
+    values: [ISwapper.SwapDataStruct, PromiseOrValue<BytesLike>]
+  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
   encodeFunctionData(
@@ -54,6 +183,24 @@ export interface BaseSwapperInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "swap",
+    values: [
+      ISwapper.SwapDataStruct,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)",
+    values: [
+      ISwapper.SwapDataStruct,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [PromiseOrValue<string>]
   ): string;
@@ -62,6 +209,38 @@ export interface BaseSwapperInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "buildSwapData(address,address,uint256,uint256,bool,bool)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getDefaultDexOptions",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getDefaultDexOptions()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getInputAmount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getOutputAmount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
   decodeFunctionResult(
@@ -70,6 +249,11 @@ export interface BaseSwapperInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "swap", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -132,6 +316,54 @@ export interface BaseSwapper extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    "buildSwapData(address,address,uint256,uint256,bool,bool)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<[ISwapper.SwapDataStructOutput]>;
+
+    "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
+      tokenInId: PromiseOrValue<BigNumberish>,
+      tokenOutId: PromiseOrValue<BigNumberish>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<[ISwapper.SwapDataStructOutput]>;
+
+    getDefaultDexOptions(overrides?: CallOverrides): Promise<[string]>;
+
+    "getDefaultDexOptions()"(overrides?: CallOverrides): Promise<[string]>;
+
+    getInputAmount(
+      swapData: ISwapper.SwapDataStruct,
+      dexOptions: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { amountIn: BigNumber }>;
+
+    "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      swapData: ISwapper.SwapDataStruct,
+      dexOptions: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { amountIn: BigNumber }>;
+
+    getOutputAmount(
+      swapData: ISwapper.SwapDataStruct,
+      dexOptions: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { amountOut: BigNumber }>;
+
+    "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      swapData: ISwapper.SwapDataStruct,
+      dexOptions: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { amountOut: BigNumber }>;
+
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
@@ -141,6 +373,22 @@ export interface BaseSwapper extends BaseContract {
     ): Promise<ContractTransaction>;
 
     "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    swap(
+      swapData: ISwapper.SwapDataStruct,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      dexOptions: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
+      swapData: ISwapper.SwapDataStruct,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      dexOptions: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -155,6 +403,54 @@ export interface BaseSwapper extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
+  "buildSwapData(address,address,uint256,uint256,bool,bool)"(
+    tokenIn: PromiseOrValue<string>,
+    tokenOut: PromiseOrValue<string>,
+    amountIn: PromiseOrValue<BigNumberish>,
+    shareIn: PromiseOrValue<BigNumberish>,
+    withdrawFromYb: PromiseOrValue<boolean>,
+    depositToYb: PromiseOrValue<boolean>,
+    overrides?: CallOverrides
+  ): Promise<ISwapper.SwapDataStructOutput>;
+
+  "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
+    tokenInId: PromiseOrValue<BigNumberish>,
+    tokenOutId: PromiseOrValue<BigNumberish>,
+    amountIn: PromiseOrValue<BigNumberish>,
+    shareIn: PromiseOrValue<BigNumberish>,
+    withdrawFromYb: PromiseOrValue<boolean>,
+    depositToYb: PromiseOrValue<boolean>,
+    overrides?: CallOverrides
+  ): Promise<ISwapper.SwapDataStructOutput>;
+
+  getDefaultDexOptions(overrides?: CallOverrides): Promise<string>;
+
+  "getDefaultDexOptions()"(overrides?: CallOverrides): Promise<string>;
+
+  getInputAmount(
+    swapData: ISwapper.SwapDataStruct,
+    dexOptions: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+    swapData: ISwapper.SwapDataStruct,
+    dexOptions: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  getOutputAmount(
+    swapData: ISwapper.SwapDataStruct,
+    dexOptions: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+    swapData: ISwapper.SwapDataStruct,
+    dexOptions: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   owner(overrides?: CallOverrides): Promise<string>;
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -164,6 +460,22 @@ export interface BaseSwapper extends BaseContract {
   ): Promise<ContractTransaction>;
 
   "renounceOwnership()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  swap(
+    swapData: ISwapper.SwapDataStruct,
+    amountOutMin: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<string>,
+    dexOptions: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
+    swapData: ISwapper.SwapDataStruct,
+    amountOutMin: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<string>,
+    dexOptions: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -178,6 +490,54 @@ export interface BaseSwapper extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    "buildSwapData(address,address,uint256,uint256,bool,bool)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<ISwapper.SwapDataStructOutput>;
+
+    "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
+      tokenInId: PromiseOrValue<BigNumberish>,
+      tokenOutId: PromiseOrValue<BigNumberish>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<ISwapper.SwapDataStructOutput>;
+
+    getDefaultDexOptions(overrides?: CallOverrides): Promise<string>;
+
+    "getDefaultDexOptions()"(overrides?: CallOverrides): Promise<string>;
+
+    getInputAmount(
+      swapData: ISwapper.SwapDataStruct,
+      dexOptions: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      swapData: ISwapper.SwapDataStruct,
+      dexOptions: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getOutputAmount(
+      swapData: ISwapper.SwapDataStruct,
+      dexOptions: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      swapData: ISwapper.SwapDataStruct,
+      dexOptions: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     owner(overrides?: CallOverrides): Promise<string>;
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -185,6 +545,26 @@ export interface BaseSwapper extends BaseContract {
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
     "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
+
+    swap(
+      swapData: ISwapper.SwapDataStruct,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      dexOptions: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
+    >;
+
+    "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
+      swapData: ISwapper.SwapDataStruct,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      dexOptions: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
+    >;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
@@ -209,6 +589,54 @@ export interface BaseSwapper extends BaseContract {
   };
 
   estimateGas: {
+    "buildSwapData(address,address,uint256,uint256,bool,bool)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
+      tokenInId: PromiseOrValue<BigNumberish>,
+      tokenOutId: PromiseOrValue<BigNumberish>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getDefaultDexOptions(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "getDefaultDexOptions()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getInputAmount(
+      swapData: ISwapper.SwapDataStruct,
+      dexOptions: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      swapData: ISwapper.SwapDataStruct,
+      dexOptions: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getOutputAmount(
+      swapData: ISwapper.SwapDataStruct,
+      dexOptions: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      swapData: ISwapper.SwapDataStruct,
+      dexOptions: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -218,6 +646,22 @@ export interface BaseSwapper extends BaseContract {
     ): Promise<BigNumber>;
 
     "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    swap(
+      swapData: ISwapper.SwapDataStruct,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      dexOptions: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
+      swapData: ISwapper.SwapDataStruct,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      dexOptions: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -233,6 +677,58 @@ export interface BaseSwapper extends BaseContract {
   };
 
   populateTransaction: {
+    "buildSwapData(address,address,uint256,uint256,bool,bool)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
+      tokenInId: PromiseOrValue<BigNumberish>,
+      tokenOutId: PromiseOrValue<BigNumberish>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getDefaultDexOptions(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "getDefaultDexOptions()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getInputAmount(
+      swapData: ISwapper.SwapDataStruct,
+      dexOptions: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      swapData: ISwapper.SwapDataStruct,
+      dexOptions: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getOutputAmount(
+      swapData: ISwapper.SwapDataStruct,
+      dexOptions: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
+      swapData: ISwapper.SwapDataStruct,
+      dexOptions: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -242,6 +738,22 @@ export interface BaseSwapper extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    swap(
+      swapData: ISwapper.SwapDataStruct,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      dexOptions: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
+      swapData: ISwapper.SwapDataStruct,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      dexOptions: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
