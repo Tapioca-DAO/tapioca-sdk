@@ -176,7 +176,6 @@ export class DeployerVM {
         }
         const calls = await this.getBuildCalls(runSimulations);
 
-        console.log(`execute----------A`);
         console.log('[+] Executing deployment queue');
         if (calls.length > 1) {
             console.log(
@@ -619,15 +618,12 @@ export class DeployerVM {
         }
         console.log('[+] Building call queue');
         const tapiocaDeployer = await this.getTapiocaDeployer();
-        console.log('---------A');
         // Build the calls
         let currentByteCodeSize = 0;
         let currentBatch = 0;
         const calls: Multicall3.CallStruct[][] = [[]];
-        console.log('---------B');
         for (const build of this.buildQueue) {
             // We'll batch the calls to avoid hitting the gas limit
-            console.log('---------C');
             const callData = this.buildDeployerCode(
                 tapiocaDeployer,
                 0,
@@ -635,7 +631,6 @@ export class DeployerVM {
                 build.creationCode,
                 build.deploymentName,
             );
-            console.log('---------D');
             // Check if we need to create a new batch
             if (
                 currentByteCodeSize + callData.length >
@@ -653,7 +648,6 @@ export class DeployerVM {
                 allowFailure: false,
                 callData,
             });
-            console.log('---------E');
         }
 
         return calls;
