@@ -2,7 +2,7 @@ import { ethers } from 'ethers';
 import _find from 'lodash/find';
 import { TContract, TLocalDeployment, TProjectCaller } from '../shared';
 import SUPPORTED_CHAINS from '../SUPPORTED_CHAINS';
-import { TapiocaOFT__factory } from '../typechain/TapiocaZ';
+import { TapiocaOFT__factory } from '../typechain/tapiocaz';
 import {
     EChainID,
     NETWORK_MAPPING_CHAIN_TO_LZ,

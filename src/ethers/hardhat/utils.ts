@@ -3,7 +3,7 @@ import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import inquirer from 'inquirer';
 import { getSupportedChains } from '../../api/utils';
 import { TContract, TLocalDeployment, TProjectCaller } from '../../shared';
-import { TapiocaWrapper } from '../../typechain/TapiocaZ';
+import { TapiocaWrapper } from '../../typechain/tapiocaz';
 import { Multicall3 } from '../../typechain/tapioca-periphery/Multicall';
 import SUPPORTED_CHAINS from '../../SUPPORTED_CHAINS';
 
