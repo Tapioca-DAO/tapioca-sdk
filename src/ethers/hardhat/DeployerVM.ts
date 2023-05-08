@@ -732,6 +732,9 @@ export class DeployerVM {
     /**
      * Used to check for reverts
      */
+    /**
+     * Used to check for reverts
+     */
     private async runStaticSimulation() {
         // Run asynchronously
         await Promise.all(
@@ -743,6 +746,9 @@ export class DeployerVM {
                         e.salt,
                         e.creationCode,
                         e.deploymentName,
+                        getOverrideOptions(
+                            String(this.hre.network.config.chainId),
+                        ),
                     );
                 }),
         );
