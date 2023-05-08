@@ -3,6 +3,50 @@
         "tapioca-bar": {
             "421613": [
                 {
+                    "name": "Tapioca Singularity TapiocaOFT-WETHMock/USDO-OracleMock-TapiocaOFT-WETHMock",
+                    "address": "0x51C2AdB3125d42C5055a0D1AEACd4f174fA88bdA",
+                    "meta": {
+                        "isSGLMarket": true,
+                        "collateral": {
+                            "collateralAddress": "0x5f906Eec37403aE3c130731B517A81cf48aBFA58",
+                            "collateralStrategyAddress": "0x3693abfCadaE88c4bd1dCb51B1Af8a6394553CDE"
+                        },
+                        "asset": {
+                            "assetAddress": "0xC219649a34B3FBafD9E42894a8CE2a9230249925",
+                            "assetStrategyAddress": "0x6c70b4c8Aa8e6809A8191017Bd6827A70be71b33"
+                        }
+                    }
+                },
+                {
+                    "name": "OracleMock-TapiocaOFT-WETHMock",
+                    "address": "0x2c1e18d32C74ca5Bcb3e5Aa17f7Fa489f67c4983",
+                    "meta": {
+                        "args": [
+                            "OracleMock-TapiocaOFT-WETHMock",
+                            "OCM-TapiocaOFT-WETHMock",
+                            {
+                                "type": "BigNumber",
+                                "hex": "0x0de0b6b3a7640000"
+                            }
+                        ],
+                        "salt": "0xa9f34be80b21f6431c20f3e70dd74091797274d1e4369b9ca9542152154d567a",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "ERC20WithoutStrategy-TapiocaOFT-WETHMock",
+                    "address": "0x3693abfCadaE88c4bd1dCb51B1Af8a6394553CDE",
+                    "meta": {
+                        "stratFor": "TapiocaOFT-WETHMock",
+                        "args": [
+                            "0x87788372aa6aE4250106CCfDE52e033fC77B29dd",
+                            "0x5f906Eec37403aE3c130731B517A81cf48aBFA58"
+                        ],
+                        "salt": "0x3509f5af37a17f96b9a089c5f329e883053e34664a0cda2b0985e94c63df725c",
+                        "create2": true
+                    }
+                },
+                {
                     "name": "YieldBoxURIBuilder",
                     "address": "0xa1360EAFb93a2BDF25200826fB8654709cEadB4F",
                     "meta": {
