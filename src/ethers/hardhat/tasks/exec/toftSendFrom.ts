@@ -1,5 +1,5 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
-import { TapiocaOFT } from '../../../../typechain/TapiocaZ';
+import { TapiocaOFT } from '../../../../typechain/tapiocaz';
 import { getLocalContract } from '../../utils';
 
 // TODO use the new task arg system

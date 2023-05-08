@@ -1,7 +1,7 @@
 import { ContractFactory } from 'ethers';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { v4 as uuidv4 } from 'uuid';
-import { TAPIOCA_PROJECTS } from '../../api/config';
+import { MAX_GAS_LIMITS, TAPIOCA_PROJECTS } from '../../api/config';
 import { TContract } from '../../shared';
 import {
     TapiocaDeployer,
@@ -18,6 +18,7 @@ import {
     MultisigMock__factory,
 } from '../../typechain/tapioca-mocks';
 import { IOwnable__factory } from '../../typechain/utils/IOwnable/factories';
+import { getOverrideOptions } from '../../api/utils';
 
 interface IDependentOn {
     deploymentName: string;
@@ -197,7 +198,10 @@ export class DeployerVM {
         // Execute the calls
         try {
             for (const call of calls) {
-                const tx = await this.multicall.multicall(call);
+                const tx = await this.multicall.multicall(
+                    call,
+                    getOverrideOptions(String(this.hre.network.config.chainId)),
+                );
                 console.log(`[+] Execution batch hash: ${tx.hash}`);
                 await tx.wait(wait);
             }
@@ -486,11 +490,14 @@ export class DeployerVM {
         if (!deployment) {
             // Deploy Multicall3
             console.log('[+] Deploying Multicall3');
+
             const multicall = await new Multicall3__factory(
                 (
                     await this.hre.ethers.getSigners()
                 )[0],
-            ).deploy();
+            ).deploy(
+                getOverrideOptions(String(this.hre.network.config.chainId)),
+            );
 
             await multicall.deployTransaction.wait(3);
             console.log('[+] Deployed');
@@ -618,7 +625,6 @@ export class DeployerVM {
         }
         console.log('[+] Building call queue');
         const tapiocaDeployer = await this.getTapiocaDeployer();
-
         // Build the calls
         let currentByteCodeSize = 0;
         let currentBatch = 0;
@@ -726,6 +732,9 @@ export class DeployerVM {
     /**
      * Used to check for reverts
      */
+    /**
+     * Used to check for reverts
+     */
     private async runStaticSimulation() {
         // Run asynchronously
         await Promise.all(
@@ -737,6 +746,9 @@ export class DeployerVM {
                         e.salt,
                         e.creationCode,
                         e.deploymentName,
+                        getOverrideOptions(
+                            String(this.hre.network.config.chainId),
+                        ),
                     );
                 }),
         );
@@ -773,11 +785,14 @@ export class DeployerVM {
         // Deploy TapiocaDeployer if not deployed
         if (!deployment) {
             // Deploy TapiocaDeployer
+
             const tapiocaDeployer = await new TapiocaDeployer__factory(
                 (
                     await this.hre.ethers.getSigners()
                 )[0],
-            ).deploy();
+            ).deploy(
+                getOverrideOptions(String(this.hre.network.config.chainId)),
+            );
 
             await tapiocaDeployer.deployTransaction.wait(3);
 

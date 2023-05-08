@@ -4,7 +4,7 @@ import inquirer from 'inquirer';
 import { EChainID } from '../../../../api/config';
 import { TContract, TLocalDeployment } from '../../../../shared';
 import { TapiocaZ } from '../../../../typechain';
-import { TapiocaWrapper } from '../../../../typechain/TapiocaZ';
+import { TapiocaWrapper } from '../../../../typechain/tapiocaz';
 import { Multicall3 } from '../../../../typechain/tapioca-periphery/Multicall/Multicall3';
 
 /**

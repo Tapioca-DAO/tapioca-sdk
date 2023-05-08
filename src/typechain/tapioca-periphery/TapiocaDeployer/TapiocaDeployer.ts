@@ -27,7 +27,7 @@ export interface TapiocaDeployerInterface extends utils.Interface {
   functions: {
     "computeAddress(bytes32,bytes32)": FunctionFragment;
     "computeAddress(bytes32,bytes32,address)": FunctionFragment;
-    "deploy(uint256,bytes32,bytes)": FunctionFragment;
+    "deploy(uint256,bytes32,bytes,string)": FunctionFragment;
   };
 
   getFunction(
@@ -35,7 +35,7 @@ export interface TapiocaDeployerInterface extends utils.Interface {
       | "computeAddress(bytes32,bytes32)"
       | "computeAddress(bytes32,bytes32,address)"
       | "deploy"
-      | "deploy(uint256,bytes32,bytes)"
+      | "deploy(uint256,bytes32,bytes,string)"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -55,15 +55,17 @@ export interface TapiocaDeployerInterface extends utils.Interface {
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
-      PromiseOrValue<BytesLike>
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "deploy(uint256,bytes32,bytes)",
+    functionFragment: "deploy(uint256,bytes32,bytes,string)",
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
-      PromiseOrValue<BytesLike>
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>
     ]
   ): string;
 
@@ -77,7 +79,7 @@ export interface TapiocaDeployerInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "deploy", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "deploy(uint256,bytes32,bytes)",
+    functionFragment: "deploy(uint256,bytes32,bytes,string)",
     data: BytesLike
   ): Result;
 
@@ -130,13 +132,15 @@ export interface TapiocaDeployer extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       salt: PromiseOrValue<BytesLike>,
       bytecode: PromiseOrValue<BytesLike>,
+      contractName: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "deploy(uint256,bytes32,bytes)"(
+    "deploy(uint256,bytes32,bytes,string)"(
       amount: PromiseOrValue<BigNumberish>,
       salt: PromiseOrValue<BytesLike>,
       bytecode: PromiseOrValue<BytesLike>,
+      contractName: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
@@ -158,13 +162,15 @@ export interface TapiocaDeployer extends BaseContract {
     amount: PromiseOrValue<BigNumberish>,
     salt: PromiseOrValue<BytesLike>,
     bytecode: PromiseOrValue<BytesLike>,
+    contractName: PromiseOrValue<string>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "deploy(uint256,bytes32,bytes)"(
+  "deploy(uint256,bytes32,bytes,string)"(
     amount: PromiseOrValue<BigNumberish>,
     salt: PromiseOrValue<BytesLike>,
     bytecode: PromiseOrValue<BytesLike>,
+    contractName: PromiseOrValue<string>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -186,13 +192,15 @@ export interface TapiocaDeployer extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       salt: PromiseOrValue<BytesLike>,
       bytecode: PromiseOrValue<BytesLike>,
+      contractName: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<string>;
 
-    "deploy(uint256,bytes32,bytes)"(
+    "deploy(uint256,bytes32,bytes,string)"(
       amount: PromiseOrValue<BigNumberish>,
       salt: PromiseOrValue<BytesLike>,
       bytecode: PromiseOrValue<BytesLike>,
+      contractName: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<string>;
   };
@@ -217,13 +225,15 @@ export interface TapiocaDeployer extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       salt: PromiseOrValue<BytesLike>,
       bytecode: PromiseOrValue<BytesLike>,
+      contractName: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "deploy(uint256,bytes32,bytes)"(
+    "deploy(uint256,bytes32,bytes,string)"(
       amount: PromiseOrValue<BigNumberish>,
       salt: PromiseOrValue<BytesLike>,
       bytecode: PromiseOrValue<BytesLike>,
+      contractName: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
@@ -246,13 +256,15 @@ export interface TapiocaDeployer extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       salt: PromiseOrValue<BytesLike>,
       bytecode: PromiseOrValue<BytesLike>,
+      contractName: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "deploy(uint256,bytes32,bytes)"(
+    "deploy(uint256,bytes32,bytes,string)"(
       amount: PromiseOrValue<BigNumberish>,
       salt: PromiseOrValue<BytesLike>,
       bytecode: PromiseOrValue<BytesLike>,
+      contractName: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };

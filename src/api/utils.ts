@@ -2,12 +2,13 @@ import { ethers } from 'ethers';
 import _find from 'lodash/find';
 import { TContract, TLocalDeployment, TProjectCaller } from '../shared';
 import SUPPORTED_CHAINS from '../SUPPORTED_CHAINS';
-import { TapiocaOFT__factory } from '../typechain/TapiocaZ';
+import { TapiocaOFT__factory } from '../typechain/tapiocaz';
 import {
     EChainID,
     NETWORK_MAPPING_CHAIN_TO_LZ,
     PACKET_TYPES,
     TAPIOCA_PROJECTS,
+    MAX_GAS_LIMITS,
 } from './config';
 import * as db from './db';
 
@@ -58,6 +59,13 @@ export const getTapiocaProjects = () => TAPIOCA_PROJECTS;
  * Deployment
  ******************
  */
+
+export const getOverrideOptions = (chainId: string) => {
+    return {
+        gasLimit: MAX_GAS_LIMITS[chainId] ?? undefined,
+    };
+};
+
 /**
  * Returns a list of contract names
  * @param chainId The chain ID

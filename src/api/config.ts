@@ -89,6 +89,13 @@ export enum ELZChainID {
 }
 
 /**
+ * Returns max gas for chains
+ **/
+export const MAX_GAS_LIMITS = {
+    [EChainID.ARBITRUM_GOERLI]: 40000000000,
+};
+
+/**
  * Returns a list of all available OFTs packet types Tapioca uses
  **/
 export const PACKET_TYPES = [
