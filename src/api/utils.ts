@@ -8,6 +8,7 @@ import {
     NETWORK_MAPPING_CHAIN_TO_LZ,
     PACKET_TYPES,
     TAPIOCA_PROJECTS,
+    MAX_GAS_LIMITS,
 } from './config';
 import * as db from './db';
 
@@ -58,6 +59,13 @@ export const getTapiocaProjects = () => TAPIOCA_PROJECTS;
  * Deployment
  ******************
  */
+
+export const getOverrideOptions = (chainId: string) => {
+    return {
+        gasLimit: MAX_GAS_LIMITS[chainId] ?? undefined,
+    };
+};
+
 /**
  * Returns a list of contract names
  * @param chainId The chain ID
