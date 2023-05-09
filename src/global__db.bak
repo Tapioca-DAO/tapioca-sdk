@@ -1,0 +1,30 @@
+{
+    "default": {
+        "tapioca-bar": {},
+        "tap-token": {},
+        "tapiocaz": {},
+        "generic": {
+            "43113": [
+                {
+                    "name": "Multicall3",
+                    "address": "0xEc90C6b4728De0983f965B41E8c894Ee09cFB44B",
+                    "meta": {}
+                }
+            ],
+            "80001": [
+                {
+                    "name": "Multicall3",
+                    "address": "0x30E303A41FA94175789D9118eA59CBd06f1ADB72",
+                    "meta": {}
+                }
+            ],
+            "421613": [
+                {
+                    "name": "Multicall3",
+                    "address": "0xB47e564F96D310EFd13f67221aF83007883A3d1d",
+                    "meta": {}
+                }
+            ]
+        }
+    }
+}
