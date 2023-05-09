@@ -5,3 +5,4 @@ export * as magnetar from "./Magnetar";
 export * as multicall from "./Multicall";
 export * as swapper from "./Swapper";
 export * as tapiocaDeployer from "./TapiocaDeployer";
+export * as iOwnable from "./IOwnable";
