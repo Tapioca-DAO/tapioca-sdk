@@ -17,6 +17,4 @@ export type { TapiocaOptionLiquidityProvision } from "./options/TapiocaOptionLiq
 export { TapiocaOptionLiquidityProvision__factory } from "./factories/options/TapiocaOptionLiquidityProvision__factory";
 export type { TapOFT } from "./tokens/TapOFT";
 export { TapOFT__factory } from "./factories/tokens/TapOFT__factory";
-export type { YieldBoxVaultStrat } from "./tokens/YieldBoxVaultStrat";
-export { YieldBoxVaultStrat__factory } from "./factories/tokens/YieldBoxVaultStrat__factory";
 export { Vesting__factory } from "./factories/Vesting__factory";

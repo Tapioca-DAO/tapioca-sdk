@@ -2,4 +2,3 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { TapOFT } from "./TapOFT";
-export type { YieldBoxVaultStrat } from "./YieldBoxVaultStrat";

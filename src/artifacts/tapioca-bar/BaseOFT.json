@@ -15,11 +15,6 @@
       "type": "error"
     },
     {
-      "inputs": [],
-      "name": "TOFT_YB_ETHDeposit",
-      "type": "error"
-    },
-    {
       "anonymous": false,
       "inputs": [
         {
@@ -396,32 +391,6 @@
       "type": "event"
     },
     {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "_amount",
-          "type": "uint256"
-        }
-      ],
-      "name": "YieldBoxDeposit",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "_amount",
-          "type": "uint256"
-        }
-      ],
-      "name": "YieldBoxRetrieval",
-      "type": "event"
-    },
-    {
       "inputs": [],
       "name": "DEFAULT_PAYLOAD_SIZE_LIMIT",
       "outputs": [
@@ -488,59 +457,7 @@
     },
     {
       "inputs": [],
-      "name": "PT_YB_DEPOSIT",
-      "outputs": [
-        {
-          "internalType": "uint16",
-          "name": "",
-          "type": "uint16"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "PT_YB_RETRIEVE_STRAT",
-      "outputs": [
-        {
-          "internalType": "uint16",
-          "name": "",
-          "type": "uint16"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
       "name": "PT_YB_SEND_SGL_LEND",
-      "outputs": [
-        {
-          "internalType": "uint16",
-          "name": "",
-          "type": "uint16"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "PT_YB_SEND_STRAT",
-      "outputs": [
-        {
-          "internalType": "uint16",
-          "name": "",
-          "type": "uint16"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "PT_YB_WITHDRAW",
       "outputs": [
         {
           "internalType": "uint16",
@@ -1380,61 +1297,6 @@
           "type": "address"
         },
         {
-          "internalType": "uint256",
-          "name": "amount",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "assetId",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint16",
-          "name": "lzDstChainId",
-          "type": "uint16"
-        },
-        {
-          "components": [
-            {
-              "internalType": "uint256",
-              "name": "extraGasLimit",
-              "type": "uint256"
-            },
-            {
-              "internalType": "address",
-              "name": "zroPaymentAddress",
-              "type": "address"
-            },
-            {
-              "internalType": "bool",
-              "name": "strategyDeposit",
-              "type": "bool"
-            }
-          ],
-          "internalType": "struct BaseOFT.SendOptions",
-          "name": "options",
-          "type": "tuple"
-        }
-      ],
-      "name": "sendToYB",
-      "outputs": [],
-      "stateMutability": "payable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_from",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "_to",
-          "type": "address"
-        },
-        {
           "internalType": "uint16",
           "name": "lzDstChainId",
           "type": "uint16"
@@ -1872,7 +1734,7 @@
       "name": "yieldBox",
       "outputs": [
         {
-          "internalType": "contract IYieldBox",
+          "internalType": "contract IYieldBoxBase",
           "name": "",
           "type": "address"
         }

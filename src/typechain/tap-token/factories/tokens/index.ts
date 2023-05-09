@@ -2,4 +2,3 @@
 /* tslint:disable */
 /* eslint-disable */
 export { TapOFT__factory } from "./TapOFT__factory";
-export { YieldBoxVaultStrat__factory } from "./YieldBoxVaultStrat__factory";

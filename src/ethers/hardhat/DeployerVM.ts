@@ -17,7 +17,7 @@ import {
     MultisigMock,
     MultisigMock__factory,
 } from '../../typechain/tapioca-mocks';
-import { IOwnable__factory } from '../../typechain/utils/IOwnable/factories';
+import { IOwnable__factory } from '../../typechain/tapioca-periphery/factories/IOwnable';
 import { getOverrideOptions } from '../../api/utils';
 
 interface IDependentOn {

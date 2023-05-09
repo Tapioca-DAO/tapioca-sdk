@@ -33,10 +33,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapOFT__factory>;
     getContractFactory(
-      name: "YieldBoxVaultStrat",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.YieldBoxVaultStrat__factory>;
-    getContractFactory(
       name: "Vesting",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Vesting__factory>;
@@ -66,11 +62,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TapOFT>;
-    getContractAt(
-      name: "YieldBoxVaultStrat",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.YieldBoxVaultStrat>;
     getContractAt(
       name: "Vesting",
       address: string,

@@ -1,0 +1,24 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "Test",
+  "sourceName": "contracts/Test.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "x",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6080806040523460195760016000556078908161001f8239f35b600080fdfe6080806040526004361015601257600080fd5b600090813560e01c630c55699c14602857600080fd5b34603e5781600319360112603e57602091548152f35b5080fdfea26469706673582212204baa567d24d2490913d8f53dfefbf2ecaee1337b67c20b76711f55a5d29a0da164736f6c63430008120033",
+  "deployedBytecode": "0x6080806040526004361015601257600080fd5b600090813560e01c630c55699c14602857600080fd5b34603e5781600319360112603e57602091548152f35b5080fdfea26469706673582212204baa567d24d2490913d8f53dfefbf2ecaee1337b67c20b76711f55a5d29a0da164736f6c63430008120033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
