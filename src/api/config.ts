@@ -89,6 +89,13 @@ export enum ELZChainID {
 }
 
 /**
+ * Returns max gas for chains
+ **/
+export const MAX_GAS_LIMITS = {
+    [EChainID.ARBITRUM_GOERLI]: 40000000000,
+};
+
+/**
  * Returns a list of all available OFTs packet types Tapioca uses
  **/
 export const PACKET_TYPES = [
@@ -175,7 +182,10 @@ export enum TAPIOCA_PROJECTS_NAME {
     TapToken = 'tap-token',
     TapiocaBar = 'tapioca-bar',
     Generic = 'generic',
+    TapiocaPeriphery = 'tapioca-periphery',
+    TapiocaMocks = 'tapioca-mocks',
     PCNFT = 'pcnft',
+    TapiocaStrategies = 'tapioca-strategies',
 }
 
 export const TAPIOCA_PROJECTS = [
@@ -183,7 +193,10 @@ export const TAPIOCA_PROJECTS = [
     'tap-token',
     'tapioca-bar',
     'generic',
+    'tapioca-periphery',
+    'tapioca-mocks',
     'pcnft',
+    'tapioca-strategies',
 ] as const;
 
 export const MULTICALL_ADDRESS = '0xcA11bde05977b3631167028862bE2a173976CA11';

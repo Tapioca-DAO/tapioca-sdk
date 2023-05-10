@@ -1,6 +1,7 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { TAPIOCA_PROJECTS } from '../../../../api/config';
-import { Magnetar__factory } from '../../../../typechain/Tapioca-Bar/factories/utils/Magnetar/Magnetar__factory';
+import { getOverrideOptions } from '../../../../api/utils';
+import { MagnetarV2__factory } from '../../../../typechain/tapioca-periphery';
 import { askForTag } from '../../utils';
 
 export const deployMagnetar__task = async (
@@ -12,9 +13,12 @@ export const deployMagnetar__task = async (
     const tag = await askForTag(hre, 'local');
 
     const signer = (await hre.ethers.getSigners())[0];
-    const Magnetar = new Magnetar__factory(signer);
+    const Magnetar = new MagnetarV2__factory(signer);
 
-    const magnetar = await Magnetar.deploy(signer.address);
+    const magnetar = await Magnetar.deploy(
+        signer.address,
+        getOverrideOptions(String(hre.network.config.chainId)),
+    );
     await magnetar.deployTransaction.wait(3);
     console.log(`[+] Deployed at ${magnetar.address}`);
 

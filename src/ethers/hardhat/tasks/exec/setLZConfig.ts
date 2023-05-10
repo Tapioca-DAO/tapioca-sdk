@@ -4,8 +4,8 @@ import inquirer from 'inquirer';
 import { EChainID } from '../../../../api/config';
 import { TContract, TLocalDeployment } from '../../../../shared';
 import { TapiocaZ } from '../../../../typechain';
-import { TapiocaWrapper } from '../../../../typechain/TapiocaZ';
-import { Multicall3 } from '../../../../typechain/utils/MultiCall';
+import { TapiocaWrapper } from '../../../../typechain/tapiocaz';
+import { Multicall3 } from '../../../../typechain/tapioca-periphery/Multicall/Multicall3';
 
 /**
  * Configure the LZ app in one go
@@ -95,9 +95,7 @@ export const setLZConfig__task = async (
         //transfer ownership to the multicall contract
         await VM.transferOwnership(multicall.address, contractToConf);
 
-        const tx = taskArgs.debugMode
-            ? await multicall.multicall(calls)
-            : await multicall.aggregate3(calls);
+        const tx = await multicall.multicall(calls);
         console.log('[+] Tx sent: ', tx.hash);
         await tx.wait(3);
         console.log('[+] Tx mined!');
@@ -200,7 +198,7 @@ function buildCalls(
     isOnft?: boolean,
 ) {
     // Build calls
-    const calls: Multicall3.Call3Struct[] = [];
+    const calls: Multicall3.CallStruct[] = [];
     console.log('[+] UseCustomAdapter ');
     if (!isOnft) {
         calls.push({

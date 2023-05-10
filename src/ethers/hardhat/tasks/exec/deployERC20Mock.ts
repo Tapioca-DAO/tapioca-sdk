@@ -1,6 +1,7 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import inquirer from 'inquirer';
-import { ERC20Mock__factory } from '../../../../typechain/tap-token';
+import { getOverrideOptions } from '../../../../api/utils';
+import { ERC20Mock__factory } from '../../../../typechain/tapioca-mocks';
 import { askForTag } from '../../utils';
 
 export const deployERC20Mock__task = async (
@@ -43,6 +44,7 @@ export const deployERC20Mock__task = async (
         hre.ethers.BigNumber.from((1e18).toString()).mul(1_000_000_000),
         decimals,
         signer.address,
+        getOverrideOptions(String(hre.network.config.chainId)),
     );
     await ercMock.deployTransaction.wait(3);
     console.log(`[+] Deployed ${name} at ${ercMock.address}`);

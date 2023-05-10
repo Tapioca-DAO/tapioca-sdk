@@ -1,11 +1,10 @@
 import { Contract } from 'ethers';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import inquirer from 'inquirer';
-import { EChainID } from '../../api/config';
 import { getSupportedChains } from '../../api/utils';
 import { TContract, TLocalDeployment, TProjectCaller } from '../../shared';
-import { TapiocaWrapper } from '../../typechain/TapiocaZ';
-import { Multicall3 } from '../../typechain/utils/MultiCall';
+import { TapiocaWrapper } from '../../typechain/tapiocaz';
+import { Multicall3 } from '../../typechain/tapioca-periphery/Multicall';
 import SUPPORTED_CHAINS from '../../SUPPORTED_CHAINS';
 
 /**
@@ -45,7 +44,7 @@ export const getLocalContract = async <T extends Contract>(
 };
 
 export const transformMulticallToTapiocaWrapper = (
-    multicalls: Multicall3.Call3Struct[],
+    multicalls: Multicall3.CallStruct[],
 ): TapiocaWrapper.ExecutionCallStruct[] => {
     return multicalls.map((m) => ({
         toft: m.target,
