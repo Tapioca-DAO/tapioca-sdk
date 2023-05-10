@@ -147,11 +147,15 @@ export const saveGlobally = (
     tag = 'default',
 ) => {
     const db = readDB('global', SUBREPO_GLOBAL_DB_PATH) ?? {};
-    const prevDep = db[tag]?.[project] || {}; // Read previous deployments
+    const prevDep: any = db[tag]?.[project]; // Read previous deployments
 
     // Save previous deployments in a backup file
-    if (db[tag]?.[project])
-        writeDB('global', db, `${SUBREPO_GLOBAL_DB_PATH}.bak`);
+    if (prevDep) writeDB('global', db, `${SUBREPO_GLOBAL_DB_PATH}.bak`);
+    else {
+        // Create the project if it doesn't exist
+        if (!db[tag]) db[tag] = {};
+        if (!db[tag][project]) db[tag][project] = {};
+    }
 
     // Merge prev and new deployments
     const deployments = mergeDeployments(data, prevDep);

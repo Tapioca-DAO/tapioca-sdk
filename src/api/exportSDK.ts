@@ -1,8 +1,7 @@
+import fs from 'fs-extra';
 import { glob, runTypeChain } from 'typechain';
 import { TLocalDeployment, TProjectCaller } from '../shared';
 import { saveGlobally } from './db';
-import inquirer from 'inquirer';
-import fs from 'fs-extra';
 
 /**
  * Export project local database and merge it with the global database, then generate typings
@@ -17,7 +16,7 @@ export const run = async (params: {
     projectCaller: TProjectCaller;
     contractNames: string[];
     artifactPath: string;
-    exportArtifacts?: boolean;
+    artifactToExport?: string[];
     deployment?: {
         data: TLocalDeployment;
         tag?: string;
@@ -28,16 +27,23 @@ export const run = async (params: {
         contractNames,
         artifactPath,
         deployment,
-        exportArtifacts,
+        artifactToExport,
     } = params;
+    const cwd = process.cwd();
 
-    if (exportArtifacts) {
+    if (artifactToExport?.length) {
+        const artifactFiles = _parseFiles(cwd, artifactPath, artifactToExport);
         console.log('[+] Exporting artifacts for tapioca-sdk...');
-        fs.copySync(
-            'artifacts',
-            `gitsub_tapioca-sdk/src/artifacts/${projectCaller}`,
-            { overwrite: true },
-        );
+
+        artifactFiles.forEach((file) => {
+            fs.copySync(
+                file,
+                `gitsub_tapioca-sdk/src/artifacts/${projectCaller}/${
+                    file.split('/').slice(-1)[0]
+                }`,
+                { overwrite: true },
+            );
+        });
     }
 
     console.log(

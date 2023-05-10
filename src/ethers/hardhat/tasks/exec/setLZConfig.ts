@@ -11,7 +11,12 @@ import { Multicall3 } from '../../../../typechain/tapioca-periphery/Multicall/Mu
  * Configure the LZ app in one go
  */
 export const setLZConfig__task = async (
-    taskArgs: { isToft?: boolean; debugMode?: boolean; chainId?: string },
+    taskArgs: {
+        isToft?: boolean;
+        debugMode?: boolean;
+        chainId?: string;
+        isOnft?: boolean;
+    },
     hre: HardhatRuntimeEnvironment,
 ) => {
     console.log('[+] Setting omni config');
@@ -21,7 +26,12 @@ export const setLZConfig__task = async (
     console.log(
         '[+] This task will configure the following packets to a minDstGas of 200_000: ',
     );
-    console.log(hre.SDK.config.PACKET_TYPES);
+
+    console.log(
+        taskArgs.isOnft
+            ? hre.SDK.config.ONFT_PACKET_TYPES
+            : hre.SDK.config.PACKET_TYPES,
+    );
 
     const tag = await hre.SDK.hardhatUtils.askForTag(hre, 'local');
 
@@ -62,7 +72,7 @@ export const setLZConfig__task = async (
         taskArgs.chainId,
     );
 
-    const calls = buildCalls(hre, contractToConf, targets);
+    const calls = buildCalls(hre, contractToConf, targets, taskArgs.isOnft);
 
     // Execute calls
     if (taskArgs.isToft) {
@@ -185,19 +195,22 @@ function buildCalls(
     hre: HardhatRuntimeEnvironment,
     contractToConf: TContract,
     targets: Awaited<ReturnType<typeof getLinkedContract>>,
+    isOnft?: boolean,
 ) {
     // Build calls
     const calls: Multicall3.CallStruct[] = [];
     console.log('[+] UseCustomAdapter ');
-    calls.push({
-        target: contractToConf.address,
-        callData:
-            TapiocaZ.BaseTOFT__factory.createInterface().encodeFunctionData(
-                'setUseCustomAdapterParams',
-                [true],
-            ),
-        allowFailure: false,
-    });
+    if (!isOnft) {
+        calls.push({
+            target: contractToConf.address,
+            callData:
+                TapiocaZ.BaseTOFT__factory.createInterface().encodeFunctionData(
+                    'setUseCustomAdapterParams',
+                    [true],
+                ),
+            allowFailure: false,
+        });
+    }
 
     for (const target of targets) {
         console.log('[+] Configuring ', target.contract.name, '...');
@@ -226,7 +239,10 @@ function buildCalls(
 
         // Set minDstGas per packet type
         console.log('\t- MinDstGas: ');
-        for (const packetType of hre.SDK.config.PACKET_TYPES) {
+        const packetTypes = isOnft
+            ? hre.SDK.config.ONFT_PACKET_TYPES
+            : hre.SDK.config.PACKET_TYPES;
+        for (const packetType of packetTypes) {
             console.log('\t\t- PacketType:', packetType);
             console.log('\t\t\t- LZChainID:', target.lzChainId);
             console.log(
