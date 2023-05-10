@@ -185,6 +185,7 @@ export enum TAPIOCA_PROJECTS_NAME {
     TapiocaPeriphery = 'tapioca-periphery',
     TapiocaMocks = 'tapioca-mocks',
     PCNFT = 'pcnft',
+    TapiocaStrategies = 'tapioca-strategies',
 }
 
 export const TAPIOCA_PROJECTS = [
@@ -195,6 +196,7 @@ export const TAPIOCA_PROJECTS = [
     'tapioca-periphery',
     'tapioca-mocks',
     'pcnft',
+    'tapioca-strategies',
 ] as const;
 
 export const MULTICALL_ADDRESS = '0xcA11bde05977b3631167028862bE2a173976CA11';
