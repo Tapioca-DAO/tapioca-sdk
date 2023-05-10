@@ -112,13 +112,18 @@ export const askForProject = async (hre: HardhatRuntimeEnvironment) => {
 export const askForDeployment = async (
     hre: HardhatRuntimeEnvironment,
     type: 'local' | 'global',
+    options?: {
+        messageAll?: string;
+        messageSpecific?: string;
+    },
 ) => {
     const tag = await askForTag(hre, type);
     const project = await askForProject(hre);
     const { specific } = await inquirer.prompt({
         type: 'list',
         name: 'specific',
-        message: 'Choose a specific contract deployment?',
+        message:
+            options?.messageAll ?? 'Choose a specific contract deployment?',
         choices: ['All', 'Specific'],
     });
 
@@ -134,7 +139,7 @@ export const askForDeployment = async (
         const { contractName } = await inquirer.prompt({
             type: 'list',
             name: 'contractName',
-            message: 'Choose a contract',
+            message: options?.messageSpecific ?? 'Choose a contract',
             choices,
         });
 
@@ -154,14 +159,14 @@ export const askForDeployment = async (
  * Ask for a chain
  * @returns The chain
  */
-export const askForChain = async () => {
+export const askForChain = async (message?: string) => {
     const supportedChains = getSupportedChains();
     const choices = supportedChains.map((e) => e.name);
 
     const { chain } = await inquirer.prompt({
         type: 'list',
         name: 'chain',
-        message: 'Choose a chain',
+        message: message ?? 'Choose a chain',
         choices,
     });
 

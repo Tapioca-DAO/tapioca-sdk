@@ -70,7 +70,8 @@ addDebugModeParams(
 addDebugModeParams(
     task('setLZConfig', 'Set an LZ app config', setLZConfig__task)
         .addOptionalParam('chainId', 'LZ chain id to configure for')
-        .addFlag('isToft', 'If the contract to configure is TOFT'),
+        .addFlag('isToft', 'If the contract to configure is TOFT')
+        .addFlag('isOnft', 'If the contract to configure is ONFT'),
 );
 
 addCliParams(

@@ -109,6 +109,8 @@ export const PACKET_TYPES = [
     EPacketType.PT_SEND_APPROVAL,
 ];
 
+export const ONFT_PACKET_TYPES = [EPacketType.PT_SEND_AND_CALL];
+
 /**
  * Returns a mapping between chain ID and LZ chain ID
  **/
@@ -182,6 +184,7 @@ export enum TAPIOCA_PROJECTS_NAME {
     Generic = 'generic',
     TapiocaPeriphery = 'tapioca-periphery',
     TapiocaMocks = 'tapioca-mocks',
+    PCNFT = 'pcnft',
 }
 
 export const TAPIOCA_PROJECTS = [
@@ -191,6 +194,7 @@ export const TAPIOCA_PROJECTS = [
     'generic',
     'tapioca-periphery',
     'tapioca-mocks',
+    'pcnft',
 ] as const;
 
 export const MULTICALL_ADDRESS = '0xcA11bde05977b3631167028862bE2a173976CA11';
