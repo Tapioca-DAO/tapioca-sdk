@@ -230,22 +230,22 @@ export interface MockSwapper extends BaseContract {
 
   functions: {
     "buildSwapData(address,address,uint256,uint256,bool,bool)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<boolean>,
-      arg5: PromiseOrValue<boolean>,
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<[MockSwapper.SwapDataStructOutput]>;
 
     "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<boolean>,
-      arg5: PromiseOrValue<boolean>,
+      tokenInId: PromiseOrValue<BigNumberish>,
+      tokenOutId: PromiseOrValue<BigNumberish>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<[MockSwapper.SwapDataStructOutput]>;
 
@@ -291,22 +291,22 @@ export interface MockSwapper extends BaseContract {
   };
 
   "buildSwapData(address,address,uint256,uint256,bool,bool)"(
-    arg0: PromiseOrValue<string>,
-    arg1: PromiseOrValue<string>,
-    arg2: PromiseOrValue<BigNumberish>,
-    arg3: PromiseOrValue<BigNumberish>,
-    arg4: PromiseOrValue<boolean>,
-    arg5: PromiseOrValue<boolean>,
+    tokenIn: PromiseOrValue<string>,
+    tokenOut: PromiseOrValue<string>,
+    amountIn: PromiseOrValue<BigNumberish>,
+    shareIn: PromiseOrValue<BigNumberish>,
+    withdrawFromYb: PromiseOrValue<boolean>,
+    depositToYb: PromiseOrValue<boolean>,
     overrides?: CallOverrides
   ): Promise<MockSwapper.SwapDataStructOutput>;
 
   "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<BigNumberish>,
-    arg2: PromiseOrValue<BigNumberish>,
-    arg3: PromiseOrValue<BigNumberish>,
-    arg4: PromiseOrValue<boolean>,
-    arg5: PromiseOrValue<boolean>,
+    tokenInId: PromiseOrValue<BigNumberish>,
+    tokenOutId: PromiseOrValue<BigNumberish>,
+    amountIn: PromiseOrValue<BigNumberish>,
+    shareIn: PromiseOrValue<BigNumberish>,
+    withdrawFromYb: PromiseOrValue<boolean>,
+    depositToYb: PromiseOrValue<boolean>,
     overrides?: CallOverrides
   ): Promise<MockSwapper.SwapDataStructOutput>;
 
@@ -352,22 +352,22 @@ export interface MockSwapper extends BaseContract {
 
   callStatic: {
     "buildSwapData(address,address,uint256,uint256,bool,bool)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<boolean>,
-      arg5: PromiseOrValue<boolean>,
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<MockSwapper.SwapDataStructOutput>;
 
     "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<boolean>,
-      arg5: PromiseOrValue<boolean>,
+      tokenInId: PromiseOrValue<BigNumberish>,
+      tokenOutId: PromiseOrValue<BigNumberish>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<MockSwapper.SwapDataStructOutput>;
 
@@ -420,22 +420,22 @@ export interface MockSwapper extends BaseContract {
 
   estimateGas: {
     "buildSwapData(address,address,uint256,uint256,bool,bool)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<boolean>,
-      arg5: PromiseOrValue<boolean>,
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<boolean>,
-      arg5: PromiseOrValue<boolean>,
+      tokenInId: PromiseOrValue<BigNumberish>,
+      tokenOutId: PromiseOrValue<BigNumberish>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -482,22 +482,22 @@ export interface MockSwapper extends BaseContract {
 
   populateTransaction: {
     "buildSwapData(address,address,uint256,uint256,bool,bool)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<boolean>,
-      arg5: PromiseOrValue<boolean>,
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<boolean>,
-      arg5: PromiseOrValue<boolean>,
+      tokenInId: PromiseOrValue<BigNumberish>,
+      tokenOutId: PromiseOrValue<BigNumberish>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
+      withdrawFromYb: PromiseOrValue<boolean>,
+      depositToYb: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
