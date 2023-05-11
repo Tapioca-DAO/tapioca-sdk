@@ -17,316 +17,14 @@
     {
       "inputs": [
         {
-          "internalType": "address",
-          "name": "tokenIn",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "tokenOut",
-          "type": "address"
-        },
-        {
           "internalType": "uint256",
-          "name": "amountIn",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "shareIn",
-          "type": "uint256"
-        },
-        {
-          "internalType": "bool",
-          "name": "withdrawFromYb",
-          "type": "bool"
-        },
-        {
-          "internalType": "bool",
-          "name": "depositToYb",
-          "type": "bool"
-        }
-      ],
-      "name": "buildSwapData",
-      "outputs": [
-        {
-          "components": [
-            {
-              "components": [
-                {
-                  "internalType": "address",
-                  "name": "tokenIn",
-                  "type": "address"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "tokenInId",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "address",
-                  "name": "tokenOut",
-                  "type": "address"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "tokenOutId",
-                  "type": "uint256"
-                }
-              ],
-              "internalType": "struct MockSwapper.SwapTokensData",
-              "name": "tokensData",
-              "type": "tuple"
-            },
-            {
-              "components": [
-                {
-                  "internalType": "uint256",
-                  "name": "amountIn",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "shareIn",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "amountOut",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "shareOut",
-                  "type": "uint256"
-                }
-              ],
-              "internalType": "struct MockSwapper.SwapAmountData",
-              "name": "amountData",
-              "type": "tuple"
-            },
-            {
-              "components": [
-                {
-                  "internalType": "bool",
-                  "name": "withdrawFromYb",
-                  "type": "bool"
-                },
-                {
-                  "internalType": "bool",
-                  "name": "depositToYb",
-                  "type": "bool"
-                }
-              ],
-              "internalType": "struct MockSwapper.YieldBoxData",
-              "name": "yieldBoxData",
-              "type": "tuple"
-            }
-          ],
-          "internalType": "struct MockSwapper.SwapData",
           "name": "",
-          "type": "tuple"
-        }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "tokenInId",
           "type": "uint256"
         },
         {
           "internalType": "uint256",
-          "name": "tokenOutId",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "amountIn",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "shareIn",
-          "type": "uint256"
-        },
-        {
-          "internalType": "bool",
-          "name": "withdrawFromYb",
-          "type": "bool"
-        },
-        {
-          "internalType": "bool",
-          "name": "depositToYb",
-          "type": "bool"
-        }
-      ],
-      "name": "buildSwapData",
-      "outputs": [
-        {
-          "components": [
-            {
-              "components": [
-                {
-                  "internalType": "address",
-                  "name": "tokenIn",
-                  "type": "address"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "tokenInId",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "address",
-                  "name": "tokenOut",
-                  "type": "address"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "tokenOutId",
-                  "type": "uint256"
-                }
-              ],
-              "internalType": "struct MockSwapper.SwapTokensData",
-              "name": "tokensData",
-              "type": "tuple"
-            },
-            {
-              "components": [
-                {
-                  "internalType": "uint256",
-                  "name": "amountIn",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "shareIn",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "amountOut",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "shareOut",
-                  "type": "uint256"
-                }
-              ],
-              "internalType": "struct MockSwapper.SwapAmountData",
-              "name": "amountData",
-              "type": "tuple"
-            },
-            {
-              "components": [
-                {
-                  "internalType": "bool",
-                  "name": "withdrawFromYb",
-                  "type": "bool"
-                },
-                {
-                  "internalType": "bool",
-                  "name": "depositToYb",
-                  "type": "bool"
-                }
-              ],
-              "internalType": "struct MockSwapper.YieldBoxData",
-              "name": "yieldBoxData",
-              "type": "tuple"
-            }
-          ],
-          "internalType": "struct MockSwapper.SwapData",
           "name": "",
-          "type": "tuple"
-        }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "components": [
-            {
-              "components": [
-                {
-                  "internalType": "address",
-                  "name": "tokenIn",
-                  "type": "address"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "tokenInId",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "address",
-                  "name": "tokenOut",
-                  "type": "address"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "tokenOutId",
-                  "type": "uint256"
-                }
-              ],
-              "internalType": "struct MockSwapper.SwapTokensData",
-              "name": "tokensData",
-              "type": "tuple"
-            },
-            {
-              "components": [
-                {
-                  "internalType": "uint256",
-                  "name": "amountIn",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "shareIn",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "amountOut",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "shareOut",
-                  "type": "uint256"
-                }
-              ],
-              "internalType": "struct MockSwapper.SwapAmountData",
-              "name": "amountData",
-              "type": "tuple"
-            },
-            {
-              "components": [
-                {
-                  "internalType": "bool",
-                  "name": "withdrawFromYb",
-                  "type": "bool"
-                },
-                {
-                  "internalType": "bool",
-                  "name": "depositToYb",
-                  "type": "bool"
-                }
-              ],
-              "internalType": "struct MockSwapper.YieldBoxData",
-              "name": "yieldBoxData",
-              "type": "tuple"
-            }
-          ],
-          "internalType": "struct MockSwapper.SwapData",
-          "name": "",
-          "type": "tuple"
+          "type": "uint256"
         },
         {
           "internalType": "bytes",
@@ -348,82 +46,14 @@
     {
       "inputs": [
         {
-          "components": [
-            {
-              "components": [
-                {
-                  "internalType": "address",
-                  "name": "tokenIn",
-                  "type": "address"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "tokenInId",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "address",
-                  "name": "tokenOut",
-                  "type": "address"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "tokenOutId",
-                  "type": "uint256"
-                }
-              ],
-              "internalType": "struct MockSwapper.SwapTokensData",
-              "name": "tokensData",
-              "type": "tuple"
-            },
-            {
-              "components": [
-                {
-                  "internalType": "uint256",
-                  "name": "amountIn",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "shareIn",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "amountOut",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "shareOut",
-                  "type": "uint256"
-                }
-              ],
-              "internalType": "struct MockSwapper.SwapAmountData",
-              "name": "amountData",
-              "type": "tuple"
-            },
-            {
-              "components": [
-                {
-                  "internalType": "bool",
-                  "name": "withdrawFromYb",
-                  "type": "bool"
-                },
-                {
-                  "internalType": "bool",
-                  "name": "depositToYb",
-                  "type": "bool"
-                }
-              ],
-              "internalType": "struct MockSwapper.YieldBoxData",
-              "name": "yieldBoxData",
-              "type": "tuple"
-            }
-          ],
-          "internalType": "struct MockSwapper.SwapData",
+          "internalType": "uint256",
           "name": "",
-          "type": "tuple"
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
         },
         {
           "internalType": "bytes",
@@ -435,7 +65,7 @@
       "outputs": [
         {
           "internalType": "uint256",
-          "name": "amountOut",
+          "name": "",
           "type": "uint256"
         }
       ],
@@ -445,92 +75,29 @@
     {
       "inputs": [
         {
-          "components": [
-            {
-              "components": [
-                {
-                  "internalType": "address",
-                  "name": "tokenIn",
-                  "type": "address"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "tokenInId",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "address",
-                  "name": "tokenOut",
-                  "type": "address"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "tokenOutId",
-                  "type": "uint256"
-                }
-              ],
-              "internalType": "struct MockSwapper.SwapTokensData",
-              "name": "tokensData",
-              "type": "tuple"
-            },
-            {
-              "components": [
-                {
-                  "internalType": "uint256",
-                  "name": "amountIn",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "shareIn",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "amountOut",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "shareOut",
-                  "type": "uint256"
-                }
-              ],
-              "internalType": "struct MockSwapper.SwapAmountData",
-              "name": "amountData",
-              "type": "tuple"
-            },
-            {
-              "components": [
-                {
-                  "internalType": "bool",
-                  "name": "withdrawFromYb",
-                  "type": "bool"
-                },
-                {
-                  "internalType": "bool",
-                  "name": "depositToYb",
-                  "type": "bool"
-                }
-              ],
-              "internalType": "struct MockSwapper.YieldBoxData",
-              "name": "yieldBoxData",
-              "type": "tuple"
-            }
-          ],
-          "internalType": "struct MockSwapper.SwapData",
-          "name": "swapData",
-          "type": "tuple"
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
         },
         {
           "internalType": "uint256",
-          "name": "amountOutMin",
+          "name": "tokenOutId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
           "type": "uint256"
         },
         {
           "internalType": "address",
           "name": "to",
           "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amountOutMin",
+          "type": "uint256"
         },
         {
           "internalType": "bytes",
@@ -555,8 +122,8 @@
       "type": "function"
     }
   ],
-  "bytecode": "0x60a03461006a57601f61060e38819003918201601f19168301916001600160401b0383118484101761006f5780849260209460405283398101031261006a57516001600160a01b038116810361006a5760805260405161058890816100868239608051816101000152f35b600080fd5b634e487b7160e01b600052604160045260246000fdfe60406080815260048036101561001457600080fd5b6000803560e01c80633fa2ef5e146103555780635bf66e48146102375780637b2a8bd21461023c578063e3c711a0146102375763efa84c6d1461005657600080fd5b346102305736600319016101a081126102335761014013610230576101443591610164359173ffffffffffffffffffffffffffffffffffffffff9081841680940361023057610184359267ffffffffffffffff9283851161022c573660238601121561022c57848201358481116102195788516020966100df601f8401601f1916890183610475565b828252366024848301011161021557918791816024889501848301370101527f00000000000000000000000000000000000000000000000000000000000000001692606435885196638eb22cdd60e01b88528184890152886024890152600160448901528688606481895afa97881561020b5785986101dc575b50853b156101d8579060848592838c519889948593630208d92960e11b8552308a860152602485015260448401528b60648401525af180156101ce576101a8575b505050508351928352820152f35b83116101bb57505084523880808061019a565b634e487b7160e01b825260419052602490fd5b88513d85823e3d90fd5b8480fd5b9097508681813d8311610204575b6101f48183610475565b810103126101d857519638610159565b503d6101ea565b8a513d87823e3d90fd5b8580fd5b634e487b7160e01b845260418352602484fd5b8280fd5b80fd5b5080fd5b610419565b5082346102335760c0366003190112610233576103519261025b6103f6565b9061026461040a565b9361026d61050d565b5061027661050d565b9461027f6104ad565b92604435845260643560208501526102956104ad565b928084528684015235602083015260243560608301526102b36104e3565b93151584521515602084015284526020840152818301525191829182919091610120602060406101408401956060815173ffffffffffffffffffffffffffffffffffffffff808251168852858201518689015284820151168488015201516060860152606083820151805160808801528481015160a08801528381015160c0880152015160e086015201518051151561010085015201511515910152565b0390f35b5090346102335760c036600319011261023357359173ffffffffffffffffffffffffffffffffffffffff9283811680910361022c5760243593841680940361022c57610351936103a36103f6565b916103ac61040a565b6103b461050d565b506103bd61050d565b956103c66104ad565b93604435855260643560208601526103dc6104ad565b9384528684015280602084015260608301526102b36104e3565b60843590811515820361040557565b600080fd5b60a43590811515820361040557565b3461040557366003190161016081126104055761014013610405576101443567ffffffffffffffff8082116104055736602383011215610405578160040135908111610405573691016024011161040557602060405160008152f35b90601f8019910116810190811067ffffffffffffffff82111761049757604052565b634e487b7160e01b600052604160045260246000fd5b604051906080820182811067ffffffffffffffff8211176104975760405260006060838281528260208201528260408201520152565b604051906040820182811067ffffffffffffffff8211176104975760405260006020838281520152565b604051906060820182811067ffffffffffffffff82111761049757604052816105346104ad565b815261053e6104ad565b6020820152604061054d6104e3565b91015256fea2646970667358221220b3e49f210986bd413492977476a37be8bd81f8964db1f608fe44e968c59413ca64736f6c63430008120033",
-  "deployedBytecode": "0x60406080815260048036101561001457600080fd5b6000803560e01c80633fa2ef5e146103555780635bf66e48146102375780637b2a8bd21461023c578063e3c711a0146102375763efa84c6d1461005657600080fd5b346102305736600319016101a081126102335761014013610230576101443591610164359173ffffffffffffffffffffffffffffffffffffffff9081841680940361023057610184359267ffffffffffffffff9283851161022c573660238601121561022c57848201358481116102195788516020966100df601f8401601f1916890183610475565b828252366024848301011161021557918791816024889501848301370101527f00000000000000000000000000000000000000000000000000000000000000001692606435885196638eb22cdd60e01b88528184890152886024890152600160448901528688606481895afa97881561020b5785986101dc575b50853b156101d8579060848592838c519889948593630208d92960e11b8552308a860152602485015260448401528b60648401525af180156101ce576101a8575b505050508351928352820152f35b83116101bb57505084523880808061019a565b634e487b7160e01b825260419052602490fd5b88513d85823e3d90fd5b8480fd5b9097508681813d8311610204575b6101f48183610475565b810103126101d857519638610159565b503d6101ea565b8a513d87823e3d90fd5b8580fd5b634e487b7160e01b845260418352602484fd5b8280fd5b80fd5b5080fd5b610419565b5082346102335760c0366003190112610233576103519261025b6103f6565b9061026461040a565b9361026d61050d565b5061027661050d565b9461027f6104ad565b92604435845260643560208501526102956104ad565b928084528684015235602083015260243560608301526102b36104e3565b93151584521515602084015284526020840152818301525191829182919091610120602060406101408401956060815173ffffffffffffffffffffffffffffffffffffffff808251168852858201518689015284820151168488015201516060860152606083820151805160808801528481015160a08801528381015160c0880152015160e086015201518051151561010085015201511515910152565b0390f35b5090346102335760c036600319011261023357359173ffffffffffffffffffffffffffffffffffffffff9283811680910361022c5760243593841680940361022c57610351936103a36103f6565b916103ac61040a565b6103b461050d565b506103bd61050d565b956103c66104ad565b93604435855260643560208601526103dc6104ad565b9384528684015280602084015260608301526102b36104e3565b60843590811515820361040557565b600080fd5b60a43590811515820361040557565b3461040557366003190161016081126104055761014013610405576101443567ffffffffffffffff8082116104055736602383011215610405578160040135908111610405573691016024011161040557602060405160008152f35b90601f8019910116810190811067ffffffffffffffff82111761049757604052565b634e487b7160e01b600052604160045260246000fd5b604051906080820182811067ffffffffffffffff8211176104975760405260006060838281528260208201528260408201520152565b604051906040820182811067ffffffffffffffff8211176104975760405260006020838281520152565b604051906060820182811067ffffffffffffffff82111761049757604052816105346104ad565b815261053e6104ad565b6020820152604061054d6104e3565b91015256fea2646970667358221220b3e49f210986bd413492977476a37be8bd81f8964db1f608fe44e968c59413ca64736f6c63430008120033",
+  "bytecode": "0x60a03461006957601f61031838819003918201601f19168301916001600160401b0383118484101761006e5780849260209460405283398101031261006957516001600160a01b038116810361006957608052604051610293908161008582396080518160ac0152f35b600080fd5b634e487b7160e01b600052604160045260246000fdfe6040608081526004908136101561001557600080fd5b600091823560e01c928363532bb1921461004657836355a68e101461004b5750505063c6fe95491461004657600080fd5b61021f565b346101e95760c03660031901126101e9576024356064359173ffffffffffffffffffffffffffffffffffffffff938484168094036101e5576084359467ffffffffffffffff9060a435828111610184576100a890369085016101ec565b50507f00000000000000000000000000000000000000000000000000000000000000001693875195638eb22cdd60e01b8752818488015287602488015260016044880152602087606481895afa9687156101db578597610188575b50853b15610184579060848592838b519889948593630208d92960e11b8552308a860152602485015260448401528a60648401525af1801561017a57610154575b5050505082519182526020820152f35b8311610167575050835283808080610144565b634e487b7160e01b825260419052602490fd5b87513d85823e3d90fd5b8480fd5b90965060203d81116101d4575b601f8101601f19168201848111838210176101c15760209183918c528101031261018457519589610103565b634e487b7160e01b875260418652602487fd5b503d610195565b89513d87823e3d90fd5b5080fd5b80fd5b9181601f8401121561021a5782359167ffffffffffffffff831161021a576020838186019501011161021a57565b600080fd5b3461021a57606036600319011261021a5760443567ffffffffffffffff811161021a576102509036906004016101ec565b5050602060405160008152f3fea2646970667358221220eb278b1b15ef2de1919593b341d58c74edae90fbb8a7f8fd389c1eb78efce6e964736f6c63430008120033",
+  "deployedBytecode": "0x6040608081526004908136101561001557600080fd5b600091823560e01c928363532bb1921461004657836355a68e101461004b5750505063c6fe95491461004657600080fd5b61021f565b346101e95760c03660031901126101e9576024356064359173ffffffffffffffffffffffffffffffffffffffff938484168094036101e5576084359467ffffffffffffffff9060a435828111610184576100a890369085016101ec565b50507f00000000000000000000000000000000000000000000000000000000000000001693875195638eb22cdd60e01b8752818488015287602488015260016044880152602087606481895afa9687156101db578597610188575b50853b15610184579060848592838b519889948593630208d92960e11b8552308a860152602485015260448401528a60648401525af1801561017a57610154575b5050505082519182526020820152f35b8311610167575050835283808080610144565b634e487b7160e01b825260419052602490fd5b87513d85823e3d90fd5b8480fd5b90965060203d81116101d4575b601f8101601f19168201848111838210176101c15760209183918c528101031261018457519589610103565b634e487b7160e01b875260418652602487fd5b503d610195565b89513d87823e3d90fd5b5080fd5b80fd5b9181601f8401121561021a5782359167ffffffffffffffff831161021a576020838186019501011161021a57565b600080fd5b3461021a57606036600319011261021a5760443567ffffffffffffffff811161021a576102509036906004016101ec565b5050602060405160008152f3fea2646970667358221220eb278b1b15ef2de1919593b341d58c74edae90fbb8a7f8fd389c1eb78efce6e964736f6c63430008120033",
   "linkReferences": {},
   "deployedLinkReferences": {}
 }
