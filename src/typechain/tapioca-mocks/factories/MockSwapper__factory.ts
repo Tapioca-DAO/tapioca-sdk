@@ -21,6 +21,16 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
         internalType: "uint256",
         name: "",
         type: "uint256",
@@ -29,6 +39,298 @@ const _abi = [
         internalType: "uint256",
         name: "",
         type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    name: "buildSwapData",
+    outputs: [
+      {
+        components: [
+          {
+            components: [
+              {
+                internalType: "address",
+                name: "tokenIn",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "tokenInId",
+                type: "uint256",
+              },
+              {
+                internalType: "address",
+                name: "tokenOut",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "tokenOutId",
+                type: "uint256",
+              },
+            ],
+            internalType: "struct MockSwapper.SwapTokensData",
+            name: "tokensData",
+            type: "tuple",
+          },
+          {
+            components: [
+              {
+                internalType: "uint256",
+                name: "amountIn",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "shareIn",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "amountOut",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "shareOut",
+                type: "uint256",
+              },
+            ],
+            internalType: "struct MockSwapper.SwapAmountData",
+            name: "amountData",
+            type: "tuple",
+          },
+          {
+            components: [
+              {
+                internalType: "bool",
+                name: "withdrawFromYb",
+                type: "bool",
+              },
+              {
+                internalType: "bool",
+                name: "depositToYb",
+                type: "bool",
+              },
+            ],
+            internalType: "struct MockSwapper.YieldBoxData",
+            name: "yieldBoxData",
+            type: "tuple",
+          },
+        ],
+        internalType: "struct MockSwapper.SwapData",
+        name: "",
+        type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    name: "buildSwapData",
+    outputs: [
+      {
+        components: [
+          {
+            components: [
+              {
+                internalType: "address",
+                name: "tokenIn",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "tokenInId",
+                type: "uint256",
+              },
+              {
+                internalType: "address",
+                name: "tokenOut",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "tokenOutId",
+                type: "uint256",
+              },
+            ],
+            internalType: "struct MockSwapper.SwapTokensData",
+            name: "tokensData",
+            type: "tuple",
+          },
+          {
+            components: [
+              {
+                internalType: "uint256",
+                name: "amountIn",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "shareIn",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "amountOut",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "shareOut",
+                type: "uint256",
+              },
+            ],
+            internalType: "struct MockSwapper.SwapAmountData",
+            name: "amountData",
+            type: "tuple",
+          },
+          {
+            components: [
+              {
+                internalType: "bool",
+                name: "withdrawFromYb",
+                type: "bool",
+              },
+              {
+                internalType: "bool",
+                name: "depositToYb",
+                type: "bool",
+              },
+            ],
+            internalType: "struct MockSwapper.YieldBoxData",
+            name: "yieldBoxData",
+            type: "tuple",
+          },
+        ],
+        internalType: "struct MockSwapper.SwapData",
+        name: "",
+        type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        components: [
+          {
+            components: [
+              {
+                internalType: "address",
+                name: "tokenIn",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "tokenInId",
+                type: "uint256",
+              },
+              {
+                internalType: "address",
+                name: "tokenOut",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "tokenOutId",
+                type: "uint256",
+              },
+            ],
+            internalType: "struct MockSwapper.SwapTokensData",
+            name: "tokensData",
+            type: "tuple",
+          },
+          {
+            components: [
+              {
+                internalType: "uint256",
+                name: "amountIn",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "shareIn",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "amountOut",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "shareOut",
+                type: "uint256",
+              },
+            ],
+            internalType: "struct MockSwapper.SwapAmountData",
+            name: "amountData",
+            type: "tuple",
+          },
+          {
+            components: [
+              {
+                internalType: "bool",
+                name: "withdrawFromYb",
+                type: "bool",
+              },
+              {
+                internalType: "bool",
+                name: "depositToYb",
+                type: "bool",
+              },
+            ],
+            internalType: "struct MockSwapper.YieldBoxData",
+            name: "yieldBoxData",
+            type: "tuple",
+          },
+        ],
+        internalType: "struct MockSwapper.SwapData",
+        name: "",
+        type: "tuple",
       },
       {
         internalType: "bytes",
@@ -50,14 +352,82 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "uint256",
+        components: [
+          {
+            components: [
+              {
+                internalType: "address",
+                name: "tokenIn",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "tokenInId",
+                type: "uint256",
+              },
+              {
+                internalType: "address",
+                name: "tokenOut",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "tokenOutId",
+                type: "uint256",
+              },
+            ],
+            internalType: "struct MockSwapper.SwapTokensData",
+            name: "tokensData",
+            type: "tuple",
+          },
+          {
+            components: [
+              {
+                internalType: "uint256",
+                name: "amountIn",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "shareIn",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "amountOut",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "shareOut",
+                type: "uint256",
+              },
+            ],
+            internalType: "struct MockSwapper.SwapAmountData",
+            name: "amountData",
+            type: "tuple",
+          },
+          {
+            components: [
+              {
+                internalType: "bool",
+                name: "withdrawFromYb",
+                type: "bool",
+              },
+              {
+                internalType: "bool",
+                name: "depositToYb",
+                type: "bool",
+              },
+            ],
+            internalType: "struct MockSwapper.YieldBoxData",
+            name: "yieldBoxData",
+            type: "tuple",
+          },
+        ],
+        internalType: "struct MockSwapper.SwapData",
         name: "",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        type: "tuple",
       },
       {
         internalType: "bytes",
@@ -79,29 +449,92 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        components: [
+          {
+            components: [
+              {
+                internalType: "address",
+                name: "tokenIn",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "tokenInId",
+                type: "uint256",
+              },
+              {
+                internalType: "address",
+                name: "tokenOut",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "tokenOutId",
+                type: "uint256",
+              },
+            ],
+            internalType: "struct MockSwapper.SwapTokensData",
+            name: "tokensData",
+            type: "tuple",
+          },
+          {
+            components: [
+              {
+                internalType: "uint256",
+                name: "amountIn",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "shareIn",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "amountOut",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "shareOut",
+                type: "uint256",
+              },
+            ],
+            internalType: "struct MockSwapper.SwapAmountData",
+            name: "amountData",
+            type: "tuple",
+          },
+          {
+            components: [
+              {
+                internalType: "bool",
+                name: "withdrawFromYb",
+                type: "bool",
+              },
+              {
+                internalType: "bool",
+                name: "depositToYb",
+                type: "bool",
+              },
+            ],
+            internalType: "struct MockSwapper.YieldBoxData",
+            name: "yieldBoxData",
+            type: "tuple",
+          },
+        ],
+        internalType: "struct MockSwapper.SwapData",
+        name: "swapData",
+        type: "tuple",
       },
       {
         internalType: "uint256",
-        name: "tokenOutId",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "",
+        name: "amountOutMin",
         type: "uint256",
       },
       {
         internalType: "address",
         name: "to",
         type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "amountOutMin",
-        type: "uint256",
       },
       {
         internalType: "bytes",
@@ -128,7 +561,7 @@ const _abi = [
 ] as const;
 
 const _bytecode =
-  "0x60a03461006957601f61031838819003918201601f19168301916001600160401b0383118484101761006e5780849260209460405283398101031261006957516001600160a01b038116810361006957608052604051610293908161008582396080518160ac0152f35b600080fd5b634e487b7160e01b600052604160045260246000fdfe6040608081526004908136101561001557600080fd5b600091823560e01c928363532bb1921461004657836355a68e101461004b5750505063c6fe95491461004657600080fd5b61021f565b346101e95760c03660031901126101e9576024356064359173ffffffffffffffffffffffffffffffffffffffff938484168094036101e5576084359467ffffffffffffffff9060a435828111610184576100a890369085016101ec565b50507f00000000000000000000000000000000000000000000000000000000000000001693875195638eb22cdd60e01b8752818488015287602488015260016044880152602087606481895afa9687156101db578597610188575b50853b15610184579060848592838b519889948593630208d92960e11b8552308a860152602485015260448401528a60648401525af1801561017a57610154575b5050505082519182526020820152f35b8311610167575050835283808080610144565b634e487b7160e01b825260419052602490fd5b87513d85823e3d90fd5b8480fd5b90965060203d81116101d4575b601f8101601f19168201848111838210176101c15760209183918c528101031261018457519589610103565b634e487b7160e01b875260418652602487fd5b503d610195565b89513d87823e3d90fd5b5080fd5b80fd5b9181601f8401121561021a5782359167ffffffffffffffff831161021a576020838186019501011161021a57565b600080fd5b3461021a57606036600319011261021a5760443567ffffffffffffffff811161021a576102509036906004016101ec565b5050602060405160008152f3fea2646970667358221220eb278b1b15ef2de1919593b341d58c74edae90fbb8a7f8fd389c1eb78efce6e964736f6c63430008120033";
+  "0x60a03461006957601f61053e38819003918201601f19168301916001600160401b0383118484101761006e5780849260209460405283398101031261006957516001600160a01b0381168103610069576080526040516104b9908161008582396080518160c70152f35b600080fd5b634e487b7160e01b600052604160045260246000fdfe60806040908082526004908136101561001757600080fd5b600090813560e01c9081633fa2ef5e14610303575080635bf66e481461020e5780637b2a8bd214610213578063e3c711a01461020e5763efa84c6d1461005c57600080fd5b3461020b5736600319016101a08112610207576101401361020b576101443591610164359173ffffffffffffffffffffffffffffffffffffffff918284168094036102075767ffffffffffffffff9261018435848111610203576100c39036908401610388565b50507f00000000000000000000000000000000000000000000000000000000000000001692606435875195638eb22cdd60e01b8752818488015287602488015260016044880152602087606481895afa9687156101f95785976101a6575b50853b156101a2579060848592838b519889948593630208d92960e11b8552308a860152602485015260448401528a60648401525af1801561019857610172575b5050505082519182526020820152f35b8311610185575050835238808080610162565b634e487b7160e01b825260419052602490fd5b87513d85823e3d90fd5b8480fd5b90965060203d81116101f2575b601f8101601f19168201848111838210176101df5760209183918c52810103126101a257519538610121565b634e487b7160e01b875260418652602487fd5b503d6101b3565b89513d87823e3d90fd5b8380fd5b5080fd5b80fd5b6103b6565b5082346102075760c036600319011261020757906102ff91610233610365565b5061023c610379565b50805191610249836103ff565b61025161044d565b835261025b61044d565b602084015281519061026c82610431565b8082526020820152818301525191829182919091610120602060406101408401956060815173ffffffffffffffffffffffffffffffffffffffff808251168852858201518689015284820151168488015201516060860152606083820151805160808801528481015160a08801528381015160c0880152015160e086015201518051151561010085015201511515910152565b0390f35b90508383346102035760c0366003190112610203573573ffffffffffffffffffffffffffffffffffffffff90818116036102035760243590811603610361576102ff9261034e610365565b50610357610379565b50610249836103ff565b8280fd5b60843590811515820361037457565b600080fd5b60a43590811515820361037457565b9181601f840112156103745782359167ffffffffffffffff8311610374576020838186019501011161037457565b3461037457366003190161016081126103745761014013610374576101443567ffffffffffffffff8111610374576103f2903690600401610388565b5050602060405160008152f35b6060810190811067ffffffffffffffff82111761041b57604052565b634e487b7160e01b600052604160045260246000fd5b6040810190811067ffffffffffffffff82111761041b57604052565b604051906080820182811067ffffffffffffffff82111761041b576040526000606083828152826020820152826040820152015256fea26469706673582212201d2ca26d1e0dbb81f6b4a2d91cd3965f771657be13acd9203e3749b42fe94fc064736f6c63430008120033";
 
 type MockSwapperConstructorParams =
   | [signer?: Signer]
