@@ -265,13 +265,13 @@ export interface MockSwapper extends BaseContract {
       arg0: MockSwapper.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
-    ): Promise<[BigNumber] & { amountOut: BigNumber }>;
+    ): Promise<[BigNumber]>;
 
     "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
       arg0: MockSwapper.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
-    ): Promise<[BigNumber] & { amountOut: BigNumber }>;
+    ): Promise<[BigNumber]>;
 
     swap(
       swapData: MockSwapper.SwapDataStruct,

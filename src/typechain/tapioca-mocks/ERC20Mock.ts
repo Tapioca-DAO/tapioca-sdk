@@ -9,6 +9,7 @@ import type {
   CallOverrides,
   ContractTransaction,
   Overrides,
+  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -36,8 +37,10 @@ export interface ERC20MockInterface extends utils.Interface {
     "balanceOf(address)": FunctionFragment;
     "decimals()": FunctionFragment;
     "decreaseAllowance(address,uint256)": FunctionFragment;
+    "deposit()": FunctionFragment;
     "extractTokens(uint256)": FunctionFragment;
     "freeMint(uint256)": FunctionFragment;
+    "hasMintRestrictions()": FunctionFragment;
     "increaseAllowance(address,uint256)": FunctionFragment;
     "mintLimit()": FunctionFragment;
     "mintTo(address,uint256)": FunctionFragment;
@@ -48,11 +51,13 @@ export interface ERC20MockInterface extends utils.Interface {
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "symbol()": FunctionFragment;
+    "toggleRestrictions()": FunctionFragment;
     "totalSupply()": FunctionFragment;
     "transfer(address,uint256)": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "updateMintLimit(uint256)": FunctionFragment;
+    "withdraw(uint256)": FunctionFragment;
   };
 
   getFunction(
@@ -71,10 +76,14 @@ export interface ERC20MockInterface extends utils.Interface {
       | "decimals()"
       | "decreaseAllowance"
       | "decreaseAllowance(address,uint256)"
+      | "deposit"
+      | "deposit()"
       | "extractTokens"
       | "extractTokens(uint256)"
       | "freeMint"
       | "freeMint(uint256)"
+      | "hasMintRestrictions"
+      | "hasMintRestrictions()"
       | "increaseAllowance"
       | "increaseAllowance(address,uint256)"
       | "mintLimit"
@@ -95,6 +104,8 @@ export interface ERC20MockInterface extends utils.Interface {
       | "renounceOwnership()"
       | "symbol"
       | "symbol()"
+      | "toggleRestrictions"
+      | "toggleRestrictions()"
       | "totalSupply"
       | "totalSupply()"
       | "transfer"
@@ -105,6 +116,8 @@ export interface ERC20MockInterface extends utils.Interface {
       | "transferOwnership(address)"
       | "updateMintLimit"
       | "updateMintLimit(uint256)"
+      | "withdraw"
+      | "withdraw(uint256)"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -160,6 +173,8 @@ export interface ERC20MockInterface extends utils.Interface {
     functionFragment: "decreaseAllowance(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
+  encodeFunctionData(functionFragment: "deposit", values?: undefined): string;
+  encodeFunctionData(functionFragment: "deposit()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "extractTokens",
     values: [PromiseOrValue<BigNumberish>]
@@ -175,6 +190,14 @@ export interface ERC20MockInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "freeMint(uint256)",
     values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "hasMintRestrictions",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "hasMintRestrictions()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "increaseAllowance",
@@ -252,6 +275,14 @@ export interface ERC20MockInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
   encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "toggleRestrictions",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "toggleRestrictions()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "totalSupply",
     values?: undefined
   ): string;
@@ -299,6 +330,14 @@ export interface ERC20MockInterface extends utils.Interface {
     functionFragment: "updateMintLimit(uint256)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
+  encodeFunctionData(
+    functionFragment: "withdraw",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdraw(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "DOMAIN_SEPARATOR",
@@ -341,6 +380,8 @@ export interface ERC20MockInterface extends utils.Interface {
     functionFragment: "decreaseAllowance(address,uint256)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "deposit()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "extractTokens",
     data: BytesLike
@@ -352,6 +393,14 @@ export interface ERC20MockInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "freeMint", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "freeMint(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "hasMintRestrictions",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "hasMintRestrictions()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -402,6 +451,14 @@ export interface ERC20MockInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "toggleRestrictions",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "toggleRestrictions()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "totalSupply",
     data: BytesLike
   ): Result;
@@ -438,17 +495,26 @@ export interface ERC20MockInterface extends utils.Interface {
     functionFragment: "updateMintLimit(uint256)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "withdraw(uint256)",
+    data: BytesLike
+  ): Result;
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
+    "Deposit(address,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
+    "Withdrawal(address,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Approval(address,address,uint256)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Deposit"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Deposit(address,uint256)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "OwnershipTransferred(address,address)"
@@ -456,6 +522,10 @@ export interface ERC20MockInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Transfer(address,address,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Withdrawal"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "Withdrawal(address,uint256)"
   ): EventFragment;
 }
 
@@ -470,6 +540,14 @@ export type ApprovalEvent = TypedEvent<
 >;
 
 export type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
+
+export interface DepositEventObject {
+  dst: string;
+  wad: BigNumber;
+}
+export type DepositEvent = TypedEvent<[string, BigNumber], DepositEventObject>;
+
+export type DepositEventFilter = TypedEventFilter<DepositEvent>;
 
 export interface OwnershipTransferredEventObject {
   previousOwner: string;
@@ -494,6 +572,17 @@ export type TransferEvent = TypedEvent<
 >;
 
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
+
+export interface WithdrawalEventObject {
+  src: string;
+  wad: BigNumber;
+}
+export type WithdrawalEvent = TypedEvent<
+  [string, BigNumber],
+  WithdrawalEventObject
+>;
+
+export type WithdrawalEventFilter = TypedEventFilter<WithdrawalEvent>;
 
 export interface ERC20Mock extends BaseContract {
   contractName: "ERC20Mock";
@@ -582,6 +671,14 @@ export interface ERC20Mock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    deposit(
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "deposit()"(
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     extractTokens(
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -601,6 +698,10 @@ export interface ERC20Mock extends BaseContract {
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    hasMintRestrictions(overrides?: CallOverrides): Promise<[boolean]>;
+
+    "hasMintRestrictions()"(overrides?: CallOverrides): Promise<[boolean]>;
 
     increaseAllowance(
       spender: PromiseOrValue<string>,
@@ -692,6 +793,14 @@ export interface ERC20Mock extends BaseContract {
 
     "symbol()"(overrides?: CallOverrides): Promise<[string]>;
 
+    toggleRestrictions(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "toggleRestrictions()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -739,6 +848,16 @@ export interface ERC20Mock extends BaseContract {
 
     "updateMintLimit(uint256)"(
       _newVal: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    withdraw(
+      wad: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "withdraw(uint256)"(
+      wad: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
@@ -801,6 +920,14 @@ export interface ERC20Mock extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  deposit(
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "deposit()"(
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   extractTokens(
     _amount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -820,6 +947,10 @@ export interface ERC20Mock extends BaseContract {
     _val: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  hasMintRestrictions(overrides?: CallOverrides): Promise<boolean>;
+
+  "hasMintRestrictions()"(overrides?: CallOverrides): Promise<boolean>;
 
   increaseAllowance(
     spender: PromiseOrValue<string>,
@@ -911,6 +1042,14 @@ export interface ERC20Mock extends BaseContract {
 
   "symbol()"(overrides?: CallOverrides): Promise<string>;
 
+  toggleRestrictions(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "toggleRestrictions()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
   "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -958,6 +1097,16 @@ export interface ERC20Mock extends BaseContract {
 
   "updateMintLimit(uint256)"(
     _newVal: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  withdraw(
+    wad: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "withdraw(uint256)"(
+    wad: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1020,6 +1169,10 @@ export interface ERC20Mock extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
+    deposit(overrides?: CallOverrides): Promise<void>;
+
+    "deposit()"(overrides?: CallOverrides): Promise<void>;
+
     extractTokens(
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1039,6 +1192,10 @@ export interface ERC20Mock extends BaseContract {
       _val: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    hasMintRestrictions(overrides?: CallOverrides): Promise<boolean>;
+
+    "hasMintRestrictions()"(overrides?: CallOverrides): Promise<boolean>;
 
     increaseAllowance(
       spender: PromiseOrValue<string>,
@@ -1126,6 +1283,10 @@ export interface ERC20Mock extends BaseContract {
 
     "symbol()"(overrides?: CallOverrides): Promise<string>;
 
+    toggleRestrictions(overrides?: CallOverrides): Promise<void>;
+
+    "toggleRestrictions()"(overrides?: CallOverrides): Promise<void>;
+
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1175,6 +1336,16 @@ export interface ERC20Mock extends BaseContract {
       _newVal: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    withdraw(
+      wad: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "withdraw(uint256)"(
+      wad: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
@@ -1188,6 +1359,15 @@ export interface ERC20Mock extends BaseContract {
       spender?: PromiseOrValue<string> | null,
       value?: null
     ): ApprovalEventFilter;
+
+    "Deposit(address,uint256)"(
+      dst?: PromiseOrValue<string> | null,
+      wad?: null
+    ): DepositEventFilter;
+    Deposit(
+      dst?: PromiseOrValue<string> | null,
+      wad?: null
+    ): DepositEventFilter;
 
     "OwnershipTransferred(address,address)"(
       previousOwner?: PromiseOrValue<string> | null,
@@ -1208,6 +1388,15 @@ export interface ERC20Mock extends BaseContract {
       to?: PromiseOrValue<string> | null,
       value?: null
     ): TransferEventFilter;
+
+    "Withdrawal(address,uint256)"(
+      src?: PromiseOrValue<string> | null,
+      wad?: null
+    ): WithdrawalEventFilter;
+    Withdrawal(
+      src?: PromiseOrValue<string> | null,
+      wad?: null
+    ): WithdrawalEventFilter;
   };
 
   estimateGas: {
@@ -1269,6 +1458,14 @@ export interface ERC20Mock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    deposit(
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "deposit()"(
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     extractTokens(
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1288,6 +1485,10 @@ export interface ERC20Mock extends BaseContract {
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    hasMintRestrictions(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "hasMintRestrictions()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     increaseAllowance(
       spender: PromiseOrValue<string>,
@@ -1379,6 +1580,14 @@ export interface ERC20Mock extends BaseContract {
 
     "symbol()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    toggleRestrictions(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "toggleRestrictions()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1426,6 +1635,16 @@ export interface ERC20Mock extends BaseContract {
 
     "updateMintLimit(uint256)"(
       _newVal: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    withdraw(
+      wad: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "withdraw(uint256)"(
+      wad: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
@@ -1491,6 +1710,14 @@ export interface ERC20Mock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    deposit(
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "deposit()"(
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     extractTokens(
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1509,6 +1736,14 @@ export interface ERC20Mock extends BaseContract {
     "freeMint(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    hasMintRestrictions(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "hasMintRestrictions()"(
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     increaseAllowance(
@@ -1601,6 +1836,14 @@ export interface ERC20Mock extends BaseContract {
 
     "symbol()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    toggleRestrictions(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "toggleRestrictions()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1648,6 +1891,16 @@ export interface ERC20Mock extends BaseContract {
 
     "updateMintLimit(uint256)"(
       _newVal: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    withdraw(
+      wad: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "withdraw(uint256)"(
+      wad: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
