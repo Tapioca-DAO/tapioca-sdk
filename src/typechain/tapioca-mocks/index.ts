@@ -3,6 +3,8 @@
 /* eslint-disable */
 import type * as flashBorrowerMockSol from "./FlashBorrowerMock.sol";
 export type { flashBorrowerMockSol };
+import type * as uniswapV2RouterMockSol from "./UniswapV2RouterMock.sol";
+export type { uniswapV2RouterMockSol };
 import type * as uniswapv2 from "./uniswapv2";
 export type { uniswapv2 };
 export type { ContractThatCannotBeDeployed } from "./ContractThatCannotBeDeployed";
@@ -44,5 +46,7 @@ export type { UniswapV2Pair } from "./uniswapv2/UniswapV2Pair";
 export { UniswapV2Pair__factory } from "./factories/uniswapv2/UniswapV2Pair__factory";
 export type { UniswapV2Router02 } from "./uniswapv2/UniswapV2Router02";
 export { UniswapV2Router02__factory } from "./factories/uniswapv2/UniswapV2Router02__factory";
+export type { SwapperMock } from "./UniswapV2RouterMock.sol/SwapperMock";
+export { SwapperMock__factory } from "./factories/UniswapV2RouterMock.sol/SwapperMock__factory";
 export { VulnMultiSwapper__factory } from "./factories/VulnMultiSwapper__factory";
 export { YieldBoxMock__factory } from "./factories/YieldBoxMock__factory";
