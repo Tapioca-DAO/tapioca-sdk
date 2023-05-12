@@ -85,9 +85,9 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.UniswapV2Router02__factory>;
     getContractFactory(
-      name: "SwapperMock",
+      name: "UniswapV2RouterMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.SwapperMock__factory>;
+    ): Promise<Contracts.UniswapV2RouterMock__factory>;
     getContractFactory(
       name: "VulnMultiSwapper",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -188,10 +188,10 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.UniswapV2Router02>;
     getContractAt(
-      name: "SwapperMock",
+      name: "UniswapV2RouterMock",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.SwapperMock>;
+    ): Promise<Contracts.UniswapV2RouterMock>;
     getContractAt(
       name: "VulnMultiSwapper",
       address: string,
