@@ -4,14 +4,17 @@
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
-import type { MockSwapper, MockSwapperInterface } from "../MockSwapper";
+import type {
+  UniswapV3SwapperMock,
+  UniswapV3SwapperMockInterface,
+} from "../UniswapV3SwapperMock";
 
 const _abi = [
   {
     inputs: [
       {
-        internalType: "contract YieldBox",
-        name: "_yieldBox",
+        internalType: "address",
+        name: "",
         type: "address",
       },
     ],
@@ -78,7 +81,7 @@ const _abi = [
                 type: "uint256",
               },
             ],
-            internalType: "struct MockSwapper.SwapTokensData",
+            internalType: "struct UniswapV3SwapperMock.SwapTokensData",
             name: "tokensData",
             type: "tuple",
           },
@@ -105,7 +108,7 @@ const _abi = [
                 type: "uint256",
               },
             ],
-            internalType: "struct MockSwapper.SwapAmountData",
+            internalType: "struct UniswapV3SwapperMock.SwapAmountData",
             name: "amountData",
             type: "tuple",
           },
@@ -122,12 +125,12 @@ const _abi = [
                 type: "bool",
               },
             ],
-            internalType: "struct MockSwapper.YieldBoxData",
+            internalType: "struct UniswapV3SwapperMock.YieldBoxData",
             name: "yieldBoxData",
             type: "tuple",
           },
         ],
-        internalType: "struct MockSwapper.SwapData",
+        internalType: "struct UniswapV3SwapperMock.SwapData",
         name: "",
         type: "tuple",
       },
@@ -195,7 +198,7 @@ const _abi = [
                 type: "uint256",
               },
             ],
-            internalType: "struct MockSwapper.SwapTokensData",
+            internalType: "struct UniswapV3SwapperMock.SwapTokensData",
             name: "tokensData",
             type: "tuple",
           },
@@ -222,7 +225,7 @@ const _abi = [
                 type: "uint256",
               },
             ],
-            internalType: "struct MockSwapper.SwapAmountData",
+            internalType: "struct UniswapV3SwapperMock.SwapAmountData",
             name: "amountData",
             type: "tuple",
           },
@@ -239,12 +242,12 @@ const _abi = [
                 type: "bool",
               },
             ],
-            internalType: "struct MockSwapper.YieldBoxData",
+            internalType: "struct UniswapV3SwapperMock.YieldBoxData",
             name: "yieldBoxData",
             type: "tuple",
           },
         ],
-        internalType: "struct MockSwapper.SwapData",
+        internalType: "struct UniswapV3SwapperMock.SwapData",
         name: "",
         type: "tuple",
       },
@@ -279,7 +282,7 @@ const _abi = [
                 type: "uint256",
               },
             ],
-            internalType: "struct MockSwapper.SwapTokensData",
+            internalType: "struct UniswapV3SwapperMock.SwapTokensData",
             name: "tokensData",
             type: "tuple",
           },
@@ -306,7 +309,7 @@ const _abi = [
                 type: "uint256",
               },
             ],
-            internalType: "struct MockSwapper.SwapAmountData",
+            internalType: "struct UniswapV3SwapperMock.SwapAmountData",
             name: "amountData",
             type: "tuple",
           },
@@ -323,13 +326,13 @@ const _abi = [
                 type: "bool",
               },
             ],
-            internalType: "struct MockSwapper.YieldBoxData",
+            internalType: "struct UniswapV3SwapperMock.YieldBoxData",
             name: "yieldBoxData",
             type: "tuple",
           },
         ],
-        internalType: "struct MockSwapper.SwapData",
-        name: "",
+        internalType: "struct UniswapV3SwapperMock.SwapData",
+        name: "swapData",
         type: "tuple",
       },
       {
@@ -376,7 +379,7 @@ const _abi = [
                 type: "uint256",
               },
             ],
-            internalType: "struct MockSwapper.SwapTokensData",
+            internalType: "struct UniswapV3SwapperMock.SwapTokensData",
             name: "tokensData",
             type: "tuple",
           },
@@ -403,7 +406,7 @@ const _abi = [
                 type: "uint256",
               },
             ],
-            internalType: "struct MockSwapper.SwapAmountData",
+            internalType: "struct UniswapV3SwapperMock.SwapAmountData",
             name: "amountData",
             type: "tuple",
           },
@@ -420,13 +423,13 @@ const _abi = [
                 type: "bool",
               },
             ],
-            internalType: "struct MockSwapper.YieldBoxData",
+            internalType: "struct UniswapV3SwapperMock.YieldBoxData",
             name: "yieldBoxData",
             type: "tuple",
           },
         ],
-        internalType: "struct MockSwapper.SwapData",
-        name: "",
+        internalType: "struct UniswapV3SwapperMock.SwapData",
+        name: "swapData",
         type: "tuple",
       },
       {
@@ -473,7 +476,7 @@ const _abi = [
                 type: "uint256",
               },
             ],
-            internalType: "struct MockSwapper.SwapTokensData",
+            internalType: "struct UniswapV3SwapperMock.SwapTokensData",
             name: "tokensData",
             type: "tuple",
           },
@@ -500,7 +503,7 @@ const _abi = [
                 type: "uint256",
               },
             ],
-            internalType: "struct MockSwapper.SwapAmountData",
+            internalType: "struct UniswapV3SwapperMock.SwapAmountData",
             name: "amountData",
             type: "tuple",
           },
@@ -517,23 +520,23 @@ const _abi = [
                 type: "bool",
               },
             ],
-            internalType: "struct MockSwapper.YieldBoxData",
+            internalType: "struct UniswapV3SwapperMock.YieldBoxData",
             name: "yieldBoxData",
             type: "tuple",
           },
         ],
-        internalType: "struct MockSwapper.SwapData",
+        internalType: "struct UniswapV3SwapperMock.SwapData",
         name: "swapData",
         type: "tuple",
       },
       {
         internalType: "uint256",
-        name: "amountOutMin",
+        name: "",
         type: "uint256",
       },
       {
         internalType: "address",
-        name: "to",
+        name: "",
         type: "address",
       },
       {
@@ -561,57 +564,61 @@ const _abi = [
 ] as const;
 
 const _bytecode =
-  "0x60a03461006a57601f61060e38819003918201601f19168301916001600160401b0383118484101761006f5780849260209460405283398101031261006a57516001600160a01b038116810361006a5760805260405161058890816100868239608051816101000152f35b600080fd5b634e487b7160e01b600052604160045260246000fdfe60406080815260048036101561001457600080fd5b6000803560e01c80633fa2ef5e146103555780635bf66e48146102375780637b2a8bd21461023c578063e3c711a0146102375763efa84c6d1461005657600080fd5b346102305736600319016101a081126102335761014013610230576101443591610164359173ffffffffffffffffffffffffffffffffffffffff9081841680940361023057610184359267ffffffffffffffff9283851161022c573660238601121561022c57848201358481116102195788516020966100df601f8401601f1916890183610475565b828252366024848301011161021557918791816024889501848301370101527f00000000000000000000000000000000000000000000000000000000000000001692606435885196638eb22cdd60e01b88528184890152886024890152600160448901528688606481895afa97881561020b5785986101dc575b50853b156101d8579060848592838c519889948593630208d92960e11b8552308a860152602485015260448401528b60648401525af180156101ce576101a8575b505050508351928352820152f35b83116101bb57505084523880808061019a565b634e487b7160e01b825260419052602490fd5b88513d85823e3d90fd5b8480fd5b9097508681813d8311610204575b6101f48183610475565b810103126101d857519638610159565b503d6101ea565b8a513d87823e3d90fd5b8580fd5b634e487b7160e01b845260418352602484fd5b8280fd5b80fd5b5080fd5b610419565b5082346102335760c0366003190112610233576103519261025b6103f6565b9061026461040a565b9361026d61050d565b5061027661050d565b9461027f6104ad565b92604435845260643560208501526102956104ad565b928084528684015235602083015260243560608301526102b36104e3565b93151584521515602084015284526020840152818301525191829182919091610120602060406101408401956060815173ffffffffffffffffffffffffffffffffffffffff808251168852858201518689015284820151168488015201516060860152606083820151805160808801528481015160a08801528381015160c0880152015160e086015201518051151561010085015201511515910152565b0390f35b5090346102335760c036600319011261023357359173ffffffffffffffffffffffffffffffffffffffff9283811680910361022c5760243593841680940361022c57610351936103a36103f6565b916103ac61040a565b6103b461050d565b506103bd61050d565b956103c66104ad565b93604435855260643560208601526103dc6104ad565b9384528684015280602084015260608301526102b36104e3565b60843590811515820361040557565b600080fd5b60a43590811515820361040557565b3461040557366003190161016081126104055761014013610405576101443567ffffffffffffffff8082116104055736602383011215610405578160040135908111610405573691016024011161040557602060405160008152f35b90601f8019910116810190811067ffffffffffffffff82111761049757604052565b634e487b7160e01b600052604160045260246000fd5b604051906080820182811067ffffffffffffffff8211176104975760405260006060838281528260208201528260408201520152565b604051906040820182811067ffffffffffffffff8211176104975760405260006020838281520152565b604051906060820182811067ffffffffffffffff82111761049757604052816105346104ad565b815261053e6104ad565b6020820152604061054d6104e3565b91015256fea2646970667358221220f31ea805bd3903b212f5479c164a3d603ab940d2811e6307d90f0f3c99497cc164736f6c63430008120033";
+  "0x60803461005d57601f61083538819003918201601f19168301916001600160401b038311848410176100625780849260209460405283398101031261005d57516001600160a01b0381160361005d576040516107bc90816100798239f35b600080fd5b634e487b7160e01b600052604160045260246000fdfe6040608081526004908136101561001557600080fd5b600091823560e01c80633fa2ef5e1461035f5780635bf66e481461034a5780637b2a8bd21461023d578063e3c711a01461021d5763efa84c6d1461005857600080fd5b346102115736600319016101a081126101fb5761014013610211576001600160a01b039061016435828116036101fb57610184359367ffffffffffffffff808611610219573660238701121561021957858301356100b5816104a5565b6100c18751918261046d565b818152602497368984830101116102155791602091818a879501848301370101528235938085168095036102115785516323b872dd60e01b60208201523388820152306044820152608435606480830182905282529560a08201848111838210176101ff57885261013291906104d7565b8061013b6104c1565b16803b156101fb5783809189895180948193637c928fe960e01b83528b8b8401525af180156101f1576101d0575b506101726104c1565b169185519363a9059cbb60e01b60208601523388860152856044860152604485526080850192858410908411176101be57505084526101b191906104d7565b8151908082526020820152f35b634e487b7160e01b8252604190528690fd5b8281116101df57865238610169565b634e487b7160e01b8452604185528784fd5b87513d86823e3d90fd5b8380fd5b634e487b7160e01b8652604187528986fd5b8280fd5b8480fd5b5080fd5b5050346102195760209060c061023236610417565b505091519101358152f35b509190346102195760c0366003190112610219576103469261025d6103f4565b90610266610408565b9361026f610741565b50610278610741565b946102816106e1565b92604435845260643560208501526102976106e1565b928084528684015235602083015260243560608301526102b5610717565b9315158452151560208401528452602084015281830152519182918291909161012060206040610140840195606081516001600160a01b03808251168852858201518689015284820151168488015201516060860152606083820151805160808801528481015160a08801528381015160c0880152015160e086015201518051151561010085015201511515910152565b0390f35b50503461021957602090608061023236610417565b508290346102195760c03660031901126102195735916001600160a01b03928381168091036102115760243593841680940361021157610346936103a16103f4565b916103aa610408565b6103b2610741565b506103bb610741565b956103c46106e1565b93604435855260643560208601526103da6106e1565b9384528684015280602084015260608301526102b5610717565b60843590811515820361040357565b600080fd5b60a43590811515820361040357565b600319810161016081126104035761014013610403576004916101443567ffffffffffffffff92838211610403578060238301121561040357818501359384116104035760248483010111610403576024019190565b90601f8019910116810190811067ffffffffffffffff82111761048f57604052565b634e487b7160e01b600052604160045260246000fd5b67ffffffffffffffff811161048f57601f01601f191660200190565b6044356001600160a01b03811681036104035790565b6001600160a01b031690604051604081019080821067ffffffffffffffff83111761048f57610568916040526020938482527f5361666545524332303a206c6f772d6c6576656c2063616c6c206661696c6564858301526000808587829751910182855af13d15610609573d9161054d836104a5565b9261055b604051948561046d565b83523d868885013e61060d565b805180610576575b50505050565b818491810103126102195782015190811591821503610606575061059c57808080610570565b6084906040519062461bcd60e51b82526004820152602a60248201527f5361666545524332303a204552433230206f7065726174696f6e20646964206e60448201527f6f742073756363656564000000000000000000000000000000000000000000006064820152fd5b80fd5b6060915b9192901561066f5750815115610621575090565b3b1561062a5790565b60405162461bcd60e51b815260206004820152601d60248201527f416464726573733a2063616c6c20746f206e6f6e2d636f6e74726163740000006044820152606490fd5b8251909150156106825750805190602001fd5b6040519062461bcd60e51b82528160208060048301528251908160248401526000935b8285106106c8575050604492506000838284010152601f80199101168101030190fd5b84810182015186860160440152938101938593506106a5565b604051906080820182811067ffffffffffffffff82111761048f5760405260006060838281528260208201528260408201520152565b604051906040820182811067ffffffffffffffff82111761048f5760405260006020838281520152565b604051906060820182811067ffffffffffffffff82111761048f57604052816107686106e1565b81526107726106e1565b60208201526040610781610717565b91015256fea26469706673582212205d3a28ccbd35c3bc572adb0c3d6f3040cfd44572c776d49f246ea1d522d7655b64736f6c63430008120033";
 
-type MockSwapperConstructorParams =
+type UniswapV3SwapperMockConstructorParams =
   | [signer?: Signer]
   | ConstructorParameters<typeof ContractFactory>;
 
 const isSuperArgs = (
-  xs: MockSwapperConstructorParams
+  xs: UniswapV3SwapperMockConstructorParams
 ): xs is ConstructorParameters<typeof ContractFactory> => xs.length > 1;
 
-export class MockSwapper__factory extends ContractFactory {
-  constructor(...args: MockSwapperConstructorParams) {
+export class UniswapV3SwapperMock__factory extends ContractFactory {
+  constructor(...args: UniswapV3SwapperMockConstructorParams) {
     if (isSuperArgs(args)) {
       super(...args);
     } else {
       super(_abi, _bytecode, args[0]);
     }
-    this.contractName = "MockSwapper";
+    this.contractName = "UniswapV3SwapperMock";
   }
 
   override deploy(
-    _yieldBox: PromiseOrValue<string>,
+    arg0: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<MockSwapper> {
-    return super.deploy(_yieldBox, overrides || {}) as Promise<MockSwapper>;
+  ): Promise<UniswapV3SwapperMock> {
+    return super.deploy(arg0, overrides || {}) as Promise<UniswapV3SwapperMock>;
   }
   override getDeployTransaction(
-    _yieldBox: PromiseOrValue<string>,
+    arg0: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): TransactionRequest {
-    return super.getDeployTransaction(_yieldBox, overrides || {});
+    return super.getDeployTransaction(arg0, overrides || {});
   }
-  override attach(address: string): MockSwapper {
-    return super.attach(address) as MockSwapper;
+  override attach(address: string): UniswapV3SwapperMock {
+    return super.attach(address) as UniswapV3SwapperMock;
   }
-  override connect(signer: Signer): MockSwapper__factory {
-    return super.connect(signer) as MockSwapper__factory;
+  override connect(signer: Signer): UniswapV3SwapperMock__factory {
+    return super.connect(signer) as UniswapV3SwapperMock__factory;
   }
-  static readonly contractName: "MockSwapper";
+  static readonly contractName: "UniswapV3SwapperMock";
 
-  public readonly contractName: "MockSwapper";
+  public readonly contractName: "UniswapV3SwapperMock";
 
   static readonly bytecode = _bytecode;
   static readonly abi = _abi;
-  static createInterface(): MockSwapperInterface {
-    return new utils.Interface(_abi) as MockSwapperInterface;
+  static createInterface(): UniswapV3SwapperMockInterface {
+    return new utils.Interface(_abi) as UniswapV3SwapperMockInterface;
   }
   static connect(
     address: string,
     signerOrProvider: Signer | Provider
-  ): MockSwapper {
-    return new Contract(address, _abi, signerOrProvider) as MockSwapper;
+  ): UniswapV3SwapperMock {
+    return new Contract(
+      address,
+      _abi,
+      signerOrProvider
+    ) as UniswapV3SwapperMock;
   }
 }

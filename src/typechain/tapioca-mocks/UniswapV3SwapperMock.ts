@@ -23,7 +23,7 @@ import type {
   PromiseOrValue,
 } from "./common";
 
-export declare namespace MockSwapper {
+export declare namespace UniswapV3SwapperMock {
   export type SwapTokensDataStruct = {
     tokenIn: PromiseOrValue<string>;
     tokenInId: PromiseOrValue<BigNumberish>;
@@ -73,23 +73,23 @@ export declare namespace MockSwapper {
   };
 
   export type SwapDataStruct = {
-    tokensData: MockSwapper.SwapTokensDataStruct;
-    amountData: MockSwapper.SwapAmountDataStruct;
-    yieldBoxData: MockSwapper.YieldBoxDataStruct;
+    tokensData: UniswapV3SwapperMock.SwapTokensDataStruct;
+    amountData: UniswapV3SwapperMock.SwapAmountDataStruct;
+    yieldBoxData: UniswapV3SwapperMock.YieldBoxDataStruct;
   };
 
   export type SwapDataStructOutput = [
-    MockSwapper.SwapTokensDataStructOutput,
-    MockSwapper.SwapAmountDataStructOutput,
-    MockSwapper.YieldBoxDataStructOutput
+    UniswapV3SwapperMock.SwapTokensDataStructOutput,
+    UniswapV3SwapperMock.SwapAmountDataStructOutput,
+    UniswapV3SwapperMock.YieldBoxDataStructOutput
   ] & {
-    tokensData: MockSwapper.SwapTokensDataStructOutput;
-    amountData: MockSwapper.SwapAmountDataStructOutput;
-    yieldBoxData: MockSwapper.YieldBoxDataStructOutput;
+    tokensData: UniswapV3SwapperMock.SwapTokensDataStructOutput;
+    amountData: UniswapV3SwapperMock.SwapAmountDataStructOutput;
+    yieldBoxData: UniswapV3SwapperMock.YieldBoxDataStructOutput;
   };
 }
 
-export interface MockSwapperInterface extends utils.Interface {
+export interface UniswapV3SwapperMockInterface extends utils.Interface {
   functions: {
     "buildSwapData(address,address,uint256,uint256,bool,bool)": FunctionFragment;
     "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)": FunctionFragment;
@@ -134,24 +134,24 @@ export interface MockSwapperInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getInputAmount",
-    values: [MockSwapper.SwapDataStruct, PromiseOrValue<BytesLike>]
+    values: [UniswapV3SwapperMock.SwapDataStruct, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)",
-    values: [MockSwapper.SwapDataStruct, PromiseOrValue<BytesLike>]
+    values: [UniswapV3SwapperMock.SwapDataStruct, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "getOutputAmount",
-    values: [MockSwapper.SwapDataStruct, PromiseOrValue<BytesLike>]
+    values: [UniswapV3SwapperMock.SwapDataStruct, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)",
-    values: [MockSwapper.SwapDataStruct, PromiseOrValue<BytesLike>]
+    values: [UniswapV3SwapperMock.SwapDataStruct, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "swap",
     values: [
-      MockSwapper.SwapDataStruct,
+      UniswapV3SwapperMock.SwapDataStruct,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<BytesLike>
@@ -160,7 +160,7 @@ export interface MockSwapperInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)",
     values: [
-      MockSwapper.SwapDataStruct,
+      UniswapV3SwapperMock.SwapDataStruct,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<BytesLike>
@@ -200,14 +200,14 @@ export interface MockSwapperInterface extends utils.Interface {
   events: {};
 }
 
-export interface MockSwapper extends BaseContract {
-  contractName: "MockSwapper";
+export interface UniswapV3SwapperMock extends BaseContract {
+  contractName: "UniswapV3SwapperMock";
 
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: MockSwapperInterface;
+  interface: UniswapV3SwapperMockInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -237,7 +237,7 @@ export interface MockSwapper extends BaseContract {
       withdrawFromYb: PromiseOrValue<boolean>,
       depositToYb: PromiseOrValue<boolean>,
       overrides?: CallOverrides
-    ): Promise<[MockSwapper.SwapDataStructOutput]>;
+    ): Promise<[UniswapV3SwapperMock.SwapDataStructOutput]>;
 
     "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
       tokenInId: PromiseOrValue<BigNumberish>,
@@ -247,44 +247,44 @@ export interface MockSwapper extends BaseContract {
       withdrawFromYb: PromiseOrValue<boolean>,
       depositToYb: PromiseOrValue<boolean>,
       overrides?: CallOverrides
-    ): Promise<[MockSwapper.SwapDataStructOutput]>;
+    ): Promise<[UniswapV3SwapperMock.SwapDataStructOutput]>;
 
     getInputAmount(
-      arg0: MockSwapper.SwapDataStruct,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
-      arg0: MockSwapper.SwapDataStruct,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     getOutputAmount(
-      arg0: MockSwapper.SwapDataStruct,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { amountOut: BigNumber }>;
 
     "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
-      arg0: MockSwapper.SwapDataStruct,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { amountOut: BigNumber }>;
 
     swap(
-      swapData: MockSwapper.SwapDataStruct,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<string>,
       arg3: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
-      swapData: MockSwapper.SwapDataStruct,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<string>,
       arg3: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -298,7 +298,7 @@ export interface MockSwapper extends BaseContract {
     withdrawFromYb: PromiseOrValue<boolean>,
     depositToYb: PromiseOrValue<boolean>,
     overrides?: CallOverrides
-  ): Promise<MockSwapper.SwapDataStructOutput>;
+  ): Promise<UniswapV3SwapperMock.SwapDataStructOutput>;
 
   "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
     tokenInId: PromiseOrValue<BigNumberish>,
@@ -308,44 +308,44 @@ export interface MockSwapper extends BaseContract {
     withdrawFromYb: PromiseOrValue<boolean>,
     depositToYb: PromiseOrValue<boolean>,
     overrides?: CallOverrides
-  ): Promise<MockSwapper.SwapDataStructOutput>;
+  ): Promise<UniswapV3SwapperMock.SwapDataStructOutput>;
 
   getInputAmount(
-    arg0: MockSwapper.SwapDataStruct,
+    swapData: UniswapV3SwapperMock.SwapDataStruct,
     arg1: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
-    arg0: MockSwapper.SwapDataStruct,
+    swapData: UniswapV3SwapperMock.SwapDataStruct,
     arg1: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   getOutputAmount(
-    arg0: MockSwapper.SwapDataStruct,
+    swapData: UniswapV3SwapperMock.SwapDataStruct,
     arg1: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
-    arg0: MockSwapper.SwapDataStruct,
+    swapData: UniswapV3SwapperMock.SwapDataStruct,
     arg1: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   swap(
-    swapData: MockSwapper.SwapDataStruct,
-    amountOutMin: PromiseOrValue<BigNumberish>,
-    to: PromiseOrValue<string>,
+    swapData: UniswapV3SwapperMock.SwapDataStruct,
+    arg1: PromiseOrValue<BigNumberish>,
+    arg2: PromiseOrValue<string>,
     arg3: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
-    swapData: MockSwapper.SwapDataStruct,
-    amountOutMin: PromiseOrValue<BigNumberish>,
-    to: PromiseOrValue<string>,
+    swapData: UniswapV3SwapperMock.SwapDataStruct,
+    arg1: PromiseOrValue<BigNumberish>,
+    arg2: PromiseOrValue<string>,
     arg3: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -359,7 +359,7 @@ export interface MockSwapper extends BaseContract {
       withdrawFromYb: PromiseOrValue<boolean>,
       depositToYb: PromiseOrValue<boolean>,
       overrides?: CallOverrides
-    ): Promise<MockSwapper.SwapDataStructOutput>;
+    ): Promise<UniswapV3SwapperMock.SwapDataStructOutput>;
 
     "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
       tokenInId: PromiseOrValue<BigNumberish>,
@@ -369,36 +369,36 @@ export interface MockSwapper extends BaseContract {
       withdrawFromYb: PromiseOrValue<boolean>,
       depositToYb: PromiseOrValue<boolean>,
       overrides?: CallOverrides
-    ): Promise<MockSwapper.SwapDataStructOutput>;
+    ): Promise<UniswapV3SwapperMock.SwapDataStructOutput>;
 
     getInputAmount(
-      arg0: MockSwapper.SwapDataStruct,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
-      arg0: MockSwapper.SwapDataStruct,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getOutputAmount(
-      arg0: MockSwapper.SwapDataStruct,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
-      arg0: MockSwapper.SwapDataStruct,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     swap(
-      swapData: MockSwapper.SwapDataStruct,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<string>,
       arg3: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<
@@ -406,9 +406,9 @@ export interface MockSwapper extends BaseContract {
     >;
 
     "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
-      swapData: MockSwapper.SwapDataStruct,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<string>,
       arg3: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<
@@ -440,41 +440,41 @@ export interface MockSwapper extends BaseContract {
     ): Promise<BigNumber>;
 
     getInputAmount(
-      arg0: MockSwapper.SwapDataStruct,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
-      arg0: MockSwapper.SwapDataStruct,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getOutputAmount(
-      arg0: MockSwapper.SwapDataStruct,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
-      arg0: MockSwapper.SwapDataStruct,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     swap(
-      swapData: MockSwapper.SwapDataStruct,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<string>,
       arg3: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
-      swapData: MockSwapper.SwapDataStruct,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<string>,
       arg3: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -502,41 +502,41 @@ export interface MockSwapper extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     getInputAmount(
-      arg0: MockSwapper.SwapDataStruct,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
-      arg0: MockSwapper.SwapDataStruct,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getOutputAmount(
-      arg0: MockSwapper.SwapDataStruct,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)"(
-      arg0: MockSwapper.SwapDataStruct,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     swap(
-      swapData: MockSwapper.SwapDataStruct,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<string>,
       arg3: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
-      swapData: MockSwapper.SwapDataStruct,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
+      swapData: UniswapV3SwapperMock.SwapDataStruct,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<string>,
       arg3: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
