@@ -29,12 +29,6 @@ import type {
 } from "./common";
 
 export declare namespace IPenrose {
-  export type SwapDataStruct = { minAssetAmount: PromiseOrValue<BigNumberish> };
-
-  export type SwapDataStructOutput = [BigNumber] & {
-    minAssetAmount: BigNumber;
-  };
-
   export type MasterContractStruct = {
     location: PromiseOrValue<string>;
     risk: PromiseOrValue<BigNumberish>;
@@ -44,11 +38,16 @@ export declare namespace IPenrose {
     location: string;
     risk: number;
   };
+
+  export type SwapDataStruct = { minAssetAmount: PromiseOrValue<BigNumberish> };
+
+  export type SwapDataStructOutput = [BigNumber] & {
+    minAssetAmount: BigNumber;
+  };
 }
 
 export interface PenroseInterface extends utils.Interface {
   functions: {
-    "_depositFeesToYieldBox(address,address,(uint256))": FunctionFragment;
     "_getMasterContractLength((address,uint8)[])": FunctionFragment;
     "bigBangEthDebtRate()": FunctionFragment;
     "bigBangEthMarket()": FunctionFragment;
@@ -63,6 +62,9 @@ export interface PenroseInterface extends utils.Interface {
     "emptyStrategies(address)": FunctionFragment;
     "executeMarketFn(address[],bytes[],bool)": FunctionFragment;
     "feeTo()": FunctionFragment;
+    "isBigBangMasterContractRegistered(address)": FunctionFragment;
+    "isMarketRegistered(address)": FunctionFragment;
+    "isSingularityMasterContractRegistered(address)": FunctionFragment;
     "masterContractOf(address)": FunctionFragment;
     "owner()": FunctionFragment;
     "paused()": FunctionFragment;
@@ -89,15 +91,12 @@ export interface PenroseInterface extends utils.Interface {
     "usdoToken()": FunctionFragment;
     "wethAssetId()": FunctionFragment;
     "wethToken()": FunctionFragment;
-    "withdrawAllBigBangFees(address[],address[],(uint256)[])": FunctionFragment;
-    "withdrawAllSingularityFees(address[],address[],(uint256)[])": FunctionFragment;
+    "withdrawAllMarketFees(address[],address[],(uint256)[])": FunctionFragment;
     "yieldBox()": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "_depositFeesToYieldBox"
-      | "_depositFeesToYieldBox(address,address,(uint256))"
       | "_getMasterContractLength"
       | "_getMasterContractLength((address,uint8)[])"
       | "bigBangEthDebtRate"
@@ -126,6 +125,12 @@ export interface PenroseInterface extends utils.Interface {
       | "executeMarketFn(address[],bytes[],bool)"
       | "feeTo"
       | "feeTo()"
+      | "isBigBangMasterContractRegistered"
+      | "isBigBangMasterContractRegistered(address)"
+      | "isMarketRegistered"
+      | "isMarketRegistered(address)"
+      | "isSingularityMasterContractRegistered"
+      | "isSingularityMasterContractRegistered(address)"
       | "masterContractOf"
       | "masterContractOf(address)"
       | "owner"
@@ -178,30 +183,12 @@ export interface PenroseInterface extends utils.Interface {
       | "wethAssetId()"
       | "wethToken"
       | "wethToken()"
-      | "withdrawAllBigBangFees"
-      | "withdrawAllBigBangFees(address[],address[],(uint256)[])"
-      | "withdrawAllSingularityFees"
-      | "withdrawAllSingularityFees(address[],address[],(uint256)[])"
+      | "withdrawAllMarketFees"
+      | "withdrawAllMarketFees(address[],address[],(uint256)[])"
       | "yieldBox"
       | "yieldBox()"
   ): FunctionFragment;
 
-  encodeFunctionData(
-    functionFragment: "_depositFeesToYieldBox",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      IPenrose.SwapDataStruct
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "_depositFeesToYieldBox(address,address,(uint256))",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      IPenrose.SwapDataStruct
-    ]
-  ): string;
   encodeFunctionData(
     functionFragment: "_getMasterContractLength",
     values: [IPenrose.MasterContractStruct[]]
@@ -324,6 +311,30 @@ export interface PenroseInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "feeTo", values?: undefined): string;
   encodeFunctionData(functionFragment: "feeTo()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "isBigBangMasterContractRegistered",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isBigBangMasterContractRegistered(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isMarketRegistered",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isMarketRegistered(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isSingularityMasterContractRegistered",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isSingularityMasterContractRegistered(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(
     functionFragment: "masterContractOf",
     values: [PromiseOrValue<string>]
@@ -536,7 +547,7 @@ export interface PenroseInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "withdrawAllBigBangFees",
+    functionFragment: "withdrawAllMarketFees",
     values: [
       PromiseOrValue<string>[],
       PromiseOrValue<string>[],
@@ -544,23 +555,7 @@ export interface PenroseInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "withdrawAllBigBangFees(address[],address[],(uint256)[])",
-    values: [
-      PromiseOrValue<string>[],
-      PromiseOrValue<string>[],
-      IPenrose.SwapDataStruct[]
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "withdrawAllSingularityFees",
-    values: [
-      PromiseOrValue<string>[],
-      PromiseOrValue<string>[],
-      IPenrose.SwapDataStruct[]
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "withdrawAllSingularityFees(address[],address[],(uint256)[])",
+    functionFragment: "withdrawAllMarketFees(address[],address[],(uint256)[])",
     values: [
       PromiseOrValue<string>[],
       PromiseOrValue<string>[],
@@ -573,14 +568,6 @@ export interface PenroseInterface extends utils.Interface {
     values?: undefined
   ): string;
 
-  decodeFunctionResult(
-    functionFragment: "_depositFeesToYieldBox",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "_depositFeesToYieldBox(address,address,(uint256))",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "_getMasterContractLength",
     data: BytesLike
@@ -681,6 +668,30 @@ export interface PenroseInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "feeTo", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "feeTo()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "isBigBangMasterContractRegistered",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isBigBangMasterContractRegistered(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isMarketRegistered",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isMarketRegistered(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isSingularityMasterContractRegistered",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isSingularityMasterContractRegistered(address)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "masterContractOf",
     data: BytesLike
@@ -854,19 +865,11 @@ export interface PenroseInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "withdrawAllBigBangFees",
+    functionFragment: "withdrawAllMarketFees",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "withdrawAllBigBangFees(address[],address[],(uint256)[])",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "withdrawAllSingularityFees",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "withdrawAllSingularityFees(address[],address[],(uint256)[])",
+    functionFragment: "withdrawAllMarketFees(address[],address[],(uint256)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "yieldBox", data: BytesLike): Result;
@@ -1151,20 +1154,6 @@ export interface Penrose extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    _depositFeesToYieldBox(
-      market: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      dexData: IPenrose.SwapDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "_depositFeesToYieldBox(address,address,(uint256))"(
-      market: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      dexData: IPenrose.SwapDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     _getMasterContractLength(
       array: IPenrose.MasterContractStruct[],
       overrides?: CallOverrides
@@ -1284,6 +1273,36 @@ export interface Penrose extends BaseContract {
     feeTo(overrides?: CallOverrides): Promise<[string]>;
 
     "feeTo()"(overrides?: CallOverrides): Promise<[string]>;
+
+    isBigBangMasterContractRegistered(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "isBigBangMasterContractRegistered(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    isMarketRegistered(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "isMarketRegistered(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    isSingularityMasterContractRegistered(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "isSingularityMasterContractRegistered(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
     masterContractOf(
       arg0: PromiseOrValue<string>,
@@ -1505,28 +1524,14 @@ export interface Penrose extends BaseContract {
 
     "wethToken()"(overrides?: CallOverrides): Promise<[string]>;
 
-    withdrawAllBigBangFees(
+    withdrawAllMarketFees(
       markets_: PromiseOrValue<string>[],
       swappers_: PromiseOrValue<string>[],
       swapData_: IPenrose.SwapDataStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "withdrawAllBigBangFees(address[],address[],(uint256)[])"(
-      markets_: PromiseOrValue<string>[],
-      swappers_: PromiseOrValue<string>[],
-      swapData_: IPenrose.SwapDataStruct[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    withdrawAllSingularityFees(
-      markets_: PromiseOrValue<string>[],
-      swappers_: PromiseOrValue<string>[],
-      swapData_: IPenrose.SwapDataStruct[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "withdrawAllSingularityFees(address[],address[],(uint256)[])"(
+    "withdrawAllMarketFees(address[],address[],(uint256)[])"(
       markets_: PromiseOrValue<string>[],
       swappers_: PromiseOrValue<string>[],
       swapData_: IPenrose.SwapDataStruct[],
@@ -1537,20 +1542,6 @@ export interface Penrose extends BaseContract {
 
     "yieldBox()"(overrides?: CallOverrides): Promise<[string]>;
   };
-
-  _depositFeesToYieldBox(
-    market: PromiseOrValue<string>,
-    swapper: PromiseOrValue<string>,
-    dexData: IPenrose.SwapDataStruct,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "_depositFeesToYieldBox(address,address,(uint256))"(
-    market: PromiseOrValue<string>,
-    swapper: PromiseOrValue<string>,
-    dexData: IPenrose.SwapDataStruct,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
 
   _getMasterContractLength(
     array: IPenrose.MasterContractStruct[],
@@ -1665,6 +1656,36 @@ export interface Penrose extends BaseContract {
   feeTo(overrides?: CallOverrides): Promise<string>;
 
   "feeTo()"(overrides?: CallOverrides): Promise<string>;
+
+  isBigBangMasterContractRegistered(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "isBigBangMasterContractRegistered(address)"(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  isMarketRegistered(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "isMarketRegistered(address)"(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  isSingularityMasterContractRegistered(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "isSingularityMasterContractRegistered(address)"(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   masterContractOf(
     arg0: PromiseOrValue<string>,
@@ -1882,28 +1903,14 @@ export interface Penrose extends BaseContract {
 
   "wethToken()"(overrides?: CallOverrides): Promise<string>;
 
-  withdrawAllBigBangFees(
+  withdrawAllMarketFees(
     markets_: PromiseOrValue<string>[],
     swappers_: PromiseOrValue<string>[],
     swapData_: IPenrose.SwapDataStruct[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "withdrawAllBigBangFees(address[],address[],(uint256)[])"(
-    markets_: PromiseOrValue<string>[],
-    swappers_: PromiseOrValue<string>[],
-    swapData_: IPenrose.SwapDataStruct[],
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  withdrawAllSingularityFees(
-    markets_: PromiseOrValue<string>[],
-    swappers_: PromiseOrValue<string>[],
-    swapData_: IPenrose.SwapDataStruct[],
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "withdrawAllSingularityFees(address[],address[],(uint256)[])"(
+  "withdrawAllMarketFees(address[],address[],(uint256)[])"(
     markets_: PromiseOrValue<string>[],
     swappers_: PromiseOrValue<string>[],
     swapData_: IPenrose.SwapDataStruct[],
@@ -1915,20 +1922,6 @@ export interface Penrose extends BaseContract {
   "yieldBox()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
-    _depositFeesToYieldBox(
-      market: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      dexData: IPenrose.SwapDataStruct,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "_depositFeesToYieldBox(address,address,(uint256))"(
-      market: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      dexData: IPenrose.SwapDataStruct,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     _getMasterContractLength(
       array: IPenrose.MasterContractStruct[],
       overrides?: CallOverrides
@@ -2042,6 +2035,36 @@ export interface Penrose extends BaseContract {
     feeTo(overrides?: CallOverrides): Promise<string>;
 
     "feeTo()"(overrides?: CallOverrides): Promise<string>;
+
+    isBigBangMasterContractRegistered(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "isBigBangMasterContractRegistered(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    isMarketRegistered(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "isMarketRegistered(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    isSingularityMasterContractRegistered(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "isSingularityMasterContractRegistered(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     masterContractOf(
       arg0: PromiseOrValue<string>,
@@ -2259,28 +2282,14 @@ export interface Penrose extends BaseContract {
 
     "wethToken()"(overrides?: CallOverrides): Promise<string>;
 
-    withdrawAllBigBangFees(
+    withdrawAllMarketFees(
       markets_: PromiseOrValue<string>[],
       swappers_: PromiseOrValue<string>[],
       swapData_: IPenrose.SwapDataStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "withdrawAllBigBangFees(address[],address[],(uint256)[])"(
-      markets_: PromiseOrValue<string>[],
-      swappers_: PromiseOrValue<string>[],
-      swapData_: IPenrose.SwapDataStruct[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    withdrawAllSingularityFees(
-      markets_: PromiseOrValue<string>[],
-      swappers_: PromiseOrValue<string>[],
-      swapData_: IPenrose.SwapDataStruct[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "withdrawAllSingularityFees(address[],address[],(uint256)[])"(
+    "withdrawAllMarketFees(address[],address[],(uint256)[])"(
       markets_: PromiseOrValue<string>[],
       swappers_: PromiseOrValue<string>[],
       swapData_: IPenrose.SwapDataStruct[],
@@ -2417,20 +2426,6 @@ export interface Penrose extends BaseContract {
   };
 
   estimateGas: {
-    _depositFeesToYieldBox(
-      market: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      dexData: IPenrose.SwapDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "_depositFeesToYieldBox(address,address,(uint256))"(
-      market: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      dexData: IPenrose.SwapDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     _getMasterContractLength(
       array: IPenrose.MasterContractStruct[],
       overrides?: CallOverrides
@@ -2544,6 +2539,36 @@ export interface Penrose extends BaseContract {
     feeTo(overrides?: CallOverrides): Promise<BigNumber>;
 
     "feeTo()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    isBigBangMasterContractRegistered(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "isBigBangMasterContractRegistered(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    isMarketRegistered(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "isMarketRegistered(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    isSingularityMasterContractRegistered(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "isSingularityMasterContractRegistered(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     masterContractOf(
       arg0: PromiseOrValue<string>,
@@ -2761,28 +2786,14 @@ export interface Penrose extends BaseContract {
 
     "wethToken()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    withdrawAllBigBangFees(
+    withdrawAllMarketFees(
       markets_: PromiseOrValue<string>[],
       swappers_: PromiseOrValue<string>[],
       swapData_: IPenrose.SwapDataStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "withdrawAllBigBangFees(address[],address[],(uint256)[])"(
-      markets_: PromiseOrValue<string>[],
-      swappers_: PromiseOrValue<string>[],
-      swapData_: IPenrose.SwapDataStruct[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    withdrawAllSingularityFees(
-      markets_: PromiseOrValue<string>[],
-      swappers_: PromiseOrValue<string>[],
-      swapData_: IPenrose.SwapDataStruct[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "withdrawAllSingularityFees(address[],address[],(uint256)[])"(
+    "withdrawAllMarketFees(address[],address[],(uint256)[])"(
       markets_: PromiseOrValue<string>[],
       swappers_: PromiseOrValue<string>[],
       swapData_: IPenrose.SwapDataStruct[],
@@ -2795,20 +2806,6 @@ export interface Penrose extends BaseContract {
   };
 
   populateTransaction: {
-    _depositFeesToYieldBox(
-      market: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      dexData: IPenrose.SwapDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "_depositFeesToYieldBox(address,address,(uint256))"(
-      market: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      dexData: IPenrose.SwapDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     _getMasterContractLength(
       array: IPenrose.MasterContractStruct[],
       overrides?: CallOverrides
@@ -2932,6 +2929,36 @@ export interface Penrose extends BaseContract {
     feeTo(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "feeTo()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    isBigBangMasterContractRegistered(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "isBigBangMasterContractRegistered(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    isMarketRegistered(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "isMarketRegistered(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    isSingularityMasterContractRegistered(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "isSingularityMasterContractRegistered(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     masterContractOf(
       arg0: PromiseOrValue<string>,
@@ -3153,28 +3180,14 @@ export interface Penrose extends BaseContract {
 
     "wethToken()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    withdrawAllBigBangFees(
+    withdrawAllMarketFees(
       markets_: PromiseOrValue<string>[],
       swappers_: PromiseOrValue<string>[],
       swapData_: IPenrose.SwapDataStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "withdrawAllBigBangFees(address[],address[],(uint256)[])"(
-      markets_: PromiseOrValue<string>[],
-      swappers_: PromiseOrValue<string>[],
-      swapData_: IPenrose.SwapDataStruct[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    withdrawAllSingularityFees(
-      markets_: PromiseOrValue<string>[],
-      swappers_: PromiseOrValue<string>[],
-      swapData_: IPenrose.SwapDataStruct[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "withdrawAllSingularityFees(address[],address[],(uint256)[])"(
+    "withdrawAllMarketFees(address[],address[],(uint256)[])"(
       markets_: PromiseOrValue<string>[],
       swappers_: PromiseOrValue<string>[],
       swapData_: IPenrose.SwapDataStruct[],
