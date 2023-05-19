@@ -1339,11 +1339,6 @@ const _abi = [
             name: "zroPaymentAddress",
             type: "address",
           },
-          {
-            internalType: "bool",
-            name: "strategyDeposit",
-            type: "bool",
-          },
         ],
         internalType: "struct BaseOFT.SendOptions",
         name: "options",

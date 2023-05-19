@@ -13,6 +13,18 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "CurveStableToUsdoBidder",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CurveStableToUsdoBidder__factory>;
+    getContractFactory(
+      name: "UniUsdoToWethBidder",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.UniUsdoToWethBidder__factory>;
+    getContractFactory(
+      name: "LiquidationQueue",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.LiquidationQueue__factory>;
+    getContractFactory(
       name: "MagnetarV2",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MagnetarV2__factory>;
@@ -45,6 +57,21 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapiocaDeployer__factory>;
 
+    getContractAt(
+      name: "CurveStableToUsdoBidder",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CurveStableToUsdoBidder>;
+    getContractAt(
+      name: "UniUsdoToWethBidder",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.UniUsdoToWethBidder>;
+    getContractAt(
+      name: "LiquidationQueue",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.LiquidationQueue>;
     getContractAt(
       name: "MagnetarV2",
       address: string,
