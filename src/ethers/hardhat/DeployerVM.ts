@@ -18,6 +18,7 @@ import {
 } from '../../typechain/tapioca-mocks';
 import { IOwnable__factory } from '../../typechain/tapioca-periphery/factories/IOwnable';
 import { getOverrideOptions } from '../../api/utils';
+import { TAPIOCA_PROJECTS_NAME } from '../../api/config';
 
 interface IDependentOn {
     deploymentName: string;
