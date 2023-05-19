@@ -794,6 +794,41 @@
             ],
             "421613": [
                 {
+                    "name": "TapiocaOFT-WETHMock",
+                    "address": "0x5f906Eec37403aE3c130731B517A81cf48aBFA58",
+                    "meta": {
+                        "isToftHost": true,
+                        "isMerged": false,
+                        "isToft": true,
+                        "args": [
+                            "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
+                            false,
+                            "0x37EeDBD70D8E288c424E8c51856bF8A4A11B527D",
+                            "0x87788372aa6aE4250106CCfDE52e033fC77B29dd",
+                            "WETHMock",
+                            "WETHM",
+                            18,
+                            421613
+                        ]
+                    }
+                },
+                {
+                    "name": "TapiocaWrapper",
+                    "address": "0xd2e59D783b660CFbAACA17696f5D9b9c2Ae9C688",
+                    "meta": {
+                        "args": [
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ],
+                        "salt": "0x2db9003993af9426b795d496c73615f32e888075ea8ba99888be7463ea3f43bd",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "TapiocaDeployer",
+                    "address": "0x6b0fa4feb4EA7790778e7c4AB97A51C9B4dE8d4c",
+                    "meta": {}
+                },
+                {
                     "name": "TapiocaOFT-AVAXMock",
                     "address": "0xbd6C8126BF75901e5cd4b0480dC0feee3a439f96",
                     "meta": {
@@ -830,41 +865,6 @@
                             80001
                         ]
                     }
-                },
-                {
-                    "name": "TapiocaOFT-WETHMock",
-                    "address": "0xD9c4D94172180407AD3D66d258844be0a3C931DF",
-                    "meta": {
-                        "isToftHost": true,
-                        "isMerged": false,
-                        "isToft": true,
-                        "args": [
-                            "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
-                            false,
-                            "0x6a7bf532A2CEc67c0aE41a81E9e62Bf24bEBa201",
-                            "0x42A18403984EBc754cE26F89Be574ee1A7c99482",
-                            "WETHMock",
-                            "WETHM",
-                            18,
-                            421613
-                        ]
-                    }
-                },
-                {
-                    "name": "TapiocaWrapper",
-                    "address": "0xaC0a16DC8d9eAcE14d29F4A7DB8D1A22cDe33755",
-                    "meta": {
-                        "args": [
-                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
-                        ],
-                        "salt": "0xf1b4af3f9333db7e143a5f4b24962028a28de9ded5ca310dd8d3bb52209cfbb4",
-                        "create2": true
-                    }
-                },
-                {
-                    "name": "TapiocaDeployer",
-                    "address": "0xCB0A47730DcdCa3d71f47ca04C01086A361600E1",
-                    "meta": {}
                 }
             ]
         },
