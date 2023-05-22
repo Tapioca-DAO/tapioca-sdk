@@ -42,6 +42,47 @@
                     "meta": {}
                 }
             ],
+            "80001": [
+                {
+                    "name": "YieldBoxURIBuilder",
+                    "address": "0xc4C4d3410B18230014702ebfC5CCcF08F03318ED",
+                    "meta": {
+                        "args": [],
+                        "salt": "0x8e46a2faff745c8a3879aa1b8fb8d538435650124700133d22f5fef1151b0259",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "YieldBox",
+                    "address": "0x5B1898822873c5231FC1b7AE06C6d7e16CBfc552",
+                    "meta": {
+                        "args": [
+                            "0x8314d89557b05B91f424eA6Af6E8a2f85E1e4090",
+                            "0xc4C4d3410B18230014702ebfC5CCcF08F03318ED"
+                        ],
+                        "salt": "0xbccc8f4a3d9a9c69942fbf146d1b4cf23a2aca5a75778e034486aa66b324a27d",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "USDO",
+                    "address": "0x60dC62025560C3d62e92aDBA45e627DF65D8D657",
+                    "meta": {
+                        "args": [
+                            "0xf69186dfBa60DdB133E91E9A4B5673624293d8F8",
+                            "0x5B1898822873c5231FC1b7AE06C6d7e16CBfc552",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ],
+                        "salt": "0xcba0e8c367af335a95ae8b577d5d406104ba9e766bf3c9bb9ae9ab96b471801a",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "TapiocaDeployer",
+                    "address": "0xc8B26d0C6728095bBD8b78049A864Bd12d7628Bd",
+                    "meta": {}
+                }
+            ],
             "421613": [
                 {
                     "name": "YieldBoxURIBuilder",
