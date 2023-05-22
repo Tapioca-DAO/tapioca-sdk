@@ -60,11 +60,17 @@ addDebugModeParams(
         'deployERC20Mock',
         'Deploys an ERC20 mock contract',
         deployERC20Mock__task,
-    ).addFlag('save', 'Save the deployment to the local database'),
+    )
+        .addFlag('save', 'Save the deployment to the local database')
+        .addOptionalParam('overrideOptions', 'Override options flag'),
 );
 
 addDebugModeParams(
-    task('deployMagnetar', 'Deploys Magnetar', deployMagnetar__task),
+    task(
+        'deployMagnetar',
+        'Deploys Magnetar',
+        deployMagnetar__task,
+    ).addOptionalParam('overrideOptions', 'Override options flag'),
 );
 
 addDebugModeParams(

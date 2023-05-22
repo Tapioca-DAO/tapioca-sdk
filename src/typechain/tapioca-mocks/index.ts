@@ -18,6 +18,7 @@ export type { StargateRouterETHMock } from "./StargateRouterETHMock";
 export type { StargateRouterMock } from "./StargateRouterMock";
 export type { TapiocaDeployerMock } from "./TapiocaDeployerMock";
 export type { UniswapV2RouterMock } from "./UniswapV2RouterMock";
+export type { UniswapV3SwapperMock } from "./UniswapV3SwapperMock";
 export type { VulnMultiSwapper } from "./VulnMultiSwapper";
 export type { YieldBoxMock } from "./YieldBoxMock";
 export * as factories from "./factories";
@@ -46,5 +47,6 @@ export { UniswapV2Pair__factory } from "./factories/uniswapv2/UniswapV2Pair__fac
 export type { UniswapV2Router02 } from "./uniswapv2/UniswapV2Router02";
 export { UniswapV2Router02__factory } from "./factories/uniswapv2/UniswapV2Router02__factory";
 export { UniswapV2RouterMock__factory } from "./factories/UniswapV2RouterMock__factory";
+export { UniswapV3SwapperMock__factory } from "./factories/UniswapV3SwapperMock__factory";
 export { VulnMultiSwapper__factory } from "./factories/VulnMultiSwapper__factory";
 export { YieldBoxMock__factory } from "./factories/YieldBoxMock__factory";

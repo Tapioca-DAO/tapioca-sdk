@@ -18,6 +18,7 @@ import {
 } from '../../typechain/tapioca-mocks';
 import { IOwnable__factory } from '../../typechain/tapioca-periphery/factories/IOwnable';
 import { getOverrideOptions } from '../../api/utils';
+import { TAPIOCA_PROJECTS_NAME } from '../../api/config';
 
 interface IDependentOn {
     deploymentName: string;
@@ -43,6 +44,7 @@ interface IConstructorOptions {
     tag?: string;
     multicall?: Multicall3;
     multisig?: MultisigMock;
+    overrideOptions?: boolean;
 }
 
 export interface IDeployerVMAdd<T extends ContractFactory>
@@ -201,7 +203,11 @@ export class DeployerVM {
             for (const call of calls) {
                 const tx = await this.multicall.multicall(
                     call,
-                    getOverrideOptions(String(this.hre.network.config.chainId)),
+                    this.options.overrideOptions
+                        ? getOverrideOptions(
+                              String(this.hre.network.config.chainId),
+                          )
+                        : {},
                 );
                 console.log(`[+] Execution batch hash: ${tx.hash}`);
                 await tx.wait(wait);
@@ -500,7 +506,11 @@ export class DeployerVM {
                     await this.hre.ethers.getSigners()
                 )[0],
             ).deploy(
-                getOverrideOptions(String(this.hre.network.config.chainId)),
+                this.options.overrideOptions
+                    ? getOverrideOptions(
+                          String(this.hre.network.config.chainId),
+                      )
+                    : {},
             );
 
             await multicall.deployTransaction.wait(3);
@@ -750,9 +760,11 @@ export class DeployerVM {
                         e.salt,
                         e.creationCode,
                         e.deploymentName,
-                        getOverrideOptions(
-                            String(this.hre.network.config.chainId),
-                        ),
+                        this.options.overrideOptions
+                            ? getOverrideOptions(
+                                  String(this.hre.network.config.chainId),
+                              )
+                            : {},
                     );
                 }),
         );
@@ -795,7 +807,11 @@ export class DeployerVM {
                     await this.hre.ethers.getSigners()
                 )[0],
             ).deploy(
-                getOverrideOptions(String(this.hre.network.config.chainId)),
+                this.options.overrideOptions
+                    ? getOverrideOptions(
+                          String(this.hre.network.config.chainId),
+                      )
+                    : {},
             );
 
             await tapiocaDeployer.deployTransaction.wait(3);

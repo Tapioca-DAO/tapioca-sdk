@@ -7,6 +7,7 @@ import { askForTag } from '../../utils';
 export const deployMagnetar__task = async (
     taskArgs: {
         debugMode?: boolean;
+        overrideOptions?: boolean;
     },
     hre: HardhatRuntimeEnvironment,
 ) => {
@@ -17,7 +18,9 @@ export const deployMagnetar__task = async (
 
     const magnetar = await Magnetar.deploy(
         signer.address,
-        getOverrideOptions(String(hre.network.config.chainId)),
+        taskArgs.overrideOptions
+            ? getOverrideOptions(String(hre.network.config.chainId))
+            : {},
     );
     await magnetar.deployTransaction.wait(3);
     console.log(`[+] Deployed at ${magnetar.address}`);
