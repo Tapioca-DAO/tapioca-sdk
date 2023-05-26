@@ -25,11 +25,13 @@ import type {
   TypedListener,
   OnEvent,
   PromiseOrValue,
-} from "../common";
+} from "../../common";
 
-export interface MarketInterface extends utils.Interface {
+export interface SGLLendingCommonInterface extends utils.Interface {
   functions: {
     "DOMAIN_SEPARATOR()": FunctionFragment;
+    "accrue()": FunctionFragment;
+    "accrueInfo()": FunctionFragment;
     "allowance(address,address)": FunctionFragment;
     "allowanceBorrow(address,address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
@@ -37,6 +39,7 @@ export interface MarketInterface extends utils.Interface {
     "asset()": FunctionFragment;
     "assetId()": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
+    "borrowOpeningFee()": FunctionFragment;
     "callerFee()": FunctionFragment;
     "claimOwnership()": FunctionFragment;
     "collateral()": FunctionFragment;
@@ -46,13 +49,19 @@ export interface MarketInterface extends utils.Interface {
     "computeLiquidatorReward(address,uint256)": FunctionFragment;
     "computeTVLInfo(address,uint256)": FunctionFragment;
     "conservator()": FunctionFragment;
+    "decimals()": FunctionFragment;
     "exchangeRate()": FunctionFragment;
     "liquidationBonusAmount()": FunctionFragment;
+    "liquidationMultiplier()": FunctionFragment;
+    "liquidationQueue()": FunctionFragment;
+    "lqCollateralizationRate()": FunctionFragment;
     "maxLiquidatorReward()": FunctionFragment;
     "minLiquidatorReward()": FunctionFragment;
+    "name()": FunctionFragment;
     "nonces(address)": FunctionFragment;
     "oracle()": FunctionFragment;
     "oracleData()": FunctionFragment;
+    "orderBookLiquidationMultiplier()": FunctionFragment;
     "owner()": FunctionFragment;
     "paused()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
@@ -69,6 +78,8 @@ export interface MarketInterface extends utils.Interface {
     "setMinLiquidatorReward(uint256)": FunctionFragment;
     "setOracleData(bytes)": FunctionFragment;
     "setProtocolFee(uint256)": FunctionFragment;
+    "symbol()": FunctionFragment;
+    "totalAsset()": FunctionFragment;
     "totalBorrow()": FunctionFragment;
     "totalBorrowCap()": FunctionFragment;
     "totalCollateralShare()": FunctionFragment;
@@ -87,6 +98,10 @@ export interface MarketInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "DOMAIN_SEPARATOR"
       | "DOMAIN_SEPARATOR()"
+      | "accrue"
+      | "accrue()"
+      | "accrueInfo"
+      | "accrueInfo()"
       | "allowance"
       | "allowance(address,address)"
       | "allowanceBorrow"
@@ -101,6 +116,8 @@ export interface MarketInterface extends utils.Interface {
       | "assetId()"
       | "balanceOf"
       | "balanceOf(address)"
+      | "borrowOpeningFee"
+      | "borrowOpeningFee()"
       | "callerFee"
       | "callerFee()"
       | "claimOwnership"
@@ -119,20 +136,32 @@ export interface MarketInterface extends utils.Interface {
       | "computeTVLInfo(address,uint256)"
       | "conservator"
       | "conservator()"
+      | "decimals"
+      | "decimals()"
       | "exchangeRate"
       | "exchangeRate()"
       | "liquidationBonusAmount"
       | "liquidationBonusAmount()"
+      | "liquidationMultiplier"
+      | "liquidationMultiplier()"
+      | "liquidationQueue"
+      | "liquidationQueue()"
+      | "lqCollateralizationRate"
+      | "lqCollateralizationRate()"
       | "maxLiquidatorReward"
       | "maxLiquidatorReward()"
       | "minLiquidatorReward"
       | "minLiquidatorReward()"
+      | "name"
+      | "name()"
       | "nonces"
       | "nonces(address)"
       | "oracle"
       | "oracle()"
       | "oracleData"
       | "oracleData()"
+      | "orderBookLiquidationMultiplier"
+      | "orderBookLiquidationMultiplier()"
       | "owner"
       | "owner()"
       | "paused"
@@ -165,6 +194,10 @@ export interface MarketInterface extends utils.Interface {
       | "setOracleData(bytes)"
       | "setProtocolFee"
       | "setProtocolFee(uint256)"
+      | "symbol"
+      | "symbol()"
+      | "totalAsset"
+      | "totalAsset()"
       | "totalBorrow"
       | "totalBorrow()"
       | "totalBorrowCap"
@@ -197,6 +230,16 @@ export interface MarketInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "DOMAIN_SEPARATOR()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "accrue", values?: undefined): string;
+  encodeFunctionData(functionFragment: "accrue()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "accrueInfo",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "accrueInfo()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -242,6 +285,14 @@ export interface MarketInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "balanceOf(address)",
     values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "borrowOpeningFee",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "borrowOpeningFee()",
+    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "callerFee", values?: undefined): string;
   encodeFunctionData(
@@ -312,6 +363,11 @@ export interface MarketInterface extends utils.Interface {
     functionFragment: "conservator()",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "decimals()",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "exchangeRate",
     values?: undefined
@@ -326,6 +382,30 @@ export interface MarketInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "liquidationBonusAmount()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "liquidationMultiplier",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "liquidationMultiplier()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "liquidationQueue",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "liquidationQueue()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "lqCollateralizationRate",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "lqCollateralizationRate()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -344,6 +424,8 @@ export interface MarketInterface extends utils.Interface {
     functionFragment: "minLiquidatorReward()",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "name", values?: undefined): string;
+  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "nonces",
     values: [PromiseOrValue<string>]
@@ -360,6 +442,14 @@ export interface MarketInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "oracleData()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "orderBookLiquidationMultiplier",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "orderBookLiquidationMultiplier()",
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
@@ -504,6 +594,16 @@ export interface MarketInterface extends utils.Interface {
     functionFragment: "setProtocolFee(uint256)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
+  encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
+  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "totalAsset",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalAsset()",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "totalBorrow",
     values?: undefined
@@ -622,6 +722,13 @@ export interface MarketInterface extends utils.Interface {
     functionFragment: "DOMAIN_SEPARATOR()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "accrue", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "accrue()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "accrueInfo", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "accrueInfo()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "allowance(address,address)",
@@ -655,6 +762,14 @@ export interface MarketInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "balanceOf(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "borrowOpeningFee",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "borrowOpeningFee()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "callerFee", data: BytesLike): Result;
@@ -723,6 +838,8 @@ export interface MarketInterface extends utils.Interface {
     functionFragment: "conservator()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "exchangeRate",
     data: BytesLike
@@ -737,6 +854,30 @@ export interface MarketInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "liquidationBonusAmount()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "liquidationMultiplier",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "liquidationMultiplier()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "liquidationQueue",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "liquidationQueue()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "lqCollateralizationRate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "lqCollateralizationRate()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -755,6 +896,8 @@ export interface MarketInterface extends utils.Interface {
     functionFragment: "minLiquidatorReward()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "nonces(address)",
@@ -765,6 +908,14 @@ export interface MarketInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "oracleData", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "oracleData()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "orderBookLiquidationMultiplier",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "orderBookLiquidationMultiplier()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -874,6 +1025,13 @@ export interface MarketInterface extends utils.Interface {
     functionFragment: "setProtocolFee(uint256)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "totalAsset", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "totalAsset()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "totalBorrow",
     data: BytesLike
@@ -967,8 +1125,17 @@ export interface MarketInterface extends utils.Interface {
     "ApprovalBorrow(address,address,uint256)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)": EventFragment;
+    "LogAccrue(uint256,uint256,uint64,uint256)": EventFragment;
+    "LogAddAsset(address,address,uint256,uint256)": EventFragment;
+    "LogAddCollateral(address,address,uint256)": EventFragment;
+    "LogBorrow(address,address,uint256,uint256,uint256)": EventFragment;
     "LogBorrowCapUpdated(uint256,uint256)": EventFragment;
     "LogExchangeRate(uint256)": EventFragment;
+    "LogRemoveAsset(address,address,uint256,uint256)": EventFragment;
+    "LogRemoveCollateral(address,address,uint256)": EventFragment;
+    "LogRepay(address,address,uint256,uint256)": EventFragment;
+    "LogWithdrawFees(address,uint256)": EventFragment;
+    "LogYieldBoxFeesDeposit(uint256,uint256)": EventFragment;
     "OracleDataUpdated()": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "PausedUpdated(bool,bool)": EventFragment;
@@ -991,12 +1158,48 @@ export interface MarketInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "Liquidated(address,address[],uint256,uint256,uint256,uint256)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogAccrue"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LogAccrue(uint256,uint256,uint64,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogAddAsset"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LogAddAsset(address,address,uint256,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogAddCollateral"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LogAddCollateral(address,address,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogBorrow"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LogBorrow(address,address,uint256,uint256,uint256)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogBorrowCapUpdated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "LogBorrowCapUpdated(uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogExchangeRate"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogExchangeRate(uint256)"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogRemoveAsset"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LogRemoveAsset(address,address,uint256,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogRemoveCollateral"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LogRemoveCollateral(address,address,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogRepay"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LogRepay(address,address,uint256,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogWithdrawFees"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LogWithdrawFees(address,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogYieldBoxFeesDeposit"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LogYieldBoxFeesDeposit(uint256,uint256)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OracleDataUpdated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OracleDataUpdated()"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
@@ -1062,6 +1265,59 @@ export type LiquidatedEvent = TypedEvent<
 
 export type LiquidatedEventFilter = TypedEventFilter<LiquidatedEvent>;
 
+export interface LogAccrueEventObject {
+  accruedAmount: BigNumber;
+  feeFraction: BigNumber;
+  rate: BigNumber;
+  utilization: BigNumber;
+}
+export type LogAccrueEvent = TypedEvent<
+  [BigNumber, BigNumber, BigNumber, BigNumber],
+  LogAccrueEventObject
+>;
+
+export type LogAccrueEventFilter = TypedEventFilter<LogAccrueEvent>;
+
+export interface LogAddAssetEventObject {
+  from: string;
+  to: string;
+  share: BigNumber;
+  fraction: BigNumber;
+}
+export type LogAddAssetEvent = TypedEvent<
+  [string, string, BigNumber, BigNumber],
+  LogAddAssetEventObject
+>;
+
+export type LogAddAssetEventFilter = TypedEventFilter<LogAddAssetEvent>;
+
+export interface LogAddCollateralEventObject {
+  from: string;
+  to: string;
+  share: BigNumber;
+}
+export type LogAddCollateralEvent = TypedEvent<
+  [string, string, BigNumber],
+  LogAddCollateralEventObject
+>;
+
+export type LogAddCollateralEventFilter =
+  TypedEventFilter<LogAddCollateralEvent>;
+
+export interface LogBorrowEventObject {
+  from: string;
+  to: string;
+  amount: BigNumber;
+  feeAmount: BigNumber;
+  part: BigNumber;
+}
+export type LogBorrowEvent = TypedEvent<
+  [string, string, BigNumber, BigNumber, BigNumber],
+  LogBorrowEventObject
+>;
+
+export type LogBorrowEventFilter = TypedEventFilter<LogBorrowEvent>;
+
 export interface LogBorrowCapUpdatedEventObject {
   _oldVal: BigNumber;
   _newVal: BigNumber;
@@ -1083,6 +1339,68 @@ export type LogExchangeRateEvent = TypedEvent<
 >;
 
 export type LogExchangeRateEventFilter = TypedEventFilter<LogExchangeRateEvent>;
+
+export interface LogRemoveAssetEventObject {
+  from: string;
+  to: string;
+  share: BigNumber;
+  fraction: BigNumber;
+}
+export type LogRemoveAssetEvent = TypedEvent<
+  [string, string, BigNumber, BigNumber],
+  LogRemoveAssetEventObject
+>;
+
+export type LogRemoveAssetEventFilter = TypedEventFilter<LogRemoveAssetEvent>;
+
+export interface LogRemoveCollateralEventObject {
+  from: string;
+  to: string;
+  share: BigNumber;
+}
+export type LogRemoveCollateralEvent = TypedEvent<
+  [string, string, BigNumber],
+  LogRemoveCollateralEventObject
+>;
+
+export type LogRemoveCollateralEventFilter =
+  TypedEventFilter<LogRemoveCollateralEvent>;
+
+export interface LogRepayEventObject {
+  from: string;
+  to: string;
+  amount: BigNumber;
+  part: BigNumber;
+}
+export type LogRepayEvent = TypedEvent<
+  [string, string, BigNumber, BigNumber],
+  LogRepayEventObject
+>;
+
+export type LogRepayEventFilter = TypedEventFilter<LogRepayEvent>;
+
+export interface LogWithdrawFeesEventObject {
+  feeTo: string;
+  feesEarnedFraction: BigNumber;
+}
+export type LogWithdrawFeesEvent = TypedEvent<
+  [string, BigNumber],
+  LogWithdrawFeesEventObject
+>;
+
+export type LogWithdrawFeesEventFilter = TypedEventFilter<LogWithdrawFeesEvent>;
+
+export interface LogYieldBoxFeesDepositEventObject {
+  feeShares: BigNumber;
+  ethAmount: BigNumber;
+}
+export type LogYieldBoxFeesDepositEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  LogYieldBoxFeesDepositEventObject
+>;
+
+export type LogYieldBoxFeesDepositEventFilter =
+  TypedEventFilter<LogYieldBoxFeesDepositEvent>;
 
 export interface OracleDataUpdatedEventObject {}
 export type OracleDataUpdatedEvent = TypedEvent<
@@ -1128,14 +1446,14 @@ export type TransferEvent = TypedEvent<
 
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 
-export interface Market extends BaseContract {
-  contractName: "Market";
+export interface SGLLendingCommon extends BaseContract {
+  contractName: "SGLLendingCommon";
 
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: MarketInterface;
+  interface: SGLLendingCommonInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -1160,6 +1478,34 @@ export interface Market extends BaseContract {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<[string]>;
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<[string]>;
+
+    accrue(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "accrue()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    accrueInfo(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber] & {
+        interestPerSecond: BigNumber;
+        lastAccrued: BigNumber;
+        feesEarnedFraction: BigNumber;
+      }
+    >;
+
+    "accrueInfo()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber] & {
+        interestPerSecond: BigNumber;
+        lastAccrued: BigNumber;
+        feesEarnedFraction: BigNumber;
+      }
+    >;
 
     allowance(
       arg0: PromiseOrValue<string>,
@@ -1226,6 +1572,10 @@ export interface Market extends BaseContract {
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
+
+    borrowOpeningFee(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "borrowOpeningFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     callerFee(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -1303,6 +1653,10 @@ export interface Market extends BaseContract {
 
     "conservator()"(overrides?: CallOverrides): Promise<[string]>;
 
+    decimals(overrides?: CallOverrides): Promise<[number]>;
+
+    "decimals()"(overrides?: CallOverrides): Promise<[number]>;
+
     exchangeRate(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "exchangeRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -1311,6 +1665,20 @@ export interface Market extends BaseContract {
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    liquidationMultiplier(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "liquidationMultiplier()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    liquidationQueue(overrides?: CallOverrides): Promise<[string]>;
+
+    "liquidationQueue()"(overrides?: CallOverrides): Promise<[string]>;
+
+    lqCollateralizationRate(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "lqCollateralizationRate()"(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     maxLiquidatorReward(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "maxLiquidatorReward()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -1318,6 +1686,10 @@ export interface Market extends BaseContract {
     minLiquidatorReward(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "minLiquidatorReward()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    name(overrides?: CallOverrides): Promise<[string]>;
+
+    "name()"(overrides?: CallOverrides): Promise<[string]>;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -1336,6 +1708,14 @@ export interface Market extends BaseContract {
     oracleData(overrides?: CallOverrides): Promise<[string]>;
 
     "oracleData()"(overrides?: CallOverrides): Promise<[string]>;
+
+    orderBookLiquidationMultiplier(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "orderBookLiquidationMultiplier()"(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -1491,6 +1871,22 @@ export interface Market extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    symbol(overrides?: CallOverrides): Promise<[string]>;
+
+    "symbol()"(overrides?: CallOverrides): Promise<[string]>;
+
+    totalAsset(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
+    >;
+
+    "totalAsset()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
+    >;
+
     totalBorrow(
       overrides?: CallOverrides
     ): Promise<
@@ -1602,6 +1998,34 @@ export interface Market extends BaseContract {
 
   "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
 
+  accrue(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "accrue()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  accrueInfo(
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber, BigNumber] & {
+      interestPerSecond: BigNumber;
+      lastAccrued: BigNumber;
+      feesEarnedFraction: BigNumber;
+    }
+  >;
+
+  "accrueInfo()"(
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber, BigNumber] & {
+      interestPerSecond: BigNumber;
+      lastAccrued: BigNumber;
+      feesEarnedFraction: BigNumber;
+    }
+  >;
+
   allowance(
     arg0: PromiseOrValue<string>,
     arg1: PromiseOrValue<string>,
@@ -1667,6 +2091,10 @@ export interface Market extends BaseContract {
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
+
+  borrowOpeningFee(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "borrowOpeningFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   callerFee(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1744,6 +2172,10 @@ export interface Market extends BaseContract {
 
   "conservator()"(overrides?: CallOverrides): Promise<string>;
 
+  decimals(overrides?: CallOverrides): Promise<number>;
+
+  "decimals()"(overrides?: CallOverrides): Promise<number>;
+
   exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
 
   "exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1752,6 +2184,18 @@ export interface Market extends BaseContract {
 
   "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  liquidationQueue(overrides?: CallOverrides): Promise<string>;
+
+  "liquidationQueue()"(overrides?: CallOverrides): Promise<string>;
+
+  lqCollateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "lqCollateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   maxLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
 
   "maxLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1759,6 +2203,10 @@ export interface Market extends BaseContract {
   minLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
 
   "minLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  name(overrides?: CallOverrides): Promise<string>;
+
+  "name()"(overrides?: CallOverrides): Promise<string>;
 
   nonces(
     owner: PromiseOrValue<string>,
@@ -1777,6 +2225,12 @@ export interface Market extends BaseContract {
   oracleData(overrides?: CallOverrides): Promise<string>;
 
   "oracleData()"(overrides?: CallOverrides): Promise<string>;
+
+  orderBookLiquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "orderBookLiquidationMultiplier()"(
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -1932,6 +2386,18 @@ export interface Market extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  symbol(overrides?: CallOverrides): Promise<string>;
+
+  "symbol()"(overrides?: CallOverrides): Promise<string>;
+
+  totalAsset(
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }>;
+
+  "totalAsset()"(
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }>;
+
   totalBorrow(
     overrides?: CallOverrides
   ): Promise<[BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }>;
@@ -2039,6 +2505,30 @@ export interface Market extends BaseContract {
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
 
+    accrue(overrides?: CallOverrides): Promise<void>;
+
+    "accrue()"(overrides?: CallOverrides): Promise<void>;
+
+    accrueInfo(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber] & {
+        interestPerSecond: BigNumber;
+        lastAccrued: BigNumber;
+        feesEarnedFraction: BigNumber;
+      }
+    >;
+
+    "accrueInfo()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber] & {
+        interestPerSecond: BigNumber;
+        lastAccrued: BigNumber;
+        feesEarnedFraction: BigNumber;
+      }
+    >;
+
     allowance(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
@@ -2104,6 +2594,10 @@ export interface Market extends BaseContract {
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    borrowOpeningFee(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "borrowOpeningFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     callerFee(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2177,6 +2671,10 @@ export interface Market extends BaseContract {
 
     "conservator()"(overrides?: CallOverrides): Promise<string>;
 
+    decimals(overrides?: CallOverrides): Promise<number>;
+
+    "decimals()"(overrides?: CallOverrides): Promise<number>;
+
     exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2185,6 +2683,18 @@ export interface Market extends BaseContract {
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    liquidationQueue(overrides?: CallOverrides): Promise<string>;
+
+    "liquidationQueue()"(overrides?: CallOverrides): Promise<string>;
+
+    lqCollateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "lqCollateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     maxLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
 
     "maxLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2192,6 +2702,10 @@ export interface Market extends BaseContract {
     minLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
 
     "minLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    name(overrides?: CallOverrides): Promise<string>;
+
+    "name()"(overrides?: CallOverrides): Promise<string>;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -2210,6 +2724,14 @@ export interface Market extends BaseContract {
     oracleData(overrides?: CallOverrides): Promise<string>;
 
     "oracleData()"(overrides?: CallOverrides): Promise<string>;
+
+    orderBookLiquidationMultiplier(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "orderBookLiquidationMultiplier()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -2364,6 +2886,22 @@ export interface Market extends BaseContract {
       _val: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    symbol(overrides?: CallOverrides): Promise<string>;
+
+    "symbol()"(overrides?: CallOverrides): Promise<string>;
+
+    totalAsset(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
+    >;
+
+    "totalAsset()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
+    >;
 
     totalBorrow(
       overrides?: CallOverrides
@@ -2521,6 +3059,58 @@ export interface Market extends BaseContract {
       collateralShareRemoved?: null
     ): LiquidatedEventFilter;
 
+    "LogAccrue(uint256,uint256,uint64,uint256)"(
+      accruedAmount?: null,
+      feeFraction?: null,
+      rate?: null,
+      utilization?: null
+    ): LogAccrueEventFilter;
+    LogAccrue(
+      accruedAmount?: null,
+      feeFraction?: null,
+      rate?: null,
+      utilization?: null
+    ): LogAccrueEventFilter;
+
+    "LogAddAsset(address,address,uint256,uint256)"(
+      from?: PromiseOrValue<string> | null,
+      to?: PromiseOrValue<string> | null,
+      share?: null,
+      fraction?: null
+    ): LogAddAssetEventFilter;
+    LogAddAsset(
+      from?: PromiseOrValue<string> | null,
+      to?: PromiseOrValue<string> | null,
+      share?: null,
+      fraction?: null
+    ): LogAddAssetEventFilter;
+
+    "LogAddCollateral(address,address,uint256)"(
+      from?: PromiseOrValue<string> | null,
+      to?: PromiseOrValue<string> | null,
+      share?: null
+    ): LogAddCollateralEventFilter;
+    LogAddCollateral(
+      from?: PromiseOrValue<string> | null,
+      to?: PromiseOrValue<string> | null,
+      share?: null
+    ): LogAddCollateralEventFilter;
+
+    "LogBorrow(address,address,uint256,uint256,uint256)"(
+      from?: PromiseOrValue<string> | null,
+      to?: PromiseOrValue<string> | null,
+      amount?: null,
+      feeAmount?: null,
+      part?: null
+    ): LogBorrowEventFilter;
+    LogBorrow(
+      from?: PromiseOrValue<string> | null,
+      to?: PromiseOrValue<string> | null,
+      amount?: null,
+      feeAmount?: null,
+      part?: null
+    ): LogBorrowEventFilter;
+
     "LogBorrowCapUpdated(uint256,uint256)"(
       _oldVal?: null,
       _newVal?: null
@@ -2532,6 +3122,61 @@ export interface Market extends BaseContract {
 
     "LogExchangeRate(uint256)"(rate?: null): LogExchangeRateEventFilter;
     LogExchangeRate(rate?: null): LogExchangeRateEventFilter;
+
+    "LogRemoveAsset(address,address,uint256,uint256)"(
+      from?: PromiseOrValue<string> | null,
+      to?: PromiseOrValue<string> | null,
+      share?: null,
+      fraction?: null
+    ): LogRemoveAssetEventFilter;
+    LogRemoveAsset(
+      from?: PromiseOrValue<string> | null,
+      to?: PromiseOrValue<string> | null,
+      share?: null,
+      fraction?: null
+    ): LogRemoveAssetEventFilter;
+
+    "LogRemoveCollateral(address,address,uint256)"(
+      from?: PromiseOrValue<string> | null,
+      to?: PromiseOrValue<string> | null,
+      share?: null
+    ): LogRemoveCollateralEventFilter;
+    LogRemoveCollateral(
+      from?: PromiseOrValue<string> | null,
+      to?: PromiseOrValue<string> | null,
+      share?: null
+    ): LogRemoveCollateralEventFilter;
+
+    "LogRepay(address,address,uint256,uint256)"(
+      from?: PromiseOrValue<string> | null,
+      to?: PromiseOrValue<string> | null,
+      amount?: null,
+      part?: null
+    ): LogRepayEventFilter;
+    LogRepay(
+      from?: PromiseOrValue<string> | null,
+      to?: PromiseOrValue<string> | null,
+      amount?: null,
+      part?: null
+    ): LogRepayEventFilter;
+
+    "LogWithdrawFees(address,uint256)"(
+      feeTo?: PromiseOrValue<string> | null,
+      feesEarnedFraction?: null
+    ): LogWithdrawFeesEventFilter;
+    LogWithdrawFees(
+      feeTo?: PromiseOrValue<string> | null,
+      feesEarnedFraction?: null
+    ): LogWithdrawFeesEventFilter;
+
+    "LogYieldBoxFeesDeposit(uint256,uint256)"(
+      feeShares?: null,
+      ethAmount?: null
+    ): LogYieldBoxFeesDepositEventFilter;
+    LogYieldBoxFeesDeposit(
+      feeShares?: null,
+      ethAmount?: null
+    ): LogYieldBoxFeesDepositEventFilter;
 
     "OracleDataUpdated()"(): OracleDataUpdatedEventFilter;
     OracleDataUpdated(): OracleDataUpdatedEventFilter;
@@ -2567,6 +3212,18 @@ export interface Market extends BaseContract {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<BigNumber>;
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    accrue(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "accrue()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    accrueInfo(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "accrueInfo()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     allowance(
       arg0: PromiseOrValue<string>,
@@ -2634,6 +3291,10 @@ export interface Market extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    borrowOpeningFee(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "borrowOpeningFee()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     callerFee(overrides?: CallOverrides): Promise<BigNumber>;
 
     "callerFee()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2698,6 +3359,10 @@ export interface Market extends BaseContract {
 
     "conservator()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    decimals(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2706,6 +3371,18 @@ export interface Market extends BaseContract {
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    liquidationQueue(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "liquidationQueue()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    lqCollateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "lqCollateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     maxLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
 
     "maxLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2713,6 +3390,10 @@ export interface Market extends BaseContract {
     minLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
 
     "minLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    name(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "name()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -2731,6 +3412,14 @@ export interface Market extends BaseContract {
     oracleData(overrides?: CallOverrides): Promise<BigNumber>;
 
     "oracleData()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    orderBookLiquidationMultiplier(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "orderBookLiquidationMultiplier()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2886,6 +3575,14 @@ export interface Market extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    symbol(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "symbol()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    totalAsset(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "totalAsset()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     totalBorrow(overrides?: CallOverrides): Promise<BigNumber>;
 
     "totalBorrow()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2992,6 +3689,18 @@ export interface Market extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    accrue(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "accrue()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    accrueInfo(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "accrueInfo()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     allowance(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
@@ -3055,6 +3764,12 @@ export interface Market extends BaseContract {
 
     "balanceOf(address)"(
       arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    borrowOpeningFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "borrowOpeningFee()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -3126,6 +3841,10 @@ export interface Market extends BaseContract {
 
     "conservator()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     exchangeRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "exchangeRate()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -3135,6 +3854,28 @@ export interface Market extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "liquidationBonusAmount()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    liquidationMultiplier(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "liquidationMultiplier()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    liquidationQueue(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "liquidationQueue()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    lqCollateralizationRate(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "lqCollateralizationRate()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -3154,6 +3895,10 @@ export interface Market extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     nonces(
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -3171,6 +3916,14 @@ export interface Market extends BaseContract {
     oracleData(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "oracleData()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    orderBookLiquidationMultiplier(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "orderBookLiquidationMultiplier()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -3325,6 +4078,14 @@ export interface Market extends BaseContract {
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "symbol()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    totalAsset(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "totalAsset()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     totalBorrow(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

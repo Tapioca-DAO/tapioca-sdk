@@ -32,7 +32,6 @@ export interface SGLCommonInterface extends utils.Interface {
     "DOMAIN_SEPARATOR()": FunctionFragment;
     "accrue()": FunctionFragment;
     "accrueInfo()": FunctionFragment;
-    "addAsset(address,address,bool,uint256)": FunctionFragment;
     "allowance(address,address)": FunctionFragment;
     "allowanceBorrow(address,address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
@@ -70,7 +69,6 @@ export interface SGLCommonInterface extends utils.Interface {
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "permitBorrow(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "protocolFee()": FunctionFragment;
-    "removeAsset(address,address,uint256)": FunctionFragment;
     "setBorrowCap(uint256)": FunctionFragment;
     "setCallerFee(uint256)": FunctionFragment;
     "setCollateralizationRate(uint256)": FunctionFragment;
@@ -104,8 +102,6 @@ export interface SGLCommonInterface extends utils.Interface {
       | "accrue()"
       | "accrueInfo"
       | "accrueInfo()"
-      | "addAsset"
-      | "addAsset(address,address,bool,uint256)"
       | "allowance"
       | "allowance(address,address)"
       | "allowanceBorrow"
@@ -180,8 +176,6 @@ export interface SGLCommonInterface extends utils.Interface {
       | "permitBorrow(address,address,uint256,uint256,uint8,bytes32,bytes32)"
       | "protocolFee"
       | "protocolFee()"
-      | "removeAsset"
-      | "removeAsset(address,address,uint256)"
       | "setBorrowCap"
       | "setBorrowCap(uint256)"
       | "setCallerFee"
@@ -247,24 +241,6 @@ export interface SGLCommonInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "accrueInfo()",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "addAsset",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "addAsset(address,address,bool,uint256)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<BigNumberish>
-    ]
   ): string;
   encodeFunctionData(
     functionFragment: "allowance",
@@ -547,22 +523,6 @@ export interface SGLCommonInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "removeAsset",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "removeAsset(address,address,uint256)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "setBorrowCap",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
@@ -767,11 +727,6 @@ export interface SGLCommonInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "accrueInfo", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "accrueInfo()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "addAsset", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "addAsset(address,address,bool,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
@@ -999,14 +954,6 @@ export interface SGLCommonInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "removeAsset",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "removeAsset(address,address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "setBorrowCap",
     data: BytesLike
   ): Result;
@@ -1177,6 +1124,7 @@ export interface SGLCommonInterface extends utils.Interface {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalBorrow(address,address,uint256)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
+    "Liquidated(address,address[],uint256,uint256,uint256,uint256)": EventFragment;
     "LogAccrue(uint256,uint256,uint64,uint256)": EventFragment;
     "LogAddAsset(address,address,uint256,uint256)": EventFragment;
     "LogAddCollateral(address,address,uint256)": EventFragment;
@@ -1205,6 +1153,10 @@ export interface SGLCommonInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "ConservatorUpdated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ConservatorUpdated(address,address)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Liquidated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "Liquidated(address,address[],uint256,uint256,uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogAccrue"): EventFragment;
   getEvent(
@@ -1297,6 +1249,21 @@ export type ConservatorUpdatedEvent = TypedEvent<
 
 export type ConservatorUpdatedEventFilter =
   TypedEventFilter<ConservatorUpdatedEvent>;
+
+export interface LiquidatedEventObject {
+  liquidator: string;
+  users: string[];
+  liquidatorReward: BigNumber;
+  protocolReward: BigNumber;
+  repayedAmount: BigNumber;
+  collateralShareRemoved: BigNumber;
+}
+export type LiquidatedEvent = TypedEvent<
+  [string, string[], BigNumber, BigNumber, BigNumber, BigNumber],
+  LiquidatedEventObject
+>;
+
+export type LiquidatedEventFilter = TypedEventFilter<LiquidatedEvent>;
 
 export interface LogAccrueEventObject {
   accruedAmount: BigNumber;
@@ -1539,22 +1506,6 @@ export interface SGLCommon extends BaseContract {
         feesEarnedFraction: BigNumber;
       }
     >;
-
-    addAsset(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "addAsset(address,address,bool,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
 
     allowance(
       arg0: PromiseOrValue<string>,
@@ -1830,20 +1781,6 @@ export interface SGLCommon extends BaseContract {
 
     "protocolFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    removeAsset(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      fraction: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "removeAsset(address,address,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      fraction: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     setBorrowCap(
       _cap: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2088,22 +2025,6 @@ export interface SGLCommon extends BaseContract {
       feesEarnedFraction: BigNumber;
     }
   >;
-
-  addAsset(
-    from: PromiseOrValue<string>,
-    to: PromiseOrValue<string>,
-    skim: PromiseOrValue<boolean>,
-    share: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "addAsset(address,address,bool,uint256)"(
-    from: PromiseOrValue<string>,
-    to: PromiseOrValue<string>,
-    skim: PromiseOrValue<boolean>,
-    share: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
 
   allowance(
     arg0: PromiseOrValue<string>,
@@ -2375,20 +2296,6 @@ export interface SGLCommon extends BaseContract {
 
   "protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-  removeAsset(
-    from: PromiseOrValue<string>,
-    to: PromiseOrValue<string>,
-    fraction: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "removeAsset(address,address,uint256)"(
-    from: PromiseOrValue<string>,
-    to: PromiseOrValue<string>,
-    fraction: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   setBorrowCap(
     _cap: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2621,22 +2528,6 @@ export interface SGLCommon extends BaseContract {
         feesEarnedFraction: BigNumber;
       }
     >;
-
-    addAsset(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "addAsset(address,address,bool,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
 
     allowance(
       arg0: PromiseOrValue<string>,
@@ -2906,20 +2797,6 @@ export interface SGLCommon extends BaseContract {
 
     "protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    removeAsset(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      fraction: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "removeAsset(address,address,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      fraction: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     setBorrowCap(
       _cap: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -3165,6 +3042,23 @@ export interface SGLCommon extends BaseContract {
       _new?: PromiseOrValue<string> | null
     ): ConservatorUpdatedEventFilter;
 
+    "Liquidated(address,address[],uint256,uint256,uint256,uint256)"(
+      liquidator?: null,
+      users?: null,
+      liquidatorReward?: null,
+      protocolReward?: null,
+      repayedAmount?: null,
+      collateralShareRemoved?: null
+    ): LiquidatedEventFilter;
+    Liquidated(
+      liquidator?: null,
+      users?: null,
+      liquidatorReward?: null,
+      protocolReward?: null,
+      repayedAmount?: null,
+      collateralShareRemoved?: null
+    ): LiquidatedEventFilter;
+
     "LogAccrue(uint256,uint256,uint64,uint256)"(
       accruedAmount?: null,
       feeFraction?: null,
@@ -3330,22 +3224,6 @@ export interface SGLCommon extends BaseContract {
     accrueInfo(overrides?: CallOverrides): Promise<BigNumber>;
 
     "accrueInfo()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    addAsset(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "addAsset(address,address,bool,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
 
     allowance(
       arg0: PromiseOrValue<string>,
@@ -3607,20 +3485,6 @@ export interface SGLCommon extends BaseContract {
 
     "protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    removeAsset(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      fraction: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "removeAsset(address,address,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      fraction: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     setBorrowCap(
       _cap: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -3836,22 +3700,6 @@ export interface SGLCommon extends BaseContract {
     accrueInfo(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "accrueInfo()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    addAsset(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "addAsset(address,address,bool,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
 
     allowance(
       arg0: PromiseOrValue<string>,
@@ -4140,20 +3988,6 @@ export interface SGLCommon extends BaseContract {
     protocolFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "protocolFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    removeAsset(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      fraction: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "removeAsset(address,address,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      fraction: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
 
     setBorrowCap(
       _cap: PromiseOrValue<BigNumberish>,

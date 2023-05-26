@@ -33,7 +33,7 @@ export interface SingularityInterface extends utils.Interface {
     "accrue()": FunctionFragment;
     "accrueInfo()": FunctionFragment;
     "addAsset(address,address,bool,uint256)": FunctionFragment;
-    "addCollateral(address,address,bool,uint256)": FunctionFragment;
+    "addCollateral(address,address,bool,uint256,uint256)": FunctionFragment;
     "allowance(address,address)": FunctionFragment;
     "allowanceBorrow(address,address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
@@ -42,12 +42,14 @@ export interface SingularityInterface extends utils.Interface {
     "assetId()": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "borrow(address,address,uint256)": FunctionFragment;
+    "borrowModule()": FunctionFragment;
     "borrowOpeningFee()": FunctionFragment;
     "buyCollateral(address,uint256,uint256,uint256,address,bytes)": FunctionFragment;
     "callerFee()": FunctionFragment;
     "claimOwnership()": FunctionFragment;
     "collateral()": FunctionFragment;
     "collateralId()": FunctionFragment;
+    "collateralModule()": FunctionFragment;
     "collateralizationRate()": FunctionFragment;
     "computeAllowedLendShare(uint256,uint256)": FunctionFragment;
     "computeClosingFactor(address,uint256)": FunctionFragment;
@@ -58,7 +60,7 @@ export interface SingularityInterface extends utils.Interface {
     "exchangeRate()": FunctionFragment;
     "execute(bytes[],bool)": FunctionFragment;
     "init(bytes)": FunctionFragment;
-    "lendingBorrowingModule()": FunctionFragment;
+    "leverageModule()": FunctionFragment;
     "liquidate(address[],uint256[],address,bytes,bytes)": FunctionFragment;
     "liquidationBonusAmount()": FunctionFragment;
     "liquidationModule()": FunctionFragment;
@@ -129,7 +131,7 @@ export interface SingularityInterface extends utils.Interface {
       | "addAsset"
       | "addAsset(address,address,bool,uint256)"
       | "addCollateral"
-      | "addCollateral(address,address,bool,uint256)"
+      | "addCollateral(address,address,bool,uint256,uint256)"
       | "allowance"
       | "allowance(address,address)"
       | "allowanceBorrow"
@@ -146,6 +148,8 @@ export interface SingularityInterface extends utils.Interface {
       | "balanceOf(address)"
       | "borrow"
       | "borrow(address,address,uint256)"
+      | "borrowModule"
+      | "borrowModule()"
       | "borrowOpeningFee"
       | "borrowOpeningFee()"
       | "buyCollateral"
@@ -158,6 +162,8 @@ export interface SingularityInterface extends utils.Interface {
       | "collateral()"
       | "collateralId"
       | "collateralId()"
+      | "collateralModule"
+      | "collateralModule()"
       | "collateralizationRate"
       | "collateralizationRate()"
       | "computeAllowedLendShare"
@@ -178,8 +184,8 @@ export interface SingularityInterface extends utils.Interface {
       | "execute(bytes[],bool)"
       | "init"
       | "init(bytes)"
-      | "lendingBorrowingModule"
-      | "lendingBorrowingModule()"
+      | "leverageModule"
+      | "leverageModule()"
       | "liquidate"
       | "liquidate(address[],uint256[],address,bytes,bytes)"
       | "liquidationBonusAmount"
@@ -338,15 +344,17 @@ export interface SingularityInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<boolean>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "addCollateral(address,address,bool,uint256)",
+    functionFragment: "addCollateral(address,address,bool,uint256,uint256)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<boolean>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>
     ]
   ): string;
@@ -411,6 +419,14 @@ export interface SingularityInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "borrowModule",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "borrowModule()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "borrowOpeningFee",
     values?: undefined
   ): string;
@@ -467,6 +483,14 @@ export interface SingularityInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "collateralId()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "collateralModule",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "collateralModule()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -547,11 +571,11 @@ export interface SingularityInterface extends utils.Interface {
     values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
-    functionFragment: "lendingBorrowingModule",
+    functionFragment: "leverageModule",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "lendingBorrowingModule()",
+    functionFragment: "leverageModule()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -1095,7 +1119,7 @@ export interface SingularityInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "addCollateral(address,address,bool,uint256)",
+    functionFragment: "addCollateral(address,address,bool,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
@@ -1139,6 +1163,14 @@ export interface SingularityInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "borrowModule",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "borrowModule()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "borrowOpeningFee",
     data: BytesLike
   ): Result;
@@ -1178,6 +1210,14 @@ export interface SingularityInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "collateralId()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "collateralModule",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "collateralModule()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1249,11 +1289,11 @@ export interface SingularityInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "lendingBorrowingModule",
+    functionFragment: "leverageModule",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "lendingBorrowingModule()",
+    functionFragment: "leverageModule()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "liquidate", data: BytesLike): Result;
@@ -1654,6 +1694,7 @@ export interface SingularityInterface extends utils.Interface {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalBorrow(address,address,uint256)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
+    "Liquidated(address,address[],uint256,uint256,uint256,uint256)": EventFragment;
     "LogAccrue(uint256,uint256,uint64,uint256)": EventFragment;
     "LogAddAsset(address,address,uint256,uint256)": EventFragment;
     "LogAddCollateral(address,address,uint256)": EventFragment;
@@ -1682,6 +1723,10 @@ export interface SingularityInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "ConservatorUpdated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ConservatorUpdated(address,address)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Liquidated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "Liquidated(address,address[],uint256,uint256,uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogAccrue"): EventFragment;
   getEvent(
@@ -1774,6 +1819,21 @@ export type ConservatorUpdatedEvent = TypedEvent<
 
 export type ConservatorUpdatedEventFilter =
   TypedEventFilter<ConservatorUpdatedEvent>;
+
+export interface LiquidatedEventObject {
+  liquidator: string;
+  users: string[];
+  liquidatorReward: BigNumber;
+  protocolReward: BigNumber;
+  repayedAmount: BigNumber;
+  collateralShareRemoved: BigNumber;
+}
+export type LiquidatedEvent = TypedEvent<
+  [string, string[], BigNumber, BigNumber, BigNumber, BigNumber],
+  LiquidatedEventObject
+>;
+
+export type LiquidatedEventFilter = TypedEventFilter<LiquidatedEvent>;
 
 export interface LogAccrueEventObject {
   accruedAmount: BigNumber;
@@ -2037,14 +2097,16 @@ export interface Singularity extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       skim: PromiseOrValue<boolean>,
+      amount: PromiseOrValue<BigNumberish>,
       share: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "addCollateral(address,address,bool,uint256)"(
+    "addCollateral(address,address,bool,uint256,uint256)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       skim: PromiseOrValue<boolean>,
+      amount: PromiseOrValue<BigNumberish>,
       share: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2129,6 +2191,10 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    borrowModule(overrides?: CallOverrides): Promise<[string]>;
+
+    "borrowModule()"(overrides?: CallOverrides): Promise<[string]>;
+
     borrowOpeningFee(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "borrowOpeningFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -2172,6 +2238,10 @@ export interface Singularity extends BaseContract {
     collateralId(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "collateralId()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    collateralModule(overrides?: CallOverrides): Promise<[string]>;
+
+    "collateralModule()"(overrides?: CallOverrides): Promise<[string]>;
 
     collateralizationRate(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -2271,9 +2341,9 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    lendingBorrowingModule(overrides?: CallOverrides): Promise<[string]>;
+    leverageModule(overrides?: CallOverrides): Promise<[string]>;
 
-    "lendingBorrowingModule()"(overrides?: CallOverrides): Promise<[string]>;
+    "leverageModule()"(overrides?: CallOverrides): Promise<[string]>;
 
     liquidate(
       users: PromiseOrValue<string>[],
@@ -2844,14 +2914,16 @@ export interface Singularity extends BaseContract {
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
     skim: PromiseOrValue<boolean>,
+    amount: PromiseOrValue<BigNumberish>,
     share: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "addCollateral(address,address,bool,uint256)"(
+  "addCollateral(address,address,bool,uint256,uint256)"(
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
     skim: PromiseOrValue<boolean>,
+    amount: PromiseOrValue<BigNumberish>,
     share: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -2936,6 +3008,10 @@ export interface Singularity extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  borrowModule(overrides?: CallOverrides): Promise<string>;
+
+  "borrowModule()"(overrides?: CallOverrides): Promise<string>;
+
   borrowOpeningFee(overrides?: CallOverrides): Promise<BigNumber>;
 
   "borrowOpeningFee()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2979,6 +3055,10 @@ export interface Singularity extends BaseContract {
   collateralId(overrides?: CallOverrides): Promise<BigNumber>;
 
   "collateralId()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  collateralModule(overrides?: CallOverrides): Promise<string>;
+
+  "collateralModule()"(overrides?: CallOverrides): Promise<string>;
 
   collateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3078,9 +3158,9 @@ export interface Singularity extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  lendingBorrowingModule(overrides?: CallOverrides): Promise<string>;
+  leverageModule(overrides?: CallOverrides): Promise<string>;
 
-  "lendingBorrowingModule()"(overrides?: CallOverrides): Promise<string>;
+  "leverageModule()"(overrides?: CallOverrides): Promise<string>;
 
   liquidate(
     users: PromiseOrValue<string>[],
@@ -3635,14 +3715,16 @@ export interface Singularity extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       skim: PromiseOrValue<boolean>,
+      amount: PromiseOrValue<BigNumberish>,
       share: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "addCollateral(address,address,bool,uint256)"(
+    "addCollateral(address,address,bool,uint256,uint256)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       skim: PromiseOrValue<boolean>,
+      amount: PromiseOrValue<BigNumberish>,
       share: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -3727,6 +3809,10 @@ export interface Singularity extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber] & { part: BigNumber; share: BigNumber }>;
 
+    borrowModule(overrides?: CallOverrides): Promise<string>;
+
+    "borrowModule()"(overrides?: CallOverrides): Promise<string>;
+
     borrowOpeningFee(overrides?: CallOverrides): Promise<BigNumber>;
 
     "borrowOpeningFee()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3766,6 +3852,10 @@ export interface Singularity extends BaseContract {
     collateralId(overrides?: CallOverrides): Promise<BigNumber>;
 
     "collateralId()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    collateralModule(overrides?: CallOverrides): Promise<string>;
+
+    "collateralModule()"(overrides?: CallOverrides): Promise<string>;
 
     collateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3869,9 +3959,9 @@ export interface Singularity extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    lendingBorrowingModule(overrides?: CallOverrides): Promise<string>;
+    leverageModule(overrides?: CallOverrides): Promise<string>;
 
-    "lendingBorrowingModule()"(overrides?: CallOverrides): Promise<string>;
+    "leverageModule()"(overrides?: CallOverrides): Promise<string>;
 
     liquidate(
       users: PromiseOrValue<string>[],
@@ -4416,6 +4506,23 @@ export interface Singularity extends BaseContract {
       _new?: PromiseOrValue<string> | null
     ): ConservatorUpdatedEventFilter;
 
+    "Liquidated(address,address[],uint256,uint256,uint256,uint256)"(
+      liquidator?: null,
+      users?: null,
+      liquidatorReward?: null,
+      protocolReward?: null,
+      repayedAmount?: null,
+      collateralShareRemoved?: null
+    ): LiquidatedEventFilter;
+    Liquidated(
+      liquidator?: null,
+      users?: null,
+      liquidatorReward?: null,
+      protocolReward?: null,
+      repayedAmount?: null,
+      collateralShareRemoved?: null
+    ): LiquidatedEventFilter;
+
     "LogAccrue(uint256,uint256,uint64,uint256)"(
       accruedAmount?: null,
       feeFraction?: null,
@@ -4602,14 +4709,16 @@ export interface Singularity extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       skim: PromiseOrValue<boolean>,
+      amount: PromiseOrValue<BigNumberish>,
       share: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "addCollateral(address,address,bool,uint256)"(
+    "addCollateral(address,address,bool,uint256,uint256)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       skim: PromiseOrValue<boolean>,
+      amount: PromiseOrValue<BigNumberish>,
       share: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -4694,6 +4803,10 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    borrowModule(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "borrowModule()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     borrowOpeningFee(overrides?: CallOverrides): Promise<BigNumber>;
 
     "borrowOpeningFee()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -4737,6 +4850,10 @@ export interface Singularity extends BaseContract {
     collateralId(overrides?: CallOverrides): Promise<BigNumber>;
 
     "collateralId()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    collateralModule(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "collateralModule()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     collateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -4824,9 +4941,9 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    lendingBorrowingModule(overrides?: CallOverrides): Promise<BigNumber>;
+    leverageModule(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "lendingBorrowingModule()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "leverageModule()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     liquidate(
       users: PromiseOrValue<string>[],
@@ -5366,14 +5483,16 @@ export interface Singularity extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       skim: PromiseOrValue<boolean>,
+      amount: PromiseOrValue<BigNumberish>,
       share: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "addCollateral(address,address,bool,uint256)"(
+    "addCollateral(address,address,bool,uint256,uint256)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       skim: PromiseOrValue<boolean>,
+      amount: PromiseOrValue<BigNumberish>,
       share: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -5458,6 +5577,10 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    borrowModule(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "borrowModule()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     borrowOpeningFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "borrowOpeningFee()"(
@@ -5503,6 +5626,12 @@ export interface Singularity extends BaseContract {
     collateralId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "collateralId()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    collateralModule(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "collateralModule()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     collateralizationRate(
       overrides?: CallOverrides
@@ -5594,11 +5723,9 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    lendingBorrowingModule(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    leverageModule(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "lendingBorrowingModule()"(
+    "leverageModule()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

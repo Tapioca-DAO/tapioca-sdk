@@ -25,13 +25,25 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MarketERC20__factory>;
     getContractFactory(
+      name: "SGLBorrow",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SGLBorrow__factory>;
+    getContractFactory(
+      name: "SGLCollateral",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SGLCollateral__factory>;
+    getContractFactory(
       name: "SGLCommon",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SGLCommon__factory>;
     getContractFactory(
-      name: "SGLLendingBorrowing",
+      name: "SGLLendingCommon",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.SGLLendingBorrowing__factory>;
+    ): Promise<Contracts.SGLLendingCommon__factory>;
+    getContractFactory(
+      name: "SGLLeverage",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SGLLeverage__factory>;
     getContractFactory(
       name: "SGLLiquidation",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -60,10 +72,6 @@ declare module "hardhat/types/runtime" {
       name: "USDO",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.USDO__factory>;
-    getContractFactory(
-      name: "USDOMocks",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.USDOMocks__factory>;
 
     getContractAt(
       name: "BigBang",
@@ -81,15 +89,30 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.MarketERC20>;
     getContractAt(
+      name: "SGLBorrow",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SGLBorrow>;
+    getContractAt(
+      name: "SGLCollateral",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SGLCollateral>;
+    getContractAt(
       name: "SGLCommon",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.SGLCommon>;
     getContractAt(
-      name: "SGLLendingBorrowing",
+      name: "SGLLendingCommon",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.SGLLendingBorrowing>;
+    ): Promise<Contracts.SGLLendingCommon>;
+    getContractAt(
+      name: "SGLLeverage",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SGLLeverage>;
     getContractAt(
       name: "SGLLiquidation",
       address: string,
@@ -125,11 +148,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.USDO>;
-    getContractAt(
-      name: "USDOMocks",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.USDOMocks>;
 
     // default types
     getContractFactory(

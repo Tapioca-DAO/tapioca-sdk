@@ -1117,6 +1117,7 @@ export interface SGLStorageInterface extends utils.Interface {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalBorrow(address,address,uint256)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
+    "Liquidated(address,address[],uint256,uint256,uint256,uint256)": EventFragment;
     "LogAccrue(uint256,uint256,uint64,uint256)": EventFragment;
     "LogAddAsset(address,address,uint256,uint256)": EventFragment;
     "LogAddCollateral(address,address,uint256)": EventFragment;
@@ -1145,6 +1146,10 @@ export interface SGLStorageInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "ConservatorUpdated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ConservatorUpdated(address,address)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Liquidated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "Liquidated(address,address[],uint256,uint256,uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogAccrue"): EventFragment;
   getEvent(
@@ -1237,6 +1242,21 @@ export type ConservatorUpdatedEvent = TypedEvent<
 
 export type ConservatorUpdatedEventFilter =
   TypedEventFilter<ConservatorUpdatedEvent>;
+
+export interface LiquidatedEventObject {
+  liquidator: string;
+  users: string[];
+  liquidatorReward: BigNumber;
+  protocolReward: BigNumber;
+  repayedAmount: BigNumber;
+  collateralShareRemoved: BigNumber;
+}
+export type LiquidatedEvent = TypedEvent<
+  [string, string[], BigNumber, BigNumber, BigNumber, BigNumber],
+  LiquidatedEventObject
+>;
+
+export type LiquidatedEventFilter = TypedEventFilter<LiquidatedEvent>;
 
 export interface LogAccrueEventObject {
   accruedAmount: BigNumber;
@@ -2994,6 +3014,23 @@ export interface SGLStorage extends BaseContract {
       old?: PromiseOrValue<string> | null,
       _new?: PromiseOrValue<string> | null
     ): ConservatorUpdatedEventFilter;
+
+    "Liquidated(address,address[],uint256,uint256,uint256,uint256)"(
+      liquidator?: null,
+      users?: null,
+      liquidatorReward?: null,
+      protocolReward?: null,
+      repayedAmount?: null,
+      collateralShareRemoved?: null
+    ): LiquidatedEventFilter;
+    Liquidated(
+      liquidator?: null,
+      users?: null,
+      liquidatorReward?: null,
+      protocolReward?: null,
+      repayedAmount?: null,
+      collateralShareRemoved?: null
+    ): LiquidatedEventFilter;
 
     "LogAccrue(uint256,uint256,uint64,uint256)"(
       accruedAmount?: null,
