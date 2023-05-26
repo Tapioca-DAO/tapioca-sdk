@@ -32,7 +32,7 @@ export interface BigBangInterface extends utils.Interface {
     "DOMAIN_SEPARATOR()": FunctionFragment;
     "accrue()": FunctionFragment;
     "accrueInfo()": FunctionFragment;
-    "addCollateral(address,address,bool,uint256)": FunctionFragment;
+    "addCollateral(address,address,bool,uint256,uint256)": FunctionFragment;
     "allowance(address,address)": FunctionFragment;
     "allowanceBorrow(address,address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
@@ -113,7 +113,7 @@ export interface BigBangInterface extends utils.Interface {
       | "accrueInfo"
       | "accrueInfo()"
       | "addCollateral"
-      | "addCollateral(address,address,bool,uint256)"
+      | "addCollateral(address,address,bool,uint256,uint256)"
       | "allowance"
       | "allowance(address,address)"
       | "allowanceBorrow"
@@ -278,15 +278,17 @@ export interface BigBangInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<boolean>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "addCollateral(address,address,bool,uint256)",
+    functionFragment: "addCollateral(address,address,bool,uint256,uint256)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<boolean>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>
     ]
   ): string;
@@ -902,7 +904,7 @@ export interface BigBangInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "addCollateral(address,address,bool,uint256)",
+    functionFragment: "addCollateral(address,address,bool,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
@@ -1372,6 +1374,7 @@ export interface BigBangInterface extends utils.Interface {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalBorrow(address,address,uint256)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
+    "Liquidated(address,address[],uint256,uint256,uint256,uint256)": EventFragment;
     "LogAccrue(uint256,uint64)": EventFragment;
     "LogAddCollateral(address,address,uint256)": EventFragment;
     "LogBorrow(address,address,uint256,uint256,uint256)": EventFragment;
@@ -1397,6 +1400,10 @@ export interface BigBangInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "ConservatorUpdated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ConservatorUpdated(address,address)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Liquidated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "Liquidated(address,address[],uint256,uint256,uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogAccrue"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogAccrue(uint256,uint64)"): EventFragment;
@@ -1475,6 +1482,21 @@ export type ConservatorUpdatedEvent = TypedEvent<
 
 export type ConservatorUpdatedEventFilter =
   TypedEventFilter<ConservatorUpdatedEvent>;
+
+export interface LiquidatedEventObject {
+  liquidator: string;
+  users: string[];
+  liquidatorReward: BigNumber;
+  protocolReward: BigNumber;
+  repayedAmount: BigNumber;
+  collateralShareRemoved: BigNumber;
+}
+export type LiquidatedEvent = TypedEvent<
+  [string, string[], BigNumber, BigNumber, BigNumber, BigNumber],
+  LiquidatedEventObject
+>;
+
+export type LiquidatedEventFilter = TypedEventFilter<LiquidatedEvent>;
 
 export interface LogAccrueEventObject {
   accruedAmount: BigNumber;
@@ -1674,14 +1696,16 @@ export interface BigBang extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       skim: PromiseOrValue<boolean>,
+      amount: PromiseOrValue<BigNumberish>,
       share: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "addCollateral(address,address,bool,uint256)"(
+    "addCollateral(address,address,bool,uint256,uint256)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       skim: PromiseOrValue<boolean>,
+      amount: PromiseOrValue<BigNumberish>,
       share: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2311,14 +2335,16 @@ export interface BigBang extends BaseContract {
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
     skim: PromiseOrValue<boolean>,
+    amount: PromiseOrValue<BigNumberish>,
     share: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "addCollateral(address,address,bool,uint256)"(
+  "addCollateral(address,address,bool,uint256,uint256)"(
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
     skim: PromiseOrValue<boolean>,
+    amount: PromiseOrValue<BigNumberish>,
     share: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -2938,14 +2964,16 @@ export interface BigBang extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       skim: PromiseOrValue<boolean>,
+      amount: PromiseOrValue<BigNumberish>,
       share: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "addCollateral(address,address,bool,uint256)"(
+    "addCollateral(address,address,bool,uint256,uint256)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       skim: PromiseOrValue<boolean>,
+      amount: PromiseOrValue<BigNumberish>,
       share: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -3577,6 +3605,23 @@ export interface BigBang extends BaseContract {
       _new?: PromiseOrValue<string> | null
     ): ConservatorUpdatedEventFilter;
 
+    "Liquidated(address,address[],uint256,uint256,uint256,uint256)"(
+      liquidator?: null,
+      users?: null,
+      liquidatorReward?: null,
+      protocolReward?: null,
+      repayedAmount?: null,
+      collateralShareRemoved?: null
+    ): LiquidatedEventFilter;
+    Liquidated(
+      liquidator?: null,
+      users?: null,
+      liquidatorReward?: null,
+      protocolReward?: null,
+      repayedAmount?: null,
+      collateralShareRemoved?: null
+    ): LiquidatedEventFilter;
+
     "LogAccrue(uint256,uint64)"(
       accruedAmount?: null,
       rate?: null
@@ -3702,14 +3747,16 @@ export interface BigBang extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       skim: PromiseOrValue<boolean>,
+      amount: PromiseOrValue<BigNumberish>,
       share: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "addCollateral(address,address,bool,uint256)"(
+    "addCollateral(address,address,bool,uint256,uint256)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       skim: PromiseOrValue<boolean>,
+      amount: PromiseOrValue<BigNumberish>,
       share: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -4312,14 +4359,16 @@ export interface BigBang extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       skim: PromiseOrValue<boolean>,
+      amount: PromiseOrValue<BigNumberish>,
       share: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "addCollateral(address,address,bool,uint256)"(
+    "addCollateral(address,address,bool,uint256,uint256)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       skim: PromiseOrValue<boolean>,
+      amount: PromiseOrValue<BigNumberish>,
       share: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
