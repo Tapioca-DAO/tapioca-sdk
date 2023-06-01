@@ -40,7 +40,7 @@ export const getChainBy = (
     getBy: TGET_CHAIN_BY_FILTER,
     value: keyof typeof SUPPORTED_CHAINS | string,
 ) => {
-    return _find(SUPPORTED_CHAINS, (e) => e[getBy] === value);
+    return _find(SUPPORTED_CHAINS, (e) => e[getBy] === String(value));
 };
 
 /**
