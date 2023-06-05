@@ -3,4 +3,3 @@
 /* eslint-disable */
 export type { BaseOFT } from "./BaseOFT";
 export type { USDO } from "./USDO";
-export type { USDOMocks } from "./USDOMocks";

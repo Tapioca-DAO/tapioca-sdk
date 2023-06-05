@@ -104,12 +104,10 @@ export interface USDOInterface extends utils.Interface {
   functions: {
     "DEFAULT_PAYLOAD_SIZE_LIMIT()": FunctionFragment;
     "DOMAIN_SEPARATOR()": FunctionFragment;
-    "MINT_WINDOW()": FunctionFragment;
     "NO_EXTRA_GAS()": FunctionFragment;
     "PT_SEND()": FunctionFragment;
     "PT_SEND_AND_CALL()": FunctionFragment;
     "PT_YB_SEND_SGL_LEND()": FunctionFragment;
-    "_owner()": FunctionFragment;
     "allowance(address,address)": FunctionFragment;
     "allowedBurner(uint256,address)": FunctionFragment;
     "allowedMinter(uint256,address)": FunctionFragment;
@@ -130,7 +128,6 @@ export interface USDOInterface extends utils.Interface {
     "flashLoan(address,address,uint256,bytes)": FunctionFragment;
     "flashMintFee()": FunctionFragment;
     "forceResumeReceive(uint16,bytes)": FunctionFragment;
-    "freeMint(uint256)": FunctionFragment;
     "getConfig(uint16,uint16,address,uint256)": FunctionFragment;
     "getTrustedRemoteAddress(uint16)": FunctionFragment;
     "increaseAllowance(address,uint256)": FunctionFragment;
@@ -141,8 +138,6 @@ export interface USDOInterface extends utils.Interface {
     "maxFlashMint()": FunctionFragment;
     "minDstGasLookup(uint16,uint16)": FunctionFragment;
     "mint(address,uint256)": FunctionFragment;
-    "mintLimit()": FunctionFragment;
-    "mintedAt(address)": FunctionFragment;
     "name()": FunctionFragment;
     "nonblockingLzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
     "nonces(address)": FunctionFragment;
@@ -162,7 +157,6 @@ export interface USDOInterface extends utils.Interface {
     "setFlashMintFee(uint256)": FunctionFragment;
     "setMaxFlashMintable(uint256)": FunctionFragment;
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
-    "setMintLimit(uint256)": FunctionFragment;
     "setMinterStatus(address,bool)": FunctionFragment;
     "setPayloadSizeLimit(uint16,uint256)": FunctionFragment;
     "setPrecrime(address)": FunctionFragment;
@@ -191,8 +185,6 @@ export interface USDOInterface extends utils.Interface {
       | "DEFAULT_PAYLOAD_SIZE_LIMIT()"
       | "DOMAIN_SEPARATOR"
       | "DOMAIN_SEPARATOR()"
-      | "MINT_WINDOW"
-      | "MINT_WINDOW()"
       | "NO_EXTRA_GAS"
       | "NO_EXTRA_GAS()"
       | "PT_SEND"
@@ -201,8 +193,6 @@ export interface USDOInterface extends utils.Interface {
       | "PT_SEND_AND_CALL()"
       | "PT_YB_SEND_SGL_LEND"
       | "PT_YB_SEND_SGL_LEND()"
-      | "_owner"
-      | "_owner()"
       | "allowance"
       | "allowance(address,address)"
       | "allowedBurner"
@@ -243,8 +233,6 @@ export interface USDOInterface extends utils.Interface {
       | "flashMintFee()"
       | "forceResumeReceive"
       | "forceResumeReceive(uint16,bytes)"
-      | "freeMint"
-      | "freeMint(uint256)"
       | "getConfig"
       | "getConfig(uint16,uint16,address,uint256)"
       | "getTrustedRemoteAddress"
@@ -265,10 +253,6 @@ export interface USDOInterface extends utils.Interface {
       | "minDstGasLookup(uint16,uint16)"
       | "mint"
       | "mint(address,uint256)"
-      | "mintLimit"
-      | "mintLimit()"
-      | "mintedAt"
-      | "mintedAt(address)"
       | "name"
       | "name()"
       | "nonblockingLzReceive"
@@ -307,8 +291,6 @@ export interface USDOInterface extends utils.Interface {
       | "setMaxFlashMintable(uint256)"
       | "setMinDstGas"
       | "setMinDstGas(uint16,uint16,uint256)"
-      | "setMintLimit"
-      | "setMintLimit(uint256)"
       | "setMinterStatus"
       | "setMinterStatus(address,bool)"
       | "setPayloadSizeLimit"
@@ -368,14 +350,6 @@ export interface USDOInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "MINT_WINDOW",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "MINT_WINDOW()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "NO_EXTRA_GAS",
     values?: undefined
   ): string;
@@ -401,8 +375,6 @@ export interface USDOInterface extends utils.Interface {
     functionFragment: "PT_YB_SEND_SGL_LEND()",
     values?: undefined
   ): string;
-  encodeFunctionData(functionFragment: "_owner", values?: undefined): string;
-  encodeFunctionData(functionFragment: "_owner()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "allowance",
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
@@ -633,14 +605,6 @@ export interface USDOInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
-    functionFragment: "freeMint",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "freeMint(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "getConfig",
     values: [
       PromiseOrValue<BigNumberish>,
@@ -739,19 +703,6 @@ export interface USDOInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "mint(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(functionFragment: "mintLimit", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "mintLimit()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "mintedAt",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "mintedAt(address)",
-    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(functionFragment: "name()", values?: undefined): string;
@@ -981,14 +932,6 @@ export interface USDOInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "setMintLimit",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setMintLimit(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "setMinterStatus",
     values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
   ): string;
@@ -1159,14 +1102,6 @@ export interface USDOInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "MINT_WINDOW",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "MINT_WINDOW()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "NO_EXTRA_GAS",
     data: BytesLike
   ): Result;
@@ -1192,8 +1127,6 @@ export interface USDOInterface extends utils.Interface {
     functionFragment: "PT_YB_SEND_SGL_LEND()",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "_owner", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "_owner()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "allowance(address,address)",
@@ -1327,11 +1260,6 @@ export interface USDOInterface extends utils.Interface {
     functionFragment: "forceResumeReceive(uint16,bytes)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "freeMint", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "freeMint(uint256)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "getConfig", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getConfig(uint16,uint16,address,uint256)",
@@ -1398,16 +1326,6 @@ export interface USDOInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "mint(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "mintLimit", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "mintLimit()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "mintedAt", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "mintedAt(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
@@ -1524,14 +1442,6 @@ export interface USDOInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setMinDstGas(uint16,uint16,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setMintLimit",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setMintLimit(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2103,10 +2013,6 @@ export interface USDO extends BaseContract {
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<[string]>;
 
-    MINT_WINDOW(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "MINT_WINDOW()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     NO_EXTRA_GAS(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "NO_EXTRA_GAS()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -2122,10 +2028,6 @@ export interface USDO extends BaseContract {
     PT_YB_SEND_SGL_LEND(overrides?: CallOverrides): Promise<[number]>;
 
     "PT_YB_SEND_SGL_LEND()"(overrides?: CallOverrides): Promise<[number]>;
-
-    _owner(overrides?: CallOverrides): Promise<[string]>;
-
-    "_owner()"(overrides?: CallOverrides): Promise<[string]>;
 
     allowance(
       owner: PromiseOrValue<string>,
@@ -2377,16 +2279,6 @@ export interface USDO extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    freeMint(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "freeMint(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     getConfig(
       _version: PromiseOrValue<BigNumberish>,
       _chainId: PromiseOrValue<BigNumberish>,
@@ -2494,20 +2386,6 @@ export interface USDO extends BaseContract {
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
-
-    mintLimit(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "mintLimit()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    mintedAt(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "mintedAt(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
 
     name(overrides?: CallOverrides): Promise<[string]>;
 
@@ -2739,16 +2617,6 @@ export interface USDO extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    setMintLimit(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setMintLimit(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     setMinterStatus(
       _for: PromiseOrValue<string>,
       _status: PromiseOrValue<boolean>,
@@ -2936,10 +2804,6 @@ export interface USDO extends BaseContract {
 
   "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
 
-  MINT_WINDOW(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "MINT_WINDOW()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   NO_EXTRA_GAS(overrides?: CallOverrides): Promise<BigNumber>;
 
   "NO_EXTRA_GAS()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2955,10 +2819,6 @@ export interface USDO extends BaseContract {
   PT_YB_SEND_SGL_LEND(overrides?: CallOverrides): Promise<number>;
 
   "PT_YB_SEND_SGL_LEND()"(overrides?: CallOverrides): Promise<number>;
-
-  _owner(overrides?: CallOverrides): Promise<string>;
-
-  "_owner()"(overrides?: CallOverrides): Promise<string>;
 
   allowance(
     owner: PromiseOrValue<string>,
@@ -3210,16 +3070,6 @@ export interface USDO extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  freeMint(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "freeMint(uint256)"(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   getConfig(
     _version: PromiseOrValue<BigNumberish>,
     _chainId: PromiseOrValue<BigNumberish>,
@@ -3327,20 +3177,6 @@ export interface USDO extends BaseContract {
     _amount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
-
-  mintLimit(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "mintLimit()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  mintedAt(
-    arg0: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "mintedAt(address)"(
-    arg0: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
 
   name(overrides?: CallOverrides): Promise<string>;
 
@@ -3572,16 +3408,6 @@ export interface USDO extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  setMintLimit(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setMintLimit(uint256)"(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   setMinterStatus(
     _for: PromiseOrValue<string>,
     _status: PromiseOrValue<boolean>,
@@ -3771,10 +3597,6 @@ export interface USDO extends BaseContract {
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
 
-    MINT_WINDOW(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "MINT_WINDOW()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     NO_EXTRA_GAS(overrides?: CallOverrides): Promise<BigNumber>;
 
     "NO_EXTRA_GAS()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3790,10 +3612,6 @@ export interface USDO extends BaseContract {
     PT_YB_SEND_SGL_LEND(overrides?: CallOverrides): Promise<number>;
 
     "PT_YB_SEND_SGL_LEND()"(overrides?: CallOverrides): Promise<number>;
-
-    _owner(overrides?: CallOverrides): Promise<string>;
-
-    "_owner()"(overrides?: CallOverrides): Promise<string>;
 
     allowance(
       owner: PromiseOrValue<string>,
@@ -4045,16 +3863,6 @@ export interface USDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    freeMint(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "freeMint(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     getConfig(
       _version: PromiseOrValue<BigNumberish>,
       _chainId: PromiseOrValue<BigNumberish>,
@@ -4162,20 +3970,6 @@ export interface USDO extends BaseContract {
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    mintLimit(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "mintLimit()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    mintedAt(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "mintedAt(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<string>;
 
@@ -4400,16 +4194,6 @@ export interface USDO extends BaseContract {
       _dstChainId: PromiseOrValue<BigNumberish>,
       _packetType: PromiseOrValue<BigNumberish>,
       _minGas: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setMintLimit(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setMintLimit(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4836,10 +4620,6 @@ export interface USDO extends BaseContract {
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    MINT_WINDOW(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "MINT_WINDOW()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     NO_EXTRA_GAS(overrides?: CallOverrides): Promise<BigNumber>;
 
     "NO_EXTRA_GAS()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -4855,10 +4635,6 @@ export interface USDO extends BaseContract {
     PT_YB_SEND_SGL_LEND(overrides?: CallOverrides): Promise<BigNumber>;
 
     "PT_YB_SEND_SGL_LEND()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    _owner(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "_owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     allowance(
       owner: PromiseOrValue<string>,
@@ -5102,16 +4878,6 @@ export interface USDO extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    freeMint(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "freeMint(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     getConfig(
       _version: PromiseOrValue<BigNumberish>,
       _chainId: PromiseOrValue<BigNumberish>,
@@ -5218,20 +4984,6 @@ export interface USDO extends BaseContract {
       _to: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    mintLimit(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "mintLimit()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    mintedAt(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "mintedAt(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<BigNumber>;
@@ -5464,16 +5216,6 @@ export interface USDO extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    setMintLimit(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setMintLimit(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     setMinterStatus(
       _for: PromiseOrValue<string>,
       _status: PromiseOrValue<boolean>,
@@ -5668,10 +5410,6 @@ export interface USDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    MINT_WINDOW(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "MINT_WINDOW()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     NO_EXTRA_GAS(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "NO_EXTRA_GAS()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -5693,10 +5431,6 @@ export interface USDO extends BaseContract {
     "PT_YB_SEND_SGL_LEND()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    _owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "_owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     allowance(
       owner: PromiseOrValue<string>,
@@ -5942,16 +5676,6 @@ export interface USDO extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    freeMint(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "freeMint(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     getConfig(
       _version: PromiseOrValue<BigNumberish>,
       _chainId: PromiseOrValue<BigNumberish>,
@@ -6058,20 +5782,6 @@ export interface USDO extends BaseContract {
       _to: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    mintLimit(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "mintLimit()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    mintedAt(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "mintedAt(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -6301,16 +6011,6 @@ export interface USDO extends BaseContract {
       _dstChainId: PromiseOrValue<BigNumberish>,
       _packetType: PromiseOrValue<BigNumberish>,
       _minGas: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setMintLimit(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setMintLimit(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

@@ -191,12 +191,13 @@ export interface MagnetarV2Interface extends utils.Interface {
     "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,bool,bool)": FunctionFragment;
     "getAmountForAssetFraction(address,uint256)": FunctionFragment;
     "getAmountForBorrowPart(address,uint256)": FunctionFragment;
-    "getCollateralAmountForShare(address,uint256)": FunctionFragment;
     "getCollateralSharesForBorrowPart(address,uint256,uint256,uint256)": FunctionFragment;
+    "isApprovedForAll(address,address)": FunctionFragment;
     "mintAndLend(address,address,address,uint256,uint256,bool,bool)": FunctionFragment;
     "owner()": FunctionFragment;
     "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
+    "setApprovalForAll(address,bool)": FunctionFragment;
     "singularityMarketInfo(address,address[])": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "withdrawTo(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)": FunctionFragment;
@@ -220,10 +221,10 @@ export interface MagnetarV2Interface extends utils.Interface {
       | "getAmountForAssetFraction(address,uint256)"
       | "getAmountForBorrowPart"
       | "getAmountForBorrowPart(address,uint256)"
-      | "getCollateralAmountForShare"
-      | "getCollateralAmountForShare(address,uint256)"
       | "getCollateralSharesForBorrowPart"
       | "getCollateralSharesForBorrowPart(address,uint256,uint256,uint256)"
+      | "isApprovedForAll"
+      | "isApprovedForAll(address,address)"
       | "mintAndLend"
       | "mintAndLend(address,address,address,uint256,uint256,bool,bool)"
       | "owner"
@@ -232,6 +233,8 @@ export interface MagnetarV2Interface extends utils.Interface {
       | "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)"
       | "renounceOwnership"
       | "renounceOwnership()"
+      | "setApprovalForAll"
+      | "setApprovalForAll(address,bool)"
       | "singularityMarketInfo"
       | "singularityMarketInfo(address,address[])"
       | "transferOwnership"
@@ -367,14 +370,6 @@ export interface MagnetarV2Interface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "getCollateralAmountForShare",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getCollateralAmountForShare(address,uint256)",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "getCollateralSharesForBorrowPart",
     values: [
       PromiseOrValue<string>,
@@ -391,6 +386,14 @@ export interface MagnetarV2Interface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isApprovedForAll",
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isApprovedForAll(address,address)",
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "mintAndLend",
@@ -451,6 +454,14 @@ export interface MagnetarV2Interface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "renounceOwnership()",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setApprovalForAll",
+    values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setApprovalForAll(address,bool)",
+    values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "singularityMarketInfo",
@@ -561,19 +572,19 @@ export interface MagnetarV2Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getCollateralAmountForShare",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getCollateralAmountForShare(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "getCollateralSharesForBorrowPart",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "getCollateralSharesForBorrowPart(address,uint256,uint256,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isApprovedForAll",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isApprovedForAll(address,address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -603,6 +614,14 @@ export interface MagnetarV2Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "setApprovalForAll",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setApprovalForAll(address,bool)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "singularityMarketInfo",
     data: BytesLike
   ): Result;
@@ -625,14 +644,31 @@ export interface MagnetarV2Interface extends utils.Interface {
   ): Result;
 
   events: {
+    "ApprovalForAll(address,address,bool)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "ApprovalForAll(address,address,bool)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "OwnershipTransferred(address,address)"
   ): EventFragment;
 }
+
+export interface ApprovalForAllEventObject {
+  owner: string;
+  operator: string;
+  approved: boolean;
+}
+export type ApprovalForAllEvent = TypedEvent<
+  [string, string, boolean],
+  ApprovalForAllEventObject
+>;
+
+export type ApprovalForAllEventFilter = TypedEventFilter<ApprovalForAllEvent>;
 
 export interface OwnershipTransferredEventObject {
   previousOwner: string;
@@ -807,18 +843,6 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { amount: BigNumber }>;
 
-    getCollateralAmountForShare(
-      market: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { amount: BigNumber }>;
-
-    "getCollateralAmountForShare(address,uint256)"(
-      market: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { amount: BigNumber }>;
-
     getCollateralSharesForBorrowPart(
       market: PromiseOrValue<string>,
       borrowPart: PromiseOrValue<BigNumberish>,
@@ -834,6 +858,18 @@ export interface MagnetarV2 extends BaseContract {
       exchangeRatePrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { collateralShares: BigNumber }>;
+
+    isApprovedForAll(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "isApprovedForAll(address,address)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
     mintAndLend(
       singularity: PromiseOrValue<string>,
@@ -890,6 +926,18 @@ export interface MagnetarV2 extends BaseContract {
     ): Promise<ContractTransaction>;
 
     "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setApprovalForAll(
+      operator: PromiseOrValue<string>,
+      approved: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setApprovalForAll(address,bool)"(
+      operator: PromiseOrValue<string>,
+      approved: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1076,18 +1124,6 @@ export interface MagnetarV2 extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  getCollateralAmountForShare(
-    market: PromiseOrValue<string>,
-    share: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "getCollateralAmountForShare(address,uint256)"(
-    market: PromiseOrValue<string>,
-    share: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   getCollateralSharesForBorrowPart(
     market: PromiseOrValue<string>,
     borrowPart: PromiseOrValue<BigNumberish>,
@@ -1103,6 +1139,18 @@ export interface MagnetarV2 extends BaseContract {
     exchangeRatePrecision: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
+
+  isApprovedForAll(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "isApprovedForAll(address,address)"(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   mintAndLend(
     singularity: PromiseOrValue<string>,
@@ -1159,6 +1207,18 @@ export interface MagnetarV2 extends BaseContract {
   ): Promise<ContractTransaction>;
 
   "renounceOwnership()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setApprovalForAll(
+    operator: PromiseOrValue<string>,
+    approved: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setApprovalForAll(address,bool)"(
+    operator: PromiseOrValue<string>,
+    approved: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1345,18 +1405,6 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getCollateralAmountForShare(
-      market: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "getCollateralAmountForShare(address,uint256)"(
-      market: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     getCollateralSharesForBorrowPart(
       market: PromiseOrValue<string>,
       borrowPart: PromiseOrValue<BigNumberish>,
@@ -1372,6 +1420,18 @@ export interface MagnetarV2 extends BaseContract {
       exchangeRatePrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    isApprovedForAll(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "isApprovedForAll(address,address)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     mintAndLend(
       singularity: PromiseOrValue<string>,
@@ -1427,6 +1487,18 @@ export interface MagnetarV2 extends BaseContract {
 
     "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
 
+    setApprovalForAll(
+      operator: PromiseOrValue<string>,
+      approved: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setApprovalForAll(address,bool)"(
+      operator: PromiseOrValue<string>,
+      approved: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     singularityMarketInfo(
       who: PromiseOrValue<string>,
       markets: PromiseOrValue<string>[],
@@ -1479,6 +1551,17 @@ export interface MagnetarV2 extends BaseContract {
   };
 
   filters: {
+    "ApprovalForAll(address,address,bool)"(
+      owner?: null,
+      operator?: null,
+      approved?: null
+    ): ApprovalForAllEventFilter;
+    ApprovalForAll(
+      owner?: null,
+      operator?: null,
+      approved?: null
+    ): ApprovalForAllEventFilter;
+
     "OwnershipTransferred(address,address)"(
       previousOwner?: PromiseOrValue<string> | null,
       newOwner?: PromiseOrValue<string> | null
@@ -1622,18 +1705,6 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getCollateralAmountForShare(
-      market: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "getCollateralAmountForShare(address,uint256)"(
-      market: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     getCollateralSharesForBorrowPart(
       market: PromiseOrValue<string>,
       borrowPart: PromiseOrValue<BigNumberish>,
@@ -1647,6 +1718,18 @@ export interface MagnetarV2 extends BaseContract {
       borrowPart: PromiseOrValue<BigNumberish>,
       liquidationMultiplierPrecision: PromiseOrValue<BigNumberish>,
       exchangeRatePrecision: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    isApprovedForAll(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "isApprovedForAll(address,address)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1705,6 +1788,18 @@ export interface MagnetarV2 extends BaseContract {
     ): Promise<BigNumber>;
 
     "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setApprovalForAll(
+      operator: PromiseOrValue<string>,
+      approved: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setApprovalForAll(address,bool)"(
+      operator: PromiseOrValue<string>,
+      approved: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1892,18 +1987,6 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getCollateralAmountForShare(
-      market: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "getCollateralAmountForShare(address,uint256)"(
-      market: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     getCollateralSharesForBorrowPart(
       market: PromiseOrValue<string>,
       borrowPart: PromiseOrValue<BigNumberish>,
@@ -1917,6 +2000,18 @@ export interface MagnetarV2 extends BaseContract {
       borrowPart: PromiseOrValue<BigNumberish>,
       liquidationMultiplierPrecision: PromiseOrValue<BigNumberish>,
       exchangeRatePrecision: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    isApprovedForAll(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "isApprovedForAll(address,address)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1975,6 +2070,18 @@ export interface MagnetarV2 extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setApprovalForAll(
+      operator: PromiseOrValue<string>,
+      approved: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setApprovalForAll(address,bool)"(
+      operator: PromiseOrValue<string>,
+      approved: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
