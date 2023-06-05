@@ -29,6 +29,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC20Mock__factory>;
     getContractFactory(
+      name: "ERC721Mock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC721Mock__factory>;
+    getContractFactory(
       name: "FlashBorrowerMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.FlashBorrowerMock__factory>;
@@ -125,6 +129,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ERC20Mock>;
+    getContractAt(
+      name: "ERC721Mock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC721Mock>;
     getContractAt(
       name: "FlashBorrowerMock",
       address: string,
