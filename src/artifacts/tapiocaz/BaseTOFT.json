@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
   "contractName": "BaseTOFT",
-  "sourceName": "contracts/BaseTOFT.sol",
+  "sourceName": "contracts/tOFT/BaseTOFT.sol",
   "abi": [
     {
       "anonymous": false,
@@ -862,6 +862,19 @@
     },
     {
       "inputs": [],
+      "name": "leverageModule",
+      "outputs": [
+        {
+          "internalType": "contract BaseTOFTLeverageModule",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
       "name": "lzEndpoint",
       "outputs": [
         {
@@ -899,6 +912,19 @@
       "name": "lzReceive",
       "outputs": [],
       "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "marketModule",
+      "outputs": [
+        {
+          "internalType": "contract BaseTOFTMarketModule",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
       "type": "function"
     },
     {
@@ -1084,7 +1110,7 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "_from",
+          "name": "from",
           "type": "address"
         },
         {
@@ -1374,12 +1400,12 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "_from",
+          "name": "from",
           "type": "address"
         },
         {
           "internalType": "address",
-          "name": "_to",
+          "name": "to",
           "type": "address"
         },
         {
@@ -1415,7 +1441,7 @@
               "type": "address"
             }
           ],
-          "internalType": "struct BaseTOFT.ISendOptions",
+          "internalType": "struct ITapiocaOFT.ISendOptions",
           "name": "options",
           "type": "tuple"
         }
@@ -1429,12 +1455,12 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "_from",
+          "name": "from",
           "type": "address"
         },
         {
           "internalType": "address",
-          "name": "_to",
+          "name": "to",
           "type": "address"
         },
         {
@@ -1470,7 +1496,7 @@
               "type": "address"
             }
           ],
-          "internalType": "struct BaseTOFT.IBorrowParams",
+          "internalType": "struct ITapiocaOFT.IBorrowParams",
           "name": "borrowParams",
           "type": "tuple"
         },
@@ -1502,7 +1528,7 @@
               "type": "bytes"
             }
           ],
-          "internalType": "struct BaseTOFT.IWithdrawParams",
+          "internalType": "struct ITapiocaOFT.IWithdrawParams",
           "name": "withdrawParams",
           "type": "tuple"
         },
@@ -1519,7 +1545,7 @@
               "type": "address"
             }
           ],
-          "internalType": "struct BaseTOFT.ISendOptions",
+          "internalType": "struct ITapiocaOFT.ISendOptions",
           "name": "options",
           "type": "tuple"
         },
@@ -1576,7 +1602,7 @@
               "type": "bytes32"
             }
           ],
-          "internalType": "struct BaseTOFT.IApproval[]",
+          "internalType": "struct ITapiocaOFT.IApproval[]",
           "name": "approvals",
           "type": "tuple[]"
         }
@@ -1751,6 +1777,19 @@
           "internalType": "uint8",
           "name": "",
           "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "strategyModule",
+      "outputs": [
+        {
+          "internalType": "contract BaseTOFTStrategyModule",
+          "name": "",
+          "type": "address"
         }
       ],
       "stateMutability": "view",
