@@ -1230,6 +1230,16 @@ const _abi = [
       {
         components: [
           {
+            internalType: "uint256",
+            name: "srcExtraGasLimit",
+            type: "uint256",
+          },
+          {
+            internalType: "uint16",
+            name: "lzSrcChainId",
+            type: "uint16",
+          },
+          {
             internalType: "uint16",
             name: "lzDstChainId",
             type: "uint16",
@@ -1241,7 +1251,12 @@ const _abi = [
           },
           {
             internalType: "bytes",
-            name: "airdropAdapterParam",
+            name: "dstAirdropAdapterParam",
+            type: "bytes",
+          },
+          {
+            internalType: "bytes",
+            name: "srcAirdropAdapterParam",
             type: "bytes",
           },
           {
@@ -1465,6 +1480,11 @@ const _abi = [
       },
       {
         components: [
+          {
+            internalType: "bool",
+            name: "withdraw",
+            type: "bool",
+          },
           {
             internalType: "uint256",
             name: "withdrawLzFeeAmount",
