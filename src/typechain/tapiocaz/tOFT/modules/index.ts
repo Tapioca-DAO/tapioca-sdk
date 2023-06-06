@@ -3,5 +3,4 @@
 /* eslint-disable */
 export type { BaseTOFTLeverageModule } from "./BaseTOFTLeverageModule";
 export type { BaseTOFTMarketModule } from "./BaseTOFTMarketModule";
-export type { BaseTOFTModule } from "./BaseTOFTModule";
 export type { BaseTOFTStrategyModule } from "./BaseTOFTStrategyModule";
