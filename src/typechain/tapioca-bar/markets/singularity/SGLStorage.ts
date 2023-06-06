@@ -69,6 +69,7 @@ export interface SGLStorageInterface extends utils.Interface {
     "permitBorrow(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "protocolFee()": FunctionFragment;
     "setBorrowCap(uint256)": FunctionFragment;
+    "setBorrowOpeningFee(uint256)": FunctionFragment;
     "setCallerFee(uint256)": FunctionFragment;
     "setCollateralizationRate(uint256)": FunctionFragment;
     "setConservator(address)": FunctionFragment;
@@ -175,6 +176,8 @@ export interface SGLStorageInterface extends utils.Interface {
       | "protocolFee()"
       | "setBorrowCap"
       | "setBorrowCap(uint256)"
+      | "setBorrowOpeningFee"
+      | "setBorrowOpeningFee(uint256)"
       | "setCallerFee"
       | "setCallerFee(uint256)"
       | "setCollateralizationRate"
@@ -523,6 +526,14 @@ export interface SGLStorageInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setBorrowCap(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setBorrowOpeningFee",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setBorrowOpeningFee(uint256)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
@@ -955,6 +966,14 @@ export interface SGLStorageInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "setBorrowOpeningFee",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setBorrowOpeningFee(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "setCallerFee",
     data: BytesLike
   ): Result;
@@ -1123,6 +1142,7 @@ export interface SGLStorageInterface extends utils.Interface {
     "LogAddCollateral(address,address,uint256)": EventFragment;
     "LogBorrow(address,address,uint256,uint256,uint256)": EventFragment;
     "LogBorrowCapUpdated(uint256,uint256)": EventFragment;
+    "LogBorrowingFee(uint256,uint256)": EventFragment;
     "LogExchangeRate(uint256)": EventFragment;
     "LogRemoveAsset(address,address,uint256,uint256)": EventFragment;
     "LogRemoveCollateral(address,address,uint256)": EventFragment;
@@ -1170,6 +1190,10 @@ export interface SGLStorageInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "LogBorrowCapUpdated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "LogBorrowCapUpdated(uint256,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogBorrowingFee"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LogBorrowingFee(uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogExchangeRate"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogExchangeRate(uint256)"): EventFragment;
@@ -1322,6 +1346,17 @@ export type LogBorrowCapUpdatedEvent = TypedEvent<
 
 export type LogBorrowCapUpdatedEventFilter =
   TypedEventFilter<LogBorrowCapUpdatedEvent>;
+
+export interface LogBorrowingFeeEventObject {
+  _oldVal: BigNumber;
+  _newVal: BigNumber;
+}
+export type LogBorrowingFeeEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  LogBorrowingFeeEventObject
+>;
+
+export type LogBorrowingFeeEventFilter = TypedEventFilter<LogBorrowingFeeEvent>;
 
 export interface LogExchangeRateEventObject {
   rate: BigNumber;
@@ -1773,6 +1808,16 @@ export interface SGLStorage extends BaseContract {
 
     "setBorrowCap(uint256)"(
       _cap: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setBorrowOpeningFee(
+      _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setBorrowOpeningFee(uint256)"(
+      _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2283,6 +2328,16 @@ export interface SGLStorage extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  setBorrowOpeningFee(
+    _val: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setBorrowOpeningFee(uint256)"(
+    _val: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   setCallerFee(
     _val: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2780,6 +2835,16 @@ export interface SGLStorage extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setBorrowOpeningFee(
+      _val: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setBorrowOpeningFee(uint256)"(
+      _val: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     setCallerFee(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -3092,6 +3157,12 @@ export interface SGLStorage extends BaseContract {
       _oldVal?: null,
       _newVal?: null
     ): LogBorrowCapUpdatedEventFilter;
+
+    "LogBorrowingFee(uint256,uint256)"(
+      _oldVal?: null,
+      _newVal?: null
+    ): LogBorrowingFeeEventFilter;
+    LogBorrowingFee(_oldVal?: null, _newVal?: null): LogBorrowingFeeEventFilter;
 
     "LogExchangeRate(uint256)"(rate?: null): LogExchangeRateEventFilter;
     LogExchangeRate(rate?: null): LogExchangeRateEventFilter;
@@ -3457,6 +3528,16 @@ export interface SGLStorage extends BaseContract {
 
     "setBorrowCap(uint256)"(
       _cap: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setBorrowOpeningFee(
+      _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setBorrowOpeningFee(uint256)"(
+      _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -3953,6 +4034,16 @@ export interface SGLStorage extends BaseContract {
 
     "setBorrowCap(uint256)"(
       _cap: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setBorrowOpeningFee(
+      _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setBorrowOpeningFee(uint256)"(
+      _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
