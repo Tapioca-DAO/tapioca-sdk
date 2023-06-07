@@ -1,9 +1,139 @@
 {
     "default": {
         "tapioca-bar": {},
-        "tap-token": {},
+        "tap-token": {
+            "4002": [
+                {
+                    "name": "TapOFT",
+                    "address": "0x45Db4bFbbCc7CeB5d2459698f0435C3906CeEbe6",
+                    "meta": {
+                        "args": [
+                            "0x7dcAD72640F835B0FA36EFD3D6d3ec902C7E5acf",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "421613",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ],
+                        "salt": "0xf3195c2dea2f2d9b8f7d8a9027ccc13b531763ff5be05ca595651dc88a565c15",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "TapiocaDeployer",
+                    "address": "0x65E94a211561E71afcF4E7CfA3c5afd827C0f550",
+                    "meta": {}
+                }
+            ],
+            "43113": [
+                {
+                    "name": "TapOFT",
+                    "address": "0x69aFdd9e49aB73eaDBFfCBD72c15fFE7cc08bFAE",
+                    "meta": {
+                        "args": [
+                            "0x93f54D755A063cE7bB9e6Ac47Eccc8e33411d706",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "421613",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ],
+                        "salt": "0x0797893e6e9b3bb62faa282fcf3726fec157c36eeaa2cffd0a89b8af730a4adf",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "TapiocaDeployer",
+                    "address": "0xB24c0679e83Fd12acC7b1df541E9625B9BbF3cd9",
+                    "meta": {}
+                }
+            ],
+            "80001": [
+                {
+                    "name": "TapOFT",
+                    "address": "0xdb2CA3c2A08950ebcD3bE4354C853493072C2d16",
+                    "meta": {
+                        "args": [
+                            "0xf69186dfBa60DdB133E91E9A4B5673624293d8F8",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "421613",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ],
+                        "salt": "0xafd6ed7f41149fe5e616060cef9450c8e2c0c1318a478f06b66dcf8d9cc872c0",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "TapiocaDeployer",
+                    "address": "0x7C87D986623eD85718ca7d35b40E01a747FF5D0B",
+                    "meta": {}
+                }
+            ],
+            "421613": [
+                {
+                    "name": "TapOFT",
+                    "address": "0xA38d375B16eCc83d8ecF410D927831505b9Ce1f6",
+                    "meta": {
+                        "args": [
+                            "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "421613",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ],
+                        "salt": "0x58d697dcd4d6fc6ee7f8148f8abaaadb086596a87b9ca447d1c623799a87c2e6",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "TapiocaDeployer",
+                    "address": "0x59529572212E4381a385E8AE5604a558b6d77868",
+                    "meta": {}
+                }
+            ]
+        },
         "tapiocaz": {},
-        "generic": {},
+        "generic": {
+            "4002": [
+                {
+                    "name": "Multicall3",
+                    "address": "0x992b30C458fF7e80f03Ea5fBFA034789B4EAe443",
+                    "meta": {}
+                }
+            ],
+            "43113": [
+                {
+                    "name": "Multicall3",
+                    "address": "0xbA2C24Cc3cC21d35988380eB8AB5927c0a0d1Ab7",
+                    "meta": {}
+                }
+            ],
+            "80001": [
+                {
+                    "name": "Multicall3",
+                    "address": "0xe61775ad9ccb3042b9A253060e0050eFd4d96782",
+                    "meta": {}
+                }
+            ],
+            "421613": [
+                {
+                    "name": "Multicall3",
+                    "address": "0xc9759A0abC50C3cB4b511351225bCd3a569b1445",
+                    "meta": {}
+                }
+            ]
+        },
         "tapioca-mocks": {
             "4002": [
                 {

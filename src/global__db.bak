@@ -3,7 +3,87 @@
         "tapioca-bar": {},
         "tap-token": {},
         "tapiocaz": {},
-        "generic": {},
-        "tapioca-mocks": {}
+        "generic": {
+            "4002": [
+                {
+                    "name": "Multicall3",
+                    "address": "0x992b30C458fF7e80f03Ea5fBFA034789B4EAe443",
+                    "meta": {}
+                }
+            ],
+            "43113": [
+                {
+                    "name": "Multicall3",
+                    "address": "0xbA2C24Cc3cC21d35988380eB8AB5927c0a0d1Ab7",
+                    "meta": {}
+                }
+            ],
+            "80001": [
+                {
+                    "name": "Multicall3",
+                    "address": "0xe61775ad9ccb3042b9A253060e0050eFd4d96782",
+                    "meta": {}
+                }
+            ],
+            "421613": [
+                {
+                    "name": "Multicall3",
+                    "address": "0xc9759A0abC50C3cB4b511351225bCd3a569b1445",
+                    "meta": {}
+                }
+            ]
+        },
+        "tapioca-mocks": {
+            "4002": [
+                {
+                    "name": "FANTOMMock",
+                    "address": "0x5c7dED9dFF6bCAa6E6f1864eC72D73A7140dDBAf",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
+                {
+                    "name": "WETHMock",
+                    "address": "0xB17c5498fF88db1c65B8c58E85987566B1e94870",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                }
+            ],
+            "43113": [
+                {
+                    "name": "AVALANCHEMock",
+                    "address": "0xaB3cc6a4c9dd88A6fBf87bd472F6b6501d17D72d",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
+                {
+                    "name": "WETHMock",
+                    "address": "0x3957A2a9B825511680F7Abe5D5d0151221e64AC4",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                }
+            ],
+            "80001": [
+                {
+                    "name": "WETHMock",
+                    "address": "0x21116360199D273f83a50395536025339621CbdB",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                }
+            ],
+            "421613": [
+                {
+                    "name": "WETHMock",
+                    "address": "0xD3C99Ad6E1d97d4c242C1AF0e1D28075647426C1",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                }
+            ]
+        }
     }
 }
