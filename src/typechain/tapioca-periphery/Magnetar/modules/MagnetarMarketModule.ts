@@ -8,6 +8,7 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
+  Overrides,
   PayableOverrides,
   PopulatedTransaction,
   Signer,
@@ -36,6 +37,7 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
     "isApprovedForAll(address,address)": FunctionFragment;
     "mintAndLend(address,address,address,uint256,uint256,bool,bool)": FunctionFragment;
     "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)": FunctionFragment;
+    "setApprovalForAll(address,bool)": FunctionFragment;
     "withdrawTo(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)": FunctionFragment;
   };
 
@@ -55,6 +57,8 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
       | "mintAndLend(address,address,address,uint256,uint256,bool,bool)"
       | "removeAssetAndRepay"
       | "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)"
+      | "setApprovalForAll"
+      | "setApprovalForAll(address,bool)"
       | "withdrawTo"
       | "withdrawTo(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)"
   ): FunctionFragment;
@@ -212,6 +216,14 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "setApprovalForAll",
+    values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setApprovalForAll(address,bool)",
+    values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "withdrawTo",
     values: [
       PromiseOrValue<string>,
@@ -296,6 +308,14 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setApprovalForAll",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setApprovalForAll(address,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "withdrawTo", data: BytesLike): Result;
@@ -499,6 +519,18 @@ export interface MagnetarMarketModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    setApprovalForAll(
+      operator: PromiseOrValue<string>,
+      approved: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setApprovalForAll(address,bool)"(
+      operator: PromiseOrValue<string>,
+      approved: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     withdrawTo(
       yieldBox: PromiseOrValue<string>,
       from: PromiseOrValue<string>,
@@ -672,6 +704,18 @@ export interface MagnetarMarketModule extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  setApprovalForAll(
+    operator: PromiseOrValue<string>,
+    approved: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setApprovalForAll(address,bool)"(
+    operator: PromiseOrValue<string>,
+    approved: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   withdrawTo(
     yieldBox: PromiseOrValue<string>,
     from: PromiseOrValue<string>,
@@ -842,6 +886,18 @@ export interface MagnetarMarketModule extends BaseContract {
       collateralShare: PromiseOrValue<BigNumberish>,
       withdraw: PromiseOrValue<boolean>,
       withdrawData: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setApprovalForAll(
+      operator: PromiseOrValue<string>,
+      approved: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setApprovalForAll(address,bool)"(
+      operator: PromiseOrValue<string>,
+      approved: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1032,6 +1088,18 @@ export interface MagnetarMarketModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    setApprovalForAll(
+      operator: PromiseOrValue<string>,
+      approved: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setApprovalForAll(address,bool)"(
+      operator: PromiseOrValue<string>,
+      approved: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     withdrawTo(
       yieldBox: PromiseOrValue<string>,
       from: PromiseOrValue<string>,
@@ -1204,6 +1272,18 @@ export interface MagnetarMarketModule extends BaseContract {
       withdraw: PromiseOrValue<boolean>,
       withdrawData: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setApprovalForAll(
+      operator: PromiseOrValue<string>,
+      approved: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setApprovalForAll(address,bool)"(
+      operator: PromiseOrValue<string>,
+      approved: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     withdrawTo(
