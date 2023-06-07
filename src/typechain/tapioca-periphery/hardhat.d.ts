@@ -29,9 +29,13 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MagnetarV2__factory>;
     getContractFactory(
-      name: "MagnetarV2Operations",
+      name: "MagnetarV2Storage",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MagnetarV2Operations__factory>;
+    ): Promise<Contracts.MagnetarV2Storage__factory>;
+    getContractFactory(
+      name: "MagnetarMarketModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MagnetarMarketModule__factory>;
     getContractFactory(
       name: "Multicall3",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -78,10 +82,15 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.MagnetarV2>;
     getContractAt(
-      name: "MagnetarV2Operations",
+      name: "MagnetarV2Storage",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.MagnetarV2Operations>;
+    ): Promise<Contracts.MagnetarV2Storage>;
+    getContractAt(
+      name: "MagnetarMarketModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MagnetarMarketModule>;
     getContractAt(
       name: "Multicall3",
       address: string,
