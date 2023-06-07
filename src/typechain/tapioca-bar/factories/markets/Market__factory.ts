@@ -194,6 +194,12 @@ const _abi = [
   },
   {
     anonymous: false,
+    inputs: [],
+    name: "OracleUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
     inputs: [
       {
         indexed: true,
@@ -924,6 +930,19 @@ const _abi = [
       },
     ],
     name: "setMinLiquidatorReward",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "contract IOracle",
+        name: "_oracle",
+        type: "address",
+      },
+    ],
+    name: "setOracle",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
