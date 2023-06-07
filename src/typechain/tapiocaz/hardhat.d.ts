@@ -17,9 +17,29 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Balancer__factory>;
     getContractFactory(
+      name: "TapiocaWrapper",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TapiocaWrapper__factory>;
+    getContractFactory(
       name: "BaseTOFT",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BaseTOFT__factory>;
+    getContractFactory(
+      name: "BaseTOFTStorage",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseTOFTStorage__factory>;
+    getContractFactory(
+      name: "BaseTOFTLeverageModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseTOFTLeverageModule__factory>;
+    getContractFactory(
+      name: "BaseTOFTMarketModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseTOFTMarketModule__factory>;
+    getContractFactory(
+      name: "BaseTOFTStrategyModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseTOFTStrategyModule__factory>;
     getContractFactory(
       name: "MTapiocaOFT",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -28,10 +48,6 @@ declare module "hardhat/types/runtime" {
       name: "TapiocaOFT",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapiocaOFT__factory>;
-    getContractFactory(
-      name: "TapiocaWrapper",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TapiocaWrapper__factory>;
 
     getContractAt(
       name: "Balancer",
@@ -39,10 +55,35 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.Balancer>;
     getContractAt(
+      name: "TapiocaWrapper",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TapiocaWrapper>;
+    getContractAt(
       name: "BaseTOFT",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.BaseTOFT>;
+    getContractAt(
+      name: "BaseTOFTStorage",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseTOFTStorage>;
+    getContractAt(
+      name: "BaseTOFTLeverageModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseTOFTLeverageModule>;
+    getContractAt(
+      name: "BaseTOFTMarketModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseTOFTMarketModule>;
+    getContractAt(
+      name: "BaseTOFTStrategyModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseTOFTStrategyModule>;
     getContractAt(
       name: "MTapiocaOFT",
       address: string,
@@ -53,11 +94,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TapiocaOFT>;
-    getContractAt(
-      name: "TapiocaWrapper",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.TapiocaWrapper>;
 
     // default types
     getContractFactory(

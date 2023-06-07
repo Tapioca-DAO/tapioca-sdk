@@ -9,6 +9,7 @@ import type {
   CallOverrides,
   ContractTransaction,
   Overrides,
+  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -26,6 +27,62 @@ import type {
   OnEvent,
   PromiseOrValue,
 } from "../../common";
+
+export declare namespace IUSDOBase {
+  export type ILeverageSwapDataStruct = {
+    tokenOut: PromiseOrValue<string>;
+    amountOutMin: PromiseOrValue<BigNumberish>;
+    data: PromiseOrValue<BytesLike>;
+  };
+
+  export type ILeverageSwapDataStructOutput = [string, BigNumber, string] & {
+    tokenOut: string;
+    amountOutMin: BigNumber;
+    data: string;
+  };
+
+  export type ILeverageLZDataStruct = {
+    srcExtraGasLimit: PromiseOrValue<BigNumberish>;
+    lzSrcChainId: PromiseOrValue<BigNumberish>;
+    lzDstChainId: PromiseOrValue<BigNumberish>;
+    zroPaymentAddress: PromiseOrValue<string>;
+    dstAirdropAdapterParam: PromiseOrValue<BytesLike>;
+    srcAirdropAdapterParam: PromiseOrValue<BytesLike>;
+    refundAddress: PromiseOrValue<string>;
+  };
+
+  export type ILeverageLZDataStructOutput = [
+    BigNumber,
+    number,
+    number,
+    string,
+    string,
+    string,
+    string
+  ] & {
+    srcExtraGasLimit: BigNumber;
+    lzSrcChainId: number;
+    lzDstChainId: number;
+    zroPaymentAddress: string;
+    dstAirdropAdapterParam: string;
+    srcAirdropAdapterParam: string;
+    refundAddress: string;
+  };
+
+  export type ILeverageExternalContractsDataStruct = {
+    swapper: PromiseOrValue<string>;
+    magnetar: PromiseOrValue<string>;
+    tOft: PromiseOrValue<string>;
+    srcMarket: PromiseOrValue<string>;
+  };
+
+  export type ILeverageExternalContractsDataStructOutput = [
+    string,
+    string,
+    string,
+    string
+  ] & { swapper: string; magnetar: string; tOft: string; srcMarket: string };
+}
 
 export interface SingularityInterface extends utils.Interface {
   functions: {
@@ -69,6 +126,8 @@ export interface SingularityInterface extends utils.Interface {
     "lqCollateralizationRate()": FunctionFragment;
     "maxLiquidatorReward()": FunctionFragment;
     "minLiquidatorReward()": FunctionFragment;
+    "multiHopBuyCollateral(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))": FunctionFragment;
+    "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))": FunctionFragment;
     "name()": FunctionFragment;
     "nonces(address)": FunctionFragment;
     "oracle()": FunctionFragment;
@@ -202,6 +261,10 @@ export interface SingularityInterface extends utils.Interface {
       | "maxLiquidatorReward()"
       | "minLiquidatorReward"
       | "minLiquidatorReward()"
+      | "multiHopBuyCollateral"
+      | "multiHopBuyCollateral(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"
+      | "multiHopSellCollateral"
+      | "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"
       | "name"
       | "name()"
       | "nonces"
@@ -653,6 +716,48 @@ export interface SingularityInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "minLiquidatorReward()",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "multiHopBuyCollateral",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      IUSDOBase.ILeverageSwapDataStruct,
+      IUSDOBase.ILeverageLZDataStruct,
+      IUSDOBase.ILeverageExternalContractsDataStruct
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "multiHopBuyCollateral(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      IUSDOBase.ILeverageSwapDataStruct,
+      IUSDOBase.ILeverageLZDataStruct,
+      IUSDOBase.ILeverageExternalContractsDataStruct
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "multiHopSellCollateral",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      IUSDOBase.ILeverageSwapDataStruct,
+      IUSDOBase.ILeverageLZDataStruct,
+      IUSDOBase.ILeverageExternalContractsDataStruct
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      IUSDOBase.ILeverageSwapDataStruct,
+      IUSDOBase.ILeverageLZDataStruct,
+      IUSDOBase.ILeverageExternalContractsDataStruct
+    ]
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(functionFragment: "name()", values?: undefined): string;
@@ -1357,6 +1462,22 @@ export interface SingularityInterface extends utils.Interface {
     functionFragment: "minLiquidatorReward()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "multiHopBuyCollateral",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "multiHopBuyCollateral(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "multiHopSellCollateral",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
@@ -1700,6 +1821,7 @@ export interface SingularityInterface extends utils.Interface {
     "LogAddCollateral(address,address,uint256)": EventFragment;
     "LogBorrow(address,address,uint256,uint256,uint256)": EventFragment;
     "LogBorrowCapUpdated(uint256,uint256)": EventFragment;
+    "LogBorrowingFee(uint256,uint256)": EventFragment;
     "LogExchangeRate(uint256)": EventFragment;
     "LogRemoveAsset(address,address,uint256,uint256)": EventFragment;
     "LogRemoveCollateral(address,address,uint256)": EventFragment;
@@ -1747,6 +1869,10 @@ export interface SingularityInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "LogBorrowCapUpdated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "LogBorrowCapUpdated(uint256,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogBorrowingFee"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LogBorrowingFee(uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogExchangeRate"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogExchangeRate(uint256)"): EventFragment;
@@ -1899,6 +2025,17 @@ export type LogBorrowCapUpdatedEvent = TypedEvent<
 
 export type LogBorrowCapUpdatedEventFilter =
   TypedEventFilter<LogBorrowCapUpdatedEvent>;
+
+export interface LogBorrowingFeeEventObject {
+  _oldVal: BigNumber;
+  _newVal: BigNumber;
+}
+export type LogBorrowingFeeEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  LogBorrowingFeeEventObject
+>;
+
+export type LogBorrowingFeeEventFilter = TypedEventFilter<LogBorrowingFeeEvent>;
 
 export interface LogExchangeRateEventObject {
   rate: BigNumber;
@@ -2392,6 +2529,44 @@ export interface Singularity extends BaseContract {
     minLiquidatorReward(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "minLiquidatorReward()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    multiHopBuyCollateral(
+      from: PromiseOrValue<string>,
+      collateralAmount: PromiseOrValue<BigNumberish>,
+      borrowAmount: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "multiHopBuyCollateral(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
+      from: PromiseOrValue<string>,
+      collateralAmount: PromiseOrValue<BigNumberish>,
+      borrowAmount: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    multiHopSellCollateral(
+      from: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
+      from: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     name(overrides?: CallOverrides): Promise<[string]>;
 
@@ -3208,6 +3383,44 @@ export interface Singularity extends BaseContract {
 
   "minLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  multiHopBuyCollateral(
+    from: PromiseOrValue<string>,
+    collateralAmount: PromiseOrValue<BigNumberish>,
+    borrowAmount: PromiseOrValue<BigNumberish>,
+    swapData: IUSDOBase.ILeverageSwapDataStruct,
+    lzData: IUSDOBase.ILeverageLZDataStruct,
+    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "multiHopBuyCollateral(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
+    from: PromiseOrValue<string>,
+    collateralAmount: PromiseOrValue<BigNumberish>,
+    borrowAmount: PromiseOrValue<BigNumberish>,
+    swapData: IUSDOBase.ILeverageSwapDataStruct,
+    lzData: IUSDOBase.ILeverageLZDataStruct,
+    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  multiHopSellCollateral(
+    from: PromiseOrValue<string>,
+    share: PromiseOrValue<BigNumberish>,
+    swapData: IUSDOBase.ILeverageSwapDataStruct,
+    lzData: IUSDOBase.ILeverageLZDataStruct,
+    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
+    from: PromiseOrValue<string>,
+    share: PromiseOrValue<BigNumberish>,
+    swapData: IUSDOBase.ILeverageSwapDataStruct,
+    lzData: IUSDOBase.ILeverageLZDataStruct,
+    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   name(overrides?: CallOverrides): Promise<string>;
 
   "name()"(overrides?: CallOverrides): Promise<string>;
@@ -4009,6 +4222,44 @@ export interface Singularity extends BaseContract {
 
     "minLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    multiHopBuyCollateral(
+      from: PromiseOrValue<string>,
+      collateralAmount: PromiseOrValue<BigNumberish>,
+      borrowAmount: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "multiHopBuyCollateral(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
+      from: PromiseOrValue<string>,
+      collateralAmount: PromiseOrValue<BigNumberish>,
+      borrowAmount: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    multiHopSellCollateral(
+      from: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
+      from: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     name(overrides?: CallOverrides): Promise<string>;
 
     "name()"(overrides?: CallOverrides): Promise<string>;
@@ -4584,6 +4835,12 @@ export interface Singularity extends BaseContract {
       _newVal?: null
     ): LogBorrowCapUpdatedEventFilter;
 
+    "LogBorrowingFee(uint256,uint256)"(
+      _oldVal?: null,
+      _newVal?: null
+    ): LogBorrowingFeeEventFilter;
+    LogBorrowingFee(_oldVal?: null, _newVal?: null): LogBorrowingFeeEventFilter;
+
     "LogExchangeRate(uint256)"(rate?: null): LogExchangeRateEventFilter;
     LogExchangeRate(rate?: null): LogExchangeRateEventFilter;
 
@@ -4990,6 +5247,44 @@ export interface Singularity extends BaseContract {
     minLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
 
     "minLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    multiHopBuyCollateral(
+      from: PromiseOrValue<string>,
+      collateralAmount: PromiseOrValue<BigNumberish>,
+      borrowAmount: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "multiHopBuyCollateral(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
+      from: PromiseOrValue<string>,
+      collateralAmount: PromiseOrValue<BigNumberish>,
+      borrowAmount: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    multiHopSellCollateral(
+      from: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
+      from: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -5797,6 +6092,44 @@ export interface Singularity extends BaseContract {
 
     "minLiquidatorReward()"(
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    multiHopBuyCollateral(
+      from: PromiseOrValue<string>,
+      collateralAmount: PromiseOrValue<BigNumberish>,
+      borrowAmount: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "multiHopBuyCollateral(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
+      from: PromiseOrValue<string>,
+      collateralAmount: PromiseOrValue<BigNumberish>,
+      borrowAmount: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    multiHopSellCollateral(
+      from: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
+      from: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;

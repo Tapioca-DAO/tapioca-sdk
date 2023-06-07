@@ -42,25 +42,27 @@ export declare namespace ICommonOFT {
   };
 }
 
-export declare namespace BaseOFT {
+export declare namespace IUSDOBase {
   export type ILendParamsStruct = {
+    repay: PromiseOrValue<boolean>;
     amount: PromiseOrValue<BigNumberish>;
     marketHelper: PromiseOrValue<string>;
     market: PromiseOrValue<string>;
   };
 
-  export type ILendParamsStructOutput = [BigNumber, string, string] & {
+  export type ILendParamsStructOutput = [boolean, BigNumber, string, string] & {
+    repay: boolean;
     amount: BigNumber;
     marketHelper: string;
     market: string;
   };
 
-  export type SendOptionsStruct = {
+  export type ISendOptionsStruct = {
     extraGasLimit: PromiseOrValue<BigNumberish>;
     zroPaymentAddress: PromiseOrValue<string>;
   };
 
-  export type SendOptionsStructOutput = [BigNumber, string] & {
+  export type ISendOptionsStructOutput = [BigNumber, string] & {
     extraGasLimit: BigNumber;
     zroPaymentAddress: string;
   };
@@ -98,6 +100,60 @@ export declare namespace BaseOFT {
     r: string;
     s: string;
   };
+
+  export type ILeverageLZDataStruct = {
+    srcExtraGasLimit: PromiseOrValue<BigNumberish>;
+    lzSrcChainId: PromiseOrValue<BigNumberish>;
+    lzDstChainId: PromiseOrValue<BigNumberish>;
+    zroPaymentAddress: PromiseOrValue<string>;
+    dstAirdropAdapterParam: PromiseOrValue<BytesLike>;
+    srcAirdropAdapterParam: PromiseOrValue<BytesLike>;
+    refundAddress: PromiseOrValue<string>;
+  };
+
+  export type ILeverageLZDataStructOutput = [
+    BigNumber,
+    number,
+    number,
+    string,
+    string,
+    string,
+    string
+  ] & {
+    srcExtraGasLimit: BigNumber;
+    lzSrcChainId: number;
+    lzDstChainId: number;
+    zroPaymentAddress: string;
+    dstAirdropAdapterParam: string;
+    srcAirdropAdapterParam: string;
+    refundAddress: string;
+  };
+
+  export type ILeverageSwapDataStruct = {
+    tokenOut: PromiseOrValue<string>;
+    amountOutMin: PromiseOrValue<BigNumberish>;
+    data: PromiseOrValue<BytesLike>;
+  };
+
+  export type ILeverageSwapDataStructOutput = [string, BigNumber, string] & {
+    tokenOut: string;
+    amountOutMin: BigNumber;
+    data: string;
+  };
+
+  export type ILeverageExternalContractsDataStruct = {
+    swapper: PromiseOrValue<string>;
+    magnetar: PromiseOrValue<string>;
+    tOft: PromiseOrValue<string>;
+    srcMarket: PromiseOrValue<string>;
+  };
+
+  export type ILeverageExternalContractsDataStructOutput = [
+    string,
+    string,
+    string,
+    string
+  ] & { swapper: string; magnetar: string; tOft: string; srcMarket: string };
 }
 
 export interface USDOInterface extends utils.Interface {
@@ -107,13 +163,11 @@ export interface USDOInterface extends utils.Interface {
     "NO_EXTRA_GAS()": FunctionFragment;
     "PT_SEND()": FunctionFragment;
     "PT_SEND_AND_CALL()": FunctionFragment;
-    "PT_YB_SEND_SGL_LEND()": FunctionFragment;
     "allowance(address,address)": FunctionFragment;
     "allowedBurner(uint256,address)": FunctionFragment;
     "allowedMinter(uint256,address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
-    "batch(bytes[],bool)": FunctionFragment;
     "burn(address,uint256)": FunctionFragment;
     "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)": FunctionFragment;
     "circulatingSupply()": FunctionFragment;
@@ -132,8 +186,10 @@ export interface USDOInterface extends utils.Interface {
     "getTrustedRemoteAddress(uint16)": FunctionFragment;
     "increaseAllowance(address,uint256)": FunctionFragment;
     "isTrustedRemote(uint16,bytes)": FunctionFragment;
+    "leverageModule()": FunctionFragment;
     "lzEndpoint()": FunctionFragment;
     "lzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
+    "marketModule()": FunctionFragment;
     "maxFlashLoan(address)": FunctionFragment;
     "maxFlashMint()": FunctionFragment;
     "minDstGasLookup(uint16,uint16)": FunctionFragment;
@@ -149,8 +205,9 @@ export interface USDOInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
+    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
+    "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
-    "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "setBurnerStatus(address,bool)": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
     "setConservator(address)": FunctionFragment;
@@ -191,8 +248,6 @@ export interface USDOInterface extends utils.Interface {
       | "PT_SEND()"
       | "PT_SEND_AND_CALL"
       | "PT_SEND_AND_CALL()"
-      | "PT_YB_SEND_SGL_LEND"
-      | "PT_YB_SEND_SGL_LEND()"
       | "allowance"
       | "allowance(address,address)"
       | "allowedBurner"
@@ -203,8 +258,6 @@ export interface USDOInterface extends utils.Interface {
       | "approve(address,uint256)"
       | "balanceOf"
       | "balanceOf(address)"
-      | "batch"
-      | "batch(bytes[],bool)"
       | "burn"
       | "burn(address,uint256)"
       | "callOnOFTReceived"
@@ -241,10 +294,14 @@ export interface USDOInterface extends utils.Interface {
       | "increaseAllowance(address,uint256)"
       | "isTrustedRemote"
       | "isTrustedRemote(uint16,bytes)"
+      | "leverageModule"
+      | "leverageModule()"
       | "lzEndpoint"
       | "lzEndpoint()"
       | "lzReceive"
       | "lzReceive(uint16,bytes,uint64,bytes)"
+      | "marketModule"
+      | "marketModule()"
       | "maxFlashLoan"
       | "maxFlashLoan(address)"
       | "maxFlashMint"
@@ -275,10 +332,12 @@ export interface USDOInterface extends utils.Interface {
       | "retryMessage(uint16,bytes,uint64,bytes)"
       | "sendAndCall"
       | "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))"
+      | "sendAndLendOrRepay"
+      | "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
+      | "sendForLeverage"
+      | "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))"
       | "sendFrom"
       | "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"
-      | "sendToYBAndLend"
-      | "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "setBurnerStatus"
       | "setBurnerStatus(address,bool)"
       | "setConfig"
@@ -368,14 +427,6 @@ export interface USDOInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "PT_YB_SEND_SGL_LEND",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "PT_YB_SEND_SGL_LEND()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "allowance",
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
@@ -414,14 +465,6 @@ export interface USDOInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "balanceOf(address)",
     values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "batch",
-    values: [PromiseOrValue<BytesLike>[], PromiseOrValue<boolean>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "batch(bytes[],bool)",
-    values: [PromiseOrValue<BytesLike>[], PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "burn",
@@ -647,6 +690,14 @@ export interface USDOInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
+    functionFragment: "leverageModule",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "leverageModule()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "lzEndpoint",
     values?: undefined
   ): string;
@@ -671,6 +722,14 @@ export interface USDOInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "marketModule",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "marketModule()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "maxFlashLoan",
@@ -824,6 +883,48 @@ export interface USDOInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "sendAndLendOrRepay",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      IUSDOBase.ILendParamsStruct,
+      IUSDOBase.ISendOptionsStruct,
+      IUSDOBase.IApprovalStruct[]
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      IUSDOBase.ILendParamsStruct,
+      IUSDOBase.ISendOptionsStruct,
+      IUSDOBase.IApprovalStruct[]
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "sendForLeverage",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      IUSDOBase.ILeverageLZDataStruct,
+      IUSDOBase.ILeverageSwapDataStruct,
+      IUSDOBase.ILeverageExternalContractsDataStruct
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      IUSDOBase.ILeverageLZDataStruct,
+      IUSDOBase.ILeverageSwapDataStruct,
+      IUSDOBase.ILeverageExternalContractsDataStruct
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "sendFrom",
     values: [
       PromiseOrValue<string>,
@@ -841,28 +942,6 @@ export interface USDOInterface extends utils.Interface {
       PromiseOrValue<BytesLike>,
       PromiseOrValue<BigNumberish>,
       ICommonOFT.LzCallParamsStruct
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "sendToYBAndLend",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      BaseOFT.ILendParamsStruct,
-      BaseOFT.SendOptionsStruct,
-      BaseOFT.IApprovalStruct[]
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      BaseOFT.ILendParamsStruct,
-      BaseOFT.SendOptionsStruct,
-      BaseOFT.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
@@ -1119,14 +1198,6 @@ export interface USDOInterface extends utils.Interface {
     functionFragment: "PT_SEND_AND_CALL()",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "PT_YB_SEND_SGL_LEND",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "PT_YB_SEND_SGL_LEND()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "allowance(address,address)",
@@ -1156,11 +1227,6 @@ export interface USDOInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "balanceOf(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "batch", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "batch(bytes[],bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
@@ -1289,6 +1355,14 @@ export interface USDOInterface extends utils.Interface {
     functionFragment: "isTrustedRemote(uint16,bytes)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "leverageModule",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "leverageModule()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "lzEndpoint", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "lzEndpoint()",
@@ -1297,6 +1371,14 @@ export interface USDOInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "lzReceive", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "lzReceive(uint16,bytes,uint64,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "marketModule",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "marketModule()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1386,17 +1468,25 @@ export interface USDOInterface extends utils.Interface {
     functionFragment: "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "sendAndLendOrRepay",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "sendForLeverage",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "sendFrom", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "sendToYBAndLend",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1590,7 +1680,6 @@ export interface USDOInterface extends utils.Interface {
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
     "FlashMintFeeUpdated(uint256,uint256)": EventFragment;
-    "Lend(address,uint256)": EventFragment;
     "MaxFlashMintUpdated(uint256,uint256)": EventFragment;
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)": EventFragment;
     "Minted(address,uint256)": EventFragment;
@@ -1599,7 +1688,6 @@ export interface USDOInterface extends utils.Interface {
     "PausedUpdated(bool,bool)": EventFragment;
     "ReceiveFromChain(uint16,address,uint256)": EventFragment;
     "RetryMessageSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
-    "SendApproval(address,address,address,uint256)": EventFragment;
     "SendToChain(uint16,address,bytes32,uint256)": EventFragment;
     "SetBurnerStatus(address,bool)": EventFragment;
     "SetMinDstGas(uint16,uint16,uint256)": EventFragment;
@@ -1629,8 +1717,6 @@ export interface USDOInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "FlashMintFeeUpdated(uint256,uint256)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Lend"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Lend(address,uint256)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MaxFlashMintUpdated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "MaxFlashMintUpdated(uint256,uint256)"
@@ -1658,10 +1744,6 @@ export interface USDOInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "RetryMessageSuccess"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "RetryMessageSuccess(uint16,bytes,uint64,bytes32)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "SendApproval"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "SendApproval(address,address,address,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SendToChain"): EventFragment;
   getEvent(
@@ -1757,14 +1839,6 @@ export type FlashMintFeeUpdatedEvent = TypedEvent<
 export type FlashMintFeeUpdatedEventFilter =
   TypedEventFilter<FlashMintFeeUpdatedEvent>;
 
-export interface LendEventObject {
-  _from: string;
-  _amount: BigNumber;
-}
-export type LendEvent = TypedEvent<[string, BigNumber], LendEventObject>;
-
-export type LendEventFilter = TypedEventFilter<LendEvent>;
-
 export interface MaxFlashMintUpdatedEventObject {
   _old: BigNumber;
   _new: BigNumber;
@@ -1859,19 +1933,6 @@ export type RetryMessageSuccessEvent = TypedEvent<
 
 export type RetryMessageSuccessEventFilter =
   TypedEventFilter<RetryMessageSuccessEvent>;
-
-export interface SendApprovalEventObject {
-  _target: string;
-  _owner: string;
-  _spender: string;
-  _amount: BigNumber;
-}
-export type SendApprovalEvent = TypedEvent<
-  [string, string, string, BigNumber],
-  SendApprovalEventObject
->;
-
-export type SendApprovalEventFilter = TypedEventFilter<SendApprovalEvent>;
 
 export interface SendToChainEventObject {
   _dstChainId: number;
@@ -2025,10 +2086,6 @@ export interface USDO extends BaseContract {
 
     "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<[number]>;
 
-    PT_YB_SEND_SGL_LEND(overrides?: CallOverrides): Promise<[number]>;
-
-    "PT_YB_SEND_SGL_LEND()"(overrides?: CallOverrides): Promise<[number]>;
-
     allowance(
       owner: PromiseOrValue<string>,
       spender: PromiseOrValue<string>,
@@ -2086,18 +2143,6 @@ export interface USDO extends BaseContract {
       account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
-
-    batch(
-      calls: PromiseOrValue<BytesLike>[],
-      revertOnFail: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "batch(bytes[],bool)"(
-      calls: PromiseOrValue<BytesLike>[],
-      revertOnFail: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
 
     burn(
       _from: PromiseOrValue<string>,
@@ -2329,6 +2374,10 @@ export interface USDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    leverageModule(overrides?: CallOverrides): Promise<[string]>;
+
+    "leverageModule()"(overrides?: CallOverrides): Promise<[string]>;
+
     lzEndpoint(overrides?: CallOverrides): Promise<[string]>;
 
     "lzEndpoint()"(overrides?: CallOverrides): Promise<[string]>;
@@ -2348,6 +2397,10 @@ export interface USDO extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    marketModule(overrides?: CallOverrides): Promise<[string]>;
+
+    "marketModule()"(overrides?: CallOverrides): Promise<[string]>;
 
     maxFlashLoan(
       arg0: PromiseOrValue<string>,
@@ -2507,6 +2560,44 @@ export interface USDO extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    sendAndLendOrRepay(
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lendParams: IUSDOBase.ILendParamsStruct,
+      options: IUSDOBase.ISendOptionsStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lendParams: IUSDOBase.ILendParamsStruct,
+      options: IUSDOBase.ISendOptionsStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    sendForLeverage(
+      amount: PromiseOrValue<BigNumberish>,
+      leverageFor: PromiseOrValue<string>,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))"(
+      amount: PromiseOrValue<BigNumberish>,
+      leverageFor: PromiseOrValue<string>,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     sendFrom(
       _from: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -2522,26 +2613,6 @@ export interface USDO extends BaseContract {
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
       _callParams: ICommonOFT.LzCallParamsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    sendToYBAndLend(
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      lendParams: BaseOFT.ILendParamsStruct,
-      options: BaseOFT.SendOptionsStruct,
-      approvals: BaseOFT.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      lendParams: BaseOFT.ILendParamsStruct,
-      options: BaseOFT.SendOptionsStruct,
-      approvals: BaseOFT.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2816,10 +2887,6 @@ export interface USDO extends BaseContract {
 
   "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<number>;
 
-  PT_YB_SEND_SGL_LEND(overrides?: CallOverrides): Promise<number>;
-
-  "PT_YB_SEND_SGL_LEND()"(overrides?: CallOverrides): Promise<number>;
-
   allowance(
     owner: PromiseOrValue<string>,
     spender: PromiseOrValue<string>,
@@ -2877,18 +2944,6 @@ export interface USDO extends BaseContract {
     account: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
-
-  batch(
-    calls: PromiseOrValue<BytesLike>[],
-    revertOnFail: PromiseOrValue<boolean>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "batch(bytes[],bool)"(
-    calls: PromiseOrValue<BytesLike>[],
-    revertOnFail: PromiseOrValue<boolean>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
 
   burn(
     _from: PromiseOrValue<string>,
@@ -3120,6 +3175,10 @@ export interface USDO extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  leverageModule(overrides?: CallOverrides): Promise<string>;
+
+  "leverageModule()"(overrides?: CallOverrides): Promise<string>;
+
   lzEndpoint(overrides?: CallOverrides): Promise<string>;
 
   "lzEndpoint()"(overrides?: CallOverrides): Promise<string>;
@@ -3139,6 +3198,10 @@ export interface USDO extends BaseContract {
     _payload: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  marketModule(overrides?: CallOverrides): Promise<string>;
+
+  "marketModule()"(overrides?: CallOverrides): Promise<string>;
 
   maxFlashLoan(
     arg0: PromiseOrValue<string>,
@@ -3298,6 +3361,44 @@ export interface USDO extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  sendAndLendOrRepay(
+    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    lzDstChainId: PromiseOrValue<BigNumberish>,
+    lendParams: IUSDOBase.ILendParamsStruct,
+    options: IUSDOBase.ISendOptionsStruct,
+    approvals: IUSDOBase.IApprovalStruct[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    lzDstChainId: PromiseOrValue<BigNumberish>,
+    lendParams: IUSDOBase.ILendParamsStruct,
+    options: IUSDOBase.ISendOptionsStruct,
+    approvals: IUSDOBase.IApprovalStruct[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  sendForLeverage(
+    amount: PromiseOrValue<BigNumberish>,
+    leverageFor: PromiseOrValue<string>,
+    lzData: IUSDOBase.ILeverageLZDataStruct,
+    swapData: IUSDOBase.ILeverageSwapDataStruct,
+    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))"(
+    amount: PromiseOrValue<BigNumberish>,
+    leverageFor: PromiseOrValue<string>,
+    lzData: IUSDOBase.ILeverageLZDataStruct,
+    swapData: IUSDOBase.ILeverageSwapDataStruct,
+    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   sendFrom(
     _from: PromiseOrValue<string>,
     _dstChainId: PromiseOrValue<BigNumberish>,
@@ -3313,26 +3414,6 @@ export interface USDO extends BaseContract {
     _toAddress: PromiseOrValue<BytesLike>,
     _amount: PromiseOrValue<BigNumberish>,
     _callParams: ICommonOFT.LzCallParamsStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  sendToYBAndLend(
-    _from: PromiseOrValue<string>,
-    _to: PromiseOrValue<string>,
-    lzDstChainId: PromiseOrValue<BigNumberish>,
-    lendParams: BaseOFT.ILendParamsStruct,
-    options: BaseOFT.SendOptionsStruct,
-    approvals: BaseOFT.IApprovalStruct[],
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-    _from: PromiseOrValue<string>,
-    _to: PromiseOrValue<string>,
-    lzDstChainId: PromiseOrValue<BigNumberish>,
-    lendParams: BaseOFT.ILendParamsStruct,
-    options: BaseOFT.SendOptionsStruct,
-    approvals: BaseOFT.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3609,10 +3690,6 @@ export interface USDO extends BaseContract {
 
     "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<number>;
 
-    PT_YB_SEND_SGL_LEND(overrides?: CallOverrides): Promise<number>;
-
-    "PT_YB_SEND_SGL_LEND()"(overrides?: CallOverrides): Promise<number>;
-
     allowance(
       owner: PromiseOrValue<string>,
       spender: PromiseOrValue<string>,
@@ -3670,18 +3747,6 @@ export interface USDO extends BaseContract {
       account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    batch(
-      calls: PromiseOrValue<BytesLike>[],
-      revertOnFail: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "batch(bytes[],bool)"(
-      calls: PromiseOrValue<BytesLike>[],
-      revertOnFail: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     burn(
       _from: PromiseOrValue<string>,
@@ -3913,6 +3978,10 @@ export interface USDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
+    leverageModule(overrides?: CallOverrides): Promise<string>;
+
+    "leverageModule()"(overrides?: CallOverrides): Promise<string>;
+
     lzEndpoint(overrides?: CallOverrides): Promise<string>;
 
     "lzEndpoint()"(overrides?: CallOverrides): Promise<string>;
@@ -3932,6 +4001,10 @@ export interface USDO extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    marketModule(overrides?: CallOverrides): Promise<string>;
+
+    "marketModule()"(overrides?: CallOverrides): Promise<string>;
 
     maxFlashLoan(
       arg0: PromiseOrValue<string>,
@@ -4087,6 +4160,44 @@ export interface USDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    sendAndLendOrRepay(
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lendParams: IUSDOBase.ILendParamsStruct,
+      options: IUSDOBase.ISendOptionsStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lendParams: IUSDOBase.ILendParamsStruct,
+      options: IUSDOBase.ISendOptionsStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    sendForLeverage(
+      amount: PromiseOrValue<BigNumberish>,
+      leverageFor: PromiseOrValue<string>,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))"(
+      amount: PromiseOrValue<BigNumberish>,
+      leverageFor: PromiseOrValue<string>,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     sendFrom(
       _from: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -4102,26 +4213,6 @@ export interface USDO extends BaseContract {
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
       _callParams: ICommonOFT.LzCallParamsStruct,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    sendToYBAndLend(
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      lendParams: BaseOFT.ILendParamsStruct,
-      options: BaseOFT.SendOptionsStruct,
-      approvals: BaseOFT.IApprovalStruct[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      lendParams: BaseOFT.ILendParamsStruct,
-      options: BaseOFT.SendOptionsStruct,
-      approvals: BaseOFT.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4428,15 +4519,6 @@ export interface USDO extends BaseContract {
       _new?: null
     ): FlashMintFeeUpdatedEventFilter;
 
-    "Lend(address,uint256)"(
-      _from?: PromiseOrValue<string> | null,
-      _amount?: null
-    ): LendEventFilter;
-    Lend(
-      _from?: PromiseOrValue<string> | null,
-      _amount?: null
-    ): LendEventFilter;
-
     "MaxFlashMintUpdated(uint256,uint256)"(
       _old?: null,
       _new?: null
@@ -4513,19 +4595,6 @@ export interface USDO extends BaseContract {
       _nonce?: null,
       _payloadHash?: null
     ): RetryMessageSuccessEventFilter;
-
-    "SendApproval(address,address,address,uint256)"(
-      _target?: null,
-      _owner?: null,
-      _spender?: null,
-      _amount?: null
-    ): SendApprovalEventFilter;
-    SendApproval(
-      _target?: null,
-      _owner?: null,
-      _spender?: null,
-      _amount?: null
-    ): SendApprovalEventFilter;
 
     "SendToChain(uint16,address,bytes32,uint256)"(
       _dstChainId?: PromiseOrValue<BigNumberish> | null,
@@ -4632,10 +4701,6 @@ export interface USDO extends BaseContract {
 
     "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    PT_YB_SEND_SGL_LEND(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "PT_YB_SEND_SGL_LEND()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     allowance(
       owner: PromiseOrValue<string>,
       spender: PromiseOrValue<string>,
@@ -4692,18 +4757,6 @@ export interface USDO extends BaseContract {
     "balanceOf(address)"(
       account: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    batch(
-      calls: PromiseOrValue<BytesLike>[],
-      revertOnFail: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "batch(bytes[],bool)"(
-      calls: PromiseOrValue<BytesLike>[],
-      revertOnFail: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     burn(
@@ -4928,6 +4981,10 @@ export interface USDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    leverageModule(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "leverageModule()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     lzEndpoint(overrides?: CallOverrides): Promise<BigNumber>;
 
     "lzEndpoint()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -4947,6 +5004,10 @@ export interface USDO extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    marketModule(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "marketModule()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     maxFlashLoan(
       arg0: PromiseOrValue<string>,
@@ -5106,6 +5167,44 @@ export interface USDO extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    sendAndLendOrRepay(
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lendParams: IUSDOBase.ILendParamsStruct,
+      options: IUSDOBase.ISendOptionsStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lendParams: IUSDOBase.ILendParamsStruct,
+      options: IUSDOBase.ISendOptionsStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    sendForLeverage(
+      amount: PromiseOrValue<BigNumberish>,
+      leverageFor: PromiseOrValue<string>,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))"(
+      amount: PromiseOrValue<BigNumberish>,
+      leverageFor: PromiseOrValue<string>,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     sendFrom(
       _from: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -5121,26 +5220,6 @@ export interface USDO extends BaseContract {
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
       _callParams: ICommonOFT.LzCallParamsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    sendToYBAndLend(
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      lendParams: BaseOFT.ILendParamsStruct,
-      options: BaseOFT.SendOptionsStruct,
-      approvals: BaseOFT.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      lendParams: BaseOFT.ILendParamsStruct,
-      options: BaseOFT.SendOptionsStruct,
-      approvals: BaseOFT.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5424,14 +5503,6 @@ export interface USDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    PT_YB_SEND_SGL_LEND(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "PT_YB_SEND_SGL_LEND()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     allowance(
       owner: PromiseOrValue<string>,
       spender: PromiseOrValue<string>,
@@ -5488,18 +5559,6 @@ export interface USDO extends BaseContract {
     "balanceOf(address)"(
       account: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    batch(
-      calls: PromiseOrValue<BytesLike>[],
-      revertOnFail: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "batch(bytes[],bool)"(
-      calls: PromiseOrValue<BytesLike>[],
-      revertOnFail: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     burn(
@@ -5726,6 +5785,12 @@ export interface USDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    leverageModule(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "leverageModule()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     lzEndpoint(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "lzEndpoint()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -5745,6 +5810,10 @@ export interface USDO extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    marketModule(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "marketModule()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     maxFlashLoan(
       arg0: PromiseOrValue<string>,
@@ -5904,6 +5973,44 @@ export interface USDO extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    sendAndLendOrRepay(
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lendParams: IUSDOBase.ILendParamsStruct,
+      options: IUSDOBase.ISendOptionsStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lendParams: IUSDOBase.ILendParamsStruct,
+      options: IUSDOBase.ISendOptionsStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    sendForLeverage(
+      amount: PromiseOrValue<BigNumberish>,
+      leverageFor: PromiseOrValue<string>,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))"(
+      amount: PromiseOrValue<BigNumberish>,
+      leverageFor: PromiseOrValue<string>,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     sendFrom(
       _from: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -5919,26 +6026,6 @@ export interface USDO extends BaseContract {
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
       _callParams: ICommonOFT.LzCallParamsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    sendToYBAndLend(
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      lendParams: BaseOFT.ILendParamsStruct,
-      options: BaseOFT.SendOptionsStruct,
-      approvals: BaseOFT.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "sendToYBAndLend(address,address,uint16,(uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      lendParams: BaseOFT.ILendParamsStruct,
-      options: BaseOFT.SendOptionsStruct,
-      approvals: BaseOFT.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

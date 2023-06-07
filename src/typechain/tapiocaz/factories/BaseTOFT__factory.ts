@@ -8,16 +8,6 @@ import type { BaseTOFT, BaseTOFTInterface } from "../BaseTOFT";
 
 const _abi = [
   {
-    inputs: [],
-    name: "TOFT_ZeroAmount",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "TOFT__NotHostChain",
-    type: "error",
-  },
-  {
     anonymous: false,
     inputs: [
       {
@@ -40,25 +30,6 @@ const _abi = [
       },
     ],
     name: "Approval",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "_from",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
-      },
-    ],
-    name: "Borrow",
     type: "event",
   },
   {
@@ -221,37 +192,6 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
-        internalType: "address",
-        name: "_target",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "_owner",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "_spender",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
-      },
-    ],
-    name: "SendApproval",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
         indexed: true,
         internalType: "uint16",
         name: "_dstChainId",
@@ -394,82 +334,6 @@ const _abi = [
     type: "event",
   },
   {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "_from",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "_to",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
-      },
-    ],
-    name: "Unwrap",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "_from",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "_to",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
-      },
-    ],
-    name: "Wrap",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
-      },
-    ],
-    name: "YieldBoxDeposit",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
-      },
-    ],
-    name: "YieldBoxRetrieval",
-    type: "event",
-  },
-  {
     inputs: [],
     name: "DEFAULT_PAYLOAD_SIZE_LIMIT",
     outputs: [
@@ -529,45 +393,6 @@ const _abi = [
         internalType: "uint8",
         name: "",
         type: "uint8",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "PT_YB_RETRIEVE_STRAT",
-    outputs: [
-      {
-        internalType: "uint16",
-        name: "",
-        type: "uint16",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "PT_YB_SEND_SGL_BORROW",
-    outputs: [
-      {
-        internalType: "uint16",
-        name: "",
-        type: "uint16",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "PT_YB_SEND_STRAT",
-    outputs: [
-      {
-        internalType: "uint16",
-        name: "",
-        type: "uint16",
       },
     ],
     stateMutability: "view",
@@ -638,24 +463,6 @@ const _abi = [
       },
     ],
     stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "bytes[]",
-        name: "calls",
-        type: "bytes[]",
-      },
-      {
-        internalType: "bool",
-        name: "revertOnFail",
-        type: "bool",
-      },
-    ],
-    name: "batch",
-    outputs: [],
-    stateMutability: "payable",
     type: "function",
   },
   {
@@ -790,7 +597,7 @@ const _abi = [
     name: "erc20",
     outputs: [
       {
-        internalType: "contract IERC20",
+        internalType: "address",
         name: "",
         type: "address",
       },
@@ -978,19 +785,6 @@ const _abi = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "getLzChainId",
-    outputs: [
-      {
-        internalType: "uint16",
-        name: "",
-        type: "uint16",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [
       {
         internalType: "uint16",
@@ -1044,32 +838,6 @@ const _abi = [
       },
     ],
     stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "isHostChain",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "isNative",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
     type: "function",
   },
   {
@@ -1330,6 +1098,11 @@ const _abi = [
       },
       {
         internalType: "uint256",
+        name: "share",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
         name: "assetId",
         type: "uint256",
       },
@@ -1445,6 +1218,115 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "leverageFor",
+        type: "address",
+      },
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "srcExtraGasLimit",
+            type: "uint256",
+          },
+          {
+            internalType: "uint16",
+            name: "lzSrcChainId",
+            type: "uint16",
+          },
+          {
+            internalType: "uint16",
+            name: "lzDstChainId",
+            type: "uint16",
+          },
+          {
+            internalType: "address",
+            name: "zroPaymentAddress",
+            type: "address",
+          },
+          {
+            internalType: "bytes",
+            name: "dstAirdropAdapterParam",
+            type: "bytes",
+          },
+          {
+            internalType: "bytes",
+            name: "srcAirdropAdapterParam",
+            type: "bytes",
+          },
+          {
+            internalType: "address",
+            name: "refundAddress",
+            type: "address",
+          },
+        ],
+        internalType: "struct IUSDOBase.ILeverageLZData",
+        name: "lzData",
+        type: "tuple",
+      },
+      {
+        components: [
+          {
+            internalType: "address",
+            name: "tokenOut",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "amountOutMin",
+            type: "uint256",
+          },
+          {
+            internalType: "bytes",
+            name: "data",
+            type: "bytes",
+          },
+        ],
+        internalType: "struct IUSDOBase.ILeverageSwapData",
+        name: "swapData",
+        type: "tuple",
+      },
+      {
+        components: [
+          {
+            internalType: "address",
+            name: "swapper",
+            type: "address",
+          },
+          {
+            internalType: "address",
+            name: "magnetar",
+            type: "address",
+          },
+          {
+            internalType: "address",
+            name: "tOft",
+            type: "address",
+          },
+          {
+            internalType: "address",
+            name: "srcMarket",
+            type: "address",
+          },
+        ],
+        internalType: "struct IUSDOBase.ILeverageExternalContractsData",
+        name: "externalData",
+        type: "tuple",
+      },
+    ],
+    name: "sendForLeverage",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "address",
         name: "_from",
         type: "address",
@@ -1511,6 +1393,11 @@ const _abi = [
       },
       {
         internalType: "uint256",
+        name: "share",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
         name: "assetId",
         type: "uint256",
       },
@@ -1531,13 +1418,8 @@ const _abi = [
             name: "zroPaymentAddress",
             type: "address",
           },
-          {
-            internalType: "bool",
-            name: "wrap",
-            type: "bool",
-          },
         ],
-        internalType: "struct BaseTOFT.SendOptions",
+        internalType: "struct BaseTOFT.ISendOptions",
         name: "options",
         type: "tuple",
       },
@@ -1599,6 +1481,11 @@ const _abi = [
       {
         components: [
           {
+            internalType: "bool",
+            name: "withdraw",
+            type: "bool",
+          },
+          {
             internalType: "uint256",
             name: "withdrawLzFeeAmount",
             type: "uint256",
@@ -1635,13 +1522,8 @@ const _abi = [
             name: "zroPaymentAddress",
             type: "address",
           },
-          {
-            internalType: "bool",
-            name: "wrap",
-            type: "bool",
-          },
         ],
-        internalType: "struct BaseTOFT.SendOptions",
+        internalType: "struct BaseTOFT.ISendOptions",
         name: "options",
         type: "tuple",
       },

@@ -42,17 +42,71 @@ export declare namespace ICommonOFT {
   };
 }
 
-export declare namespace BaseTOFT {
-  export type SendOptionsStruct = {
-    extraGasLimit: PromiseOrValue<BigNumberish>;
+export declare namespace IUSDOBase {
+  export type ILeverageLZDataStruct = {
+    srcExtraGasLimit: PromiseOrValue<BigNumberish>;
+    lzSrcChainId: PromiseOrValue<BigNumberish>;
+    lzDstChainId: PromiseOrValue<BigNumberish>;
     zroPaymentAddress: PromiseOrValue<string>;
-    wrap: PromiseOrValue<boolean>;
+    dstAirdropAdapterParam: PromiseOrValue<BytesLike>;
+    srcAirdropAdapterParam: PromiseOrValue<BytesLike>;
+    refundAddress: PromiseOrValue<string>;
   };
 
-  export type SendOptionsStructOutput = [BigNumber, string, boolean] & {
+  export type ILeverageLZDataStructOutput = [
+    BigNumber,
+    number,
+    number,
+    string,
+    string,
+    string,
+    string
+  ] & {
+    srcExtraGasLimit: BigNumber;
+    lzSrcChainId: number;
+    lzDstChainId: number;
+    zroPaymentAddress: string;
+    dstAirdropAdapterParam: string;
+    srcAirdropAdapterParam: string;
+    refundAddress: string;
+  };
+
+  export type ILeverageSwapDataStruct = {
+    tokenOut: PromiseOrValue<string>;
+    amountOutMin: PromiseOrValue<BigNumberish>;
+    data: PromiseOrValue<BytesLike>;
+  };
+
+  export type ILeverageSwapDataStructOutput = [string, BigNumber, string] & {
+    tokenOut: string;
+    amountOutMin: BigNumber;
+    data: string;
+  };
+
+  export type ILeverageExternalContractsDataStruct = {
+    swapper: PromiseOrValue<string>;
+    magnetar: PromiseOrValue<string>;
+    tOft: PromiseOrValue<string>;
+    srcMarket: PromiseOrValue<string>;
+  };
+
+  export type ILeverageExternalContractsDataStructOutput = [
+    string,
+    string,
+    string,
+    string
+  ] & { swapper: string; magnetar: string; tOft: string; srcMarket: string };
+}
+
+export declare namespace BaseTOFT {
+  export type ISendOptionsStruct = {
+    extraGasLimit: PromiseOrValue<BigNumberish>;
+    zroPaymentAddress: PromiseOrValue<string>;
+  };
+
+  export type ISendOptionsStructOutput = [BigNumber, string] & {
     extraGasLimit: BigNumber;
     zroPaymentAddress: string;
-    wrap: boolean;
   };
 
   export type IBorrowParamsStruct = {
@@ -75,6 +129,7 @@ export declare namespace BaseTOFT {
   };
 
   export type IWithdrawParamsStruct = {
+    withdraw: PromiseOrValue<boolean>;
     withdrawLzFeeAmount: PromiseOrValue<BigNumberish>;
     withdrawOnOtherChain: PromiseOrValue<boolean>;
     withdrawLzChainId: PromiseOrValue<BigNumberish>;
@@ -82,11 +137,13 @@ export declare namespace BaseTOFT {
   };
 
   export type IWithdrawParamsStructOutput = [
+    boolean,
     BigNumber,
     boolean,
     number,
     string
   ] & {
+    withdraw: boolean;
     withdrawLzFeeAmount: BigNumber;
     withdrawOnOtherChain: boolean;
     withdrawLzChainId: number;
@@ -138,13 +195,9 @@ export interface BaseTOFTInterface extends utils.Interface {
     "NO_EXTRA_GAS()": FunctionFragment;
     "PT_SEND()": FunctionFragment;
     "PT_SEND_AND_CALL()": FunctionFragment;
-    "PT_YB_RETRIEVE_STRAT()": FunctionFragment;
-    "PT_YB_SEND_SGL_BORROW()": FunctionFragment;
-    "PT_YB_SEND_STRAT()": FunctionFragment;
     "allowance(address,address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
-    "batch(bytes[],bool)": FunctionFragment;
     "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)": FunctionFragment;
     "circulatingSupply()": FunctionFragment;
     "creditedPackets(uint16,bytes,uint64)": FunctionFragment;
@@ -156,12 +209,9 @@ export interface BaseTOFTInterface extends utils.Interface {
     "failedMessages(uint16,bytes,uint64)": FunctionFragment;
     "forceResumeReceive(uint16,bytes)": FunctionFragment;
     "getConfig(uint16,uint16,address,uint256)": FunctionFragment;
-    "getLzChainId()": FunctionFragment;
     "getTrustedRemoteAddress(uint16)": FunctionFragment;
     "hostChainID()": FunctionFragment;
     "increaseAllowance(address,uint256)": FunctionFragment;
-    "isHostChain()": FunctionFragment;
-    "isNative()": FunctionFragment;
     "isTrustedRemote(uint16,bytes)": FunctionFragment;
     "lzEndpoint()": FunctionFragment;
     "lzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
@@ -174,12 +224,13 @@ export interface BaseTOFTInterface extends utils.Interface {
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "precrime()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "retrieveFromStrategy(address,uint256,uint256,uint16,address,bytes)": FunctionFragment;
+    "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
+    "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
-    "sendToStrategy(address,address,uint256,uint256,uint16,(uint256,address,bool))": FunctionFragment;
-    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
+    "sendToStrategy(address,address,uint256,uint256,uint256,uint16,(uint256,address))": FunctionFragment;
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
     "setPayloadSizeLimit(uint16,uint256)": FunctionFragment;
@@ -214,20 +265,12 @@ export interface BaseTOFTInterface extends utils.Interface {
       | "PT_SEND()"
       | "PT_SEND_AND_CALL"
       | "PT_SEND_AND_CALL()"
-      | "PT_YB_RETRIEVE_STRAT"
-      | "PT_YB_RETRIEVE_STRAT()"
-      | "PT_YB_SEND_SGL_BORROW"
-      | "PT_YB_SEND_SGL_BORROW()"
-      | "PT_YB_SEND_STRAT"
-      | "PT_YB_SEND_STRAT()"
       | "allowance"
       | "allowance(address,address)"
       | "approve"
       | "approve(address,uint256)"
       | "balanceOf"
       | "balanceOf(address)"
-      | "batch"
-      | "batch(bytes[],bool)"
       | "callOnOFTReceived"
       | "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)"
       | "circulatingSupply"
@@ -250,18 +293,12 @@ export interface BaseTOFTInterface extends utils.Interface {
       | "forceResumeReceive(uint16,bytes)"
       | "getConfig"
       | "getConfig(uint16,uint16,address,uint256)"
-      | "getLzChainId"
-      | "getLzChainId()"
       | "getTrustedRemoteAddress"
       | "getTrustedRemoteAddress(uint16)"
       | "hostChainID"
       | "hostChainID()"
       | "increaseAllowance"
       | "increaseAllowance(address,uint256)"
-      | "isHostChain"
-      | "isHostChain()"
-      | "isNative"
-      | "isNative()"
       | "isTrustedRemote"
       | "isTrustedRemote(uint16,bytes)"
       | "lzEndpoint"
@@ -287,17 +324,19 @@ export interface BaseTOFTInterface extends utils.Interface {
       | "renounceOwnership"
       | "renounceOwnership()"
       | "retrieveFromStrategy"
-      | "retrieveFromStrategy(address,uint256,uint256,uint16,address,bytes)"
+      | "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)"
       | "retryMessage"
       | "retryMessage(uint16,bytes,uint64,bytes)"
       | "sendAndCall"
       | "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))"
+      | "sendForLeverage"
+      | "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))"
       | "sendFrom"
       | "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"
       | "sendToStrategy"
-      | "sendToStrategy(address,address,uint256,uint256,uint16,(uint256,address,bool))"
+      | "sendToStrategy(address,address,uint256,uint256,uint256,uint16,(uint256,address))"
       | "sendToYBAndBorrow"
-      | "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
+      | "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "setConfig"
       | "setConfig(uint16,uint16,uint256,bytes)"
       | "setMinDstGas"
@@ -375,30 +414,6 @@ export interface BaseTOFTInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "PT_YB_RETRIEVE_STRAT",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "PT_YB_RETRIEVE_STRAT()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "PT_YB_SEND_SGL_BORROW",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "PT_YB_SEND_SGL_BORROW()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "PT_YB_SEND_STRAT",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "PT_YB_SEND_STRAT()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "allowance",
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
@@ -421,14 +436,6 @@ export interface BaseTOFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "balanceOf(address)",
     values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "batch",
-    values: [PromiseOrValue<BytesLike>[], PromiseOrValue<boolean>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "batch(bytes[],bool)",
-    values: [PromiseOrValue<BytesLike>[], PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "callOnOFTReceived",
@@ -582,14 +589,6 @@ export interface BaseTOFTInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "getLzChainId",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getLzChainId()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "getTrustedRemoteAddress",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
@@ -612,19 +611,6 @@ export interface BaseTOFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "increaseAllowance(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isHostChain",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isHostChain()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "isNative", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "isNative()",
-    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "isTrustedRemote",
@@ -750,14 +736,16 @@ export interface BaseTOFTInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "retrieveFromStrategy(address,uint256,uint256,uint16,address,bytes)",
+    functionFragment: "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)",
     values: [
       PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
@@ -808,6 +796,26 @@ export interface BaseTOFTInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "sendForLeverage",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      IUSDOBase.ILeverageLZDataStruct,
+      IUSDOBase.ILeverageSwapDataStruct,
+      IUSDOBase.ILeverageExternalContractsDataStruct
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      IUSDOBase.ILeverageLZDataStruct,
+      IUSDOBase.ILeverageSwapDataStruct,
+      IUSDOBase.ILeverageExternalContractsDataStruct
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "sendFrom",
     values: [
       PromiseOrValue<string>,
@@ -835,18 +843,20 @@ export interface BaseTOFTInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
-      BaseTOFT.SendOptionsStruct
+      PromiseOrValue<BigNumberish>,
+      BaseTOFT.ISendOptionsStruct
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "sendToStrategy(address,address,uint256,uint256,uint16,(uint256,address,bool))",
+    functionFragment: "sendToStrategy(address,address,uint256,uint256,uint256,uint16,(uint256,address))",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
-      BaseTOFT.SendOptionsStruct
+      PromiseOrValue<BigNumberish>,
+      BaseTOFT.ISendOptionsStruct
     ]
   ): string;
   encodeFunctionData(
@@ -858,12 +868,12 @@ export interface BaseTOFTInterface extends utils.Interface {
       PromiseOrValue<BytesLike>,
       BaseTOFT.IBorrowParamsStruct,
       BaseTOFT.IWithdrawParamsStruct,
-      BaseTOFT.SendOptionsStruct,
+      BaseTOFT.ISendOptionsStruct,
       BaseTOFT.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -871,7 +881,7 @@ export interface BaseTOFTInterface extends utils.Interface {
       PromiseOrValue<BytesLike>,
       BaseTOFT.IBorrowParamsStruct,
       BaseTOFT.IWithdrawParamsStruct,
-      BaseTOFT.SendOptionsStruct,
+      BaseTOFT.ISendOptionsStruct,
       BaseTOFT.IApprovalStruct[]
     ]
   ): string;
@@ -1081,30 +1091,6 @@ export interface BaseTOFTInterface extends utils.Interface {
     functionFragment: "PT_SEND_AND_CALL()",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "PT_YB_RETRIEVE_STRAT",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "PT_YB_RETRIEVE_STRAT()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "PT_YB_SEND_SGL_BORROW",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "PT_YB_SEND_SGL_BORROW()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "PT_YB_SEND_STRAT",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "PT_YB_SEND_STRAT()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "allowance(address,address)",
@@ -1118,11 +1104,6 @@ export interface BaseTOFTInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "balanceOf(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "batch", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "batch(bytes[],bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1199,14 +1180,6 @@ export interface BaseTOFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getLzChainId",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getLzChainId()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "getTrustedRemoteAddress",
     data: BytesLike
   ): Result;
@@ -1230,16 +1203,6 @@ export interface BaseTOFTInterface extends utils.Interface {
     functionFragment: "increaseAllowance(address,uint256)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "isHostChain",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isHostChain()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "isNative", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "isNative()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "isTrustedRemote",
     data: BytesLike
@@ -1311,7 +1274,7 @@ export interface BaseTOFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "retrieveFromStrategy(address,uint256,uint256,uint16,address,bytes)",
+    functionFragment: "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1330,6 +1293,14 @@ export interface BaseTOFTInterface extends utils.Interface {
     functionFragment: "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "sendForLeverage",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "sendFrom", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))",
@@ -1340,7 +1311,7 @@ export interface BaseTOFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "sendToStrategy(address,address,uint256,uint256,uint16,(uint256,address,bool))",
+    functionFragment: "sendToStrategy(address,address,uint256,uint256,uint256,uint16,(uint256,address))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1348,7 +1319,7 @@ export interface BaseTOFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "setConfig", data: BytesLike): Result;
@@ -1490,14 +1461,12 @@ export interface BaseTOFTInterface extends utils.Interface {
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
-    "Borrow(address,uint256)": EventFragment;
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)": EventFragment;
     "NonContractAddress(address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "ReceiveFromChain(uint16,address,uint256)": EventFragment;
     "RetryMessageSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
-    "SendApproval(address,address,address,uint256)": EventFragment;
     "SendToChain(uint16,address,bytes32,uint256)": EventFragment;
     "SetMinDstGas(uint16,uint16,uint256)": EventFragment;
     "SetPrecrime(address)": EventFragment;
@@ -1505,18 +1474,12 @@ export interface BaseTOFTInterface extends utils.Interface {
     "SetTrustedRemoteAddress(uint16,bytes)": EventFragment;
     "SetUseCustomAdapterParams(bool)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
-    "Unwrap(address,address,uint256)": EventFragment;
-    "Wrap(address,address,uint256)": EventFragment;
-    "YieldBoxDeposit(uint256)": EventFragment;
-    "YieldBoxRetrieval(uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Approval(address,address,uint256)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Borrow"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Borrow(address,uint256)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "CallOFTReceivedSuccess"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"
@@ -1540,10 +1503,6 @@ export interface BaseTOFTInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "RetryMessageSuccess"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "RetryMessageSuccess(uint16,bytes,uint64,bytes32)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "SendApproval"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "SendApproval(address,address,address,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SendToChain"): EventFragment;
   getEvent(
@@ -1571,18 +1530,6 @@ export interface BaseTOFTInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "Transfer(address,address,uint256)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Unwrap"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "Unwrap(address,address,uint256)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Wrap"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "Wrap(address,address,uint256)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "YieldBoxDeposit"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "YieldBoxDeposit(uint256)"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "YieldBoxRetrieval"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "YieldBoxRetrieval(uint256)"): EventFragment;
 }
 
 export interface ApprovalEventObject {
@@ -1596,14 +1543,6 @@ export type ApprovalEvent = TypedEvent<
 >;
 
 export type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
-
-export interface BorrowEventObject {
-  _from: string;
-  _amount: BigNumber;
-}
-export type BorrowEvent = TypedEvent<[string, BigNumber], BorrowEventObject>;
-
-export type BorrowEventFilter = TypedEventFilter<BorrowEvent>;
 
 export interface CallOFTReceivedSuccessEventObject {
   _srcChainId: number;
@@ -1682,19 +1621,6 @@ export type RetryMessageSuccessEvent = TypedEvent<
 
 export type RetryMessageSuccessEventFilter =
   TypedEventFilter<RetryMessageSuccessEvent>;
-
-export interface SendApprovalEventObject {
-  _target: string;
-  _owner: string;
-  _spender: string;
-  _amount: BigNumber;
-}
-export type SendApprovalEvent = TypedEvent<
-  [string, string, string, BigNumber],
-  SendApprovalEventObject
->;
-
-export type SendApprovalEventFilter = TypedEventFilter<SendApprovalEvent>;
 
 export interface SendToChainEventObject {
   _dstChainId: number;
@@ -1775,51 +1701,6 @@ export type TransferEvent = TypedEvent<
 
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 
-export interface UnwrapEventObject {
-  _from: string;
-  _to: string;
-  _amount: BigNumber;
-}
-export type UnwrapEvent = TypedEvent<
-  [string, string, BigNumber],
-  UnwrapEventObject
->;
-
-export type UnwrapEventFilter = TypedEventFilter<UnwrapEvent>;
-
-export interface WrapEventObject {
-  _from: string;
-  _to: string;
-  _amount: BigNumber;
-}
-export type WrapEvent = TypedEvent<
-  [string, string, BigNumber],
-  WrapEventObject
->;
-
-export type WrapEventFilter = TypedEventFilter<WrapEvent>;
-
-export interface YieldBoxDepositEventObject {
-  _amount: BigNumber;
-}
-export type YieldBoxDepositEvent = TypedEvent<
-  [BigNumber],
-  YieldBoxDepositEventObject
->;
-
-export type YieldBoxDepositEventFilter = TypedEventFilter<YieldBoxDepositEvent>;
-
-export interface YieldBoxRetrievalEventObject {
-  _amount: BigNumber;
-}
-export type YieldBoxRetrievalEvent = TypedEvent<
-  [BigNumber],
-  YieldBoxRetrievalEventObject
->;
-
-export type YieldBoxRetrievalEventFilter =
-  TypedEventFilter<YieldBoxRetrievalEvent>;
-
 export interface BaseTOFT extends BaseContract {
   contractName: "BaseTOFT";
 
@@ -1871,18 +1752,6 @@ export interface BaseTOFT extends BaseContract {
 
     "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<[number]>;
 
-    PT_YB_RETRIEVE_STRAT(overrides?: CallOverrides): Promise<[number]>;
-
-    "PT_YB_RETRIEVE_STRAT()"(overrides?: CallOverrides): Promise<[number]>;
-
-    PT_YB_SEND_SGL_BORROW(overrides?: CallOverrides): Promise<[number]>;
-
-    "PT_YB_SEND_SGL_BORROW()"(overrides?: CallOverrides): Promise<[number]>;
-
-    PT_YB_SEND_STRAT(overrides?: CallOverrides): Promise<[number]>;
-
-    "PT_YB_SEND_STRAT()"(overrides?: CallOverrides): Promise<[number]>;
-
     allowance(
       owner: PromiseOrValue<string>,
       spender: PromiseOrValue<string>,
@@ -1916,18 +1785,6 @@ export interface BaseTOFT extends BaseContract {
       account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
-
-    batch(
-      calls: PromiseOrValue<BytesLike>[],
-      revertOnFail: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "batch(bytes[],bool)"(
-      calls: PromiseOrValue<BytesLike>[],
-      revertOnFail: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
 
     callOnOFTReceived(
       _srcChainId: PromiseOrValue<BigNumberish>,
@@ -2081,10 +1938,6 @@ export interface BaseTOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    getLzChainId(overrides?: CallOverrides): Promise<[number]>;
-
-    "getLzChainId()"(overrides?: CallOverrides): Promise<[number]>;
-
     getTrustedRemoteAddress(
       _remoteChainId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -2110,14 +1963,6 @@ export interface BaseTOFT extends BaseContract {
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
-
-    isHostChain(overrides?: CallOverrides): Promise<[boolean]>;
-
-    "isHostChain()"(overrides?: CallOverrides): Promise<[boolean]>;
-
-    isNative(overrides?: CallOverrides): Promise<[boolean]>;
-
-    "isNative()"(overrides?: CallOverrides): Promise<[boolean]>;
 
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
@@ -2244,6 +2089,7 @@ export interface BaseTOFT extends BaseContract {
     retrieveFromStrategy(
       _from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
@@ -2251,9 +2097,10 @@ export interface BaseTOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "retrieveFromStrategy(address,uint256,uint256,uint16,address,bytes)"(
+    "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)"(
       _from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
@@ -2299,6 +2146,24 @@ export interface BaseTOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    sendForLeverage(
+      amount: PromiseOrValue<BigNumberish>,
+      leverageFor: PromiseOrValue<string>,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))"(
+      amount: PromiseOrValue<BigNumberish>,
+      leverageFor: PromiseOrValue<string>,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     sendFrom(
       _from: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -2321,19 +2186,21 @@ export interface BaseTOFT extends BaseContract {
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: BaseTOFT.SendOptionsStruct,
+      options: BaseTOFT.ISendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "sendToStrategy(address,address,uint256,uint256,uint16,(uint256,address,bool))"(
+    "sendToStrategy(address,address,uint256,uint256,uint256,uint16,(uint256,address))"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: BaseTOFT.SendOptionsStruct,
+      options: BaseTOFT.ISendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2344,19 +2211,19 @@ export interface BaseTOFT extends BaseContract {
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: BaseTOFT.IBorrowParamsStruct,
       withdrawParams: BaseTOFT.IWithdrawParamsStruct,
-      options: BaseTOFT.SendOptionsStruct,
+      options: BaseTOFT.ISendOptionsStruct,
       approvals: BaseTOFT.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: BaseTOFT.IBorrowParamsStruct,
       withdrawParams: BaseTOFT.IWithdrawParamsStruct,
-      options: BaseTOFT.SendOptionsStruct,
+      options: BaseTOFT.ISendOptionsStruct,
       approvals: BaseTOFT.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2568,18 +2435,6 @@ export interface BaseTOFT extends BaseContract {
 
   "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<number>;
 
-  PT_YB_RETRIEVE_STRAT(overrides?: CallOverrides): Promise<number>;
-
-  "PT_YB_RETRIEVE_STRAT()"(overrides?: CallOverrides): Promise<number>;
-
-  PT_YB_SEND_SGL_BORROW(overrides?: CallOverrides): Promise<number>;
-
-  "PT_YB_SEND_SGL_BORROW()"(overrides?: CallOverrides): Promise<number>;
-
-  PT_YB_SEND_STRAT(overrides?: CallOverrides): Promise<number>;
-
-  "PT_YB_SEND_STRAT()"(overrides?: CallOverrides): Promise<number>;
-
   allowance(
     owner: PromiseOrValue<string>,
     spender: PromiseOrValue<string>,
@@ -2613,18 +2468,6 @@ export interface BaseTOFT extends BaseContract {
     account: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
-
-  batch(
-    calls: PromiseOrValue<BytesLike>[],
-    revertOnFail: PromiseOrValue<boolean>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "batch(bytes[],bool)"(
-    calls: PromiseOrValue<BytesLike>[],
-    revertOnFail: PromiseOrValue<boolean>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
 
   callOnOFTReceived(
     _srcChainId: PromiseOrValue<BigNumberish>,
@@ -2778,10 +2621,6 @@ export interface BaseTOFT extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  getLzChainId(overrides?: CallOverrides): Promise<number>;
-
-  "getLzChainId()"(overrides?: CallOverrides): Promise<number>;
-
   getTrustedRemoteAddress(
     _remoteChainId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -2807,14 +2646,6 @@ export interface BaseTOFT extends BaseContract {
     addedValue: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
-
-  isHostChain(overrides?: CallOverrides): Promise<boolean>;
-
-  "isHostChain()"(overrides?: CallOverrides): Promise<boolean>;
-
-  isNative(overrides?: CallOverrides): Promise<boolean>;
-
-  "isNative()"(overrides?: CallOverrides): Promise<boolean>;
 
   isTrustedRemote(
     _srcChainId: PromiseOrValue<BigNumberish>,
@@ -2941,6 +2772,7 @@ export interface BaseTOFT extends BaseContract {
   retrieveFromStrategy(
     _from: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
+    share: PromiseOrValue<BigNumberish>,
     assetId: PromiseOrValue<BigNumberish>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
     zroPaymentAddress: PromiseOrValue<string>,
@@ -2948,9 +2780,10 @@ export interface BaseTOFT extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "retrieveFromStrategy(address,uint256,uint256,uint16,address,bytes)"(
+  "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)"(
     _from: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
+    share: PromiseOrValue<BigNumberish>,
     assetId: PromiseOrValue<BigNumberish>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
     zroPaymentAddress: PromiseOrValue<string>,
@@ -2996,6 +2829,24 @@ export interface BaseTOFT extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  sendForLeverage(
+    amount: PromiseOrValue<BigNumberish>,
+    leverageFor: PromiseOrValue<string>,
+    lzData: IUSDOBase.ILeverageLZDataStruct,
+    swapData: IUSDOBase.ILeverageSwapDataStruct,
+    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))"(
+    amount: PromiseOrValue<BigNumberish>,
+    leverageFor: PromiseOrValue<string>,
+    lzData: IUSDOBase.ILeverageLZDataStruct,
+    swapData: IUSDOBase.ILeverageSwapDataStruct,
+    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   sendFrom(
     _from: PromiseOrValue<string>,
     _dstChainId: PromiseOrValue<BigNumberish>,
@@ -3018,19 +2869,21 @@ export interface BaseTOFT extends BaseContract {
     _from: PromiseOrValue<string>,
     _to: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
+    share: PromiseOrValue<BigNumberish>,
     assetId: PromiseOrValue<BigNumberish>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
-    options: BaseTOFT.SendOptionsStruct,
+    options: BaseTOFT.ISendOptionsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "sendToStrategy(address,address,uint256,uint256,uint16,(uint256,address,bool))"(
+  "sendToStrategy(address,address,uint256,uint256,uint256,uint16,(uint256,address))"(
     _from: PromiseOrValue<string>,
     _to: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
+    share: PromiseOrValue<BigNumberish>,
     assetId: PromiseOrValue<BigNumberish>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
-    options: BaseTOFT.SendOptionsStruct,
+    options: BaseTOFT.ISendOptionsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3041,19 +2894,19 @@ export interface BaseTOFT extends BaseContract {
     airdropAdapterParams: PromiseOrValue<BytesLike>,
     borrowParams: BaseTOFT.IBorrowParamsStruct,
     withdrawParams: BaseTOFT.IWithdrawParamsStruct,
-    options: BaseTOFT.SendOptionsStruct,
+    options: BaseTOFT.ISendOptionsStruct,
     approvals: BaseTOFT.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+  "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
     _from: PromiseOrValue<string>,
     _to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
     airdropAdapterParams: PromiseOrValue<BytesLike>,
     borrowParams: BaseTOFT.IBorrowParamsStruct,
     withdrawParams: BaseTOFT.IWithdrawParamsStruct,
-    options: BaseTOFT.SendOptionsStruct,
+    options: BaseTOFT.ISendOptionsStruct,
     approvals: BaseTOFT.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -3267,18 +3120,6 @@ export interface BaseTOFT extends BaseContract {
 
     "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<number>;
 
-    PT_YB_RETRIEVE_STRAT(overrides?: CallOverrides): Promise<number>;
-
-    "PT_YB_RETRIEVE_STRAT()"(overrides?: CallOverrides): Promise<number>;
-
-    PT_YB_SEND_SGL_BORROW(overrides?: CallOverrides): Promise<number>;
-
-    "PT_YB_SEND_SGL_BORROW()"(overrides?: CallOverrides): Promise<number>;
-
-    PT_YB_SEND_STRAT(overrides?: CallOverrides): Promise<number>;
-
-    "PT_YB_SEND_STRAT()"(overrides?: CallOverrides): Promise<number>;
-
     allowance(
       owner: PromiseOrValue<string>,
       spender: PromiseOrValue<string>,
@@ -3312,18 +3153,6 @@ export interface BaseTOFT extends BaseContract {
       account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    batch(
-      calls: PromiseOrValue<BytesLike>[],
-      revertOnFail: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "batch(bytes[],bool)"(
-      calls: PromiseOrValue<BytesLike>[],
-      revertOnFail: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     callOnOFTReceived(
       _srcChainId: PromiseOrValue<BigNumberish>,
@@ -3477,10 +3306,6 @@ export interface BaseTOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    getLzChainId(overrides?: CallOverrides): Promise<number>;
-
-    "getLzChainId()"(overrides?: CallOverrides): Promise<number>;
-
     getTrustedRemoteAddress(
       _remoteChainId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -3506,14 +3331,6 @@ export interface BaseTOFT extends BaseContract {
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
-
-    isHostChain(overrides?: CallOverrides): Promise<boolean>;
-
-    "isHostChain()"(overrides?: CallOverrides): Promise<boolean>;
-
-    isNative(overrides?: CallOverrides): Promise<boolean>;
-
-    "isNative()"(overrides?: CallOverrides): Promise<boolean>;
 
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
@@ -3636,6 +3453,7 @@ export interface BaseTOFT extends BaseContract {
     retrieveFromStrategy(
       _from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
@@ -3643,9 +3461,10 @@ export interface BaseTOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "retrieveFromStrategy(address,uint256,uint256,uint16,address,bytes)"(
+    "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)"(
       _from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
@@ -3691,6 +3510,24 @@ export interface BaseTOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    sendForLeverage(
+      amount: PromiseOrValue<BigNumberish>,
+      leverageFor: PromiseOrValue<string>,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))"(
+      amount: PromiseOrValue<BigNumberish>,
+      leverageFor: PromiseOrValue<string>,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     sendFrom(
       _from: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -3713,19 +3550,21 @@ export interface BaseTOFT extends BaseContract {
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: BaseTOFT.SendOptionsStruct,
+      options: BaseTOFT.ISendOptionsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "sendToStrategy(address,address,uint256,uint256,uint16,(uint256,address,bool))"(
+    "sendToStrategy(address,address,uint256,uint256,uint256,uint16,(uint256,address))"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: BaseTOFT.SendOptionsStruct,
+      options: BaseTOFT.ISendOptionsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3736,19 +3575,19 @@ export interface BaseTOFT extends BaseContract {
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: BaseTOFT.IBorrowParamsStruct,
       withdrawParams: BaseTOFT.IWithdrawParamsStruct,
-      options: BaseTOFT.SendOptionsStruct,
+      options: BaseTOFT.ISendOptionsStruct,
       approvals: BaseTOFT.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: BaseTOFT.IBorrowParamsStruct,
       withdrawParams: BaseTOFT.IWithdrawParamsStruct,
-      options: BaseTOFT.SendOptionsStruct,
+      options: BaseTOFT.ISendOptionsStruct,
       approvals: BaseTOFT.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
@@ -3952,15 +3791,6 @@ export interface BaseTOFT extends BaseContract {
       value?: null
     ): ApprovalEventFilter;
 
-    "Borrow(address,uint256)"(
-      _from?: PromiseOrValue<string> | null,
-      _amount?: null
-    ): BorrowEventFilter;
-    Borrow(
-      _from?: PromiseOrValue<string> | null,
-      _amount?: null
-    ): BorrowEventFilter;
-
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"(
       _srcChainId?: PromiseOrValue<BigNumberish> | null,
       _srcAddress?: null,
@@ -4027,19 +3857,6 @@ export interface BaseTOFT extends BaseContract {
       _payloadHash?: null
     ): RetryMessageSuccessEventFilter;
 
-    "SendApproval(address,address,address,uint256)"(
-      _target?: null,
-      _owner?: null,
-      _spender?: null,
-      _amount?: null
-    ): SendApprovalEventFilter;
-    SendApproval(
-      _target?: null,
-      _owner?: null,
-      _spender?: null,
-      _amount?: null
-    ): SendApprovalEventFilter;
-
     "SendToChain(uint16,address,bytes32,uint256)"(
       _dstChainId?: PromiseOrValue<BigNumberish> | null,
       _from?: PromiseOrValue<string> | null,
@@ -4102,34 +3919,6 @@ export interface BaseTOFT extends BaseContract {
       to?: PromiseOrValue<string> | null,
       value?: null
     ): TransferEventFilter;
-
-    "Unwrap(address,address,uint256)"(
-      _from?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null,
-      _amount?: null
-    ): UnwrapEventFilter;
-    Unwrap(
-      _from?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null,
-      _amount?: null
-    ): UnwrapEventFilter;
-
-    "Wrap(address,address,uint256)"(
-      _from?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null,
-      _amount?: null
-    ): WrapEventFilter;
-    Wrap(
-      _from?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null,
-      _amount?: null
-    ): WrapEventFilter;
-
-    "YieldBoxDeposit(uint256)"(_amount?: null): YieldBoxDepositEventFilter;
-    YieldBoxDeposit(_amount?: null): YieldBoxDepositEventFilter;
-
-    "YieldBoxRetrieval(uint256)"(_amount?: null): YieldBoxRetrievalEventFilter;
-    YieldBoxRetrieval(_amount?: null): YieldBoxRetrievalEventFilter;
   };
 
   estimateGas: {
@@ -4154,18 +3943,6 @@ export interface BaseTOFT extends BaseContract {
     PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<BigNumber>;
 
     "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    PT_YB_RETRIEVE_STRAT(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "PT_YB_RETRIEVE_STRAT()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    PT_YB_SEND_SGL_BORROW(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "PT_YB_SEND_SGL_BORROW()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    PT_YB_SEND_STRAT(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "PT_YB_SEND_STRAT()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     allowance(
       owner: PromiseOrValue<string>,
@@ -4199,18 +3976,6 @@ export interface BaseTOFT extends BaseContract {
     "balanceOf(address)"(
       account: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    batch(
-      calls: PromiseOrValue<BytesLike>[],
-      revertOnFail: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "batch(bytes[],bool)"(
-      calls: PromiseOrValue<BytesLike>[],
-      revertOnFail: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     callOnOFTReceived(
@@ -4357,10 +4122,6 @@ export interface BaseTOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getLzChainId(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "getLzChainId()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     getTrustedRemoteAddress(
       _remoteChainId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -4386,14 +4147,6 @@ export interface BaseTOFT extends BaseContract {
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
-
-    isHostChain(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "isHostChain()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    isNative(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "isNative()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
@@ -4520,6 +4273,7 @@ export interface BaseTOFT extends BaseContract {
     retrieveFromStrategy(
       _from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
@@ -4527,9 +4281,10 @@ export interface BaseTOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "retrieveFromStrategy(address,uint256,uint256,uint16,address,bytes)"(
+    "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)"(
       _from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
@@ -4575,6 +4330,24 @@ export interface BaseTOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    sendForLeverage(
+      amount: PromiseOrValue<BigNumberish>,
+      leverageFor: PromiseOrValue<string>,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))"(
+      amount: PromiseOrValue<BigNumberish>,
+      leverageFor: PromiseOrValue<string>,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     sendFrom(
       _from: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -4597,19 +4370,21 @@ export interface BaseTOFT extends BaseContract {
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: BaseTOFT.SendOptionsStruct,
+      options: BaseTOFT.ISendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "sendToStrategy(address,address,uint256,uint256,uint16,(uint256,address,bool))"(
+    "sendToStrategy(address,address,uint256,uint256,uint256,uint16,(uint256,address))"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: BaseTOFT.SendOptionsStruct,
+      options: BaseTOFT.ISendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4620,19 +4395,19 @@ export interface BaseTOFT extends BaseContract {
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: BaseTOFT.IBorrowParamsStruct,
       withdrawParams: BaseTOFT.IWithdrawParamsStruct,
-      options: BaseTOFT.SendOptionsStruct,
+      options: BaseTOFT.ISendOptionsStruct,
       approvals: BaseTOFT.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: BaseTOFT.IBorrowParamsStruct,
       withdrawParams: BaseTOFT.IWithdrawParamsStruct,
-      options: BaseTOFT.SendOptionsStruct,
+      options: BaseTOFT.ISendOptionsStruct,
       approvals: BaseTOFT.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -4853,28 +4628,6 @@ export interface BaseTOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    PT_YB_RETRIEVE_STRAT(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "PT_YB_RETRIEVE_STRAT()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    PT_YB_SEND_SGL_BORROW(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "PT_YB_SEND_SGL_BORROW()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    PT_YB_SEND_STRAT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "PT_YB_SEND_STRAT()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     allowance(
       owner: PromiseOrValue<string>,
       spender: PromiseOrValue<string>,
@@ -4907,18 +4660,6 @@ export interface BaseTOFT extends BaseContract {
     "balanceOf(address)"(
       account: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    batch(
-      calls: PromiseOrValue<BytesLike>[],
-      revertOnFail: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "batch(bytes[],bool)"(
-      calls: PromiseOrValue<BytesLike>[],
-      revertOnFail: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     callOnOFTReceived(
@@ -5067,10 +4808,6 @@ export interface BaseTOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getLzChainId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "getLzChainId()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     getTrustedRemoteAddress(
       _remoteChainId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -5096,14 +4833,6 @@ export interface BaseTOFT extends BaseContract {
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
-
-    isHostChain(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "isHostChain()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    isNative(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "isNative()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
@@ -5230,6 +4959,7 @@ export interface BaseTOFT extends BaseContract {
     retrieveFromStrategy(
       _from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
@@ -5237,9 +4967,10 @@ export interface BaseTOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "retrieveFromStrategy(address,uint256,uint256,uint16,address,bytes)"(
+    "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)"(
       _from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
@@ -5285,6 +5016,24 @@ export interface BaseTOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    sendForLeverage(
+      amount: PromiseOrValue<BigNumberish>,
+      leverageFor: PromiseOrValue<string>,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))"(
+      amount: PromiseOrValue<BigNumberish>,
+      leverageFor: PromiseOrValue<string>,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     sendFrom(
       _from: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -5307,19 +5056,21 @@ export interface BaseTOFT extends BaseContract {
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: BaseTOFT.SendOptionsStruct,
+      options: BaseTOFT.ISendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "sendToStrategy(address,address,uint256,uint256,uint16,(uint256,address,bool))"(
+    "sendToStrategy(address,address,uint256,uint256,uint256,uint16,(uint256,address))"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: BaseTOFT.SendOptionsStruct,
+      options: BaseTOFT.ISendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -5330,19 +5081,19 @@ export interface BaseTOFT extends BaseContract {
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: BaseTOFT.IBorrowParamsStruct,
       withdrawParams: BaseTOFT.IWithdrawParamsStruct,
-      options: BaseTOFT.SendOptionsStruct,
+      options: BaseTOFT.ISendOptionsStruct,
       approvals: BaseTOFT.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(uint256,bool,uint16,bytes),(uint256,address,bool),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: BaseTOFT.IBorrowParamsStruct,
       withdrawParams: BaseTOFT.IWithdrawParamsStruct,
-      options: BaseTOFT.SendOptionsStruct,
+      options: BaseTOFT.ISendOptionsStruct,
       approvals: BaseTOFT.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;

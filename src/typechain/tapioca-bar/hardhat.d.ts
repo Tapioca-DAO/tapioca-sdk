@@ -65,9 +65,21 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Test__factory>;
     getContractFactory(
-      name: "BaseOFT",
+      name: "BaseUSDO",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.BaseOFT__factory>;
+    ): Promise<Contracts.BaseUSDO__factory>;
+    getContractFactory(
+      name: "BaseUSDOStorage",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseUSDOStorage__factory>;
+    getContractFactory(
+      name: "USDOLeverageModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.USDOLeverageModule__factory>;
+    getContractFactory(
+      name: "USDOMarketModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.USDOMarketModule__factory>;
     getContractFactory(
       name: "USDO",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -139,10 +151,25 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.Test>;
     getContractAt(
-      name: "BaseOFT",
+      name: "BaseUSDO",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.BaseOFT>;
+    ): Promise<Contracts.BaseUSDO>;
+    getContractAt(
+      name: "BaseUSDOStorage",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseUSDOStorage>;
+    getContractAt(
+      name: "USDOLeverageModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.USDOLeverageModule>;
+    getContractAt(
+      name: "USDOMarketModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.USDOMarketModule>;
     getContractAt(
       name: "USDO",
       address: string,

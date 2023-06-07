@@ -160,6 +160,25 @@ const _abi = [
       {
         indexed: false,
         internalType: "uint256",
+        name: "_oldVal",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "_newVal",
+        type: "uint256",
+      },
+    ],
+    name: "LogBorrowingFee",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
         name: "rate",
         type: "uint256",
       },
@@ -380,6 +399,19 @@ const _abi = [
       },
     ],
     name: "balanceOf",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "borrowOpeningFee",
     outputs: [
       {
         internalType: "uint256",
@@ -801,6 +833,19 @@ const _abi = [
       },
     ],
     name: "setBorrowCap",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_val",
+        type: "uint256",
+      },
+    ],
+    name: "setBorrowOpeningFee",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
