@@ -934,6 +934,13 @@
             ],
             "80001": [
                 {
+                    "name": "MATICMock",
+                    "address": "0x7F68D69150D277016aD3b9B7b3562249F0DAECf6",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
+                {
                     "name": "WETHMock",
                     "address": "0x21116360199D273f83a50395536025339621CbdB",
                     "meta": {
