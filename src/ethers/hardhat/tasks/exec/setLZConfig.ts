@@ -204,7 +204,7 @@ function buildCalls(
         calls.push({
             target: contractToConf.address,
             callData:
-                TapiocaZ.BaseTOFT__factory.createInterface().encodeFunctionData(
+                TapiocaZ.tOft.BaseTOFT__factory.createInterface().encodeFunctionData(
                     'setUseCustomAdapterParams',
                     [true],
                 ),
@@ -224,7 +224,7 @@ function buildCalls(
         calls.push({
             target: contractToConf.address,
             callData:
-                TapiocaZ.BaseTOFT__factory.createInterface().encodeFunctionData(
+                TapiocaZ.tOft.BaseTOFT__factory.createInterface().encodeFunctionData(
                     'setTrustedRemote',
                     [
                         target.lzChainId,
@@ -252,7 +252,7 @@ function buildCalls(
             calls.push({
                 target: contractToConf.address,
                 callData:
-                    TapiocaZ.BaseTOFT__factory.createInterface().encodeFunctionData(
+                    TapiocaZ.tOft.BaseTOFT__factory.createInterface().encodeFunctionData(
                         'setMinDstGas',
                         [
                             target.lzChainId,

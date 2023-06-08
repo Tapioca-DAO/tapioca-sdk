@@ -138,6 +138,7 @@ export interface SGLLeverageInterface extends utils.Interface {
     "setLiquidationBonusAmount(uint256)": FunctionFragment;
     "setMaxLiquidatorReward(uint256)": FunctionFragment;
     "setMinLiquidatorReward(uint256)": FunctionFragment;
+    "setOracle(address)": FunctionFragment;
     "setOracleData(bytes)": FunctionFragment;
     "setProtocolFee(uint256)": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -262,6 +263,8 @@ export interface SGLLeverageInterface extends utils.Interface {
       | "setMaxLiquidatorReward(uint256)"
       | "setMinLiquidatorReward"
       | "setMinLiquidatorReward(uint256)"
+      | "setOracle"
+      | "setOracle(address)"
       | "setOracleData"
       | "setOracleData(bytes)"
       | "setProtocolFee"
@@ -743,6 +746,14 @@ export interface SGLLeverageInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
+    functionFragment: "setOracle",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setOracle(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "setOracleData",
     values: [PromiseOrValue<BytesLike>]
   ): string;
@@ -1213,6 +1224,11 @@ export interface SGLLeverageInterface extends utils.Interface {
     functionFragment: "setMinLiquidatorReward(uint256)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "setOracle", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setOracle(address)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "setOracleData",
     data: BytesLike
@@ -1342,6 +1358,7 @@ export interface SGLLeverageInterface extends utils.Interface {
     "LogWithdrawFees(address,uint256)": EventFragment;
     "LogYieldBoxFeesDeposit(uint256,uint256)": EventFragment;
     "OracleDataUpdated()": EventFragment;
+    "OracleUpdated()": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "PausedUpdated(bool,bool)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
@@ -1411,6 +1428,8 @@ export interface SGLLeverageInterface extends utils.Interface {
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OracleDataUpdated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OracleDataUpdated()"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OracleUpdated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OracleUpdated()"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "OwnershipTransferred(address,address)"
@@ -1630,6 +1649,11 @@ export type OracleDataUpdatedEvent = TypedEvent<
 
 export type OracleDataUpdatedEventFilter =
   TypedEventFilter<OracleDataUpdatedEvent>;
+
+export interface OracleUpdatedEventObject {}
+export type OracleUpdatedEvent = TypedEvent<[], OracleUpdatedEventObject>;
+
+export type OracleUpdatedEventFilter = TypedEventFilter<OracleUpdatedEvent>;
 
 export interface OwnershipTransferredEventObject {
   previousOwner: string;
@@ -2154,6 +2178,16 @@ export interface SGLLeverage extends BaseContract {
 
     "setMinLiquidatorReward(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setOracle(
+      _oracle: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setOracle(address)"(
+      _oracle: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2758,6 +2792,16 @@ export interface SGLLeverage extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  setOracle(
+    _oracle: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setOracle(address)"(
+    _oracle: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   setOracleData(
     _oracleData: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -3345,6 +3389,16 @@ export interface SGLLeverage extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setOracle(
+      _oracle: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setOracle(address)"(
+      _oracle: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     setOracleData(
       _oracleData: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -3664,6 +3718,9 @@ export interface SGLLeverage extends BaseContract {
 
     "OracleDataUpdated()"(): OracleDataUpdatedEventFilter;
     OracleDataUpdated(): OracleDataUpdatedEventFilter;
+
+    "OracleUpdated()"(): OracleUpdatedEventFilter;
+    OracleUpdated(): OracleUpdatedEventFilter;
 
     "OwnershipTransferred(address,address)"(
       previousOwner?: PromiseOrValue<string> | null,
@@ -4122,6 +4179,16 @@ export interface SGLLeverage extends BaseContract {
 
     "setMinLiquidatorReward(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setOracle(
+      _oracle: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setOracle(address)"(
+      _oracle: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4712,6 +4779,16 @@ export interface SGLLeverage extends BaseContract {
 
     "setMinLiquidatorReward(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setOracle(
+      _oracle: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setOracle(address)"(
+      _oracle: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
