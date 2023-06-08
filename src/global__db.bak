@@ -950,6 +950,13 @@
             ],
             "421613": [
                 {
+                    "name": "BBMock",
+                    "address": "0xBf882506B8C592AF4D84AF2FdfEAaC49833c1F23",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
+                {
                     "name": "WETHMock",
                     "address": "0xD3C99Ad6E1d97d4c242C1AF0e1D28075647426C1",
                     "meta": {
