@@ -422,7 +422,7 @@ export class DeployerVM {
 
         // Verify the contracts
         for (const batch of verifyList) {
-            await Promise.all(
+            await Promise.allSettled(
                 batch.map((contract) =>
                     this.hre.run('verify:verify', {
                         ...contract,

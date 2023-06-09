@@ -48,7 +48,10 @@ export const deployMagnetar__task = async (
         console.log('[+] Verifying');
         await hre.run('verify', {
             address: magnetar.address,
-            constructorArgsParams: [signer.address],
+            constructorArgsParams: [
+                signer.address,
+                magnetarMarketModule.address,
+            ],
         });
         console.log('[+] Verified');
     } catch (err: any) {
