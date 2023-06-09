@@ -918,6 +918,13 @@
             ],
             "43113": [
                 {
+                    "name": "LINKEDMock",
+                    "address": "0xEd003497c99d4EcC9Daf3B7b88D6F0a25470A02e",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
+                {
                     "name": "AVALANCHEMock",
                     "address": "0xaB3cc6a4c9dd88A6fBf87bd472F6b6501d17D72d",
                     "meta": {
@@ -949,6 +956,13 @@
                 }
             ],
             "421613": [
+                {
+                    "name": "LINKEDMock",
+                    "address": "0x7214e2d98A02c727ac491E4c79Bad53B879eD2e7",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
                 {
                     "name": "BB2Mock",
                     "address": "0x3C5Da8AFD9D2E0FF6d1A98d33535C9925A1dC7fB",
