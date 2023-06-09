@@ -1469,6 +1469,13 @@
             ],
             "80001": [
                 {
+                    "name": "LINKEDMock",
+                    "address": "0x1787F5DABb7b24405DBC19b698Db557550a2CdC1",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
+                {
                     "name": "MATICMock",
                     "address": "0x7F68D69150D277016aD3b9B7b3562249F0DAECf6",
                     "meta": {
