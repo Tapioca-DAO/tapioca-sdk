@@ -3,6 +3,19 @@
         "tapioca-bar": {
             "4002": [
                 {
+                    "name": "ERC20WithoutStrategy-TapiocaOFT-BBMock",
+                    "address": "0x925FD3001b3E5f1f714716Dd9BC3136756302aaA",
+                    "meta": {
+                        "stratFor": "TapiocaOFT-BBMock",
+                        "args": [
+                            "0xd24E226136571f106E9EbA6C90d025cCde337Fd8",
+                            "0x19FC4f15D9ffa0c132b535537502102EbA9DdFD1"
+                        ],
+                        "salt": "0x07ab248b7d4cf099ce3282ff6564d81ab96f38049fa1f85d9473c8e4eec0a7a5",
+                        "create2": true
+                    }
+                },
+                {
                     "name": "ERC20WithoutStrategy-TapOFT",
                     "address": "0x03b10b84f9d61f4658CaDF45c66f1b93512d87EF",
                     "meta": {
@@ -147,6 +160,19 @@
                 }
             ],
             "43113": [
+                {
+                    "name": "ERC20WithoutStrategy-TapiocaOFT-BBMock",
+                    "address": "0xa3e3A99D7F7eba395C175ab6F64dF10D07252170",
+                    "meta": {
+                        "stratFor": "TapiocaOFT-BBMock",
+                        "args": [
+                            "0x055529378A680Ddc666E57870A87034373A1A50f",
+                            "0xED610624cF797E76aFe8F78a9CeD31359F4bdF92"
+                        ],
+                        "salt": "0x338fbddb4a975bf2e6df8bbc3164687dfb6b702842396c17ff38a72604dbd18b",
+                        "create2": true
+                    }
+                },
                 {
                     "name": "ERC20WithoutStrategy-TapOFT",
                     "address": "0xaC8e8718f8212e972Fa1a67A6a797229CE5e2c99",
@@ -293,6 +319,19 @@
             ],
             "80001": [
                 {
+                    "name": "ERC20WithoutStrategy-TapiocaOFT-BBMock",
+                    "address": "0x3BfC1fA0e5ddf21A4EC0893bacCE5aF85683EB1b",
+                    "meta": {
+                        "stratFor": "TapiocaOFT-BBMock",
+                        "args": [
+                            "0x554CdDbd1CE66c5917CA71c8Fd90E11eD93bF726",
+                            "0xDcFB2765bdb5ced2D7D62847Bd62bDA923D4D9Af"
+                        ],
+                        "salt": "0xba8e45feb02d3177785ed875106c1c0534467078e27751b612234efcd1a834bc",
+                        "create2": true
+                    }
+                },
+                {
                     "name": "ERC20WithoutStrategy-TapOFT",
                     "address": "0xA784Ed1371242792fF237A6Ee9B3175036f6200E",
                     "meta": {
@@ -437,6 +476,46 @@
                 }
             ],
             "421613": [
+                {
+                    "name": "BigBang-TapiocaOFT-BBMock",
+                    "address": "0xD40Db48b4228703DF465eD5328a545bAF269913E",
+                    "meta": {
+                        "isBigBangMarket": true,
+                        "collateral": {
+                            "collateralAddress": "0xCa67cd84A8164BCE83e417AB809cd7b9D8f90dE7",
+                            "collateralStrategyAddress": "0x3857BD7d35DA7970827f5307ad7cc7253A25132a"
+                        }
+                    }
+                },
+                {
+                    "name": "OracleMock-TapiocaOFT-BBMock",
+                    "address": "0x6Ef4B736C1BB961aC85cD7b0b29714d97F3456E5",
+                    "meta": {
+                        "args": [
+                            "OracleMock-TapiocaOFT-BBMock",
+                            "OCM-TapiocaOFT-BBMock",
+                            {
+                                "type": "BigNumber",
+                                "hex": "0x0853a0d2313c0000"
+                            }
+                        ],
+                        "salt": "0x9eeba9ff1c8fc63fa6dc29af1ae4ad9d26e5660fe1f95388032a6fa0a5dd03a4",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "ERC20WithoutStrategy-TapiocaOFT-BBMock",
+                    "address": "0x3857BD7d35DA7970827f5307ad7cc7253A25132a",
+                    "meta": {
+                        "stratFor": "TapiocaOFT-BBMock",
+                        "args": [
+                            "0xE56606EF6A2DEBBa0F4D3E4Ea0903d013e456E04",
+                            "0xCa67cd84A8164BCE83e417AB809cd7b9D8f90dE7"
+                        ],
+                        "salt": "0x5d17610f1ca3ecf9a4cf5c5d74966be10015de3c515eb71b12f9a1ab2737eda9",
+                        "create2": true
+                    }
+                },
                 {
                     "name": "BigBang-BB2Mock",
                     "address": "0xb77e31907Ffffd401411312F7651A520BdE50CEd",
@@ -970,6 +1049,27 @@
         "tapiocaz": {
             "4002": [
                 {
+                    "name": "TapiocaOFT-BBMock",
+                    "address": "0x19FC4f15D9ffa0c132b535537502102EbA9DdFD1",
+                    "meta": {
+                        "isToftHost": false,
+                        "isMerged": false,
+                        "isToft": true,
+                        "args": [
+                            "0x7dcAD72640F835B0FA36EFD3D6d3ec902C7E5acf",
+                            "0xBf882506B8C592AF4D84AF2FdfEAaC49833c1F23",
+                            "0xd24E226136571f106E9EbA6C90d025cCde337Fd8",
+                            "BBMock",
+                            "BB",
+                            18,
+                            421613,
+                            "0x9eefcA185bd685CE08f171f5b52458dDd3F47bA3",
+                            "0xe4Cd86127Cce1250bb75B1933F66a01A1034F25c",
+                            "0x19b9c5b67b6727a4ea1DBF1383a412ABfcE50d4A"
+                        ]
+                    }
+                },
+                {
                     "name": "TapiocaOFT-FANTOMMock",
                     "address": "0x297Bec50D22d96D4C9fCe95dceC9B9718E40B253",
                     "meta": {
@@ -1071,6 +1171,61 @@
                 }
             ],
             "43113": [
+                {
+                    "name": "TapiocaOFT-BBMock",
+                    "address": "0xED610624cF797E76aFe8F78a9CeD31359F4bdF92",
+                    "meta": {
+                        "isToftHost": false,
+                        "isMerged": false,
+                        "isToft": true,
+                        "args": [
+                            "0x93f54D755A063cE7bB9e6Ac47Eccc8e33411d706",
+                            "0xBf882506B8C592AF4D84AF2FdfEAaC49833c1F23",
+                            "0x055529378A680Ddc666E57870A87034373A1A50f",
+                            "BBMock",
+                            "BB",
+                            18,
+                            421613,
+                            "0x5ba5Ea441b44f152ACcAb3280c548fa75A91cc0F",
+                            "0xDd10A6d313e2693631d580D73b86d9271aC96218",
+                            "0x35Be9E323F7A50fA753332E4e378cc2ee1Cc0595"
+                        ]
+                    }
+                },
+                {
+                    "name": "TapiocaOFT-LINKEDMock",
+                    "address": "0x19ac78391839bac42741f1e641506b98ec46ed7d",
+                    "meta": {
+                        "isToftHost": true,
+                        "isMerged": true,
+                        "isToft": true,
+                        "args": [
+                            "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
+                            "0x7214e2d98A02c727ac491E4c79Bad53B879eD2e7",
+                            "0xE56606EF6A2DEBBa0F4D3E4Ea0903d013e456E04",
+                            "LINKEDMock",
+                            "LM1",
+                            18,
+                            43113,
+                            "0xDf970f5E34Bd18061e281483A9E6677e6324eFc6",
+                            "0x1B96E92d0B691DC8360E464646cA8c6b9C191676",
+                            "0xdBA7F93aA7746c54d17728f274EDCd96CB87a089"
+                        ]
+                    }
+                },
+                {
+                    "name": "Balancer",
+                    "address": "0xBc97C4AeE6A89b1e1c42cA5207e1ca1F8f711Fa3",
+                    "meta": {
+                        "args": [
+                            "0x7612aE2a34E5A363E137De748801FB4c86499152",
+                            "0xb850873f4c993Ac2405A1AdD71F6ca5D4d4d6b4f",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ],
+                        "salt": "0x78f91c70509cf7041fb16d913ace816c7d5914ad610fa97ec82221d087409dea",
+                        "create2": true
+                    }
+                },
                 {
                     "name": "TapiocaOFT-FANTOMMock",
                     "address": "0xE0bc0e9A88E60C9720E01ae40174A1Bb797f277d",
@@ -1174,6 +1329,27 @@
             ],
             "80001": [
                 {
+                    "name": "TapiocaOFT-BBMock",
+                    "address": "0xDcFB2765bdb5ced2D7D62847Bd62bDA923D4D9Af",
+                    "meta": {
+                        "isToftHost": false,
+                        "isMerged": false,
+                        "isToft": true,
+                        "args": [
+                            "0xf69186dfBa60DdB133E91E9A4B5673624293d8F8",
+                            "0xBf882506B8C592AF4D84AF2FdfEAaC49833c1F23",
+                            "0x554CdDbd1CE66c5917CA71c8Fd90E11eD93bF726",
+                            "BBMock",
+                            "BB",
+                            18,
+                            421613,
+                            "0xe9dbfe68146Ba337542bcEFbE7681e1DDc528d12",
+                            "0xbac2C8363f3b2De1618Dae58AF459119C9e24DDB",
+                            "0x6A0C440196aae2A61e91f07e7c0a9E309cCB1523"
+                        ]
+                    }
+                },
+                {
                     "name": "TapiocaOFT-FANTOMMock",
                     "address": "0xeC0386A3EC8A92590B49d33226C9d41b7DE817Cf",
                     "meta": {
@@ -1275,6 +1451,61 @@
                 }
             ],
             "421613": [
+                {
+                    "name": "TapiocaOFT-BBMock",
+                    "address": "0xCa67cd84A8164BCE83e417AB809cd7b9D8f90dE7",
+                    "meta": {
+                        "isToftHost": true,
+                        "isMerged": false,
+                        "isToft": true,
+                        "args": [
+                            "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
+                            "0xBf882506B8C592AF4D84AF2FdfEAaC49833c1F23",
+                            "0xE56606EF6A2DEBBa0F4D3E4Ea0903d013e456E04",
+                            "BBMock",
+                            "BB",
+                            18,
+                            421613,
+                            "0x82c08117af66C29a0A96925a5Dc9E843adAF6E76",
+                            "0x0714936e3c65763D40Cd69C9fA7A500fE9863A27",
+                            "0xB2aB8e0Ad0A066C1703CBE0b42112713864505ef"
+                        ]
+                    }
+                },
+                {
+                    "name": "TapiocaOFT-LINKEDMock",
+                    "address": "0x33D8A80e43018E1Ee577F9DdE6777ebeEb12650c",
+                    "meta": {
+                        "isToftHost": true,
+                        "isMerged": true,
+                        "isToft": true,
+                        "args": [
+                            "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
+                            "0x7214e2d98A02c727ac491E4c79Bad53B879eD2e7",
+                            "0xE56606EF6A2DEBBa0F4D3E4Ea0903d013e456E04",
+                            "LINKEDMock",
+                            "LM1",
+                            18,
+                            421613,
+                            "0xDf970f5E34Bd18061e281483A9E6677e6324eFc6",
+                            "0x1B96E92d0B691DC8360E464646cA8c6b9C191676",
+                            "0xdBA7F93aA7746c54d17728f274EDCd96CB87a089"
+                        ]
+                    }
+                },
+                {
+                    "name": "Balancer",
+                    "address": "0x5E3B2F96Cd6a32B83DE9BE39eb46dD4320Ce565f",
+                    "meta": {
+                        "args": [
+                            "0x7612aE2a34E5A363E137De748801FB4c86499152",
+                            "0xb850873f4c993Ac2405A1AdD71F6ca5D4d4d6b4f",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ],
+                        "salt": "0xb1dc55f3a06a2f0e847dbf1a6a7dbdabd1fb39362299247b4e9c34666818cd15",
+                        "create2": true
+                    }
+                },
                 {
                     "name": "TapiocaOFT-FANTOMMock",
                     "address": "0x322C11dcEA523Dc2b43e8425271Ca1adE371201D",
@@ -1446,6 +1677,13 @@
             ],
             "43113": [
                 {
+                    "name": "LINKEDMock",
+                    "address": "0xEd003497c99d4EcC9Daf3B7b88D6F0a25470A02e",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
+                {
                     "name": "AVALANCHEMock",
                     "address": "0xaB3cc6a4c9dd88A6fBf87bd472F6b6501d17D72d",
                     "meta": {
@@ -1462,6 +1700,13 @@
             ],
             "80001": [
                 {
+                    "name": "LINKEDMock",
+                    "address": "0x1787F5DABb7b24405DBC19b698Db557550a2CdC1",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
+                {
                     "name": "MATICMock",
                     "address": "0x7F68D69150D277016aD3b9B7b3562249F0DAECf6",
                     "meta": {
@@ -1477,6 +1722,13 @@
                 }
             ],
             "421613": [
+                {
+                    "name": "LINKEDMock",
+                    "address": "0x7214e2d98A02c727ac491E4c79Bad53B879eD2e7",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
                 {
                     "name": "BB2Mock",
                     "address": "0x3C5Da8AFD9D2E0FF6d1A98d33535C9925A1dC7fB",
