@@ -54,6 +54,18 @@ export declare namespace MagnetarV2Storage {
     spotExchangeRate: PromiseOrValue<BigNumberish>;
     oracleExchangeRate: PromiseOrValue<BigNumberish>;
     totalBorrowCap: PromiseOrValue<BigNumberish>;
+    totalYieldBoxCollateralShare: PromiseOrValue<BigNumberish>;
+    totalYieldBoxCollateralAmount: PromiseOrValue<BigNumberish>;
+    totalYieldBoxAssetShare: PromiseOrValue<BigNumberish>;
+    totalYieldBoxAssetAmount: PromiseOrValue<BigNumberish>;
+    yieldBoxCollateralTokenType: PromiseOrValue<BigNumberish>;
+    yieldBoxCollateralContractAddress: PromiseOrValue<string>;
+    yieldBoxCollateralStrategyAddress: PromiseOrValue<string>;
+    yieldBoxCollateralTokenId: PromiseOrValue<BigNumberish>;
+    yieldBoxAssetTokenType: PromiseOrValue<BigNumberish>;
+    yieldBoxAssetContractAddress: PromiseOrValue<string>;
+    yieldBoxAssetStrategyAddress: PromiseOrValue<string>;
+    yieldBoxAssetTokenId: PromiseOrValue<BigNumberish>;
   };
 
   export type MarketInfoStructOutput = [
@@ -70,6 +82,18 @@ export declare namespace MagnetarV2Storage {
     BigNumber,
     BigNumber,
     BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    number,
+    string,
+    string,
+    BigNumber,
+    number,
+    string,
+    string,
     BigNumber
   ] & {
     collateral: string;
@@ -86,6 +110,18 @@ export declare namespace MagnetarV2Storage {
     spotExchangeRate: BigNumber;
     oracleExchangeRate: BigNumber;
     totalBorrowCap: BigNumber;
+    totalYieldBoxCollateralShare: BigNumber;
+    totalYieldBoxCollateralAmount: BigNumber;
+    totalYieldBoxAssetShare: BigNumber;
+    totalYieldBoxAssetAmount: BigNumber;
+    yieldBoxCollateralTokenType: number;
+    yieldBoxCollateralContractAddress: string;
+    yieldBoxCollateralStrategyAddress: string;
+    yieldBoxCollateralTokenId: BigNumber;
+    yieldBoxAssetTokenType: number;
+    yieldBoxAssetContractAddress: string;
+    yieldBoxAssetStrategyAddress: string;
+    yieldBoxAssetTokenId: BigNumber;
   };
 
   export type BigBangInfoStruct = {
