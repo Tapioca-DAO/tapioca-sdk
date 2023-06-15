@@ -28,35 +28,31 @@ import type {
   PromiseOrValue,
 } from "../common";
 
-export declare namespace ICommonOFT {
-  export type LzCallParamsStruct = {
-    refundAddress: PromiseOrValue<string>;
-    zroPaymentAddress: PromiseOrValue<string>;
-    adapterParams: PromiseOrValue<BytesLike>;
+export declare namespace ITapiocaOFT {
+  export type IWithdrawParamsStruct = {
+    withdraw: PromiseOrValue<boolean>;
+    withdrawLzFeeAmount: PromiseOrValue<BigNumberish>;
+    withdrawOnOtherChain: PromiseOrValue<boolean>;
+    withdrawLzChainId: PromiseOrValue<BigNumberish>;
+    withdrawAdapterParams: PromiseOrValue<BytesLike>;
   };
 
-  export type LzCallParamsStructOutput = [string, string, string] & {
-    refundAddress: string;
-    zroPaymentAddress: string;
-    adapterParams: string;
+  export type IWithdrawParamsStructOutput = [
+    boolean,
+    BigNumber,
+    boolean,
+    number,
+    string
+  ] & {
+    withdraw: boolean;
+    withdrawLzFeeAmount: BigNumber;
+    withdrawOnOtherChain: boolean;
+    withdrawLzChainId: number;
+    withdrawAdapterParams: string;
   };
 }
 
 export declare namespace IUSDOBase {
-  export type ILendParamsStruct = {
-    repay: PromiseOrValue<boolean>;
-    amount: PromiseOrValue<BigNumberish>;
-    marketHelper: PromiseOrValue<string>;
-    market: PromiseOrValue<string>;
-  };
-
-  export type ILendParamsStructOutput = [boolean, BigNumber, string, string] & {
-    repay: boolean;
-    amount: BigNumber;
-    marketHelper: string;
-    market: string;
-  };
-
   export type ISendOptionsStruct = {
     extraGasLimit: PromiseOrValue<BigNumberish>;
     zroPaymentAddress: PromiseOrValue<string>;
@@ -67,9 +63,22 @@ export declare namespace IUSDOBase {
     zroPaymentAddress: string;
   };
 
+  export type IRemoveParamsStruct = {
+    share: PromiseOrValue<BigNumberish>;
+    marketHelper: PromiseOrValue<string>;
+    market: PromiseOrValue<string>;
+  };
+
+  export type IRemoveParamsStructOutput = [BigNumber, string, string] & {
+    share: BigNumber;
+    marketHelper: string;
+    market: string;
+  };
+
   export type IApprovalStruct = {
     allowFailure: PromiseOrValue<boolean>;
     target: PromiseOrValue<string>;
+    permitBorrow: PromiseOrValue<boolean>;
     owner: PromiseOrValue<string>;
     spender: PromiseOrValue<string>;
     value: PromiseOrValue<BigNumberish>;
@@ -82,6 +91,7 @@ export declare namespace IUSDOBase {
   export type IApprovalStructOutput = [
     boolean,
     string,
+    boolean,
     string,
     string,
     BigNumber,
@@ -92,6 +102,7 @@ export declare namespace IUSDOBase {
   ] & {
     allowFailure: boolean;
     target: string;
+    permitBorrow: boolean;
     owner: string;
     spender: string;
     value: BigNumber;
@@ -99,6 +110,31 @@ export declare namespace IUSDOBase {
     v: number;
     r: string;
     s: string;
+  };
+
+  export type ILendParamsStruct = {
+    repay: PromiseOrValue<boolean>;
+    amount: PromiseOrValue<BigNumberish>;
+    marketHelper: PromiseOrValue<string>;
+    market: PromiseOrValue<string>;
+    removeCollateral: PromiseOrValue<boolean>;
+    removeCollateralShare: PromiseOrValue<BigNumberish>;
+  };
+
+  export type ILendParamsStructOutput = [
+    boolean,
+    BigNumber,
+    string,
+    string,
+    boolean,
+    BigNumber
+  ] & {
+    repay: boolean;
+    amount: BigNumber;
+    marketHelper: string;
+    market: string;
+    removeCollateral: boolean;
+    removeCollateralShare: BigNumber;
   };
 
   export type ILeverageLZDataStruct = {
@@ -156,6 +192,20 @@ export declare namespace IUSDOBase {
   ] & { swapper: string; magnetar: string; tOft: string; srcMarket: string };
 }
 
+export declare namespace ICommonOFT {
+  export type LzCallParamsStruct = {
+    refundAddress: PromiseOrValue<string>;
+    zroPaymentAddress: PromiseOrValue<string>;
+    adapterParams: PromiseOrValue<BytesLike>;
+  };
+
+  export type LzCallParamsStructOutput = [string, string, string] & {
+    refundAddress: string;
+    zroPaymentAddress: string;
+    adapterParams: string;
+  };
+}
+
 export interface BaseUSDOInterface extends utils.Interface {
   functions: {
     "DEFAULT_PAYLOAD_SIZE_LIMIT()": FunctionFragment;
@@ -197,10 +247,11 @@ export interface BaseUSDOInterface extends utils.Interface {
     "payloadSizeLimitLookup(uint16)": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "precrime()": FunctionFragment;
+    "removeAsset(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
-    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
+    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
     "setBurnerStatus(address,bool)": FunctionFragment;
@@ -311,6 +362,8 @@ export interface BaseUSDOInterface extends utils.Interface {
       | "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)"
       | "precrime"
       | "precrime()"
+      | "removeAsset"
+      | "removeAsset(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"
       | "renounceOwnership"
       | "renounceOwnership()"
       | "retryMessage"
@@ -318,7 +371,7 @@ export interface BaseUSDOInterface extends utils.Interface {
       | "sendAndCall"
       | "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))"
       | "sendAndLendOrRepay"
-      | "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
+      | "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "sendForLeverage"
       | "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))"
       | "sendFrom"
@@ -768,6 +821,32 @@ export interface BaseUSDOInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "removeAsset",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      ITapiocaOFT.IWithdrawParamsStruct,
+      IUSDOBase.ISendOptionsStruct,
+      IUSDOBase.IRemoveParamsStruct,
+      IUSDOBase.IApprovalStruct[],
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "removeAsset(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      ITapiocaOFT.IWithdrawParamsStruct,
+      IUSDOBase.ISendOptionsStruct,
+      IUSDOBase.IRemoveParamsStruct,
+      IUSDOBase.IApprovalStruct[],
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "renounceOwnership",
     values?: undefined
   ): string;
@@ -829,7 +908,7 @@ export interface BaseUSDOInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -1352,6 +1431,14 @@ export interface BaseUSDOInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "precrime", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "precrime()", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "removeAsset",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "removeAsset(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "renounceOwnership",
     data: BytesLike
   ): Result;
@@ -1380,7 +1467,7 @@ export interface BaseUSDOInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2359,6 +2446,30 @@ export interface BaseUSDO extends BaseContract {
 
     "precrime()"(overrides?: CallOverrides): Promise<[string]>;
 
+    removeAsset(
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      options: IUSDOBase.ISendOptionsStruct,
+      removeParams: IUSDOBase.IRemoveParamsStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "removeAsset(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      options: IUSDOBase.ISendOptionsStruct,
+      removeParams: IUSDOBase.IRemoveParamsStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2415,7 +2526,7 @@ export interface BaseUSDO extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3098,6 +3209,30 @@ export interface BaseUSDO extends BaseContract {
 
   "precrime()"(overrides?: CallOverrides): Promise<string>;
 
+  removeAsset(
+    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    lzDstChainId: PromiseOrValue<BigNumberish>,
+    withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+    options: IUSDOBase.ISendOptionsStruct,
+    removeParams: IUSDOBase.IRemoveParamsStruct,
+    approvals: IUSDOBase.IApprovalStruct[],
+    adapterParams: PromiseOrValue<BytesLike>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "removeAsset(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    lzDstChainId: PromiseOrValue<BigNumberish>,
+    withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+    options: IUSDOBase.ISendOptionsStruct,
+    removeParams: IUSDOBase.IRemoveParamsStruct,
+    approvals: IUSDOBase.IApprovalStruct[],
+    adapterParams: PromiseOrValue<BytesLike>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   renounceOwnership(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -3154,7 +3289,7 @@ export interface BaseUSDO extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+  "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3839,6 +3974,30 @@ export interface BaseUSDO extends BaseContract {
 
     "precrime()"(overrides?: CallOverrides): Promise<string>;
 
+    removeAsset(
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      options: IUSDOBase.ISendOptionsStruct,
+      removeParams: IUSDOBase.IRemoveParamsStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "removeAsset(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      options: IUSDOBase.ISendOptionsStruct,
+      removeParams: IUSDOBase.IRemoveParamsStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
     "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
@@ -3891,7 +4050,7 @@ export interface BaseUSDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -4780,6 +4939,30 @@ export interface BaseUSDO extends BaseContract {
 
     "precrime()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    removeAsset(
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      options: IUSDOBase.ISendOptionsStruct,
+      removeParams: IUSDOBase.IRemoveParamsStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "removeAsset(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      options: IUSDOBase.ISendOptionsStruct,
+      removeParams: IUSDOBase.IRemoveParamsStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -4836,7 +5019,7 @@ export interface BaseUSDO extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -5524,6 +5707,30 @@ export interface BaseUSDO extends BaseContract {
 
     "precrime()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    removeAsset(
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      options: IUSDOBase.ISendOptionsStruct,
+      removeParams: IUSDOBase.IRemoveParamsStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "removeAsset(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      options: IUSDOBase.ISendOptionsStruct,
+      removeParams: IUSDOBase.IRemoveParamsStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -5580,7 +5787,7 @@ export interface BaseUSDO extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address),(uint256,address),(bool,address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
