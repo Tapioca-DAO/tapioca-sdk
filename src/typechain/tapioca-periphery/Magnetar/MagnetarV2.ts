@@ -234,7 +234,6 @@ export interface MagnetarV2Interface extends utils.Interface {
     "owner()": FunctionFragment;
     "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setApprovalForAll(address,bool)": FunctionFragment;
     "singularityMarketInfo(address,address[])": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "withdrawTo(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)": FunctionFragment;
@@ -276,8 +275,6 @@ export interface MagnetarV2Interface extends utils.Interface {
       | "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)"
       | "renounceOwnership"
       | "renounceOwnership()"
-      | "setApprovalForAll"
-      | "setApprovalForAll(address,bool)"
       | "singularityMarketInfo"
       | "singularityMarketInfo(address,address[])"
       | "transferOwnership"
@@ -523,14 +520,6 @@ export interface MagnetarV2Interface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "setApprovalForAll",
-    values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setApprovalForAll(address,bool)",
-    values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "singularityMarketInfo",
     values: [PromiseOrValue<string>, PromiseOrValue<string>[]]
   ): string;
@@ -702,14 +691,6 @@ export interface MagnetarV2Interface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setApprovalForAll",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setApprovalForAll(address,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1048,18 +1029,6 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    setApprovalForAll(
-      operator: PromiseOrValue<string>,
-      approved: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setApprovalForAll(address,bool)"(
-      operator: PromiseOrValue<string>,
-      approved: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     singularityMarketInfo(
       who: PromiseOrValue<string>,
       markets: PromiseOrValue<string>[],
@@ -1357,18 +1326,6 @@ export interface MagnetarV2 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  setApprovalForAll(
-    operator: PromiseOrValue<string>,
-    approved: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setApprovalForAll(address,bool)"(
-    operator: PromiseOrValue<string>,
-    approved: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   singularityMarketInfo(
     who: PromiseOrValue<string>,
     markets: PromiseOrValue<string>[],
@@ -1661,18 +1618,6 @@ export interface MagnetarV2 extends BaseContract {
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
     "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
-
-    setApprovalForAll(
-      operator: PromiseOrValue<string>,
-      approved: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setApprovalForAll(address,bool)"(
-      operator: PromiseOrValue<string>,
-      approved: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     singularityMarketInfo(
       who: PromiseOrValue<string>,
@@ -1994,18 +1939,6 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    setApprovalForAll(
-      operator: PromiseOrValue<string>,
-      approved: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setApprovalForAll(address,bool)"(
-      operator: PromiseOrValue<string>,
-      approved: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     singularityMarketInfo(
       who: PromiseOrValue<string>,
       markets: PromiseOrValue<string>[],
@@ -2301,18 +2234,6 @@ export interface MagnetarV2 extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "renounceOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setApprovalForAll(
-      operator: PromiseOrValue<string>,
-      approved: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setApprovalForAll(address,bool)"(
-      operator: PromiseOrValue<string>,
-      approved: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
