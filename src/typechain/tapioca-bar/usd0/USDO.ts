@@ -256,7 +256,7 @@ export interface USDOInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
-    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
+    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)": FunctionFragment;
     "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
     "setBurnerStatus(address,bool)": FunctionFragment;
@@ -386,7 +386,7 @@ export interface USDOInterface extends utils.Interface {
       | "sendAndCall"
       | "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))"
       | "sendAndLendOrRepay"
-      | "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
+      | "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"
       | "sendForLeverage"
       | "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))"
       | "sendFrom"
@@ -969,18 +969,20 @@ export interface USDOInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       IUSDOBase.ILendParamsStruct,
       IUSDOBase.ISendOptionsStruct,
-      IUSDOBase.IApprovalStruct[]
+      IUSDOBase.IApprovalStruct[],
+      PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       IUSDOBase.ILendParamsStruct,
       IUSDOBase.ISendOptionsStruct,
-      IUSDOBase.IApprovalStruct[]
+      IUSDOBase.IApprovalStruct[],
+      PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
@@ -1560,7 +1562,7 @@ export interface USDOInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2678,16 +2680,18 @@ export interface USDO extends BaseContract {
       lendParams: IUSDOBase.ILendParamsStruct,
       options: IUSDOBase.ISendOptionsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       lendParams: IUSDOBase.ILendParamsStruct,
       options: IUSDOBase.ISendOptionsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -3503,16 +3507,18 @@ export interface USDO extends BaseContract {
     lendParams: IUSDOBase.ILendParamsStruct,
     options: IUSDOBase.ISendOptionsStruct,
     approvals: IUSDOBase.IApprovalStruct[],
+    adapterParams: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+  "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
     lendParams: IUSDOBase.ILendParamsStruct,
     options: IUSDOBase.ISendOptionsStruct,
     approvals: IUSDOBase.IApprovalStruct[],
+    adapterParams: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -4326,16 +4332,18 @@ export interface USDO extends BaseContract {
       lendParams: IUSDOBase.ILendParamsStruct,
       options: IUSDOBase.ISendOptionsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       lendParams: IUSDOBase.ILendParamsStruct,
       options: IUSDOBase.ISendOptionsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -5357,16 +5365,18 @@ export interface USDO extends BaseContract {
       lendParams: IUSDOBase.ILendParamsStruct,
       options: IUSDOBase.ISendOptionsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       lendParams: IUSDOBase.ILendParamsStruct,
       options: IUSDOBase.ISendOptionsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -6187,16 +6197,18 @@ export interface USDO extends BaseContract {
       lendParams: IUSDOBase.ILendParamsStruct,
       options: IUSDOBase.ISendOptionsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendAndLendOrRepay(address,address,uint16,(bool,uint256,address,address,bool,uint256),(uint256,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       lendParams: IUSDOBase.ILendParamsStruct,
       options: IUSDOBase.ISendOptionsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
