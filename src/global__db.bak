@@ -3,6 +3,19 @@
         "tapioca-bar": {
             "4002": [
                 {
+                    "name": "ERC20WithoutStrategy-USDO",
+                    "address": "0x63d7373Dc5C42f5F9b37e2691828e15422dBa98B",
+                    "meta": {
+                        "stratFor": "USDO",
+                        "args": [
+                            "0x08cFba843Bf4AE1a9874Fae8c9B8F051EfcCDf17",
+                            "0xD8C30a31748cb8a4FB9ac637332bDC91C17ab596"
+                        ],
+                        "salt": "0x5a02464d2194fbbb6f0ab3dc66b019a99a287f675e2de0e152d60e636ade2f00",
+                        "create2": true
+                    }
+                },
+                {
                     "name": "USDOLeverageModule",
                     "address": "0x4c7a9B015e38a4342570Ea9dfd6CEE60418bD47a",
                     "meta": {
@@ -38,19 +51,6 @@
                             "0xF5a29FAC757C647136c44141777AB73a2854ce9f"
                         ],
                         "salt": "0x70705a6d981e1b56ca576d99b0e87d2c2e9dcd8fbd7908ea6da853e8bb3006b5",
-                        "create2": true
-                    }
-                },
-                {
-                    "name": "ERC20WithoutStrategy-USDO",
-                    "address": "0x7919aA0E88978ddAA2FdfB0528e018e69805b566",
-                    "meta": {
-                        "stratFor": "USDO",
-                        "args": [
-                            "0x08cFba843Bf4AE1a9874Fae8c9B8F051EfcCDf17",
-                            "0xe62C2AAaEA25Bf403755c0ADcFf8EED0cb970845"
-                        ],
-                        "salt": "0x844d9f25a1bbe9bbc14b17e07082d300c35d455c4d91c9cebfd75c2ab415e50d",
                         "create2": true
                     }
                 },
@@ -148,6 +148,19 @@
             ],
             "43113": [
                 {
+                    "name": "ERC20WithoutStrategy-USDO",
+                    "address": "0x94c1de8E761E6edD9c96B0Eaa04C1dE6FA5c2031",
+                    "meta": {
+                        "stratFor": "USDO",
+                        "args": [
+                            "0xa4957075980Ec5caD26d42859d975c152350a6a9",
+                            "0x38F466d992A473211Dc32c88c4E36c59354dEe85"
+                        ],
+                        "salt": "0x3e0d4fb5c3f301d74f4eaf222b0e922e12ed3c5c20da5219a513952450b47a02",
+                        "create2": true
+                    }
+                },
+                {
                     "name": "USDOLeverageModule",
                     "address": "0x17b8C3d3a36FC26b741300eF3554372F0B0D4a03",
                     "meta": {
@@ -183,19 +196,6 @@
                             "0x1E1b5Ee9Ac523fd13C845EA26467DA3828b4Bf2e"
                         ],
                         "salt": "0x4489bbe003642b196e44d4fb0b321503f70bcc977492d0b65f989a25c0d273d4",
-                        "create2": true
-                    }
-                },
-                {
-                    "name": "ERC20WithoutStrategy-USDO",
-                    "address": "0x9D0eC45Fd74B889eB532f34B6281AC03761C9993",
-                    "meta": {
-                        "stratFor": "USDO",
-                        "args": [
-                            "0xa4957075980Ec5caD26d42859d975c152350a6a9",
-                            "0x2aB974f03151C138CdEF66addAf05a93FB796b23"
-                        ],
-                        "salt": "0xa0996b4eb776b0fe5f01a9e877953ae1cbcf5439c01d4839b3ff16b0b31749c9",
                         "create2": true
                     }
                 },
@@ -293,6 +293,19 @@
             ],
             "80001": [
                 {
+                    "name": "ERC20WithoutStrategy-USDO",
+                    "address": "0x2E872438746e953af382C7596f9c30FC7B7bcB48",
+                    "meta": {
+                        "stratFor": "USDO",
+                        "args": [
+                            "0xEF7DB9bfE4194Ac70b0E1736aB267691dB573A6D",
+                            "0xDEFa7E0D808474a3eacDEc44f418e4C82Bd9149f"
+                        ],
+                        "salt": "0x4587999bde5ef4b0e8023739d2ff080ec0798195b96dccc2cc2c687b488c854f",
+                        "create2": true
+                    }
+                },
+                {
                     "name": "USDOLeverageModule",
                     "address": "0x75C73814aA9f1D49363aCBb7b389719aa893Af4a",
                     "meta": {
@@ -328,19 +341,6 @@
                             "0xFFA759cE187E3790Fa0161d5Bc9839C8a4B50559"
                         ],
                         "salt": "0x3c236ab7ba7738602dc9bf7779d74cf6125d80cc6174477387ce73f08ee1d0d6",
-                        "create2": true
-                    }
-                },
-                {
-                    "name": "ERC20WithoutStrategy-USDO",
-                    "address": "0x314f61C9c216F806653376a4f39E6f3DfC50F1D9",
-                    "meta": {
-                        "stratFor": "USDO",
-                        "args": [
-                            "0xEF7DB9bfE4194Ac70b0E1736aB267691dB573A6D",
-                            "0x0A8a1cad44Ea686DbE9CC9110deeC9d899DA36d8"
-                        ],
-                        "salt": "0xe3d3153ced99051bb51e8535e0b6345cd227b795c124f93617eac2d0a78245b6",
                         "create2": true
                     }
                 },
@@ -437,6 +437,77 @@
                 }
             ],
             "421613": [
+                {
+                    "name": "BigBang-TapiocaOFT-WETHMock",
+                    "address": "0x49E0eC04854BEb42898e61Ee9C83c8d4fCD84341",
+                    "meta": {
+                        "isBigBangMarket": true,
+                        "collateral": {
+                            "collateralAddress": "0x376b5F65aeC8B19839af83722DcEfAe341b703F2",
+                            "collateralStrategyAddress": "0xa49567E61baa858468bb5385F22281EF3cC9B410"
+                        }
+                    }
+                },
+                {
+                    "name": "Tapioca Singularity TapiocaOFT-WETHMock/USDO-OracleMock-TapiocaOFT-WETHMock",
+                    "address": "0xb9CF12675a8fb28B3Df3761B69b93a671416e433",
+                    "meta": {
+                        "isSGLMarket": true,
+                        "collateral": {
+                            "collateralAddress": "0x376b5F65aeC8B19839af83722DcEfAe341b703F2",
+                            "collateralStrategyAddress": "0xa49567E61baa858468bb5385F22281EF3cC9B410"
+                        },
+                        "asset": {
+                            "assetAddress": "0xf69c1F4ae784ba4fF61B1079478Fc4ee709491D6",
+                            "assetStrategyAddress": "0x8614Af9a2C87E2223855CCc1F7615986E6D3a12C"
+                        }
+                    }
+                },
+                {
+                    "name": "Tapioca Singularity TapiocaOFT-MATICM/USDO-OracleMock-TapiocaOFT-MATICM",
+                    "address": "0x39A4eFd277ABb0aC783E24EcEF1fA9c1F00Bf390",
+                    "meta": {
+                        "isSGLMarket": true,
+                        "collateral": {
+                            "collateralAddress": "0x8Ab7F7da0d28284E5906a6E7776B17962Aeb376D",
+                            "collateralStrategyAddress": "0x377911aB664A760CFF00B5B3Dc3A915A4339a61a"
+                        },
+                        "asset": {
+                            "assetAddress": "0xf69c1F4ae784ba4fF61B1079478Fc4ee709491D6",
+                            "assetStrategyAddress": "0x8614Af9a2C87E2223855CCc1F7615986E6D3a12C"
+                        }
+                    }
+                },
+                {
+                    "name": "Tapioca Singularity TapiocaOFT-FANTOMMock/USDO-OracleMock-TapiocaOFT-FANTOMMock",
+                    "address": "0x59D5d0d9C73b9144091d825e722C42AA9Ea0DD5f",
+                    "meta": {
+                        "isSGLMarket": true,
+                        "collateral": {
+                            "collateralAddress": "0xd7b4942b6C908c93a4157f388366bD1eA58BBe4c",
+                            "collateralStrategyAddress": "0x3f2c1a1b6BbF40B151b3C5F435aDF2B8b57d12c7"
+                        },
+                        "asset": {
+                            "assetAddress": "0xf69c1F4ae784ba4fF61B1079478Fc4ee709491D6",
+                            "assetStrategyAddress": "0x8614Af9a2C87E2223855CCc1F7615986E6D3a12C"
+                        }
+                    }
+                },
+                {
+                    "name": "Tapioca Singularity TapiocaOFT-AVAXMock/USDO-OracleMock-TapiocaOFT-AVAXMock",
+                    "address": "0x456EDa3d41E4A6d1047Ee2be90032E56d6c59F23",
+                    "meta": {
+                        "isSGLMarket": true,
+                        "collateral": {
+                            "collateralAddress": "0x91E339cC47acB4E846959f03Af041E725C1e511e",
+                            "collateralStrategyAddress": "0xF1a08DeB0A56c4a7a548Aedf188FBcd1A46F0534"
+                        },
+                        "asset": {
+                            "assetAddress": "0xf69c1F4ae784ba4fF61B1079478Fc4ee709491D6",
+                            "assetStrategyAddress": "0x8614Af9a2C87E2223855CCc1F7615986E6D3a12C"
+                        }
+                    }
+                },
                 {
                     "name": "Penrose",
                     "address": "0x6C579eD6857158a63a7af51D20f8A7416179c7Af",
@@ -579,77 +650,6 @@
                         ],
                         "salt": "0xcb2077e3bca2f253595ab6f4ce2b9b34fc157d247fe12a5d1bcef55b1248cd08",
                         "create2": true
-                    }
-                },
-                {
-                    "name": "BigBang-TapiocaOFT-WETHMock",
-                    "address": "0x88139e7a6Dc124d9CE2a384992772CC1d82f50b3",
-                    "meta": {
-                        "isBigBangMarket": true,
-                        "collateral": {
-                            "collateralAddress": "0x376b5F65aeC8B19839af83722DcEfAe341b703F2",
-                            "collateralStrategyAddress": "0xa49567E61baa858468bb5385F22281EF3cC9B410"
-                        }
-                    }
-                },
-                {
-                    "name": "Tapioca Singularity TapiocaOFT-WETHMock/USDO-OracleMock-TapiocaOFT-WETHMock",
-                    "address": "0x088a938E57Db91609fD3d7e273F1610D33280F3D",
-                    "meta": {
-                        "isSGLMarket": true,
-                        "collateral": {
-                            "collateralAddress": "0x376b5F65aeC8B19839af83722DcEfAe341b703F2",
-                            "collateralStrategyAddress": "0xa49567E61baa858468bb5385F22281EF3cC9B410"
-                        },
-                        "asset": {
-                            "assetAddress": "0xF2B650FF789b837Dbb92e0BC64E0008b3194D1B0",
-                            "assetStrategyAddress": "0x6293bf4bacA4e88d019F56c937C17105e961bacb"
-                        }
-                    }
-                },
-                {
-                    "name": "Tapioca Singularity TapiocaOFT-MATICM/USDO-OracleMock-TapiocaOFT-MATICM",
-                    "address": "0x2828Ac2e8F217918b84413EB9F4B7F842B82E7af",
-                    "meta": {
-                        "isSGLMarket": true,
-                        "collateral": {
-                            "collateralAddress": "0x8Ab7F7da0d28284E5906a6E7776B17962Aeb376D",
-                            "collateralStrategyAddress": "0x377911aB664A760CFF00B5B3Dc3A915A4339a61a"
-                        },
-                        "asset": {
-                            "assetAddress": "0xF2B650FF789b837Dbb92e0BC64E0008b3194D1B0",
-                            "assetStrategyAddress": "0x6293bf4bacA4e88d019F56c937C17105e961bacb"
-                        }
-                    }
-                },
-                {
-                    "name": "Tapioca Singularity TapiocaOFT-FANTOMMock/USDO-OracleMock-TapiocaOFT-FANTOMMock",
-                    "address": "0xCFeA5d12dE917AdE9872b2981E436C087244AB20",
-                    "meta": {
-                        "isSGLMarket": true,
-                        "collateral": {
-                            "collateralAddress": "0xd7b4942b6C908c93a4157f388366bD1eA58BBe4c",
-                            "collateralStrategyAddress": "0x3f2c1a1b6BbF40B151b3C5F435aDF2B8b57d12c7"
-                        },
-                        "asset": {
-                            "assetAddress": "0xF2B650FF789b837Dbb92e0BC64E0008b3194D1B0",
-                            "assetStrategyAddress": "0x6293bf4bacA4e88d019F56c937C17105e961bacb"
-                        }
-                    }
-                },
-                {
-                    "name": "Tapioca Singularity TapiocaOFT-AVAXMock/USDO-OracleMock-TapiocaOFT-AVAXMock",
-                    "address": "0x5F5055AFFCaA05250602F3bd696462429B616794",
-                    "meta": {
-                        "isSGLMarket": true,
-                        "collateral": {
-                            "collateralAddress": "0x91E339cC47acB4E846959f03Af041E725C1e511e",
-                            "collateralStrategyAddress": "0xF1a08DeB0A56c4a7a548Aedf188FBcd1A46F0534"
-                        },
-                        "asset": {
-                            "assetAddress": "0xF2B650FF789b837Dbb92e0BC64E0008b3194D1B0",
-                            "assetStrategyAddress": "0x6293bf4bacA4e88d019F56c937C17105e961bacb"
-                        }
                     }
                 },
                 {
@@ -1312,7 +1312,7 @@
             "4002": [
                 {
                     "name": "Magnetar",
-                    "address": "0x80fD61250289482460162A188feF0DC22f06600e",
+                    "address": "0x74E1d68Fd9Bb230045CbDa895Ba8A8B2C3D2Ad1A",
                     "meta": {}
                 },
                 {
@@ -1336,7 +1336,7 @@
             "80001": [
                 {
                     "name": "Magnetar",
-                    "address": "0x62F8B281d1991a18A54C5F642026B01d6252c8cf",
+                    "address": "0xdaF1d8dee27765dd20184A0E098CaA49B62A67fe",
                     "meta": {}
                 },
                 {
@@ -1348,7 +1348,7 @@
             "421613": [
                 {
                     "name": "Magnetar",
-                    "address": "0xe6E5Fd4377573c2185f92D4e4D424B66AD5A5BDE",
+                    "address": "0x5e9Ce2d21569fAC9b3292C648Bfc22E28626bD18",
                     "meta": {}
                 },
                 {
