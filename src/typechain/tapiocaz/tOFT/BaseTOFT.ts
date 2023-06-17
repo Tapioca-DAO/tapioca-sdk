@@ -51,16 +51,6 @@ export declare namespace ITapiocaOFT {
     withdrawAdapterParams: string;
   };
 
-  export type ISendOptionsStruct = {
-    extraGasLimit: PromiseOrValue<BigNumberish>;
-    zroPaymentAddress: PromiseOrValue<string>;
-  };
-
-  export type ISendOptionsStructOutput = [BigNumber, string] & {
-    extraGasLimit: BigNumber;
-    zroPaymentAddress: string;
-  };
-
   export type IRemoveParamsStruct = {
     share: PromiseOrValue<BigNumberish>;
     marketHelper: PromiseOrValue<string>;
@@ -108,6 +98,16 @@ export declare namespace ITapiocaOFT {
     v: number;
     r: string;
     s: string;
+  };
+
+  export type ISendOptionsStruct = {
+    extraGasLimit: PromiseOrValue<BigNumberish>;
+    zroPaymentAddress: PromiseOrValue<string>;
+  };
+
+  export type ISendOptionsStructOutput = [BigNumber, string] & {
+    extraGasLimit: BigNumber;
+    zroPaymentAddress: string;
   };
 
   export type IBorrowParamsStruct = {
@@ -237,7 +237,7 @@ export interface BaseTOFTInterface extends utils.Interface {
     "payloadSizeLimitLookup(uint16)": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "precrime()": FunctionFragment;
-    "removeCollateral(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
+    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
@@ -342,7 +342,7 @@ export interface BaseTOFTInterface extends utils.Interface {
       | "precrime"
       | "precrime()"
       | "removeCollateral"
-      | "removeCollateral(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
+      | "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"
       | "renounceOwnership"
       | "renounceOwnership()"
       | "retrieveFromStrategy"
@@ -767,22 +767,24 @@ export interface BaseTOFTInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
       ITapiocaOFT.IWithdrawParamsStruct,
-      ITapiocaOFT.ISendOptionsStruct,
       ITapiocaOFT.IRemoveParamsStruct,
-      ITapiocaOFT.IApprovalStruct[]
+      ITapiocaOFT.IApprovalStruct[],
+      PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "removeCollateral(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
       ITapiocaOFT.IWithdrawParamsStruct,
-      ITapiocaOFT.ISendOptionsStruct,
       ITapiocaOFT.IRemoveParamsStruct,
-      ITapiocaOFT.IApprovalStruct[]
+      ITapiocaOFT.IApprovalStruct[],
+      PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
@@ -1354,7 +1356,7 @@ export interface BaseTOFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "removeCollateral(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2194,21 +2196,23 @@ export interface BaseTOFT extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
       approvals: ITapiocaOFT.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "removeCollateral(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
       approvals: ITapiocaOFT.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2911,21 +2915,23 @@ export interface BaseTOFT extends BaseContract {
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
+    zroPaymentAddress: PromiseOrValue<string>,
     withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-    options: ITapiocaOFT.ISendOptionsStruct,
     removeParams: ITapiocaOFT.IRemoveParamsStruct,
     approvals: ITapiocaOFT.IApprovalStruct[],
+    adapterParams: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "removeCollateral(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+  "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
+    zroPaymentAddress: PromiseOrValue<string>,
     withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-    options: ITapiocaOFT.ISendOptionsStruct,
     removeParams: ITapiocaOFT.IRemoveParamsStruct,
     approvals: ITapiocaOFT.IApprovalStruct[],
+    adapterParams: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3630,21 +3636,23 @@ export interface BaseTOFT extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
       approvals: ITapiocaOFT.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "removeCollateral(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
       approvals: ITapiocaOFT.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4480,21 +4488,23 @@ export interface BaseTOFT extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
       approvals: ITapiocaOFT.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "removeCollateral(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
       approvals: ITapiocaOFT.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5202,21 +5212,23 @@ export interface BaseTOFT extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
       approvals: ITapiocaOFT.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "removeCollateral(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes),(uint256,address,address),(bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
       approvals: ITapiocaOFT.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
