@@ -1323,6 +1323,11 @@
             ],
             "43113": [
                 {
+                    "name": "Magnetar",
+                    "address": "0x4b69ce0BE518b33d07DC10729d1ACde28FAb3c28",
+                    "meta": {}
+                },
+                {
                     "name": "Multicall3",
                     "address": "0xCF2EdC1B53A3B6b4575E9756caD8D8cb93A8E21a",
                     "meta": {}
