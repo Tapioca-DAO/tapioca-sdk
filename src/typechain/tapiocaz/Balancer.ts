@@ -36,6 +36,8 @@ export interface BalancerInterface extends utils.Interface {
     "initConnectedOFT(address,uint16,address,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "rebalance(address,uint16,uint256,uint256,bytes)": FunctionFragment;
+    "router()": FunctionFragment;
+    "routerETH()": FunctionFragment;
     "setOwner(address)": FunctionFragment;
   };
 
@@ -53,6 +55,10 @@ export interface BalancerInterface extends utils.Interface {
       | "owner()"
       | "rebalance"
       | "rebalance(address,uint16,uint256,uint256,bytes)"
+      | "router"
+      | "router()"
+      | "routerETH"
+      | "routerETH()"
       | "setOwner"
       | "setOwner(address)"
   ): FunctionFragment;
@@ -129,6 +135,13 @@ export interface BalancerInterface extends utils.Interface {
       PromiseOrValue<BytesLike>
     ]
   ): string;
+  encodeFunctionData(functionFragment: "router", values?: undefined): string;
+  encodeFunctionData(functionFragment: "router()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "routerETH", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "routerETH()",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "setOwner",
     values: [PromiseOrValue<string>]
@@ -172,6 +185,13 @@ export interface BalancerInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "rebalance", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "rebalance(address,uint16,uint256,uint256,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "router", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "router()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "routerETH", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "routerETH()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "setOwner", data: BytesLike): Result;
@@ -376,6 +396,14 @@ export interface Balancer extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    router(overrides?: CallOverrides): Promise<[string]>;
+
+    "router()"(overrides?: CallOverrides): Promise<[string]>;
+
+    routerETH(overrides?: CallOverrides): Promise<[string]>;
+
+    "routerETH()"(overrides?: CallOverrides): Promise<[string]>;
+
     setOwner(
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -477,6 +505,14 @@ export interface Balancer extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  router(overrides?: CallOverrides): Promise<string>;
+
+  "router()"(overrides?: CallOverrides): Promise<string>;
+
+  routerETH(overrides?: CallOverrides): Promise<string>;
+
+  "routerETH()"(overrides?: CallOverrides): Promise<string>;
+
   setOwner(
     newOwner: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -577,6 +613,14 @@ export interface Balancer extends BaseContract {
       _ercData: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    router(overrides?: CallOverrides): Promise<string>;
+
+    "router()"(overrides?: CallOverrides): Promise<string>;
+
+    routerETH(overrides?: CallOverrides): Promise<string>;
+
+    "routerETH()"(overrides?: CallOverrides): Promise<string>;
 
     setOwner(
       newOwner: PromiseOrValue<string>,
@@ -716,6 +760,14 @@ export interface Balancer extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    router(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "router()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    routerETH(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "routerETH()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     setOwner(
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -803,6 +855,14 @@ export interface Balancer extends BaseContract {
       _ercData: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    router(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "router()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    routerETH(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "routerETH()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     setOwner(
       newOwner: PromiseOrValue<string>,

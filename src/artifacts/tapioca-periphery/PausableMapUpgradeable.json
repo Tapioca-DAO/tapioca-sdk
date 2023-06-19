@@ -1,0 +1,56 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "PausableMapUpgradeable",
+  "sourceName": "contracts/oracle/utils/PausableMapUpgradeable.sol",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "name",
+          "type": "bytes32"
+        }
+      ],
+      "name": "Paused",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "name",
+          "type": "bytes32"
+        }
+      ],
+      "name": "Unpaused",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "paused",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608080604052346014576089908161001a8239f35b600080fdfe6080806040526004361015601257600080fd5b600090813560e01c639e9e466614602857600080fd5b34604f576020366003190112604f5760ff6040602093600435815280855220541615158152f35b5080fdfea2646970667358221220ea1f0f2bdb35a487c7c4a0c5ea2a0581ee4d6516c84e00ce15ef6d9505f189d864736f6c63430008120033",
+  "deployedBytecode": "0x6080806040526004361015601257600080fd5b600090813560e01c639e9e466614602857600080fd5b34604f576020366003190112604f5760ff6040602093600435815280855220541615158152f35b5080fdfea2646970667358221220ea1f0f2bdb35a487c7c4a0c5ea2a0581ee4d6516c84e00ce15ef6d9505f189d864736f6c63430008120033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
