@@ -438,6 +438,28 @@
             ],
             "421613": [
                 {
+                    "name": "BigBang-TapiocaOFT-MATICMock",
+                    "address": "0x49F7542082d7D3801A28068353058f459a2978D9",
+                    "meta": {
+                        "isBigBangMarket": true,
+                        "collateral": {
+                            "collateralAddress": "0x25e3E01aE766fFC0106e154C248b81B02928590A",
+                            "collateralStrategyAddress": "0x7E37B91F47Dab399f36d00FD738D5CD74e514bCC"
+                        }
+                    }
+                },
+                {
+                    "name": "BigBang-TapiocaOFT-AVAXMock",
+                    "address": "0x249A5144FEd2ba85DF1F563A37dA45F5106e4A03",
+                    "meta": {
+                        "isBigBangMarket": true,
+                        "collateral": {
+                            "collateralAddress": "0x1d98B1B41cD0b8A0B6A84c3DbbE259835cD330D4",
+                            "collateralStrategyAddress": "0x0696298626b35a2fb5Ed2fC3d4f07B44964853a8"
+                        }
+                    }
+                },
+                {
                     "name": "BigBang-TapiocaOFT-WETHMock",
                     "address": "0xB5A9f057C2841238220a12cd668CF0D0D2A33A47",
                     "meta": {
