@@ -132,6 +132,7 @@ export declare namespace MagnetarV2Storage {
     debtRateAgainstEthMarket: PromiseOrValue<BigNumberish>;
     mainBBMarket: PromiseOrValue<string>;
     mainBBDebtRate: PromiseOrValue<BigNumberish>;
+    currentDebtRate: PromiseOrValue<BigNumberish>;
   };
 
   export type BigBangInfoStructOutput = [
@@ -141,6 +142,7 @@ export declare namespace MagnetarV2Storage {
     BigNumber,
     BigNumber,
     string,
+    BigNumber,
     BigNumber
   ] & {
     market: MagnetarV2Storage.MarketInfoStructOutput;
@@ -150,6 +152,7 @@ export declare namespace MagnetarV2Storage {
     debtRateAgainstEthMarket: BigNumber;
     mainBBMarket: string;
     mainBBDebtRate: BigNumber;
+    currentDebtRate: BigNumber;
   };
 
   export type CallStruct = {
