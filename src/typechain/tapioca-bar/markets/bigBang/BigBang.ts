@@ -85,8 +85,11 @@ export interface BigBangInterface extends utils.Interface {
     "setCallerFee(uint256)": FunctionFragment;
     "setCollateralizationRate(uint256)": FunctionFragment;
     "setConservator(address)": FunctionFragment;
+    "setDebtRateAgainstEth(uint256)": FunctionFragment;
     "setLiquidationBonusAmount(uint256)": FunctionFragment;
+    "setMaxDebtRate(uint256)": FunctionFragment;
     "setMaxLiquidatorReward(uint256)": FunctionFragment;
+    "setMinDebtRate(uint256)": FunctionFragment;
     "setMinLiquidatorReward(uint256)": FunctionFragment;
     "setOracle(address)": FunctionFragment;
     "setOracleData(bytes)": FunctionFragment;
@@ -221,10 +224,16 @@ export interface BigBangInterface extends utils.Interface {
       | "setCollateralizationRate(uint256)"
       | "setConservator"
       | "setConservator(address)"
+      | "setDebtRateAgainstEth"
+      | "setDebtRateAgainstEth(uint256)"
       | "setLiquidationBonusAmount"
       | "setLiquidationBonusAmount(uint256)"
+      | "setMaxDebtRate"
+      | "setMaxDebtRate(uint256)"
       | "setMaxLiquidatorReward"
       | "setMaxLiquidatorReward(uint256)"
+      | "setMinDebtRate"
+      | "setMinDebtRate(uint256)"
       | "setMinLiquidatorReward"
       | "setMinLiquidatorReward(uint256)"
       | "setOracle"
@@ -773,6 +782,14 @@ export interface BigBangInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "setDebtRateAgainstEth",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setDebtRateAgainstEth(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "setLiquidationBonusAmount",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
@@ -781,11 +798,27 @@ export interface BigBangInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
+    functionFragment: "setMaxDebtRate",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setMaxDebtRate(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "setMaxLiquidatorReward",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMaxLiquidatorReward(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setMinDebtRate",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setMinDebtRate(uint256)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
@@ -1305,6 +1338,14 @@ export interface BigBangInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "setDebtRateAgainstEth",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setDebtRateAgainstEth(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "setLiquidationBonusAmount",
     data: BytesLike
   ): Result;
@@ -1313,11 +1354,27 @@ export interface BigBangInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "setMaxDebtRate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setMaxDebtRate(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "setMaxLiquidatorReward",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "setMaxLiquidatorReward(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setMinDebtRate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setMinDebtRate(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1454,6 +1511,7 @@ export interface BigBangInterface extends utils.Interface {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalBorrow(address,address,uint256)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
+    "DebtRateAgainstEthUpdated(uint256,uint256)": EventFragment;
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)": EventFragment;
     "LogAccrue(uint256,uint64)": EventFragment;
     "LogAddCollateral(address,address,uint256)": EventFragment;
@@ -1463,6 +1521,8 @@ export interface BigBangInterface extends utils.Interface {
     "LogExchangeRate(uint256)": EventFragment;
     "LogRemoveCollateral(address,address,uint256)": EventFragment;
     "LogRepay(address,address,uint256,uint256)": EventFragment;
+    "MaxDebtRateUpdated(uint256,uint256)": EventFragment;
+    "MinDebtRateUpdated(uint256,uint256)": EventFragment;
     "OracleDataUpdated()": EventFragment;
     "OracleUpdated()": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
@@ -1481,6 +1541,10 @@ export interface BigBangInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "ConservatorUpdated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ConservatorUpdated(address,address)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "DebtRateAgainstEthUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DebtRateAgainstEthUpdated(uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Liquidated"): EventFragment;
   getEvent(
@@ -1513,6 +1577,14 @@ export interface BigBangInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "LogRepay"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "LogRepay(address,address,uint256,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "MaxDebtRateUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "MaxDebtRateUpdated(uint256,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "MinDebtRateUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "MinDebtRateUpdated(uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OracleDataUpdated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OracleDataUpdated()"): EventFragment;
@@ -1565,6 +1637,18 @@ export type ConservatorUpdatedEvent = TypedEvent<
 
 export type ConservatorUpdatedEventFilter =
   TypedEventFilter<ConservatorUpdatedEvent>;
+
+export interface DebtRateAgainstEthUpdatedEventObject {
+  oldVal: BigNumber;
+  newVal: BigNumber;
+}
+export type DebtRateAgainstEthUpdatedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  DebtRateAgainstEthUpdatedEventObject
+>;
+
+export type DebtRateAgainstEthUpdatedEventFilter =
+  TypedEventFilter<DebtRateAgainstEthUpdatedEvent>;
 
 export interface LiquidatedEventObject {
   liquidator: string;
@@ -1677,6 +1761,30 @@ export type LogRepayEvent = TypedEvent<
 >;
 
 export type LogRepayEventFilter = TypedEventFilter<LogRepayEvent>;
+
+export interface MaxDebtRateUpdatedEventObject {
+  oldVal: BigNumber;
+  newVal: BigNumber;
+}
+export type MaxDebtRateUpdatedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  MaxDebtRateUpdatedEventObject
+>;
+
+export type MaxDebtRateUpdatedEventFilter =
+  TypedEventFilter<MaxDebtRateUpdatedEvent>;
+
+export interface MinDebtRateUpdatedEventObject {
+  oldVal: BigNumber;
+  newVal: BigNumber;
+}
+export type MinDebtRateUpdatedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  MinDebtRateUpdatedEventObject
+>;
+
+export type MinDebtRateUpdatedEventFilter =
+  TypedEventFilter<MinDebtRateUpdatedEvent>;
 
 export interface OracleDataUpdatedEventObject {}
 export type OracleDataUpdatedEvent = TypedEvent<
@@ -2260,6 +2368,16 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    setDebtRateAgainstEth(
+      val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setDebtRateAgainstEth(uint256)"(
+      val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     setLiquidationBonusAmount(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2270,6 +2388,16 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    setMaxDebtRate(
+      val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setMaxDebtRate(uint256)"(
+      val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     setMaxLiquidatorReward(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2277,6 +2405,16 @@ export interface BigBang extends BaseContract {
 
     "setMaxLiquidatorReward(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setMinDebtRate(
+      val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setMinDebtRate(uint256)"(
+      val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2945,6 +3083,16 @@ export interface BigBang extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  setDebtRateAgainstEth(
+    val: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setDebtRateAgainstEth(uint256)"(
+    val: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   setLiquidationBonusAmount(
     _val: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2955,6 +3103,16 @@ export interface BigBang extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  setMaxDebtRate(
+    val: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setMaxDebtRate(uint256)"(
+    val: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   setMaxLiquidatorReward(
     _val: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2962,6 +3120,16 @@ export interface BigBang extends BaseContract {
 
   "setMaxLiquidatorReward(uint256)"(
     _val: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setMinDebtRate(
+    val: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setMinDebtRate(uint256)"(
+    val: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3622,6 +3790,16 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setDebtRateAgainstEth(
+      val: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setDebtRateAgainstEth(uint256)"(
+      val: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     setLiquidationBonusAmount(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -3632,6 +3810,16 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setMaxDebtRate(
+      val: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setMaxDebtRate(uint256)"(
+      val: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     setMaxLiquidatorReward(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -3639,6 +3827,16 @@ export interface BigBang extends BaseContract {
 
     "setMaxLiquidatorReward(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setMinDebtRate(
+      val: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setMinDebtRate(uint256)"(
+      val: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3837,6 +4035,15 @@ export interface BigBang extends BaseContract {
       _new?: PromiseOrValue<string> | null
     ): ConservatorUpdatedEventFilter;
 
+    "DebtRateAgainstEthUpdated(uint256,uint256)"(
+      oldVal?: null,
+      newVal?: null
+    ): DebtRateAgainstEthUpdatedEventFilter;
+    DebtRateAgainstEthUpdated(
+      oldVal?: null,
+      newVal?: null
+    ): DebtRateAgainstEthUpdatedEventFilter;
+
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)"(
       liquidator?: null,
       users?: null,
@@ -3927,6 +4134,24 @@ export interface BigBang extends BaseContract {
       amount?: null,
       part?: null
     ): LogRepayEventFilter;
+
+    "MaxDebtRateUpdated(uint256,uint256)"(
+      oldVal?: null,
+      newVal?: null
+    ): MaxDebtRateUpdatedEventFilter;
+    MaxDebtRateUpdated(
+      oldVal?: null,
+      newVal?: null
+    ): MaxDebtRateUpdatedEventFilter;
+
+    "MinDebtRateUpdated(uint256,uint256)"(
+      oldVal?: null,
+      newVal?: null
+    ): MinDebtRateUpdatedEventFilter;
+    MinDebtRateUpdated(
+      oldVal?: null,
+      newVal?: null
+    ): MinDebtRateUpdatedEventFilter;
 
     "OracleDataUpdated()"(): OracleDataUpdatedEventFilter;
     OracleDataUpdated(): OracleDataUpdatedEventFilter;
@@ -4444,6 +4669,16 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    setDebtRateAgainstEth(
+      val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setDebtRateAgainstEth(uint256)"(
+      val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     setLiquidationBonusAmount(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -4454,6 +4689,16 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    setMaxDebtRate(
+      val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setMaxDebtRate(uint256)"(
+      val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     setMaxLiquidatorReward(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -4461,6 +4706,16 @@ export interface BigBang extends BaseContract {
 
     "setMaxLiquidatorReward(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setMinDebtRate(
+      val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setMinDebtRate(uint256)"(
+      val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5128,6 +5383,16 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    setDebtRateAgainstEth(
+      val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setDebtRateAgainstEth(uint256)"(
+      val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     setLiquidationBonusAmount(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -5138,6 +5403,16 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    setMaxDebtRate(
+      val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setMaxDebtRate(uint256)"(
+      val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     setMaxLiquidatorReward(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -5145,6 +5420,16 @@ export interface BigBang extends BaseContract {
 
     "setMaxLiquidatorReward(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setMinDebtRate(
+      val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setMinDebtRate(uint256)"(
+      val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
