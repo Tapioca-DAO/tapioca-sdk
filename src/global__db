@@ -1384,7 +1384,7 @@
             "4002": [
                 {
                     "name": "FTMLPMOck",
-                    "address": "0x732349d2ee4495CB75fF0eCCBe0e5F9118e10c69",
+                    "address": "0x7b1caEd4Ffe4ac86eaa9704E315ED2b776FFAE7D",
                     "meta": {
                         "isERC20Mock": true
                     }
@@ -1407,7 +1407,7 @@
             "43113": [
                 {
                     "name": "AVAXLPMock",
-                    "address": "0x937aF8Ab29F7F46eEC3dd664f6aF78A96C4C5A9B",
+                    "address": "0xC3356308aa671BcD65546b86A28cCFCa56b18076",
                     "meta": {
                         "isERC20Mock": true
                     }
@@ -1430,7 +1430,7 @@
             "80001": [
                 {
                     "name": "MATICLPMock",
-                    "address": "0x86261BEce5f6a57d10D8f5D6e597f1E3F3E5aa45",
+                    "address": "0x5a5a30aB3e5ddf56448DC33ed92d9E787673A44a",
                     "meta": {
                         "isERC20Mock": true
                     }
@@ -1460,7 +1460,7 @@
             "421613": [
                 {
                     "name": "GLPMock",
-                    "address": "0xcAcf32Ff21E8F32Da706C2D033D5A0A506DE9F13",
+                    "address": "0xc09C2A03CA1D4ED847e780cC57D7fEF339d5dC52",
                     "meta": {
                         "isERC20Mock": true
                     }

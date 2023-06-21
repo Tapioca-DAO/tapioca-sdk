@@ -1383,6 +1383,13 @@
         "tapioca-mocks": {
             "4002": [
                 {
+                    "name": "FTMLPMOck",
+                    "address": "0x732349d2ee4495CB75fF0eCCBe0e5F9118e10c69",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
+                {
                     "name": "FTMMock",
                     "address": "0x01dc174e3fe22aeeE0642A3396c15FF40c89acde",
                     "meta": {
@@ -1422,13 +1429,6 @@
             ],
             "80001": [
                 {
-                    "name": "FTMLPMock",
-                    "address": "0xcEfDD7519AdfB67EC6858C6ACC22dD1471596E5a",
-                    "meta": {
-                        "isERC20Mock": true
-                    }
-                },
-                {
                     "name": "MATICLPMock",
                     "address": "0x86261BEce5f6a57d10D8f5D6e597f1E3F3E5aa45",
                     "meta": {
@@ -1445,6 +1445,13 @@
                 {
                     "name": "WETHMock",
                     "address": "0x7d7AA9aDeeCF8658d61BDb538CAB533A6cf1B5B1",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
+                {
+                    "name": "FTMLPMock",
+                    "address": "0xcEfDD7519AdfB67EC6858C6ACC22dD1471596E5a",
                     "meta": {
                         "isERC20Mock": true
                     }
