@@ -127,14 +127,29 @@ export declare namespace MagnetarV2Storage {
   export type BigBangInfoStruct = {
     market: MagnetarV2Storage.MarketInfoStruct;
     accrueInfo: IBigBang.AccrueInfoStruct;
+    minDebtRate: PromiseOrValue<BigNumberish>;
+    maxDebtRate: PromiseOrValue<BigNumberish>;
+    debtRateAgainstEthMarket: PromiseOrValue<BigNumberish>;
+    mainBBMarket: PromiseOrValue<string>;
+    mainBBDebtRate: PromiseOrValue<BigNumberish>;
   };
 
   export type BigBangInfoStructOutput = [
     MagnetarV2Storage.MarketInfoStructOutput,
-    IBigBang.AccrueInfoStructOutput
+    IBigBang.AccrueInfoStructOutput,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    string,
+    BigNumber
   ] & {
     market: MagnetarV2Storage.MarketInfoStructOutput;
     accrueInfo: IBigBang.AccrueInfoStructOutput;
+    minDebtRate: BigNumber;
+    maxDebtRate: BigNumber;
+    debtRateAgainstEthMarket: BigNumber;
+    mainBBMarket: string;
+    mainBBDebtRate: BigNumber;
   };
 
   export type CallStruct = {
