@@ -49,6 +49,8 @@ export declare namespace IPenrose {
 export interface PenroseInterface extends utils.Interface {
   functions: {
     "_getMasterContractLength((address,uint8)[])": FunctionFragment;
+    "addBigBang(address,address)": FunctionFragment;
+    "addSingularity(address,address)": FunctionFragment;
     "bigBangEthDebtRate()": FunctionFragment;
     "bigBangEthMarket()": FunctionFragment;
     "bigBangMarkets()": FunctionFragment;
@@ -99,6 +101,10 @@ export interface PenroseInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "_getMasterContractLength"
       | "_getMasterContractLength((address,uint8)[])"
+      | "addBigBang"
+      | "addBigBang(address,address)"
+      | "addSingularity"
+      | "addSingularity(address,address)"
       | "bigBangEthDebtRate"
       | "bigBangEthDebtRate()"
       | "bigBangEthMarket"
@@ -196,6 +202,22 @@ export interface PenroseInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "_getMasterContractLength((address,uint8)[])",
     values: [IPenrose.MasterContractStruct[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "addBigBang",
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "addBigBang(address,address)",
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "addSingularity",
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "addSingularity(address,address)",
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "bigBangEthDebtRate",
@@ -574,6 +596,19 @@ export interface PenroseInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "_getMasterContractLength((address,uint8)[])",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "addBigBang", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "addBigBang(address,address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "addSingularity",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "addSingularity(address,address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1164,6 +1199,30 @@ export interface Penrose extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string[]] & { markets: string[] }>;
 
+    addBigBang(
+      mc: PromiseOrValue<string>,
+      _contract: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "addBigBang(address,address)"(
+      mc: PromiseOrValue<string>,
+      _contract: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    addSingularity(
+      mc: PromiseOrValue<string>,
+      _contract: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "addSingularity(address,address)"(
+      mc: PromiseOrValue<string>,
+      _contract: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     bigBangEthDebtRate(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "bigBangEthDebtRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -1553,6 +1612,30 @@ export interface Penrose extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string[]>;
 
+  addBigBang(
+    mc: PromiseOrValue<string>,
+    _contract: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "addBigBang(address,address)"(
+    mc: PromiseOrValue<string>,
+    _contract: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  addSingularity(
+    mc: PromiseOrValue<string>,
+    _contract: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "addSingularity(address,address)"(
+    mc: PromiseOrValue<string>,
+    _contract: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   bigBangEthDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
   "bigBangEthDebtRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1931,6 +2014,30 @@ export interface Penrose extends BaseContract {
       array: IPenrose.MasterContractStruct[],
       overrides?: CallOverrides
     ): Promise<string[]>;
+
+    addBigBang(
+      mc: PromiseOrValue<string>,
+      _contract: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "addBigBang(address,address)"(
+      mc: PromiseOrValue<string>,
+      _contract: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    addSingularity(
+      mc: PromiseOrValue<string>,
+      _contract: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "addSingularity(address,address)"(
+      mc: PromiseOrValue<string>,
+      _contract: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     bigBangEthDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2436,6 +2543,30 @@ export interface Penrose extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    addBigBang(
+      mc: PromiseOrValue<string>,
+      _contract: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "addBigBang(address,address)"(
+      mc: PromiseOrValue<string>,
+      _contract: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    addSingularity(
+      mc: PromiseOrValue<string>,
+      _contract: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "addSingularity(address,address)"(
+      mc: PromiseOrValue<string>,
+      _contract: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     bigBangEthDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "bigBangEthDebtRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2814,6 +2945,30 @@ export interface Penrose extends BaseContract {
     "_getMasterContractLength((address,uint8)[])"(
       array: IPenrose.MasterContractStruct[],
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    addBigBang(
+      mc: PromiseOrValue<string>,
+      _contract: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "addBigBang(address,address)"(
+      mc: PromiseOrValue<string>,
+      _contract: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    addSingularity(
+      mc: PromiseOrValue<string>,
+      _contract: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "addSingularity(address,address)"(
+      mc: PromiseOrValue<string>,
+      _contract: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     bigBangEthDebtRate(
