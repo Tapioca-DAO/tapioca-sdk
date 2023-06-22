@@ -127,14 +127,32 @@ export declare namespace MagnetarV2Storage {
   export type BigBangInfoStruct = {
     market: MagnetarV2Storage.MarketInfoStruct;
     accrueInfo: IBigBang.AccrueInfoStruct;
+    minDebtRate: PromiseOrValue<BigNumberish>;
+    maxDebtRate: PromiseOrValue<BigNumberish>;
+    debtRateAgainstEthMarket: PromiseOrValue<BigNumberish>;
+    mainBBMarket: PromiseOrValue<string>;
+    mainBBDebtRate: PromiseOrValue<BigNumberish>;
+    currentDebtRate: PromiseOrValue<BigNumberish>;
   };
 
   export type BigBangInfoStructOutput = [
     MagnetarV2Storage.MarketInfoStructOutput,
-    IBigBang.AccrueInfoStructOutput
+    IBigBang.AccrueInfoStructOutput,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    string,
+    BigNumber,
+    BigNumber
   ] & {
     market: MagnetarV2Storage.MarketInfoStructOutput;
     accrueInfo: IBigBang.AccrueInfoStructOutput;
+    minDebtRate: BigNumber;
+    maxDebtRate: BigNumber;
+    debtRateAgainstEthMarket: BigNumber;
+    mainBBMarket: string;
+    mainBBDebtRate: BigNumber;
+    currentDebtRate: BigNumber;
   };
 
   export type CallStruct = {
@@ -174,18 +192,21 @@ export declare namespace MagnetarV2Storage {
     totalAsset: RebaseStruct;
     userAssetFraction: PromiseOrValue<BigNumberish>;
     accrueInfo: ISingularity.AccrueInfoStruct;
+    utilization: PromiseOrValue<BigNumberish>;
   };
 
   export type SingularityInfoStructOutput = [
     MagnetarV2Storage.MarketInfoStructOutput,
     RebaseStructOutput,
     BigNumber,
-    ISingularity.AccrueInfoStructOutput
+    ISingularity.AccrueInfoStructOutput,
+    BigNumber
   ] & {
     market: MagnetarV2Storage.MarketInfoStructOutput;
     totalAsset: RebaseStructOutput;
     userAssetFraction: BigNumber;
     accrueInfo: ISingularity.AccrueInfoStructOutput;
+    utilization: BigNumber;
   };
 }
 

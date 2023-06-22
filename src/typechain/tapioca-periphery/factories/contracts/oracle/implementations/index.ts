@@ -3,3 +3,4 @@
 /* eslint-disable */
 export { ARBTriCryptoOracle__factory } from "./ARBTriCryptoOracle__factory";
 export { GLPOracle__factory } from "./GLPOracle__factory";
+export { SGOracle__factory } from "./SGOracle__factory";
