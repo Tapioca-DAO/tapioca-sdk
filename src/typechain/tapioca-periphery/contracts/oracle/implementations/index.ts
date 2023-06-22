@@ -3,3 +3,4 @@
 /* eslint-disable */
 export type { ARBTriCryptoOracle } from "./ARBTriCryptoOracle";
 export type { GLPOracle } from "./GLPOracle";
+export type { SGOracle } from "./SGOracle";

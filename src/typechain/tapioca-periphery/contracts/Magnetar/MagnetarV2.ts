@@ -192,18 +192,21 @@ export declare namespace MagnetarV2Storage {
     totalAsset: RebaseStruct;
     userAssetFraction: PromiseOrValue<BigNumberish>;
     accrueInfo: ISingularity.AccrueInfoStruct;
+    utilization: PromiseOrValue<BigNumberish>;
   };
 
   export type SingularityInfoStructOutput = [
     MagnetarV2Storage.MarketInfoStructOutput,
     RebaseStructOutput,
     BigNumber,
-    ISingularity.AccrueInfoStructOutput
+    ISingularity.AccrueInfoStructOutput,
+    BigNumber
   ] & {
     market: MagnetarV2Storage.MarketInfoStructOutput;
     totalAsset: RebaseStructOutput;
     userAssetFraction: BigNumber;
     accrueInfo: ISingularity.AccrueInfoStructOutput;
+    utilization: BigNumber;
   };
 }
 

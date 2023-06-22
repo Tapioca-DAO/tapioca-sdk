@@ -61,6 +61,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.GLPOracle__factory>;
     getContractFactory(
+      name: "SGOracle",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SGOracle__factory>;
+    getContractFactory(
       name: "ModuleChainlinkMulti",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ModuleChainlinkMulti__factory>;
@@ -197,6 +201,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.GLPOracle>;
+    getContractAt(
+      name: "SGOracle",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SGOracle>;
     getContractAt(
       name: "ModuleChainlinkMulti",
       address: string,

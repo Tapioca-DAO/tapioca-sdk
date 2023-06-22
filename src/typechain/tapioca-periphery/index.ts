@@ -28,6 +28,8 @@ export type { ARBTriCryptoOracle } from "./contracts/oracle/implementations/ARBT
 export { ARBTriCryptoOracle__factory } from "./factories/contracts/oracle/implementations/ARBTriCryptoOracle__factory";
 export type { GLPOracle } from "./contracts/oracle/implementations/GLPOracle";
 export { GLPOracle__factory } from "./factories/contracts/oracle/implementations/GLPOracle__factory";
+export type { SGOracle } from "./contracts/oracle/implementations/SGOracle";
+export { SGOracle__factory } from "./factories/contracts/oracle/implementations/SGOracle__factory";
 export type { ModuleChainlinkMulti } from "./contracts/oracle/modules/ModuleChainlinkMulti";
 export { ModuleChainlinkMulti__factory } from "./factories/contracts/oracle/modules/ModuleChainlinkMulti__factory";
 export type { ModuleChainlinkSingle } from "./contracts/oracle/modules/ModuleChainlinkSingle";
