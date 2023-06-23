@@ -796,9 +796,10 @@ export interface TapiocaOptionBroker extends BaseContract {
       _tapAmount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber] & {
+      [BigNumber, BigNumber, BigNumber] & {
         eligibleTapAmount: BigNumber;
         paymentTokenAmount: BigNumber;
+        tapAmount: BigNumber;
       }
     >;
 
@@ -808,9 +809,10 @@ export interface TapiocaOptionBroker extends BaseContract {
       _tapAmount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber] & {
+      [BigNumber, BigNumber, BigNumber] & {
         eligibleTapAmount: BigNumber;
         paymentTokenAmount: BigNumber;
+        tapAmount: BigNumber;
       }
     >;
 
@@ -842,13 +844,13 @@ export interface TapiocaOptionBroker extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[boolean]>;
+    ): Promise<[BigNumber]>;
 
     "oTAPCalls(uint256,uint256)"(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[boolean]>;
+    ): Promise<[BigNumber]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -1067,9 +1069,10 @@ export interface TapiocaOptionBroker extends BaseContract {
     _tapAmount: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<
-    [BigNumber, BigNumber] & {
+    [BigNumber, BigNumber, BigNumber] & {
       eligibleTapAmount: BigNumber;
       paymentTokenAmount: BigNumber;
+      tapAmount: BigNumber;
     }
   >;
 
@@ -1079,9 +1082,10 @@ export interface TapiocaOptionBroker extends BaseContract {
     _tapAmount: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<
-    [BigNumber, BigNumber] & {
+    [BigNumber, BigNumber, BigNumber] & {
       eligibleTapAmount: BigNumber;
       paymentTokenAmount: BigNumber;
+      tapAmount: BigNumber;
     }
   >;
 
@@ -1113,13 +1117,13 @@ export interface TapiocaOptionBroker extends BaseContract {
     arg0: PromiseOrValue<BigNumberish>,
     arg1: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
-  ): Promise<boolean>;
+  ): Promise<BigNumber>;
 
   "oTAPCalls(uint256,uint256)"(
     arg0: PromiseOrValue<BigNumberish>,
     arg1: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
-  ): Promise<boolean>;
+  ): Promise<BigNumber>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -1334,9 +1338,10 @@ export interface TapiocaOptionBroker extends BaseContract {
       _tapAmount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber] & {
+      [BigNumber, BigNumber, BigNumber] & {
         eligibleTapAmount: BigNumber;
         paymentTokenAmount: BigNumber;
+        tapAmount: BigNumber;
       }
     >;
 
@@ -1346,9 +1351,10 @@ export interface TapiocaOptionBroker extends BaseContract {
       _tapAmount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber] & {
+      [BigNumber, BigNumber, BigNumber] & {
         eligibleTapAmount: BigNumber;
         paymentTokenAmount: BigNumber;
+        tapAmount: BigNumber;
       }
     >;
 
@@ -1372,13 +1378,13 @@ export interface TapiocaOptionBroker extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<boolean>;
+    ): Promise<BigNumber>;
 
     "oTAPCalls(uint256,uint256)"(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<boolean>;
+    ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -1544,14 +1550,14 @@ export interface TapiocaOptionBroker extends BaseContract {
   filters: {
     "AMLDivergence(uint256,uint256,uint256,uint256)"(
       epoch?: PromiseOrValue<BigNumberish> | null,
-      cumulative?: PromiseOrValue<BigNumberish> | null,
-      averageMagnitude?: PromiseOrValue<BigNumberish> | null,
+      cumulative?: null,
+      averageMagnitude?: null,
       totalParticipants?: null
     ): AMLDivergenceEventFilter;
     AMLDivergence(
       epoch?: PromiseOrValue<BigNumberish> | null,
-      cumulative?: PromiseOrValue<BigNumberish> | null,
-      averageMagnitude?: PromiseOrValue<BigNumberish> | null,
+      cumulative?: null,
+      averageMagnitude?: null,
       totalParticipants?: null
     ): AMLDivergenceEventFilter;
 

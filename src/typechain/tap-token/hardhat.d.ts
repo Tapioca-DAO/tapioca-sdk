@@ -13,9 +13,9 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
-      name: "TapiocaOptionBrokerMock",
+      name: "TwTAP",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TapiocaOptionBrokerMock__factory>;
+    ): Promise<Contracts.TwTAP__factory>;
     getContractFactory(
       name: "OTAP",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -29,6 +29,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapiocaOptionLiquidityProvision__factory>;
     getContractFactory(
+      name: "LTap",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.LTap__factory>;
+    getContractFactory(
       name: "TapOFT",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapOFT__factory>;
@@ -38,10 +42,10 @@ declare module "hardhat/types/runtime" {
     ): Promise<Contracts.Vesting__factory>;
 
     getContractAt(
-      name: "TapiocaOptionBrokerMock",
+      name: "TwTAP",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.TapiocaOptionBrokerMock>;
+    ): Promise<Contracts.TwTAP>;
     getContractAt(
       name: "OTAP",
       address: string,
@@ -57,6 +61,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TapiocaOptionLiquidityProvision>;
+    getContractAt(
+      name: "LTap",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.LTap>;
     getContractAt(
       name: "TapOFT",
       address: string,

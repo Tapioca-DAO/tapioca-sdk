@@ -26,90 +26,93 @@ import type {
   TypedListener,
   OnEvent,
   PromiseOrValue,
-} from "../common";
+} from "../../common";
 
-export type LockPositionStruct = {
-  sglAssetID: PromiseOrValue<BigNumberish>;
-  amount: PromiseOrValue<BigNumberish>;
-  lockTime: PromiseOrValue<BigNumberish>;
-  lockDuration: PromiseOrValue<BigNumberish>;
+export type ParticipationStruct = {
+  averageMagnitude: PromiseOrValue<BigNumberish>;
+  hasVotingPower: PromiseOrValue<boolean>;
+  divergenceForce: PromiseOrValue<boolean>;
+  tapReleased: PromiseOrValue<boolean>;
+  expiry: PromiseOrValue<BigNumberish>;
+  tapAmount: PromiseOrValue<BigNumberish>;
+  multiplier: PromiseOrValue<BigNumberish>;
+  lastInactive: PromiseOrValue<BigNumberish>;
+  lastActive: PromiseOrValue<BigNumberish>;
 };
 
-export type LockPositionStructOutput = [
+export type ParticipationStructOutput = [
+  BigNumber,
+  boolean,
+  boolean,
+  boolean,
   BigNumber,
   BigNumber,
-  BigNumber,
-  BigNumber
+  number,
+  number,
+  number
 ] & {
-  sglAssetID: BigNumber;
-  amount: BigNumber;
-  lockTime: BigNumber;
-  lockDuration: BigNumber;
+  averageMagnitude: BigNumber;
+  hasVotingPower: boolean;
+  divergenceForce: boolean;
+  tapReleased: boolean;
+  expiry: BigNumber;
+  tapAmount: BigNumber;
+  multiplier: number;
+  lastInactive: number;
+  lastActive: number;
 };
 
-export type SingularityPoolStruct = {
-  sglAssetID: PromiseOrValue<BigNumberish>;
-  totalDeposited: PromiseOrValue<BigNumberish>;
-  poolWeight: PromiseOrValue<BigNumberish>;
-};
-
-export type SingularityPoolStructOutput = [BigNumber, BigNumber, BigNumber] & {
-  sglAssetID: BigNumber;
-  totalDeposited: BigNumber;
-  poolWeight: BigNumber;
-};
-
-export interface TapiocaOptionLiquidityProvisionInterface
-  extends utils.Interface {
+export interface TwTAPInterface extends utils.Interface {
   functions: {
     "DOMAIN_SEPARATOR()": FunctionFragment;
-    "activeSingularities(address)": FunctionFragment;
+    "addRewardToken(address)": FunctionFragment;
+    "advanceWeek(uint256)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "batch(bytes[],bool)": FunctionFragment;
     "claimOwnership()": FunctionFragment;
+    "claimRewards(uint256,address)": FunctionFragment;
+    "claimable(uint256)": FunctionFragment;
+    "claimed(uint256,uint256)": FunctionFragment;
+    "creation()": FunctionFragment;
+    "currentWeek()": FunctionFragment;
+    "distributeReward(uint256,uint256)": FunctionFragment;
+    "exitPosition(uint256)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
-    "getLock(uint256)": FunctionFragment;
-    "getSingularities()": FunctionFragment;
-    "getSingularityPools()": FunctionFragment;
-    "getTotalPoolDeposited(uint256)": FunctionFragment;
+    "getParticipation(uint256)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
-    "isApprovedOrOwner(address,uint256)": FunctionFragment;
-    "lock(address,address,uint128,uint128)": FunctionFragment;
-    "lockPositions(uint256)": FunctionFragment;
+    "lastProcessedWeek()": FunctionFragment;
+    "mintedTWTap()": FunctionFragment;
     "name()": FunctionFragment;
     "nonces(address)": FunctionFragment;
-    "onERC1155Received(address,address,uint256,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
-    "paused()": FunctionFragment;
+    "participate(address,uint256,uint256)": FunctionFragment;
     "pendingOwner()": FunctionFragment;
     "permit(address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "registerSingularity(address,uint256,uint256)": FunctionFragment;
+    "releaseTap(uint256,address)": FunctionFragment;
+    "rewardTokens(uint256)": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,bytes)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setSGLPoolWEight(address,uint256)": FunctionFragment;
-    "sglAssetIDToAddress(uint256)": FunctionFragment;
-    "singularities(uint256)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
-    "tokenCounter()": FunctionFragment;
+    "tapOFT()": FunctionFragment;
     "tokenURI(uint256)": FunctionFragment;
-    "totalSingularityPoolWeights()": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
-    "unlock(uint256,address,address)": FunctionFragment;
-    "unregisterSingularity(address)": FunctionFragment;
-    "yieldBox()": FunctionFragment;
+    "twAML()": FunctionFragment;
+    "weekTotals(uint256)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
       | "DOMAIN_SEPARATOR"
       | "DOMAIN_SEPARATOR()"
-      | "activeSingularities"
-      | "activeSingularities(address)"
+      | "addRewardToken"
+      | "addRewardToken(address)"
+      | "advanceWeek"
+      | "advanceWeek(uint256)"
       | "approve"
       | "approve(address,uint256)"
       | "balanceOf"
@@ -118,72 +121,68 @@ export interface TapiocaOptionLiquidityProvisionInterface
       | "batch(bytes[],bool)"
       | "claimOwnership"
       | "claimOwnership()"
+      | "claimRewards"
+      | "claimRewards(uint256,address)"
+      | "claimable"
+      | "claimable(uint256)"
+      | "claimed"
+      | "claimed(uint256,uint256)"
+      | "creation"
+      | "creation()"
+      | "currentWeek"
+      | "currentWeek()"
+      | "distributeReward"
+      | "distributeReward(uint256,uint256)"
+      | "exitPosition"
+      | "exitPosition(uint256)"
       | "getApproved"
       | "getApproved(uint256)"
-      | "getLock"
-      | "getLock(uint256)"
-      | "getSingularities"
-      | "getSingularities()"
-      | "getSingularityPools"
-      | "getSingularityPools()"
-      | "getTotalPoolDeposited"
-      | "getTotalPoolDeposited(uint256)"
+      | "getParticipation"
+      | "getParticipation(uint256)"
       | "isApprovedForAll"
       | "isApprovedForAll(address,address)"
-      | "isApprovedOrOwner"
-      | "isApprovedOrOwner(address,uint256)"
-      | "lock"
-      | "lock(address,address,uint128,uint128)"
-      | "lockPositions"
-      | "lockPositions(uint256)"
+      | "lastProcessedWeek"
+      | "lastProcessedWeek()"
+      | "mintedTWTap"
+      | "mintedTWTap()"
       | "name"
       | "name()"
       | "nonces"
       | "nonces(address)"
-      | "onERC1155Received"
-      | "onERC1155Received(address,address,uint256,uint256,bytes)"
       | "owner"
       | "owner()"
       | "ownerOf"
       | "ownerOf(uint256)"
-      | "paused"
-      | "paused()"
+      | "participate"
+      | "participate(address,uint256,uint256)"
       | "pendingOwner"
       | "pendingOwner()"
       | "permit"
       | "permit(address,uint256,uint256,uint8,bytes32,bytes32)"
-      | "registerSingularity"
-      | "registerSingularity(address,uint256,uint256)"
+      | "releaseTap"
+      | "releaseTap(uint256,address)"
+      | "rewardTokens"
+      | "rewardTokens(uint256)"
       | "safeTransferFrom(address,address,uint256)"
       | "safeTransferFrom(address,address,uint256,bytes)"
       | "setApprovalForAll"
       | "setApprovalForAll(address,bool)"
-      | "setSGLPoolWEight"
-      | "setSGLPoolWEight(address,uint256)"
-      | "sglAssetIDToAddress"
-      | "sglAssetIDToAddress(uint256)"
-      | "singularities"
-      | "singularities(uint256)"
       | "supportsInterface"
       | "supportsInterface(bytes4)"
       | "symbol"
       | "symbol()"
-      | "tokenCounter"
-      | "tokenCounter()"
+      | "tapOFT"
+      | "tapOFT()"
       | "tokenURI"
       | "tokenURI(uint256)"
-      | "totalSingularityPoolWeights"
-      | "totalSingularityPoolWeights()"
       | "transferFrom"
       | "transferFrom(address,address,uint256)"
       | "transferOwnership"
       | "transferOwnership(address,bool,bool)"
-      | "unlock"
-      | "unlock(uint256,address,address)"
-      | "unregisterSingularity"
-      | "unregisterSingularity(address)"
-      | "yieldBox"
-      | "yieldBox()"
+      | "twAML"
+      | "twAML()"
+      | "weekTotals"
+      | "weekTotals(uint256)"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -195,12 +194,20 @@ export interface TapiocaOptionLiquidityProvisionInterface
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "activeSingularities",
+    functionFragment: "addRewardToken",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "activeSingularities(address)",
+    functionFragment: "addRewardToken(address)",
     values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "advanceWeek",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "advanceWeek(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "approve",
@@ -235,6 +242,59 @@ export interface TapiocaOptionLiquidityProvisionInterface
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "claimRewards",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "claimRewards(uint256,address)",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "claimable",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "claimable(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "claimed",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "claimed(uint256,uint256)",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(functionFragment: "creation", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "creation()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "currentWeek",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "currentWeek()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "distributeReward",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "distributeReward(uint256,uint256)",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "exitPosition",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "exitPosition(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "getApproved",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
@@ -243,35 +303,11 @@ export interface TapiocaOptionLiquidityProvisionInterface
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "getLock",
+    functionFragment: "getParticipation",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "getLock(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getSingularities",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getSingularities()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getSingularityPools",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getSingularityPools()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getTotalPoolDeposited",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getTotalPoolDeposited(uint256)",
+    functionFragment: "getParticipation(uint256)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
@@ -283,38 +319,20 @@ export interface TapiocaOptionLiquidityProvisionInterface
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "isApprovedOrOwner",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+    functionFragment: "lastProcessedWeek",
+    values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "isApprovedOrOwner(address,uint256)",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+    functionFragment: "lastProcessedWeek()",
+    values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "lock",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
+    functionFragment: "mintedTWTap",
+    values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "lock(address,address,uint128,uint128)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "lockPositions",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "lockPositions(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
+    functionFragment: "mintedTWTap()",
+    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(functionFragment: "name()", values?: undefined): string;
@@ -326,26 +344,6 @@ export interface TapiocaOptionLiquidityProvisionInterface
     functionFragment: "nonces(address)",
     values: [PromiseOrValue<string>]
   ): string;
-  encodeFunctionData(
-    functionFragment: "onERC1155Received",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "onERC1155Received(address,address,uint256,uint256,bytes)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
   encodeFunctionData(
@@ -356,8 +354,22 @@ export interface TapiocaOptionLiquidityProvisionInterface
     functionFragment: "ownerOf(uint256)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(functionFragment: "paused", values?: undefined): string;
-  encodeFunctionData(functionFragment: "paused()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "participate",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "participate(address,uint256,uint256)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
   encodeFunctionData(
     functionFragment: "pendingOwner",
     values?: undefined
@@ -389,20 +401,20 @@ export interface TapiocaOptionLiquidityProvisionInterface
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "registerSingularity",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
+    functionFragment: "releaseTap",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "registerSingularity(address,uint256,uint256)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
+    functionFragment: "releaseTap(uint256,address)",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rewardTokens",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rewardTokens(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "safeTransferFrom(address,address,uint256)",
@@ -430,30 +442,6 @@ export interface TapiocaOptionLiquidityProvisionInterface
     values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
-    functionFragment: "setSGLPoolWEight",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setSGLPoolWEight(address,uint256)",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "sglAssetIDToAddress",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "sglAssetIDToAddress(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "singularities",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "singularities(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "supportsInterface",
     values: [PromiseOrValue<BytesLike>]
   ): string;
@@ -463,14 +451,8 @@ export interface TapiocaOptionLiquidityProvisionInterface
   ): string;
   encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
   encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "tokenCounter",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "tokenCounter()",
-    values?: undefined
-  ): string;
+  encodeFunctionData(functionFragment: "tapOFT", values?: undefined): string;
+  encodeFunctionData(functionFragment: "tapOFT()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "tokenURI",
     values: [PromiseOrValue<BigNumberish>]
@@ -478,14 +460,6 @@ export interface TapiocaOptionLiquidityProvisionInterface
   encodeFunctionData(
     functionFragment: "tokenURI(uint256)",
     values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "totalSingularityPoolWeights",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "totalSingularityPoolWeights()",
-    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "transferFrom",
@@ -519,34 +493,15 @@ export interface TapiocaOptionLiquidityProvisionInterface
       PromiseOrValue<boolean>
     ]
   ): string;
+  encodeFunctionData(functionFragment: "twAML", values?: undefined): string;
+  encodeFunctionData(functionFragment: "twAML()", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "unlock",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>
-    ]
+    functionFragment: "weekTotals",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "unlock(uint256,address,address)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "unregisterSingularity",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "unregisterSingularity(address)",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(functionFragment: "yieldBox", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "yieldBox()",
-    values?: undefined
+    functionFragment: "weekTotals(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(
@@ -558,11 +513,19 @@ export interface TapiocaOptionLiquidityProvisionInterface
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "activeSingularities",
+    functionFragment: "addRewardToken",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "activeSingularities(address)",
+    functionFragment: "addRewardToken(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "advanceWeek",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "advanceWeek(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
@@ -589,6 +552,50 @@ export interface TapiocaOptionLiquidityProvisionInterface
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "claimRewards",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "claimRewards(uint256,address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "claimable", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "claimable(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "claimed", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "claimed(uint256,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "creation", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "creation()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "currentWeek",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "currentWeek()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "distributeReward",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "distributeReward(uint256,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "exitPosition",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "exitPosition(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "getApproved",
     data: BytesLike
   ): Result;
@@ -596,33 +603,12 @@ export interface TapiocaOptionLiquidityProvisionInterface
     functionFragment: "getApproved(uint256)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "getLock", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "getLock(uint256)",
+    functionFragment: "getParticipation",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getSingularities",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getSingularities()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getSingularityPools",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getSingularityPools()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getTotalPoolDeposited",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getTotalPoolDeposited(uint256)",
+    functionFragment: "getParticipation(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -634,24 +620,19 @@ export interface TapiocaOptionLiquidityProvisionInterface
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "isApprovedOrOwner",
+    functionFragment: "lastProcessedWeek",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "isApprovedOrOwner(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "lock", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "lock(address,address,uint128,uint128)",
+    functionFragment: "lastProcessedWeek()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "lockPositions",
+    functionFragment: "mintedTWTap",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "lockPositions(uint256)",
+    functionFragment: "mintedTWTap()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
@@ -661,14 +642,6 @@ export interface TapiocaOptionLiquidityProvisionInterface
     functionFragment: "nonces(address)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "onERC1155Received",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "onERC1155Received(address,address,uint256,uint256,bytes)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
@@ -676,8 +649,14 @@ export interface TapiocaOptionLiquidityProvisionInterface
     functionFragment: "ownerOf(uint256)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "paused()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "participate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "participate(address,uint256,uint256)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "pendingOwner",
     data: BytesLike
@@ -691,12 +670,17 @@ export interface TapiocaOptionLiquidityProvisionInterface
     functionFragment: "permit(address,uint256,uint256,uint8,bytes32,bytes32)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "releaseTap", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "registerSingularity",
+    functionFragment: "releaseTap(uint256,address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "registerSingularity(address,uint256,uint256)",
+    functionFragment: "rewardTokens",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "rewardTokens(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -716,30 +700,6 @@ export interface TapiocaOptionLiquidityProvisionInterface
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setSGLPoolWEight",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setSGLPoolWEight(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "sglAssetIDToAddress",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "sglAssetIDToAddress(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "singularities",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "singularities(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "supportsInterface",
     data: BytesLike
   ): Result;
@@ -749,25 +709,11 @@ export interface TapiocaOptionLiquidityProvisionInterface
   ): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "tokenCounter",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "tokenCounter()",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "tapOFT", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "tapOFT()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "tokenURI", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "tokenURI(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "totalSingularityPoolWeights",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "totalSingularityPoolWeights()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -786,37 +732,28 @@ export interface TapiocaOptionLiquidityProvisionInterface
     functionFragment: "transferOwnership(address,bool,bool)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "unlock", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "twAML", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "twAML()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "weekTotals", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "unlock(uint256,address,address)",
+    functionFragment: "weekTotals(uint256)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "unregisterSingularity",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "unregisterSingularity(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "yieldBox", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "yieldBox()", data: BytesLike): Result;
 
   events: {
+    "AMLDivergence(uint256,uint256,uint256)": EventFragment;
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalForAll(address,address,bool)": EventFragment;
-    "Burn(address,uint128,tuple)": EventFragment;
-    "Mint(address,uint128,tuple)": EventFragment;
+    "ExitPosition(uint256,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
-    "Paused(address)": EventFragment;
-    "RegisterSingularity(address,uint256)": EventFragment;
-    "SetSGLPoolWeight(address,uint256)": EventFragment;
+    "Participate(address,uint256,uint256)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
-    "Unpaused(address)": EventFragment;
-    "UnregisterSingularity(address,uint256)": EventFragment;
-    "UpdateTotalSingularityPoolWeights(uint256)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "AMLDivergence"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "AMLDivergence(uint256,uint256,uint256)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Approval(address,address,uint256)"
@@ -825,45 +762,35 @@ export interface TapiocaOptionLiquidityProvisionInterface
   getEvent(
     nameOrSignatureOrTopic: "ApprovalForAll(address,address,bool)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Burn"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ExitPosition"): EventFragment;
   getEvent(
-    nameOrSignatureOrTopic: "Burn(address,uint128,tuple)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Mint"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "Mint(address,uint128,tuple)"
+    nameOrSignatureOrTopic: "ExitPosition(uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "OwnershipTransferred(address,address)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Paused"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Paused(address)"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "RegisterSingularity"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Participate"): EventFragment;
   getEvent(
-    nameOrSignatureOrTopic: "RegisterSingularity(address,uint256)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "SetSGLPoolWeight"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "SetSGLPoolWeight(address,uint256)"
+    nameOrSignatureOrTopic: "Participate(address,uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Transfer(address,address,uint256)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Unpaused"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Unpaused(address)"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "UnregisterSingularity"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "UnregisterSingularity(address,uint256)"
-  ): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "UpdateTotalSingularityPoolWeights"
-  ): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "UpdateTotalSingularityPoolWeights(uint256)"
-  ): EventFragment;
 }
+
+export interface AMLDivergenceEventObject {
+  cumulative: BigNumber;
+  averageMagnitude: BigNumber;
+  totalParticipants: BigNumber;
+}
+export type AMLDivergenceEvent = TypedEvent<
+  [BigNumber, BigNumber, BigNumber],
+  AMLDivergenceEventObject
+>;
+
+export type AMLDivergenceEventFilter = TypedEventFilter<AMLDivergenceEvent>;
 
 export interface ApprovalEventObject {
   owner: string;
@@ -889,29 +816,16 @@ export type ApprovalForAllEvent = TypedEvent<
 
 export type ApprovalForAllEventFilter = TypedEventFilter<ApprovalForAllEvent>;
 
-export interface BurnEventObject {
-  to: string;
-  sglAssetID: BigNumber;
-  lockPosition: LockPositionStructOutput;
+export interface ExitPositionEventObject {
+  tokenId: BigNumber;
+  amount: BigNumber;
 }
-export type BurnEvent = TypedEvent<
-  [string, BigNumber, LockPositionStructOutput],
-  BurnEventObject
+export type ExitPositionEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  ExitPositionEventObject
 >;
 
-export type BurnEventFilter = TypedEventFilter<BurnEvent>;
-
-export interface MintEventObject {
-  to: string;
-  sglAssetID: BigNumber;
-  lockPosition: LockPositionStructOutput;
-}
-export type MintEvent = TypedEvent<
-  [string, BigNumber, LockPositionStructOutput],
-  MintEventObject
->;
-
-export type MintEventFilter = TypedEventFilter<MintEvent>;
+export type ExitPositionEventFilter = TypedEventFilter<ExitPositionEvent>;
 
 export interface OwnershipTransferredEventObject {
   previousOwner: string;
@@ -925,36 +839,17 @@ export type OwnershipTransferredEvent = TypedEvent<
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
 
-export interface PausedEventObject {
-  account: string;
+export interface ParticipateEventObject {
+  participant: string;
+  tapAmount: BigNumber;
+  multiplier: BigNumber;
 }
-export type PausedEvent = TypedEvent<[string], PausedEventObject>;
-
-export type PausedEventFilter = TypedEventFilter<PausedEvent>;
-
-export interface RegisterSingularityEventObject {
-  sgl: string;
-  assetID: BigNumber;
-}
-export type RegisterSingularityEvent = TypedEvent<
-  [string, BigNumber],
-  RegisterSingularityEventObject
+export type ParticipateEvent = TypedEvent<
+  [string, BigNumber, BigNumber],
+  ParticipateEventObject
 >;
 
-export type RegisterSingularityEventFilter =
-  TypedEventFilter<RegisterSingularityEvent>;
-
-export interface SetSGLPoolWeightEventObject {
-  sgl: string;
-  poolWeight: BigNumber;
-}
-export type SetSGLPoolWeightEvent = TypedEvent<
-  [string, BigNumber],
-  SetSGLPoolWeightEventObject
->;
-
-export type SetSGLPoolWeightEventFilter =
-  TypedEventFilter<SetSGLPoolWeightEvent>;
+export type ParticipateEventFilter = TypedEventFilter<ParticipateEvent>;
 
 export interface TransferEventObject {
   from: string;
@@ -968,44 +863,14 @@ export type TransferEvent = TypedEvent<
 
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 
-export interface UnpausedEventObject {
-  account: string;
-}
-export type UnpausedEvent = TypedEvent<[string], UnpausedEventObject>;
-
-export type UnpausedEventFilter = TypedEventFilter<UnpausedEvent>;
-
-export interface UnregisterSingularityEventObject {
-  sgl: string;
-  assetID: BigNumber;
-}
-export type UnregisterSingularityEvent = TypedEvent<
-  [string, BigNumber],
-  UnregisterSingularityEventObject
->;
-
-export type UnregisterSingularityEventFilter =
-  TypedEventFilter<UnregisterSingularityEvent>;
-
-export interface UpdateTotalSingularityPoolWeightsEventObject {
-  totalSingularityPoolWeights: BigNumber;
-}
-export type UpdateTotalSingularityPoolWeightsEvent = TypedEvent<
-  [BigNumber],
-  UpdateTotalSingularityPoolWeightsEventObject
->;
-
-export type UpdateTotalSingularityPoolWeightsEventFilter =
-  TypedEventFilter<UpdateTotalSingularityPoolWeightsEvent>;
-
-export interface TapiocaOptionLiquidityProvision extends BaseContract {
-  contractName: "TapiocaOptionLiquidityProvision";
+export interface TwTAP extends BaseContract {
+  contractName: "TwTAP";
 
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: TapiocaOptionLiquidityProvisionInterface;
+  interface: TwTAPInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -1031,27 +896,25 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<[string]>;
 
-    activeSingularities(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber] & {
-        sglAssetID: BigNumber;
-        totalDeposited: BigNumber;
-        poolWeight: BigNumber;
-      }
-    >;
+    addRewardToken(
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
-    "activeSingularities(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber] & {
-        sglAssetID: BigNumber;
-        totalDeposited: BigNumber;
-        poolWeight: BigNumber;
-      }
-    >;
+    "addRewardToken(address)"(
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    advanceWeek(
+      _limit: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "advanceWeek(uint256)"(
+      _limit: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     approve(
       to: PromiseOrValue<string>,
@@ -1095,6 +958,70 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    claimRewards(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "claimRewards(uint256,address)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    claimable(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber[]]>;
+
+    "claimable(uint256)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber[]]>;
+
+    claimed(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "claimed(uint256,uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    creation(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "creation()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    currentWeek(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "currentWeek()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    distributeReward(
+      _rewardTokenId: PromiseOrValue<BigNumberish>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "distributeReward(uint256,uint256)"(
+      _rewardTokenId: PromiseOrValue<BigNumberish>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    exitPosition(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "exitPosition(uint256)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     getApproved(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1105,37 +1032,19 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    getLock(
+    getParticipation(
       _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[boolean, LockPositionStructOutput]>;
+    ): Promise<
+      [ParticipationStructOutput] & { participant: ParticipationStructOutput }
+    >;
 
-    "getLock(uint256)"(
+    "getParticipation(uint256)"(
       _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[boolean, LockPositionStructOutput]>;
-
-    getSingularities(overrides?: CallOverrides): Promise<[BigNumber[]]>;
-
-    "getSingularities()"(overrides?: CallOverrides): Promise<[BigNumber[]]>;
-
-    getSingularityPools(
-      overrides?: CallOverrides
-    ): Promise<[SingularityPoolStructOutput[]]>;
-
-    "getSingularityPools()"(
-      overrides?: CallOverrides
-    ): Promise<[SingularityPoolStructOutput[]]>;
-
-    getTotalPoolDeposited(
-      _sglAssetId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "getTotalPoolDeposited(uint256)"(
-      _sglAssetId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    ): Promise<
+      [ParticipationStructOutput] & { participant: ParticipationStructOutput }
+    >;
 
     isApprovedForAll(
       owner: PromiseOrValue<string>,
@@ -1149,57 +1058,13 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
-    isApprovedOrOwner(
-      _spender: PromiseOrValue<string>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
+    lastProcessedWeek(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "isApprovedOrOwner(address,uint256)"(
-      _spender: PromiseOrValue<string>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
+    "lastProcessedWeek()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    lock(
-      _to: PromiseOrValue<string>,
-      _singularity: PromiseOrValue<string>,
-      _lockDuration: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
+    mintedTWTap(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "lock(address,address,uint128,uint128)"(
-      _to: PromiseOrValue<string>,
-      _singularity: PromiseOrValue<string>,
-      _lockDuration: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    lockPositions(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        sglAssetID: BigNumber;
-        amount: BigNumber;
-        lockTime: BigNumber;
-        lockDuration: BigNumber;
-      }
-    >;
-
-    "lockPositions(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        sglAssetID: BigNumber;
-        amount: BigNumber;
-        lockTime: BigNumber;
-        lockDuration: BigNumber;
-      }
-    >;
+    "mintedTWTap()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     name(overrides?: CallOverrides): Promise<[string]>;
 
@@ -1215,24 +1080,6 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    onERC1155Received(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    "onERC1155Received(address,address,uint256,uint256,bytes)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
@@ -1247,9 +1094,19 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    paused(overrides?: CallOverrides): Promise<[boolean]>;
+    participate(
+      _participant: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
-    "paused()"(overrides?: CallOverrides): Promise<[boolean]>;
+    "participate(address,uint256,uint256)"(
+      _participant: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     pendingOwner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -1275,19 +1132,27 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    registerSingularity(
-      singularity: PromiseOrValue<string>,
-      assetID: PromiseOrValue<BigNumberish>,
-      weight: PromiseOrValue<BigNumberish>,
+    releaseTap(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "registerSingularity(address,uint256,uint256)"(
-      singularity: PromiseOrValue<string>,
-      assetID: PromiseOrValue<BigNumberish>,
-      weight: PromiseOrValue<BigNumberish>,
+    "releaseTap(uint256,address)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    rewardTokens(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    "rewardTokens(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: PromiseOrValue<string>,
@@ -1316,38 +1181,6 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    setSGLPoolWEight(
-      singularity: PromiseOrValue<string>,
-      weight: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setSGLPoolWEight(address,uint256)"(
-      singularity: PromiseOrValue<string>,
-      weight: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    sglAssetIDToAddress(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    "sglAssetIDToAddress(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    singularities(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "singularities(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -1362,9 +1195,9 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "symbol()"(overrides?: CallOverrides): Promise<[string]>;
 
-    tokenCounter(overrides?: CallOverrides): Promise<[BigNumber]>;
+    tapOFT(overrides?: CallOverrides): Promise<[string]>;
 
-    "tokenCounter()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+    "tapOFT()"(overrides?: CallOverrides): Promise<[string]>;
 
     tokenURI(
       tokenId: PromiseOrValue<BigNumberish>,
@@ -1375,14 +1208,6 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
-
-    totalSingularityPoolWeights(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "totalSingularityPoolWeights()"(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
 
     transferFrom(
       from: PromiseOrValue<string>,
@@ -1412,60 +1237,62 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    unlock(
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _singularity: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
+    twAML(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber, BigNumber] & {
+        totalParticipants: BigNumber;
+        averageMagnitude: BigNumber;
+        totalDeposited: BigNumber;
+        cumulative: BigNumber;
+      }
+    >;
 
-    "unlock(uint256,address,address)"(
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _singularity: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
+    "twAML()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber, BigNumber] & {
+        totalParticipants: BigNumber;
+        averageMagnitude: BigNumber;
+        totalDeposited: BigNumber;
+        cumulative: BigNumber;
+      }
+    >;
 
-    unregisterSingularity(
-      singularity: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
+    weekTotals(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { netActiveVotes: BigNumber }>;
 
-    "unregisterSingularity(address)"(
-      singularity: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    yieldBox(overrides?: CallOverrides): Promise<[string]>;
-
-    "yieldBox()"(overrides?: CallOverrides): Promise<[string]>;
+    "weekTotals(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { netActiveVotes: BigNumber }>;
   };
 
   DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
 
   "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
 
-  activeSingularities(
-    arg0: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, BigNumber, BigNumber] & {
-      sglAssetID: BigNumber;
-      totalDeposited: BigNumber;
-      poolWeight: BigNumber;
-    }
-  >;
+  addRewardToken(
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
-  "activeSingularities(address)"(
-    arg0: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, BigNumber, BigNumber] & {
-      sglAssetID: BigNumber;
-      totalDeposited: BigNumber;
-      poolWeight: BigNumber;
-    }
-  >;
+  "addRewardToken(address)"(
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  advanceWeek(
+    _limit: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "advanceWeek(uint256)"(
+    _limit: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   approve(
     to: PromiseOrValue<string>,
@@ -1509,6 +1336,70 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  claimRewards(
+    _tokenId: PromiseOrValue<BigNumberish>,
+    _to: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "claimRewards(uint256,address)"(
+    _tokenId: PromiseOrValue<BigNumberish>,
+    _to: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  claimable(
+    _tokenId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber[]>;
+
+  "claimable(uint256)"(
+    _tokenId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber[]>;
+
+  claimed(
+    arg0: PromiseOrValue<BigNumberish>,
+    arg1: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "claimed(uint256,uint256)"(
+    arg0: PromiseOrValue<BigNumberish>,
+    arg1: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  creation(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "creation()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  currentWeek(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "currentWeek()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  distributeReward(
+    _rewardTokenId: PromiseOrValue<BigNumberish>,
+    _amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "distributeReward(uint256,uint256)"(
+    _rewardTokenId: PromiseOrValue<BigNumberish>,
+    _amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  exitPosition(
+    _tokenId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "exitPosition(uint256)"(
+    _tokenId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   getApproved(
     tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -1519,37 +1410,15 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  getLock(
+  getParticipation(
     _tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
-  ): Promise<[boolean, LockPositionStructOutput]>;
+  ): Promise<ParticipationStructOutput>;
 
-  "getLock(uint256)"(
+  "getParticipation(uint256)"(
     _tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
-  ): Promise<[boolean, LockPositionStructOutput]>;
-
-  getSingularities(overrides?: CallOverrides): Promise<BigNumber[]>;
-
-  "getSingularities()"(overrides?: CallOverrides): Promise<BigNumber[]>;
-
-  getSingularityPools(
-    overrides?: CallOverrides
-  ): Promise<SingularityPoolStructOutput[]>;
-
-  "getSingularityPools()"(
-    overrides?: CallOverrides
-  ): Promise<SingularityPoolStructOutput[]>;
-
-  getTotalPoolDeposited(
-    _sglAssetId: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "getTotalPoolDeposited(uint256)"(
-    _sglAssetId: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  ): Promise<ParticipationStructOutput>;
 
   isApprovedForAll(
     owner: PromiseOrValue<string>,
@@ -1563,57 +1432,13 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  isApprovedOrOwner(
-    _spender: PromiseOrValue<string>,
-    _tokenId: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
+  lastProcessedWeek(overrides?: CallOverrides): Promise<BigNumber>;
 
-  "isApprovedOrOwner(address,uint256)"(
-    _spender: PromiseOrValue<string>,
-    _tokenId: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
+  "lastProcessedWeek()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-  lock(
-    _to: PromiseOrValue<string>,
-    _singularity: PromiseOrValue<string>,
-    _lockDuration: PromiseOrValue<BigNumberish>,
-    _amount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
+  mintedTWTap(overrides?: CallOverrides): Promise<BigNumber>;
 
-  "lock(address,address,uint128,uint128)"(
-    _to: PromiseOrValue<string>,
-    _singularity: PromiseOrValue<string>,
-    _lockDuration: PromiseOrValue<BigNumberish>,
-    _amount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  lockPositions(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, BigNumber, BigNumber, BigNumber] & {
-      sglAssetID: BigNumber;
-      amount: BigNumber;
-      lockTime: BigNumber;
-      lockDuration: BigNumber;
-    }
-  >;
-
-  "lockPositions(uint256)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, BigNumber, BigNumber, BigNumber] & {
-      sglAssetID: BigNumber;
-      amount: BigNumber;
-      lockTime: BigNumber;
-      lockDuration: BigNumber;
-    }
-  >;
+  "mintedTWTap()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   name(overrides?: CallOverrides): Promise<string>;
 
@@ -1629,24 +1454,6 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  onERC1155Received(
-    arg0: PromiseOrValue<string>,
-    arg1: PromiseOrValue<string>,
-    arg2: PromiseOrValue<BigNumberish>,
-    arg3: PromiseOrValue<BigNumberish>,
-    arg4: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  "onERC1155Received(address,address,uint256,uint256,bytes)"(
-    arg0: PromiseOrValue<string>,
-    arg1: PromiseOrValue<string>,
-    arg2: PromiseOrValue<BigNumberish>,
-    arg3: PromiseOrValue<BigNumberish>,
-    arg4: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
   owner(overrides?: CallOverrides): Promise<string>;
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -1661,9 +1468,19 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  paused(overrides?: CallOverrides): Promise<boolean>;
+  participate(
+    _participant: PromiseOrValue<string>,
+    _amount: PromiseOrValue<BigNumberish>,
+    _duration: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
-  "paused()"(overrides?: CallOverrides): Promise<boolean>;
+  "participate(address,uint256,uint256)"(
+    _participant: PromiseOrValue<string>,
+    _amount: PromiseOrValue<BigNumberish>,
+    _duration: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   pendingOwner(overrides?: CallOverrides): Promise<string>;
 
@@ -1689,19 +1506,27 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  registerSingularity(
-    singularity: PromiseOrValue<string>,
-    assetID: PromiseOrValue<BigNumberish>,
-    weight: PromiseOrValue<BigNumberish>,
+  releaseTap(
+    _tokenId: PromiseOrValue<BigNumberish>,
+    _to: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "registerSingularity(address,uint256,uint256)"(
-    singularity: PromiseOrValue<string>,
-    assetID: PromiseOrValue<BigNumberish>,
-    weight: PromiseOrValue<BigNumberish>,
+  "releaseTap(uint256,address)"(
+    _tokenId: PromiseOrValue<BigNumberish>,
+    _to: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  rewardTokens(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  "rewardTokens(uint256)"(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   "safeTransferFrom(address,address,uint256)"(
     from: PromiseOrValue<string>,
@@ -1730,38 +1555,6 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  setSGLPoolWEight(
-    singularity: PromiseOrValue<string>,
-    weight: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setSGLPoolWEight(address,uint256)"(
-    singularity: PromiseOrValue<string>,
-    weight: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  sglAssetIDToAddress(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  "sglAssetIDToAddress(uint256)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  singularities(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "singularities(uint256)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   supportsInterface(
     interfaceId: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
@@ -1776,9 +1569,9 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
   "symbol()"(overrides?: CallOverrides): Promise<string>;
 
-  tokenCounter(overrides?: CallOverrides): Promise<BigNumber>;
+  tapOFT(overrides?: CallOverrides): Promise<string>;
 
-  "tokenCounter()"(overrides?: CallOverrides): Promise<BigNumber>;
+  "tapOFT()"(overrides?: CallOverrides): Promise<string>;
 
   tokenURI(
     tokenId: PromiseOrValue<BigNumberish>,
@@ -1789,12 +1582,6 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
-
-  totalSingularityPoolWeights(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "totalSingularityPoolWeights()"(
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
 
   transferFrom(
     from: PromiseOrValue<string>,
@@ -1824,60 +1611,62 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  unlock(
-    _tokenId: PromiseOrValue<BigNumberish>,
-    _singularity: PromiseOrValue<string>,
-    _to: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
+  twAML(
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber, BigNumber, BigNumber] & {
+      totalParticipants: BigNumber;
+      averageMagnitude: BigNumber;
+      totalDeposited: BigNumber;
+      cumulative: BigNumber;
+    }
+  >;
 
-  "unlock(uint256,address,address)"(
-    _tokenId: PromiseOrValue<BigNumberish>,
-    _singularity: PromiseOrValue<string>,
-    _to: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
+  "twAML()"(
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber, BigNumber, BigNumber] & {
+      totalParticipants: BigNumber;
+      averageMagnitude: BigNumber;
+      totalDeposited: BigNumber;
+      cumulative: BigNumber;
+    }
+  >;
 
-  unregisterSingularity(
-    singularity: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
+  weekTotals(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
-  "unregisterSingularity(address)"(
-    singularity: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  yieldBox(overrides?: CallOverrides): Promise<string>;
-
-  "yieldBox()"(overrides?: CallOverrides): Promise<string>;
+  "weekTotals(uint256)"(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   callStatic: {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
 
-    activeSingularities(
-      arg0: PromiseOrValue<string>,
+    addRewardToken(
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber] & {
-        sglAssetID: BigNumber;
-        totalDeposited: BigNumber;
-        poolWeight: BigNumber;
-      }
-    >;
+    ): Promise<BigNumber>;
 
-    "activeSingularities(address)"(
-      arg0: PromiseOrValue<string>,
+    "addRewardToken(address)"(
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber] & {
-        sglAssetID: BigNumber;
-        totalDeposited: BigNumber;
-        poolWeight: BigNumber;
-      }
-    >;
+    ): Promise<BigNumber>;
+
+    advanceWeek(
+      _limit: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "advanceWeek(uint256)"(
+      _limit: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     approve(
       to: PromiseOrValue<string>,
@@ -1917,6 +1706,70 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "claimOwnership()"(overrides?: CallOverrides): Promise<void>;
 
+    claimRewards(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _to: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "claimRewards(uint256,address)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _to: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    claimable(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber[]>;
+
+    "claimable(uint256)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber[]>;
+
+    claimed(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "claimed(uint256,uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    creation(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "creation()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    currentWeek(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "currentWeek()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    distributeReward(
+      _rewardTokenId: PromiseOrValue<BigNumberish>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "distributeReward(uint256,uint256)"(
+      _rewardTokenId: PromiseOrValue<BigNumberish>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    exitPosition(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "exitPosition(uint256)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     getApproved(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1927,37 +1780,15 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    getLock(
+    getParticipation(
       _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[boolean, LockPositionStructOutput]>;
+    ): Promise<ParticipationStructOutput>;
 
-    "getLock(uint256)"(
+    "getParticipation(uint256)"(
       _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[boolean, LockPositionStructOutput]>;
-
-    getSingularities(overrides?: CallOverrides): Promise<BigNumber[]>;
-
-    "getSingularities()"(overrides?: CallOverrides): Promise<BigNumber[]>;
-
-    getSingularityPools(
-      overrides?: CallOverrides
-    ): Promise<SingularityPoolStructOutput[]>;
-
-    "getSingularityPools()"(
-      overrides?: CallOverrides
-    ): Promise<SingularityPoolStructOutput[]>;
-
-    getTotalPoolDeposited(
-      _sglAssetId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "getTotalPoolDeposited(uint256)"(
-      _sglAssetId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    ): Promise<ParticipationStructOutput>;
 
     isApprovedForAll(
       owner: PromiseOrValue<string>,
@@ -1971,57 +1802,13 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    isApprovedOrOwner(
-      _spender: PromiseOrValue<string>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
+    lastProcessedWeek(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "isApprovedOrOwner(address,uint256)"(
-      _spender: PromiseOrValue<string>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
+    "lastProcessedWeek()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    lock(
-      _to: PromiseOrValue<string>,
-      _singularity: PromiseOrValue<string>,
-      _lockDuration: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    mintedTWTap(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "lock(address,address,uint128,uint128)"(
-      _to: PromiseOrValue<string>,
-      _singularity: PromiseOrValue<string>,
-      _lockDuration: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    lockPositions(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        sglAssetID: BigNumber;
-        amount: BigNumber;
-        lockTime: BigNumber;
-        lockDuration: BigNumber;
-      }
-    >;
-
-    "lockPositions(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        sglAssetID: BigNumber;
-        amount: BigNumber;
-        lockTime: BigNumber;
-        lockDuration: BigNumber;
-      }
-    >;
+    "mintedTWTap()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<string>;
 
@@ -2037,24 +1824,6 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    onERC1155Received(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    "onERC1155Received(address,address,uint256,uint256,bytes)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
     owner(overrides?: CallOverrides): Promise<string>;
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -2069,9 +1838,19 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    paused(overrides?: CallOverrides): Promise<boolean>;
+    participate(
+      _participant: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    "paused()"(overrides?: CallOverrides): Promise<boolean>;
+    "participate(address,uint256,uint256)"(
+      _participant: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     pendingOwner(overrides?: CallOverrides): Promise<string>;
 
@@ -2097,19 +1876,27 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    registerSingularity(
-      singularity: PromiseOrValue<string>,
-      assetID: PromiseOrValue<BigNumberish>,
-      weight: PromiseOrValue<BigNumberish>,
+    releaseTap(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _to: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "registerSingularity(address,uint256,uint256)"(
-      singularity: PromiseOrValue<string>,
-      assetID: PromiseOrValue<BigNumberish>,
-      weight: PromiseOrValue<BigNumberish>,
+    "releaseTap(uint256,address)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _to: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    rewardTokens(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "rewardTokens(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: PromiseOrValue<string>,
@@ -2138,38 +1925,6 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setSGLPoolWEight(
-      singularity: PromiseOrValue<string>,
-      weight: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setSGLPoolWEight(address,uint256)"(
-      singularity: PromiseOrValue<string>,
-      weight: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    sglAssetIDToAddress(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    "sglAssetIDToAddress(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    singularities(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "singularities(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -2184,9 +1939,9 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "symbol()"(overrides?: CallOverrides): Promise<string>;
 
-    tokenCounter(overrides?: CallOverrides): Promise<BigNumber>;
+    tapOFT(overrides?: CallOverrides): Promise<string>;
 
-    "tokenCounter()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "tapOFT()"(overrides?: CallOverrides): Promise<string>;
 
     tokenURI(
       tokenId: PromiseOrValue<BigNumberish>,
@@ -2197,12 +1952,6 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
-
-    totalSingularityPoolWeights(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "totalSingularityPoolWeights()"(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
 
     transferFrom(
       from: PromiseOrValue<string>,
@@ -2232,36 +1981,51 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    unlock(
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _singularity: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
+    twAML(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber, BigNumber] & {
+        totalParticipants: BigNumber;
+        averageMagnitude: BigNumber;
+        totalDeposited: BigNumber;
+        cumulative: BigNumber;
+      }
+    >;
+
+    "twAML()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber, BigNumber] & {
+        totalParticipants: BigNumber;
+        averageMagnitude: BigNumber;
+        totalDeposited: BigNumber;
+        cumulative: BigNumber;
+      }
+    >;
+
+    weekTotals(
+      arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "unlock(uint256,address,address)"(
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _singularity: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
+    "weekTotals(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    unregisterSingularity(
-      singularity: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "unregisterSingularity(address)"(
-      singularity: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    yieldBox(overrides?: CallOverrides): Promise<string>;
-
-    "yieldBox()"(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
+    "AMLDivergence(uint256,uint256,uint256)"(
+      cumulative?: null,
+      averageMagnitude?: null,
+      totalParticipants?: null
+    ): AMLDivergenceEventFilter;
+    AMLDivergence(
+      cumulative?: null,
+      averageMagnitude?: null,
+      totalParticipants?: null
+    ): AMLDivergenceEventFilter;
+
     "Approval(address,address,uint256)"(
       owner?: PromiseOrValue<string> | null,
       approved?: PromiseOrValue<string> | null,
@@ -2284,27 +2048,11 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       approved?: null
     ): ApprovalForAllEventFilter;
 
-    "Burn(address,uint128,tuple)"(
-      to?: PromiseOrValue<string> | null,
-      sglAssetID?: PromiseOrValue<BigNumberish> | null,
-      lockPosition?: null
-    ): BurnEventFilter;
-    Burn(
-      to?: PromiseOrValue<string> | null,
-      sglAssetID?: PromiseOrValue<BigNumberish> | null,
-      lockPosition?: null
-    ): BurnEventFilter;
-
-    "Mint(address,uint128,tuple)"(
-      to?: PromiseOrValue<string> | null,
-      sglAssetID?: PromiseOrValue<BigNumberish> | null,
-      lockPosition?: null
-    ): MintEventFilter;
-    Mint(
-      to?: PromiseOrValue<string> | null,
-      sglAssetID?: PromiseOrValue<BigNumberish> | null,
-      lockPosition?: null
-    ): MintEventFilter;
+    "ExitPosition(uint256,uint256)"(
+      tokenId?: null,
+      amount?: null
+    ): ExitPositionEventFilter;
+    ExitPosition(tokenId?: null, amount?: null): ExitPositionEventFilter;
 
     "OwnershipTransferred(address,address)"(
       previousOwner?: PromiseOrValue<string> | null,
@@ -2315,26 +2063,16 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
 
-    "Paused(address)"(account?: null): PausedEventFilter;
-    Paused(account?: null): PausedEventFilter;
-
-    "RegisterSingularity(address,uint256)"(
-      sgl?: null,
-      assetID?: null
-    ): RegisterSingularityEventFilter;
-    RegisterSingularity(
-      sgl?: null,
-      assetID?: null
-    ): RegisterSingularityEventFilter;
-
-    "SetSGLPoolWeight(address,uint256)"(
-      sgl?: null,
-      poolWeight?: null
-    ): SetSGLPoolWeightEventFilter;
-    SetSGLPoolWeight(
-      sgl?: null,
-      poolWeight?: null
-    ): SetSGLPoolWeightEventFilter;
+    "Participate(address,uint256,uint256)"(
+      participant?: PromiseOrValue<string> | null,
+      tapAmount?: null,
+      multiplier?: null
+    ): ParticipateEventFilter;
+    Participate(
+      participant?: PromiseOrValue<string> | null,
+      tapAmount?: null,
+      multiplier?: null
+    ): ParticipateEventFilter;
 
     "Transfer(address,address,uint256)"(
       from?: PromiseOrValue<string> | null,
@@ -2346,25 +2084,6 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       to?: PromiseOrValue<string> | null,
       tokenId?: PromiseOrValue<BigNumberish> | null
     ): TransferEventFilter;
-
-    "Unpaused(address)"(account?: null): UnpausedEventFilter;
-    Unpaused(account?: null): UnpausedEventFilter;
-
-    "UnregisterSingularity(address,uint256)"(
-      sgl?: null,
-      assetID?: null
-    ): UnregisterSingularityEventFilter;
-    UnregisterSingularity(
-      sgl?: null,
-      assetID?: null
-    ): UnregisterSingularityEventFilter;
-
-    "UpdateTotalSingularityPoolWeights(uint256)"(
-      totalSingularityPoolWeights?: null
-    ): UpdateTotalSingularityPoolWeightsEventFilter;
-    UpdateTotalSingularityPoolWeights(
-      totalSingularityPoolWeights?: null
-    ): UpdateTotalSingularityPoolWeightsEventFilter;
   };
 
   estimateGas: {
@@ -2372,14 +2091,24 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    activeSingularities(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
+    addRewardToken(
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "activeSingularities(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
+    "addRewardToken(address)"(
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    advanceWeek(
+      _limit: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "advanceWeek(uint256)"(
+      _limit: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     approve(
@@ -2424,6 +2153,70 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    claimRewards(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "claimRewards(uint256,address)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    claimable(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "claimable(uint256)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    claimed(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "claimed(uint256,uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    creation(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "creation()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    currentWeek(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "currentWeek()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    distributeReward(
+      _rewardTokenId: PromiseOrValue<BigNumberish>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "distributeReward(uint256,uint256)"(
+      _rewardTokenId: PromiseOrValue<BigNumberish>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    exitPosition(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "exitPosition(uint256)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     getApproved(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -2434,31 +2227,13 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getLock(
+    getParticipation(
       _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "getLock(uint256)"(
+    "getParticipation(uint256)"(
       _tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    getSingularities(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "getSingularities()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    getSingularityPools(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "getSingularityPools()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    getTotalPoolDeposited(
-      _sglAssetId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "getTotalPoolDeposited(uint256)"(
-      _sglAssetId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -2474,43 +2249,13 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    isApprovedOrOwner(
-      _spender: PromiseOrValue<string>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    lastProcessedWeek(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "isApprovedOrOwner(address,uint256)"(
-      _spender: PromiseOrValue<string>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    "lastProcessedWeek()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    lock(
-      _to: PromiseOrValue<string>,
-      _singularity: PromiseOrValue<string>,
-      _lockDuration: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
+    mintedTWTap(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "lock(address,address,uint128,uint128)"(
-      _to: PromiseOrValue<string>,
-      _singularity: PromiseOrValue<string>,
-      _lockDuration: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    lockPositions(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "lockPositions(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    "mintedTWTap()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2523,24 +2268,6 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "nonces(address)"(
       owner: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    onERC1155Received(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "onERC1155Received(address,address,uint256,uint256,bytes)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -2558,9 +2285,19 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    paused(overrides?: CallOverrides): Promise<BigNumber>;
+    participate(
+      _participant: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
-    "paused()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "participate(address,uint256,uint256)"(
+      _participant: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2586,18 +2323,26 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    registerSingularity(
-      singularity: PromiseOrValue<string>,
-      assetID: PromiseOrValue<BigNumberish>,
-      weight: PromiseOrValue<BigNumberish>,
+    releaseTap(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "registerSingularity(address,uint256,uint256)"(
-      singularity: PromiseOrValue<string>,
-      assetID: PromiseOrValue<BigNumberish>,
-      weight: PromiseOrValue<BigNumberish>,
+    "releaseTap(uint256,address)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    rewardTokens(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "rewardTokens(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "safeTransferFrom(address,address,uint256)"(
@@ -2627,38 +2372,6 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    setSGLPoolWEight(
-      singularity: PromiseOrValue<string>,
-      weight: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setSGLPoolWEight(address,uint256)"(
-      singularity: PromiseOrValue<string>,
-      weight: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    sglAssetIDToAddress(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "sglAssetIDToAddress(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    singularities(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "singularities(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -2673,9 +2386,9 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "symbol()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    tokenCounter(overrides?: CallOverrides): Promise<BigNumber>;
+    tapOFT(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "tokenCounter()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "tapOFT()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     tokenURI(
       tokenId: PromiseOrValue<BigNumberish>,
@@ -2684,12 +2397,6 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "tokenURI(uint256)"(
       tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    totalSingularityPoolWeights(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "totalSingularityPoolWeights()"(
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -2721,33 +2428,19 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    unlock(
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _singularity: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    twAML(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "twAML()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    weekTotals(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "unlock(uint256,address,address)"(
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _singularity: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    "weekTotals(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    unregisterSingularity(
-      singularity: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "unregisterSingularity(address)"(
-      singularity: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    yieldBox(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "yieldBox()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -2757,14 +2450,24 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    activeSingularities(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
+    addRewardToken(
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "activeSingularities(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
+    "addRewardToken(address)"(
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    advanceWeek(
+      _limit: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "advanceWeek(uint256)"(
+      _limit: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     approve(
@@ -2809,6 +2512,70 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    claimRewards(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "claimRewards(uint256,address)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    claimable(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "claimable(uint256)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    claimed(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "claimed(uint256,uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    creation(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "creation()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    currentWeek(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "currentWeek()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    distributeReward(
+      _rewardTokenId: PromiseOrValue<BigNumberish>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "distributeReward(uint256,uint256)"(
+      _rewardTokenId: PromiseOrValue<BigNumberish>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    exitPosition(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "exitPosition(uint256)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     getApproved(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -2819,37 +2586,13 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getLock(
+    getParticipation(
       _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "getLock(uint256)"(
+    "getParticipation(uint256)"(
       _tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    getSingularities(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "getSingularities()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    getSingularityPools(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "getSingularityPools()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    getTotalPoolDeposited(
-      _sglAssetId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "getTotalPoolDeposited(uint256)"(
-      _sglAssetId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -2865,43 +2608,15 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    isApprovedOrOwner(
-      _spender: PromiseOrValue<string>,
-      _tokenId: PromiseOrValue<BigNumberish>,
+    lastProcessedWeek(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "lastProcessedWeek()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "isApprovedOrOwner(address,uint256)"(
-      _spender: PromiseOrValue<string>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    mintedTWTap(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    lock(
-      _to: PromiseOrValue<string>,
-      _singularity: PromiseOrValue<string>,
-      _lockDuration: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "lock(address,address,uint128,uint128)"(
-      _to: PromiseOrValue<string>,
-      _singularity: PromiseOrValue<string>,
-      _lockDuration: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    lockPositions(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "lockPositions(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    "mintedTWTap()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -2914,24 +2629,6 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "nonces(address)"(
       owner: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    onERC1155Received(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "onERC1155Received(address,address,uint256,uint256,bytes)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -2949,9 +2646,19 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    paused(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    participate(
+      _participant: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
-    "paused()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "participate(address,uint256,uint256)"(
+      _participant: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -2977,18 +2684,26 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    registerSingularity(
-      singularity: PromiseOrValue<string>,
-      assetID: PromiseOrValue<BigNumberish>,
-      weight: PromiseOrValue<BigNumberish>,
+    releaseTap(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "registerSingularity(address,uint256,uint256)"(
-      singularity: PromiseOrValue<string>,
-      assetID: PromiseOrValue<BigNumberish>,
-      weight: PromiseOrValue<BigNumberish>,
+    "releaseTap(uint256,address)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    rewardTokens(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "rewardTokens(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "safeTransferFrom(address,address,uint256)"(
@@ -3018,38 +2733,6 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    setSGLPoolWEight(
-      singularity: PromiseOrValue<string>,
-      weight: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setSGLPoolWEight(address,uint256)"(
-      singularity: PromiseOrValue<string>,
-      weight: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    sglAssetIDToAddress(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "sglAssetIDToAddress(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    singularities(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "singularities(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -3064,9 +2747,9 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "symbol()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    tokenCounter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    tapOFT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "tokenCounter()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "tapOFT()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     tokenURI(
       tokenId: PromiseOrValue<BigNumberish>,
@@ -3075,14 +2758,6 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "tokenURI(uint256)"(
       tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    totalSingularityPoolWeights(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "totalSingularityPoolWeights()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -3114,32 +2789,18 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    unlock(
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _singularity: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    twAML(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "twAML()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    weekTotals(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "unlock(uint256,address,address)"(
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _singularity: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    "weekTotals(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    unregisterSingularity(
-      singularity: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "unregisterSingularity(address)"(
-      singularity: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    yieldBox(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "yieldBox()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

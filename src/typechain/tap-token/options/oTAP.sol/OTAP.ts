@@ -56,7 +56,6 @@ export interface OTAPInterface extends utils.Interface {
     "isApprovedOrOwner(address,uint256)": FunctionFragment;
     "mint(address,uint128,uint128,uint256)": FunctionFragment;
     "mintedOTAP()": FunctionFragment;
-    "mintedTAP()": FunctionFragment;
     "name()": FunctionFragment;
     "nonces(address)": FunctionFragment;
     "options(uint256)": FunctionFragment;
@@ -103,8 +102,6 @@ export interface OTAPInterface extends utils.Interface {
       | "mint(address,uint128,uint128,uint256)"
       | "mintedOTAP"
       | "mintedOTAP()"
-      | "mintedTAP"
-      | "mintedTAP()"
       | "name"
       | "name()"
       | "nonces"
@@ -247,11 +244,6 @@ export interface OTAPInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "mintedOTAP()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "mintedTAP", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "mintedTAP()",
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
@@ -458,11 +450,6 @@ export interface OTAPInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "mintedOTAP", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "mintedOTAP()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "mintedTAP", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "mintedTAP()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
@@ -793,10 +780,6 @@ export interface OTAP extends BaseContract {
 
     "mintedOTAP()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    mintedTAP(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "mintedTAP()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     name(overrides?: CallOverrides): Promise<[string]>;
 
     "name()"(overrides?: CallOverrides): Promise<[string]>;
@@ -1085,10 +1068,6 @@ export interface OTAP extends BaseContract {
 
   "mintedOTAP()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-  mintedTAP(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "mintedTAP()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   name(overrides?: CallOverrides): Promise<string>;
 
   "name()"(overrides?: CallOverrides): Promise<string>;
@@ -1372,10 +1351,6 @@ export interface OTAP extends BaseContract {
     mintedOTAP(overrides?: CallOverrides): Promise<BigNumber>;
 
     "mintedOTAP()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    mintedTAP(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "mintedTAP()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<string>;
 
@@ -1723,10 +1698,6 @@ export interface OTAP extends BaseContract {
 
     "mintedOTAP()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    mintedTAP(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "mintedTAP()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
     "name()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2005,10 +1976,6 @@ export interface OTAP extends BaseContract {
     mintedOTAP(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "mintedOTAP()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    mintedTAP(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "mintedTAP()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
