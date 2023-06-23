@@ -28,6 +28,20 @@ import type {
   PromiseOrValue,
 } from "../../common";
 
+export declare namespace ISingularity {
+  export type AccrueInfoStruct = {
+    interestPerSecond: PromiseOrValue<BigNumberish>;
+    lastAccrued: PromiseOrValue<BigNumberish>;
+    feesEarnedFraction: PromiseOrValue<BigNumberish>;
+  };
+
+  export type AccrueInfoStructOutput = [BigNumber, BigNumber, BigNumber] & {
+    interestPerSecond: BigNumber;
+    lastAccrued: BigNumber;
+    feesEarnedFraction: BigNumber;
+  };
+}
+
 export declare namespace IUSDOBase {
   export type ILeverageSwapDataStruct = {
     tokenOut: PromiseOrValue<string>;
@@ -116,6 +130,7 @@ export interface SingularityInterface extends utils.Interface {
     "decimals()": FunctionFragment;
     "exchangeRate()": FunctionFragment;
     "execute(bytes[],bool)": FunctionFragment;
+    "getInterestRate()": FunctionFragment;
     "init(bytes)": FunctionFragment;
     "leverageModule()": FunctionFragment;
     "liquidate(address[],uint256[],address,bytes,bytes)": FunctionFragment;
@@ -242,6 +257,8 @@ export interface SingularityInterface extends utils.Interface {
       | "exchangeRate()"
       | "execute"
       | "execute(bytes[],bool)"
+      | "getInterestRate"
+      | "getInterestRate()"
       | "init"
       | "init(bytes)"
       | "leverageModule"
@@ -627,6 +644,14 @@ export interface SingularityInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "execute(bytes[],bool)",
     values: [PromiseOrValue<BytesLike>[], PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getInterestRate",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getInterestRate()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "init",
@@ -1397,6 +1422,14 @@ export interface SingularityInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "execute", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "execute(bytes[],bool)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getInterestRate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getInterestRate()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "init", data: BytesLike): Result;
@@ -2492,6 +2525,24 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    getInterestRate(
+      overrides?: CallOverrides
+    ): Promise<
+      [ISingularity.AccrueInfoStructOutput, BigNumber] & {
+        _accrueInfo: ISingularity.AccrueInfoStructOutput;
+        utilization: BigNumber;
+      }
+    >;
+
+    "getInterestRate()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [ISingularity.AccrueInfoStructOutput, BigNumber] & {
+        _accrueInfo: ISingularity.AccrueInfoStructOutput;
+        utilization: BigNumber;
+      }
+    >;
+
     init(
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -3357,6 +3408,24 @@ export interface Singularity extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  getInterestRate(
+    overrides?: CallOverrides
+  ): Promise<
+    [ISingularity.AccrueInfoStructOutput, BigNumber] & {
+      _accrueInfo: ISingularity.AccrueInfoStructOutput;
+      utilization: BigNumber;
+    }
+  >;
+
+  "getInterestRate()"(
+    overrides?: CallOverrides
+  ): Promise<
+    [ISingularity.AccrueInfoStructOutput, BigNumber] & {
+      _accrueInfo: ISingularity.AccrueInfoStructOutput;
+      utilization: BigNumber;
+    }
+  >;
+
   init(
     data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -4204,6 +4273,24 @@ export interface Singularity extends BaseContract {
       overrides?: CallOverrides
     ): Promise<
       [boolean[], string[]] & { successes: boolean[]; results: string[] }
+    >;
+
+    getInterestRate(
+      overrides?: CallOverrides
+    ): Promise<
+      [ISingularity.AccrueInfoStructOutput, BigNumber] & {
+        _accrueInfo: ISingularity.AccrueInfoStructOutput;
+        utilization: BigNumber;
+      }
+    >;
+
+    "getInterestRate()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [ISingularity.AccrueInfoStructOutput, BigNumber] & {
+        _accrueInfo: ISingularity.AccrueInfoStructOutput;
+        utilization: BigNumber;
+      }
     >;
 
     init(
@@ -5245,6 +5332,10 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    getInterestRate(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "getInterestRate()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     init(
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -6073,6 +6164,12 @@ export interface Singularity extends BaseContract {
       calls: PromiseOrValue<BytesLike>[],
       revertOnFail: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    getInterestRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "getInterestRate()"(
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     init(

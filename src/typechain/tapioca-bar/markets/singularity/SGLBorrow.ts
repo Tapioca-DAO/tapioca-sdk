@@ -27,6 +27,20 @@ import type {
   PromiseOrValue,
 } from "../../common";
 
+export declare namespace ISingularity {
+  export type AccrueInfoStruct = {
+    interestPerSecond: PromiseOrValue<BigNumberish>;
+    lastAccrued: PromiseOrValue<BigNumberish>;
+    feesEarnedFraction: PromiseOrValue<BigNumberish>;
+  };
+
+  export type AccrueInfoStructOutput = [BigNumber, BigNumber, BigNumber] & {
+    interestPerSecond: BigNumber;
+    lastAccrued: BigNumber;
+    feesEarnedFraction: BigNumber;
+  };
+}
+
 export interface SGLBorrowInterface extends utils.Interface {
   functions: {
     "DOMAIN_SEPARATOR()": FunctionFragment;
@@ -52,6 +66,7 @@ export interface SGLBorrowInterface extends utils.Interface {
     "conservator()": FunctionFragment;
     "decimals()": FunctionFragment;
     "exchangeRate()": FunctionFragment;
+    "getInterestRate()": FunctionFragment;
     "liquidationBonusAmount()": FunctionFragment;
     "liquidationMultiplier()": FunctionFragment;
     "liquidationQueue()": FunctionFragment;
@@ -146,6 +161,8 @@ export interface SGLBorrowInterface extends utils.Interface {
       | "decimals()"
       | "exchangeRate"
       | "exchangeRate()"
+      | "getInterestRate"
+      | "getInterestRate()"
       | "liquidationBonusAmount"
       | "liquidationBonusAmount()"
       | "liquidationMultiplier"
@@ -402,6 +419,14 @@ export interface SGLBorrowInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "exchangeRate()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getInterestRate",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getInterestRate()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -913,6 +938,14 @@ export interface SGLBorrowInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "exchangeRate()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getInterestRate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getInterestRate()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1784,6 +1817,24 @@ export interface SGLBorrow extends BaseContract {
 
     "exchangeRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    getInterestRate(
+      overrides?: CallOverrides
+    ): Promise<
+      [ISingularity.AccrueInfoStructOutput, BigNumber] & {
+        _accrueInfo: ISingularity.AccrueInfoStructOutput;
+        utilization: BigNumber;
+      }
+    >;
+
+    "getInterestRate()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [ISingularity.AccrueInfoStructOutput, BigNumber] & {
+        _accrueInfo: ISingularity.AccrueInfoStructOutput;
+        utilization: BigNumber;
+      }
+    >;
+
     liquidationBonusAmount(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -2353,6 +2404,24 @@ export interface SGLBorrow extends BaseContract {
 
   "exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  getInterestRate(
+    overrides?: CallOverrides
+  ): Promise<
+    [ISingularity.AccrueInfoStructOutput, BigNumber] & {
+      _accrueInfo: ISingularity.AccrueInfoStructOutput;
+      utilization: BigNumber;
+    }
+  >;
+
+  "getInterestRate()"(
+    overrides?: CallOverrides
+  ): Promise<
+    [ISingularity.AccrueInfoStructOutput, BigNumber] & {
+      _accrueInfo: ISingularity.AccrueInfoStructOutput;
+      utilization: BigNumber;
+    }
+  >;
+
   liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
   "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2901,6 +2970,24 @@ export interface SGLBorrow extends BaseContract {
     exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getInterestRate(
+      overrides?: CallOverrides
+    ): Promise<
+      [ISingularity.AccrueInfoStructOutput, BigNumber] & {
+        _accrueInfo: ISingularity.AccrueInfoStructOutput;
+        utilization: BigNumber;
+      }
+    >;
+
+    "getInterestRate()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [ISingularity.AccrueInfoStructOutput, BigNumber] & {
+        _accrueInfo: ISingularity.AccrueInfoStructOutput;
+        utilization: BigNumber;
+      }
+    >;
 
     liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3649,6 +3736,10 @@ export interface SGLBorrow extends BaseContract {
 
     "exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    getInterestRate(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "getInterestRate()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -4180,6 +4271,12 @@ export interface SGLBorrow extends BaseContract {
     exchangeRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "exchangeRate()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    getInterestRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "getInterestRate()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     liquidationBonusAmount(
       overrides?: CallOverrides
