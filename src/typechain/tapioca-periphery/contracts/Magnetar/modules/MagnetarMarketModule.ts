@@ -35,7 +35,6 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
     "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,bool,bool)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "mintAndLend(address,address,address,uint256,uint256,bool,bool)": FunctionFragment;
-    "removeAsset(address,address,uint256)": FunctionFragment;
     "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)": FunctionFragment;
     "withdrawTo(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)": FunctionFragment;
   };
@@ -54,8 +53,6 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
       | "isApprovedForAll(address,address)"
       | "mintAndLend"
       | "mintAndLend(address,address,address,uint256,uint256,bool,bool)"
-      | "removeAsset"
-      | "removeAsset(address,address,uint256)"
       | "removeAssetAndRepay"
       | "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)"
       | "withdrawTo"
@@ -189,22 +186,6 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "removeAsset",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "removeAsset(address,address,uint256)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "removeAssetAndRepay",
     values: [
       PromiseOrValue<string>,
@@ -307,14 +288,6 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "mintAndLend(address,address,address,uint256,uint256,bool,bool)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "removeAsset",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "removeAsset(address,address,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -502,20 +475,6 @@ export interface MagnetarMarketModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    removeAsset(
-      singularity: PromiseOrValue<string>,
-      user: PromiseOrValue<string>,
-      fraction: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "removeAsset(address,address,uint256)"(
-      singularity: PromiseOrValue<string>,
-      user: PromiseOrValue<string>,
-      fraction: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     removeAssetAndRepay(
       singularity: PromiseOrValue<string>,
       bingBang: PromiseOrValue<string>,
@@ -689,20 +648,6 @@ export interface MagnetarMarketModule extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  removeAsset(
-    singularity: PromiseOrValue<string>,
-    user: PromiseOrValue<string>,
-    fraction: PromiseOrValue<BigNumberish>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "removeAsset(address,address,uint256)"(
-    singularity: PromiseOrValue<string>,
-    user: PromiseOrValue<string>,
-    fraction: PromiseOrValue<BigNumberish>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   removeAssetAndRepay(
     singularity: PromiseOrValue<string>,
     bingBang: PromiseOrValue<string>,
@@ -873,20 +818,6 @@ export interface MagnetarMarketModule extends BaseContract {
       borrowAmount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    removeAsset(
-      singularity: PromiseOrValue<string>,
-      user: PromiseOrValue<string>,
-      fraction: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "removeAsset(address,address,uint256)"(
-      singularity: PromiseOrValue<string>,
-      user: PromiseOrValue<string>,
-      fraction: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1077,20 +1008,6 @@ export interface MagnetarMarketModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    removeAsset(
-      singularity: PromiseOrValue<string>,
-      user: PromiseOrValue<string>,
-      fraction: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "removeAsset(address,address,uint256)"(
-      singularity: PromiseOrValue<string>,
-      user: PromiseOrValue<string>,
-      fraction: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     removeAssetAndRepay(
       singularity: PromiseOrValue<string>,
       bingBang: PromiseOrValue<string>,
@@ -1262,20 +1179,6 @@ export interface MagnetarMarketModule extends BaseContract {
       borrowAmount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    removeAsset(
-      singularity: PromiseOrValue<string>,
-      user: PromiseOrValue<string>,
-      fraction: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "removeAsset(address,address,uint256)"(
-      singularity: PromiseOrValue<string>,
-      user: PromiseOrValue<string>,
-      fraction: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
