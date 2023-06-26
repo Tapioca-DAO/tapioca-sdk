@@ -40,5 +40,7 @@ export type { USDOLeverageModule } from "./usd0/modules/USDOLeverageModule";
 export { USDOLeverageModule__factory } from "./factories/usd0/modules/USDOLeverageModule__factory";
 export type { USDOMarketModule } from "./usd0/modules/USDOMarketModule";
 export { USDOMarketModule__factory } from "./factories/usd0/modules/USDOMarketModule__factory";
+export type { USDOOptionsModule } from "./usd0/modules/USDOOptionsModule";
+export { USDOOptionsModule__factory } from "./factories/usd0/modules/USDOOptionsModule__factory";
 export type { USDO } from "./usd0/USDO";
 export { USDO__factory } from "./factories/usd0/USDO__factory";

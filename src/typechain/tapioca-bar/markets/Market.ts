@@ -63,15 +63,7 @@ export interface MarketInterface extends utils.Interface {
     "protocolFee()": FunctionFragment;
     "setBorrowCap(uint256)": FunctionFragment;
     "setBorrowOpeningFee(uint256)": FunctionFragment;
-    "setCallerFee(uint256)": FunctionFragment;
-    "setCollateralizationRate(uint256)": FunctionFragment;
-    "setConservator(address)": FunctionFragment;
-    "setLiquidationBonusAmount(uint256)": FunctionFragment;
-    "setMaxLiquidatorReward(uint256)": FunctionFragment;
-    "setMinLiquidatorReward(uint256)": FunctionFragment;
-    "setOracle(address)": FunctionFragment;
-    "setOracleData(bytes)": FunctionFragment;
-    "setProtocolFee(uint256)": FunctionFragment;
+    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
     "totalBorrow()": FunctionFragment;
     "totalBorrowCap()": FunctionFragment;
     "totalCollateralShare()": FunctionFragment;
@@ -156,24 +148,8 @@ export interface MarketInterface extends utils.Interface {
       | "setBorrowCap(uint256)"
       | "setBorrowOpeningFee"
       | "setBorrowOpeningFee(uint256)"
-      | "setCallerFee"
-      | "setCallerFee(uint256)"
-      | "setCollateralizationRate"
-      | "setCollateralizationRate(uint256)"
-      | "setConservator"
-      | "setConservator(address)"
-      | "setLiquidationBonusAmount"
-      | "setLiquidationBonusAmount(uint256)"
-      | "setMaxLiquidatorReward"
-      | "setMaxLiquidatorReward(uint256)"
-      | "setMinLiquidatorReward"
-      | "setMinLiquidatorReward(uint256)"
-      | "setOracle"
-      | "setOracle(address)"
-      | "setOracleData"
-      | "setOracleData(bytes)"
-      | "setProtocolFee"
-      | "setProtocolFee(uint256)"
+      | "setMarketConfig"
+      | "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
       | "totalBorrow"
       | "totalBorrow()"
       | "totalBorrowCap"
@@ -466,76 +442,36 @@ export interface MarketInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "setCallerFee",
-    values: [PromiseOrValue<BigNumberish>]
+    functionFragment: "setMarketConfig",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
-    functionFragment: "setCallerFee(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setCollateralizationRate",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setCollateralizationRate(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setConservator",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setConservator(address)",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setLiquidationBonusAmount",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setLiquidationBonusAmount(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setMaxLiquidatorReward",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setMaxLiquidatorReward(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setMinLiquidatorReward",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setMinLiquidatorReward(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setOracle",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setOracle(address)",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setOracleData",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setOracleData(bytes)",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setProtocolFee",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setProtocolFee(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
+    functionFragment: "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "totalBorrow",
@@ -860,72 +796,11 @@ export interface MarketInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setCallerFee",
+    functionFragment: "setMarketConfig",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setCallerFee(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setCollateralizationRate",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setCollateralizationRate(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setConservator",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setConservator(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setLiquidationBonusAmount",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setLiquidationBonusAmount(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setMaxLiquidatorReward",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setMaxLiquidatorReward(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setMinLiquidatorReward",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setMinLiquidatorReward(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "setOracle", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "setOracle(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setOracleData",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setOracleData(bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setProtocolFee",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setProtocolFee(uint256)",
+    functionFragment: "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1503,93 +1378,33 @@ export interface Market extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    setCallerFee(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setCallerFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setCollateralizationRate(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setCollateralizationRate(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setConservator(
-      _conservator: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setConservator(address)"(
-      _conservator: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setLiquidationBonusAmount(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setLiquidationBonusAmount(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setMaxLiquidatorReward(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setMaxLiquidatorReward(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setMinLiquidatorReward(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setMinLiquidatorReward(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setOracle(
+    setMarketConfig(
+      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
+      _oracleData: PromiseOrValue<BytesLike>,
+      _conservator: PromiseOrValue<string>,
+      _callerFee: PromiseOrValue<BigNumberish>,
+      _protocolFee: PromiseOrValue<BigNumberish>,
+      _liquidationBonusAmount: PromiseOrValue<BigNumberish>,
+      _minLiquidatorReward: PromiseOrValue<BigNumberish>,
+      _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
+      _totalBorrowCap: PromiseOrValue<BigNumberish>,
+      _collateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setOracle(address)"(
+    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
+      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setOracleData(
       _oracleData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setOracleData(bytes)"(
-      _oracleData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setProtocolFee(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setProtocolFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
+      _conservator: PromiseOrValue<string>,
+      _callerFee: PromiseOrValue<BigNumberish>,
+      _protocolFee: PromiseOrValue<BigNumberish>,
+      _liquidationBonusAmount: PromiseOrValue<BigNumberish>,
+      _minLiquidatorReward: PromiseOrValue<BigNumberish>,
+      _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
+      _totalBorrowCap: PromiseOrValue<BigNumberish>,
+      _collateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1968,93 +1783,33 @@ export interface Market extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  setCallerFee(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setCallerFee(uint256)"(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setCollateralizationRate(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setCollateralizationRate(uint256)"(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setConservator(
-    _conservator: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setConservator(address)"(
-    _conservator: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setLiquidationBonusAmount(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setLiquidationBonusAmount(uint256)"(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setMaxLiquidatorReward(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setMaxLiquidatorReward(uint256)"(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setMinLiquidatorReward(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setMinLiquidatorReward(uint256)"(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setOracle(
+  setMarketConfig(
+    _borrowOpeningFee: PromiseOrValue<BigNumberish>,
     _oracle: PromiseOrValue<string>,
+    _oracleData: PromiseOrValue<BytesLike>,
+    _conservator: PromiseOrValue<string>,
+    _callerFee: PromiseOrValue<BigNumberish>,
+    _protocolFee: PromiseOrValue<BigNumberish>,
+    _liquidationBonusAmount: PromiseOrValue<BigNumberish>,
+    _minLiquidatorReward: PromiseOrValue<BigNumberish>,
+    _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
+    _totalBorrowCap: PromiseOrValue<BigNumberish>,
+    _collateralizationRate: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setOracle(address)"(
+  "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
+    _borrowOpeningFee: PromiseOrValue<BigNumberish>,
     _oracle: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setOracleData(
     _oracleData: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setOracleData(bytes)"(
-    _oracleData: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setProtocolFee(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setProtocolFee(uint256)"(
-    _val: PromiseOrValue<BigNumberish>,
+    _conservator: PromiseOrValue<string>,
+    _callerFee: PromiseOrValue<BigNumberish>,
+    _protocolFee: PromiseOrValue<BigNumberish>,
+    _liquidationBonusAmount: PromiseOrValue<BigNumberish>,
+    _minLiquidatorReward: PromiseOrValue<BigNumberish>,
+    _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
+    _totalBorrowCap: PromiseOrValue<BigNumberish>,
+    _collateralizationRate: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -2425,93 +2180,33 @@ export interface Market extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setCallerFee(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setCallerFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setCollateralizationRate(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setCollateralizationRate(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setConservator(
-      _conservator: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setConservator(address)"(
-      _conservator: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setLiquidationBonusAmount(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setLiquidationBonusAmount(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setMaxLiquidatorReward(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setMaxLiquidatorReward(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setMinLiquidatorReward(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setMinLiquidatorReward(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setOracle(
+    setMarketConfig(
+      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
+      _oracleData: PromiseOrValue<BytesLike>,
+      _conservator: PromiseOrValue<string>,
+      _callerFee: PromiseOrValue<BigNumberish>,
+      _protocolFee: PromiseOrValue<BigNumberish>,
+      _liquidationBonusAmount: PromiseOrValue<BigNumberish>,
+      _minLiquidatorReward: PromiseOrValue<BigNumberish>,
+      _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
+      _totalBorrowCap: PromiseOrValue<BigNumberish>,
+      _collateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setOracle(address)"(
+    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
+      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setOracleData(
       _oracleData: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setOracleData(bytes)"(
-      _oracleData: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setProtocolFee(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setProtocolFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
+      _conservator: PromiseOrValue<string>,
+      _callerFee: PromiseOrValue<BigNumberish>,
+      _protocolFee: PromiseOrValue<BigNumberish>,
+      _liquidationBonusAmount: PromiseOrValue<BigNumberish>,
+      _minLiquidatorReward: PromiseOrValue<BigNumberish>,
+      _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
+      _totalBorrowCap: PromiseOrValue<BigNumberish>,
+      _collateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -2979,93 +2674,33 @@ export interface Market extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    setCallerFee(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setCallerFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setCollateralizationRate(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setCollateralizationRate(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setConservator(
-      _conservator: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setConservator(address)"(
-      _conservator: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setLiquidationBonusAmount(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setLiquidationBonusAmount(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setMaxLiquidatorReward(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setMaxLiquidatorReward(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setMinLiquidatorReward(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setMinLiquidatorReward(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setOracle(
+    setMarketConfig(
+      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
+      _oracleData: PromiseOrValue<BytesLike>,
+      _conservator: PromiseOrValue<string>,
+      _callerFee: PromiseOrValue<BigNumberish>,
+      _protocolFee: PromiseOrValue<BigNumberish>,
+      _liquidationBonusAmount: PromiseOrValue<BigNumberish>,
+      _minLiquidatorReward: PromiseOrValue<BigNumberish>,
+      _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
+      _totalBorrowCap: PromiseOrValue<BigNumberish>,
+      _collateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setOracle(address)"(
+    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
+      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setOracleData(
       _oracleData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setOracleData(bytes)"(
-      _oracleData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setProtocolFee(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setProtocolFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
+      _conservator: PromiseOrValue<string>,
+      _callerFee: PromiseOrValue<BigNumberish>,
+      _protocolFee: PromiseOrValue<BigNumberish>,
+      _liquidationBonusAmount: PromiseOrValue<BigNumberish>,
+      _minLiquidatorReward: PromiseOrValue<BigNumberish>,
+      _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
+      _totalBorrowCap: PromiseOrValue<BigNumberish>,
+      _collateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -3445,93 +3080,33 @@ export interface Market extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    setCallerFee(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setCallerFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setCollateralizationRate(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setCollateralizationRate(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setConservator(
-      _conservator: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setConservator(address)"(
-      _conservator: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setLiquidationBonusAmount(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setLiquidationBonusAmount(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setMaxLiquidatorReward(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setMaxLiquidatorReward(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setMinLiquidatorReward(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setMinLiquidatorReward(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setOracle(
+    setMarketConfig(
+      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
+      _oracleData: PromiseOrValue<BytesLike>,
+      _conservator: PromiseOrValue<string>,
+      _callerFee: PromiseOrValue<BigNumberish>,
+      _protocolFee: PromiseOrValue<BigNumberish>,
+      _liquidationBonusAmount: PromiseOrValue<BigNumberish>,
+      _minLiquidatorReward: PromiseOrValue<BigNumberish>,
+      _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
+      _totalBorrowCap: PromiseOrValue<BigNumberish>,
+      _collateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setOracle(address)"(
+    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
+      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setOracleData(
       _oracleData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setOracleData(bytes)"(
-      _oracleData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setProtocolFee(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setProtocolFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
+      _conservator: PromiseOrValue<string>,
+      _callerFee: PromiseOrValue<BigNumberish>,
+      _protocolFee: PromiseOrValue<BigNumberish>,
+      _liquidationBonusAmount: PromiseOrValue<BigNumberish>,
+      _minLiquidatorReward: PromiseOrValue<BigNumberish>,
+      _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
+      _totalBorrowCap: PromiseOrValue<BigNumberish>,
+      _collateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
