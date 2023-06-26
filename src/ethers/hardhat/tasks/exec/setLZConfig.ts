@@ -94,8 +94,8 @@ export const setLZConfig__task = async (
     );
 
     // Execute calls
-    if (contractType === 'TapOFT') {
-        console.log('[+] Using TapiocaWrapper (TOFT)');
+    if (contractType === 'tOFT') {
+        console.log('[+] Using TapiocaWrapper (tOFT)');
 
         const { contract: tapiocaWrapper } =
             await hre.SDK.hardhatUtils.getLocalContract<TapiocaWrapper>(
