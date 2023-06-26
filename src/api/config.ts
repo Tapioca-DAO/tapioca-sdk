@@ -24,6 +24,9 @@ export enum EPacketType {
     PT_YB_WITHDRAW = 773,
     PT_YB_SEND_SGL_BORROW = 775,
     PT_SEND_APPROVAL = 790,
+    // TapOFT
+    PT_LOCK_TWTAP = 870,
+    PT_UNLOCK_TWTAP = 871,
 }
 
 /**
@@ -38,6 +41,8 @@ export const MIN_GAS_FOR_PACKET_TYPE = {
     [EPacketType.PT_YB_WITHDRAW]: 200_000,
     [EPacketType.PT_YB_SEND_SGL_BORROW]: 200_000,
     [EPacketType.PT_SEND_APPROVAL]: 200_000,
+    [EPacketType.PT_LOCK_TWTAP]: 550_000,
+    [EPacketType.PT_UNLOCK_TWTAP]: 750_000,
 };
 
 /**
@@ -110,6 +115,10 @@ export const PACKET_TYPES = [
 ];
 
 export const ONFT_PACKET_TYPES = [EPacketType.PT_SEND_AND_CALL];
+export const TAPOFT_PACKET_TYPES = [
+    EPacketType.PT_LOCK_TWTAP,
+    EPacketType.PT_UNLOCK_TWTAP,
+];
 
 /**
  * Returns a mapping between chain ID and LZ chain ID

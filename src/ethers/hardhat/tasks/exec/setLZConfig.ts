@@ -1,7 +1,7 @@
 import '@nomicfoundation/hardhat-toolbox/dist/src/index';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import inquirer from 'inquirer';
-import { EChainID } from '../../../../api/config';
+import { EChainID, EPacketType } from '../../../../api/config';
 import { TContract, TLocalDeployment } from '../../../../shared';
 import { TapiocaZ } from '../../../../typechain';
 import { TapiocaWrapper } from '../../../../typechain/tapiocaz';
@@ -12,10 +12,8 @@ import { Multicall3 } from '../../../../typechain/tapioca-periphery/Multicall/Mu
  */
 export const setLZConfig__task = async (
     taskArgs: {
-        isToft?: boolean;
         debugMode?: boolean;
         chainId?: string;
-        isOnft?: boolean;
     },
     hre: HardhatRuntimeEnvironment,
 ) => {
@@ -26,15 +24,30 @@ export const setLZConfig__task = async (
     console.log(
         '[+] This task will configure the following packets to a minDstGas of 200_000: ',
     );
-
-    console.log(
-        taskArgs.isOnft
-            ? hre.SDK.config.ONFT_PACKET_TYPES
-            : hre.SDK.config.PACKET_TYPES,
-    );
-
     const tag = await hre.SDK.hardhatUtils.askForTag(hre, 'local');
 
+    //--- Get the type of contract
+    const _contractTypeChoices = ['tOFT', 'ONFT', 'TapOFT'] as const;
+    const contractType = (
+        await inquirer.prompt({
+            type: 'list',
+            message: 'Select contract type',
+            name: 'contractType',
+            choices: _contractTypeChoices,
+        })
+    ).contractType as (typeof _contractTypeChoices)[number];
+
+    let packetTypes: EPacketType[] = [];
+    if (contractType === 'tOFT') {
+        packetTypes = hre.SDK.config.PACKET_TYPES;
+    } else if (contractType === 'ONFT') {
+        packetTypes = hre.SDK.config.ONFT_PACKET_TYPES;
+    } else if (contractType === 'TapOFT') {
+        packetTypes = hre.SDK.config.TAPOFT_PACKET_TYPES;
+    }
+    if (packetTypes.length === 0) throw new Error('[-] No packet types found');
+
+    //--- Setup VM
     const VM = new hre.SDK.DeployerVM(hre, {
         bytecodeSizeLimit: 100_000,
         debugMode: true,
@@ -72,10 +85,16 @@ export const setLZConfig__task = async (
         taskArgs.chainId,
     );
 
-    const calls = buildCalls(hre, contractToConf, targets, taskArgs.isOnft);
+    const calls = buildCalls(
+        hre,
+        contractToConf,
+        targets,
+        packetTypes,
+        contractType === 'ONFT',
+    );
 
     // Execute calls
-    if (taskArgs.isToft) {
+    if (contractType === 'TapOFT') {
         console.log('[+] Using TapiocaWrapper (TOFT)');
 
         const { contract: tapiocaWrapper } =
@@ -195,6 +214,7 @@ function buildCalls(
     hre: HardhatRuntimeEnvironment,
     contractToConf: TContract,
     targets: Awaited<ReturnType<typeof getLinkedContract>>,
+    packetTypes: EPacketType[],
     isOnft?: boolean,
 ) {
     // Build calls
@@ -239,9 +259,6 @@ function buildCalls(
 
         // Set minDstGas per packet type
         console.log('\t- MinDstGas: ');
-        const packetTypes = isOnft
-            ? hre.SDK.config.ONFT_PACKET_TYPES
-            : hre.SDK.config.PACKET_TYPES;
         for (const packetType of packetTypes) {
             console.log('\t\t- PacketType:', packetType);
             console.log('\t\t\t- LZChainID:', target.lzChainId);
