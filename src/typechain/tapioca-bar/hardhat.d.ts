@@ -81,6 +81,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.USDOMarketModule__factory>;
     getContractFactory(
+      name: "USDOOptionsModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.USDOOptionsModule__factory>;
+    getContractFactory(
       name: "USDO",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.USDO__factory>;
@@ -170,6 +174,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.USDOMarketModule>;
+    getContractAt(
+      name: "USDOOptionsModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.USDOOptionsModule>;
     getContractAt(
       name: "USDO",
       address: string,

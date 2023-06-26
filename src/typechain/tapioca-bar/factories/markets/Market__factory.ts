@@ -860,115 +860,61 @@ const _abi = [
     inputs: [
       {
         internalType: "uint256",
-        name: "_val",
+        name: "_borrowOpeningFee",
         type: "uint256",
       },
-    ],
-    name: "setCallerFee",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_val",
-        type: "uint256",
-      },
-    ],
-    name: "setCollateralizationRate",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_conservator",
-        type: "address",
-      },
-    ],
-    name: "setConservator",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_val",
-        type: "uint256",
-      },
-    ],
-    name: "setLiquidationBonusAmount",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_val",
-        type: "uint256",
-      },
-    ],
-    name: "setMaxLiquidatorReward",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_val",
-        type: "uint256",
-      },
-    ],
-    name: "setMinLiquidatorReward",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
       {
         internalType: "contract IOracle",
         name: "_oracle",
         type: "address",
       },
-    ],
-    name: "setOracle",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
       {
         internalType: "bytes",
         name: "_oracleData",
         type: "bytes",
       },
-    ],
-    name: "setOracleData",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
+      {
+        internalType: "address",
+        name: "_conservator",
+        type: "address",
+      },
       {
         internalType: "uint256",
-        name: "_val",
+        name: "_callerFee",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_protocolFee",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_liquidationBonusAmount",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_minLiquidatorReward",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_maxLiquidatorReward",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_totalBorrowCap",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_collateralizationRate",
         type: "uint256",
       },
     ],
-    name: "setProtocolFee",
+    name: "setMarketConfig",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

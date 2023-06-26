@@ -3,3 +3,4 @@
 /* eslint-disable */
 export { USDOLeverageModule__factory } from "./USDOLeverageModule__factory";
 export { USDOMarketModule__factory } from "./USDOMarketModule__factory";
+export { USDOOptionsModule__factory } from "./USDOOptionsModule__factory";
