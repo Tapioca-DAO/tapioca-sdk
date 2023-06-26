@@ -28,41 +28,7 @@ import type {
   PromiseOrValue,
 } from "../common";
 
-export declare namespace ITapiocaOFT {
-  export type IWithdrawParamsStruct = {
-    withdraw: PromiseOrValue<boolean>;
-    withdrawLzFeeAmount: PromiseOrValue<BigNumberish>;
-    withdrawOnOtherChain: PromiseOrValue<boolean>;
-    withdrawLzChainId: PromiseOrValue<BigNumberish>;
-    withdrawAdapterParams: PromiseOrValue<BytesLike>;
-  };
-
-  export type IWithdrawParamsStructOutput = [
-    boolean,
-    BigNumber,
-    boolean,
-    number,
-    string
-  ] & {
-    withdraw: boolean;
-    withdrawLzFeeAmount: BigNumber;
-    withdrawOnOtherChain: boolean;
-    withdrawLzChainId: number;
-    withdrawAdapterParams: string;
-  };
-
-  export type IRemoveParamsStruct = {
-    share: PromiseOrValue<BigNumberish>;
-    marketHelper: PromiseOrValue<string>;
-    market: PromiseOrValue<string>;
-  };
-
-  export type IRemoveParamsStructOutput = [BigNumber, string, string] & {
-    share: BigNumber;
-    marketHelper: string;
-    market: string;
-  };
-
+export declare namespace ITapiocaOptionsBrokerCrossChain {
   export type IApprovalStruct = {
     permitAll: PromiseOrValue<boolean>;
     allowFailure: PromiseOrValue<boolean>;
@@ -101,6 +67,138 @@ export declare namespace ITapiocaOFT {
     v: number;
     r: string;
     s: string;
+  };
+}
+
+export declare namespace IUSDOBase {
+  export type ILeverageSwapDataStruct = {
+    tokenOut: PromiseOrValue<string>;
+    amountOutMin: PromiseOrValue<BigNumberish>;
+    data: PromiseOrValue<BytesLike>;
+  };
+
+  export type ILeverageSwapDataStructOutput = [string, BigNumber, string] & {
+    tokenOut: string;
+    amountOutMin: BigNumber;
+    data: string;
+  };
+
+  export type ILeverageLZDataStruct = {
+    srcExtraGasLimit: PromiseOrValue<BigNumberish>;
+    lzSrcChainId: PromiseOrValue<BigNumberish>;
+    lzDstChainId: PromiseOrValue<BigNumberish>;
+    zroPaymentAddress: PromiseOrValue<string>;
+    dstAirdropAdapterParam: PromiseOrValue<BytesLike>;
+    srcAirdropAdapterParam: PromiseOrValue<BytesLike>;
+    refundAddress: PromiseOrValue<string>;
+  };
+
+  export type ILeverageLZDataStructOutput = [
+    BigNumber,
+    number,
+    number,
+    string,
+    string,
+    string,
+    string
+  ] & {
+    srcExtraGasLimit: BigNumber;
+    lzSrcChainId: number;
+    lzDstChainId: number;
+    zroPaymentAddress: string;
+    dstAirdropAdapterParam: string;
+    srcAirdropAdapterParam: string;
+    refundAddress: string;
+  };
+
+  export type ILeverageExternalContractsDataStruct = {
+    swapper: PromiseOrValue<string>;
+    magnetar: PromiseOrValue<string>;
+    tOft: PromiseOrValue<string>;
+    srcMarket: PromiseOrValue<string>;
+  };
+
+  export type ILeverageExternalContractsDataStructOutput = [
+    string,
+    string,
+    string,
+    string
+  ] & { swapper: string; magnetar: string; tOft: string; srcMarket: string };
+}
+
+export declare namespace ITapiocaOFT {
+  export type IApprovalStruct = {
+    permitAll: PromiseOrValue<boolean>;
+    allowFailure: PromiseOrValue<boolean>;
+    target: PromiseOrValue<string>;
+    permitBorrow: PromiseOrValue<boolean>;
+    owner: PromiseOrValue<string>;
+    spender: PromiseOrValue<string>;
+    value: PromiseOrValue<BigNumberish>;
+    deadline: PromiseOrValue<BigNumberish>;
+    v: PromiseOrValue<BigNumberish>;
+    r: PromiseOrValue<BytesLike>;
+    s: PromiseOrValue<BytesLike>;
+  };
+
+  export type IApprovalStructOutput = [
+    boolean,
+    boolean,
+    string,
+    boolean,
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    number,
+    string,
+    string
+  ] & {
+    permitAll: boolean;
+    allowFailure: boolean;
+    target: string;
+    permitBorrow: boolean;
+    owner: string;
+    spender: string;
+    value: BigNumber;
+    deadline: BigNumber;
+    v: number;
+    r: string;
+    s: string;
+  };
+
+  export type IWithdrawParamsStruct = {
+    withdraw: PromiseOrValue<boolean>;
+    withdrawLzFeeAmount: PromiseOrValue<BigNumberish>;
+    withdrawOnOtherChain: PromiseOrValue<boolean>;
+    withdrawLzChainId: PromiseOrValue<BigNumberish>;
+    withdrawAdapterParams: PromiseOrValue<BytesLike>;
+  };
+
+  export type IWithdrawParamsStructOutput = [
+    boolean,
+    BigNumber,
+    boolean,
+    number,
+    string
+  ] & {
+    withdraw: boolean;
+    withdrawLzFeeAmount: BigNumber;
+    withdrawOnOtherChain: boolean;
+    withdrawLzChainId: number;
+    withdrawAdapterParams: string;
+  };
+
+  export type IRemoveParamsStruct = {
+    share: PromiseOrValue<BigNumberish>;
+    marketHelper: PromiseOrValue<string>;
+    market: PromiseOrValue<string>;
+  };
+
+  export type IRemoveParamsStructOutput = [BigNumber, string, string] & {
+    share: BigNumber;
+    marketHelper: string;
+    market: string;
   };
 
   export type ISendOptionsStruct = {
@@ -147,62 +245,6 @@ export declare namespace ICommonOFT {
   };
 }
 
-export declare namespace IUSDOBase {
-  export type ILeverageLZDataStruct = {
-    srcExtraGasLimit: PromiseOrValue<BigNumberish>;
-    lzSrcChainId: PromiseOrValue<BigNumberish>;
-    lzDstChainId: PromiseOrValue<BigNumberish>;
-    zroPaymentAddress: PromiseOrValue<string>;
-    dstAirdropAdapterParam: PromiseOrValue<BytesLike>;
-    srcAirdropAdapterParam: PromiseOrValue<BytesLike>;
-    refundAddress: PromiseOrValue<string>;
-  };
-
-  export type ILeverageLZDataStructOutput = [
-    BigNumber,
-    number,
-    number,
-    string,
-    string,
-    string,
-    string
-  ] & {
-    srcExtraGasLimit: BigNumber;
-    lzSrcChainId: number;
-    lzDstChainId: number;
-    zroPaymentAddress: string;
-    dstAirdropAdapterParam: string;
-    srcAirdropAdapterParam: string;
-    refundAddress: string;
-  };
-
-  export type ILeverageSwapDataStruct = {
-    tokenOut: PromiseOrValue<string>;
-    amountOutMin: PromiseOrValue<BigNumberish>;
-    data: PromiseOrValue<BytesLike>;
-  };
-
-  export type ILeverageSwapDataStructOutput = [string, BigNumber, string] & {
-    tokenOut: string;
-    amountOutMin: BigNumber;
-    data: string;
-  };
-
-  export type ILeverageExternalContractsDataStruct = {
-    swapper: PromiseOrValue<string>;
-    magnetar: PromiseOrValue<string>;
-    tOft: PromiseOrValue<string>;
-    srcMarket: PromiseOrValue<string>;
-  };
-
-  export type ILeverageExternalContractsDataStructOutput = [
-    string,
-    string,
-    string,
-    string
-  ] & { swapper: string; magnetar: string; tOft: string; srcMarket: string };
-}
-
 export interface MTapiocaOFTInterface extends utils.Interface {
   functions: {
     "DEFAULT_PAYLOAD_SIZE_LIMIT()": FunctionFragment;
@@ -223,6 +265,7 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     "erc20()": FunctionFragment;
     "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)": FunctionFragment;
     "estimateSendFee(uint16,bytes32,uint256,bool,bytes)": FunctionFragment;
+    "exerciseOption(address,uint256,uint16,address,uint256,address,uint256,address,uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "extractUnderlying(uint256)": FunctionFragment;
     "failedMessages(uint16,bytes,uint64)": FunctionFragment;
     "forceResumeReceive(uint16,bytes)": FunctionFragment;
@@ -230,6 +273,7 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     "getTrustedRemoteAddress(uint16)": FunctionFragment;
     "hostChainID()": FunctionFragment;
     "increaseAllowance(address,uint256)": FunctionFragment;
+    "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "isTrustedRemote(uint16,bytes)": FunctionFragment;
     "leverageModule()": FunctionFragment;
     "lzEndpoint()": FunctionFragment;
@@ -239,6 +283,7 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     "name()": FunctionFragment;
     "nonblockingLzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
     "nonces(address)": FunctionFragment;
+    "optionsModule()": FunctionFragment;
     "owner()": FunctionFragment;
     "payloadSizeLimitLookup(uint16)": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
@@ -317,6 +362,8 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       | "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)"
       | "estimateSendFee"
       | "estimateSendFee(uint16,bytes32,uint256,bool,bytes)"
+      | "exerciseOption"
+      | "exerciseOption(address,uint256,uint16,address,uint256,address,uint256,address,uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "extractUnderlying"
       | "extractUnderlying(uint256)"
       | "failedMessages"
@@ -331,6 +378,8 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       | "hostChainID()"
       | "increaseAllowance"
       | "increaseAllowance(address,uint256)"
+      | "initMultiSell"
+      | "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "isTrustedRemote"
       | "isTrustedRemote(uint16,bytes)"
       | "leverageModule"
@@ -349,6 +398,8 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       | "nonblockingLzReceive(uint16,bytes,uint64,bytes)"
       | "nonces"
       | "nonces(address)"
+      | "optionsModule"
+      | "optionsModule()"
       | "owner"
       | "owner()"
       | "payloadSizeLimitLookup"
@@ -611,6 +662,36 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "exerciseOption",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      ITapiocaOptionsBrokerCrossChain.IApprovalStruct[]
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "exerciseOption(address,uint256,uint16,address,uint256,address,uint256,address,uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      ITapiocaOptionsBrokerCrossChain.IApprovalStruct[]
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "extractUnderlying",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
@@ -683,6 +764,30 @@ export interface MTapiocaOFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "increaseAllowance(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "initMultiSell",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      IUSDOBase.ILeverageSwapDataStruct,
+      IUSDOBase.ILeverageLZDataStruct,
+      IUSDOBase.ILeverageExternalContractsDataStruct,
+      PromiseOrValue<BytesLike>,
+      ITapiocaOFT.IApprovalStruct[]
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      IUSDOBase.ILeverageSwapDataStruct,
+      IUSDOBase.ILeverageLZDataStruct,
+      IUSDOBase.ILeverageExternalContractsDataStruct,
+      PromiseOrValue<BytesLike>,
+      ITapiocaOFT.IApprovalStruct[]
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "isTrustedRemote",
@@ -769,6 +874,14 @@ export interface MTapiocaOFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "nonces(address)",
     values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "optionsModule",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "optionsModule()",
+    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
@@ -1334,6 +1447,14 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "exerciseOption",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "exerciseOption(address,uint256,uint16,address,uint256,address,uint256,address,uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "extractUnderlying",
     data: BytesLike
   ): Result;
@@ -1384,6 +1505,14 @@ export interface MTapiocaOFTInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "increaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "initMultiSell",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1441,6 +1570,14 @@ export interface MTapiocaOFTInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "nonces(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "optionsModule",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "optionsModule()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -2212,6 +2349,34 @@ export interface MTapiocaOFT extends BaseContract {
       [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
     >;
 
+    exerciseOption(
+      from: PromiseOrValue<string>,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      extraGas: PromiseOrValue<BigNumberish>,
+      target: PromiseOrValue<string>,
+      oTAPTokenID: PromiseOrValue<BigNumberish>,
+      paymentToken: PromiseOrValue<string>,
+      tapAmount: PromiseOrValue<BigNumberish>,
+      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "exerciseOption(address,uint256,uint16,address,uint256,address,uint256,address,uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      extraGas: PromiseOrValue<BigNumberish>,
+      target: PromiseOrValue<string>,
+      oTAPTokenID: PromiseOrValue<BigNumberish>,
+      paymentToken: PromiseOrValue<string>,
+      tapAmount: PromiseOrValue<BigNumberish>,
+      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     extractUnderlying(
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2288,6 +2453,28 @@ export interface MTapiocaOFT extends BaseContract {
       spender: PromiseOrValue<string>,
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    initMultiSell(
+      from: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      airdropAdapterParams: PromiseOrValue<BytesLike>,
+      approvals: ITapiocaOFT.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      airdropAdapterParams: PromiseOrValue<BytesLike>,
+      approvals: ITapiocaOFT.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     isTrustedRemote(
@@ -2371,6 +2558,10 @@ export interface MTapiocaOFT extends BaseContract {
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
+
+    optionsModule(overrides?: CallOverrides): Promise<[string]>;
+
+    "optionsModule()"(overrides?: CallOverrides): Promise<[string]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -3011,6 +3202,34 @@ export interface MTapiocaOFT extends BaseContract {
     [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
   >;
 
+  exerciseOption(
+    from: PromiseOrValue<string>,
+    paymentTokenAmount: PromiseOrValue<BigNumberish>,
+    lzDstChainId: PromiseOrValue<BigNumberish>,
+    zroPaymentAddress: PromiseOrValue<string>,
+    extraGas: PromiseOrValue<BigNumberish>,
+    target: PromiseOrValue<string>,
+    oTAPTokenID: PromiseOrValue<BigNumberish>,
+    paymentToken: PromiseOrValue<string>,
+    tapAmount: PromiseOrValue<BigNumberish>,
+    approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "exerciseOption(address,uint256,uint16,address,uint256,address,uint256,address,uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    from: PromiseOrValue<string>,
+    paymentTokenAmount: PromiseOrValue<BigNumberish>,
+    lzDstChainId: PromiseOrValue<BigNumberish>,
+    zroPaymentAddress: PromiseOrValue<string>,
+    extraGas: PromiseOrValue<BigNumberish>,
+    target: PromiseOrValue<string>,
+    oTAPTokenID: PromiseOrValue<BigNumberish>,
+    paymentToken: PromiseOrValue<string>,
+    tapAmount: PromiseOrValue<BigNumberish>,
+    approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   extractUnderlying(
     _amount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -3087,6 +3306,28 @@ export interface MTapiocaOFT extends BaseContract {
     spender: PromiseOrValue<string>,
     addedValue: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  initMultiSell(
+    from: PromiseOrValue<string>,
+    share: PromiseOrValue<BigNumberish>,
+    swapData: IUSDOBase.ILeverageSwapDataStruct,
+    lzData: IUSDOBase.ILeverageLZDataStruct,
+    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+    airdropAdapterParams: PromiseOrValue<BytesLike>,
+    approvals: ITapiocaOFT.IApprovalStruct[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    from: PromiseOrValue<string>,
+    share: PromiseOrValue<BigNumberish>,
+    swapData: IUSDOBase.ILeverageSwapDataStruct,
+    lzData: IUSDOBase.ILeverageLZDataStruct,
+    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+    airdropAdapterParams: PromiseOrValue<BytesLike>,
+    approvals: ITapiocaOFT.IApprovalStruct[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   isTrustedRemote(
@@ -3170,6 +3411,10 @@ export interface MTapiocaOFT extends BaseContract {
     owner: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
+
+  optionsModule(overrides?: CallOverrides): Promise<string>;
+
+  "optionsModule()"(overrides?: CallOverrides): Promise<string>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -3812,6 +4057,34 @@ export interface MTapiocaOFT extends BaseContract {
       [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
     >;
 
+    exerciseOption(
+      from: PromiseOrValue<string>,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      extraGas: PromiseOrValue<BigNumberish>,
+      target: PromiseOrValue<string>,
+      oTAPTokenID: PromiseOrValue<BigNumberish>,
+      paymentToken: PromiseOrValue<string>,
+      tapAmount: PromiseOrValue<BigNumberish>,
+      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "exerciseOption(address,uint256,uint16,address,uint256,address,uint256,address,uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      extraGas: PromiseOrValue<BigNumberish>,
+      target: PromiseOrValue<string>,
+      oTAPTokenID: PromiseOrValue<BigNumberish>,
+      paymentToken: PromiseOrValue<string>,
+      tapAmount: PromiseOrValue<BigNumberish>,
+      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     extractUnderlying(
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -3889,6 +4162,28 @@ export interface MTapiocaOFT extends BaseContract {
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
+
+    initMultiSell(
+      from: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      airdropAdapterParams: PromiseOrValue<BytesLike>,
+      approvals: ITapiocaOFT.IApprovalStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      airdropAdapterParams: PromiseOrValue<BytesLike>,
+      approvals: ITapiocaOFT.IApprovalStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
@@ -3971,6 +4266,10 @@ export interface MTapiocaOFT extends BaseContract {
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    optionsModule(overrides?: CallOverrides): Promise<string>;
+
+    "optionsModule()"(overrides?: CallOverrides): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -4777,6 +5076,34 @@ export interface MTapiocaOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    exerciseOption(
+      from: PromiseOrValue<string>,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      extraGas: PromiseOrValue<BigNumberish>,
+      target: PromiseOrValue<string>,
+      oTAPTokenID: PromiseOrValue<BigNumberish>,
+      paymentToken: PromiseOrValue<string>,
+      tapAmount: PromiseOrValue<BigNumberish>,
+      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "exerciseOption(address,uint256,uint16,address,uint256,address,uint256,address,uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      extraGas: PromiseOrValue<BigNumberish>,
+      target: PromiseOrValue<string>,
+      oTAPTokenID: PromiseOrValue<BigNumberish>,
+      paymentToken: PromiseOrValue<string>,
+      tapAmount: PromiseOrValue<BigNumberish>,
+      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     extractUnderlying(
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -4853,6 +5180,28 @@ export interface MTapiocaOFT extends BaseContract {
       spender: PromiseOrValue<string>,
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    initMultiSell(
+      from: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      airdropAdapterParams: PromiseOrValue<BytesLike>,
+      approvals: ITapiocaOFT.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      airdropAdapterParams: PromiseOrValue<BytesLike>,
+      approvals: ITapiocaOFT.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     isTrustedRemote(
@@ -4936,6 +5285,10 @@ export interface MTapiocaOFT extends BaseContract {
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    optionsModule(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "optionsModule()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -5579,6 +5932,34 @@ export interface MTapiocaOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    exerciseOption(
+      from: PromiseOrValue<string>,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      extraGas: PromiseOrValue<BigNumberish>,
+      target: PromiseOrValue<string>,
+      oTAPTokenID: PromiseOrValue<BigNumberish>,
+      paymentToken: PromiseOrValue<string>,
+      tapAmount: PromiseOrValue<BigNumberish>,
+      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "exerciseOption(address,uint256,uint16,address,uint256,address,uint256,address,uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      extraGas: PromiseOrValue<BigNumberish>,
+      target: PromiseOrValue<string>,
+      oTAPTokenID: PromiseOrValue<BigNumberish>,
+      paymentToken: PromiseOrValue<string>,
+      tapAmount: PromiseOrValue<BigNumberish>,
+      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     extractUnderlying(
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -5655,6 +6036,28 @@ export interface MTapiocaOFT extends BaseContract {
       spender: PromiseOrValue<string>,
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    initMultiSell(
+      from: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      airdropAdapterParams: PromiseOrValue<BytesLike>,
+      approvals: ITapiocaOFT.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      airdropAdapterParams: PromiseOrValue<BytesLike>,
+      approvals: ITapiocaOFT.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     isTrustedRemote(
@@ -5740,6 +6143,10 @@ export interface MTapiocaOFT extends BaseContract {
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    optionsModule(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "optionsModule()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

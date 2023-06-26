@@ -37,6 +37,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BaseTOFTMarketModule__factory>;
     getContractFactory(
+      name: "BaseTOFTOptionsModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseTOFTOptionsModule__factory>;
+    getContractFactory(
       name: "BaseTOFTStrategyModule",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BaseTOFTStrategyModule__factory>;
@@ -79,6 +83,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.BaseTOFTMarketModule>;
+    getContractAt(
+      name: "BaseTOFTOptionsModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseTOFTOptionsModule>;
     getContractAt(
       name: "BaseTOFTStrategyModule",
       address: string,

@@ -28,6 +28,48 @@ import type {
   PromiseOrValue,
 } from "../../common";
 
+export declare namespace ITapiocaOptionsBrokerCrossChain {
+  export type IApprovalStruct = {
+    permitAll: PromiseOrValue<boolean>;
+    allowFailure: PromiseOrValue<boolean>;
+    target: PromiseOrValue<string>;
+    permitBorrow: PromiseOrValue<boolean>;
+    owner: PromiseOrValue<string>;
+    spender: PromiseOrValue<string>;
+    value: PromiseOrValue<BigNumberish>;
+    deadline: PromiseOrValue<BigNumberish>;
+    v: PromiseOrValue<BigNumberish>;
+    r: PromiseOrValue<BytesLike>;
+    s: PromiseOrValue<BytesLike>;
+  };
+
+  export type IApprovalStructOutput = [
+    boolean,
+    boolean,
+    string,
+    boolean,
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    number,
+    string,
+    string
+  ] & {
+    permitAll: boolean;
+    allowFailure: boolean;
+    target: string;
+    permitBorrow: boolean;
+    owner: string;
+    spender: string;
+    value: BigNumber;
+    deadline: BigNumber;
+    v: number;
+    r: string;
+    s: string;
+  };
+}
+
 export declare namespace ICommonOFT {
   export type LzCallParamsStruct = {
     refundAddress: PromiseOrValue<string>;
@@ -42,19 +84,7 @@ export declare namespace ICommonOFT {
   };
 }
 
-export declare namespace ITapiocaOFT {
-  export type ISendOptionsStruct = {
-    extraGasLimit: PromiseOrValue<BigNumberish>;
-    zroPaymentAddress: PromiseOrValue<string>;
-  };
-
-  export type ISendOptionsStructOutput = [BigNumber, string] & {
-    extraGasLimit: BigNumber;
-    zroPaymentAddress: string;
-  };
-}
-
-export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
+export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
   functions: {
     "DEFAULT_PAYLOAD_SIZE_LIMIT()": FunctionFragment;
     "NO_EXTRA_GAS()": FunctionFragment;
@@ -68,10 +98,11 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
     "creditedPackets(uint16,bytes,uint64)": FunctionFragment;
     "decimals()": FunctionFragment;
     "decreaseAllowance(address,uint256)": FunctionFragment;
-    "depositToYieldbox(uint256,uint256,uint256,address,address,address)": FunctionFragment;
     "erc20()": FunctionFragment;
     "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)": FunctionFragment;
     "estimateSendFee(uint16,bytes32,uint256,bool,bytes)": FunctionFragment;
+    "exercise(uint16,bytes)": FunctionFragment;
+    "exerciseOption(address,uint256,uint16,address,uint256,address,uint256,address,uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "failedMessages(uint16,bytes,uint64)": FunctionFragment;
     "forceResumeReceive(uint16,bytes)": FunctionFragment;
     "getConfig(uint16,uint16,address,uint256)": FunctionFragment;
@@ -88,11 +119,9 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
     "payloadSizeLimitLookup(uint16)": FunctionFragment;
     "precrime()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
-    "sendToStrategy(address,address,uint256,uint256,uint256,uint16,(uint256,address))": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
     "setPayloadSizeLimit(uint16,uint256)": FunctionFragment;
@@ -103,8 +132,6 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
     "setTrustedRemoteAddress(uint16,bytes)": FunctionFragment;
     "setUseCustomAdapterParams(bool)": FunctionFragment;
     "sharedDecimals()": FunctionFragment;
-    "strategyDeposit(address,uint16,bytes,address)": FunctionFragment;
-    "strategyWithdraw(uint16,bytes)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
     "token()": FunctionFragment;
@@ -143,14 +170,16 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
       | "decimals()"
       | "decreaseAllowance"
       | "decreaseAllowance(address,uint256)"
-      | "depositToYieldbox"
-      | "depositToYieldbox(uint256,uint256,uint256,address,address,address)"
       | "erc20"
       | "erc20()"
       | "estimateSendAndCallFee"
       | "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)"
       | "estimateSendFee"
       | "estimateSendFee(uint16,bytes32,uint256,bool,bytes)"
+      | "exercise"
+      | "exercise(uint16,bytes)"
+      | "exerciseOption"
+      | "exerciseOption(address,uint256,uint16,address,uint256,address,uint256,address,uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "failedMessages"
       | "failedMessages(uint16,bytes,uint64)"
       | "forceResumeReceive"
@@ -183,16 +212,12 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
       | "precrime()"
       | "renounceOwnership"
       | "renounceOwnership()"
-      | "retrieveFromStrategy"
-      | "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)"
       | "retryMessage"
       | "retryMessage(uint16,bytes,uint64,bytes)"
       | "sendAndCall"
       | "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))"
       | "sendFrom"
       | "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"
-      | "sendToStrategy"
-      | "sendToStrategy(address,address,uint256,uint256,uint256,uint16,(uint256,address))"
       | "setConfig"
       | "setConfig(uint16,uint16,uint256,bytes)"
       | "setMinDstGas"
@@ -213,10 +238,6 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
       | "setUseCustomAdapterParams(bool)"
       | "sharedDecimals"
       | "sharedDecimals()"
-      | "strategyDeposit"
-      | "strategyDeposit(address,uint16,bytes,address)"
-      | "strategyWithdraw"
-      | "strategyWithdraw(uint16,bytes)"
       | "supportsInterface"
       | "supportsInterface(bytes4)"
       | "symbol"
@@ -352,28 +373,6 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
     functionFragment: "decreaseAllowance(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(
-    functionFragment: "depositToYieldbox",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "depositToYieldbox(uint256,uint256,uint256,address,address,address)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>
-    ]
-  ): string;
   encodeFunctionData(functionFragment: "erc20", values?: undefined): string;
   encodeFunctionData(functionFragment: "erc20()", values?: undefined): string;
   encodeFunctionData(
@@ -418,6 +417,44 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<boolean>,
       PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "exercise",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "exercise(uint16,bytes)",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "exerciseOption",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      ITapiocaOptionsBrokerCrossChain.IApprovalStruct[]
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "exerciseOption(address,uint256,uint16,address,uint256,address,uint256,address,uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      ITapiocaOptionsBrokerCrossChain.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
@@ -572,30 +609,6 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "retrieveFromStrategy",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "retryMessage",
     values: [
       PromiseOrValue<BigNumberish>,
@@ -655,30 +668,6 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
       PromiseOrValue<BytesLike>,
       PromiseOrValue<BigNumberish>,
       ICommonOFT.LzCallParamsStruct
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "sendToStrategy",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      ITapiocaOFT.ISendOptionsStruct
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "sendToStrategy(address,address,uint256,uint256,uint256,uint16,(uint256,address))",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      ITapiocaOFT.ISendOptionsStruct
     ]
   ): string;
   encodeFunctionData(
@@ -778,32 +767,6 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "sharedDecimals()",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "strategyDeposit",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "strategyDeposit(address,uint16,bytes,address)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "strategyWithdraw",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "strategyWithdraw(uint16,bytes)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "supportsInterface",
@@ -954,14 +917,6 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
     functionFragment: "decreaseAllowance(address,uint256)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "depositToYieldbox",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "depositToYieldbox(uint256,uint256,uint256,address,address,address)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "erc20", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "erc20()", data: BytesLike): Result;
   decodeFunctionResult(
@@ -978,6 +933,19 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "estimateSendFee(uint16,bytes32,uint256,bool,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "exercise", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "exercise(uint16,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "exerciseOption",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "exerciseOption(address,uint256,uint16,address,uint256,address,uint256,address,uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1082,14 +1050,6 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "retrieveFromStrategy",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "retryMessage",
     data: BytesLike
   ): Result;
@@ -1108,14 +1068,6 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "sendFrom", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "sendToStrategy",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "sendToStrategy(address,address,uint256,uint256,uint256,uint16,(uint256,address))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "setConfig", data: BytesLike): Result;
@@ -1193,22 +1145,6 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "sharedDecimals()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "strategyDeposit",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "strategyDeposit(address,uint16,bytes,address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "strategyWithdraw",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "strategyWithdraw(uint16,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1513,14 +1449,14 @@ export type TransferEvent = TypedEvent<
 
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 
-export interface BaseTOFTStrategyModule extends BaseContract {
-  contractName: "BaseTOFTStrategyModule";
+export interface BaseTOFTOptionsModule extends BaseContract {
+  contractName: "BaseTOFTOptionsModule";
 
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: BaseTOFTStrategyModuleInterface;
+  interface: BaseTOFTOptionsModuleInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -1652,26 +1588,6 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    depositToYieldbox(
-      _assetId: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _share: PromiseOrValue<BigNumberish>,
-      _erc20: PromiseOrValue<string>,
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "depositToYieldbox(uint256,uint256,uint256,address,address,address)"(
-      _assetId: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _share: PromiseOrValue<BigNumberish>,
-      _erc20: PromiseOrValue<string>,
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     erc20(overrides?: CallOverrides): Promise<[string]>;
 
     "erc20()"(overrides?: CallOverrides): Promise<[string]>;
@@ -1723,6 +1639,46 @@ export interface BaseTOFTStrategyModule extends BaseContract {
     ): Promise<
       [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
     >;
+
+    exercise(
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "exercise(uint16,bytes)"(
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    exerciseOption(
+      from: PromiseOrValue<string>,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      extraGas: PromiseOrValue<BigNumberish>,
+      target: PromiseOrValue<string>,
+      oTAPTokenID: PromiseOrValue<BigNumberish>,
+      paymentToken: PromiseOrValue<string>,
+      tapAmount: PromiseOrValue<BigNumberish>,
+      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "exerciseOption(address,uint256,uint16,address,uint256,address,uint256,address,uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      extraGas: PromiseOrValue<BigNumberish>,
+      target: PromiseOrValue<string>,
+      oTAPTokenID: PromiseOrValue<BigNumberish>,
+      paymentToken: PromiseOrValue<string>,
+      tapAmount: PromiseOrValue<BigNumberish>,
+      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     failedMessages(
       arg0: PromiseOrValue<BigNumberish>,
@@ -1882,28 +1838,6 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    retrieveFromStrategy(
-      _from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      airdropAdapterParam: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)"(
-      _from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      airdropAdapterParam: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     retryMessage(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -1957,28 +1891,6 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
       _callParams: ICommonOFT.LzCallParamsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    sendToStrategy(
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "sendToStrategy(address,address,uint256,uint256,uint256,uint16,(uint256,address))"(
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2091,34 +2003,6 @@ export interface BaseTOFTStrategyModule extends BaseContract {
     sharedDecimals(overrides?: CallOverrides): Promise<[number]>;
 
     "sharedDecimals()"(overrides?: CallOverrides): Promise<[number]>;
-
-    strategyDeposit(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      _erc20: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "strategyDeposit(address,uint16,bytes,address)"(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      _erc20: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    strategyWithdraw(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "strategyWithdraw(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
@@ -2305,26 +2189,6 @@ export interface BaseTOFTStrategyModule extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  depositToYieldbox(
-    _assetId: PromiseOrValue<BigNumberish>,
-    _amount: PromiseOrValue<BigNumberish>,
-    _share: PromiseOrValue<BigNumberish>,
-    _erc20: PromiseOrValue<string>,
-    _from: PromiseOrValue<string>,
-    _to: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "depositToYieldbox(uint256,uint256,uint256,address,address,address)"(
-    _assetId: PromiseOrValue<BigNumberish>,
-    _amount: PromiseOrValue<BigNumberish>,
-    _share: PromiseOrValue<BigNumberish>,
-    _erc20: PromiseOrValue<string>,
-    _from: PromiseOrValue<string>,
-    _to: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   erc20(overrides?: CallOverrides): Promise<string>;
 
   "erc20()"(overrides?: CallOverrides): Promise<string>;
@@ -2376,6 +2240,46 @@ export interface BaseTOFTStrategyModule extends BaseContract {
   ): Promise<
     [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
   >;
+
+  exercise(
+    _srcChainId: PromiseOrValue<BigNumberish>,
+    _payload: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "exercise(uint16,bytes)"(
+    _srcChainId: PromiseOrValue<BigNumberish>,
+    _payload: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  exerciseOption(
+    from: PromiseOrValue<string>,
+    paymentTokenAmount: PromiseOrValue<BigNumberish>,
+    lzDstChainId: PromiseOrValue<BigNumberish>,
+    zroPaymentAddress: PromiseOrValue<string>,
+    extraGas: PromiseOrValue<BigNumberish>,
+    target: PromiseOrValue<string>,
+    oTAPTokenID: PromiseOrValue<BigNumberish>,
+    paymentToken: PromiseOrValue<string>,
+    tapAmount: PromiseOrValue<BigNumberish>,
+    approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "exerciseOption(address,uint256,uint16,address,uint256,address,uint256,address,uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    from: PromiseOrValue<string>,
+    paymentTokenAmount: PromiseOrValue<BigNumberish>,
+    lzDstChainId: PromiseOrValue<BigNumberish>,
+    zroPaymentAddress: PromiseOrValue<string>,
+    extraGas: PromiseOrValue<BigNumberish>,
+    target: PromiseOrValue<string>,
+    oTAPTokenID: PromiseOrValue<BigNumberish>,
+    paymentToken: PromiseOrValue<string>,
+    tapAmount: PromiseOrValue<BigNumberish>,
+    approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   failedMessages(
     arg0: PromiseOrValue<BigNumberish>,
@@ -2535,28 +2439,6 @@ export interface BaseTOFTStrategyModule extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  retrieveFromStrategy(
-    _from: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    share: PromiseOrValue<BigNumberish>,
-    assetId: PromiseOrValue<BigNumberish>,
-    lzDstChainId: PromiseOrValue<BigNumberish>,
-    zroPaymentAddress: PromiseOrValue<string>,
-    airdropAdapterParam: PromiseOrValue<BytesLike>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)"(
-    _from: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    share: PromiseOrValue<BigNumberish>,
-    assetId: PromiseOrValue<BigNumberish>,
-    lzDstChainId: PromiseOrValue<BigNumberish>,
-    zroPaymentAddress: PromiseOrValue<string>,
-    airdropAdapterParam: PromiseOrValue<BytesLike>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   retryMessage(
     _srcChainId: PromiseOrValue<BigNumberish>,
     _srcAddress: PromiseOrValue<BytesLike>,
@@ -2610,28 +2492,6 @@ export interface BaseTOFTStrategyModule extends BaseContract {
     _toAddress: PromiseOrValue<BytesLike>,
     _amount: PromiseOrValue<BigNumberish>,
     _callParams: ICommonOFT.LzCallParamsStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  sendToStrategy(
-    _from: PromiseOrValue<string>,
-    _to: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    share: PromiseOrValue<BigNumberish>,
-    assetId: PromiseOrValue<BigNumberish>,
-    lzDstChainId: PromiseOrValue<BigNumberish>,
-    options: ITapiocaOFT.ISendOptionsStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "sendToStrategy(address,address,uint256,uint256,uint256,uint16,(uint256,address))"(
-    _from: PromiseOrValue<string>,
-    _to: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    share: PromiseOrValue<BigNumberish>,
-    assetId: PromiseOrValue<BigNumberish>,
-    lzDstChainId: PromiseOrValue<BigNumberish>,
-    options: ITapiocaOFT.ISendOptionsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -2744,34 +2604,6 @@ export interface BaseTOFTStrategyModule extends BaseContract {
   sharedDecimals(overrides?: CallOverrides): Promise<number>;
 
   "sharedDecimals()"(overrides?: CallOverrides): Promise<number>;
-
-  strategyDeposit(
-    module: PromiseOrValue<string>,
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _payload: PromiseOrValue<BytesLike>,
-    _erc20: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "strategyDeposit(address,uint16,bytes,address)"(
-    module: PromiseOrValue<string>,
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _payload: PromiseOrValue<BytesLike>,
-    _erc20: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  strategyWithdraw(
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "strategyWithdraw(uint16,bytes)"(
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
 
   supportsInterface(
     interfaceId: PromiseOrValue<BytesLike>,
@@ -2960,26 +2792,6 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    depositToYieldbox(
-      _assetId: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _share: PromiseOrValue<BigNumberish>,
-      _erc20: PromiseOrValue<string>,
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "depositToYieldbox(uint256,uint256,uint256,address,address,address)"(
-      _assetId: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _share: PromiseOrValue<BigNumberish>,
-      _erc20: PromiseOrValue<string>,
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     erc20(overrides?: CallOverrides): Promise<string>;
 
     "erc20()"(overrides?: CallOverrides): Promise<string>;
@@ -3031,6 +2843,46 @@ export interface BaseTOFTStrategyModule extends BaseContract {
     ): Promise<
       [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
     >;
+
+    exercise(
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "exercise(uint16,bytes)"(
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    exerciseOption(
+      from: PromiseOrValue<string>,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      extraGas: PromiseOrValue<BigNumberish>,
+      target: PromiseOrValue<string>,
+      oTAPTokenID: PromiseOrValue<BigNumberish>,
+      paymentToken: PromiseOrValue<string>,
+      tapAmount: PromiseOrValue<BigNumberish>,
+      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "exerciseOption(address,uint256,uint16,address,uint256,address,uint256,address,uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      extraGas: PromiseOrValue<BigNumberish>,
+      target: PromiseOrValue<string>,
+      oTAPTokenID: PromiseOrValue<BigNumberish>,
+      paymentToken: PromiseOrValue<string>,
+      tapAmount: PromiseOrValue<BigNumberish>,
+      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     failedMessages(
       arg0: PromiseOrValue<BigNumberish>,
@@ -3186,28 +3038,6 @@ export interface BaseTOFTStrategyModule extends BaseContract {
 
     "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
 
-    retrieveFromStrategy(
-      _from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      airdropAdapterParam: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)"(
-      _from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      airdropAdapterParam: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     retryMessage(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -3261,28 +3091,6 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
       _callParams: ICommonOFT.LzCallParamsStruct,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    sendToStrategy(
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "sendToStrategy(address,address,uint256,uint256,uint256,uint16,(uint256,address))"(
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3395,34 +3203,6 @@ export interface BaseTOFTStrategyModule extends BaseContract {
     sharedDecimals(overrides?: CallOverrides): Promise<number>;
 
     "sharedDecimals()"(overrides?: CallOverrides): Promise<number>;
-
-    strategyDeposit(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      _erc20: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "strategyDeposit(address,uint16,bytes,address)"(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      _erc20: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    strategyWithdraw(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "strategyWithdraw(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
@@ -3754,26 +3534,6 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    depositToYieldbox(
-      _assetId: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _share: PromiseOrValue<BigNumberish>,
-      _erc20: PromiseOrValue<string>,
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "depositToYieldbox(uint256,uint256,uint256,address,address,address)"(
-      _assetId: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _share: PromiseOrValue<BigNumberish>,
-      _erc20: PromiseOrValue<string>,
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     erc20(overrides?: CallOverrides): Promise<BigNumber>;
 
     "erc20()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3816,6 +3576,46 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       _useZro: PromiseOrValue<boolean>,
       _adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    exercise(
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "exercise(uint16,bytes)"(
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    exerciseOption(
+      from: PromiseOrValue<string>,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      extraGas: PromiseOrValue<BigNumberish>,
+      target: PromiseOrValue<string>,
+      oTAPTokenID: PromiseOrValue<BigNumberish>,
+      paymentToken: PromiseOrValue<string>,
+      tapAmount: PromiseOrValue<BigNumberish>,
+      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "exerciseOption(address,uint256,uint16,address,uint256,address,uint256,address,uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      extraGas: PromiseOrValue<BigNumberish>,
+      target: PromiseOrValue<string>,
+      oTAPTokenID: PromiseOrValue<BigNumberish>,
+      paymentToken: PromiseOrValue<string>,
+      tapAmount: PromiseOrValue<BigNumberish>,
+      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     failedMessages(
@@ -3976,28 +3776,6 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    retrieveFromStrategy(
-      _from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      airdropAdapterParam: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)"(
-      _from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      airdropAdapterParam: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     retryMessage(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -4051,28 +3829,6 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
       _callParams: ICommonOFT.LzCallParamsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    sendToStrategy(
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "sendToStrategy(address,address,uint256,uint256,uint256,uint16,(uint256,address))"(
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4185,34 +3941,6 @@ export interface BaseTOFTStrategyModule extends BaseContract {
     sharedDecimals(overrides?: CallOverrides): Promise<BigNumber>;
 
     "sharedDecimals()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    strategyDeposit(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      _erc20: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "strategyDeposit(address,uint16,bytes,address)"(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      _erc20: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    strategyWithdraw(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "strategyWithdraw(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
@@ -4408,26 +4136,6 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    depositToYieldbox(
-      _assetId: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _share: PromiseOrValue<BigNumberish>,
-      _erc20: PromiseOrValue<string>,
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "depositToYieldbox(uint256,uint256,uint256,address,address,address)"(
-      _assetId: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _share: PromiseOrValue<BigNumberish>,
-      _erc20: PromiseOrValue<string>,
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     erc20(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "erc20()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -4470,6 +4178,46 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       _useZro: PromiseOrValue<boolean>,
       _adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    exercise(
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "exercise(uint16,bytes)"(
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    exerciseOption(
+      from: PromiseOrValue<string>,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      extraGas: PromiseOrValue<BigNumberish>,
+      target: PromiseOrValue<string>,
+      oTAPTokenID: PromiseOrValue<BigNumberish>,
+      paymentToken: PromiseOrValue<string>,
+      tapAmount: PromiseOrValue<BigNumberish>,
+      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "exerciseOption(address,uint256,uint16,address,uint256,address,uint256,address,uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      extraGas: PromiseOrValue<BigNumberish>,
+      target: PromiseOrValue<string>,
+      oTAPTokenID: PromiseOrValue<BigNumberish>,
+      paymentToken: PromiseOrValue<string>,
+      tapAmount: PromiseOrValue<BigNumberish>,
+      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     failedMessages(
@@ -4630,28 +4378,6 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    retrieveFromStrategy(
-      _from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      airdropAdapterParam: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)"(
-      _from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      airdropAdapterParam: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     retryMessage(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -4705,28 +4431,6 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       _toAddress: PromiseOrValue<BytesLike>,
       _amount: PromiseOrValue<BigNumberish>,
       _callParams: ICommonOFT.LzCallParamsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    sendToStrategy(
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "sendToStrategy(address,address,uint256,uint256,uint256,uint16,(uint256,address))"(
-      _from: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      assetId: PromiseOrValue<BigNumberish>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -4840,34 +4544,6 @@ export interface BaseTOFTStrategyModule extends BaseContract {
 
     "sharedDecimals()"(
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    strategyDeposit(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      _erc20: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "strategyDeposit(address,uint16,bytes,address)"(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      _erc20: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    strategyWithdraw(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "strategyWithdraw(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     supportsInterface(
