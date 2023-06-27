@@ -165,7 +165,7 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
     "increaseAllowance(address,uint256)": FunctionFragment;
     "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "isTrustedRemote(uint16,bytes)": FunctionFragment;
-    "leverageDown(address,uint16,bytes)": FunctionFragment;
+    "leverageDown(address,uint16,bytes,uint64,bytes)": FunctionFragment;
     "leverageDownInternal(uint256,(address,uint256,bytes),(address,address,address,address),(uint256,uint16,uint16,address,bytes,bytes,address),address)": FunctionFragment;
     "lzEndpoint()": FunctionFragment;
     "lzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
@@ -252,7 +252,7 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
       | "isTrustedRemote"
       | "isTrustedRemote(uint16,bytes)"
       | "leverageDown"
-      | "leverageDown(address,uint16,bytes)"
+      | "leverageDown(address,uint16,bytes,uint64,bytes)"
       | "leverageDownInternal"
       | "leverageDownInternal(uint256,(address,uint256,bytes),(address,address,address,address),(uint256,uint16,uint16,address,bytes,bytes,address),address)"
       | "lzEndpoint"
@@ -587,13 +587,17 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "leverageDown(address,uint16,bytes)",
+    functionFragment: "leverageDown(address,uint16,bytes,uint64,bytes)",
     values: [
       PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
@@ -1116,7 +1120,7 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "leverageDown(address,uint16,bytes)",
+    functionFragment: "leverageDown(address,uint16,bytes,uint64,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1884,13 +1888,17 @@ export interface BaseTOFTLeverageModule extends BaseContract {
     leverageDown(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "leverageDown(address,uint16,bytes)"(
+    "leverageDown(address,uint16,bytes,uint64,bytes)"(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2527,13 +2535,17 @@ export interface BaseTOFTLeverageModule extends BaseContract {
   leverageDown(
     module: PromiseOrValue<string>,
     _srcChainId: PromiseOrValue<BigNumberish>,
+    _srcAddress: PromiseOrValue<BytesLike>,
+    _nonce: PromiseOrValue<BigNumberish>,
     _payload: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "leverageDown(address,uint16,bytes)"(
+  "leverageDown(address,uint16,bytes,uint64,bytes)"(
     module: PromiseOrValue<string>,
     _srcChainId: PromiseOrValue<BigNumberish>,
+    _srcAddress: PromiseOrValue<BytesLike>,
+    _nonce: PromiseOrValue<BigNumberish>,
     _payload: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -3172,13 +3184,17 @@ export interface BaseTOFTLeverageModule extends BaseContract {
     leverageDown(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "leverageDown(address,uint16,bytes)"(
+    "leverageDown(address,uint16,bytes,uint64,bytes)"(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -3948,13 +3964,17 @@ export interface BaseTOFTLeverageModule extends BaseContract {
     leverageDown(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "leverageDown(address,uint16,bytes)"(
+    "leverageDown(address,uint16,bytes,uint64,bytes)"(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -4592,13 +4612,17 @@ export interface BaseTOFTLeverageModule extends BaseContract {
     leverageDown(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "leverageDown(address,uint16,bytes)"(
+    "leverageDown(address,uint16,bytes,uint64,bytes)"(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;

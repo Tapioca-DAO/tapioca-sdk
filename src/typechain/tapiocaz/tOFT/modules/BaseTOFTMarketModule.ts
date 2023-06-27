@@ -156,7 +156,7 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
     "allowance(address,address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
-    "borrow(address,uint16,bytes)": FunctionFragment;
+    "borrow(address,uint16,bytes,uint64,bytes)": FunctionFragment;
     "borrowInternal(address,bytes32,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)": FunctionFragment;
     "circulatingSupply()": FunctionFragment;
@@ -227,7 +227,7 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
       | "balanceOf"
       | "balanceOf(address)"
       | "borrow"
-      | "borrow(address,uint16,bytes)"
+      | "borrow(address,uint16,bytes,uint64,bytes)"
       | "borrowInternal"
       | "borrowInternal(address,bytes32,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "callOnOFTReceived"
@@ -387,13 +387,17 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "borrow(address,uint16,bytes)",
+    functionFragment: "borrow(address,uint16,bytes,uint64,bytes)",
     values: [
       PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
@@ -1015,7 +1019,7 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "borrow", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "borrow(address,uint16,bytes)",
+    functionFragment: "borrow(address,uint16,bytes,uint64,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1684,13 +1688,17 @@ export interface BaseTOFTMarketModule extends BaseContract {
     borrow(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "borrow(address,uint16,bytes)"(
+    "borrow(address,uint16,bytes,uint64,bytes)"(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2335,13 +2343,17 @@ export interface BaseTOFTMarketModule extends BaseContract {
   borrow(
     module: PromiseOrValue<string>,
     _srcChainId: PromiseOrValue<BigNumberish>,
+    _srcAddress: PromiseOrValue<BytesLike>,
+    _nonce: PromiseOrValue<BigNumberish>,
     _payload: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "borrow(address,uint16,bytes)"(
+  "borrow(address,uint16,bytes,uint64,bytes)"(
     module: PromiseOrValue<string>,
     _srcChainId: PromiseOrValue<BigNumberish>,
+    _srcAddress: PromiseOrValue<BytesLike>,
+    _nonce: PromiseOrValue<BigNumberish>,
     _payload: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -2988,13 +3000,17 @@ export interface BaseTOFTMarketModule extends BaseContract {
     borrow(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "borrow(address,uint16,bytes)"(
+    "borrow(address,uint16,bytes,uint64,bytes)"(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -3780,13 +3796,17 @@ export interface BaseTOFTMarketModule extends BaseContract {
     borrow(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "borrow(address,uint16,bytes)"(
+    "borrow(address,uint16,bytes,uint64,bytes)"(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -4430,13 +4450,17 @@ export interface BaseTOFTMarketModule extends BaseContract {
     borrow(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "borrow(address,uint16,bytes)"(
+    "borrow(address,uint16,bytes,uint64,bytes)"(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;

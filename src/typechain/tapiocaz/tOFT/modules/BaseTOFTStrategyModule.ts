@@ -103,7 +103,7 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
     "setTrustedRemoteAddress(uint16,bytes)": FunctionFragment;
     "setUseCustomAdapterParams(bool)": FunctionFragment;
     "sharedDecimals()": FunctionFragment;
-    "strategyDeposit(address,uint16,bytes,address)": FunctionFragment;
+    "strategyDeposit(address,uint16,bytes,uint64,bytes,address)": FunctionFragment;
     "strategyWithdraw(uint16,bytes)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -214,7 +214,7 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
       | "sharedDecimals"
       | "sharedDecimals()"
       | "strategyDeposit"
-      | "strategyDeposit(address,uint16,bytes,address)"
+      | "strategyDeposit(address,uint16,bytes,uint64,bytes,address)"
       | "strategyWithdraw"
       | "strategyWithdraw(uint16,bytes)"
       | "supportsInterface"
@@ -785,13 +785,17 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
       PromiseOrValue<string>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "strategyDeposit(address,uint16,bytes,address)",
+    functionFragment: "strategyDeposit(address,uint16,bytes,uint64,bytes,address)",
     values: [
       PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<string>
@@ -1200,7 +1204,7 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "strategyDeposit(address,uint16,bytes,address)",
+    functionFragment: "strategyDeposit(address,uint16,bytes,uint64,bytes,address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2095,14 +2099,18 @@ export interface BaseTOFTStrategyModule extends BaseContract {
     strategyDeposit(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       _erc20: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "strategyDeposit(address,uint16,bytes,address)"(
+    "strategyDeposit(address,uint16,bytes,uint64,bytes,address)"(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       _erc20: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2748,14 +2756,18 @@ export interface BaseTOFTStrategyModule extends BaseContract {
   strategyDeposit(
     module: PromiseOrValue<string>,
     _srcChainId: PromiseOrValue<BigNumberish>,
+    _srcAddress: PromiseOrValue<BytesLike>,
+    _nonce: PromiseOrValue<BigNumberish>,
     _payload: PromiseOrValue<BytesLike>,
     _erc20: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "strategyDeposit(address,uint16,bytes,address)"(
+  "strategyDeposit(address,uint16,bytes,uint64,bytes,address)"(
     module: PromiseOrValue<string>,
     _srcChainId: PromiseOrValue<BigNumberish>,
+    _srcAddress: PromiseOrValue<BytesLike>,
+    _nonce: PromiseOrValue<BigNumberish>,
     _payload: PromiseOrValue<BytesLike>,
     _erc20: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -3399,14 +3411,18 @@ export interface BaseTOFTStrategyModule extends BaseContract {
     strategyDeposit(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       _erc20: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "strategyDeposit(address,uint16,bytes,address)"(
+    "strategyDeposit(address,uint16,bytes,uint64,bytes,address)"(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       _erc20: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -4189,14 +4205,18 @@ export interface BaseTOFTStrategyModule extends BaseContract {
     strategyDeposit(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       _erc20: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "strategyDeposit(address,uint16,bytes,address)"(
+    "strategyDeposit(address,uint16,bytes,uint64,bytes,address)"(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       _erc20: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -4845,14 +4865,18 @@ export interface BaseTOFTStrategyModule extends BaseContract {
     strategyDeposit(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       _erc20: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "strategyDeposit(address,uint16,bytes,address)"(
+    "strategyDeposit(address,uint16,bytes,uint64,bytes,address)"(
       module: PromiseOrValue<string>,
       _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       _erc20: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
