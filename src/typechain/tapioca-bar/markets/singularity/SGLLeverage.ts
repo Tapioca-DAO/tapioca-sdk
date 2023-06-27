@@ -142,7 +142,6 @@ export interface SGLLeverageInterface extends utils.Interface {
     "nonces(address)": FunctionFragment;
     "oracle()": FunctionFragment;
     "oracleData()": FunctionFragment;
-    "orderBookLiquidationMultiplier()": FunctionFragment;
     "owner()": FunctionFragment;
     "paused()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
@@ -257,8 +256,6 @@ export interface SGLLeverageInterface extends utils.Interface {
       | "oracle()"
       | "oracleData"
       | "oracleData()"
-      | "orderBookLiquidationMultiplier"
-      | "orderBookLiquidationMultiplier()"
       | "owner"
       | "owner()"
       | "paused"
@@ -651,14 +648,6 @@ export interface SGLLeverageInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "oracleData()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "orderBookLiquidationMultiplier",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "orderBookLiquidationMultiplier()",
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
@@ -1201,14 +1190,6 @@ export interface SGLLeverageInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "oracleData", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "oracleData()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "orderBookLiquidationMultiplier",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "orderBookLiquidationMultiplier()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -2286,14 +2267,6 @@ export interface SGLLeverage extends BaseContract {
 
     "oracleData()"(overrides?: CallOverrides): Promise<[string]>;
 
-    orderBookLiquidationMultiplier(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "orderBookLiquidationMultiplier()"(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
@@ -2887,12 +2860,6 @@ export interface SGLLeverage extends BaseContract {
 
   "oracleData()"(overrides?: CallOverrides): Promise<string>;
 
-  orderBookLiquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "orderBookLiquidationMultiplier()"(
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   owner(overrides?: CallOverrides): Promise<string>;
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -3467,14 +3434,6 @@ export interface SGLLeverage extends BaseContract {
     oracleData(overrides?: CallOverrides): Promise<string>;
 
     "oracleData()"(overrides?: CallOverrides): Promise<string>;
-
-    orderBookLiquidationMultiplier(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "orderBookLiquidationMultiplier()"(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -4319,14 +4278,6 @@ export interface SGLLeverage extends BaseContract {
 
     "oracleData()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    orderBookLiquidationMultiplier(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "orderBookLiquidationMultiplier()"(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -4920,14 +4871,6 @@ export interface SGLLeverage extends BaseContract {
     oracleData(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "oracleData()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    orderBookLiquidationMultiplier(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "orderBookLiquidationMultiplier()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

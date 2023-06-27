@@ -153,7 +153,6 @@ export interface SingularityInterface extends utils.Interface {
     "nonces(address)": FunctionFragment;
     "oracle()": FunctionFragment;
     "oracleData()": FunctionFragment;
-    "orderBookLiquidationMultiplier()": FunctionFragment;
     "owner()": FunctionFragment;
     "paused()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
@@ -170,7 +169,7 @@ export interface SingularityInterface extends utils.Interface {
     "setBorrowOpeningFee(uint256)": FunctionFragment;
     "setLiquidationQueueConfig(address,address,address)": FunctionFragment;
     "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
-    "setSingularityConfig(uint256,uint256,uint256,uint256,uint256,uint64,uint64,uint256)": FunctionFragment;
+    "setSingularityConfig(uint256,uint256,uint256,uint256,uint64,uint64,uint256)": FunctionFragment;
     "startingInterestPerSecond()": FunctionFragment;
     "symbol()": FunctionFragment;
     "totalAsset()": FunctionFragment;
@@ -298,8 +297,6 @@ export interface SingularityInterface extends utils.Interface {
       | "oracle()"
       | "oracleData"
       | "oracleData()"
-      | "orderBookLiquidationMultiplier"
-      | "orderBookLiquidationMultiplier()"
       | "owner"
       | "owner()"
       | "paused"
@@ -333,7 +330,7 @@ export interface SingularityInterface extends utils.Interface {
       | "setMarketConfig"
       | "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
       | "setSingularityConfig"
-      | "setSingularityConfig(uint256,uint256,uint256,uint256,uint256,uint64,uint64,uint256)"
+      | "setSingularityConfig(uint256,uint256,uint256,uint256,uint64,uint64,uint256)"
       | "startingInterestPerSecond"
       | "startingInterestPerSecond()"
       | "symbol"
@@ -840,14 +837,6 @@ export interface SingularityInterface extends utils.Interface {
     functionFragment: "oracleData()",
     values?: undefined
   ): string;
-  encodeFunctionData(
-    functionFragment: "orderBookLiquidationMultiplier",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "orderBookLiquidationMultiplier()",
-    values?: undefined
-  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
   encodeFunctionData(functionFragment: "paused", values?: undefined): string;
@@ -1069,14 +1058,12 @@ export interface SingularityInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "setSingularityConfig(uint256,uint256,uint256,uint256,uint256,uint64,uint64,uint256)",
+    functionFragment: "setSingularityConfig(uint256,uint256,uint256,uint256,uint64,uint64,uint256)",
     values: [
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
@@ -1579,14 +1566,6 @@ export interface SingularityInterface extends utils.Interface {
     functionFragment: "oracleData()",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "orderBookLiquidationMultiplier",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "orderBookLiquidationMultiplier()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
@@ -1696,7 +1675,7 @@ export interface SingularityInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setSingularityConfig(uint256,uint256,uint256,uint256,uint256,uint64,uint64,uint256)",
+    functionFragment: "setSingularityConfig(uint256,uint256,uint256,uint256,uint64,uint64,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2839,14 +2818,6 @@ export interface Singularity extends BaseContract {
 
     "oracleData()"(overrides?: CallOverrides): Promise<[string]>;
 
-    orderBookLiquidationMultiplier(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "orderBookLiquidationMultiplier()"(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
@@ -3050,7 +3021,6 @@ export interface Singularity extends BaseContract {
     setSingularityConfig(
       _lqCollateralizationRate: PromiseOrValue<BigNumberish>,
       _liquidationMultiplier: PromiseOrValue<BigNumberish>,
-      _orderBookLiquidationMultiplier: PromiseOrValue<BigNumberish>,
       _minimumTargetUtilization: PromiseOrValue<BigNumberish>,
       _maximumTargetUtilization: PromiseOrValue<BigNumberish>,
       _minimumInterestPerSecond: PromiseOrValue<BigNumberish>,
@@ -3059,10 +3029,9 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setSingularityConfig(uint256,uint256,uint256,uint256,uint256,uint64,uint64,uint256)"(
+    "setSingularityConfig(uint256,uint256,uint256,uint256,uint64,uint64,uint256)"(
       _lqCollateralizationRate: PromiseOrValue<BigNumberish>,
       _liquidationMultiplier: PromiseOrValue<BigNumberish>,
-      _orderBookLiquidationMultiplier: PromiseOrValue<BigNumberish>,
       _minimumTargetUtilization: PromiseOrValue<BigNumberish>,
       _maximumTargetUtilization: PromiseOrValue<BigNumberish>,
       _minimumInterestPerSecond: PromiseOrValue<BigNumberish>,
@@ -3668,12 +3637,6 @@ export interface Singularity extends BaseContract {
 
   "oracleData()"(overrides?: CallOverrides): Promise<string>;
 
-  orderBookLiquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "orderBookLiquidationMultiplier()"(
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   owner(overrides?: CallOverrides): Promise<string>;
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -3877,7 +3840,6 @@ export interface Singularity extends BaseContract {
   setSingularityConfig(
     _lqCollateralizationRate: PromiseOrValue<BigNumberish>,
     _liquidationMultiplier: PromiseOrValue<BigNumberish>,
-    _orderBookLiquidationMultiplier: PromiseOrValue<BigNumberish>,
     _minimumTargetUtilization: PromiseOrValue<BigNumberish>,
     _maximumTargetUtilization: PromiseOrValue<BigNumberish>,
     _minimumInterestPerSecond: PromiseOrValue<BigNumberish>,
@@ -3886,10 +3848,9 @@ export interface Singularity extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setSingularityConfig(uint256,uint256,uint256,uint256,uint256,uint64,uint64,uint256)"(
+  "setSingularityConfig(uint256,uint256,uint256,uint256,uint64,uint64,uint256)"(
     _lqCollateralizationRate: PromiseOrValue<BigNumberish>,
     _liquidationMultiplier: PromiseOrValue<BigNumberish>,
-    _orderBookLiquidationMultiplier: PromiseOrValue<BigNumberish>,
     _minimumTargetUtilization: PromiseOrValue<BigNumberish>,
     _maximumTargetUtilization: PromiseOrValue<BigNumberish>,
     _minimumInterestPerSecond: PromiseOrValue<BigNumberish>,
@@ -4481,14 +4442,6 @@ export interface Singularity extends BaseContract {
 
     "oracleData()"(overrides?: CallOverrides): Promise<string>;
 
-    orderBookLiquidationMultiplier(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "orderBookLiquidationMultiplier()"(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     owner(overrides?: CallOverrides): Promise<string>;
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -4692,7 +4645,6 @@ export interface Singularity extends BaseContract {
     setSingularityConfig(
       _lqCollateralizationRate: PromiseOrValue<BigNumberish>,
       _liquidationMultiplier: PromiseOrValue<BigNumberish>,
-      _orderBookLiquidationMultiplier: PromiseOrValue<BigNumberish>,
       _minimumTargetUtilization: PromiseOrValue<BigNumberish>,
       _maximumTargetUtilization: PromiseOrValue<BigNumberish>,
       _minimumInterestPerSecond: PromiseOrValue<BigNumberish>,
@@ -4701,10 +4653,9 @@ export interface Singularity extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setSingularityConfig(uint256,uint256,uint256,uint256,uint256,uint64,uint64,uint256)"(
+    "setSingularityConfig(uint256,uint256,uint256,uint256,uint64,uint64,uint256)"(
       _lqCollateralizationRate: PromiseOrValue<BigNumberish>,
       _liquidationMultiplier: PromiseOrValue<BigNumberish>,
-      _orderBookLiquidationMultiplier: PromiseOrValue<BigNumberish>,
       _minimumTargetUtilization: PromiseOrValue<BigNumberish>,
       _maximumTargetUtilization: PromiseOrValue<BigNumberish>,
       _minimumInterestPerSecond: PromiseOrValue<BigNumberish>,
@@ -5556,14 +5507,6 @@ export interface Singularity extends BaseContract {
 
     "oracleData()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    orderBookLiquidationMultiplier(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "orderBookLiquidationMultiplier()"(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -5767,7 +5710,6 @@ export interface Singularity extends BaseContract {
     setSingularityConfig(
       _lqCollateralizationRate: PromiseOrValue<BigNumberish>,
       _liquidationMultiplier: PromiseOrValue<BigNumberish>,
-      _orderBookLiquidationMultiplier: PromiseOrValue<BigNumberish>,
       _minimumTargetUtilization: PromiseOrValue<BigNumberish>,
       _maximumTargetUtilization: PromiseOrValue<BigNumberish>,
       _minimumInterestPerSecond: PromiseOrValue<BigNumberish>,
@@ -5776,10 +5718,9 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setSingularityConfig(uint256,uint256,uint256,uint256,uint256,uint64,uint64,uint256)"(
+    "setSingularityConfig(uint256,uint256,uint256,uint256,uint64,uint64,uint256)"(
       _lqCollateralizationRate: PromiseOrValue<BigNumberish>,
       _liquidationMultiplier: PromiseOrValue<BigNumberish>,
-      _orderBookLiquidationMultiplier: PromiseOrValue<BigNumberish>,
       _minimumTargetUtilization: PromiseOrValue<BigNumberish>,
       _maximumTargetUtilization: PromiseOrValue<BigNumberish>,
       _minimumInterestPerSecond: PromiseOrValue<BigNumberish>,
@@ -6392,14 +6333,6 @@ export interface Singularity extends BaseContract {
 
     "oracleData()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    orderBookLiquidationMultiplier(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "orderBookLiquidationMultiplier()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -6603,7 +6536,6 @@ export interface Singularity extends BaseContract {
     setSingularityConfig(
       _lqCollateralizationRate: PromiseOrValue<BigNumberish>,
       _liquidationMultiplier: PromiseOrValue<BigNumberish>,
-      _orderBookLiquidationMultiplier: PromiseOrValue<BigNumberish>,
       _minimumTargetUtilization: PromiseOrValue<BigNumberish>,
       _maximumTargetUtilization: PromiseOrValue<BigNumberish>,
       _minimumInterestPerSecond: PromiseOrValue<BigNumberish>,
@@ -6612,10 +6544,9 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setSingularityConfig(uint256,uint256,uint256,uint256,uint256,uint64,uint64,uint256)"(
+    "setSingularityConfig(uint256,uint256,uint256,uint256,uint64,uint64,uint256)"(
       _lqCollateralizationRate: PromiseOrValue<BigNumberish>,
       _liquidationMultiplier: PromiseOrValue<BigNumberish>,
-      _orderBookLiquidationMultiplier: PromiseOrValue<BigNumberish>,
       _minimumTargetUtilization: PromiseOrValue<BigNumberish>,
       _maximumTargetUtilization: PromiseOrValue<BigNumberish>,
       _minimumInterestPerSecond: PromiseOrValue<BigNumberish>,
