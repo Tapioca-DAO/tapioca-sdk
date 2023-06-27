@@ -17,6 +17,14 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TwTAP__factory>;
     getContractFactory(
+      name: "AirdropBroker",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AirdropBroker__factory>;
+    getContractFactory(
+      name: "AOTAP",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AOTAP__factory>;
+    getContractFactory(
       name: "OTAP",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.OTAP__factory>;
@@ -28,6 +36,10 @@ declare module "hardhat/types/runtime" {
       name: "TapiocaOptionLiquidityProvision",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapiocaOptionLiquidityProvision__factory>;
+    getContractFactory(
+      name: "BaseTapOFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseTapOFT__factory>;
     getContractFactory(
       name: "LTap",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -47,6 +59,16 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.TwTAP>;
     getContractAt(
+      name: "AirdropBroker",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AirdropBroker>;
+    getContractAt(
+      name: "AOTAP",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AOTAP>;
+    getContractAt(
       name: "OTAP",
       address: string,
       signer?: ethers.Signer
@@ -61,6 +83,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TapiocaOptionLiquidityProvision>;
+    getContractAt(
+      name: "BaseTapOFT",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseTapOFT>;
     getContractAt(
       name: "LTap",
       address: string,

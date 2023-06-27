@@ -27,63 +27,72 @@ import type {
   PromiseOrValue,
 } from "../common";
 
-export type LockPositionStruct = {
-  sglAssetID: PromiseOrValue<BigNumberish>;
-  amount: PromiseOrValue<BigNumberish>;
-  lockTime: PromiseOrValue<BigNumberish>;
-  lockDuration: PromiseOrValue<BigNumberish>;
-};
-
-export type LockPositionStructOutput = [
-  BigNumber,
-  BigNumber,
-  BigNumber,
-  BigNumber
-] & {
-  sglAssetID: BigNumber;
-  amount: BigNumber;
-  lockTime: BigNumber;
-  lockDuration: BigNumber;
-};
-
-export interface TapiocaOptionBrokerInterface extends utils.Interface {
+export interface AirdropBrokerInterface extends utils.Interface {
   functions: {
     "EPOCH_DURATION()": FunctionFragment;
+    "PCNFT()": FunctionFragment;
+    "PHASE_1_DISCOUNT()": FunctionFragment;
+    "PHASE_2_AMOUNT_PER_USER(uint256)": FunctionFragment;
+    "PHASE_2_DISCOUNT_PER_USER(uint256)": FunctionFragment;
+    "PHASE_3_AMOUNT_PER_USER()": FunctionFragment;
+    "PHASE_3_DISCOUNT()": FunctionFragment;
+    "PHASE_4_DISCOUNT()": FunctionFragment;
+    "aoTAP()": FunctionFragment;
+    "aoTAPBrokerClaim()": FunctionFragment;
+    "aoTAPCalls(uint256,uint256)": FunctionFragment;
     "claimOwnership()": FunctionFragment;
     "collectPaymentTokens(address[])": FunctionFragment;
     "epoch()": FunctionFragment;
     "epochTAPValuation()": FunctionFragment;
     "exerciseOption(uint256,address,uint256)": FunctionFragment;
-    "exitPosition(uint256)": FunctionFragment;
     "getOTCDealDetails(uint256,address,uint256)": FunctionFragment;
     "lastEpochUpdate()": FunctionFragment;
     "newEpoch()": FunctionFragment;
-    "oTAP()": FunctionFragment;
-    "oTAPBrokerClaim()": FunctionFragment;
-    "oTAPCalls(uint256,uint256)": FunctionFragment;
     "owner()": FunctionFragment;
-    "participants(uint256)": FunctionFragment;
-    "participate(uint256)": FunctionFragment;
+    "participate(bytes)": FunctionFragment;
     "paused()": FunctionFragment;
     "paymentTokenBeneficiary()": FunctionFragment;
     "paymentTokens(address)": FunctionFragment;
     "pendingOwner()": FunctionFragment;
+    "phase1Users(address)": FunctionFragment;
+    "phase2MerkleRoots(uint256)": FunctionFragment;
+    "phase4Users(address)": FunctionFragment;
+    "registerUserForPhase(uint256,address[],uint256[])": FunctionFragment;
     "setPaymentToken(address,address,bytes)": FunctionFragment;
     "setPaymentTokenBeneficiary(address)": FunctionFragment;
+    "setPhase2MerkleRoots(bytes32[4])": FunctionFragment;
     "setTapOracle(address,bytes)": FunctionFragment;
-    "singularityGauges(uint256,uint256)": FunctionFragment;
-    "tOLP()": FunctionFragment;
     "tapOFT()": FunctionFragment;
     "tapOracle()": FunctionFragment;
     "tapOracleData()": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
-    "twAML(uint256)": FunctionFragment;
+    "userParticipation(address,uint256)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
       | "EPOCH_DURATION"
       | "EPOCH_DURATION()"
+      | "PCNFT"
+      | "PCNFT()"
+      | "PHASE_1_DISCOUNT"
+      | "PHASE_1_DISCOUNT()"
+      | "PHASE_2_AMOUNT_PER_USER"
+      | "PHASE_2_AMOUNT_PER_USER(uint256)"
+      | "PHASE_2_DISCOUNT_PER_USER"
+      | "PHASE_2_DISCOUNT_PER_USER(uint256)"
+      | "PHASE_3_AMOUNT_PER_USER"
+      | "PHASE_3_AMOUNT_PER_USER()"
+      | "PHASE_3_DISCOUNT"
+      | "PHASE_3_DISCOUNT()"
+      | "PHASE_4_DISCOUNT"
+      | "PHASE_4_DISCOUNT()"
+      | "aoTAP"
+      | "aoTAP()"
+      | "aoTAPBrokerClaim"
+      | "aoTAPBrokerClaim()"
+      | "aoTAPCalls"
+      | "aoTAPCalls(uint256,uint256)"
       | "claimOwnership"
       | "claimOwnership()"
       | "collectPaymentTokens"
@@ -94,26 +103,16 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
       | "epochTAPValuation()"
       | "exerciseOption"
       | "exerciseOption(uint256,address,uint256)"
-      | "exitPosition"
-      | "exitPosition(uint256)"
       | "getOTCDealDetails"
       | "getOTCDealDetails(uint256,address,uint256)"
       | "lastEpochUpdate"
       | "lastEpochUpdate()"
       | "newEpoch"
       | "newEpoch()"
-      | "oTAP"
-      | "oTAP()"
-      | "oTAPBrokerClaim"
-      | "oTAPBrokerClaim()"
-      | "oTAPCalls"
-      | "oTAPCalls(uint256,uint256)"
       | "owner"
       | "owner()"
-      | "participants"
-      | "participants(uint256)"
       | "participate"
-      | "participate(uint256)"
+      | "participate(bytes)"
       | "paused"
       | "paused()"
       | "paymentTokenBeneficiary"
@@ -122,16 +121,22 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
       | "paymentTokens(address)"
       | "pendingOwner"
       | "pendingOwner()"
+      | "phase1Users"
+      | "phase1Users(address)"
+      | "phase2MerkleRoots"
+      | "phase2MerkleRoots(uint256)"
+      | "phase4Users"
+      | "phase4Users(address)"
+      | "registerUserForPhase"
+      | "registerUserForPhase(uint256,address[],uint256[])"
       | "setPaymentToken"
       | "setPaymentToken(address,address,bytes)"
       | "setPaymentTokenBeneficiary"
       | "setPaymentTokenBeneficiary(address)"
+      | "setPhase2MerkleRoots"
+      | "setPhase2MerkleRoots(bytes32[4])"
       | "setTapOracle"
       | "setTapOracle(address,bytes)"
-      | "singularityGauges"
-      | "singularityGauges(uint256,uint256)"
-      | "tOLP"
-      | "tOLP()"
       | "tapOFT"
       | "tapOFT()"
       | "tapOracle"
@@ -140,8 +145,8 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
       | "tapOracleData()"
       | "transferOwnership"
       | "transferOwnership(address,bool,bool)"
-      | "twAML"
-      | "twAML(uint256)"
+      | "userParticipation"
+      | "userParticipation(address,uint256)"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -151,6 +156,74 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "EPOCH_DURATION()",
     values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "PCNFT", values?: undefined): string;
+  encodeFunctionData(functionFragment: "PCNFT()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "PHASE_1_DISCOUNT",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PHASE_1_DISCOUNT()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PHASE_2_AMOUNT_PER_USER",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PHASE_2_AMOUNT_PER_USER(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PHASE_2_DISCOUNT_PER_USER",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PHASE_2_DISCOUNT_PER_USER(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PHASE_3_AMOUNT_PER_USER",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PHASE_3_AMOUNT_PER_USER()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PHASE_3_DISCOUNT",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PHASE_3_DISCOUNT()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PHASE_4_DISCOUNT",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PHASE_4_DISCOUNT()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "aoTAP", values?: undefined): string;
+  encodeFunctionData(functionFragment: "aoTAP()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "aoTAPBrokerClaim",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "aoTAPBrokerClaim()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "aoTAPCalls",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "aoTAPCalls(uint256,uint256)",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "claimOwnership",
@@ -195,14 +268,6 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "exitPosition",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "exitPosition(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "getOTCDealDetails",
     values: [
       PromiseOrValue<BigNumberish>,
@@ -231,41 +296,15 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     functionFragment: "newEpoch()",
     values?: undefined
   ): string;
-  encodeFunctionData(functionFragment: "oTAP", values?: undefined): string;
-  encodeFunctionData(functionFragment: "oTAP()", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "oTAPBrokerClaim",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "oTAPBrokerClaim()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "oTAPCalls",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "oTAPCalls(uint256,uint256)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
-  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "participants",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "participants(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "participate",
-    values: [PromiseOrValue<BigNumberish>]
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
-    functionFragment: "participate(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
+    functionFragment: "participate(bytes)",
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(functionFragment: "paused", values?: undefined): string;
   encodeFunctionData(functionFragment: "paused()", values?: undefined): string;
@@ -294,6 +333,46 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "phase1Users",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "phase1Users(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "phase2MerkleRoots",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "phase2MerkleRoots(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "phase4Users",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "phase4Users(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "registerUserForPhase",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>[],
+      PromiseOrValue<BigNumberish>[]
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "registerUserForPhase(uint256,address[],uint256[])",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>[],
+      PromiseOrValue<BigNumberish>[]
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "setPaymentToken",
     values: [
       PromiseOrValue<string>,
@@ -318,6 +397,28 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "setPhase2MerkleRoots",
+    values: [
+      [
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>
+      ]
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setPhase2MerkleRoots(bytes32[4])",
+    values: [
+      [
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>
+      ]
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "setTapOracle",
     values: [PromiseOrValue<string>, PromiseOrValue<BytesLike>]
   ): string;
@@ -325,16 +426,6 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     functionFragment: "setTapOracle(address,bytes)",
     values: [PromiseOrValue<string>, PromiseOrValue<BytesLike>]
   ): string;
-  encodeFunctionData(
-    functionFragment: "singularityGauges",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "singularityGauges(uint256,uint256)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(functionFragment: "tOLP", values?: undefined): string;
-  encodeFunctionData(functionFragment: "tOLP()", values?: undefined): string;
   encodeFunctionData(functionFragment: "tapOFT", values?: undefined): string;
   encodeFunctionData(functionFragment: "tapOFT()", values?: undefined): string;
   encodeFunctionData(functionFragment: "tapOracle", values?: undefined): string;
@@ -367,12 +458,12 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "twAML",
-    values: [PromiseOrValue<BigNumberish>]
+    functionFragment: "userParticipation",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "twAML(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
+    functionFragment: "userParticipation(address,uint256)",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(
@@ -381,6 +472,71 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "EPOCH_DURATION()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "PCNFT", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "PCNFT()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "PHASE_1_DISCOUNT",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "PHASE_1_DISCOUNT()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "PHASE_2_AMOUNT_PER_USER",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "PHASE_2_AMOUNT_PER_USER(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "PHASE_2_DISCOUNT_PER_USER",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "PHASE_2_DISCOUNT_PER_USER(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "PHASE_3_AMOUNT_PER_USER",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "PHASE_3_AMOUNT_PER_USER()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "PHASE_3_DISCOUNT",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "PHASE_3_DISCOUNT()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "PHASE_4_DISCOUNT",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "PHASE_4_DISCOUNT()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "aoTAP", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "aoTAP()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "aoTAPBrokerClaim",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "aoTAPBrokerClaim()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "aoTAPCalls", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "aoTAPCalls(uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -418,14 +574,6 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "exitPosition",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "exitPosition(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "getOTCDealDetails",
     data: BytesLike
   ): Result;
@@ -443,37 +591,14 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "newEpoch", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "newEpoch()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "oTAP", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "oTAP()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "oTAPBrokerClaim",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "oTAPBrokerClaim()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "oTAPCalls", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "oTAPCalls(uint256,uint256)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "participants",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "participants(uint256)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "participate",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "participate(uint256)",
+    functionFragment: "participate(bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
@@ -503,6 +628,38 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "phase1Users",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "phase1Users(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "phase2MerkleRoots",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "phase2MerkleRoots(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "phase4Users",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "phase4Users(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "registerUserForPhase",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "registerUserForPhase(uint256,address[],uint256[])",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "setPaymentToken",
     data: BytesLike
   ): Result;
@@ -519,6 +676,14 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "setPhase2MerkleRoots",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setPhase2MerkleRoots(bytes32[4])",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "setTapOracle",
     data: BytesLike
   ): Result;
@@ -526,16 +691,6 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     functionFragment: "setTapOracle(address,bytes)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "singularityGauges",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "singularityGauges(uint256,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "tOLP", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "tOLP()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "tapOFT", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "tapOFT()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "tapOracle", data: BytesLike): Result;
@@ -559,48 +714,39 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     functionFragment: "transferOwnership(address,bool,bool)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "twAML", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "twAML(uint256)",
+    functionFragment: "userParticipation",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "userParticipation(address,uint256)",
     data: BytesLike
   ): Result;
 
   events: {
-    "AMLDivergence(uint256,uint256,uint256,uint256)": EventFragment;
     "ExerciseOption(uint256,address,address,uint256,uint256)": EventFragment;
-    "ExitPosition(uint256,uint256,uint256)": EventFragment;
-    "NewEpoch(uint256,uint256,uint256)": EventFragment;
+    "NewEpoch(uint256,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
-    "Participate(uint256,uint256,uint256,tuple,uint256)": EventFragment;
+    "Participate(uint256,uint256)": EventFragment;
     "Paused(address)": EventFragment;
     "SetPaymentToken(address,address,bytes)": EventFragment;
     "SetTapOracle(address,bytes)": EventFragment;
     "Unpaused(address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "AMLDivergence"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "AMLDivergence(uint256,uint256,uint256,uint256)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ExerciseOption"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ExerciseOption(uint256,address,address,uint256,uint256)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "ExitPosition"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "ExitPosition(uint256,uint256,uint256)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "NewEpoch"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "NewEpoch(uint256,uint256,uint256)"
-  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NewEpoch(uint256,uint256)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "OwnershipTransferred(address,address)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Participate"): EventFragment;
   getEvent(
-    nameOrSignatureOrTopic: "Participate(uint256,uint256,uint256,tuple,uint256)"
+    nameOrSignatureOrTopic: "Participate(uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Paused"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Paused(address)"): EventFragment;
@@ -616,24 +762,11 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Unpaused(address)"): EventFragment;
 }
 
-export interface AMLDivergenceEventObject {
-  epoch: BigNumber;
-  cumulative: BigNumber;
-  averageMagnitude: BigNumber;
-  totalParticipants: BigNumber;
-}
-export type AMLDivergenceEvent = TypedEvent<
-  [BigNumber, BigNumber, BigNumber, BigNumber],
-  AMLDivergenceEventObject
->;
-
-export type AMLDivergenceEventFilter = TypedEventFilter<AMLDivergenceEvent>;
-
 export interface ExerciseOptionEventObject {
   epoch: BigNumber;
   to: string;
   paymentToken: string;
-  oTapTokenID: BigNumber;
+  aoTapTokenID: BigNumber;
   amount: BigNumber;
 }
 export type ExerciseOptionEvent = TypedEvent<
@@ -643,25 +776,12 @@ export type ExerciseOptionEvent = TypedEvent<
 
 export type ExerciseOptionEventFilter = TypedEventFilter<ExerciseOptionEvent>;
 
-export interface ExitPositionEventObject {
-  epoch: BigNumber;
-  tokenId: BigNumber;
-  amount: BigNumber;
-}
-export type ExitPositionEvent = TypedEvent<
-  [BigNumber, BigNumber, BigNumber],
-  ExitPositionEventObject
->;
-
-export type ExitPositionEventFilter = TypedEventFilter<ExitPositionEvent>;
-
 export interface NewEpochEventObject {
   epoch: BigNumber;
-  extractedTAP: BigNumber;
   epochTAPValuation: BigNumber;
 }
 export type NewEpochEvent = TypedEvent<
-  [BigNumber, BigNumber, BigNumber],
+  [BigNumber, BigNumber],
   NewEpochEventObject
 >;
 
@@ -681,13 +801,10 @@ export type OwnershipTransferredEventFilter =
 
 export interface ParticipateEventObject {
   epoch: BigNumber;
-  sglAssetID: BigNumber;
-  totalDeposited: BigNumber;
-  lock: LockPositionStructOutput;
-  discount: BigNumber;
+  aoTAPTokenID: BigNumber;
 }
 export type ParticipateEvent = TypedEvent<
-  [BigNumber, BigNumber, BigNumber, LockPositionStructOutput, BigNumber],
+  [BigNumber, BigNumber],
   ParticipateEventObject
 >;
 
@@ -730,14 +847,14 @@ export type UnpausedEvent = TypedEvent<[string], UnpausedEventObject>;
 
 export type UnpausedEventFilter = TypedEventFilter<UnpausedEvent>;
 
-export interface TapiocaOptionBroker extends BaseContract {
-  contractName: "TapiocaOptionBroker";
+export interface AirdropBroker extends BaseContract {
+  contractName: "AirdropBroker";
 
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: TapiocaOptionBrokerInterface;
+  interface: AirdropBrokerInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -762,6 +879,72 @@ export interface TapiocaOptionBroker extends BaseContract {
     EPOCH_DURATION(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "EPOCH_DURATION()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    PCNFT(overrides?: CallOverrides): Promise<[string]>;
+
+    "PCNFT()"(overrides?: CallOverrides): Promise<[string]>;
+
+    PHASE_1_DISCOUNT(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "PHASE_1_DISCOUNT()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    PHASE_2_AMOUNT_PER_USER(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[number]>;
+
+    "PHASE_2_AMOUNT_PER_USER(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[number]>;
+
+    PHASE_2_DISCOUNT_PER_USER(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[number]>;
+
+    "PHASE_2_DISCOUNT_PER_USER(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[number]>;
+
+    PHASE_3_AMOUNT_PER_USER(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "PHASE_3_AMOUNT_PER_USER()"(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    PHASE_3_DISCOUNT(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "PHASE_3_DISCOUNT()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    PHASE_4_DISCOUNT(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "PHASE_4_DISCOUNT()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    aoTAP(overrides?: CallOverrides): Promise<[string]>;
+
+    "aoTAP()"(overrides?: CallOverrides): Promise<[string]>;
+
+    aoTAPBrokerClaim(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "aoTAPBrokerClaim()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    aoTAPCalls(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "aoTAPCalls(uint256,uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     claimOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -790,31 +973,21 @@ export interface TapiocaOptionBroker extends BaseContract {
     "epochTAPValuation()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     exerciseOption(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
+      _aoTAPTokenID: PromiseOrValue<BigNumberish>,
       _paymentToken: PromiseOrValue<string>,
       _tapAmount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "exerciseOption(uint256,address,uint256)"(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
+      _aoTAPTokenID: PromiseOrValue<BigNumberish>,
       _paymentToken: PromiseOrValue<string>,
       _tapAmount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    exitPosition(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "exitPosition(uint256)"(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     getOTCDealDetails(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
+      _aoTAPTokenID: PromiseOrValue<BigNumberish>,
       _paymentToken: PromiseOrValue<string>,
       _tapAmount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -827,7 +1000,7 @@ export interface TapiocaOptionBroker extends BaseContract {
     >;
 
     "getOTCDealDetails(uint256,address,uint256)"(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
+      _aoTAPTokenID: PromiseOrValue<BigNumberish>,
       _paymentToken: PromiseOrValue<string>,
       _tapAmount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -851,63 +1024,17 @@ export interface TapiocaOptionBroker extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    oTAP(overrides?: CallOverrides): Promise<[string]>;
-
-    "oTAP()"(overrides?: CallOverrides): Promise<[string]>;
-
-    oTAPBrokerClaim(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "oTAPBrokerClaim()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    oTAPCalls(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "oTAPCalls(uint256,uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
 
-    participants(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<
-      [boolean, boolean, BigNumber] & {
-        hasVotingPower: boolean;
-        divergenceForce: boolean;
-        averageMagnitude: BigNumber;
-      }
-    >;
-
-    "participants(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<
-      [boolean, boolean, BigNumber] & {
-        hasVotingPower: boolean;
-        divergenceForce: boolean;
-        averageMagnitude: BigNumber;
-      }
-    >;
-
     participate(
-      _tOLPTokenID: PromiseOrValue<BigNumberish>,
+      _data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "participate(uint256)"(
-      _tOLPTokenID: PromiseOrValue<BigNumberish>,
+    "participate(bytes)"(
+      _data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -933,6 +1060,50 @@ export interface TapiocaOptionBroker extends BaseContract {
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<[string]>;
 
+    phase1Users(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "phase1Users(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    phase2MerkleRoots(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    "phase2MerkleRoots(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    phase4Users(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "phase4Users(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    registerUserForPhase(
+      _phase: PromiseOrValue<BigNumberish>,
+      _users: PromiseOrValue<string>[],
+      _amounts: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "registerUserForPhase(uint256,address[],uint256[])"(
+      _phase: PromiseOrValue<BigNumberish>,
+      _users: PromiseOrValue<string>[],
+      _amounts: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     setPaymentToken(
       _paymentToken: PromiseOrValue<string>,
       _oracle: PromiseOrValue<string>,
@@ -957,6 +1128,26 @@ export interface TapiocaOptionBroker extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    setPhase2MerkleRoots(
+      _merkleRoots: [
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>
+      ],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setPhase2MerkleRoots(bytes32[4])"(
+      _merkleRoots: [
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>
+      ],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     setTapOracle(
       _tapOracle: PromiseOrValue<string>,
       _tapOracleData: PromiseOrValue<BytesLike>,
@@ -968,22 +1159,6 @@ export interface TapiocaOptionBroker extends BaseContract {
       _tapOracleData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
-
-    singularityGauges(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "singularityGauges(uint256,uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    tOLP(overrides?: CallOverrides): Promise<[string]>;
-
-    "tOLP()"(overrides?: CallOverrides): Promise<[string]>;
 
     tapOFT(overrides?: CallOverrides): Promise<[string]>;
 
@@ -1011,34 +1186,86 @@ export interface TapiocaOptionBroker extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    twAML(
-      arg0: PromiseOrValue<BigNumberish>,
+    userParticipation(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        totalParticipants: BigNumber;
-        averageMagnitude: BigNumber;
-        totalDeposited: BigNumber;
-        cumulative: BigNumber;
-      }
-    >;
+    ): Promise<[boolean]>;
 
-    "twAML(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
+    "userParticipation(address,uint256)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        totalParticipants: BigNumber;
-        averageMagnitude: BigNumber;
-        totalDeposited: BigNumber;
-        cumulative: BigNumber;
-      }
-    >;
+    ): Promise<[boolean]>;
   };
 
   EPOCH_DURATION(overrides?: CallOverrides): Promise<BigNumber>;
 
   "EPOCH_DURATION()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  PCNFT(overrides?: CallOverrides): Promise<string>;
+
+  "PCNFT()"(overrides?: CallOverrides): Promise<string>;
+
+  PHASE_1_DISCOUNT(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "PHASE_1_DISCOUNT()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  PHASE_2_AMOUNT_PER_USER(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<number>;
+
+  "PHASE_2_AMOUNT_PER_USER(uint256)"(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<number>;
+
+  PHASE_2_DISCOUNT_PER_USER(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<number>;
+
+  "PHASE_2_DISCOUNT_PER_USER(uint256)"(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<number>;
+
+  PHASE_3_AMOUNT_PER_USER(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "PHASE_3_AMOUNT_PER_USER()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  PHASE_3_DISCOUNT(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "PHASE_3_DISCOUNT()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  PHASE_4_DISCOUNT(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "PHASE_4_DISCOUNT()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  aoTAP(overrides?: CallOverrides): Promise<string>;
+
+  "aoTAP()"(overrides?: CallOverrides): Promise<string>;
+
+  aoTAPBrokerClaim(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "aoTAPBrokerClaim()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  aoTAPCalls(
+    arg0: PromiseOrValue<BigNumberish>,
+    arg1: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "aoTAPCalls(uint256,uint256)"(
+    arg0: PromiseOrValue<BigNumberish>,
+    arg1: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   claimOwnership(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1067,31 +1294,21 @@ export interface TapiocaOptionBroker extends BaseContract {
   "epochTAPValuation()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   exerciseOption(
-    _oTAPTokenID: PromiseOrValue<BigNumberish>,
+    _aoTAPTokenID: PromiseOrValue<BigNumberish>,
     _paymentToken: PromiseOrValue<string>,
     _tapAmount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "exerciseOption(uint256,address,uint256)"(
-    _oTAPTokenID: PromiseOrValue<BigNumberish>,
+    _aoTAPTokenID: PromiseOrValue<BigNumberish>,
     _paymentToken: PromiseOrValue<string>,
     _tapAmount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  exitPosition(
-    _oTAPTokenID: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "exitPosition(uint256)"(
-    _oTAPTokenID: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   getOTCDealDetails(
-    _oTAPTokenID: PromiseOrValue<BigNumberish>,
+    _aoTAPTokenID: PromiseOrValue<BigNumberish>,
     _paymentToken: PromiseOrValue<string>,
     _tapAmount: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -1104,7 +1321,7 @@ export interface TapiocaOptionBroker extends BaseContract {
   >;
 
   "getOTCDealDetails(uint256,address,uint256)"(
-    _oTAPTokenID: PromiseOrValue<BigNumberish>,
+    _aoTAPTokenID: PromiseOrValue<BigNumberish>,
     _paymentToken: PromiseOrValue<string>,
     _tapAmount: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -1128,63 +1345,17 @@ export interface TapiocaOptionBroker extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  oTAP(overrides?: CallOverrides): Promise<string>;
-
-  "oTAP()"(overrides?: CallOverrides): Promise<string>;
-
-  oTAPBrokerClaim(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "oTAPBrokerClaim()"(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  oTAPCalls(
-    arg0: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "oTAPCalls(uint256,uint256)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   owner(overrides?: CallOverrides): Promise<string>;
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
 
-  participants(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<
-    [boolean, boolean, BigNumber] & {
-      hasVotingPower: boolean;
-      divergenceForce: boolean;
-      averageMagnitude: BigNumber;
-    }
-  >;
-
-  "participants(uint256)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<
-    [boolean, boolean, BigNumber] & {
-      hasVotingPower: boolean;
-      divergenceForce: boolean;
-      averageMagnitude: BigNumber;
-    }
-  >;
-
   participate(
-    _tOLPTokenID: PromiseOrValue<BigNumberish>,
+    _data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "participate(uint256)"(
-    _tOLPTokenID: PromiseOrValue<BigNumberish>,
+  "participate(bytes)"(
+    _data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1210,6 +1381,50 @@ export interface TapiocaOptionBroker extends BaseContract {
 
   "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
 
+  phase1Users(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "phase1Users(address)"(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  phase2MerkleRoots(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  "phase2MerkleRoots(uint256)"(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  phase4Users(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "phase4Users(address)"(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  registerUserForPhase(
+    _phase: PromiseOrValue<BigNumberish>,
+    _users: PromiseOrValue<string>[],
+    _amounts: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "registerUserForPhase(uint256,address[],uint256[])"(
+    _phase: PromiseOrValue<BigNumberish>,
+    _users: PromiseOrValue<string>[],
+    _amounts: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   setPaymentToken(
     _paymentToken: PromiseOrValue<string>,
     _oracle: PromiseOrValue<string>,
@@ -1234,6 +1449,26 @@ export interface TapiocaOptionBroker extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  setPhase2MerkleRoots(
+    _merkleRoots: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>
+    ],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setPhase2MerkleRoots(bytes32[4])"(
+    _merkleRoots: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>
+    ],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   setTapOracle(
     _tapOracle: PromiseOrValue<string>,
     _tapOracleData: PromiseOrValue<BytesLike>,
@@ -1245,22 +1480,6 @@ export interface TapiocaOptionBroker extends BaseContract {
     _tapOracleData: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
-
-  singularityGauges(
-    arg0: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "singularityGauges(uint256,uint256)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  tOLP(overrides?: CallOverrides): Promise<string>;
-
-  "tOLP()"(overrides?: CallOverrides): Promise<string>;
 
   tapOFT(overrides?: CallOverrides): Promise<string>;
 
@@ -1288,34 +1507,82 @@ export interface TapiocaOptionBroker extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  twAML(
-    arg0: PromiseOrValue<BigNumberish>,
+  userParticipation(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, BigNumber, BigNumber, BigNumber] & {
-      totalParticipants: BigNumber;
-      averageMagnitude: BigNumber;
-      totalDeposited: BigNumber;
-      cumulative: BigNumber;
-    }
-  >;
+  ): Promise<boolean>;
 
-  "twAML(uint256)"(
-    arg0: PromiseOrValue<BigNumberish>,
+  "userParticipation(address,uint256)"(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, BigNumber, BigNumber, BigNumber] & {
-      totalParticipants: BigNumber;
-      averageMagnitude: BigNumber;
-      totalDeposited: BigNumber;
-      cumulative: BigNumber;
-    }
-  >;
+  ): Promise<boolean>;
 
   callStatic: {
     EPOCH_DURATION(overrides?: CallOverrides): Promise<BigNumber>;
 
     "EPOCH_DURATION()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    PCNFT(overrides?: CallOverrides): Promise<string>;
+
+    "PCNFT()"(overrides?: CallOverrides): Promise<string>;
+
+    PHASE_1_DISCOUNT(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "PHASE_1_DISCOUNT()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    PHASE_2_AMOUNT_PER_USER(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<number>;
+
+    "PHASE_2_AMOUNT_PER_USER(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<number>;
+
+    PHASE_2_DISCOUNT_PER_USER(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<number>;
+
+    "PHASE_2_DISCOUNT_PER_USER(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<number>;
+
+    PHASE_3_AMOUNT_PER_USER(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "PHASE_3_AMOUNT_PER_USER()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    PHASE_3_DISCOUNT(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "PHASE_3_DISCOUNT()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    PHASE_4_DISCOUNT(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "PHASE_4_DISCOUNT()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    aoTAP(overrides?: CallOverrides): Promise<string>;
+
+    "aoTAP()"(overrides?: CallOverrides): Promise<string>;
+
+    aoTAPBrokerClaim(overrides?: CallOverrides): Promise<void>;
+
+    "aoTAPBrokerClaim()"(overrides?: CallOverrides): Promise<void>;
+
+    aoTAPCalls(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "aoTAPCalls(uint256,uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     claimOwnership(overrides?: CallOverrides): Promise<void>;
 
@@ -1340,31 +1607,21 @@ export interface TapiocaOptionBroker extends BaseContract {
     "epochTAPValuation()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     exerciseOption(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
+      _aoTAPTokenID: PromiseOrValue<BigNumberish>,
       _paymentToken: PromiseOrValue<string>,
       _tapAmount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "exerciseOption(uint256,address,uint256)"(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
+      _aoTAPTokenID: PromiseOrValue<BigNumberish>,
       _paymentToken: PromiseOrValue<string>,
       _tapAmount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    exitPosition(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "exitPosition(uint256)"(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     getOTCDealDetails(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
+      _aoTAPTokenID: PromiseOrValue<BigNumberish>,
       _paymentToken: PromiseOrValue<string>,
       _tapAmount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1377,7 +1634,7 @@ export interface TapiocaOptionBroker extends BaseContract {
     >;
 
     "getOTCDealDetails(uint256,address,uint256)"(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
+      _aoTAPTokenID: PromiseOrValue<BigNumberish>,
       _paymentToken: PromiseOrValue<string>,
       _tapAmount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1397,59 +1654,17 @@ export interface TapiocaOptionBroker extends BaseContract {
 
     "newEpoch()"(overrides?: CallOverrides): Promise<void>;
 
-    oTAP(overrides?: CallOverrides): Promise<string>;
-
-    "oTAP()"(overrides?: CallOverrides): Promise<string>;
-
-    oTAPBrokerClaim(overrides?: CallOverrides): Promise<void>;
-
-    "oTAPBrokerClaim()"(overrides?: CallOverrides): Promise<void>;
-
-    oTAPCalls(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "oTAPCalls(uint256,uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     owner(overrides?: CallOverrides): Promise<string>;
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
 
-    participants(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<
-      [boolean, boolean, BigNumber] & {
-        hasVotingPower: boolean;
-        divergenceForce: boolean;
-        averageMagnitude: BigNumber;
-      }
-    >;
-
-    "participants(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<
-      [boolean, boolean, BigNumber] & {
-        hasVotingPower: boolean;
-        divergenceForce: boolean;
-        averageMagnitude: BigNumber;
-      }
-    >;
-
     participate(
-      _tOLPTokenID: PromiseOrValue<BigNumberish>,
+      _data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "participate(uint256)"(
-      _tOLPTokenID: PromiseOrValue<BigNumberish>,
+    "participate(bytes)"(
+      _data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1475,6 +1690,50 @@ export interface TapiocaOptionBroker extends BaseContract {
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
 
+    phase1Users(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "phase1Users(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    phase2MerkleRoots(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "phase2MerkleRoots(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    phase4Users(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "phase4Users(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    registerUserForPhase(
+      _phase: PromiseOrValue<BigNumberish>,
+      _users: PromiseOrValue<string>[],
+      _amounts: PromiseOrValue<BigNumberish>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "registerUserForPhase(uint256,address[],uint256[])"(
+      _phase: PromiseOrValue<BigNumberish>,
+      _users: PromiseOrValue<string>[],
+      _amounts: PromiseOrValue<BigNumberish>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     setPaymentToken(
       _paymentToken: PromiseOrValue<string>,
       _oracle: PromiseOrValue<string>,
@@ -1499,6 +1758,26 @@ export interface TapiocaOptionBroker extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setPhase2MerkleRoots(
+      _merkleRoots: [
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>
+      ],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setPhase2MerkleRoots(bytes32[4])"(
+      _merkleRoots: [
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>
+      ],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     setTapOracle(
       _tapOracle: PromiseOrValue<string>,
       _tapOracleData: PromiseOrValue<BytesLike>,
@@ -1510,22 +1789,6 @@ export interface TapiocaOptionBroker extends BaseContract {
       _tapOracleData: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    singularityGauges(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "singularityGauges(uint256,uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    tOLP(overrides?: CallOverrides): Promise<string>;
-
-    "tOLP()"(overrides?: CallOverrides): Promise<string>;
 
     tapOFT(overrides?: CallOverrides): Promise<string>;
 
@@ -1553,79 +1816,41 @@ export interface TapiocaOptionBroker extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    twAML(
-      arg0: PromiseOrValue<BigNumberish>,
+    userParticipation(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        totalParticipants: BigNumber;
-        averageMagnitude: BigNumber;
-        totalDeposited: BigNumber;
-        cumulative: BigNumber;
-      }
-    >;
+    ): Promise<boolean>;
 
-    "twAML(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
+    "userParticipation(address,uint256)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        totalParticipants: BigNumber;
-        averageMagnitude: BigNumber;
-        totalDeposited: BigNumber;
-        cumulative: BigNumber;
-      }
-    >;
+    ): Promise<boolean>;
   };
 
   filters: {
-    "AMLDivergence(uint256,uint256,uint256,uint256)"(
-      epoch?: PromiseOrValue<BigNumberish> | null,
-      cumulative?: null,
-      averageMagnitude?: null,
-      totalParticipants?: null
-    ): AMLDivergenceEventFilter;
-    AMLDivergence(
-      epoch?: PromiseOrValue<BigNumberish> | null,
-      cumulative?: null,
-      averageMagnitude?: null,
-      totalParticipants?: null
-    ): AMLDivergenceEventFilter;
-
     "ExerciseOption(uint256,address,address,uint256,uint256)"(
       epoch?: PromiseOrValue<BigNumberish> | null,
       to?: PromiseOrValue<string> | null,
       paymentToken?: PromiseOrValue<string> | null,
-      oTapTokenID?: null,
+      aoTapTokenID?: null,
       amount?: null
     ): ExerciseOptionEventFilter;
     ExerciseOption(
       epoch?: PromiseOrValue<BigNumberish> | null,
       to?: PromiseOrValue<string> | null,
       paymentToken?: PromiseOrValue<string> | null,
-      oTapTokenID?: null,
+      aoTapTokenID?: null,
       amount?: null
     ): ExerciseOptionEventFilter;
 
-    "ExitPosition(uint256,uint256,uint256)"(
+    "NewEpoch(uint256,uint256)"(
       epoch?: PromiseOrValue<BigNumberish> | null,
-      tokenId?: PromiseOrValue<BigNumberish> | null,
-      amount?: null
-    ): ExitPositionEventFilter;
-    ExitPosition(
-      epoch?: PromiseOrValue<BigNumberish> | null,
-      tokenId?: PromiseOrValue<BigNumberish> | null,
-      amount?: null
-    ): ExitPositionEventFilter;
-
-    "NewEpoch(uint256,uint256,uint256)"(
-      epoch?: PromiseOrValue<BigNumberish> | null,
-      extractedTAP?: null,
       epochTAPValuation?: null
     ): NewEpochEventFilter;
     NewEpoch(
       epoch?: PromiseOrValue<BigNumberish> | null,
-      extractedTAP?: null,
       epochTAPValuation?: null
     ): NewEpochEventFilter;
 
@@ -1638,19 +1863,13 @@ export interface TapiocaOptionBroker extends BaseContract {
       newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
 
-    "Participate(uint256,uint256,uint256,tuple,uint256)"(
+    "Participate(uint256,uint256)"(
       epoch?: PromiseOrValue<BigNumberish> | null,
-      sglAssetID?: PromiseOrValue<BigNumberish> | null,
-      totalDeposited?: null,
-      lock?: null,
-      discount?: null
+      aoTAPTokenID?: null
     ): ParticipateEventFilter;
     Participate(
       epoch?: PromiseOrValue<BigNumberish> | null,
-      sglAssetID?: PromiseOrValue<BigNumberish> | null,
-      totalDeposited?: null,
-      lock?: null,
-      discount?: null
+      aoTAPTokenID?: null
     ): ParticipateEventFilter;
 
     "Paused(address)"(account?: null): PausedEventFilter;
@@ -1682,6 +1901,70 @@ export interface TapiocaOptionBroker extends BaseContract {
 
     "EPOCH_DURATION()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    PCNFT(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "PCNFT()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    PHASE_1_DISCOUNT(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "PHASE_1_DISCOUNT()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    PHASE_2_AMOUNT_PER_USER(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "PHASE_2_AMOUNT_PER_USER(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    PHASE_2_DISCOUNT_PER_USER(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "PHASE_2_DISCOUNT_PER_USER(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    PHASE_3_AMOUNT_PER_USER(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "PHASE_3_AMOUNT_PER_USER()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    PHASE_3_DISCOUNT(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "PHASE_3_DISCOUNT()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    PHASE_4_DISCOUNT(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "PHASE_4_DISCOUNT()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    aoTAP(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "aoTAP()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    aoTAPBrokerClaim(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "aoTAPBrokerClaim()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    aoTAPCalls(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "aoTAPCalls(uint256,uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     claimOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -1709,38 +1992,28 @@ export interface TapiocaOptionBroker extends BaseContract {
     "epochTAPValuation()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     exerciseOption(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
+      _aoTAPTokenID: PromiseOrValue<BigNumberish>,
       _paymentToken: PromiseOrValue<string>,
       _tapAmount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "exerciseOption(uint256,address,uint256)"(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
+      _aoTAPTokenID: PromiseOrValue<BigNumberish>,
       _paymentToken: PromiseOrValue<string>,
       _tapAmount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    exitPosition(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "exitPosition(uint256)"(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     getOTCDealDetails(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
+      _aoTAPTokenID: PromiseOrValue<BigNumberish>,
       _paymentToken: PromiseOrValue<string>,
       _tapAmount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getOTCDealDetails(uint256,address,uint256)"(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
+      _aoTAPTokenID: PromiseOrValue<BigNumberish>,
       _paymentToken: PromiseOrValue<string>,
       _tapAmount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1758,51 +2031,17 @@ export interface TapiocaOptionBroker extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    oTAP(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "oTAP()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    oTAPBrokerClaim(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "oTAPBrokerClaim()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    oTAPCalls(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "oTAPCalls(uint256,uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    participants(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "participants(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     participate(
-      _tOLPTokenID: PromiseOrValue<BigNumberish>,
+      _data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "participate(uint256)"(
-      _tOLPTokenID: PromiseOrValue<BigNumberish>,
+    "participate(bytes)"(
+      _data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1828,6 +2067,50 @@ export interface TapiocaOptionBroker extends BaseContract {
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    phase1Users(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "phase1Users(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    phase2MerkleRoots(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "phase2MerkleRoots(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    phase4Users(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "phase4Users(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    registerUserForPhase(
+      _phase: PromiseOrValue<BigNumberish>,
+      _users: PromiseOrValue<string>[],
+      _amounts: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "registerUserForPhase(uint256,address[],uint256[])"(
+      _phase: PromiseOrValue<BigNumberish>,
+      _users: PromiseOrValue<string>[],
+      _amounts: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     setPaymentToken(
       _paymentToken: PromiseOrValue<string>,
       _oracle: PromiseOrValue<string>,
@@ -1852,6 +2135,26 @@ export interface TapiocaOptionBroker extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    setPhase2MerkleRoots(
+      _merkleRoots: [
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>
+      ],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setPhase2MerkleRoots(bytes32[4])"(
+      _merkleRoots: [
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>
+      ],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     setTapOracle(
       _tapOracle: PromiseOrValue<string>,
       _tapOracleData: PromiseOrValue<BytesLike>,
@@ -1863,22 +2166,6 @@ export interface TapiocaOptionBroker extends BaseContract {
       _tapOracleData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
-
-    singularityGauges(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "singularityGauges(uint256,uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    tOLP(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "tOLP()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     tapOFT(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1906,13 +2193,15 @@ export interface TapiocaOptionBroker extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    twAML(
-      arg0: PromiseOrValue<BigNumberish>,
+    userParticipation(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "twAML(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
+    "userParticipation(address,uint256)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
@@ -1921,6 +2210,80 @@ export interface TapiocaOptionBroker extends BaseContract {
     EPOCH_DURATION(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "EPOCH_DURATION()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    PCNFT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "PCNFT()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    PHASE_1_DISCOUNT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "PHASE_1_DISCOUNT()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    PHASE_2_AMOUNT_PER_USER(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "PHASE_2_AMOUNT_PER_USER(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    PHASE_2_DISCOUNT_PER_USER(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "PHASE_2_DISCOUNT_PER_USER(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    PHASE_3_AMOUNT_PER_USER(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "PHASE_3_AMOUNT_PER_USER()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    PHASE_3_DISCOUNT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "PHASE_3_DISCOUNT()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    PHASE_4_DISCOUNT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "PHASE_4_DISCOUNT()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    aoTAP(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "aoTAP()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    aoTAPBrokerClaim(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "aoTAPBrokerClaim()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    aoTAPCalls(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "aoTAPCalls(uint256,uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1953,38 +2316,28 @@ export interface TapiocaOptionBroker extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     exerciseOption(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
+      _aoTAPTokenID: PromiseOrValue<BigNumberish>,
       _paymentToken: PromiseOrValue<string>,
       _tapAmount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "exerciseOption(uint256,address,uint256)"(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
+      _aoTAPTokenID: PromiseOrValue<BigNumberish>,
       _paymentToken: PromiseOrValue<string>,
       _tapAmount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    exitPosition(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "exitPosition(uint256)"(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     getOTCDealDetails(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
+      _aoTAPTokenID: PromiseOrValue<BigNumberish>,
       _paymentToken: PromiseOrValue<string>,
       _tapAmount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "getOTCDealDetails(uint256,address,uint256)"(
-      _oTAPTokenID: PromiseOrValue<BigNumberish>,
+      _aoTAPTokenID: PromiseOrValue<BigNumberish>,
       _paymentToken: PromiseOrValue<string>,
       _tapAmount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -2004,51 +2357,17 @@ export interface TapiocaOptionBroker extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    oTAP(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "oTAP()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    oTAPBrokerClaim(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "oTAPBrokerClaim()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    oTAPCalls(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "oTAPCalls(uint256,uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    participants(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "participants(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     participate(
-      _tOLPTokenID: PromiseOrValue<BigNumberish>,
+      _data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "participate(uint256)"(
-      _tOLPTokenID: PromiseOrValue<BigNumberish>,
+    "participate(bytes)"(
+      _data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -2078,6 +2397,50 @@ export interface TapiocaOptionBroker extends BaseContract {
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    phase1Users(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "phase1Users(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    phase2MerkleRoots(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "phase2MerkleRoots(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    phase4Users(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "phase4Users(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    registerUserForPhase(
+      _phase: PromiseOrValue<BigNumberish>,
+      _users: PromiseOrValue<string>[],
+      _amounts: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "registerUserForPhase(uint256,address[],uint256[])"(
+      _phase: PromiseOrValue<BigNumberish>,
+      _users: PromiseOrValue<string>[],
+      _amounts: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     setPaymentToken(
       _paymentToken: PromiseOrValue<string>,
       _oracle: PromiseOrValue<string>,
@@ -2102,6 +2465,26 @@ export interface TapiocaOptionBroker extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    setPhase2MerkleRoots(
+      _merkleRoots: [
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>
+      ],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setPhase2MerkleRoots(bytes32[4])"(
+      _merkleRoots: [
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>
+      ],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     setTapOracle(
       _tapOracle: PromiseOrValue<string>,
       _tapOracleData: PromiseOrValue<BytesLike>,
@@ -2113,22 +2496,6 @@ export interface TapiocaOptionBroker extends BaseContract {
       _tapOracleData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
-
-    singularityGauges(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "singularityGauges(uint256,uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    tOLP(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "tOLP()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     tapOFT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -2156,13 +2523,15 @@ export interface TapiocaOptionBroker extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    twAML(
-      arg0: PromiseOrValue<BigNumberish>,
+    userParticipation(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "twAML(uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
+    "userParticipation(address,uint256)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

@@ -3,6 +3,8 @@
 /* eslint-disable */
 import type * as governance from "./governance";
 export type { governance };
+import type * as optionAirdrop from "./option-airdrop";
+export type { optionAirdrop };
 import type * as options from "./options";
 export type { options };
 import type * as tokens from "./tokens";
@@ -11,12 +13,18 @@ export type { Vesting } from "./Vesting";
 export * as factories from "./factories";
 export type { TwTAP } from "./governance/twTAP.sol/TwTAP";
 export { TwTAP__factory } from "./factories/governance/twTAP.sol/TwTAP__factory";
+export type { AirdropBroker } from "./option-airdrop/AirdropBroker";
+export { AirdropBroker__factory } from "./factories/option-airdrop/AirdropBroker__factory";
+export type { AOTAP } from "./option-airdrop/aoTAP.sol/AOTAP";
+export { AOTAP__factory } from "./factories/option-airdrop/aoTAP.sol/AOTAP__factory";
 export type { OTAP } from "./options/oTAP.sol/OTAP";
 export { OTAP__factory } from "./factories/options/oTAP.sol/OTAP__factory";
 export type { TapiocaOptionBroker } from "./options/TapiocaOptionBroker";
 export { TapiocaOptionBroker__factory } from "./factories/options/TapiocaOptionBroker__factory";
 export type { TapiocaOptionLiquidityProvision } from "./options/TapiocaOptionLiquidityProvision";
 export { TapiocaOptionLiquidityProvision__factory } from "./factories/options/TapiocaOptionLiquidityProvision__factory";
+export type { BaseTapOFT } from "./tokens/BaseTapOFT";
+export { BaseTapOFT__factory } from "./factories/tokens/BaseTapOFT__factory";
 export type { LTap } from "./tokens/LTap";
 export { LTap__factory } from "./factories/tokens/LTap__factory";
 export type { TapOFT } from "./tokens/TapOFT";
