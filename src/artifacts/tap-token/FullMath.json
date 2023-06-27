@@ -1,6 +1,6 @@
 {
   "_format": "hh-sol-artifact-1",
-  "contractName": "TWAML",
+  "contractName": "FullMath",
   "sourceName": "contracts/twAML.sol",
   "abi": [],
   "bytecode": "0x",

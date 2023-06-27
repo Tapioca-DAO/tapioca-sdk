@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as governance from "./governance";
+export * as optionAirdrop from "./option-airdrop";
 export * as options from "./options";
 export * as tokens from "./tokens";
 export { Vesting__factory } from "./Vesting__factory";
