@@ -241,6 +241,18 @@ export declare namespace ITapiocaOptionLiquidityProvision {
     lockDuration: BigNumber;
     amount: BigNumber;
   };
+
+  export type IOptionsUnlockDataStruct = {
+    unlock: PromiseOrValue<boolean>;
+    target: PromiseOrValue<string>;
+    tokenId: PromiseOrValue<BigNumberish>;
+  };
+
+  export type IOptionsUnlockDataStructOutput = [boolean, string, BigNumber] & {
+    unlock: boolean;
+    target: string;
+    tokenId: BigNumber;
+  };
 }
 
 export declare namespace ITapiocaOptionsBroker {
@@ -252,6 +264,91 @@ export declare namespace ITapiocaOptionsBroker {
   export type IOptionsParticipateDataStructOutput = [boolean, string] & {
     participate: boolean;
     target: string;
+  };
+
+  export type IOptionsExitDataStruct = {
+    exit: PromiseOrValue<boolean>;
+    target: PromiseOrValue<string>;
+    oTAPTokenID: PromiseOrValue<BigNumberish>;
+  };
+
+  export type IOptionsExitDataStructOutput = [boolean, string, BigNumber] & {
+    exit: boolean;
+    target: string;
+    oTAPTokenID: BigNumber;
+  };
+}
+
+export declare namespace IUSDOBase {
+  export type IRemoveAndRepayExternalContractsStruct = {
+    magnetar: PromiseOrValue<string>;
+    singularity: PromiseOrValue<string>;
+    bigBang: PromiseOrValue<string>;
+  };
+
+  export type IRemoveAndRepayExternalContractsStructOutput = [
+    string,
+    string,
+    string
+  ] & { magnetar: string; singularity: string; bigBang: string };
+
+  export type IWithdrawParamsStruct = {
+    withdraw: PromiseOrValue<boolean>;
+    withdrawLzFeeAmount: PromiseOrValue<BigNumberish>;
+    withdrawOnOtherChain: PromiseOrValue<boolean>;
+    withdrawLzChainId: PromiseOrValue<BigNumberish>;
+    withdrawAdapterParams: PromiseOrValue<BytesLike>;
+  };
+
+  export type IWithdrawParamsStructOutput = [
+    boolean,
+    BigNumber,
+    boolean,
+    number,
+    string
+  ] & {
+    withdraw: boolean;
+    withdrawLzFeeAmount: BigNumber;
+    withdrawOnOtherChain: boolean;
+    withdrawLzChainId: number;
+    withdrawAdapterParams: string;
+  };
+
+  export type IRemoveAndRepayStruct = {
+    removeAssetFromSGL: PromiseOrValue<boolean>;
+    removeShare: PromiseOrValue<BigNumberish>;
+    repayAssetOnBB: PromiseOrValue<boolean>;
+    repayAmount: PromiseOrValue<BigNumberish>;
+    removeCollateralFromBB: PromiseOrValue<boolean>;
+    collateralShare: PromiseOrValue<BigNumberish>;
+    exitData: ITapiocaOptionsBroker.IOptionsExitDataStruct;
+    unlockData: ITapiocaOptionLiquidityProvision.IOptionsUnlockDataStruct;
+    assetWithdrawData: IUSDOBase.IWithdrawParamsStruct;
+    collateralWithdrawData: IUSDOBase.IWithdrawParamsStruct;
+  };
+
+  export type IRemoveAndRepayStructOutput = [
+    boolean,
+    BigNumber,
+    boolean,
+    BigNumber,
+    boolean,
+    BigNumber,
+    ITapiocaOptionsBroker.IOptionsExitDataStructOutput,
+    ITapiocaOptionLiquidityProvision.IOptionsUnlockDataStructOutput,
+    IUSDOBase.IWithdrawParamsStructOutput,
+    IUSDOBase.IWithdrawParamsStructOutput
+  ] & {
+    removeAssetFromSGL: boolean;
+    removeShare: BigNumber;
+    repayAssetOnBB: boolean;
+    repayAmount: BigNumber;
+    removeCollateralFromBB: boolean;
+    collateralShare: BigNumber;
+    exitData: ITapiocaOptionsBroker.IOptionsExitDataStructOutput;
+    unlockData: ITapiocaOptionLiquidityProvision.IOptionsUnlockDataStructOutput;
+    assetWithdrawData: IUSDOBase.IWithdrawParamsStructOutput;
+    collateralWithdrawData: IUSDOBase.IWithdrawParamsStructOutput;
   };
 }
 
@@ -287,7 +384,7 @@ export interface MagnetarV2Interface extends utils.Interface {
     "marketModule()": FunctionFragment;
     "mintAndLend(address,address,address,uint256,uint256,bool,bool)": FunctionFragment;
     "owner()": FunctionFragment;
-    "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)": FunctionFragment;
+    "removeAssetAndRepay(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)))": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "singularityMarketInfo(address,address[])": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
@@ -329,7 +426,7 @@ export interface MagnetarV2Interface extends utils.Interface {
       | "owner"
       | "owner()"
       | "removeAssetAndRepay"
-      | "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)"
+      | "removeAssetAndRepay(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)))"
       | "renounceOwnership"
       | "renounceOwnership()"
       | "singularityMarketInfo"
@@ -558,26 +655,16 @@ export interface MagnetarV2Interface extends utils.Interface {
     functionFragment: "removeAssetAndRepay",
     values: [
       PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<BytesLike>
+      IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+      IUSDOBase.IRemoveAndRepayStruct
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)",
+    functionFragment: "removeAssetAndRepay(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)))",
     values: [
       PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<BytesLike>
+      IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+      IUSDOBase.IRemoveAndRepayStruct
     ]
   ): string;
   encodeFunctionData(
@@ -759,7 +846,7 @@ export interface MagnetarV2Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)",
+    functionFragment: "removeAssetAndRepay(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1091,26 +1178,16 @@ export interface MagnetarV2 extends BaseContract {
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
 
     removeAssetAndRepay(
-      singularity: PromiseOrValue<string>,
-      bingBang: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
-      removeShare: PromiseOrValue<BigNumberish>,
-      repayAmount: PromiseOrValue<BigNumberish>,
-      collateralShare: PromiseOrValue<BigNumberish>,
-      withdraw: PromiseOrValue<boolean>,
-      withdrawData: PromiseOrValue<BytesLike>,
+      externalData: IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+      removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)"(
-      singularity: PromiseOrValue<string>,
-      bingBang: PromiseOrValue<string>,
+    "removeAssetAndRepay(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)))"(
       user: PromiseOrValue<string>,
-      removeShare: PromiseOrValue<BigNumberish>,
-      repayAmount: PromiseOrValue<BigNumberish>,
-      collateralShare: PromiseOrValue<BigNumberish>,
-      withdraw: PromiseOrValue<boolean>,
-      withdrawData: PromiseOrValue<BytesLike>,
+      externalData: IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+      removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1404,26 +1481,16 @@ export interface MagnetarV2 extends BaseContract {
   "owner()"(overrides?: CallOverrides): Promise<string>;
 
   removeAssetAndRepay(
-    singularity: PromiseOrValue<string>,
-    bingBang: PromiseOrValue<string>,
     user: PromiseOrValue<string>,
-    removeShare: PromiseOrValue<BigNumberish>,
-    repayAmount: PromiseOrValue<BigNumberish>,
-    collateralShare: PromiseOrValue<BigNumberish>,
-    withdraw: PromiseOrValue<boolean>,
-    withdrawData: PromiseOrValue<BytesLike>,
+    externalData: IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+    removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)"(
-    singularity: PromiseOrValue<string>,
-    bingBang: PromiseOrValue<string>,
+  "removeAssetAndRepay(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)))"(
     user: PromiseOrValue<string>,
-    removeShare: PromiseOrValue<BigNumberish>,
-    repayAmount: PromiseOrValue<BigNumberish>,
-    collateralShare: PromiseOrValue<BigNumberish>,
-    withdraw: PromiseOrValue<boolean>,
-    withdrawData: PromiseOrValue<BytesLike>,
+    externalData: IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+    removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1717,26 +1784,16 @@ export interface MagnetarV2 extends BaseContract {
     "owner()"(overrides?: CallOverrides): Promise<string>;
 
     removeAssetAndRepay(
-      singularity: PromiseOrValue<string>,
-      bingBang: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
-      removeShare: PromiseOrValue<BigNumberish>,
-      repayAmount: PromiseOrValue<BigNumberish>,
-      collateralShare: PromiseOrValue<BigNumberish>,
-      withdraw: PromiseOrValue<boolean>,
-      withdrawData: PromiseOrValue<BytesLike>,
+      externalData: IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+      removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)"(
-      singularity: PromiseOrValue<string>,
-      bingBang: PromiseOrValue<string>,
+    "removeAssetAndRepay(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)))"(
       user: PromiseOrValue<string>,
-      removeShare: PromiseOrValue<BigNumberish>,
-      repayAmount: PromiseOrValue<BigNumberish>,
-      collateralShare: PromiseOrValue<BigNumberish>,
-      withdraw: PromiseOrValue<boolean>,
-      withdrawData: PromiseOrValue<BytesLike>,
+      externalData: IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+      removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -2049,26 +2106,16 @@ export interface MagnetarV2 extends BaseContract {
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     removeAssetAndRepay(
-      singularity: PromiseOrValue<string>,
-      bingBang: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
-      removeShare: PromiseOrValue<BigNumberish>,
-      repayAmount: PromiseOrValue<BigNumberish>,
-      collateralShare: PromiseOrValue<BigNumberish>,
-      withdraw: PromiseOrValue<boolean>,
-      withdrawData: PromiseOrValue<BytesLike>,
+      externalData: IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+      removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)"(
-      singularity: PromiseOrValue<string>,
-      bingBang: PromiseOrValue<string>,
+    "removeAssetAndRepay(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)))"(
       user: PromiseOrValue<string>,
-      removeShare: PromiseOrValue<BigNumberish>,
-      repayAmount: PromiseOrValue<BigNumberish>,
-      collateralShare: PromiseOrValue<BigNumberish>,
-      withdraw: PromiseOrValue<boolean>,
-      withdrawData: PromiseOrValue<BytesLike>,
+      externalData: IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+      removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -2363,26 +2410,16 @@ export interface MagnetarV2 extends BaseContract {
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     removeAssetAndRepay(
-      singularity: PromiseOrValue<string>,
-      bingBang: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
-      removeShare: PromiseOrValue<BigNumberish>,
-      repayAmount: PromiseOrValue<BigNumberish>,
-      collateralShare: PromiseOrValue<BigNumberish>,
-      withdraw: PromiseOrValue<boolean>,
-      withdrawData: PromiseOrValue<BytesLike>,
+      externalData: IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+      removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "removeAssetAndRepay(address,address,address,uint256,uint256,uint256,bool,bytes)"(
-      singularity: PromiseOrValue<string>,
-      bingBang: PromiseOrValue<string>,
+    "removeAssetAndRepay(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)))"(
       user: PromiseOrValue<string>,
-      removeShare: PromiseOrValue<BigNumberish>,
-      repayAmount: PromiseOrValue<BigNumberish>,
-      collateralShare: PromiseOrValue<BigNumberish>,
-      withdraw: PromiseOrValue<boolean>,
-      withdrawData: PromiseOrValue<BytesLike>,
+      externalData: IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+      removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

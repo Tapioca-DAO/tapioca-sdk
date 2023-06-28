@@ -47,6 +47,18 @@ export declare namespace ITapiocaOptionLiquidityProvision {
     lockDuration: BigNumber;
     amount: BigNumber;
   };
+
+  export type IOptionsUnlockDataStruct = {
+    unlock: PromiseOrValue<boolean>;
+    target: PromiseOrValue<string>;
+    tokenId: PromiseOrValue<BigNumberish>;
+  };
+
+  export type IOptionsUnlockDataStructOutput = [boolean, string, BigNumber] & {
+    unlock: boolean;
+    target: string;
+    tokenId: BigNumber;
+  };
 }
 
 export declare namespace ITapiocaOptionsBroker {
@@ -59,10 +71,22 @@ export declare namespace ITapiocaOptionsBroker {
     participate: boolean;
     target: string;
   };
+
+  export type IOptionsExitDataStruct = {
+    exit: PromiseOrValue<boolean>;
+    target: PromiseOrValue<string>;
+    oTAPTokenID: PromiseOrValue<BigNumberish>;
+  };
+
+  export type IOptionsExitDataStructOutput = [boolean, string, BigNumber] & {
+    exit: boolean;
+    target: string;
+    oTAPTokenID: BigNumber;
+  };
 }
 
 export declare namespace IUSDOBase {
-  export type ILendParamsStruct = {
+  export type ILendOrRepayParamsStruct = {
     repay: PromiseOrValue<boolean>;
     depositAmount: PromiseOrValue<BigNumberish>;
     repayAmount: PromiseOrValue<BigNumberish>;
@@ -74,7 +98,7 @@ export declare namespace IUSDOBase {
     participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct;
   };
 
-  export type ILendParamsStructOutput = [
+  export type ILendOrRepayParamsStructOutput = [
     boolean,
     BigNumber,
     BigNumber,
@@ -136,26 +160,75 @@ export declare namespace IUSDOBase {
     s: string;
   };
 
-  export type ISendOptionsStruct = {
-    extraGasLimit: PromiseOrValue<BigNumberish>;
-    zroPaymentAddress: PromiseOrValue<string>;
+  export type IRemoveAndRepayExternalContractsStruct = {
+    magnetar: PromiseOrValue<string>;
+    singularity: PromiseOrValue<string>;
+    bigBang: PromiseOrValue<string>;
   };
 
-  export type ISendOptionsStructOutput = [BigNumber, string] & {
-    extraGasLimit: BigNumber;
-    zroPaymentAddress: string;
+  export type IRemoveAndRepayExternalContractsStructOutput = [
+    string,
+    string,
+    string
+  ] & { magnetar: string; singularity: string; bigBang: string };
+
+  export type IWithdrawParamsStruct = {
+    withdraw: PromiseOrValue<boolean>;
+    withdrawLzFeeAmount: PromiseOrValue<BigNumberish>;
+    withdrawOnOtherChain: PromiseOrValue<boolean>;
+    withdrawLzChainId: PromiseOrValue<BigNumberish>;
+    withdrawAdapterParams: PromiseOrValue<BytesLike>;
   };
 
-  export type IRemoveParamsStruct = {
-    share: PromiseOrValue<BigNumberish>;
-    marketHelper: PromiseOrValue<string>;
-    market: PromiseOrValue<string>;
+  export type IWithdrawParamsStructOutput = [
+    boolean,
+    BigNumber,
+    boolean,
+    number,
+    string
+  ] & {
+    withdraw: boolean;
+    withdrawLzFeeAmount: BigNumber;
+    withdrawOnOtherChain: boolean;
+    withdrawLzChainId: number;
+    withdrawAdapterParams: string;
   };
 
-  export type IRemoveParamsStructOutput = [BigNumber, string, string] & {
-    share: BigNumber;
-    marketHelper: string;
-    market: string;
+  export type IRemoveAndRepayStruct = {
+    removeAssetFromSGL: PromiseOrValue<boolean>;
+    removeShare: PromiseOrValue<BigNumberish>;
+    repayAssetOnBB: PromiseOrValue<boolean>;
+    repayAmount: PromiseOrValue<BigNumberish>;
+    removeCollateralFromBB: PromiseOrValue<boolean>;
+    collateralShare: PromiseOrValue<BigNumberish>;
+    exitData: ITapiocaOptionsBroker.IOptionsExitDataStruct;
+    unlockData: ITapiocaOptionLiquidityProvision.IOptionsUnlockDataStruct;
+    assetWithdrawData: IUSDOBase.IWithdrawParamsStruct;
+    collateralWithdrawData: IUSDOBase.IWithdrawParamsStruct;
+  };
+
+  export type IRemoveAndRepayStructOutput = [
+    boolean,
+    BigNumber,
+    boolean,
+    BigNumber,
+    boolean,
+    BigNumber,
+    ITapiocaOptionsBroker.IOptionsExitDataStructOutput,
+    ITapiocaOptionLiquidityProvision.IOptionsUnlockDataStructOutput,
+    IUSDOBase.IWithdrawParamsStructOutput,
+    IUSDOBase.IWithdrawParamsStructOutput
+  ] & {
+    removeAssetFromSGL: boolean;
+    removeShare: BigNumber;
+    repayAssetOnBB: boolean;
+    repayAmount: BigNumber;
+    removeCollateralFromBB: boolean;
+    collateralShare: BigNumber;
+    exitData: ITapiocaOptionsBroker.IOptionsExitDataStructOutput;
+    unlockData: ITapiocaOptionLiquidityProvision.IOptionsUnlockDataStructOutput;
+    assetWithdrawData: IUSDOBase.IWithdrawParamsStructOutput;
+    collateralWithdrawData: IUSDOBase.IWithdrawParamsStructOutput;
   };
 }
 
@@ -236,7 +309,7 @@ export interface USDOMarketModuleInterface extends utils.Interface {
     "payloadSizeLimitLookup(uint16)": FunctionFragment;
     "precrime()": FunctionFragment;
     "remove(bytes)": FunctionFragment;
-    "removeAsset(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)": FunctionFragment;
+    "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
@@ -341,7 +414,7 @@ export interface USDOMarketModuleInterface extends utils.Interface {
       | "remove"
       | "remove(bytes)"
       | "removeAsset"
-      | "removeAsset(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"
+      | "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "renounceOwnership"
       | "renounceOwnership()"
       | "retryMessage"
@@ -673,7 +746,7 @@ export interface USDOMarketModuleInterface extends utils.Interface {
     functionFragment: "lendInternal",
     values: [
       PromiseOrValue<string>,
-      IUSDOBase.ILendParamsStruct,
+      IUSDOBase.ILendOrRepayParamsStruct,
       IUSDOBase.IApprovalStruct[],
       ITapiocaOFT.IWithdrawParamsStruct
     ]
@@ -682,7 +755,7 @@ export interface USDOMarketModuleInterface extends utils.Interface {
     functionFragment: "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128),(bool,address)),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes))",
     values: [
       PromiseOrValue<string>,
-      IUSDOBase.ILendParamsStruct,
+      IUSDOBase.ILendOrRepayParamsStruct,
       IUSDOBase.IApprovalStruct[],
       ITapiocaOFT.IWithdrawParamsStruct
     ]
@@ -780,24 +853,24 @@ export interface USDOMarketModuleInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
-      ITapiocaOFT.IWithdrawParamsStruct,
-      IUSDOBase.ISendOptionsStruct,
-      IUSDOBase.IRemoveParamsStruct,
-      IUSDOBase.IApprovalStruct[],
-      PromiseOrValue<BytesLike>
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>,
+      IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+      IUSDOBase.IRemoveAndRepayStruct,
+      IUSDOBase.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "removeAsset(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
+    functionFragment: "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
-      ITapiocaOFT.IWithdrawParamsStruct,
-      IUSDOBase.ISendOptionsStruct,
-      IUSDOBase.IRemoveParamsStruct,
-      IUSDOBase.IApprovalStruct[],
-      PromiseOrValue<BytesLike>
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>,
+      IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+      IUSDOBase.IRemoveAndRepayStruct,
+      IUSDOBase.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
@@ -857,7 +930,7 @@ export interface USDOMarketModuleInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
-      IUSDOBase.ILendParamsStruct,
+      IUSDOBase.ILendOrRepayParamsStruct,
       IUSDOBase.IApprovalStruct[],
       ITapiocaOFT.IWithdrawParamsStruct,
       PromiseOrValue<BytesLike>
@@ -870,7 +943,7 @@ export interface USDOMarketModuleInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
-      IUSDOBase.ILendParamsStruct,
+      IUSDOBase.ILendOrRepayParamsStruct,
       IUSDOBase.IApprovalStruct[],
       ITapiocaOFT.IWithdrawParamsStruct,
       PromiseOrValue<BytesLike>
@@ -1309,7 +1382,7 @@ export interface USDOMarketModuleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "removeAsset(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
+    functionFragment: "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2162,7 +2235,7 @@ export interface USDOMarketModule extends BaseContract {
 
     lendInternal(
       to: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendParamsStruct,
+      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -2170,7 +2243,7 @@ export interface USDOMarketModule extends BaseContract {
 
     "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128),(bool,address)),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes))"(
       to: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendParamsStruct,
+      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -2268,23 +2341,23 @@ export interface USDOMarketModule extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: IUSDOBase.ISendOptionsStruct,
-      removeParams: IUSDOBase.IRemoveParamsStruct,
-      approvals: IUSDOBase.IApprovalStruct[],
+      zroPaymentAddress: PromiseOrValue<string>,
       adapterParams: PromiseOrValue<BytesLike>,
+      externalData: IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+      removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "removeAsset(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+    "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: IUSDOBase.ISendOptionsStruct,
-      removeParams: IUSDOBase.IRemoveParamsStruct,
-      approvals: IUSDOBase.IApprovalStruct[],
+      zroPaymentAddress: PromiseOrValue<string>,
       adapterParams: PromiseOrValue<BytesLike>,
+      externalData: IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+      removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2339,7 +2412,7 @@ export interface USDOMarketModule extends BaseContract {
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendParamsStruct,
+      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
       adapterParams: PromiseOrValue<BytesLike>,
@@ -2351,7 +2424,7 @@ export interface USDOMarketModule extends BaseContract {
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendParamsStruct,
+      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
       adapterParams: PromiseOrValue<BytesLike>,
@@ -2847,7 +2920,7 @@ export interface USDOMarketModule extends BaseContract {
 
   lendInternal(
     to: PromiseOrValue<string>,
-    lendParams: IUSDOBase.ILendParamsStruct,
+    lendParams: IUSDOBase.ILendOrRepayParamsStruct,
     approvals: IUSDOBase.IApprovalStruct[],
     withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -2855,7 +2928,7 @@ export interface USDOMarketModule extends BaseContract {
 
   "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128),(bool,address)),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes))"(
     to: PromiseOrValue<string>,
-    lendParams: IUSDOBase.ILendParamsStruct,
+    lendParams: IUSDOBase.ILendOrRepayParamsStruct,
     approvals: IUSDOBase.IApprovalStruct[],
     withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -2953,23 +3026,23 @@ export interface USDOMarketModule extends BaseContract {
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
-    withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-    options: IUSDOBase.ISendOptionsStruct,
-    removeParams: IUSDOBase.IRemoveParamsStruct,
-    approvals: IUSDOBase.IApprovalStruct[],
+    zroPaymentAddress: PromiseOrValue<string>,
     adapterParams: PromiseOrValue<BytesLike>,
+    externalData: IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+    removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
+    approvals: IUSDOBase.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "removeAsset(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+  "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
-    withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-    options: IUSDOBase.ISendOptionsStruct,
-    removeParams: IUSDOBase.IRemoveParamsStruct,
-    approvals: IUSDOBase.IApprovalStruct[],
+    zroPaymentAddress: PromiseOrValue<string>,
     adapterParams: PromiseOrValue<BytesLike>,
+    externalData: IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+    removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
+    approvals: IUSDOBase.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3024,7 +3097,7 @@ export interface USDOMarketModule extends BaseContract {
     _to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
     zroPaymentAddress: PromiseOrValue<string>,
-    lendParams: IUSDOBase.ILendParamsStruct,
+    lendParams: IUSDOBase.ILendOrRepayParamsStruct,
     approvals: IUSDOBase.IApprovalStruct[],
     withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
     adapterParams: PromiseOrValue<BytesLike>,
@@ -3036,7 +3109,7 @@ export interface USDOMarketModule extends BaseContract {
     _to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
     zroPaymentAddress: PromiseOrValue<string>,
-    lendParams: IUSDOBase.ILendParamsStruct,
+    lendParams: IUSDOBase.ILendOrRepayParamsStruct,
     approvals: IUSDOBase.IApprovalStruct[],
     withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
     adapterParams: PromiseOrValue<BytesLike>,
@@ -3534,7 +3607,7 @@ export interface USDOMarketModule extends BaseContract {
 
     lendInternal(
       to: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendParamsStruct,
+      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
       overrides?: CallOverrides
@@ -3542,7 +3615,7 @@ export interface USDOMarketModule extends BaseContract {
 
     "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128),(bool,address)),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes))"(
       to: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendParamsStruct,
+      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
       overrides?: CallOverrides
@@ -3640,23 +3713,23 @@ export interface USDOMarketModule extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: IUSDOBase.ISendOptionsStruct,
-      removeParams: IUSDOBase.IRemoveParamsStruct,
-      approvals: IUSDOBase.IApprovalStruct[],
+      zroPaymentAddress: PromiseOrValue<string>,
       adapterParams: PromiseOrValue<BytesLike>,
+      externalData: IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+      removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "removeAsset(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+    "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: IUSDOBase.ISendOptionsStruct,
-      removeParams: IUSDOBase.IRemoveParamsStruct,
-      approvals: IUSDOBase.IApprovalStruct[],
+      zroPaymentAddress: PromiseOrValue<string>,
       adapterParams: PromiseOrValue<BytesLike>,
+      externalData: IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+      removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3707,7 +3780,7 @@ export interface USDOMarketModule extends BaseContract {
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendParamsStruct,
+      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
       adapterParams: PromiseOrValue<BytesLike>,
@@ -3719,7 +3792,7 @@ export interface USDOMarketModule extends BaseContract {
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendParamsStruct,
+      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
       adapterParams: PromiseOrValue<BytesLike>,
@@ -4421,7 +4494,7 @@ export interface USDOMarketModule extends BaseContract {
 
     lendInternal(
       to: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendParamsStruct,
+      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -4429,7 +4502,7 @@ export interface USDOMarketModule extends BaseContract {
 
     "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128),(bool,address)),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes))"(
       to: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendParamsStruct,
+      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -4527,23 +4600,23 @@ export interface USDOMarketModule extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: IUSDOBase.ISendOptionsStruct,
-      removeParams: IUSDOBase.IRemoveParamsStruct,
-      approvals: IUSDOBase.IApprovalStruct[],
+      zroPaymentAddress: PromiseOrValue<string>,
       adapterParams: PromiseOrValue<BytesLike>,
+      externalData: IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+      removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "removeAsset(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+    "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: IUSDOBase.ISendOptionsStruct,
-      removeParams: IUSDOBase.IRemoveParamsStruct,
-      approvals: IUSDOBase.IApprovalStruct[],
+      zroPaymentAddress: PromiseOrValue<string>,
       adapterParams: PromiseOrValue<BytesLike>,
+      externalData: IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+      removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4598,7 +4671,7 @@ export interface USDOMarketModule extends BaseContract {
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendParamsStruct,
+      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
       adapterParams: PromiseOrValue<BytesLike>,
@@ -4610,7 +4683,7 @@ export interface USDOMarketModule extends BaseContract {
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendParamsStruct,
+      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
       adapterParams: PromiseOrValue<BytesLike>,
@@ -5107,7 +5180,7 @@ export interface USDOMarketModule extends BaseContract {
 
     lendInternal(
       to: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendParamsStruct,
+      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -5115,7 +5188,7 @@ export interface USDOMarketModule extends BaseContract {
 
     "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128),(bool,address)),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes))"(
       to: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendParamsStruct,
+      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -5213,23 +5286,23 @@ export interface USDOMarketModule extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: IUSDOBase.ISendOptionsStruct,
-      removeParams: IUSDOBase.IRemoveParamsStruct,
-      approvals: IUSDOBase.IApprovalStruct[],
+      zroPaymentAddress: PromiseOrValue<string>,
       adapterParams: PromiseOrValue<BytesLike>,
+      externalData: IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+      removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "removeAsset(address,address,uint16,(bool,uint256,bool,uint16,bytes),(uint256,address),(uint256,address,address),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+    "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: IUSDOBase.ISendOptionsStruct,
-      removeParams: IUSDOBase.IRemoveParamsStruct,
-      approvals: IUSDOBase.IApprovalStruct[],
+      zroPaymentAddress: PromiseOrValue<string>,
       adapterParams: PromiseOrValue<BytesLike>,
+      externalData: IUSDOBase.IRemoveAndRepayExternalContractsStruct,
+      removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
+      approvals: IUSDOBase.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -5284,7 +5357,7 @@ export interface USDOMarketModule extends BaseContract {
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendParamsStruct,
+      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
       adapterParams: PromiseOrValue<BytesLike>,
@@ -5296,7 +5369,7 @@ export interface USDOMarketModule extends BaseContract {
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendParamsStruct,
+      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
       approvals: IUSDOBase.IApprovalStruct[],
       withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
       adapterParams: PromiseOrValue<BytesLike>,
