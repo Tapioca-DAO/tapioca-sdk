@@ -222,6 +222,39 @@ export declare namespace IBigBang {
   };
 }
 
+export declare namespace ITapiocaOptionLiquidityProvision {
+  export type IOptionsLockDataStruct = {
+    lock: PromiseOrValue<boolean>;
+    target: PromiseOrValue<string>;
+    lockDuration: PromiseOrValue<BigNumberish>;
+    amount: PromiseOrValue<BigNumberish>;
+  };
+
+  export type IOptionsLockDataStructOutput = [
+    boolean,
+    string,
+    BigNumber,
+    BigNumber
+  ] & {
+    lock: boolean;
+    target: string;
+    lockDuration: BigNumber;
+    amount: BigNumber;
+  };
+}
+
+export declare namespace ITapiocaOptionsBroker {
+  export type IOptionsParticipateDataStruct = {
+    participate: PromiseOrValue<boolean>;
+    target: PromiseOrValue<string>;
+  };
+
+  export type IOptionsParticipateDataStructOutput = [boolean, string] & {
+    participate: boolean;
+    target: string;
+  };
+}
+
 export declare namespace ISingularity {
   export type AccrueInfoStruct = {
     interestPerSecond: PromiseOrValue<BigNumberish>;
@@ -241,12 +274,13 @@ export interface MagnetarV2Interface extends utils.Interface {
     "bigBangMarketInfo(address,address[])": FunctionFragment;
     "burst((uint16,address,uint256,bool,bytes)[])": FunctionFragment;
     "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bool,bytes)": FunctionFragment;
-    "depositAndAddAsset(address,address,uint256,bool,bool)": FunctionFragment;
+    "depositAndAddAsset(address,address,uint256,bool,bool,(bool,address,uint128,uint128),(bool,address))": FunctionFragment;
     "depositAndRepay(address,address,uint256,uint256,bool,bool)": FunctionFragment;
     "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,bool,bool)": FunctionFragment;
     "getAmountForAssetFraction(address,uint256)": FunctionFragment;
     "getAmountForBorrowPart(address,uint256)": FunctionFragment;
     "getBorrowPartForAmount(address,uint256)": FunctionFragment;
+    "getCollateralAmountForShare(address,uint256)": FunctionFragment;
     "getCollateralSharesForBorrowPart(address,uint256,uint256,uint256)": FunctionFragment;
     "getFractionForAmount(address,uint256)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
@@ -269,7 +303,7 @@ export interface MagnetarV2Interface extends utils.Interface {
       | "depositAddCollateralAndBorrow"
       | "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bool,bytes)"
       | "depositAndAddAsset"
-      | "depositAndAddAsset(address,address,uint256,bool,bool)"
+      | "depositAndAddAsset(address,address,uint256,bool,bool,(bool,address,uint128,uint128),(bool,address))"
       | "depositAndRepay"
       | "depositAndRepay(address,address,uint256,uint256,bool,bool)"
       | "depositRepayAndRemoveCollateral"
@@ -280,6 +314,8 @@ export interface MagnetarV2Interface extends utils.Interface {
       | "getAmountForBorrowPart(address,uint256)"
       | "getBorrowPartForAmount"
       | "getBorrowPartForAmount(address,uint256)"
+      | "getCollateralAmountForShare"
+      | "getCollateralAmountForShare(address,uint256)"
       | "getCollateralSharesForBorrowPart"
       | "getCollateralSharesForBorrowPart(address,uint256,uint256,uint256)"
       | "getFractionForAmount"
@@ -353,17 +389,21 @@ export interface MagnetarV2Interface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<boolean>,
-      PromiseOrValue<boolean>
+      PromiseOrValue<boolean>,
+      ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
+      ITapiocaOptionsBroker.IOptionsParticipateDataStruct
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "depositAndAddAsset(address,address,uint256,bool,bool)",
+    functionFragment: "depositAndAddAsset(address,address,uint256,bool,bool,(bool,address,uint128,uint128),(bool,address))",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<boolean>,
-      PromiseOrValue<boolean>
+      PromiseOrValue<boolean>,
+      ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
+      ITapiocaOptionsBroker.IOptionsParticipateDataStruct
     ]
   ): string;
   encodeFunctionData(
@@ -436,6 +476,14 @@ export interface MagnetarV2Interface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getBorrowPartForAmount(address,uint256)",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCollateralAmountForShare",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCollateralAmountForShare(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
@@ -613,7 +661,7 @@ export interface MagnetarV2Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "depositAndAddAsset(address,address,uint256,bool,bool)",
+    functionFragment: "depositAndAddAsset(address,address,uint256,bool,bool,(bool,address,uint128,uint128),(bool,address))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -654,6 +702,14 @@ export interface MagnetarV2Interface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "getBorrowPartForAmount(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCollateralAmountForShare",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCollateralAmountForShare(address,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -856,15 +912,19 @@ export interface MagnetarV2 extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
+      lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
+      participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "depositAndAddAsset(address,address,uint256,bool,bool)"(
+    "depositAndAddAsset(address,address,uint256,bool,bool,(bool,address,uint128,uint128),(bool,address))"(
       singularity: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
+      lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
+      participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -947,6 +1007,18 @@ export interface MagnetarV2 extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { part: BigNumber }>;
+
+    getCollateralAmountForShare(
+      market: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { amount: BigNumber }>;
+
+    "getCollateralAmountForShare(address,uint256)"(
+      market: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { amount: BigNumber }>;
 
     getCollateralSharesForBorrowPart(
       market: PromiseOrValue<string>,
@@ -1153,15 +1225,19 @@ export interface MagnetarV2 extends BaseContract {
     amount: PromiseOrValue<BigNumberish>,
     deposit: PromiseOrValue<boolean>,
     extractFromSender: PromiseOrValue<boolean>,
+    lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
+    participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "depositAndAddAsset(address,address,uint256,bool,bool)"(
+  "depositAndAddAsset(address,address,uint256,bool,bool,(bool,address,uint128,uint128),(bool,address))"(
     singularity: PromiseOrValue<string>,
     user: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     deposit: PromiseOrValue<boolean>,
     extractFromSender: PromiseOrValue<boolean>,
+    lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
+    participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1242,6 +1318,18 @@ export interface MagnetarV2 extends BaseContract {
   "getBorrowPartForAmount(address,uint256)"(
     market: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  getCollateralAmountForShare(
+    market: PromiseOrValue<string>,
+    share: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "getCollateralAmountForShare(address,uint256)"(
+    market: PromiseOrValue<string>,
+    share: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -1450,15 +1538,19 @@ export interface MagnetarV2 extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
+      lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
+      participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "depositAndAddAsset(address,address,uint256,bool,bool)"(
+    "depositAndAddAsset(address,address,uint256,bool,bool,(bool,address,uint128,uint128),(bool,address))"(
       singularity: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
+      lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
+      participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1539,6 +1631,18 @@ export interface MagnetarV2 extends BaseContract {
     "getBorrowPartForAmount(address,uint256)"(
       market: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getCollateralAmountForShare(
+      market: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getCollateralAmountForShare(address,uint256)"(
+      market: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1766,15 +1870,19 @@ export interface MagnetarV2 extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
+      lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
+      participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "depositAndAddAsset(address,address,uint256,bool,bool)"(
+    "depositAndAddAsset(address,address,uint256,bool,bool,(bool,address,uint128,uint128),(bool,address))"(
       singularity: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
+      lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
+      participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1855,6 +1963,18 @@ export interface MagnetarV2 extends BaseContract {
     "getBorrowPartForAmount(address,uint256)"(
       market: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getCollateralAmountForShare(
+      market: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getCollateralAmountForShare(address,uint256)"(
+      market: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -2064,15 +2184,19 @@ export interface MagnetarV2 extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
+      lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
+      participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "depositAndAddAsset(address,address,uint256,bool,bool)"(
+    "depositAndAddAsset(address,address,uint256,bool,bool,(bool,address,uint128,uint128),(bool,address))"(
       singularity: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       deposit: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
+      lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
+      participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -2153,6 +2277,18 @@ export interface MagnetarV2 extends BaseContract {
     "getBorrowPartForAmount(address,uint256)"(
       market: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getCollateralAmountForShare(
+      market: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "getCollateralAmountForShare(address,uint256)"(
+      market: PromiseOrValue<string>,
+      share: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

@@ -209,52 +209,52 @@ export interface SGOracle extends BaseContract {
     "decimals()"(overrides?: CallOverrides): Promise<[number]>;
 
     get(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "get(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     name(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     "name(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     peek(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
     "peek(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
     peekSpot(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { rate: BigNumber }>;
 
     "peekSpot(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { rate: BigNumber }>;
 
     symbol(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     "symbol(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[string]>;
   };
@@ -280,52 +280,52 @@ export interface SGOracle extends BaseContract {
   "decimals()"(overrides?: CallOverrides): Promise<number>;
 
   get(
-    data: PromiseOrValue<BytesLike>,
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "get(bytes)"(
-    data: PromiseOrValue<BytesLike>,
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   name(
-    data: PromiseOrValue<BytesLike>,
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   "name(bytes)"(
-    data: PromiseOrValue<BytesLike>,
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   peek(
-    data: PromiseOrValue<BytesLike>,
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
   "peek(bytes)"(
-    data: PromiseOrValue<BytesLike>,
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
   peekSpot(
-    data: PromiseOrValue<BytesLike>,
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   "peekSpot(bytes)"(
-    data: PromiseOrValue<BytesLike>,
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   symbol(
-    data: PromiseOrValue<BytesLike>,
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   "symbol(bytes)"(
-    data: PromiseOrValue<BytesLike>,
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -351,52 +351,52 @@ export interface SGOracle extends BaseContract {
     "decimals()"(overrides?: CallOverrides): Promise<number>;
 
     get(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
     "get(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
     name(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     "name(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     peek(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
     "peek(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
     peekSpot(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "peekSpot(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     symbol(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     "symbol(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string>;
   };
@@ -425,52 +425,52 @@ export interface SGOracle extends BaseContract {
     "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     get(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "get(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     name(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "name(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     peek(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "peek(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     peekSpot(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "peekSpot(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     symbol(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "symbol(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
@@ -497,52 +497,52 @@ export interface SGOracle extends BaseContract {
     "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     get(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "get(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     name(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "name(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     peek(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "peek(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     peekSpot(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "peekSpot(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     symbol(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "symbol(bytes)"(
-      data: PromiseOrValue<BytesLike>,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
