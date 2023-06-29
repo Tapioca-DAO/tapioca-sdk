@@ -279,7 +279,7 @@ export declare namespace ITapiocaOptionsBroker {
   };
 }
 
-export declare namespace IUSDOBase {
+export declare namespace ICommonData {
   export type IWithdrawParamsStruct = {
     withdraw: PromiseOrValue<boolean>;
     withdrawLzFeeAmount: PromiseOrValue<BigNumberish>;
@@ -301,7 +301,9 @@ export declare namespace IUSDOBase {
     withdrawLzChainId: number;
     withdrawAdapterParams: string;
   };
+}
 
+export declare namespace IUSDOBase {
   export type IRemoveAndRepayExternalContractsStruct = {
     magnetar: PromiseOrValue<string>;
     singularity: PromiseOrValue<string>;
@@ -323,8 +325,8 @@ export declare namespace IUSDOBase {
     collateralShare: PromiseOrValue<BigNumberish>;
     exitData: ITapiocaOptionsBroker.IOptionsExitDataStruct;
     unlockData: ITapiocaOptionLiquidityProvision.IOptionsUnlockDataStruct;
-    assetWithdrawData: IUSDOBase.IWithdrawParamsStruct;
-    collateralWithdrawData: IUSDOBase.IWithdrawParamsStruct;
+    assetWithdrawData: ICommonData.IWithdrawParamsStruct;
+    collateralWithdrawData: ICommonData.IWithdrawParamsStruct;
   };
 
   export type IRemoveAndRepayStructOutput = [
@@ -336,8 +338,8 @@ export declare namespace IUSDOBase {
     BigNumber,
     ITapiocaOptionsBroker.IOptionsExitDataStructOutput,
     ITapiocaOptionLiquidityProvision.IOptionsUnlockDataStructOutput,
-    IUSDOBase.IWithdrawParamsStructOutput,
-    IUSDOBase.IWithdrawParamsStructOutput
+    ICommonData.IWithdrawParamsStructOutput,
+    ICommonData.IWithdrawParamsStructOutput
   ] & {
     removeAssetFromSGL: boolean;
     removeShare: BigNumber;
@@ -347,8 +349,8 @@ export declare namespace IUSDOBase {
     collateralShare: BigNumber;
     exitData: ITapiocaOptionsBroker.IOptionsExitDataStructOutput;
     unlockData: ITapiocaOptionLiquidityProvision.IOptionsUnlockDataStructOutput;
-    assetWithdrawData: IUSDOBase.IWithdrawParamsStructOutput;
-    collateralWithdrawData: IUSDOBase.IWithdrawParamsStructOutput;
+    assetWithdrawData: ICommonData.IWithdrawParamsStructOutput;
+    collateralWithdrawData: ICommonData.IWithdrawParamsStructOutput;
   };
 }
 
@@ -509,7 +511,7 @@ export interface MagnetarV2Interface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<boolean>,
-      IUSDOBase.IWithdrawParamsStruct
+      ICommonData.IWithdrawParamsStruct
     ]
   ): string;
   encodeFunctionData(
@@ -521,7 +523,7 @@ export interface MagnetarV2Interface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<boolean>,
-      IUSDOBase.IWithdrawParamsStruct
+      ICommonData.IWithdrawParamsStruct
     ]
   ): string;
   encodeFunctionData(
@@ -987,7 +989,7 @@ export interface MagnetarV2 extends BaseContract {
       repayAmount: PromiseOrValue<BigNumberish>,
       collateralAmount: PromiseOrValue<BigNumberish>,
       extractFromSender: PromiseOrValue<boolean>,
-      withdrawCollateralParams: IUSDOBase.IWithdrawParamsStruct,
+      withdrawCollateralParams: ICommonData.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -998,7 +1000,7 @@ export interface MagnetarV2 extends BaseContract {
       repayAmount: PromiseOrValue<BigNumberish>,
       collateralAmount: PromiseOrValue<BigNumberish>,
       extractFromSender: PromiseOrValue<boolean>,
-      withdrawCollateralParams: IUSDOBase.IWithdrawParamsStruct,
+      withdrawCollateralParams: ICommonData.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1268,7 +1270,7 @@ export interface MagnetarV2 extends BaseContract {
     repayAmount: PromiseOrValue<BigNumberish>,
     collateralAmount: PromiseOrValue<BigNumberish>,
     extractFromSender: PromiseOrValue<boolean>,
-    withdrawCollateralParams: IUSDOBase.IWithdrawParamsStruct,
+    withdrawCollateralParams: ICommonData.IWithdrawParamsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1279,7 +1281,7 @@ export interface MagnetarV2 extends BaseContract {
     repayAmount: PromiseOrValue<BigNumberish>,
     collateralAmount: PromiseOrValue<BigNumberish>,
     extractFromSender: PromiseOrValue<boolean>,
-    withdrawCollateralParams: IUSDOBase.IWithdrawParamsStruct,
+    withdrawCollateralParams: ICommonData.IWithdrawParamsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1549,7 +1551,7 @@ export interface MagnetarV2 extends BaseContract {
       repayAmount: PromiseOrValue<BigNumberish>,
       collateralAmount: PromiseOrValue<BigNumberish>,
       extractFromSender: PromiseOrValue<boolean>,
-      withdrawCollateralParams: IUSDOBase.IWithdrawParamsStruct,
+      withdrawCollateralParams: ICommonData.IWithdrawParamsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1560,7 +1562,7 @@ export interface MagnetarV2 extends BaseContract {
       repayAmount: PromiseOrValue<BigNumberish>,
       collateralAmount: PromiseOrValue<BigNumberish>,
       extractFromSender: PromiseOrValue<boolean>,
-      withdrawCollateralParams: IUSDOBase.IWithdrawParamsStruct,
+      withdrawCollateralParams: ICommonData.IWithdrawParamsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1849,7 +1851,7 @@ export interface MagnetarV2 extends BaseContract {
       repayAmount: PromiseOrValue<BigNumberish>,
       collateralAmount: PromiseOrValue<BigNumberish>,
       extractFromSender: PromiseOrValue<boolean>,
-      withdrawCollateralParams: IUSDOBase.IWithdrawParamsStruct,
+      withdrawCollateralParams: ICommonData.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1860,7 +1862,7 @@ export interface MagnetarV2 extends BaseContract {
       repayAmount: PromiseOrValue<BigNumberish>,
       collateralAmount: PromiseOrValue<BigNumberish>,
       extractFromSender: PromiseOrValue<boolean>,
-      withdrawCollateralParams: IUSDOBase.IWithdrawParamsStruct,
+      withdrawCollateralParams: ICommonData.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -2131,7 +2133,7 @@ export interface MagnetarV2 extends BaseContract {
       repayAmount: PromiseOrValue<BigNumberish>,
       collateralAmount: PromiseOrValue<BigNumberish>,
       extractFromSender: PromiseOrValue<boolean>,
-      withdrawCollateralParams: IUSDOBase.IWithdrawParamsStruct,
+      withdrawCollateralParams: ICommonData.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -2142,7 +2144,7 @@ export interface MagnetarV2 extends BaseContract {
       repayAmount: PromiseOrValue<BigNumberish>,
       collateralAmount: PromiseOrValue<BigNumberish>,
       extractFromSender: PromiseOrValue<boolean>,
-      withdrawCollateralParams: IUSDOBase.IWithdrawParamsStruct,
+      withdrawCollateralParams: ICommonData.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
