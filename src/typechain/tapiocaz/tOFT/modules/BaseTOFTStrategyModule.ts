@@ -42,7 +42,7 @@ export declare namespace ICommonOFT {
   };
 }
 
-export declare namespace ITapiocaOFT {
+export declare namespace ICommonData {
   export type ISendOptionsStruct = {
     extraGasLimit: PromiseOrValue<BigNumberish>;
     zroPaymentAddress: PromiseOrValue<string>;
@@ -666,7 +666,7 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
-      ITapiocaOFT.ISendOptionsStruct
+      ICommonData.ISendOptionsStruct
     ]
   ): string;
   encodeFunctionData(
@@ -678,7 +678,7 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
-      ITapiocaOFT.ISendOptionsStruct
+      ICommonData.ISendOptionsStruct
     ]
   ): string;
   encodeFunctionData(
@@ -1971,7 +1971,7 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
+      options: ICommonData.ISendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1982,7 +1982,7 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
+      options: ICommonData.ISendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2628,7 +2628,7 @@ export interface BaseTOFTStrategyModule extends BaseContract {
     share: PromiseOrValue<BigNumberish>,
     assetId: PromiseOrValue<BigNumberish>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
-    options: ITapiocaOFT.ISendOptionsStruct,
+    options: ICommonData.ISendOptionsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -2639,7 +2639,7 @@ export interface BaseTOFTStrategyModule extends BaseContract {
     share: PromiseOrValue<BigNumberish>,
     assetId: PromiseOrValue<BigNumberish>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
-    options: ITapiocaOFT.ISendOptionsStruct,
+    options: ICommonData.ISendOptionsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3283,7 +3283,7 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
+      options: ICommonData.ISendOptionsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3294,7 +3294,7 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
+      options: ICommonData.ISendOptionsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4077,7 +4077,7 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
+      options: ICommonData.ISendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4088,7 +4088,7 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
+      options: ICommonData.ISendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4735,7 +4735,7 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
+      options: ICommonData.ISendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -4746,7 +4746,7 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
+      options: ICommonData.ISendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

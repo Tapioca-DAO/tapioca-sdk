@@ -90,105 +90,9 @@ export declare namespace ITapiocaOptionsBrokerCrossChain {
     zroPaymentAddress: string;
     extraGas: BigNumber;
   };
-
-  export type IApprovalStruct = {
-    permitAll: PromiseOrValue<boolean>;
-    allowFailure: PromiseOrValue<boolean>;
-    target: PromiseOrValue<string>;
-    permitBorrow: PromiseOrValue<boolean>;
-    owner: PromiseOrValue<string>;
-    spender: PromiseOrValue<string>;
-    value: PromiseOrValue<BigNumberish>;
-    deadline: PromiseOrValue<BigNumberish>;
-    v: PromiseOrValue<BigNumberish>;
-    r: PromiseOrValue<BytesLike>;
-    s: PromiseOrValue<BytesLike>;
-  };
-
-  export type IApprovalStructOutput = [
-    boolean,
-    boolean,
-    string,
-    boolean,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    number,
-    string,
-    string
-  ] & {
-    permitAll: boolean;
-    allowFailure: boolean;
-    target: string;
-    permitBorrow: boolean;
-    owner: string;
-    spender: string;
-    value: BigNumber;
-    deadline: BigNumber;
-    v: number;
-    r: string;
-    s: string;
-  };
 }
 
-export declare namespace IUSDOBase {
-  export type ILeverageSwapDataStruct = {
-    tokenOut: PromiseOrValue<string>;
-    amountOutMin: PromiseOrValue<BigNumberish>;
-    data: PromiseOrValue<BytesLike>;
-  };
-
-  export type ILeverageSwapDataStructOutput = [string, BigNumber, string] & {
-    tokenOut: string;
-    amountOutMin: BigNumber;
-    data: string;
-  };
-
-  export type ILeverageLZDataStruct = {
-    srcExtraGasLimit: PromiseOrValue<BigNumberish>;
-    lzSrcChainId: PromiseOrValue<BigNumberish>;
-    lzDstChainId: PromiseOrValue<BigNumberish>;
-    zroPaymentAddress: PromiseOrValue<string>;
-    dstAirdropAdapterParam: PromiseOrValue<BytesLike>;
-    srcAirdropAdapterParam: PromiseOrValue<BytesLike>;
-    refundAddress: PromiseOrValue<string>;
-  };
-
-  export type ILeverageLZDataStructOutput = [
-    BigNumber,
-    number,
-    number,
-    string,
-    string,
-    string,
-    string
-  ] & {
-    srcExtraGasLimit: BigNumber;
-    lzSrcChainId: number;
-    lzDstChainId: number;
-    zroPaymentAddress: string;
-    dstAirdropAdapterParam: string;
-    srcAirdropAdapterParam: string;
-    refundAddress: string;
-  };
-
-  export type ILeverageExternalContractsDataStruct = {
-    swapper: PromiseOrValue<string>;
-    magnetar: PromiseOrValue<string>;
-    tOft: PromiseOrValue<string>;
-    srcMarket: PromiseOrValue<string>;
-  };
-
-  export type ILeverageExternalContractsDataStructOutput = [
-    string,
-    string,
-    string,
-    string
-  ] & { swapper: string; magnetar: string; tOft: string; srcMarket: string };
-}
-
-export declare namespace ITapiocaOFT {
+export declare namespace ICommonData {
   export type IApprovalStruct = {
     permitAll: PromiseOrValue<boolean>;
     allowFailure: PromiseOrValue<boolean>;
@@ -251,6 +155,74 @@ export declare namespace ITapiocaOFT {
     withdrawAdapterParams: string;
   };
 
+  export type ISendOptionsStruct = {
+    extraGasLimit: PromiseOrValue<BigNumberish>;
+    zroPaymentAddress: PromiseOrValue<string>;
+  };
+
+  export type ISendOptionsStructOutput = [BigNumber, string] & {
+    extraGasLimit: BigNumber;
+    zroPaymentAddress: string;
+  };
+}
+
+export declare namespace IUSDOBase {
+  export type ILeverageSwapDataStruct = {
+    tokenOut: PromiseOrValue<string>;
+    amountOutMin: PromiseOrValue<BigNumberish>;
+    data: PromiseOrValue<BytesLike>;
+  };
+
+  export type ILeverageSwapDataStructOutput = [string, BigNumber, string] & {
+    tokenOut: string;
+    amountOutMin: BigNumber;
+    data: string;
+  };
+
+  export type ILeverageLZDataStruct = {
+    srcExtraGasLimit: PromiseOrValue<BigNumberish>;
+    lzSrcChainId: PromiseOrValue<BigNumberish>;
+    lzDstChainId: PromiseOrValue<BigNumberish>;
+    zroPaymentAddress: PromiseOrValue<string>;
+    dstAirdropAdapterParam: PromiseOrValue<BytesLike>;
+    srcAirdropAdapterParam: PromiseOrValue<BytesLike>;
+    refundAddress: PromiseOrValue<string>;
+  };
+
+  export type ILeverageLZDataStructOutput = [
+    BigNumber,
+    number,
+    number,
+    string,
+    string,
+    string,
+    string
+  ] & {
+    srcExtraGasLimit: BigNumber;
+    lzSrcChainId: number;
+    lzDstChainId: number;
+    zroPaymentAddress: string;
+    dstAirdropAdapterParam: string;
+    srcAirdropAdapterParam: string;
+    refundAddress: string;
+  };
+
+  export type ILeverageExternalContractsDataStruct = {
+    swapper: PromiseOrValue<string>;
+    magnetar: PromiseOrValue<string>;
+    tOft: PromiseOrValue<string>;
+    srcMarket: PromiseOrValue<string>;
+  };
+
+  export type ILeverageExternalContractsDataStructOutput = [
+    string,
+    string,
+    string,
+    string
+  ] & { swapper: string; magnetar: string; tOft: string; srcMarket: string };
+}
+
+export declare namespace ITapiocaOFT {
   export type IRemoveParamsStruct = {
     share: PromiseOrValue<BigNumberish>;
     marketHelper: PromiseOrValue<string>;
@@ -261,16 +233,6 @@ export declare namespace ITapiocaOFT {
     share: BigNumber;
     marketHelper: string;
     market: string;
-  };
-
-  export type ISendOptionsStruct = {
-    extraGasLimit: PromiseOrValue<BigNumberish>;
-    zroPaymentAddress: PromiseOrValue<string>;
-  };
-
-  export type ISendOptionsStructOutput = [BigNumber, string] & {
-    extraGasLimit: BigNumber;
-    zroPaymentAddress: string;
   };
 
   export type IBorrowParamsStruct = {
@@ -746,7 +708,7 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      ITapiocaOptionsBrokerCrossChain.IApprovalStruct[]
+      ICommonData.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
@@ -755,7 +717,7 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      ITapiocaOptionsBrokerCrossChain.IApprovalStruct[]
+      ICommonData.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
@@ -841,7 +803,7 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       IUSDOBase.ILeverageLZDataStruct,
       IUSDOBase.ILeverageExternalContractsDataStruct,
       PromiseOrValue<BytesLike>,
-      ITapiocaOFT.IApprovalStruct[]
+      ICommonData.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
@@ -853,7 +815,7 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       IUSDOBase.ILeverageLZDataStruct,
       IUSDOBase.ILeverageExternalContractsDataStruct,
       PromiseOrValue<BytesLike>,
-      ITapiocaOFT.IApprovalStruct[]
+      ICommonData.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
@@ -996,9 +958,9 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
-      ITapiocaOFT.IWithdrawParamsStruct,
+      ICommonData.IWithdrawParamsStruct,
       ITapiocaOFT.IRemoveParamsStruct,
-      ITapiocaOFT.IApprovalStruct[],
+      ICommonData.IApprovalStruct[],
       PromiseOrValue<BytesLike>
     ]
   ): string;
@@ -1009,9 +971,9 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
-      ITapiocaOFT.IWithdrawParamsStruct,
+      ICommonData.IWithdrawParamsStruct,
       ITapiocaOFT.IRemoveParamsStruct,
-      ITapiocaOFT.IApprovalStruct[],
+      ICommonData.IApprovalStruct[],
       PromiseOrValue<BytesLike>
     ]
   ): string;
@@ -1138,7 +1100,7 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
-      ITapiocaOFT.ISendOptionsStruct
+      ICommonData.ISendOptionsStruct
     ]
   ): string;
   encodeFunctionData(
@@ -1150,7 +1112,7 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
-      ITapiocaOFT.ISendOptionsStruct
+      ICommonData.ISendOptionsStruct
     ]
   ): string;
   encodeFunctionData(
@@ -1161,9 +1123,9 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
       ITapiocaOFT.IBorrowParamsStruct,
-      ITapiocaOFT.IWithdrawParamsStruct,
-      ITapiocaOFT.ISendOptionsStruct,
-      ITapiocaOFT.IApprovalStruct[]
+      ICommonData.IWithdrawParamsStruct,
+      ICommonData.ISendOptionsStruct,
+      ICommonData.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
@@ -1174,9 +1136,9 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
       ITapiocaOFT.IBorrowParamsStruct,
-      ITapiocaOFT.IWithdrawParamsStruct,
-      ITapiocaOFT.ISendOptionsStruct,
-      ITapiocaOFT.IApprovalStruct[]
+      ICommonData.IWithdrawParamsStruct,
+      ICommonData.ISendOptionsStruct,
+      ICommonData.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
@@ -1345,7 +1307,7 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       ISendFrom.LzCallParamsStruct,
-      ITapiocaOptionsBrokerCrossChain.IApprovalStruct[]
+      ICommonData.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
@@ -1356,7 +1318,7 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       ISendFrom.LzCallParamsStruct,
-      ITapiocaOptionsBrokerCrossChain.IApprovalStruct[]
+      ICommonData.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
@@ -2450,7 +2412,7 @@ export interface MTapiocaOFT extends BaseContract {
       optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2458,7 +2420,7 @@ export interface MTapiocaOFT extends BaseContract {
       optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2547,7 +2509,7 @@ export interface MTapiocaOFT extends BaseContract {
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2558,7 +2520,7 @@ export interface MTapiocaOFT extends BaseContract {
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2693,9 +2655,9 @@ export interface MTapiocaOFT extends BaseContract {
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2705,9 +2667,9 @@ export interface MTapiocaOFT extends BaseContract {
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2823,7 +2785,7 @@ export interface MTapiocaOFT extends BaseContract {
       share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
+      options: ICommonData.ISendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2834,7 +2796,7 @@ export interface MTapiocaOFT extends BaseContract {
       share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
+      options: ICommonData.ISendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2844,9 +2806,9 @@ export interface MTapiocaOFT extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      options: ICommonData.ISendOptionsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2856,9 +2818,9 @@ export interface MTapiocaOFT extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      options: ICommonData.ISendOptionsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -3040,7 +3002,7 @@ export interface MTapiocaOFT extends BaseContract {
       zroPaymentAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       sendFromData: ISendFrom.LzCallParamsStruct,
-      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -3050,7 +3012,7 @@ export interface MTapiocaOFT extends BaseContract {
       zroPaymentAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       sendFromData: ISendFrom.LzCallParamsStruct,
-      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -3311,7 +3273,7 @@ export interface MTapiocaOFT extends BaseContract {
     optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
     lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
     tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-    approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+    approvals: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3319,7 +3281,7 @@ export interface MTapiocaOFT extends BaseContract {
     optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
     lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
     tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-    approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+    approvals: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3408,7 +3370,7 @@ export interface MTapiocaOFT extends BaseContract {
     lzData: IUSDOBase.ILeverageLZDataStruct,
     externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
     airdropAdapterParams: PromiseOrValue<BytesLike>,
-    approvals: ITapiocaOFT.IApprovalStruct[],
+    approvals: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3419,7 +3381,7 @@ export interface MTapiocaOFT extends BaseContract {
     lzData: IUSDOBase.ILeverageLZDataStruct,
     externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
     airdropAdapterParams: PromiseOrValue<BytesLike>,
-    approvals: ITapiocaOFT.IApprovalStruct[],
+    approvals: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3554,9 +3516,9 @@ export interface MTapiocaOFT extends BaseContract {
     to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
     zroPaymentAddress: PromiseOrValue<string>,
-    withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+    withdrawParams: ICommonData.IWithdrawParamsStruct,
     removeParams: ITapiocaOFT.IRemoveParamsStruct,
-    approvals: ITapiocaOFT.IApprovalStruct[],
+    approvals: ICommonData.IApprovalStruct[],
     adapterParams: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -3566,9 +3528,9 @@ export interface MTapiocaOFT extends BaseContract {
     to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
     zroPaymentAddress: PromiseOrValue<string>,
-    withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+    withdrawParams: ICommonData.IWithdrawParamsStruct,
     removeParams: ITapiocaOFT.IRemoveParamsStruct,
-    approvals: ITapiocaOFT.IApprovalStruct[],
+    approvals: ICommonData.IApprovalStruct[],
     adapterParams: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -3684,7 +3646,7 @@ export interface MTapiocaOFT extends BaseContract {
     share: PromiseOrValue<BigNumberish>,
     assetId: PromiseOrValue<BigNumberish>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
-    options: ITapiocaOFT.ISendOptionsStruct,
+    options: ICommonData.ISendOptionsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3695,7 +3657,7 @@ export interface MTapiocaOFT extends BaseContract {
     share: PromiseOrValue<BigNumberish>,
     assetId: PromiseOrValue<BigNumberish>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
-    options: ITapiocaOFT.ISendOptionsStruct,
+    options: ICommonData.ISendOptionsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3705,9 +3667,9 @@ export interface MTapiocaOFT extends BaseContract {
     lzDstChainId: PromiseOrValue<BigNumberish>,
     airdropAdapterParams: PromiseOrValue<BytesLike>,
     borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-    withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-    options: ITapiocaOFT.ISendOptionsStruct,
-    approvals: ITapiocaOFT.IApprovalStruct[],
+    withdrawParams: ICommonData.IWithdrawParamsStruct,
+    options: ICommonData.ISendOptionsStruct,
+    approvals: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3717,9 +3679,9 @@ export interface MTapiocaOFT extends BaseContract {
     lzDstChainId: PromiseOrValue<BigNumberish>,
     airdropAdapterParams: PromiseOrValue<BytesLike>,
     borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-    withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-    options: ITapiocaOFT.ISendOptionsStruct,
-    approvals: ITapiocaOFT.IApprovalStruct[],
+    withdrawParams: ICommonData.IWithdrawParamsStruct,
+    options: ICommonData.ISendOptionsStruct,
+    approvals: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3901,7 +3863,7 @@ export interface MTapiocaOFT extends BaseContract {
     zroPaymentAddress: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     sendFromData: ISendFrom.LzCallParamsStruct,
-    approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+    approvals: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3911,7 +3873,7 @@ export interface MTapiocaOFT extends BaseContract {
     zroPaymentAddress: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     sendFromData: ISendFrom.LzCallParamsStruct,
-    approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+    approvals: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -4174,7 +4136,7 @@ export interface MTapiocaOFT extends BaseContract {
       optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4182,7 +4144,7 @@ export interface MTapiocaOFT extends BaseContract {
       optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4271,7 +4233,7 @@ export interface MTapiocaOFT extends BaseContract {
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4282,7 +4244,7 @@ export interface MTapiocaOFT extends BaseContract {
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4417,9 +4379,9 @@ export interface MTapiocaOFT extends BaseContract {
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -4429,9 +4391,9 @@ export interface MTapiocaOFT extends BaseContract {
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -4543,7 +4505,7 @@ export interface MTapiocaOFT extends BaseContract {
       share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
+      options: ICommonData.ISendOptionsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4554,7 +4516,7 @@ export interface MTapiocaOFT extends BaseContract {
       share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
+      options: ICommonData.ISendOptionsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4564,9 +4526,9 @@ export interface MTapiocaOFT extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      options: ICommonData.ISendOptionsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4576,9 +4538,9 @@ export interface MTapiocaOFT extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      options: ICommonData.ISendOptionsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4760,7 +4722,7 @@ export interface MTapiocaOFT extends BaseContract {
       zroPaymentAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       sendFromData: ISendFrom.LzCallParamsStruct,
-      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4770,7 +4732,7 @@ export interface MTapiocaOFT extends BaseContract {
       zroPaymentAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       sendFromData: ISendFrom.LzCallParamsStruct,
-      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -5201,7 +5163,7 @@ export interface MTapiocaOFT extends BaseContract {
       optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5209,7 +5171,7 @@ export interface MTapiocaOFT extends BaseContract {
       optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5298,7 +5260,7 @@ export interface MTapiocaOFT extends BaseContract {
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5309,7 +5271,7 @@ export interface MTapiocaOFT extends BaseContract {
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5444,9 +5406,9 @@ export interface MTapiocaOFT extends BaseContract {
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -5456,9 +5418,9 @@ export interface MTapiocaOFT extends BaseContract {
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -5574,7 +5536,7 @@ export interface MTapiocaOFT extends BaseContract {
       share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
+      options: ICommonData.ISendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5585,7 +5547,7 @@ export interface MTapiocaOFT extends BaseContract {
       share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
+      options: ICommonData.ISendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5595,9 +5557,9 @@ export interface MTapiocaOFT extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      options: ICommonData.ISendOptionsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5607,9 +5569,9 @@ export interface MTapiocaOFT extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      options: ICommonData.ISendOptionsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5791,7 +5753,7 @@ export interface MTapiocaOFT extends BaseContract {
       zroPaymentAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       sendFromData: ISendFrom.LzCallParamsStruct,
-      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5801,7 +5763,7 @@ export interface MTapiocaOFT extends BaseContract {
       zroPaymentAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       sendFromData: ISendFrom.LzCallParamsStruct,
-      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -6065,7 +6027,7 @@ export interface MTapiocaOFT extends BaseContract {
       optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -6073,7 +6035,7 @@ export interface MTapiocaOFT extends BaseContract {
       optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -6162,7 +6124,7 @@ export interface MTapiocaOFT extends BaseContract {
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -6173,7 +6135,7 @@ export interface MTapiocaOFT extends BaseContract {
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -6310,9 +6272,9 @@ export interface MTapiocaOFT extends BaseContract {
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -6322,9 +6284,9 @@ export interface MTapiocaOFT extends BaseContract {
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -6440,7 +6402,7 @@ export interface MTapiocaOFT extends BaseContract {
       share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
+      options: ICommonData.ISendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -6451,7 +6413,7 @@ export interface MTapiocaOFT extends BaseContract {
       share: PromiseOrValue<BigNumberish>,
       assetId: PromiseOrValue<BigNumberish>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      options: ITapiocaOFT.ISendOptionsStruct,
+      options: ICommonData.ISendOptionsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -6461,9 +6423,9 @@ export interface MTapiocaOFT extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      options: ICommonData.ISendOptionsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -6473,9 +6435,9 @@ export interface MTapiocaOFT extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      options: ICommonData.ISendOptionsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -6661,7 +6623,7 @@ export interface MTapiocaOFT extends BaseContract {
       zroPaymentAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       sendFromData: ISendFrom.LzCallParamsStruct,
-      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -6671,7 +6633,7 @@ export interface MTapiocaOFT extends BaseContract {
       zroPaymentAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       sendFromData: ISendFrom.LzCallParamsStruct,
-      approvals: ITapiocaOptionsBrokerCrossChain.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

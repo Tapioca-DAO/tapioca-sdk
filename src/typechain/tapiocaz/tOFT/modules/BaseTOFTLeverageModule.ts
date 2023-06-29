@@ -84,7 +84,7 @@ export declare namespace IUSDOBase {
   ] & { swapper: string; magnetar: string; tOft: string; srcMarket: string };
 }
 
-export declare namespace ITapiocaOFT {
+export declare namespace ICommonData {
   export type IApprovalStruct = {
     permitAll: PromiseOrValue<boolean>;
     allowFailure: PromiseOrValue<boolean>;
@@ -559,7 +559,7 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
       IUSDOBase.ILeverageLZDataStruct,
       IUSDOBase.ILeverageExternalContractsDataStruct,
       PromiseOrValue<BytesLike>,
-      ITapiocaOFT.IApprovalStruct[]
+      ICommonData.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
@@ -571,7 +571,7 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
       IUSDOBase.ILeverageLZDataStruct,
       IUSDOBase.ILeverageExternalContractsDataStruct,
       PromiseOrValue<BytesLike>,
-      ITapiocaOFT.IApprovalStruct[]
+      ICommonData.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
@@ -1858,7 +1858,7 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1869,7 +1869,7 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2505,7 +2505,7 @@ export interface BaseTOFTLeverageModule extends BaseContract {
     lzData: IUSDOBase.ILeverageLZDataStruct,
     externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
     airdropAdapterParams: PromiseOrValue<BytesLike>,
-    approvals: ITapiocaOFT.IApprovalStruct[],
+    approvals: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -2516,7 +2516,7 @@ export interface BaseTOFTLeverageModule extends BaseContract {
     lzData: IUSDOBase.ILeverageLZDataStruct,
     externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
     airdropAdapterParams: PromiseOrValue<BytesLike>,
-    approvals: ITapiocaOFT.IApprovalStruct[],
+    approvals: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3154,7 +3154,7 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3165,7 +3165,7 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3934,7 +3934,7 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -3945,7 +3945,7 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4582,7 +4582,7 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -4593,7 +4593,7 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
