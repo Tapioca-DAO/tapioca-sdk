@@ -85,18 +85,6 @@ export declare namespace ITapiocaOptionsBroker {
 }
 
 export declare namespace IUSDOBase {
-  export type IRemoveAndRepayExternalContractsStruct = {
-    magnetar: PromiseOrValue<string>;
-    singularity: PromiseOrValue<string>;
-    bigBang: PromiseOrValue<string>;
-  };
-
-  export type IRemoveAndRepayExternalContractsStructOutput = [
-    string,
-    string,
-    string
-  ] & { magnetar: string; singularity: string; bigBang: string };
-
   export type IWithdrawParamsStruct = {
     withdraw: PromiseOrValue<boolean>;
     withdrawLzFeeAmount: PromiseOrValue<BigNumberish>;
@@ -118,6 +106,18 @@ export declare namespace IUSDOBase {
     withdrawLzChainId: number;
     withdrawAdapterParams: string;
   };
+
+  export type IRemoveAndRepayExternalContractsStruct = {
+    magnetar: PromiseOrValue<string>;
+    singularity: PromiseOrValue<string>;
+    bigBang: PromiseOrValue<string>;
+  };
+
+  export type IRemoveAndRepayExternalContractsStructOutput = [
+    string,
+    string,
+    string
+  ] & { magnetar: string; singularity: string; bigBang: string };
 
   export type IRemoveAndRepayStruct = {
     removeAssetFromSGL: PromiseOrValue<boolean>;
@@ -161,8 +161,7 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
   functions: {
     "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bool,bytes)": FunctionFragment;
     "depositAndAddAsset(address,address,uint256,bool,bool,(bool,address,uint128,uint128),(bool,address))": FunctionFragment;
-    "depositAndRepay(address,address,uint256,uint256,bool,bool)": FunctionFragment;
-    "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,bool,bool)": FunctionFragment;
+    "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes))": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "mintAndLend(address,address,address,uint256,uint256,bool,bool)": FunctionFragment;
     "removeAssetAndRepay(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)))": FunctionFragment;
@@ -175,10 +174,8 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
       | "depositAddCollateralAndBorrow(address,address,uint256,uint256,bool,bool,bool,bytes)"
       | "depositAndAddAsset"
       | "depositAndAddAsset(address,address,uint256,bool,bool,(bool,address,uint128,uint128),(bool,address))"
-      | "depositAndRepay"
-      | "depositAndRepay(address,address,uint256,uint256,bool,bool)"
       | "depositRepayAndRemoveCollateral"
-      | "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,bool,bool)"
+      | "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes))"
       | "isApprovedForAll"
       | "isApprovedForAll(address,address)"
       | "mintAndLend"
@@ -240,28 +237,6 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "depositAndRepay",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<boolean>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "depositAndRepay(address,address,uint256,uint256,bool,bool)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<boolean>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "depositRepayAndRemoveCollateral",
     values: [
       PromiseOrValue<string>,
@@ -270,12 +245,11 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<boolean>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<boolean>
+      IUSDOBase.IWithdrawParamsStruct
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,bool,bool)",
+    functionFragment: "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes))",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -283,8 +257,7 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<boolean>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<boolean>
+      IUSDOBase.IWithdrawParamsStruct
     ]
   ): string;
   encodeFunctionData(
@@ -383,19 +356,11 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "depositAndRepay",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "depositAndRepay(address,address,uint256,uint256,bool,bool)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "depositRepayAndRemoveCollateral",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,bool,bool)",
+    functionFragment: "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -525,47 +490,25 @@ export interface MagnetarMarketModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    depositAndRepay(
-      market: PromiseOrValue<string>,
-      user: PromiseOrValue<string>,
-      depositAmount: PromiseOrValue<BigNumberish>,
-      repayAmount: PromiseOrValue<BigNumberish>,
-      deposit: PromiseOrValue<boolean>,
-      extractFromSender: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "depositAndRepay(address,address,uint256,uint256,bool,bool)"(
-      market: PromiseOrValue<string>,
-      user: PromiseOrValue<string>,
-      depositAmount: PromiseOrValue<BigNumberish>,
-      repayAmount: PromiseOrValue<BigNumberish>,
-      deposit: PromiseOrValue<boolean>,
-      extractFromSender: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     depositRepayAndRemoveCollateral(
       market: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       depositAmount: PromiseOrValue<BigNumberish>,
       repayAmount: PromiseOrValue<BigNumberish>,
       collateralAmount: PromiseOrValue<BigNumberish>,
-      deposit: PromiseOrValue<boolean>,
-      withdraw: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
+      withdrawCollateralParams: IUSDOBase.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,bool,bool)"(
+    "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes))"(
       market: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       depositAmount: PromiseOrValue<BigNumberish>,
       repayAmount: PromiseOrValue<BigNumberish>,
       collateralAmount: PromiseOrValue<BigNumberish>,
-      deposit: PromiseOrValue<boolean>,
-      withdraw: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
+      withdrawCollateralParams: IUSDOBase.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -692,47 +635,25 @@ export interface MagnetarMarketModule extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  depositAndRepay(
-    market: PromiseOrValue<string>,
-    user: PromiseOrValue<string>,
-    depositAmount: PromiseOrValue<BigNumberish>,
-    repayAmount: PromiseOrValue<BigNumberish>,
-    deposit: PromiseOrValue<boolean>,
-    extractFromSender: PromiseOrValue<boolean>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "depositAndRepay(address,address,uint256,uint256,bool,bool)"(
-    market: PromiseOrValue<string>,
-    user: PromiseOrValue<string>,
-    depositAmount: PromiseOrValue<BigNumberish>,
-    repayAmount: PromiseOrValue<BigNumberish>,
-    deposit: PromiseOrValue<boolean>,
-    extractFromSender: PromiseOrValue<boolean>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   depositRepayAndRemoveCollateral(
     market: PromiseOrValue<string>,
     user: PromiseOrValue<string>,
     depositAmount: PromiseOrValue<BigNumberish>,
     repayAmount: PromiseOrValue<BigNumberish>,
     collateralAmount: PromiseOrValue<BigNumberish>,
-    deposit: PromiseOrValue<boolean>,
-    withdraw: PromiseOrValue<boolean>,
     extractFromSender: PromiseOrValue<boolean>,
+    withdrawCollateralParams: IUSDOBase.IWithdrawParamsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,bool,bool)"(
+  "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes))"(
     market: PromiseOrValue<string>,
     user: PromiseOrValue<string>,
     depositAmount: PromiseOrValue<BigNumberish>,
     repayAmount: PromiseOrValue<BigNumberish>,
     collateralAmount: PromiseOrValue<BigNumberish>,
-    deposit: PromiseOrValue<boolean>,
-    withdraw: PromiseOrValue<boolean>,
     extractFromSender: PromiseOrValue<boolean>,
+    withdrawCollateralParams: IUSDOBase.IWithdrawParamsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -859,47 +780,25 @@ export interface MagnetarMarketModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    depositAndRepay(
-      market: PromiseOrValue<string>,
-      user: PromiseOrValue<string>,
-      depositAmount: PromiseOrValue<BigNumberish>,
-      repayAmount: PromiseOrValue<BigNumberish>,
-      deposit: PromiseOrValue<boolean>,
-      extractFromSender: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "depositAndRepay(address,address,uint256,uint256,bool,bool)"(
-      market: PromiseOrValue<string>,
-      user: PromiseOrValue<string>,
-      depositAmount: PromiseOrValue<BigNumberish>,
-      repayAmount: PromiseOrValue<BigNumberish>,
-      deposit: PromiseOrValue<boolean>,
-      extractFromSender: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     depositRepayAndRemoveCollateral(
       market: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       depositAmount: PromiseOrValue<BigNumberish>,
       repayAmount: PromiseOrValue<BigNumberish>,
       collateralAmount: PromiseOrValue<BigNumberish>,
-      deposit: PromiseOrValue<boolean>,
-      withdraw: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
+      withdrawCollateralParams: IUSDOBase.IWithdrawParamsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,bool,bool)"(
+    "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes))"(
       market: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       depositAmount: PromiseOrValue<BigNumberish>,
       repayAmount: PromiseOrValue<BigNumberish>,
       collateralAmount: PromiseOrValue<BigNumberish>,
-      deposit: PromiseOrValue<boolean>,
-      withdraw: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
+      withdrawCollateralParams: IUSDOBase.IWithdrawParamsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1040,47 +939,25 @@ export interface MagnetarMarketModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    depositAndRepay(
-      market: PromiseOrValue<string>,
-      user: PromiseOrValue<string>,
-      depositAmount: PromiseOrValue<BigNumberish>,
-      repayAmount: PromiseOrValue<BigNumberish>,
-      deposit: PromiseOrValue<boolean>,
-      extractFromSender: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "depositAndRepay(address,address,uint256,uint256,bool,bool)"(
-      market: PromiseOrValue<string>,
-      user: PromiseOrValue<string>,
-      depositAmount: PromiseOrValue<BigNumberish>,
-      repayAmount: PromiseOrValue<BigNumberish>,
-      deposit: PromiseOrValue<boolean>,
-      extractFromSender: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     depositRepayAndRemoveCollateral(
       market: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       depositAmount: PromiseOrValue<BigNumberish>,
       repayAmount: PromiseOrValue<BigNumberish>,
       collateralAmount: PromiseOrValue<BigNumberish>,
-      deposit: PromiseOrValue<boolean>,
-      withdraw: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
+      withdrawCollateralParams: IUSDOBase.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,bool,bool)"(
+    "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes))"(
       market: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       depositAmount: PromiseOrValue<BigNumberish>,
       repayAmount: PromiseOrValue<BigNumberish>,
       collateralAmount: PromiseOrValue<BigNumberish>,
-      deposit: PromiseOrValue<boolean>,
-      withdraw: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
+      withdrawCollateralParams: IUSDOBase.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1208,47 +1085,25 @@ export interface MagnetarMarketModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    depositAndRepay(
-      market: PromiseOrValue<string>,
-      user: PromiseOrValue<string>,
-      depositAmount: PromiseOrValue<BigNumberish>,
-      repayAmount: PromiseOrValue<BigNumberish>,
-      deposit: PromiseOrValue<boolean>,
-      extractFromSender: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "depositAndRepay(address,address,uint256,uint256,bool,bool)"(
-      market: PromiseOrValue<string>,
-      user: PromiseOrValue<string>,
-      depositAmount: PromiseOrValue<BigNumberish>,
-      repayAmount: PromiseOrValue<BigNumberish>,
-      deposit: PromiseOrValue<boolean>,
-      extractFromSender: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     depositRepayAndRemoveCollateral(
       market: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       depositAmount: PromiseOrValue<BigNumberish>,
       repayAmount: PromiseOrValue<BigNumberish>,
       collateralAmount: PromiseOrValue<BigNumberish>,
-      deposit: PromiseOrValue<boolean>,
-      withdraw: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
+      withdrawCollateralParams: IUSDOBase.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,bool,bool)"(
+    "depositRepayAndRemoveCollateral(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes))"(
       market: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       depositAmount: PromiseOrValue<BigNumberish>,
       repayAmount: PromiseOrValue<BigNumberish>,
       collateralAmount: PromiseOrValue<BigNumberish>,
-      deposit: PromiseOrValue<boolean>,
-      withdraw: PromiseOrValue<boolean>,
       extractFromSender: PromiseOrValue<boolean>,
+      withdrawCollateralParams: IUSDOBase.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
