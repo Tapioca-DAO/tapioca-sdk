@@ -48,6 +48,20 @@ export declare namespace ITapiocaOFT {
     market: string;
   };
 
+  export type IRemoveParamsStruct = {
+    share: PromiseOrValue<BigNumberish>;
+    marketHelper: PromiseOrValue<string>;
+    market: PromiseOrValue<string>;
+  };
+
+  export type IRemoveParamsStructOutput = [BigNumber, string, string] & {
+    share: BigNumber;
+    marketHelper: string;
+    market: string;
+  };
+}
+
+export declare namespace ICommonData {
   export type IWithdrawParamsStruct = {
     withdraw: PromiseOrValue<boolean>;
     withdrawLzFeeAmount: PromiseOrValue<BigNumberish>;
@@ -108,18 +122,6 @@ export declare namespace ITapiocaOFT {
     v: number;
     r: string;
     s: string;
-  };
-
-  export type IRemoveParamsStruct = {
-    share: PromiseOrValue<BigNumberish>;
-    marketHelper: PromiseOrValue<string>;
-    market: PromiseOrValue<string>;
-  };
-
-  export type IRemoveParamsStructOutput = [BigNumber, string, string] & {
-    share: BigNumber;
-    marketHelper: string;
-    market: string;
   };
 
   export type ISendOptionsStruct = {
@@ -408,8 +410,8 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BytesLike>,
       ITapiocaOFT.IBorrowParamsStruct,
-      ITapiocaOFT.IWithdrawParamsStruct,
-      ITapiocaOFT.IApprovalStruct[]
+      ICommonData.IWithdrawParamsStruct,
+      ICommonData.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
@@ -418,8 +420,8 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BytesLike>,
       ITapiocaOFT.IBorrowParamsStruct,
-      ITapiocaOFT.IWithdrawParamsStruct,
-      ITapiocaOFT.IApprovalStruct[]
+      ICommonData.IWithdrawParamsStruct,
+      ICommonData.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
@@ -689,9 +691,9 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
-      ITapiocaOFT.IWithdrawParamsStruct,
+      ICommonData.IWithdrawParamsStruct,
       ITapiocaOFT.IRemoveParamsStruct,
-      ITapiocaOFT.IApprovalStruct[],
+      ICommonData.IApprovalStruct[],
       PromiseOrValue<BytesLike>
     ]
   ): string;
@@ -702,9 +704,9 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
-      ITapiocaOFT.IWithdrawParamsStruct,
+      ICommonData.IWithdrawParamsStruct,
       ITapiocaOFT.IRemoveParamsStruct,
-      ITapiocaOFT.IApprovalStruct[],
+      ICommonData.IApprovalStruct[],
       PromiseOrValue<BytesLike>
     ]
   ): string;
@@ -786,9 +788,9 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
       ITapiocaOFT.IBorrowParamsStruct,
-      ITapiocaOFT.IWithdrawParamsStruct,
-      ITapiocaOFT.ISendOptionsStruct,
-      ITapiocaOFT.IApprovalStruct[]
+      ICommonData.IWithdrawParamsStruct,
+      ICommonData.ISendOptionsStruct,
+      ICommonData.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
@@ -799,9 +801,9 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
       ITapiocaOFT.IBorrowParamsStruct,
-      ITapiocaOFT.IWithdrawParamsStruct,
-      ITapiocaOFT.ISendOptionsStruct,
-      ITapiocaOFT.IApprovalStruct[]
+      ICommonData.IWithdrawParamsStruct,
+      ICommonData.ISendOptionsStruct,
+      ICommonData.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
@@ -1707,8 +1709,8 @@ export interface BaseTOFTMarketModule extends BaseContract {
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1716,8 +1718,8 @@ export interface BaseTOFTMarketModule extends BaseContract {
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1996,9 +1998,9 @@ export interface BaseTOFTMarketModule extends BaseContract {
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2008,9 +2010,9 @@ export interface BaseTOFTMarketModule extends BaseContract {
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2085,9 +2087,9 @@ export interface BaseTOFTMarketModule extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      options: ICommonData.ISendOptionsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2097,9 +2099,9 @@ export interface BaseTOFTMarketModule extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      options: ICommonData.ISendOptionsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2362,8 +2364,8 @@ export interface BaseTOFTMarketModule extends BaseContract {
     _from: PromiseOrValue<string>,
     _to: PromiseOrValue<BytesLike>,
     borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-    withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-    approvals: ITapiocaOFT.IApprovalStruct[],
+    withdrawParams: ICommonData.IWithdrawParamsStruct,
+    approvals: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -2371,8 +2373,8 @@ export interface BaseTOFTMarketModule extends BaseContract {
     _from: PromiseOrValue<string>,
     _to: PromiseOrValue<BytesLike>,
     borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-    withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-    approvals: ITapiocaOFT.IApprovalStruct[],
+    withdrawParams: ICommonData.IWithdrawParamsStruct,
+    approvals: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -2651,9 +2653,9 @@ export interface BaseTOFTMarketModule extends BaseContract {
     to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
     zroPaymentAddress: PromiseOrValue<string>,
-    withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+    withdrawParams: ICommonData.IWithdrawParamsStruct,
     removeParams: ITapiocaOFT.IRemoveParamsStruct,
-    approvals: ITapiocaOFT.IApprovalStruct[],
+    approvals: ICommonData.IApprovalStruct[],
     adapterParams: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -2663,9 +2665,9 @@ export interface BaseTOFTMarketModule extends BaseContract {
     to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
     zroPaymentAddress: PromiseOrValue<string>,
-    withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+    withdrawParams: ICommonData.IWithdrawParamsStruct,
     removeParams: ITapiocaOFT.IRemoveParamsStruct,
-    approvals: ITapiocaOFT.IApprovalStruct[],
+    approvals: ICommonData.IApprovalStruct[],
     adapterParams: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -2740,9 +2742,9 @@ export interface BaseTOFTMarketModule extends BaseContract {
     lzDstChainId: PromiseOrValue<BigNumberish>,
     airdropAdapterParams: PromiseOrValue<BytesLike>,
     borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-    withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-    options: ITapiocaOFT.ISendOptionsStruct,
-    approvals: ITapiocaOFT.IApprovalStruct[],
+    withdrawParams: ICommonData.IWithdrawParamsStruct,
+    options: ICommonData.ISendOptionsStruct,
+    approvals: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -2752,9 +2754,9 @@ export interface BaseTOFTMarketModule extends BaseContract {
     lzDstChainId: PromiseOrValue<BigNumberish>,
     airdropAdapterParams: PromiseOrValue<BytesLike>,
     borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-    withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-    options: ITapiocaOFT.ISendOptionsStruct,
-    approvals: ITapiocaOFT.IApprovalStruct[],
+    withdrawParams: ICommonData.IWithdrawParamsStruct,
+    options: ICommonData.ISendOptionsStruct,
+    approvals: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3019,8 +3021,8 @@ export interface BaseTOFTMarketModule extends BaseContract {
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3028,8 +3030,8 @@ export interface BaseTOFTMarketModule extends BaseContract {
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3308,9 +3310,9 @@ export interface BaseTOFTMarketModule extends BaseContract {
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -3320,9 +3322,9 @@ export interface BaseTOFTMarketModule extends BaseContract {
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -3393,9 +3395,9 @@ export interface BaseTOFTMarketModule extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      options: ICommonData.ISendOptionsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3405,9 +3407,9 @@ export interface BaseTOFTMarketModule extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      options: ICommonData.ISendOptionsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3815,8 +3817,8 @@ export interface BaseTOFTMarketModule extends BaseContract {
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -3824,8 +3826,8 @@ export interface BaseTOFTMarketModule extends BaseContract {
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4096,9 +4098,9 @@ export interface BaseTOFTMarketModule extends BaseContract {
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -4108,9 +4110,9 @@ export interface BaseTOFTMarketModule extends BaseContract {
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -4185,9 +4187,9 @@ export interface BaseTOFTMarketModule extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      options: ICommonData.ISendOptionsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4197,9 +4199,9 @@ export interface BaseTOFTMarketModule extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      options: ICommonData.ISendOptionsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4469,8 +4471,8 @@ export interface BaseTOFTMarketModule extends BaseContract {
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -4478,8 +4480,8 @@ export interface BaseTOFTMarketModule extends BaseContract {
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -4752,9 +4754,9 @@ export interface BaseTOFTMarketModule extends BaseContract {
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -4764,9 +4766,9 @@ export interface BaseTOFTMarketModule extends BaseContract {
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      approvals: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -4841,9 +4843,9 @@ export interface BaseTOFTMarketModule extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      options: ICommonData.ISendOptionsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -4853,9 +4855,9 @@ export interface BaseTOFTMarketModule extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
-      withdrawParams: ITapiocaOFT.IWithdrawParamsStruct,
-      options: ITapiocaOFT.ISendOptionsStruct,
-      approvals: ITapiocaOFT.IApprovalStruct[],
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
+      options: ICommonData.ISendOptionsStruct,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
