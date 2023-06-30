@@ -62,20 +62,6 @@ export type ParticipationStructOutput = [
   lastActive: number;
 };
 
-export declare namespace ICommonOFT {
-  export type LzCallParamsStruct = {
-    refundAddress: PromiseOrValue<string>;
-    zroPaymentAddress: PromiseOrValue<string>;
-    adapterParams: PromiseOrValue<BytesLike>;
-  };
-
-  export type LzCallParamsStructOutput = [string, string, string] & {
-    refundAddress: string;
-    zroPaymentAddress: string;
-    adapterParams: string;
-  };
-}
-
 export interface TwTAPInterface extends utils.Interface {
   functions: {
     "DEFAULT_PAYLOAD_SIZE_LIMIT()": FunctionFragment;
@@ -87,6 +73,7 @@ export interface TwTAPInterface extends utils.Interface {
     "advanceWeek(uint256)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
+    "claimAndSendRewards(uint256,address[])": FunctionFragment;
     "claimRewards(uint256,address)": FunctionFragment;
     "claimable(uint256)": FunctionFragment;
     "claimed(uint256,uint256)": FunctionFragment;
@@ -99,7 +86,7 @@ export interface TwTAPInterface extends utils.Interface {
     "estimateSendBatchFee(uint16,bytes,uint256[],bool,bytes)": FunctionFragment;
     "estimateSendFee(uint16,bytes,uint256,bool,bytes)": FunctionFragment;
     "exitPosition(uint256)": FunctionFragment;
-    "exitPositionAndSendTap(uint256,uint16,bytes32,(address,address,bytes))": FunctionFragment;
+    "exitPositionAndSendTap(uint256)": FunctionFragment;
     "failedMessages(uint16,bytes,uint64)": FunctionFragment;
     "forceResumeReceive(uint16,bytes)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
@@ -127,6 +114,7 @@ export interface TwTAPInterface extends utils.Interface {
     "releaseTap(uint256,address)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
+    "rewardTokenIndex(address)": FunctionFragment;
     "rewardTokens(uint256)": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,bytes)": FunctionFragment;
@@ -176,6 +164,8 @@ export interface TwTAPInterface extends utils.Interface {
       | "approve(address,uint256)"
       | "balanceOf"
       | "balanceOf(address)"
+      | "claimAndSendRewards"
+      | "claimAndSendRewards(uint256,address[])"
       | "claimRewards"
       | "claimRewards(uint256,address)"
       | "claimable"
@@ -201,7 +191,7 @@ export interface TwTAPInterface extends utils.Interface {
       | "exitPosition"
       | "exitPosition(uint256)"
       | "exitPositionAndSendTap"
-      | "exitPositionAndSendTap(uint256,uint16,bytes32,(address,address,bytes))"
+      | "exitPositionAndSendTap(uint256)"
       | "failedMessages"
       | "failedMessages(uint16,bytes,uint64)"
       | "forceResumeReceive"
@@ -256,6 +246,8 @@ export interface TwTAPInterface extends utils.Interface {
       | "renounceOwnership()"
       | "retryMessage"
       | "retryMessage(uint16,bytes,uint64,bytes)"
+      | "rewardTokenIndex"
+      | "rewardTokenIndex(address)"
       | "rewardTokens"
       | "rewardTokens(uint256)"
       | "safeTransferFrom(address,address,uint256)"
@@ -383,6 +375,14 @@ export interface TwTAPInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "claimAndSendRewards",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "claimAndSendRewards(uint256,address[])",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>[]]
+  ): string;
+  encodeFunctionData(
     functionFragment: "claimRewards",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
@@ -501,21 +501,11 @@ export interface TwTAPInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "exitPositionAndSendTap",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      ICommonOFT.LzCallParamsStruct
-    ]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "exitPositionAndSendTap(uint256,uint16,bytes32,(address,address,bytes))",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      ICommonOFT.LzCallParamsStruct
-    ]
+    functionFragment: "exitPositionAndSendTap(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "failedMessages",
@@ -787,6 +777,14 @@ export interface TwTAPInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rewardTokenIndex",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rewardTokenIndex(address)",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "rewardTokens",
@@ -1113,6 +1111,14 @@ export interface TwTAPInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "claimAndSendRewards",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "claimAndSendRewards(uint256,address[])",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "claimRewards",
     data: BytesLike
   ): Result;
@@ -1201,7 +1207,7 @@ export interface TwTAPInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "exitPositionAndSendTap(uint256,uint16,bytes32,(address,address,bytes))",
+    functionFragment: "exitPositionAndSendTap(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1379,6 +1385,14 @@ export interface TwTAPInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "retryMessage(uint16,bytes,uint64,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "rewardTokenIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "rewardTokenIndex(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1938,6 +1952,18 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
+    claimAndSendRewards(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _rewardTokens: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "claimAndSendRewards(uint256,address[])"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _rewardTokens: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     claimRewards(
       _tokenId: PromiseOrValue<BigNumberish>,
       _to: PromiseOrValue<string>,
@@ -2078,18 +2104,12 @@ export interface TwTAP extends BaseContract {
 
     exitPositionAndSendTap(
       _tokenId: PromiseOrValue<BigNumberish>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzCallParams: ICommonOFT.LzCallParamsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "exitPositionAndSendTap(uint256,uint16,bytes32,(address,address,bytes))"(
+    "exitPositionAndSendTap(uint256)"(
       _tokenId: PromiseOrValue<BigNumberish>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzCallParams: ICommonOFT.LzCallParamsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     failedMessages(
@@ -2419,6 +2439,16 @@ export interface TwTAP extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    rewardTokenIndex(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "rewardTokenIndex(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     rewardTokens(
       arg0: PromiseOrValue<BigNumberish>,
@@ -2812,6 +2842,18 @@ export interface TwTAP extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  claimAndSendRewards(
+    _tokenId: PromiseOrValue<BigNumberish>,
+    _rewardTokens: PromiseOrValue<string>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "claimAndSendRewards(uint256,address[])"(
+    _tokenId: PromiseOrValue<BigNumberish>,
+    _rewardTokens: PromiseOrValue<string>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   claimRewards(
     _tokenId: PromiseOrValue<BigNumberish>,
     _to: PromiseOrValue<string>,
@@ -2952,18 +2994,12 @@ export interface TwTAP extends BaseContract {
 
   exitPositionAndSendTap(
     _tokenId: PromiseOrValue<BigNumberish>,
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _to: PromiseOrValue<BytesLike>,
-    _lzCallParams: ICommonOFT.LzCallParamsStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "exitPositionAndSendTap(uint256,uint16,bytes32,(address,address,bytes))"(
+  "exitPositionAndSendTap(uint256)"(
     _tokenId: PromiseOrValue<BigNumberish>,
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _to: PromiseOrValue<BytesLike>,
-    _lzCallParams: ICommonOFT.LzCallParamsStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   failedMessages(
@@ -3287,6 +3323,16 @@ export interface TwTAP extends BaseContract {
     _payload: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  rewardTokenIndex(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "rewardTokenIndex(address)"(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   rewardTokens(
     arg0: PromiseOrValue<BigNumberish>,
@@ -3682,6 +3728,18 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    claimAndSendRewards(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _rewardTokens: PromiseOrValue<string>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "claimAndSendRewards(uint256,address[])"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _rewardTokens: PromiseOrValue<string>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     claimRewards(
       _tokenId: PromiseOrValue<BigNumberish>,
       _to: PromiseOrValue<string>,
@@ -3822,19 +3880,13 @@ export interface TwTAP extends BaseContract {
 
     exitPositionAndSendTap(
       _tokenId: PromiseOrValue<BigNumberish>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzCallParams: ICommonOFT.LzCallParamsStruct,
       overrides?: CallOverrides
-    ): Promise<void>;
+    ): Promise<BigNumber>;
 
-    "exitPositionAndSendTap(uint256,uint16,bytes32,(address,address,bytes))"(
+    "exitPositionAndSendTap(uint256)"(
       _tokenId: PromiseOrValue<BigNumberish>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzCallParams: ICommonOFT.LzCallParamsStruct,
       overrides?: CallOverrides
-    ): Promise<void>;
+    ): Promise<BigNumber>;
 
     failedMessages(
       arg0: PromiseOrValue<BigNumberish>,
@@ -4153,6 +4205,16 @@ export interface TwTAP extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    rewardTokenIndex(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "rewardTokenIndex(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     rewardTokens(
       arg0: PromiseOrValue<BigNumberish>,
@@ -4719,6 +4781,18 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    claimAndSendRewards(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _rewardTokens: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "claimAndSendRewards(uint256,address[])"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _rewardTokens: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     claimRewards(
       _tokenId: PromiseOrValue<BigNumberish>,
       _to: PromiseOrValue<string>,
@@ -4851,18 +4925,12 @@ export interface TwTAP extends BaseContract {
 
     exitPositionAndSendTap(
       _tokenId: PromiseOrValue<BigNumberish>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzCallParams: ICommonOFT.LzCallParamsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "exitPositionAndSendTap(uint256,uint16,bytes32,(address,address,bytes))"(
+    "exitPositionAndSendTap(uint256)"(
       _tokenId: PromiseOrValue<BigNumberish>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzCallParams: ICommonOFT.LzCallParamsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     failedMessages(
@@ -5141,6 +5209,16 @@ export interface TwTAP extends BaseContract {
       _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    rewardTokenIndex(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "rewardTokenIndex(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     rewardTokens(
@@ -5516,6 +5594,18 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    claimAndSendRewards(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _rewardTokens: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "claimAndSendRewards(uint256,address[])"(
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _rewardTokens: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     claimRewards(
       _tokenId: PromiseOrValue<BigNumberish>,
       _to: PromiseOrValue<string>,
@@ -5648,18 +5738,12 @@ export interface TwTAP extends BaseContract {
 
     exitPositionAndSendTap(
       _tokenId: PromiseOrValue<BigNumberish>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzCallParams: ICommonOFT.LzCallParamsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "exitPositionAndSendTap(uint256,uint16,bytes32,(address,address,bytes))"(
+    "exitPositionAndSendTap(uint256)"(
       _tokenId: PromiseOrValue<BigNumberish>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzCallParams: ICommonOFT.LzCallParamsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     failedMessages(
@@ -5944,6 +6028,16 @@ export interface TwTAP extends BaseContract {
       _nonce: PromiseOrValue<BigNumberish>,
       _payload: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    rewardTokenIndex(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "rewardTokenIndex(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     rewardTokens(

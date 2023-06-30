@@ -566,6 +566,78 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "tokenID",
+        type: "uint256",
+      },
+      {
+        internalType: "address[]",
+        name: "rewardTokens",
+        type: "address[]",
+      },
+      {
+        internalType: "uint16",
+        name: "lzDstChainId",
+        type: "uint16",
+      },
+      {
+        internalType: "address",
+        name: "zroPaymentAddress",
+        type: "address",
+      },
+      {
+        internalType: "bytes",
+        name: "adapterParams",
+        type: "bytes",
+      },
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "ethValue",
+            type: "uint256",
+          },
+          {
+            components: [
+              {
+                internalType: "address payable",
+                name: "refundAddress",
+                type: "address",
+              },
+              {
+                internalType: "address",
+                name: "zroPaymentAddress",
+                type: "address",
+              },
+              {
+                internalType: "bytes",
+                name: "adapterParams",
+                type: "bytes",
+              },
+            ],
+            internalType: "struct ISendFrom.LzCallParams",
+            name: "callParams",
+            type: "tuple",
+          },
+        ],
+        internalType: "struct IRewardClaimSendFromParams[]",
+        name: "rewardClaimSendParams",
+        type: "tuple[]",
+      },
+    ],
+    name: "claimRewards",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "uint16",
         name: "",
         type: "uint16",
@@ -849,6 +921,25 @@ const _abi = [
       },
     ],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint16",
+        name: "",
+        type: "uint16",
+      },
+    ],
+    name: "isLdChain",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -1233,6 +1324,24 @@ const _abi = [
       },
     ],
     name: "setConfig",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint16",
+        name: "_chainId",
+        type: "uint16",
+      },
+      {
+        internalType: "bool",
+        name: "_isLdChain",
+        type: "bool",
+      },
+    ],
+    name: "setLdChain",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

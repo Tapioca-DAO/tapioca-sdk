@@ -28,6 +28,30 @@ import type {
   PromiseOrValue,
 } from "../common";
 
+export type IRewardClaimSendFromParamsStruct = {
+  ethValue: PromiseOrValue<BigNumberish>;
+  callParams: ISendFrom.LzCallParamsStruct;
+};
+
+export type IRewardClaimSendFromParamsStructOutput = [
+  BigNumber,
+  ISendFrom.LzCallParamsStructOutput
+] & { ethValue: BigNumber; callParams: ISendFrom.LzCallParamsStructOutput };
+
+export declare namespace ISendFrom {
+  export type LzCallParamsStruct = {
+    refundAddress: PromiseOrValue<string>;
+    zroPaymentAddress: PromiseOrValue<string>;
+    adapterParams: PromiseOrValue<BytesLike>;
+  };
+
+  export type LzCallParamsStructOutput = [string, string, string] & {
+    refundAddress: string;
+    zroPaymentAddress: string;
+    adapterParams: string;
+  };
+}
+
 export declare namespace ICommonOFT {
   export type LzCallParamsStruct = {
     refundAddress: PromiseOrValue<string>;
@@ -53,6 +77,7 @@ export interface BaseTapOFTInterface extends utils.Interface {
     "balanceOf(address)": FunctionFragment;
     "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)": FunctionFragment;
     "circulatingSupply()": FunctionFragment;
+    "claimRewards(address,uint256,address[],uint16,address,bytes,(uint256,(address,address,bytes))[])": FunctionFragment;
     "creditedPackets(uint16,bytes,uint64)": FunctionFragment;
     "decimals()": FunctionFragment;
     "decreaseAllowance(address,uint256)": FunctionFragment;
@@ -63,6 +88,7 @@ export interface BaseTapOFTInterface extends utils.Interface {
     "getConfig(uint16,uint16,address,uint256)": FunctionFragment;
     "getTrustedRemoteAddress(uint16)": FunctionFragment;
     "increaseAllowance(address,uint256)": FunctionFragment;
+    "isLdChain(uint16)": FunctionFragment;
     "isTrustedRemote(uint16,bytes)": FunctionFragment;
     "lockTwTapPosition(address,uint256,uint256,uint16,address,bytes)": FunctionFragment;
     "lzEndpoint()": FunctionFragment;
@@ -78,6 +104,7 @@ export interface BaseTapOFTInterface extends utils.Interface {
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
+    "setLdChain(uint16,bool)": FunctionFragment;
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
     "setPayloadSizeLimit(uint16,uint256)": FunctionFragment;
     "setPrecrime(address)": FunctionFragment;
@@ -121,6 +148,8 @@ export interface BaseTapOFTInterface extends utils.Interface {
       | "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)"
       | "circulatingSupply"
       | "circulatingSupply()"
+      | "claimRewards"
+      | "claimRewards(address,uint256,address[],uint16,address,bytes,(uint256,(address,address,bytes))[])"
       | "creditedPackets"
       | "creditedPackets(uint16,bytes,uint64)"
       | "decimals"
@@ -141,6 +170,8 @@ export interface BaseTapOFTInterface extends utils.Interface {
       | "getTrustedRemoteAddress(uint16)"
       | "increaseAllowance"
       | "increaseAllowance(address,uint256)"
+      | "isLdChain"
+      | "isLdChain(uint16)"
       | "isTrustedRemote"
       | "isTrustedRemote(uint16,bytes)"
       | "lockTwTapPosition"
@@ -171,6 +202,8 @@ export interface BaseTapOFTInterface extends utils.Interface {
       | "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"
       | "setConfig"
       | "setConfig(uint16,uint16,uint256,bytes)"
+      | "setLdChain"
+      | "setLdChain(uint16,bool)"
       | "setMinDstGas"
       | "setMinDstGas(uint16,uint16,uint256)"
       | "setPayloadSizeLimit"
@@ -298,6 +331,30 @@ export interface BaseTapOFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "circulatingSupply()",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "claimRewards",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>[],
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>,
+      IRewardClaimSendFromParamsStruct[]
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "claimRewards(address,uint256,address[],uint16,address,bytes,(uint256,(address,address,bytes))[])",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>[],
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>,
+      IRewardClaimSendFromParamsStruct[]
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "creditedPackets",
@@ -429,6 +486,14 @@ export interface BaseTapOFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "increaseAllowance(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isLdChain",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isLdChain(uint16)",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "isTrustedRemote",
@@ -616,6 +681,14 @@ export interface BaseTapOFTInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLdChain",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLdChain(uint16,bool)",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMinDstGas",
@@ -856,6 +929,14 @@ export interface BaseTapOFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "claimRewards",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "claimRewards(address,uint256,address[],uint16,address,bytes,(uint256,(address,address,bytes))[])",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "creditedPackets",
     data: BytesLike
   ): Result;
@@ -924,6 +1005,11 @@ export interface BaseTapOFTInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "increaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "isLdChain", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "isLdChain(uint16)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1014,6 +1100,11 @@ export interface BaseTapOFTInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "setConfig", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setConfig(uint16,uint16,uint256,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "setLdChain", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setLdChain(uint16,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1546,6 +1637,28 @@ export interface BaseTapOFT extends BaseContract {
 
     "circulatingSupply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    claimRewards(
+      to: PromiseOrValue<string>,
+      tokenID: PromiseOrValue<BigNumberish>,
+      rewardTokens: PromiseOrValue<string>[],
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      adapterParams: PromiseOrValue<BytesLike>,
+      rewardClaimSendParams: IRewardClaimSendFromParamsStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "claimRewards(address,uint256,address[],uint16,address,bytes,(uint256,(address,address,bytes))[])"(
+      to: PromiseOrValue<string>,
+      tokenID: PromiseOrValue<BigNumberish>,
+      rewardTokens: PromiseOrValue<string>[],
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      adapterParams: PromiseOrValue<BytesLike>,
+      rewardClaimSendParams: IRewardClaimSendFromParamsStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     creditedPackets(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
@@ -1687,6 +1800,16 @@ export interface BaseTapOFT extends BaseContract {
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    isLdChain(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "isLdChain(uint16)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
@@ -1867,6 +1990,18 @@ export interface BaseTapOFT extends BaseContract {
       _chainId: PromiseOrValue<BigNumberish>,
       _configType: PromiseOrValue<BigNumberish>,
       _config: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setLdChain(
+      _chainId: PromiseOrValue<BigNumberish>,
+      _isLdChain: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setLdChain(uint16,bool)"(
+      _chainId: PromiseOrValue<BigNumberish>,
+      _isLdChain: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2149,6 +2284,28 @@ export interface BaseTapOFT extends BaseContract {
 
   "circulatingSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  claimRewards(
+    to: PromiseOrValue<string>,
+    tokenID: PromiseOrValue<BigNumberish>,
+    rewardTokens: PromiseOrValue<string>[],
+    lzDstChainId: PromiseOrValue<BigNumberish>,
+    zroPaymentAddress: PromiseOrValue<string>,
+    adapterParams: PromiseOrValue<BytesLike>,
+    rewardClaimSendParams: IRewardClaimSendFromParamsStruct[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "claimRewards(address,uint256,address[],uint16,address,bytes,(uint256,(address,address,bytes))[])"(
+    to: PromiseOrValue<string>,
+    tokenID: PromiseOrValue<BigNumberish>,
+    rewardTokens: PromiseOrValue<string>[],
+    lzDstChainId: PromiseOrValue<BigNumberish>,
+    zroPaymentAddress: PromiseOrValue<string>,
+    adapterParams: PromiseOrValue<BytesLike>,
+    rewardClaimSendParams: IRewardClaimSendFromParamsStruct[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   creditedPackets(
     arg0: PromiseOrValue<BigNumberish>,
     arg1: PromiseOrValue<BytesLike>,
@@ -2290,6 +2447,16 @@ export interface BaseTapOFT extends BaseContract {
     addedValue: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  isLdChain(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "isLdChain(uint16)"(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   isTrustedRemote(
     _srcChainId: PromiseOrValue<BigNumberish>,
@@ -2470,6 +2637,18 @@ export interface BaseTapOFT extends BaseContract {
     _chainId: PromiseOrValue<BigNumberish>,
     _configType: PromiseOrValue<BigNumberish>,
     _config: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setLdChain(
+    _chainId: PromiseOrValue<BigNumberish>,
+    _isLdChain: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setLdChain(uint16,bool)"(
+    _chainId: PromiseOrValue<BigNumberish>,
+    _isLdChain: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -2754,6 +2933,28 @@ export interface BaseTapOFT extends BaseContract {
 
     "circulatingSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    claimRewards(
+      to: PromiseOrValue<string>,
+      tokenID: PromiseOrValue<BigNumberish>,
+      rewardTokens: PromiseOrValue<string>[],
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      adapterParams: PromiseOrValue<BytesLike>,
+      rewardClaimSendParams: IRewardClaimSendFromParamsStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "claimRewards(address,uint256,address[],uint16,address,bytes,(uint256,(address,address,bytes))[])"(
+      to: PromiseOrValue<string>,
+      tokenID: PromiseOrValue<BigNumberish>,
+      rewardTokens: PromiseOrValue<string>[],
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      adapterParams: PromiseOrValue<BytesLike>,
+      rewardClaimSendParams: IRewardClaimSendFromParamsStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     creditedPackets(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
@@ -2893,6 +3094,16 @@ export interface BaseTapOFT extends BaseContract {
     "increaseAllowance(address,uint256)"(
       spender: PromiseOrValue<string>,
       addedValue: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    isLdChain(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "isLdChain(uint16)"(
+      arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -3071,6 +3282,18 @@ export interface BaseTapOFT extends BaseContract {
       _chainId: PromiseOrValue<BigNumberish>,
       _configType: PromiseOrValue<BigNumberish>,
       _config: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setLdChain(
+      _chainId: PromiseOrValue<BigNumberish>,
+      _isLdChain: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setLdChain(uint16,bool)"(
+      _chainId: PromiseOrValue<BigNumberish>,
+      _isLdChain: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3520,6 +3743,28 @@ export interface BaseTapOFT extends BaseContract {
 
     "circulatingSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    claimRewards(
+      to: PromiseOrValue<string>,
+      tokenID: PromiseOrValue<BigNumberish>,
+      rewardTokens: PromiseOrValue<string>[],
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      adapterParams: PromiseOrValue<BytesLike>,
+      rewardClaimSendParams: IRewardClaimSendFromParamsStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "claimRewards(address,uint256,address[],uint16,address,bytes,(uint256,(address,address,bytes))[])"(
+      to: PromiseOrValue<string>,
+      tokenID: PromiseOrValue<BigNumberish>,
+      rewardTokens: PromiseOrValue<string>[],
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      adapterParams: PromiseOrValue<BytesLike>,
+      rewardClaimSendParams: IRewardClaimSendFromParamsStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     creditedPackets(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
@@ -3652,6 +3897,16 @@ export interface BaseTapOFT extends BaseContract {
       spender: PromiseOrValue<string>,
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    isLdChain(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "isLdChain(uint16)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     isTrustedRemote(
@@ -3833,6 +4088,18 @@ export interface BaseTapOFT extends BaseContract {
       _chainId: PromiseOrValue<BigNumberish>,
       _configType: PromiseOrValue<BigNumberish>,
       _config: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setLdChain(
+      _chainId: PromiseOrValue<BigNumberish>,
+      _isLdChain: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setLdChain(uint16,bool)"(
+      _chainId: PromiseOrValue<BigNumberish>,
+      _isLdChain: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4124,6 +4391,28 @@ export interface BaseTapOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    claimRewards(
+      to: PromiseOrValue<string>,
+      tokenID: PromiseOrValue<BigNumberish>,
+      rewardTokens: PromiseOrValue<string>[],
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      adapterParams: PromiseOrValue<BytesLike>,
+      rewardClaimSendParams: IRewardClaimSendFromParamsStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "claimRewards(address,uint256,address[],uint16,address,bytes,(uint256,(address,address,bytes))[])"(
+      to: PromiseOrValue<string>,
+      tokenID: PromiseOrValue<BigNumberish>,
+      rewardTokens: PromiseOrValue<string>[],
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      zroPaymentAddress: PromiseOrValue<string>,
+      adapterParams: PromiseOrValue<BytesLike>,
+      rewardClaimSendParams: IRewardClaimSendFromParamsStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     creditedPackets(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
@@ -4256,6 +4545,16 @@ export interface BaseTapOFT extends BaseContract {
       spender: PromiseOrValue<string>,
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    isLdChain(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "isLdChain(uint16)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     isTrustedRemote(
@@ -4437,6 +4736,18 @@ export interface BaseTapOFT extends BaseContract {
       _chainId: PromiseOrValue<BigNumberish>,
       _configType: PromiseOrValue<BigNumberish>,
       _config: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setLdChain(
+      _chainId: PromiseOrValue<BigNumberish>,
+      _isLdChain: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setLdChain(uint16,bool)"(
+      _chainId: PromiseOrValue<BigNumberish>,
+      _isLdChain: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
