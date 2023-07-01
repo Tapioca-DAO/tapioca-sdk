@@ -405,7 +405,7 @@ export interface MagnetarV2Interface extends utils.Interface {
   functions: {
     "bigBangMarketInfo(address,address[])": FunctionFragment;
     "burst((uint16,address,uint256,bool,bytes)[])": FunctionFragment;
-    "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,bool,bytes)": FunctionFragment;
+    "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes))": FunctionFragment;
     "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes))": FunctionFragment;
     "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)))": FunctionFragment;
     "getAmountForAssetFraction(address,uint256)": FunctionFragment;
@@ -431,7 +431,7 @@ export interface MagnetarV2Interface extends utils.Interface {
       | "burst"
       | "burst((uint16,address,uint256,bool,bytes)[])"
       | "depositAddCollateralAndBorrowFromMarket"
-      | "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,bool,bytes)"
+      | "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes))"
       | "depositRepayAndRemoveCollateralFromMarket"
       | "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes))"
       | "exitPositionAndRemoveCollateral"
@@ -491,12 +491,11 @@ export interface MagnetarV2Interface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<boolean>,
       PromiseOrValue<boolean>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<BytesLike>
+      ICommonData.IWithdrawParamsStruct
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,bool,bytes)",
+    functionFragment: "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes))",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -504,8 +503,7 @@ export interface MagnetarV2Interface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<boolean>,
       PromiseOrValue<boolean>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<BytesLike>
+      ICommonData.IWithdrawParamsStruct
     ]
   ): string;
   encodeFunctionData(
@@ -721,7 +719,7 @@ export interface MagnetarV2Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,bool,bytes)",
+    functionFragment: "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -944,20 +942,18 @@ export interface MagnetarV2 extends BaseContract {
       borrowAmount: PromiseOrValue<BigNumberish>,
       extractFromSender: PromiseOrValue<boolean>,
       deposit: PromiseOrValue<boolean>,
-      withdraw: PromiseOrValue<boolean>,
-      withdrawData: PromiseOrValue<BytesLike>,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,bool,bytes)"(
+    "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes))"(
       market: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       collateralAmount: PromiseOrValue<BigNumberish>,
       borrowAmount: PromiseOrValue<BigNumberish>,
       extractFromSender: PromiseOrValue<boolean>,
       deposit: PromiseOrValue<boolean>,
-      withdraw: PromiseOrValue<boolean>,
-      withdrawData: PromiseOrValue<BytesLike>,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1203,20 +1199,18 @@ export interface MagnetarV2 extends BaseContract {
     borrowAmount: PromiseOrValue<BigNumberish>,
     extractFromSender: PromiseOrValue<boolean>,
     deposit: PromiseOrValue<boolean>,
-    withdraw: PromiseOrValue<boolean>,
-    withdrawData: PromiseOrValue<BytesLike>,
+    withdrawParams: ICommonData.IWithdrawParamsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,bool,bytes)"(
+  "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes))"(
     market: PromiseOrValue<string>,
     user: PromiseOrValue<string>,
     collateralAmount: PromiseOrValue<BigNumberish>,
     borrowAmount: PromiseOrValue<BigNumberish>,
     extractFromSender: PromiseOrValue<boolean>,
     deposit: PromiseOrValue<boolean>,
-    withdraw: PromiseOrValue<boolean>,
-    withdrawData: PromiseOrValue<BytesLike>,
+    withdrawParams: ICommonData.IWithdrawParamsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1462,20 +1456,18 @@ export interface MagnetarV2 extends BaseContract {
       borrowAmount: PromiseOrValue<BigNumberish>,
       extractFromSender: PromiseOrValue<boolean>,
       deposit: PromiseOrValue<boolean>,
-      withdraw: PromiseOrValue<boolean>,
-      withdrawData: PromiseOrValue<BytesLike>,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,bool,bytes)"(
+    "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes))"(
       market: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       collateralAmount: PromiseOrValue<BigNumberish>,
       borrowAmount: PromiseOrValue<BigNumberish>,
       extractFromSender: PromiseOrValue<boolean>,
       deposit: PromiseOrValue<boolean>,
-      withdraw: PromiseOrValue<boolean>,
-      withdrawData: PromiseOrValue<BytesLike>,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1740,20 +1732,18 @@ export interface MagnetarV2 extends BaseContract {
       borrowAmount: PromiseOrValue<BigNumberish>,
       extractFromSender: PromiseOrValue<boolean>,
       deposit: PromiseOrValue<boolean>,
-      withdraw: PromiseOrValue<boolean>,
-      withdrawData: PromiseOrValue<BytesLike>,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,bool,bytes)"(
+    "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes))"(
       market: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       collateralAmount: PromiseOrValue<BigNumberish>,
       borrowAmount: PromiseOrValue<BigNumberish>,
       extractFromSender: PromiseOrValue<boolean>,
       deposit: PromiseOrValue<boolean>,
-      withdraw: PromiseOrValue<boolean>,
-      withdrawData: PromiseOrValue<BytesLike>,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -2000,20 +1990,18 @@ export interface MagnetarV2 extends BaseContract {
       borrowAmount: PromiseOrValue<BigNumberish>,
       extractFromSender: PromiseOrValue<boolean>,
       deposit: PromiseOrValue<boolean>,
-      withdraw: PromiseOrValue<boolean>,
-      withdrawData: PromiseOrValue<BytesLike>,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,bool,bytes)"(
+    "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes))"(
       market: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       collateralAmount: PromiseOrValue<BigNumberish>,
       borrowAmount: PromiseOrValue<BigNumberish>,
       extractFromSender: PromiseOrValue<boolean>,
       deposit: PromiseOrValue<boolean>,
-      withdraw: PromiseOrValue<boolean>,
-      withdrawData: PromiseOrValue<BytesLike>,
+      withdrawParams: ICommonData.IWithdrawParamsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
