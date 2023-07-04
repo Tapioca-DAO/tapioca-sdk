@@ -48,7 +48,7 @@ export interface BigBangInterface extends utils.Interface {
     "collateral()": FunctionFragment;
     "collateralId()": FunctionFragment;
     "collateralizationRate()": FunctionFragment;
-    "computeClosingFactor(address,uint256)": FunctionFragment;
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
     "computeLiquidatorReward(address,uint256)": FunctionFragment;
     "computeTVLInfo(address,uint256)": FunctionFragment;
     "conservator()": FunctionFragment;
@@ -61,6 +61,7 @@ export interface BigBangInterface extends utils.Interface {
     "init(bytes)": FunctionFragment;
     "liquidate(address[],uint256[],address,bytes)": FunctionFragment;
     "liquidationBonusAmount()": FunctionFragment;
+    "liquidationMultiplier()": FunctionFragment;
     "maxDebtRate()": FunctionFragment;
     "maxLiquidatorReward()": FunctionFragment;
     "minDebtRate()": FunctionFragment;
@@ -80,7 +81,7 @@ export interface BigBangInterface extends utils.Interface {
     "removeCollateral(address,address,uint256)": FunctionFragment;
     "repay(address,address,bool,uint256)": FunctionFragment;
     "sellCollateral(address,uint256,uint256,address,bytes)": FunctionFragment;
-    "setBigBangConfig(uint256,uint256,uint256)": FunctionFragment;
+    "setBigBangConfig(uint256,uint256,uint256,uint256)": FunctionFragment;
     "setBorrowCap(uint256)": FunctionFragment;
     "setBorrowOpeningFee(uint256)": FunctionFragment;
     "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
@@ -141,7 +142,7 @@ export interface BigBangInterface extends utils.Interface {
       | "collateralizationRate"
       | "collateralizationRate()"
       | "computeClosingFactor"
-      | "computeClosingFactor(address,uint256)"
+      | "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"
       | "computeLiquidatorReward"
       | "computeLiquidatorReward(address,uint256)"
       | "computeTVLInfo"
@@ -166,6 +167,8 @@ export interface BigBangInterface extends utils.Interface {
       | "liquidate(address[],uint256[],address,bytes)"
       | "liquidationBonusAmount"
       | "liquidationBonusAmount()"
+      | "liquidationMultiplier"
+      | "liquidationMultiplier()"
       | "maxDebtRate"
       | "maxDebtRate()"
       | "maxLiquidatorReward"
@@ -205,7 +208,7 @@ export interface BigBangInterface extends utils.Interface {
       | "sellCollateral"
       | "sellCollateral(address,uint256,uint256,address,bytes)"
       | "setBigBangConfig"
-      | "setBigBangConfig(uint256,uint256,uint256)"
+      | "setBigBangConfig(uint256,uint256,uint256,uint256)"
       | "setBorrowCap"
       | "setBorrowCap(uint256)"
       | "setBorrowOpeningFee"
@@ -409,11 +412,23 @@ export interface BigBangInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "computeClosingFactor",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
-    functionFragment: "computeClosingFactor(address,uint256)",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+    functionFragment: "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "computeLiquidatorReward",
@@ -519,6 +534,14 @@ export interface BigBangInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "liquidationBonusAmount()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "liquidationMultiplier",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "liquidationMultiplier()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -716,12 +739,14 @@ export interface BigBangInterface extends utils.Interface {
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "setBigBangConfig(uint256,uint256,uint256)",
+    functionFragment: "setBigBangConfig(uint256,uint256,uint256,uint256)",
     values: [
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>
@@ -1016,7 +1041,7 @@ export interface BigBangInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "computeClosingFactor(address,uint256)",
+    functionFragment: "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1104,6 +1129,14 @@ export interface BigBangInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "liquidationBonusAmount()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "liquidationMultiplier",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "liquidationMultiplier()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1224,7 +1257,7 @@ export interface BigBangInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setBigBangConfig(uint256,uint256,uint256)",
+    functionFragment: "setBigBangConfig(uint256,uint256,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1358,6 +1391,7 @@ export interface BigBangInterface extends utils.Interface {
     "ConservatorUpdated(address,address)": EventFragment;
     "DebtRateAgainstEthUpdated(uint256,uint256)": EventFragment;
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)": EventFragment;
+    "LiquidationMultiplierUpdated(uint256,uint256)": EventFragment;
     "LogAccrue(uint256,uint64)": EventFragment;
     "LogAddCollateral(address,address,uint256)": EventFragment;
     "LogBorrow(address,address,uint256,uint256,uint256)": EventFragment;
@@ -1394,6 +1428,12 @@ export interface BigBangInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Liquidated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Liquidated(address,address[],uint256,uint256,uint256,uint256)"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LiquidationMultiplierUpdated"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LiquidationMultiplierUpdated(uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogAccrue"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogAccrue(uint256,uint64)"): EventFragment;
@@ -1509,6 +1549,18 @@ export type LiquidatedEvent = TypedEvent<
 >;
 
 export type LiquidatedEventFilter = TypedEventFilter<LiquidatedEvent>;
+
+export interface LiquidationMultiplierUpdatedEventObject {
+  oldVal: BigNumber;
+  newVal: BigNumber;
+}
+export type LiquidationMultiplierUpdatedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  LiquidationMultiplierUpdatedEventObject
+>;
+
+export type LiquidationMultiplierUpdatedEventFilter =
+  TypedEventFilter<LiquidationMultiplierUpdatedEvent>;
 
 export interface LogAccrueEventObject {
   accruedAmount: BigNumber;
@@ -1880,14 +1932,20 @@ export interface BigBang extends BaseContract {
     "collateralizationRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     computeClosingFactor(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    "computeClosingFactor(address,uint256)"(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
@@ -1994,6 +2052,10 @@ export interface BigBang extends BaseContract {
     liquidationBonusAmount(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    liquidationMultiplier(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "liquidationMultiplier()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     maxDebtRate(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -2167,13 +2229,15 @@ export interface BigBang extends BaseContract {
       _minDebtRate: PromiseOrValue<BigNumberish>,
       _maxDebtRate: PromiseOrValue<BigNumberish>,
       _debtRateAgainstEthMarket: PromiseOrValue<BigNumberish>,
+      _liquidationMultiplier: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setBigBangConfig(uint256,uint256,uint256)"(
+    "setBigBangConfig(uint256,uint256,uint256,uint256)"(
       _minDebtRate: PromiseOrValue<BigNumberish>,
       _maxDebtRate: PromiseOrValue<BigNumberish>,
       _debtRateAgainstEthMarket: PromiseOrValue<BigNumberish>,
+      _liquidationMultiplier: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2521,14 +2585,20 @@ export interface BigBang extends BaseContract {
   "collateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   computeClosingFactor(
-    user: PromiseOrValue<string>,
-    _exchangeRate: PromiseOrValue<BigNumberish>,
+    borrowPart: PromiseOrValue<BigNumberish>,
+    collateralPartInAsset: PromiseOrValue<BigNumberish>,
+    borrowPartDecimals: PromiseOrValue<BigNumberish>,
+    collateralPartDecimals: PromiseOrValue<BigNumberish>,
+    ratesPrecision: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  "computeClosingFactor(address,uint256)"(
-    user: PromiseOrValue<string>,
-    _exchangeRate: PromiseOrValue<BigNumberish>,
+  "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+    borrowPart: PromiseOrValue<BigNumberish>,
+    collateralPartInAsset: PromiseOrValue<BigNumberish>,
+    borrowPartDecimals: PromiseOrValue<BigNumberish>,
+    collateralPartDecimals: PromiseOrValue<BigNumberish>,
+    ratesPrecision: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -2633,6 +2703,10 @@ export interface BigBang extends BaseContract {
   liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
   "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   maxDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2806,13 +2880,15 @@ export interface BigBang extends BaseContract {
     _minDebtRate: PromiseOrValue<BigNumberish>,
     _maxDebtRate: PromiseOrValue<BigNumberish>,
     _debtRateAgainstEthMarket: PromiseOrValue<BigNumberish>,
+    _liquidationMultiplier: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setBigBangConfig(uint256,uint256,uint256)"(
+  "setBigBangConfig(uint256,uint256,uint256,uint256)"(
     _minDebtRate: PromiseOrValue<BigNumberish>,
     _maxDebtRate: PromiseOrValue<BigNumberish>,
     _debtRateAgainstEthMarket: PromiseOrValue<BigNumberish>,
+    _liquidationMultiplier: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3148,14 +3224,20 @@ export interface BigBang extends BaseContract {
     "collateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     computeClosingFactor(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "computeClosingFactor(address,uint256)"(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -3264,6 +3346,10 @@ export interface BigBang extends BaseContract {
     liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     maxDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3437,13 +3523,15 @@ export interface BigBang extends BaseContract {
       _minDebtRate: PromiseOrValue<BigNumberish>,
       _maxDebtRate: PromiseOrValue<BigNumberish>,
       _debtRateAgainstEthMarket: PromiseOrValue<BigNumberish>,
+      _liquidationMultiplier: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setBigBangConfig(uint256,uint256,uint256)"(
+    "setBigBangConfig(uint256,uint256,uint256,uint256)"(
       _minDebtRate: PromiseOrValue<BigNumberish>,
       _maxDebtRate: PromiseOrValue<BigNumberish>,
       _debtRateAgainstEthMarket: PromiseOrValue<BigNumberish>,
+      _liquidationMultiplier: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3677,6 +3765,15 @@ export interface BigBang extends BaseContract {
       repayedAmount?: null,
       collateralShareRemoved?: null
     ): LiquidatedEventFilter;
+
+    "LiquidationMultiplierUpdated(uint256,uint256)"(
+      oldVal?: null,
+      newVal?: null
+    ): LiquidationMultiplierUpdatedEventFilter;
+    LiquidationMultiplierUpdated(
+      oldVal?: null,
+      newVal?: null
+    ): LiquidationMultiplierUpdatedEventFilter;
 
     "LogAccrue(uint256,uint64)"(
       accruedAmount?: null,
@@ -3967,14 +4064,20 @@ export interface BigBang extends BaseContract {
     "collateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     computeClosingFactor(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "computeClosingFactor(address,uint256)"(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -4067,6 +4170,10 @@ export interface BigBang extends BaseContract {
     liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     maxDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -4240,13 +4347,15 @@ export interface BigBang extends BaseContract {
       _minDebtRate: PromiseOrValue<BigNumberish>,
       _maxDebtRate: PromiseOrValue<BigNumberish>,
       _debtRateAgainstEthMarket: PromiseOrValue<BigNumberish>,
+      _liquidationMultiplier: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setBigBangConfig(uint256,uint256,uint256)"(
+    "setBigBangConfig(uint256,uint256,uint256,uint256)"(
       _minDebtRate: PromiseOrValue<BigNumberish>,
       _maxDebtRate: PromiseOrValue<BigNumberish>,
       _debtRateAgainstEthMarket: PromiseOrValue<BigNumberish>,
+      _liquidationMultiplier: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4587,14 +4696,20 @@ export interface BigBang extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     computeClosingFactor(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "computeClosingFactor(address,uint256)"(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -4695,6 +4810,14 @@ export interface BigBang extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "liquidationBonusAmount()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    liquidationMultiplier(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "liquidationMultiplier()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -4878,13 +5001,15 @@ export interface BigBang extends BaseContract {
       _minDebtRate: PromiseOrValue<BigNumberish>,
       _maxDebtRate: PromiseOrValue<BigNumberish>,
       _debtRateAgainstEthMarket: PromiseOrValue<BigNumberish>,
+      _liquidationMultiplier: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setBigBangConfig(uint256,uint256,uint256)"(
+    "setBigBangConfig(uint256,uint256,uint256,uint256)"(
       _minDebtRate: PromiseOrValue<BigNumberish>,
       _maxDebtRate: PromiseOrValue<BigNumberish>,
       _debtRateAgainstEthMarket: PromiseOrValue<BigNumberish>,
+      _liquidationMultiplier: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

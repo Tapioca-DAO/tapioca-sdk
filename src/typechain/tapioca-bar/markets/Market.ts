@@ -43,12 +43,13 @@ export interface MarketInterface extends utils.Interface {
     "collateral()": FunctionFragment;
     "collateralId()": FunctionFragment;
     "collateralizationRate()": FunctionFragment;
-    "computeClosingFactor(address,uint256)": FunctionFragment;
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
     "computeLiquidatorReward(address,uint256)": FunctionFragment;
     "computeTVLInfo(address,uint256)": FunctionFragment;
     "conservator()": FunctionFragment;
     "exchangeRate()": FunctionFragment;
     "liquidationBonusAmount()": FunctionFragment;
+    "liquidationMultiplier()": FunctionFragment;
     "maxLiquidatorReward()": FunctionFragment;
     "minLiquidatorReward()": FunctionFragment;
     "nonces(address)": FunctionFragment;
@@ -109,7 +110,7 @@ export interface MarketInterface extends utils.Interface {
       | "collateralizationRate"
       | "collateralizationRate()"
       | "computeClosingFactor"
-      | "computeClosingFactor(address,uint256)"
+      | "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"
       | "computeLiquidatorReward"
       | "computeLiquidatorReward(address,uint256)"
       | "computeTVLInfo"
@@ -120,6 +121,8 @@ export interface MarketInterface extends utils.Interface {
       | "exchangeRate()"
       | "liquidationBonusAmount"
       | "liquidationBonusAmount()"
+      | "liquidationMultiplier"
+      | "liquidationMultiplier()"
       | "maxLiquidatorReward"
       | "maxLiquidatorReward()"
       | "minLiquidatorReward"
@@ -275,11 +278,23 @@ export interface MarketInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "computeClosingFactor",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
-    functionFragment: "computeClosingFactor(address,uint256)",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+    functionFragment: "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "computeLiquidatorReward",
@@ -319,6 +334,14 @@ export interface MarketInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "liquidationBonusAmount()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "liquidationMultiplier",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "liquidationMultiplier()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -673,7 +696,7 @@ export interface MarketInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "computeClosingFactor(address,uint256)",
+    functionFragment: "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -714,6 +737,14 @@ export interface MarketInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "liquidationBonusAmount()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "liquidationMultiplier",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "liquidationMultiplier()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -896,6 +927,7 @@ export interface MarketInterface extends utils.Interface {
     "ApprovalBorrow(address,address,uint256)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)": EventFragment;
+    "LiquidationMultiplierUpdated(uint256,uint256)": EventFragment;
     "LogBorrowCapUpdated(uint256,uint256)": EventFragment;
     "LogBorrowingFee(uint256,uint256)": EventFragment;
     "LogExchangeRate(uint256)": EventFragment;
@@ -921,6 +953,12 @@ export interface MarketInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Liquidated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Liquidated(address,address[],uint256,uint256,uint256,uint256)"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LiquidationMultiplierUpdated"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LiquidationMultiplierUpdated(uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogBorrowCapUpdated"): EventFragment;
   getEvent(
@@ -998,6 +1036,18 @@ export type LiquidatedEvent = TypedEvent<
 >;
 
 export type LiquidatedEventFilter = TypedEventFilter<LiquidatedEvent>;
+
+export interface LiquidationMultiplierUpdatedEventObject {
+  oldVal: BigNumber;
+  newVal: BigNumber;
+}
+export type LiquidationMultiplierUpdatedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  LiquidationMultiplierUpdatedEventObject
+>;
+
+export type LiquidationMultiplierUpdatedEventFilter =
+  TypedEventFilter<LiquidationMultiplierUpdatedEvent>;
 
 export interface LogBorrowCapUpdatedEventObject {
   _oldVal: BigNumber;
@@ -1209,14 +1259,20 @@ export interface Market extends BaseContract {
     "collateralizationRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     computeClosingFactor(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    "computeClosingFactor(address,uint256)"(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
@@ -1267,6 +1323,10 @@ export interface Market extends BaseContract {
     liquidationBonusAmount(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    liquidationMultiplier(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "liquidationMultiplier()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     maxLiquidatorReward(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -1614,14 +1674,20 @@ export interface Market extends BaseContract {
   "collateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   computeClosingFactor(
-    user: PromiseOrValue<string>,
-    _exchangeRate: PromiseOrValue<BigNumberish>,
+    borrowPart: PromiseOrValue<BigNumberish>,
+    collateralPartInAsset: PromiseOrValue<BigNumberish>,
+    borrowPartDecimals: PromiseOrValue<BigNumberish>,
+    collateralPartDecimals: PromiseOrValue<BigNumberish>,
+    ratesPrecision: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  "computeClosingFactor(address,uint256)"(
-    user: PromiseOrValue<string>,
-    _exchangeRate: PromiseOrValue<BigNumberish>,
+  "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+    borrowPart: PromiseOrValue<BigNumberish>,
+    collateralPartInAsset: PromiseOrValue<BigNumberish>,
+    borrowPartDecimals: PromiseOrValue<BigNumberish>,
+    collateralPartDecimals: PromiseOrValue<BigNumberish>,
+    ratesPrecision: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -1672,6 +1738,10 @@ export interface Market extends BaseContract {
   liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
   "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   maxLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2011,14 +2081,20 @@ export interface Market extends BaseContract {
     "collateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     computeClosingFactor(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "computeClosingFactor(address,uint256)"(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -2069,6 +2145,10 @@ export interface Market extends BaseContract {
     liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     maxLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2366,6 +2446,15 @@ export interface Market extends BaseContract {
       collateralShareRemoved?: null
     ): LiquidatedEventFilter;
 
+    "LiquidationMultiplierUpdated(uint256,uint256)"(
+      oldVal?: null,
+      newVal?: null
+    ): LiquidationMultiplierUpdatedEventFilter;
+    LiquidationMultiplierUpdated(
+      oldVal?: null,
+      newVal?: null
+    ): LiquidationMultiplierUpdatedEventFilter;
+
     "LogBorrowCapUpdated(uint256,uint256)"(
       _oldVal?: null,
       _newVal?: null
@@ -2517,14 +2606,20 @@ export interface Market extends BaseContract {
     "collateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     computeClosingFactor(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "computeClosingFactor(address,uint256)"(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -2563,6 +2658,10 @@ export interface Market extends BaseContract {
     liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     maxLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2911,14 +3010,20 @@ export interface Market extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     computeClosingFactor(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "computeClosingFactor(address,uint256)"(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -2959,6 +3064,14 @@ export interface Market extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "liquidationBonusAmount()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    liquidationMultiplier(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "liquidationMultiplier()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
