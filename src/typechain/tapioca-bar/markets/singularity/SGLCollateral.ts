@@ -60,7 +60,7 @@ export interface SGLCollateralInterface extends utils.Interface {
     "collateral()": FunctionFragment;
     "collateralId()": FunctionFragment;
     "collateralizationRate()": FunctionFragment;
-    "computeClosingFactor(address,uint256)": FunctionFragment;
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
     "computeLiquidatorReward(address,uint256)": FunctionFragment;
     "computeTVLInfo(address,uint256)": FunctionFragment;
     "conservator()": FunctionFragment;
@@ -148,7 +148,7 @@ export interface SGLCollateralInterface extends utils.Interface {
       | "collateralizationRate"
       | "collateralizationRate()"
       | "computeClosingFactor"
-      | "computeClosingFactor(address,uint256)"
+      | "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"
       | "computeLiquidatorReward"
       | "computeLiquidatorReward(address,uint256)"
       | "computeTVLInfo"
@@ -376,11 +376,23 @@ export interface SGLCollateralInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "computeClosingFactor",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
-    functionFragment: "computeClosingFactor(address,uint256)",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+    functionFragment: "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "computeLiquidatorReward",
@@ -910,7 +922,7 @@ export interface SGLCollateralInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "computeClosingFactor(address,uint256)",
+    functionFragment: "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1941,14 +1953,20 @@ export interface SGLCollateral extends BaseContract {
     "collateralizationRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     computeClosingFactor(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    "computeClosingFactor(address,uint256)"(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
@@ -2502,14 +2520,20 @@ export interface SGLCollateral extends BaseContract {
   "collateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   computeClosingFactor(
-    user: PromiseOrValue<string>,
-    _exchangeRate: PromiseOrValue<BigNumberish>,
+    borrowPart: PromiseOrValue<BigNumberish>,
+    collateralPartInAsset: PromiseOrValue<BigNumberish>,
+    borrowPartDecimals: PromiseOrValue<BigNumberish>,
+    collateralPartDecimals: PromiseOrValue<BigNumberish>,
+    ratesPrecision: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  "computeClosingFactor(address,uint256)"(
-    user: PromiseOrValue<string>,
-    _exchangeRate: PromiseOrValue<BigNumberish>,
+  "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+    borrowPart: PromiseOrValue<BigNumberish>,
+    collateralPartInAsset: PromiseOrValue<BigNumberish>,
+    borrowPartDecimals: PromiseOrValue<BigNumberish>,
+    collateralPartDecimals: PromiseOrValue<BigNumberish>,
+    ratesPrecision: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -3033,14 +3057,20 @@ export interface SGLCollateral extends BaseContract {
     "collateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     computeClosingFactor(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "computeClosingFactor(address,uint256)"(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -3858,14 +3888,20 @@ export interface SGLCollateral extends BaseContract {
     "collateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     computeClosingFactor(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "computeClosingFactor(address,uint256)"(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -4358,14 +4394,20 @@ export interface SGLCollateral extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     computeClosingFactor(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "computeClosingFactor(address,uint256)"(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
