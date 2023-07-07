@@ -1885,7 +1885,7 @@ export interface BaseTOFTLeverageModule extends BaseContract {
 
     initMultiSell(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -1896,7 +1896,7 @@ export interface BaseTOFTLeverageModule extends BaseContract {
 
     "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -2554,7 +2554,7 @@ export interface BaseTOFTLeverageModule extends BaseContract {
 
   initMultiSell(
     from: PromiseOrValue<string>,
-    share: PromiseOrValue<BigNumberish>,
+    amount: PromiseOrValue<BigNumberish>,
     swapData: IUSDOBase.ILeverageSwapDataStruct,
     lzData: IUSDOBase.ILeverageLZDataStruct,
     externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -2565,7 +2565,7 @@ export interface BaseTOFTLeverageModule extends BaseContract {
 
   "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
     from: PromiseOrValue<string>,
-    share: PromiseOrValue<BigNumberish>,
+    amount: PromiseOrValue<BigNumberish>,
     swapData: IUSDOBase.ILeverageSwapDataStruct,
     lzData: IUSDOBase.ILeverageLZDataStruct,
     externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -3225,7 +3225,7 @@ export interface BaseTOFTLeverageModule extends BaseContract {
 
     initMultiSell(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -3236,7 +3236,7 @@ export interface BaseTOFTLeverageModule extends BaseContract {
 
     "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -4027,7 +4027,7 @@ export interface BaseTOFTLeverageModule extends BaseContract {
 
     initMultiSell(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -4038,7 +4038,7 @@ export interface BaseTOFTLeverageModule extends BaseContract {
 
     "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -4697,7 +4697,7 @@ export interface BaseTOFTLeverageModule extends BaseContract {
 
     initMultiSell(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -4708,7 +4708,7 @@ export interface BaseTOFTLeverageModule extends BaseContract {
 
     "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,

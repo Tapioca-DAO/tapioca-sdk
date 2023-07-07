@@ -49,13 +49,13 @@ export declare namespace ITapiocaOFT {
   };
 
   export type IRemoveParamsStruct = {
-    share: PromiseOrValue<BigNumberish>;
+    amount: PromiseOrValue<BigNumberish>;
     marketHelper: PromiseOrValue<string>;
     market: PromiseOrValue<string>;
   };
 
   export type IRemoveParamsStructOutput = [BigNumber, string, string] & {
-    share: BigNumber;
+    amount: BigNumber;
     marketHelper: string;
     market: string;
   };
