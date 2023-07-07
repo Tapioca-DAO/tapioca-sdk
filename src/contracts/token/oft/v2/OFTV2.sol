@@ -8,7 +8,6 @@ import "./BaseOFTV2.sol";
 contract OFTV2 is BaseOFTV2, ERC20 {
 
     uint internal immutable ld2sdRate;
-    mapping(uint16 => bool) public isLdChain;
 
     constructor(string memory _name, string memory _symbol, uint8 _sharedDecimals, address _lzEndpoint) ERC20(_name, _symbol) BaseOFTV2(_sharedDecimals, _lzEndpoint) {
         uint8 decimals = decimals();
@@ -25,16 +24,6 @@ contract OFTV2 is BaseOFTV2, ERC20 {
 
     function token() public view virtual override returns (address) {
         return address(this);
-    }
-
-    
-    /************************************************************************
-    * owner functions
-    ************************************************************************/
-
-    
-    function setLdChain(uint16 _chainId, bool _isLdChain) public virtual onlyOwner {
-        isLdChain[_chainId] = _isLdChain;
     }
 
     /************************************************************************
@@ -61,7 +50,6 @@ contract OFTV2 is BaseOFTV2, ERC20 {
     }
 
     function _ld2sdRate() internal view virtual override returns (uint) {
-        if(isLdChain[lzEndpoint.getChainId()]) return ld2sdRate;
-        return 1;
+        return ld2sdRate;
     }
 }
