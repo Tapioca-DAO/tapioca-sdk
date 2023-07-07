@@ -335,11 +335,11 @@ export declare namespace ITapiocaOptionLiquidityProvision {
 export declare namespace IUSDOBase {
   export type IRemoveAndRepayStruct = {
     removeAssetFromSGL: PromiseOrValue<boolean>;
-    removeShare: PromiseOrValue<BigNumberish>;
+    removeAmount: PromiseOrValue<BigNumberish>;
     repayAssetOnBB: PromiseOrValue<boolean>;
     repayAmount: PromiseOrValue<BigNumberish>;
     removeCollateralFromBB: PromiseOrValue<boolean>;
-    collateralShare: PromiseOrValue<BigNumberish>;
+    collateralAmount: PromiseOrValue<BigNumberish>;
     exitData: ITapiocaOptionsBroker.IOptionsExitDataStruct;
     unlockData: ITapiocaOptionLiquidityProvision.IOptionsUnlockDataStruct;
     assetWithdrawData: ICommonData.IWithdrawParamsStruct;
@@ -359,11 +359,11 @@ export declare namespace IUSDOBase {
     ICommonData.IWithdrawParamsStructOutput
   ] & {
     removeAssetFromSGL: boolean;
-    removeShare: BigNumber;
+    removeAmount: BigNumber;
     repayAssetOnBB: boolean;
     repayAmount: BigNumber;
     removeCollateralFromBB: boolean;
-    collateralShare: BigNumber;
+    collateralAmount: BigNumber;
     exitData: ITapiocaOptionsBroker.IOptionsExitDataStructOutput;
     unlockData: ITapiocaOptionLiquidityProvision.IOptionsUnlockDataStructOutput;
     assetWithdrawData: ICommonData.IWithdrawParamsStructOutput;
