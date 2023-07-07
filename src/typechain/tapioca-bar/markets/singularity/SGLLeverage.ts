@@ -2247,7 +2247,7 @@ export interface SGLLeverage extends BaseContract {
 
     multiHopSellCollateral(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -2256,7 +2256,7 @@ export interface SGLLeverage extends BaseContract {
 
     "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -2846,7 +2846,7 @@ export interface SGLLeverage extends BaseContract {
 
   multiHopSellCollateral(
     from: PromiseOrValue<string>,
-    share: PromiseOrValue<BigNumberish>,
+    amount: PromiseOrValue<BigNumberish>,
     swapData: IUSDOBase.ILeverageSwapDataStruct,
     lzData: IUSDOBase.ILeverageLZDataStruct,
     externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -2855,7 +2855,7 @@ export interface SGLLeverage extends BaseContract {
 
   "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
     from: PromiseOrValue<string>,
-    share: PromiseOrValue<BigNumberish>,
+    amount: PromiseOrValue<BigNumberish>,
     swapData: IUSDOBase.ILeverageSwapDataStruct,
     lzData: IUSDOBase.ILeverageLZDataStruct,
     externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -3427,7 +3427,7 @@ export interface SGLLeverage extends BaseContract {
 
     multiHopSellCollateral(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -3436,7 +3436,7 @@ export interface SGLLeverage extends BaseContract {
 
     "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -4276,7 +4276,7 @@ export interface SGLLeverage extends BaseContract {
 
     multiHopSellCollateral(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -4285,7 +4285,7 @@ export interface SGLLeverage extends BaseContract {
 
     "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -4876,7 +4876,7 @@ export interface SGLLeverage extends BaseContract {
 
     multiHopSellCollateral(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -4885,7 +4885,7 @@ export interface SGLLeverage extends BaseContract {
 
     "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
