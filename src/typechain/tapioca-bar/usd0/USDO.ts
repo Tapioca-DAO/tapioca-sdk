@@ -225,11 +225,11 @@ export declare namespace IUSDOBase {
 
   export type IRemoveAndRepayStruct = {
     removeAssetFromSGL: PromiseOrValue<boolean>;
-    removeShare: PromiseOrValue<BigNumberish>;
+    removeAmount: PromiseOrValue<BigNumberish>;
     repayAssetOnBB: PromiseOrValue<boolean>;
     repayAmount: PromiseOrValue<BigNumberish>;
     removeCollateralFromBB: PromiseOrValue<boolean>;
-    collateralShare: PromiseOrValue<BigNumberish>;
+    collateralAmount: PromiseOrValue<BigNumberish>;
     exitData: ITapiocaOptionsBroker.IOptionsExitDataStruct;
     unlockData: ITapiocaOptionLiquidityProvision.IOptionsUnlockDataStruct;
     assetWithdrawData: ICommonData.IWithdrawParamsStruct;
@@ -249,11 +249,11 @@ export declare namespace IUSDOBase {
     ICommonData.IWithdrawParamsStructOutput
   ] & {
     removeAssetFromSGL: boolean;
-    removeShare: BigNumber;
+    removeAmount: BigNumber;
     repayAssetOnBB: boolean;
     repayAmount: BigNumber;
     removeCollateralFromBB: boolean;
-    collateralShare: BigNumber;
+    collateralAmount: BigNumber;
     exitData: ITapiocaOptionsBroker.IOptionsExitDataStructOutput;
     unlockData: ITapiocaOptionLiquidityProvision.IOptionsUnlockDataStructOutput;
     assetWithdrawData: ICommonData.IWithdrawParamsStructOutput;
@@ -416,6 +416,7 @@ export interface USDOInterface extends utils.Interface {
     "getTrustedRemoteAddress(uint16)": FunctionFragment;
     "increaseAllowance(address,uint256)": FunctionFragment;
     "initMultiHopBuy(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
+    "isLdChain(uint16)": FunctionFragment;
     "isTrustedRemote(uint16,bytes)": FunctionFragment;
     "leverageModule()": FunctionFragment;
     "lzEndpoint()": FunctionFragment;
@@ -436,6 +437,7 @@ export interface USDOInterface extends utils.Interface {
     "precrime()": FunctionFragment;
     "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
+    "rescueEth(uint256,address)": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
     "sendAndLendOrRepay(address,address,uint16,address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes),bytes)": FunctionFragment;
@@ -445,6 +447,7 @@ export interface USDOInterface extends utils.Interface {
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
     "setConservator(address)": FunctionFragment;
     "setFlashMintFee(uint256)": FunctionFragment;
+    "setLdChain(uint16,bool)": FunctionFragment;
     "setMaxFlashMintable(uint256)": FunctionFragment;
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
     "setMinterStatus(address,bool)": FunctionFragment;
@@ -530,6 +533,8 @@ export interface USDOInterface extends utils.Interface {
       | "increaseAllowance(address,uint256)"
       | "initMultiHopBuy"
       | "initMultiHopBuy(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
+      | "isLdChain"
+      | "isLdChain(uint16)"
       | "isTrustedRemote"
       | "isTrustedRemote(uint16,bytes)"
       | "leverageModule"
@@ -570,6 +575,8 @@ export interface USDOInterface extends utils.Interface {
       | "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "renounceOwnership"
       | "renounceOwnership()"
+      | "rescueEth"
+      | "rescueEth(uint256,address)"
       | "retryMessage"
       | "retryMessage(uint16,bytes,uint64,bytes)"
       | "sendAndCall"
@@ -588,6 +595,8 @@ export interface USDOInterface extends utils.Interface {
       | "setConservator(address)"
       | "setFlashMintFee"
       | "setFlashMintFee(uint256)"
+      | "setLdChain"
+      | "setLdChain(uint16,bool)"
       | "setMaxFlashMintable"
       | "setMaxFlashMintable(uint256)"
       | "setMinDstGas"
@@ -970,6 +979,14 @@ export interface USDOInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "isLdChain",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isLdChain(uint16)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "isTrustedRemote",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
   ): string;
@@ -1163,6 +1180,14 @@ export interface USDOInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "rescueEth",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rescueEth(uint256,address)",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "retryMessage",
     values: [
       PromiseOrValue<BigNumberish>,
@@ -1311,6 +1336,14 @@ export interface USDOInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "setFlashMintFee(uint256)",
     values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLdChain",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLdChain(uint16,bool)",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMaxFlashMintable",
@@ -1711,6 +1744,11 @@ export interface USDOInterface extends utils.Interface {
     functionFragment: "initMultiHopBuy(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "isLdChain", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "isLdChain(uint16)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "isTrustedRemote",
     data: BytesLike
@@ -1832,6 +1870,11 @@ export interface USDOInterface extends utils.Interface {
     functionFragment: "renounceOwnership()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "rescueEth", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "rescueEth(uint256,address)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "retryMessage",
     data: BytesLike
@@ -1896,6 +1939,11 @@ export interface USDOInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setFlashMintFee(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "setLdChain", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setLdChain(uint16,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2790,6 +2838,16 @@ export interface USDO extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    isLdChain(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "isLdChain(uint16)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -2978,6 +3036,18 @@ export interface USDO extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     retryMessage(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -3121,6 +3191,18 @@ export interface USDO extends BaseContract {
 
     "setFlashMintFee(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setLdChain(
+      _chainId: PromiseOrValue<BigNumberish>,
+      _isLdChain: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setLdChain(uint16,bool)"(
+      _chainId: PromiseOrValue<BigNumberish>,
+      _isLdChain: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -3683,6 +3765,16 @@ export interface USDO extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  isLdChain(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "isLdChain(uint16)"(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
   isTrustedRemote(
     _srcChainId: PromiseOrValue<BigNumberish>,
     _srcAddress: PromiseOrValue<BytesLike>,
@@ -3871,6 +3963,18 @@ export interface USDO extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  rescueEth(
+    amount: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "rescueEth(uint256,address)"(
+    amount: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   retryMessage(
     _srcChainId: PromiseOrValue<BigNumberish>,
     _srcAddress: PromiseOrValue<BytesLike>,
@@ -4014,6 +4118,18 @@ export interface USDO extends BaseContract {
 
   "setFlashMintFee(uint256)"(
     _val: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setLdChain(
+    _chainId: PromiseOrValue<BigNumberish>,
+    _isLdChain: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setLdChain(uint16,bool)"(
+    _chainId: PromiseOrValue<BigNumberish>,
+    _isLdChain: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -4578,6 +4694,16 @@ export interface USDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    isLdChain(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "isLdChain(uint16)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -4762,6 +4888,18 @@ export interface USDO extends BaseContract {
 
     "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
 
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     retryMessage(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -4905,6 +5043,18 @@ export interface USDO extends BaseContract {
 
     "setFlashMintFee(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setLdChain(
+      _chainId: PromiseOrValue<BigNumberish>,
+      _isLdChain: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setLdChain(uint16,bool)"(
+      _chainId: PromiseOrValue<BigNumberish>,
+      _isLdChain: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -5673,6 +5823,16 @@ export interface USDO extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    isLdChain(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "isLdChain(uint16)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -5861,6 +6021,18 @@ export interface USDO extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     retryMessage(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -6004,6 +6176,18 @@ export interface USDO extends BaseContract {
 
     "setFlashMintFee(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setLdChain(
+      _chainId: PromiseOrValue<BigNumberish>,
+      _isLdChain: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setLdChain(uint16,bool)"(
+      _chainId: PromiseOrValue<BigNumberish>,
+      _isLdChain: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -6569,6 +6753,16 @@ export interface USDO extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    isLdChain(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "isLdChain(uint16)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -6759,6 +6953,18 @@ export interface USDO extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     retryMessage(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -6902,6 +7108,18 @@ export interface USDO extends BaseContract {
 
     "setFlashMintFee(uint256)"(
       _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setLdChain(
+      _chainId: PromiseOrValue<BigNumberish>,
+      _isLdChain: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setLdChain(uint16,bool)"(
+      _chainId: PromiseOrValue<BigNumberish>,
+      _isLdChain: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

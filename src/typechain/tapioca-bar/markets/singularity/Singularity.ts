@@ -123,7 +123,7 @@ export interface SingularityInterface extends utils.Interface {
     "collateralModule()": FunctionFragment;
     "collateralizationRate()": FunctionFragment;
     "computeAllowedLendShare(uint256,uint256)": FunctionFragment;
-    "computeClosingFactor(address,uint256)": FunctionFragment;
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
     "computeLiquidatorReward(address,uint256)": FunctionFragment;
     "computeTVLInfo(address,uint256)": FunctionFragment;
     "conservator()": FunctionFragment;
@@ -164,6 +164,7 @@ export interface SingularityInterface extends utils.Interface {
     "removeAsset(address,address,uint256)": FunctionFragment;
     "removeCollateral(address,address,uint256)": FunctionFragment;
     "repay(address,address,bool,uint256)": FunctionFragment;
+    "rescueEth(uint256,address)": FunctionFragment;
     "sellCollateral(address,uint256,uint256,address,bytes)": FunctionFragment;
     "setBorrowCap(uint256)": FunctionFragment;
     "setBorrowOpeningFee(uint256)": FunctionFragment;
@@ -238,7 +239,7 @@ export interface SingularityInterface extends utils.Interface {
       | "computeAllowedLendShare"
       | "computeAllowedLendShare(uint256,uint256)"
       | "computeClosingFactor"
-      | "computeClosingFactor(address,uint256)"
+      | "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"
       | "computeLiquidatorReward"
       | "computeLiquidatorReward(address,uint256)"
       | "computeTVLInfo"
@@ -319,6 +320,8 @@ export interface SingularityInterface extends utils.Interface {
       | "removeCollateral(address,address,uint256)"
       | "repay"
       | "repay(address,address,bool,uint256)"
+      | "rescueEth"
+      | "rescueEth(uint256,address)"
       | "sellCollateral"
       | "sellCollateral(address,uint256,uint256,address,bytes)"
       | "setBorrowCap"
@@ -576,11 +579,23 @@ export interface SingularityInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "computeClosingFactor",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
-    functionFragment: "computeClosingFactor(address,uint256)",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+    functionFragment: "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "computeLiquidatorReward",
@@ -964,6 +979,14 @@ export interface SingularityInterface extends utils.Interface {
       PromiseOrValue<boolean>,
       PromiseOrValue<BigNumberish>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rescueEth",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rescueEth(uint256,address)",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "sellCollateral",
@@ -1364,7 +1387,7 @@ export interface SingularityInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "computeClosingFactor(address,uint256)",
+    functionFragment: "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1628,6 +1651,11 @@ export interface SingularityInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "repay", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "repay(address,address,bool,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "rescueEth", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "rescueEth(uint256,address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2573,14 +2601,20 @@ export interface Singularity extends BaseContract {
     ): Promise<[BigNumber] & { share: BigNumber }>;
 
     computeClosingFactor(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    "computeClosingFactor(address,uint256)"(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
@@ -2933,6 +2967,18 @@ export interface Singularity extends BaseContract {
       to: PromiseOrValue<string>,
       skim: PromiseOrValue<boolean>,
       part: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -3404,14 +3450,20 @@ export interface Singularity extends BaseContract {
   ): Promise<BigNumber>;
 
   computeClosingFactor(
-    user: PromiseOrValue<string>,
-    _exchangeRate: PromiseOrValue<BigNumberish>,
+    borrowPart: PromiseOrValue<BigNumberish>,
+    collateralPartInAsset: PromiseOrValue<BigNumberish>,
+    borrowPartDecimals: PromiseOrValue<BigNumberish>,
+    collateralPartDecimals: PromiseOrValue<BigNumberish>,
+    ratesPrecision: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  "computeClosingFactor(address,uint256)"(
-    user: PromiseOrValue<string>,
-    _exchangeRate: PromiseOrValue<BigNumberish>,
+  "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+    borrowPart: PromiseOrValue<BigNumberish>,
+    collateralPartInAsset: PromiseOrValue<BigNumberish>,
+    borrowPartDecimals: PromiseOrValue<BigNumberish>,
+    collateralPartDecimals: PromiseOrValue<BigNumberish>,
+    ratesPrecision: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -3752,6 +3804,18 @@ export interface Singularity extends BaseContract {
     to: PromiseOrValue<string>,
     skim: PromiseOrValue<boolean>,
     part: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  rescueEth(
+    amount: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "rescueEth(uint256,address)"(
+    amount: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -4205,14 +4269,20 @@ export interface Singularity extends BaseContract {
     ): Promise<BigNumber>;
 
     computeClosingFactor(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "computeClosingFactor(address,uint256)"(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -4560,6 +4630,18 @@ export interface Singularity extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     sellCollateral(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
@@ -4833,10 +4915,10 @@ export interface Singularity extends BaseContract {
     ): ApprovalBorrowEventFilter;
 
     "BidExecutionSwapperUpdated(address)"(
-      newAddress?: null
+      newAddress?: PromiseOrValue<string> | null
     ): BidExecutionSwapperUpdatedEventFilter;
     BidExecutionSwapperUpdated(
-      newAddress?: null
+      newAddress?: PromiseOrValue<string> | null
     ): BidExecutionSwapperUpdatedEventFilter;
 
     "ConservatorUpdated(address,address)"(
@@ -4858,7 +4940,7 @@ export interface Singularity extends BaseContract {
     ): InterestElasticityUpdatedEventFilter;
 
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)"(
-      liquidator?: null,
+      liquidator?: PromiseOrValue<string> | null,
       users?: null,
       liquidatorReward?: null,
       protocolReward?: null,
@@ -4866,7 +4948,7 @@ export interface Singularity extends BaseContract {
       collateralShareRemoved?: null
     ): LiquidatedEventFilter;
     Liquidated(
-      liquidator?: null,
+      liquidator?: PromiseOrValue<string> | null,
       users?: null,
       liquidatorReward?: null,
       protocolReward?: null,
@@ -5095,9 +5177,11 @@ export interface Singularity extends BaseContract {
     ): TransferEventFilter;
 
     "UsdoSwapperUpdated(address)"(
-      newAddress?: null
+      newAddress?: PromiseOrValue<string> | null
     ): UsdoSwapperUpdatedEventFilter;
-    UsdoSwapperUpdated(newAddress?: null): UsdoSwapperUpdatedEventFilter;
+    UsdoSwapperUpdated(
+      newAddress?: PromiseOrValue<string> | null
+    ): UsdoSwapperUpdatedEventFilter;
   };
 
   estimateGas: {
@@ -5300,14 +5384,20 @@ export interface Singularity extends BaseContract {
     ): Promise<BigNumber>;
 
     computeClosingFactor(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "computeClosingFactor(address,uint256)"(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -5622,6 +5712,18 @@ export interface Singularity extends BaseContract {
       to: PromiseOrValue<string>,
       skim: PromiseOrValue<boolean>,
       part: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -6072,14 +6174,20 @@ export interface Singularity extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     computeClosingFactor(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "computeClosingFactor(address,uint256)"(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -6448,6 +6556,18 @@ export interface Singularity extends BaseContract {
       to: PromiseOrValue<string>,
       skim: PromiseOrValue<boolean>,
       part: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

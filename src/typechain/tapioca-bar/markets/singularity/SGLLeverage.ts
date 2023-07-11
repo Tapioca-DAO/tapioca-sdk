@@ -117,7 +117,7 @@ export interface SGLLeverageInterface extends utils.Interface {
     "collateral()": FunctionFragment;
     "collateralId()": FunctionFragment;
     "collateralizationRate()": FunctionFragment;
-    "computeClosingFactor(address,uint256)": FunctionFragment;
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
     "computeLiquidatorReward(address,uint256)": FunctionFragment;
     "computeTVLInfo(address,uint256)": FunctionFragment;
     "conservator()": FunctionFragment;
@@ -207,7 +207,7 @@ export interface SGLLeverageInterface extends utils.Interface {
       | "collateralizationRate"
       | "collateralizationRate()"
       | "computeClosingFactor"
-      | "computeClosingFactor(address,uint256)"
+      | "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"
       | "computeLiquidatorReward"
       | "computeLiquidatorReward(address,uint256)"
       | "computeTVLInfo"
@@ -441,11 +441,23 @@ export interface SGLLeverageInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "computeClosingFactor",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
-    functionFragment: "computeClosingFactor(address,uint256)",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+    functionFragment: "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "computeLiquidatorReward",
@@ -1021,7 +1033,7 @@ export interface SGLLeverageInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "computeClosingFactor(address,uint256)",
+    functionFragment: "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2070,14 +2082,20 @@ export interface SGLLeverage extends BaseContract {
     "collateralizationRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     computeClosingFactor(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    "computeClosingFactor(address,uint256)"(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
@@ -2229,7 +2247,7 @@ export interface SGLLeverage extends BaseContract {
 
     multiHopSellCollateral(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -2238,7 +2256,7 @@ export interface SGLLeverage extends BaseContract {
 
     "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -2675,14 +2693,20 @@ export interface SGLLeverage extends BaseContract {
   "collateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   computeClosingFactor(
-    user: PromiseOrValue<string>,
-    _exchangeRate: PromiseOrValue<BigNumberish>,
+    borrowPart: PromiseOrValue<BigNumberish>,
+    collateralPartInAsset: PromiseOrValue<BigNumberish>,
+    borrowPartDecimals: PromiseOrValue<BigNumberish>,
+    collateralPartDecimals: PromiseOrValue<BigNumberish>,
+    ratesPrecision: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  "computeClosingFactor(address,uint256)"(
-    user: PromiseOrValue<string>,
-    _exchangeRate: PromiseOrValue<BigNumberish>,
+  "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+    borrowPart: PromiseOrValue<BigNumberish>,
+    collateralPartInAsset: PromiseOrValue<BigNumberish>,
+    borrowPartDecimals: PromiseOrValue<BigNumberish>,
+    collateralPartDecimals: PromiseOrValue<BigNumberish>,
+    ratesPrecision: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -2822,7 +2846,7 @@ export interface SGLLeverage extends BaseContract {
 
   multiHopSellCollateral(
     from: PromiseOrValue<string>,
-    share: PromiseOrValue<BigNumberish>,
+    amount: PromiseOrValue<BigNumberish>,
     swapData: IUSDOBase.ILeverageSwapDataStruct,
     lzData: IUSDOBase.ILeverageLZDataStruct,
     externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -2831,7 +2855,7 @@ export interface SGLLeverage extends BaseContract {
 
   "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
     from: PromiseOrValue<string>,
-    share: PromiseOrValue<BigNumberish>,
+    amount: PromiseOrValue<BigNumberish>,
     swapData: IUSDOBase.ILeverageSwapDataStruct,
     lzData: IUSDOBase.ILeverageLZDataStruct,
     externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -3250,14 +3274,20 @@ export interface SGLLeverage extends BaseContract {
     "collateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     computeClosingFactor(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "computeClosingFactor(address,uint256)"(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -3397,7 +3427,7 @@ export interface SGLLeverage extends BaseContract {
 
     multiHopSellCollateral(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -3406,7 +3436,7 @@ export interface SGLLeverage extends BaseContract {
 
     "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -3720,10 +3750,10 @@ export interface SGLLeverage extends BaseContract {
     ): ApprovalBorrowEventFilter;
 
     "BidExecutionSwapperUpdated(address)"(
-      newAddress?: null
+      newAddress?: PromiseOrValue<string> | null
     ): BidExecutionSwapperUpdatedEventFilter;
     BidExecutionSwapperUpdated(
-      newAddress?: null
+      newAddress?: PromiseOrValue<string> | null
     ): BidExecutionSwapperUpdatedEventFilter;
 
     "ConservatorUpdated(address,address)"(
@@ -3745,7 +3775,7 @@ export interface SGLLeverage extends BaseContract {
     ): InterestElasticityUpdatedEventFilter;
 
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)"(
-      liquidator?: null,
+      liquidator?: PromiseOrValue<string> | null,
       users?: null,
       liquidatorReward?: null,
       protocolReward?: null,
@@ -3753,7 +3783,7 @@ export interface SGLLeverage extends BaseContract {
       collateralShareRemoved?: null
     ): LiquidatedEventFilter;
     Liquidated(
-      liquidator?: null,
+      liquidator?: PromiseOrValue<string> | null,
       users?: null,
       liquidatorReward?: null,
       protocolReward?: null,
@@ -3982,9 +4012,11 @@ export interface SGLLeverage extends BaseContract {
     ): TransferEventFilter;
 
     "UsdoSwapperUpdated(address)"(
-      newAddress?: null
+      newAddress?: PromiseOrValue<string> | null
     ): UsdoSwapperUpdatedEventFilter;
-    UsdoSwapperUpdated(newAddress?: null): UsdoSwapperUpdatedEventFilter;
+    UsdoSwapperUpdated(
+      newAddress?: PromiseOrValue<string> | null
+    ): UsdoSwapperUpdatedEventFilter;
   };
 
   estimateGas: {
@@ -4119,14 +4151,20 @@ export interface SGLLeverage extends BaseContract {
     "collateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     computeClosingFactor(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "computeClosingFactor(address,uint256)"(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -4240,7 +4278,7 @@ export interface SGLLeverage extends BaseContract {
 
     multiHopSellCollateral(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -4249,7 +4287,7 @@ export interface SGLLeverage extends BaseContract {
 
     "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -4663,14 +4701,20 @@ export interface SGLLeverage extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     computeClosingFactor(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "computeClosingFactor(address,uint256)"(
-      user: PromiseOrValue<string>,
-      _exchangeRate: PromiseOrValue<BigNumberish>,
+    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+      borrowPart: PromiseOrValue<BigNumberish>,
+      collateralPartInAsset: PromiseOrValue<BigNumberish>,
+      borrowPartDecimals: PromiseOrValue<BigNumberish>,
+      collateralPartDecimals: PromiseOrValue<BigNumberish>,
+      ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -4834,7 +4878,7 @@ export interface SGLLeverage extends BaseContract {
 
     multiHopSellCollateral(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -4843,7 +4887,7 @@ export interface SGLLeverage extends BaseContract {
 
     "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
       from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
