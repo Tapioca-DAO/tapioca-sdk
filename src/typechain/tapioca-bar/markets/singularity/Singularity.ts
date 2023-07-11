@@ -164,6 +164,7 @@ export interface SingularityInterface extends utils.Interface {
     "removeAsset(address,address,uint256)": FunctionFragment;
     "removeCollateral(address,address,uint256)": FunctionFragment;
     "repay(address,address,bool,uint256)": FunctionFragment;
+    "rescueEth(uint256,address)": FunctionFragment;
     "sellCollateral(address,uint256,uint256,address,bytes)": FunctionFragment;
     "setBorrowCap(uint256)": FunctionFragment;
     "setBorrowOpeningFee(uint256)": FunctionFragment;
@@ -319,6 +320,8 @@ export interface SingularityInterface extends utils.Interface {
       | "removeCollateral(address,address,uint256)"
       | "repay"
       | "repay(address,address,bool,uint256)"
+      | "rescueEth"
+      | "rescueEth(uint256,address)"
       | "sellCollateral"
       | "sellCollateral(address,uint256,uint256,address,bytes)"
       | "setBorrowCap"
@@ -976,6 +979,14 @@ export interface SingularityInterface extends utils.Interface {
       PromiseOrValue<boolean>,
       PromiseOrValue<BigNumberish>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rescueEth",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rescueEth(uint256,address)",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "sellCollateral",
@@ -1640,6 +1651,11 @@ export interface SingularityInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "repay", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "repay(address,address,bool,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "rescueEth", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "rescueEth(uint256,address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2954,6 +2970,18 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     sellCollateral(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
@@ -3779,6 +3807,18 @@ export interface Singularity extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  rescueEth(
+    amount: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "rescueEth(uint256,address)"(
+    amount: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   sellCollateral(
     from: PromiseOrValue<string>,
     share: PromiseOrValue<BigNumberish>,
@@ -4590,6 +4630,18 @@ export interface Singularity extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     sellCollateral(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
@@ -4863,10 +4915,10 @@ export interface Singularity extends BaseContract {
     ): ApprovalBorrowEventFilter;
 
     "BidExecutionSwapperUpdated(address)"(
-      newAddress?: null
+      newAddress?: PromiseOrValue<string> | null
     ): BidExecutionSwapperUpdatedEventFilter;
     BidExecutionSwapperUpdated(
-      newAddress?: null
+      newAddress?: PromiseOrValue<string> | null
     ): BidExecutionSwapperUpdatedEventFilter;
 
     "ConservatorUpdated(address,address)"(
@@ -4888,7 +4940,7 @@ export interface Singularity extends BaseContract {
     ): InterestElasticityUpdatedEventFilter;
 
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)"(
-      liquidator?: null,
+      liquidator?: PromiseOrValue<string> | null,
       users?: null,
       liquidatorReward?: null,
       protocolReward?: null,
@@ -4896,7 +4948,7 @@ export interface Singularity extends BaseContract {
       collateralShareRemoved?: null
     ): LiquidatedEventFilter;
     Liquidated(
-      liquidator?: null,
+      liquidator?: PromiseOrValue<string> | null,
       users?: null,
       liquidatorReward?: null,
       protocolReward?: null,
@@ -5125,9 +5177,11 @@ export interface Singularity extends BaseContract {
     ): TransferEventFilter;
 
     "UsdoSwapperUpdated(address)"(
-      newAddress?: null
+      newAddress?: PromiseOrValue<string> | null
     ): UsdoSwapperUpdatedEventFilter;
-    UsdoSwapperUpdated(newAddress?: null): UsdoSwapperUpdatedEventFilter;
+    UsdoSwapperUpdated(
+      newAddress?: PromiseOrValue<string> | null
+    ): UsdoSwapperUpdatedEventFilter;
   };
 
   estimateGas: {
@@ -5658,6 +5712,18 @@ export interface Singularity extends BaseContract {
       to: PromiseOrValue<string>,
       skim: PromiseOrValue<boolean>,
       part: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -6490,6 +6556,18 @@ export interface Singularity extends BaseContract {
       to: PromiseOrValue<string>,
       skim: PromiseOrValue<boolean>,
       part: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

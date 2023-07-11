@@ -2430,8 +2430,12 @@ export interface Penrose extends BaseContract {
       _new?: PromiseOrValue<string> | null
     ): ConservatorUpdatedEventFilter;
 
-    "FeeToUpdate(address)"(newFeeTo?: null): FeeToUpdateEventFilter;
-    FeeToUpdate(newFeeTo?: null): FeeToUpdateEventFilter;
+    "FeeToUpdate(address)"(
+      newFeeTo?: PromiseOrValue<string> | null
+    ): FeeToUpdateEventFilter;
+    FeeToUpdate(
+      newFeeTo?: PromiseOrValue<string> | null
+    ): FeeToUpdateEventFilter;
 
     "LogDeploy(address,bytes,address)"(
       masterContract?: PromiseOrValue<string> | null,
@@ -2478,47 +2482,47 @@ export interface Penrose extends BaseContract {
     ): ProtocolWithdrawalEventFilter;
 
     "RegisterBigBang(address,address)"(
-      location?: null,
-      masterContract?: null
+      location?: PromiseOrValue<string> | null,
+      masterContract?: PromiseOrValue<string> | null
     ): RegisterBigBangEventFilter;
     RegisterBigBang(
-      location?: null,
-      masterContract?: null
+      location?: PromiseOrValue<string> | null,
+      masterContract?: PromiseOrValue<string> | null
     ): RegisterBigBangEventFilter;
 
     "RegisterBigBangMasterContract(address,uint8)"(
-      location?: null,
+      location?: PromiseOrValue<string> | null,
       risk?: null
     ): RegisterBigBangMasterContractEventFilter;
     RegisterBigBangMasterContract(
-      location?: null,
+      location?: PromiseOrValue<string> | null,
       risk?: null
     ): RegisterBigBangMasterContractEventFilter;
 
     "RegisterSingularity(address,address)"(
-      location?: null,
-      masterContract?: null
+      location?: PromiseOrValue<string> | null,
+      masterContract?: PromiseOrValue<string> | null
     ): RegisterSingularityEventFilter;
     RegisterSingularity(
-      location?: null,
-      masterContract?: null
+      location?: PromiseOrValue<string> | null,
+      masterContract?: PromiseOrValue<string> | null
     ): RegisterSingularityEventFilter;
 
     "RegisterSingularityMasterContract(address,uint8)"(
-      location?: null,
+      location?: PromiseOrValue<string> | null,
       risk?: null
     ): RegisterSingularityMasterContractEventFilter;
     RegisterSingularityMasterContract(
-      location?: null,
+      location?: PromiseOrValue<string> | null,
       risk?: null
     ): RegisterSingularityMasterContractEventFilter;
 
     "SwapperUpdate(address,bool)"(
-      swapper?: null,
+      swapper?: PromiseOrValue<string> | null,
       isRegistered?: null
     ): SwapperUpdateEventFilter;
     SwapperUpdate(
-      swapper?: null,
+      swapper?: PromiseOrValue<string> | null,
       isRegistered?: null
     ): SwapperUpdateEventFilter;
 

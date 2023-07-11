@@ -4,22 +4,6 @@
   "sourceName": "contracts/markets/Market.sol",
   "abi": [
     {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_from",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "_operator",
-          "type": "address"
-        }
-      ],
-      "name": "NotApproved",
-      "type": "error"
-    },
-    {
       "anonymous": false,
       "inputs": [
         {
@@ -92,7 +76,7 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "address",
           "name": "liquidator",
           "type": "address"

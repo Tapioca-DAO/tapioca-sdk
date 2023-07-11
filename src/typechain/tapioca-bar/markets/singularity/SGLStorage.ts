@@ -3223,10 +3223,10 @@ export interface SGLStorage extends BaseContract {
     ): ApprovalBorrowEventFilter;
 
     "BidExecutionSwapperUpdated(address)"(
-      newAddress?: null
+      newAddress?: PromiseOrValue<string> | null
     ): BidExecutionSwapperUpdatedEventFilter;
     BidExecutionSwapperUpdated(
-      newAddress?: null
+      newAddress?: PromiseOrValue<string> | null
     ): BidExecutionSwapperUpdatedEventFilter;
 
     "ConservatorUpdated(address,address)"(
@@ -3248,7 +3248,7 @@ export interface SGLStorage extends BaseContract {
     ): InterestElasticityUpdatedEventFilter;
 
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)"(
-      liquidator?: null,
+      liquidator?: PromiseOrValue<string> | null,
       users?: null,
       liquidatorReward?: null,
       protocolReward?: null,
@@ -3256,7 +3256,7 @@ export interface SGLStorage extends BaseContract {
       collateralShareRemoved?: null
     ): LiquidatedEventFilter;
     Liquidated(
-      liquidator?: null,
+      liquidator?: PromiseOrValue<string> | null,
       users?: null,
       liquidatorReward?: null,
       protocolReward?: null,
@@ -3485,9 +3485,11 @@ export interface SGLStorage extends BaseContract {
     ): TransferEventFilter;
 
     "UsdoSwapperUpdated(address)"(
-      newAddress?: null
+      newAddress?: PromiseOrValue<string> | null
     ): UsdoSwapperUpdatedEventFilter;
-    UsdoSwapperUpdated(newAddress?: null): UsdoSwapperUpdatedEventFilter;
+    UsdoSwapperUpdated(
+      newAddress?: PromiseOrValue<string> | null
+    ): UsdoSwapperUpdatedEventFilter;
   };
 
   estimateGas: {

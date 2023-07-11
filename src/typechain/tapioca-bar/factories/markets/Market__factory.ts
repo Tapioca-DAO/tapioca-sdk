@@ -8,22 +8,6 @@ import type { Market, MarketInterface } from "../../markets/Market";
 
 const _abi = [
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_from",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "_operator",
-        type: "address",
-      },
-    ],
-    name: "NotApproved",
-    type: "error",
-  },
-  {
     anonymous: false,
     inputs: [
       {
@@ -96,7 +80,7 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
+        indexed: true,
         internalType: "address",
         name: "liquidator",
         type: "address",
