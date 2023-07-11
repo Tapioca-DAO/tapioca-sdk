@@ -17,29 +17,109 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AaveStrategy__factory>;
     getContractFactory(
+      name: "LendingPoolMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.LendingPoolMock__factory>;
+    getContractFactory(
+      name: "StkAaveMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.StkAaveMock__factory>;
+    getContractFactory(
       name: "BalancerStrategy",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BalancerStrategy__factory>;
+    getContractFactory(
+      name: "BalancerHelpersMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BalancerHelpersMock__factory>;
+    getContractFactory(
+      name: "BalancerPoolMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BalancerPoolMock__factory>;
+    getContractFactory(
+      name: "BalancerVaultMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BalancerVaultMock__factory>;
     getContractFactory(
       name: "CompoundStrategy",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.CompoundStrategy__factory>;
     getContractFactory(
+      name: "CTokenMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CTokenMock__factory>;
+    getContractFactory(
       name: "ConvexTricryptoStrategy",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ConvexTricryptoStrategy__factory>;
+    getContractFactory(
+      name: "ConvexBoosterMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ConvexBoosterMock__factory>;
+    getContractFactory(
+      name: "ConvexRewardPoolMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ConvexRewardPoolMock__factory>;
+    getContractFactory(
+      name: "ConvexZapMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ConvexZapMock__factory>;
+    getContractFactory(
+      name: "CurveMinterMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CurveMinterMock__factory>;
+    getContractFactory(
+      name: "TricryptoLiquidityPoolMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TricryptoLiquidityPoolMock__factory>;
+    getContractFactory(
+      name: "TricryptoLPGaugeMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TricryptoLPGaugeMock__factory>;
     getContractFactory(
       name: "TricryptoLPGetter",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TricryptoLPGetter__factory>;
     getContractFactory(
-      name: "TricryptoStrategy",
+      name: "TricryptoLPStrategy",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TricryptoStrategy__factory>;
+    ): Promise<Contracts.TricryptoLPStrategy__factory>;
+    getContractFactory(
+      name: "TricryptoNativeStrategy",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TricryptoNativeStrategy__factory>;
+    getContractFactory(
+      name: "GlpStrategy",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.GlpStrategy__factory>;
     getContractFactory(
       name: "LidoEthStrategy",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.LidoEthStrategy__factory>;
+    getContractFactory(
+      name: "CurveEthStEthPoolMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CurveEthStEthPoolMock__factory>;
+    getContractFactory(
+      name: "StEthMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.StEthMock__factory>;
+    getContractFactory(
+      name: "LPStakingMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.LPStakingMock__factory>;
+    getContractFactory(
+      name: "RouterETHMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.RouterETHMock__factory>;
+    getContractFactory(
+      name: "StargateRouterMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.StargateRouterMock__factory>;
+    getContractFactory(
+      name: "StargateSwapperV3Mock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.StargateSwapperV3Mock__factory>;
     getContractFactory(
       name: "StargateStrategy",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -48,6 +128,10 @@ declare module "hardhat/types/runtime" {
       name: "StargateSwapperV3",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.StargateSwapperV3__factory>;
+    getContractFactory(
+      name: "YearnVaultMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.YearnVaultMock__factory>;
     getContractFactory(
       name: "YearnStrategy",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -59,35 +143,135 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.AaveStrategy>;
     getContractAt(
+      name: "LendingPoolMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.LendingPoolMock>;
+    getContractAt(
+      name: "StkAaveMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.StkAaveMock>;
+    getContractAt(
       name: "BalancerStrategy",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.BalancerStrategy>;
+    getContractAt(
+      name: "BalancerHelpersMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BalancerHelpersMock>;
+    getContractAt(
+      name: "BalancerPoolMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BalancerPoolMock>;
+    getContractAt(
+      name: "BalancerVaultMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BalancerVaultMock>;
     getContractAt(
       name: "CompoundStrategy",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.CompoundStrategy>;
     getContractAt(
+      name: "CTokenMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CTokenMock>;
+    getContractAt(
       name: "ConvexTricryptoStrategy",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ConvexTricryptoStrategy>;
+    getContractAt(
+      name: "ConvexBoosterMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ConvexBoosterMock>;
+    getContractAt(
+      name: "ConvexRewardPoolMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ConvexRewardPoolMock>;
+    getContractAt(
+      name: "ConvexZapMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ConvexZapMock>;
+    getContractAt(
+      name: "CurveMinterMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CurveMinterMock>;
+    getContractAt(
+      name: "TricryptoLiquidityPoolMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TricryptoLiquidityPoolMock>;
+    getContractAt(
+      name: "TricryptoLPGaugeMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TricryptoLPGaugeMock>;
     getContractAt(
       name: "TricryptoLPGetter",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TricryptoLPGetter>;
     getContractAt(
-      name: "TricryptoStrategy",
+      name: "TricryptoLPStrategy",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.TricryptoStrategy>;
+    ): Promise<Contracts.TricryptoLPStrategy>;
+    getContractAt(
+      name: "TricryptoNativeStrategy",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TricryptoNativeStrategy>;
+    getContractAt(
+      name: "GlpStrategy",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.GlpStrategy>;
     getContractAt(
       name: "LidoEthStrategy",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.LidoEthStrategy>;
+    getContractAt(
+      name: "CurveEthStEthPoolMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CurveEthStEthPoolMock>;
+    getContractAt(
+      name: "StEthMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.StEthMock>;
+    getContractAt(
+      name: "LPStakingMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.LPStakingMock>;
+    getContractAt(
+      name: "RouterETHMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.RouterETHMock>;
+    getContractAt(
+      name: "StargateRouterMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.StargateRouterMock>;
+    getContractAt(
+      name: "StargateSwapperV3Mock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.StargateSwapperV3Mock>;
     getContractAt(
       name: "StargateStrategy",
       address: string,
@@ -98,6 +282,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.StargateSwapperV3>;
+    getContractAt(
+      name: "YearnVaultMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.YearnVaultMock>;
     getContractAt(
       name: "YearnStrategy",
       address: string,

@@ -46,6 +46,7 @@ export interface StargateStrategyInterface extends utils.Interface {
     "name()": FunctionFragment;
     "owner()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
+    "rescueEth(uint256,address)": FunctionFragment;
     "router()": FunctionFragment;
     "setDepositThreshold(uint256)": FunctionFragment;
     "setMultiSwapper(address)": FunctionFragment;
@@ -98,6 +99,8 @@ export interface StargateStrategyInterface extends utils.Interface {
       | "owner()"
       | "pendingOwner"
       | "pendingOwner()"
+      | "rescueEth"
+      | "rescueEth(uint256,address)"
       | "router"
       | "router()"
       | "setDepositThreshold"
@@ -248,6 +251,14 @@ export interface StargateStrategyInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "pendingOwner()",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rescueEth",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rescueEth(uint256,address)",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "router", values?: undefined): string;
   encodeFunctionData(functionFragment: "router()", values?: undefined): string;
@@ -456,6 +467,11 @@ export interface StargateStrategyInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "pendingOwner()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "rescueEth", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "rescueEth(uint256,address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "router", data: BytesLike): Result;
@@ -765,6 +781,18 @@ export interface StargateStrategy extends BaseContract {
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<[string]>;
 
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     router(overrides?: CallOverrides): Promise<[string]>;
 
     "router()"(overrides?: CallOverrides): Promise<[string]>;
@@ -944,6 +972,18 @@ export interface StargateStrategy extends BaseContract {
 
   "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
 
+  rescueEth(
+    amount: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "rescueEth(uint256,address)"(
+    amount: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   router(overrides?: CallOverrides): Promise<string>;
 
   "router()"(overrides?: CallOverrides): Promise<string>;
@@ -1110,6 +1150,18 @@ export interface StargateStrategy extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<string>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
+
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     router(overrides?: CallOverrides): Promise<string>;
 
@@ -1328,6 +1380,18 @@ export interface StargateStrategy extends BaseContract {
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     router(overrides?: CallOverrides): Promise<BigNumber>;
 
     "router()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1517,6 +1581,18 @@ export interface StargateStrategy extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     router(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

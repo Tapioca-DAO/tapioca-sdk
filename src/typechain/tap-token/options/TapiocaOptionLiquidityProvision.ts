@@ -2319,20 +2319,20 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     Paused(account?: null): PausedEventFilter;
 
     "RegisterSingularity(address,uint256)"(
-      sgl?: null,
-      assetID?: null
+      sgl?: PromiseOrValue<string> | null,
+      assetID?: PromiseOrValue<BigNumberish> | null
     ): RegisterSingularityEventFilter;
     RegisterSingularity(
-      sgl?: null,
-      assetID?: null
+      sgl?: PromiseOrValue<string> | null,
+      assetID?: PromiseOrValue<BigNumberish> | null
     ): RegisterSingularityEventFilter;
 
     "SetSGLPoolWeight(address,uint256)"(
-      sgl?: null,
+      sgl?: PromiseOrValue<string> | null,
       poolWeight?: null
     ): SetSGLPoolWeightEventFilter;
     SetSGLPoolWeight(
-      sgl?: null,
+      sgl?: PromiseOrValue<string> | null,
       poolWeight?: null
     ): SetSGLPoolWeightEventFilter;
 
@@ -2351,12 +2351,12 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     Unpaused(account?: null): UnpausedEventFilter;
 
     "UnregisterSingularity(address,uint256)"(
-      sgl?: null,
-      assetID?: null
+      sgl?: PromiseOrValue<string> | null,
+      assetID?: PromiseOrValue<BigNumberish> | null
     ): UnregisterSingularityEventFilter;
     UnregisterSingularity(
-      sgl?: null,
-      assetID?: null
+      sgl?: PromiseOrValue<string> | null,
+      assetID?: PromiseOrValue<BigNumberish> | null
     ): UnregisterSingularityEventFilter;
 
     "UpdateTotalSingularityPoolWeights(uint256)"(

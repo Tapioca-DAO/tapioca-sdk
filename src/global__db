@@ -2179,6 +2179,52 @@
                     }
                 }
             ]
+        },
+        "tapioca-strategies": {
+            "43113": [
+                {
+                    "name": "TricryptoLPGetter",
+                    "address": "0xF8482Ca2e18e43AE32d6C1DAB0fB96a64aEC6E30",
+                    "meta": {
+                        "args": [
+                            "0x5a5a30aB3e5ddf56448DC33ed92d9E787673A44a",
+                            "0x5a5a30aB3e5ddf56448DC33ed92d9E787673A44a",
+                            "0x5a5a30aB3e5ddf56448DC33ed92d9E787673A44a",
+                            "0x5a5a30aB3e5ddf56448DC33ed92d9E787673A44a"
+                        ],
+                        "salt": "0x8d890b9bc041f0cc0886414e01e5a8b25042c2f37c666bcbb7217a3e8769e680",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "TricryptoLPStrategy",
+                    "address": "0x87121E1B663a6bFaa786F76cAc3646AdC54c0921",
+                    "meta": {
+                        "args": [
+                            "0xba128B0E747c978AF61D08Be31BC7d4a60Ae5654",
+                            "0x5a5a30aB3e5ddf56448DC33ed92d9E787673A44a",
+                            "0x5a5a30aB3e5ddf56448DC33ed92d9E787673A44a",
+                            "0xF8482Ca2e18e43AE32d6C1DAB0fB96a64aEC6E30",
+                            "0x5a5a30aB3e5ddf56448DC33ed92d9E787673A44a",
+                            "0x5a5a30aB3e5ddf56448DC33ed92d9E787673A44a"
+                        ],
+                        "salt": "0x495a030064677d13fb09cf6237464fadd2b081b5da97a0506b6dc1bf5c7da320",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "TapiocaDeployer",
+                    "address": "0x2FD9d9974C26655CC16700CAD0B057B75A9e5E11",
+                    "meta": {}
+                }
+            ],
+            "421613": [
+                {
+                    "name": "TapiocaDeployer",
+                    "address": "0xdA526f3c23CD2Dfe52702Ff97671Cb4EA99ACEF7",
+                    "meta": {}
+                }
+            ]
         }
     }
 }

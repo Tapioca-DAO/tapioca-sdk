@@ -46,6 +46,7 @@ export interface BalancerStrategyInterface extends utils.Interface {
     "pendingOwner()": FunctionFragment;
     "pool()": FunctionFragment;
     "poolId()": FunctionFragment;
+    "rescueEth(uint256,address)": FunctionFragment;
     "rewardTokens(uint256)": FunctionFragment;
     "setDepositThreshold(uint256)": FunctionFragment;
     "tokenId()": FunctionFragment;
@@ -95,6 +96,8 @@ export interface BalancerStrategyInterface extends utils.Interface {
       | "pool()"
       | "poolId"
       | "poolId()"
+      | "rescueEth"
+      | "rescueEth(uint256,address)"
       | "rewardTokens"
       | "rewardTokens(uint256)"
       | "setDepositThreshold"
@@ -219,6 +222,14 @@ export interface BalancerStrategyInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "pool()", values?: undefined): string;
   encodeFunctionData(functionFragment: "poolId", values?: undefined): string;
   encodeFunctionData(functionFragment: "poolId()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "rescueEth",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rescueEth(uint256,address)",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(
     functionFragment: "rewardTokens",
     values: [PromiseOrValue<BigNumberish>]
@@ -392,6 +403,11 @@ export interface BalancerStrategyInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "pool()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "poolId", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "poolId()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "rescueEth", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "rescueEth(uint256,address)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "rewardTokens",
     data: BytesLike
@@ -684,6 +700,18 @@ export interface BalancerStrategy extends BaseContract {
 
     "poolId()"(overrides?: CallOverrides): Promise<[string]>;
 
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     rewardTokens(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -855,6 +883,18 @@ export interface BalancerStrategy extends BaseContract {
 
   "poolId()"(overrides?: CallOverrides): Promise<string>;
 
+  rescueEth(
+    amount: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "rescueEth(uint256,address)"(
+    amount: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   rewardTokens(
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -1013,6 +1053,18 @@ export interface BalancerStrategy extends BaseContract {
     poolId(overrides?: CallOverrides): Promise<string>;
 
     "poolId()"(overrides?: CallOverrides): Promise<string>;
+
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     rewardTokens(
       arg0: PromiseOrValue<BigNumberish>,
@@ -1213,6 +1265,18 @@ export interface BalancerStrategy extends BaseContract {
 
     "poolId()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     rewardTokens(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1390,6 +1454,18 @@ export interface BalancerStrategy extends BaseContract {
     poolId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "poolId()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     rewardTokens(
       arg0: PromiseOrValue<BigNumberish>,

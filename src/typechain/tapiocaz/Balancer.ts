@@ -655,13 +655,13 @@ export interface Balancer extends BaseContract {
     ): OwnerUpdatedEventFilter;
 
     "RebalanceAmountUpdated(address,uint16,uint256,uint256)"(
-      _srcOft?: null,
+      _srcOft?: PromiseOrValue<string> | null,
       _dstChainId?: null,
       _amount?: null,
       _totalAmount?: null
     ): RebalanceAmountUpdatedEventFilter;
     RebalanceAmountUpdated(
-      _srcOft?: null,
+      _srcOft?: PromiseOrValue<string> | null,
       _dstChainId?: null,
       _amount?: null,
       _totalAmount?: null

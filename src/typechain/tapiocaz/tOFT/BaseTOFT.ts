@@ -326,6 +326,7 @@ export interface BaseTOFTInterface extends utils.Interface {
     "precrime()": FunctionFragment;
     "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes),(uint256,address,address),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
+    "rescueEth(uint256,address)": FunctionFragment;
     "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
@@ -442,6 +443,8 @@ export interface BaseTOFTInterface extends utils.Interface {
       | "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes),(uint256,address,address),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"
       | "renounceOwnership"
       | "renounceOwnership()"
+      | "rescueEth"
+      | "rescueEth(uint256,address)"
       | "retrieveFromStrategy"
       | "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)"
       | "retryMessage"
@@ -953,6 +956,14 @@ export interface BaseTOFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "renounceOwnership()",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rescueEth",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rescueEth(uint256,address)",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "retrieveFromStrategy",
@@ -1583,6 +1594,11 @@ export interface BaseTOFTInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "rescueEth", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "rescueEth(uint256,address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2507,6 +2523,18 @@ export interface BaseTOFT extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     retrieveFromStrategy(
       from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
@@ -3310,6 +3338,18 @@ export interface BaseTOFT extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  rescueEth(
+    amount: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "rescueEth(uint256,address)"(
+    amount: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   retrieveFromStrategy(
     from: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
@@ -4110,6 +4150,18 @@ export interface BaseTOFT extends BaseContract {
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
     "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
+
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     retrieveFromStrategy(
       from: PromiseOrValue<string>,
@@ -5051,6 +5103,18 @@ export interface BaseTOFT extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     retrieveFromStrategy(
       from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
@@ -5856,6 +5920,18 @@ export interface BaseTOFT extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

@@ -100,6 +100,7 @@ export interface BaseTapOFTInterface extends utils.Interface {
     "payloadSizeLimitLookup(uint16)": FunctionFragment;
     "precrime()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
+    "rescueEth(uint256,address)": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
@@ -194,6 +195,8 @@ export interface BaseTapOFTInterface extends utils.Interface {
       | "precrime()"
       | "renounceOwnership"
       | "renounceOwnership()"
+      | "rescueEth"
+      | "rescueEth(uint256,address)"
       | "retryMessage"
       | "retryMessage(uint16,bytes,uint64,bytes)"
       | "sendAndCall"
@@ -601,6 +604,14 @@ export interface BaseTapOFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "renounceOwnership()",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rescueEth",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rescueEth(uint256,address)",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "retryMessage",
@@ -1074,6 +1085,11 @@ export interface BaseTapOFTInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "rescueEth", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "rescueEth(uint256,address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1921,6 +1937,18 @@ export interface BaseTapOFT extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     retryMessage(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -2565,6 +2593,18 @@ export interface BaseTapOFT extends BaseContract {
   ): Promise<ContractTransaction>;
 
   "renounceOwnership()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  rescueEth(
+    amount: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "rescueEth(uint256,address)"(
+    amount: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3213,6 +3253,18 @@ export interface BaseTapOFT extends BaseContract {
 
     "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
 
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     retryMessage(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -3511,23 +3563,23 @@ export interface BaseTapOFT extends BaseContract {
     ): ApprovalEventFilter;
 
     "CallFailedBytes(uint16,bytes,bytes)"(
-      _srcChainId?: null,
+      _srcChainId?: PromiseOrValue<BigNumberish> | null,
       _payload?: null,
       _reason?: null
     ): CallFailedBytesEventFilter;
     CallFailedBytes(
-      _srcChainId?: null,
+      _srcChainId?: PromiseOrValue<BigNumberish> | null,
       _payload?: null,
       _reason?: null
     ): CallFailedBytesEventFilter;
 
     "CallFailedStr(uint16,bytes,string)"(
-      _srcChainId?: null,
+      _srcChainId?: PromiseOrValue<BigNumberish> | null,
       _payload?: null,
       _reason?: null
     ): CallFailedStrEventFilter;
     CallFailedStr(
-      _srcChainId?: null,
+      _srcChainId?: PromiseOrValue<BigNumberish> | null,
       _payload?: null,
       _reason?: null
     ): CallFailedStrEventFilter;
@@ -4016,6 +4068,18 @@ export interface BaseTapOFT extends BaseContract {
     ): Promise<BigNumber>;
 
     "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4664,6 +4728,18 @@ export interface BaseTapOFT extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    rescueEth(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "rescueEth(uint256,address)"(
+      amount: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

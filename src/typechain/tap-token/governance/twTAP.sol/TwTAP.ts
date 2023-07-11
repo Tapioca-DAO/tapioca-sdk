@@ -4593,10 +4593,13 @@ export interface TwTAP extends BaseContract {
     ): CreditStoredEventFilter;
 
     "ExitPosition(uint256,uint256)"(
-      tokenId?: null,
+      tokenId?: PromiseOrValue<BigNumberish> | null,
       amount?: null
     ): ExitPositionEventFilter;
-    ExitPosition(tokenId?: null, amount?: null): ExitPositionEventFilter;
+    ExitPosition(
+      tokenId?: PromiseOrValue<BigNumberish> | null,
+      amount?: null
+    ): ExitPositionEventFilter;
 
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)"(
       _srcChainId?: null,

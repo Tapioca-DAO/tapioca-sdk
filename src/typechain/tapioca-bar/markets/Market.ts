@@ -2430,7 +2430,7 @@ export interface Market extends BaseContract {
     ): ConservatorUpdatedEventFilter;
 
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)"(
-      liquidator?: null,
+      liquidator?: PromiseOrValue<string> | null,
       users?: null,
       liquidatorReward?: null,
       protocolReward?: null,
@@ -2438,7 +2438,7 @@ export interface Market extends BaseContract {
       collateralShareRemoved?: null
     ): LiquidatedEventFilter;
     Liquidated(
-      liquidator?: null,
+      liquidator?: PromiseOrValue<string> | null,
       users?: null,
       liquidatorReward?: null,
       protocolReward?: null,
