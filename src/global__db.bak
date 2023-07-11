@@ -2082,22 +2082,22 @@
         "tapioca-mocks": {
             "4002": [
                 {
-                    "name": "FTMLPMock",
-                    "address": "0xAc2C80435f1413ad93009e07d1140E8b77EadE2C",
+                    "name": "WETHMock",
+                    "address": "0xA7a90751e2979DBd816210cDC2a2f97F634d679e",
                     "meta": {
                         "isERC20Mock": true
                     }
                 },
                 {
                     "name": "FTMMock",
-                    "address": "0x70bcE790585D2bb340Cbf8468b2D2c26dE98b7B9",
+                    "address": "0xEe5f46c9e983b3E77eb0f62Cd395e64995E4D3DD",
                     "meta": {
                         "isERC20Mock": true
                     }
                 },
                 {
-                    "name": "WETHMock",
-                    "address": "0x55B5778fF43D415704aE118ea4964B6D119Dd381",
+                    "name": "FTMLPMock",
+                    "address": "0xAc2C80435f1413ad93009e07d1140E8b77EadE2C",
                     "meta": {
                         "isERC20Mock": true
                     }
@@ -2112,22 +2112,22 @@
             ],
             "43113": [
                 {
+                    "name": "WETHMock",
+                    "address": "0x3A92688529B13049aEabfcbFE702EADE93e5b73e",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
+                {
                     "name": "AVAXLPMock",
-                    "address": "0x424792Ac553b7fEbC0e8AB9A63A4133F05331ac0",
+                    "address": "0x1316978304935aCdfD895DC5262766692f82A467",
                     "meta": {
                         "isERC20Mock": true
                     }
                 },
                 {
                     "name": "AVAXMock",
-                    "address": "0x9aFe847ef324d066C8A96a8c3c821D04818BE4B6",
-                    "meta": {
-                        "isERC20Mock": true
-                    }
-                },
-                {
-                    "name": "WETHMock",
-                    "address": "0xd1ea98907e7Ba94Ed37dA0F8EfEB7Ed63891A079",
+                    "address": "0x4b8e70f909f7Ad587a0f395923e00d3F55110ab5",
                     "meta": {
                         "isERC20Mock": true
                     }
@@ -2135,22 +2135,22 @@
             ],
             "80001": [
                 {
+                    "name": "WETHMock",
+                    "address": "0x00BBBD93E7dc93499b962E1A4Ec0e985C87798f4",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
+                {
                     "name": "MATICLPMock",
-                    "address": "0x692b3bC67A119EbdD375085668Fe2a89Eb141cE4",
+                    "address": "0x6F0eE1C41f550d76AD2dB03ee0a25ee197cb262A",
                     "meta": {
                         "isERC20Mock": true
                     }
                 },
                 {
                     "name": "MATICMock",
-                    "address": "0x2FD9d9974C26655CC16700CAD0B057B75A9e5E11",
-                    "meta": {
-                        "isERC20Mock": true
-                    }
-                },
-                {
-                    "name": "WETHMock",
-                    "address": "0xEAB2d91A3B07fE96780d3E2092C99857CF0644Ff",
+                    "address": "0x228972504eF6eF73399d93e0551122a768A82f97",
                     "meta": {
                         "isERC20Mock": true
                     }
@@ -2166,14 +2166,14 @@
             "421613": [
                 {
                     "name": "GLPMock",
-                    "address": "0x2cFAE53445bff5308196de0156A183be502875b4",
+                    "address": "0xA0Bd5Cc751d1393aE26FE66548CCDd197685D11e",
                     "meta": {
                         "isERC20Mock": true
                     }
                 },
                 {
                     "name": "WETHMock",
-                    "address": "0x9884B2AfE77427E118855F155091Ee27A165b68d",
+                    "address": "0xB5430bb678293c5D314eE65BA85443bE37C99e7D",
                     "meta": {
                         "isERC20Mock": true
                     }
