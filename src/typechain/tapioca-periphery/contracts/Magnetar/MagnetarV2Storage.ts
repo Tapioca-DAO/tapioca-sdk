@@ -145,13 +145,13 @@ export interface MagnetarV2Storage extends BaseContract {
 
   filters: {
     "ApprovalForAll(address,address,bool)"(
-      owner?: null,
-      operator?: null,
+      owner?: PromiseOrValue<string> | null,
+      operator?: PromiseOrValue<string> | null,
       approved?: null
     ): ApprovalForAllEventFilter;
     ApprovalForAll(
-      owner?: null,
-      operator?: null,
+      owner?: PromiseOrValue<string> | null,
+      operator?: PromiseOrValue<string> | null,
       approved?: null
     ): ApprovalForAllEventFilter;
   };
