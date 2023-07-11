@@ -260,6 +260,69 @@ function buildCalls(
             allowFailure: false,
         });
 
+        // // Set ld2sd rate
+        // console.log('\t- Ld2Sd rate: ');
+
+        // //configuring target chain
+        // console.log('\t\t\t- LZChainID:', target.lzChainId);
+        // const lzEndpointChainId = parseInt(target.lzChainId) - 100; //lzEndpoint.getChainId() returns the lzChainId - 100
+        // console.log('\t\t\t- LZEndpoint Chain id:', lzEndpointChainId);
+
+        // calls.push({
+        //     target: contractToConf.address,
+        //     callData:
+        //         TapiocaZ.tOft.TapiocaOFT__factory.createInterface().encodeFunctionData(
+        //             'setLdChain',
+        //             [lzEndpointChainId, true],
+        //         ),
+        //     allowFailure: false,
+        // });
+
+        // console.log('\t\t\t- LZChainID:', target.lzChainId);
+        // console.log('\t\t\t- LZEndpoint Chain id:', target.lzChainId);
+
+        // calls.push({
+        //     target: contractToConf.address,
+        //     callData:
+        //         TapiocaZ.tOft.TapiocaOFT__factory.createInterface().encodeFunctionData(
+        //             'setLdChain',
+        //             [target.lzChainId, true],
+        //         ),
+        //     allowFailure: false,
+        // });
+
+        // //configuring current chain
+        // const currentChainLz =
+        //     hre.SDK.config.NETWORK_MAPPING_CHAIN_TO_LZ[
+        //         String(hre.network.config.chainId) as EChainID
+        //     ];
+        // console.log('\t\t\t- LZChainID:', currentChainLz);
+        // const lzEndpointCurrentChainId = parseInt(currentChainLz) - 100; //lzEndpoint.getChainId() returns the lzChainId - 100
+        // console.log('\t\t\t- LZEndpoint Chain id:', lzEndpointCurrentChainId);
+
+        // calls.push({
+        //     target: contractToConf.address,
+        //     callData:
+        //         TapiocaZ.tOft.TapiocaOFT__factory.createInterface().encodeFunctionData(
+        //             'setLdChain',
+        //             [lzEndpointCurrentChainId, true],
+        //         ),
+        //     allowFailure: false,
+        // });
+
+        // console.log('\t\t\t- LZChainID:', currentChainLz);
+        // console.log('\t\t\t- LZEndpoint Chain id:', currentChainLz);
+
+        // calls.push({
+        //     target: contractToConf.address,
+        //     callData:
+        //         TapiocaZ.tOft.TapiocaOFT__factory.createInterface().encodeFunctionData(
+        //             'setLdChain',
+        //             [currentChainLz, true],
+        //         ),
+        //     allowFailure: false,
+        // });
+
         // Set minDstGas per packet type
         console.log('\t- MinDstGas: ');
         for (const packetType of packetTypes) {
