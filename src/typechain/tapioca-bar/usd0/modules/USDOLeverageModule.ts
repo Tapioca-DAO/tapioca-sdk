@@ -1459,13 +1459,11 @@ export interface USDOLeverageModuleInterface extends utils.Interface {
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
-    "Burned(address,uint256)": EventFragment;
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
     "FlashMintFeeUpdated(uint256,uint256)": EventFragment;
     "MaxFlashMintUpdated(uint256,uint256)": EventFragment;
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)": EventFragment;
-    "Minted(address,uint256)": EventFragment;
     "NonContractAddress(address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "PausedUpdated(bool,bool)": EventFragment;
@@ -1486,8 +1484,6 @@ export interface USDOLeverageModuleInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "Approval(address,address,uint256)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Burned"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Burned(address,uint256)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "CallOFTReceivedSuccess"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"
@@ -1508,8 +1504,6 @@ export interface USDOLeverageModuleInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "MessageFailed(uint16,bytes,uint64,bytes,bytes)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Minted"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Minted(address,uint256)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "NonContractAddress"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "NonContractAddress(address)"
@@ -1576,14 +1570,6 @@ export type ApprovalEvent = TypedEvent<
 
 export type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
 
-export interface BurnedEventObject {
-  _from: string;
-  _amount: BigNumber;
-}
-export type BurnedEvent = TypedEvent<[string, BigNumber], BurnedEventObject>;
-
-export type BurnedEventFilter = TypedEventFilter<BurnedEvent>;
-
 export interface CallOFTReceivedSuccessEventObject {
   _srcChainId: number;
   _srcAddress: string;
@@ -1647,14 +1633,6 @@ export type MessageFailedEvent = TypedEvent<
 >;
 
 export type MessageFailedEventFilter = TypedEventFilter<MessageFailedEvent>;
-
-export interface MintedEventObject {
-  _for: string;
-  _amount: BigNumber;
-}
-export type MintedEvent = TypedEvent<[string, BigNumber], MintedEventObject>;
-
-export type MintedEventFilter = TypedEventFilter<MintedEvent>;
 
 export interface NonContractAddressEventObject {
   _address: string;
@@ -3968,15 +3946,6 @@ export interface USDOLeverageModule extends BaseContract {
       value?: null
     ): ApprovalEventFilter;
 
-    "Burned(address,uint256)"(
-      _from?: PromiseOrValue<string> | null,
-      _amount?: null
-    ): BurnedEventFilter;
-    Burned(
-      _from?: PromiseOrValue<string> | null,
-      _amount?: null
-    ): BurnedEventFilter;
-
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"(
       _srcChainId?: PromiseOrValue<BigNumberish> | null,
       _srcAddress?: null,
@@ -4031,15 +4000,6 @@ export interface USDOLeverageModule extends BaseContract {
       _payload?: null,
       _reason?: null
     ): MessageFailedEventFilter;
-
-    "Minted(address,uint256)"(
-      _for?: PromiseOrValue<string> | null,
-      _amount?: null
-    ): MintedEventFilter;
-    Minted(
-      _for?: PromiseOrValue<string> | null,
-      _amount?: null
-    ): MintedEventFilter;
 
     "NonContractAddress(address)"(
       _address?: null
