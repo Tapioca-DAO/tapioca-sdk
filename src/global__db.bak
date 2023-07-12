@@ -633,6 +633,17 @@
             ],
             "421613": [
                 {
+                    "name": "MockSwapper",
+                    "address": "0xcc7339dF397005Db6a3421ff1dA36778678598D5",
+                    "meta": {
+                        "args": [
+                            "0x548feA3B6BA889d041626dCcD50286d10a324caA"
+                        ],
+                        "salt": "0xebf7c7058e14e4e71dbf73e58755393d9dd3c293e1a6fcae777da5e034d6669f",
+                        "create2": true
+                    }
+                },
+                {
                     "name": "BigBang-TapiocaOFT-AVAXMock",
                     "address": "0x9b82110576236E1764B2007501Ec38ebfabC44C6",
                     "meta": {
@@ -1148,17 +1159,6 @@
                             }
                         ],
                         "salt": "0xc8ef4c830b1dd4a90ee01d061b1cb4df56b2473ee95aa2a7ed1359d706777e77",
-                        "create2": true
-                    }
-                },
-                {
-                    "name": "MockSwapper",
-                    "address": "0xc63759760Bf0a02f7A16E82027aC64Fe94A1BC12",
-                    "meta": {
-                        "args": [
-                            "0xe8E86C35e14826623898ae6191d59821f62bd681"
-                        ],
-                        "salt": "0xb34697c25e80fd1caeced0f2b1ae62ac545421bb3dfc534a3d8681efc7e05a8b",
                         "create2": true
                     }
                 }
@@ -2052,6 +2052,11 @@
         "generic": {
             "4002": [
                 {
+                    "name": "Magnetar",
+                    "address": "0xAd1672D96311088EC07DBdDDE0cEa8DAe4A8a2A9",
+                    "meta": {}
+                },
+                {
                     "name": "Multicall3",
                     "address": "0x7a45BDCA10cDA2b1CE8fa309ce150F4Aa571E0EB",
                     "meta": {}
@@ -2066,12 +2071,22 @@
             ],
             "80001": [
                 {
+                    "name": "Magnetar",
+                    "address": "0x0633A1df8EAf0c047c68e2C9D4fC03235a22026C",
+                    "meta": {}
+                },
+                {
                     "name": "Multicall3",
                     "address": "0xaB3cc6a4c9dd88A6fBf87bd472F6b6501d17D72d",
                     "meta": {}
                 }
             ],
             "421613": [
+                {
+                    "name": "Magnetar",
+                    "address": "0x32F3b3a9A283A246b08478264e2254e0eC878c7d",
+                    "meta": {}
+                },
                 {
                     "name": "Multicall3",
                     "address": "0x38f5EB3d7093518BaCa22dfd7646D76EAd132040",
