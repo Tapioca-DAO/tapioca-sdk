@@ -709,13 +709,28 @@ export class DeployerVM {
                     );
                     // Throw if not found
                     if (!deps) {
-                        throw new Error(
-                            `[-] Dependency ${dependency.deploymentName} not found for ${contract.deploymentName}}`,
-                        );
+                        const dependencyAddress =
+                            contract.args[dependency.argPosition];
+                        if (
+                            !dependencyAddress ||
+                            dependencyAddress ==
+                                this.hre.ethers.constants.AddressZero
+                        ) {
+                            throw new Error(
+                                `[-] Dependency ${dependency.deploymentName} not found for ${contract.deploymentName}}`,
+                            );
+                        } else {
+                            console.log(
+                                `Dependency already provided: ${
+                                    contract.args[dependency.argPosition]
+                                }`,
+                            );
+                        }
+                    } else {
+                        // Set the dependency address in the contract args
+                        contract.args[dependency.argPosition] =
+                            deps.deterministicAddress;
                     }
-                    // Set the dependency address in the contract args
-                    contract.args[dependency.argPosition] =
-                        deps.deterministicAddress;
                 });
 
                 // Build the creation code
