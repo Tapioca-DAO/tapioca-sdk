@@ -98,7 +98,7 @@ export declare namespace IUSDOBase {
     marketHelper: PromiseOrValue<string>;
     market: PromiseOrValue<string>;
     removeCollateral: PromiseOrValue<boolean>;
-    removeCollateralShare: PromiseOrValue<BigNumberish>;
+    removeCollateralAmount: PromiseOrValue<BigNumberish>;
     lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct;
     participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct;
   };
@@ -120,7 +120,7 @@ export declare namespace IUSDOBase {
     marketHelper: string;
     market: string;
     removeCollateral: boolean;
-    removeCollateralShare: BigNumber;
+    removeCollateralAmount: BigNumber;
     lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStructOutput;
     participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStructOutput;
   };
@@ -278,7 +278,6 @@ export interface USDOMarketModuleInterface extends utils.Interface {
     "getConfig(uint16,uint16,address,uint256)": FunctionFragment;
     "getTrustedRemoteAddress(uint16)": FunctionFragment;
     "increaseAllowance(address,uint256)": FunctionFragment;
-    "isLdChain(uint16)": FunctionFragment;
     "isTrustedRemote(uint16,bytes)": FunctionFragment;
     "lend(address,uint16,bytes,uint64,bytes)": FunctionFragment;
     "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes))": FunctionFragment;
@@ -300,7 +299,6 @@ export interface USDOMarketModuleInterface extends utils.Interface {
     "sendAndLendOrRepay(address,address,uint16,address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes),bytes)": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
-    "setLdChain(uint16,bool)": FunctionFragment;
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
     "setPayloadSizeLimit(uint16,uint256)": FunctionFragment;
     "setPrecrime(address)": FunctionFragment;
@@ -370,8 +368,6 @@ export interface USDOMarketModuleInterface extends utils.Interface {
       | "getTrustedRemoteAddress(uint16)"
       | "increaseAllowance"
       | "increaseAllowance(address,uint256)"
-      | "isLdChain"
-      | "isLdChain(uint16)"
       | "isTrustedRemote"
       | "isTrustedRemote(uint16,bytes)"
       | "lend"
@@ -414,8 +410,6 @@ export interface USDOMarketModuleInterface extends utils.Interface {
       | "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"
       | "setConfig"
       | "setConfig(uint16,uint16,uint256,bytes)"
-      | "setLdChain"
-      | "setLdChain(uint16,bool)"
       | "setMinDstGas"
       | "setMinDstGas(uint16,uint16,uint256)"
       | "setPayloadSizeLimit"
@@ -704,14 +698,6 @@ export interface USDOMarketModuleInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "isLdChain",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isLdChain(uint16)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "isTrustedRemote",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
   ): string;
@@ -983,14 +969,6 @@ export interface USDOMarketModuleInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setLdChain",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setLdChain(uint16,bool)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMinDstGas",
@@ -1306,11 +1284,6 @@ export interface USDOMarketModuleInterface extends utils.Interface {
     functionFragment: "increaseAllowance(address,uint256)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "isLdChain", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "isLdChain(uint16)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "isTrustedRemote",
     data: BytesLike
@@ -1435,11 +1408,6 @@ export interface USDOMarketModuleInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "setConfig", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setConfig(uint16,uint16,uint256,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "setLdChain", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "setLdChain(uint16,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2196,16 +2164,6 @@ export interface USDOMarketModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    isLdChain(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
-    "isLdChain(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -2465,18 +2423,6 @@ export interface USDOMarketModule extends BaseContract {
       _chainId: PromiseOrValue<BigNumberish>,
       _configType: PromiseOrValue<BigNumberish>,
       _config: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setLdChain(
-      _chainId: PromiseOrValue<BigNumberish>,
-      _isLdChain: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setLdChain(uint16,bool)"(
-      _chainId: PromiseOrValue<BigNumberish>,
-      _isLdChain: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2903,16 +2849,6 @@ export interface USDOMarketModule extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  isLdChain(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  "isLdChain(uint16)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
   isTrustedRemote(
     _srcChainId: PromiseOrValue<BigNumberish>,
     _srcAddress: PromiseOrValue<BytesLike>,
@@ -3172,18 +3108,6 @@ export interface USDOMarketModule extends BaseContract {
     _chainId: PromiseOrValue<BigNumberish>,
     _configType: PromiseOrValue<BigNumberish>,
     _config: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setLdChain(
-    _chainId: PromiseOrValue<BigNumberish>,
-    _isLdChain: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setLdChain(uint16,bool)"(
-    _chainId: PromiseOrValue<BigNumberish>,
-    _isLdChain: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3612,16 +3536,6 @@ export interface USDOMarketModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    isLdChain(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    "isLdChain(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -3877,18 +3791,6 @@ export interface USDOMarketModule extends BaseContract {
       _chainId: PromiseOrValue<BigNumberish>,
       _configType: PromiseOrValue<BigNumberish>,
       _config: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setLdChain(
-      _chainId: PromiseOrValue<BigNumberish>,
-      _isLdChain: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setLdChain(uint16,bool)"(
-      _chainId: PromiseOrValue<BigNumberish>,
-      _isLdChain: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4503,16 +4405,6 @@ export interface USDOMarketModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    isLdChain(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "isLdChain(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -4772,18 +4664,6 @@ export interface USDOMarketModule extends BaseContract {
       _chainId: PromiseOrValue<BigNumberish>,
       _configType: PromiseOrValue<BigNumberish>,
       _config: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setLdChain(
-      _chainId: PromiseOrValue<BigNumberish>,
-      _isLdChain: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setLdChain(uint16,bool)"(
-      _chainId: PromiseOrValue<BigNumberish>,
-      _isLdChain: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5211,16 +5091,6 @@ export interface USDOMarketModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    isLdChain(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "isLdChain(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -5480,18 +5350,6 @@ export interface USDOMarketModule extends BaseContract {
       _chainId: PromiseOrValue<BigNumberish>,
       _configType: PromiseOrValue<BigNumberish>,
       _config: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setLdChain(
-      _chainId: PromiseOrValue<BigNumberish>,
-      _isLdChain: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setLdChain(uint16,bool)"(
-      _chainId: PromiseOrValue<BigNumberish>,
-      _isLdChain: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
