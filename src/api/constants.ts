@@ -142,6 +142,33 @@ export const UNISWAP_DEPLOYMENTS: {
     },
 };
 
+export const CURVE_DEPLOYMENTS: {
+    [key in EChainID]?: {
+        stablePool: string;
+    };
+} = {
+    // Mainnet
+    [EChainID.MAINNET]: {
+        stablePool: '0x803147a1f65f9b838e7be39bac1a4f51e6d29a18',
+    },
+    // Testnet
+    [EChainID.GOERLI]: {
+        stablePool: '0x803147a1f65f9b838e7be39bac1a4f51e6d29a18',
+    },
+    [EChainID.ARBITRUM_GOERLI]: {
+        stablePool: '0x803147a1f65f9b838e7be39bac1a4f51e6d29a18',
+    },
+    [EChainID.FUJI_AVALANCHE]: {
+        stablePool: '0x803147a1f65f9b838e7be39bac1a4f51e6d29a18',
+    },
+    [EChainID.MUMBAI_POLYGON]: {
+        stablePool: '0x803147a1f65f9b838e7be39bac1a4f51e6d29a18',
+    },
+    [EChainID.FANTOM_TESTNET]: {
+        stablePool: '0x803147a1f65f9b838e7be39bac1a4f51e6d29a18',
+    },
+};
+
 export const FEE_ADDRESSES: {
     [key in EChainID]?: {
         feeTo: string;
