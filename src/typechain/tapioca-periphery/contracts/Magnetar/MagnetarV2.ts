@@ -66,6 +66,7 @@ export declare namespace MagnetarV2Storage {
     yieldBoxAssetContractAddress: PromiseOrValue<string>;
     yieldBoxAssetStrategyAddress: PromiseOrValue<string>;
     yieldBoxAssetTokenId: PromiseOrValue<BigNumberish>;
+    collateralizationRate: PromiseOrValue<BigNumberish>;
   };
 
   export type MarketInfoStructOutput = [
@@ -94,6 +95,7 @@ export declare namespace MagnetarV2Storage {
     number,
     string,
     string,
+    BigNumber,
     BigNumber
   ] & {
     collateral: string;
@@ -122,6 +124,7 @@ export declare namespace MagnetarV2Storage {
     yieldBoxAssetContractAddress: string;
     yieldBoxAssetStrategyAddress: string;
     yieldBoxAssetTokenId: BigNumber;
+    collateralizationRate: BigNumber;
   };
 
   export type BigBangInfoStruct = {
@@ -193,6 +196,12 @@ export declare namespace MagnetarV2Storage {
     userAssetFraction: PromiseOrValue<BigNumberish>;
     accrueInfo: ISingularity.AccrueInfoStruct;
     utilization: PromiseOrValue<BigNumberish>;
+    minimumTargetUtilization: PromiseOrValue<BigNumberish>;
+    maximumTargetUtilization: PromiseOrValue<BigNumberish>;
+    minimumInterestPerSecond: PromiseOrValue<BigNumberish>;
+    maximumInterestPerSecond: PromiseOrValue<BigNumberish>;
+    interestElasticity: PromiseOrValue<BigNumberish>;
+    startingInterestPerSecond: PromiseOrValue<BigNumberish>;
   };
 
   export type SingularityInfoStructOutput = [
@@ -200,6 +209,12 @@ export declare namespace MagnetarV2Storage {
     RebaseStructOutput,
     BigNumber,
     ISingularity.AccrueInfoStructOutput,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
     BigNumber
   ] & {
     market: MagnetarV2Storage.MarketInfoStructOutput;
@@ -207,6 +222,12 @@ export declare namespace MagnetarV2Storage {
     userAssetFraction: BigNumber;
     accrueInfo: ISingularity.AccrueInfoStructOutput;
     utilization: BigNumber;
+    minimumTargetUtilization: BigNumber;
+    maximumTargetUtilization: BigNumber;
+    minimumInterestPerSecond: BigNumber;
+    maximumInterestPerSecond: BigNumber;
+    interestElasticity: BigNumber;
+    startingInterestPerSecond: BigNumber;
   };
 }
 
