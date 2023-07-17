@@ -107,3 +107,98 @@ export const STARGATE_ROUTERS: {
         router: '0xb850873f4c993Ac2405A1AdD71F6ca5D4d4d6b4f',
     },
 };
+
+export const UNISWAP_DEPLOYMENTS: {
+    [key in EChainID]?: {
+        v2Router: string;
+        v2factory: string;
+    };
+} = {
+    // Mainnet
+    [EChainID.MAINNET]: {
+        v2Router: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
+        v2factory: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
+    },
+    // Testnet
+    [EChainID.GOERLI]: {
+        v2Router: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
+        v2factory: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
+    },
+    [EChainID.ARBITRUM_GOERLI]: {
+        v2Router: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
+        v2factory: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
+    },
+    [EChainID.FUJI_AVALANCHE]: {
+        v2Router: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
+        v2factory: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
+    },
+    [EChainID.MUMBAI_POLYGON]: {
+        v2Router: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
+        v2factory: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
+    },
+    [EChainID.FANTOM_TESTNET]: {
+        v2Router: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
+        v2factory: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
+    },
+};
+
+export const FEE_ADDRESSES: {
+    [key in EChainID]?: {
+        feeTo: string;
+        feeCollector: string;
+    };
+} = {
+    // Mainnet
+    [EChainID.MAINNET]: {
+        feeTo: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
+        feeCollector: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
+    },
+    // Testnet
+    [EChainID.GOERLI]: {
+        feeTo: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
+        feeCollector: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
+    },
+    [EChainID.ARBITRUM_GOERLI]: {
+        feeTo: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
+        feeCollector: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
+    },
+    [EChainID.FUJI_AVALANCHE]: {
+        feeTo: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
+        feeCollector: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
+    },
+    [EChainID.MUMBAI_POLYGON]: {
+        feeTo: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
+        feeCollector: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
+    },
+    [EChainID.FANTOM_TESTNET]: {
+        feeTo: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
+        feeCollector: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
+    },
+};
+
+export const TOKENS_DEPLOYMENTS: {
+    [key in EChainID]?: {
+        weth: string;
+    };
+} = {
+    // Mainnet
+    [EChainID.MAINNET]: {
+        weth: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
+    },
+    // Testnet
+    [EChainID.GOERLI]: {
+        weth: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
+    },
+    [EChainID.ARBITRUM_GOERLI]: {
+        weth: '0xd428690148436dA9c7422698eEe15F51C8cec871',
+    },
+    [EChainID.FUJI_AVALANCHE]: {
+        weth: '0x71E4364611BDCc8865c61f2e8F979644Ba0ec7f7',
+    },
+    [EChainID.MUMBAI_POLYGON]: {
+        weth: '0x5d405f701fb11f749e2D8D5D73A70181Ef25d457',
+    },
+    [EChainID.FANTOM_TESTNET]: {
+        weth: '0x95c7E83D6d44F3d81cb60FB4e5472dC5C0415571',
+    },
+};
