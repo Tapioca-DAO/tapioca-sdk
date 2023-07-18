@@ -8,10 +8,110 @@
         },
         "tap-token": {
             "5": [],
-            "4002": [],
-            "43113": [],
-            "80001": [],
-            "421613": []
+            "4002": [
+                {
+                    "name": "TapOFT",
+                    "address": "0x6E5094CD65f9D00933F12C36Df4aF835769F0eA6",
+                    "meta": {
+                        "args": [
+                            "0x7dcAD72640F835B0FA36EFD3D6d3ec902C7E5acf",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "421613",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ],
+                        "salt": "0xab9d0a74c01685288d4c57432dc0a2237793ce5b9a32e1b1172c081b859fab0f",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "TapiocaDeployer",
+                    "address": "0x21286529296aa57785A498169D18DC797286e018",
+                    "meta": {}
+                }
+            ],
+            "43113": [
+                {
+                    "name": "TapOFT",
+                    "address": "0xD5490EE402811c6772D323b6005a44EC0FEb7d62",
+                    "meta": {
+                        "args": [
+                            "0x93f54D755A063cE7bB9e6Ac47Eccc8e33411d706",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "421613",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ],
+                        "salt": "0xa0ecd7e920c7b278b14ccef17d91e6349c7d5a2a5778c1f4c467ef50df74b7ec",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "TapiocaDeployer",
+                    "address": "0x21c7bfa1092DcF008a9346aC4b18C8DB8bdFCc76",
+                    "meta": {}
+                }
+            ],
+            "80001": [
+                {
+                    "name": "TapOFT",
+                    "address": "0x852E36D007a086Ce08D29E1009b6861fC499BE2f",
+                    "meta": {
+                        "args": [
+                            "0xf69186dfBa60DdB133E91E9A4B5673624293d8F8",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "421613",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ],
+                        "salt": "0xfec10e0e2f829aa1614feac0dd6decac99495aa43f0becc62b4fb468ee83b36e",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "TapiocaDeployer",
+                    "address": "0x8E35B7F96F738F5BA545Dc5FAa841793bA95b79C",
+                    "meta": {}
+                }
+            ],
+            "421613": [
+                {
+                    "name": "TapOFT",
+                    "address": "0xd422c21750c7Ac2c79E62DCA97255EA559D9403e",
+                    "meta": {
+                        "args": [
+                            "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "421613",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ],
+                        "salt": "0x2b2507edc43435417ade6ea54bd7be248deb169ea4436ab9464cf344bbe3e60a",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "TapiocaDeployer",
+                    "address": "0x54FC340EE4FeCcaEA051C0af3ACC975534674a9B",
+                    "meta": {}
+                }
+            ]
         },
         "tapiocaz": {
             "4002": [],

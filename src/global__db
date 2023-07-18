@@ -11,7 +11,7 @@
             "4002": [
                 {
                     "name": "TapOFT",
-                    "address": "0x6E5094CD65f9D00933F12C36Df4aF835769F0eA6",
+                    "address": "0xD615bD96E092800A0Ef8316a81fC874A71Fd0DE7",
                     "meta": {
                         "args": [
                             "0x7dcAD72640F835B0FA36EFD3D6d3ec902C7E5acf",
@@ -24,7 +24,7 @@
                             "421613",
                             "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
                         ],
-                        "salt": "0xab9d0a74c01685288d4c57432dc0a2237793ce5b9a32e1b1172c081b859fab0f",
+                        "salt": "0x4b90497bd1f92cbba57a432ffd13b5a5f1b9d2c0fc4c526f25df0639f5ef6309",
                         "create2": true
                     }
                 },
@@ -37,7 +37,7 @@
             "43113": [
                 {
                     "name": "TapOFT",
-                    "address": "0xD5490EE402811c6772D323b6005a44EC0FEb7d62",
+                    "address": "0x64411DDA4318A52Fc18eb8247FbCE2BB6B93dAb6",
                     "meta": {
                         "args": [
                             "0x93f54D755A063cE7bB9e6Ac47Eccc8e33411d706",
@@ -50,7 +50,7 @@
                             "421613",
                             "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
                         ],
-                        "salt": "0xa0ecd7e920c7b278b14ccef17d91e6349c7d5a2a5778c1f4c467ef50df74b7ec",
+                        "salt": "0x404913ab03e67cb8a48b2a58772b02969a36cfd6df300a8332d2a0f5b00a2643",
                         "create2": true
                     }
                 },
@@ -63,7 +63,7 @@
             "80001": [
                 {
                     "name": "TapOFT",
-                    "address": "0x852E36D007a086Ce08D29E1009b6861fC499BE2f",
+                    "address": "0xb31dbEc118E88E784d28b47a1ff8bB61E0D9b15d",
                     "meta": {
                         "args": [
                             "0xf69186dfBa60DdB133E91E9A4B5673624293d8F8",
@@ -76,7 +76,7 @@
                             "421613",
                             "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
                         ],
-                        "salt": "0xfec10e0e2f829aa1614feac0dd6decac99495aa43f0becc62b4fb468ee83b36e",
+                        "salt": "0xae841bbcbaf566e970545c2f6f382235f4f6c7388e60dbca2a6b2be8a8e803a9",
                         "create2": true
                     }
                 },
@@ -89,7 +89,7 @@
             "421613": [
                 {
                     "name": "TapOFT",
-                    "address": "0xd422c21750c7Ac2c79E62DCA97255EA559D9403e",
+                    "address": "0xbbfBdA78d54Dd35fd8f6C52a6e7F30E610e762D2",
                     "meta": {
                         "args": [
                             "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
@@ -102,7 +102,7 @@
                             "421613",
                             "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
                         ],
-                        "salt": "0x2b2507edc43435417ade6ea54bd7be248deb169ea4436ab9464cf344bbe3e60a",
+                        "salt": "0xe46300177c22f3babc18acab677b1ffa671f670f2b9d2a388d78f771eb2f4e96",
                         "create2": true
                     }
                 },
