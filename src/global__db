@@ -564,6 +564,11 @@
             ],
             "421613": [
                 {
+                    "name": "Magnetar",
+                    "address": "0x48752171869721176b676fD854d1d0C79248f21B",
+                    "meta": {}
+                },
+                {
                     "name": "Multicall3",
                     "address": "0xb7640e7A895f66B60E9547460822Ff6791CCe21c",
                     "meta": {}
