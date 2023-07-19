@@ -2109,6 +2109,11 @@
             ],
             "80001": [
                 {
+                    "name": "Magnetar",
+                    "address": "0xb6515A55BC7D0EE6E440A4750BB4fa6c963B9C60",
+                    "meta": {}
+                },
+                {
                     "name": "Multicall3",
                     "address": "0x687f6c17E0c0571a7A763224da1dE253E97844A6",
                     "meta": {}
