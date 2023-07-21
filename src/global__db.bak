@@ -3,6 +3,17 @@
         "tapioca-bar": {
             "4002": [
                 {
+                    "name": "MockSwapper",
+                    "address": "0x047751a000b832354AFad2FA1d4105D6fb34f9C2",
+                    "meta": {
+                        "args": [
+                            "0x3d58d11dcf64B7CC691E1dCC606085b14ACBA4EC"
+                        ],
+                        "salt": "0x78b898849a93ace23665c03153caf10ee1befc7c8c17862d904c6b9ab5d71d13",
+                        "create2": true
+                    }
+                },
+                {
                     "name": "ERC20WithoutStrategy-TapOFT",
                     "address": "0xEe07c1624a50fafA5dD61Af11128afF9ab1D4B7A",
                     "meta": {
@@ -209,20 +220,20 @@
                     "name": "TapiocaDeployer",
                     "address": "0xAcB3dc85D819d6487d48Eee43Fb9eF6C84A1dcc8",
                     "meta": {}
-                },
-                {
-                    "name": "MockSwapper",
-                    "address": "0x288C10d700d5A0038b19a36A43FFc6bE105A1fdB",
-                    "meta": {
-                        "args": [
-                            "0x2083Ee85Dd134Ca8E47d898f450014541eC8E0B9"
-                        ],
-                        "salt": "0xd99e04f1a1136513125924b98aad3c025d94f0254a0300593c73b037fea84a8f",
-                        "create2": true
-                    }
                 }
             ],
             "43113": [
+                {
+                    "name": "MockSwapper",
+                    "address": "0x917Dc9d0b6d554E458Dab99603e4d9115dc46cf8",
+                    "meta": {
+                        "args": [
+                            "0xf724d6446a2d5a04a7c4aea748145e0a765a3084"
+                        ],
+                        "salt": "0x86f824a58f97067ecae580e806400003b81639b277b327713272f9d6dbb70772",
+                        "create2": true
+                    }
+                },
                 {
                     "name": "ERC20WithoutStrategy-TapOFT",
                     "address": "0x169C1D174272D687a123C822d9aB410dCaED164a",
@@ -430,20 +441,20 @@
                     "name": "TapiocaDeployer",
                     "address": "0xe6094B5775275479C7fDb3D136b9b4405408fB30",
                     "meta": {}
-                },
-                {
-                    "name": "MockSwapper",
-                    "address": "0x7eF73a9d7868708f7B235Caf564f410C7A17d14C",
-                    "meta": {
-                        "args": [
-                            "0x0fEe0b46f78e3B687120369376D223B927Ff0b70"
-                        ],
-                        "salt": "0xb403565d7d46a2bfa73b46e96a494854d7a7ad3b123c07d3a816e71c22d949b6",
-                        "create2": true
-                    }
                 }
             ],
             "80001": [
+                {
+                    "name": "MockSwapper",
+                    "address": "0x9a9b1e354D6E46b9D75a1c4CA6E1Cc7cf6A27774",
+                    "meta": {
+                        "args": [
+                            "0x2593af45D3EEb6d9492B06CfDf418a41fd44Ab7B"
+                        ],
+                        "salt": "0xf7ada23067ca904579ee68aa36fd2c18dea1c0ad6f5b5a2acd7e431158e22377",
+                        "create2": true
+                    }
+                },
                 {
                     "name": "ERC20WithoutStrategy-TapOFT",
                     "address": "0xf6F54f54Bba769E57043b8a5182212e74d911080",
@@ -651,17 +662,6 @@
                     "name": "TapiocaDeployer",
                     "address": "0x12D1d723ed7df857d19010A0f5aDDE6dDAE2Bef3",
                     "meta": {}
-                },
-                {
-                    "name": "MockSwapper",
-                    "address": "0xdf8bf14F96eFd2a9e0F04Afe855c95D31CD90fa3",
-                    "meta": {
-                        "args": [
-                            "0x48FA3bD8B61707fAd5024B407fE74b2040f7B5Bb"
-                        ],
-                        "salt": "0x363019d2a7348b0e866b93437656f3cdbfa971f3d629a9bfaee38ba3f3067b5d",
-                        "create2": true
-                    }
                 }
             ],
             "421613": [
