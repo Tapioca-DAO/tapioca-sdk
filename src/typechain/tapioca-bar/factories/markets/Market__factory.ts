@@ -504,16 +504,6 @@ const _abi = [
       },
       {
         internalType: "uint256",
-        name: "borrowPartDecimals",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "collateralPartDecimals",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
         name: "ratesPrecision",
         type: "uint256",
       },

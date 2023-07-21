@@ -59,7 +59,7 @@ export interface SGLLiquidationInterface extends utils.Interface {
     "collateral()": FunctionFragment;
     "collateralId()": FunctionFragment;
     "collateralizationRate()": FunctionFragment;
-    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
+    "computeClosingFactor(uint256,uint256,uint256)": FunctionFragment;
     "computeLiquidatorReward(address,uint256)": FunctionFragment;
     "computeTVLInfo(address,uint256)": FunctionFragment;
     "conservator()": FunctionFragment;
@@ -69,6 +69,7 @@ export interface SGLLiquidationInterface extends utils.Interface {
     "getInterestDetails()": FunctionFragment;
     "interestElasticity()": FunctionFragment;
     "liquidate(address[],uint256[],address,bytes,bytes)": FunctionFragment;
+    "liquidateBadDebt(address,address,address,bytes)": FunctionFragment;
     "liquidationBonusAmount()": FunctionFragment;
     "liquidationMultiplier()": FunctionFragment;
     "liquidationQueue()": FunctionFragment;
@@ -145,7 +146,7 @@ export interface SGLLiquidationInterface extends utils.Interface {
       | "collateralizationRate"
       | "collateralizationRate()"
       | "computeClosingFactor"
-      | "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"
+      | "computeClosingFactor(uint256,uint256,uint256)"
       | "computeLiquidatorReward"
       | "computeLiquidatorReward(address,uint256)"
       | "computeTVLInfo"
@@ -164,6 +165,8 @@ export interface SGLLiquidationInterface extends utils.Interface {
       | "interestElasticity()"
       | "liquidate"
       | "liquidate(address[],uint256[],address,bytes,bytes)"
+      | "liquidateBadDebt"
+      | "liquidateBadDebt(address,address,address,bytes)"
       | "liquidationBonusAmount"
       | "liquidationBonusAmount()"
       | "liquidationMultiplier"
@@ -356,16 +359,12 @@ export interface SGLLiquidationInterface extends utils.Interface {
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)",
+    functionFragment: "computeClosingFactor(uint256,uint256,uint256)",
     values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>
@@ -449,6 +448,24 @@ export interface SGLLiquidationInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>[],
       PromiseOrValue<string>,
       PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "liquidateBadDebt",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "liquidateBadDebt(address,address,address,bytes)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
@@ -895,7 +912,7 @@ export interface SGLLiquidationInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)",
+    functionFragment: "computeClosingFactor(uint256,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -959,6 +976,14 @@ export interface SGLLiquidationInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "liquidate", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "liquidate(address[],uint256[],address,bytes,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "liquidateBadDebt",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "liquidateBadDebt(address,address,address,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1907,17 +1932,13 @@ export interface SGLLiquidation extends BaseContract {
     computeClosingFactor(
       borrowPart: PromiseOrValue<BigNumberish>,
       collateralPartInAsset: PromiseOrValue<BigNumberish>,
-      borrowPartDecimals: PromiseOrValue<BigNumberish>,
-      collateralPartDecimals: PromiseOrValue<BigNumberish>,
       ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+    "computeClosingFactor(uint256,uint256,uint256)"(
       borrowPart: PromiseOrValue<BigNumberish>,
       collateralPartInAsset: PromiseOrValue<BigNumberish>,
-      borrowPartDecimals: PromiseOrValue<BigNumberish>,
-      collateralPartDecimals: PromiseOrValue<BigNumberish>,
       ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
@@ -2013,6 +2034,22 @@ export interface SGLLiquidation extends BaseContract {
       swapper: PromiseOrValue<string>,
       collateralToAssetSwapData: PromiseOrValue<BytesLike>,
       usdoToBorrowedSwapData: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    liquidateBadDebt(
+      user: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      swapper: PromiseOrValue<string>,
+      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "liquidateBadDebt(address,address,address,bytes)"(
+      user: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      swapper: PromiseOrValue<string>,
+      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2460,17 +2497,13 @@ export interface SGLLiquidation extends BaseContract {
   computeClosingFactor(
     borrowPart: PromiseOrValue<BigNumberish>,
     collateralPartInAsset: PromiseOrValue<BigNumberish>,
-    borrowPartDecimals: PromiseOrValue<BigNumberish>,
-    collateralPartDecimals: PromiseOrValue<BigNumberish>,
     ratesPrecision: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+  "computeClosingFactor(uint256,uint256,uint256)"(
     borrowPart: PromiseOrValue<BigNumberish>,
     collateralPartInAsset: PromiseOrValue<BigNumberish>,
-    borrowPartDecimals: PromiseOrValue<BigNumberish>,
-    collateralPartDecimals: PromiseOrValue<BigNumberish>,
     ratesPrecision: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
@@ -2564,6 +2597,22 @@ export interface SGLLiquidation extends BaseContract {
     swapper: PromiseOrValue<string>,
     collateralToAssetSwapData: PromiseOrValue<BytesLike>,
     usdoToBorrowedSwapData: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  liquidateBadDebt(
+    user: PromiseOrValue<string>,
+    receiver: PromiseOrValue<string>,
+    swapper: PromiseOrValue<string>,
+    collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "liquidateBadDebt(address,address,address,bytes)"(
+    user: PromiseOrValue<string>,
+    receiver: PromiseOrValue<string>,
+    swapper: PromiseOrValue<string>,
+    collateralToAssetSwapData: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -2983,17 +3032,13 @@ export interface SGLLiquidation extends BaseContract {
     computeClosingFactor(
       borrowPart: PromiseOrValue<BigNumberish>,
       collateralPartInAsset: PromiseOrValue<BigNumberish>,
-      borrowPartDecimals: PromiseOrValue<BigNumberish>,
-      collateralPartDecimals: PromiseOrValue<BigNumberish>,
       ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+    "computeClosingFactor(uint256,uint256,uint256)"(
       borrowPart: PromiseOrValue<BigNumberish>,
       collateralPartInAsset: PromiseOrValue<BigNumberish>,
-      borrowPartDecimals: PromiseOrValue<BigNumberish>,
-      collateralPartDecimals: PromiseOrValue<BigNumberish>,
       ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -3087,6 +3132,22 @@ export interface SGLLiquidation extends BaseContract {
       swapper: PromiseOrValue<string>,
       collateralToAssetSwapData: PromiseOrValue<BytesLike>,
       usdoToBorrowedSwapData: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    liquidateBadDebt(
+      user: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      swapper: PromiseOrValue<string>,
+      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "liquidateBadDebt(address,address,address,bytes)"(
+      user: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      swapper: PromiseOrValue<string>,
+      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3802,17 +3863,13 @@ export interface SGLLiquidation extends BaseContract {
     computeClosingFactor(
       borrowPart: PromiseOrValue<BigNumberish>,
       collateralPartInAsset: PromiseOrValue<BigNumberish>,
-      borrowPartDecimals: PromiseOrValue<BigNumberish>,
-      collateralPartDecimals: PromiseOrValue<BigNumberish>,
       ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+    "computeClosingFactor(uint256,uint256,uint256)"(
       borrowPart: PromiseOrValue<BigNumberish>,
       collateralPartInAsset: PromiseOrValue<BigNumberish>,
-      borrowPartDecimals: PromiseOrValue<BigNumberish>,
-      collateralPartDecimals: PromiseOrValue<BigNumberish>,
       ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -3880,6 +3937,22 @@ export interface SGLLiquidation extends BaseContract {
       swapper: PromiseOrValue<string>,
       collateralToAssetSwapData: PromiseOrValue<BytesLike>,
       usdoToBorrowedSwapData: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    liquidateBadDebt(
+      user: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      swapper: PromiseOrValue<string>,
+      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "liquidateBadDebt(address,address,address,bytes)"(
+      user: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      swapper: PromiseOrValue<string>,
+      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4294,17 +4367,13 @@ export interface SGLLiquidation extends BaseContract {
     computeClosingFactor(
       borrowPart: PromiseOrValue<BigNumberish>,
       collateralPartInAsset: PromiseOrValue<BigNumberish>,
-      borrowPartDecimals: PromiseOrValue<BigNumberish>,
-      collateralPartDecimals: PromiseOrValue<BigNumberish>,
       ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+    "computeClosingFactor(uint256,uint256,uint256)"(
       borrowPart: PromiseOrValue<BigNumberish>,
       collateralPartInAsset: PromiseOrValue<BigNumberish>,
-      borrowPartDecimals: PromiseOrValue<BigNumberish>,
-      collateralPartDecimals: PromiseOrValue<BigNumberish>,
       ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -4384,6 +4453,22 @@ export interface SGLLiquidation extends BaseContract {
       swapper: PromiseOrValue<string>,
       collateralToAssetSwapData: PromiseOrValue<BytesLike>,
       usdoToBorrowedSwapData: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    liquidateBadDebt(
+      user: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      swapper: PromiseOrValue<string>,
+      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "liquidateBadDebt(address,address,address,bytes)"(
+      user: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      swapper: PromiseOrValue<string>,
+      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

@@ -123,7 +123,7 @@ export interface SingularityInterface extends utils.Interface {
     "collateralModule()": FunctionFragment;
     "collateralizationRate()": FunctionFragment;
     "computeAllowedLendShare(uint256,uint256)": FunctionFragment;
-    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
+    "computeClosingFactor(uint256,uint256,uint256)": FunctionFragment;
     "computeLiquidatorReward(address,uint256)": FunctionFragment;
     "computeTVLInfo(address,uint256)": FunctionFragment;
     "conservator()": FunctionFragment;
@@ -136,6 +136,7 @@ export interface SingularityInterface extends utils.Interface {
     "interestElasticity()": FunctionFragment;
     "leverageModule()": FunctionFragment;
     "liquidate(address[],uint256[],address,bytes,bytes)": FunctionFragment;
+    "liquidateBadDebt(address,address,address,bytes)": FunctionFragment;
     "liquidationBonusAmount()": FunctionFragment;
     "liquidationModule()": FunctionFragment;
     "liquidationMultiplier()": FunctionFragment;
@@ -147,8 +148,8 @@ export interface SingularityInterface extends utils.Interface {
     "minLiquidatorReward()": FunctionFragment;
     "minimumInterestPerSecond()": FunctionFragment;
     "minimumTargetUtilization()": FunctionFragment;
-    "multiHopBuyCollateral(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))": FunctionFragment;
-    "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))": FunctionFragment;
+    "multiHopBuyCollateral(address,uint256,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))": FunctionFragment;
+    "multiHopSellCollateral(address,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))": FunctionFragment;
     "name()": FunctionFragment;
     "nonces(address)": FunctionFragment;
     "oracle()": FunctionFragment;
@@ -239,7 +240,7 @@ export interface SingularityInterface extends utils.Interface {
       | "computeAllowedLendShare"
       | "computeAllowedLendShare(uint256,uint256)"
       | "computeClosingFactor"
-      | "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"
+      | "computeClosingFactor(uint256,uint256,uint256)"
       | "computeLiquidatorReward"
       | "computeLiquidatorReward(address,uint256)"
       | "computeTVLInfo"
@@ -264,6 +265,8 @@ export interface SingularityInterface extends utils.Interface {
       | "leverageModule()"
       | "liquidate"
       | "liquidate(address[],uint256[],address,bytes,bytes)"
+      | "liquidateBadDebt"
+      | "liquidateBadDebt(address,address,address,bytes)"
       | "liquidationBonusAmount"
       | "liquidationBonusAmount()"
       | "liquidationModule"
@@ -287,9 +290,9 @@ export interface SingularityInterface extends utils.Interface {
       | "minimumTargetUtilization"
       | "minimumTargetUtilization()"
       | "multiHopBuyCollateral"
-      | "multiHopBuyCollateral(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"
+      | "multiHopBuyCollateral(address,uint256,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"
       | "multiHopSellCollateral"
-      | "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"
+      | "multiHopSellCollateral(address,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"
       | "name"
       | "name()"
       | "nonces"
@@ -582,16 +585,12 @@ export interface SingularityInterface extends utils.Interface {
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)",
+    functionFragment: "computeClosingFactor(uint256,uint256,uint256)",
     values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>
@@ -703,6 +702,24 @@ export interface SingularityInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "liquidateBadDebt",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "liquidateBadDebt(address,address,address,bytes)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "liquidationBonusAmount",
     values?: undefined
   ): string;
@@ -796,17 +813,19 @@ export interface SingularityInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<boolean>,
       IUSDOBase.ILeverageSwapDataStruct,
       IUSDOBase.ILeverageLZDataStruct,
       IUSDOBase.ILeverageExternalContractsDataStruct
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "multiHopBuyCollateral(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))",
+    functionFragment: "multiHopBuyCollateral(address,uint256,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<boolean>,
       IUSDOBase.ILeverageSwapDataStruct,
       IUSDOBase.ILeverageLZDataStruct,
       IUSDOBase.ILeverageExternalContractsDataStruct
@@ -817,16 +836,18 @@ export interface SingularityInterface extends utils.Interface {
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<boolean>,
       IUSDOBase.ILeverageSwapDataStruct,
       IUSDOBase.ILeverageLZDataStruct,
       IUSDOBase.ILeverageExternalContractsDataStruct
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))",
+    functionFragment: "multiHopSellCollateral(address,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<boolean>,
       IUSDOBase.ILeverageSwapDataStruct,
       IUSDOBase.ILeverageLZDataStruct,
       IUSDOBase.ILeverageExternalContractsDataStruct
@@ -1387,7 +1408,7 @@ export interface SingularityInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)",
+    functionFragment: "computeClosingFactor(uint256,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1469,6 +1490,14 @@ export interface SingularityInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "liquidate", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "liquidate(address[],uint256[],address,bytes,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "liquidateBadDebt",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "liquidateBadDebt(address,address,address,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1564,7 +1593,7 @@ export interface SingularityInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "multiHopBuyCollateral(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))",
+    functionFragment: "multiHopBuyCollateral(address,uint256,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1572,7 +1601,7 @@ export interface SingularityInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))",
+    functionFragment: "multiHopSellCollateral(address,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
@@ -2603,17 +2632,13 @@ export interface Singularity extends BaseContract {
     computeClosingFactor(
       borrowPart: PromiseOrValue<BigNumberish>,
       collateralPartInAsset: PromiseOrValue<BigNumberish>,
-      borrowPartDecimals: PromiseOrValue<BigNumberish>,
-      collateralPartDecimals: PromiseOrValue<BigNumberish>,
       ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+    "computeClosingFactor(uint256,uint256,uint256)"(
       borrowPart: PromiseOrValue<BigNumberish>,
       collateralPartInAsset: PromiseOrValue<BigNumberish>,
-      borrowPartDecimals: PromiseOrValue<BigNumberish>,
-      collateralPartDecimals: PromiseOrValue<BigNumberish>,
       ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
@@ -2738,6 +2763,22 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    liquidateBadDebt(
+      user: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      swapper: PromiseOrValue<string>,
+      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "liquidateBadDebt(address,address,address,bytes)"(
+      user: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      swapper: PromiseOrValue<string>,
+      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     liquidationBonusAmount(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -2796,16 +2837,18 @@ export interface Singularity extends BaseContract {
       from: PromiseOrValue<string>,
       collateralAmount: PromiseOrValue<BigNumberish>,
       borrowAmount: PromiseOrValue<BigNumberish>,
+      useAirdropped: PromiseOrValue<boolean>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "multiHopBuyCollateral(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
+    "multiHopBuyCollateral(address,uint256,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
       from: PromiseOrValue<string>,
       collateralAmount: PromiseOrValue<BigNumberish>,
       borrowAmount: PromiseOrValue<BigNumberish>,
+      useAirdropped: PromiseOrValue<boolean>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -2815,15 +2858,17 @@ export interface Singularity extends BaseContract {
     multiHopSellCollateral(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
+      useAirdropped: PromiseOrValue<boolean>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
+    "multiHopSellCollateral(address,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
+      useAirdropped: PromiseOrValue<boolean>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -3452,17 +3497,13 @@ export interface Singularity extends BaseContract {
   computeClosingFactor(
     borrowPart: PromiseOrValue<BigNumberish>,
     collateralPartInAsset: PromiseOrValue<BigNumberish>,
-    borrowPartDecimals: PromiseOrValue<BigNumberish>,
-    collateralPartDecimals: PromiseOrValue<BigNumberish>,
     ratesPrecision: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+  "computeClosingFactor(uint256,uint256,uint256)"(
     borrowPart: PromiseOrValue<BigNumberish>,
     collateralPartInAsset: PromiseOrValue<BigNumberish>,
-    borrowPartDecimals: PromiseOrValue<BigNumberish>,
-    collateralPartDecimals: PromiseOrValue<BigNumberish>,
     ratesPrecision: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
@@ -3585,6 +3626,22 @@ export interface Singularity extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  liquidateBadDebt(
+    user: PromiseOrValue<string>,
+    receiver: PromiseOrValue<string>,
+    swapper: PromiseOrValue<string>,
+    collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "liquidateBadDebt(address,address,address,bytes)"(
+    user: PromiseOrValue<string>,
+    receiver: PromiseOrValue<string>,
+    swapper: PromiseOrValue<string>,
+    collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
   "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3633,16 +3690,18 @@ export interface Singularity extends BaseContract {
     from: PromiseOrValue<string>,
     collateralAmount: PromiseOrValue<BigNumberish>,
     borrowAmount: PromiseOrValue<BigNumberish>,
+    useAirdropped: PromiseOrValue<boolean>,
     swapData: IUSDOBase.ILeverageSwapDataStruct,
     lzData: IUSDOBase.ILeverageLZDataStruct,
     externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "multiHopBuyCollateral(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
+  "multiHopBuyCollateral(address,uint256,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
     from: PromiseOrValue<string>,
     collateralAmount: PromiseOrValue<BigNumberish>,
     borrowAmount: PromiseOrValue<BigNumberish>,
+    useAirdropped: PromiseOrValue<boolean>,
     swapData: IUSDOBase.ILeverageSwapDataStruct,
     lzData: IUSDOBase.ILeverageLZDataStruct,
     externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -3652,15 +3711,17 @@ export interface Singularity extends BaseContract {
   multiHopSellCollateral(
     from: PromiseOrValue<string>,
     share: PromiseOrValue<BigNumberish>,
+    useAirdropped: PromiseOrValue<boolean>,
     swapData: IUSDOBase.ILeverageSwapDataStruct,
     lzData: IUSDOBase.ILeverageLZDataStruct,
     externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
+  "multiHopSellCollateral(address,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
     from: PromiseOrValue<string>,
     share: PromiseOrValue<BigNumberish>,
+    useAirdropped: PromiseOrValue<boolean>,
     swapData: IUSDOBase.ILeverageSwapDataStruct,
     lzData: IUSDOBase.ILeverageLZDataStruct,
     externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -4271,17 +4332,13 @@ export interface Singularity extends BaseContract {
     computeClosingFactor(
       borrowPart: PromiseOrValue<BigNumberish>,
       collateralPartInAsset: PromiseOrValue<BigNumberish>,
-      borrowPartDecimals: PromiseOrValue<BigNumberish>,
-      collateralPartDecimals: PromiseOrValue<BigNumberish>,
       ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+    "computeClosingFactor(uint256,uint256,uint256)"(
       borrowPart: PromiseOrValue<BigNumberish>,
       collateralPartInAsset: PromiseOrValue<BigNumberish>,
-      borrowPartDecimals: PromiseOrValue<BigNumberish>,
-      collateralPartDecimals: PromiseOrValue<BigNumberish>,
       ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -4408,6 +4465,22 @@ export interface Singularity extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    liquidateBadDebt(
+      user: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      swapper: PromiseOrValue<string>,
+      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "liquidateBadDebt(address,address,address,bytes)"(
+      user: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      swapper: PromiseOrValue<string>,
+      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -4456,16 +4529,18 @@ export interface Singularity extends BaseContract {
       from: PromiseOrValue<string>,
       collateralAmount: PromiseOrValue<BigNumberish>,
       borrowAmount: PromiseOrValue<BigNumberish>,
+      useAirdropped: PromiseOrValue<boolean>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "multiHopBuyCollateral(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
+    "multiHopBuyCollateral(address,uint256,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
       from: PromiseOrValue<string>,
       collateralAmount: PromiseOrValue<BigNumberish>,
       borrowAmount: PromiseOrValue<BigNumberish>,
+      useAirdropped: PromiseOrValue<boolean>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -4475,15 +4550,17 @@ export interface Singularity extends BaseContract {
     multiHopSellCollateral(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
+      useAirdropped: PromiseOrValue<boolean>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
+    "multiHopSellCollateral(address,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
+      useAirdropped: PromiseOrValue<boolean>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -5386,17 +5463,13 @@ export interface Singularity extends BaseContract {
     computeClosingFactor(
       borrowPart: PromiseOrValue<BigNumberish>,
       collateralPartInAsset: PromiseOrValue<BigNumberish>,
-      borrowPartDecimals: PromiseOrValue<BigNumberish>,
-      collateralPartDecimals: PromiseOrValue<BigNumberish>,
       ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+    "computeClosingFactor(uint256,uint256,uint256)"(
       borrowPart: PromiseOrValue<BigNumberish>,
       collateralPartInAsset: PromiseOrValue<BigNumberish>,
-      borrowPartDecimals: PromiseOrValue<BigNumberish>,
-      collateralPartDecimals: PromiseOrValue<BigNumberish>,
       ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -5493,6 +5566,22 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    liquidateBadDebt(
+      user: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      swapper: PromiseOrValue<string>,
+      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "liquidateBadDebt(address,address,address,bytes)"(
+      user: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      swapper: PromiseOrValue<string>,
+      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -5541,16 +5630,18 @@ export interface Singularity extends BaseContract {
       from: PromiseOrValue<string>,
       collateralAmount: PromiseOrValue<BigNumberish>,
       borrowAmount: PromiseOrValue<BigNumberish>,
+      useAirdropped: PromiseOrValue<boolean>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "multiHopBuyCollateral(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
+    "multiHopBuyCollateral(address,uint256,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
       from: PromiseOrValue<string>,
       collateralAmount: PromiseOrValue<BigNumberish>,
       borrowAmount: PromiseOrValue<BigNumberish>,
+      useAirdropped: PromiseOrValue<boolean>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -5560,15 +5651,17 @@ export interface Singularity extends BaseContract {
     multiHopSellCollateral(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
+      useAirdropped: PromiseOrValue<boolean>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
+    "multiHopSellCollateral(address,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
+      useAirdropped: PromiseOrValue<boolean>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -6176,17 +6269,13 @@ export interface Singularity extends BaseContract {
     computeClosingFactor(
       borrowPart: PromiseOrValue<BigNumberish>,
       collateralPartInAsset: PromiseOrValue<BigNumberish>,
-      borrowPartDecimals: PromiseOrValue<BigNumberish>,
-      collateralPartDecimals: PromiseOrValue<BigNumberish>,
       ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "computeClosingFactor(uint256,uint256,uint256,uint256,uint256)"(
+    "computeClosingFactor(uint256,uint256,uint256)"(
       borrowPart: PromiseOrValue<BigNumberish>,
       collateralPartInAsset: PromiseOrValue<BigNumberish>,
-      borrowPartDecimals: PromiseOrValue<BigNumberish>,
-      collateralPartDecimals: PromiseOrValue<BigNumberish>,
       ratesPrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -6297,6 +6386,22 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    liquidateBadDebt(
+      user: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      swapper: PromiseOrValue<string>,
+      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "liquidateBadDebt(address,address,address,bytes)"(
+      user: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      swapper: PromiseOrValue<string>,
+      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     liquidationBonusAmount(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -6385,16 +6490,18 @@ export interface Singularity extends BaseContract {
       from: PromiseOrValue<string>,
       collateralAmount: PromiseOrValue<BigNumberish>,
       borrowAmount: PromiseOrValue<BigNumberish>,
+      useAirdropped: PromiseOrValue<boolean>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "multiHopBuyCollateral(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
+    "multiHopBuyCollateral(address,uint256,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
       from: PromiseOrValue<string>,
       collateralAmount: PromiseOrValue<BigNumberish>,
       borrowAmount: PromiseOrValue<BigNumberish>,
+      useAirdropped: PromiseOrValue<boolean>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
@@ -6404,15 +6511,17 @@ export interface Singularity extends BaseContract {
     multiHopSellCollateral(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
+      useAirdropped: PromiseOrValue<boolean>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "multiHopSellCollateral(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
+    "multiHopSellCollateral(address,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
+      useAirdropped: PromiseOrValue<boolean>,
       swapData: IUSDOBase.ILeverageSwapDataStruct,
       lzData: IUSDOBase.ILeverageLZDataStruct,
       externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
