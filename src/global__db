@@ -1463,7 +1463,7 @@
             "4002": [
                 {
                     "name": "Magnetar",
-                    "address": "0xf9eAbd160ca23539efACB416c68010F82857970e",
+                    "address": "0xdBfC4EF6303C6261FDb7Cf189ef4D23b21e06Dee",
                     "meta": {}
                 },
                 {
@@ -1487,7 +1487,7 @@
             "80001": [
                 {
                     "name": "Magnetar",
-                    "address": "0xb6515A55BC7D0EE6E440A4750BB4fa6c963B9C60",
+                    "address": "0x50b9c4e1caE6170201FC31fA45475F2E74D960D7",
                     "meta": {}
                 },
                 {
@@ -1499,7 +1499,7 @@
             "421613": [
                 {
                     "name": "Magnetar",
-                    "address": "0xA56ED86Bcf4ce01A93a6Fdec564Cccc5120378a7",
+                    "address": "0x5B8787214Bb80F1b30e853A1b5e197C44812616e",
                     "meta": {}
                 },
                 {
