@@ -1519,15 +1519,15 @@
                     }
                 },
                 {
-                    "name": "FTMMock",
-                    "address": "0xEe5f46c9e983b3E77eb0f62Cd395e64995E4D3DD",
+                    "name": "FTMLPMock",
+                    "address": "0x8bCF51D287A33F7d8B514ff3aa4fB66489Ec275E",
                     "meta": {
                         "isERC20Mock": true
                     }
                 },
                 {
-                    "name": "FTMLPMock",
-                    "address": "0xAc2C80435f1413ad93009e07d1140E8b77EadE2C",
+                    "name": "FTMMock",
+                    "address": "0xEe5f46c9e983b3E77eb0f62Cd395e64995E4D3DD",
                     "meta": {
                         "isERC20Mock": true
                     }
