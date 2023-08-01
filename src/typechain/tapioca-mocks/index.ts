@@ -3,6 +3,8 @@
 /* eslint-disable */
 import type * as flashBorrowerMockSol from "./FlashBorrowerMock.sol";
 export type { flashBorrowerMockSol };
+import type * as twTapMockSol from "./TwTapMock.sol";
+export type { twTapMockSol };
 import type * as uniswapv2 from "./uniswapv2";
 export type { uniswapv2 };
 export type { ContractThatCannotBeDeployed } from "./ContractThatCannotBeDeployed";
@@ -42,6 +44,8 @@ export { StargateRouterETHMock__factory } from "./factories/StargateRouterETHMoc
 export { StargateRouterMock__factory } from "./factories/StargateRouterMock__factory";
 export { TapiocaDeployerMock__factory } from "./factories/TapiocaDeployerMock__factory";
 export { TOFTStrategyMock__factory } from "./factories/TOFTStrategyMock__factory";
+export type { TwTwapMock } from "./TwTapMock.sol/TwTwapMock";
+export { TwTwapMock__factory } from "./factories/TwTapMock.sol/TwTwapMock__factory";
 export type { UniswapV2ERC20 } from "./uniswapv2/UniswapV2ERC20";
 export { UniswapV2ERC20__factory } from "./factories/uniswapv2/UniswapV2ERC20__factory";
 export type { UniswapV2Factory } from "./uniswapv2/UniswapV2Factory";
