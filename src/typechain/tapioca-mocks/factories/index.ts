@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as flashBorrowerMockSol from "./FlashBorrowerMock.sol";
+export * as twTapMockSol from "./TwTapMock.sol";
 export * as uniswapv2 from "./uniswapv2";
 export { ContractThatCannotBeDeployed__factory } from "./ContractThatCannotBeDeployed__factory";
 export { ContractThatReverts__factory } from "./ContractThatReverts__factory";

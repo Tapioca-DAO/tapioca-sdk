@@ -1,4 +1,4 @@
-import { ContractFactory } from 'ethers';
+import { ContractFactory, ContractTransaction } from 'ethers';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { v4 as uuidv4 } from 'uuid';
 import { TContract } from '../../shared';
@@ -420,18 +420,25 @@ export class DeployerVM {
             counter++;
         }
 
+        console.log(`[+] No. of batches to verify: ${verifyList.length}`);
+
         // Verify the contracts
         for (const batch of verifyList) {
-            await Promise.allSettled(
-                batch.map((contract) =>
-                    this.hre.run('verify:verify', {
-                        ...contract,
-                        noCompile: true,
-                    }),
-                ),
-            );
-            await new Promise((resolve) => setTimeout(resolve, 2000));
+            try {
+                await Promise.allSettled(
+                    batch.map((contract) =>
+                        this.hre.run('verify:verify', {
+                            ...contract,
+                            noCompile: true,
+                        }),
+                    ),
+                );
+                await new Promise((resolve) => setTimeout(resolve, 2000));
+            } catch (e: any) {
+                console.log(`[-] Failed to verify ${e.message}`);
+            }
         }
+        console.log('[+] Verified');
 
         return this;
     }

@@ -77,6 +77,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TOFTStrategyMock__factory>;
     getContractFactory(
+      name: "TwTwapMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TwTwapMock__factory>;
+    getContractFactory(
       name: "UniswapV2ERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.UniswapV2ERC20__factory>;
@@ -189,6 +193,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TOFTStrategyMock>;
+    getContractAt(
+      name: "TwTwapMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TwTwapMock>;
     getContractAt(
       name: "UniswapV2ERC20",
       address: string,

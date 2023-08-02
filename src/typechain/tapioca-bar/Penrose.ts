@@ -64,6 +64,7 @@ export interface PenroseInterface extends utils.Interface {
     "emptyStrategies(address)": FunctionFragment;
     "executeMarketFn(address[],bytes[],bool)": FunctionFragment;
     "feeTo()": FunctionFragment;
+    "hostLzChainId()": FunctionFragment;
     "isBigBangMasterContractRegistered(address)": FunctionFragment;
     "isMarketRegistered(address)": FunctionFragment;
     "isSingularityMasterContractRegistered(address)": FunctionFragment;
@@ -79,12 +80,12 @@ export interface PenroseInterface extends utils.Interface {
     "setBigBangEthMarketDebtRate(uint256)": FunctionFragment;
     "setConservator(address)": FunctionFragment;
     "setFeeTo(address)": FunctionFragment;
-    "setSwapper(address,bool)": FunctionFragment;
+    "setSwapper(address,uint16,bool)": FunctionFragment;
     "setUsdoToken(address)": FunctionFragment;
     "singularityMarkets()": FunctionFragment;
     "singularityMasterContractLength()": FunctionFragment;
     "singularityMasterContracts(uint256)": FunctionFragment;
-    "swappers(address)": FunctionFragment;
+    "swappers(uint16,address)": FunctionFragment;
     "tapAssetId()": FunctionFragment;
     "tapToken()": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
@@ -131,6 +132,8 @@ export interface PenroseInterface extends utils.Interface {
       | "executeMarketFn(address[],bytes[],bool)"
       | "feeTo"
       | "feeTo()"
+      | "hostLzChainId"
+      | "hostLzChainId()"
       | "isBigBangMasterContractRegistered"
       | "isBigBangMasterContractRegistered(address)"
       | "isMarketRegistered"
@@ -162,7 +165,7 @@ export interface PenroseInterface extends utils.Interface {
       | "setFeeTo"
       | "setFeeTo(address)"
       | "setSwapper"
-      | "setSwapper(address,bool)"
+      | "setSwapper(address,uint16,bool)"
       | "setUsdoToken"
       | "setUsdoToken(address)"
       | "singularityMarkets"
@@ -172,7 +175,7 @@ export interface PenroseInterface extends utils.Interface {
       | "singularityMasterContracts"
       | "singularityMasterContracts(uint256)"
       | "swappers"
-      | "swappers(address)"
+      | "swappers(uint16,address)"
       | "tapAssetId"
       | "tapAssetId()"
       | "tapToken"
@@ -334,6 +337,14 @@ export interface PenroseInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "feeTo", values?: undefined): string;
   encodeFunctionData(functionFragment: "feeTo()", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "hostLzChainId",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "hostLzChainId()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "isBigBangMasterContractRegistered",
     values: [PromiseOrValue<string>]
   ): string;
@@ -459,11 +470,19 @@ export interface PenroseInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setSwapper",
-    values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<boolean>
+    ]
   ): string;
   encodeFunctionData(
-    functionFragment: "setSwapper(address,bool)",
-    values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
+    functionFragment: "setSwapper(address,uint16,bool)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<boolean>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "setUsdoToken",
@@ -499,11 +518,11 @@ export interface PenroseInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "swappers",
-    values: [PromiseOrValue<string>]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "swappers(address)",
-    values: [PromiseOrValue<string>]
+    functionFragment: "swappers(uint16,address)",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "tapAssetId",
@@ -704,6 +723,14 @@ export interface PenroseInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "feeTo", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "feeTo()", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "hostLzChainId",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "hostLzChainId()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "isBigBangMasterContractRegistered",
     data: BytesLike
   ): Result;
@@ -810,7 +837,7 @@ export interface PenroseInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "setSwapper", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "setSwapper(address,bool)",
+    functionFragment: "setSwapper(address,uint16,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -847,7 +874,7 @@ export interface PenroseInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "swappers", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "swappers(address)",
+    functionFragment: "swappers(uint16,address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "tapAssetId", data: BytesLike): Result;
@@ -924,7 +951,7 @@ export interface PenroseInterface extends utils.Interface {
     "RegisterBigBangMasterContract(address,uint8)": EventFragment;
     "RegisterSingularity(address,address)": EventFragment;
     "RegisterSingularityMasterContract(address,uint8)": EventFragment;
-    "SwapperUpdate(address,bool)": EventFragment;
+    "SwapperUpdate(address,uint16,bool)": EventFragment;
     "UsdoTokenUpdated(address,uint256)": EventFragment;
   };
 
@@ -982,7 +1009,7 @@ export interface PenroseInterface extends utils.Interface {
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SwapperUpdate"): EventFragment;
   getEvent(
-    nameOrSignatureOrTopic: "SwapperUpdate(address,bool)"
+    nameOrSignatureOrTopic: "SwapperUpdate(address,uint16,bool)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "UsdoTokenUpdated"): EventFragment;
   getEvent(
@@ -1139,10 +1166,11 @@ export type RegisterSingularityMasterContractEventFilter =
 
 export interface SwapperUpdateEventObject {
   swapper: string;
+  id: number;
   isRegistered: boolean;
 }
 export type SwapperUpdateEvent = TypedEvent<
-  [string, boolean],
+  [string, number, boolean],
   SwapperUpdateEventObject
 >;
 
@@ -1333,6 +1361,10 @@ export interface Penrose extends BaseContract {
 
     "feeTo()"(overrides?: CallOverrides): Promise<[string]>;
 
+    hostLzChainId(overrides?: CallOverrides): Promise<[number]>;
+
+    "hostLzChainId()"(overrides?: CallOverrides): Promise<[number]>;
+
     isBigBangMasterContractRegistered(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -1479,12 +1511,14 @@ export interface Penrose extends BaseContract {
 
     setSwapper(
       swapper: PromiseOrValue<string>,
+      lzChainId: PromiseOrValue<BigNumberish>,
       enable: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setSwapper(address,bool)"(
+    "setSwapper(address,uint16,bool)"(
       swapper: PromiseOrValue<string>,
+      lzChainId: PromiseOrValue<BigNumberish>,
       enable: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -1526,14 +1560,16 @@ export interface Penrose extends BaseContract {
     ): Promise<[string, number] & { location: string; risk: number }>;
 
     swappers(
-      arg0: PromiseOrValue<string>,
+      lzChainId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<[boolean]>;
+    ): Promise<[boolean] & { isWhitelisted: boolean }>;
 
-    "swappers(address)"(
-      arg0: PromiseOrValue<string>,
+    "swappers(uint16,address)"(
+      lzChainId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<[boolean]>;
+    ): Promise<[boolean] & { isWhitelisted: boolean }>;
 
     tapAssetId(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -1740,6 +1776,10 @@ export interface Penrose extends BaseContract {
 
   "feeTo()"(overrides?: CallOverrides): Promise<string>;
 
+  hostLzChainId(overrides?: CallOverrides): Promise<number>;
+
+  "hostLzChainId()"(overrides?: CallOverrides): Promise<number>;
+
   isBigBangMasterContractRegistered(
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
@@ -1886,12 +1926,14 @@ export interface Penrose extends BaseContract {
 
   setSwapper(
     swapper: PromiseOrValue<string>,
+    lzChainId: PromiseOrValue<BigNumberish>,
     enable: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setSwapper(address,bool)"(
+  "setSwapper(address,uint16,bool)"(
     swapper: PromiseOrValue<string>,
+    lzChainId: PromiseOrValue<BigNumberish>,
     enable: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -1929,12 +1971,14 @@ export interface Penrose extends BaseContract {
   ): Promise<[string, number] & { location: string; risk: number }>;
 
   swappers(
-    arg0: PromiseOrValue<string>,
+    lzChainId: PromiseOrValue<BigNumberish>,
+    arg1: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  "swappers(address)"(
-    arg0: PromiseOrValue<string>,
+  "swappers(uint16,address)"(
+    lzChainId: PromiseOrValue<BigNumberish>,
+    arg1: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
@@ -2143,6 +2187,10 @@ export interface Penrose extends BaseContract {
 
     "feeTo()"(overrides?: CallOverrides): Promise<string>;
 
+    hostLzChainId(overrides?: CallOverrides): Promise<number>;
+
+    "hostLzChainId()"(overrides?: CallOverrides): Promise<number>;
+
     isBigBangMasterContractRegistered(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -2289,12 +2337,14 @@ export interface Penrose extends BaseContract {
 
     setSwapper(
       swapper: PromiseOrValue<string>,
+      lzChainId: PromiseOrValue<BigNumberish>,
       enable: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setSwapper(address,bool)"(
+    "setSwapper(address,uint16,bool)"(
       swapper: PromiseOrValue<string>,
+      lzChainId: PromiseOrValue<BigNumberish>,
       enable: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -2332,12 +2382,14 @@ export interface Penrose extends BaseContract {
     ): Promise<[string, number] & { location: string; risk: number }>;
 
     swappers(
-      arg0: PromiseOrValue<string>,
+      lzChainId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    "swappers(address)"(
-      arg0: PromiseOrValue<string>,
+    "swappers(uint16,address)"(
+      lzChainId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -2517,12 +2569,14 @@ export interface Penrose extends BaseContract {
       risk?: null
     ): RegisterSingularityMasterContractEventFilter;
 
-    "SwapperUpdate(address,bool)"(
+    "SwapperUpdate(address,uint16,bool)"(
       swapper?: PromiseOrValue<string> | null,
+      id?: PromiseOrValue<BigNumberish> | null,
       isRegistered?: null
     ): SwapperUpdateEventFilter;
     SwapperUpdate(
       swapper?: PromiseOrValue<string> | null,
+      id?: PromiseOrValue<BigNumberish> | null,
       isRegistered?: null
     ): SwapperUpdateEventFilter;
 
@@ -2675,6 +2729,10 @@ export interface Penrose extends BaseContract {
 
     "feeTo()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    hostLzChainId(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "hostLzChainId()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     isBigBangMasterContractRegistered(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -2821,12 +2879,14 @@ export interface Penrose extends BaseContract {
 
     setSwapper(
       swapper: PromiseOrValue<string>,
+      lzChainId: PromiseOrValue<BigNumberish>,
       enable: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setSwapper(address,bool)"(
+    "setSwapper(address,uint16,bool)"(
       swapper: PromiseOrValue<string>,
+      lzChainId: PromiseOrValue<BigNumberish>,
       enable: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -2864,12 +2924,14 @@ export interface Penrose extends BaseContract {
     ): Promise<BigNumber>;
 
     swappers(
-      arg0: PromiseOrValue<string>,
+      lzChainId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "swappers(address)"(
-      arg0: PromiseOrValue<string>,
+    "swappers(uint16,address)"(
+      lzChainId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -3089,6 +3151,10 @@ export interface Penrose extends BaseContract {
 
     "feeTo()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    hostLzChainId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "hostLzChainId()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     isBigBangMasterContractRegistered(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -3235,12 +3301,14 @@ export interface Penrose extends BaseContract {
 
     setSwapper(
       swapper: PromiseOrValue<string>,
+      lzChainId: PromiseOrValue<BigNumberish>,
       enable: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setSwapper(address,bool)"(
+    "setSwapper(address,uint16,bool)"(
       swapper: PromiseOrValue<string>,
+      lzChainId: PromiseOrValue<BigNumberish>,
       enable: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -3282,12 +3350,14 @@ export interface Penrose extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     swappers(
-      arg0: PromiseOrValue<string>,
+      lzChainId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "swappers(address)"(
-      arg0: PromiseOrValue<string>,
+    "swappers(uint16,address)"(
+      lzChainId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
