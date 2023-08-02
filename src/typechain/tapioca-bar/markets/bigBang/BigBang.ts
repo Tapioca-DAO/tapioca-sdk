@@ -68,6 +68,7 @@ export interface BigBangInterface extends utils.Interface {
     "minDebtRate()": FunctionFragment;
     "minLiquidatorReward()": FunctionFragment;
     "nonces(address)": FunctionFragment;
+    "openingFees(address)": FunctionFragment;
     "operators(address,address)": FunctionFragment;
     "oracle()": FunctionFragment;
     "oracleData()": FunctionFragment;
@@ -78,7 +79,7 @@ export interface BigBangInterface extends utils.Interface {
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "permitBorrow(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "protocolFee()": FunctionFragment;
-    "refreshPenroseFees(address)": FunctionFragment;
+    "refreshPenroseFees()": FunctionFragment;
     "removeCollateral(address,address,uint256)": FunctionFragment;
     "repay(address,address,bool,uint256)": FunctionFragment;
     "sellCollateral(address,uint256,uint256,address,bytes)": FunctionFragment;
@@ -182,6 +183,8 @@ export interface BigBangInterface extends utils.Interface {
       | "minLiquidatorReward()"
       | "nonces"
       | "nonces(address)"
+      | "openingFees"
+      | "openingFees(address)"
       | "operators"
       | "operators(address,address)"
       | "oracle"
@@ -203,7 +206,7 @@ export interface BigBangInterface extends utils.Interface {
       | "protocolFee"
       | "protocolFee()"
       | "refreshPenroseFees"
-      | "refreshPenroseFees(address)"
+      | "refreshPenroseFees()"
       | "removeCollateral"
       | "removeCollateral(address,address,uint256)"
       | "repay"
@@ -602,6 +605,14 @@ export interface BigBangInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "openingFees",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "openingFees(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "operators",
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
@@ -691,11 +702,11 @@ export interface BigBangInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "refreshPenroseFees",
-    values: [PromiseOrValue<string>]
+    values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "refreshPenroseFees(address)",
-    values: [PromiseOrValue<string>]
+    functionFragment: "refreshPenroseFees()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "removeCollateral",
@@ -1201,6 +1212,14 @@ export interface BigBangInterface extends utils.Interface {
     functionFragment: "nonces(address)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "openingFees",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "openingFees(address)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "operators", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "operators(address,address)",
@@ -1253,7 +1272,7 @@ export interface BigBangInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "refreshPenroseFees(address)",
+    functionFragment: "refreshPenroseFees()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2120,6 +2139,16 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
+    openingFees(
+      user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { fee: BigNumber }>;
+
+    "openingFees(address)"(
+      user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { fee: BigNumber }>;
+
     operators(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
@@ -2205,12 +2234,10 @@ export interface BigBang extends BaseContract {
     "protocolFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     refreshPenroseFees(
-      arg0: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "refreshPenroseFees(address)"(
-      arg0: PromiseOrValue<string>,
+    "refreshPenroseFees()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2783,6 +2810,16 @@ export interface BigBang extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  openingFees(
+    user: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "openingFees(address)"(
+    user: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   operators(
     arg0: PromiseOrValue<string>,
     arg1: PromiseOrValue<string>,
@@ -2868,12 +2905,10 @@ export interface BigBang extends BaseContract {
   "protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   refreshPenroseFees(
-    arg0: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "refreshPenroseFees(address)"(
-    arg0: PromiseOrValue<string>,
+  "refreshPenroseFees()"(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3438,6 +3473,16 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    openingFees(
+      user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "openingFees(address)"(
+      user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     operators(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
@@ -3522,15 +3567,9 @@ export interface BigBang extends BaseContract {
 
     "protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    refreshPenroseFees(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    refreshPenroseFees(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "refreshPenroseFees(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    "refreshPenroseFees()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     removeCollateral(
       from: PromiseOrValue<string>,
@@ -4274,6 +4313,16 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    openingFees(
+      user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "openingFees(address)"(
+      user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     operators(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
@@ -4359,12 +4408,10 @@ export interface BigBang extends BaseContract {
     "protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     refreshPenroseFees(
-      arg0: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "refreshPenroseFees(address)"(
-      arg0: PromiseOrValue<string>,
+    "refreshPenroseFees()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4940,6 +4987,16 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    openingFees(
+      user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "openingFees(address)"(
+      user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     operators(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
@@ -5025,12 +5082,10 @@ export interface BigBang extends BaseContract {
     "protocolFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     refreshPenroseFees(
-      arg0: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "refreshPenroseFees(address)"(
-      arg0: PromiseOrValue<string>,
+    "refreshPenroseFees()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
