@@ -3,6 +3,17 @@
         "tapioca-bar": {
             "4002": [
                 {
+                    "name": "MockSwapper",
+                    "address": "0xd06693540dA88FBccf9FE8d0146F83A3a6d5cbeD",
+                    "meta": {
+                        "args": [
+                            "0xCc676B73C038D5A532B91C733feC4747619eB930"
+                        ],
+                        "salt": "0x65f8cb3fd2387842f9a3ea7849543e742140072dfc06529eee66347c29632d37",
+                        "create2": true
+                    }
+                },
+                {
                     "name": "ERC20WithoutStrategy-TapOFT",
                     "address": "0xA281475C97fd562D2ecDa3eA26B1D6FaE2C8d6b9",
                     "meta": {
@@ -212,6 +223,17 @@
                 }
             ],
             "43113": [
+                {
+                    "name": "MockSwapper",
+                    "address": "0x81576A7c87D56321d2a1CEf103DC91993827cFd7",
+                    "meta": {
+                        "args": [
+                            "0x822c40938B7d24D6BeCE6655C8621E5BBD22A985"
+                        ],
+                        "salt": "0x40e0b89bdb5ba0e50e80a9517a5f6cb6a2c332244c7593b29b7b21392796004d",
+                        "create2": true
+                    }
+                },
                 {
                     "name": "ERC20WithoutStrategy-TapOFT",
                     "address": "0x98653f8435458a06ceeF2c22dFDcD411C8729755",
@@ -423,6 +445,17 @@
             ],
             "80001": [
                 {
+                    "name": "MockSwapper",
+                    "address": "0xBFd62A185614BC8e3545b7D53FD6BEe14eeC4255",
+                    "meta": {
+                        "args": [
+                            "0x85144100E2c8D1d2fa8c73081C1a65c99727506c"
+                        ],
+                        "salt": "0xef371462476cb18b2438bfa431399b791f11d270f13cdd4df515845f845d94fd",
+                        "create2": true
+                    }
+                },
+                {
                     "name": "ERC20WithoutStrategy-TapOFT",
                     "address": "0x8732D8b675bDe6Ba2b07AAf91F14896B743Dbf03",
                     "meta": {
@@ -632,6 +665,17 @@
                 }
             ],
             "421613": [
+                {
+                    "name": "MockSwapper",
+                    "address": "0xB1590930bf3778cc0a96c0c333E4737E7e3A575b",
+                    "meta": {
+                        "args": [
+                            "0xAe009E0E67861E497929A518B65d9832258AE0E1"
+                        ],
+                        "salt": "0xa3923da5c7dbfdbe21b26990371c08d0c98004cf863c01c7da0b6087783805a0",
+                        "create2": true
+                    }
+                },
                 {
                     "name": "BigBang-TapiocaOFT-FTMMock",
                     "address": "0xE55e656800f23EC0b6B0E0232cC83Fd0100B2a0c",
