@@ -99,7 +99,6 @@ export interface TapOFTInterface extends utils.Interface {
     "getTrustedRemoteAddress(uint16)": FunctionFragment;
     "governanceChainIdentifier()": FunctionFragment;
     "increaseAllowance(address,uint256)": FunctionFragment;
-    "isLdChain(uint16)": FunctionFragment;
     "isTrustedRemote(uint16,bytes)": FunctionFragment;
     "lockTwTapPosition(address,uint256,uint256,uint16,address,bytes)": FunctionFragment;
     "lzEndpoint()": FunctionFragment;
@@ -123,7 +122,6 @@ export interface TapOFTInterface extends utils.Interface {
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
     "setGovernanceChainIdentifier(uint256)": FunctionFragment;
-    "setLdChain(uint16,bool)": FunctionFragment;
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
     "setMinter(address)": FunctionFragment;
     "setPayloadSizeLimit(uint16,uint256)": FunctionFragment;
@@ -214,8 +212,6 @@ export interface TapOFTInterface extends utils.Interface {
       | "governanceChainIdentifier()"
       | "increaseAllowance"
       | "increaseAllowance(address,uint256)"
-      | "isLdChain"
-      | "isLdChain(uint16)"
       | "isTrustedRemote"
       | "isTrustedRemote(uint16,bytes)"
       | "lockTwTapPosition"
@@ -262,8 +258,6 @@ export interface TapOFTInterface extends utils.Interface {
       | "setConfig(uint16,uint16,uint256,bytes)"
       | "setGovernanceChainIdentifier"
       | "setGovernanceChainIdentifier(uint256)"
-      | "setLdChain"
-      | "setLdChain(uint16,bool)"
       | "setMinDstGas"
       | "setMinDstGas(uint16,uint16,uint256)"
       | "setMinter"
@@ -636,14 +630,6 @@ export interface TapOFTInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "isLdChain",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isLdChain(uint16)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "isTrustedRemote",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
   ): string;
@@ -897,14 +883,6 @@ export interface TapOFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "setGovernanceChainIdentifier(uint256)",
     values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setLdChain",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setLdChain(uint16,bool)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMinDstGas",
@@ -1323,11 +1301,6 @@ export interface TapOFTInterface extends utils.Interface {
     functionFragment: "increaseAllowance(address,uint256)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "isLdChain", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "isLdChain(uint16)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "isTrustedRemote",
     data: BytesLike
@@ -1456,11 +1429,6 @@ export interface TapOFTInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setGovernanceChainIdentifier(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "setLdChain", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "setLdChain(uint16,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2333,16 +2301,6 @@ export interface TapOFT extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    isLdChain(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
-    "isLdChain(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -2604,18 +2562,6 @@ export interface TapOFT extends BaseContract {
 
     "setGovernanceChainIdentifier(uint256)"(
       _identifier: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setLdChain(
-      _chainId: PromiseOrValue<BigNumberish>,
-      _isLdChain: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setLdChain(uint16,bool)"(
-      _chainId: PromiseOrValue<BigNumberish>,
-      _isLdChain: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -3154,16 +3100,6 @@ export interface TapOFT extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  isLdChain(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  "isLdChain(uint16)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
   isTrustedRemote(
     _srcChainId: PromiseOrValue<BigNumberish>,
     _srcAddress: PromiseOrValue<BytesLike>,
@@ -3425,18 +3361,6 @@ export interface TapOFT extends BaseContract {
 
   "setGovernanceChainIdentifier(uint256)"(
     _identifier: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setLdChain(
-    _chainId: PromiseOrValue<BigNumberish>,
-    _isLdChain: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setLdChain(uint16,bool)"(
-    _chainId: PromiseOrValue<BigNumberish>,
-    _isLdChain: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3975,16 +3899,6 @@ export interface TapOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    isLdChain(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    "isLdChain(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -4242,18 +4156,6 @@ export interface TapOFT extends BaseContract {
 
     "setGovernanceChainIdentifier(uint256)"(
       _identifier: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setLdChain(
-      _chainId: PromiseOrValue<BigNumberish>,
-      _isLdChain: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setLdChain(uint16,bool)"(
-      _chainId: PromiseOrValue<BigNumberish>,
-      _isLdChain: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -5000,16 +4902,6 @@ export interface TapOFT extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    isLdChain(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "isLdChain(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -5271,18 +5163,6 @@ export interface TapOFT extends BaseContract {
 
     "setGovernanceChainIdentifier(uint256)"(
       _identifier: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setLdChain(
-      _chainId: PromiseOrValue<BigNumberish>,
-      _isLdChain: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setLdChain(uint16,bool)"(
-      _chainId: PromiseOrValue<BigNumberish>,
-      _isLdChain: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5840,16 +5720,6 @@ export interface TapOFT extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    isLdChain(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "isLdChain(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -6111,18 +5981,6 @@ export interface TapOFT extends BaseContract {
 
     "setGovernanceChainIdentifier(uint256)"(
       _identifier: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setLdChain(
-      _chainId: PromiseOrValue<BigNumberish>,
-      _isLdChain: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setLdChain(uint16,bool)"(
-      _chainId: PromiseOrValue<BigNumberish>,
-      _isLdChain: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

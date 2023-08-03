@@ -927,25 +927,6 @@ const _abi = [
     inputs: [
       {
         internalType: "uint16",
-        name: "",
-        type: "uint16",
-      },
-    ],
-    name: "isLdChain",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint16",
         name: "_srcChainId",
         type: "uint16",
       },
@@ -1342,24 +1323,6 @@ const _abi = [
       },
     ],
     name: "setConfig",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint16",
-        name: "_chainId",
-        type: "uint16",
-      },
-      {
-        internalType: "bool",
-        name: "_isLdChain",
-        type: "bool",
-      },
-    ],
-    name: "setLdChain",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
