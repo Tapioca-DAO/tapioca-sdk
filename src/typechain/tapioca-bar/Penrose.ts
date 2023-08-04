@@ -38,12 +38,6 @@ export declare namespace IPenrose {
     location: string;
     risk: number;
   };
-
-  export type SwapDataStruct = { minAssetAmount: PromiseOrValue<BigNumberish> };
-
-  export type SwapDataStructOutput = [BigNumber] & {
-    minAssetAmount: BigNumber;
-  };
 }
 
 export interface PenroseInterface extends utils.Interface {
@@ -63,7 +57,6 @@ export interface PenroseInterface extends utils.Interface {
     "deploy(address,bytes,bool)": FunctionFragment;
     "emptyStrategies(address)": FunctionFragment;
     "executeMarketFn(address[],bytes[],bool)": FunctionFragment;
-    "feeTo()": FunctionFragment;
     "hostLzChainId()": FunctionFragment;
     "isBigBangMasterContractRegistered(address)": FunctionFragment;
     "isMarketRegistered(address)": FunctionFragment;
@@ -79,7 +72,6 @@ export interface PenroseInterface extends utils.Interface {
     "setBigBangEthMarket(address)": FunctionFragment;
     "setBigBangEthMarketDebtRate(uint256)": FunctionFragment;
     "setConservator(address)": FunctionFragment;
-    "setFeeTo(address)": FunctionFragment;
     "setSwapper(address,uint16,bool)": FunctionFragment;
     "setUsdoToken(address)": FunctionFragment;
     "singularityMarkets()": FunctionFragment;
@@ -94,7 +86,7 @@ export interface PenroseInterface extends utils.Interface {
     "usdoToken()": FunctionFragment;
     "wethAssetId()": FunctionFragment;
     "wethToken()": FunctionFragment;
-    "withdrawAllMarketFees(address[],address[],(uint256)[])": FunctionFragment;
+    "withdrawAllMarketFees(address[],address)": FunctionFragment;
     "yieldBox()": FunctionFragment;
   };
 
@@ -130,8 +122,6 @@ export interface PenroseInterface extends utils.Interface {
       | "emptyStrategies(address)"
       | "executeMarketFn"
       | "executeMarketFn(address[],bytes[],bool)"
-      | "feeTo"
-      | "feeTo()"
       | "hostLzChainId"
       | "hostLzChainId()"
       | "isBigBangMasterContractRegistered"
@@ -162,8 +152,6 @@ export interface PenroseInterface extends utils.Interface {
       | "setBigBangEthMarketDebtRate(uint256)"
       | "setConservator"
       | "setConservator(address)"
-      | "setFeeTo"
-      | "setFeeTo(address)"
       | "setSwapper"
       | "setSwapper(address,uint16,bool)"
       | "setUsdoToken"
@@ -193,7 +181,7 @@ export interface PenroseInterface extends utils.Interface {
       | "wethToken"
       | "wethToken()"
       | "withdrawAllMarketFees"
-      | "withdrawAllMarketFees(address[],address[],(uint256)[])"
+      | "withdrawAllMarketFees(address[],address)"
       | "yieldBox"
       | "yieldBox()"
   ): FunctionFragment;
@@ -334,8 +322,6 @@ export interface PenroseInterface extends utils.Interface {
       PromiseOrValue<boolean>
     ]
   ): string;
-  encodeFunctionData(functionFragment: "feeTo", values?: undefined): string;
-  encodeFunctionData(functionFragment: "feeTo()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "hostLzChainId",
     values?: undefined
@@ -461,14 +447,6 @@ export interface PenroseInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "setFeeTo",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setFeeTo(address)",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "setSwapper",
     values: [
       PromiseOrValue<string>,
@@ -589,19 +567,11 @@ export interface PenroseInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "withdrawAllMarketFees",
-    values: [
-      PromiseOrValue<string>[],
-      PromiseOrValue<string>[],
-      IPenrose.SwapDataStruct[]
-    ]
+    values: [PromiseOrValue<string>[], PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "withdrawAllMarketFees(address[],address[],(uint256)[])",
-    values: [
-      PromiseOrValue<string>[],
-      PromiseOrValue<string>[],
-      IPenrose.SwapDataStruct[]
-    ]
+    functionFragment: "withdrawAllMarketFees(address[],address)",
+    values: [PromiseOrValue<string>[], PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "yieldBox", values?: undefined): string;
   encodeFunctionData(
@@ -720,8 +690,6 @@ export interface PenroseInterface extends utils.Interface {
     functionFragment: "executeMarketFn(address[],bytes[],bool)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "feeTo", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "feeTo()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "hostLzChainId",
     data: BytesLike
@@ -830,11 +798,6 @@ export interface PenroseInterface extends utils.Interface {
     functionFragment: "setConservator(address)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "setFeeTo", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "setFeeTo(address)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "setSwapper", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setSwapper(address,uint16,bool)",
@@ -931,7 +894,7 @@ export interface PenroseInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "withdrawAllMarketFees(address[],address[],(uint256)[])",
+    functionFragment: "withdrawAllMarketFees(address[],address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "yieldBox", data: BytesLike): Result;
@@ -941,9 +904,8 @@ export interface PenroseInterface extends utils.Interface {
     "BigBangEthMarketDebtRate(uint256)": EventFragment;
     "BigBangEthMarketSet(address)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
-    "FeeToUpdate(address)": EventFragment;
     "LogDeploy(address,bytes,address)": EventFragment;
-    "LogYieldBoxFeesDeposit(uint256,uint256)": EventFragment;
+    "LogTwTapFeesDeposit(uint256,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "PausedUpdated(bool,bool)": EventFragment;
     "ProtocolWithdrawal(address[],uint256)": EventFragment;
@@ -967,15 +929,13 @@ export interface PenroseInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "ConservatorUpdated(address,address)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "FeeToUpdate"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "FeeToUpdate(address)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogDeploy"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "LogDeploy(address,bytes,address)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "LogYieldBoxFeesDeposit"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogTwTapFeesDeposit"): EventFragment;
   getEvent(
-    nameOrSignatureOrTopic: "LogYieldBoxFeesDeposit(uint256,uint256)"
+    nameOrSignatureOrTopic: "LogTwTapFeesDeposit(uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
@@ -1051,13 +1011,6 @@ export type ConservatorUpdatedEvent = TypedEvent<
 export type ConservatorUpdatedEventFilter =
   TypedEventFilter<ConservatorUpdatedEvent>;
 
-export interface FeeToUpdateEventObject {
-  newFeeTo: string;
-}
-export type FeeToUpdateEvent = TypedEvent<[string], FeeToUpdateEventObject>;
-
-export type FeeToUpdateEventFilter = TypedEventFilter<FeeToUpdateEvent>;
-
 export interface LogDeployEventObject {
   masterContract: string;
   data: string;
@@ -1070,17 +1023,17 @@ export type LogDeployEvent = TypedEvent<
 
 export type LogDeployEventFilter = TypedEventFilter<LogDeployEvent>;
 
-export interface LogYieldBoxFeesDepositEventObject {
+export interface LogTwTapFeesDepositEventObject {
   feeShares: BigNumber;
   ethAmount: BigNumber;
 }
-export type LogYieldBoxFeesDepositEvent = TypedEvent<
+export type LogTwTapFeesDepositEvent = TypedEvent<
   [BigNumber, BigNumber],
-  LogYieldBoxFeesDepositEventObject
+  LogTwTapFeesDepositEventObject
 >;
 
-export type LogYieldBoxFeesDepositEventFilter =
-  TypedEventFilter<LogYieldBoxFeesDepositEvent>;
+export type LogTwTapFeesDepositEventFilter =
+  TypedEventFilter<LogTwTapFeesDepositEvent>;
 
 export interface OwnershipTransferredEventObject {
   previousOwner: string;
@@ -1357,10 +1310,6 @@ export interface Penrose extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    feeTo(overrides?: CallOverrides): Promise<[string]>;
-
-    "feeTo()"(overrides?: CallOverrides): Promise<[string]>;
-
     hostLzChainId(overrides?: CallOverrides): Promise<[number]>;
 
     "hostLzChainId()"(overrides?: CallOverrides): Promise<[number]>;
@@ -1499,16 +1448,6 @@ export interface Penrose extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    setFeeTo(
-      feeTo_: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setFeeTo(address)"(
-      feeTo_: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     setSwapper(
       swapper: PromiseOrValue<string>,
       lzChainId: PromiseOrValue<BigNumberish>,
@@ -1621,15 +1560,13 @@ export interface Penrose extends BaseContract {
 
     withdrawAllMarketFees(
       markets_: PromiseOrValue<string>[],
-      swappers_: PromiseOrValue<string>[],
-      swapData_: IPenrose.SwapDataStruct[],
+      twTap: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "withdrawAllMarketFees(address[],address[],(uint256)[])"(
+    "withdrawAllMarketFees(address[],address)"(
       markets_: PromiseOrValue<string>[],
-      swappers_: PromiseOrValue<string>[],
-      swapData_: IPenrose.SwapDataStruct[],
+      twTap: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1772,10 +1709,6 @@ export interface Penrose extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  feeTo(overrides?: CallOverrides): Promise<string>;
-
-  "feeTo()"(overrides?: CallOverrides): Promise<string>;
-
   hostLzChainId(overrides?: CallOverrides): Promise<number>;
 
   "hostLzChainId()"(overrides?: CallOverrides): Promise<number>;
@@ -1914,16 +1847,6 @@ export interface Penrose extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  setFeeTo(
-    feeTo_: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setFeeTo(address)"(
-    feeTo_: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   setSwapper(
     swapper: PromiseOrValue<string>,
     lzChainId: PromiseOrValue<BigNumberish>,
@@ -2032,15 +1955,13 @@ export interface Penrose extends BaseContract {
 
   withdrawAllMarketFees(
     markets_: PromiseOrValue<string>[],
-    swappers_: PromiseOrValue<string>[],
-    swapData_: IPenrose.SwapDataStruct[],
+    twTap: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "withdrawAllMarketFees(address[],address[],(uint256)[])"(
+  "withdrawAllMarketFees(address[],address)"(
     markets_: PromiseOrValue<string>[],
-    swappers_: PromiseOrValue<string>[],
-    swapData_: IPenrose.SwapDataStruct[],
+    twTap: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -2183,10 +2104,6 @@ export interface Penrose extends BaseContract {
       [boolean[], string[]] & { success: boolean[]; result: string[] }
     >;
 
-    feeTo(overrides?: CallOverrides): Promise<string>;
-
-    "feeTo()"(overrides?: CallOverrides): Promise<string>;
-
     hostLzChainId(overrides?: CallOverrides): Promise<number>;
 
     "hostLzChainId()"(overrides?: CallOverrides): Promise<number>;
@@ -2325,16 +2242,6 @@ export interface Penrose extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setFeeTo(
-      feeTo_: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setFeeTo(address)"(
-      feeTo_: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     setSwapper(
       swapper: PromiseOrValue<string>,
       lzChainId: PromiseOrValue<BigNumberish>,
@@ -2443,15 +2350,13 @@ export interface Penrose extends BaseContract {
 
     withdrawAllMarketFees(
       markets_: PromiseOrValue<string>[],
-      swappers_: PromiseOrValue<string>[],
-      swapData_: IPenrose.SwapDataStruct[],
+      twTap: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "withdrawAllMarketFees(address[],address[],(uint256)[])"(
+    "withdrawAllMarketFees(address[],address)"(
       markets_: PromiseOrValue<string>[],
-      swappers_: PromiseOrValue<string>[],
-      swapData_: IPenrose.SwapDataStruct[],
+      twTap: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -2482,13 +2387,6 @@ export interface Penrose extends BaseContract {
       _new?: PromiseOrValue<string> | null
     ): ConservatorUpdatedEventFilter;
 
-    "FeeToUpdate(address)"(
-      newFeeTo?: PromiseOrValue<string> | null
-    ): FeeToUpdateEventFilter;
-    FeeToUpdate(
-      newFeeTo?: PromiseOrValue<string> | null
-    ): FeeToUpdateEventFilter;
-
     "LogDeploy(address,bytes,address)"(
       masterContract?: PromiseOrValue<string> | null,
       data?: null,
@@ -2500,14 +2398,14 @@ export interface Penrose extends BaseContract {
       cloneAddress?: PromiseOrValue<string> | null
     ): LogDeployEventFilter;
 
-    "LogYieldBoxFeesDeposit(uint256,uint256)"(
+    "LogTwTapFeesDeposit(uint256,uint256)"(
       feeShares?: null,
       ethAmount?: null
-    ): LogYieldBoxFeesDepositEventFilter;
-    LogYieldBoxFeesDeposit(
+    ): LogTwTapFeesDepositEventFilter;
+    LogTwTapFeesDeposit(
       feeShares?: null,
       ethAmount?: null
-    ): LogYieldBoxFeesDepositEventFilter;
+    ): LogTwTapFeesDepositEventFilter;
 
     "OwnershipTransferred(address,address)"(
       previousOwner?: PromiseOrValue<string> | null,
@@ -2725,10 +2623,6 @@ export interface Penrose extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    feeTo(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "feeTo()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     hostLzChainId(overrides?: CallOverrides): Promise<BigNumber>;
 
     "hostLzChainId()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2867,16 +2761,6 @@ export interface Penrose extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    setFeeTo(
-      feeTo_: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setFeeTo(address)"(
-      feeTo_: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     setSwapper(
       swapper: PromiseOrValue<string>,
       lzChainId: PromiseOrValue<BigNumberish>,
@@ -2985,15 +2869,13 @@ export interface Penrose extends BaseContract {
 
     withdrawAllMarketFees(
       markets_: PromiseOrValue<string>[],
-      swappers_: PromiseOrValue<string>[],
-      swapData_: IPenrose.SwapDataStruct[],
+      twTap: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "withdrawAllMarketFees(address[],address[],(uint256)[])"(
+    "withdrawAllMarketFees(address[],address)"(
       markets_: PromiseOrValue<string>[],
-      swappers_: PromiseOrValue<string>[],
-      swapData_: IPenrose.SwapDataStruct[],
+      twTap: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -3147,10 +3029,6 @@ export interface Penrose extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    feeTo(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "feeTo()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     hostLzChainId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "hostLzChainId()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -3289,16 +3167,6 @@ export interface Penrose extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    setFeeTo(
-      feeTo_: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setFeeTo(address)"(
-      feeTo_: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     setSwapper(
       swapper: PromiseOrValue<string>,
       lzChainId: PromiseOrValue<BigNumberish>,
@@ -3411,15 +3279,13 @@ export interface Penrose extends BaseContract {
 
     withdrawAllMarketFees(
       markets_: PromiseOrValue<string>[],
-      swappers_: PromiseOrValue<string>[],
-      swapData_: IPenrose.SwapDataStruct[],
+      twTap: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "withdrawAllMarketFees(address[],address[],(uint256)[])"(
+    "withdrawAllMarketFees(address[],address)"(
       markets_: PromiseOrValue<string>[],
-      swappers_: PromiseOrValue<string>[],
-      swapData_: IPenrose.SwapDataStruct[],
+      twTap: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

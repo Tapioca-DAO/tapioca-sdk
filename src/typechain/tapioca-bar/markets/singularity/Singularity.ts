@@ -161,7 +161,7 @@ export interface SingularityInterface extends utils.Interface {
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "permitBorrow(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "protocolFee()": FunctionFragment;
-    "refreshPenroseFees(address)": FunctionFragment;
+    "refreshPenroseFees()": FunctionFragment;
     "removeAsset(address,address,uint256)": FunctionFragment;
     "removeCollateral(address,address,uint256)": FunctionFragment;
     "repay(address,address,bool,uint256)": FunctionFragment;
@@ -186,7 +186,6 @@ export interface SingularityInterface extends utils.Interface {
     "updatePause(bool)": FunctionFragment;
     "userBorrowPart(address)": FunctionFragment;
     "userCollateralShare(address)": FunctionFragment;
-    "withdrawFeesEarned()": FunctionFragment;
     "yieldBox()": FunctionFragment;
     "yieldBoxShares(address,uint256)": FunctionFragment;
   };
@@ -316,7 +315,7 @@ export interface SingularityInterface extends utils.Interface {
       | "protocolFee"
       | "protocolFee()"
       | "refreshPenroseFees"
-      | "refreshPenroseFees(address)"
+      | "refreshPenroseFees()"
       | "removeAsset"
       | "removeAsset(address,address,uint256)"
       | "removeCollateral"
@@ -365,8 +364,6 @@ export interface SingularityInterface extends utils.Interface {
       | "userBorrowPart(address)"
       | "userCollateralShare"
       | "userCollateralShare(address)"
-      | "withdrawFeesEarned"
-      | "withdrawFeesEarned()"
       | "yieldBox"
       | "yieldBox()"
       | "yieldBoxShares"
@@ -945,11 +942,11 @@ export interface SingularityInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "refreshPenroseFees",
-    values: [PromiseOrValue<string>]
+    values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "refreshPenroseFees(address)",
-    values: [PromiseOrValue<string>]
+    functionFragment: "refreshPenroseFees()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "removeAsset",
@@ -1238,14 +1235,6 @@ export interface SingularityInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "userCollateralShare(address)",
     values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "withdrawFeesEarned",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "withdrawFeesEarned()",
-    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "yieldBox", values?: undefined): string;
   encodeFunctionData(
@@ -1658,7 +1647,7 @@ export interface SingularityInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "refreshPenroseFees(address)",
+    functionFragment: "refreshPenroseFees()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1833,14 +1822,6 @@ export interface SingularityInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "userCollateralShare(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "withdrawFeesEarned",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "withdrawFeesEarned()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "yieldBox", data: BytesLike): Result;
@@ -2962,12 +2943,10 @@ export interface Singularity extends BaseContract {
     "protocolFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     refreshPenroseFees(
-      feeTo: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "refreshPenroseFees(address)"(
-      feeTo: PromiseOrValue<string>,
+    "refreshPenroseFees()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -3254,14 +3233,6 @@ export interface Singularity extends BaseContract {
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
-
-    withdrawFeesEarned(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "withdrawFeesEarned()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
 
     yieldBox(overrides?: CallOverrides): Promise<[string]>;
 
@@ -3815,12 +3786,10 @@ export interface Singularity extends BaseContract {
   "protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   refreshPenroseFees(
-    feeTo: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "refreshPenroseFees(address)"(
-    feeTo: PromiseOrValue<string>,
+  "refreshPenroseFees()"(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -4097,14 +4066,6 @@ export interface Singularity extends BaseContract {
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
-
-  withdrawFeesEarned(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "withdrawFeesEarned()"(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
 
   yieldBox(overrides?: CallOverrides): Promise<string>;
 
@@ -4653,15 +4614,9 @@ export interface Singularity extends BaseContract {
 
     "protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    refreshPenroseFees(
-      feeTo: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    refreshPenroseFees(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "refreshPenroseFees(address)"(
-      feeTo: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    "refreshPenroseFees()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     removeAsset(
       from: PromiseOrValue<string>,
@@ -4946,10 +4901,6 @@ export interface Singularity extends BaseContract {
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    withdrawFeesEarned(overrides?: CallOverrides): Promise<void>;
-
-    "withdrawFeesEarned()"(overrides?: CallOverrides): Promise<void>;
 
     yieldBox(overrides?: CallOverrides): Promise<string>;
 
@@ -5755,12 +5706,10 @@ export interface Singularity extends BaseContract {
     "protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     refreshPenroseFees(
-      feeTo: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "refreshPenroseFees(address)"(
-      feeTo: PromiseOrValue<string>,
+    "refreshPenroseFees()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -6030,14 +5979,6 @@ export interface Singularity extends BaseContract {
     "userCollateralShare(address)"(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    withdrawFeesEarned(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "withdrawFeesEarned()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     yieldBox(overrides?: CallOverrides): Promise<BigNumber>;
@@ -6615,12 +6556,10 @@ export interface Singularity extends BaseContract {
     "protocolFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     refreshPenroseFees(
-      feeTo: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "refreshPenroseFees(address)"(
-      feeTo: PromiseOrValue<string>,
+    "refreshPenroseFees()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -6898,14 +6837,6 @@ export interface Singularity extends BaseContract {
     "userCollateralShare(address)"(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    withdrawFeesEarned(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "withdrawFeesEarned()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     yieldBox(overrides?: CallOverrides): Promise<PopulatedTransaction>;
