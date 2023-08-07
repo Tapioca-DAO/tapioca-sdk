@@ -13,6 +13,34 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "BBBorrow",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BBBorrow__factory>;
+    getContractFactory(
+      name: "BBCollateral",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BBCollateral__factory>;
+    getContractFactory(
+      name: "BBCommon",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BBCommon__factory>;
+    getContractFactory(
+      name: "BBLendingCommon",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BBLendingCommon__factory>;
+    getContractFactory(
+      name: "BBLeverage",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BBLeverage__factory>;
+    getContractFactory(
+      name: "BBLiquidation",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BBLiquidation__factory>;
+    getContractFactory(
+      name: "BBStorage",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BBStorage__factory>;
+    getContractFactory(
       name: "BigBang",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BigBang__factory>;
@@ -89,6 +117,41 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.USDO__factory>;
 
+    getContractAt(
+      name: "BBBorrow",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BBBorrow>;
+    getContractAt(
+      name: "BBCollateral",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BBCollateral>;
+    getContractAt(
+      name: "BBCommon",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BBCommon>;
+    getContractAt(
+      name: "BBLendingCommon",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BBLendingCommon>;
+    getContractAt(
+      name: "BBLeverage",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BBLeverage>;
+    getContractAt(
+      name: "BBLiquidation",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BBLiquidation>;
+    getContractAt(
+      name: "BBStorage",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BBStorage>;
     getContractAt(
       name: "BigBang",
       address: string,
