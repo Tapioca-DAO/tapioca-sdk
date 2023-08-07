@@ -61,6 +61,8 @@ export interface PenroseInterface extends utils.Interface {
     "isBigBangMasterContractRegistered(address)": FunctionFragment;
     "isMarketRegistered(address)": FunctionFragment;
     "isSingularityMasterContractRegistered(address)": FunctionFragment;
+    "mainAssetId()": FunctionFragment;
+    "mainToken()": FunctionFragment;
     "masterContractOf(address)": FunctionFragment;
     "owner()": FunctionFragment;
     "paused()": FunctionFragment;
@@ -84,8 +86,6 @@ export interface PenroseInterface extends utils.Interface {
     "updatePause(bool)": FunctionFragment;
     "usdoAssetId()": FunctionFragment;
     "usdoToken()": FunctionFragment;
-    "wethAssetId()": FunctionFragment;
-    "wethToken()": FunctionFragment;
     "withdrawAllMarketFees(address[],address)": FunctionFragment;
     "yieldBox()": FunctionFragment;
   };
@@ -130,6 +130,10 @@ export interface PenroseInterface extends utils.Interface {
       | "isMarketRegistered(address)"
       | "isSingularityMasterContractRegistered"
       | "isSingularityMasterContractRegistered(address)"
+      | "mainAssetId"
+      | "mainAssetId()"
+      | "mainToken"
+      | "mainToken()"
       | "masterContractOf"
       | "masterContractOf(address)"
       | "owner"
@@ -176,10 +180,6 @@ export interface PenroseInterface extends utils.Interface {
       | "usdoAssetId()"
       | "usdoToken"
       | "usdoToken()"
-      | "wethAssetId"
-      | "wethAssetId()"
-      | "wethToken"
-      | "wethToken()"
       | "withdrawAllMarketFees"
       | "withdrawAllMarketFees(address[],address)"
       | "yieldBox"
@@ -353,6 +353,19 @@ export interface PenroseInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "isSingularityMasterContractRegistered(address)",
     values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "mainAssetId",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "mainAssetId()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "mainToken", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "mainToken()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "masterContractOf",
@@ -553,19 +566,6 @@ export interface PenroseInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "wethAssetId",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "wethAssetId()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "wethToken", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "wethToken()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "withdrawAllMarketFees",
     values: [PromiseOrValue<string>[], PromiseOrValue<string>]
   ): string;
@@ -723,6 +723,19 @@ export interface PenroseInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "mainAssetId",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "mainAssetId()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "mainToken", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "mainToken()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "masterContractOf",
     data: BytesLike
   ): Result;
@@ -874,19 +887,6 @@ export interface PenroseInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "usdoToken", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "usdoToken()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "wethAssetId",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "wethAssetId()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "wethToken", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "wethToken()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1344,6 +1344,14 @@ export interface Penrose extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    mainAssetId(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "mainAssetId()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    mainToken(overrides?: CallOverrides): Promise<[string]>;
+
+    "mainToken()"(overrides?: CallOverrides): Promise<[string]>;
+
     masterContractOf(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -1550,14 +1558,6 @@ export interface Penrose extends BaseContract {
 
     "usdoToken()"(overrides?: CallOverrides): Promise<[string]>;
 
-    wethAssetId(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "wethAssetId()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    wethToken(overrides?: CallOverrides): Promise<[string]>;
-
-    "wethToken()"(overrides?: CallOverrides): Promise<[string]>;
-
     withdrawAllMarketFees(
       markets_: PromiseOrValue<string>[],
       twTap: PromiseOrValue<string>,
@@ -1742,6 +1742,14 @@ export interface Penrose extends BaseContract {
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<boolean>;
+
+  mainAssetId(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "mainAssetId()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  mainToken(overrides?: CallOverrides): Promise<string>;
+
+  "mainToken()"(overrides?: CallOverrides): Promise<string>;
 
   masterContractOf(
     arg0: PromiseOrValue<string>,
@@ -1945,14 +1953,6 @@ export interface Penrose extends BaseContract {
 
   "usdoToken()"(overrides?: CallOverrides): Promise<string>;
 
-  wethAssetId(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "wethAssetId()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  wethToken(overrides?: CallOverrides): Promise<string>;
-
-  "wethToken()"(overrides?: CallOverrides): Promise<string>;
-
   withdrawAllMarketFees(
     markets_: PromiseOrValue<string>[],
     twTap: PromiseOrValue<string>,
@@ -2137,6 +2137,14 @@ export interface Penrose extends BaseContract {
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<boolean>;
+
+    mainAssetId(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "mainAssetId()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    mainToken(overrides?: CallOverrides): Promise<string>;
+
+    "mainToken()"(overrides?: CallOverrides): Promise<string>;
 
     masterContractOf(
       arg0: PromiseOrValue<string>,
@@ -2339,14 +2347,6 @@ export interface Penrose extends BaseContract {
     usdoToken(overrides?: CallOverrides): Promise<string>;
 
     "usdoToken()"(overrides?: CallOverrides): Promise<string>;
-
-    wethAssetId(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "wethAssetId()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    wethToken(overrides?: CallOverrides): Promise<string>;
-
-    "wethToken()"(overrides?: CallOverrides): Promise<string>;
 
     withdrawAllMarketFees(
       markets_: PromiseOrValue<string>[],
@@ -2657,6 +2657,14 @@ export interface Penrose extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    mainAssetId(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "mainAssetId()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    mainToken(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "mainToken()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     masterContractOf(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -2859,14 +2867,6 @@ export interface Penrose extends BaseContract {
 
     "usdoToken()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    wethAssetId(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "wethAssetId()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    wethToken(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "wethToken()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     withdrawAllMarketFees(
       markets_: PromiseOrValue<string>[],
       twTap: PromiseOrValue<string>,
@@ -3062,6 +3062,14 @@ export interface Penrose extends BaseContract {
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    mainAssetId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "mainAssetId()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    mainToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "mainToken()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     masterContractOf(
       arg0: PromiseOrValue<string>,
@@ -3268,14 +3276,6 @@ export interface Penrose extends BaseContract {
     usdoToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "usdoToken()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    wethAssetId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "wethAssetId()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    wethToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "wethToken()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     withdrawAllMarketFees(
       markets_: PromiseOrValue<string>[],
