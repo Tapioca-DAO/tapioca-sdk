@@ -78,7 +78,6 @@ export interface BBLendingCommonInterface extends utils.Interface {
     "totalBorrow()": FunctionFragment;
     "totalBorrowCap()": FunctionFragment;
     "totalCollateralShare()": FunctionFragment;
-    "totalFees()": FunctionFragment;
     "totalSupply()": FunctionFragment;
     "transfer(address,uint256)": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
@@ -190,8 +189,6 @@ export interface BBLendingCommonInterface extends utils.Interface {
       | "totalBorrowCap()"
       | "totalCollateralShare"
       | "totalCollateralShare()"
-      | "totalFees"
-      | "totalFees()"
       | "totalSupply"
       | "totalSupply()"
       | "transfer"
@@ -623,11 +620,6 @@ export interface BBLendingCommonInterface extends utils.Interface {
     functionFragment: "totalCollateralShare()",
     values?: undefined
   ): string;
-  encodeFunctionData(functionFragment: "totalFees", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "totalFees()",
-    values?: undefined
-  ): string;
   encodeFunctionData(
     functionFragment: "totalSupply",
     values?: undefined
@@ -1035,11 +1027,6 @@ export interface BBLendingCommonInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "totalCollateralShare()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "totalFees", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "totalFees()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1866,10 +1853,6 @@ export interface BBLendingCommon extends BaseContract {
 
     "totalCollateralShare()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    totalFees(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "totalFees()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -2335,10 +2318,6 @@ export interface BBLendingCommon extends BaseContract {
 
   "totalCollateralShare()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-  totalFees(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "totalFees()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
   "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2799,10 +2778,6 @@ export interface BBLendingCommon extends BaseContract {
     totalCollateralShare(overrides?: CallOverrides): Promise<BigNumber>;
 
     "totalCollateralShare()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    totalFees(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "totalFees()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3438,10 +3413,6 @@ export interface BBLendingCommon extends BaseContract {
 
     "totalCollateralShare()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    totalFees(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "totalFees()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3919,10 +3890,6 @@ export interface BBLendingCommon extends BaseContract {
     "totalCollateralShare()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    totalFees(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "totalFees()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
