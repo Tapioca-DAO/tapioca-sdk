@@ -3,6 +3,17 @@
         "tapioca-bar": {
             "4002": [
                 {
+                    "name": "MockSwapper",
+                    "address": "0x05fe5B8252078ca0CF72B53De0c0d88aFbbf0526",
+                    "meta": {
+                        "args": [
+                            "0x6B8fbc4910E3021E34DB8927dB6dBBD8F95Dcb06"
+                        ],
+                        "salt": "0xceaacf49a6f97f5aeeef7521dda61cac4708700de01417427a227612e04e34d4",
+                        "create2": true
+                    }
+                },
+                {
                     "name": "ERC20WithoutStrategy-TapOFT",
                     "address": "0xB5A2A253aE1D11D3aa9a217b514425d121Cb034a",
                     "meta": {
@@ -209,20 +220,20 @@
                     "name": "TapiocaDeployer",
                     "address": "0xe3E5EAB0d3d1a758aD9d77f895C9f8ED514403c7",
                     "meta": {}
-                },
-                {
-                    "name": "MockSwapper",
-                    "address": "0xd06693540dA88FBccf9FE8d0146F83A3a6d5cbeD",
-                    "meta": {
-                        "args": [
-                            "0xCc676B73C038D5A532B91C733feC4747619eB930"
-                        ],
-                        "salt": "0x65f8cb3fd2387842f9a3ea7849543e742140072dfc06529eee66347c29632d37",
-                        "create2": true
-                    }
                 }
             ],
             "43113": [
+                {
+                    "name": "MockSwapper",
+                    "address": "0xEC92e37EAe6A3D66057D4BD1d5C2F0C5f3D24670",
+                    "meta": {
+                        "args": [
+                            "0x76C15019E4aedF6ED0001c35DC8CF0f17E02d343"
+                        ],
+                        "salt": "0x1cc186360d5dc7c66367ad8411c6894364f281e410462c4bb13c3df21bbe62be",
+                        "create2": true
+                    }
+                },
                 {
                     "name": "ERC20WithoutStrategy-TapOFT",
                     "address": "0xC9AB9E67044c8BdB03FbD12edFad1c2741f51F96",
@@ -430,20 +441,20 @@
                     "name": "TapiocaDeployer",
                     "address": "0xEB2791040f577d6AF634AB2070A01E8a4E10c7d5",
                     "meta": {}
-                },
-                {
-                    "name": "MockSwapper",
-                    "address": "0x81576A7c87D56321d2a1CEf103DC91993827cFd7",
-                    "meta": {
-                        "args": [
-                            "0x822c40938B7d24D6BeCE6655C8621E5BBD22A985"
-                        ],
-                        "salt": "0x40e0b89bdb5ba0e50e80a9517a5f6cb6a2c332244c7593b29b7b21392796004d",
-                        "create2": true
-                    }
                 }
             ],
             "80001": [
+                {
+                    "name": "MockSwapper",
+                    "address": "0x0655627fd3deC8f7C8C9dfF8269c3F86EDfB0170",
+                    "meta": {
+                        "args": [
+                            "0xBd658Bb3F3a2Bd9641C742d7606704534A89d002"
+                        ],
+                        "salt": "0xa3bc4df844f98ef4e31f80b33ed37591b96f7d8f2df5483a13516ad1ee2a0a42",
+                        "create2": true
+                    }
+                },
                 {
                     "name": "ERC20WithoutStrategy-TapOFT",
                     "address": "0x3330dBC3dE86A852648202E5B48f65620b866ac8",
@@ -651,20 +662,20 @@
                     "name": "TapiocaDeployer",
                     "address": "0xF86D503D52Cf5355b4f7ebE02e8D8f584671abEF",
                     "meta": {}
-                },
-                {
-                    "name": "MockSwapper",
-                    "address": "0xBFd62A185614BC8e3545b7D53FD6BEe14eeC4255",
-                    "meta": {
-                        "args": [
-                            "0x85144100E2c8D1d2fa8c73081C1a65c99727506c"
-                        ],
-                        "salt": "0xef371462476cb18b2438bfa431399b791f11d270f13cdd4df515845f845d94fd",
-                        "create2": true
-                    }
                 }
             ],
             "421613": [
+                {
+                    "name": "MockSwapper",
+                    "address": "0xFa94281880EFA50D5608A443d5425b85E13EACCF",
+                    "meta": {
+                        "args": [
+                            "0x1998ED76bFA95F34D87af6Ec2FbB20E7717cBF45"
+                        ],
+                        "salt": "0x07fe4ae3d5fc6b80cee9ffb3e71992f2eb98fcc3a90d9af1308b086614e8eeb0",
+                        "create2": true
+                    }
+                },
                 {
                     "name": "BigBang-TapiocaOFT-FTMMock",
                     "address": "0x81A2098e9696E5ea8dEa63a0303c434555bC4e42",
@@ -1218,17 +1229,6 @@
                             }
                         ],
                         "salt": "0xca839686f1eb3404bac24c194b7c3073d7b4e5039b3c94a50eb47e4d7cb528f9",
-                        "create2": true
-                    }
-                },
-                {
-                    "name": "MockSwapper",
-                    "address": "0xB1590930bf3778cc0a96c0c333E4737E7e3A575b",
-                    "meta": {
-                        "args": [
-                            "0xAe009E0E67861E497929A518B65d9832258AE0E1"
-                        ],
-                        "salt": "0xa3923da5c7dbfdbe21b26990371c08d0c98004cf863c01c7da0b6087783805a0",
                         "create2": true
                     }
                 }
