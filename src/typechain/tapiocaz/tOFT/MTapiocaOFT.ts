@@ -345,6 +345,7 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     "setTrustedRemote(uint16,bytes)": FunctionFragment;
     "setTrustedRemoteAddress(uint16,bytes)": FunctionFragment;
     "setUseCustomAdapterParams(bool)": FunctionFragment;
+    "sgReceive(uint16,bytes,uint256,address,uint256,bytes)": FunctionFragment;
     "sharedDecimals()": FunctionFragment;
     "strategyModule()": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
@@ -486,6 +487,8 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       | "setTrustedRemoteAddress(uint16,bytes)"
       | "setUseCustomAdapterParams"
       | "setUseCustomAdapterParams(bool)"
+      | "sgReceive"
+      | "sgReceive(uint16,bytes,uint256,address,uint256,bytes)"
       | "sharedDecimals"
       | "sharedDecimals()"
       | "strategyModule"
@@ -1243,6 +1246,28 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     values: [PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
+    functionFragment: "sgReceive",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "sgReceive(uint16,bytes,uint256,address,uint256,bytes)",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "sharedDecimals",
     values?: undefined
   ): string;
@@ -1800,6 +1825,11 @@ export interface MTapiocaOFTInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setUseCustomAdapterParams(bool)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "sgReceive", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "sgReceive(uint16,bytes,uint256,address,uint256,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2958,6 +2988,26 @@ export interface MTapiocaOFT extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    sgReceive(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BytesLike>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<string>,
+      arg4: PromiseOrValue<BigNumberish>,
+      arg5: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "sgReceive(uint16,bytes,uint256,address,uint256,bytes)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BytesLike>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<string>,
+      arg4: PromiseOrValue<BigNumberish>,
+      arg5: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     sharedDecimals(overrides?: CallOverrides): Promise<[number]>;
 
     "sharedDecimals()"(overrides?: CallOverrides): Promise<[number]>;
@@ -3831,6 +3881,26 @@ export interface MTapiocaOFT extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  sgReceive(
+    arg0: PromiseOrValue<BigNumberish>,
+    arg1: PromiseOrValue<BytesLike>,
+    arg2: PromiseOrValue<BigNumberish>,
+    arg3: PromiseOrValue<string>,
+    arg4: PromiseOrValue<BigNumberish>,
+    arg5: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "sgReceive(uint16,bytes,uint256,address,uint256,bytes)"(
+    arg0: PromiseOrValue<BigNumberish>,
+    arg1: PromiseOrValue<BytesLike>,
+    arg2: PromiseOrValue<BigNumberish>,
+    arg3: PromiseOrValue<string>,
+    arg4: PromiseOrValue<BigNumberish>,
+    arg5: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   sharedDecimals(overrides?: CallOverrides): Promise<number>;
 
   "sharedDecimals()"(overrides?: CallOverrides): Promise<number>;
@@ -4699,6 +4769,26 @@ export interface MTapiocaOFT extends BaseContract {
 
     "setUseCustomAdapterParams(bool)"(
       _useCustomAdapterParams: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    sgReceive(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BytesLike>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<string>,
+      arg4: PromiseOrValue<BigNumberish>,
+      arg5: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "sgReceive(uint16,bytes,uint256,address,uint256,bytes)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BytesLike>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<string>,
+      arg4: PromiseOrValue<BigNumberish>,
+      arg5: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -5745,6 +5835,26 @@ export interface MTapiocaOFT extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    sgReceive(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BytesLike>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<string>,
+      arg4: PromiseOrValue<BigNumberish>,
+      arg5: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "sgReceive(uint16,bytes,uint256,address,uint256,bytes)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BytesLike>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<string>,
+      arg4: PromiseOrValue<BigNumberish>,
+      arg5: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     sharedDecimals(overrides?: CallOverrides): Promise<BigNumber>;
 
     "sharedDecimals()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -6620,6 +6730,26 @@ export interface MTapiocaOFT extends BaseContract {
 
     "setUseCustomAdapterParams(bool)"(
       _useCustomAdapterParams: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    sgReceive(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BytesLike>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<string>,
+      arg4: PromiseOrValue<BigNumberish>,
+      arg5: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "sgReceive(uint16,bytes,uint256,address,uint256,bytes)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BytesLike>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<string>,
+      arg4: PromiseOrValue<BigNumberish>,
+      arg5: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
