@@ -8,6 +8,8 @@ export type { contracts };
 export * as factories from "./factories";
 export type { AggregatorV3Interface } from "./@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface";
 export { AggregatorV3Interface__factory } from "./factories/@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface__factory";
+export type { Cluster } from "./contracts/Cluster/Cluster";
+export { Cluster__factory } from "./factories/contracts/Cluster/Cluster__factory";
 export type { CurveStableToUsdoBidder } from "./contracts/LiquidationQueue/bidders/CurveStableToUsdoBidder";
 export { CurveStableToUsdoBidder__factory } from "./factories/contracts/LiquidationQueue/bidders/CurveStableToUsdoBidder__factory";
 export type { UniUsdoToWethBidder } from "./contracts/LiquidationQueue/bidders/UniUsdoToWethBidder";

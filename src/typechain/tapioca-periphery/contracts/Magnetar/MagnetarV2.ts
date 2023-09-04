@@ -438,6 +438,7 @@ export interface MagnetarV2Interface extends utils.Interface {
     "isApprovedForAll(address,address)": FunctionFragment;
     "marketModule()": FunctionFragment;
     "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address))": FunctionFragment;
+    "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "rescueEth(uint256,address)": FunctionFragment;
@@ -476,6 +477,8 @@ export interface MagnetarV2Interface extends utils.Interface {
       | "marketModule()"
       | "mintFromBBAndLendOnSGL"
       | "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address))"
+      | "onERC721Received"
+      | "onERC721Received(address,address,uint256,bytes)"
       | "owner"
       | "owner()"
       | "renounceOwnership"
@@ -668,6 +671,24 @@ export interface MagnetarV2Interface extends utils.Interface {
       ICommonData.ICommonExternalContractsStruct
     ]
   ): string;
+  encodeFunctionData(
+    functionFragment: "onERC721Received",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "onERC721Received(address,address,uint256,bytes)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
   encodeFunctionData(
@@ -840,6 +861,14 @@ export interface MagnetarV2Interface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address))",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC721Received",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC721Received(address,address,uint256,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -1144,6 +1173,22 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    onERC721Received(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "onERC721Received(address,address,uint256,bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
@@ -1411,6 +1456,22 @@ export interface MagnetarV2 extends BaseContract {
     participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
     externalContracts: ICommonData.ICommonExternalContractsStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  onERC721Received(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<string>,
+    arg2: PromiseOrValue<BigNumberish>,
+    arg3: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "onERC721Received(address,address,uint256,bytes)"(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<string>,
+    arg2: PromiseOrValue<BigNumberish>,
+    arg3: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
@@ -1681,6 +1742,22 @@ export interface MagnetarV2 extends BaseContract {
       externalContracts: ICommonData.ICommonExternalContractsStruct,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    onERC721Received(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "onERC721Received(address,address,uint256,bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -1970,6 +2047,22 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    onERC721Received(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "onERC721Received(address,address,uint256,bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2238,6 +2331,22 @@ export interface MagnetarV2 extends BaseContract {
       participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
       externalContracts: ICommonData.ICommonExternalContractsStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    onERC721Received(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "onERC721Received(address,address,uint256,bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
