@@ -182,7 +182,7 @@ export interface USDOOptionsModuleInterface extends utils.Interface {
     "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)": FunctionFragment;
     "estimateSendFee(uint16,bytes32,uint256,bool,bytes)": FunctionFragment;
     "exercise(address,uint16,bytes,uint64,bytes)": FunctionFragment;
-    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
+    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "failedMessages(uint16,bytes,uint64)": FunctionFragment;
     "flashMintFee()": FunctionFragment;
@@ -268,7 +268,7 @@ export interface USDOOptionsModuleInterface extends utils.Interface {
       | "exercise"
       | "exercise(address,uint16,bytes,uint64,bytes)"
       | "exerciseInternal"
-      | "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
+      | "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "exerciseOption"
       | "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "failedMessages"
@@ -569,11 +569,12 @@ export interface USDOOptionsModuleInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+      PromiseOrValue<BigNumberish>,
       ICommonData.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
@@ -581,6 +582,7 @@ export interface USDOOptionsModuleInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+      PromiseOrValue<BigNumberish>,
       ICommonData.IApprovalStruct[]
     ]
   ): string;
@@ -1152,7 +1154,7 @@ export interface USDOOptionsModuleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2027,17 +2029,19 @@ export interface USDOOptionsModule extends BaseContract {
       tapAmount: PromiseOrValue<BigNumberish>,
       target: PromiseOrValue<string>,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       oTAPTokenID: PromiseOrValue<BigNumberish>,
       paymentToken: PromiseOrValue<string>,
       tapAmount: PromiseOrValue<BigNumberish>,
       target: PromiseOrValue<string>,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2706,17 +2710,19 @@ export interface USDOOptionsModule extends BaseContract {
     tapAmount: PromiseOrValue<BigNumberish>,
     target: PromiseOrValue<string>,
     tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+    paymentTokenAmount: PromiseOrValue<BigNumberish>,
     approvals: ICommonData.IApprovalStruct[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+  "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
     from: PromiseOrValue<string>,
     oTAPTokenID: PromiseOrValue<BigNumberish>,
     paymentToken: PromiseOrValue<string>,
     tapAmount: PromiseOrValue<BigNumberish>,
     target: PromiseOrValue<string>,
     tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+    paymentTokenAmount: PromiseOrValue<BigNumberish>,
     approvals: ICommonData.IApprovalStruct[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -3387,17 +3393,19 @@ export interface USDOOptionsModule extends BaseContract {
       tapAmount: PromiseOrValue<BigNumberish>,
       target: PromiseOrValue<string>,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       oTAPTokenID: PromiseOrValue<BigNumberish>,
       paymentToken: PromiseOrValue<string>,
       tapAmount: PromiseOrValue<BigNumberish>,
       target: PromiseOrValue<string>,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
@@ -4250,17 +4258,19 @@ export interface USDOOptionsModule extends BaseContract {
       tapAmount: PromiseOrValue<BigNumberish>,
       target: PromiseOrValue<string>,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       oTAPTokenID: PromiseOrValue<BigNumberish>,
       paymentToken: PromiseOrValue<string>,
       tapAmount: PromiseOrValue<BigNumberish>,
       target: PromiseOrValue<string>,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -4930,17 +4940,19 @@ export interface USDOOptionsModule extends BaseContract {
       tapAmount: PromiseOrValue<BigNumberish>,
       target: PromiseOrValue<string>,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       oTAPTokenID: PromiseOrValue<BigNumberish>,
       paymentToken: PromiseOrValue<string>,
       tapAmount: PromiseOrValue<BigNumberish>,
       target: PromiseOrValue<string>,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;

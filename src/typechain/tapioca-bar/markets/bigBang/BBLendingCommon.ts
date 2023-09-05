@@ -66,7 +66,7 @@ export interface BBLendingCommonInterface extends utils.Interface {
     "oracle()": FunctionFragment;
     "oracleData()": FunctionFragment;
     "owner()": FunctionFragment;
-    "paused()": FunctionFragment;
+    "pauseOptions(uint8)": FunctionFragment;
     "pendingOwner()": FunctionFragment;
     "penrose()": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
@@ -83,7 +83,7 @@ export interface BBLendingCommonInterface extends utils.Interface {
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
     "updateExchangeRate()": FunctionFragment;
-    "updatePause(bool)": FunctionFragment;
+    "updatePause(uint8,bool)": FunctionFragment;
     "userBorrowPart(address)": FunctionFragment;
     "userCollateralShare(address)": FunctionFragment;
     "yieldBox()": FunctionFragment;
@@ -165,8 +165,8 @@ export interface BBLendingCommonInterface extends utils.Interface {
       | "oracleData()"
       | "owner"
       | "owner()"
-      | "paused"
-      | "paused()"
+      | "pauseOptions"
+      | "pauseOptions(uint8)"
       | "pendingOwner"
       | "pendingOwner()"
       | "penrose"
@@ -200,7 +200,7 @@ export interface BBLendingCommonInterface extends utils.Interface {
       | "updateExchangeRate"
       | "updateExchangeRate()"
       | "updatePause"
-      | "updatePause(bool)"
+      | "updatePause(uint8,bool)"
       | "userBorrowPart"
       | "userBorrowPart(address)"
       | "userCollateralShare"
@@ -480,8 +480,14 @@ export interface BBLendingCommonInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "paused", values?: undefined): string;
-  encodeFunctionData(functionFragment: "paused()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "pauseOptions",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "pauseOptions(uint8)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
   encodeFunctionData(
     functionFragment: "pendingOwner",
     values?: undefined
@@ -678,11 +684,11 @@ export interface BBLendingCommonInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "updatePause",
-    values: [PromiseOrValue<boolean>]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
-    functionFragment: "updatePause(bool)",
-    values: [PromiseOrValue<boolean>]
+    functionFragment: "updatePause(uint8,bool)",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "userBorrowPart",
@@ -948,8 +954,14 @@ export interface BBLendingCommonInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "paused()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "pauseOptions",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "pauseOptions(uint8)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "pendingOwner",
     data: BytesLike
@@ -1071,7 +1083,7 @@ export interface BBLendingCommonInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "updatePause(bool)",
+    functionFragment: "updatePause(uint8,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1113,7 +1125,7 @@ export interface BBLendingCommonInterface extends utils.Interface {
     "OracleDataUpdated()": EventFragment;
     "OracleUpdated()": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
-    "PausedUpdated(bool,bool)": EventFragment;
+    "PausedUpdated(uint8,bool,bool)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
 
@@ -1188,7 +1200,9 @@ export interface BBLendingCommonInterface extends utils.Interface {
     nameOrSignatureOrTopic: "OwnershipTransferred(address,address)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "PausedUpdated"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "PausedUpdated(bool,bool)"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "PausedUpdated(uint8,bool,bool)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Transfer(address,address,uint256)"
@@ -1418,11 +1432,12 @@ export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
 
 export interface PausedUpdatedEventObject {
+  _type: number;
   oldState: boolean;
   newState: boolean;
 }
 export type PausedUpdatedEvent = TypedEvent<
-  [boolean, boolean],
+  [number, boolean, boolean],
   PausedUpdatedEventObject
 >;
 
@@ -1723,9 +1738,15 @@ export interface BBLendingCommon extends BaseContract {
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
 
-    paused(overrides?: CallOverrides): Promise<[boolean]>;
+    pauseOptions(
+      pauseProp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[boolean] & { pauseStatus: boolean }>;
 
-    "paused()"(overrides?: CallOverrides): Promise<[boolean]>;
+    "pauseOptions(uint8)"(
+      pauseProp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[boolean] & { pauseStatus: boolean }>;
 
     pendingOwner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -1906,11 +1927,13 @@ export interface BBLendingCommon extends BaseContract {
     ): Promise<ContractTransaction>;
 
     updatePause(
+      _type: PromiseOrValue<BigNumberish>,
       val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "updatePause(bool)"(
+    "updatePause(uint8,bool)"(
+      _type: PromiseOrValue<BigNumberish>,
       val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2192,9 +2215,15 @@ export interface BBLendingCommon extends BaseContract {
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
 
-  paused(overrides?: CallOverrides): Promise<boolean>;
+  pauseOptions(
+    pauseProp: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
-  "paused()"(overrides?: CallOverrides): Promise<boolean>;
+  "pauseOptions(uint8)"(
+    pauseProp: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   pendingOwner(overrides?: CallOverrides): Promise<string>;
 
@@ -2371,11 +2400,13 @@ export interface BBLendingCommon extends BaseContract {
   ): Promise<ContractTransaction>;
 
   updatePause(
+    _type: PromiseOrValue<BigNumberish>,
     val: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "updatePause(bool)"(
+  "updatePause(uint8,bool)"(
+    _type: PromiseOrValue<BigNumberish>,
     val: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -2649,9 +2680,15 @@ export interface BBLendingCommon extends BaseContract {
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
 
-    paused(overrides?: CallOverrides): Promise<boolean>;
+    pauseOptions(
+      pauseProp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    "paused()"(overrides?: CallOverrides): Promise<boolean>;
+    "pauseOptions(uint8)"(
+      pauseProp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     pendingOwner(overrides?: CallOverrides): Promise<string>;
 
@@ -2832,11 +2869,13 @@ export interface BBLendingCommon extends BaseContract {
     ): Promise<[boolean, BigNumber] & { updated: boolean; rate: BigNumber }>;
 
     updatePause(
+      _type: PromiseOrValue<BigNumberish>,
       val: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "updatePause(bool)"(
+    "updatePause(uint8,bool)"(
+      _type: PromiseOrValue<BigNumberish>,
       val: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -3040,11 +3079,16 @@ export interface BBLendingCommon extends BaseContract {
       newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
 
-    "PausedUpdated(bool,bool)"(
+    "PausedUpdated(uint8,bool,bool)"(
+      _type?: null,
       oldState?: null,
       newState?: null
     ): PausedUpdatedEventFilter;
-    PausedUpdated(oldState?: null, newState?: null): PausedUpdatedEventFilter;
+    PausedUpdated(
+      _type?: null,
+      oldState?: null,
+      newState?: null
+    ): PausedUpdatedEventFilter;
 
     "Transfer(address,address,uint256)"(
       from?: PromiseOrValue<string> | null,
@@ -3291,9 +3335,15 @@ export interface BBLendingCommon extends BaseContract {
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    paused(overrides?: CallOverrides): Promise<BigNumber>;
+    pauseOptions(
+      pauseProp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    "paused()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "pauseOptions(uint8)"(
+      pauseProp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3466,11 +3516,13 @@ export interface BBLendingCommon extends BaseContract {
     ): Promise<BigNumber>;
 
     updatePause(
+      _type: PromiseOrValue<BigNumberish>,
       val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "updatePause(bool)"(
+    "updatePause(uint8,bool)"(
+      _type: PromiseOrValue<BigNumberish>,
       val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -3763,9 +3815,15 @@ export interface BBLendingCommon extends BaseContract {
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    paused(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    pauseOptions(
+      pauseProp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    "paused()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "pauseOptions(uint8)"(
+      pauseProp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -3944,11 +4002,13 @@ export interface BBLendingCommon extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     updatePause(
+      _type: PromiseOrValue<BigNumberish>,
       val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "updatePause(bool)"(
+    "updatePause(uint8,bool)"(
+      _type: PromiseOrValue<BigNumberish>,
       val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
