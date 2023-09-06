@@ -296,6 +296,7 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     "balancers(address)": FunctionFragment;
     "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)": FunctionFragment;
     "circulatingSupply()": FunctionFragment;
+    "cluster()": FunctionFragment;
     "connectedChains(uint256)": FunctionFragment;
     "creditedPackets(uint16,bytes,uint64)": FunctionFragment;
     "decimals()": FunctionFragment;
@@ -389,6 +390,8 @@ export interface MTapiocaOFTInterface extends utils.Interface {
       | "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)"
       | "circulatingSupply"
       | "circulatingSupply()"
+      | "cluster"
+      | "cluster()"
       | "connectedChains"
       | "connectedChains(uint256)"
       | "creditedPackets"
@@ -625,6 +628,8 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     functionFragment: "circulatingSupply()",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "cluster", values?: undefined): string;
+  encodeFunctionData(functionFragment: "cluster()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "connectedChains",
     values: [PromiseOrValue<BigNumberish>]
@@ -1489,6 +1494,8 @@ export interface MTapiocaOFTInterface extends utils.Interface {
     functionFragment: "circulatingSupply()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "cluster", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "cluster()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "connectedChains",
     data: BytesLike
@@ -2361,6 +2368,10 @@ export interface MTapiocaOFT extends BaseContract {
     circulatingSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "circulatingSupply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    cluster(overrides?: CallOverrides): Promise<[string]>;
+
+    "cluster()"(overrides?: CallOverrides): Promise<[string]>;
 
     connectedChains(
       arg0: PromiseOrValue<BigNumberish>,
@@ -3254,6 +3265,10 @@ export interface MTapiocaOFT extends BaseContract {
   circulatingSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
   "circulatingSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  cluster(overrides?: CallOverrides): Promise<string>;
+
+  "cluster()"(overrides?: CallOverrides): Promise<string>;
 
   connectedChains(
     arg0: PromiseOrValue<BigNumberish>,
@@ -4149,6 +4164,10 @@ export interface MTapiocaOFT extends BaseContract {
     circulatingSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     "circulatingSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    cluster(overrides?: CallOverrides): Promise<string>;
+
+    "cluster()"(overrides?: CallOverrides): Promise<string>;
 
     connectedChains(
       arg0: PromiseOrValue<BigNumberish>,
@@ -5217,6 +5236,10 @@ export interface MTapiocaOFT extends BaseContract {
 
     "circulatingSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    cluster(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "cluster()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     connectedChains(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -6112,6 +6135,10 @@ export interface MTapiocaOFT extends BaseContract {
     "circulatingSupply()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    cluster(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "cluster()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     connectedChains(
       arg0: PromiseOrValue<BigNumberish>,
