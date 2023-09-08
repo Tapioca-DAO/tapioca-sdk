@@ -28,6 +28,58 @@ import type {
   PromiseOrValue,
 } from "../../common";
 
+export declare namespace ICommonData {
+  export type IApprovalStruct = {
+    permitAll: PromiseOrValue<boolean>;
+    allowFailure: PromiseOrValue<boolean>;
+    target: PromiseOrValue<string>;
+    permitBorrow: PromiseOrValue<boolean>;
+    owner: PromiseOrValue<string>;
+    spender: PromiseOrValue<string>;
+    value: PromiseOrValue<BigNumberish>;
+    deadline: PromiseOrValue<BigNumberish>;
+    v: PromiseOrValue<BigNumberish>;
+    r: PromiseOrValue<BytesLike>;
+    s: PromiseOrValue<BytesLike>;
+  };
+
+  export type IApprovalStructOutput = [
+    boolean,
+    boolean,
+    string,
+    boolean,
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    number,
+    string,
+    string
+  ] & {
+    permitAll: boolean;
+    allowFailure: boolean;
+    target: string;
+    permitBorrow: boolean;
+    owner: string;
+    spender: string;
+    value: BigNumber;
+    deadline: BigNumber;
+    v: number;
+    r: string;
+    s: string;
+  };
+
+  export type ISendOptionsStruct = {
+    extraGasLimit: PromiseOrValue<BigNumberish>;
+    zroPaymentAddress: PromiseOrValue<string>;
+  };
+
+  export type ISendOptionsStructOutput = [BigNumber, string] & {
+    extraGasLimit: BigNumber;
+    zroPaymentAddress: string;
+  };
+}
+
 export declare namespace ICommonOFT {
   export type LzCallParamsStruct = {
     refundAddress: PromiseOrValue<string>;
@@ -39,18 +91,6 @@ export declare namespace ICommonOFT {
     refundAddress: string;
     zroPaymentAddress: string;
     adapterParams: string;
-  };
-}
-
-export declare namespace ICommonData {
-  export type ISendOptionsStruct = {
-    extraGasLimit: PromiseOrValue<BigNumberish>;
-    zroPaymentAddress: PromiseOrValue<string>;
-  };
-
-  export type ISendOptionsStructOutput = [BigNumber, string] & {
-    extraGasLimit: BigNumber;
-    zroPaymentAddress: string;
   };
 }
 
@@ -89,7 +129,7 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
     "payloadSizeLimitLookup(uint16)": FunctionFragment;
     "precrime()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)": FunctionFragment;
+    "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
@@ -187,7 +227,7 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
       | "renounceOwnership"
       | "renounceOwnership()"
       | "retrieveFromStrategy"
-      | "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)"
+      | "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "retryMessage"
       | "retryMessage(uint16,bytes,uint64,bytes)"
       | "sendAndCall"
@@ -585,11 +625,12 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>
+      PromiseOrValue<BytesLike>,
+      ICommonData.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)",
+    functionFragment: "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
@@ -597,7 +638,8 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>
+      PromiseOrValue<BytesLike>,
+      ICommonData.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
@@ -1097,7 +1139,7 @@ export interface BaseTOFTStrategyModuleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)",
+    functionFragment: "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1905,10 +1947,11 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
       airdropAdapterParam: PromiseOrValue<BytesLike>,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)"(
+    "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       share: PromiseOrValue<BigNumberish>,
@@ -1916,6 +1959,7 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
       airdropAdapterParam: PromiseOrValue<BytesLike>,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2566,10 +2610,11 @@ export interface BaseTOFTStrategyModule extends BaseContract {
     lzDstChainId: PromiseOrValue<BigNumberish>,
     zroPaymentAddress: PromiseOrValue<string>,
     airdropAdapterParam: PromiseOrValue<BytesLike>,
+    approvals: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)"(
+  "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
     _from: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     share: PromiseOrValue<BigNumberish>,
@@ -2577,6 +2622,7 @@ export interface BaseTOFTStrategyModule extends BaseContract {
     lzDstChainId: PromiseOrValue<BigNumberish>,
     zroPaymentAddress: PromiseOrValue<string>,
     airdropAdapterParam: PromiseOrValue<BytesLike>,
+    approvals: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3225,10 +3271,11 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
       airdropAdapterParam: PromiseOrValue<BytesLike>,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)"(
+    "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       share: PromiseOrValue<BigNumberish>,
@@ -3236,6 +3283,7 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
       airdropAdapterParam: PromiseOrValue<BytesLike>,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4023,10 +4071,11 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
       airdropAdapterParam: PromiseOrValue<BytesLike>,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)"(
+    "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       share: PromiseOrValue<BigNumberish>,
@@ -4034,6 +4083,7 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
       airdropAdapterParam: PromiseOrValue<BytesLike>,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4685,10 +4735,11 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
       airdropAdapterParam: PromiseOrValue<BytesLike>,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes)"(
+    "retrieveFromStrategy(address,uint256,uint256,uint256,uint16,address,bytes,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       share: PromiseOrValue<BigNumberish>,
@@ -4696,6 +4747,7 @@ export interface BaseTOFTStrategyModule extends BaseContract {
       lzDstChainId: PromiseOrValue<BigNumberish>,
       zroPaymentAddress: PromiseOrValue<string>,
       airdropAdapterParam: PromiseOrValue<BytesLike>,
+      approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
