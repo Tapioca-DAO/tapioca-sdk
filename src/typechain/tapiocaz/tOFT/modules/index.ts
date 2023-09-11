@@ -5,3 +5,4 @@ export type { BaseTOFTLeverageModule } from "./BaseTOFTLeverageModule";
 export type { BaseTOFTMarketModule } from "./BaseTOFTMarketModule";
 export type { BaseTOFTOptionsModule } from "./BaseTOFTOptionsModule";
 export type { BaseTOFTStrategyModule } from "./BaseTOFTStrategyModule";
+export type { TOFTCommon } from "./TOFTCommon";
