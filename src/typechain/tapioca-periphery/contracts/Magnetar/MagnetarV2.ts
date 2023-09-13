@@ -444,7 +444,7 @@ export interface MagnetarV2Interface extends utils.Interface {
     "rescueEth(uint256,address)": FunctionFragment;
     "singularityMarketInfo(address,address[])": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
-    "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)": FunctionFragment;
+    "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)": FunctionFragment;
   };
 
   getFunction(
@@ -490,7 +490,7 @@ export interface MagnetarV2Interface extends utils.Interface {
       | "transferOwnership"
       | "transferOwnership(address)"
       | "withdrawToChain"
-      | "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)"
+      | "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -732,21 +732,19 @@ export interface MagnetarV2Interface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)",
+    functionFragment: "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<string>,
@@ -907,7 +905,7 @@ export interface MagnetarV2Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)",
+    functionFragment: "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)",
     data: BytesLike
   ): Result;
 
@@ -1110,7 +1108,7 @@ export interface MagnetarV2 extends BaseContract {
     getCollateralSharesForBorrowPart(
       market: PromiseOrValue<string>,
       borrowPart: PromiseOrValue<BigNumberish>,
-      liquidationMultiplierPrecision: PromiseOrValue<BigNumberish>,
+      collateralizationRatePrecision: PromiseOrValue<BigNumberish>,
       exchangeRatePrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { collateralShares: BigNumber }>;
@@ -1118,7 +1116,7 @@ export interface MagnetarV2 extends BaseContract {
     "getCollateralSharesForBorrowPart(address,uint256,uint256,uint256)"(
       market: PromiseOrValue<string>,
       borrowPart: PromiseOrValue<BigNumberish>,
-      liquidationMultiplierPrecision: PromiseOrValue<BigNumberish>,
+      collateralizationRatePrecision: PromiseOrValue<BigNumberish>,
       exchangeRatePrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { collateralShares: BigNumber }>;
@@ -1242,21 +1240,19 @@ export interface MagnetarV2 extends BaseContract {
       dstChainId: PromiseOrValue<BigNumberish>,
       receiver: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
       adapterParams: PromiseOrValue<BytesLike>,
       refundAddress: PromiseOrValue<string>,
       gas: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)"(
+    "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)"(
       yieldBox: PromiseOrValue<string>,
       from: PromiseOrValue<string>,
       assetId: PromiseOrValue<BigNumberish>,
       dstChainId: PromiseOrValue<BigNumberish>,
       receiver: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
       adapterParams: PromiseOrValue<BytesLike>,
       refundAddress: PromiseOrValue<string>,
       gas: PromiseOrValue<BigNumberish>,
@@ -1395,7 +1391,7 @@ export interface MagnetarV2 extends BaseContract {
   getCollateralSharesForBorrowPart(
     market: PromiseOrValue<string>,
     borrowPart: PromiseOrValue<BigNumberish>,
-    liquidationMultiplierPrecision: PromiseOrValue<BigNumberish>,
+    collateralizationRatePrecision: PromiseOrValue<BigNumberish>,
     exchangeRatePrecision: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
@@ -1403,7 +1399,7 @@ export interface MagnetarV2 extends BaseContract {
   "getCollateralSharesForBorrowPart(address,uint256,uint256,uint256)"(
     market: PromiseOrValue<string>,
     borrowPart: PromiseOrValue<BigNumberish>,
-    liquidationMultiplierPrecision: PromiseOrValue<BigNumberish>,
+    collateralizationRatePrecision: PromiseOrValue<BigNumberish>,
     exchangeRatePrecision: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
@@ -1527,21 +1523,19 @@ export interface MagnetarV2 extends BaseContract {
     dstChainId: PromiseOrValue<BigNumberish>,
     receiver: PromiseOrValue<BytesLike>,
     amount: PromiseOrValue<BigNumberish>,
-    share: PromiseOrValue<BigNumberish>,
     adapterParams: PromiseOrValue<BytesLike>,
     refundAddress: PromiseOrValue<string>,
     gas: PromiseOrValue<BigNumberish>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)"(
+  "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)"(
     yieldBox: PromiseOrValue<string>,
     from: PromiseOrValue<string>,
     assetId: PromiseOrValue<BigNumberish>,
     dstChainId: PromiseOrValue<BigNumberish>,
     receiver: PromiseOrValue<BytesLike>,
     amount: PromiseOrValue<BigNumberish>,
-    share: PromiseOrValue<BigNumberish>,
     adapterParams: PromiseOrValue<BytesLike>,
     refundAddress: PromiseOrValue<string>,
     gas: PromiseOrValue<BigNumberish>,
@@ -1680,7 +1674,7 @@ export interface MagnetarV2 extends BaseContract {
     getCollateralSharesForBorrowPart(
       market: PromiseOrValue<string>,
       borrowPart: PromiseOrValue<BigNumberish>,
-      liquidationMultiplierPrecision: PromiseOrValue<BigNumberish>,
+      collateralizationRatePrecision: PromiseOrValue<BigNumberish>,
       exchangeRatePrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1688,7 +1682,7 @@ export interface MagnetarV2 extends BaseContract {
     "getCollateralSharesForBorrowPart(address,uint256,uint256,uint256)"(
       market: PromiseOrValue<string>,
       borrowPart: PromiseOrValue<BigNumberish>,
-      liquidationMultiplierPrecision: PromiseOrValue<BigNumberish>,
+      collateralizationRatePrecision: PromiseOrValue<BigNumberish>,
       exchangeRatePrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1808,21 +1802,19 @@ export interface MagnetarV2 extends BaseContract {
       dstChainId: PromiseOrValue<BigNumberish>,
       receiver: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
       adapterParams: PromiseOrValue<BytesLike>,
       refundAddress: PromiseOrValue<string>,
       gas: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)"(
+    "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)"(
       yieldBox: PromiseOrValue<string>,
       from: PromiseOrValue<string>,
       assetId: PromiseOrValue<BigNumberish>,
       dstChainId: PromiseOrValue<BigNumberish>,
       receiver: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
       adapterParams: PromiseOrValue<BytesLike>,
       refundAddress: PromiseOrValue<string>,
       gas: PromiseOrValue<BigNumberish>,
@@ -1984,7 +1976,7 @@ export interface MagnetarV2 extends BaseContract {
     getCollateralSharesForBorrowPart(
       market: PromiseOrValue<string>,
       borrowPart: PromiseOrValue<BigNumberish>,
-      liquidationMultiplierPrecision: PromiseOrValue<BigNumberish>,
+      collateralizationRatePrecision: PromiseOrValue<BigNumberish>,
       exchangeRatePrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1992,7 +1984,7 @@ export interface MagnetarV2 extends BaseContract {
     "getCollateralSharesForBorrowPart(address,uint256,uint256,uint256)"(
       market: PromiseOrValue<string>,
       borrowPart: PromiseOrValue<BigNumberish>,
-      liquidationMultiplierPrecision: PromiseOrValue<BigNumberish>,
+      collateralizationRatePrecision: PromiseOrValue<BigNumberish>,
       exchangeRatePrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -2116,21 +2108,19 @@ export interface MagnetarV2 extends BaseContract {
       dstChainId: PromiseOrValue<BigNumberish>,
       receiver: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
       adapterParams: PromiseOrValue<BytesLike>,
       refundAddress: PromiseOrValue<string>,
       gas: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)"(
+    "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)"(
       yieldBox: PromiseOrValue<string>,
       from: PromiseOrValue<string>,
       assetId: PromiseOrValue<BigNumberish>,
       dstChainId: PromiseOrValue<BigNumberish>,
       receiver: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
       adapterParams: PromiseOrValue<BytesLike>,
       refundAddress: PromiseOrValue<string>,
       gas: PromiseOrValue<BigNumberish>,
@@ -2270,7 +2260,7 @@ export interface MagnetarV2 extends BaseContract {
     getCollateralSharesForBorrowPart(
       market: PromiseOrValue<string>,
       borrowPart: PromiseOrValue<BigNumberish>,
-      liquidationMultiplierPrecision: PromiseOrValue<BigNumberish>,
+      collateralizationRatePrecision: PromiseOrValue<BigNumberish>,
       exchangeRatePrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -2278,7 +2268,7 @@ export interface MagnetarV2 extends BaseContract {
     "getCollateralSharesForBorrowPart(address,uint256,uint256,uint256)"(
       market: PromiseOrValue<string>,
       borrowPart: PromiseOrValue<BigNumberish>,
-      liquidationMultiplierPrecision: PromiseOrValue<BigNumberish>,
+      collateralizationRatePrecision: PromiseOrValue<BigNumberish>,
       exchangeRatePrecision: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -2402,21 +2392,19 @@ export interface MagnetarV2 extends BaseContract {
       dstChainId: PromiseOrValue<BigNumberish>,
       receiver: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
       adapterParams: PromiseOrValue<BytesLike>,
       refundAddress: PromiseOrValue<string>,
       gas: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)"(
+    "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)"(
       yieldBox: PromiseOrValue<string>,
       from: PromiseOrValue<string>,
       assetId: PromiseOrValue<BigNumberish>,
       dstChainId: PromiseOrValue<BigNumberish>,
       receiver: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
       adapterParams: PromiseOrValue<BytesLike>,
       refundAddress: PromiseOrValue<string>,
       gas: PromiseOrValue<BigNumberish>,

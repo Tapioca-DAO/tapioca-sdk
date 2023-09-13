@@ -199,7 +199,7 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
     "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)),uint256)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address))": FunctionFragment;
-    "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)": FunctionFragment;
+    "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)": FunctionFragment;
   };
 
   getFunction(
@@ -215,7 +215,7 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
       | "mintFromBBAndLendOnSGL"
       | "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address))"
       | "withdrawToChain"
-      | "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)"
+      | "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -329,21 +329,19 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)",
+    functionFragment: "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<string>,
@@ -396,7 +394,7 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)",
+    functionFragment: "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)",
     data: BytesLike
   ): Result;
 
@@ -556,21 +554,19 @@ export interface MagnetarMarketModule extends BaseContract {
       dstChainId: PromiseOrValue<BigNumberish>,
       receiver: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
       adapterParams: PromiseOrValue<BytesLike>,
       refundAddress: PromiseOrValue<string>,
       gas: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)"(
+    "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)"(
       yieldBox: PromiseOrValue<string>,
       from: PromiseOrValue<string>,
       assetId: PromiseOrValue<BigNumberish>,
       dstChainId: PromiseOrValue<BigNumberish>,
       receiver: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
       adapterParams: PromiseOrValue<BytesLike>,
       refundAddress: PromiseOrValue<string>,
       gas: PromiseOrValue<BigNumberish>,
@@ -683,21 +679,19 @@ export interface MagnetarMarketModule extends BaseContract {
     dstChainId: PromiseOrValue<BigNumberish>,
     receiver: PromiseOrValue<BytesLike>,
     amount: PromiseOrValue<BigNumberish>,
-    share: PromiseOrValue<BigNumberish>,
     adapterParams: PromiseOrValue<BytesLike>,
     refundAddress: PromiseOrValue<string>,
     gas: PromiseOrValue<BigNumberish>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)"(
+  "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)"(
     yieldBox: PromiseOrValue<string>,
     from: PromiseOrValue<string>,
     assetId: PromiseOrValue<BigNumberish>,
     dstChainId: PromiseOrValue<BigNumberish>,
     receiver: PromiseOrValue<BytesLike>,
     amount: PromiseOrValue<BigNumberish>,
-    share: PromiseOrValue<BigNumberish>,
     adapterParams: PromiseOrValue<BytesLike>,
     refundAddress: PromiseOrValue<string>,
     gas: PromiseOrValue<BigNumberish>,
@@ -810,21 +804,19 @@ export interface MagnetarMarketModule extends BaseContract {
       dstChainId: PromiseOrValue<BigNumberish>,
       receiver: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
       adapterParams: PromiseOrValue<BytesLike>,
       refundAddress: PromiseOrValue<string>,
       gas: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)"(
+    "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)"(
       yieldBox: PromiseOrValue<string>,
       from: PromiseOrValue<string>,
       assetId: PromiseOrValue<BigNumberish>,
       dstChainId: PromiseOrValue<BigNumberish>,
       receiver: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
       adapterParams: PromiseOrValue<BytesLike>,
       refundAddress: PromiseOrValue<string>,
       gas: PromiseOrValue<BigNumberish>,
@@ -951,21 +943,19 @@ export interface MagnetarMarketModule extends BaseContract {
       dstChainId: PromiseOrValue<BigNumberish>,
       receiver: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
       adapterParams: PromiseOrValue<BytesLike>,
       refundAddress: PromiseOrValue<string>,
       gas: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)"(
+    "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)"(
       yieldBox: PromiseOrValue<string>,
       from: PromiseOrValue<string>,
       assetId: PromiseOrValue<BigNumberish>,
       dstChainId: PromiseOrValue<BigNumberish>,
       receiver: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
       adapterParams: PromiseOrValue<BytesLike>,
       refundAddress: PromiseOrValue<string>,
       gas: PromiseOrValue<BigNumberish>,
@@ -1079,21 +1069,19 @@ export interface MagnetarMarketModule extends BaseContract {
       dstChainId: PromiseOrValue<BigNumberish>,
       receiver: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
       adapterParams: PromiseOrValue<BytesLike>,
       refundAddress: PromiseOrValue<string>,
       gas: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,uint256,bytes,address,uint256)"(
+    "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)"(
       yieldBox: PromiseOrValue<string>,
       from: PromiseOrValue<string>,
       assetId: PromiseOrValue<BigNumberish>,
       dstChainId: PromiseOrValue<BigNumberish>,
       receiver: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
       adapterParams: PromiseOrValue<BytesLike>,
       refundAddress: PromiseOrValue<string>,
       gas: PromiseOrValue<BigNumberish>,
