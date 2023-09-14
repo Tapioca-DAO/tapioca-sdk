@@ -5,4 +5,3 @@ export { BaseTOFTLeverageModule__factory } from "./BaseTOFTLeverageModule__facto
 export { BaseTOFTMarketModule__factory } from "./BaseTOFTMarketModule__factory";
 export { BaseTOFTOptionsModule__factory } from "./BaseTOFTOptionsModule__factory";
 export { BaseTOFTStrategyModule__factory } from "./BaseTOFTStrategyModule__factory";
-export { TOFTCommon__factory } from "./TOFTCommon__factory";

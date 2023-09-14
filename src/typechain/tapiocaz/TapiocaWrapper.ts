@@ -31,19 +31,12 @@ import type {
 export declare namespace TapiocaWrapper {
   export type ExecutionCallStruct = {
     toft: PromiseOrValue<string>;
-    value: PromiseOrValue<BigNumberish>;
     bytecode: PromiseOrValue<BytesLike>;
     revertOnFailure: PromiseOrValue<boolean>;
   };
 
-  export type ExecutionCallStructOutput = [
-    string,
-    BigNumber,
-    string,
-    boolean
-  ] & {
+  export type ExecutionCallStructOutput = [string, string, boolean] & {
     toft: string;
-    value: BigNumber;
     bytecode: string;
     revertOnFailure: boolean;
   };
@@ -52,7 +45,7 @@ export declare namespace TapiocaWrapper {
 export interface TapiocaWrapperInterface extends utils.Interface {
   functions: {
     "createTOFT(address,bytes,bytes32,bool)": FunctionFragment;
-    "executeCalls((address,uint256,bytes,bool)[])": FunctionFragment;
+    "executeCalls((address,bytes,bool)[])": FunctionFragment;
     "executeTOFT(address,bytes,bool)": FunctionFragment;
     "harvestFees()": FunctionFragment;
     "harvestableTapiocaOFTsLength()": FunctionFragment;
@@ -70,7 +63,7 @@ export interface TapiocaWrapperInterface extends utils.Interface {
       | "createTOFT"
       | "createTOFT(address,bytes,bytes32,bool)"
       | "executeCalls"
-      | "executeCalls((address,uint256,bytes,bool)[])"
+      | "executeCalls((address,bytes,bool)[])"
       | "executeTOFT"
       | "executeTOFT(address,bytes,bool)"
       | "harvestFees"
@@ -116,7 +109,7 @@ export interface TapiocaWrapperInterface extends utils.Interface {
     values: [TapiocaWrapper.ExecutionCallStruct[]]
   ): string;
   encodeFunctionData(
-    functionFragment: "executeCalls((address,uint256,bytes,bool)[])",
+    functionFragment: "executeCalls((address,bytes,bool)[])",
     values: [TapiocaWrapper.ExecutionCallStruct[]]
   ): string;
   encodeFunctionData(
@@ -209,7 +202,7 @@ export interface TapiocaWrapperInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "executeCalls((address,uint256,bytes,bool)[])",
+    functionFragment: "executeCalls((address,bytes,bool)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -384,7 +377,7 @@ export interface TapiocaWrapper extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "executeCalls((address,uint256,bytes,bool)[])"(
+    "executeCalls((address,bytes,bool)[])"(
       _call: TapiocaWrapper.ExecutionCallStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -491,7 +484,7 @@ export interface TapiocaWrapper extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "executeCalls((address,uint256,bytes,bool)[])"(
+  "executeCalls((address,bytes,bool)[])"(
     _call: TapiocaWrapper.ExecutionCallStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -596,7 +589,7 @@ export interface TapiocaWrapper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean, string[]] & { success: boolean; results: string[] }>;
 
-    "executeCalls((address,uint256,bytes,bool)[])"(
+    "executeCalls((address,bytes,bool)[])"(
       _call: TapiocaWrapper.ExecutionCallStruct[],
       overrides?: CallOverrides
     ): Promise<[boolean, string[]] & { success: boolean; results: string[] }>;
@@ -724,7 +717,7 @@ export interface TapiocaWrapper extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "executeCalls((address,uint256,bytes,bool)[])"(
+    "executeCalls((address,bytes,bool)[])"(
       _call: TapiocaWrapper.ExecutionCallStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -830,7 +823,7 @@ export interface TapiocaWrapper extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "executeCalls((address,uint256,bytes,bool)[])"(
+    "executeCalls((address,bytes,bool)[])"(
       _call: TapiocaWrapper.ExecutionCallStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
