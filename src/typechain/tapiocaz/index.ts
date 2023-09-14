@@ -20,6 +20,8 @@ export type { BaseTOFTOptionsModule } from "./tOFT/modules/BaseTOFTOptionsModule
 export { BaseTOFTOptionsModule__factory } from "./factories/tOFT/modules/BaseTOFTOptionsModule__factory";
 export type { BaseTOFTStrategyModule } from "./tOFT/modules/BaseTOFTStrategyModule";
 export { BaseTOFTStrategyModule__factory } from "./factories/tOFT/modules/BaseTOFTStrategyModule__factory";
+export type { TOFTCommon } from "./tOFT/modules/TOFTCommon";
+export { TOFTCommon__factory } from "./factories/tOFT/modules/TOFTCommon__factory";
 export type { MTapiocaOFT } from "./tOFT/MTapiocaOFT";
 export { MTapiocaOFT__factory } from "./factories/tOFT/MTapiocaOFT__factory";
 export type { TapiocaOFT } from "./tOFT/TapiocaOFT";

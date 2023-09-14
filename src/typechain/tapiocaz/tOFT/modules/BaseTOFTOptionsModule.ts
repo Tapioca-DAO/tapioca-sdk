@@ -173,6 +173,7 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
     "balanceOf(address)": FunctionFragment;
     "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)": FunctionFragment;
     "circulatingSupply()": FunctionFragment;
+    "cluster()": FunctionFragment;
     "creditedPackets(uint16,bytes,uint64)": FunctionFragment;
     "decimals()": FunctionFragment;
     "decreaseAllowance(address,uint256)": FunctionFragment;
@@ -180,8 +181,8 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
     "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)": FunctionFragment;
     "estimateSendFee(uint16,bytes32,uint256,bool,bytes)": FunctionFragment;
     "exercise(address,uint16,bytes,uint64,bytes)": FunctionFragment;
-    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
-    "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
+    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
+    "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)": FunctionFragment;
     "failedMessages(uint16,bytes,uint64)": FunctionFragment;
     "forceResumeReceive(uint16,bytes)": FunctionFragment;
     "getConfig(uint16,uint16,address,uint256)": FunctionFragment;
@@ -245,6 +246,8 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
       | "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)"
       | "circulatingSupply"
       | "circulatingSupply()"
+      | "cluster"
+      | "cluster()"
       | "creditedPackets"
       | "creditedPackets(uint16,bytes,uint64)"
       | "decimals"
@@ -260,9 +263,9 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
       | "exercise"
       | "exercise(address,uint16,bytes,uint64,bytes)"
       | "exerciseInternal"
-      | "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
+      | "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "exerciseOption"
-      | "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
+      | "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"
       | "failedMessages"
       | "failedMessages(uint16,bytes,uint64)"
       | "forceResumeReceive"
@@ -431,6 +434,8 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
     functionFragment: "circulatingSupply()",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "cluster", values?: undefined): string;
+  encodeFunctionData(functionFragment: "cluster()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "creditedPackets",
     values: [
@@ -535,11 +540,12 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+      PromiseOrValue<BigNumberish>,
       ICommonData.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
@@ -547,6 +553,7 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+      PromiseOrValue<BigNumberish>,
       ICommonData.IApprovalStruct[]
     ]
   ): string;
@@ -556,16 +563,18 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
       ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      ICommonData.IApprovalStruct[]
+      ICommonData.IApprovalStruct[],
+      PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
     values: [
       ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      ICommonData.IApprovalStruct[]
+      ICommonData.IApprovalStruct[],
+      PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
@@ -1040,6 +1049,8 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
     functionFragment: "circulatingSupply()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "cluster", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "cluster()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "creditedPackets",
     data: BytesLike
@@ -1086,7 +1097,7 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1094,7 +1105,7 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1723,6 +1734,10 @@ export interface BaseTOFTOptionsModule extends BaseContract {
 
     "circulatingSupply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    cluster(overrides?: CallOverrides): Promise<[string]>;
+
+    "cluster()"(overrides?: CallOverrides): Promise<[string]>;
+
     creditedPackets(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
@@ -1830,17 +1845,19 @@ export interface BaseTOFTOptionsModule extends BaseContract {
       tapAmount: PromiseOrValue<BigNumberish>,
       target: PromiseOrValue<string>,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       oTAPTokenID: PromiseOrValue<BigNumberish>,
       paymentToken: PromiseOrValue<string>,
       tapAmount: PromiseOrValue<BigNumberish>,
       target: PromiseOrValue<string>,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -1850,14 +1867,16 @@ export interface BaseTOFTOptionsModule extends BaseContract {
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
       approvals: ICommonData.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
       approvals: ICommonData.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2370,6 +2389,10 @@ export interface BaseTOFTOptionsModule extends BaseContract {
 
   "circulatingSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  cluster(overrides?: CallOverrides): Promise<string>;
+
+  "cluster()"(overrides?: CallOverrides): Promise<string>;
+
   creditedPackets(
     arg0: PromiseOrValue<BigNumberish>,
     arg1: PromiseOrValue<BytesLike>,
@@ -2477,17 +2500,19 @@ export interface BaseTOFTOptionsModule extends BaseContract {
     tapAmount: PromiseOrValue<BigNumberish>,
     target: PromiseOrValue<string>,
     tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+    paymentTokenAmount: PromiseOrValue<BigNumberish>,
     approvals: ICommonData.IApprovalStruct[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+  "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
     from: PromiseOrValue<string>,
     oTAPTokenID: PromiseOrValue<BigNumberish>,
     paymentToken: PromiseOrValue<string>,
     tapAmount: PromiseOrValue<BigNumberish>,
     target: PromiseOrValue<string>,
     tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+    paymentTokenAmount: PromiseOrValue<BigNumberish>,
     approvals: ICommonData.IApprovalStruct[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -2497,14 +2522,16 @@ export interface BaseTOFTOptionsModule extends BaseContract {
     lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
     tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
     approvals: ICommonData.IApprovalStruct[],
+    adapterParams: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+  "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
     optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
     lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
     tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
     approvals: ICommonData.IApprovalStruct[],
+    adapterParams: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3019,6 +3046,10 @@ export interface BaseTOFTOptionsModule extends BaseContract {
 
     "circulatingSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    cluster(overrides?: CallOverrides): Promise<string>;
+
+    "cluster()"(overrides?: CallOverrides): Promise<string>;
+
     creditedPackets(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
@@ -3126,17 +3157,19 @@ export interface BaseTOFTOptionsModule extends BaseContract {
       tapAmount: PromiseOrValue<BigNumberish>,
       target: PromiseOrValue<string>,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       oTAPTokenID: PromiseOrValue<BigNumberish>,
       paymentToken: PromiseOrValue<string>,
       tapAmount: PromiseOrValue<BigNumberish>,
       target: PromiseOrValue<string>,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
@@ -3146,14 +3179,16 @@ export interface BaseTOFTOptionsModule extends BaseContract {
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
       approvals: ICommonData.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
       approvals: ICommonData.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3807,6 +3842,10 @@ export interface BaseTOFTOptionsModule extends BaseContract {
 
     "circulatingSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    cluster(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "cluster()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     creditedPackets(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
@@ -3906,17 +3945,19 @@ export interface BaseTOFTOptionsModule extends BaseContract {
       tapAmount: PromiseOrValue<BigNumberish>,
       target: PromiseOrValue<string>,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       oTAPTokenID: PromiseOrValue<BigNumberish>,
       paymentToken: PromiseOrValue<string>,
       tapAmount: PromiseOrValue<BigNumberish>,
       target: PromiseOrValue<string>,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -3926,14 +3967,16 @@ export interface BaseTOFTOptionsModule extends BaseContract {
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
       approvals: ICommonData.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
       approvals: ICommonData.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4455,6 +4498,10 @@ export interface BaseTOFTOptionsModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    cluster(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "cluster()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     creditedPackets(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
@@ -4554,17 +4601,19 @@ export interface BaseTOFTOptionsModule extends BaseContract {
       tapAmount: PromiseOrValue<BigNumberish>,
       target: PromiseOrValue<string>,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       oTAPTokenID: PromiseOrValue<BigNumberish>,
       paymentToken: PromiseOrValue<string>,
       tapAmount: PromiseOrValue<BigNumberish>,
       target: PromiseOrValue<string>,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
+      paymentTokenAmount: PromiseOrValue<BigNumberish>,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -4574,14 +4623,16 @@ export interface BaseTOFTOptionsModule extends BaseContract {
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
       approvals: ICommonData.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
       approvals: ICommonData.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
