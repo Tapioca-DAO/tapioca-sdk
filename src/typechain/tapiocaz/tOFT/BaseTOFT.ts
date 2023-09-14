@@ -302,7 +302,7 @@ export interface BaseTOFTInterface extends utils.Interface {
     "erc20()": FunctionFragment;
     "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)": FunctionFragment;
     "estimateSendFee(uint16,bytes32,uint256,bool,bytes)": FunctionFragment;
-    "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
+    "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)": FunctionFragment;
     "failedMessages(uint16,bytes,uint64)": FunctionFragment;
     "forceResumeReceive(uint16,bytes)": FunctionFragment;
     "getConfig(uint16,uint16,address,uint256)": FunctionFragment;
@@ -396,7 +396,7 @@ export interface BaseTOFTInterface extends utils.Interface {
       | "estimateSendFee"
       | "estimateSendFee(uint16,bytes32,uint256,bool,bytes)"
       | "exerciseOption"
-      | "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
+      | "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"
       | "failedMessages"
       | "failedMessages(uint16,bytes,uint64)"
       | "forceResumeReceive"
@@ -682,16 +682,18 @@ export interface BaseTOFTInterface extends utils.Interface {
       ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      ICommonData.IApprovalStruct[]
+      ICommonData.IApprovalStruct[],
+      PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
     values: [
       ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      ICommonData.IApprovalStruct[]
+      ICommonData.IApprovalStruct[],
+      PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
@@ -1445,7 +1447,7 @@ export interface BaseTOFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2261,14 +2263,16 @@ export interface BaseTOFT extends BaseContract {
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
       approvals: ICommonData.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
       approvals: ICommonData.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -3076,14 +3080,16 @@ export interface BaseTOFT extends BaseContract {
     lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
     tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
     approvals: ICommonData.IApprovalStruct[],
+    adapterParams: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+  "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
     optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
     lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
     tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
     approvals: ICommonData.IApprovalStruct[],
+    adapterParams: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3893,14 +3899,16 @@ export interface BaseTOFT extends BaseContract {
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
       approvals: ICommonData.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
       approvals: ICommonData.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4841,14 +4849,16 @@ export interface BaseTOFT extends BaseContract {
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
       approvals: ICommonData.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
       approvals: ICommonData.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5659,14 +5669,16 @@ export interface BaseTOFT extends BaseContract {
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
       approvals: ICommonData.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
       tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
       approvals: ICommonData.IApprovalStruct[],
+      adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

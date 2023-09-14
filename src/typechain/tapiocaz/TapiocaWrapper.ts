@@ -54,7 +54,6 @@ export interface TapiocaWrapperInterface extends utils.Interface {
     "createTOFT(address,bytes,bytes32,bool)": FunctionFragment;
     "executeCalls((address,uint256,bytes,bool)[])": FunctionFragment;
     "executeTOFT(address,bytes,bool)": FunctionFragment;
-    "harvestFees()": FunctionFragment;
     "harvestableTapiocaOFTsLength()": FunctionFragment;
     "lastTOFT()": FunctionFragment;
     "owner()": FunctionFragment;
@@ -73,8 +72,6 @@ export interface TapiocaWrapperInterface extends utils.Interface {
       | "executeCalls((address,uint256,bytes,bool)[])"
       | "executeTOFT"
       | "executeTOFT(address,bytes,bool)"
-      | "harvestFees"
-      | "harvestFees()"
       | "harvestableTapiocaOFTsLength"
       | "harvestableTapiocaOFTsLength()"
       | "lastTOFT"
@@ -134,14 +131,6 @@ export interface TapiocaWrapperInterface extends utils.Interface {
       PromiseOrValue<BytesLike>,
       PromiseOrValue<boolean>
     ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "harvestFees",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "harvestFees()",
-    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "harvestableTapiocaOFTsLength",
@@ -221,14 +210,6 @@ export interface TapiocaWrapperInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "harvestFees",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "harvestFees()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "harvestableTapiocaOFTsLength",
     data: BytesLike
   ): Result;
@@ -283,15 +264,12 @@ export interface TapiocaWrapperInterface extends utils.Interface {
 
   events: {
     "CreateOFT(address,address)": EventFragment;
-    "HarvestFees(address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "SetFees(uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "CreateOFT"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "CreateOFT(address,address)"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "HarvestFees"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "HarvestFees(address)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "OwnershipTransferred(address,address)"
@@ -307,13 +285,6 @@ export interface CreateOFTEventObject {
 export type CreateOFTEvent = TypedEvent<[string, string], CreateOFTEventObject>;
 
 export type CreateOFTEventFilter = TypedEventFilter<CreateOFTEvent>;
-
-export interface HarvestFeesEventObject {
-  _caller: string;
-}
-export type HarvestFeesEvent = TypedEvent<[string], HarvestFeesEventObject>;
-
-export type HarvestFeesEventFilter = TypedEventFilter<HarvestFeesEvent>;
 
 export interface OwnershipTransferredEventObject {
   previousOwner: string;
@@ -401,14 +372,6 @@ export interface TapiocaWrapper extends BaseContract {
       _bytecode: PromiseOrValue<BytesLike>,
       _revertOnFailure: PromiseOrValue<boolean>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    harvestFees(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "harvestFees()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     harvestableTapiocaOFTsLength(
@@ -510,14 +473,6 @@ export interface TapiocaWrapper extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  harvestFees(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "harvestFees()"(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   harvestableTapiocaOFTsLength(overrides?: CallOverrides): Promise<BigNumber>;
 
   "harvestableTapiocaOFTsLength()"(
@@ -615,10 +570,6 @@ export interface TapiocaWrapper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean, string] & { success: boolean; result: string }>;
 
-    harvestFees(overrides?: CallOverrides): Promise<void>;
-
-    "harvestFees()"(overrides?: CallOverrides): Promise<void>;
-
     harvestableTapiocaOFTsLength(overrides?: CallOverrides): Promise<BigNumber>;
 
     "harvestableTapiocaOFTsLength()"(
@@ -682,13 +633,6 @@ export interface TapiocaWrapper extends BaseContract {
       _erc20?: PromiseOrValue<string> | null
     ): CreateOFTEventFilter;
 
-    "HarvestFees(address)"(
-      _caller?: PromiseOrValue<string> | null
-    ): HarvestFeesEventFilter;
-    HarvestFees(
-      _caller?: PromiseOrValue<string> | null
-    ): HarvestFeesEventFilter;
-
     "OwnershipTransferred(address,address)"(
       previousOwner?: PromiseOrValue<string> | null,
       newOwner?: PromiseOrValue<string> | null
@@ -741,14 +685,6 @@ export interface TapiocaWrapper extends BaseContract {
       _bytecode: PromiseOrValue<BytesLike>,
       _revertOnFailure: PromiseOrValue<boolean>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    harvestFees(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "harvestFees()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     harvestableTapiocaOFTsLength(overrides?: CallOverrides): Promise<BigNumber>;
@@ -847,14 +783,6 @@ export interface TapiocaWrapper extends BaseContract {
       _bytecode: PromiseOrValue<BytesLike>,
       _revertOnFailure: PromiseOrValue<boolean>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    harvestFees(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "harvestFees()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     harvestableTapiocaOFTsLength(
