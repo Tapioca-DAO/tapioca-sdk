@@ -4,6 +4,7 @@
 import type {
   BaseContract,
   BigNumber,
+  BigNumberish,
   BytesLike,
   CallOverrides,
   ContractTransaction,
@@ -12,7 +13,11 @@ import type {
   Signer,
   utils,
 } from "ethers";
-import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type {
+  FunctionFragment,
+  Result,
+  EventFragment,
+} from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type {
   TypedEventFilter,
@@ -24,20 +29,40 @@ import type {
 
 export interface SGOracleInterface extends utils.Interface {
   functions: {
+    "DEFAULT_ADMIN_ROLE()": FunctionFragment;
+    "GRACE_PERIOD_TIME()": FunctionFragment;
+    "GUARDIAN_ROLE_CHAINLINK()": FunctionFragment;
+    "SEQUENCER_UPTIME_FEED()": FunctionFragment;
     "SG_POOL()": FunctionFragment;
     "UNDERLYING()": FunctionFragment;
     "_name()": FunctionFragment;
     "_symbol()": FunctionFragment;
+    "changeGracePeriod(uint32)": FunctionFragment;
+    "changeStalePeriod(uint32)": FunctionFragment;
     "decimals()": FunctionFragment;
     "get(bytes)": FunctionFragment;
+    "getRoleAdmin(bytes32)": FunctionFragment;
+    "grantRole(bytes32,address)": FunctionFragment;
+    "hasRole(bytes32,address)": FunctionFragment;
     "name(bytes)": FunctionFragment;
     "peek(bytes)": FunctionFragment;
     "peekSpot(bytes)": FunctionFragment;
+    "renounceRole(bytes32,address)": FunctionFragment;
+    "revokeRole(bytes32,address)": FunctionFragment;
+    "stalePeriod()": FunctionFragment;
     "symbol(bytes)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "DEFAULT_ADMIN_ROLE"
+      | "DEFAULT_ADMIN_ROLE()"
+      | "GRACE_PERIOD_TIME"
+      | "GRACE_PERIOD_TIME()"
+      | "GUARDIAN_ROLE_CHAINLINK"
+      | "GUARDIAN_ROLE_CHAINLINK()"
+      | "SEQUENCER_UPTIME_FEED"
+      | "SEQUENCER_UPTIME_FEED()"
       | "SG_POOL"
       | "SG_POOL()"
       | "UNDERLYING"
@@ -46,20 +71,68 @@ export interface SGOracleInterface extends utils.Interface {
       | "_name()"
       | "_symbol"
       | "_symbol()"
+      | "changeGracePeriod"
+      | "changeGracePeriod(uint32)"
+      | "changeStalePeriod"
+      | "changeStalePeriod(uint32)"
       | "decimals"
       | "decimals()"
       | "get"
       | "get(bytes)"
+      | "getRoleAdmin"
+      | "getRoleAdmin(bytes32)"
+      | "grantRole"
+      | "grantRole(bytes32,address)"
+      | "hasRole"
+      | "hasRole(bytes32,address)"
       | "name"
       | "name(bytes)"
       | "peek"
       | "peek(bytes)"
       | "peekSpot"
       | "peekSpot(bytes)"
+      | "renounceRole"
+      | "renounceRole(bytes32,address)"
+      | "revokeRole"
+      | "revokeRole(bytes32,address)"
+      | "stalePeriod"
+      | "stalePeriod()"
       | "symbol"
       | "symbol(bytes)"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "DEFAULT_ADMIN_ROLE()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "GRACE_PERIOD_TIME",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "GRACE_PERIOD_TIME()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "GUARDIAN_ROLE_CHAINLINK",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "GUARDIAN_ROLE_CHAINLINK()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "SEQUENCER_UPTIME_FEED",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "SEQUENCER_UPTIME_FEED()",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "SG_POOL", values?: undefined): string;
   encodeFunctionData(functionFragment: "SG_POOL()", values?: undefined): string;
   encodeFunctionData(
@@ -74,6 +147,22 @@ export interface SGOracleInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "_name()", values?: undefined): string;
   encodeFunctionData(functionFragment: "_symbol", values?: undefined): string;
   encodeFunctionData(functionFragment: "_symbol()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "changeGracePeriod",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "changeGracePeriod(uint32)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "changeStalePeriod",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "changeStalePeriod(uint32)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "decimals()",
@@ -86,6 +175,30 @@ export interface SGOracleInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "get(bytes)",
     values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getRoleAdmin",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getRoleAdmin(bytes32)",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantRole",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantRole(bytes32,address)",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "hasRole",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "hasRole(bytes32,address)",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "name",
@@ -112,6 +225,30 @@ export interface SGOracleInterface extends utils.Interface {
     values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
+    functionFragment: "renounceRole",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "renounceRole(bytes32,address)",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokeRole",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokeRole(bytes32,address)",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "stalePeriod",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "stalePeriod()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "symbol",
     values: [PromiseOrValue<BytesLike>]
   ): string;
@@ -120,6 +257,38 @@ export interface SGOracleInterface extends utils.Interface {
     values: [PromiseOrValue<BytesLike>]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "DEFAULT_ADMIN_ROLE()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "GRACE_PERIOD_TIME",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "GRACE_PERIOD_TIME()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "GUARDIAN_ROLE_CHAINLINK",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "GUARDIAN_ROLE_CHAINLINK()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "SEQUENCER_UPTIME_FEED",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "SEQUENCER_UPTIME_FEED()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "SG_POOL", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "SG_POOL()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "UNDERLYING", data: BytesLike): Result;
@@ -131,10 +300,44 @@ export interface SGOracleInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "_name()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "_symbol", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "_symbol()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "changeGracePeriod",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "changeGracePeriod(uint32)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "changeStalePeriod",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "changeStalePeriod(uint32)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "get", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "get(bytes)", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getRoleAdmin",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getRoleAdmin(bytes32)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "grantRole", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "grantRole(bytes32,address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "hasRole", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "hasRole(bytes32,address)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "name(bytes)",
@@ -150,14 +353,89 @@ export interface SGOracleInterface extends utils.Interface {
     functionFragment: "peekSpot(bytes)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceRole",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceRole(bytes32,address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "revokeRole(bytes32,address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "stalePeriod",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "stalePeriod()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "symbol(bytes)",
     data: BytesLike
   ): Result;
 
-  events: {};
+  events: {
+    "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
+    "RoleGranted(bytes32,address,address)": EventFragment;
+    "RoleRevoked(bytes32,address,address)": EventFragment;
+  };
+
+  getEvent(nameOrSignatureOrTopic: "RoleAdminChanged"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "RoleAdminChanged(bytes32,bytes32,bytes32)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RoleGranted"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "RoleGranted(bytes32,address,address)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RoleRevoked"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "RoleRevoked(bytes32,address,address)"
+  ): EventFragment;
 }
+
+export interface RoleAdminChangedEventObject {
+  role: string;
+  previousAdminRole: string;
+  newAdminRole: string;
+}
+export type RoleAdminChangedEvent = TypedEvent<
+  [string, string, string],
+  RoleAdminChangedEventObject
+>;
+
+export type RoleAdminChangedEventFilter =
+  TypedEventFilter<RoleAdminChangedEvent>;
+
+export interface RoleGrantedEventObject {
+  role: string;
+  account: string;
+  sender: string;
+}
+export type RoleGrantedEvent = TypedEvent<
+  [string, string, string],
+  RoleGrantedEventObject
+>;
+
+export type RoleGrantedEventFilter = TypedEventFilter<RoleGrantedEvent>;
+
+export interface RoleRevokedEventObject {
+  role: string;
+  account: string;
+  sender: string;
+}
+export type RoleRevokedEvent = TypedEvent<
+  [string, string, string],
+  RoleRevokedEventObject
+>;
+
+export type RoleRevokedEventFilter = TypedEventFilter<RoleRevokedEvent>;
 
 export interface SGOracle extends BaseContract {
   contractName: "SGOracle";
@@ -188,6 +466,22 @@ export interface SGOracle extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<[string]>;
+
+    "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<[string]>;
+
+    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    GUARDIAN_ROLE_CHAINLINK(overrides?: CallOverrides): Promise<[string]>;
+
+    "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<[string]>;
+
+    SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<[string]>;
+
+    "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<[string]>;
+
     SG_POOL(overrides?: CallOverrides): Promise<[string]>;
 
     "SG_POOL()"(overrides?: CallOverrides): Promise<[string]>;
@@ -204,6 +498,26 @@ export interface SGOracle extends BaseContract {
 
     "_symbol()"(overrides?: CallOverrides): Promise<[string]>;
 
+    changeGracePeriod(
+      _gracePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "changeGracePeriod(uint32)"(
+      _gracePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    changeStalePeriod(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "changeStalePeriod(uint32)"(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     decimals(overrides?: CallOverrides): Promise<[number]>;
 
     "decimals()"(overrides?: CallOverrides): Promise<[number]>;
@@ -217,6 +531,40 @@ export interface SGOracle extends BaseContract {
       arg0: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    getRoleAdmin(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    "getRoleAdmin(bytes32)"(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    grantRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "grantRole(bytes32,address)"(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    hasRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "hasRole(bytes32,address)"(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
     name(
       arg0: PromiseOrValue<BytesLike>,
@@ -248,6 +596,34 @@ export interface SGOracle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { rate: BigNumber }>;
 
+    renounceRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "renounceRole(bytes32,address)"(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    revokeRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "revokeRole(bytes32,address)"(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    stalePeriod(overrides?: CallOverrides): Promise<[number]>;
+
+    "stalePeriod()"(overrides?: CallOverrides): Promise<[number]>;
+
     symbol(
       arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -258,6 +634,22 @@ export interface SGOracle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
   };
+
+  DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
+
+  "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<string>;
+
+  GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  GUARDIAN_ROLE_CHAINLINK(overrides?: CallOverrides): Promise<string>;
+
+  "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<string>;
+
+  SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<string>;
+
+  "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<string>;
 
   SG_POOL(overrides?: CallOverrides): Promise<string>;
 
@@ -275,6 +667,26 @@ export interface SGOracle extends BaseContract {
 
   "_symbol()"(overrides?: CallOverrides): Promise<string>;
 
+  changeGracePeriod(
+    _gracePeriod: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "changeGracePeriod(uint32)"(
+    _gracePeriod: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  changeStalePeriod(
+    _stalePeriod: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "changeStalePeriod(uint32)"(
+    _stalePeriod: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   decimals(overrides?: CallOverrides): Promise<number>;
 
   "decimals()"(overrides?: CallOverrides): Promise<number>;
@@ -288,6 +700,40 @@ export interface SGOracle extends BaseContract {
     arg0: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  getRoleAdmin(
+    role: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  "getRoleAdmin(bytes32)"(
+    role: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  grantRole(
+    role: PromiseOrValue<BytesLike>,
+    account: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "grantRole(bytes32,address)"(
+    role: PromiseOrValue<BytesLike>,
+    account: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  hasRole(
+    role: PromiseOrValue<BytesLike>,
+    account: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "hasRole(bytes32,address)"(
+    role: PromiseOrValue<BytesLike>,
+    account: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   name(
     arg0: PromiseOrValue<BytesLike>,
@@ -319,6 +765,34 @@ export interface SGOracle extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  renounceRole(
+    role: PromiseOrValue<BytesLike>,
+    account: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "renounceRole(bytes32,address)"(
+    role: PromiseOrValue<BytesLike>,
+    account: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  revokeRole(
+    role: PromiseOrValue<BytesLike>,
+    account: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "revokeRole(bytes32,address)"(
+    role: PromiseOrValue<BytesLike>,
+    account: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  stalePeriod(overrides?: CallOverrides): Promise<number>;
+
+  "stalePeriod()"(overrides?: CallOverrides): Promise<number>;
+
   symbol(
     arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
@@ -330,6 +804,22 @@ export interface SGOracle extends BaseContract {
   ): Promise<string>;
 
   callStatic: {
+    DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
+
+    "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<string>;
+
+    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    GUARDIAN_ROLE_CHAINLINK(overrides?: CallOverrides): Promise<string>;
+
+    "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<string>;
+
+    SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<string>;
+
+    "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<string>;
+
     SG_POOL(overrides?: CallOverrides): Promise<string>;
 
     "SG_POOL()"(overrides?: CallOverrides): Promise<string>;
@@ -346,6 +836,26 @@ export interface SGOracle extends BaseContract {
 
     "_symbol()"(overrides?: CallOverrides): Promise<string>;
 
+    changeGracePeriod(
+      _gracePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "changeGracePeriod(uint32)"(
+      _gracePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    changeStalePeriod(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "changeStalePeriod(uint32)"(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     decimals(overrides?: CallOverrides): Promise<number>;
 
     "decimals()"(overrides?: CallOverrides): Promise<number>;
@@ -359,6 +869,40 @@ export interface SGOracle extends BaseContract {
       arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
+
+    getRoleAdmin(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "getRoleAdmin(bytes32)"(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    grantRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "grantRole(bytes32,address)"(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    hasRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "hasRole(bytes32,address)"(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     name(
       arg0: PromiseOrValue<BytesLike>,
@@ -390,6 +934,34 @@ export interface SGOracle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    renounceRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "renounceRole(bytes32,address)"(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    revokeRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "revokeRole(bytes32,address)"(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    stalePeriod(overrides?: CallOverrides): Promise<number>;
+
+    "stalePeriod()"(overrides?: CallOverrides): Promise<number>;
+
     symbol(
       arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -401,9 +973,58 @@ export interface SGOracle extends BaseContract {
     ): Promise<string>;
   };
 
-  filters: {};
+  filters: {
+    "RoleAdminChanged(bytes32,bytes32,bytes32)"(
+      role?: PromiseOrValue<BytesLike> | null,
+      previousAdminRole?: PromiseOrValue<BytesLike> | null,
+      newAdminRole?: PromiseOrValue<BytesLike> | null
+    ): RoleAdminChangedEventFilter;
+    RoleAdminChanged(
+      role?: PromiseOrValue<BytesLike> | null,
+      previousAdminRole?: PromiseOrValue<BytesLike> | null,
+      newAdminRole?: PromiseOrValue<BytesLike> | null
+    ): RoleAdminChangedEventFilter;
+
+    "RoleGranted(bytes32,address,address)"(
+      role?: PromiseOrValue<BytesLike> | null,
+      account?: PromiseOrValue<string> | null,
+      sender?: PromiseOrValue<string> | null
+    ): RoleGrantedEventFilter;
+    RoleGranted(
+      role?: PromiseOrValue<BytesLike> | null,
+      account?: PromiseOrValue<string> | null,
+      sender?: PromiseOrValue<string> | null
+    ): RoleGrantedEventFilter;
+
+    "RoleRevoked(bytes32,address,address)"(
+      role?: PromiseOrValue<BytesLike> | null,
+      account?: PromiseOrValue<string> | null,
+      sender?: PromiseOrValue<string> | null
+    ): RoleRevokedEventFilter;
+    RoleRevoked(
+      role?: PromiseOrValue<BytesLike> | null,
+      account?: PromiseOrValue<string> | null,
+      sender?: PromiseOrValue<string> | null
+    ): RoleRevokedEventFilter;
+  };
 
   estimateGas: {
+    DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    GUARDIAN_ROLE_CHAINLINK(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     SG_POOL(overrides?: CallOverrides): Promise<BigNumber>;
 
     "SG_POOL()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -420,6 +1041,26 @@ export interface SGOracle extends BaseContract {
 
     "_symbol()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    changeGracePeriod(
+      _gracePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "changeGracePeriod(uint32)"(
+      _gracePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    changeStalePeriod(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "changeStalePeriod(uint32)"(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     decimals(overrides?: CallOverrides): Promise<BigNumber>;
 
     "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -432,6 +1073,40 @@ export interface SGOracle extends BaseContract {
     "get(bytes)"(
       arg0: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    getRoleAdmin(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getRoleAdmin(bytes32)"(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    grantRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "grantRole(bytes32,address)"(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    hasRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "hasRole(bytes32,address)"(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     name(
@@ -464,6 +1139,34 @@ export interface SGOracle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    renounceRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "renounceRole(bytes32,address)"(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    revokeRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "revokeRole(bytes32,address)"(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    stalePeriod(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "stalePeriod()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     symbol(
       arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -476,6 +1179,36 @@ export interface SGOracle extends BaseContract {
   };
 
   populateTransaction: {
+    DEFAULT_ADMIN_ROLE(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "DEFAULT_ADMIN_ROLE()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "GRACE_PERIOD_TIME()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    GUARDIAN_ROLE_CHAINLINK(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "GUARDIAN_ROLE_CHAINLINK()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    SEQUENCER_UPTIME_FEED(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "SEQUENCER_UPTIME_FEED()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     SG_POOL(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "SG_POOL()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -492,6 +1225,26 @@ export interface SGOracle extends BaseContract {
 
     "_symbol()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    changeGracePeriod(
+      _gracePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "changeGracePeriod(uint32)"(
+      _gracePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    changeStalePeriod(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "changeStalePeriod(uint32)"(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -504,6 +1257,40 @@ export interface SGOracle extends BaseContract {
     "get(bytes)"(
       arg0: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    getRoleAdmin(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "getRoleAdmin(bytes32)"(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    grantRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "grantRole(bytes32,address)"(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    hasRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "hasRole(bytes32,address)"(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     name(
@@ -535,6 +1322,34 @@ export interface SGOracle extends BaseContract {
       arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    renounceRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "renounceRole(bytes32,address)"(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    revokeRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "revokeRole(bytes32,address)"(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    stalePeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "stalePeriod()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     symbol(
       arg0: PromiseOrValue<BytesLike>,

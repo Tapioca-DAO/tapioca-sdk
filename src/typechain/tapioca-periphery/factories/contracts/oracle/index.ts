@@ -3,6 +3,7 @@
 /* eslint-disable */
 export * as external from "./external";
 export * as implementations from "./implementations";
+export * as mocks from "./mocks";
 export * as modules from "./modules";
 export * as utils from "./utils";
 export { OracleAbstract__factory } from "./OracleAbstract__factory";

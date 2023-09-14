@@ -1,0 +1,246 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "SequencerFeedMock",
+  "sourceName": "contracts/oracle/mocks/SequencerFeedMock.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "decimals",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "description",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint80",
+          "name": "_roundId",
+          "type": "uint80"
+        }
+      ],
+      "name": "getRoundData",
+      "outputs": [
+        {
+          "internalType": "uint80",
+          "name": "roundId",
+          "type": "uint80"
+        },
+        {
+          "internalType": "int256",
+          "name": "answer",
+          "type": "int256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "startedAt",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "updatedAt",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint80",
+          "name": "answeredInRound",
+          "type": "uint80"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "latestRoundData",
+      "outputs": [
+        {
+          "internalType": "uint80",
+          "name": "roundId",
+          "type": "uint80"
+        },
+        {
+          "internalType": "int256",
+          "name": "answer",
+          "type": "int256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "startedAt",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "updatedAt",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint80",
+          "name": "answeredInRound",
+          "type": "uint80"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint80",
+          "name": "",
+          "type": "uint80"
+        }
+      ],
+      "name": "roundData",
+      "outputs": [
+        {
+          "internalType": "uint80",
+          "name": "roundId",
+          "type": "uint80"
+        },
+        {
+          "internalType": "int256",
+          "name": "answer",
+          "type": "int256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "startedAt",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "updatedAt",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint80",
+          "name": "answeredInRound",
+          "type": "uint80"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint80",
+              "name": "roundId",
+              "type": "uint80"
+            },
+            {
+              "internalType": "int256",
+              "name": "answer",
+              "type": "int256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startedAt",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "updatedAt",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint80",
+              "name": "answeredInRound",
+              "type": "uint80"
+            }
+          ],
+          "internalType": "struct RoundData",
+          "name": "_latestRoundData",
+          "type": "tuple"
+        }
+      ],
+      "name": "setLatestRoundData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint80",
+          "name": "_roundId",
+          "type": "uint80"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint80",
+              "name": "roundId",
+              "type": "uint80"
+            },
+            {
+              "internalType": "int256",
+              "name": "answer",
+              "type": "int256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startedAt",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "updatedAt",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint80",
+              "name": "answeredInRound",
+              "type": "uint80"
+            }
+          ],
+          "internalType": "struct RoundData",
+          "name": "_roundData",
+          "type": "tuple"
+        }
+      ],
+      "name": "setRoundData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x60808060405234610016576103e9908161001c8239f35b600080fdfe6040608081526004908136101561001557600080fd5b6000803560e01c8063255f530b14610270578063313ce5671461025457806354fd4d50146102385780637284e4161461018f5780639a6fc8f514610131578063bc81bae814610131578063df4a00eb146100bb5763feaf968c1461007857600080fd5b346100b857806003193601126100b85750600154600254600354935460055493519485946100b4946001600160501b0391821694911686610380565b0390f35b80fd5b50823461012d5760a036600319011261012d576100d661034b565b506001600160501b039080358281169190829003610129576084359283168093036101295760018060501b0319918260015416176001556024356002556044356003556064359055600554161760055580f35b8380fd5b5080fd5b5091903461018b57602036600319011261018b576001600160501b03926100b4919081908561015e610330565b16815280602052208481541693600182015495600283015491600384015493015416925195869586610380565b8280fd5b50913461018b578260031936011261018b57815190818301906001600160401b0382118383101761022557508252601381526020907253657175656e6365722046656564204d6f636b60681b8282015282519382859384528251928382860152825b84811061020f57505050828201840152601f01601f19168101030190f35b81810183015188820188015287955082016101f1565b634e487b7160e01b855260419052602484fd5b50903461012d578160031936011261012d576020905160038152f35b50903461012d578160031936011261012d576020905160128152f35b50913461018b5760c036600319011261018b5761028b610330565b9060a0366023190112610129576102a061034b565b6001600160501b039190602435838116810361032c5781526020810193604435855285820160643581526060830191608435835260a43597868916890361032857868092608087019a8b52168a528960205289209351169560018060501b03199687855416178455516001840155516002830155516003820155019251169082541617905580f35b8980fd5b8680fd5b600435906001600160501b038216820361034657565b600080fd5b6040519060a082016001600160401b0381118382101761036a57604052565b634e487b7160e01b600052604160045260246000fd5b6001600160501b039182168152602081019290925260408201929092526060810192909252909116608082015260a0019056fea26469706673582212202664d2b80497d244ec929301c95e7aaea3f9aa90be861fd70225bd2caf3a899964736f6c63430008120033",
+  "deployedBytecode": "0x6040608081526004908136101561001557600080fd5b6000803560e01c8063255f530b14610270578063313ce5671461025457806354fd4d50146102385780637284e4161461018f5780639a6fc8f514610131578063bc81bae814610131578063df4a00eb146100bb5763feaf968c1461007857600080fd5b346100b857806003193601126100b85750600154600254600354935460055493519485946100b4946001600160501b0391821694911686610380565b0390f35b80fd5b50823461012d5760a036600319011261012d576100d661034b565b506001600160501b039080358281169190829003610129576084359283168093036101295760018060501b0319918260015416176001556024356002556044356003556064359055600554161760055580f35b8380fd5b5080fd5b5091903461018b57602036600319011261018b576001600160501b03926100b4919081908561015e610330565b16815280602052208481541693600182015495600283015491600384015493015416925195869586610380565b8280fd5b50913461018b578260031936011261018b57815190818301906001600160401b0382118383101761022557508252601381526020907253657175656e6365722046656564204d6f636b60681b8282015282519382859384528251928382860152825b84811061020f57505050828201840152601f01601f19168101030190f35b81810183015188820188015287955082016101f1565b634e487b7160e01b855260419052602484fd5b50903461012d578160031936011261012d576020905160038152f35b50903461012d578160031936011261012d576020905160128152f35b50913461018b5760c036600319011261018b5761028b610330565b9060a0366023190112610129576102a061034b565b6001600160501b039190602435838116810361032c5781526020810193604435855285820160643581526060830191608435835260a43597868916890361032857868092608087019a8b52168a528960205289209351169560018060501b03199687855416178455516001840155516002830155516003820155019251169082541617905580f35b8980fd5b8680fd5b600435906001600160501b038216820361034657565b600080fd5b6040519060a082016001600160401b0381118382101761036a57604052565b634e487b7160e01b600052604160045260246000fd5b6001600160501b039182168152602081019290925260408201929092526060810192909252909116608082015260a0019056fea26469706673582212202664d2b80497d244ec929301c95e7aaea3f9aa90be861fd70225bd2caf3a899964736f6c63430008120033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

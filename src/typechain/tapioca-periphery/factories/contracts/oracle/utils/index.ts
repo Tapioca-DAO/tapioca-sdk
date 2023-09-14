@@ -4,4 +4,5 @@
 export { ChainlinkUtils__factory } from "./ChainlinkUtils__factory";
 export { FunctionUtils__factory } from "./FunctionUtils__factory";
 export { PausableMapUpgradeable__factory } from "./PausableMapUpgradeable__factory";
+export { SequencerCheck__factory } from "./SequencerCheck__factory";
 export { UniswapUtils__factory } from "./UniswapUtils__factory";

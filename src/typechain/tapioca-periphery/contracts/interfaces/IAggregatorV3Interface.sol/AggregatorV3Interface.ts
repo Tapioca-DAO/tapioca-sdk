@@ -23,6 +23,7 @@ import type {
 
 export interface AggregatorV3InterfaceInterface extends utils.Interface {
   functions: {
+    "aggregator()": FunctionFragment;
     "decimals()": FunctionFragment;
     "description()": FunctionFragment;
     "getRoundData(uint80)": FunctionFragment;
@@ -32,6 +33,8 @@ export interface AggregatorV3InterfaceInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "aggregator"
+      | "aggregator()"
       | "decimals"
       | "decimals()"
       | "description"
@@ -44,6 +47,14 @@ export interface AggregatorV3InterfaceInterface extends utils.Interface {
       | "version()"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "aggregator",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "aggregator()",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "decimals()",
@@ -76,6 +87,11 @@ export interface AggregatorV3InterfaceInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "version", values?: undefined): string;
   encodeFunctionData(functionFragment: "version()", values?: undefined): string;
 
+  decodeFunctionResult(functionFragment: "aggregator", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "aggregator()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
   decodeFunctionResult(
@@ -137,6 +153,10 @@ export interface AggregatorV3Interface extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    aggregator(overrides?: CallOverrides): Promise<[string]>;
+
+    "aggregator()"(overrides?: CallOverrides): Promise<[string]>;
+
     decimals(overrides?: CallOverrides): Promise<[number]>;
 
     "decimals()"(overrides?: CallOverrides): Promise<[number]>;
@@ -199,6 +219,10 @@ export interface AggregatorV3Interface extends BaseContract {
 
     "version()"(overrides?: CallOverrides): Promise<[BigNumber]>;
   };
+
+  aggregator(overrides?: CallOverrides): Promise<string>;
+
+  "aggregator()"(overrides?: CallOverrides): Promise<string>;
 
   decimals(overrides?: CallOverrides): Promise<number>;
 
@@ -263,6 +287,10 @@ export interface AggregatorV3Interface extends BaseContract {
   "version()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   callStatic: {
+    aggregator(overrides?: CallOverrides): Promise<string>;
+
+    "aggregator()"(overrides?: CallOverrides): Promise<string>;
+
     decimals(overrides?: CallOverrides): Promise<number>;
 
     "decimals()"(overrides?: CallOverrides): Promise<number>;
@@ -329,6 +357,10 @@ export interface AggregatorV3Interface extends BaseContract {
   filters: {};
 
   estimateGas: {
+    aggregator(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "aggregator()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     decimals(overrides?: CallOverrides): Promise<BigNumber>;
 
     "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -357,6 +389,10 @@ export interface AggregatorV3Interface extends BaseContract {
   };
 
   populateTransaction: {
+    aggregator(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "aggregator()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
