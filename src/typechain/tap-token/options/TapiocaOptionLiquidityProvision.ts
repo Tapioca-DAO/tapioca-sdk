@@ -30,7 +30,7 @@ import type {
 
 export type LockPositionStruct = {
   sglAssetID: PromiseOrValue<BigNumberish>;
-  amount: PromiseOrValue<BigNumberish>;
+  ybShares: PromiseOrValue<BigNumberish>;
   lockTime: PromiseOrValue<BigNumberish>;
   lockDuration: PromiseOrValue<BigNumberish>;
 };
@@ -42,7 +42,7 @@ export type LockPositionStructOutput = [
   BigNumber
 ] & {
   sglAssetID: BigNumber;
-  amount: BigNumber;
+  ybShares: BigNumber;
   lockTime: BigNumber;
   lockDuration: BigNumber;
 };
@@ -79,7 +79,6 @@ export interface TapiocaOptionLiquidityProvisionInterface
     "lockPositions(uint256)": FunctionFragment;
     "name()": FunctionFragment;
     "nonces(address)": FunctionFragment;
-    "onERC1155Received(address,address,uint256,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
     "paused()": FunctionFragment;
@@ -140,8 +139,6 @@ export interface TapiocaOptionLiquidityProvisionInterface
       | "name()"
       | "nonces"
       | "nonces(address)"
-      | "onERC1155Received"
-      | "onERC1155Received(address,address,uint256,uint256,bytes)"
       | "owner"
       | "owner()"
       | "ownerOf"
@@ -325,26 +322,6 @@ export interface TapiocaOptionLiquidityProvisionInterface
   encodeFunctionData(
     functionFragment: "nonces(address)",
     values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "onERC1155Received",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "onERC1155Received(address,address,uint256,uint256,bytes)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
@@ -659,14 +636,6 @@ export interface TapiocaOptionLiquidityProvisionInterface
   decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "nonces(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "onERC1155Received",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "onERC1155Received(address,address,uint256,uint256,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -1130,12 +1099,16 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     getTotalPoolDeposited(
       _sglAssetId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    ): Promise<
+      [BigNumber, BigNumber] & { shares: BigNumber; amount: BigNumber }
+    >;
 
     "getTotalPoolDeposited(uint256)"(
       _sglAssetId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    ): Promise<
+      [BigNumber, BigNumber] & { shares: BigNumber; amount: BigNumber }
+    >;
 
     isApprovedForAll(
       owner: PromiseOrValue<string>,
@@ -1165,7 +1138,7 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       _to: PromiseOrValue<string>,
       _singularity: PromiseOrValue<string>,
       _lockDuration: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
+      _ybShares: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1173,7 +1146,7 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       _to: PromiseOrValue<string>,
       _singularity: PromiseOrValue<string>,
       _lockDuration: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
+      _ybShares: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1183,7 +1156,7 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     ): Promise<
       [BigNumber, BigNumber, BigNumber, BigNumber] & {
         sglAssetID: BigNumber;
-        amount: BigNumber;
+        ybShares: BigNumber;
         lockTime: BigNumber;
         lockDuration: BigNumber;
       }
@@ -1195,7 +1168,7 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     ): Promise<
       [BigNumber, BigNumber, BigNumber, BigNumber] & {
         sglAssetID: BigNumber;
-        amount: BigNumber;
+        ybShares: BigNumber;
         lockTime: BigNumber;
         lockDuration: BigNumber;
       }
@@ -1214,24 +1187,6 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
-
-    onERC1155Received(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    "onERC1155Received(address,address,uint256,uint256,bytes)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -1544,12 +1499,12 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
   getTotalPoolDeposited(
     _sglAssetId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  ): Promise<[BigNumber, BigNumber] & { shares: BigNumber; amount: BigNumber }>;
 
   "getTotalPoolDeposited(uint256)"(
     _sglAssetId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  ): Promise<[BigNumber, BigNumber] & { shares: BigNumber; amount: BigNumber }>;
 
   isApprovedForAll(
     owner: PromiseOrValue<string>,
@@ -1579,7 +1534,7 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     _to: PromiseOrValue<string>,
     _singularity: PromiseOrValue<string>,
     _lockDuration: PromiseOrValue<BigNumberish>,
-    _amount: PromiseOrValue<BigNumberish>,
+    _ybShares: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1587,7 +1542,7 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     _to: PromiseOrValue<string>,
     _singularity: PromiseOrValue<string>,
     _lockDuration: PromiseOrValue<BigNumberish>,
-    _amount: PromiseOrValue<BigNumberish>,
+    _ybShares: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1597,7 +1552,7 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
   ): Promise<
     [BigNumber, BigNumber, BigNumber, BigNumber] & {
       sglAssetID: BigNumber;
-      amount: BigNumber;
+      ybShares: BigNumber;
       lockTime: BigNumber;
       lockDuration: BigNumber;
     }
@@ -1609,7 +1564,7 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
   ): Promise<
     [BigNumber, BigNumber, BigNumber, BigNumber] & {
       sglAssetID: BigNumber;
-      amount: BigNumber;
+      ybShares: BigNumber;
       lockTime: BigNumber;
       lockDuration: BigNumber;
     }
@@ -1628,24 +1583,6 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     owner: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
-
-  onERC1155Received(
-    arg0: PromiseOrValue<string>,
-    arg1: PromiseOrValue<string>,
-    arg2: PromiseOrValue<BigNumberish>,
-    arg3: PromiseOrValue<BigNumberish>,
-    arg4: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  "onERC1155Received(address,address,uint256,uint256,bytes)"(
-    arg0: PromiseOrValue<string>,
-    arg1: PromiseOrValue<string>,
-    arg2: PromiseOrValue<BigNumberish>,
-    arg3: PromiseOrValue<BigNumberish>,
-    arg4: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<string>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -1952,12 +1889,16 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     getTotalPoolDeposited(
       _sglAssetId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    ): Promise<
+      [BigNumber, BigNumber] & { shares: BigNumber; amount: BigNumber }
+    >;
 
     "getTotalPoolDeposited(uint256)"(
       _sglAssetId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    ): Promise<
+      [BigNumber, BigNumber] & { shares: BigNumber; amount: BigNumber }
+    >;
 
     isApprovedForAll(
       owner: PromiseOrValue<string>,
@@ -1987,7 +1928,7 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       _to: PromiseOrValue<string>,
       _singularity: PromiseOrValue<string>,
       _lockDuration: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
+      _ybShares: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1995,7 +1936,7 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       _to: PromiseOrValue<string>,
       _singularity: PromiseOrValue<string>,
       _lockDuration: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
+      _ybShares: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -2005,7 +1946,7 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     ): Promise<
       [BigNumber, BigNumber, BigNumber, BigNumber] & {
         sglAssetID: BigNumber;
-        amount: BigNumber;
+        ybShares: BigNumber;
         lockTime: BigNumber;
         lockDuration: BigNumber;
       }
@@ -2017,7 +1958,7 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     ): Promise<
       [BigNumber, BigNumber, BigNumber, BigNumber] & {
         sglAssetID: BigNumber;
-        amount: BigNumber;
+        ybShares: BigNumber;
         lockTime: BigNumber;
         lockDuration: BigNumber;
       }
@@ -2036,24 +1977,6 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    onERC1155Received(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    "onERC1155Received(address,address,uint256,uint256,bytes)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -2237,14 +2160,14 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       _singularity: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    ): Promise<void>;
 
     "unlock(uint256,address,address)"(
       _tokenId: PromiseOrValue<BigNumberish>,
       _singularity: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    ): Promise<void>;
 
     unregisterSingularity(
       singularity: PromiseOrValue<string>,
@@ -2490,7 +2413,7 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       _to: PromiseOrValue<string>,
       _singularity: PromiseOrValue<string>,
       _lockDuration: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
+      _ybShares: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -2498,7 +2421,7 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       _to: PromiseOrValue<string>,
       _singularity: PromiseOrValue<string>,
       _lockDuration: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
+      _ybShares: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -2523,24 +2446,6 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "nonces(address)"(
       owner: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    onERC1155Received(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "onERC1155Received(address,address,uint256,uint256,bytes)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -2881,7 +2786,7 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       _to: PromiseOrValue<string>,
       _singularity: PromiseOrValue<string>,
       _lockDuration: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
+      _ybShares: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -2889,7 +2794,7 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       _to: PromiseOrValue<string>,
       _singularity: PromiseOrValue<string>,
       _lockDuration: PromiseOrValue<BigNumberish>,
-      _amount: PromiseOrValue<BigNumberish>,
+      _ybShares: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -2914,24 +2819,6 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "nonces(address)"(
       owner: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    onERC1155Received(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "onERC1155Received(address,address,uint256,uint256,bytes)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      arg3: PromiseOrValue<BigNumberish>,
-      arg4: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
