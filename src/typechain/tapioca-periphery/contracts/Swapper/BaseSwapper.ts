@@ -9,6 +9,7 @@ import type {
   CallOverrides,
   ContractTransaction,
   Overrides,
+  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -381,7 +382,7 @@ export interface BaseSwapper extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       dexOptions: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
@@ -389,7 +390,7 @@ export interface BaseSwapper extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       dexOptions: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     transferOwnership(
@@ -468,7 +469,7 @@ export interface BaseSwapper extends BaseContract {
     amountOutMin: PromiseOrValue<BigNumberish>,
     to: PromiseOrValue<string>,
     dexOptions: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
@@ -476,7 +477,7 @@ export interface BaseSwapper extends BaseContract {
     amountOutMin: PromiseOrValue<BigNumberish>,
     to: PromiseOrValue<string>,
     dexOptions: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   transferOwnership(
@@ -654,7 +655,7 @@ export interface BaseSwapper extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       dexOptions: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
@@ -662,7 +663,7 @@ export interface BaseSwapper extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       dexOptions: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     transferOwnership(
@@ -746,7 +747,7 @@ export interface BaseSwapper extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       dexOptions: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
@@ -754,7 +755,7 @@ export interface BaseSwapper extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       dexOptions: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     transferOwnership(
