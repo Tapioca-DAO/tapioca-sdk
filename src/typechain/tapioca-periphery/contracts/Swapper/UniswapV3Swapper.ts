@@ -9,6 +9,7 @@ import type {
   CallOverrides,
   ContractTransaction,
   Overrides,
+  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -459,7 +460,7 @@ export interface UniswapV3Swapper extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
@@ -467,7 +468,7 @@ export interface UniswapV3Swapper extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     swapRouter(overrides?: CallOverrides): Promise<[string]>;
@@ -568,7 +569,7 @@ export interface UniswapV3Swapper extends BaseContract {
     amountOutMin: PromiseOrValue<BigNumberish>,
     to: PromiseOrValue<string>,
     data: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
@@ -576,7 +577,7 @@ export interface UniswapV3Swapper extends BaseContract {
     amountOutMin: PromiseOrValue<BigNumberish>,
     to: PromiseOrValue<string>,
     data: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   swapRouter(overrides?: CallOverrides): Promise<string>;
@@ -801,7 +802,7 @@ export interface UniswapV3Swapper extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
@@ -809,7 +810,7 @@ export interface UniswapV3Swapper extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     swapRouter(overrides?: CallOverrides): Promise<BigNumber>;
@@ -915,7 +916,7 @@ export interface UniswapV3Swapper extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
@@ -923,7 +924,7 @@ export interface UniswapV3Swapper extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     swapRouter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
