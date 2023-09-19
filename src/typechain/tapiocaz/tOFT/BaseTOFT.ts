@@ -356,6 +356,7 @@ export interface BaseTOFTInterface extends utils.Interface {
     "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "trustedRemoteLookup(uint16)": FunctionFragment;
     "useCustomAdapterParams()": FunctionFragment;
+    "vault()": FunctionFragment;
     "yieldBox()": FunctionFragment;
   };
 
@@ -503,6 +504,8 @@ export interface BaseTOFTInterface extends utils.Interface {
       | "trustedRemoteLookup(uint16)"
       | "useCustomAdapterParams"
       | "useCustomAdapterParams()"
+      | "vault"
+      | "vault()"
       | "yieldBox"
       | "yieldBox()"
   ): FunctionFragment;
@@ -1333,6 +1336,8 @@ export interface BaseTOFTInterface extends utils.Interface {
     functionFragment: "useCustomAdapterParams()",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "vault", values?: undefined): string;
+  encodeFunctionData(functionFragment: "vault()", values?: undefined): string;
   encodeFunctionData(functionFragment: "yieldBox", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "yieldBox()",
@@ -1814,6 +1819,8 @@ export interface BaseTOFTInterface extends utils.Interface {
     functionFragment: "useCustomAdapterParams()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "vault", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "vault()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "yieldBox", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "yieldBox()", data: BytesLike): Result;
 
@@ -2787,7 +2794,7 @@ export interface BaseTOFT extends BaseContract {
       arg1: PromiseOrValue<BytesLike>,
       arg2: PromiseOrValue<BigNumberish>,
       arg3: PromiseOrValue<string>,
-      arg4: PromiseOrValue<BigNumberish>,
+      amountLD: PromiseOrValue<BigNumberish>,
       arg5: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2797,7 +2804,7 @@ export interface BaseTOFT extends BaseContract {
       arg1: PromiseOrValue<BytesLike>,
       arg2: PromiseOrValue<BigNumberish>,
       arg3: PromiseOrValue<string>,
-      arg4: PromiseOrValue<BigNumberish>,
+      amountLD: PromiseOrValue<BigNumberish>,
       arg5: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2901,6 +2908,10 @@ export interface BaseTOFT extends BaseContract {
     useCustomAdapterParams(overrides?: CallOverrides): Promise<[boolean]>;
 
     "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<[boolean]>;
+
+    vault(overrides?: CallOverrides): Promise<[string]>;
+
+    "vault()"(overrides?: CallOverrides): Promise<[string]>;
 
     yieldBox(overrides?: CallOverrides): Promise<[string]>;
 
@@ -3604,7 +3615,7 @@ export interface BaseTOFT extends BaseContract {
     arg1: PromiseOrValue<BytesLike>,
     arg2: PromiseOrValue<BigNumberish>,
     arg3: PromiseOrValue<string>,
-    arg4: PromiseOrValue<BigNumberish>,
+    amountLD: PromiseOrValue<BigNumberish>,
     arg5: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -3614,7 +3625,7 @@ export interface BaseTOFT extends BaseContract {
     arg1: PromiseOrValue<BytesLike>,
     arg2: PromiseOrValue<BigNumberish>,
     arg3: PromiseOrValue<string>,
-    arg4: PromiseOrValue<BigNumberish>,
+    amountLD: PromiseOrValue<BigNumberish>,
     arg5: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -3718,6 +3729,10 @@ export interface BaseTOFT extends BaseContract {
   useCustomAdapterParams(overrides?: CallOverrides): Promise<boolean>;
 
   "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<boolean>;
+
+  vault(overrides?: CallOverrides): Promise<string>;
+
+  "vault()"(overrides?: CallOverrides): Promise<string>;
 
   yieldBox(overrides?: CallOverrides): Promise<string>;
 
@@ -4419,7 +4434,7 @@ export interface BaseTOFT extends BaseContract {
       arg1: PromiseOrValue<BytesLike>,
       arg2: PromiseOrValue<BigNumberish>,
       arg3: PromiseOrValue<string>,
-      arg4: PromiseOrValue<BigNumberish>,
+      amountLD: PromiseOrValue<BigNumberish>,
       arg5: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -4429,7 +4444,7 @@ export interface BaseTOFT extends BaseContract {
       arg1: PromiseOrValue<BytesLike>,
       arg2: PromiseOrValue<BigNumberish>,
       arg3: PromiseOrValue<string>,
-      arg4: PromiseOrValue<BigNumberish>,
+      amountLD: PromiseOrValue<BigNumberish>,
       arg5: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -4533,6 +4548,10 @@ export interface BaseTOFT extends BaseContract {
     useCustomAdapterParams(overrides?: CallOverrides): Promise<boolean>;
 
     "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<boolean>;
+
+    vault(overrides?: CallOverrides): Promise<string>;
+
+    "vault()"(overrides?: CallOverrides): Promise<string>;
 
     yieldBox(overrides?: CallOverrides): Promise<string>;
 
@@ -5373,7 +5392,7 @@ export interface BaseTOFT extends BaseContract {
       arg1: PromiseOrValue<BytesLike>,
       arg2: PromiseOrValue<BigNumberish>,
       arg3: PromiseOrValue<string>,
-      arg4: PromiseOrValue<BigNumberish>,
+      amountLD: PromiseOrValue<BigNumberish>,
       arg5: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -5383,7 +5402,7 @@ export interface BaseTOFT extends BaseContract {
       arg1: PromiseOrValue<BytesLike>,
       arg2: PromiseOrValue<BigNumberish>,
       arg3: PromiseOrValue<string>,
-      arg4: PromiseOrValue<BigNumberish>,
+      amountLD: PromiseOrValue<BigNumberish>,
       arg5: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -5487,6 +5506,10 @@ export interface BaseTOFT extends BaseContract {
     useCustomAdapterParams(overrides?: CallOverrides): Promise<BigNumber>;
 
     "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    vault(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "vault()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     yieldBox(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -6195,7 +6218,7 @@ export interface BaseTOFT extends BaseContract {
       arg1: PromiseOrValue<BytesLike>,
       arg2: PromiseOrValue<BigNumberish>,
       arg3: PromiseOrValue<string>,
-      arg4: PromiseOrValue<BigNumberish>,
+      amountLD: PromiseOrValue<BigNumberish>,
       arg5: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -6205,7 +6228,7 @@ export interface BaseTOFT extends BaseContract {
       arg1: PromiseOrValue<BytesLike>,
       arg2: PromiseOrValue<BigNumberish>,
       arg3: PromiseOrValue<string>,
-      arg4: PromiseOrValue<BigNumberish>,
+      amountLD: PromiseOrValue<BigNumberish>,
       arg5: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -6317,6 +6340,10 @@ export interface BaseTOFT extends BaseContract {
     "useCustomAdapterParams()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    vault(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "vault()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     yieldBox(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

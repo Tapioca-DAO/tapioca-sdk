@@ -357,6 +357,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
     "trustedRemoteLookup(uint16)": FunctionFragment;
     "unwrap(address,uint256)": FunctionFragment;
     "useCustomAdapterParams()": FunctionFragment;
+    "vault()": FunctionFragment;
     "wrap(address,address,uint256)": FunctionFragment;
     "yieldBox()": FunctionFragment;
   };
@@ -507,6 +508,8 @@ export interface TapiocaOFTInterface extends utils.Interface {
       | "unwrap(address,uint256)"
       | "useCustomAdapterParams"
       | "useCustomAdapterParams()"
+      | "vault"
+      | "vault()"
       | "wrap"
       | "wrap(address,address,uint256)"
       | "yieldBox"
@@ -1347,6 +1350,8 @@ export interface TapiocaOFTInterface extends utils.Interface {
     functionFragment: "useCustomAdapterParams()",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "vault", values?: undefined): string;
+  encodeFunctionData(functionFragment: "vault()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "wrap",
     values: [
@@ -1849,6 +1854,8 @@ export interface TapiocaOFTInterface extends utils.Interface {
     functionFragment: "useCustomAdapterParams()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "vault", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "vault()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "wrap", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "wrap(address,address,uint256)",
@@ -2827,7 +2834,7 @@ export interface TapiocaOFT extends BaseContract {
       arg1: PromiseOrValue<BytesLike>,
       arg2: PromiseOrValue<BigNumberish>,
       arg3: PromiseOrValue<string>,
-      arg4: PromiseOrValue<BigNumberish>,
+      amountLD: PromiseOrValue<BigNumberish>,
       arg5: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2837,7 +2844,7 @@ export interface TapiocaOFT extends BaseContract {
       arg1: PromiseOrValue<BytesLike>,
       arg2: PromiseOrValue<BigNumberish>,
       arg3: PromiseOrValue<string>,
-      arg4: PromiseOrValue<BigNumberish>,
+      amountLD: PromiseOrValue<BigNumberish>,
       arg5: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2953,6 +2960,10 @@ export interface TapiocaOFT extends BaseContract {
     useCustomAdapterParams(overrides?: CallOverrides): Promise<[boolean]>;
 
     "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<[boolean]>;
+
+    vault(overrides?: CallOverrides): Promise<[string]>;
+
+    "vault()"(overrides?: CallOverrides): Promise<[string]>;
 
     wrap(
       _fromAddress: PromiseOrValue<string>,
@@ -3670,7 +3681,7 @@ export interface TapiocaOFT extends BaseContract {
     arg1: PromiseOrValue<BytesLike>,
     arg2: PromiseOrValue<BigNumberish>,
     arg3: PromiseOrValue<string>,
-    arg4: PromiseOrValue<BigNumberish>,
+    amountLD: PromiseOrValue<BigNumberish>,
     arg5: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -3680,7 +3691,7 @@ export interface TapiocaOFT extends BaseContract {
     arg1: PromiseOrValue<BytesLike>,
     arg2: PromiseOrValue<BigNumberish>,
     arg3: PromiseOrValue<string>,
-    arg4: PromiseOrValue<BigNumberish>,
+    amountLD: PromiseOrValue<BigNumberish>,
     arg5: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -3796,6 +3807,10 @@ export interface TapiocaOFT extends BaseContract {
   useCustomAdapterParams(overrides?: CallOverrides): Promise<boolean>;
 
   "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<boolean>;
+
+  vault(overrides?: CallOverrides): Promise<string>;
+
+  "vault()"(overrides?: CallOverrides): Promise<string>;
 
   wrap(
     _fromAddress: PromiseOrValue<string>,
@@ -4511,7 +4526,7 @@ export interface TapiocaOFT extends BaseContract {
       arg1: PromiseOrValue<BytesLike>,
       arg2: PromiseOrValue<BigNumberish>,
       arg3: PromiseOrValue<string>,
-      arg4: PromiseOrValue<BigNumberish>,
+      amountLD: PromiseOrValue<BigNumberish>,
       arg5: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -4521,7 +4536,7 @@ export interface TapiocaOFT extends BaseContract {
       arg1: PromiseOrValue<BytesLike>,
       arg2: PromiseOrValue<BigNumberish>,
       arg3: PromiseOrValue<string>,
-      arg4: PromiseOrValue<BigNumberish>,
+      amountLD: PromiseOrValue<BigNumberish>,
       arg5: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -4637,6 +4652,10 @@ export interface TapiocaOFT extends BaseContract {
     useCustomAdapterParams(overrides?: CallOverrides): Promise<boolean>;
 
     "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<boolean>;
+
+    vault(overrides?: CallOverrides): Promise<string>;
+
+    "vault()"(overrides?: CallOverrides): Promise<string>;
 
     wrap(
       _fromAddress: PromiseOrValue<string>,
@@ -5491,7 +5510,7 @@ export interface TapiocaOFT extends BaseContract {
       arg1: PromiseOrValue<BytesLike>,
       arg2: PromiseOrValue<BigNumberish>,
       arg3: PromiseOrValue<string>,
-      arg4: PromiseOrValue<BigNumberish>,
+      amountLD: PromiseOrValue<BigNumberish>,
       arg5: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -5501,7 +5520,7 @@ export interface TapiocaOFT extends BaseContract {
       arg1: PromiseOrValue<BytesLike>,
       arg2: PromiseOrValue<BigNumberish>,
       arg3: PromiseOrValue<string>,
-      arg4: PromiseOrValue<BigNumberish>,
+      amountLD: PromiseOrValue<BigNumberish>,
       arg5: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -5617,6 +5636,10 @@ export interface TapiocaOFT extends BaseContract {
     useCustomAdapterParams(overrides?: CallOverrides): Promise<BigNumber>;
 
     "useCustomAdapterParams()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    vault(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "vault()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     wrap(
       _fromAddress: PromiseOrValue<string>,
@@ -6339,7 +6362,7 @@ export interface TapiocaOFT extends BaseContract {
       arg1: PromiseOrValue<BytesLike>,
       arg2: PromiseOrValue<BigNumberish>,
       arg3: PromiseOrValue<string>,
-      arg4: PromiseOrValue<BigNumberish>,
+      amountLD: PromiseOrValue<BigNumberish>,
       arg5: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -6349,7 +6372,7 @@ export interface TapiocaOFT extends BaseContract {
       arg1: PromiseOrValue<BytesLike>,
       arg2: PromiseOrValue<BigNumberish>,
       arg3: PromiseOrValue<string>,
-      arg4: PromiseOrValue<BigNumberish>,
+      amountLD: PromiseOrValue<BigNumberish>,
       arg5: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -6473,6 +6496,10 @@ export interface TapiocaOFT extends BaseContract {
     "useCustomAdapterParams()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    vault(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "vault()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     wrap(
       _fromAddress: PromiseOrValue<string>,
