@@ -234,12 +234,14 @@ export interface MagnetarV2Interface extends utils.Interface {
     "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes))": FunctionFragment;
     "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes))": FunctionFragment;
     "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)))": FunctionFragment;
+    "helper()": FunctionFragment;
     "marketModule()": FunctionFragment;
     "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address))": FunctionFragment;
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "rescueEth(uint256,address)": FunctionFragment;
+    "setHelper(address)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)": FunctionFragment;
   };
@@ -256,6 +258,8 @@ export interface MagnetarV2Interface extends utils.Interface {
       | "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes))"
       | "exitPositionAndRemoveCollateral"
       | "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)))"
+      | "helper"
+      | "helper()"
       | "marketModule"
       | "marketModule()"
       | "mintFromBBAndLendOnSGL"
@@ -268,6 +272,8 @@ export interface MagnetarV2Interface extends utils.Interface {
       | "renounceOwnership()"
       | "rescueEth"
       | "rescueEth(uint256,address)"
+      | "setHelper"
+      | "setHelper(address)"
       | "transferOwnership"
       | "transferOwnership(address)"
       | "withdrawToChain"
@@ -348,6 +354,8 @@ export interface MagnetarV2Interface extends utils.Interface {
       IUSDOBase.IRemoveAndRepayStruct
     ]
   ): string;
+  encodeFunctionData(functionFragment: "helper", values?: undefined): string;
+  encodeFunctionData(functionFragment: "helper()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "marketModule",
     values?: undefined
@@ -417,6 +425,14 @@ export interface MagnetarV2Interface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "setHelper",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setHelper(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [PromiseOrValue<string>]
   ): string;
@@ -484,6 +500,8 @@ export interface MagnetarV2Interface extends utils.Interface {
     functionFragment: "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)))",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "helper", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "helper()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "marketModule",
     data: BytesLike
@@ -523,6 +541,11 @@ export interface MagnetarV2Interface extends utils.Interface {
     functionFragment: "rescueEth(uint256,address)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "setHelper", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setHelper(address)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
     data: BytesLike
@@ -543,6 +566,7 @@ export interface MagnetarV2Interface extends utils.Interface {
   events: {
     "ApprovalForAll(address,address,bool)": EventFragment;
     "ClusterSet(address,address)": EventFragment;
+    "HelperUpdate(address,address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
   };
 
@@ -553,6 +577,10 @@ export interface MagnetarV2Interface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "ClusterSet"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ClusterSet(address,address)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "HelperUpdate"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "HelperUpdate(address,address)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
@@ -582,6 +610,17 @@ export type ClusterSetEvent = TypedEvent<
 >;
 
 export type ClusterSetEventFilter = TypedEventFilter<ClusterSetEvent>;
+
+export interface HelperUpdateEventObject {
+  old: string;
+  newHelper: string;
+}
+export type HelperUpdateEvent = TypedEvent<
+  [string, string],
+  HelperUpdateEventObject
+>;
+
+export type HelperUpdateEventFilter = TypedEventFilter<HelperUpdateEvent>;
 
 export interface OwnershipTransferredEventObject {
   previousOwner: string;
@@ -696,6 +735,10 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    helper(overrides?: CallOverrides): Promise<[string]>;
+
+    "helper()"(overrides?: CallOverrides): Promise<[string]>;
+
     marketModule(overrides?: CallOverrides): Promise<[string]>;
 
     "marketModule()"(overrides?: CallOverrides): Promise<[string]>;
@@ -759,6 +802,16 @@ export interface MagnetarV2 extends BaseContract {
     "rescueEth(uint256,address)"(
       amount: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setHelper(
+      _helper: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setHelper(address)"(
+      _helper: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -871,6 +924,10 @@ export interface MagnetarV2 extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  helper(overrides?: CallOverrides): Promise<string>;
+
+  "helper()"(overrides?: CallOverrides): Promise<string>;
+
   marketModule(overrides?: CallOverrides): Promise<string>;
 
   "marketModule()"(overrides?: CallOverrides): Promise<string>;
@@ -934,6 +991,16 @@ export interface MagnetarV2 extends BaseContract {
   "rescueEth(uint256,address)"(
     amount: PromiseOrValue<BigNumberish>,
     to: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setHelper(
+    _helper: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setHelper(address)"(
+    _helper: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1046,6 +1113,10 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    helper(overrides?: CallOverrides): Promise<string>;
+
+    "helper()"(overrides?: CallOverrides): Promise<string>;
+
     marketModule(overrides?: CallOverrides): Promise<string>;
 
     "marketModule()"(overrides?: CallOverrides): Promise<string>;
@@ -1108,6 +1179,16 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setHelper(
+      _helper: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setHelper(address)"(
+      _helper: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     transferOwnership(
       newOwner: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -1165,6 +1246,15 @@ export interface MagnetarV2 extends BaseContract {
       oldCluster?: PromiseOrValue<string> | null,
       newCluster?: PromiseOrValue<string> | null
     ): ClusterSetEventFilter;
+
+    "HelperUpdate(address,address)"(
+      old?: PromiseOrValue<string> | null,
+      newHelper?: PromiseOrValue<string> | null
+    ): HelperUpdateEventFilter;
+    HelperUpdate(
+      old?: PromiseOrValue<string> | null,
+      newHelper?: PromiseOrValue<string> | null
+    ): HelperUpdateEventFilter;
 
     "OwnershipTransferred(address,address)"(
       previousOwner?: PromiseOrValue<string> | null,
@@ -1249,6 +1339,10 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    helper(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "helper()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     marketModule(overrides?: CallOverrides): Promise<BigNumber>;
 
     "marketModule()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1312,6 +1406,16 @@ export interface MagnetarV2 extends BaseContract {
     "rescueEth(uint256,address)"(
       amount: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setHelper(
+      _helper: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setHelper(address)"(
+      _helper: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1425,6 +1529,10 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    helper(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "helper()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     marketModule(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "marketModule()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1488,6 +1596,16 @@ export interface MagnetarV2 extends BaseContract {
     "rescueEth(uint256,address)"(
       amount: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setHelper(
+      _helper: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setHelper(address)"(
+      _helper: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

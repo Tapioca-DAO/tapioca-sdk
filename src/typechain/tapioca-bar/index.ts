@@ -50,6 +50,8 @@ export type { BaseUSDO } from "./usd0/BaseUSDO";
 export { BaseUSDO__factory } from "./factories/usd0/BaseUSDO__factory";
 export type { BaseUSDOStorage } from "./usd0/BaseUSDOStorage";
 export { BaseUSDOStorage__factory } from "./factories/usd0/BaseUSDOStorage__factory";
+export type { USDOCommon } from "./usd0/modules/USDOCommon";
+export { USDOCommon__factory } from "./factories/usd0/modules/USDOCommon__factory";
 export type { USDOLeverageModule } from "./usd0/modules/USDOLeverageModule";
 export { USDOLeverageModule__factory } from "./factories/usd0/modules/USDOLeverageModule__factory";
 export type { USDOMarketModule } from "./usd0/modules/USDOMarketModule";
