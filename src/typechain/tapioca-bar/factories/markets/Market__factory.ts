@@ -225,6 +225,12 @@ const _abi = [
     inputs: [
       {
         indexed: false,
+        internalType: "enum Market.PauseType",
+        name: "_type",
+        type: "uint8",
+      },
+      {
+        indexed: false,
         internalType: "bool",
         name: "oldState",
         type: "bool",
@@ -714,12 +720,18 @@ const _abi = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "paused",
+    inputs: [
+      {
+        internalType: "enum Market.PauseType",
+        name: "pauseProp",
+        type: "uint8",
+      },
+    ],
+    name: "pauseOptions",
     outputs: [
       {
         internalType: "bool",
-        name: "",
+        name: "pauseStatus",
         type: "bool",
       },
     ],
@@ -1093,6 +1105,11 @@ const _abi = [
   },
   {
     inputs: [
+      {
+        internalType: "enum Market.PauseType",
+        name: "_type",
+        type: "uint8",
+      },
       {
         internalType: "bool",
         name: "val",

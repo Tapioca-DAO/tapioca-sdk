@@ -17,6 +17,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AggregatorV3Interface__factory>;
     getContractFactory(
+      name: "Cluster",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Cluster__factory>;
+    getContractFactory(
       name: "AggregatorV3Interface",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AggregatorV3Interface__factory>;
@@ -146,6 +150,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.AggregatorV3Interface>;
+    getContractAt(
+      name: "Cluster",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Cluster>;
     getContractAt(
       name: "AggregatorV3Interface",
       address: string,

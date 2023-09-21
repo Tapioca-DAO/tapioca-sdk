@@ -53,6 +53,7 @@ export interface PenroseInterface extends utils.Interface {
     "claimOwnership()": FunctionFragment;
     "clonesOf(address,uint256)": FunctionFragment;
     "clonesOfCount(address)": FunctionFragment;
+    "cluster()": FunctionFragment;
     "conservator()": FunctionFragment;
     "deploy(address,bytes,bool)": FunctionFragment;
     "emptyStrategies(address)": FunctionFragment;
@@ -74,12 +75,10 @@ export interface PenroseInterface extends utils.Interface {
     "setBigBangEthMarket(address)": FunctionFragment;
     "setBigBangEthMarketDebtRate(uint256)": FunctionFragment;
     "setConservator(address)": FunctionFragment;
-    "setSwapper(address,uint16,bool)": FunctionFragment;
     "setUsdoToken(address)": FunctionFragment;
     "singularityMarkets()": FunctionFragment;
     "singularityMasterContractLength()": FunctionFragment;
     "singularityMasterContracts(uint256)": FunctionFragment;
-    "swappers(uint16,address)": FunctionFragment;
     "tapAssetId()": FunctionFragment;
     "tapToken()": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
@@ -114,6 +113,8 @@ export interface PenroseInterface extends utils.Interface {
       | "clonesOf(address,uint256)"
       | "clonesOfCount"
       | "clonesOfCount(address)"
+      | "cluster"
+      | "cluster()"
       | "conservator"
       | "conservator()"
       | "deploy"
@@ -156,8 +157,6 @@ export interface PenroseInterface extends utils.Interface {
       | "setBigBangEthMarketDebtRate(uint256)"
       | "setConservator"
       | "setConservator(address)"
-      | "setSwapper"
-      | "setSwapper(address,uint16,bool)"
       | "setUsdoToken"
       | "setUsdoToken(address)"
       | "singularityMarkets"
@@ -166,8 +165,6 @@ export interface PenroseInterface extends utils.Interface {
       | "singularityMasterContractLength()"
       | "singularityMasterContracts"
       | "singularityMasterContracts(uint256)"
-      | "swappers"
-      | "swappers(uint16,address)"
       | "tapAssetId"
       | "tapAssetId()"
       | "tapToken"
@@ -274,6 +271,8 @@ export interface PenroseInterface extends utils.Interface {
     functionFragment: "clonesOfCount(address)",
     values: [PromiseOrValue<string>]
   ): string;
+  encodeFunctionData(functionFragment: "cluster", values?: undefined): string;
+  encodeFunctionData(functionFragment: "cluster()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "conservator",
     values?: undefined
@@ -460,22 +459,6 @@ export interface PenroseInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "setSwapper",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<boolean>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setSwapper(address,uint16,bool)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<boolean>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "setUsdoToken",
     values: [PromiseOrValue<string>]
   ): string;
@@ -506,14 +489,6 @@ export interface PenroseInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "singularityMasterContracts(uint256)",
     values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "swappers",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "swappers(uint16,address)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "tapAssetId",
@@ -661,6 +636,8 @@ export interface PenroseInterface extends utils.Interface {
     functionFragment: "clonesOfCount(address)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "cluster", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "cluster()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "conservator",
     data: BytesLike
@@ -811,11 +788,6 @@ export interface PenroseInterface extends utils.Interface {
     functionFragment: "setConservator(address)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "setSwapper", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "setSwapper(address,uint16,bool)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "setUsdoToken",
     data: BytesLike
@@ -846,11 +818,6 @@ export interface PenroseInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "singularityMasterContracts(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "swappers", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "swappers(uint16,address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "tapAssetId", data: BytesLike): Result;
@@ -1268,6 +1235,10 @@ export interface Penrose extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { cloneCount: BigNumber }>;
 
+    cluster(overrides?: CallOverrides): Promise<[string]>;
+
+    "cluster()"(overrides?: CallOverrides): Promise<[string]>;
+
     conservator(overrides?: CallOverrides): Promise<[string]>;
 
     "conservator()"(overrides?: CallOverrides): Promise<[string]>;
@@ -1456,20 +1427,6 @@ export interface Penrose extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    setSwapper(
-      swapper: PromiseOrValue<string>,
-      lzChainId: PromiseOrValue<BigNumberish>,
-      enable: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setSwapper(address,uint16,bool)"(
-      swapper: PromiseOrValue<string>,
-      lzChainId: PromiseOrValue<BigNumberish>,
-      enable: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     setUsdoToken(
       _usdoToken: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1505,18 +1462,6 @@ export interface Penrose extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string, number] & { location: string; risk: number }>;
-
-    swappers(
-      lzChainId: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { isWhitelisted: boolean }>;
-
-    "swappers(uint16,address)"(
-      lzChainId: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { isWhitelisted: boolean }>;
 
     tapAssetId(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -1666,6 +1611,10 @@ export interface Penrose extends BaseContract {
     masterContract: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
+
+  cluster(overrides?: CallOverrides): Promise<string>;
+
+  "cluster()"(overrides?: CallOverrides): Promise<string>;
 
   conservator(overrides?: CallOverrides): Promise<string>;
 
@@ -1855,20 +1804,6 @@ export interface Penrose extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  setSwapper(
-    swapper: PromiseOrValue<string>,
-    lzChainId: PromiseOrValue<BigNumberish>,
-    enable: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setSwapper(address,uint16,bool)"(
-    swapper: PromiseOrValue<string>,
-    lzChainId: PromiseOrValue<BigNumberish>,
-    enable: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   setUsdoToken(
     _usdoToken: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1900,18 +1835,6 @@ export interface Penrose extends BaseContract {
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<[string, number] & { location: string; risk: number }>;
-
-  swappers(
-    lzChainId: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  "swappers(uint16,address)"(
-    lzChainId: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
 
   tapAssetId(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2057,6 +1980,10 @@ export interface Penrose extends BaseContract {
       masterContract: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    cluster(overrides?: CallOverrides): Promise<string>;
+
+    "cluster()"(overrides?: CallOverrides): Promise<string>;
 
     conservator(overrides?: CallOverrides): Promise<string>;
 
@@ -2250,20 +2177,6 @@ export interface Penrose extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setSwapper(
-      swapper: PromiseOrValue<string>,
-      lzChainId: PromiseOrValue<BigNumberish>,
-      enable: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setSwapper(address,uint16,bool)"(
-      swapper: PromiseOrValue<string>,
-      lzChainId: PromiseOrValue<BigNumberish>,
-      enable: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     setUsdoToken(
       _usdoToken: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -2295,18 +2208,6 @@ export interface Penrose extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string, number] & { location: string; risk: number }>;
-
-    swappers(
-      lzChainId: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    "swappers(uint16,address)"(
-      lzChainId: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
 
     tapAssetId(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2581,6 +2482,10 @@ export interface Penrose extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    cluster(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "cluster()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     conservator(overrides?: CallOverrides): Promise<BigNumber>;
 
     "conservator()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2769,20 +2674,6 @@ export interface Penrose extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    setSwapper(
-      swapper: PromiseOrValue<string>,
-      lzChainId: PromiseOrValue<BigNumberish>,
-      enable: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setSwapper(address,uint16,bool)"(
-      swapper: PromiseOrValue<string>,
-      lzChainId: PromiseOrValue<BigNumberish>,
-      enable: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     setUsdoToken(
       _usdoToken: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2812,18 +2703,6 @@ export interface Penrose extends BaseContract {
 
     "singularityMasterContracts(uint256)"(
       arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    swappers(
-      lzChainId: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "swappers(uint16,address)"(
-      lzChainId: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -2986,6 +2865,10 @@ export interface Penrose extends BaseContract {
       masterContract: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    cluster(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "cluster()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     conservator(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -3175,20 +3058,6 @@ export interface Penrose extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    setSwapper(
-      swapper: PromiseOrValue<string>,
-      lzChainId: PromiseOrValue<BigNumberish>,
-      enable: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setSwapper(address,uint16,bool)"(
-      swapper: PromiseOrValue<string>,
-      lzChainId: PromiseOrValue<BigNumberish>,
-      enable: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     setUsdoToken(
       _usdoToken: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -3222,18 +3091,6 @@ export interface Penrose extends BaseContract {
 
     "singularityMasterContracts(uint256)"(
       arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    swappers(
-      lzChainId: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "swappers(uint16,address)"(
-      lzChainId: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
