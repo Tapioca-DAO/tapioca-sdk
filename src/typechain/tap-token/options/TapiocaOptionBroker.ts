@@ -29,7 +29,7 @@ import type {
 
 export type LockPositionStruct = {
   sglAssetID: PromiseOrValue<BigNumberish>;
-  amount: PromiseOrValue<BigNumberish>;
+  ybShares: PromiseOrValue<BigNumberish>;
   lockTime: PromiseOrValue<BigNumberish>;
   lockDuration: PromiseOrValue<BigNumberish>;
 };
@@ -41,7 +41,7 @@ export type LockPositionStructOutput = [
   BigNumber
 ] & {
   sglAssetID: BigNumber;
-  amount: BigNumber;
+  ybShares: BigNumber;
   lockTime: BigNumber;
   lockDuration: BigNumber;
 };
@@ -51,10 +51,12 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     "EPOCH_DURATION()": FunctionFragment;
     "claimOwnership()": FunctionFragment;
     "collectPaymentTokens(address[])": FunctionFragment;
+    "emissionsStartTime()": FunctionFragment;
     "epoch()": FunctionFragment;
     "epochTAPValuation()": FunctionFragment;
     "exerciseOption(uint256,address,uint256)": FunctionFragment;
     "exitPosition(uint256)": FunctionFragment;
+    "getCurrentWeek()": FunctionFragment;
     "getOTCDealDetails(uint256,address,uint256)": FunctionFragment;
     "lastEpochUpdate()": FunctionFragment;
     "newEpoch()": FunctionFragment;
@@ -76,6 +78,7 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     "tapOFT()": FunctionFragment;
     "tapOracle()": FunctionFragment;
     "tapOracleData()": FunctionFragment;
+    "timestampToWeek(uint256)": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
     "twAML(uint256)": FunctionFragment;
   };
@@ -88,6 +91,8 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
       | "claimOwnership()"
       | "collectPaymentTokens"
       | "collectPaymentTokens(address[])"
+      | "emissionsStartTime"
+      | "emissionsStartTime()"
       | "epoch"
       | "epoch()"
       | "epochTAPValuation"
@@ -96,6 +101,8 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
       | "exerciseOption(uint256,address,uint256)"
       | "exitPosition"
       | "exitPosition(uint256)"
+      | "getCurrentWeek"
+      | "getCurrentWeek()"
       | "getOTCDealDetails"
       | "getOTCDealDetails(uint256,address,uint256)"
       | "lastEpochUpdate"
@@ -138,6 +145,8 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
       | "tapOracle()"
       | "tapOracleData"
       | "tapOracleData()"
+      | "timestampToWeek"
+      | "timestampToWeek(uint256)"
       | "transferOwnership"
       | "transferOwnership(address,bool,bool)"
       | "twAML"
@@ -167,6 +176,14 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "collectPaymentTokens(address[])",
     values: [PromiseOrValue<string>[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "emissionsStartTime",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "emissionsStartTime()",
+    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "epoch", values?: undefined): string;
   encodeFunctionData(functionFragment: "epoch()", values?: undefined): string;
@@ -201,6 +218,14 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "exitPosition(uint256)",
     values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCurrentWeek",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCurrentWeek()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "getOTCDealDetails",
@@ -351,6 +376,14 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "timestampToWeek",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "timestampToWeek(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [
       PromiseOrValue<string>,
@@ -399,6 +432,14 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     functionFragment: "collectPaymentTokens(address[])",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "emissionsStartTime",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "emissionsStartTime()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "epoch", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "epoch()", data: BytesLike): Result;
   decodeFunctionResult(
@@ -423,6 +464,14 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "exitPosition(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCurrentWeek",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCurrentWeek()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -549,6 +598,14 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "tapOracleData()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timestampToWeek",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timestampToWeek(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -781,6 +838,10 @@ export interface TapiocaOptionBroker extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    emissionsStartTime(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "emissionsStartTime()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     epoch(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "epoch()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -812,6 +873,10 @@ export interface TapiocaOptionBroker extends BaseContract {
       _oTAPTokenID: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    getCurrentWeek(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "getCurrentWeek()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     getOTCDealDetails(
       _oTAPTokenID: PromiseOrValue<BigNumberish>,
@@ -997,6 +1062,16 @@ export interface TapiocaOptionBroker extends BaseContract {
 
     "tapOracleData()"(overrides?: CallOverrides): Promise<[string]>;
 
+    timestampToWeek(
+      timestamp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "timestampToWeek(uint256)"(
+      timestamp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     transferOwnership(
       newOwner: PromiseOrValue<string>,
       direct: PromiseOrValue<boolean>,
@@ -1058,6 +1133,10 @@ export interface TapiocaOptionBroker extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  emissionsStartTime(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "emissionsStartTime()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   epoch(overrides?: CallOverrides): Promise<BigNumber>;
 
   "epoch()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1089,6 +1168,10 @@ export interface TapiocaOptionBroker extends BaseContract {
     _oTAPTokenID: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  getCurrentWeek(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "getCurrentWeek()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   getOTCDealDetails(
     _oTAPTokenID: PromiseOrValue<BigNumberish>,
@@ -1274,6 +1357,16 @@ export interface TapiocaOptionBroker extends BaseContract {
 
   "tapOracleData()"(overrides?: CallOverrides): Promise<string>;
 
+  timestampToWeek(
+    timestamp: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "timestampToWeek(uint256)"(
+    timestamp: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   transferOwnership(
     newOwner: PromiseOrValue<string>,
     direct: PromiseOrValue<boolean>,
@@ -1331,6 +1424,10 @@ export interface TapiocaOptionBroker extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    emissionsStartTime(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "emissionsStartTime()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     epoch(overrides?: CallOverrides): Promise<BigNumber>;
 
     "epoch()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1362,6 +1459,10 @@ export interface TapiocaOptionBroker extends BaseContract {
       _oTAPTokenID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    getCurrentWeek(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "getCurrentWeek()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     getOTCDealDetails(
       _oTAPTokenID: PromiseOrValue<BigNumberish>,
@@ -1539,6 +1640,16 @@ export interface TapiocaOptionBroker extends BaseContract {
 
     "tapOracleData()"(overrides?: CallOverrides): Promise<string>;
 
+    timestampToWeek(
+      timestamp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "timestampToWeek(uint256)"(
+      timestamp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     transferOwnership(
       newOwner: PromiseOrValue<string>,
       direct: PromiseOrValue<boolean>,
@@ -1700,6 +1811,10 @@ export interface TapiocaOptionBroker extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    emissionsStartTime(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "emissionsStartTime()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     epoch(overrides?: CallOverrides): Promise<BigNumber>;
 
     "epoch()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1731,6 +1846,10 @@ export interface TapiocaOptionBroker extends BaseContract {
       _oTAPTokenID: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    getCurrentWeek(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "getCurrentWeek()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     getOTCDealDetails(
       _oTAPTokenID: PromiseOrValue<BigNumberish>,
@@ -1892,6 +2011,16 @@ export interface TapiocaOptionBroker extends BaseContract {
 
     "tapOracleData()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    timestampToWeek(
+      timestamp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "timestampToWeek(uint256)"(
+      timestamp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     transferOwnership(
       newOwner: PromiseOrValue<string>,
       direct: PromiseOrValue<boolean>,
@@ -1942,6 +2071,14 @@ export interface TapiocaOptionBroker extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    emissionsStartTime(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "emissionsStartTime()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     epoch(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "epoch()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1974,6 +2111,12 @@ export interface TapiocaOptionBroker extends BaseContract {
     "exitPosition(uint256)"(
       _oTAPTokenID: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    getCurrentWeek(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "getCurrentWeek()"(
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getOTCDealDetails(
@@ -2141,6 +2284,16 @@ export interface TapiocaOptionBroker extends BaseContract {
     tapOracleData(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "tapOracleData()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    timestampToWeek(
+      timestamp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "timestampToWeek(uint256)"(
+      timestamp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,

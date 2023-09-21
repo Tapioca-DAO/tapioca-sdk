@@ -11,6 +11,8 @@ import type * as tokens from "./tokens";
 export type { tokens };
 export type { Vesting } from "./Vesting";
 export * as factories from "./factories";
+export type { FakeTapOFT } from "./governance/mocks/FakeTapOFT";
+export { FakeTapOFT__factory } from "./factories/governance/mocks/FakeTapOFT__factory";
 export type { TwTAP } from "./governance/twTAP.sol/TwTAP";
 export { TwTAP__factory } from "./factories/governance/twTAP.sol/TwTAP__factory";
 export type { AirdropBroker } from "./option-airdrop/AirdropBroker";
