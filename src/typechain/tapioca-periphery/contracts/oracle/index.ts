@@ -5,6 +5,8 @@ import type * as external from "./external";
 export type { external };
 import type * as implementations from "./implementations";
 export type { implementations };
+import type * as mocks from "./mocks";
+export type { mocks };
 import type * as modules from "./modules";
 export type { modules };
 import type * as utils from "./utils";

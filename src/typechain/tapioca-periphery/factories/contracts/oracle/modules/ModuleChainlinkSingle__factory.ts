@@ -12,7 +12,17 @@ import type {
 const _abi = [
   {
     inputs: [],
+    name: "GracePeriodNotOver",
+    type: "error",
+  },
+  {
+    inputs: [],
     name: "InvalidChainlinkRate",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "SequencerDown",
     type: "error",
   },
   {
@@ -105,12 +115,38 @@ const _abi = [
   },
   {
     inputs: [],
+    name: "GRACE_PERIOD_TIME",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "GUARDIAN_ROLE_CHAINLINK",
     outputs: [
       {
         internalType: "bytes32",
         name: "",
         type: "bytes32",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "SEQUENCER_UPTIME_FEED",
+    outputs: [
+      {
+        internalType: "contract AggregatorV3Interface",
+        name: "",
+        type: "address",
       },
     ],
     stateMutability: "view",
@@ -127,6 +163,19 @@ const _abi = [
       },
     ],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint32",
+        name: "_gracePeriod",
+        type: "uint32",
+      },
+    ],
+    name: "changeGracePeriod",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {

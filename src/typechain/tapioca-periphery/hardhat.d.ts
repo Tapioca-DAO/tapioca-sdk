@@ -21,6 +21,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Cluster__factory>;
     getContractFactory(
+      name: "AccessControlledOffchainAggregator",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AccessControlledOffchainAggregator__factory>;
+    getContractFactory(
       name: "AggregatorV3Interface",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AggregatorV3Interface__factory>;
@@ -36,6 +40,10 @@ declare module "hardhat/types/runtime" {
       name: "LiquidationQueue",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.LiquidationQueue__factory>;
+    getContractFactory(
+      name: "MagnetarHelper",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MagnetarHelper__factory>;
     getContractFactory(
       name: "MagnetarV2",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -68,6 +76,10 @@ declare module "hardhat/types/runtime" {
       name: "SGOracle",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SGOracle__factory>;
+    getContractFactory(
+      name: "SequencerFeedMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SequencerFeedMock__factory>;
     getContractFactory(
       name: "ModuleChainlinkMulti",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -121,6 +133,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.PausableMapUpgradeable__factory>;
     getContractFactory(
+      name: "SequencerCheck",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SequencerCheck__factory>;
+    getContractFactory(
       name: "UniswapUtils",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.UniswapUtils__factory>;
@@ -156,6 +172,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.Cluster>;
     getContractAt(
+      name: "AccessControlledOffchainAggregator",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AccessControlledOffchainAggregator>;
+    getContractAt(
       name: "AggregatorV3Interface",
       address: string,
       signer?: ethers.Signer
@@ -175,6 +196,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.LiquidationQueue>;
+    getContractAt(
+      name: "MagnetarHelper",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MagnetarHelper>;
     getContractAt(
       name: "MagnetarV2",
       address: string,
@@ -215,6 +241,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.SGOracle>;
+    getContractAt(
+      name: "SequencerFeedMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SequencerFeedMock>;
     getContractAt(
       name: "ModuleChainlinkMulti",
       address: string,
@@ -280,6 +311,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.PausableMapUpgradeable>;
+    getContractAt(
+      name: "SequencerCheck",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SequencerCheck>;
     getContractAt(
       name: "UniswapUtils",
       address: string,

@@ -2,5 +2,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as modules from "./modules";
+export { MagnetarHelper__factory } from "./MagnetarHelper__factory";
 export { MagnetarV2__factory } from "./MagnetarV2__factory";
 export { MagnetarV2Storage__factory } from "./MagnetarV2Storage__factory";

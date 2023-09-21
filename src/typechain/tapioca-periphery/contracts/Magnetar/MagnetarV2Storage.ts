@@ -26,40 +26,31 @@ import type {
 
 export interface MagnetarV2StorageInterface extends utils.Interface {
   functions: {
-    "isApprovedForAll(address,address)": FunctionFragment;
+    "cluster()": FunctionFragment;
   };
 
   getFunction(
-    nameOrSignatureOrTopic:
-      | "isApprovedForAll"
-      | "isApprovedForAll(address,address)"
+    nameOrSignatureOrTopic: "cluster" | "cluster()"
   ): FunctionFragment;
 
-  encodeFunctionData(
-    functionFragment: "isApprovedForAll",
-    values: [PromiseOrValue<string>, PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isApprovedForAll(address,address)",
-    values: [PromiseOrValue<string>, PromiseOrValue<string>]
-  ): string;
+  encodeFunctionData(functionFragment: "cluster", values?: undefined): string;
+  encodeFunctionData(functionFragment: "cluster()", values?: undefined): string;
 
-  decodeFunctionResult(
-    functionFragment: "isApprovedForAll",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isApprovedForAll(address,address)",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "cluster", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "cluster()", data: BytesLike): Result;
 
   events: {
     "ApprovalForAll(address,address,bool)": EventFragment;
+    "ClusterSet(address,address)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ApprovalForAll(address,address,bool)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ClusterSet"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "ClusterSet(address,address)"
   ): EventFragment;
 }
 
@@ -74,6 +65,17 @@ export type ApprovalForAllEvent = TypedEvent<
 >;
 
 export type ApprovalForAllEventFilter = TypedEventFilter<ApprovalForAllEvent>;
+
+export interface ClusterSetEventObject {
+  oldCluster: string;
+  newCluster: string;
+}
+export type ClusterSetEvent = TypedEvent<
+  [string, string],
+  ClusterSetEventObject
+>;
+
+export type ClusterSetEventFilter = TypedEventFilter<ClusterSetEvent>;
 
 export interface MagnetarV2Storage extends BaseContract {
   contractName: "MagnetarV2Storage";
@@ -104,43 +106,19 @@ export interface MagnetarV2Storage extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    isApprovedForAll(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
+    cluster(overrides?: CallOverrides): Promise<[string]>;
 
-    "isApprovedForAll(address,address)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
+    "cluster()"(overrides?: CallOverrides): Promise<[string]>;
   };
 
-  isApprovedForAll(
-    arg0: PromiseOrValue<string>,
-    arg1: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
+  cluster(overrides?: CallOverrides): Promise<string>;
 
-  "isApprovedForAll(address,address)"(
-    arg0: PromiseOrValue<string>,
-    arg1: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
+  "cluster()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
-    isApprovedForAll(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
+    cluster(overrides?: CallOverrides): Promise<string>;
 
-    "isApprovedForAll(address,address)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
+    "cluster()"(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
@@ -154,33 +132,26 @@ export interface MagnetarV2Storage extends BaseContract {
       operator?: PromiseOrValue<string> | null,
       approved?: null
     ): ApprovalForAllEventFilter;
+
+    "ClusterSet(address,address)"(
+      oldCluster?: PromiseOrValue<string> | null,
+      newCluster?: PromiseOrValue<string> | null
+    ): ClusterSetEventFilter;
+    ClusterSet(
+      oldCluster?: PromiseOrValue<string> | null,
+      newCluster?: PromiseOrValue<string> | null
+    ): ClusterSetEventFilter;
   };
 
   estimateGas: {
-    isApprovedForAll(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    cluster(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "isApprovedForAll(address,address)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    "cluster()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    isApprovedForAll(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    cluster(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "isApprovedForAll(address,address)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    "cluster()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

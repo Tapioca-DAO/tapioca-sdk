@@ -12,6 +12,19 @@ import type {
 const _abi = [
   {
     inputs: [],
+    name: "aggregator",
+    outputs: [
+      {
+        internalType: "contract AccessControlledOffchainAggregator",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "decimals",
     outputs: [
       {

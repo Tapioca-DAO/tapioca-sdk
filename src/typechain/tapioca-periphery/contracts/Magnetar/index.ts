@@ -3,5 +3,6 @@
 /* eslint-disable */
 import type * as modules from "./modules";
 export type { modules };
+export type { MagnetarHelper } from "./MagnetarHelper";
 export type { MagnetarV2 } from "./MagnetarV2";
 export type { MagnetarV2Storage } from "./MagnetarV2Storage";

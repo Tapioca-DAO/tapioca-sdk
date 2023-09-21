@@ -1,0 +1,37 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "AccessControlledOffchainAggregator",
+  "sourceName": "contracts/interfaces/IAggregatorV3Interface.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "maxAnswer",
+      "outputs": [
+        {
+          "internalType": "int192",
+          "name": "",
+          "type": "int192"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "minAnswer",
+      "outputs": [
+        {
+          "internalType": "int192",
+          "name": "",
+          "type": "int192"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
