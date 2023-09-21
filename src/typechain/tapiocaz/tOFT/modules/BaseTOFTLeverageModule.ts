@@ -151,6 +151,7 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
     "balanceOf(address)": FunctionFragment;
     "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)": FunctionFragment;
     "circulatingSupply()": FunctionFragment;
+    "cluster()": FunctionFragment;
     "creditedPackets(uint16,bytes,uint64)": FunctionFragment;
     "decimals()": FunctionFragment;
     "decreaseAllowance(address,uint256)": FunctionFragment;
@@ -223,6 +224,8 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
       | "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)"
       | "circulatingSupply"
       | "circulatingSupply()"
+      | "cluster"
+      | "cluster()"
       | "creditedPackets"
       | "creditedPackets(uint16,bytes,uint64)"
       | "decimals"
@@ -409,6 +412,8 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
     functionFragment: "circulatingSupply()",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "cluster", values?: undefined): string;
+  encodeFunctionData(functionFragment: "cluster()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "creditedPackets",
     values: [
@@ -1018,6 +1023,8 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
     functionFragment: "circulatingSupply()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "cluster", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "cluster()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "creditedPackets",
     data: BytesLike
@@ -1701,6 +1708,10 @@ export interface BaseTOFTLeverageModule extends BaseContract {
 
     "circulatingSupply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    cluster(overrides?: CallOverrides): Promise<[string]>;
+
+    "cluster()"(overrides?: CallOverrides): Promise<[string]>;
+
     creditedPackets(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
@@ -2347,6 +2358,10 @@ export interface BaseTOFTLeverageModule extends BaseContract {
   circulatingSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
   "circulatingSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  cluster(overrides?: CallOverrides): Promise<string>;
+
+  "cluster()"(overrides?: CallOverrides): Promise<string>;
 
   creditedPackets(
     arg0: PromiseOrValue<BigNumberish>,
@@ -2996,6 +3011,10 @@ export interface BaseTOFTLeverageModule extends BaseContract {
     circulatingSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     "circulatingSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    cluster(overrides?: CallOverrides): Promise<string>;
+
+    "cluster()"(overrides?: CallOverrides): Promise<string>;
 
     creditedPackets(
       arg0: PromiseOrValue<BigNumberish>,
@@ -3785,6 +3804,10 @@ export interface BaseTOFTLeverageModule extends BaseContract {
 
     "circulatingSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    cluster(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "cluster()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     creditedPackets(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
@@ -4432,6 +4455,10 @@ export interface BaseTOFTLeverageModule extends BaseContract {
     "circulatingSupply()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    cluster(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "cluster()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     creditedPackets(
       arg0: PromiseOrValue<BigNumberish>,
