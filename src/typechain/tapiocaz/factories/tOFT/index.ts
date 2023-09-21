@@ -4,5 +4,6 @@
 export * as modules from "./modules";
 export { BaseTOFT__factory } from "./BaseTOFT__factory";
 export { BaseTOFTStorage__factory } from "./BaseTOFTStorage__factory";
+export { TOFTVault__factory } from "./TOFTVault__factory";
 export { TapiocaOFT__factory } from "./TapiocaOFT__factory";
 export { MTapiocaOFT__factory } from "./MTapiocaOFT__factory";

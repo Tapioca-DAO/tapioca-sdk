@@ -26,3 +26,5 @@ export type { MTapiocaOFT } from "./tOFT/MTapiocaOFT";
 export { MTapiocaOFT__factory } from "./factories/tOFT/MTapiocaOFT__factory";
 export type { TapiocaOFT } from "./tOFT/TapiocaOFT";
 export { TapiocaOFT__factory } from "./factories/tOFT/TapiocaOFT__factory";
+export type { TOFTVault } from "./tOFT/TOFTVault";
+export { TOFTVault__factory } from "./factories/tOFT/TOFTVault__factory";

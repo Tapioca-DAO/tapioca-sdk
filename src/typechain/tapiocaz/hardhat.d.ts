@@ -56,6 +56,10 @@ declare module "hardhat/types/runtime" {
       name: "TapiocaOFT",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapiocaOFT__factory>;
+    getContractFactory(
+      name: "TOFTVault",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TOFTVault__factory>;
 
     getContractAt(
       name: "Balancer",
@@ -112,6 +116,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TapiocaOFT>;
+    getContractAt(
+      name: "TOFTVault",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TOFTVault>;
 
     // default types
     getContractFactory(
