@@ -389,6 +389,19 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "SWAP_MAX_SLIPPAGE",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -1187,6 +1200,19 @@ const _abi = [
       },
     ],
     name: "setConfig",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_slippage",
+        type: "uint256",
+      },
+    ],
+    name: "setMaxSlippage",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
