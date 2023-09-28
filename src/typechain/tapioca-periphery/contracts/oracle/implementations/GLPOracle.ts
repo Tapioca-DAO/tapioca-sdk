@@ -400,13 +400,13 @@ export interface GLPOracle extends BaseContract {
 
     get(
       arg0: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     "get(bytes)"(
       arg0: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     getRoleAdmin(
       role: PromiseOrValue<BytesLike>,
@@ -535,13 +535,13 @@ export interface GLPOracle extends BaseContract {
 
   get(
     arg0: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   "get(bytes)"(
     arg0: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   getRoleAdmin(
     role: PromiseOrValue<BytesLike>,
@@ -841,12 +841,12 @@ export interface GLPOracle extends BaseContract {
 
     get(
       arg0: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "get(bytes)"(
       arg0: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getRoleAdmin(
@@ -987,12 +987,12 @@ export interface GLPOracle extends BaseContract {
 
     get(
       arg0: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "get(bytes)"(
       arg0: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getRoleAdmin(
