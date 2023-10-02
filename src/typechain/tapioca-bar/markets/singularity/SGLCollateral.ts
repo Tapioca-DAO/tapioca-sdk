@@ -88,7 +88,6 @@ export interface SGLCollateralInterface extends utils.Interface {
     "pendingOwner()": FunctionFragment;
     "penrose()": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "permitAction(bytes,uint16)": FunctionFragment;
     "permitBorrow(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "protocolFee()": FunctionFragment;
     "removeCollateral(address,address,uint256)": FunctionFragment;
@@ -204,8 +203,6 @@ export interface SGLCollateralInterface extends utils.Interface {
       | "penrose()"
       | "permit"
       | "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)"
-      | "permitAction"
-      | "permitAction(bytes,uint16)"
       | "permitBorrow"
       | "permitBorrow(address,address,uint256,uint256,uint8,bytes32,bytes32)"
       | "protocolFee"
@@ -597,14 +594,6 @@ export interface SGLCollateralInterface extends utils.Interface {
       PromiseOrValue<BytesLike>,
       PromiseOrValue<BytesLike>
     ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "permitAction",
-    values: [PromiseOrValue<BytesLike>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "permitAction(bytes,uint16)",
-    values: [PromiseOrValue<BytesLike>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "permitBorrow",
@@ -1113,14 +1102,6 @@ export interface SGLCollateralInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "permit", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "permitAction",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "permitAction(bytes,uint16)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2188,18 +2169,6 @@ export interface SGLCollateral extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    permitAction(
-      data: PromiseOrValue<BytesLike>,
-      actionType: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "permitAction(bytes,uint16)"(
-      data: PromiseOrValue<BytesLike>,
-      actionType: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     permitBorrow(
       owner: PromiseOrValue<string>,
       spender: PromiseOrValue<string>,
@@ -2759,18 +2728,6 @@ export interface SGLCollateral extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  permitAction(
-    data: PromiseOrValue<BytesLike>,
-    actionType: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "permitAction(bytes,uint16)"(
-    data: PromiseOrValue<BytesLike>,
-    actionType: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   permitBorrow(
     owner: PromiseOrValue<string>,
     spender: PromiseOrValue<string>,
@@ -3309,18 +3266,6 @@ export interface SGLCollateral extends BaseContract {
       v: PromiseOrValue<BigNumberish>,
       r: PromiseOrValue<BytesLike>,
       s: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    permitAction(
-      data: PromiseOrValue<BytesLike>,
-      actionType: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "permitAction(bytes,uint16)"(
-      data: PromiseOrValue<BytesLike>,
-      actionType: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4140,18 +4085,6 @@ export interface SGLCollateral extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    permitAction(
-      data: PromiseOrValue<BytesLike>,
-      actionType: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "permitAction(bytes,uint16)"(
-      data: PromiseOrValue<BytesLike>,
-      actionType: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     permitBorrow(
       owner: PromiseOrValue<string>,
       spender: PromiseOrValue<string>,
@@ -4709,18 +4642,6 @@ export interface SGLCollateral extends BaseContract {
       v: PromiseOrValue<BigNumberish>,
       r: PromiseOrValue<BytesLike>,
       s: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    permitAction(
-      data: PromiseOrValue<BytesLike>,
-      actionType: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "permitAction(bytes,uint16)"(
-      data: PromiseOrValue<BytesLike>,
-      actionType: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
