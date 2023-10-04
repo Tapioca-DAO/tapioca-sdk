@@ -27,7 +27,7 @@ export interface MarketLiquidationReceiverMockInterface
   extends utils.Interface {
   functions: {
     "asset()": FunctionFragment;
-    "onCollateralReceiver(address,address,address,uint256,uint256,bytes)": FunctionFragment;
+    "onCollateralReceiver(address,address,address,uint256,bytes)": FunctionFragment;
   };
 
   getFunction(
@@ -35,7 +35,7 @@ export interface MarketLiquidationReceiverMockInterface
       | "asset"
       | "asset()"
       | "onCollateralReceiver"
-      | "onCollateralReceiver(address,address,address,uint256,uint256,bytes)"
+      | "onCollateralReceiver(address,address,address,uint256,bytes)"
   ): FunctionFragment;
 
   encodeFunctionData(functionFragment: "asset", values?: undefined): string;
@@ -47,17 +47,15 @@ export interface MarketLiquidationReceiverMockInterface
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "onCollateralReceiver(address,address,address,uint256,uint256,bytes)",
+    functionFragment: "onCollateralReceiver(address,address,address,uint256,bytes)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
@@ -70,7 +68,7 @@ export interface MarketLiquidationReceiverMockInterface
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "onCollateralReceiver(address,address,address,uint256,uint256,bytes)",
+    functionFragment: "onCollateralReceiver(address,address,address,uint256,bytes)",
     data: BytesLike
   ): Result;
 
@@ -115,18 +113,16 @@ export interface MarketLiquidationReceiverMock extends BaseContract {
       arg1: PromiseOrValue<string>,
       arg2: PromiseOrValue<string>,
       arg3: PromiseOrValue<BigNumberish>,
-      amountToReceive: PromiseOrValue<BigNumberish>,
-      arg5: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "onCollateralReceiver(address,address,address,uint256,uint256,bytes)"(
+    "onCollateralReceiver(address,address,address,uint256,bytes)"(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
       arg2: PromiseOrValue<string>,
       arg3: PromiseOrValue<BigNumberish>,
-      amountToReceive: PromiseOrValue<BigNumberish>,
-      arg5: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
@@ -140,18 +136,16 @@ export interface MarketLiquidationReceiverMock extends BaseContract {
     arg1: PromiseOrValue<string>,
     arg2: PromiseOrValue<string>,
     arg3: PromiseOrValue<BigNumberish>,
-    amountToReceive: PromiseOrValue<BigNumberish>,
-    arg5: PromiseOrValue<BytesLike>,
+    data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "onCollateralReceiver(address,address,address,uint256,uint256,bytes)"(
+  "onCollateralReceiver(address,address,address,uint256,bytes)"(
     arg0: PromiseOrValue<string>,
     arg1: PromiseOrValue<string>,
     arg2: PromiseOrValue<string>,
     arg3: PromiseOrValue<BigNumberish>,
-    amountToReceive: PromiseOrValue<BigNumberish>,
-    arg5: PromiseOrValue<BytesLike>,
+    data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -165,18 +159,16 @@ export interface MarketLiquidationReceiverMock extends BaseContract {
       arg1: PromiseOrValue<string>,
       arg2: PromiseOrValue<string>,
       arg3: PromiseOrValue<BigNumberish>,
-      amountToReceive: PromiseOrValue<BigNumberish>,
-      arg5: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    "onCollateralReceiver(address,address,address,uint256,uint256,bytes)"(
+    "onCollateralReceiver(address,address,address,uint256,bytes)"(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
       arg2: PromiseOrValue<string>,
       arg3: PromiseOrValue<BigNumberish>,
-      amountToReceive: PromiseOrValue<BigNumberish>,
-      arg5: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<boolean>;
   };
@@ -193,18 +185,16 @@ export interface MarketLiquidationReceiverMock extends BaseContract {
       arg1: PromiseOrValue<string>,
       arg2: PromiseOrValue<string>,
       arg3: PromiseOrValue<BigNumberish>,
-      amountToReceive: PromiseOrValue<BigNumberish>,
-      arg5: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "onCollateralReceiver(address,address,address,uint256,uint256,bytes)"(
+    "onCollateralReceiver(address,address,address,uint256,bytes)"(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
       arg2: PromiseOrValue<string>,
       arg3: PromiseOrValue<BigNumberish>,
-      amountToReceive: PromiseOrValue<BigNumberish>,
-      arg5: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
@@ -219,18 +209,16 @@ export interface MarketLiquidationReceiverMock extends BaseContract {
       arg1: PromiseOrValue<string>,
       arg2: PromiseOrValue<string>,
       arg3: PromiseOrValue<BigNumberish>,
-      amountToReceive: PromiseOrValue<BigNumberish>,
-      arg5: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "onCollateralReceiver(address,address,address,uint256,uint256,bytes)"(
+    "onCollateralReceiver(address,address,address,uint256,bytes)"(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
       arg2: PromiseOrValue<string>,
       arg3: PromiseOrValue<BigNumberish>,
-      amountToReceive: PromiseOrValue<BigNumberish>,
-      arg5: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
