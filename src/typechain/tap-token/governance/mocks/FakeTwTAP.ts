@@ -62,7 +62,7 @@ export type ParticipationStructOutput = [
   lastActive: number;
 };
 
-export interface TwTAPInterface extends utils.Interface {
+export interface FakeTwTAPInterface extends utils.Interface {
   functions: {
     "DEFAULT_PAYLOAD_SIZE_LIMIT()": FunctionFragment;
     "DOMAIN_SEPARATOR()": FunctionFragment;
@@ -1915,14 +1915,14 @@ export type TransferEvent = TypedEvent<
 
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 
-export interface TwTAP extends BaseContract {
-  contractName: "TwTAP";
+export interface FakeTwTAP extends BaseContract {
+  contractName: "FakeTwTAP";
 
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: TwTAPInterface;
+  interface: FakeTwTAPInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,

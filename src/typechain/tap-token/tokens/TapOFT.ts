@@ -4404,33 +4404,33 @@ export interface TapOFT extends BaseContract {
 
     "Burned(address,uint256)"(
       _from?: PromiseOrValue<string> | null,
-      _amount?: null
+      _amount?: PromiseOrValue<BigNumberish> | null
     ): BurnedEventFilter;
     Burned(
       _from?: PromiseOrValue<string> | null,
-      _amount?: null
+      _amount?: PromiseOrValue<BigNumberish> | null
     ): BurnedEventFilter;
 
     "CallFailedBytes(uint16,bytes,bytes)"(
       _srcChainId?: PromiseOrValue<BigNumberish> | null,
-      _payload?: null,
-      _reason?: null
+      _payload?: PromiseOrValue<BytesLike> | null,
+      _reason?: PromiseOrValue<BytesLike> | null
     ): CallFailedBytesEventFilter;
     CallFailedBytes(
       _srcChainId?: PromiseOrValue<BigNumberish> | null,
-      _payload?: null,
-      _reason?: null
+      _payload?: PromiseOrValue<BytesLike> | null,
+      _reason?: PromiseOrValue<BytesLike> | null
     ): CallFailedBytesEventFilter;
 
     "CallFailedStr(uint16,bytes,string)"(
       _srcChainId?: PromiseOrValue<BigNumberish> | null,
-      _payload?: null,
-      _reason?: null
+      _payload?: PromiseOrValue<BytesLike> | null,
+      _reason?: PromiseOrValue<string> | null
     ): CallFailedStrEventFilter;
     CallFailedStr(
       _srcChainId?: PromiseOrValue<BigNumberish> | null,
-      _payload?: null,
-      _reason?: null
+      _payload?: PromiseOrValue<BytesLike> | null,
+      _reason?: PromiseOrValue<string> | null
     ): CallFailedStrEventFilter;
 
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"(
@@ -4446,16 +4446,22 @@ export interface TapOFT extends BaseContract {
       _hash?: null
     ): CallOFTReceivedSuccessEventFilter;
 
-    "Emitted(uint256,uint256)"(week?: null, amount?: null): EmittedEventFilter;
-    Emitted(week?: null, amount?: null): EmittedEventFilter;
+    "Emitted(uint256,uint256)"(
+      week?: PromiseOrValue<BigNumberish> | null,
+      amount?: PromiseOrValue<BigNumberish> | null
+    ): EmittedEventFilter;
+    Emitted(
+      week?: PromiseOrValue<BigNumberish> | null,
+      amount?: PromiseOrValue<BigNumberish> | null
+    ): EmittedEventFilter;
 
     "GovernanceChainIdentifierUpdated(uint256,uint256)"(
-      _old?: null,
-      _new?: null
+      _old?: PromiseOrValue<BigNumberish> | null,
+      _new?: PromiseOrValue<BigNumberish> | null
     ): GovernanceChainIdentifierUpdatedEventFilter;
     GovernanceChainIdentifierUpdated(
-      _old?: null,
-      _new?: null
+      _old?: PromiseOrValue<BigNumberish> | null,
+      _new?: PromiseOrValue<BigNumberish> | null
     ): GovernanceChainIdentifierUpdatedEventFilter;
 
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)"(
@@ -4476,12 +4482,12 @@ export interface TapOFT extends BaseContract {
     "Minted(address,address,uint256)"(
       _by?: PromiseOrValue<string> | null,
       _to?: PromiseOrValue<string> | null,
-      _amount?: null
+      _amount?: PromiseOrValue<BigNumberish> | null
     ): MintedEventFilter;
     Minted(
       _by?: PromiseOrValue<string> | null,
       _to?: PromiseOrValue<string> | null,
-      _amount?: null
+      _amount?: PromiseOrValue<BigNumberish> | null
     ): MintedEventFilter;
 
     "MinterUpdated(address,address)"(
@@ -4508,10 +4514,13 @@ export interface TapOFT extends BaseContract {
     ): OwnershipTransferredEventFilter;
 
     "PausedUpdated(bool,bool)"(
-      oldState?: null,
-      newState?: null
+      oldState?: PromiseOrValue<boolean> | null,
+      newState?: PromiseOrValue<boolean> | null
     ): PausedUpdatedEventFilter;
-    PausedUpdated(oldState?: null, newState?: null): PausedUpdatedEventFilter;
+    PausedUpdated(
+      oldState?: PromiseOrValue<boolean> | null,
+      newState?: PromiseOrValue<boolean> | null
+    ): PausedUpdatedEventFilter;
 
     "ReceiveFromChain(uint16,address,uint256)"(
       _srcChainId?: PromiseOrValue<BigNumberish> | null,

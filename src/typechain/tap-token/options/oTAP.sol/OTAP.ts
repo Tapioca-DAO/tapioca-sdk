@@ -1532,23 +1532,23 @@ export interface OTAP extends BaseContract {
     "Burn(address,uint256,tuple)"(
       from?: PromiseOrValue<string> | null,
       tokenId?: PromiseOrValue<BigNumberish> | null,
-      option?: null
+      option?: TapOptionStruct | null
     ): BurnEventFilter;
     Burn(
       from?: PromiseOrValue<string> | null,
       tokenId?: PromiseOrValue<BigNumberish> | null,
-      option?: null
+      option?: TapOptionStruct | null
     ): BurnEventFilter;
 
     "Mint(address,uint256,tuple)"(
       to?: PromiseOrValue<string> | null,
       tokenId?: PromiseOrValue<BigNumberish> | null,
-      option?: null
+      option?: TapOptionStruct | null
     ): MintEventFilter;
     Mint(
       to?: PromiseOrValue<string> | null,
       tokenId?: PromiseOrValue<BigNumberish> | null,
-      option?: null
+      option?: TapOptionStruct | null
     ): MintEventFilter;
 
     "Transfer(address,address,uint256)"(

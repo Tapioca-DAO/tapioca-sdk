@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { FakeTapOFT } from "./FakeTapOFT";
+export type { FakeTwTAP } from "./FakeTwTAP";

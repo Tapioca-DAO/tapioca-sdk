@@ -3466,24 +3466,24 @@ export interface BaseTapOFT extends BaseContract {
 
     "CallFailedBytes(uint16,bytes,bytes)"(
       _srcChainId?: PromiseOrValue<BigNumberish> | null,
-      _payload?: null,
-      _reason?: null
+      _payload?: PromiseOrValue<BytesLike> | null,
+      _reason?: PromiseOrValue<BytesLike> | null
     ): CallFailedBytesEventFilter;
     CallFailedBytes(
       _srcChainId?: PromiseOrValue<BigNumberish> | null,
-      _payload?: null,
-      _reason?: null
+      _payload?: PromiseOrValue<BytesLike> | null,
+      _reason?: PromiseOrValue<BytesLike> | null
     ): CallFailedBytesEventFilter;
 
     "CallFailedStr(uint16,bytes,string)"(
       _srcChainId?: PromiseOrValue<BigNumberish> | null,
-      _payload?: null,
-      _reason?: null
+      _payload?: PromiseOrValue<BytesLike> | null,
+      _reason?: PromiseOrValue<string> | null
     ): CallFailedStrEventFilter;
     CallFailedStr(
       _srcChainId?: PromiseOrValue<BigNumberish> | null,
-      _payload?: null,
-      _reason?: null
+      _payload?: PromiseOrValue<BytesLike> | null,
+      _reason?: PromiseOrValue<string> | null
     ): CallFailedStrEventFilter;
 
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"(

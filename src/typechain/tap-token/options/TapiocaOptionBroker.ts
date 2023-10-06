@@ -59,6 +59,7 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     "getCurrentWeek()": FunctionFragment;
     "getOTCDealDetails(uint256,address,uint256)": FunctionFragment;
     "lastEpochUpdate()": FunctionFragment;
+    "netDepositedForEpoch(uint256,uint256)": FunctionFragment;
     "newEpoch()": FunctionFragment;
     "oTAP()": FunctionFragment;
     "oTAPBrokerClaim()": FunctionFragment;
@@ -107,6 +108,8 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
       | "getOTCDealDetails(uint256,address,uint256)"
       | "lastEpochUpdate"
       | "lastEpochUpdate()"
+      | "netDepositedForEpoch"
+      | "netDepositedForEpoch(uint256,uint256)"
       | "newEpoch"
       | "newEpoch()"
       | "oTAP"
@@ -250,6 +253,14 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "lastEpochUpdate()",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "netDepositedForEpoch",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "netDepositedForEpoch(uint256,uint256)",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "newEpoch", values?: undefined): string;
   encodeFunctionData(
@@ -488,6 +499,14 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "lastEpochUpdate()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "netDepositedForEpoch",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "netDepositedForEpoch(uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "newEpoch", data: BytesLike): Result;
@@ -908,6 +927,18 @@ export interface TapiocaOptionBroker extends BaseContract {
 
     "lastEpochUpdate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    netDepositedForEpoch(
+      epoch: PromiseOrValue<BigNumberish>,
+      sglAssetID: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { netAmount: BigNumber }>;
+
+    "netDepositedForEpoch(uint256,uint256)"(
+      epoch: PromiseOrValue<BigNumberish>,
+      sglAssetID: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { netAmount: BigNumber }>;
+
     newEpoch(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -1203,6 +1234,18 @@ export interface TapiocaOptionBroker extends BaseContract {
 
   "lastEpochUpdate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  netDepositedForEpoch(
+    epoch: PromiseOrValue<BigNumberish>,
+    sglAssetID: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "netDepositedForEpoch(uint256,uint256)"(
+    epoch: PromiseOrValue<BigNumberish>,
+    sglAssetID: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   newEpoch(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -1494,6 +1537,18 @@ export interface TapiocaOptionBroker extends BaseContract {
 
     "lastEpochUpdate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    netDepositedForEpoch(
+      epoch: PromiseOrValue<BigNumberish>,
+      sglAssetID: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "netDepositedForEpoch(uint256,uint256)"(
+      epoch: PromiseOrValue<BigNumberish>,
+      sglAssetID: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     newEpoch(overrides?: CallOverrides): Promise<void>;
 
     "newEpoch()"(overrides?: CallOverrides): Promise<void>;
@@ -1692,14 +1747,14 @@ export interface TapiocaOptionBroker extends BaseContract {
   filters: {
     "AMLDivergence(uint256,uint256,uint256,uint256)"(
       epoch?: PromiseOrValue<BigNumberish> | null,
-      cumulative?: null,
-      averageMagnitude?: null,
+      cumulative?: PromiseOrValue<BigNumberish> | null,
+      averageMagnitude?: PromiseOrValue<BigNumberish> | null,
       totalParticipants?: null
     ): AMLDivergenceEventFilter;
     AMLDivergence(
       epoch?: PromiseOrValue<BigNumberish> | null,
-      cumulative?: null,
-      averageMagnitude?: null,
+      cumulative?: PromiseOrValue<BigNumberish> | null,
+      averageMagnitude?: PromiseOrValue<BigNumberish> | null,
       totalParticipants?: null
     ): AMLDivergenceEventFilter;
 
@@ -1721,23 +1776,23 @@ export interface TapiocaOptionBroker extends BaseContract {
     "ExitPosition(uint256,uint256,uint256)"(
       epoch?: PromiseOrValue<BigNumberish> | null,
       tokenId?: PromiseOrValue<BigNumberish> | null,
-      amount?: null
+      amount?: PromiseOrValue<BigNumberish> | null
     ): ExitPositionEventFilter;
     ExitPosition(
       epoch?: PromiseOrValue<BigNumberish> | null,
       tokenId?: PromiseOrValue<BigNumberish> | null,
-      amount?: null
+      amount?: PromiseOrValue<BigNumberish> | null
     ): ExitPositionEventFilter;
 
     "NewEpoch(uint256,uint256,uint256)"(
       epoch?: PromiseOrValue<BigNumberish> | null,
-      extractedTAP?: null,
-      epochTAPValuation?: null
+      extractedTAP?: PromiseOrValue<BigNumberish> | null,
+      epochTAPValuation?: PromiseOrValue<BigNumberish> | null
     ): NewEpochEventFilter;
     NewEpoch(
       epoch?: PromiseOrValue<BigNumberish> | null,
-      extractedTAP?: null,
-      epochTAPValuation?: null
+      extractedTAP?: PromiseOrValue<BigNumberish> | null,
+      epochTAPValuation?: PromiseOrValue<BigNumberish> | null
     ): NewEpochEventFilter;
 
     "OwnershipTransferred(address,address)"(
@@ -1752,14 +1807,14 @@ export interface TapiocaOptionBroker extends BaseContract {
     "Participate(uint256,uint256,uint256,tuple,uint256)"(
       epoch?: PromiseOrValue<BigNumberish> | null,
       sglAssetID?: PromiseOrValue<BigNumberish> | null,
-      totalDeposited?: null,
+      totalDeposited?: PromiseOrValue<BigNumberish> | null,
       lock?: null,
       discount?: null
     ): ParticipateEventFilter;
     Participate(
       epoch?: PromiseOrValue<BigNumberish> | null,
       sglAssetID?: PromiseOrValue<BigNumberish> | null,
-      totalDeposited?: null,
+      totalDeposited?: PromiseOrValue<BigNumberish> | null,
       lock?: null,
       discount?: null
     ): ParticipateEventFilter;
@@ -1768,21 +1823,24 @@ export interface TapiocaOptionBroker extends BaseContract {
     Paused(account?: null): PausedEventFilter;
 
     "SetPaymentToken(address,address,bytes)"(
-      paymentToken?: null,
-      oracle?: null,
-      oracleData?: null
+      paymentToken?: PromiseOrValue<string> | null,
+      oracle?: PromiseOrValue<string> | null,
+      oracleData?: PromiseOrValue<BytesLike> | null
     ): SetPaymentTokenEventFilter;
     SetPaymentToken(
-      paymentToken?: null,
-      oracle?: null,
-      oracleData?: null
+      paymentToken?: PromiseOrValue<string> | null,
+      oracle?: PromiseOrValue<string> | null,
+      oracleData?: PromiseOrValue<BytesLike> | null
     ): SetPaymentTokenEventFilter;
 
     "SetTapOracle(address,bytes)"(
-      oracle?: null,
-      oracleData?: null
+      oracle?: PromiseOrValue<string> | null,
+      oracleData?: PromiseOrValue<BytesLike> | null
     ): SetTapOracleEventFilter;
-    SetTapOracle(oracle?: null, oracleData?: null): SetTapOracleEventFilter;
+    SetTapOracle(
+      oracle?: PromiseOrValue<string> | null,
+      oracleData?: PromiseOrValue<BytesLike> | null
+    ): SetTapOracleEventFilter;
 
     "Unpaused(address)"(account?: null): UnpausedEventFilter;
     Unpaused(account?: null): UnpausedEventFilter;
@@ -1868,6 +1926,18 @@ export interface TapiocaOptionBroker extends BaseContract {
     lastEpochUpdate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "lastEpochUpdate()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    netDepositedForEpoch(
+      epoch: PromiseOrValue<BigNumberish>,
+      sglAssetID: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "netDepositedForEpoch(uint256,uint256)"(
+      epoch: PromiseOrValue<BigNumberish>,
+      sglAssetID: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     newEpoch(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2136,6 +2206,18 @@ export interface TapiocaOptionBroker extends BaseContract {
     lastEpochUpdate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "lastEpochUpdate()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    netDepositedForEpoch(
+      epoch: PromiseOrValue<BigNumberish>,
+      sglAssetID: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "netDepositedForEpoch(uint256,uint256)"(
+      epoch: PromiseOrValue<BigNumberish>,
+      sglAssetID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
