@@ -883,12 +883,12 @@ export interface MarketERC20 extends BaseContract {
     "ApprovalBorrow(address,address,uint256)"(
       owner?: PromiseOrValue<string> | null,
       spender?: PromiseOrValue<string> | null,
-      value?: null
+      value?: PromiseOrValue<BigNumberish> | null
     ): ApprovalBorrowEventFilter;
     ApprovalBorrow(
       owner?: PromiseOrValue<string> | null,
       spender?: PromiseOrValue<string> | null,
-      value?: null
+      value?: PromiseOrValue<BigNumberish> | null
     ): ApprovalBorrowEventFilter;
 
     "Transfer(address,address,uint256)"(

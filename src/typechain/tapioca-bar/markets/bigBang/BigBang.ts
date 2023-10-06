@@ -63,9 +63,10 @@ export interface BigBangInterface extends utils.Interface {
     "init(bytes)": FunctionFragment;
     "isMainMarket()": FunctionFragment;
     "leverageModule()": FunctionFragment;
-    "liquidate(address[],uint256[],bytes[],address)": FunctionFragment;
+    "liquidate(address[],uint256[],address[],bytes[])": FunctionFragment;
     "liquidateBadDebt(address,address,address,bytes)": FunctionFragment;
     "liquidationBonusAmount()": FunctionFragment;
+    "liquidationCollateralizationRate()": FunctionFragment;
     "liquidationModule()": FunctionFragment;
     "liquidationMultiplier()": FunctionFragment;
     "maxDebtRate()": FunctionFragment;
@@ -84,15 +85,15 @@ export interface BigBangInterface extends utils.Interface {
     "permitAction(bytes,uint16)": FunctionFragment;
     "permitBorrow(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "protocolFee()": FunctionFragment;
+    "rateTimestamp()": FunctionFragment;
+    "rateValidDuration()": FunctionFragment;
     "refreshPenroseFees()": FunctionFragment;
     "removeCollateral(address,address,uint256)": FunctionFragment;
     "repay(address,address,bool,uint256)": FunctionFragment;
     "rescueEth(uint256,address)": FunctionFragment;
     "sellCollateral(address,uint256,uint256,address,bytes)": FunctionFragment;
     "setBigBangConfig(uint256,uint256,uint256,uint256)": FunctionFragment;
-    "setBorrowCap(uint256)": FunctionFragment;
-    "setBorrowOpeningFee(uint256)": FunctionFragment;
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
+    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
     "totalBorrow()": FunctionFragment;
     "totalBorrowCap()": FunctionFragment;
     "totalCollateralShare()": FunctionFragment;
@@ -178,11 +179,13 @@ export interface BigBangInterface extends utils.Interface {
       | "leverageModule"
       | "leverageModule()"
       | "liquidate"
-      | "liquidate(address[],uint256[],bytes[],address)"
+      | "liquidate(address[],uint256[],address[],bytes[])"
       | "liquidateBadDebt"
       | "liquidateBadDebt(address,address,address,bytes)"
       | "liquidationBonusAmount"
       | "liquidationBonusAmount()"
+      | "liquidationCollateralizationRate"
+      | "liquidationCollateralizationRate()"
       | "liquidationModule"
       | "liquidationModule()"
       | "liquidationMultiplier"
@@ -219,6 +222,10 @@ export interface BigBangInterface extends utils.Interface {
       | "permitBorrow(address,address,uint256,uint256,uint8,bytes32,bytes32)"
       | "protocolFee"
       | "protocolFee()"
+      | "rateTimestamp"
+      | "rateTimestamp()"
+      | "rateValidDuration"
+      | "rateValidDuration()"
       | "refreshPenroseFees"
       | "refreshPenroseFees()"
       | "removeCollateral"
@@ -231,12 +238,8 @@ export interface BigBangInterface extends utils.Interface {
       | "sellCollateral(address,uint256,uint256,address,bytes)"
       | "setBigBangConfig"
       | "setBigBangConfig(uint256,uint256,uint256,uint256)"
-      | "setBorrowCap"
-      | "setBorrowCap(uint256)"
-      | "setBorrowOpeningFee"
-      | "setBorrowOpeningFee(uint256)"
       | "setMarketConfig"
-      | "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
+      | "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
       | "totalBorrow"
       | "totalBorrow()"
       | "totalBorrowCap"
@@ -561,17 +564,17 @@ export interface BigBangInterface extends utils.Interface {
     values: [
       PromiseOrValue<string>[],
       PromiseOrValue<BigNumberish>[],
-      PromiseOrValue<BytesLike>[],
-      PromiseOrValue<string>
+      PromiseOrValue<string>[],
+      PromiseOrValue<BytesLike>[]
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "liquidate(address[],uint256[],bytes[],address)",
+    functionFragment: "liquidate(address[],uint256[],address[],bytes[])",
     values: [
       PromiseOrValue<string>[],
       PromiseOrValue<BigNumberish>[],
-      PromiseOrValue<BytesLike>[],
-      PromiseOrValue<string>
+      PromiseOrValue<string>[],
+      PromiseOrValue<BytesLike>[]
     ]
   ): string;
   encodeFunctionData(
@@ -598,6 +601,14 @@ export interface BigBangInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "liquidationBonusAmount()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "liquidationCollateralizationRate",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "liquidationCollateralizationRate()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -759,6 +770,22 @@ export interface BigBangInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "rateTimestamp",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rateTimestamp()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rateValidDuration",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rateValidDuration()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "refreshPenroseFees",
     values?: undefined
   ): string;
@@ -847,22 +874,6 @@ export interface BigBangInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "setBorrowCap",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setBorrowCap(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setBorrowOpeningFee",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setBorrowOpeningFee(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "setMarketConfig",
     values: [
       PromiseOrValue<BigNumberish>,
@@ -875,16 +886,18 @@ export interface BigBangInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
+    functionFragment: "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
@@ -1233,7 +1246,7 @@ export interface BigBangInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "liquidate", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "liquidate(address[],uint256[],bytes[],address)",
+    functionFragment: "liquidate(address[],uint256[],address[],bytes[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1250,6 +1263,14 @@ export interface BigBangInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "liquidationBonusAmount()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "liquidationCollateralizationRate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "liquidationCollateralizationRate()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1370,6 +1391,22 @@ export interface BigBangInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "rateTimestamp",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "rateTimestamp()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "rateValidDuration",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "rateValidDuration()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "refreshPenroseFees",
     data: BytesLike
   ): Result;
@@ -1412,27 +1449,11 @@ export interface BigBangInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setBorrowCap",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setBorrowCap(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setBorrowOpeningFee",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setBorrowOpeningFee(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "setMarketConfig",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
+    functionFragment: "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1528,6 +1549,7 @@ export interface BigBangInterface extends utils.Interface {
     "ApprovalBorrow(address,address,uint256)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
     "DebtRateAgainstEthUpdated(uint256,uint256)": EventFragment;
+    "ExchangeRateDurationUpdated(uint256,uint256)": EventFragment;
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)": EventFragment;
     "LiquidationMultiplierUpdated(uint256,uint256)": EventFragment;
     "LogAccrue(uint256,uint64)": EventFragment;
@@ -1562,6 +1584,12 @@ export interface BigBangInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "DebtRateAgainstEthUpdated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "DebtRateAgainstEthUpdated(uint256,uint256)"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "ExchangeRateDurationUpdated"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "ExchangeRateDurationUpdated(uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Liquidated"): EventFragment;
   getEvent(
@@ -1674,6 +1702,18 @@ export type DebtRateAgainstEthUpdatedEvent = TypedEvent<
 
 export type DebtRateAgainstEthUpdatedEventFilter =
   TypedEventFilter<DebtRateAgainstEthUpdatedEvent>;
+
+export interface ExchangeRateDurationUpdatedEventObject {
+  _oldVal: BigNumber;
+  _newVal: BigNumber;
+}
+export type ExchangeRateDurationUpdatedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  ExchangeRateDurationUpdatedEventObject
+>;
+
+export type ExchangeRateDurationUpdatedEventFilter =
+  TypedEventFilter<ExchangeRateDurationUpdatedEvent>;
 
 export interface LiquidatedEventObject {
   liquidator: string;
@@ -2189,38 +2229,46 @@ export interface BigBang extends BaseContract {
     liquidate(
       users: PromiseOrValue<string>[],
       maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      collateralToAssetSwapDatas: PromiseOrValue<BytesLike>[],
-      swapper: PromiseOrValue<string>,
+      liquidatorReceivers: PromiseOrValue<string>[],
+      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "liquidate(address[],uint256[],bytes[],address)"(
+    "liquidate(address[],uint256[],address[],bytes[])"(
       users: PromiseOrValue<string>[],
       maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      collateralToAssetSwapDatas: PromiseOrValue<BytesLike>[],
-      swapper: PromiseOrValue<string>,
+      liquidatorReceivers: PromiseOrValue<string>[],
+      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     liquidateBadDebt(
       user: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      liquidatorReceiver: PromiseOrValue<string>,
+      liquidatorReceiverData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "liquidateBadDebt(address,address,address,bytes)"(
       user: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      liquidatorReceiver: PromiseOrValue<string>,
+      liquidatorReceiverData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     liquidationBonusAmount(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    liquidationCollateralizationRate(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "liquidationCollateralizationRate()"(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     liquidationModule(overrides?: CallOverrides): Promise<[string]>;
 
@@ -2356,6 +2404,14 @@ export interface BigBang extends BaseContract {
 
     "protocolFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    rateTimestamp(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "rateTimestamp()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    rateValidDuration(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "rateValidDuration()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     refreshPenroseFees(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2440,26 +2496,6 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    setBorrowCap(
-      _cap: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setBorrowCap(uint256)"(
-      _cap: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setBorrowOpeningFee(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setBorrowOpeningFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     setMarketConfig(
       _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
@@ -2472,10 +2508,11 @@ export interface BigBang extends BaseContract {
       _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
       _totalBorrowCap: PromiseOrValue<BigNumberish>,
       _collateralizationRate: PromiseOrValue<BigNumberish>,
+      _liquidationCollateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
+    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
@@ -2487,6 +2524,7 @@ export interface BigBang extends BaseContract {
       _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
       _totalBorrowCap: PromiseOrValue<BigNumberish>,
       _collateralizationRate: PromiseOrValue<BigNumberish>,
+      _liquidationCollateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2884,38 +2922,46 @@ export interface BigBang extends BaseContract {
   liquidate(
     users: PromiseOrValue<string>[],
     maxBorrowParts: PromiseOrValue<BigNumberish>[],
-    collateralToAssetSwapDatas: PromiseOrValue<BytesLike>[],
-    swapper: PromiseOrValue<string>,
+    liquidatorReceivers: PromiseOrValue<string>[],
+    liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "liquidate(address[],uint256[],bytes[],address)"(
+  "liquidate(address[],uint256[],address[],bytes[])"(
     users: PromiseOrValue<string>[],
     maxBorrowParts: PromiseOrValue<BigNumberish>[],
-    collateralToAssetSwapDatas: PromiseOrValue<BytesLike>[],
-    swapper: PromiseOrValue<string>,
+    liquidatorReceivers: PromiseOrValue<string>[],
+    liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   liquidateBadDebt(
     user: PromiseOrValue<string>,
     receiver: PromiseOrValue<string>,
-    swapper: PromiseOrValue<string>,
-    collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+    liquidatorReceiver: PromiseOrValue<string>,
+    liquidatorReceiverData: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "liquidateBadDebt(address,address,address,bytes)"(
     user: PromiseOrValue<string>,
     receiver: PromiseOrValue<string>,
-    swapper: PromiseOrValue<string>,
-    collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+    liquidatorReceiver: PromiseOrValue<string>,
+    liquidatorReceiverData: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
   "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  liquidationCollateralizationRate(
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "liquidationCollateralizationRate()"(
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   liquidationModule(overrides?: CallOverrides): Promise<string>;
 
@@ -3051,6 +3097,14 @@ export interface BigBang extends BaseContract {
 
   "protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  rateTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "rateTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  rateValidDuration(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   refreshPenroseFees(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -3135,26 +3189,6 @@ export interface BigBang extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  setBorrowCap(
-    _cap: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setBorrowCap(uint256)"(
-    _cap: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setBorrowOpeningFee(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setBorrowOpeningFee(uint256)"(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   setMarketConfig(
     _borrowOpeningFee: PromiseOrValue<BigNumberish>,
     _oracle: PromiseOrValue<string>,
@@ -3167,10 +3201,11 @@ export interface BigBang extends BaseContract {
     _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
     _totalBorrowCap: PromiseOrValue<BigNumberish>,
     _collateralizationRate: PromiseOrValue<BigNumberish>,
+    _liquidationCollateralizationRate: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
+  "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
     _borrowOpeningFee: PromiseOrValue<BigNumberish>,
     _oracle: PromiseOrValue<string>,
     _oracleData: PromiseOrValue<BytesLike>,
@@ -3182,6 +3217,7 @@ export interface BigBang extends BaseContract {
     _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
     _totalBorrowCap: PromiseOrValue<BigNumberish>,
     _collateralizationRate: PromiseOrValue<BigNumberish>,
+    _liquidationCollateralizationRate: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3571,38 +3607,46 @@ export interface BigBang extends BaseContract {
     liquidate(
       users: PromiseOrValue<string>[],
       maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      collateralToAssetSwapDatas: PromiseOrValue<BytesLike>[],
-      swapper: PromiseOrValue<string>,
+      liquidatorReceivers: PromiseOrValue<string>[],
+      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "liquidate(address[],uint256[],bytes[],address)"(
+    "liquidate(address[],uint256[],address[],bytes[])"(
       users: PromiseOrValue<string>[],
       maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      collateralToAssetSwapDatas: PromiseOrValue<BytesLike>[],
-      swapper: PromiseOrValue<string>,
+      liquidatorReceivers: PromiseOrValue<string>[],
+      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     liquidateBadDebt(
       user: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      liquidatorReceiver: PromiseOrValue<string>,
+      liquidatorReceiverData: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "liquidateBadDebt(address,address,address,bytes)"(
       user: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      liquidatorReceiver: PromiseOrValue<string>,
+      liquidatorReceiverData: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    liquidationCollateralizationRate(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "liquidationCollateralizationRate()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     liquidationModule(overrides?: CallOverrides): Promise<string>;
 
@@ -3738,6 +3782,14 @@ export interface BigBang extends BaseContract {
 
     "protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    rateTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "rateTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    rateValidDuration(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     refreshPenroseFees(overrides?: CallOverrides): Promise<BigNumber>;
 
     "refreshPenroseFees()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3818,26 +3870,6 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setBorrowCap(
-      _cap: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setBorrowCap(uint256)"(
-      _cap: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setBorrowOpeningFee(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setBorrowOpeningFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     setMarketConfig(
       _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
@@ -3850,10 +3882,11 @@ export interface BigBang extends BaseContract {
       _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
       _totalBorrowCap: PromiseOrValue<BigNumberish>,
       _collateralizationRate: PromiseOrValue<BigNumberish>,
+      _liquidationCollateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
+    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
@@ -3865,6 +3898,7 @@ export interface BigBang extends BaseContract {
       _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
       _totalBorrowCap: PromiseOrValue<BigNumberish>,
       _collateralizationRate: PromiseOrValue<BigNumberish>,
+      _liquidationCollateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3992,12 +4026,12 @@ export interface BigBang extends BaseContract {
     "ApprovalBorrow(address,address,uint256)"(
       owner?: PromiseOrValue<string> | null,
       spender?: PromiseOrValue<string> | null,
-      value?: null
+      value?: PromiseOrValue<BigNumberish> | null
     ): ApprovalBorrowEventFilter;
     ApprovalBorrow(
       owner?: PromiseOrValue<string> | null,
       spender?: PromiseOrValue<string> | null,
-      value?: null
+      value?: PromiseOrValue<BigNumberish> | null
     ): ApprovalBorrowEventFilter;
 
     "ConservatorUpdated(address,address)"(
@@ -4010,130 +4044,149 @@ export interface BigBang extends BaseContract {
     ): ConservatorUpdatedEventFilter;
 
     "DebtRateAgainstEthUpdated(uint256,uint256)"(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): DebtRateAgainstEthUpdatedEventFilter;
     DebtRateAgainstEthUpdated(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): DebtRateAgainstEthUpdatedEventFilter;
+
+    "ExchangeRateDurationUpdated(uint256,uint256)"(
+      _oldVal?: null,
+      _newVal?: null
+    ): ExchangeRateDurationUpdatedEventFilter;
+    ExchangeRateDurationUpdated(
+      _oldVal?: null,
+      _newVal?: null
+    ): ExchangeRateDurationUpdatedEventFilter;
 
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)"(
       liquidator?: PromiseOrValue<string> | null,
-      users?: null,
-      liquidatorReward?: null,
+      users?: PromiseOrValue<string>[] | null,
+      liquidatorReward?: PromiseOrValue<BigNumberish> | null,
       protocolReward?: null,
       repayedAmount?: null,
       collateralShareRemoved?: null
     ): LiquidatedEventFilter;
     Liquidated(
       liquidator?: PromiseOrValue<string> | null,
-      users?: null,
-      liquidatorReward?: null,
+      users?: PromiseOrValue<string>[] | null,
+      liquidatorReward?: PromiseOrValue<BigNumberish> | null,
       protocolReward?: null,
       repayedAmount?: null,
       collateralShareRemoved?: null
     ): LiquidatedEventFilter;
 
     "LiquidationMultiplierUpdated(uint256,uint256)"(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): LiquidationMultiplierUpdatedEventFilter;
     LiquidationMultiplierUpdated(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): LiquidationMultiplierUpdatedEventFilter;
 
     "LogAccrue(uint256,uint64)"(
-      accruedAmount?: null,
-      rate?: null
+      accruedAmount?: PromiseOrValue<BigNumberish> | null,
+      rate?: PromiseOrValue<BigNumberish> | null
     ): LogAccrueEventFilter;
-    LogAccrue(accruedAmount?: null, rate?: null): LogAccrueEventFilter;
+    LogAccrue(
+      accruedAmount?: PromiseOrValue<BigNumberish> | null,
+      rate?: PromiseOrValue<BigNumberish> | null
+    ): LogAccrueEventFilter;
 
     "LogAddCollateral(address,address,uint256)"(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      share?: null
+      share?: PromiseOrValue<BigNumberish> | null
     ): LogAddCollateralEventFilter;
     LogAddCollateral(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      share?: null
+      share?: PromiseOrValue<BigNumberish> | null
     ): LogAddCollateralEventFilter;
 
     "LogBorrow(address,address,uint256,uint256,uint256)"(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      amount?: null,
+      amount?: PromiseOrValue<BigNumberish> | null,
       feeAmount?: null,
       part?: null
     ): LogBorrowEventFilter;
     LogBorrow(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      amount?: null,
+      amount?: PromiseOrValue<BigNumberish> | null,
       feeAmount?: null,
       part?: null
     ): LogBorrowEventFilter;
 
     "LogBorrowCapUpdated(uint256,uint256)"(
-      _oldVal?: null,
-      _newVal?: null
+      _oldVal?: PromiseOrValue<BigNumberish> | null,
+      _newVal?: PromiseOrValue<BigNumberish> | null
     ): LogBorrowCapUpdatedEventFilter;
     LogBorrowCapUpdated(
-      _oldVal?: null,
-      _newVal?: null
+      _oldVal?: PromiseOrValue<BigNumberish> | null,
+      _newVal?: PromiseOrValue<BigNumberish> | null
     ): LogBorrowCapUpdatedEventFilter;
 
     "LogBorrowingFee(uint256,uint256)"(
-      _oldVal?: null,
-      _newVal?: null
+      _oldVal?: PromiseOrValue<BigNumberish> | null,
+      _newVal?: PromiseOrValue<BigNumberish> | null
     ): LogBorrowingFeeEventFilter;
-    LogBorrowingFee(_oldVal?: null, _newVal?: null): LogBorrowingFeeEventFilter;
+    LogBorrowingFee(
+      _oldVal?: PromiseOrValue<BigNumberish> | null,
+      _newVal?: PromiseOrValue<BigNumberish> | null
+    ): LogBorrowingFeeEventFilter;
 
-    "LogExchangeRate(uint256)"(rate?: null): LogExchangeRateEventFilter;
-    LogExchangeRate(rate?: null): LogExchangeRateEventFilter;
+    "LogExchangeRate(uint256)"(
+      rate?: PromiseOrValue<BigNumberish> | null
+    ): LogExchangeRateEventFilter;
+    LogExchangeRate(
+      rate?: PromiseOrValue<BigNumberish> | null
+    ): LogExchangeRateEventFilter;
 
     "LogRemoveCollateral(address,address,uint256)"(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      share?: null
+      share?: PromiseOrValue<BigNumberish> | null
     ): LogRemoveCollateralEventFilter;
     LogRemoveCollateral(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      share?: null
+      share?: PromiseOrValue<BigNumberish> | null
     ): LogRemoveCollateralEventFilter;
 
     "LogRepay(address,address,uint256,uint256)"(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      amount?: null,
+      amount?: PromiseOrValue<BigNumberish> | null,
       part?: null
     ): LogRepayEventFilter;
     LogRepay(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      amount?: null,
+      amount?: PromiseOrValue<BigNumberish> | null,
       part?: null
     ): LogRepayEventFilter;
 
     "MaxDebtRateUpdated(uint256,uint256)"(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): MaxDebtRateUpdatedEventFilter;
     MaxDebtRateUpdated(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): MaxDebtRateUpdatedEventFilter;
 
     "MinDebtRateUpdated(uint256,uint256)"(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): MinDebtRateUpdatedEventFilter;
     MinDebtRateUpdated(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): MinDebtRateUpdatedEventFilter;
 
     "OracleDataUpdated()"(): OracleDataUpdatedEventFilter;
@@ -4152,14 +4205,14 @@ export interface BigBang extends BaseContract {
     ): OwnershipTransferredEventFilter;
 
     "PausedUpdated(uint8,bool,bool)"(
-      _type?: null,
-      oldState?: null,
-      newState?: null
+      _type?: PromiseOrValue<BigNumberish> | null,
+      oldState?: PromiseOrValue<boolean> | null,
+      newState?: PromiseOrValue<boolean> | null
     ): PausedUpdatedEventFilter;
     PausedUpdated(
-      _type?: null,
-      oldState?: null,
-      newState?: null
+      _type?: PromiseOrValue<BigNumberish> | null,
+      oldState?: PromiseOrValue<boolean> | null,
+      newState?: PromiseOrValue<boolean> | null
     ): PausedUpdatedEventFilter;
 
     "Transfer(address,address,uint256)"(
@@ -4440,38 +4493,46 @@ export interface BigBang extends BaseContract {
     liquidate(
       users: PromiseOrValue<string>[],
       maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      collateralToAssetSwapDatas: PromiseOrValue<BytesLike>[],
-      swapper: PromiseOrValue<string>,
+      liquidatorReceivers: PromiseOrValue<string>[],
+      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "liquidate(address[],uint256[],bytes[],address)"(
+    "liquidate(address[],uint256[],address[],bytes[])"(
       users: PromiseOrValue<string>[],
       maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      collateralToAssetSwapDatas: PromiseOrValue<BytesLike>[],
-      swapper: PromiseOrValue<string>,
+      liquidatorReceivers: PromiseOrValue<string>[],
+      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     liquidateBadDebt(
       user: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      liquidatorReceiver: PromiseOrValue<string>,
+      liquidatorReceiverData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "liquidateBadDebt(address,address,address,bytes)"(
       user: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      liquidatorReceiver: PromiseOrValue<string>,
+      liquidatorReceiverData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    liquidationCollateralizationRate(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "liquidationCollateralizationRate()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     liquidationModule(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -4607,6 +4668,14 @@ export interface BigBang extends BaseContract {
 
     "protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    rateTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "rateTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    rateValidDuration(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     refreshPenroseFees(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -4691,26 +4760,6 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    setBorrowCap(
-      _cap: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setBorrowCap(uint256)"(
-      _cap: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setBorrowOpeningFee(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setBorrowOpeningFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     setMarketConfig(
       _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
@@ -4723,10 +4772,11 @@ export interface BigBang extends BaseContract {
       _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
       _totalBorrowCap: PromiseOrValue<BigNumberish>,
       _collateralizationRate: PromiseOrValue<BigNumberish>,
+      _liquidationCollateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
+    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
@@ -4738,6 +4788,7 @@ export interface BigBang extends BaseContract {
       _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
       _totalBorrowCap: PromiseOrValue<BigNumberish>,
       _collateralizationRate: PromiseOrValue<BigNumberish>,
+      _liquidationCollateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5126,32 +5177,32 @@ export interface BigBang extends BaseContract {
     liquidate(
       users: PromiseOrValue<string>[],
       maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      collateralToAssetSwapDatas: PromiseOrValue<BytesLike>[],
-      swapper: PromiseOrValue<string>,
+      liquidatorReceivers: PromiseOrValue<string>[],
+      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "liquidate(address[],uint256[],bytes[],address)"(
+    "liquidate(address[],uint256[],address[],bytes[])"(
       users: PromiseOrValue<string>[],
       maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      collateralToAssetSwapDatas: PromiseOrValue<BytesLike>[],
-      swapper: PromiseOrValue<string>,
+      liquidatorReceivers: PromiseOrValue<string>[],
+      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     liquidateBadDebt(
       user: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      liquidatorReceiver: PromiseOrValue<string>,
+      liquidatorReceiverData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "liquidateBadDebt(address,address,address,bytes)"(
       user: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      liquidatorReceiver: PromiseOrValue<string>,
+      liquidatorReceiverData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -5160,6 +5211,14 @@ export interface BigBang extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "liquidationBonusAmount()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    liquidationCollateralizationRate(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "liquidationCollateralizationRate()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -5311,6 +5370,16 @@ export interface BigBang extends BaseContract {
 
     "protocolFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    rateTimestamp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "rateTimestamp()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    rateValidDuration(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "rateValidDuration()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     refreshPenroseFees(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -5395,26 +5464,6 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    setBorrowCap(
-      _cap: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setBorrowCap(uint256)"(
-      _cap: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setBorrowOpeningFee(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setBorrowOpeningFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     setMarketConfig(
       _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
@@ -5427,10 +5476,11 @@ export interface BigBang extends BaseContract {
       _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
       _totalBorrowCap: PromiseOrValue<BigNumberish>,
       _collateralizationRate: PromiseOrValue<BigNumberish>,
+      _liquidationCollateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
+    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
@@ -5442,6 +5492,7 @@ export interface BigBang extends BaseContract {
       _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
       _totalBorrowCap: PromiseOrValue<BigNumberish>,
       _collateralizationRate: PromiseOrValue<BigNumberish>,
+      _liquidationCollateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

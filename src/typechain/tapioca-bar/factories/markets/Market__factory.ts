@@ -48,7 +48,7 @@ const _abi = [
         type: "address",
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: "uint256",
         name: "value",
         type: "uint256",
@@ -80,19 +80,38 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
+        indexed: false,
+        internalType: "uint256",
+        name: "_oldVal",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "_newVal",
+        type: "uint256",
+      },
+    ],
+    name: "ExchangeRateDurationUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
         indexed: true,
         internalType: "address",
         name: "liquidator",
         type: "address",
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: "address[]",
         name: "users",
         type: "address[]",
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: "uint256",
         name: "liquidatorReward",
         type: "uint256",
@@ -123,13 +142,13 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
+        indexed: true,
         internalType: "uint256",
         name: "oldVal",
         type: "uint256",
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: "uint256",
         name: "newVal",
         type: "uint256",
@@ -142,13 +161,13 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
+        indexed: true,
         internalType: "uint256",
         name: "_oldVal",
         type: "uint256",
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: "uint256",
         name: "_newVal",
         type: "uint256",
@@ -161,13 +180,13 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
+        indexed: true,
         internalType: "uint256",
         name: "_oldVal",
         type: "uint256",
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: "uint256",
         name: "_newVal",
         type: "uint256",
@@ -180,7 +199,7 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
+        indexed: true,
         internalType: "uint256",
         name: "rate",
         type: "uint256",
@@ -224,19 +243,19 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
+        indexed: true,
         internalType: "enum Market.PauseType",
         name: "_type",
         type: "uint8",
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: "bool",
         name: "oldState",
         type: "bool",
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: "bool",
         name: "newState",
         type: "bool",
@@ -624,6 +643,19 @@ const _abi = [
   },
   {
     inputs: [],
+    name: "liquidationCollateralizationRate",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "liquidationMultiplier",
     outputs: [
       {
@@ -882,29 +914,29 @@ const _abi = [
     type: "function",
   },
   {
-    inputs: [
+    inputs: [],
+    name: "rateTimestamp",
+    outputs: [
       {
         internalType: "uint256",
-        name: "_cap",
+        name: "",
         type: "uint256",
       },
     ],
-    name: "setBorrowCap",
-    outputs: [],
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [
+    inputs: [],
+    name: "rateValidDuration",
+    outputs: [
       {
         internalType: "uint256",
-        name: "_val",
+        name: "",
         type: "uint256",
       },
     ],
-    name: "setBorrowOpeningFee",
-    outputs: [],
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -962,6 +994,11 @@ const _abi = [
       {
         internalType: "uint256",
         name: "_collateralizationRate",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_liquidationCollateralizationRate",
         type: "uint256",
       },
     ],

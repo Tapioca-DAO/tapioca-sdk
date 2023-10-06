@@ -69,8 +69,8 @@ export interface SGLLendingCommonInterface extends utils.Interface {
     "getInterestDetails()": FunctionFragment;
     "interestElasticity()": FunctionFragment;
     "liquidationBonusAmount()": FunctionFragment;
+    "liquidationCollateralizationRate()": FunctionFragment;
     "liquidationMultiplier()": FunctionFragment;
-    "liquidationQueue()": FunctionFragment;
     "lqCollateralizationRate()": FunctionFragment;
     "maxLiquidatorReward()": FunctionFragment;
     "maximumInterestPerSecond()": FunctionFragment;
@@ -90,9 +90,9 @@ export interface SGLLendingCommonInterface extends utils.Interface {
     "permitAction(bytes,uint16)": FunctionFragment;
     "permitBorrow(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "protocolFee()": FunctionFragment;
-    "setBorrowCap(uint256)": FunctionFragment;
-    "setBorrowOpeningFee(uint256)": FunctionFragment;
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
+    "rateTimestamp()": FunctionFragment;
+    "rateValidDuration()": FunctionFragment;
+    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
     "startingInterestPerSecond()": FunctionFragment;
     "symbol()": FunctionFragment;
     "totalAsset()": FunctionFragment;
@@ -164,10 +164,10 @@ export interface SGLLendingCommonInterface extends utils.Interface {
       | "interestElasticity()"
       | "liquidationBonusAmount"
       | "liquidationBonusAmount()"
+      | "liquidationCollateralizationRate"
+      | "liquidationCollateralizationRate()"
       | "liquidationMultiplier"
       | "liquidationMultiplier()"
-      | "liquidationQueue"
-      | "liquidationQueue()"
       | "lqCollateralizationRate"
       | "lqCollateralizationRate()"
       | "maxLiquidatorReward"
@@ -206,12 +206,12 @@ export interface SGLLendingCommonInterface extends utils.Interface {
       | "permitBorrow(address,address,uint256,uint256,uint8,bytes32,bytes32)"
       | "protocolFee"
       | "protocolFee()"
-      | "setBorrowCap"
-      | "setBorrowCap(uint256)"
-      | "setBorrowOpeningFee"
-      | "setBorrowOpeningFee(uint256)"
+      | "rateTimestamp"
+      | "rateTimestamp()"
+      | "rateValidDuration"
+      | "rateValidDuration()"
       | "setMarketConfig"
-      | "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
+      | "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
       | "startingInterestPerSecond"
       | "startingInterestPerSecond()"
       | "symbol"
@@ -437,19 +437,19 @@ export interface SGLLendingCommonInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "liquidationCollateralizationRate",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "liquidationCollateralizationRate()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "liquidationMultiplier",
     values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "liquidationMultiplier()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidationQueue",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidationQueue()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -613,20 +613,20 @@ export interface SGLLendingCommonInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "setBorrowCap",
-    values: [PromiseOrValue<BigNumberish>]
+    functionFragment: "rateTimestamp",
+    values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "setBorrowCap(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
+    functionFragment: "rateTimestamp()",
+    values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "setBorrowOpeningFee",
-    values: [PromiseOrValue<BigNumberish>]
+    functionFragment: "rateValidDuration",
+    values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "setBorrowOpeningFee(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
+    functionFragment: "rateValidDuration()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "setMarketConfig",
@@ -641,16 +641,18 @@ export interface SGLLendingCommonInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
+    functionFragment: "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
@@ -955,19 +957,19 @@ export interface SGLLendingCommonInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "liquidationCollateralizationRate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "liquidationCollateralizationRate()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "liquidationMultiplier",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "liquidationMultiplier()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidationQueue",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidationQueue()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1090,19 +1092,19 @@ export interface SGLLendingCommonInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setBorrowCap",
+    functionFragment: "rateTimestamp",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setBorrowCap(uint256)",
+    functionFragment: "rateTimestamp()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setBorrowOpeningFee",
+    functionFragment: "rateValidDuration",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setBorrowOpeningFee(uint256)",
+    functionFragment: "rateValidDuration()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1110,7 +1112,7 @@ export interface SGLLendingCommonInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
+    functionFragment: "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1221,6 +1223,7 @@ export interface SGLLendingCommonInterface extends utils.Interface {
     "ApprovalBorrow(address,address,uint256)": EventFragment;
     "BidExecutionSwapperUpdated(address)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
+    "ExchangeRateDurationUpdated(uint256,uint256)": EventFragment;
     "InterestElasticityUpdated(uint256,uint256)": EventFragment;
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)": EventFragment;
     "LiquidationMultiplierUpdated(uint256,uint256)": EventFragment;
@@ -1265,6 +1268,12 @@ export interface SGLLendingCommonInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "ConservatorUpdated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ConservatorUpdated(address,address)"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "ExchangeRateDurationUpdated"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "ExchangeRateDurationUpdated(uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "InterestElasticityUpdated"): EventFragment;
   getEvent(
@@ -1430,6 +1439,18 @@ export type ConservatorUpdatedEvent = TypedEvent<
 
 export type ConservatorUpdatedEventFilter =
   TypedEventFilter<ConservatorUpdatedEvent>;
+
+export interface ExchangeRateDurationUpdatedEventObject {
+  _oldVal: BigNumber;
+  _newVal: BigNumber;
+}
+export type ExchangeRateDurationUpdatedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  ExchangeRateDurationUpdatedEventObject
+>;
+
+export type ExchangeRateDurationUpdatedEventFilter =
+  TypedEventFilter<ExchangeRateDurationUpdatedEvent>;
 
 export interface InterestElasticityUpdatedEventObject {
   oldVal: BigNumber;
@@ -2000,13 +2021,17 @@ export interface SGLLendingCommon extends BaseContract {
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    liquidationCollateralizationRate(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "liquidationCollateralizationRate()"(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     liquidationMultiplier(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "liquidationMultiplier()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    liquidationQueue(overrides?: CallOverrides): Promise<[string]>;
-
-    "liquidationQueue()"(overrides?: CallOverrides): Promise<[string]>;
 
     lqCollateralizationRate(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -2150,25 +2175,13 @@ export interface SGLLendingCommon extends BaseContract {
 
     "protocolFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    setBorrowCap(
-      _cap: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
+    rateTimestamp(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "setBorrowCap(uint256)"(
-      _cap: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
+    "rateTimestamp()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    setBorrowOpeningFee(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
+    rateValidDuration(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "setBorrowOpeningFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
+    "rateValidDuration()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     setMarketConfig(
       _borrowOpeningFee: PromiseOrValue<BigNumberish>,
@@ -2182,10 +2195,11 @@ export interface SGLLendingCommon extends BaseContract {
       _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
       _totalBorrowCap: PromiseOrValue<BigNumberish>,
       _collateralizationRate: PromiseOrValue<BigNumberish>,
+      _liquidationCollateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
+    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
@@ -2197,6 +2211,7 @@ export interface SGLLendingCommon extends BaseContract {
       _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
       _totalBorrowCap: PromiseOrValue<BigNumberish>,
       _collateralizationRate: PromiseOrValue<BigNumberish>,
+      _liquidationCollateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2549,13 +2564,17 @@ export interface SGLLendingCommon extends BaseContract {
 
   "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  liquidationCollateralizationRate(
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "liquidationCollateralizationRate()"(
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
 
   "liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  liquidationQueue(overrides?: CallOverrides): Promise<string>;
-
-  "liquidationQueue()"(overrides?: CallOverrides): Promise<string>;
 
   lqCollateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2689,25 +2708,13 @@ export interface SGLLendingCommon extends BaseContract {
 
   "protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-  setBorrowCap(
-    _cap: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
+  rateTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
 
-  "setBorrowCap(uint256)"(
-    _cap: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
+  "rateTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-  setBorrowOpeningFee(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
+  rateValidDuration(overrides?: CallOverrides): Promise<BigNumber>;
 
-  "setBorrowOpeningFee(uint256)"(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
+  "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   setMarketConfig(
     _borrowOpeningFee: PromiseOrValue<BigNumberish>,
@@ -2721,10 +2728,11 @@ export interface SGLLendingCommon extends BaseContract {
     _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
     _totalBorrowCap: PromiseOrValue<BigNumberish>,
     _collateralizationRate: PromiseOrValue<BigNumberish>,
+    _liquidationCollateralizationRate: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
+  "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
     _borrowOpeningFee: PromiseOrValue<BigNumberish>,
     _oracle: PromiseOrValue<string>,
     _oracleData: PromiseOrValue<BytesLike>,
@@ -2736,6 +2744,7 @@ export interface SGLLendingCommon extends BaseContract {
     _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
     _totalBorrowCap: PromiseOrValue<BigNumberish>,
     _collateralizationRate: PromiseOrValue<BigNumberish>,
+    _liquidationCollateralizationRate: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3070,13 +3079,17 @@ export interface SGLLendingCommon extends BaseContract {
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    liquidationCollateralizationRate(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "liquidationCollateralizationRate()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
 
     "liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    liquidationQueue(overrides?: CallOverrides): Promise<string>;
-
-    "liquidationQueue()"(overrides?: CallOverrides): Promise<string>;
 
     lqCollateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3210,25 +3223,13 @@ export interface SGLLendingCommon extends BaseContract {
 
     "protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    setBorrowCap(
-      _cap: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    rateTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "setBorrowCap(uint256)"(
-      _cap: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    "rateTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    setBorrowOpeningFee(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    rateValidDuration(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "setBorrowOpeningFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     setMarketConfig(
       _borrowOpeningFee: PromiseOrValue<BigNumberish>,
@@ -3242,10 +3243,11 @@ export interface SGLLendingCommon extends BaseContract {
       _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
       _totalBorrowCap: PromiseOrValue<BigNumberish>,
       _collateralizationRate: PromiseOrValue<BigNumberish>,
+      _liquidationCollateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
+    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
@@ -3257,6 +3259,7 @@ export interface SGLLendingCommon extends BaseContract {
       _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
       _totalBorrowCap: PromiseOrValue<BigNumberish>,
       _collateralizationRate: PromiseOrValue<BigNumberish>,
+      _liquidationCollateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3406,12 +3409,12 @@ export interface SGLLendingCommon extends BaseContract {
     "ApprovalBorrow(address,address,uint256)"(
       owner?: PromiseOrValue<string> | null,
       spender?: PromiseOrValue<string> | null,
-      value?: null
+      value?: PromiseOrValue<BigNumberish> | null
     ): ApprovalBorrowEventFilter;
     ApprovalBorrow(
       owner?: PromiseOrValue<string> | null,
       spender?: PromiseOrValue<string> | null,
-      value?: null
+      value?: PromiseOrValue<BigNumberish> | null
     ): ApprovalBorrowEventFilter;
 
     "BidExecutionSwapperUpdated(address)"(
@@ -3430,209 +3433,225 @@ export interface SGLLendingCommon extends BaseContract {
       _new?: PromiseOrValue<string> | null
     ): ConservatorUpdatedEventFilter;
 
+    "ExchangeRateDurationUpdated(uint256,uint256)"(
+      _oldVal?: null,
+      _newVal?: null
+    ): ExchangeRateDurationUpdatedEventFilter;
+    ExchangeRateDurationUpdated(
+      _oldVal?: null,
+      _newVal?: null
+    ): ExchangeRateDurationUpdatedEventFilter;
+
     "InterestElasticityUpdated(uint256,uint256)"(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): InterestElasticityUpdatedEventFilter;
     InterestElasticityUpdated(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): InterestElasticityUpdatedEventFilter;
 
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)"(
       liquidator?: PromiseOrValue<string> | null,
-      users?: null,
-      liquidatorReward?: null,
+      users?: PromiseOrValue<string>[] | null,
+      liquidatorReward?: PromiseOrValue<BigNumberish> | null,
       protocolReward?: null,
       repayedAmount?: null,
       collateralShareRemoved?: null
     ): LiquidatedEventFilter;
     Liquidated(
       liquidator?: PromiseOrValue<string> | null,
-      users?: null,
-      liquidatorReward?: null,
+      users?: PromiseOrValue<string>[] | null,
+      liquidatorReward?: PromiseOrValue<BigNumberish> | null,
       protocolReward?: null,
       repayedAmount?: null,
       collateralShareRemoved?: null
     ): LiquidatedEventFilter;
 
     "LiquidationMultiplierUpdated(uint256,uint256)"(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): LiquidationMultiplierUpdatedEventFilter;
     LiquidationMultiplierUpdated(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): LiquidationMultiplierUpdatedEventFilter;
 
     "LogAccrue(uint256,uint256,uint64,uint256)"(
-      accruedAmount?: null,
-      feeFraction?: null,
-      rate?: null,
+      accruedAmount?: PromiseOrValue<BigNumberish> | null,
+      feeFraction?: PromiseOrValue<BigNumberish> | null,
+      rate?: PromiseOrValue<BigNumberish> | null,
       utilization?: null
     ): LogAccrueEventFilter;
     LogAccrue(
-      accruedAmount?: null,
-      feeFraction?: null,
-      rate?: null,
+      accruedAmount?: PromiseOrValue<BigNumberish> | null,
+      feeFraction?: PromiseOrValue<BigNumberish> | null,
+      rate?: PromiseOrValue<BigNumberish> | null,
       utilization?: null
     ): LogAccrueEventFilter;
 
     "LogAddAsset(address,address,uint256,uint256)"(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      share?: null,
+      share?: PromiseOrValue<BigNumberish> | null,
       fraction?: null
     ): LogAddAssetEventFilter;
     LogAddAsset(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      share?: null,
+      share?: PromiseOrValue<BigNumberish> | null,
       fraction?: null
     ): LogAddAssetEventFilter;
 
     "LogAddCollateral(address,address,uint256)"(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      share?: null
+      share?: PromiseOrValue<BigNumberish> | null
     ): LogAddCollateralEventFilter;
     LogAddCollateral(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      share?: null
+      share?: PromiseOrValue<BigNumberish> | null
     ): LogAddCollateralEventFilter;
 
     "LogBorrow(address,address,uint256,uint256,uint256)"(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      amount?: null,
+      amount?: PromiseOrValue<BigNumberish> | null,
       feeAmount?: null,
       part?: null
     ): LogBorrowEventFilter;
     LogBorrow(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      amount?: null,
+      amount?: PromiseOrValue<BigNumberish> | null,
       feeAmount?: null,
       part?: null
     ): LogBorrowEventFilter;
 
     "LogBorrowCapUpdated(uint256,uint256)"(
-      _oldVal?: null,
-      _newVal?: null
+      _oldVal?: PromiseOrValue<BigNumberish> | null,
+      _newVal?: PromiseOrValue<BigNumberish> | null
     ): LogBorrowCapUpdatedEventFilter;
     LogBorrowCapUpdated(
-      _oldVal?: null,
-      _newVal?: null
+      _oldVal?: PromiseOrValue<BigNumberish> | null,
+      _newVal?: PromiseOrValue<BigNumberish> | null
     ): LogBorrowCapUpdatedEventFilter;
 
     "LogBorrowingFee(uint256,uint256)"(
-      _oldVal?: null,
-      _newVal?: null
+      _oldVal?: PromiseOrValue<BigNumberish> | null,
+      _newVal?: PromiseOrValue<BigNumberish> | null
     ): LogBorrowingFeeEventFilter;
-    LogBorrowingFee(_oldVal?: null, _newVal?: null): LogBorrowingFeeEventFilter;
+    LogBorrowingFee(
+      _oldVal?: PromiseOrValue<BigNumberish> | null,
+      _newVal?: PromiseOrValue<BigNumberish> | null
+    ): LogBorrowingFeeEventFilter;
 
-    "LogExchangeRate(uint256)"(rate?: null): LogExchangeRateEventFilter;
-    LogExchangeRate(rate?: null): LogExchangeRateEventFilter;
+    "LogExchangeRate(uint256)"(
+      rate?: PromiseOrValue<BigNumberish> | null
+    ): LogExchangeRateEventFilter;
+    LogExchangeRate(
+      rate?: PromiseOrValue<BigNumberish> | null
+    ): LogExchangeRateEventFilter;
 
     "LogRemoveAsset(address,address,uint256,uint256)"(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      share?: null,
+      share?: PromiseOrValue<BigNumberish> | null,
       fraction?: null
     ): LogRemoveAssetEventFilter;
     LogRemoveAsset(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      share?: null,
+      share?: PromiseOrValue<BigNumberish> | null,
       fraction?: null
     ): LogRemoveAssetEventFilter;
 
     "LogRemoveCollateral(address,address,uint256)"(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      share?: null
+      share?: PromiseOrValue<BigNumberish> | null
     ): LogRemoveCollateralEventFilter;
     LogRemoveCollateral(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      share?: null
+      share?: PromiseOrValue<BigNumberish> | null
     ): LogRemoveCollateralEventFilter;
 
     "LogRepay(address,address,uint256,uint256)"(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      amount?: null,
+      amount?: PromiseOrValue<BigNumberish> | null,
       part?: null
     ): LogRepayEventFilter;
     LogRepay(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      amount?: null,
+      amount?: PromiseOrValue<BigNumberish> | null,
       part?: null
     ): LogRepayEventFilter;
 
     "LogWithdrawFees(address,uint256)"(
       feeTo?: PromiseOrValue<string> | null,
-      feesEarnedFraction?: null
+      feesEarnedFraction?: PromiseOrValue<BigNumberish> | null
     ): LogWithdrawFeesEventFilter;
     LogWithdrawFees(
       feeTo?: PromiseOrValue<string> | null,
-      feesEarnedFraction?: null
+      feesEarnedFraction?: PromiseOrValue<BigNumberish> | null
     ): LogWithdrawFeesEventFilter;
 
     "LogYieldBoxFeesDeposit(uint256,uint256)"(
-      feeShares?: null,
-      ethAmount?: null
+      feeShares?: PromiseOrValue<BigNumberish> | null,
+      ethAmount?: PromiseOrValue<BigNumberish> | null
     ): LogYieldBoxFeesDepositEventFilter;
     LogYieldBoxFeesDeposit(
-      feeShares?: null,
-      ethAmount?: null
+      feeShares?: PromiseOrValue<BigNumberish> | null,
+      ethAmount?: PromiseOrValue<BigNumberish> | null
     ): LogYieldBoxFeesDepositEventFilter;
 
     "LqCollateralizationRateUpdated(uint256,uint256)"(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): LqCollateralizationRateUpdatedEventFilter;
     LqCollateralizationRateUpdated(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): LqCollateralizationRateUpdatedEventFilter;
 
     "MaximumInterestPerSecondUpdated(uint256,uint256)"(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): MaximumInterestPerSecondUpdatedEventFilter;
     MaximumInterestPerSecondUpdated(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): MaximumInterestPerSecondUpdatedEventFilter;
 
     "MaximumTargetUtilizationUpdated(uint256,uint256)"(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): MaximumTargetUtilizationUpdatedEventFilter;
     MaximumTargetUtilizationUpdated(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): MaximumTargetUtilizationUpdatedEventFilter;
 
     "MinimumInterestPerSecondUpdated(uint256,uint256)"(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): MinimumInterestPerSecondUpdatedEventFilter;
     MinimumInterestPerSecondUpdated(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): MinimumInterestPerSecondUpdatedEventFilter;
 
     "MinimumTargetUtilizationUpdated(uint256,uint256)"(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): MinimumTargetUtilizationUpdatedEventFilter;
     MinimumTargetUtilizationUpdated(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): MinimumTargetUtilizationUpdatedEventFilter;
 
     "OracleDataUpdated()"(): OracleDataUpdatedEventFilter;
@@ -3642,12 +3661,12 @@ export interface SGLLendingCommon extends BaseContract {
     OracleUpdated(): OracleUpdatedEventFilter;
 
     "OrderBookLiquidationMultiplierUpdated(uint256,uint256)"(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): OrderBookLiquidationMultiplierUpdatedEventFilter;
     OrderBookLiquidationMultiplierUpdated(
-      oldVal?: null,
-      newVal?: null
+      oldVal?: PromiseOrValue<BigNumberish> | null,
+      newVal?: PromiseOrValue<BigNumberish> | null
     ): OrderBookLiquidationMultiplierUpdatedEventFilter;
 
     "OwnershipTransferred(address,address)"(
@@ -3660,14 +3679,14 @@ export interface SGLLendingCommon extends BaseContract {
     ): OwnershipTransferredEventFilter;
 
     "PausedUpdated(uint8,bool,bool)"(
-      _type?: null,
-      oldState?: null,
-      newState?: null
+      _type?: PromiseOrValue<BigNumberish> | null,
+      oldState?: PromiseOrValue<boolean> | null,
+      newState?: PromiseOrValue<boolean> | null
     ): PausedUpdatedEventFilter;
     PausedUpdated(
-      _type?: null,
-      oldState?: null,
-      newState?: null
+      _type?: PromiseOrValue<BigNumberish> | null,
+      oldState?: PromiseOrValue<boolean> | null,
+      newState?: PromiseOrValue<boolean> | null
     ): PausedUpdatedEventFilter;
 
     "Transfer(address,address,uint256)"(
@@ -3866,13 +3885,17 @@ export interface SGLLendingCommon extends BaseContract {
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    liquidationCollateralizationRate(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "liquidationCollateralizationRate()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
 
     "liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    liquidationQueue(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "liquidationQueue()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     lqCollateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -4006,25 +4029,13 @@ export interface SGLLendingCommon extends BaseContract {
 
     "protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    setBorrowCap(
-      _cap: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
+    rateTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "setBorrowCap(uint256)"(
-      _cap: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
+    "rateTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    setBorrowOpeningFee(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
+    rateValidDuration(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "setBorrowOpeningFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
+    "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     setMarketConfig(
       _borrowOpeningFee: PromiseOrValue<BigNumberish>,
@@ -4038,10 +4049,11 @@ export interface SGLLendingCommon extends BaseContract {
       _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
       _totalBorrowCap: PromiseOrValue<BigNumberish>,
       _collateralizationRate: PromiseOrValue<BigNumberish>,
+      _liquidationCollateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
+    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
@@ -4053,6 +4065,7 @@ export interface SGLLendingCommon extends BaseContract {
       _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
       _totalBorrowCap: PromiseOrValue<BigNumberish>,
       _collateralizationRate: PromiseOrValue<BigNumberish>,
+      _liquidationCollateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4372,17 +4385,19 @@ export interface SGLLendingCommon extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    liquidationCollateralizationRate(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "liquidationCollateralizationRate()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     liquidationMultiplier(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "liquidationMultiplier()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    liquidationQueue(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "liquidationQueue()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -4546,24 +4561,14 @@ export interface SGLLendingCommon extends BaseContract {
 
     "protocolFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    setBorrowCap(
-      _cap: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
+    rateTimestamp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "setBorrowCap(uint256)"(
-      _cap: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
+    "rateTimestamp()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    setBorrowOpeningFee(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
+    rateValidDuration(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "setBorrowOpeningFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    "rateValidDuration()"(
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     setMarketConfig(
@@ -4578,10 +4583,11 @@ export interface SGLLendingCommon extends BaseContract {
       _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
       _totalBorrowCap: PromiseOrValue<BigNumberish>,
       _collateralizationRate: PromiseOrValue<BigNumberish>,
+      _liquidationCollateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
+    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
@@ -4593,6 +4599,7 @@ export interface SGLLendingCommon extends BaseContract {
       _maxLiquidatorReward: PromiseOrValue<BigNumberish>,
       _totalBorrowCap: PromiseOrValue<BigNumberish>,
       _collateralizationRate: PromiseOrValue<BigNumberish>,
+      _liquidationCollateralizationRate: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

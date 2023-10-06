@@ -53,6 +53,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MarketERC20__factory>;
     getContractFactory(
+      name: "MarketLiquidatorReceiver",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MarketLiquidatorReceiver__factory>;
+    getContractFactory(
       name: "SGLBorrow",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SGLBorrow__factory>;
@@ -171,6 +175,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.MarketERC20>;
+    getContractAt(
+      name: "MarketLiquidatorReceiver",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MarketLiquidatorReceiver>;
     getContractAt(
       name: "SGLBorrow",
       address: string,
