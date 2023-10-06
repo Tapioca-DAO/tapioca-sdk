@@ -104,6 +104,7 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
     "NO_EXTRA_GAS()": FunctionFragment;
     "PT_SEND()": FunctionFragment;
     "PT_SEND_AND_CALL()": FunctionFragment;
+    "SWAP_MAX_SLIPPAGE()": FunctionFragment;
     "allowance(address,address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
@@ -128,7 +129,6 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
     "lzEndpoint()": FunctionFragment;
     "lzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
     "minDstGasLookup(uint16,uint16)": FunctionFragment;
-    "multiHop(bytes)": FunctionFragment;
     "name()": FunctionFragment;
     "nonblockingLzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
@@ -140,6 +140,7 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
     "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
+    "setMaxSlippage(uint256)": FunctionFragment;
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
     "setPayloadSizeLimit(uint16,uint256)": FunctionFragment;
     "setPrecrime(address)": FunctionFragment;
@@ -171,6 +172,8 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
       | "PT_SEND()"
       | "PT_SEND_AND_CALL"
       | "PT_SEND_AND_CALL()"
+      | "SWAP_MAX_SLIPPAGE"
+      | "SWAP_MAX_SLIPPAGE()"
       | "allowance"
       | "allowance(address,address)"
       | "approve"
@@ -219,8 +222,6 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
       | "lzReceive(uint16,bytes,uint64,bytes)"
       | "minDstGasLookup"
       | "minDstGasLookup(uint16,uint16)"
-      | "multiHop"
-      | "multiHop(bytes)"
       | "name"
       | "name()"
       | "nonblockingLzReceive"
@@ -243,6 +244,8 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
       | "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"
       | "setConfig"
       | "setConfig(uint16,uint16,uint256,bytes)"
+      | "setMaxSlippage"
+      | "setMaxSlippage(uint256)"
       | "setMinDstGas"
       | "setMinDstGas(uint16,uint16,uint256)"
       | "setPayloadSizeLimit"
@@ -307,6 +310,14 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "PT_SEND_AND_CALL()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "SWAP_MAX_SLIPPAGE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "SWAP_MAX_SLIPPAGE()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -592,14 +603,6 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
     functionFragment: "minDstGasLookup(uint16,uint16)",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(
-    functionFragment: "multiHop",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "multiHop(bytes)",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(functionFragment: "name()", values?: undefined): string;
   encodeFunctionData(
@@ -742,6 +745,14 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setMaxSlippage",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setMaxSlippage(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMinDstGas",
@@ -923,6 +934,14 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
     functionFragment: "PT_SEND_AND_CALL()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "SWAP_MAX_SLIPPAGE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "SWAP_MAX_SLIPPAGE()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "allowance(address,address)",
@@ -1079,11 +1098,6 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
     functionFragment: "minDstGasLookup(uint16,uint16)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "multiHop", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "multiHop(bytes)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
   decodeFunctionResult(
@@ -1146,6 +1160,14 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "setConfig", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setConfig(uint16,uint16,uint256,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setMaxSlippage",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setMaxSlippage(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1569,6 +1591,10 @@ export interface BaseTOFTLeverageModule extends BaseContract {
 
     "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<[number]>;
 
+    SWAP_MAX_SLIPPAGE(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "SWAP_MAX_SLIPPAGE()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     allowance(
       owner: PromiseOrValue<string>,
       spender: PromiseOrValue<string>,
@@ -1865,16 +1891,6 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    multiHop(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "multiHop(bytes)"(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     name(overrides?: CallOverrides): Promise<[string]>;
 
     "name()"(overrides?: CallOverrides): Promise<[string]>;
@@ -2008,6 +2024,16 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       _chainId: PromiseOrValue<BigNumberish>,
       _configType: PromiseOrValue<BigNumberish>,
       _config: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setMaxSlippage(
+      _slippage: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setMaxSlippage(uint256)"(
+      _slippage: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2197,6 +2223,10 @@ export interface BaseTOFTLeverageModule extends BaseContract {
   PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<number>;
 
   "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<number>;
+
+  SWAP_MAX_SLIPPAGE(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "SWAP_MAX_SLIPPAGE()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   allowance(
     owner: PromiseOrValue<string>,
@@ -2494,16 +2524,6 @@ export interface BaseTOFTLeverageModule extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  multiHop(
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "multiHop(bytes)"(
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   name(overrides?: CallOverrides): Promise<string>;
 
   "name()"(overrides?: CallOverrides): Promise<string>;
@@ -2637,6 +2657,16 @@ export interface BaseTOFTLeverageModule extends BaseContract {
     _chainId: PromiseOrValue<BigNumberish>,
     _configType: PromiseOrValue<BigNumberish>,
     _config: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setMaxSlippage(
+    _slippage: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setMaxSlippage(uint256)"(
+    _slippage: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -2828,6 +2858,10 @@ export interface BaseTOFTLeverageModule extends BaseContract {
     PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<number>;
 
     "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<number>;
+
+    SWAP_MAX_SLIPPAGE(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "SWAP_MAX_SLIPPAGE()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     allowance(
       owner: PromiseOrValue<string>,
@@ -3125,16 +3159,6 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    multiHop(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "multiHop(bytes)"(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     name(overrides?: CallOverrides): Promise<string>;
 
     "name()"(overrides?: CallOverrides): Promise<string>;
@@ -3264,6 +3288,16 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       _chainId: PromiseOrValue<BigNumberish>,
       _configType: PromiseOrValue<BigNumberish>,
       _config: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setMaxSlippage(
+      _slippage: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setMaxSlippage(uint256)"(
+      _slippage: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3599,6 +3633,10 @@ export interface BaseTOFTLeverageModule extends BaseContract {
 
     "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    SWAP_MAX_SLIPPAGE(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "SWAP_MAX_SLIPPAGE()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     allowance(
       owner: PromiseOrValue<string>,
       spender: PromiseOrValue<string>,
@@ -3887,16 +3925,6 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    multiHop(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "multiHop(bytes)"(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
     "name()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -4030,6 +4058,16 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       _chainId: PromiseOrValue<BigNumberish>,
       _configType: PromiseOrValue<BigNumberish>,
       _config: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setMaxSlippage(
+      _slippage: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setMaxSlippage(uint256)"(
+      _slippage: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4224,6 +4262,12 @@ export interface BaseTOFTLeverageModule extends BaseContract {
     PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "PT_SEND_AND_CALL()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    SWAP_MAX_SLIPPAGE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "SWAP_MAX_SLIPPAGE()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -4517,16 +4561,6 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    multiHop(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "multiHop(bytes)"(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -4660,6 +4694,16 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       _chainId: PromiseOrValue<BigNumberish>,
       _configType: PromiseOrValue<BigNumberish>,
       _config: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setMaxSlippage(
+      _slippage: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setMaxSlippage(uint256)"(
+      _slippage: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

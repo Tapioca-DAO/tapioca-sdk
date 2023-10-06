@@ -198,7 +198,7 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
     "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes),uint256)": FunctionFragment;
     "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes),uint256)": FunctionFragment;
     "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)),uint256,address)": FunctionFragment;
-    "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address))": FunctionFragment;
+    "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address),address)": FunctionFragment;
     "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)": FunctionFragment;
   };
 
@@ -213,7 +213,7 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
       | "exitPositionAndRemoveCollateral"
       | "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)),uint256,address)"
       | "mintFromBBAndLendOnSGL"
-      | "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address))"
+      | "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address),address)"
       | "withdrawToChain"
       | "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)"
   ): FunctionFragment;
@@ -301,11 +301,12 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
       ICommonData.IDepositDataStruct,
       ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
       ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
-      ICommonData.ICommonExternalContractsStruct
+      ICommonData.ICommonExternalContractsStruct,
+      PromiseOrValue<string>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address))",
+    functionFragment: "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address),address)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
@@ -313,7 +314,8 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
       ICommonData.IDepositDataStruct,
       ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
       ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
-      ICommonData.ICommonExternalContractsStruct
+      ICommonData.ICommonExternalContractsStruct,
+      PromiseOrValue<string>
     ]
   ): string;
   encodeFunctionData(
@@ -376,7 +378,7 @@ export interface MagnetarMarketModuleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address))",
+    functionFragment: "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address),address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -533,10 +535,11 @@ export interface MagnetarMarketModule extends BaseContract {
       lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
       participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
       externalContracts: ICommonData.ICommonExternalContractsStruct,
+      _cluster: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address))"(
+    "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address),address)"(
       user: PromiseOrValue<string>,
       lendAmount: PromiseOrValue<BigNumberish>,
       mintData: IUSDOBase.IMintDataStruct,
@@ -544,6 +547,7 @@ export interface MagnetarMarketModule extends BaseContract {
       lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
       participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
       externalContracts: ICommonData.ICommonExternalContractsStruct,
+      _cluster: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -652,10 +656,11 @@ export interface MagnetarMarketModule extends BaseContract {
     lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
     participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
     externalContracts: ICommonData.ICommonExternalContractsStruct,
+    _cluster: PromiseOrValue<string>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address))"(
+  "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address),address)"(
     user: PromiseOrValue<string>,
     lendAmount: PromiseOrValue<BigNumberish>,
     mintData: IUSDOBase.IMintDataStruct,
@@ -663,6 +668,7 @@ export interface MagnetarMarketModule extends BaseContract {
     lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
     participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
     externalContracts: ICommonData.ICommonExternalContractsStruct,
+    _cluster: PromiseOrValue<string>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -771,10 +777,11 @@ export interface MagnetarMarketModule extends BaseContract {
       lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
       participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
       externalContracts: ICommonData.ICommonExternalContractsStruct,
+      _cluster: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address))"(
+    "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address),address)"(
       user: PromiseOrValue<string>,
       lendAmount: PromiseOrValue<BigNumberish>,
       mintData: IUSDOBase.IMintDataStruct,
@@ -782,6 +789,7 @@ export interface MagnetarMarketModule extends BaseContract {
       lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
       participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
       externalContracts: ICommonData.ICommonExternalContractsStruct,
+      _cluster: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -913,10 +921,11 @@ export interface MagnetarMarketModule extends BaseContract {
       lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
       participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
       externalContracts: ICommonData.ICommonExternalContractsStruct,
+      _cluster: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address))"(
+    "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address),address)"(
       user: PromiseOrValue<string>,
       lendAmount: PromiseOrValue<BigNumberish>,
       mintData: IUSDOBase.IMintDataStruct,
@@ -924,6 +933,7 @@ export interface MagnetarMarketModule extends BaseContract {
       lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
       participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
       externalContracts: ICommonData.ICommonExternalContractsStruct,
+      _cluster: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1033,10 +1043,11 @@ export interface MagnetarMarketModule extends BaseContract {
       lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
       participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
       externalContracts: ICommonData.ICommonExternalContractsStruct,
+      _cluster: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address))"(
+    "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address),address)"(
       user: PromiseOrValue<string>,
       lendAmount: PromiseOrValue<BigNumberish>,
       mintData: IUSDOBase.IMintDataStruct,
@@ -1044,6 +1055,7 @@ export interface MagnetarMarketModule extends BaseContract {
       lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct,
       participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct,
       externalContracts: ICommonData.ICommonExternalContractsStruct,
+      _cluster: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
