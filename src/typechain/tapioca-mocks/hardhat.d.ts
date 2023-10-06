@@ -49,6 +49,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.LZEndpointMock__factory>;
     getContractFactory(
+      name: "MarketLiquidationReceiverMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MarketLiquidationReceiverMock__factory>;
+    getContractFactory(
       name: "MockSwapper",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MockSwapper__factory>;
@@ -166,6 +170,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.LZEndpointMock>;
+    getContractAt(
+      name: "MarketLiquidationReceiverMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MarketLiquidationReceiverMock>;
     getContractAt(
       name: "MockSwapper",
       address: string,

@@ -16,6 +16,7 @@ export type { ERC20Mock } from "./ERC20Mock";
 export type { ERC721Mock } from "./ERC721Mock";
 export type { LQSingularityMock } from "./LQSingularityMock";
 export type { LZEndpointMock } from "./LZEndpointMock";
+export type { MarketLiquidationReceiverMock } from "./MarketLiquidationReceiverMock";
 export type { MockSwapper } from "./MockSwapper";
 export type { MultisigMock } from "./MultisigMock";
 export type { OracleMock } from "./OracleMock";
@@ -39,6 +40,7 @@ export type { FlashMaliciousBorrowerMock } from "./FlashBorrowerMock.sol/FlashMa
 export { FlashMaliciousBorrowerMock__factory } from "./factories/FlashBorrowerMock.sol/FlashMaliciousBorrowerMock__factory";
 export { LQSingularityMock__factory } from "./factories/LQSingularityMock__factory";
 export { LZEndpointMock__factory } from "./factories/LZEndpointMock__factory";
+export { MarketLiquidationReceiverMock__factory } from "./factories/MarketLiquidationReceiverMock__factory";
 export { MockSwapper__factory } from "./factories/MockSwapper__factory";
 export { MultisigMock__factory } from "./factories/MultisigMock__factory";
 export { OracleMock__factory } from "./factories/OracleMock__factory";

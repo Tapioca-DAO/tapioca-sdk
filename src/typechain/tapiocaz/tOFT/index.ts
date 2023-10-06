@@ -5,5 +5,6 @@ import type * as modules from "./modules";
 export type { modules };
 export type { BaseTOFT } from "./BaseTOFT";
 export type { BaseTOFTStorage } from "./BaseTOFTStorage";
+export type { TOFTVault } from "./TOFTVault";
 export type { TapiocaOFT } from "./TapiocaOFT";
 export type { MTapiocaOFT } from "./MTapiocaOFT";
