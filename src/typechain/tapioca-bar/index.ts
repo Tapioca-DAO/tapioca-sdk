@@ -28,6 +28,8 @@ export type { Market } from "./markets/Market";
 export { Market__factory } from "./factories/markets/Market__factory";
 export type { MarketERC20 } from "./markets/MarketERC20";
 export { MarketERC20__factory } from "./factories/markets/MarketERC20__factory";
+export type { MarketLiquidatorReceiver } from "./markets/MarketLiquidatorReceiver";
+export { MarketLiquidatorReceiver__factory } from "./factories/markets/MarketLiquidatorReceiver__factory";
 export type { SGLBorrow } from "./markets/singularity/SGLBorrow";
 export { SGLBorrow__factory } from "./factories/markets/singularity/SGLBorrow__factory";
 export type { SGLCollateral } from "./markets/singularity/SGLCollateral";

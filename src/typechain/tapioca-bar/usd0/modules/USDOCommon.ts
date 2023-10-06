@@ -1194,7 +1194,6 @@ export interface USDOCommonInterface extends utils.Interface {
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
-    "ConservatorUpdated(address,address)": EventFragment;
     "FlashMintFeeUpdated(uint256,uint256)": EventFragment;
     "MaxFlashMintUpdated(uint256,uint256)": EventFragment;
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)": EventFragment;
@@ -1221,10 +1220,6 @@ export interface USDOCommonInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "CallOFTReceivedSuccess"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "ConservatorUpdated"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "ConservatorUpdated(address,address)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "FlashMintFeeUpdated"): EventFragment;
   getEvent(
@@ -1317,18 +1312,6 @@ export type CallOFTReceivedSuccessEvent = TypedEvent<
 
 export type CallOFTReceivedSuccessEventFilter =
   TypedEventFilter<CallOFTReceivedSuccessEvent>;
-
-export interface ConservatorUpdatedEventObject {
-  old: string;
-  _new: string;
-}
-export type ConservatorUpdatedEvent = TypedEvent<
-  [string, string],
-  ConservatorUpdatedEventObject
->;
-
-export type ConservatorUpdatedEventFilter =
-  TypedEventFilter<ConservatorUpdatedEvent>;
 
 export interface FlashMintFeeUpdatedEventObject {
   _old: BigNumber;
@@ -3374,15 +3357,6 @@ export interface USDOCommon extends BaseContract {
       _nonce?: null,
       _hash?: null
     ): CallOFTReceivedSuccessEventFilter;
-
-    "ConservatorUpdated(address,address)"(
-      old?: PromiseOrValue<string> | null,
-      _new?: PromiseOrValue<string> | null
-    ): ConservatorUpdatedEventFilter;
-    ConservatorUpdated(
-      old?: PromiseOrValue<string> | null,
-      _new?: PromiseOrValue<string> | null
-    ): ConservatorUpdatedEventFilter;
 
     "FlashMintFeeUpdated(uint256,uint256)"(
       _old?: null,

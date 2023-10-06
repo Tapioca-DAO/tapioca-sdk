@@ -12,6 +12,7 @@ export { ERC20Mock__factory } from "./ERC20Mock__factory";
 export { ERC721Mock__factory } from "./ERC721Mock__factory";
 export { LQSingularityMock__factory } from "./LQSingularityMock__factory";
 export { LZEndpointMock__factory } from "./LZEndpointMock__factory";
+export { MarketLiquidationReceiverMock__factory } from "./MarketLiquidationReceiverMock__factory";
 export { MockSwapper__factory } from "./MockSwapper__factory";
 export { MultisigMock__factory } from "./MultisigMock__factory";
 export { OracleMock__factory } from "./OracleMock__factory";

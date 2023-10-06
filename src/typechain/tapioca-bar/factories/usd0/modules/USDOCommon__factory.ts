@@ -70,25 +70,6 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: true,
-        internalType: "address",
-        name: "old",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "_new",
-        type: "address",
-      },
-    ],
-    name: "ConservatorUpdated",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
         indexed: false,
         internalType: "uint256",
         name: "_old",
