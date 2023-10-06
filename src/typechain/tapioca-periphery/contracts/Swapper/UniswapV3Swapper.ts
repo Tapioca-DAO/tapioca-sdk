@@ -106,9 +106,11 @@ export interface UniswapV3SwapperInterface extends utils.Interface {
     "poolFee()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "setPoolFee(uint24)": FunctionFragment;
+    "setTwapDuration(uint32)": FunctionFragment;
     "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)": FunctionFragment;
     "swapRouter()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "twapDuration()": FunctionFragment;
   };
 
   getFunction(
@@ -131,12 +133,16 @@ export interface UniswapV3SwapperInterface extends utils.Interface {
       | "renounceOwnership()"
       | "setPoolFee"
       | "setPoolFee(uint24)"
+      | "setTwapDuration"
+      | "setTwapDuration(uint32)"
       | "swap"
       | "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"
       | "swapRouter"
       | "swapRouter()"
       | "transferOwnership"
       | "transferOwnership(address)"
+      | "twapDuration"
+      | "twapDuration()"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -208,6 +214,14 @@ export interface UniswapV3SwapperInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
+    functionFragment: "setTwapDuration",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setTwapDuration(uint32)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "swap",
     values: [
       ISwapper.SwapDataStruct,
@@ -240,6 +254,14 @@ export interface UniswapV3SwapperInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "transferOwnership(address)",
     values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "twapDuration",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "twapDuration()",
+    values?: undefined
   ): string;
 
   decodeFunctionResult(
@@ -293,6 +315,14 @@ export interface UniswapV3SwapperInterface extends utils.Interface {
     functionFragment: "setPoolFee(uint24)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "setTwapDuration",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setTwapDuration(uint32)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "swap", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)",
@@ -309,6 +339,14 @@ export interface UniswapV3SwapperInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "twapDuration",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "twapDuration()",
     data: BytesLike
   ): Result;
 
@@ -455,6 +493,16 @@ export interface UniswapV3Swapper extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    setTwapDuration(
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setTwapDuration(uint32)"(
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     swap(
       swapData: ISwapper.SwapDataStruct,
       amountOutMin: PromiseOrValue<BigNumberish>,
@@ -484,6 +532,10 @@ export interface UniswapV3Swapper extends BaseContract {
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    twapDuration(overrides?: CallOverrides): Promise<[number]>;
+
+    "twapDuration()"(overrides?: CallOverrides): Promise<[number]>;
   };
 
   "buildSwapData(address,address,uint256,uint256,bool,bool)"(
@@ -564,6 +616,16 @@ export interface UniswapV3Swapper extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  setTwapDuration(
+    _duration: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setTwapDuration(uint32)"(
+    _duration: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   swap(
     swapData: ISwapper.SwapDataStruct,
     amountOutMin: PromiseOrValue<BigNumberish>,
@@ -593,6 +655,10 @@ export interface UniswapV3Swapper extends BaseContract {
     newOwner: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  twapDuration(overrides?: CallOverrides): Promise<number>;
+
+  "twapDuration()"(overrides?: CallOverrides): Promise<number>;
 
   callStatic: {
     "buildSwapData(address,address,uint256,uint256,bool,bool)"(
@@ -669,6 +735,16 @@ export interface UniswapV3Swapper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setTwapDuration(
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setTwapDuration(uint32)"(
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     swap(
       swapData: ISwapper.SwapDataStruct,
       amountOutMin: PromiseOrValue<BigNumberish>,
@@ -702,6 +778,10 @@ export interface UniswapV3Swapper extends BaseContract {
       newOwner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    twapDuration(overrides?: CallOverrides): Promise<number>;
+
+    "twapDuration()"(overrides?: CallOverrides): Promise<number>;
   };
 
   filters: {
@@ -714,8 +794,14 @@ export interface UniswapV3Swapper extends BaseContract {
       newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
 
-    "PoolFee(uint256,uint256)"(_old?: null, _new?: null): PoolFeeEventFilter;
-    PoolFee(_old?: null, _new?: null): PoolFeeEventFilter;
+    "PoolFee(uint256,uint256)"(
+      _old?: PromiseOrValue<BigNumberish> | null,
+      _new?: PromiseOrValue<BigNumberish> | null
+    ): PoolFeeEventFilter;
+    PoolFee(
+      _old?: PromiseOrValue<BigNumberish> | null,
+      _new?: PromiseOrValue<BigNumberish> | null
+    ): PoolFeeEventFilter;
   };
 
   estimateGas: {
@@ -797,6 +883,16 @@ export interface UniswapV3Swapper extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    setTwapDuration(
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setTwapDuration(uint32)"(
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     swap(
       swapData: ISwapper.SwapDataStruct,
       amountOutMin: PromiseOrValue<BigNumberish>,
@@ -826,6 +922,10 @@ export interface UniswapV3Swapper extends BaseContract {
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    twapDuration(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "twapDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -911,6 +1011,16 @@ export interface UniswapV3Swapper extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    setTwapDuration(
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setTwapDuration(uint32)"(
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     swap(
       swapData: ISwapper.SwapDataStruct,
       amountOutMin: PromiseOrValue<BigNumberish>,
@@ -940,5 +1050,9 @@ export interface UniswapV3Swapper extends BaseContract {
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    twapDuration(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "twapDuration()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

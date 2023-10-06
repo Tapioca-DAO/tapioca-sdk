@@ -136,11 +136,15 @@ export interface PausableMapUpgradeable extends BaseContract {
   };
 
   filters: {
-    "Paused(bytes32)"(name?: null): PausedEventFilter;
-    Paused(name?: null): PausedEventFilter;
+    "Paused(bytes32)"(
+      name?: PromiseOrValue<BytesLike> | null
+    ): PausedEventFilter;
+    Paused(name?: PromiseOrValue<BytesLike> | null): PausedEventFilter;
 
-    "Unpaused(bytes32)"(name?: null): UnpausedEventFilter;
-    Unpaused(name?: null): UnpausedEventFilter;
+    "Unpaused(bytes32)"(
+      name?: PromiseOrValue<BytesLike> | null
+    ): UnpausedEventFilter;
+    Unpaused(name?: PromiseOrValue<BytesLike> | null): UnpausedEventFilter;
   };
 
   estimateGas: {

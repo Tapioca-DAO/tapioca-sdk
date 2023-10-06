@@ -552,32 +552,35 @@ export interface Cluster extends BaseContract {
     "ContractUpdated(address,uint16,bool,bool)"(
       _contract?: PromiseOrValue<string> | null,
       _lzChainId?: PromiseOrValue<BigNumberish> | null,
-      _oldStatus?: null,
+      _oldStatus?: PromiseOrValue<boolean> | null,
       _newStatus?: null
     ): ContractUpdatedEventFilter;
     ContractUpdated(
       _contract?: PromiseOrValue<string> | null,
       _lzChainId?: PromiseOrValue<BigNumberish> | null,
-      _oldStatus?: null,
+      _oldStatus?: PromiseOrValue<boolean> | null,
       _newStatus?: null
     ): ContractUpdatedEventFilter;
 
     "EditorUpdated(address,bool,bool)"(
       _editor?: PromiseOrValue<string> | null,
-      _oldStatus?: null,
-      _newStatus?: null
+      _oldStatus?: PromiseOrValue<boolean> | null,
+      _newStatus?: PromiseOrValue<boolean> | null
     ): EditorUpdatedEventFilter;
     EditorUpdated(
       _editor?: PromiseOrValue<string> | null,
-      _oldStatus?: null,
-      _newStatus?: null
+      _oldStatus?: PromiseOrValue<boolean> | null,
+      _newStatus?: PromiseOrValue<boolean> | null
     ): EditorUpdatedEventFilter;
 
     "LzChainUpdate(uint256,uint256)"(
-      _oldChain?: null,
-      _newChain?: null
+      _oldChain?: PromiseOrValue<BigNumberish> | null,
+      _newChain?: PromiseOrValue<BigNumberish> | null
     ): LzChainUpdateEventFilter;
-    LzChainUpdate(_oldChain?: null, _newChain?: null): LzChainUpdateEventFilter;
+    LzChainUpdate(
+      _oldChain?: PromiseOrValue<BigNumberish> | null,
+      _newChain?: PromiseOrValue<BigNumberish> | null
+    ): LzChainUpdateEventFilter;
 
     "OwnershipTransferred(address,address)"(
       previousOwner?: PromiseOrValue<string> | null,
