@@ -166,7 +166,7 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "borrow(address,uint16,bytes,uint64,bytes)": FunctionFragment;
-    "borrowInternal(bytes32,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
+    "borrowInternal(bytes32,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],uint256)": FunctionFragment;
     "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)": FunctionFragment;
     "circulatingSupply()": FunctionFragment;
     "cluster()": FunctionFragment;
@@ -242,7 +242,7 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
       | "borrow"
       | "borrow(address,uint16,bytes,uint64,bytes)"
       | "borrowInternal"
-      | "borrowInternal(bytes32,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
+      | "borrowInternal(bytes32,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],uint256)"
       | "callOnOFTReceived"
       | "callOnOFTReceived(uint16,bytes,uint64,bytes32,address,uint256,bytes,uint256)"
       | "circulatingSupply"
@@ -433,16 +433,18 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
       PromiseOrValue<BytesLike>,
       ITapiocaOFT.IBorrowParamsStruct,
       ICommonData.IWithdrawParamsStruct,
-      ICommonData.IApprovalStruct[]
+      ICommonData.IApprovalStruct[],
+      PromiseOrValue<BigNumberish>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "borrowInternal(bytes32,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "borrowInternal(bytes32,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],uint256)",
     values: [
       PromiseOrValue<BytesLike>,
       ITapiocaOFT.IBorrowParamsStruct,
       ICommonData.IWithdrawParamsStruct,
-      ICommonData.IApprovalStruct[]
+      ICommonData.IApprovalStruct[],
+      PromiseOrValue<BigNumberish>
     ]
   ): string;
   encodeFunctionData(
@@ -1068,7 +1070,7 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "borrowInternal(bytes32,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "borrowInternal(bytes32,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1763,14 +1765,16 @@ export interface BaseTOFTMarketModule extends BaseContract {
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      airdropAmount: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "borrowInternal(bytes32,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "borrowInternal(bytes32,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],uint256)"(
       _to: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      airdropAmount: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2434,14 +2438,16 @@ export interface BaseTOFTMarketModule extends BaseContract {
     borrowParams: ITapiocaOFT.IBorrowParamsStruct,
     withdrawParams: ICommonData.IWithdrawParamsStruct,
     approvals: ICommonData.IApprovalStruct[],
+    airdropAmount: PromiseOrValue<BigNumberish>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "borrowInternal(bytes32,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+  "borrowInternal(bytes32,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],uint256)"(
     _to: PromiseOrValue<BytesLike>,
     borrowParams: ITapiocaOFT.IBorrowParamsStruct,
     withdrawParams: ICommonData.IWithdrawParamsStruct,
     approvals: ICommonData.IApprovalStruct[],
+    airdropAmount: PromiseOrValue<BigNumberish>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3107,14 +3113,16 @@ export interface BaseTOFTMarketModule extends BaseContract {
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      airdropAmount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "borrowInternal(bytes32,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "borrowInternal(bytes32,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],uint256)"(
       _to: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      airdropAmount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3919,14 +3927,16 @@ export interface BaseTOFTMarketModule extends BaseContract {
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      airdropAmount: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "borrowInternal(bytes32,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "borrowInternal(bytes32,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],uint256)"(
       _to: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      airdropAmount: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4591,14 +4601,16 @@ export interface BaseTOFTMarketModule extends BaseContract {
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      airdropAmount: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "borrowInternal(bytes32,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "borrowInternal(bytes32,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],uint256)"(
       _to: PromiseOrValue<BytesLike>,
       borrowParams: ITapiocaOFT.IBorrowParamsStruct,
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      airdropAmount: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

@@ -642,8 +642,10 @@ export interface TapiocaWrapper extends BaseContract {
       newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
 
-    "SetFees(uint256)"(_newFee?: null): SetFeesEventFilter;
-    SetFees(_newFee?: null): SetFeesEventFilter;
+    "SetFees(uint256)"(
+      _newFee?: PromiseOrValue<BigNumberish> | null
+    ): SetFeesEventFilter;
+    SetFees(_newFee?: PromiseOrValue<BigNumberish> | null): SetFeesEventFilter;
   };
 
   estimateGas: {

@@ -4976,13 +4976,13 @@ export interface MTapiocaOFT extends BaseContract {
 
     "BalancerStatusUpdated(address,bool,bool)"(
       _balancer?: PromiseOrValue<string> | null,
-      _bool?: null,
-      _new?: null
+      _bool?: PromiseOrValue<boolean> | null,
+      _new?: PromiseOrValue<boolean> | null
     ): BalancerStatusUpdatedEventFilter;
     BalancerStatusUpdated(
       _balancer?: PromiseOrValue<string> | null,
-      _bool?: null,
-      _new?: null
+      _bool?: PromiseOrValue<boolean> | null,
+      _new?: PromiseOrValue<boolean> | null
     ): BalancerStatusUpdatedEventFilter;
 
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"(
@@ -4999,14 +4999,14 @@ export interface MTapiocaOFT extends BaseContract {
     ): CallOFTReceivedSuccessEventFilter;
 
     "ConnectedChainStatusUpdated(uint256,bool,bool)"(
-      _chain?: null,
-      _old?: null,
-      _new?: null
+      _chain?: PromiseOrValue<BigNumberish> | null,
+      _old?: PromiseOrValue<boolean> | null,
+      _new?: PromiseOrValue<boolean> | null
     ): ConnectedChainStatusUpdatedEventFilter;
     ConnectedChainStatusUpdated(
-      _chain?: null,
-      _old?: null,
-      _new?: null
+      _chain?: PromiseOrValue<BigNumberish> | null,
+      _old?: PromiseOrValue<boolean> | null,
+      _new?: PromiseOrValue<boolean> | null
     ): ConnectedChainStatusUpdatedEventFilter;
 
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)"(
@@ -5040,13 +5040,13 @@ export interface MTapiocaOFT extends BaseContract {
 
     "Rebalancing(address,uint256,bool)"(
       _balancer?: PromiseOrValue<string> | null,
-      _amount?: null,
-      _isNative?: null
+      _amount?: PromiseOrValue<BigNumberish> | null,
+      _isNative?: PromiseOrValue<boolean> | null
     ): RebalancingEventFilter;
     Rebalancing(
       _balancer?: PromiseOrValue<string> | null,
-      _amount?: null,
-      _isNative?: null
+      _amount?: PromiseOrValue<BigNumberish> | null,
+      _isNative?: PromiseOrValue<boolean> | null
     ): RebalancingEventFilter;
 
     "ReceiveFromChain(uint16,address,uint256)"(
