@@ -50,6 +50,7 @@ export const transformMulticallToTapiocaWrapper = (
         toft: m.target,
         bytecode: m.callData,
         revertOnFailure: m.allowFailure,
+        value: 0,
     }));
 };
 
