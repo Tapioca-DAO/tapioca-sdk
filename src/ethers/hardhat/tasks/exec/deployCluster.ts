@@ -48,4 +48,4 @@ export const deployCluster__task = async (
             console.log('[-] Failed to verify\n');
         }
     }
-}
+};
