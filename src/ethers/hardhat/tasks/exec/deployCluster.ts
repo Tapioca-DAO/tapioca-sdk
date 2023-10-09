@@ -28,11 +28,13 @@ export const deployCluster__task = async (
             {
                 name: 'Cluster',
                 address: cluster.address,
-                meta: {},
+                meta: {
+                    args: [chainInfo.address, signer.address],
+                },
             },
         ],
     });
-    hre.SDK.db.saveGlobally(depHelper, TAPIOCA_PROJECTS[3], tag);
+    hre.SDK.db.saveLocally(depHelper, tag);
 
     try {
         console.log('[+] Verifying');
