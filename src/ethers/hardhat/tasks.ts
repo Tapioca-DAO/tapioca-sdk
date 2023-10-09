@@ -8,6 +8,7 @@ import { getChains__task } from './tasks/view/getChains';
 import { getDeployment__task } from './tasks/view/getDeployment';
 import { transferOwnership__task } from './tasks/exec/transferOwnership';
 import { deployMagnetar__task } from './tasks/exec/deployMagnetar';
+import { deployCluster__task } from './tasks/exec/deployCluster';
 
 const addCliParams = (task: ConfigurableTaskDefinition) => {
     return task.addOptionalParam(
@@ -71,6 +72,10 @@ addDebugModeParams(
         'Deploys Magnetar',
         deployMagnetar__task,
     ).addOptionalParam('overrideOptions', 'Override options flag'),
+);
+
+addDebugModeParams(
+    task('deployCluster', 'Deploys Cluster', deployCluster__task),
 );
 
 addDebugModeParams(
