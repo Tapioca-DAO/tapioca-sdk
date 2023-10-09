@@ -19,10 +19,22 @@
             "421613": []
         },
         "generic": {
-            "4002": [],
+            "4002": [
+                {
+                    "name": "Multicall3",
+                    "address": "0x9a95f0C3C09e3d44803d01c4413bB69bE101Db3c",
+                    "meta": {}
+                }
+            ],
             "43113": [],
             "80001": [],
-            "421613": []
+            "421613": [
+                {
+                    "name": "Multicall3",
+                    "address": "0x227ceff481F066f91A0119a4522E7f972Fb173Df",
+                    "meta": {}
+                }
+            ]
         },
         "tapioca-mocks": {
             "4002": [
