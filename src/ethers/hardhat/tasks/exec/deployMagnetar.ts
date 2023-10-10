@@ -89,6 +89,9 @@ export const deployMagnetar__task = async (
     });
     hre.SDK.db.saveGlobally(depHelper, TAPIOCA_PROJECTS[3], tag);
 
+    console.log('[+] Setting MagnetarHelper or Magnetar');
+    await magnetar.setHelper(magnetarHelper.address);
+
     try {
         console.log('[+] Verifying');
         await hre.run('verify', {
