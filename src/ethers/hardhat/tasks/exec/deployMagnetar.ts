@@ -27,7 +27,7 @@ export const deployMagnetar__task = async (
 
     let clusterAddress = hre.ethers.constants.AddressZero;
     let clusterDep = hre.SDK.db
-        .loadGlobalDeployment(tag, 'Cluster', chainInfo.chainId)
+        .loadGlobalDeployment(tag, 'tapioca-periphery', chainInfo.chainId)
         .find((e) => e.name == 'Cluster');
 
     if (!clusterDep) {
