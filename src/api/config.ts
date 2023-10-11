@@ -18,15 +18,29 @@ export type INetworkMappingLZToChain = {
 export enum EPacketType {
     PT_SEND = 0,
     PT_SEND_AND_CALL = 1,
+
+    //USDO
+    PT_MARKET_MULTIHOP_BUY = 772,
+    PT_MARKET_REMOVE_ASSET = 773,
+    PT_YB_SEND_SGL_LEND_OR_REPAY = 774,
+    PT_LEVERAGE_MARKET_UP = 775,
+
+    //TOFT
     PT_YB_SEND_STRAT = 770,
     PT_YB_RETRIEVE_STRAT = 771,
-    PT_YB_DEPOSIT = 772,
-    PT_YB_WITHDRAW = 773,
+    PT_MARKET_REMOVE_COLLATERAL = 772,
+    PT_MARKET_MULTIHOP_SELL = 773,
     PT_YB_SEND_SGL_BORROW = 775,
-    PT_SEND_APPROVAL = 790,
+    PT_LEVERAGE_MARKET_DOWN = 776,
+
+    //COMMON
+    PT_TAP_EXERCISE = 777,
+    PT_SEND_FROM = 778,
+
     // TapOFT
     PT_LOCK_TWTAP = 870,
     PT_UNLOCK_TWTAP = 871,
+    PT_CLAIM_REWARDS = 872,
 }
 
 /**
@@ -35,14 +49,21 @@ export enum EPacketType {
 export const MIN_GAS_FOR_PACKET_TYPE = {
     [EPacketType.PT_SEND]: 200_000,
     [EPacketType.PT_SEND_AND_CALL]: 200_000,
+    [EPacketType.PT_MARKET_MULTIHOP_BUY]: 200_000,
+    [EPacketType.PT_MARKET_REMOVE_ASSET]: 200_000,
+    [EPacketType.PT_YB_SEND_SGL_LEND_OR_REPAY]: 200_000,
+    [EPacketType.PT_LEVERAGE_MARKET_UP]: 200_000,
     [EPacketType.PT_YB_SEND_STRAT]: 200_000,
     [EPacketType.PT_YB_RETRIEVE_STRAT]: 200_000,
-    [EPacketType.PT_YB_DEPOSIT]: 200_000,
-    [EPacketType.PT_YB_WITHDRAW]: 200_000,
+    [EPacketType.PT_MARKET_REMOVE_COLLATERAL]: 200_000,
+    [EPacketType.PT_MARKET_MULTIHOP_SELL]: 200_000,
     [EPacketType.PT_YB_SEND_SGL_BORROW]: 200_000,
-    [EPacketType.PT_SEND_APPROVAL]: 200_000,
+    [EPacketType.PT_LEVERAGE_MARKET_DOWN]: 200_000,
+    [EPacketType.PT_TAP_EXERCISE]: 200_000,
+    [EPacketType.PT_SEND_FROM]: 200_000,
     [EPacketType.PT_LOCK_TWTAP]: 550_000,
     [EPacketType.PT_UNLOCK_TWTAP]: 750_000,
+    [EPacketType.PT_CLAIM_REWARDS]: 550_000,
 };
 
 /**
@@ -100,24 +121,28 @@ export const MAX_GAS_LIMITS = {
     [EChainID.ARBITRUM_GOERLI]: 40000000000,
 };
 
-/**
- * Returns a list of all available OFTs packet types Tapioca uses
- **/
-export const PACKET_TYPES = [
+export const USDO_PACKET_TYPES = [
+    //USDO
     EPacketType.PT_SEND,
     EPacketType.PT_SEND_AND_CALL,
+    EPacketType.PT_MARKET_MULTIHOP_BUY,
+    EPacketType.PT_MARKET_REMOVE_ASSET,
+    EPacketType.PT_YB_SEND_SGL_LEND_OR_REPAY,
+    EPacketType.PT_LEVERAGE_MARKET_UP,
+];
+export const TOFT_PACKET_TYPES = [
     EPacketType.PT_YB_SEND_STRAT,
     EPacketType.PT_YB_RETRIEVE_STRAT,
-    EPacketType.PT_YB_DEPOSIT,
-    EPacketType.PT_YB_WITHDRAW,
+    EPacketType.PT_MARKET_REMOVE_COLLATERAL,
+    EPacketType.PT_MARKET_MULTIHOP_SELL,
     EPacketType.PT_YB_SEND_SGL_BORROW,
-    EPacketType.PT_SEND_APPROVAL,
+    EPacketType.PT_LEVERAGE_MARKET_DOWN,
 ];
-
 export const ONFT_PACKET_TYPES = [EPacketType.PT_SEND_AND_CALL];
 export const TAPOFT_PACKET_TYPES = [
     EPacketType.PT_LOCK_TWTAP,
     EPacketType.PT_UNLOCK_TWTAP,
+    EPacketType.PT_CLAIM_REWARDS,
 ];
 
 /**

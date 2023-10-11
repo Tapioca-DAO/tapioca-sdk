@@ -6,7 +6,7 @@ import { TapiocaOFT__factory } from '../typechain/tapiocaz';
 import {
     EChainID,
     NETWORK_MAPPING_CHAIN_TO_LZ,
-    PACKET_TYPES,
+    
     TAPIOCA_PROJECTS,
     MAX_GAS_LIMITS,
 } from './config';
@@ -112,86 +112,4 @@ export const filterDeploymentsByVal = (
     });
 
     return result;
-};
-
-/**
- * Returns a list of OFTs together with their possible configurations
- * @param deployments The project deployments
- * @param startsWith Filter for deployment name
- * @param oftFactory __factory type of the contract for ABI retrieval
- **/
-export const getTapiocaOFTEntities = (
-    deployments: TLocalDeployment,
-    startsWith: string,
-    oftFactory: TapiocaOFT__factory,
-) => {
-    const [firstDeployment] = Object.values(deployments);
-    const tOftEntries = firstDeployment.filter((item) =>
-        item.name.startsWith(startsWith),
-    );
-
-    const tOfts: IOFTItem[][] = [];
-    tOftEntries.forEach((tOftEntry) => {
-        const toftArray: IOFTItem[] = filterDeploymentsByVal(
-            deployments,
-            tOftEntry.name,
-        );
-        tOfts.push(toftArray);
-    });
-
-    const items = [];
-    for (let i = 0; i < tOfts.length; i++) {
-        const toftArray = tOfts[i];
-
-        for (let j = 0; j < toftArray.length; j++) {
-            for (let k = 0; k < toftArray.length; k++) {
-                if (j == k) continue;
-
-                const trustedRemotePath = ethers.utils.solidityPack(
-                    ['address', 'address'],
-                    [toftArray[k].address, toftArray[j].address],
-                );
-                const trustedRemoteTx = oftFactory.interface.encodeFunctionData(
-                    'setTrustedRemote',
-                    [toftArray[k].lzChain, trustedRemotePath],
-                );
-                const customAdaptersTx =
-                    oftFactory.interface.encodeFunctionData(
-                        'setUseCustomAdapterParams',
-                        [true],
-                    );
-
-                const packetTypesTxs = [];
-                for (
-                    let packetIndex = 0;
-                    packetIndex < PACKET_TYPES.length;
-                    packetIndex++
-                ) {
-                    const minDstTx = oftFactory.interface.encodeFunctionData(
-                        'setMinDstGas',
-                        [
-                            toftArray[k].lzChain,
-                            PACKET_TYPES[packetIndex],
-                            200000,
-                        ],
-                    );
-                    packetTypesTxs.push(minDstTx);
-                }
-
-                items.push({
-                    trustedRemotePath: trustedRemotePath,
-                    trustedRemoteTx: trustedRemoteTx,
-                    customAdaptersTx: customAdaptersTx,
-                    packetTypesTxs: packetTypesTxs,
-                    srChain: toftArray[j].chain,
-                    dstChain: toftArray[k].chain,
-                    srcLzChain: toftArray[j].lzChain,
-                    dstLzChain: toftArray[k].lzChain,
-                    srcAddress: toftArray[j].address,
-                    dstAddress: toftArray[k].address,
-                });
-            }
-        }
-    }
-    return items;
 };

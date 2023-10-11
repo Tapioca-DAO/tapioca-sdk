@@ -27,7 +27,7 @@ export const setLZConfig__task = async (
     const tag = await hre.SDK.hardhatUtils.askForTag(hre, 'local');
 
     //--- Get the type of contract
-    const _contractTypeChoices = ['tOFT', 'ONFT', 'TapOFT'] as const;
+    const _contractTypeChoices = ['tOFT', 'ONFT', 'TapOFT', 'USDO'] as const;
     const contractType = (
         await inquirer.prompt({
             type: 'list',
@@ -39,14 +39,13 @@ export const setLZConfig__task = async (
 
     let packetTypes: EPacketType[] = [];
     if (contractType === 'tOFT') {
-        packetTypes = hre.SDK.config.PACKET_TYPES;
+        packetTypes = hre.SDK.config.TOFT_PACKET_TYPES;
     } else if (contractType === 'ONFT') {
         packetTypes = hre.SDK.config.ONFT_PACKET_TYPES;
+    } else if (contractType === 'USDO') {
+        packetTypes = hre.SDK.config.USDO_PACKET_TYPES;
     } else if (contractType === 'TapOFT') {
-        packetTypes = [
-            ...hre.SDK.config.PACKET_TYPES,
-            ...hre.SDK.config.TAPOFT_PACKET_TYPES,
-        ];
+        packetTypes = [...hre.SDK.config.TAPOFT_PACKET_TYPES];
     }
     if (packetTypes.length === 0) throw new Error('[-] No packet types found');
 
