@@ -6,7 +6,6 @@ import { TapiocaOFT__factory } from '../typechain/tapiocaz';
 import {
     EChainID,
     NETWORK_MAPPING_CHAIN_TO_LZ,
-    
     TAPIOCA_PROJECTS,
     MAX_GAS_LIMITS,
 } from './config';
