@@ -43,9 +43,15 @@ export const setLZConfig__task = async (
     } else if (contractType === 'ONFT') {
         packetTypes = hre.SDK.config.ONFT_PACKET_TYPES;
     } else if (contractType === 'USDO') {
-        packetTypes = hre.SDK.config.USDO_PACKET_TYPES;
+        packetTypes = [
+            ...hre.SDK.config.USDO_PACKET_TYPES,
+            ...hre.SDK.config.COMMON_PACKET_TYPES,
+        ];
     } else if (contractType === 'TapOFT') {
-        packetTypes = [...hre.SDK.config.TAPOFT_PACKET_TYPES];
+        packetTypes = [
+            ...hre.SDK.config.TAPOFT_PACKET_TYPES,
+            ...hre.SDK.config.COMMON_PACKET_TYPES,
+        ];
     }
     if (packetTypes.length === 0) throw new Error('[-] No packet types found');
 

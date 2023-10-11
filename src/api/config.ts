@@ -144,6 +144,10 @@ export const TAPOFT_PACKET_TYPES = [
     EPacketType.PT_UNLOCK_TWTAP,
     EPacketType.PT_CLAIM_REWARDS,
 ];
+export const COMMON_PACKET_TYPES = [
+    EPacketType.PT_TAP_EXERCISE,
+    EPacketType.PT_SEND_FROM,
+];
 
 /**
  * Returns a mapping between chain ID and LZ chain ID
