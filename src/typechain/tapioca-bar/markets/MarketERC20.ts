@@ -37,6 +37,7 @@ export interface MarketERC20Interface extends utils.Interface {
     "balanceOf(address)": FunctionFragment;
     "nonces(address)": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "permitAction(bytes,uint16)": FunctionFragment;
     "permitBorrow(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "totalSupply()": FunctionFragment;
     "transfer(address,uint256)": FunctionFragment;
@@ -61,6 +62,8 @@ export interface MarketERC20Interface extends utils.Interface {
       | "nonces(address)"
       | "permit"
       | "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)"
+      | "permitAction"
+      | "permitAction(bytes,uint16)"
       | "permitBorrow"
       | "permitBorrow(address,address,uint256,uint256,uint8,bytes32,bytes32)"
       | "totalSupply"
@@ -150,6 +153,14 @@ export interface MarketERC20Interface extends utils.Interface {
       PromiseOrValue<BytesLike>,
       PromiseOrValue<BytesLike>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "permitAction",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "permitAction(bytes,uint16)",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "permitBorrow",
@@ -255,6 +266,14 @@ export interface MarketERC20Interface extends utils.Interface {
   decodeFunctionResult(functionFragment: "permit", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "permitAction",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "permitAction(bytes,uint16)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -466,6 +485,18 @@ export interface MarketERC20 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    permitAction(
+      data: PromiseOrValue<BytesLike>,
+      actionType: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "permitAction(bytes,uint16)"(
+      data: PromiseOrValue<BytesLike>,
+      actionType: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     permitBorrow(
       owner: PromiseOrValue<string>,
       spender: PromiseOrValue<string>,
@@ -610,6 +641,18 @@ export interface MarketERC20 extends BaseContract {
     v: PromiseOrValue<BigNumberish>,
     r: PromiseOrValue<BytesLike>,
     s: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  permitAction(
+    data: PromiseOrValue<BytesLike>,
+    actionType: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "permitAction(bytes,uint16)"(
+    data: PromiseOrValue<BytesLike>,
+    actionType: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -760,6 +803,18 @@ export interface MarketERC20 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    permitAction(
+      data: PromiseOrValue<BytesLike>,
+      actionType: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "permitAction(bytes,uint16)"(
+      data: PromiseOrValue<BytesLike>,
+      actionType: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     permitBorrow(
       owner: PromiseOrValue<string>,
       spender: PromiseOrValue<string>,
@@ -828,12 +883,12 @@ export interface MarketERC20 extends BaseContract {
     "ApprovalBorrow(address,address,uint256)"(
       owner?: PromiseOrValue<string> | null,
       spender?: PromiseOrValue<string> | null,
-      value?: null
+      value?: PromiseOrValue<BigNumberish> | null
     ): ApprovalBorrowEventFilter;
     ApprovalBorrow(
       owner?: PromiseOrValue<string> | null,
       spender?: PromiseOrValue<string> | null,
-      value?: null
+      value?: PromiseOrValue<BigNumberish> | null
     ): ApprovalBorrowEventFilter;
 
     "Transfer(address,address,uint256)"(
@@ -940,6 +995,18 @@ export interface MarketERC20 extends BaseContract {
       v: PromiseOrValue<BigNumberish>,
       r: PromiseOrValue<BytesLike>,
       s: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    permitAction(
+      data: PromiseOrValue<BytesLike>,
+      actionType: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "permitAction(bytes,uint16)"(
+      data: PromiseOrValue<BytesLike>,
+      actionType: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1090,6 +1157,18 @@ export interface MarketERC20 extends BaseContract {
       v: PromiseOrValue<BigNumberish>,
       r: PromiseOrValue<BytesLike>,
       s: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    permitAction(
+      data: PromiseOrValue<BytesLike>,
+      actionType: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "permitAction(bytes,uint16)"(
+      data: PromiseOrValue<BytesLike>,
+      actionType: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

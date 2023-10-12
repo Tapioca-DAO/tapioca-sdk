@@ -45,6 +45,7 @@ export interface PenroseInterface extends utils.Interface {
     "_getMasterContractLength((address,uint8)[])": FunctionFragment;
     "addBigBang(address,address)": FunctionFragment;
     "addSingularity(address,address)": FunctionFragment;
+    "allBigBangMarkets(uint256)": FunctionFragment;
     "bigBangEthDebtRate()": FunctionFragment;
     "bigBangEthMarket()": FunctionFragment;
     "bigBangMarkets()": FunctionFragment;
@@ -68,6 +69,7 @@ export interface PenroseInterface extends utils.Interface {
     "owner()": FunctionFragment;
     "paused()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
+    "reAccrueBigBangMarkets()": FunctionFragment;
     "registerBigBang(address,bytes,bool)": FunctionFragment;
     "registerBigBangMasterContract(address,uint8)": FunctionFragment;
     "registerSingularity(address,bytes,bool)": FunctionFragment;
@@ -97,6 +99,8 @@ export interface PenroseInterface extends utils.Interface {
       | "addBigBang(address,address)"
       | "addSingularity"
       | "addSingularity(address,address)"
+      | "allBigBangMarkets"
+      | "allBigBangMarkets(uint256)"
       | "bigBangEthDebtRate"
       | "bigBangEthDebtRate()"
       | "bigBangEthMarket"
@@ -143,6 +147,8 @@ export interface PenroseInterface extends utils.Interface {
       | "paused()"
       | "pendingOwner"
       | "pendingOwner()"
+      | "reAccrueBigBangMarkets"
+      | "reAccrueBigBangMarkets()"
       | "registerBigBang"
       | "registerBigBang(address,bytes,bool)"
       | "registerBigBangMasterContract"
@@ -206,6 +212,14 @@ export interface PenroseInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "addSingularity(address,address)",
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "allBigBangMarkets",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "allBigBangMarkets(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "bigBangEthDebtRate",
@@ -384,6 +398,14 @@ export interface PenroseInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "pendingOwner()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "reAccrueBigBangMarkets",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "reAccrueBigBangMarkets()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -576,6 +598,14 @@ export interface PenroseInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "allBigBangMarkets",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "allBigBangMarkets(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "bigBangEthDebtRate",
     data: BytesLike
   ): Result;
@@ -730,6 +760,14 @@ export interface PenroseInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "pendingOwner()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "reAccrueBigBangMarkets",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "reAccrueBigBangMarkets()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1171,6 +1209,16 @@ export interface Penrose extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    allBigBangMarkets(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    "allBigBangMarkets(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
     bigBangEthDebtRate(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "bigBangEthDebtRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -1344,6 +1392,14 @@ export interface Penrose extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<[string]>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<[string]>;
+
+    reAccrueBigBangMarkets(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "reAccrueBigBangMarkets()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     registerBigBang(
       mc: PromiseOrValue<string>,
@@ -1554,6 +1610,16 @@ export interface Penrose extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  allBigBangMarkets(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  "allBigBangMarkets(uint256)"(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
   bigBangEthDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
   "bigBangEthDebtRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1721,6 +1787,14 @@ export interface Penrose extends BaseContract {
   pendingOwner(overrides?: CallOverrides): Promise<string>;
 
   "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
+
+  reAccrueBigBangMarkets(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "reAccrueBigBangMarkets()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   registerBigBang(
     mc: PromiseOrValue<string>,
@@ -1927,6 +2001,16 @@ export interface Penrose extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    allBigBangMarkets(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "allBigBangMarkets(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
     bigBangEthDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "bigBangEthDebtRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2094,6 +2178,10 @@ export interface Penrose extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<string>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
+
+    reAccrueBigBangMarkets(overrides?: CallOverrides): Promise<void>;
+
+    "reAccrueBigBangMarkets()"(overrides?: CallOverrides): Promise<void>;
 
     registerBigBang(
       mc: PromiseOrValue<string>,
@@ -2268,9 +2356,11 @@ export interface Penrose extends BaseContract {
 
   filters: {
     "BigBangEthMarketDebtRate(uint256)"(
-      _rate?: null
+      _rate?: PromiseOrValue<BigNumberish> | null
     ): BigBangEthMarketDebtRateEventFilter;
-    BigBangEthMarketDebtRate(_rate?: null): BigBangEthMarketDebtRateEventFilter;
+    BigBangEthMarketDebtRate(
+      _rate?: PromiseOrValue<BigNumberish> | null
+    ): BigBangEthMarketDebtRateEventFilter;
 
     "BigBangEthMarketSet(address)"(
       _newAddress?: PromiseOrValue<string> | null
@@ -2300,12 +2390,12 @@ export interface Penrose extends BaseContract {
     ): LogDeployEventFilter;
 
     "LogTwTapFeesDeposit(uint256,uint256)"(
-      feeShares?: null,
-      ethAmount?: null
+      feeShares?: PromiseOrValue<BigNumberish> | null,
+      ethAmount?: PromiseOrValue<BigNumberish> | null
     ): LogTwTapFeesDepositEventFilter;
     LogTwTapFeesDeposit(
-      feeShares?: null,
-      ethAmount?: null
+      feeShares?: PromiseOrValue<BigNumberish> | null,
+      ethAmount?: PromiseOrValue<BigNumberish> | null
     ): LogTwTapFeesDepositEventFilter;
 
     "OwnershipTransferred(address,address)"(
@@ -2318,18 +2408,21 @@ export interface Penrose extends BaseContract {
     ): OwnershipTransferredEventFilter;
 
     "PausedUpdated(bool,bool)"(
-      oldState?: null,
-      newState?: null
+      oldState?: PromiseOrValue<boolean> | null,
+      newState?: PromiseOrValue<boolean> | null
     ): PausedUpdatedEventFilter;
-    PausedUpdated(oldState?: null, newState?: null): PausedUpdatedEventFilter;
+    PausedUpdated(
+      oldState?: PromiseOrValue<boolean> | null,
+      newState?: PromiseOrValue<boolean> | null
+    ): PausedUpdatedEventFilter;
 
     "ProtocolWithdrawal(address[],uint256)"(
-      markets?: null,
-      timestamp?: null
+      markets?: PromiseOrValue<string>[] | null,
+      timestamp?: PromiseOrValue<BigNumberish> | null
     ): ProtocolWithdrawalEventFilter;
     ProtocolWithdrawal(
-      markets?: null,
-      timestamp?: null
+      markets?: PromiseOrValue<string>[] | null,
+      timestamp?: PromiseOrValue<BigNumberish> | null
     ): ProtocolWithdrawalEventFilter;
 
     "RegisterBigBang(address,address)"(
@@ -2343,11 +2436,11 @@ export interface Penrose extends BaseContract {
 
     "RegisterBigBangMasterContract(address,uint8)"(
       location?: PromiseOrValue<string> | null,
-      risk?: null
+      risk?: PromiseOrValue<BigNumberish> | null
     ): RegisterBigBangMasterContractEventFilter;
     RegisterBigBangMasterContract(
       location?: PromiseOrValue<string> | null,
-      risk?: null
+      risk?: PromiseOrValue<BigNumberish> | null
     ): RegisterBigBangMasterContractEventFilter;
 
     "RegisterSingularity(address,address)"(
@@ -2361,31 +2454,31 @@ export interface Penrose extends BaseContract {
 
     "RegisterSingularityMasterContract(address,uint8)"(
       location?: PromiseOrValue<string> | null,
-      risk?: null
+      risk?: PromiseOrValue<BigNumberish> | null
     ): RegisterSingularityMasterContractEventFilter;
     RegisterSingularityMasterContract(
       location?: PromiseOrValue<string> | null,
-      risk?: null
+      risk?: PromiseOrValue<BigNumberish> | null
     ): RegisterSingularityMasterContractEventFilter;
 
     "SwapperUpdate(address,uint16,bool)"(
       swapper?: PromiseOrValue<string> | null,
       id?: PromiseOrValue<BigNumberish> | null,
-      isRegistered?: null
+      isRegistered?: PromiseOrValue<boolean> | null
     ): SwapperUpdateEventFilter;
     SwapperUpdate(
       swapper?: PromiseOrValue<string> | null,
       id?: PromiseOrValue<BigNumberish> | null,
-      isRegistered?: null
+      isRegistered?: PromiseOrValue<boolean> | null
     ): SwapperUpdateEventFilter;
 
     "UsdoTokenUpdated(address,uint256)"(
       usdoToken?: PromiseOrValue<string> | null,
-      assetId?: null
+      assetId?: PromiseOrValue<BigNumberish> | null
     ): UsdoTokenUpdatedEventFilter;
     UsdoTokenUpdated(
       usdoToken?: PromiseOrValue<string> | null,
-      assetId?: null
+      assetId?: PromiseOrValue<BigNumberish> | null
     ): UsdoTokenUpdatedEventFilter;
   };
 
@@ -2422,6 +2515,16 @@ export interface Penrose extends BaseContract {
       mc: PromiseOrValue<string>,
       _contract: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    allBigBangMarkets(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "allBigBangMarkets(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     bigBangEthDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2591,6 +2694,14 @@ export interface Penrose extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    reAccrueBigBangMarkets(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "reAccrueBigBangMarkets()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     registerBigBang(
       mc: PromiseOrValue<string>,
@@ -2798,6 +2909,16 @@ export interface Penrose extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    allBigBangMarkets(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "allBigBangMarkets(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     bigBangEthDebtRate(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -2975,6 +3096,14 @@ export interface Penrose extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    reAccrueBigBangMarkets(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "reAccrueBigBangMarkets()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     registerBigBang(
       mc: PromiseOrValue<string>,
