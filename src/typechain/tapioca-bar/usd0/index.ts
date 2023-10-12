@@ -6,3 +6,4 @@ export type { modules };
 export type { BaseUSDO } from "./BaseUSDO";
 export type { BaseUSDOStorage } from "./BaseUSDOStorage";
 export type { USDO } from "./USDO";
+export type { USDOFlashloanHelper } from "./USDOFlashloanHelper";

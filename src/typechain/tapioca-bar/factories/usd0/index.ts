@@ -5,3 +5,4 @@ export * as modules from "./modules";
 export { BaseUSDO__factory } from "./BaseUSDO__factory";
 export { BaseUSDOStorage__factory } from "./BaseUSDOStorage__factory";
 export { USDO__factory } from "./USDO__factory";
+export { USDOFlashloanHelper__factory } from "./USDOFlashloanHelper__factory";
