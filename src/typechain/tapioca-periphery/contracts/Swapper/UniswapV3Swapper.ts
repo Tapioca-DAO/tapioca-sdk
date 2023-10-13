@@ -109,6 +109,7 @@ export interface UniswapV3SwapperInterface extends utils.Interface {
     "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)": FunctionFragment;
     "swapRouter()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "twapDuration()": FunctionFragment;
   };
 
   getFunction(
@@ -137,6 +138,8 @@ export interface UniswapV3SwapperInterface extends utils.Interface {
       | "swapRouter()"
       | "transferOwnership"
       | "transferOwnership(address)"
+      | "twapDuration"
+      | "twapDuration()"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -241,6 +244,14 @@ export interface UniswapV3SwapperInterface extends utils.Interface {
     functionFragment: "transferOwnership(address)",
     values: [PromiseOrValue<string>]
   ): string;
+  encodeFunctionData(
+    functionFragment: "twapDuration",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "twapDuration()",
+    values?: undefined
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "buildSwapData(address,address,uint256,uint256,bool,bool)",
@@ -309,6 +320,14 @@ export interface UniswapV3SwapperInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "twapDuration",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "twapDuration()",
     data: BytesLike
   ): Result;
 
@@ -484,6 +503,10 @@ export interface UniswapV3Swapper extends BaseContract {
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    twapDuration(overrides?: CallOverrides): Promise<[number]>;
+
+    "twapDuration()"(overrides?: CallOverrides): Promise<[number]>;
   };
 
   "buildSwapData(address,address,uint256,uint256,bool,bool)"(
@@ -594,6 +617,10 @@ export interface UniswapV3Swapper extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  twapDuration(overrides?: CallOverrides): Promise<number>;
+
+  "twapDuration()"(overrides?: CallOverrides): Promise<number>;
+
   callStatic: {
     "buildSwapData(address,address,uint256,uint256,bool,bool)"(
       tokenIn: PromiseOrValue<string>,
@@ -702,6 +729,10 @@ export interface UniswapV3Swapper extends BaseContract {
       newOwner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    twapDuration(overrides?: CallOverrides): Promise<number>;
+
+    "twapDuration()"(overrides?: CallOverrides): Promise<number>;
   };
 
   filters: {
@@ -714,8 +745,14 @@ export interface UniswapV3Swapper extends BaseContract {
       newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
 
-    "PoolFee(uint256,uint256)"(_old?: null, _new?: null): PoolFeeEventFilter;
-    PoolFee(_old?: null, _new?: null): PoolFeeEventFilter;
+    "PoolFee(uint256,uint256)"(
+      _old?: PromiseOrValue<BigNumberish> | null,
+      _new?: PromiseOrValue<BigNumberish> | null
+    ): PoolFeeEventFilter;
+    PoolFee(
+      _old?: PromiseOrValue<BigNumberish> | null,
+      _new?: PromiseOrValue<BigNumberish> | null
+    ): PoolFeeEventFilter;
   };
 
   estimateGas: {
@@ -826,6 +863,10 @@ export interface UniswapV3Swapper extends BaseContract {
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    twapDuration(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "twapDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -940,5 +981,9 @@ export interface UniswapV3Swapper extends BaseContract {
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    twapDuration(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "twapDuration()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

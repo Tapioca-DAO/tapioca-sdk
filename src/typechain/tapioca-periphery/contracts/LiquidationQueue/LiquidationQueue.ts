@@ -1774,12 +1774,12 @@ export interface LiquidationQueue extends BaseContract {
     "Redeem(address,address,uint256)"(
       redeemer?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      amount?: null
+      amount?: PromiseOrValue<BigNumberish> | null
     ): RedeemEventFilter;
     Redeem(
       redeemer?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
-      amount?: null
+      amount?: PromiseOrValue<BigNumberish> | null
     ): RedeemEventFilter;
 
     "RemoveBid(address,address,uint256,uint256,uint256,uint256,uint256)"(

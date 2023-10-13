@@ -29,6 +29,7 @@ import type {
 
 export interface ClusterInterface extends utils.Interface {
   functions: {
+    "batchUpdateContracts(uint16,address[],bool)": FunctionFragment;
     "isEditor(address)": FunctionFragment;
     "isWhitelisted(uint16,address)": FunctionFragment;
     "lzChainId()": FunctionFragment;
@@ -42,6 +43,8 @@ export interface ClusterInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "batchUpdateContracts"
+      | "batchUpdateContracts(uint16,address[],bool)"
       | "isEditor"
       | "isEditor(address)"
       | "isWhitelisted"
@@ -62,6 +65,22 @@ export interface ClusterInterface extends utils.Interface {
       | "updateLzChain(uint16)"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "batchUpdateContracts",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>[],
+      PromiseOrValue<boolean>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "batchUpdateContracts(uint16,address[],bool)",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>[],
+      PromiseOrValue<boolean>
+    ]
+  ): string;
   encodeFunctionData(
     functionFragment: "isEditor",
     values: [PromiseOrValue<string>]
@@ -134,6 +153,14 @@ export interface ClusterInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "batchUpdateContracts",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "batchUpdateContracts(uint16,address[],bool)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "isEditor", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "isEditor(address)",
@@ -297,6 +324,20 @@ export interface Cluster extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    batchUpdateContracts(
+      _lzChainId: PromiseOrValue<BigNumberish>,
+      _addresses: PromiseOrValue<string>[],
+      _status: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "batchUpdateContracts(uint16,address[],bool)"(
+      _lzChainId: PromiseOrValue<BigNumberish>,
+      _addresses: PromiseOrValue<string>[],
+      _status: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     isEditor(
       editor: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -381,6 +422,20 @@ export interface Cluster extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
+
+  batchUpdateContracts(
+    _lzChainId: PromiseOrValue<BigNumberish>,
+    _addresses: PromiseOrValue<string>[],
+    _status: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "batchUpdateContracts(uint16,address[],bool)"(
+    _lzChainId: PromiseOrValue<BigNumberish>,
+    _addresses: PromiseOrValue<string>[],
+    _status: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   isEditor(
     editor: PromiseOrValue<string>,
@@ -467,6 +522,20 @@ export interface Cluster extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    batchUpdateContracts(
+      _lzChainId: PromiseOrValue<BigNumberish>,
+      _addresses: PromiseOrValue<string>[],
+      _status: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "batchUpdateContracts(uint16,address[],bool)"(
+      _lzChainId: PromiseOrValue<BigNumberish>,
+      _addresses: PromiseOrValue<string>[],
+      _status: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     isEditor(
       editor: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -552,32 +621,35 @@ export interface Cluster extends BaseContract {
     "ContractUpdated(address,uint16,bool,bool)"(
       _contract?: PromiseOrValue<string> | null,
       _lzChainId?: PromiseOrValue<BigNumberish> | null,
-      _oldStatus?: null,
+      _oldStatus?: PromiseOrValue<boolean> | null,
       _newStatus?: null
     ): ContractUpdatedEventFilter;
     ContractUpdated(
       _contract?: PromiseOrValue<string> | null,
       _lzChainId?: PromiseOrValue<BigNumberish> | null,
-      _oldStatus?: null,
+      _oldStatus?: PromiseOrValue<boolean> | null,
       _newStatus?: null
     ): ContractUpdatedEventFilter;
 
     "EditorUpdated(address,bool,bool)"(
       _editor?: PromiseOrValue<string> | null,
-      _oldStatus?: null,
-      _newStatus?: null
+      _oldStatus?: PromiseOrValue<boolean> | null,
+      _newStatus?: PromiseOrValue<boolean> | null
     ): EditorUpdatedEventFilter;
     EditorUpdated(
       _editor?: PromiseOrValue<string> | null,
-      _oldStatus?: null,
-      _newStatus?: null
+      _oldStatus?: PromiseOrValue<boolean> | null,
+      _newStatus?: PromiseOrValue<boolean> | null
     ): EditorUpdatedEventFilter;
 
     "LzChainUpdate(uint256,uint256)"(
-      _oldChain?: null,
-      _newChain?: null
+      _oldChain?: PromiseOrValue<BigNumberish> | null,
+      _newChain?: PromiseOrValue<BigNumberish> | null
     ): LzChainUpdateEventFilter;
-    LzChainUpdate(_oldChain?: null, _newChain?: null): LzChainUpdateEventFilter;
+    LzChainUpdate(
+      _oldChain?: PromiseOrValue<BigNumberish> | null,
+      _newChain?: PromiseOrValue<BigNumberish> | null
+    ): LzChainUpdateEventFilter;
 
     "OwnershipTransferred(address,address)"(
       previousOwner?: PromiseOrValue<string> | null,
@@ -590,6 +662,20 @@ export interface Cluster extends BaseContract {
   };
 
   estimateGas: {
+    batchUpdateContracts(
+      _lzChainId: PromiseOrValue<BigNumberish>,
+      _addresses: PromiseOrValue<string>[],
+      _status: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "batchUpdateContracts(uint16,address[],bool)"(
+      _lzChainId: PromiseOrValue<BigNumberish>,
+      _addresses: PromiseOrValue<string>[],
+      _status: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     isEditor(
       editor: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -676,6 +762,20 @@ export interface Cluster extends BaseContract {
   };
 
   populateTransaction: {
+    batchUpdateContracts(
+      _lzChainId: PromiseOrValue<BigNumberish>,
+      _addresses: PromiseOrValue<string>[],
+      _status: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "batchUpdateContracts(uint16,address[],bool)"(
+      _lzChainId: PromiseOrValue<BigNumberish>,
+      _addresses: PromiseOrValue<string>[],
+      _status: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     isEditor(
       editor: PromiseOrValue<string>,
       overrides?: CallOverrides
