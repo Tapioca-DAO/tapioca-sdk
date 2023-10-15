@@ -61,14 +61,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.OracleMock__factory>;
     getContractFactory(
-      name: "DelegatorTest",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.DelegatorTest__factory>;
-    getContractFactory(
-      name: "ReceiverTest",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ReceiverTest__factory>;
-    getContractFactory(
       name: "StargateRouterETHMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.StargateRouterETHMock__factory>;
@@ -84,10 +76,6 @@ declare module "hardhat/types/runtime" {
       name: "TOFTStrategyMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TOFTStrategyMock__factory>;
-    getContractFactory(
-      name: "TwTwapMock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TwTwapMock__factory>;
     getContractFactory(
       name: "UniswapV2ERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -182,16 +170,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.OracleMock>;
     getContractAt(
-      name: "DelegatorTest",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.DelegatorTest>;
-    getContractAt(
-      name: "ReceiverTest",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ReceiverTest>;
-    getContractAt(
       name: "StargateRouterETHMock",
       address: string,
       signer?: ethers.Signer
@@ -211,11 +189,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TOFTStrategyMock>;
-    getContractAt(
-      name: "TwTwapMock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.TwTwapMock>;
     getContractAt(
       name: "UniswapV2ERC20",
       address: string,

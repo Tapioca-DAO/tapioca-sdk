@@ -277,7 +277,7 @@ export interface UniswapV3SwapperMock extends BaseContract {
       swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BigNumberish>,
       arg2: PromiseOrValue<string>,
-      data: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -285,7 +285,7 @@ export interface UniswapV3SwapperMock extends BaseContract {
       swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BigNumberish>,
       arg2: PromiseOrValue<string>,
-      data: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
@@ -338,7 +338,7 @@ export interface UniswapV3SwapperMock extends BaseContract {
     swapData: UniswapV3SwapperMock.SwapDataStruct,
     arg1: PromiseOrValue<BigNumberish>,
     arg2: PromiseOrValue<string>,
-    data: PromiseOrValue<BytesLike>,
+    arg3: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -346,7 +346,7 @@ export interface UniswapV3SwapperMock extends BaseContract {
     swapData: UniswapV3SwapperMock.SwapDataStruct,
     arg1: PromiseOrValue<BigNumberish>,
     arg2: PromiseOrValue<string>,
-    data: PromiseOrValue<BytesLike>,
+    arg3: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -399,7 +399,7 @@ export interface UniswapV3SwapperMock extends BaseContract {
       swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BigNumberish>,
       arg2: PromiseOrValue<string>,
-      data: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
@@ -409,7 +409,7 @@ export interface UniswapV3SwapperMock extends BaseContract {
       swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BigNumberish>,
       arg2: PromiseOrValue<string>,
-      data: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
@@ -467,7 +467,7 @@ export interface UniswapV3SwapperMock extends BaseContract {
       swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BigNumberish>,
       arg2: PromiseOrValue<string>,
-      data: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -475,7 +475,7 @@ export interface UniswapV3SwapperMock extends BaseContract {
       swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BigNumberish>,
       arg2: PromiseOrValue<string>,
-      data: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
@@ -529,7 +529,7 @@ export interface UniswapV3SwapperMock extends BaseContract {
       swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BigNumberish>,
       arg2: PromiseOrValue<string>,
-      data: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -537,7 +537,7 @@ export interface UniswapV3SwapperMock extends BaseContract {
       swapData: UniswapV3SwapperMock.SwapDataStruct,
       arg1: PromiseOrValue<BigNumberish>,
       arg2: PromiseOrValue<string>,
-      data: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
