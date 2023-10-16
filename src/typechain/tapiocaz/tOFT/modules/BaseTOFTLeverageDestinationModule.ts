@@ -41,6 +41,20 @@ export declare namespace IUSDOBase {
     data: string;
   };
 
+  export type ILeverageExternalContractsDataStruct = {
+    swapper: PromiseOrValue<string>;
+    magnetar: PromiseOrValue<string>;
+    tOft: PromiseOrValue<string>;
+    srcMarket: PromiseOrValue<string>;
+  };
+
+  export type ILeverageExternalContractsDataStructOutput = [
+    string,
+    string,
+    string,
+    string
+  ] & { swapper: string; magnetar: string; tOft: string; srcMarket: string };
+
   export type ILeverageLZDataStruct = {
     srcExtraGasLimit: PromiseOrValue<BigNumberish>;
     lzSrcChainId: PromiseOrValue<BigNumberish>;
@@ -68,68 +82,6 @@ export declare namespace IUSDOBase {
     srcAirdropAdapterParam: string;
     refundAddress: string;
   };
-
-  export type ILeverageExternalContractsDataStruct = {
-    swapper: PromiseOrValue<string>;
-    magnetar: PromiseOrValue<string>;
-    tOft: PromiseOrValue<string>;
-    srcMarket: PromiseOrValue<string>;
-  };
-
-  export type ILeverageExternalContractsDataStructOutput = [
-    string,
-    string,
-    string,
-    string
-  ] & { swapper: string; magnetar: string; tOft: string; srcMarket: string };
-}
-
-export declare namespace ICommonData {
-  export type IApprovalStruct = {
-    permitAll: PromiseOrValue<boolean>;
-    allowFailure: PromiseOrValue<boolean>;
-    yieldBoxTypeApproval: PromiseOrValue<boolean>;
-    actionType: PromiseOrValue<BigNumberish>;
-    target: PromiseOrValue<string>;
-    permitBorrow: PromiseOrValue<boolean>;
-    owner: PromiseOrValue<string>;
-    spender: PromiseOrValue<string>;
-    value: PromiseOrValue<BigNumberish>;
-    deadline: PromiseOrValue<BigNumberish>;
-    v: PromiseOrValue<BigNumberish>;
-    r: PromiseOrValue<BytesLike>;
-    s: PromiseOrValue<BytesLike>;
-  };
-
-  export type IApprovalStructOutput = [
-    boolean,
-    boolean,
-    boolean,
-    number,
-    string,
-    boolean,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    number,
-    string,
-    string
-  ] & {
-    permitAll: boolean;
-    allowFailure: boolean;
-    yieldBoxTypeApproval: boolean;
-    actionType: number;
-    target: string;
-    permitBorrow: boolean;
-    owner: string;
-    spender: string;
-    value: BigNumber;
-    deadline: BigNumber;
-    v: number;
-    r: string;
-    s: string;
-  };
 }
 
 export declare namespace ICommonOFT {
@@ -146,7 +98,8 @@ export declare namespace ICommonOFT {
   };
 }
 
-export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
+export interface BaseTOFTLeverageDestinationModuleInterface
+  extends utils.Interface {
   functions: {
     "DEFAULT_PAYLOAD_SIZE_LIMIT()": FunctionFragment;
     "NO_EXTRA_GAS()": FunctionFragment;
@@ -171,11 +124,13 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
     "getTrustedRemoteAddress(uint16)": FunctionFragment;
     "hostChainID()": FunctionFragment;
     "increaseAllowance(address,uint256)": FunctionFragment;
-    "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "isTrustedRemote(uint16,bytes)": FunctionFragment;
+    "leverageDown(address,uint16,bytes,uint64,bytes)": FunctionFragment;
+    "leverageDownInternal(address,uint256,(address,uint256,bytes),(address,address,address,address),(uint256,uint16,uint16,address,bytes,bytes,address),address,uint256)": FunctionFragment;
     "lzEndpoint()": FunctionFragment;
     "lzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
     "minDstGasLookup(uint16,uint16)": FunctionFragment;
+    "multiHop(address,uint16,bytes,uint64,bytes)": FunctionFragment;
     "name()": FunctionFragment;
     "nonblockingLzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
@@ -184,7 +139,6 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
-    "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
     "setMaxSlippage(uint256)": FunctionFragment;
@@ -257,16 +211,20 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
       | "hostChainID()"
       | "increaseAllowance"
       | "increaseAllowance(address,uint256)"
-      | "initMultiSell"
-      | "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "isTrustedRemote"
       | "isTrustedRemote(uint16,bytes)"
+      | "leverageDown"
+      | "leverageDown(address,uint16,bytes,uint64,bytes)"
+      | "leverageDownInternal"
+      | "leverageDownInternal(address,uint256,(address,uint256,bytes),(address,address,address,address),(uint256,uint16,uint16,address,bytes,bytes,address),address,uint256)"
       | "lzEndpoint"
       | "lzEndpoint()"
       | "lzReceive"
       | "lzReceive(uint16,bytes,uint64,bytes)"
       | "minDstGasLookup"
       | "minDstGasLookup(uint16,uint16)"
+      | "multiHop"
+      | "multiHop(address,uint16,bytes,uint64,bytes)"
       | "name"
       | "name()"
       | "nonblockingLzReceive"
@@ -283,8 +241,6 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
       | "retryMessage(uint16,bytes,uint64,bytes)"
       | "sendAndCall"
       | "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))"
-      | "sendForLeverage"
-      | "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))"
       | "sendFrom"
       | "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"
       | "setConfig"
@@ -567,36 +523,56 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "initMultiSell",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      IUSDOBase.ILeverageSwapDataStruct,
-      IUSDOBase.ILeverageLZDataStruct,
-      IUSDOBase.ILeverageExternalContractsDataStruct,
-      PromiseOrValue<BytesLike>,
-      ICommonData.IApprovalStruct[]
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      IUSDOBase.ILeverageSwapDataStruct,
-      IUSDOBase.ILeverageLZDataStruct,
-      IUSDOBase.ILeverageExternalContractsDataStruct,
-      PromiseOrValue<BytesLike>,
-      ICommonData.IApprovalStruct[]
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "isTrustedRemote",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "isTrustedRemote(uint16,bytes)",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "leverageDown",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "leverageDown(address,uint16,bytes,uint64,bytes)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "leverageDownInternal",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      IUSDOBase.ILeverageSwapDataStruct,
+      IUSDOBase.ILeverageExternalContractsDataStruct,
+      IUSDOBase.ILeverageLZDataStruct,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "leverageDownInternal(address,uint256,(address,uint256,bytes),(address,address,address,address),(uint256,uint16,uint16,address,bytes,bytes,address),address,uint256)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      IUSDOBase.ILeverageSwapDataStruct,
+      IUSDOBase.ILeverageExternalContractsDataStruct,
+      IUSDOBase.ILeverageLZDataStruct,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "lzEndpoint",
@@ -631,6 +607,26 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "minDstGasLookup(uint16,uint16)",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "multiHop",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "multiHop(address,uint16,bytes,uint64,bytes)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(functionFragment: "name()", values?: undefined): string;
@@ -715,26 +711,6 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
       PromiseOrValue<BytesLike>,
       PromiseOrValue<BigNumberish>,
       ICommonOFT.LzCallParamsStruct
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "sendForLeverage",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      IUSDOBase.ILeverageLZDataStruct,
-      IUSDOBase.ILeverageSwapDataStruct,
-      IUSDOBase.ILeverageExternalContractsDataStruct
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      IUSDOBase.ILeverageLZDataStruct,
-      IUSDOBase.ILeverageSwapDataStruct,
-      IUSDOBase.ILeverageExternalContractsDataStruct
     ]
   ): string;
   encodeFunctionData(
@@ -1086,19 +1062,27 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "initMultiSell",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "isTrustedRemote",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "isTrustedRemote(uint16,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "leverageDown",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "leverageDown(address,uint16,bytes,uint64,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "leverageDownInternal",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "leverageDownInternal(address,uint256,(address,uint256,bytes),(address,address,address,address),(uint256,uint16,uint16,address,bytes,bytes,address),address,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "lzEndpoint", data: BytesLike): Result;
@@ -1117,6 +1101,11 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "minDstGasLookup(uint16,uint16)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "multiHop", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "multiHop(address,uint16,bytes,uint64,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
@@ -1163,14 +1152,6 @@ export interface BaseTOFTLeverageModuleInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "sendForLeverage",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "sendFrom", data: BytesLike): Result;
@@ -1565,14 +1546,14 @@ export type TransferEvent = TypedEvent<
 
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 
-export interface BaseTOFTLeverageModule extends BaseContract {
-  contractName: "BaseTOFTLeverageModule";
+export interface BaseTOFTLeverageDestinationModule extends BaseContract {
+  contractName: "BaseTOFTLeverageDestinationModule";
 
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: BaseTOFTLeverageModuleInterface;
+  interface: BaseTOFTLeverageDestinationModuleInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -1832,28 +1813,6 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    initMultiSell(
-      from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-      from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -1865,6 +1824,46 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       _srcAddress: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
+
+    leverageDown(
+      module: PromiseOrValue<string>,
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "leverageDown(address,uint16,bytes,uint64,bytes)"(
+      module: PromiseOrValue<string>,
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    leverageDownInternal(
+      module: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      leverageFor: PromiseOrValue<string>,
+      airdropAmount: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "leverageDownInternal(address,uint256,(address,uint256,bytes),(address,address,address,address),(uint256,uint16,uint16,address,bytes,bytes,address),address,uint256)"(
+      module: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      leverageFor: PromiseOrValue<string>,
+      airdropAmount: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     lzEndpoint(overrides?: CallOverrides): Promise<[string]>;
 
@@ -1897,6 +1896,24 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
+
+    multiHop(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "multiHop(address,uint16,bytes,uint64,bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     name(overrides?: CallOverrides): Promise<[string]>;
 
@@ -1979,24 +1996,6 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       _dstGasForCall: PromiseOrValue<BigNumberish>,
       _callParams: ICommonOFT.LzCallParamsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    sendForLeverage(
-      amount: PromiseOrValue<BigNumberish>,
-      leverageFor: PromiseOrValue<string>,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))"(
-      amount: PromiseOrValue<BigNumberish>,
-      leverageFor: PromiseOrValue<string>,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2451,28 +2450,6 @@ export interface BaseTOFTLeverageModule extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  initMultiSell(
-    from: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    swapData: IUSDOBase.ILeverageSwapDataStruct,
-    lzData: IUSDOBase.ILeverageLZDataStruct,
-    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-    airdropAdapterParams: PromiseOrValue<BytesLike>,
-    approvals: ICommonData.IApprovalStruct[],
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-    from: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    swapData: IUSDOBase.ILeverageSwapDataStruct,
-    lzData: IUSDOBase.ILeverageLZDataStruct,
-    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-    airdropAdapterParams: PromiseOrValue<BytesLike>,
-    approvals: ICommonData.IApprovalStruct[],
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   isTrustedRemote(
     _srcChainId: PromiseOrValue<BigNumberish>,
     _srcAddress: PromiseOrValue<BytesLike>,
@@ -2484,6 +2461,46 @@ export interface BaseTOFTLeverageModule extends BaseContract {
     _srcAddress: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<boolean>;
+
+  leverageDown(
+    module: PromiseOrValue<string>,
+    _srcChainId: PromiseOrValue<BigNumberish>,
+    _srcAddress: PromiseOrValue<BytesLike>,
+    _nonce: PromiseOrValue<BigNumberish>,
+    _payload: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "leverageDown(address,uint16,bytes,uint64,bytes)"(
+    module: PromiseOrValue<string>,
+    _srcChainId: PromiseOrValue<BigNumberish>,
+    _srcAddress: PromiseOrValue<BytesLike>,
+    _nonce: PromiseOrValue<BigNumberish>,
+    _payload: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  leverageDownInternal(
+    module: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    swapData: IUSDOBase.ILeverageSwapDataStruct,
+    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+    lzData: IUSDOBase.ILeverageLZDataStruct,
+    leverageFor: PromiseOrValue<string>,
+    airdropAmount: PromiseOrValue<BigNumberish>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "leverageDownInternal(address,uint256,(address,uint256,bytes),(address,address,address,address),(uint256,uint16,uint16,address,bytes,bytes,address),address,uint256)"(
+    module: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    swapData: IUSDOBase.ILeverageSwapDataStruct,
+    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+    lzData: IUSDOBase.ILeverageLZDataStruct,
+    leverageFor: PromiseOrValue<string>,
+    airdropAmount: PromiseOrValue<BigNumberish>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   lzEndpoint(overrides?: CallOverrides): Promise<string>;
 
@@ -2516,6 +2533,24 @@ export interface BaseTOFTLeverageModule extends BaseContract {
     arg1: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
+
+  multiHop(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<BigNumberish>,
+    arg2: PromiseOrValue<BytesLike>,
+    arg3: PromiseOrValue<BigNumberish>,
+    _payload: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "multiHop(address,uint16,bytes,uint64,bytes)"(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<BigNumberish>,
+    arg2: PromiseOrValue<BytesLike>,
+    arg3: PromiseOrValue<BigNumberish>,
+    _payload: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   name(overrides?: CallOverrides): Promise<string>;
 
@@ -2598,24 +2633,6 @@ export interface BaseTOFTLeverageModule extends BaseContract {
     _payload: PromiseOrValue<BytesLike>,
     _dstGasForCall: PromiseOrValue<BigNumberish>,
     _callParams: ICommonOFT.LzCallParamsStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  sendForLeverage(
-    amount: PromiseOrValue<BigNumberish>,
-    leverageFor: PromiseOrValue<string>,
-    lzData: IUSDOBase.ILeverageLZDataStruct,
-    swapData: IUSDOBase.ILeverageSwapDataStruct,
-    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))"(
-    amount: PromiseOrValue<BigNumberish>,
-    leverageFor: PromiseOrValue<string>,
-    lzData: IUSDOBase.ILeverageLZDataStruct,
-    swapData: IUSDOBase.ILeverageSwapDataStruct,
-    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3072,28 +3089,6 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    initMultiSell(
-      from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-      from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -3105,6 +3100,46 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       _srcAddress: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<boolean>;
+
+    leverageDown(
+      module: PromiseOrValue<string>,
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "leverageDown(address,uint16,bytes,uint64,bytes)"(
+      module: PromiseOrValue<string>,
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    leverageDownInternal(
+      module: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      leverageFor: PromiseOrValue<string>,
+      airdropAmount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "leverageDownInternal(address,uint256,(address,uint256,bytes),(address,address,address,address),(uint256,uint16,uint16,address,bytes,bytes,address),address,uint256)"(
+      module: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      leverageFor: PromiseOrValue<string>,
+      airdropAmount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     lzEndpoint(overrides?: CallOverrides): Promise<string>;
 
@@ -3137,6 +3172,24 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    multiHop(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "multiHop(address,uint16,bytes,uint64,bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     name(overrides?: CallOverrides): Promise<string>;
 
@@ -3215,24 +3268,6 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       _dstGasForCall: PromiseOrValue<BigNumberish>,
       _callParams: ICommonOFT.LzCallParamsStruct,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    sendForLeverage(
-      amount: PromiseOrValue<BigNumberish>,
-      leverageFor: PromiseOrValue<string>,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))"(
-      amount: PromiseOrValue<BigNumberish>,
-      leverageFor: PromiseOrValue<string>,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3824,28 +3859,6 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    initMultiSell(
-      from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-      from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -3856,6 +3869,46 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    leverageDown(
+      module: PromiseOrValue<string>,
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "leverageDown(address,uint16,bytes,uint64,bytes)"(
+      module: PromiseOrValue<string>,
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    leverageDownInternal(
+      module: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      leverageFor: PromiseOrValue<string>,
+      airdropAmount: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "leverageDownInternal(address,uint256,(address,uint256,bytes),(address,address,address,address),(uint256,uint16,uint16,address,bytes,bytes,address),address,uint256)"(
+      module: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      leverageFor: PromiseOrValue<string>,
+      airdropAmount: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     lzEndpoint(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3888,6 +3941,24 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    multiHop(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "multiHop(address,uint16,bytes,uint64,bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3971,24 +4042,6 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       _dstGasForCall: PromiseOrValue<BigNumberish>,
       _callParams: ICommonOFT.LzCallParamsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    sendForLeverage(
-      amount: PromiseOrValue<BigNumberish>,
-      leverageFor: PromiseOrValue<string>,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))"(
-      amount: PromiseOrValue<BigNumberish>,
-      leverageFor: PromiseOrValue<string>,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4446,28 +4499,6 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    initMultiSell(
-      from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "initMultiSell(address,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-      from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -4478,6 +4509,46 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    leverageDown(
+      module: PromiseOrValue<string>,
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "leverageDown(address,uint16,bytes,uint64,bytes)"(
+      module: PromiseOrValue<string>,
+      _srcChainId: PromiseOrValue<BigNumberish>,
+      _srcAddress: PromiseOrValue<BytesLike>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    leverageDownInternal(
+      module: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      leverageFor: PromiseOrValue<string>,
+      airdropAmount: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "leverageDownInternal(address,uint256,(address,uint256,bytes),(address,address,address,address),(uint256,uint16,uint16,address,bytes,bytes,address),address,uint256)"(
+      module: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      swapData: IUSDOBase.ILeverageSwapDataStruct,
+      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
+      lzData: IUSDOBase.ILeverageLZDataStruct,
+      leverageFor: PromiseOrValue<string>,
+      airdropAmount: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     lzEndpoint(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -4510,6 +4581,24 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    multiHop(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "multiHop(address,uint16,bytes,uint64,bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -4593,24 +4682,6 @@ export interface BaseTOFTLeverageModule extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       _dstGasForCall: PromiseOrValue<BigNumberish>,
       _callParams: ICommonOFT.LzCallParamsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    sendForLeverage(
-      amount: PromiseOrValue<BigNumberish>,
-      leverageFor: PromiseOrValue<string>,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))"(
-      amount: PromiseOrValue<BigNumberish>,
-      leverageFor: PromiseOrValue<string>,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

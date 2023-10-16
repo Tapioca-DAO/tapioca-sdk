@@ -29,17 +29,37 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BaseTOFTStorage__factory>;
     getContractFactory(
+      name: "BaseTOFTGenericModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseTOFTGenericModule__factory>;
+    getContractFactory(
+      name: "BaseTOFTLeverageDestinationModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseTOFTLeverageDestinationModule__factory>;
+    getContractFactory(
       name: "BaseTOFTLeverageModule",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BaseTOFTLeverageModule__factory>;
+    getContractFactory(
+      name: "BaseTOFTMarketDestinationModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseTOFTMarketDestinationModule__factory>;
     getContractFactory(
       name: "BaseTOFTMarketModule",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BaseTOFTMarketModule__factory>;
     getContractFactory(
+      name: "BaseTOFTOptionsDestinationModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseTOFTOptionsDestinationModule__factory>;
+    getContractFactory(
       name: "BaseTOFTOptionsModule",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BaseTOFTOptionsModule__factory>;
+    getContractFactory(
+      name: "BaseTOFTStrategyDestinationModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseTOFTStrategyDestinationModule__factory>;
     getContractFactory(
       name: "BaseTOFTStrategyModule",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -82,20 +102,45 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.BaseTOFTStorage>;
     getContractAt(
+      name: "BaseTOFTGenericModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseTOFTGenericModule>;
+    getContractAt(
+      name: "BaseTOFTLeverageDestinationModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseTOFTLeverageDestinationModule>;
+    getContractAt(
       name: "BaseTOFTLeverageModule",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.BaseTOFTLeverageModule>;
+    getContractAt(
+      name: "BaseTOFTMarketDestinationModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseTOFTMarketDestinationModule>;
     getContractAt(
       name: "BaseTOFTMarketModule",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.BaseTOFTMarketModule>;
     getContractAt(
+      name: "BaseTOFTOptionsDestinationModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseTOFTOptionsDestinationModule>;
+    getContractAt(
       name: "BaseTOFTOptionsModule",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.BaseTOFTOptionsModule>;
+    getContractAt(
+      name: "BaseTOFTStrategyDestinationModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseTOFTStrategyDestinationModule>;
     getContractAt(
       name: "BaseTOFTStrategyModule",
       address: string,

@@ -29,31 +29,6 @@ import type {
 } from "../../common";
 
 export declare namespace ITapiocaOptionsBrokerCrossChain {
-  export type IExerciseLZSendTapDataStruct = {
-    withdrawOnAnotherChain: PromiseOrValue<boolean>;
-    tapOftAddress: PromiseOrValue<string>;
-    lzDstChainId: PromiseOrValue<BigNumberish>;
-    amount: PromiseOrValue<BigNumberish>;
-    zroPaymentAddress: PromiseOrValue<string>;
-    extraGas: PromiseOrValue<BigNumberish>;
-  };
-
-  export type IExerciseLZSendTapDataStructOutput = [
-    boolean,
-    string,
-    number,
-    BigNumber,
-    string,
-    BigNumber
-  ] & {
-    withdrawOnAnotherChain: boolean;
-    tapOftAddress: string;
-    lzDstChainId: number;
-    amount: BigNumber;
-    zroPaymentAddress: string;
-    extraGas: BigNumber;
-  };
-
   export type IExerciseOptionsDataStruct = {
     from: PromiseOrValue<string>;
     target: PromiseOrValue<string>;
@@ -90,13 +65,38 @@ export declare namespace ITapiocaOptionsBrokerCrossChain {
     zroPaymentAddress: string;
     extraGas: BigNumber;
   };
+
+  export type IExerciseLZSendTapDataStruct = {
+    withdrawOnAnotherChain: PromiseOrValue<boolean>;
+    tapOftAddress: PromiseOrValue<string>;
+    lzDstChainId: PromiseOrValue<BigNumberish>;
+    amount: PromiseOrValue<BigNumberish>;
+    zroPaymentAddress: PromiseOrValue<string>;
+    extraGas: PromiseOrValue<BigNumberish>;
+  };
+
+  export type IExerciseLZSendTapDataStructOutput = [
+    boolean,
+    string,
+    number,
+    BigNumber,
+    string,
+    BigNumber
+  ] & {
+    withdrawOnAnotherChain: boolean;
+    tapOftAddress: string;
+    lzDstChainId: number;
+    amount: BigNumber;
+    zroPaymentAddress: string;
+    extraGas: BigNumber;
+  };
 }
 
 export declare namespace ICommonData {
   export type IApprovalStruct = {
     permitAll: PromiseOrValue<boolean>;
     allowFailure: PromiseOrValue<boolean>;
-    approveOnYieldBox: PromiseOrValue<boolean>;
+    yieldBoxTypeApproval: PromiseOrValue<boolean>;
     actionType: PromiseOrValue<BigNumberish>;
     target: PromiseOrValue<string>;
     permitBorrow: PromiseOrValue<boolean>;
@@ -126,7 +126,7 @@ export declare namespace ICommonData {
   ] & {
     permitAll: boolean;
     allowFailure: boolean;
-    approveOnYieldBox: boolean;
+    yieldBoxTypeApproval: boolean;
     actionType: number;
     target: string;
     permitBorrow: boolean;
@@ -141,20 +141,6 @@ export declare namespace ICommonData {
 }
 
 export declare namespace ICommonOFT {
-  export type LzCallParamsStruct = {
-    refundAddress: PromiseOrValue<string>;
-    zroPaymentAddress: PromiseOrValue<string>;
-    adapterParams: PromiseOrValue<BytesLike>;
-  };
-
-  export type LzCallParamsStructOutput = [string, string, string] & {
-    refundAddress: string;
-    zroPaymentAddress: string;
-    adapterParams: string;
-  };
-}
-
-export declare namespace ISendFrom {
   export type LzCallParamsStruct = {
     refundAddress: PromiseOrValue<string>;
     zroPaymentAddress: PromiseOrValue<string>;
@@ -187,8 +173,6 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
     "erc20()": FunctionFragment;
     "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)": FunctionFragment;
     "estimateSendFee(uint16,bytes32,uint256,bool,bytes)": FunctionFragment;
-    "exercise(address,uint16,bytes,uint64,bytes)": FunctionFragment;
-    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],uint256)": FunctionFragment;
     "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)": FunctionFragment;
     "failedMessages(uint16,bytes,uint64)": FunctionFragment;
     "forceResumeReceive(uint16,bytes)": FunctionFragment;
@@ -209,7 +193,6 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
-    "sendFromDestination(bytes)": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
     "setMaxSlippage(uint256)": FunctionFragment;
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
@@ -228,7 +211,6 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
     "transfer(address,uint256)": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
-    "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "trustedRemoteLookup(uint16)": FunctionFragment;
     "useCustomAdapterParams()": FunctionFragment;
     "yieldBox()": FunctionFragment;
@@ -270,10 +252,6 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
       | "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)"
       | "estimateSendFee"
       | "estimateSendFee(uint16,bytes32,uint256,bool,bytes)"
-      | "exercise"
-      | "exercise(address,uint16,bytes,uint64,bytes)"
-      | "exerciseInternal"
-      | "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],uint256)"
       | "exerciseOption"
       | "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"
       | "failedMessages"
@@ -314,8 +292,6 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
       | "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))"
       | "sendFrom"
       | "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"
-      | "sendFromDestination"
-      | "sendFromDestination(bytes)"
       | "setConfig"
       | "setConfig(uint16,uint16,uint256,bytes)"
       | "setMaxSlippage"
@@ -352,8 +328,6 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
       | "transferFrom(address,address,uint256)"
       | "transferOwnership"
       | "transferOwnership(address)"
-      | "triggerSendFrom"
-      | "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "trustedRemoteLookup"
       | "trustedRemoteLookup(uint16)"
       | "useCustomAdapterParams"
@@ -529,54 +503,6 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<boolean>,
       PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "exercise",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "exercise(address,uint16,bytes,uint64,bytes)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "exerciseInternal",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      PromiseOrValue<BigNumberish>,
-      ICommonData.IApprovalStruct[],
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],uint256)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      PromiseOrValue<BigNumberish>,
-      ICommonData.IApprovalStruct[],
-      PromiseOrValue<BigNumberish>
     ]
   ): string;
   encodeFunctionData(
@@ -813,14 +739,6 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "sendFromDestination",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "sendFromDestination(bytes)",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "setConfig",
     values: [
       PromiseOrValue<BigNumberish>,
@@ -979,28 +897,6 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "triggerSendFrom",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      ISendFrom.LzCallParamsStruct,
-      ICommonData.IApprovalStruct[]
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      ISendFrom.LzCallParamsStruct,
-      ICommonData.IApprovalStruct[]
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "trustedRemoteLookup",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
@@ -1123,19 +1019,6 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "estimateSendFee(uint16,bytes32,uint256,bool,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "exercise", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "exercise(address,uint16,bytes,uint64,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "exerciseInternal",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1268,14 +1151,6 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
     functionFragment: "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "sendFromDestination",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "sendFromDestination(bytes)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "setConfig", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setConfig(uint16,uint16,uint256,bytes)",
@@ -1400,14 +1275,6 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "triggerSendFrom",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1870,50 +1737,6 @@ export interface BaseTOFTOptionsModule extends BaseContract {
       [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
     >;
 
-    exercise(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "exercise(address,uint16,bytes,uint64,bytes)"(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    exerciseInternal(
-      from: PromiseOrValue<string>,
-      oTAPTokenID: PromiseOrValue<BigNumberish>,
-      paymentToken: PromiseOrValue<string>,
-      tapAmount: PromiseOrValue<BigNumberish>,
-      target: PromiseOrValue<string>,
-      tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      paymentTokenAmount: PromiseOrValue<BigNumberish>,
-      approvals: ICommonData.IApprovalStruct[],
-      airdropAmount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],uint256)"(
-      from: PromiseOrValue<string>,
-      oTAPTokenID: PromiseOrValue<BigNumberish>,
-      paymentToken: PromiseOrValue<string>,
-      tapAmount: PromiseOrValue<BigNumberish>,
-      target: PromiseOrValue<string>,
-      tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      paymentTokenAmount: PromiseOrValue<BigNumberish>,
-      approvals: ICommonData.IApprovalStruct[],
-      airdropAmount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     exerciseOption(
       optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
@@ -2146,16 +1969,6 @@ export interface BaseTOFTOptionsModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    sendFromDestination(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "sendFromDestination(bytes)"(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     setConfig(
       _version: PromiseOrValue<BigNumberish>,
       _chainId: PromiseOrValue<BigNumberish>,
@@ -2332,26 +2145,6 @@ export interface BaseTOFTOptionsModule extends BaseContract {
     "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    triggerSendFrom(
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      sendFromData: ISendFrom.LzCallParamsStruct,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      sendFromData: ISendFrom.LzCallParamsStruct,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     trustedRemoteLookup(
@@ -2540,50 +2333,6 @@ export interface BaseTOFTOptionsModule extends BaseContract {
   ): Promise<
     [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
   >;
-
-  exercise(
-    module: PromiseOrValue<string>,
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _srcAddress: PromiseOrValue<BytesLike>,
-    _nonce: PromiseOrValue<BigNumberish>,
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "exercise(address,uint16,bytes,uint64,bytes)"(
-    module: PromiseOrValue<string>,
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _srcAddress: PromiseOrValue<BytesLike>,
-    _nonce: PromiseOrValue<BigNumberish>,
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  exerciseInternal(
-    from: PromiseOrValue<string>,
-    oTAPTokenID: PromiseOrValue<BigNumberish>,
-    paymentToken: PromiseOrValue<string>,
-    tapAmount: PromiseOrValue<BigNumberish>,
-    target: PromiseOrValue<string>,
-    tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-    paymentTokenAmount: PromiseOrValue<BigNumberish>,
-    approvals: ICommonData.IApprovalStruct[],
-    airdropAmount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],uint256)"(
-    from: PromiseOrValue<string>,
-    oTAPTokenID: PromiseOrValue<BigNumberish>,
-    paymentToken: PromiseOrValue<string>,
-    tapAmount: PromiseOrValue<BigNumberish>,
-    target: PromiseOrValue<string>,
-    tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-    paymentTokenAmount: PromiseOrValue<BigNumberish>,
-    approvals: ICommonData.IApprovalStruct[],
-    airdropAmount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
 
   exerciseOption(
     optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
@@ -2817,16 +2566,6 @@ export interface BaseTOFTOptionsModule extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  sendFromDestination(
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "sendFromDestination(bytes)"(
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   setConfig(
     _version: PromiseOrValue<BigNumberish>,
     _chainId: PromiseOrValue<BigNumberish>,
@@ -3003,26 +2742,6 @@ export interface BaseTOFTOptionsModule extends BaseContract {
   "transferOwnership(address)"(
     newOwner: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  triggerSendFrom(
-    lzDstChainId: PromiseOrValue<BigNumberish>,
-    airdropAdapterParams: PromiseOrValue<BytesLike>,
-    zroPaymentAddress: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    sendFromData: ISendFrom.LzCallParamsStruct,
-    approvals: ICommonData.IApprovalStruct[],
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-    lzDstChainId: PromiseOrValue<BigNumberish>,
-    airdropAdapterParams: PromiseOrValue<BytesLike>,
-    zroPaymentAddress: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    sendFromData: ISendFrom.LzCallParamsStruct,
-    approvals: ICommonData.IApprovalStruct[],
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   trustedRemoteLookup(
@@ -3213,50 +2932,6 @@ export interface BaseTOFTOptionsModule extends BaseContract {
     ): Promise<
       [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
     >;
-
-    exercise(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "exercise(address,uint16,bytes,uint64,bytes)"(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    exerciseInternal(
-      from: PromiseOrValue<string>,
-      oTAPTokenID: PromiseOrValue<BigNumberish>,
-      paymentToken: PromiseOrValue<string>,
-      tapAmount: PromiseOrValue<BigNumberish>,
-      target: PromiseOrValue<string>,
-      tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      paymentTokenAmount: PromiseOrValue<BigNumberish>,
-      approvals: ICommonData.IApprovalStruct[],
-      airdropAmount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],uint256)"(
-      from: PromiseOrValue<string>,
-      oTAPTokenID: PromiseOrValue<BigNumberish>,
-      paymentToken: PromiseOrValue<string>,
-      tapAmount: PromiseOrValue<BigNumberish>,
-      target: PromiseOrValue<string>,
-      tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      paymentTokenAmount: PromiseOrValue<BigNumberish>,
-      approvals: ICommonData.IApprovalStruct[],
-      airdropAmount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     exerciseOption(
       optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
@@ -3486,16 +3161,6 @@ export interface BaseTOFTOptionsModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    sendFromDestination(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "sendFromDestination(bytes)"(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     setConfig(
       _version: PromiseOrValue<BigNumberish>,
       _chainId: PromiseOrValue<BigNumberish>,
@@ -3671,26 +3336,6 @@ export interface BaseTOFTOptionsModule extends BaseContract {
 
     "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    triggerSendFrom(
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      sendFromData: ISendFrom.LzCallParamsStruct,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      sendFromData: ISendFrom.LzCallParamsStruct,
-      approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4018,50 +3663,6 @@ export interface BaseTOFTOptionsModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    exercise(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "exercise(address,uint16,bytes,uint64,bytes)"(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    exerciseInternal(
-      from: PromiseOrValue<string>,
-      oTAPTokenID: PromiseOrValue<BigNumberish>,
-      paymentToken: PromiseOrValue<string>,
-      tapAmount: PromiseOrValue<BigNumberish>,
-      target: PromiseOrValue<string>,
-      tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      paymentTokenAmount: PromiseOrValue<BigNumberish>,
-      approvals: ICommonData.IApprovalStruct[],
-      airdropAmount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],uint256)"(
-      from: PromiseOrValue<string>,
-      oTAPTokenID: PromiseOrValue<BigNumberish>,
-      paymentToken: PromiseOrValue<string>,
-      tapAmount: PromiseOrValue<BigNumberish>,
-      target: PromiseOrValue<string>,
-      tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      paymentTokenAmount: PromiseOrValue<BigNumberish>,
-      approvals: ICommonData.IApprovalStruct[],
-      airdropAmount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     exerciseOption(
       optionsData: ITapiocaOptionsBrokerCrossChain.IExerciseOptionsDataStruct,
       lzData: ITapiocaOptionsBrokerCrossChain.IExerciseLZDataStruct,
@@ -4294,16 +3895,6 @@ export interface BaseTOFTOptionsModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    sendFromDestination(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "sendFromDestination(bytes)"(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     setConfig(
       _version: PromiseOrValue<BigNumberish>,
       _chainId: PromiseOrValue<BigNumberish>,
@@ -4480,26 +4071,6 @@ export interface BaseTOFTOptionsModule extends BaseContract {
     "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    triggerSendFrom(
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      sendFromData: ISendFrom.LzCallParamsStruct,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      sendFromData: ISendFrom.LzCallParamsStruct,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     trustedRemoteLookup(
@@ -4690,50 +4261,6 @@ export interface BaseTOFTOptionsModule extends BaseContract {
       _useZro: PromiseOrValue<boolean>,
       _adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    exercise(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "exercise(address,uint16,bytes,uint64,bytes)"(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    exerciseInternal(
-      from: PromiseOrValue<string>,
-      oTAPTokenID: PromiseOrValue<BigNumberish>,
-      paymentToken: PromiseOrValue<string>,
-      tapAmount: PromiseOrValue<BigNumberish>,
-      target: PromiseOrValue<string>,
-      tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      paymentTokenAmount: PromiseOrValue<BigNumberish>,
-      approvals: ICommonData.IApprovalStruct[],
-      airdropAmount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "exerciseInternal(address,uint256,address,uint256,address,(bool,address,uint16,uint256,address,uint256),uint256,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],uint256)"(
-      from: PromiseOrValue<string>,
-      oTAPTokenID: PromiseOrValue<BigNumberish>,
-      paymentToken: PromiseOrValue<string>,
-      tapAmount: PromiseOrValue<BigNumberish>,
-      target: PromiseOrValue<string>,
-      tapSendData: ITapiocaOptionsBrokerCrossChain.IExerciseLZSendTapDataStruct,
-      paymentTokenAmount: PromiseOrValue<BigNumberish>,
-      approvals: ICommonData.IApprovalStruct[],
-      airdropAmount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     exerciseOption(
@@ -4968,16 +4495,6 @@ export interface BaseTOFTOptionsModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    sendFromDestination(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "sendFromDestination(bytes)"(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     setConfig(
       _version: PromiseOrValue<BigNumberish>,
       _chainId: PromiseOrValue<BigNumberish>,
@@ -5156,26 +4673,6 @@ export interface BaseTOFTOptionsModule extends BaseContract {
     "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    triggerSendFrom(
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      sendFromData: ISendFrom.LzCallParamsStruct,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      zroPaymentAddress: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      sendFromData: ISendFrom.LzCallParamsStruct,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     trustedRemoteLookup(
