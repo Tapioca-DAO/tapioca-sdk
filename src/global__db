@@ -7,10 +7,60 @@
             "421613": []
         },
         "tap-token": {
-            "4002": [],
+            "4002": [
+                {
+                    "name": "TapOFT",
+                    "address": "0x973Fe66Bd7E3f5Ca96280b43788ad046472ec210",
+                    "meta": {
+                        "args": [
+                            "0x7dcAD72640F835B0FA36EFD3D6d3ec902C7E5acf",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "421613",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ],
+                        "salt": "0xbeb9b1f380c23bb72a37da78b3b2138802d93dd1fbab4ac2c5d7c6553a3243ed",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "TapiocaDeployer",
+                    "address": "0x50b9c4e1caE6170201FC31fA45475F2E74D960D7",
+                    "meta": {}
+                }
+            ],
             "43113": [],
             "80001": [],
-            "421613": []
+            "421613": [
+                {
+                    "name": "TapOFT",
+                    "address": "0xf0a7E86b44B5739f8705D9804848292Ef6975A20",
+                    "meta": {
+                        "args": [
+                            "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653",
+                            "421613",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ],
+                        "salt": "0xf6764a8dcaaceea1bbb828f1b2f7c94bfdd4dcf48c7ef05e73611cd384802c78",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "TapiocaDeployer",
+                    "address": "0xe86C22A9741aF251a1e364945C43e4D8f40CEe47",
+                    "meta": {}
+                }
+            ]
         },
         "tapiocaz": {
             "4002": [
