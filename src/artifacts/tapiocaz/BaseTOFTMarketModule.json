@@ -898,6 +898,192 @@
     {
       "inputs": [
         {
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "tokenOut",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amountOutMin",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IUSDOBase.ILeverageSwapData",
+          "name": "swapData",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "srcExtraGasLimit",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint16",
+              "name": "lzSrcChainId",
+              "type": "uint16"
+            },
+            {
+              "internalType": "uint16",
+              "name": "lzDstChainId",
+              "type": "uint16"
+            },
+            {
+              "internalType": "address",
+              "name": "zroPaymentAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes",
+              "name": "dstAirdropAdapterParam",
+              "type": "bytes"
+            },
+            {
+              "internalType": "bytes",
+              "name": "srcAirdropAdapterParam",
+              "type": "bytes"
+            },
+            {
+              "internalType": "address",
+              "name": "refundAddress",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct IUSDOBase.ILeverageLZData",
+          "name": "lzData",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "swapper",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "magnetar",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "tOft",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "srcMarket",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct IUSDOBase.ILeverageExternalContractsData",
+          "name": "externalData",
+          "type": "tuple"
+        },
+        {
+          "internalType": "bytes",
+          "name": "airdropAdapterParams",
+          "type": "bytes"
+        },
+        {
+          "components": [
+            {
+              "internalType": "bool",
+              "name": "permitAll",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "allowFailure",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "approveOnYieldBox",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint16",
+              "name": "actionType",
+              "type": "uint16"
+            },
+            {
+              "internalType": "address",
+              "name": "target",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "permitBorrow",
+              "type": "bool"
+            },
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "deadline",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint8",
+              "name": "v",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "r",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "s",
+              "type": "bytes32"
+            }
+          ],
+          "internalType": "struct ICommonData.IApproval[]",
+          "name": "approvals",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "initMultiSell",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
           "internalType": "uint16",
           "name": "_srcChainId",
           "type": "uint16"
