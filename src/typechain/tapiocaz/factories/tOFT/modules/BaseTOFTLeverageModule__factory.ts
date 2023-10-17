@@ -1185,6 +1185,19 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "_payload",
+        type: "bytes",
+      },
+    ],
+    name: "multiHop",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "name",
     outputs: [
