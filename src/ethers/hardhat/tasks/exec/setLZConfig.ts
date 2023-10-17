@@ -39,7 +39,10 @@ export const setLZConfig__task = async (
 
     let packetTypes: EPacketType[] = [];
     if (contractType === 'tOFT') {
-        packetTypes = hre.SDK.config.TOFT_PACKET_TYPES;
+        packetTypes = [
+            ...hre.SDK.config.TOFT_PACKET_TYPES,
+            ...hre.SDK.config.COMMON_PACKET_TYPES,
+        ];
     } else if (contractType === 'ONFT') {
         packetTypes = hre.SDK.config.ONFT_PACKET_TYPES;
     } else if (contractType === 'USDO') {
