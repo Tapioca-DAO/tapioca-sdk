@@ -9,6 +9,7 @@ import { getDeployment__task } from './tasks/view/getDeployment';
 import { transferOwnership__task } from './tasks/exec/transferOwnership';
 import { deployMagnetar__task } from './tasks/exec/deployMagnetar';
 import { deployCluster__task } from './tasks/exec/deployCluster';
+import { saveBlockNumber__task } from './tasks/exec/saveBlockNumber';
 
 const addCliParams = (task: ConfigurableTaskDefinition) => {
     return task.addOptionalParam(
@@ -95,4 +96,13 @@ addCliParams(
         .addParam('src', 'Name of the source chain')
         .addParam('dst', 'Name of the destination chain')
         .addParam('value', 'Amount to send, (ex: 1.45)'),
+);
+
+
+addDebugModeParams(
+    task(
+        'saveBlockNumber',
+        'Saves current block number to global__db',
+        saveBlockNumber__task,
+    ),
 );
