@@ -7,3 +7,4 @@ import type * as singularity from "./singularity";
 export type { singularity };
 export type { Market } from "./Market";
 export type { MarketERC20 } from "./MarketERC20";
+export type { MarketLiquidatorReceiver } from "./MarketLiquidatorReceiver";

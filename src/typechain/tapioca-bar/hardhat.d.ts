@@ -53,6 +53,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MarketERC20__factory>;
     getContractFactory(
+      name: "MarketLiquidatorReceiver",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MarketLiquidatorReceiver__factory>;
+    getContractFactory(
       name: "SGLBorrow",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SGLBorrow__factory>;
@@ -105,13 +109,29 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.USDOCommon__factory>;
     getContractFactory(
+      name: "USDOGenericModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.USDOGenericModule__factory>;
+    getContractFactory(
+      name: "USDOLeverageDestinationModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.USDOLeverageDestinationModule__factory>;
+    getContractFactory(
       name: "USDOLeverageModule",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.USDOLeverageModule__factory>;
     getContractFactory(
+      name: "USDOMarketDestinationModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.USDOMarketDestinationModule__factory>;
+    getContractFactory(
       name: "USDOMarketModule",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.USDOMarketModule__factory>;
+    getContractFactory(
+      name: "USDOOptionsDestinationModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.USDOOptionsDestinationModule__factory>;
     getContractFactory(
       name: "USDOOptionsModule",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -120,6 +140,10 @@ declare module "hardhat/types/runtime" {
       name: "USDO",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.USDO__factory>;
+    getContractFactory(
+      name: "USDOFlashloanHelper",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.USDOFlashloanHelper__factory>;
 
     getContractAt(
       name: "BBBorrow",
@@ -171,6 +195,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.MarketERC20>;
+    getContractAt(
+      name: "MarketLiquidatorReceiver",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MarketLiquidatorReceiver>;
     getContractAt(
       name: "SGLBorrow",
       address: string,
@@ -237,15 +266,35 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.USDOCommon>;
     getContractAt(
+      name: "USDOGenericModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.USDOGenericModule>;
+    getContractAt(
+      name: "USDOLeverageDestinationModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.USDOLeverageDestinationModule>;
+    getContractAt(
       name: "USDOLeverageModule",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.USDOLeverageModule>;
     getContractAt(
+      name: "USDOMarketDestinationModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.USDOMarketDestinationModule>;
+    getContractAt(
       name: "USDOMarketModule",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.USDOMarketModule>;
+    getContractAt(
+      name: "USDOOptionsDestinationModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.USDOOptionsDestinationModule>;
     getContractAt(
       name: "USDOOptionsModule",
       address: string,
@@ -256,6 +305,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.USDO>;
+    getContractAt(
+      name: "USDOFlashloanHelper",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.USDOFlashloanHelper>;
 
     // default types
     getContractFactory(

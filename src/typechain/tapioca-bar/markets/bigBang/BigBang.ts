@@ -63,7 +63,7 @@ export interface BigBangInterface extends utils.Interface {
     "init(bytes)": FunctionFragment;
     "isMainMarket()": FunctionFragment;
     "leverageModule()": FunctionFragment;
-    "liquidate(address[],uint256[],bytes[],address)": FunctionFragment;
+    "liquidate(address[],uint256[],address[],bytes[])": FunctionFragment;
     "liquidateBadDebt(address,address,address,bytes)": FunctionFragment;
     "liquidationBonusAmount()": FunctionFragment;
     "liquidationCollateralizationRate()": FunctionFragment;
@@ -179,7 +179,7 @@ export interface BigBangInterface extends utils.Interface {
       | "leverageModule"
       | "leverageModule()"
       | "liquidate"
-      | "liquidate(address[],uint256[],bytes[],address)"
+      | "liquidate(address[],uint256[],address[],bytes[])"
       | "liquidateBadDebt"
       | "liquidateBadDebt(address,address,address,bytes)"
       | "liquidationBonusAmount"
@@ -564,17 +564,17 @@ export interface BigBangInterface extends utils.Interface {
     values: [
       PromiseOrValue<string>[],
       PromiseOrValue<BigNumberish>[],
-      PromiseOrValue<BytesLike>[],
-      PromiseOrValue<string>
+      PromiseOrValue<string>[],
+      PromiseOrValue<BytesLike>[]
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "liquidate(address[],uint256[],bytes[],address)",
+    functionFragment: "liquidate(address[],uint256[],address[],bytes[])",
     values: [
       PromiseOrValue<string>[],
       PromiseOrValue<BigNumberish>[],
-      PromiseOrValue<BytesLike>[],
-      PromiseOrValue<string>
+      PromiseOrValue<string>[],
+      PromiseOrValue<BytesLike>[]
     ]
   ): string;
   encodeFunctionData(
@@ -1246,7 +1246,7 @@ export interface BigBangInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "liquidate", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "liquidate(address[],uint256[],bytes[],address)",
+    functionFragment: "liquidate(address[],uint256[],address[],bytes[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2229,32 +2229,32 @@ export interface BigBang extends BaseContract {
     liquidate(
       users: PromiseOrValue<string>[],
       maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      collateralToAssetSwapDatas: PromiseOrValue<BytesLike>[],
-      swapper: PromiseOrValue<string>,
+      liquidatorReceivers: PromiseOrValue<string>[],
+      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "liquidate(address[],uint256[],bytes[],address)"(
+    "liquidate(address[],uint256[],address[],bytes[])"(
       users: PromiseOrValue<string>[],
       maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      collateralToAssetSwapDatas: PromiseOrValue<BytesLike>[],
-      swapper: PromiseOrValue<string>,
+      liquidatorReceivers: PromiseOrValue<string>[],
+      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     liquidateBadDebt(
       user: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      liquidatorReceiver: PromiseOrValue<string>,
+      liquidatorReceiverData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "liquidateBadDebt(address,address,address,bytes)"(
       user: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      liquidatorReceiver: PromiseOrValue<string>,
+      liquidatorReceiverData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2922,32 +2922,32 @@ export interface BigBang extends BaseContract {
   liquidate(
     users: PromiseOrValue<string>[],
     maxBorrowParts: PromiseOrValue<BigNumberish>[],
-    collateralToAssetSwapDatas: PromiseOrValue<BytesLike>[],
-    swapper: PromiseOrValue<string>,
+    liquidatorReceivers: PromiseOrValue<string>[],
+    liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "liquidate(address[],uint256[],bytes[],address)"(
+  "liquidate(address[],uint256[],address[],bytes[])"(
     users: PromiseOrValue<string>[],
     maxBorrowParts: PromiseOrValue<BigNumberish>[],
-    collateralToAssetSwapDatas: PromiseOrValue<BytesLike>[],
-    swapper: PromiseOrValue<string>,
+    liquidatorReceivers: PromiseOrValue<string>[],
+    liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   liquidateBadDebt(
     user: PromiseOrValue<string>,
     receiver: PromiseOrValue<string>,
-    swapper: PromiseOrValue<string>,
-    collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+    liquidatorReceiver: PromiseOrValue<string>,
+    liquidatorReceiverData: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "liquidateBadDebt(address,address,address,bytes)"(
     user: PromiseOrValue<string>,
     receiver: PromiseOrValue<string>,
-    swapper: PromiseOrValue<string>,
-    collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+    liquidatorReceiver: PromiseOrValue<string>,
+    liquidatorReceiverData: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3607,32 +3607,32 @@ export interface BigBang extends BaseContract {
     liquidate(
       users: PromiseOrValue<string>[],
       maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      collateralToAssetSwapDatas: PromiseOrValue<BytesLike>[],
-      swapper: PromiseOrValue<string>,
+      liquidatorReceivers: PromiseOrValue<string>[],
+      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "liquidate(address[],uint256[],bytes[],address)"(
+    "liquidate(address[],uint256[],address[],bytes[])"(
       users: PromiseOrValue<string>[],
       maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      collateralToAssetSwapDatas: PromiseOrValue<BytesLike>[],
-      swapper: PromiseOrValue<string>,
+      liquidatorReceivers: PromiseOrValue<string>[],
+      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     liquidateBadDebt(
       user: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      liquidatorReceiver: PromiseOrValue<string>,
+      liquidatorReceiverData: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "liquidateBadDebt(address,address,address,bytes)"(
       user: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      liquidatorReceiver: PromiseOrValue<string>,
+      liquidatorReceiverData: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4493,32 +4493,32 @@ export interface BigBang extends BaseContract {
     liquidate(
       users: PromiseOrValue<string>[],
       maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      collateralToAssetSwapDatas: PromiseOrValue<BytesLike>[],
-      swapper: PromiseOrValue<string>,
+      liquidatorReceivers: PromiseOrValue<string>[],
+      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "liquidate(address[],uint256[],bytes[],address)"(
+    "liquidate(address[],uint256[],address[],bytes[])"(
       users: PromiseOrValue<string>[],
       maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      collateralToAssetSwapDatas: PromiseOrValue<BytesLike>[],
-      swapper: PromiseOrValue<string>,
+      liquidatorReceivers: PromiseOrValue<string>[],
+      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     liquidateBadDebt(
       user: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      liquidatorReceiver: PromiseOrValue<string>,
+      liquidatorReceiverData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "liquidateBadDebt(address,address,address,bytes)"(
       user: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      liquidatorReceiver: PromiseOrValue<string>,
+      liquidatorReceiverData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5177,32 +5177,32 @@ export interface BigBang extends BaseContract {
     liquidate(
       users: PromiseOrValue<string>[],
       maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      collateralToAssetSwapDatas: PromiseOrValue<BytesLike>[],
-      swapper: PromiseOrValue<string>,
+      liquidatorReceivers: PromiseOrValue<string>[],
+      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "liquidate(address[],uint256[],bytes[],address)"(
+    "liquidate(address[],uint256[],address[],bytes[])"(
       users: PromiseOrValue<string>[],
       maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      collateralToAssetSwapDatas: PromiseOrValue<BytesLike>[],
-      swapper: PromiseOrValue<string>,
+      liquidatorReceivers: PromiseOrValue<string>[],
+      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     liquidateBadDebt(
       user: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      liquidatorReceiver: PromiseOrValue<string>,
+      liquidatorReceiverData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "liquidateBadDebt(address,address,address,bytes)"(
       user: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
-      swapper: PromiseOrValue<string>,
-      collateralToAssetSwapData: PromiseOrValue<BytesLike>,
+      liquidatorReceiver: PromiseOrValue<string>,
+      liquidatorReceiverData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

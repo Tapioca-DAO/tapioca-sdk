@@ -28,7 +28,127 @@ import type {
   PromiseOrValue,
 } from "../../common";
 
+export declare namespace ICommonData {
+  export type ICommonExternalContractsStruct = {
+    magnetar: PromiseOrValue<string>;
+    singularity: PromiseOrValue<string>;
+    bigBang: PromiseOrValue<string>;
+  };
+
+  export type ICommonExternalContractsStructOutput = [
+    string,
+    string,
+    string
+  ] & { magnetar: string; singularity: string; bigBang: string };
+
+  export type IWithdrawParamsStruct = {
+    withdraw: PromiseOrValue<boolean>;
+    withdrawLzFeeAmount: PromiseOrValue<BigNumberish>;
+    withdrawOnOtherChain: PromiseOrValue<boolean>;
+    withdrawLzChainId: PromiseOrValue<BigNumberish>;
+    withdrawAdapterParams: PromiseOrValue<BytesLike>;
+  };
+
+  export type IWithdrawParamsStructOutput = [
+    boolean,
+    BigNumber,
+    boolean,
+    number,
+    string
+  ] & {
+    withdraw: boolean;
+    withdrawLzFeeAmount: BigNumber;
+    withdrawOnOtherChain: boolean;
+    withdrawLzChainId: number;
+    withdrawAdapterParams: string;
+  };
+
+  export type IApprovalStruct = {
+    permitAll: PromiseOrValue<boolean>;
+    allowFailure: PromiseOrValue<boolean>;
+    yieldBoxTypeApproval: PromiseOrValue<boolean>;
+    actionType: PromiseOrValue<BigNumberish>;
+    target: PromiseOrValue<string>;
+    permitBorrow: PromiseOrValue<boolean>;
+    owner: PromiseOrValue<string>;
+    spender: PromiseOrValue<string>;
+    value: PromiseOrValue<BigNumberish>;
+    deadline: PromiseOrValue<BigNumberish>;
+    v: PromiseOrValue<BigNumberish>;
+    r: PromiseOrValue<BytesLike>;
+    s: PromiseOrValue<BytesLike>;
+  };
+
+  export type IApprovalStructOutput = [
+    boolean,
+    boolean,
+    boolean,
+    number,
+    string,
+    boolean,
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    number,
+    string,
+    string
+  ] & {
+    permitAll: boolean;
+    allowFailure: boolean;
+    yieldBoxTypeApproval: boolean;
+    actionType: number;
+    target: string;
+    permitBorrow: boolean;
+    owner: string;
+    spender: string;
+    value: BigNumber;
+    deadline: BigNumber;
+    v: number;
+    r: string;
+    s: string;
+  };
+}
+
+export declare namespace ITapiocaOptionsBroker {
+  export type IOptionsExitDataStruct = {
+    exit: PromiseOrValue<boolean>;
+    target: PromiseOrValue<string>;
+    oTAPTokenID: PromiseOrValue<BigNumberish>;
+  };
+
+  export type IOptionsExitDataStructOutput = [boolean, string, BigNumber] & {
+    exit: boolean;
+    target: string;
+    oTAPTokenID: BigNumber;
+  };
+
+  export type IOptionsParticipateDataStruct = {
+    participate: PromiseOrValue<boolean>;
+    target: PromiseOrValue<string>;
+    tOLPTokenId: PromiseOrValue<BigNumberish>;
+  };
+
+  export type IOptionsParticipateDataStructOutput = [
+    boolean,
+    string,
+    BigNumber
+  ] & { participate: boolean; target: string; tOLPTokenId: BigNumber };
+}
+
 export declare namespace ITapiocaOptionLiquidityProvision {
+  export type IOptionsUnlockDataStruct = {
+    unlock: PromiseOrValue<boolean>;
+    target: PromiseOrValue<string>;
+    tokenId: PromiseOrValue<BigNumberish>;
+  };
+
+  export type IOptionsUnlockDataStructOutput = [boolean, string, BigNumber] & {
+    unlock: boolean;
+    target: string;
+    tokenId: BigNumber;
+  };
+
   export type IOptionsLockDataStruct = {
     lock: PromiseOrValue<boolean>;
     target: PromiseOrValue<string>;
@@ -50,81 +170,9 @@ export declare namespace ITapiocaOptionLiquidityProvision {
     amount: BigNumber;
     fraction: BigNumber;
   };
-
-  export type IOptionsUnlockDataStruct = {
-    unlock: PromiseOrValue<boolean>;
-    target: PromiseOrValue<string>;
-    tokenId: PromiseOrValue<BigNumberish>;
-  };
-
-  export type IOptionsUnlockDataStructOutput = [boolean, string, BigNumber] & {
-    unlock: boolean;
-    target: string;
-    tokenId: BigNumber;
-  };
-}
-
-export declare namespace ITapiocaOptionsBroker {
-  export type IOptionsParticipateDataStruct = {
-    participate: PromiseOrValue<boolean>;
-    target: PromiseOrValue<string>;
-    tOLPTokenId: PromiseOrValue<BigNumberish>;
-  };
-
-  export type IOptionsParticipateDataStructOutput = [
-    boolean,
-    string,
-    BigNumber
-  ] & { participate: boolean; target: string; tOLPTokenId: BigNumber };
-
-  export type IOptionsExitDataStruct = {
-    exit: PromiseOrValue<boolean>;
-    target: PromiseOrValue<string>;
-    oTAPTokenID: PromiseOrValue<BigNumberish>;
-  };
-
-  export type IOptionsExitDataStructOutput = [boolean, string, BigNumber] & {
-    exit: boolean;
-    target: string;
-    oTAPTokenID: BigNumber;
-  };
 }
 
 export declare namespace IUSDOBase {
-  export type ILendOrRepayParamsStruct = {
-    repay: PromiseOrValue<boolean>;
-    depositAmount: PromiseOrValue<BigNumberish>;
-    repayAmount: PromiseOrValue<BigNumberish>;
-    marketHelper: PromiseOrValue<string>;
-    market: PromiseOrValue<string>;
-    removeCollateral: PromiseOrValue<boolean>;
-    removeCollateralAmount: PromiseOrValue<BigNumberish>;
-    lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct;
-    participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct;
-  };
-
-  export type ILendOrRepayParamsStructOutput = [
-    boolean,
-    BigNumber,
-    BigNumber,
-    string,
-    string,
-    boolean,
-    BigNumber,
-    ITapiocaOptionLiquidityProvision.IOptionsLockDataStructOutput,
-    ITapiocaOptionsBroker.IOptionsParticipateDataStructOutput
-  ] & {
-    repay: boolean;
-    depositAmount: BigNumber;
-    repayAmount: BigNumber;
-    marketHelper: string;
-    market: string;
-    removeCollateral: boolean;
-    removeCollateralAmount: BigNumber;
-    lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStructOutput;
-    participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStructOutput;
-  };
-
   export type IRemoveAndRepayStruct = {
     removeAssetFromSGL: PromiseOrValue<boolean>;
     removeAmount: PromiseOrValue<BigNumberish>;
@@ -161,88 +209,40 @@ export declare namespace IUSDOBase {
     assetWithdrawData: ICommonData.IWithdrawParamsStructOutput;
     collateralWithdrawData: ICommonData.IWithdrawParamsStructOutput;
   };
-}
 
-export declare namespace ICommonData {
-  export type IApprovalStruct = {
-    permitAll: PromiseOrValue<boolean>;
-    allowFailure: PromiseOrValue<boolean>;
-    approveOnYieldBox: PromiseOrValue<boolean>;
-    actionType: PromiseOrValue<BigNumberish>;
-    target: PromiseOrValue<string>;
-    permitBorrow: PromiseOrValue<boolean>;
-    owner: PromiseOrValue<string>;
-    spender: PromiseOrValue<string>;
-    value: PromiseOrValue<BigNumberish>;
-    deadline: PromiseOrValue<BigNumberish>;
-    v: PromiseOrValue<BigNumberish>;
-    r: PromiseOrValue<BytesLike>;
-    s: PromiseOrValue<BytesLike>;
+  export type ILendOrRepayParamsStruct = {
+    repay: PromiseOrValue<boolean>;
+    depositAmount: PromiseOrValue<BigNumberish>;
+    repayAmount: PromiseOrValue<BigNumberish>;
+    marketHelper: PromiseOrValue<string>;
+    market: PromiseOrValue<string>;
+    removeCollateral: PromiseOrValue<boolean>;
+    removeCollateralAmount: PromiseOrValue<BigNumberish>;
+    lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct;
+    participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStruct;
   };
 
-  export type IApprovalStructOutput = [
+  export type ILendOrRepayParamsStructOutput = [
     boolean,
-    boolean,
-    boolean,
-    number,
-    string,
-    boolean,
-    string,
-    string,
     BigNumber,
     BigNumber,
-    number,
     string,
-    string
+    string,
+    boolean,
+    BigNumber,
+    ITapiocaOptionLiquidityProvision.IOptionsLockDataStructOutput,
+    ITapiocaOptionsBroker.IOptionsParticipateDataStructOutput
   ] & {
-    permitAll: boolean;
-    allowFailure: boolean;
-    approveOnYieldBox: boolean;
-    actionType: number;
-    target: string;
-    permitBorrow: boolean;
-    owner: string;
-    spender: string;
-    value: BigNumber;
-    deadline: BigNumber;
-    v: number;
-    r: string;
-    s: string;
+    repay: boolean;
+    depositAmount: BigNumber;
+    repayAmount: BigNumber;
+    marketHelper: string;
+    market: string;
+    removeCollateral: boolean;
+    removeCollateralAmount: BigNumber;
+    lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStructOutput;
+    participateData: ITapiocaOptionsBroker.IOptionsParticipateDataStructOutput;
   };
-
-  export type IWithdrawParamsStruct = {
-    withdraw: PromiseOrValue<boolean>;
-    withdrawLzFeeAmount: PromiseOrValue<BigNumberish>;
-    withdrawOnOtherChain: PromiseOrValue<boolean>;
-    withdrawLzChainId: PromiseOrValue<BigNumberish>;
-    withdrawAdapterParams: PromiseOrValue<BytesLike>;
-  };
-
-  export type IWithdrawParamsStructOutput = [
-    boolean,
-    BigNumber,
-    boolean,
-    number,
-    string
-  ] & {
-    withdraw: boolean;
-    withdrawLzFeeAmount: BigNumber;
-    withdrawOnOtherChain: boolean;
-    withdrawLzChainId: number;
-    withdrawAdapterParams: string;
-  };
-
-  export type ICommonExternalContractsStruct = {
-    magnetar: PromiseOrValue<string>;
-    singularity: PromiseOrValue<string>;
-    bigBang: PromiseOrValue<string>;
-  };
-
-  export type ICommonExternalContractsStructOutput = [
-    string,
-    string,
-    string
-  ] & { magnetar: string; singularity: string; bigBang: string };
 }
 
 export declare namespace ICommonOFT {
@@ -280,17 +280,13 @@ export interface USDOMarketModuleInterface extends utils.Interface {
     "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)": FunctionFragment;
     "estimateSendFee(uint16,bytes32,uint256,bool,bytes)": FunctionFragment;
     "failedMessages(uint16,bytes,uint64)": FunctionFragment;
-    "flashMintFee()": FunctionFragment;
     "forceResumeReceive(uint16,bytes)": FunctionFragment;
     "getConfig(uint16,uint16,address,uint256)": FunctionFragment;
     "getTrustedRemoteAddress(uint16)": FunctionFragment;
     "increaseAllowance(address,uint256)": FunctionFragment;
     "isTrustedRemote(uint16,bytes)": FunctionFragment;
-    "lend(address,uint16,bytes,uint64,bytes)": FunctionFragment;
-    "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes))": FunctionFragment;
     "lzEndpoint()": FunctionFragment;
     "lzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
-    "maxFlashMint()": FunctionFragment;
     "minDstGasLookup(uint16,uint16)": FunctionFragment;
     "name()": FunctionFragment;
     "nonblockingLzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
@@ -298,7 +294,6 @@ export interface USDOMarketModuleInterface extends utils.Interface {
     "paused()": FunctionFragment;
     "payloadSizeLimitLookup(uint16)": FunctionFragment;
     "precrime()": FunctionFragment;
-    "remove(bytes)": FunctionFragment;
     "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
@@ -367,8 +362,6 @@ export interface USDOMarketModuleInterface extends utils.Interface {
       | "estimateSendFee(uint16,bytes32,uint256,bool,bytes)"
       | "failedMessages"
       | "failedMessages(uint16,bytes,uint64)"
-      | "flashMintFee"
-      | "flashMintFee()"
       | "forceResumeReceive"
       | "forceResumeReceive(uint16,bytes)"
       | "getConfig"
@@ -379,16 +372,10 @@ export interface USDOMarketModuleInterface extends utils.Interface {
       | "increaseAllowance(address,uint256)"
       | "isTrustedRemote"
       | "isTrustedRemote(uint16,bytes)"
-      | "lend"
-      | "lend(address,uint16,bytes,uint64,bytes)"
-      | "lendInternal"
-      | "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes))"
       | "lzEndpoint"
       | "lzEndpoint()"
       | "lzReceive"
       | "lzReceive(uint16,bytes,uint64,bytes)"
-      | "maxFlashMint"
-      | "maxFlashMint()"
       | "minDstGasLookup"
       | "minDstGasLookup(uint16,uint16)"
       | "name"
@@ -403,8 +390,6 @@ export interface USDOMarketModuleInterface extends utils.Interface {
       | "payloadSizeLimitLookup(uint16)"
       | "precrime"
       | "precrime()"
-      | "remove"
-      | "remove(bytes)"
       | "removeAsset"
       | "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes),(bool,uint256,bool,uint16,bytes)),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "renounceOwnership"
@@ -659,14 +644,6 @@ export interface USDOMarketModuleInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "flashMintFee",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "flashMintFee()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "forceResumeReceive",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
   ): string;
@@ -717,44 +694,6 @@ export interface USDOMarketModuleInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
-    functionFragment: "lend",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "lend(address,uint16,bytes,uint64,bytes)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "lendInternal",
-    values: [
-      PromiseOrValue<string>,
-      IUSDOBase.ILendOrRepayParamsStruct,
-      ICommonData.IApprovalStruct[],
-      ICommonData.IWithdrawParamsStruct
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes))",
-    values: [
-      PromiseOrValue<string>,
-      IUSDOBase.ILendOrRepayParamsStruct,
-      ICommonData.IApprovalStruct[],
-      ICommonData.IWithdrawParamsStruct
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "lzEndpoint",
     values?: undefined
   ): string;
@@ -779,14 +718,6 @@ export interface USDOMarketModuleInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "maxFlashMint",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "maxFlashMint()",
-    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "minDstGasLookup",
@@ -832,14 +763,6 @@ export interface USDOMarketModuleInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "precrime()",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "remove",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "remove(bytes)",
-    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "removeAsset",
@@ -1261,14 +1184,6 @@ export interface USDOMarketModuleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "flashMintFee",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "flashMintFee()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "forceResumeReceive",
     data: BytesLike
   ): Result;
@@ -1305,19 +1220,6 @@ export interface USDOMarketModuleInterface extends utils.Interface {
     functionFragment: "isTrustedRemote(uint16,bytes)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "lend", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "lend(address,uint16,bytes,uint64,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "lendInternal",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes))",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "lzEndpoint", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "lzEndpoint()",
@@ -1326,14 +1228,6 @@ export interface USDOMarketModuleInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "lzReceive", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "lzReceive(uint16,bytes,uint64,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "maxFlashMint",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "maxFlashMint()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1368,11 +1262,6 @@ export interface USDOMarketModuleInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "precrime", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "precrime()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "remove", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "remove(bytes)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "removeAsset",
     data: BytesLike
@@ -1558,9 +1447,6 @@ export interface USDOMarketModuleInterface extends utils.Interface {
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
-    "ConservatorUpdated(address,address)": EventFragment;
-    "FlashMintFeeUpdated(uint256,uint256)": EventFragment;
-    "MaxFlashMintUpdated(uint256,uint256)": EventFragment;
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)": EventFragment;
     "NonContractAddress(address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
@@ -1585,18 +1471,6 @@ export interface USDOMarketModuleInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "CallOFTReceivedSuccess"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "ConservatorUpdated"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "ConservatorUpdated(address,address)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "FlashMintFeeUpdated"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "FlashMintFeeUpdated(uint256,uint256)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "MaxFlashMintUpdated"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "MaxFlashMintUpdated(uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MessageFailed"): EventFragment;
   getEvent(
@@ -1681,42 +1555,6 @@ export type CallOFTReceivedSuccessEvent = TypedEvent<
 
 export type CallOFTReceivedSuccessEventFilter =
   TypedEventFilter<CallOFTReceivedSuccessEvent>;
-
-export interface ConservatorUpdatedEventObject {
-  old: string;
-  _new: string;
-}
-export type ConservatorUpdatedEvent = TypedEvent<
-  [string, string],
-  ConservatorUpdatedEventObject
->;
-
-export type ConservatorUpdatedEventFilter =
-  TypedEventFilter<ConservatorUpdatedEvent>;
-
-export interface FlashMintFeeUpdatedEventObject {
-  _old: BigNumber;
-  _new: BigNumber;
-}
-export type FlashMintFeeUpdatedEvent = TypedEvent<
-  [BigNumber, BigNumber],
-  FlashMintFeeUpdatedEventObject
->;
-
-export type FlashMintFeeUpdatedEventFilter =
-  TypedEventFilter<FlashMintFeeUpdatedEvent>;
-
-export interface MaxFlashMintUpdatedEventObject {
-  _old: BigNumber;
-  _new: BigNumber;
-}
-export type MaxFlashMintUpdatedEvent = TypedEvent<
-  [BigNumber, BigNumber],
-  MaxFlashMintUpdatedEventObject
->;
-
-export type MaxFlashMintUpdatedEventFilter =
-  TypedEventFilter<MaxFlashMintUpdatedEvent>;
 
 export interface MessageFailedEventObject {
   _srcChainId: number;
@@ -2127,10 +1965,6 @@ export interface USDOMarketModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    flashMintFee(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "flashMintFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     forceResumeReceive(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -2193,40 +2027,6 @@ export interface USDOMarketModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
-    lend(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "lend(address,uint16,bytes,uint64,bytes)"(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    lendInternal(
-      to: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
-      approvals: ICommonData.IApprovalStruct[],
-      withdrawParams: ICommonData.IWithdrawParamsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes))"(
-      to: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
-      approvals: ICommonData.IApprovalStruct[],
-      withdrawParams: ICommonData.IWithdrawParamsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     lzEndpoint(overrides?: CallOverrides): Promise<[string]>;
 
     "lzEndpoint()"(overrides?: CallOverrides): Promise<[string]>;
@@ -2246,10 +2046,6 @@ export interface USDOMarketModule extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
-
-    maxFlashMint(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "maxFlashMint()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     minDstGasLookup(
       arg0: PromiseOrValue<BigNumberish>,
@@ -2304,16 +2100,6 @@ export interface USDOMarketModule extends BaseContract {
     precrime(overrides?: CallOverrides): Promise<[string]>;
 
     "precrime()"(overrides?: CallOverrides): Promise<[string]>;
-
-    remove(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "remove(bytes)"(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
 
     removeAsset(
       from: PromiseOrValue<string>,
@@ -2816,10 +2602,6 @@ export interface USDOMarketModule extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  flashMintFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "flashMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   forceResumeReceive(
     _srcChainId: PromiseOrValue<BigNumberish>,
     _srcAddress: PromiseOrValue<BytesLike>,
@@ -2882,40 +2664,6 @@ export interface USDOMarketModule extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  lend(
-    module: PromiseOrValue<string>,
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _srcAddress: PromiseOrValue<BytesLike>,
-    _nonce: PromiseOrValue<BigNumberish>,
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "lend(address,uint16,bytes,uint64,bytes)"(
-    module: PromiseOrValue<string>,
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _srcAddress: PromiseOrValue<BytesLike>,
-    _nonce: PromiseOrValue<BigNumberish>,
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  lendInternal(
-    to: PromiseOrValue<string>,
-    lendParams: IUSDOBase.ILendOrRepayParamsStruct,
-    approvals: ICommonData.IApprovalStruct[],
-    withdrawParams: ICommonData.IWithdrawParamsStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes))"(
-    to: PromiseOrValue<string>,
-    lendParams: IUSDOBase.ILendOrRepayParamsStruct,
-    approvals: ICommonData.IApprovalStruct[],
-    withdrawParams: ICommonData.IWithdrawParamsStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   lzEndpoint(overrides?: CallOverrides): Promise<string>;
 
   "lzEndpoint()"(overrides?: CallOverrides): Promise<string>;
@@ -2935,10 +2683,6 @@ export interface USDOMarketModule extends BaseContract {
     _payload: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
-
-  maxFlashMint(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "maxFlashMint()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   minDstGasLookup(
     arg0: PromiseOrValue<BigNumberish>,
@@ -2993,16 +2737,6 @@ export interface USDOMarketModule extends BaseContract {
   precrime(overrides?: CallOverrides): Promise<string>;
 
   "precrime()"(overrides?: CallOverrides): Promise<string>;
-
-  remove(
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "remove(bytes)"(
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
 
   removeAsset(
     from: PromiseOrValue<string>,
@@ -3507,10 +3241,6 @@ export interface USDOMarketModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    flashMintFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "flashMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     forceResumeReceive(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -3573,40 +3303,6 @@ export interface USDOMarketModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    lend(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "lend(address,uint16,bytes,uint64,bytes)"(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    lendInternal(
-      to: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
-      approvals: ICommonData.IApprovalStruct[],
-      withdrawParams: ICommonData.IWithdrawParamsStruct,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes))"(
-      to: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
-      approvals: ICommonData.IApprovalStruct[],
-      withdrawParams: ICommonData.IWithdrawParamsStruct,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     lzEndpoint(overrides?: CallOverrides): Promise<string>;
 
     "lzEndpoint()"(overrides?: CallOverrides): Promise<string>;
@@ -3626,10 +3322,6 @@ export interface USDOMarketModule extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    maxFlashMint(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "maxFlashMint()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     minDstGasLookup(
       arg0: PromiseOrValue<BigNumberish>,
@@ -3684,16 +3376,6 @@ export interface USDOMarketModule extends BaseContract {
     precrime(overrides?: CallOverrides): Promise<string>;
 
     "precrime()"(overrides?: CallOverrides): Promise<string>;
-
-    remove(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "remove(bytes)"(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     removeAsset(
       from: PromiseOrValue<string>,
@@ -4014,33 +3696,6 @@ export interface USDOMarketModule extends BaseContract {
       _nonce?: null,
       _hash?: null
     ): CallOFTReceivedSuccessEventFilter;
-
-    "ConservatorUpdated(address,address)"(
-      old?: PromiseOrValue<string> | null,
-      _new?: PromiseOrValue<string> | null
-    ): ConservatorUpdatedEventFilter;
-    ConservatorUpdated(
-      old?: PromiseOrValue<string> | null,
-      _new?: PromiseOrValue<string> | null
-    ): ConservatorUpdatedEventFilter;
-
-    "FlashMintFeeUpdated(uint256,uint256)"(
-      _old?: null,
-      _new?: null
-    ): FlashMintFeeUpdatedEventFilter;
-    FlashMintFeeUpdated(
-      _old?: null,
-      _new?: null
-    ): FlashMintFeeUpdatedEventFilter;
-
-    "MaxFlashMintUpdated(uint256,uint256)"(
-      _old?: null,
-      _new?: null
-    ): MaxFlashMintUpdatedEventFilter;
-    MaxFlashMintUpdated(
-      _old?: null,
-      _new?: null
-    ): MaxFlashMintUpdatedEventFilter;
 
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)"(
       _srcChainId?: null,
@@ -4380,10 +4035,6 @@ export interface USDOMarketModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    flashMintFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "flashMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     forceResumeReceive(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -4446,40 +4097,6 @@ export interface USDOMarketModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    lend(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "lend(address,uint16,bytes,uint64,bytes)"(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    lendInternal(
-      to: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
-      approvals: ICommonData.IApprovalStruct[],
-      withdrawParams: ICommonData.IWithdrawParamsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes))"(
-      to: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
-      approvals: ICommonData.IApprovalStruct[],
-      withdrawParams: ICommonData.IWithdrawParamsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     lzEndpoint(overrides?: CallOverrides): Promise<BigNumber>;
 
     "lzEndpoint()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -4499,10 +4116,6 @@ export interface USDOMarketModule extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
-
-    maxFlashMint(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "maxFlashMint()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     minDstGasLookup(
       arg0: PromiseOrValue<BigNumberish>,
@@ -4557,16 +4170,6 @@ export interface USDOMarketModule extends BaseContract {
     precrime(overrides?: CallOverrides): Promise<BigNumber>;
 
     "precrime()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    remove(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "remove(bytes)"(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
 
     removeAsset(
       from: PromiseOrValue<string>,
@@ -5070,10 +4673,6 @@ export interface USDOMarketModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    flashMintFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "flashMintFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     forceResumeReceive(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -5136,40 +4735,6 @@ export interface USDOMarketModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    lend(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "lend(address,uint16,bytes,uint64,bytes)"(
-      module: PromiseOrValue<string>,
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    lendInternal(
-      to: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
-      approvals: ICommonData.IApprovalStruct[],
-      withdrawParams: ICommonData.IWithdrawParamsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes))"(
-      to: PromiseOrValue<string>,
-      lendParams: IUSDOBase.ILendOrRepayParamsStruct,
-      approvals: ICommonData.IApprovalStruct[],
-      withdrawParams: ICommonData.IWithdrawParamsStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     lzEndpoint(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "lzEndpoint()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -5189,10 +4754,6 @@ export interface USDOMarketModule extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
-
-    maxFlashMint(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "maxFlashMint()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     minDstGasLookup(
       arg0: PromiseOrValue<BigNumberish>,
@@ -5247,16 +4808,6 @@ export interface USDOMarketModule extends BaseContract {
     precrime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "precrime()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    remove(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "remove(bytes)"(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
 
     removeAsset(
       from: PromiseOrValue<string>,

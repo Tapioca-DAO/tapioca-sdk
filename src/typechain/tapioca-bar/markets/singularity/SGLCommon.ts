@@ -71,7 +71,6 @@ export interface SGLCommonInterface extends utils.Interface {
     "liquidationBonusAmount()": FunctionFragment;
     "liquidationCollateralizationRate()": FunctionFragment;
     "liquidationMultiplier()": FunctionFragment;
-    "liquidationQueue()": FunctionFragment;
     "lqCollateralizationRate()": FunctionFragment;
     "maxLiquidatorReward()": FunctionFragment;
     "maximumInterestPerSecond()": FunctionFragment;
@@ -169,8 +168,6 @@ export interface SGLCommonInterface extends utils.Interface {
       | "liquidationCollateralizationRate()"
       | "liquidationMultiplier"
       | "liquidationMultiplier()"
-      | "liquidationQueue"
-      | "liquidationQueue()"
       | "lqCollateralizationRate"
       | "lqCollateralizationRate()"
       | "maxLiquidatorReward"
@@ -453,14 +450,6 @@ export interface SGLCommonInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "liquidationMultiplier()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidationQueue",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidationQueue()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -981,14 +970,6 @@ export interface SGLCommonInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "liquidationMultiplier()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidationQueue",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidationQueue()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2052,10 +2033,6 @@ export interface SGLCommon extends BaseContract {
 
     "liquidationMultiplier()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    liquidationQueue(overrides?: CallOverrides): Promise<[string]>;
-
-    "liquidationQueue()"(overrides?: CallOverrides): Promise<[string]>;
-
     lqCollateralizationRate(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "lqCollateralizationRate()"(
@@ -2599,10 +2576,6 @@ export interface SGLCommon extends BaseContract {
 
   "liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-  liquidationQueue(overrides?: CallOverrides): Promise<string>;
-
-  "liquidationQueue()"(overrides?: CallOverrides): Promise<string>;
-
   lqCollateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
 
   "lqCollateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3117,10 +3090,6 @@ export interface SGLCommon extends BaseContract {
     liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
 
     "liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    liquidationQueue(overrides?: CallOverrides): Promise<string>;
-
-    "liquidationQueue()"(overrides?: CallOverrides): Promise<string>;
 
     lqCollateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3928,10 +3897,6 @@ export interface SGLCommon extends BaseContract {
 
     "liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    liquidationQueue(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "liquidationQueue()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     lqCollateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "lqCollateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -4433,12 +4398,6 @@ export interface SGLCommon extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "liquidationMultiplier()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    liquidationQueue(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "liquidationQueue()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
