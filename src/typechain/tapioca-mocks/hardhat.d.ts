@@ -85,6 +85,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapiocaDeployerMock__factory>;
     getContractFactory(
+      name: "TOFTMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TOFTMock__factory>;
+    getContractFactory(
       name: "TOFTStrategyMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TOFTStrategyMock__factory>;
@@ -215,6 +219,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TapiocaDeployerMock>;
+    getContractAt(
+      name: "TOFTMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TOFTMock>;
     getContractAt(
       name: "TOFTStrategyMock",
       address: string,

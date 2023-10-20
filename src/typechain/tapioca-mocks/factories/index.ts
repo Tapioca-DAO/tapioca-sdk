@@ -18,6 +18,7 @@ export { MultisigMock__factory } from "./MultisigMock__factory";
 export { OracleMock__factory } from "./OracleMock__factory";
 export { StargateRouterETHMock__factory } from "./StargateRouterETHMock__factory";
 export { StargateRouterMock__factory } from "./StargateRouterMock__factory";
+export { TOFTMock__factory } from "./TOFTMock__factory";
 export { TOFTStrategyMock__factory } from "./TOFTStrategyMock__factory";
 export { TapiocaDeployerMock__factory } from "./TapiocaDeployerMock__factory";
 export { UniswapV2RouterMock__factory } from "./UniswapV2RouterMock__factory";
