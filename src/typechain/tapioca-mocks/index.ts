@@ -22,6 +22,7 @@ export type { MultisigMock } from "./MultisigMock";
 export type { OracleMock } from "./OracleMock";
 export type { StargateRouterETHMock } from "./StargateRouterETHMock";
 export type { StargateRouterMock } from "./StargateRouterMock";
+export type { TOFTMock } from "./TOFTMock";
 export type { TOFTStrategyMock } from "./TOFTStrategyMock";
 export type { TapiocaDeployerMock } from "./TapiocaDeployerMock";
 export type { UniswapV2RouterMock } from "./UniswapV2RouterMock";
@@ -51,6 +52,7 @@ export { ReceiverTest__factory } from "./factories/research/ReceiverTest__factor
 export { StargateRouterETHMock__factory } from "./factories/StargateRouterETHMock__factory";
 export { StargateRouterMock__factory } from "./factories/StargateRouterMock__factory";
 export { TapiocaDeployerMock__factory } from "./factories/TapiocaDeployerMock__factory";
+export { TOFTMock__factory } from "./factories/TOFTMock__factory";
 export { TOFTStrategyMock__factory } from "./factories/TOFTStrategyMock__factory";
 export type { TwTwapMock } from "./TwTapMock.sol/TwTwapMock";
 export { TwTwapMock__factory } from "./factories/TwTapMock.sol/TwTwapMock__factory";
