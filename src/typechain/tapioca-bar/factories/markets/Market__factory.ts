@@ -182,25 +182,6 @@ const _abi = [
       {
         indexed: true,
         internalType: "uint256",
-        name: "_oldVal",
-        type: "uint256",
-      },
-      {
-        indexed: true,
-        internalType: "uint256",
-        name: "_newVal",
-        type: "uint256",
-      },
-    ],
-    name: "LogBorrowingFee",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "uint256",
         name: "rate",
         type: "uint256",
       },
@@ -433,19 +414,6 @@ const _abi = [
       },
     ],
     name: "balanceOf",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "borrowOpeningFee",
     outputs: [
       {
         internalType: "uint256",
@@ -941,11 +909,6 @@ const _abi = [
   },
   {
     inputs: [
-      {
-        internalType: "uint256",
-        name: "_borrowOpeningFee",
-        type: "uint256",
-      },
       {
         internalType: "contract IOracle",
         name: "_oracle",

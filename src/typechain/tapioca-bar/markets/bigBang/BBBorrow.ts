@@ -38,9 +38,10 @@ export interface BBBorrowInterface extends utils.Interface {
     "approveBorrow(address,uint256)": FunctionFragment;
     "asset()": FunctionFragment;
     "assetId()": FunctionFragment;
+    "assetOracle()": FunctionFragment;
+    "assetOracleData()": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "borrow(address,address,uint256)": FunctionFragment;
-    "borrowOpeningFee()": FunctionFragment;
     "callerFee()": FunctionFragment;
     "claimOwnership()": FunctionFragment;
     "collateral()": FunctionFragment;
@@ -61,8 +62,10 @@ export interface BBBorrowInterface extends utils.Interface {
     "liquidationMultiplier()": FunctionFragment;
     "maxDebtRate()": FunctionFragment;
     "maxLiquidatorReward()": FunctionFragment;
+    "maxMintFee()": FunctionFragment;
     "minDebtRate()": FunctionFragment;
     "minLiquidatorReward()": FunctionFragment;
+    "minMintFee()": FunctionFragment;
     "nonces(address)": FunctionFragment;
     "openingFees(address)": FunctionFragment;
     "oracle()": FunctionFragment;
@@ -78,7 +81,7 @@ export interface BBBorrowInterface extends utils.Interface {
     "rateTimestamp()": FunctionFragment;
     "rateValidDuration()": FunctionFragment;
     "repay(address,address,bool,uint256)": FunctionFragment;
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
+    "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
     "totalBorrow()": FunctionFragment;
     "totalBorrowCap()": FunctionFragment;
     "totalCollateralShare()": FunctionFragment;
@@ -113,12 +116,14 @@ export interface BBBorrowInterface extends utils.Interface {
       | "asset()"
       | "assetId"
       | "assetId()"
+      | "assetOracle"
+      | "assetOracle()"
+      | "assetOracleData"
+      | "assetOracleData()"
       | "balanceOf"
       | "balanceOf(address)"
       | "borrow"
       | "borrow(address,address,uint256)"
-      | "borrowOpeningFee"
-      | "borrowOpeningFee()"
       | "callerFee"
       | "callerFee()"
       | "claimOwnership"
@@ -159,10 +164,14 @@ export interface BBBorrowInterface extends utils.Interface {
       | "maxDebtRate()"
       | "maxLiquidatorReward"
       | "maxLiquidatorReward()"
+      | "maxMintFee"
+      | "maxMintFee()"
       | "minDebtRate"
       | "minDebtRate()"
       | "minLiquidatorReward"
       | "minLiquidatorReward()"
+      | "minMintFee"
+      | "minMintFee()"
       | "nonces"
       | "nonces(address)"
       | "openingFees"
@@ -194,7 +203,7 @@ export interface BBBorrowInterface extends utils.Interface {
       | "repay"
       | "repay(address,address,bool,uint256)"
       | "setMarketConfig"
-      | "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
+      | "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
       | "totalBorrow"
       | "totalBorrow()"
       | "totalBorrowCap"
@@ -276,6 +285,22 @@ export interface BBBorrowInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "assetId", values?: undefined): string;
   encodeFunctionData(functionFragment: "assetId()", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "assetOracle",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "assetOracle()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "assetOracleData",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "assetOracleData()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "balanceOf",
     values: [PromiseOrValue<string>]
   ): string;
@@ -298,14 +323,6 @@ export interface BBBorrowInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>
     ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "borrowOpeningFee",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "borrowOpeningFee()",
-    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "callerFee", values?: undefined): string;
   encodeFunctionData(
@@ -473,6 +490,14 @@ export interface BBBorrowInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "maxMintFee",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "maxMintFee()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "minDebtRate",
     values?: undefined
   ): string;
@@ -486,6 +511,14 @@ export interface BBBorrowInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "minLiquidatorReward()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "minMintFee",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "minMintFee()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -635,7 +668,6 @@ export interface BBBorrowInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "setMarketConfig",
     values: [
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<string>,
@@ -650,9 +682,8 @@ export interface BBBorrowInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
+    functionFragment: "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
     values: [
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<string>,
@@ -821,6 +852,22 @@ export interface BBBorrowInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "asset()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "assetId", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "assetId()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "assetOracle",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "assetOracle()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "assetOracleData",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "assetOracleData()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "balanceOf(address)",
@@ -829,14 +876,6 @@ export interface BBBorrowInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "borrow", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "borrow(address,address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "borrowOpeningFee",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "borrowOpeningFee()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "callerFee", data: BytesLike): Result;
@@ -993,6 +1032,11 @@ export interface BBBorrowInterface extends utils.Interface {
     functionFragment: "maxLiquidatorReward()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "maxMintFee", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "maxMintFee()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "minDebtRate",
     data: BytesLike
@@ -1007,6 +1051,11 @@ export interface BBBorrowInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "minLiquidatorReward()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "minMintFee", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "minMintFee()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
@@ -1104,7 +1153,7 @@ export interface BBBorrowInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
+    functionFragment: "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1198,6 +1247,8 @@ export interface BBBorrowInterface extends utils.Interface {
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalBorrow(address,address,uint256)": EventFragment;
+    "AssetOracleDataUpdated()": EventFragment;
+    "AssetOracleUpdated(address,address)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
     "DebtRateAgainstEthUpdated(uint256,uint256)": EventFragment;
     "ExchangeRateDurationUpdated(uint256,uint256)": EventFragment;
@@ -1207,7 +1258,6 @@ export interface BBBorrowInterface extends utils.Interface {
     "LogAddCollateral(address,address,uint256)": EventFragment;
     "LogBorrow(address,address,uint256,uint256,uint256)": EventFragment;
     "LogBorrowCapUpdated(uint256,uint256)": EventFragment;
-    "LogBorrowingFee(uint256,uint256)": EventFragment;
     "LogExchangeRate(uint256)": EventFragment;
     "LogRemoveCollateral(address,address,uint256)": EventFragment;
     "LogRepay(address,address,uint256,uint256)": EventFragment;
@@ -1218,6 +1268,7 @@ export interface BBBorrowInterface extends utils.Interface {
     "OwnershipTransferred(address,address)": EventFragment;
     "PausedUpdated(uint8,bool,bool)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
+    "UpdateMinMaxMintFee(uint256,uint256,uint256,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
@@ -1227,6 +1278,12 @@ export interface BBBorrowInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "ApprovalBorrow"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ApprovalBorrow(address,address,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "AssetOracleDataUpdated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "AssetOracleDataUpdated()"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "AssetOracleUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "AssetOracleUpdated(address,address)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ConservatorUpdated"): EventFragment;
   getEvent(
@@ -1266,10 +1323,6 @@ export interface BBBorrowInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "LogBorrowCapUpdated(uint256,uint256)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "LogBorrowingFee"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "LogBorrowingFee(uint256,uint256)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogExchangeRate"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogExchangeRate(uint256)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogRemoveCollateral"): EventFragment;
@@ -1304,6 +1357,10 @@ export interface BBBorrowInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "Transfer(address,address,uint256)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "UpdateMinMaxMintFee"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "UpdateMinMaxMintFee(uint256,uint256,uint256,uint256)"
+  ): EventFragment;
 }
 
 export interface ApprovalEventObject {
@@ -1329,6 +1386,27 @@ export type ApprovalBorrowEvent = TypedEvent<
 >;
 
 export type ApprovalBorrowEventFilter = TypedEventFilter<ApprovalBorrowEvent>;
+
+export interface AssetOracleDataUpdatedEventObject {}
+export type AssetOracleDataUpdatedEvent = TypedEvent<
+  [],
+  AssetOracleDataUpdatedEventObject
+>;
+
+export type AssetOracleDataUpdatedEventFilter =
+  TypedEventFilter<AssetOracleDataUpdatedEvent>;
+
+export interface AssetOracleUpdatedEventObject {
+  _oldVal: string;
+  _newVal: string;
+}
+export type AssetOracleUpdatedEvent = TypedEvent<
+  [string, string],
+  AssetOracleUpdatedEventObject
+>;
+
+export type AssetOracleUpdatedEventFilter =
+  TypedEventFilter<AssetOracleUpdatedEvent>;
 
 export interface ConservatorUpdatedEventObject {
   old: string;
@@ -1443,17 +1521,6 @@ export type LogBorrowCapUpdatedEvent = TypedEvent<
 export type LogBorrowCapUpdatedEventFilter =
   TypedEventFilter<LogBorrowCapUpdatedEvent>;
 
-export interface LogBorrowingFeeEventObject {
-  _oldVal: BigNumber;
-  _newVal: BigNumber;
-}
-export type LogBorrowingFeeEvent = TypedEvent<
-  [BigNumber, BigNumber],
-  LogBorrowingFeeEventObject
->;
-
-export type LogBorrowingFeeEventFilter = TypedEventFilter<LogBorrowingFeeEvent>;
-
 export interface LogExchangeRateEventObject {
   rate: BigNumber;
 }
@@ -1564,6 +1631,20 @@ export type TransferEvent = TypedEvent<
 
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 
+export interface UpdateMinMaxMintFeeEventObject {
+  oldMin: BigNumber;
+  newMin: BigNumber;
+  oldMax: BigNumber;
+  newMax: BigNumber;
+}
+export type UpdateMinMaxMintFeeEvent = TypedEvent<
+  [BigNumber, BigNumber, BigNumber, BigNumber],
+  UpdateMinMaxMintFeeEventObject
+>;
+
+export type UpdateMinMaxMintFeeEventFilter =
+  TypedEventFilter<UpdateMinMaxMintFeeEvent>;
+
 export interface BBBorrow extends BaseContract {
   contractName: "BBBorrow";
 
@@ -1673,6 +1754,14 @@ export interface BBBorrow extends BaseContract {
 
     "assetId()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    assetOracle(overrides?: CallOverrides): Promise<[string]>;
+
+    "assetOracle()"(overrides?: CallOverrides): Promise<[string]>;
+
+    assetOracleData(overrides?: CallOverrides): Promise<[string]>;
+
+    "assetOracleData()"(overrides?: CallOverrides): Promise<[string]>;
+
     balanceOf(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -1696,10 +1785,6 @@ export interface BBBorrow extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
-
-    borrowOpeningFee(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "borrowOpeningFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     callerFee(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -1829,6 +1914,10 @@ export interface BBBorrow extends BaseContract {
 
     "maxLiquidatorReward()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    maxMintFee(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "maxMintFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     minDebtRate(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "minDebtRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -1836,6 +1925,10 @@ export interface BBBorrow extends BaseContract {
     minLiquidatorReward(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "minLiquidatorReward()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    minMintFee(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "minMintFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -1972,7 +2065,6 @@ export interface BBBorrow extends BaseContract {
     ): Promise<ContractTransaction>;
 
     setMarketConfig(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -1987,8 +2079,7 @@ export interface BBBorrow extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
+    "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -2192,6 +2283,14 @@ export interface BBBorrow extends BaseContract {
 
   "assetId()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  assetOracle(overrides?: CallOverrides): Promise<string>;
+
+  "assetOracle()"(overrides?: CallOverrides): Promise<string>;
+
+  assetOracleData(overrides?: CallOverrides): Promise<string>;
+
+  "assetOracleData()"(overrides?: CallOverrides): Promise<string>;
+
   balanceOf(
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
@@ -2215,10 +2314,6 @@ export interface BBBorrow extends BaseContract {
     amount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
-
-  borrowOpeningFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "borrowOpeningFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   callerFee(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2346,6 +2441,10 @@ export interface BBBorrow extends BaseContract {
 
   "maxLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  maxMintFee(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "maxMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   minDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
   "minDebtRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2353,6 +2452,10 @@ export interface BBBorrow extends BaseContract {
   minLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
 
   "minLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  minMintFee(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "minMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   nonces(
     owner: PromiseOrValue<string>,
@@ -2489,7 +2592,6 @@ export interface BBBorrow extends BaseContract {
   ): Promise<ContractTransaction>;
 
   setMarketConfig(
-    _borrowOpeningFee: PromiseOrValue<BigNumberish>,
     _oracle: PromiseOrValue<string>,
     _oracleData: PromiseOrValue<BytesLike>,
     _conservator: PromiseOrValue<string>,
@@ -2504,8 +2606,7 @@ export interface BBBorrow extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
-    _borrowOpeningFee: PromiseOrValue<BigNumberish>,
+  "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
     _oracle: PromiseOrValue<string>,
     _oracleData: PromiseOrValue<BytesLike>,
     _conservator: PromiseOrValue<string>,
@@ -2701,6 +2802,14 @@ export interface BBBorrow extends BaseContract {
 
     "assetId()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    assetOracle(overrides?: CallOverrides): Promise<string>;
+
+    "assetOracle()"(overrides?: CallOverrides): Promise<string>;
+
+    assetOracleData(overrides?: CallOverrides): Promise<string>;
+
+    "assetOracleData()"(overrides?: CallOverrides): Promise<string>;
+
     balanceOf(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -2724,10 +2833,6 @@ export interface BBBorrow extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber] & { part: BigNumber; share: BigNumber }>;
-
-    borrowOpeningFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "borrowOpeningFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     callerFee(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2851,6 +2956,10 @@ export interface BBBorrow extends BaseContract {
 
     "maxLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    maxMintFee(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "maxMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     minDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "minDebtRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2858,6 +2967,10 @@ export interface BBBorrow extends BaseContract {
     minLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
 
     "minLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    minMintFee(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "minMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -2994,7 +3107,6 @@ export interface BBBorrow extends BaseContract {
     ): Promise<BigNumber>;
 
     setMarketConfig(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -3009,8 +3121,7 @@ export interface BBBorrow extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
+    "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -3157,6 +3268,18 @@ export interface BBBorrow extends BaseContract {
       value?: PromiseOrValue<BigNumberish> | null
     ): ApprovalBorrowEventFilter;
 
+    "AssetOracleDataUpdated()"(): AssetOracleDataUpdatedEventFilter;
+    AssetOracleDataUpdated(): AssetOracleDataUpdatedEventFilter;
+
+    "AssetOracleUpdated(address,address)"(
+      _oldVal?: PromiseOrValue<string> | null,
+      _newVal?: PromiseOrValue<string> | null
+    ): AssetOracleUpdatedEventFilter;
+    AssetOracleUpdated(
+      _oldVal?: PromiseOrValue<string> | null,
+      _newVal?: PromiseOrValue<string> | null
+    ): AssetOracleUpdatedEventFilter;
+
     "ConservatorUpdated(address,address)"(
       old?: PromiseOrValue<string> | null,
       _new?: PromiseOrValue<string> | null
@@ -3254,15 +3377,6 @@ export interface BBBorrow extends BaseContract {
       _newVal?: PromiseOrValue<BigNumberish> | null
     ): LogBorrowCapUpdatedEventFilter;
 
-    "LogBorrowingFee(uint256,uint256)"(
-      _oldVal?: PromiseOrValue<BigNumberish> | null,
-      _newVal?: PromiseOrValue<BigNumberish> | null
-    ): LogBorrowingFeeEventFilter;
-    LogBorrowingFee(
-      _oldVal?: PromiseOrValue<BigNumberish> | null,
-      _newVal?: PromiseOrValue<BigNumberish> | null
-    ): LogBorrowingFeeEventFilter;
-
     "LogExchangeRate(uint256)"(
       rate?: PromiseOrValue<BigNumberish> | null
     ): LogExchangeRateEventFilter;
@@ -3348,6 +3462,19 @@ export interface BBBorrow extends BaseContract {
       to?: PromiseOrValue<string> | null,
       value?: null
     ): TransferEventFilter;
+
+    "UpdateMinMaxMintFee(uint256,uint256,uint256,uint256)"(
+      oldMin?: PromiseOrValue<BigNumberish> | null,
+      newMin?: PromiseOrValue<BigNumberish> | null,
+      oldMax?: PromiseOrValue<BigNumberish> | null,
+      newMax?: null
+    ): UpdateMinMaxMintFeeEventFilter;
+    UpdateMinMaxMintFee(
+      oldMin?: PromiseOrValue<BigNumberish> | null,
+      newMin?: PromiseOrValue<BigNumberish> | null,
+      oldMax?: PromiseOrValue<BigNumberish> | null,
+      newMax?: null
+    ): UpdateMinMaxMintFeeEventFilter;
   };
 
   estimateGas: {
@@ -3423,6 +3550,14 @@ export interface BBBorrow extends BaseContract {
 
     "assetId()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    assetOracle(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "assetOracle()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    assetOracleData(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "assetOracleData()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     balanceOf(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -3446,10 +3581,6 @@ export interface BBBorrow extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
-
-    borrowOpeningFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "borrowOpeningFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     callerFee(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3565,6 +3696,10 @@ export interface BBBorrow extends BaseContract {
 
     "maxLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    maxMintFee(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "maxMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     minDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "minDebtRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3572,6 +3707,10 @@ export interface BBBorrow extends BaseContract {
     minLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
 
     "minLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    minMintFee(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "minMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -3708,7 +3847,6 @@ export interface BBBorrow extends BaseContract {
     ): Promise<BigNumber>;
 
     setMarketConfig(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -3723,8 +3861,7 @@ export interface BBBorrow extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
+    "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -3915,6 +4052,16 @@ export interface BBBorrow extends BaseContract {
 
     "assetId()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    assetOracle(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "assetOracle()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    assetOracleData(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "assetOracleData()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     balanceOf(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -3937,12 +4084,6 @@ export interface BBBorrow extends BaseContract {
       to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    borrowOpeningFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "borrowOpeningFee()"(
-      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     callerFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -4081,6 +4222,10 @@ export interface BBBorrow extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    maxMintFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "maxMintFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     minDebtRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "minDebtRate()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -4092,6 +4237,10 @@ export interface BBBorrow extends BaseContract {
     "minLiquidatorReward()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    minMintFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "minMintFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -4230,7 +4379,6 @@ export interface BBBorrow extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     setMarketConfig(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -4245,8 +4393,7 @@ export interface BBBorrow extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
+    "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,

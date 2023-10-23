@@ -92,7 +92,7 @@ export interface SGLLendingCommonInterface extends utils.Interface {
     "protocolFee()": FunctionFragment;
     "rateTimestamp()": FunctionFragment;
     "rateValidDuration()": FunctionFragment;
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
+    "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
     "startingInterestPerSecond()": FunctionFragment;
     "symbol()": FunctionFragment;
     "totalAsset()": FunctionFragment;
@@ -211,7 +211,7 @@ export interface SGLLendingCommonInterface extends utils.Interface {
       | "rateValidDuration"
       | "rateValidDuration()"
       | "setMarketConfig"
-      | "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
+      | "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
       | "startingInterestPerSecond"
       | "startingInterestPerSecond()"
       | "symbol"
@@ -631,7 +631,6 @@ export interface SGLLendingCommonInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "setMarketConfig",
     values: [
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<string>,
@@ -646,9 +645,8 @@ export interface SGLLendingCommonInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
+    functionFragment: "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
     values: [
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<string>,
@@ -1112,7 +1110,7 @@ export interface SGLLendingCommonInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
+    functionFragment: "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2184,7 +2182,6 @@ export interface SGLLendingCommon extends BaseContract {
     "rateValidDuration()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     setMarketConfig(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -2199,8 +2196,7 @@ export interface SGLLendingCommon extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
+    "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -2717,7 +2713,6 @@ export interface SGLLendingCommon extends BaseContract {
   "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   setMarketConfig(
-    _borrowOpeningFee: PromiseOrValue<BigNumberish>,
     _oracle: PromiseOrValue<string>,
     _oracleData: PromiseOrValue<BytesLike>,
     _conservator: PromiseOrValue<string>,
@@ -2732,8 +2727,7 @@ export interface SGLLendingCommon extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
-    _borrowOpeningFee: PromiseOrValue<BigNumberish>,
+  "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
     _oracle: PromiseOrValue<string>,
     _oracleData: PromiseOrValue<BytesLike>,
     _conservator: PromiseOrValue<string>,
@@ -3232,7 +3226,6 @@ export interface SGLLendingCommon extends BaseContract {
     "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     setMarketConfig(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -3247,8 +3240,7 @@ export interface SGLLendingCommon extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
+    "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -4038,7 +4030,6 @@ export interface SGLLendingCommon extends BaseContract {
     "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     setMarketConfig(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -4053,8 +4044,7 @@ export interface SGLLendingCommon extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
+    "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -4572,7 +4562,6 @@ export interface SGLLendingCommon extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     setMarketConfig(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -4587,8 +4576,7 @@ export interface SGLLendingCommon extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
+    "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,

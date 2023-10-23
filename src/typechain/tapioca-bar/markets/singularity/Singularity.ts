@@ -170,8 +170,8 @@ export interface SingularityInterface extends utils.Interface {
     "repay(address,address,bool,uint256)": FunctionFragment;
     "rescueEth(uint256,address)": FunctionFragment;
     "sellCollateral(address,uint256,uint256,address,bytes)": FunctionFragment;
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
-    "setSingularityConfig(uint256,uint256,uint256,uint256,uint64,uint64,uint256)": FunctionFragment;
+    "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
+    "setSingularityConfig(uint256,uint256,uint256,uint256,uint256,uint64,uint64,uint256)": FunctionFragment;
     "startingInterestPerSecond()": FunctionFragment;
     "symbol()": FunctionFragment;
     "totalAsset()": FunctionFragment;
@@ -333,9 +333,9 @@ export interface SingularityInterface extends utils.Interface {
       | "sellCollateral"
       | "sellCollateral(address,uint256,uint256,address,bytes)"
       | "setMarketConfig"
-      | "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
+      | "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
       | "setSingularityConfig"
-      | "setSingularityConfig(uint256,uint256,uint256,uint256,uint64,uint64,uint256)"
+      | "setSingularityConfig(uint256,uint256,uint256,uint256,uint256,uint64,uint64,uint256)"
       | "startingInterestPerSecond"
       | "startingInterestPerSecond()"
       | "symbol"
@@ -1057,7 +1057,6 @@ export interface SingularityInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "setMarketConfig",
     values: [
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<string>,
@@ -1072,9 +1071,8 @@ export interface SingularityInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
+    functionFragment: "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
     values: [
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<string>,
@@ -1097,12 +1095,14 @@ export interface SingularityInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "setSingularityConfig(uint256,uint256,uint256,uint256,uint64,uint64,uint256)",
+    functionFragment: "setSingularityConfig(uint256,uint256,uint256,uint256,uint256,uint64,uint64,uint256)",
     values: [
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
@@ -1686,12 +1686,10 @@ export interface SingularityInterface extends utils.Interface {
     functionFragment: "removeAsset(address,address,uint256)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "repay", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "removeCollateral",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "rescueEth", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "removeCollateral(address,address,uint256)",
     data: BytesLike
@@ -1719,7 +1717,7 @@ export interface SingularityInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
+    functionFragment: "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1727,7 +1725,7 @@ export interface SingularityInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setSingularityConfig(uint256,uint256,uint256,uint256,uint64,uint64,uint256)",
+    functionFragment: "setSingularityConfig(uint256,uint256,uint256,uint256,uint256,uint64,uint64,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -3081,7 +3079,6 @@ export interface Singularity extends BaseContract {
     ): Promise<ContractTransaction>;
 
     setMarketConfig(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -3096,8 +3093,7 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
+    "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -3113,6 +3109,7 @@ export interface Singularity extends BaseContract {
     ): Promise<ContractTransaction>;
 
     setSingularityConfig(
+      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _lqCollateralizationRate: PromiseOrValue<BigNumberish>,
       _liquidationMultiplier: PromiseOrValue<BigNumberish>,
       _minimumTargetUtilization: PromiseOrValue<BigNumberish>,
@@ -3123,7 +3120,8 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setSingularityConfig(uint256,uint256,uint256,uint256,uint64,uint64,uint256)"(
+    "setSingularityConfig(uint256,uint256,uint256,uint256,uint256,uint64,uint64,uint256)"(
+      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _lqCollateralizationRate: PromiseOrValue<BigNumberish>,
       _liquidationMultiplier: PromiseOrValue<BigNumberish>,
       _minimumTargetUtilization: PromiseOrValue<BigNumberish>,
@@ -3922,7 +3920,6 @@ export interface Singularity extends BaseContract {
   ): Promise<ContractTransaction>;
 
   setMarketConfig(
-    _borrowOpeningFee: PromiseOrValue<BigNumberish>,
     _oracle: PromiseOrValue<string>,
     _oracleData: PromiseOrValue<BytesLike>,
     _conservator: PromiseOrValue<string>,
@@ -3937,8 +3934,7 @@ export interface Singularity extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
-    _borrowOpeningFee: PromiseOrValue<BigNumberish>,
+  "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
     _oracle: PromiseOrValue<string>,
     _oracleData: PromiseOrValue<BytesLike>,
     _conservator: PromiseOrValue<string>,
@@ -3954,6 +3950,7 @@ export interface Singularity extends BaseContract {
   ): Promise<ContractTransaction>;
 
   setSingularityConfig(
+    _borrowOpeningFee: PromiseOrValue<BigNumberish>,
     _lqCollateralizationRate: PromiseOrValue<BigNumberish>,
     _liquidationMultiplier: PromiseOrValue<BigNumberish>,
     _minimumTargetUtilization: PromiseOrValue<BigNumberish>,
@@ -3964,7 +3961,8 @@ export interface Singularity extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setSingularityConfig(uint256,uint256,uint256,uint256,uint64,uint64,uint256)"(
+  "setSingularityConfig(uint256,uint256,uint256,uint256,uint256,uint64,uint64,uint256)"(
+    _borrowOpeningFee: PromiseOrValue<BigNumberish>,
     _lqCollateralizationRate: PromiseOrValue<BigNumberish>,
     _liquidationMultiplier: PromiseOrValue<BigNumberish>,
     _minimumTargetUtilization: PromiseOrValue<BigNumberish>,
@@ -4745,7 +4743,6 @@ export interface Singularity extends BaseContract {
     ): Promise<BigNumber>;
 
     setMarketConfig(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -4760,8 +4757,7 @@ export interface Singularity extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
+    "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -4777,6 +4773,7 @@ export interface Singularity extends BaseContract {
     ): Promise<void>;
 
     setSingularityConfig(
+      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _lqCollateralizationRate: PromiseOrValue<BigNumberish>,
       _liquidationMultiplier: PromiseOrValue<BigNumberish>,
       _minimumTargetUtilization: PromiseOrValue<BigNumberish>,
@@ -4787,7 +4784,8 @@ export interface Singularity extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setSingularityConfig(uint256,uint256,uint256,uint256,uint64,uint64,uint256)"(
+    "setSingularityConfig(uint256,uint256,uint256,uint256,uint256,uint64,uint64,uint256)"(
+      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _lqCollateralizationRate: PromiseOrValue<BigNumberish>,
       _liquidationMultiplier: PromiseOrValue<BigNumberish>,
       _minimumTargetUtilization: PromiseOrValue<BigNumberish>,
@@ -5859,7 +5857,6 @@ export interface Singularity extends BaseContract {
     ): Promise<BigNumber>;
 
     setMarketConfig(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -5874,8 +5871,7 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
+    "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -5891,6 +5887,7 @@ export interface Singularity extends BaseContract {
     ): Promise<BigNumber>;
 
     setSingularityConfig(
+      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _lqCollateralizationRate: PromiseOrValue<BigNumberish>,
       _liquidationMultiplier: PromiseOrValue<BigNumberish>,
       _minimumTargetUtilization: PromiseOrValue<BigNumberish>,
@@ -5901,7 +5898,8 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setSingularityConfig(uint256,uint256,uint256,uint256,uint64,uint64,uint256)"(
+    "setSingularityConfig(uint256,uint256,uint256,uint256,uint256,uint64,uint64,uint256)"(
+      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _lqCollateralizationRate: PromiseOrValue<BigNumberish>,
       _liquidationMultiplier: PromiseOrValue<BigNumberish>,
       _minimumTargetUtilization: PromiseOrValue<BigNumberish>,
@@ -6707,7 +6705,6 @@ export interface Singularity extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     setMarketConfig(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -6722,8 +6719,7 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
+    "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -6739,6 +6735,7 @@ export interface Singularity extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     setSingularityConfig(
+      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _lqCollateralizationRate: PromiseOrValue<BigNumberish>,
       _liquidationMultiplier: PromiseOrValue<BigNumberish>,
       _minimumTargetUtilization: PromiseOrValue<BigNumberish>,
@@ -6749,7 +6746,8 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setSingularityConfig(uint256,uint256,uint256,uint256,uint64,uint64,uint256)"(
+    "setSingularityConfig(uint256,uint256,uint256,uint256,uint256,uint64,uint64,uint256)"(
+      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _lqCollateralizationRate: PromiseOrValue<BigNumberish>,
       _liquidationMultiplier: PromiseOrValue<BigNumberish>,
       _minimumTargetUtilization: PromiseOrValue<BigNumberish>,
