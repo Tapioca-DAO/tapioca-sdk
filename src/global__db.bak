@@ -3,6 +3,33 @@
         "tapioca-bar": {
             "4002": [
                 {
+                    "name": "BigBang-TapiocaOFT-FTMMock",
+                    "address": "0xC18A44deD3b29Af18120Ed651Fe6E0f4fCCF9bf7",
+                    "meta": {
+                        "isBigBangMarket": true,
+                        "collateral": {
+                            "collateralAddress": "0xB591Db28708fCCfb89C5a4dE2B13073E66f33b27",
+                            "collateralStrategyAddress": "0xD2Bafd631a38144d8c58bA6D184eCF361B3e6719"
+                        }
+                    }
+                },
+                {
+                    "name": "OracleMock-TapiocaOFT-FTMMock",
+                    "address": "0xcAba0Bf6fCCAc592Ea5Fa6CaD88a386A9ee193D2",
+                    "meta": {
+                        "args": [
+                            "OracleMock-TapiocaOFT-FTMMock",
+                            "OCM-TapiocaOFT-FTMMock",
+                            {
+                                "type": "BigNumber",
+                                "hex": "0x738e48b0abd10d052d5f7000000000"
+                            }
+                        ],
+                        "salt": "0x40a906c69cc0320b98510fb8e5b5763172cdc2de5266a1dd6d20dee2c96960a1",
+                        "create2": true
+                    }
+                },
+                {
                     "name": "Tapioca Singularity-TapiocaOFT-FTMLPMock",
                     "address": "0x7F46542cD2bcB17E711ab801988A734488bEe115",
                     "meta": {
@@ -382,6 +409,33 @@
             "43113": [],
             "80001": [],
             "421613": [
+                {
+                    "name": "BigBang-TapiocaOFT-WETHMock",
+                    "address": "0x2e2136F858600f074D57448fA43cee56a4563842",
+                    "meta": {
+                        "isBigBangMarket": true,
+                        "collateral": {
+                            "collateralAddress": "0xd384A44C510795753E92FacB3a09BD401E333c6c",
+                            "collateralStrategyAddress": "0xd2ff30b1A716CE7d0060338DBbfAF152cA1fed25"
+                        }
+                    }
+                },
+                {
+                    "name": "OracleMock-TapiocaOFT-WETHMock",
+                    "address": "0x394cfc69A75b755CBfDD369CEb0c0988380d9909",
+                    "meta": {
+                        "args": [
+                            "OracleMock-TapiocaOFT-WETHMock",
+                            "OCM-TapiocaOFT-WETHMock",
+                            {
+                                "type": "BigNumber",
+                                "hex": "0x106f4216d9dbb8f58c1cc8340000"
+                            }
+                        ],
+                        "salt": "0x3cfc5a7a1762565f7547299d00b65d31c0d6a4d591ace5e699cf7b1068402ee6",
+                        "create2": true
+                    }
+                },
                 {
                     "name": "Tapioca Singularity-TapiocaOFT-GLPMock",
                     "address": "0x19d67955b400e17C0548108375A5932398bAf61D",
