@@ -68,6 +68,7 @@ export interface SGLLiquidationInterface extends utils.Interface {
     "fullUtilizationMinusMax()": FunctionFragment;
     "getInterestDetails()": FunctionFragment;
     "interestElasticity()": FunctionFragment;
+    "leverageExecutor()": FunctionFragment;
     "liquidate(address[],uint256[],address[],bytes[])": FunctionFragment;
     "liquidateBadDebt(address,address,address,bytes)": FunctionFragment;
     "liquidationBonusAmount()": FunctionFragment;
@@ -94,6 +95,7 @@ export interface SGLLiquidationInterface extends utils.Interface {
     "protocolFee()": FunctionFragment;
     "rateTimestamp()": FunctionFragment;
     "rateValidDuration()": FunctionFragment;
+    "setLeverageExecutor(address)": FunctionFragment;
     "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
     "startingInterestPerSecond()": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -164,6 +166,8 @@ export interface SGLLiquidationInterface extends utils.Interface {
       | "getInterestDetails()"
       | "interestElasticity"
       | "interestElasticity()"
+      | "leverageExecutor"
+      | "leverageExecutor()"
       | "liquidate"
       | "liquidate(address[],uint256[],address[],bytes[])"
       | "liquidateBadDebt"
@@ -216,6 +220,8 @@ export interface SGLLiquidationInterface extends utils.Interface {
       | "rateTimestamp()"
       | "rateValidDuration"
       | "rateValidDuration()"
+      | "setLeverageExecutor"
+      | "setLeverageExecutor(address)"
       | "setMarketConfig"
       | "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
       | "startingInterestPerSecond"
@@ -432,6 +438,14 @@ export interface SGLLiquidationInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "interestElasticity()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "leverageExecutor",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "leverageExecutor()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -669,6 +683,14 @@ export interface SGLLiquidationInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "rateValidDuration()",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLeverageExecutor",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLeverageExecutor(address)",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMarketConfig",
@@ -988,6 +1010,14 @@ export interface SGLLiquidationInterface extends utils.Interface {
     functionFragment: "interestElasticity()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "leverageExecutor",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "leverageExecutor()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "liquidate", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "liquidate(address[],uint256[],address[],bytes[])",
@@ -1161,6 +1191,14 @@ export interface SGLLiquidationInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "setLeverageExecutor",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setLeverageExecutor(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "setMarketConfig",
     data: BytesLike
   ): Result;
@@ -1278,6 +1316,7 @@ export interface SGLLiquidationInterface extends utils.Interface {
     "ConservatorUpdated(address,address)": EventFragment;
     "ExchangeRateDurationUpdated(uint256,uint256)": EventFragment;
     "InterestElasticityUpdated(uint256,uint256)": EventFragment;
+    "LeverageExecutorSet(address,address)": EventFragment;
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)": EventFragment;
     "LiquidationMultiplierUpdated(uint256,uint256)": EventFragment;
     "LogAccrue(uint256,uint256,uint64,uint256)": EventFragment;
@@ -1331,6 +1370,10 @@ export interface SGLLiquidationInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "InterestElasticityUpdated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "InterestElasticityUpdated(uint256,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LeverageExecutorSet"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LeverageExecutorSet(address,address)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Liquidated"): EventFragment;
   getEvent(
@@ -1516,6 +1559,18 @@ export type InterestElasticityUpdatedEvent = TypedEvent<
 
 export type InterestElasticityUpdatedEventFilter =
   TypedEventFilter<InterestElasticityUpdatedEvent>;
+
+export interface LeverageExecutorSetEventObject {
+  oldVal: string;
+  newVal: string;
+}
+export type LeverageExecutorSetEvent = TypedEvent<
+  [string, string],
+  LeverageExecutorSetEventObject
+>;
+
+export type LeverageExecutorSetEventFilter =
+  TypedEventFilter<LeverageExecutorSetEvent>;
 
 export interface LiquidatedEventObject {
   liquidator: string;
@@ -2070,6 +2125,10 @@ export interface SGLLiquidation extends BaseContract {
 
     "interestElasticity()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    leverageExecutor(overrides?: CallOverrides): Promise<[string]>;
+
+    "leverageExecutor()"(overrides?: CallOverrides): Promise<[string]>;
+
     liquidate(
       users: PromiseOrValue<string>[],
       maxBorrowParts: PromiseOrValue<BigNumberish>[],
@@ -2267,6 +2326,16 @@ export interface SGLLiquidation extends BaseContract {
     rateValidDuration(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "rateValidDuration()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     setMarketConfig(
       _oracle: PromiseOrValue<string>,
@@ -2643,6 +2712,10 @@ export interface SGLLiquidation extends BaseContract {
 
   "interestElasticity()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  leverageExecutor(overrides?: CallOverrides): Promise<string>;
+
+  "leverageExecutor()"(overrides?: CallOverrides): Promise<string>;
+
   liquidate(
     users: PromiseOrValue<string>[],
     maxBorrowParts: PromiseOrValue<BigNumberish>[],
@@ -2830,6 +2903,16 @@ export interface SGLLiquidation extends BaseContract {
   rateValidDuration(overrides?: CallOverrides): Promise<BigNumber>;
 
   "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  setLeverageExecutor(
+    _executor: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setLeverageExecutor(address)"(
+    _executor: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   setMarketConfig(
     _oracle: PromiseOrValue<string>,
@@ -3188,6 +3271,10 @@ export interface SGLLiquidation extends BaseContract {
 
     "interestElasticity()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    leverageExecutor(overrides?: CallOverrides): Promise<string>;
+
+    "leverageExecutor()"(overrides?: CallOverrides): Promise<string>;
+
     liquidate(
       users: PromiseOrValue<string>[],
       maxBorrowParts: PromiseOrValue<BigNumberish>[],
@@ -3375,6 +3462,16 @@ export interface SGLLiquidation extends BaseContract {
     rateValidDuration(overrides?: CallOverrides): Promise<BigNumber>;
 
     "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     setMarketConfig(
       _oracle: PromiseOrValue<string>,
@@ -3593,6 +3690,15 @@ export interface SGLLiquidation extends BaseContract {
       oldVal?: PromiseOrValue<BigNumberish> | null,
       newVal?: PromiseOrValue<BigNumberish> | null
     ): InterestElasticityUpdatedEventFilter;
+
+    "LeverageExecutorSet(address,address)"(
+      oldVal?: PromiseOrValue<string> | null,
+      newVal?: PromiseOrValue<string> | null
+    ): LeverageExecutorSetEventFilter;
+    LeverageExecutorSet(
+      oldVal?: PromiseOrValue<string> | null,
+      newVal?: PromiseOrValue<string> | null
+    ): LeverageExecutorSetEventFilter;
 
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)"(
       liquidator?: PromiseOrValue<string> | null,
@@ -4024,6 +4130,10 @@ export interface SGLLiquidation extends BaseContract {
 
     "interestElasticity()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    leverageExecutor(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "leverageExecutor()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     liquidate(
       users: PromiseOrValue<string>[],
       maxBorrowParts: PromiseOrValue<BigNumberish>[],
@@ -4211,6 +4321,16 @@ export interface SGLLiquidation extends BaseContract {
     rateValidDuration(overrides?: CallOverrides): Promise<BigNumber>;
 
     "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     setMarketConfig(
       _oracle: PromiseOrValue<string>,
@@ -4550,6 +4670,12 @@ export interface SGLLiquidation extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    leverageExecutor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "leverageExecutor()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     liquidate(
       users: PromiseOrValue<string>[],
       maxBorrowParts: PromiseOrValue<BigNumberish>[],
@@ -4774,6 +4900,16 @@ export interface SGLLiquidation extends BaseContract {
 
     "rateValidDuration()"(
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setMarketConfig(

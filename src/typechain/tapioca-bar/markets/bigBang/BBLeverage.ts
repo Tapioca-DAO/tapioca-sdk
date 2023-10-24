@@ -41,7 +41,7 @@ export interface BBLeverageInterface extends utils.Interface {
     "assetOracle()": FunctionFragment;
     "assetOracleData()": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
-    "buyCollateral(address,uint256,uint256,uint256,address,bytes)": FunctionFragment;
+    "buyCollateral(address,uint256,uint256,bytes)": FunctionFragment;
     "callerFee()": FunctionFragment;
     "claimOwnership()": FunctionFragment;
     "collateral()": FunctionFragment;
@@ -57,15 +57,18 @@ export interface BBLeverageInterface extends utils.Interface {
     "getDebtRate()": FunctionFragment;
     "getTotalDebt()": FunctionFragment;
     "isMainMarket()": FunctionFragment;
+    "leverageExecutor()": FunctionFragment;
     "liquidationBonusAmount()": FunctionFragment;
     "liquidationCollateralizationRate()": FunctionFragment;
     "liquidationMultiplier()": FunctionFragment;
     "maxDebtRate()": FunctionFragment;
     "maxLiquidatorReward()": FunctionFragment;
     "maxMintFee()": FunctionFragment;
+    "maxMintFeeStart()": FunctionFragment;
     "minDebtRate()": FunctionFragment;
     "minLiquidatorReward()": FunctionFragment;
     "minMintFee()": FunctionFragment;
+    "minMintFeeStart()": FunctionFragment;
     "nonces(address)": FunctionFragment;
     "openingFees(address)": FunctionFragment;
     "oracle()": FunctionFragment;
@@ -80,7 +83,8 @@ export interface BBLeverageInterface extends utils.Interface {
     "protocolFee()": FunctionFragment;
     "rateTimestamp()": FunctionFragment;
     "rateValidDuration()": FunctionFragment;
-    "sellCollateral(address,uint256,uint256,address,bytes)": FunctionFragment;
+    "sellCollateral(address,uint256,bytes)": FunctionFragment;
+    "setLeverageExecutor(address)": FunctionFragment;
     "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
     "totalBorrow()": FunctionFragment;
     "totalBorrowCap()": FunctionFragment;
@@ -123,7 +127,7 @@ export interface BBLeverageInterface extends utils.Interface {
       | "balanceOf"
       | "balanceOf(address)"
       | "buyCollateral"
-      | "buyCollateral(address,uint256,uint256,uint256,address,bytes)"
+      | "buyCollateral(address,uint256,uint256,bytes)"
       | "callerFee"
       | "callerFee()"
       | "claimOwnership"
@@ -154,6 +158,8 @@ export interface BBLeverageInterface extends utils.Interface {
       | "getTotalDebt()"
       | "isMainMarket"
       | "isMainMarket()"
+      | "leverageExecutor"
+      | "leverageExecutor()"
       | "liquidationBonusAmount"
       | "liquidationBonusAmount()"
       | "liquidationCollateralizationRate"
@@ -166,12 +172,16 @@ export interface BBLeverageInterface extends utils.Interface {
       | "maxLiquidatorReward()"
       | "maxMintFee"
       | "maxMintFee()"
+      | "maxMintFeeStart"
+      | "maxMintFeeStart()"
       | "minDebtRate"
       | "minDebtRate()"
       | "minLiquidatorReward"
       | "minLiquidatorReward()"
       | "minMintFee"
       | "minMintFee()"
+      | "minMintFeeStart"
+      | "minMintFeeStart()"
       | "nonces"
       | "nonces(address)"
       | "openingFees"
@@ -201,7 +211,9 @@ export interface BBLeverageInterface extends utils.Interface {
       | "rateValidDuration"
       | "rateValidDuration()"
       | "sellCollateral"
-      | "sellCollateral(address,uint256,uint256,address,bytes)"
+      | "sellCollateral(address,uint256,bytes)"
+      | "setLeverageExecutor"
+      | "setLeverageExecutor(address)"
       | "setMarketConfig"
       | "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
       | "totalBorrow"
@@ -314,19 +326,15 @@ export interface BBLeverageInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "buyCollateral(address,uint256,uint256,uint256,address,bytes)",
+    functionFragment: "buyCollateral(address,uint256,uint256,bytes)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
@@ -456,6 +464,14 @@ export interface BBLeverageInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "leverageExecutor",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "leverageExecutor()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "liquidationBonusAmount",
     values?: undefined
   ): string;
@@ -504,6 +520,14 @@ export interface BBLeverageInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "maxMintFeeStart",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "maxMintFeeStart()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "minDebtRate",
     values?: undefined
   ): string;
@@ -525,6 +549,14 @@ export interface BBLeverageInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "minMintFee()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "minMintFeeStart",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "minMintFeeStart()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -658,20 +690,24 @@ export interface BBLeverageInterface extends utils.Interface {
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "sellCollateral(address,uint256,uint256,address,bytes)",
+    functionFragment: "sellCollateral(address,uint256,bytes)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
       PromiseOrValue<BytesLike>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLeverageExecutor",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLeverageExecutor(address)",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMarketConfig",
@@ -886,7 +922,7 @@ export interface BBLeverageInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "buyCollateral(address,uint256,uint256,uint256,address,bytes)",
+    functionFragment: "buyCollateral(address,uint256,uint256,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "callerFee", data: BytesLike): Result;
@@ -1004,6 +1040,14 @@ export interface BBLeverageInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "leverageExecutor",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "leverageExecutor()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "liquidationBonusAmount",
     data: BytesLike
   ): Result;
@@ -1049,6 +1093,14 @@ export interface BBLeverageInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "maxMintFeeStart",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "maxMintFeeStart()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "minDebtRate",
     data: BytesLike
   ): Result;
@@ -1067,6 +1119,14 @@ export interface BBLeverageInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "minMintFee", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "minMintFee()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "minMintFeeStart",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "minMintFeeStart()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
@@ -1159,7 +1219,15 @@ export interface BBLeverageInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "sellCollateral(address,uint256,uint256,address,bytes)",
+    functionFragment: "sellCollateral(address,uint256,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setLeverageExecutor",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setLeverageExecutor(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1266,6 +1334,7 @@ export interface BBLeverageInterface extends utils.Interface {
     "ConservatorUpdated(address,address)": EventFragment;
     "DebtRateAgainstEthUpdated(uint256,uint256)": EventFragment;
     "ExchangeRateDurationUpdated(uint256,uint256)": EventFragment;
+    "LeverageExecutorSet(address,address)": EventFragment;
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)": EventFragment;
     "LiquidationMultiplierUpdated(uint256,uint256)": EventFragment;
     "LogAccrue(uint256,uint64)": EventFragment;
@@ -1283,6 +1352,7 @@ export interface BBLeverageInterface extends utils.Interface {
     "PausedUpdated(uint8,bool,bool)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
     "UpdateMinMaxMintFee(uint256,uint256,uint256,uint256)": EventFragment;
+    "UpdateMinMaxMintRange(uint256,uint256,uint256,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
@@ -1312,6 +1382,10 @@ export interface BBLeverageInterface extends utils.Interface {
   ): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ExchangeRateDurationUpdated(uint256,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LeverageExecutorSet"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LeverageExecutorSet(address,address)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Liquidated"): EventFragment;
   getEvent(
@@ -1375,6 +1449,10 @@ export interface BBLeverageInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "UpdateMinMaxMintFee(uint256,uint256,uint256,uint256)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "UpdateMinMaxMintRange"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "UpdateMinMaxMintRange(uint256,uint256,uint256,uint256)"
+  ): EventFragment;
 }
 
 export interface ApprovalEventObject {
@@ -1411,8 +1489,8 @@ export type AssetOracleDataUpdatedEventFilter =
   TypedEventFilter<AssetOracleDataUpdatedEvent>;
 
 export interface AssetOracleUpdatedEventObject {
-  _oldVal: string;
-  _newVal: string;
+  oldVal: string;
+  newVal: string;
 }
 export type AssetOracleUpdatedEvent = TypedEvent<
   [string, string],
@@ -1457,6 +1535,18 @@ export type ExchangeRateDurationUpdatedEvent = TypedEvent<
 
 export type ExchangeRateDurationUpdatedEventFilter =
   TypedEventFilter<ExchangeRateDurationUpdatedEvent>;
+
+export interface LeverageExecutorSetEventObject {
+  oldVal: string;
+  newVal: string;
+}
+export type LeverageExecutorSetEvent = TypedEvent<
+  [string, string],
+  LeverageExecutorSetEventObject
+>;
+
+export type LeverageExecutorSetEventFilter =
+  TypedEventFilter<LeverageExecutorSetEvent>;
 
 export interface LiquidatedEventObject {
   liquidator: string;
@@ -1659,6 +1749,20 @@ export type UpdateMinMaxMintFeeEvent = TypedEvent<
 export type UpdateMinMaxMintFeeEventFilter =
   TypedEventFilter<UpdateMinMaxMintFeeEvent>;
 
+export interface UpdateMinMaxMintRangeEventObject {
+  oldMin: BigNumber;
+  newMin: BigNumber;
+  oldMax: BigNumber;
+  newMax: BigNumber;
+}
+export type UpdateMinMaxMintRangeEvent = TypedEvent<
+  [BigNumber, BigNumber, BigNumber, BigNumber],
+  UpdateMinMaxMintRangeEventObject
+>;
+
+export type UpdateMinMaxMintRangeEventFilter =
+  TypedEventFilter<UpdateMinMaxMintRangeEvent>;
+
 export interface BBLeverage extends BaseContract {
   contractName: "BBLeverage";
 
@@ -1790,19 +1894,15 @@ export interface BBLeverage extends BaseContract {
       from: PromiseOrValue<string>,
       borrowAmount: PromiseOrValue<BigNumberish>,
       supplyAmount: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "buyCollateral(address,uint256,uint256,uint256,address,bytes)"(
+    "buyCollateral(address,uint256,uint256,bytes)"(
       from: PromiseOrValue<string>,
       borrowAmount: PromiseOrValue<BigNumberish>,
       supplyAmount: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1910,6 +2010,10 @@ export interface BBLeverage extends BaseContract {
 
     "isMainMarket()"(overrides?: CallOverrides): Promise<[boolean]>;
 
+    leverageExecutor(overrides?: CallOverrides): Promise<[string]>;
+
+    "leverageExecutor()"(overrides?: CallOverrides): Promise<[string]>;
+
     liquidationBonusAmount(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -1938,6 +2042,10 @@ export interface BBLeverage extends BaseContract {
 
     "maxMintFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    maxMintFeeStart(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "maxMintFeeStart()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     minDebtRate(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "minDebtRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -1949,6 +2057,10 @@ export interface BBLeverage extends BaseContract {
     minMintFee(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "minMintFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    minMintFeeStart(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "minMintFeeStart()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -2071,18 +2183,24 @@ export interface BBLeverage extends BaseContract {
     sellCollateral(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "sellCollateral(address,uint256,uint256,address,bytes)"(
+    "sellCollateral(address,uint256,bytes)"(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2327,19 +2445,15 @@ export interface BBLeverage extends BaseContract {
     from: PromiseOrValue<string>,
     borrowAmount: PromiseOrValue<BigNumberish>,
     supplyAmount: PromiseOrValue<BigNumberish>,
-    minAmountOut: PromiseOrValue<BigNumberish>,
-    swapper: PromiseOrValue<string>,
-    dexData: PromiseOrValue<BytesLike>,
+    data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "buyCollateral(address,uint256,uint256,uint256,address,bytes)"(
+  "buyCollateral(address,uint256,uint256,bytes)"(
     from: PromiseOrValue<string>,
     borrowAmount: PromiseOrValue<BigNumberish>,
     supplyAmount: PromiseOrValue<BigNumberish>,
-    minAmountOut: PromiseOrValue<BigNumberish>,
-    swapper: PromiseOrValue<string>,
-    dexData: PromiseOrValue<BytesLike>,
+    data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -2445,6 +2559,10 @@ export interface BBLeverage extends BaseContract {
 
   "isMainMarket()"(overrides?: CallOverrides): Promise<boolean>;
 
+  leverageExecutor(overrides?: CallOverrides): Promise<string>;
+
+  "leverageExecutor()"(overrides?: CallOverrides): Promise<string>;
+
   liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
   "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2473,6 +2591,10 @@ export interface BBLeverage extends BaseContract {
 
   "maxMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  maxMintFeeStart(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "maxMintFeeStart()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   minDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
   "minDebtRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2484,6 +2606,10 @@ export interface BBLeverage extends BaseContract {
   minMintFee(overrides?: CallOverrides): Promise<BigNumber>;
 
   "minMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  minMintFeeStart(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "minMintFeeStart()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   nonces(
     owner: PromiseOrValue<string>,
@@ -2606,18 +2732,24 @@ export interface BBLeverage extends BaseContract {
   sellCollateral(
     from: PromiseOrValue<string>,
     share: PromiseOrValue<BigNumberish>,
-    minAmountOut: PromiseOrValue<BigNumberish>,
-    swapper: PromiseOrValue<string>,
-    dexData: PromiseOrValue<BytesLike>,
+    data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "sellCollateral(address,uint256,uint256,address,bytes)"(
+  "sellCollateral(address,uint256,bytes)"(
     from: PromiseOrValue<string>,
     share: PromiseOrValue<BigNumberish>,
-    minAmountOut: PromiseOrValue<BigNumberish>,
-    swapper: PromiseOrValue<string>,
-    dexData: PromiseOrValue<BytesLike>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setLeverageExecutor(
+    _executor: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setLeverageExecutor(address)"(
+    _executor: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -2854,19 +2986,15 @@ export interface BBLeverage extends BaseContract {
       from: PromiseOrValue<string>,
       borrowAmount: PromiseOrValue<BigNumberish>,
       supplyAmount: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "buyCollateral(address,uint256,uint256,uint256,address,bytes)"(
+    "buyCollateral(address,uint256,uint256,bytes)"(
       from: PromiseOrValue<string>,
       borrowAmount: PromiseOrValue<BigNumberish>,
       supplyAmount: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -2968,6 +3096,10 @@ export interface BBLeverage extends BaseContract {
 
     "isMainMarket()"(overrides?: CallOverrides): Promise<boolean>;
 
+    leverageExecutor(overrides?: CallOverrides): Promise<string>;
+
+    "leverageExecutor()"(overrides?: CallOverrides): Promise<string>;
+
     liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2996,6 +3128,10 @@ export interface BBLeverage extends BaseContract {
 
     "maxMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    maxMintFeeStart(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "maxMintFeeStart()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     minDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "minDebtRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3007,6 +3143,10 @@ export interface BBLeverage extends BaseContract {
     minMintFee(overrides?: CallOverrides): Promise<BigNumber>;
 
     "minMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    minMintFeeStart(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "minMintFeeStart()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -3129,20 +3269,26 @@ export interface BBLeverage extends BaseContract {
     sellCollateral(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "sellCollateral(address,uint256,uint256,address,bytes)"(
+    "sellCollateral(address,uint256,bytes)"(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     setMarketConfig(
       _oracle: PromiseOrValue<string>,
@@ -3310,12 +3456,12 @@ export interface BBLeverage extends BaseContract {
     AssetOracleDataUpdated(): AssetOracleDataUpdatedEventFilter;
 
     "AssetOracleUpdated(address,address)"(
-      _oldVal?: PromiseOrValue<string> | null,
-      _newVal?: PromiseOrValue<string> | null
+      oldVal?: PromiseOrValue<string> | null,
+      newVal?: PromiseOrValue<string> | null
     ): AssetOracleUpdatedEventFilter;
     AssetOracleUpdated(
-      _oldVal?: PromiseOrValue<string> | null,
-      _newVal?: PromiseOrValue<string> | null
+      oldVal?: PromiseOrValue<string> | null,
+      newVal?: PromiseOrValue<string> | null
     ): AssetOracleUpdatedEventFilter;
 
     "ConservatorUpdated(address,address)"(
@@ -3344,6 +3490,15 @@ export interface BBLeverage extends BaseContract {
       _oldVal?: null,
       _newVal?: null
     ): ExchangeRateDurationUpdatedEventFilter;
+
+    "LeverageExecutorSet(address,address)"(
+      oldVal?: PromiseOrValue<string> | null,
+      newVal?: PromiseOrValue<string> | null
+    ): LeverageExecutorSetEventFilter;
+    LeverageExecutorSet(
+      oldVal?: PromiseOrValue<string> | null,
+      newVal?: PromiseOrValue<string> | null
+    ): LeverageExecutorSetEventFilter;
 
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)"(
       liquidator?: PromiseOrValue<string> | null,
@@ -3513,6 +3668,19 @@ export interface BBLeverage extends BaseContract {
       oldMax?: PromiseOrValue<BigNumberish> | null,
       newMax?: null
     ): UpdateMinMaxMintFeeEventFilter;
+
+    "UpdateMinMaxMintRange(uint256,uint256,uint256,uint256)"(
+      oldMin?: PromiseOrValue<BigNumberish> | null,
+      newMin?: PromiseOrValue<BigNumberish> | null,
+      oldMax?: PromiseOrValue<BigNumberish> | null,
+      newMax?: null
+    ): UpdateMinMaxMintRangeEventFilter;
+    UpdateMinMaxMintRange(
+      oldMin?: PromiseOrValue<BigNumberish> | null,
+      newMin?: PromiseOrValue<BigNumberish> | null,
+      oldMax?: PromiseOrValue<BigNumberish> | null,
+      newMax?: null
+    ): UpdateMinMaxMintRangeEventFilter;
   };
 
   estimateGas: {
@@ -3610,19 +3778,15 @@ export interface BBLeverage extends BaseContract {
       from: PromiseOrValue<string>,
       borrowAmount: PromiseOrValue<BigNumberish>,
       supplyAmount: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "buyCollateral(address,uint256,uint256,uint256,address,bytes)"(
+    "buyCollateral(address,uint256,uint256,bytes)"(
       from: PromiseOrValue<string>,
       borrowAmount: PromiseOrValue<BigNumberish>,
       supplyAmount: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -3716,6 +3880,10 @@ export interface BBLeverage extends BaseContract {
 
     "isMainMarket()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    leverageExecutor(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "leverageExecutor()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3744,6 +3912,10 @@ export interface BBLeverage extends BaseContract {
 
     "maxMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    maxMintFeeStart(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "maxMintFeeStart()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     minDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "minDebtRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3755,6 +3927,10 @@ export interface BBLeverage extends BaseContract {
     minMintFee(overrides?: CallOverrides): Promise<BigNumber>;
 
     "minMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    minMintFeeStart(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "minMintFeeStart()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -3877,18 +4053,24 @@ export interface BBLeverage extends BaseContract {
     sellCollateral(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "sellCollateral(address,uint256,uint256,address,bytes)"(
+    "sellCollateral(address,uint256,bytes)"(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4122,19 +4304,15 @@ export interface BBLeverage extends BaseContract {
       from: PromiseOrValue<string>,
       borrowAmount: PromiseOrValue<BigNumberish>,
       supplyAmount: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "buyCollateral(address,uint256,uint256,uint256,address,bytes)"(
+    "buyCollateral(address,uint256,uint256,bytes)"(
       from: PromiseOrValue<string>,
       borrowAmount: PromiseOrValue<BigNumberish>,
       supplyAmount: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -4238,6 +4416,12 @@ export interface BBLeverage extends BaseContract {
 
     "isMainMarket()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    leverageExecutor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "leverageExecutor()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     liquidationBonusAmount(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -4278,6 +4462,12 @@ export interface BBLeverage extends BaseContract {
 
     "maxMintFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    maxMintFeeStart(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "maxMintFeeStart()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     minDebtRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "minDebtRate()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -4293,6 +4483,12 @@ export interface BBLeverage extends BaseContract {
     minMintFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "minMintFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    minMintFeeStart(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "minMintFeeStart()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -4417,18 +4613,24 @@ export interface BBLeverage extends BaseContract {
     sellCollateral(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "sellCollateral(address,uint256,uint256,address,bytes)"(
+    "sellCollateral(address,uint256,bytes)"(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

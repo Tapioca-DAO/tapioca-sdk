@@ -111,7 +111,7 @@ export interface SGLLeverageInterface extends utils.Interface {
     "assetId()": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "borrowOpeningFee()": FunctionFragment;
-    "buyCollateral(address,uint256,uint256,uint256,address,bytes)": FunctionFragment;
+    "buyCollateral(address,uint256,uint256,bytes)": FunctionFragment;
     "callerFee()": FunctionFragment;
     "claimOwnership()": FunctionFragment;
     "collateral()": FunctionFragment;
@@ -126,6 +126,7 @@ export interface SGLLeverageInterface extends utils.Interface {
     "fullUtilizationMinusMax()": FunctionFragment;
     "getInterestDetails()": FunctionFragment;
     "interestElasticity()": FunctionFragment;
+    "leverageExecutor()": FunctionFragment;
     "liquidationBonusAmount()": FunctionFragment;
     "liquidationCollateralizationRate()": FunctionFragment;
     "liquidationMultiplier()": FunctionFragment;
@@ -152,7 +153,8 @@ export interface SGLLeverageInterface extends utils.Interface {
     "protocolFee()": FunctionFragment;
     "rateTimestamp()": FunctionFragment;
     "rateValidDuration()": FunctionFragment;
-    "sellCollateral(address,uint256,uint256,address,bytes)": FunctionFragment;
+    "sellCollateral(address,uint256,bytes)": FunctionFragment;
+    "setLeverageExecutor(address)": FunctionFragment;
     "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
     "startingInterestPerSecond()": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -196,7 +198,7 @@ export interface SGLLeverageInterface extends utils.Interface {
       | "borrowOpeningFee"
       | "borrowOpeningFee()"
       | "buyCollateral"
-      | "buyCollateral(address,uint256,uint256,uint256,address,bytes)"
+      | "buyCollateral(address,uint256,uint256,bytes)"
       | "callerFee"
       | "callerFee()"
       | "claimOwnership"
@@ -225,6 +227,8 @@ export interface SGLLeverageInterface extends utils.Interface {
       | "getInterestDetails()"
       | "interestElasticity"
       | "interestElasticity()"
+      | "leverageExecutor"
+      | "leverageExecutor()"
       | "liquidationBonusAmount"
       | "liquidationBonusAmount()"
       | "liquidationCollateralizationRate"
@@ -278,7 +282,9 @@ export interface SGLLeverageInterface extends utils.Interface {
       | "rateValidDuration"
       | "rateValidDuration()"
       | "sellCollateral"
-      | "sellCollateral(address,uint256,uint256,address,bytes)"
+      | "sellCollateral(address,uint256,bytes)"
+      | "setLeverageExecutor"
+      | "setLeverageExecutor(address)"
       | "setMarketConfig"
       | "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
       | "startingInterestPerSecond"
@@ -389,19 +395,15 @@ export interface SGLLeverageInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "buyCollateral(address,uint256,uint256,uint256,address,bytes)",
+    functionFragment: "buyCollateral(address,uint256,uint256,bytes)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
@@ -517,6 +519,14 @@ export interface SGLLeverageInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "interestElasticity()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "leverageExecutor",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "leverageExecutor()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -770,20 +780,24 @@ export interface SGLLeverageInterface extends utils.Interface {
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "sellCollateral(address,uint256,uint256,address,bytes)",
+    functionFragment: "sellCollateral(address,uint256,bytes)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
       PromiseOrValue<BytesLike>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLeverageExecutor",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLeverageExecutor(address)",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMarketConfig",
@@ -1008,7 +1022,7 @@ export interface SGLLeverageInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "buyCollateral(address,uint256,uint256,uint256,address,bytes)",
+    functionFragment: "buyCollateral(address,uint256,uint256,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "callerFee", data: BytesLike): Result;
@@ -1109,6 +1123,14 @@ export interface SGLLeverageInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "interestElasticity()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "leverageExecutor",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "leverageExecutor()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1291,7 +1313,15 @@ export interface SGLLeverageInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "sellCollateral(address,uint256,uint256,address,bytes)",
+    functionFragment: "sellCollateral(address,uint256,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setLeverageExecutor",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setLeverageExecutor(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1412,6 +1442,7 @@ export interface SGLLeverageInterface extends utils.Interface {
     "ConservatorUpdated(address,address)": EventFragment;
     "ExchangeRateDurationUpdated(uint256,uint256)": EventFragment;
     "InterestElasticityUpdated(uint256,uint256)": EventFragment;
+    "LeverageExecutorSet(address,address)": EventFragment;
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)": EventFragment;
     "LiquidationMultiplierUpdated(uint256,uint256)": EventFragment;
     "LogAccrue(uint256,uint256,uint64,uint256)": EventFragment;
@@ -1465,6 +1496,10 @@ export interface SGLLeverageInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "InterestElasticityUpdated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "InterestElasticityUpdated(uint256,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LeverageExecutorSet"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LeverageExecutorSet(address,address)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Liquidated"): EventFragment;
   getEvent(
@@ -1650,6 +1685,18 @@ export type InterestElasticityUpdatedEvent = TypedEvent<
 
 export type InterestElasticityUpdatedEventFilter =
   TypedEventFilter<InterestElasticityUpdatedEvent>;
+
+export interface LeverageExecutorSetEventObject {
+  oldVal: string;
+  newVal: string;
+}
+export type LeverageExecutorSetEvent = TypedEvent<
+  [string, string],
+  LeverageExecutorSetEventObject
+>;
+
+export type LeverageExecutorSetEventFilter =
+  TypedEventFilter<LeverageExecutorSetEvent>;
 
 export interface LiquidatedEventObject {
   liquidator: string;
@@ -2094,19 +2141,15 @@ export interface SGLLeverage extends BaseContract {
       from: PromiseOrValue<string>,
       borrowAmount: PromiseOrValue<BigNumberish>,
       supplyAmount: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "buyCollateral(address,uint256,uint256,uint256,address,bytes)"(
+    "buyCollateral(address,uint256,uint256,bytes)"(
       from: PromiseOrValue<string>,
       borrowAmount: PromiseOrValue<BigNumberish>,
       supplyAmount: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2223,6 +2266,10 @@ export interface SGLLeverage extends BaseContract {
     interestElasticity(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "interestElasticity()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    leverageExecutor(overrides?: CallOverrides): Promise<[string]>;
+
+    "leverageExecutor()"(overrides?: CallOverrides): Promise<[string]>;
 
     liquidationBonusAmount(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -2435,18 +2482,24 @@ export interface SGLLeverage extends BaseContract {
     sellCollateral(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "sellCollateral(address,uint256,uint256,address,bytes)"(
+    "sellCollateral(address,uint256,bytes)"(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2717,19 +2770,15 @@ export interface SGLLeverage extends BaseContract {
     from: PromiseOrValue<string>,
     borrowAmount: PromiseOrValue<BigNumberish>,
     supplyAmount: PromiseOrValue<BigNumberish>,
-    minAmountOut: PromiseOrValue<BigNumberish>,
-    swapper: PromiseOrValue<string>,
-    dexData: PromiseOrValue<BytesLike>,
+    data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "buyCollateral(address,uint256,uint256,uint256,address,bytes)"(
+  "buyCollateral(address,uint256,uint256,bytes)"(
     from: PromiseOrValue<string>,
     borrowAmount: PromiseOrValue<BigNumberish>,
     supplyAmount: PromiseOrValue<BigNumberish>,
-    minAmountOut: PromiseOrValue<BigNumberish>,
-    swapper: PromiseOrValue<string>,
-    dexData: PromiseOrValue<BytesLike>,
+    data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -2844,6 +2893,10 @@ export interface SGLLeverage extends BaseContract {
   interestElasticity(overrides?: CallOverrides): Promise<BigNumber>;
 
   "interestElasticity()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  leverageExecutor(overrides?: CallOverrides): Promise<string>;
+
+  "leverageExecutor()"(overrides?: CallOverrides): Promise<string>;
 
   liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3046,18 +3099,24 @@ export interface SGLLeverage extends BaseContract {
   sellCollateral(
     from: PromiseOrValue<string>,
     share: PromiseOrValue<BigNumberish>,
-    minAmountOut: PromiseOrValue<BigNumberish>,
-    swapper: PromiseOrValue<string>,
-    dexData: PromiseOrValue<BytesLike>,
+    data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "sellCollateral(address,uint256,uint256,address,bytes)"(
+  "sellCollateral(address,uint256,bytes)"(
     from: PromiseOrValue<string>,
     share: PromiseOrValue<BigNumberish>,
-    minAmountOut: PromiseOrValue<BigNumberish>,
-    swapper: PromiseOrValue<string>,
-    dexData: PromiseOrValue<BytesLike>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setLeverageExecutor(
+    _executor: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setLeverageExecutor(address)"(
+    _executor: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3314,19 +3373,15 @@ export interface SGLLeverage extends BaseContract {
       from: PromiseOrValue<string>,
       borrowAmount: PromiseOrValue<BigNumberish>,
       supplyAmount: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "buyCollateral(address,uint256,uint256,uint256,address,bytes)"(
+    "buyCollateral(address,uint256,uint256,bytes)"(
       from: PromiseOrValue<string>,
       borrowAmount: PromiseOrValue<BigNumberish>,
       supplyAmount: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -3437,6 +3492,10 @@ export interface SGLLeverage extends BaseContract {
     interestElasticity(overrides?: CallOverrides): Promise<BigNumber>;
 
     "interestElasticity()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    leverageExecutor(overrides?: CallOverrides): Promise<string>;
+
+    "leverageExecutor()"(overrides?: CallOverrides): Promise<string>;
 
     liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3639,20 +3698,26 @@ export interface SGLLeverage extends BaseContract {
     sellCollateral(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "sellCollateral(address,uint256,uint256,address,bytes)"(
+    "sellCollateral(address,uint256,bytes)"(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     setMarketConfig(
       _oracle: PromiseOrValue<string>,
@@ -3871,6 +3936,15 @@ export interface SGLLeverage extends BaseContract {
       oldVal?: PromiseOrValue<BigNumberish> | null,
       newVal?: PromiseOrValue<BigNumberish> | null
     ): InterestElasticityUpdatedEventFilter;
+
+    "LeverageExecutorSet(address,address)"(
+      oldVal?: PromiseOrValue<string> | null,
+      newVal?: PromiseOrValue<string> | null
+    ): LeverageExecutorSetEventFilter;
+    LeverageExecutorSet(
+      oldVal?: PromiseOrValue<string> | null,
+      newVal?: PromiseOrValue<string> | null
+    ): LeverageExecutorSetEventFilter;
 
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)"(
       liquidator?: PromiseOrValue<string> | null,
@@ -4220,19 +4294,15 @@ export interface SGLLeverage extends BaseContract {
       from: PromiseOrValue<string>,
       borrowAmount: PromiseOrValue<BigNumberish>,
       supplyAmount: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "buyCollateral(address,uint256,uint256,uint256,address,bytes)"(
+    "buyCollateral(address,uint256,uint256,bytes)"(
       from: PromiseOrValue<string>,
       borrowAmount: PromiseOrValue<BigNumberish>,
       supplyAmount: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4321,6 +4391,10 @@ export interface SGLLeverage extends BaseContract {
     interestElasticity(overrides?: CallOverrides): Promise<BigNumber>;
 
     "interestElasticity()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    leverageExecutor(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "leverageExecutor()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -4523,18 +4597,24 @@ export interface SGLLeverage extends BaseContract {
     sellCollateral(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "sellCollateral(address,uint256,uint256,address,bytes)"(
+    "sellCollateral(address,uint256,bytes)"(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4778,19 +4858,15 @@ export interface SGLLeverage extends BaseContract {
       from: PromiseOrValue<string>,
       borrowAmount: PromiseOrValue<BigNumberish>,
       supplyAmount: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "buyCollateral(address,uint256,uint256,uint256,address,bytes)"(
+    "buyCollateral(address,uint256,uint256,bytes)"(
       from: PromiseOrValue<string>,
       borrowAmount: PromiseOrValue<BigNumberish>,
       supplyAmount: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -4893,6 +4969,12 @@ export interface SGLLeverage extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "interestElasticity()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    leverageExecutor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "leverageExecutor()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -5135,18 +5217,24 @@ export interface SGLLeverage extends BaseContract {
     sellCollateral(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "sellCollateral(address,uint256,uint256,address,bytes)"(
+    "sellCollateral(address,uint256,bytes)"(
       from: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
-      minAmountOut: PromiseOrValue<BigNumberish>,
-      swapper: PromiseOrValue<string>,
-      dexData: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

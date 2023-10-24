@@ -69,6 +69,7 @@ export interface SGLCollateralInterface extends utils.Interface {
     "fullUtilizationMinusMax()": FunctionFragment;
     "getInterestDetails()": FunctionFragment;
     "interestElasticity()": FunctionFragment;
+    "leverageExecutor()": FunctionFragment;
     "liquidationBonusAmount()": FunctionFragment;
     "liquidationCollateralizationRate()": FunctionFragment;
     "liquidationMultiplier()": FunctionFragment;
@@ -94,6 +95,7 @@ export interface SGLCollateralInterface extends utils.Interface {
     "rateTimestamp()": FunctionFragment;
     "rateValidDuration()": FunctionFragment;
     "removeCollateral(address,address,uint256)": FunctionFragment;
+    "setLeverageExecutor(address)": FunctionFragment;
     "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
     "startingInterestPerSecond()": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -166,6 +168,8 @@ export interface SGLCollateralInterface extends utils.Interface {
       | "getInterestDetails()"
       | "interestElasticity"
       | "interestElasticity()"
+      | "leverageExecutor"
+      | "leverageExecutor()"
       | "liquidationBonusAmount"
       | "liquidationBonusAmount()"
       | "liquidationCollateralizationRate"
@@ -216,6 +220,8 @@ export interface SGLCollateralInterface extends utils.Interface {
       | "rateValidDuration()"
       | "removeCollateral"
       | "removeCollateral(address,address,uint256)"
+      | "setLeverageExecutor"
+      | "setLeverageExecutor(address)"
       | "setMarketConfig"
       | "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
       | "startingInterestPerSecond"
@@ -455,6 +461,14 @@ export interface SGLCollateralInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "leverageExecutor",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "leverageExecutor()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "liquidationBonusAmount",
     values?: undefined
   ): string;
@@ -669,6 +683,14 @@ export interface SGLCollateralInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLeverageExecutor",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLeverageExecutor(address)",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMarketConfig",
@@ -997,6 +1019,14 @@ export interface SGLCollateralInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "leverageExecutor",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "leverageExecutor()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "liquidationBonusAmount",
     data: BytesLike
   ): Result;
@@ -1164,6 +1194,14 @@ export interface SGLCollateralInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "setLeverageExecutor",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setLeverageExecutor(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "setMarketConfig",
     data: BytesLike
   ): Result;
@@ -1281,6 +1319,7 @@ export interface SGLCollateralInterface extends utils.Interface {
     "ConservatorUpdated(address,address)": EventFragment;
     "ExchangeRateDurationUpdated(uint256,uint256)": EventFragment;
     "InterestElasticityUpdated(uint256,uint256)": EventFragment;
+    "LeverageExecutorSet(address,address)": EventFragment;
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)": EventFragment;
     "LiquidationMultiplierUpdated(uint256,uint256)": EventFragment;
     "LogAccrue(uint256,uint256,uint64,uint256)": EventFragment;
@@ -1334,6 +1373,10 @@ export interface SGLCollateralInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "InterestElasticityUpdated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "InterestElasticityUpdated(uint256,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LeverageExecutorSet"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LeverageExecutorSet(address,address)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Liquidated"): EventFragment;
   getEvent(
@@ -1519,6 +1562,18 @@ export type InterestElasticityUpdatedEvent = TypedEvent<
 
 export type InterestElasticityUpdatedEventFilter =
   TypedEventFilter<InterestElasticityUpdatedEvent>;
+
+export interface LeverageExecutorSetEventObject {
+  oldVal: string;
+  newVal: string;
+}
+export type LeverageExecutorSetEvent = TypedEvent<
+  [string, string],
+  LeverageExecutorSetEventObject
+>;
+
+export type LeverageExecutorSetEventFilter =
+  TypedEventFilter<LeverageExecutorSetEvent>;
 
 export interface LiquidatedEventObject {
   liquidator: string;
@@ -2091,6 +2146,10 @@ export interface SGLCollateral extends BaseContract {
 
     "interestElasticity()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    leverageExecutor(overrides?: CallOverrides): Promise<[string]>;
+
+    "leverageExecutor()"(overrides?: CallOverrides): Promise<[string]>;
+
     liquidationBonusAmount(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -2268,6 +2327,16 @@ export interface SGLCollateral extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2664,6 +2733,10 @@ export interface SGLCollateral extends BaseContract {
 
   "interestElasticity()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  leverageExecutor(overrides?: CallOverrides): Promise<string>;
+
+  "leverageExecutor()"(overrides?: CallOverrides): Promise<string>;
+
   liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
   "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2831,6 +2904,16 @@ export interface SGLCollateral extends BaseContract {
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
     share: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setLeverageExecutor(
+    _executor: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setLeverageExecutor(address)"(
+    _executor: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3209,6 +3292,10 @@ export interface SGLCollateral extends BaseContract {
 
     "interestElasticity()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    leverageExecutor(overrides?: CallOverrides): Promise<string>;
+
+    "leverageExecutor()"(overrides?: CallOverrides): Promise<string>;
+
     liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3376,6 +3463,16 @@ export interface SGLCollateral extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3596,6 +3693,15 @@ export interface SGLCollateral extends BaseContract {
       oldVal?: PromiseOrValue<BigNumberish> | null,
       newVal?: PromiseOrValue<BigNumberish> | null
     ): InterestElasticityUpdatedEventFilter;
+
+    "LeverageExecutorSet(address,address)"(
+      oldVal?: PromiseOrValue<string> | null,
+      newVal?: PromiseOrValue<string> | null
+    ): LeverageExecutorSetEventFilter;
+    LeverageExecutorSet(
+      oldVal?: PromiseOrValue<string> | null,
+      newVal?: PromiseOrValue<string> | null
+    ): LeverageExecutorSetEventFilter;
 
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)"(
       liquidator?: PromiseOrValue<string> | null,
@@ -4045,6 +4151,10 @@ export interface SGLCollateral extends BaseContract {
 
     "interestElasticity()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    leverageExecutor(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "leverageExecutor()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -4212,6 +4322,16 @@ export interface SGLCollateral extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4571,6 +4691,12 @@ export interface SGLCollateral extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    leverageExecutor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "leverageExecutor()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     liquidationBonusAmount(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -4776,6 +4902,16 @@ export interface SGLCollateral extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       share: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

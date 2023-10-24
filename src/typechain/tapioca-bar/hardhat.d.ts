@@ -45,6 +45,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BigBang__factory>;
     getContractFactory(
+      name: "SimpleLeverageExecutor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SimpleLeverageExecutor__factory>;
+    getContractFactory(
       name: "Market",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Market__factory>;
@@ -185,6 +189,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.BigBang>;
+    getContractAt(
+      name: "SimpleLeverageExecutor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SimpleLeverageExecutor>;
     getContractAt(
       name: "Market",
       address: string,

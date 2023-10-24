@@ -53,15 +53,18 @@ export interface BBStorageInterface extends utils.Interface {
     "debtStartPoint()": FunctionFragment;
     "exchangeRate()": FunctionFragment;
     "isMainMarket()": FunctionFragment;
+    "leverageExecutor()": FunctionFragment;
     "liquidationBonusAmount()": FunctionFragment;
     "liquidationCollateralizationRate()": FunctionFragment;
     "liquidationMultiplier()": FunctionFragment;
     "maxDebtRate()": FunctionFragment;
     "maxLiquidatorReward()": FunctionFragment;
     "maxMintFee()": FunctionFragment;
+    "maxMintFeeStart()": FunctionFragment;
     "minDebtRate()": FunctionFragment;
     "minLiquidatorReward()": FunctionFragment;
     "minMintFee()": FunctionFragment;
+    "minMintFeeStart()": FunctionFragment;
     "nonces(address)": FunctionFragment;
     "openingFees(address)": FunctionFragment;
     "oracle()": FunctionFragment;
@@ -76,6 +79,7 @@ export interface BBStorageInterface extends utils.Interface {
     "protocolFee()": FunctionFragment;
     "rateTimestamp()": FunctionFragment;
     "rateValidDuration()": FunctionFragment;
+    "setLeverageExecutor(address)": FunctionFragment;
     "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
     "totalBorrow()": FunctionFragment;
     "totalBorrowCap()": FunctionFragment;
@@ -141,6 +145,8 @@ export interface BBStorageInterface extends utils.Interface {
       | "exchangeRate()"
       | "isMainMarket"
       | "isMainMarket()"
+      | "leverageExecutor"
+      | "leverageExecutor()"
       | "liquidationBonusAmount"
       | "liquidationBonusAmount()"
       | "liquidationCollateralizationRate"
@@ -153,12 +159,16 @@ export interface BBStorageInterface extends utils.Interface {
       | "maxLiquidatorReward()"
       | "maxMintFee"
       | "maxMintFee()"
+      | "maxMintFeeStart"
+      | "maxMintFeeStart()"
       | "minDebtRate"
       | "minDebtRate()"
       | "minLiquidatorReward"
       | "minLiquidatorReward()"
       | "minMintFee"
       | "minMintFee()"
+      | "minMintFeeStart"
+      | "minMintFeeStart()"
       | "nonces"
       | "nonces(address)"
       | "openingFees"
@@ -187,6 +197,8 @@ export interface BBStorageInterface extends utils.Interface {
       | "rateTimestamp()"
       | "rateValidDuration"
       | "rateValidDuration()"
+      | "setLeverageExecutor"
+      | "setLeverageExecutor(address)"
       | "setMarketConfig"
       | "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
       | "totalBorrow"
@@ -401,6 +413,14 @@ export interface BBStorageInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "leverageExecutor",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "leverageExecutor()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "liquidationBonusAmount",
     values?: undefined
   ): string;
@@ -449,6 +469,14 @@ export interface BBStorageInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "maxMintFeeStart",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "maxMintFeeStart()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "minDebtRate",
     values?: undefined
   ): string;
@@ -470,6 +498,14 @@ export interface BBStorageInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "minMintFee()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "minMintFeeStart",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "minMintFeeStart()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -597,6 +633,14 @@ export interface BBStorageInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "rateValidDuration()",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLeverageExecutor",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLeverageExecutor(address)",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMarketConfig",
@@ -903,6 +947,14 @@ export interface BBStorageInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "leverageExecutor",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "leverageExecutor()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "liquidationBonusAmount",
     data: BytesLike
   ): Result;
@@ -948,6 +1000,14 @@ export interface BBStorageInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "maxMintFeeStart",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "maxMintFeeStart()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "minDebtRate",
     data: BytesLike
   ): Result;
@@ -966,6 +1026,14 @@ export interface BBStorageInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "minMintFee", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "minMintFee()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "minMintFeeStart",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "minMintFeeStart()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
@@ -1051,6 +1119,14 @@ export interface BBStorageInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "rateValidDuration()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setLeverageExecutor",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setLeverageExecutor(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1157,6 +1233,7 @@ export interface BBStorageInterface extends utils.Interface {
     "ConservatorUpdated(address,address)": EventFragment;
     "DebtRateAgainstEthUpdated(uint256,uint256)": EventFragment;
     "ExchangeRateDurationUpdated(uint256,uint256)": EventFragment;
+    "LeverageExecutorSet(address,address)": EventFragment;
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)": EventFragment;
     "LiquidationMultiplierUpdated(uint256,uint256)": EventFragment;
     "LogAccrue(uint256,uint64)": EventFragment;
@@ -1174,6 +1251,7 @@ export interface BBStorageInterface extends utils.Interface {
     "PausedUpdated(uint8,bool,bool)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
     "UpdateMinMaxMintFee(uint256,uint256,uint256,uint256)": EventFragment;
+    "UpdateMinMaxMintRange(uint256,uint256,uint256,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
@@ -1203,6 +1281,10 @@ export interface BBStorageInterface extends utils.Interface {
   ): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ExchangeRateDurationUpdated(uint256,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LeverageExecutorSet"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LeverageExecutorSet(address,address)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Liquidated"): EventFragment;
   getEvent(
@@ -1266,6 +1348,10 @@ export interface BBStorageInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "UpdateMinMaxMintFee(uint256,uint256,uint256,uint256)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "UpdateMinMaxMintRange"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "UpdateMinMaxMintRange(uint256,uint256,uint256,uint256)"
+  ): EventFragment;
 }
 
 export interface ApprovalEventObject {
@@ -1302,8 +1388,8 @@ export type AssetOracleDataUpdatedEventFilter =
   TypedEventFilter<AssetOracleDataUpdatedEvent>;
 
 export interface AssetOracleUpdatedEventObject {
-  _oldVal: string;
-  _newVal: string;
+  oldVal: string;
+  newVal: string;
 }
 export type AssetOracleUpdatedEvent = TypedEvent<
   [string, string],
@@ -1348,6 +1434,18 @@ export type ExchangeRateDurationUpdatedEvent = TypedEvent<
 
 export type ExchangeRateDurationUpdatedEventFilter =
   TypedEventFilter<ExchangeRateDurationUpdatedEvent>;
+
+export interface LeverageExecutorSetEventObject {
+  oldVal: string;
+  newVal: string;
+}
+export type LeverageExecutorSetEvent = TypedEvent<
+  [string, string],
+  LeverageExecutorSetEventObject
+>;
+
+export type LeverageExecutorSetEventFilter =
+  TypedEventFilter<LeverageExecutorSetEvent>;
 
 export interface LiquidatedEventObject {
   liquidator: string;
@@ -1549,6 +1647,20 @@ export type UpdateMinMaxMintFeeEvent = TypedEvent<
 
 export type UpdateMinMaxMintFeeEventFilter =
   TypedEventFilter<UpdateMinMaxMintFeeEvent>;
+
+export interface UpdateMinMaxMintRangeEventObject {
+  oldMin: BigNumber;
+  newMin: BigNumber;
+  oldMax: BigNumber;
+  newMax: BigNumber;
+}
+export type UpdateMinMaxMintRangeEvent = TypedEvent<
+  [BigNumber, BigNumber, BigNumber, BigNumber],
+  UpdateMinMaxMintRangeEventObject
+>;
+
+export type UpdateMinMaxMintRangeEventFilter =
+  TypedEventFilter<UpdateMinMaxMintRangeEvent>;
 
 export interface BBStorage extends BaseContract {
   contractName: "BBStorage";
@@ -1765,6 +1877,10 @@ export interface BBStorage extends BaseContract {
 
     "isMainMarket()"(overrides?: CallOverrides): Promise<[boolean]>;
 
+    leverageExecutor(overrides?: CallOverrides): Promise<[string]>;
+
+    "leverageExecutor()"(overrides?: CallOverrides): Promise<[string]>;
+
     liquidationBonusAmount(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -1793,6 +1909,10 @@ export interface BBStorage extends BaseContract {
 
     "maxMintFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    maxMintFeeStart(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "maxMintFeeStart()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     minDebtRate(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "minDebtRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -1804,6 +1924,10 @@ export interface BBStorage extends BaseContract {
     minMintFee(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "minMintFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    minMintFeeStart(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "minMintFeeStart()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -1922,6 +2046,16 @@ export interface BBStorage extends BaseContract {
     rateValidDuration(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "rateValidDuration()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     setMarketConfig(
       _oracle: PromiseOrValue<string>,
@@ -2246,6 +2380,10 @@ export interface BBStorage extends BaseContract {
 
   "isMainMarket()"(overrides?: CallOverrides): Promise<boolean>;
 
+  leverageExecutor(overrides?: CallOverrides): Promise<string>;
+
+  "leverageExecutor()"(overrides?: CallOverrides): Promise<string>;
+
   liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
   "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2274,6 +2412,10 @@ export interface BBStorage extends BaseContract {
 
   "maxMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  maxMintFeeStart(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "maxMintFeeStart()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   minDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
   "minDebtRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2285,6 +2427,10 @@ export interface BBStorage extends BaseContract {
   minMintFee(overrides?: CallOverrides): Promise<BigNumber>;
 
   "minMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  minMintFeeStart(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "minMintFeeStart()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   nonces(
     owner: PromiseOrValue<string>,
@@ -2403,6 +2549,16 @@ export interface BBStorage extends BaseContract {
   rateValidDuration(overrides?: CallOverrides): Promise<BigNumber>;
 
   "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  setLeverageExecutor(
+    _executor: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setLeverageExecutor(address)"(
+    _executor: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   setMarketConfig(
     _oracle: PromiseOrValue<string>,
@@ -2719,6 +2875,10 @@ export interface BBStorage extends BaseContract {
 
     "isMainMarket()"(overrides?: CallOverrides): Promise<boolean>;
 
+    leverageExecutor(overrides?: CallOverrides): Promise<string>;
+
+    "leverageExecutor()"(overrides?: CallOverrides): Promise<string>;
+
     liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2747,6 +2907,10 @@ export interface BBStorage extends BaseContract {
 
     "maxMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    maxMintFeeStart(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "maxMintFeeStart()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     minDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "minDebtRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2758,6 +2922,10 @@ export interface BBStorage extends BaseContract {
     minMintFee(overrides?: CallOverrides): Promise<BigNumber>;
 
     "minMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    minMintFeeStart(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "minMintFeeStart()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -2876,6 +3044,16 @@ export interface BBStorage extends BaseContract {
     rateValidDuration(overrides?: CallOverrides): Promise<BigNumber>;
 
     "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     setMarketConfig(
       _oracle: PromiseOrValue<string>,
@@ -3043,12 +3221,12 @@ export interface BBStorage extends BaseContract {
     AssetOracleDataUpdated(): AssetOracleDataUpdatedEventFilter;
 
     "AssetOracleUpdated(address,address)"(
-      _oldVal?: PromiseOrValue<string> | null,
-      _newVal?: PromiseOrValue<string> | null
+      oldVal?: PromiseOrValue<string> | null,
+      newVal?: PromiseOrValue<string> | null
     ): AssetOracleUpdatedEventFilter;
     AssetOracleUpdated(
-      _oldVal?: PromiseOrValue<string> | null,
-      _newVal?: PromiseOrValue<string> | null
+      oldVal?: PromiseOrValue<string> | null,
+      newVal?: PromiseOrValue<string> | null
     ): AssetOracleUpdatedEventFilter;
 
     "ConservatorUpdated(address,address)"(
@@ -3077,6 +3255,15 @@ export interface BBStorage extends BaseContract {
       _oldVal?: null,
       _newVal?: null
     ): ExchangeRateDurationUpdatedEventFilter;
+
+    "LeverageExecutorSet(address,address)"(
+      oldVal?: PromiseOrValue<string> | null,
+      newVal?: PromiseOrValue<string> | null
+    ): LeverageExecutorSetEventFilter;
+    LeverageExecutorSet(
+      oldVal?: PromiseOrValue<string> | null,
+      newVal?: PromiseOrValue<string> | null
+    ): LeverageExecutorSetEventFilter;
 
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)"(
       liquidator?: PromiseOrValue<string> | null,
@@ -3246,6 +3433,19 @@ export interface BBStorage extends BaseContract {
       oldMax?: PromiseOrValue<BigNumberish> | null,
       newMax?: null
     ): UpdateMinMaxMintFeeEventFilter;
+
+    "UpdateMinMaxMintRange(uint256,uint256,uint256,uint256)"(
+      oldMin?: PromiseOrValue<BigNumberish> | null,
+      newMin?: PromiseOrValue<BigNumberish> | null,
+      oldMax?: PromiseOrValue<BigNumberish> | null,
+      newMax?: null
+    ): UpdateMinMaxMintRangeEventFilter;
+    UpdateMinMaxMintRange(
+      oldMin?: PromiseOrValue<BigNumberish> | null,
+      newMin?: PromiseOrValue<BigNumberish> | null,
+      oldMax?: PromiseOrValue<BigNumberish> | null,
+      newMax?: null
+    ): UpdateMinMaxMintRangeEventFilter;
   };
 
   estimateGas: {
@@ -3413,6 +3613,10 @@ export interface BBStorage extends BaseContract {
 
     "isMainMarket()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    leverageExecutor(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "leverageExecutor()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
     "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3441,6 +3645,10 @@ export interface BBStorage extends BaseContract {
 
     "maxMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    maxMintFeeStart(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "maxMintFeeStart()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     minDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "minDebtRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3452,6 +3660,10 @@ export interface BBStorage extends BaseContract {
     minMintFee(overrides?: CallOverrides): Promise<BigNumber>;
 
     "minMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    minMintFeeStart(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "minMintFeeStart()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -3570,6 +3782,16 @@ export interface BBStorage extends BaseContract {
     rateValidDuration(overrides?: CallOverrides): Promise<BigNumber>;
 
     "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     setMarketConfig(
       _oracle: PromiseOrValue<string>,
@@ -3881,6 +4103,12 @@ export interface BBStorage extends BaseContract {
 
     "isMainMarket()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    leverageExecutor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "leverageExecutor()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     liquidationBonusAmount(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -3921,6 +4149,12 @@ export interface BBStorage extends BaseContract {
 
     "maxMintFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    maxMintFeeStart(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "maxMintFeeStart()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     minDebtRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "minDebtRate()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -3936,6 +4170,12 @@ export interface BBStorage extends BaseContract {
     minMintFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "minMintFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    minMintFeeStart(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "minMintFeeStart()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -4055,6 +4295,16 @@ export interface BBStorage extends BaseContract {
 
     "rateValidDuration()"(
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setMarketConfig(
