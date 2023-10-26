@@ -241,6 +241,7 @@ export interface MagnetarV2Interface extends utils.Interface {
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "rescueEth(uint256,address)": FunctionFragment;
+    "setCluster(address)": FunctionFragment;
     "setHelper(address)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "withdrawToChain(address,address,uint256,uint16,bytes32,uint256,bytes,address,uint256)": FunctionFragment;
@@ -272,6 +273,8 @@ export interface MagnetarV2Interface extends utils.Interface {
       | "renounceOwnership()"
       | "rescueEth"
       | "rescueEth(uint256,address)"
+      | "setCluster"
+      | "setCluster(address)"
       | "setHelper"
       | "setHelper(address)"
       | "transferOwnership"
@@ -425,6 +428,14 @@ export interface MagnetarV2Interface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "setCluster",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setCluster(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "setHelper",
     values: [PromiseOrValue<string>]
   ): string;
@@ -539,6 +550,11 @@ export interface MagnetarV2Interface extends utils.Interface {
   decodeFunctionResult(functionFragment: "rescueEth", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "rescueEth(uint256,address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "setCluster", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setCluster(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "setHelper", data: BytesLike): Result;
@@ -805,6 +821,16 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    setCluster(
+      _cluster: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setCluster(address)"(
+      _cluster: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     setHelper(
       _helper: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -994,6 +1020,16 @@ export interface MagnetarV2 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  setCluster(
+    _cluster: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setCluster(address)"(
+    _cluster: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   setHelper(
     _helper: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1176,6 +1212,16 @@ export interface MagnetarV2 extends BaseContract {
     "rescueEth(uint256,address)"(
       amount: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setCluster(
+      _cluster: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setCluster(address)"(
+      _cluster: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1409,6 +1455,16 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    setCluster(
+      _cluster: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setCluster(address)"(
+      _cluster: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     setHelper(
       _helper: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1596,6 +1652,16 @@ export interface MagnetarV2 extends BaseContract {
     "rescueEth(uint256,address)"(
       amount: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setCluster(
+      _cluster: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setCluster(address)"(
+      _cluster: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
