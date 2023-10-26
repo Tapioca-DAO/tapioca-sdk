@@ -16,6 +16,7 @@ export { MarketLiquidationReceiverMock__factory } from "./MarketLiquidationRecei
 export { MockSwapper__factory } from "./MockSwapper__factory";
 export { MultisigMock__factory } from "./MultisigMock__factory";
 export { OracleMock__factory } from "./OracleMock__factory";
+export { SavingsDaiMock__factory } from "./SavingsDaiMock__factory";
 export { StargateRouterETHMock__factory } from "./StargateRouterETHMock__factory";
 export { StargateRouterMock__factory } from "./StargateRouterMock__factory";
 export { TOFTMock__factory } from "./TOFTMock__factory";

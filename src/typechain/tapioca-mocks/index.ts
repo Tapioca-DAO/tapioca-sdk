@@ -20,6 +20,7 @@ export type { MarketLiquidationReceiverMock } from "./MarketLiquidationReceiverM
 export type { MockSwapper } from "./MockSwapper";
 export type { MultisigMock } from "./MultisigMock";
 export type { OracleMock } from "./OracleMock";
+export type { SavingsDaiMock } from "./SavingsDaiMock";
 export type { StargateRouterETHMock } from "./StargateRouterETHMock";
 export type { StargateRouterMock } from "./StargateRouterMock";
 export type { TOFTMock } from "./TOFTMock";
@@ -49,6 +50,7 @@ export type { DelegatorTest } from "./research/DelegatorTest";
 export { DelegatorTest__factory } from "./factories/research/DelegatorTest__factory";
 export type { ReceiverTest } from "./research/ReceiverTest";
 export { ReceiverTest__factory } from "./factories/research/ReceiverTest__factory";
+export { SavingsDaiMock__factory } from "./factories/SavingsDaiMock__factory";
 export { StargateRouterETHMock__factory } from "./factories/StargateRouterETHMock__factory";
 export { StargateRouterMock__factory } from "./factories/StargateRouterMock__factory";
 export { TapiocaDeployerMock__factory } from "./factories/TapiocaDeployerMock__factory";
