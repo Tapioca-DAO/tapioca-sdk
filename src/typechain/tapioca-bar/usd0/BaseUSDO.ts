@@ -96,7 +96,7 @@ export declare namespace ICommonData {
   export type IApprovalStruct = {
     permitAll: PromiseOrValue<boolean>;
     allowFailure: PromiseOrValue<boolean>;
-    approveOnYieldBox: PromiseOrValue<boolean>;
+    yieldBoxTypeApproval: PromiseOrValue<boolean>;
     actionType: PromiseOrValue<BigNumberish>;
     target: PromiseOrValue<string>;
     permitBorrow: PromiseOrValue<boolean>;
@@ -126,7 +126,7 @@ export declare namespace ICommonData {
   ] & {
     permitAll: boolean;
     allowFailure: boolean;
-    approveOnYieldBox: boolean;
+    yieldBoxTypeApproval: boolean;
     actionType: number;
     target: string;
     permitBorrow: boolean;
@@ -414,22 +414,17 @@ export interface BaseUSDOInterface extends utils.Interface {
     "estimateSendFee(uint16,bytes32,uint256,bool,bytes)": FunctionFragment;
     "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)": FunctionFragment;
     "failedMessages(uint16,bytes,uint64)": FunctionFragment;
-    "flashMintFee()": FunctionFragment;
     "forceResumeReceive(uint16,bytes)": FunctionFragment;
     "getConfig(uint16,uint16,address,uint256)": FunctionFragment;
     "getTrustedRemoteAddress(uint16)": FunctionFragment;
     "increaseAllowance(address,uint256)": FunctionFragment;
     "isTrustedRemote(uint16,bytes)": FunctionFragment;
-    "leverageModule()": FunctionFragment;
     "lzEndpoint()": FunctionFragment;
     "lzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
-    "marketModule()": FunctionFragment;
-    "maxFlashMint()": FunctionFragment;
     "minDstGasLookup(uint16,uint16)": FunctionFragment;
     "name()": FunctionFragment;
     "nonblockingLzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
     "nonces(address)": FunctionFragment;
-    "optionsModule()": FunctionFragment;
     "owner()": FunctionFragment;
     "paused()": FunctionFragment;
     "payloadSizeLimitLookup(uint16)": FunctionFragment;
@@ -444,10 +439,9 @@ export interface BaseUSDOInterface extends utils.Interface {
     "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
     "setBurnerStatus(address,bool)": FunctionFragment;
+    "setCluster(address)": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
     "setConservator(address)": FunctionFragment;
-    "setFlashMintFee(uint256)": FunctionFragment;
-    "setMaxFlashMintable(uint256)": FunctionFragment;
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
     "setMinterStatus(address,bool)": FunctionFragment;
     "setPayloadSizeLimit(uint16,uint256)": FunctionFragment;
@@ -516,8 +510,6 @@ export interface BaseUSDOInterface extends utils.Interface {
       | "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"
       | "failedMessages"
       | "failedMessages(uint16,bytes,uint64)"
-      | "flashMintFee"
-      | "flashMintFee()"
       | "forceResumeReceive"
       | "forceResumeReceive(uint16,bytes)"
       | "getConfig"
@@ -528,16 +520,10 @@ export interface BaseUSDOInterface extends utils.Interface {
       | "increaseAllowance(address,uint256)"
       | "isTrustedRemote"
       | "isTrustedRemote(uint16,bytes)"
-      | "leverageModule"
-      | "leverageModule()"
       | "lzEndpoint"
       | "lzEndpoint()"
       | "lzReceive"
       | "lzReceive(uint16,bytes,uint64,bytes)"
-      | "marketModule"
-      | "marketModule()"
-      | "maxFlashMint"
-      | "maxFlashMint()"
       | "minDstGasLookup"
       | "minDstGasLookup(uint16,uint16)"
       | "name"
@@ -546,8 +532,6 @@ export interface BaseUSDOInterface extends utils.Interface {
       | "nonblockingLzReceive(uint16,bytes,uint64,bytes)"
       | "nonces"
       | "nonces(address)"
-      | "optionsModule"
-      | "optionsModule()"
       | "owner"
       | "owner()"
       | "paused"
@@ -576,14 +560,12 @@ export interface BaseUSDOInterface extends utils.Interface {
       | "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"
       | "setBurnerStatus"
       | "setBurnerStatus(address,bool)"
+      | "setCluster"
+      | "setCluster(address)"
       | "setConfig"
       | "setConfig(uint16,uint16,uint256,bytes)"
       | "setConservator"
       | "setConservator(address)"
-      | "setFlashMintFee"
-      | "setFlashMintFee(uint256)"
-      | "setMaxFlashMintable"
-      | "setMaxFlashMintable(uint256)"
       | "setMinDstGas"
       | "setMinDstGas(uint16,uint16,uint256)"
       | "setMinterStatus"
@@ -858,14 +840,6 @@ export interface BaseUSDOInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "flashMintFee",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "flashMintFee()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "forceResumeReceive",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
   ): string;
@@ -916,14 +890,6 @@ export interface BaseUSDOInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
-    functionFragment: "leverageModule",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "leverageModule()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "lzEndpoint",
     values?: undefined
   ): string;
@@ -948,22 +914,6 @@ export interface BaseUSDOInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "marketModule",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "marketModule()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "maxFlashMint",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "maxFlashMint()",
-    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "minDstGasLookup",
@@ -1000,14 +950,6 @@ export interface BaseUSDOInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "nonces(address)",
     values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "optionsModule",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "optionsModule()",
-    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
@@ -1209,6 +1151,14 @@ export interface BaseUSDOInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
+    functionFragment: "setCluster",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setCluster(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "setConfig",
     values: [
       PromiseOrValue<BigNumberish>,
@@ -1233,22 +1183,6 @@ export interface BaseUSDOInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "setConservator(address)",
     values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setFlashMintFee",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setFlashMintFee(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setMaxFlashMintable",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setMaxFlashMintable(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMinDstGas",
@@ -1582,14 +1516,6 @@ export interface BaseUSDOInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "flashMintFee",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "flashMintFee()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "forceResumeReceive",
     data: BytesLike
   ): Result;
@@ -1626,14 +1552,6 @@ export interface BaseUSDOInterface extends utils.Interface {
     functionFragment: "isTrustedRemote(uint16,bytes)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "leverageModule",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "leverageModule()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "lzEndpoint", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "lzEndpoint()",
@@ -1642,22 +1560,6 @@ export interface BaseUSDOInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "lzReceive", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "lzReceive(uint16,bytes,uint64,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "marketModule",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "marketModule()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "maxFlashMint",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "maxFlashMint()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1681,14 +1583,6 @@ export interface BaseUSDOInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "nonces(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "optionsModule",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "optionsModule()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -1776,6 +1670,11 @@ export interface BaseUSDOInterface extends utils.Interface {
     functionFragment: "setBurnerStatus(address,bool)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "setCluster", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setCluster(address)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "setConfig", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setConfig(uint16,uint16,uint256,bytes)",
@@ -1787,22 +1686,6 @@ export interface BaseUSDOInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setConservator(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setFlashMintFee",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setFlashMintFee(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setMaxFlashMintable",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setMaxFlashMintable(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1964,8 +1847,6 @@ export interface BaseUSDOInterface extends utils.Interface {
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
-    "FlashMintFeeUpdated(uint256,uint256)": EventFragment;
-    "MaxFlashMintUpdated(uint256,uint256)": EventFragment;
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)": EventFragment;
     "NonContractAddress(address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
@@ -1990,14 +1871,6 @@ export interface BaseUSDOInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "CallOFTReceivedSuccess"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "FlashMintFeeUpdated"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "FlashMintFeeUpdated(uint256,uint256)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "MaxFlashMintUpdated"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "MaxFlashMintUpdated(uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MessageFailed"): EventFragment;
   getEvent(
@@ -2082,30 +1955,6 @@ export type CallOFTReceivedSuccessEvent = TypedEvent<
 
 export type CallOFTReceivedSuccessEventFilter =
   TypedEventFilter<CallOFTReceivedSuccessEvent>;
-
-export interface FlashMintFeeUpdatedEventObject {
-  _old: BigNumber;
-  _new: BigNumber;
-}
-export type FlashMintFeeUpdatedEvent = TypedEvent<
-  [BigNumber, BigNumber],
-  FlashMintFeeUpdatedEventObject
->;
-
-export type FlashMintFeeUpdatedEventFilter =
-  TypedEventFilter<FlashMintFeeUpdatedEvent>;
-
-export interface MaxFlashMintUpdatedEventObject {
-  _old: BigNumber;
-  _new: BigNumber;
-}
-export type MaxFlashMintUpdatedEvent = TypedEvent<
-  [BigNumber, BigNumber],
-  MaxFlashMintUpdatedEventObject
->;
-
-export type MaxFlashMintUpdatedEventFilter =
-  TypedEventFilter<MaxFlashMintUpdatedEvent>;
 
 export interface MessageFailedEventObject {
   _srcChainId: number;
@@ -2538,10 +2387,6 @@ export interface BaseUSDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    flashMintFee(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "flashMintFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     forceResumeReceive(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -2604,10 +2449,6 @@ export interface BaseUSDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
-    leverageModule(overrides?: CallOverrides): Promise<[string]>;
-
-    "leverageModule()"(overrides?: CallOverrides): Promise<[string]>;
-
     lzEndpoint(overrides?: CallOverrides): Promise<[string]>;
 
     "lzEndpoint()"(overrides?: CallOverrides): Promise<[string]>;
@@ -2627,14 +2468,6 @@ export interface BaseUSDO extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
-
-    marketModule(overrides?: CallOverrides): Promise<[string]>;
-
-    "marketModule()"(overrides?: CallOverrides): Promise<[string]>;
-
-    maxFlashMint(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "maxFlashMint()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     minDstGasLookup(
       arg0: PromiseOrValue<BigNumberish>,
@@ -2677,10 +2510,6 @@ export interface BaseUSDO extends BaseContract {
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
-
-    optionsModule(overrides?: CallOverrides): Promise<[string]>;
-
-    "optionsModule()"(overrides?: CallOverrides): Promise<[string]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -2880,6 +2709,16 @@ export interface BaseUSDO extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    setCluster(
+      _cluster: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setCluster(address)"(
+      _cluster: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     setConfig(
       _version: PromiseOrValue<BigNumberish>,
       _chainId: PromiseOrValue<BigNumberish>,
@@ -2903,26 +2742,6 @@ export interface BaseUSDO extends BaseContract {
 
     "setConservator(address)"(
       _conservator: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setFlashMintFee(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setFlashMintFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setMaxFlashMintable(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setMaxFlashMintable(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -3361,10 +3180,6 @@ export interface BaseUSDO extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  flashMintFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "flashMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   forceResumeReceive(
     _srcChainId: PromiseOrValue<BigNumberish>,
     _srcAddress: PromiseOrValue<BytesLike>,
@@ -3427,10 +3242,6 @@ export interface BaseUSDO extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  leverageModule(overrides?: CallOverrides): Promise<string>;
-
-  "leverageModule()"(overrides?: CallOverrides): Promise<string>;
-
   lzEndpoint(overrides?: CallOverrides): Promise<string>;
 
   "lzEndpoint()"(overrides?: CallOverrides): Promise<string>;
@@ -3450,14 +3261,6 @@ export interface BaseUSDO extends BaseContract {
     _payload: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
-
-  marketModule(overrides?: CallOverrides): Promise<string>;
-
-  "marketModule()"(overrides?: CallOverrides): Promise<string>;
-
-  maxFlashMint(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "maxFlashMint()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   minDstGasLookup(
     arg0: PromiseOrValue<BigNumberish>,
@@ -3500,10 +3303,6 @@ export interface BaseUSDO extends BaseContract {
     owner: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
-
-  optionsModule(overrides?: CallOverrides): Promise<string>;
-
-  "optionsModule()"(overrides?: CallOverrides): Promise<string>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -3703,6 +3502,16 @@ export interface BaseUSDO extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  setCluster(
+    _cluster: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setCluster(address)"(
+    _cluster: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   setConfig(
     _version: PromiseOrValue<BigNumberish>,
     _chainId: PromiseOrValue<BigNumberish>,
@@ -3726,26 +3535,6 @@ export interface BaseUSDO extends BaseContract {
 
   "setConservator(address)"(
     _conservator: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setFlashMintFee(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setFlashMintFee(uint256)"(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setMaxFlashMintable(
-    _val: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setMaxFlashMintable(uint256)"(
-    _val: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -4186,10 +3975,6 @@ export interface BaseUSDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    flashMintFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "flashMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     forceResumeReceive(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -4252,10 +4037,6 @@ export interface BaseUSDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    leverageModule(overrides?: CallOverrides): Promise<string>;
-
-    "leverageModule()"(overrides?: CallOverrides): Promise<string>;
-
     lzEndpoint(overrides?: CallOverrides): Promise<string>;
 
     "lzEndpoint()"(overrides?: CallOverrides): Promise<string>;
@@ -4275,14 +4056,6 @@ export interface BaseUSDO extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    marketModule(overrides?: CallOverrides): Promise<string>;
-
-    "marketModule()"(overrides?: CallOverrides): Promise<string>;
-
-    maxFlashMint(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "maxFlashMint()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     minDstGasLookup(
       arg0: PromiseOrValue<BigNumberish>,
@@ -4325,10 +4098,6 @@ export interface BaseUSDO extends BaseContract {
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    optionsModule(overrides?: CallOverrides): Promise<string>;
-
-    "optionsModule()"(overrides?: CallOverrides): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -4524,6 +4293,16 @@ export interface BaseUSDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setCluster(
+      _cluster: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setCluster(address)"(
+      _cluster: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     setConfig(
       _version: PromiseOrValue<BigNumberish>,
       _chainId: PromiseOrValue<BigNumberish>,
@@ -4547,26 +4326,6 @@ export interface BaseUSDO extends BaseContract {
 
     "setConservator(address)"(
       _conservator: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setFlashMintFee(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setFlashMintFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setMaxFlashMintable(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setMaxFlashMintable(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4805,24 +4564,6 @@ export interface BaseUSDO extends BaseContract {
       _nonce?: null,
       _hash?: null
     ): CallOFTReceivedSuccessEventFilter;
-
-    "FlashMintFeeUpdated(uint256,uint256)"(
-      _old?: null,
-      _new?: null
-    ): FlashMintFeeUpdatedEventFilter;
-    FlashMintFeeUpdated(
-      _old?: null,
-      _new?: null
-    ): FlashMintFeeUpdatedEventFilter;
-
-    "MaxFlashMintUpdated(uint256,uint256)"(
-      _old?: null,
-      _new?: null
-    ): MaxFlashMintUpdatedEventFilter;
-    MaxFlashMintUpdated(
-      _old?: null,
-      _new?: null
-    ): MaxFlashMintUpdatedEventFilter;
 
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)"(
       _srcChainId?: null,
@@ -5184,10 +4925,6 @@ export interface BaseUSDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    flashMintFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "flashMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     forceResumeReceive(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -5250,10 +4987,6 @@ export interface BaseUSDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    leverageModule(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "leverageModule()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     lzEndpoint(overrides?: CallOverrides): Promise<BigNumber>;
 
     "lzEndpoint()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -5273,14 +5006,6 @@ export interface BaseUSDO extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
-
-    marketModule(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "marketModule()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    maxFlashMint(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "maxFlashMint()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     minDstGasLookup(
       arg0: PromiseOrValue<BigNumberish>,
@@ -5323,10 +5048,6 @@ export interface BaseUSDO extends BaseContract {
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    optionsModule(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "optionsModule()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -5526,6 +5247,16 @@ export interface BaseUSDO extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    setCluster(
+      _cluster: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setCluster(address)"(
+      _cluster: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     setConfig(
       _version: PromiseOrValue<BigNumberish>,
       _chainId: PromiseOrValue<BigNumberish>,
@@ -5549,26 +5280,6 @@ export interface BaseUSDO extends BaseContract {
 
     "setConservator(address)"(
       _conservator: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setFlashMintFee(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setFlashMintFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setMaxFlashMintable(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setMaxFlashMintable(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -6010,10 +5721,6 @@ export interface BaseUSDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    flashMintFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "flashMintFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     forceResumeReceive(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -6076,12 +5783,6 @@ export interface BaseUSDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    leverageModule(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "leverageModule()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     lzEndpoint(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "lzEndpoint()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -6101,14 +5802,6 @@ export interface BaseUSDO extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
-
-    marketModule(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "marketModule()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    maxFlashMint(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "maxFlashMint()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     minDstGasLookup(
       arg0: PromiseOrValue<BigNumberish>,
@@ -6151,10 +5844,6 @@ export interface BaseUSDO extends BaseContract {
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    optionsModule(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "optionsModule()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -6354,6 +6043,16 @@ export interface BaseUSDO extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    setCluster(
+      _cluster: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setCluster(address)"(
+      _cluster: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     setConfig(
       _version: PromiseOrValue<BigNumberish>,
       _chainId: PromiseOrValue<BigNumberish>,
@@ -6377,26 +6076,6 @@ export interface BaseUSDO extends BaseContract {
 
     "setConservator(address)"(
       _conservator: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setFlashMintFee(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setFlashMintFee(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setMaxFlashMintable(
-      _val: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setMaxFlashMintable(uint256)"(
-      _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

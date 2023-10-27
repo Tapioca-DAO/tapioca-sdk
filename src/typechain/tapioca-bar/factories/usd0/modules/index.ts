@@ -2,6 +2,10 @@
 /* tslint:disable */
 /* eslint-disable */
 export { USDOCommon__factory } from "./USDOCommon__factory";
+export { USDOGenericModule__factory } from "./USDOGenericModule__factory";
+export { USDOLeverageDestinationModule__factory } from "./USDOLeverageDestinationModule__factory";
 export { USDOLeverageModule__factory } from "./USDOLeverageModule__factory";
+export { USDOMarketDestinationModule__factory } from "./USDOMarketDestinationModule__factory";
 export { USDOMarketModule__factory } from "./USDOMarketModule__factory";
+export { USDOOptionsDestinationModule__factory } from "./USDOOptionsDestinationModule__factory";
 export { USDOOptionsModule__factory } from "./USDOOptionsModule__factory";

@@ -4,6 +4,7 @@
 import type {
   BaseContract,
   BigNumber,
+  BigNumberish,
   BytesLike,
   CallOverrides,
   PopulatedTransaction,
@@ -22,14 +23,76 @@ import type {
 
 export interface TestInterface extends utils.Interface {
   functions: {
+    "computeMintFeeTest(uint256,uint256,uint256)": FunctionFragment;
+    "getCallerReward(uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
     "x()": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "x" | "x()"): FunctionFragment;
+  getFunction(
+    nameOrSignatureOrTopic:
+      | "computeMintFeeTest"
+      | "computeMintFeeTest(uint256,uint256,uint256)"
+      | "getCallerReward"
+      | "getCallerReward(uint256,uint256,uint256,uint256,uint256)"
+      | "x"
+      | "x()"
+  ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "computeMintFeeTest",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "computeMintFeeTest(uint256,uint256,uint256)",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCallerReward",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCallerReward(uint256,uint256,uint256,uint256,uint256)",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
   encodeFunctionData(functionFragment: "x", values?: undefined): string;
   encodeFunctionData(functionFragment: "x()", values?: undefined): string;
 
+  decodeFunctionResult(
+    functionFragment: "computeMintFeeTest",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "computeMintFeeTest(uint256,uint256,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCallerReward",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCallerReward(uint256,uint256,uint256,uint256,uint256)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "x", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "x()", data: BytesLike): Result;
 
@@ -65,16 +128,112 @@ export interface Test extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    computeMintFeeTest(
+      rate: PromiseOrValue<BigNumberish>,
+      minFee: PromiseOrValue<BigNumberish>,
+      maxFee: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "computeMintFeeTest(uint256,uint256,uint256)"(
+      rate: PromiseOrValue<BigNumberish>,
+      minFee: PromiseOrValue<BigNumberish>,
+      maxFee: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    getCallerReward(
+      borrowed: PromiseOrValue<BigNumberish>,
+      startTVLInAsset: PromiseOrValue<BigNumberish>,
+      maxTVLInAsset: PromiseOrValue<BigNumberish>,
+      minLiquidatorReward: PromiseOrValue<BigNumberish>,
+      maxLiquidatorReward: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "getCallerReward(uint256,uint256,uint256,uint256,uint256)"(
+      borrowed: PromiseOrValue<BigNumberish>,
+      startTVLInAsset: PromiseOrValue<BigNumberish>,
+      maxTVLInAsset: PromiseOrValue<BigNumberish>,
+      minLiquidatorReward: PromiseOrValue<BigNumberish>,
+      maxLiquidatorReward: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     x(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "x()"(overrides?: CallOverrides): Promise<[BigNumber]>;
   };
+
+  computeMintFeeTest(
+    rate: PromiseOrValue<BigNumberish>,
+    minFee: PromiseOrValue<BigNumberish>,
+    maxFee: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "computeMintFeeTest(uint256,uint256,uint256)"(
+    rate: PromiseOrValue<BigNumberish>,
+    minFee: PromiseOrValue<BigNumberish>,
+    maxFee: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  getCallerReward(
+    borrowed: PromiseOrValue<BigNumberish>,
+    startTVLInAsset: PromiseOrValue<BigNumberish>,
+    maxTVLInAsset: PromiseOrValue<BigNumberish>,
+    minLiquidatorReward: PromiseOrValue<BigNumberish>,
+    maxLiquidatorReward: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "getCallerReward(uint256,uint256,uint256,uint256,uint256)"(
+    borrowed: PromiseOrValue<BigNumberish>,
+    startTVLInAsset: PromiseOrValue<BigNumberish>,
+    maxTVLInAsset: PromiseOrValue<BigNumberish>,
+    minLiquidatorReward: PromiseOrValue<BigNumberish>,
+    maxLiquidatorReward: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   x(overrides?: CallOverrides): Promise<BigNumber>;
 
   "x()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   callStatic: {
+    computeMintFeeTest(
+      rate: PromiseOrValue<BigNumberish>,
+      minFee: PromiseOrValue<BigNumberish>,
+      maxFee: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "computeMintFeeTest(uint256,uint256,uint256)"(
+      rate: PromiseOrValue<BigNumberish>,
+      minFee: PromiseOrValue<BigNumberish>,
+      maxFee: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getCallerReward(
+      borrowed: PromiseOrValue<BigNumberish>,
+      startTVLInAsset: PromiseOrValue<BigNumberish>,
+      maxTVLInAsset: PromiseOrValue<BigNumberish>,
+      minLiquidatorReward: PromiseOrValue<BigNumberish>,
+      maxLiquidatorReward: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getCallerReward(uint256,uint256,uint256,uint256,uint256)"(
+      borrowed: PromiseOrValue<BigNumberish>,
+      startTVLInAsset: PromiseOrValue<BigNumberish>,
+      maxTVLInAsset: PromiseOrValue<BigNumberish>,
+      minLiquidatorReward: PromiseOrValue<BigNumberish>,
+      maxLiquidatorReward: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     x(overrides?: CallOverrides): Promise<BigNumber>;
 
     "x()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -83,12 +242,76 @@ export interface Test extends BaseContract {
   filters: {};
 
   estimateGas: {
+    computeMintFeeTest(
+      rate: PromiseOrValue<BigNumberish>,
+      minFee: PromiseOrValue<BigNumberish>,
+      maxFee: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "computeMintFeeTest(uint256,uint256,uint256)"(
+      rate: PromiseOrValue<BigNumberish>,
+      minFee: PromiseOrValue<BigNumberish>,
+      maxFee: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getCallerReward(
+      borrowed: PromiseOrValue<BigNumberish>,
+      startTVLInAsset: PromiseOrValue<BigNumberish>,
+      maxTVLInAsset: PromiseOrValue<BigNumberish>,
+      minLiquidatorReward: PromiseOrValue<BigNumberish>,
+      maxLiquidatorReward: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getCallerReward(uint256,uint256,uint256,uint256,uint256)"(
+      borrowed: PromiseOrValue<BigNumberish>,
+      startTVLInAsset: PromiseOrValue<BigNumberish>,
+      maxTVLInAsset: PromiseOrValue<BigNumberish>,
+      minLiquidatorReward: PromiseOrValue<BigNumberish>,
+      maxLiquidatorReward: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     x(overrides?: CallOverrides): Promise<BigNumber>;
 
     "x()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
+    computeMintFeeTest(
+      rate: PromiseOrValue<BigNumberish>,
+      minFee: PromiseOrValue<BigNumberish>,
+      maxFee: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "computeMintFeeTest(uint256,uint256,uint256)"(
+      rate: PromiseOrValue<BigNumberish>,
+      minFee: PromiseOrValue<BigNumberish>,
+      maxFee: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getCallerReward(
+      borrowed: PromiseOrValue<BigNumberish>,
+      startTVLInAsset: PromiseOrValue<BigNumberish>,
+      maxTVLInAsset: PromiseOrValue<BigNumberish>,
+      minLiquidatorReward: PromiseOrValue<BigNumberish>,
+      maxLiquidatorReward: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "getCallerReward(uint256,uint256,uint256,uint256,uint256)"(
+      borrowed: PromiseOrValue<BigNumberish>,
+      startTVLInAsset: PromiseOrValue<BigNumberish>,
+      maxTVLInAsset: PromiseOrValue<BigNumberish>,
+      minLiquidatorReward: PromiseOrValue<BigNumberish>,
+      maxLiquidatorReward: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     x(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "x()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;

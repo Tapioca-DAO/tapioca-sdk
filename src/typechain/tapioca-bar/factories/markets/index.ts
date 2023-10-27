@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as bigBang from "./bigBang";
+export * as leverage from "./leverage";
 export * as singularity from "./singularity";
 export { Market__factory } from "./Market__factory";
 export { MarketERC20__factory } from "./MarketERC20__factory";

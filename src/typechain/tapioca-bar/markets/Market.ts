@@ -37,7 +37,6 @@ export interface MarketInterface extends utils.Interface {
     "asset()": FunctionFragment;
     "assetId()": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
-    "borrowOpeningFee()": FunctionFragment;
     "callerFee()": FunctionFragment;
     "claimOwnership()": FunctionFragment;
     "collateral()": FunctionFragment;
@@ -48,6 +47,7 @@ export interface MarketInterface extends utils.Interface {
     "computeTVLInfo(address,uint256)": FunctionFragment;
     "conservator()": FunctionFragment;
     "exchangeRate()": FunctionFragment;
+    "leverageExecutor()": FunctionFragment;
     "liquidationBonusAmount()": FunctionFragment;
     "liquidationCollateralizationRate()": FunctionFragment;
     "liquidationMultiplier()": FunctionFragment;
@@ -66,7 +66,8 @@ export interface MarketInterface extends utils.Interface {
     "protocolFee()": FunctionFragment;
     "rateTimestamp()": FunctionFragment;
     "rateValidDuration()": FunctionFragment;
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
+    "setLeverageExecutor(address)": FunctionFragment;
+    "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
     "totalBorrow()": FunctionFragment;
     "totalBorrowCap()": FunctionFragment;
     "totalCollateralShare()": FunctionFragment;
@@ -99,8 +100,6 @@ export interface MarketInterface extends utils.Interface {
       | "assetId()"
       | "balanceOf"
       | "balanceOf(address)"
-      | "borrowOpeningFee"
-      | "borrowOpeningFee()"
       | "callerFee"
       | "callerFee()"
       | "claimOwnership"
@@ -121,6 +120,8 @@ export interface MarketInterface extends utils.Interface {
       | "conservator()"
       | "exchangeRate"
       | "exchangeRate()"
+      | "leverageExecutor"
+      | "leverageExecutor()"
       | "liquidationBonusAmount"
       | "liquidationBonusAmount()"
       | "liquidationCollateralizationRate"
@@ -157,8 +158,10 @@ export interface MarketInterface extends utils.Interface {
       | "rateTimestamp()"
       | "rateValidDuration"
       | "rateValidDuration()"
+      | "setLeverageExecutor"
+      | "setLeverageExecutor(address)"
       | "setMarketConfig"
-      | "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
+      | "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
       | "totalBorrow"
       | "totalBorrow()"
       | "totalBorrowCap"
@@ -236,14 +239,6 @@ export interface MarketInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "balanceOf(address)",
     values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "borrowOpeningFee",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "borrowOpeningFee()",
-    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "callerFee", values?: undefined): string;
   encodeFunctionData(
@@ -328,6 +323,14 @@ export interface MarketInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "exchangeRate()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "leverageExecutor",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "leverageExecutor()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -489,9 +492,16 @@ export interface MarketInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "setLeverageExecutor",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLeverageExecutor(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "setMarketConfig",
     values: [
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<string>,
@@ -506,9 +516,8 @@ export interface MarketInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
+    functionFragment: "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
     values: [
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<string>,
@@ -675,14 +684,6 @@ export interface MarketInterface extends utils.Interface {
     functionFragment: "balanceOf(address)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "borrowOpeningFee",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "borrowOpeningFee()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "callerFee", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "callerFee()",
@@ -755,6 +756,14 @@ export interface MarketInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "exchangeRate()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "leverageExecutor",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "leverageExecutor()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -875,11 +884,19 @@ export interface MarketInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "setLeverageExecutor",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setLeverageExecutor(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "setMarketConfig",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
+    functionFragment: "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -975,10 +992,10 @@ export interface MarketInterface extends utils.Interface {
     "ApprovalBorrow(address,address,uint256)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
     "ExchangeRateDurationUpdated(uint256,uint256)": EventFragment;
+    "LeverageExecutorSet(address,address)": EventFragment;
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)": EventFragment;
     "LiquidationMultiplierUpdated(uint256,uint256)": EventFragment;
     "LogBorrowCapUpdated(uint256,uint256)": EventFragment;
-    "LogBorrowingFee(uint256,uint256)": EventFragment;
     "LogExchangeRate(uint256)": EventFragment;
     "OracleDataUpdated()": EventFragment;
     "OracleUpdated()": EventFragment;
@@ -1005,6 +1022,10 @@ export interface MarketInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "ExchangeRateDurationUpdated(uint256,uint256)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LeverageExecutorSet"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LeverageExecutorSet(address,address)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Liquidated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Liquidated(address,address[],uint256,uint256,uint256,uint256)"
@@ -1018,10 +1039,6 @@ export interface MarketInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "LogBorrowCapUpdated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "LogBorrowCapUpdated(uint256,uint256)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "LogBorrowingFee"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "LogBorrowingFee(uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogExchangeRate"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogExchangeRate(uint256)"): EventFragment;
@@ -1091,6 +1108,18 @@ export type ExchangeRateDurationUpdatedEvent = TypedEvent<
 export type ExchangeRateDurationUpdatedEventFilter =
   TypedEventFilter<ExchangeRateDurationUpdatedEvent>;
 
+export interface LeverageExecutorSetEventObject {
+  oldVal: string;
+  newVal: string;
+}
+export type LeverageExecutorSetEvent = TypedEvent<
+  [string, string],
+  LeverageExecutorSetEventObject
+>;
+
+export type LeverageExecutorSetEventFilter =
+  TypedEventFilter<LeverageExecutorSetEvent>;
+
 export interface LiquidatedEventObject {
   liquidator: string;
   users: string[];
@@ -1129,17 +1158,6 @@ export type LogBorrowCapUpdatedEvent = TypedEvent<
 
 export type LogBorrowCapUpdatedEventFilter =
   TypedEventFilter<LogBorrowCapUpdatedEvent>;
-
-export interface LogBorrowingFeeEventObject {
-  _oldVal: BigNumber;
-  _newVal: BigNumber;
-}
-export type LogBorrowingFeeEvent = TypedEvent<
-  [BigNumber, BigNumber],
-  LogBorrowingFeeEventObject
->;
-
-export type LogBorrowingFeeEventFilter = TypedEventFilter<LogBorrowingFeeEvent>;
 
 export interface LogExchangeRateEventObject {
   rate: BigNumber;
@@ -1300,10 +1318,6 @@ export interface Market extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    borrowOpeningFee(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "borrowOpeningFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     callerFee(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "callerFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -1385,6 +1399,10 @@ export interface Market extends BaseContract {
     exchangeRate(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "exchangeRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    leverageExecutor(overrides?: CallOverrides): Promise<[string]>;
+
+    "leverageExecutor()"(overrides?: CallOverrides): Promise<[string]>;
 
     liquidationBonusAmount(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -1518,8 +1536,17 @@ export interface Market extends BaseContract {
 
     "rateValidDuration()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     setMarketConfig(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -1534,8 +1561,7 @@ export interface Market extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
+    "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -1729,10 +1755,6 @@ export interface Market extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  borrowOpeningFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "borrowOpeningFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   callerFee(overrides?: CallOverrides): Promise<BigNumber>;
 
   "callerFee()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1814,6 +1836,10 @@ export interface Market extends BaseContract {
   exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
 
   "exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  leverageExecutor(overrides?: CallOverrides): Promise<string>;
+
+  "leverageExecutor()"(overrides?: CallOverrides): Promise<string>;
 
   liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1947,8 +1973,17 @@ export interface Market extends BaseContract {
 
   "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  setLeverageExecutor(
+    _executor: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setLeverageExecutor(address)"(
+    _executor: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   setMarketConfig(
-    _borrowOpeningFee: PromiseOrValue<BigNumberish>,
     _oracle: PromiseOrValue<string>,
     _oracleData: PromiseOrValue<BytesLike>,
     _conservator: PromiseOrValue<string>,
@@ -1963,8 +1998,7 @@ export interface Market extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
-    _borrowOpeningFee: PromiseOrValue<BigNumberish>,
+  "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
     _oracle: PromiseOrValue<string>,
     _oracleData: PromiseOrValue<BytesLike>,
     _conservator: PromiseOrValue<string>,
@@ -2154,10 +2188,6 @@ export interface Market extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    borrowOpeningFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "borrowOpeningFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     callerFee(overrides?: CallOverrides): Promise<BigNumber>;
 
     "callerFee()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2235,6 +2265,10 @@ export interface Market extends BaseContract {
     exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    leverageExecutor(overrides?: CallOverrides): Promise<string>;
+
+    "leverageExecutor()"(overrides?: CallOverrides): Promise<string>;
 
     liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2368,8 +2402,17 @@ export interface Market extends BaseContract {
 
     "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     setMarketConfig(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -2384,8 +2427,7 @@ export interface Market extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
+    "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -2550,6 +2592,15 @@ export interface Market extends BaseContract {
       _newVal?: null
     ): ExchangeRateDurationUpdatedEventFilter;
 
+    "LeverageExecutorSet(address,address)"(
+      oldVal?: PromiseOrValue<string> | null,
+      newVal?: PromiseOrValue<string> | null
+    ): LeverageExecutorSetEventFilter;
+    LeverageExecutorSet(
+      oldVal?: PromiseOrValue<string> | null,
+      newVal?: PromiseOrValue<string> | null
+    ): LeverageExecutorSetEventFilter;
+
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)"(
       liquidator?: PromiseOrValue<string> | null,
       users?: PromiseOrValue<string>[] | null,
@@ -2584,15 +2635,6 @@ export interface Market extends BaseContract {
       _oldVal?: PromiseOrValue<BigNumberish> | null,
       _newVal?: PromiseOrValue<BigNumberish> | null
     ): LogBorrowCapUpdatedEventFilter;
-
-    "LogBorrowingFee(uint256,uint256)"(
-      _oldVal?: PromiseOrValue<BigNumberish> | null,
-      _newVal?: PromiseOrValue<BigNumberish> | null
-    ): LogBorrowingFeeEventFilter;
-    LogBorrowingFee(
-      _oldVal?: PromiseOrValue<BigNumberish> | null,
-      _newVal?: PromiseOrValue<BigNumberish> | null
-    ): LogBorrowingFeeEventFilter;
 
     "LogExchangeRate(uint256)"(
       rate?: PromiseOrValue<BigNumberish> | null
@@ -2710,10 +2752,6 @@ export interface Market extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    borrowOpeningFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "borrowOpeningFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     callerFee(overrides?: CallOverrides): Promise<BigNumber>;
 
     "callerFee()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2783,6 +2821,10 @@ export interface Market extends BaseContract {
     exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    leverageExecutor(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "leverageExecutor()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2916,8 +2958,17 @@ export interface Market extends BaseContract {
 
     "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     setMarketConfig(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -2932,8 +2983,7 @@ export interface Market extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
+    "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -3122,12 +3172,6 @@ export interface Market extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    borrowOpeningFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "borrowOpeningFee()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     callerFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "callerFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -3201,6 +3245,12 @@ export interface Market extends BaseContract {
     exchangeRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "exchangeRate()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    leverageExecutor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "leverageExecutor()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     liquidationBonusAmount(
       overrides?: CallOverrides
@@ -3352,8 +3402,17 @@ export interface Market extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    setLeverageExecutor(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setLeverageExecutor(address)"(
+      _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     setMarketConfig(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,
@@ -3368,8 +3427,7 @@ export interface Market extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setMarketConfig(uint256,address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
-      _borrowOpeningFee: PromiseOrValue<BigNumberish>,
+    "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"(
       _oracle: PromiseOrValue<string>,
       _oracleData: PromiseOrValue<BytesLike>,
       _conservator: PromiseOrValue<string>,

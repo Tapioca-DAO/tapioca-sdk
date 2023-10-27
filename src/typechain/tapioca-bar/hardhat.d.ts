@@ -45,6 +45,26 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BigBang__factory>;
     getContractFactory(
+      name: "AssetToEthLeverageExecutor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AssetToEthLeverageExecutor__factory>;
+    getContractFactory(
+      name: "AssetToGLPLeverageExecutor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AssetToGLPLeverageExecutor__factory>;
+    getContractFactory(
+      name: "AssetTotsDaiLeverageExecutor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AssetTotsDaiLeverageExecutor__factory>;
+    getContractFactory(
+      name: "BaseLeverageExecutor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseLeverageExecutor__factory>;
+    getContractFactory(
+      name: "SimpleLeverageExecutor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SimpleLeverageExecutor__factory>;
+    getContractFactory(
       name: "Market",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Market__factory>;
@@ -109,13 +129,29 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.USDOCommon__factory>;
     getContractFactory(
+      name: "USDOGenericModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.USDOGenericModule__factory>;
+    getContractFactory(
+      name: "USDOLeverageDestinationModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.USDOLeverageDestinationModule__factory>;
+    getContractFactory(
       name: "USDOLeverageModule",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.USDOLeverageModule__factory>;
     getContractFactory(
+      name: "USDOMarketDestinationModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.USDOMarketDestinationModule__factory>;
+    getContractFactory(
       name: "USDOMarketModule",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.USDOMarketModule__factory>;
+    getContractFactory(
+      name: "USDOOptionsDestinationModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.USDOOptionsDestinationModule__factory>;
     getContractFactory(
       name: "USDOOptionsModule",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -124,6 +160,10 @@ declare module "hardhat/types/runtime" {
       name: "USDO",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.USDO__factory>;
+    getContractFactory(
+      name: "USDOFlashloanHelper",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.USDOFlashloanHelper__factory>;
 
     getContractAt(
       name: "BBBorrow",
@@ -165,6 +205,31 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.BigBang>;
+    getContractAt(
+      name: "AssetToEthLeverageExecutor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AssetToEthLeverageExecutor>;
+    getContractAt(
+      name: "AssetToGLPLeverageExecutor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AssetToGLPLeverageExecutor>;
+    getContractAt(
+      name: "AssetTotsDaiLeverageExecutor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AssetTotsDaiLeverageExecutor>;
+    getContractAt(
+      name: "BaseLeverageExecutor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseLeverageExecutor>;
+    getContractAt(
+      name: "SimpleLeverageExecutor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SimpleLeverageExecutor>;
     getContractAt(
       name: "Market",
       address: string,
@@ -246,15 +311,35 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.USDOCommon>;
     getContractAt(
+      name: "USDOGenericModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.USDOGenericModule>;
+    getContractAt(
+      name: "USDOLeverageDestinationModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.USDOLeverageDestinationModule>;
+    getContractAt(
       name: "USDOLeverageModule",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.USDOLeverageModule>;
     getContractAt(
+      name: "USDOMarketDestinationModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.USDOMarketDestinationModule>;
+    getContractAt(
       name: "USDOMarketModule",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.USDOMarketModule>;
+    getContractAt(
+      name: "USDOOptionsDestinationModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.USDOOptionsDestinationModule>;
     getContractAt(
       name: "USDOOptionsModule",
       address: string,
@@ -265,6 +350,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.USDO>;
+    getContractAt(
+      name: "USDOFlashloanHelper",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.USDOFlashloanHelper>;
 
     // default types
     getContractFactory(

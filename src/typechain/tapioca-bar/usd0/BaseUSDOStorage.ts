@@ -63,7 +63,6 @@ export interface BaseUSDOStorageInterface extends utils.Interface {
     "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)": FunctionFragment;
     "estimateSendFee(uint16,bytes32,uint256,bool,bytes)": FunctionFragment;
     "failedMessages(uint16,bytes,uint64)": FunctionFragment;
-    "flashMintFee()": FunctionFragment;
     "forceResumeReceive(uint16,bytes)": FunctionFragment;
     "getConfig(uint16,uint16,address,uint256)": FunctionFragment;
     "getTrustedRemoteAddress(uint16)": FunctionFragment;
@@ -71,7 +70,6 @@ export interface BaseUSDOStorageInterface extends utils.Interface {
     "isTrustedRemote(uint16,bytes)": FunctionFragment;
     "lzEndpoint()": FunctionFragment;
     "lzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
-    "maxFlashMint()": FunctionFragment;
     "minDstGasLookup(uint16,uint16)": FunctionFragment;
     "name()": FunctionFragment;
     "nonblockingLzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
@@ -145,8 +143,6 @@ export interface BaseUSDOStorageInterface extends utils.Interface {
       | "estimateSendFee(uint16,bytes32,uint256,bool,bytes)"
       | "failedMessages"
       | "failedMessages(uint16,bytes,uint64)"
-      | "flashMintFee"
-      | "flashMintFee()"
       | "forceResumeReceive"
       | "forceResumeReceive(uint16,bytes)"
       | "getConfig"
@@ -161,8 +157,6 @@ export interface BaseUSDOStorageInterface extends utils.Interface {
       | "lzEndpoint()"
       | "lzReceive"
       | "lzReceive(uint16,bytes,uint64,bytes)"
-      | "maxFlashMint"
-      | "maxFlashMint()"
       | "minDstGasLookup"
       | "minDstGasLookup(uint16,uint16)"
       | "name"
@@ -427,14 +421,6 @@ export interface BaseUSDOStorageInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "flashMintFee",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "flashMintFee()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "forceResumeReceive",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
   ): string;
@@ -509,14 +495,6 @@ export interface BaseUSDOStorageInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "maxFlashMint",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "maxFlashMint()",
-    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "minDstGasLookup",
@@ -931,14 +909,6 @@ export interface BaseUSDOStorageInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "flashMintFee",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "flashMintFee()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "forceResumeReceive",
     data: BytesLike
   ): Result;
@@ -983,14 +953,6 @@ export interface BaseUSDOStorageInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "lzReceive", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "lzReceive(uint16,bytes,uint64,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "maxFlashMint",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "maxFlashMint()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1194,8 +1156,6 @@ export interface BaseUSDOStorageInterface extends utils.Interface {
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
-    "FlashMintFeeUpdated(uint256,uint256)": EventFragment;
-    "MaxFlashMintUpdated(uint256,uint256)": EventFragment;
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)": EventFragment;
     "NonContractAddress(address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
@@ -1220,14 +1180,6 @@ export interface BaseUSDOStorageInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "CallOFTReceivedSuccess"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "FlashMintFeeUpdated"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "FlashMintFeeUpdated(uint256,uint256)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "MaxFlashMintUpdated"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "MaxFlashMintUpdated(uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MessageFailed"): EventFragment;
   getEvent(
@@ -1312,30 +1264,6 @@ export type CallOFTReceivedSuccessEvent = TypedEvent<
 
 export type CallOFTReceivedSuccessEventFilter =
   TypedEventFilter<CallOFTReceivedSuccessEvent>;
-
-export interface FlashMintFeeUpdatedEventObject {
-  _old: BigNumber;
-  _new: BigNumber;
-}
-export type FlashMintFeeUpdatedEvent = TypedEvent<
-  [BigNumber, BigNumber],
-  FlashMintFeeUpdatedEventObject
->;
-
-export type FlashMintFeeUpdatedEventFilter =
-  TypedEventFilter<FlashMintFeeUpdatedEvent>;
-
-export interface MaxFlashMintUpdatedEventObject {
-  _old: BigNumber;
-  _new: BigNumber;
-}
-export type MaxFlashMintUpdatedEvent = TypedEvent<
-  [BigNumber, BigNumber],
-  MaxFlashMintUpdatedEventObject
->;
-
-export type MaxFlashMintUpdatedEventFilter =
-  TypedEventFilter<MaxFlashMintUpdatedEvent>;
 
 export interface MessageFailedEventObject {
   _srcChainId: number;
@@ -1746,10 +1674,6 @@ export interface BaseUSDOStorage extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    flashMintFee(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "flashMintFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     forceResumeReceive(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -1831,10 +1755,6 @@ export interface BaseUSDOStorage extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
-
-    maxFlashMint(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "maxFlashMint()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     minDstGasLookup(
       arg0: PromiseOrValue<BigNumberish>,
@@ -2343,10 +2263,6 @@ export interface BaseUSDOStorage extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  flashMintFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "flashMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   forceResumeReceive(
     _srcChainId: PromiseOrValue<BigNumberish>,
     _srcAddress: PromiseOrValue<BytesLike>,
@@ -2428,10 +2344,6 @@ export interface BaseUSDOStorage extends BaseContract {
     _payload: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
-
-  maxFlashMint(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "maxFlashMint()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   minDstGasLookup(
     arg0: PromiseOrValue<BigNumberish>,
@@ -2942,10 +2854,6 @@ export interface BaseUSDOStorage extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    flashMintFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "flashMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     forceResumeReceive(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -3027,10 +2935,6 @@ export interface BaseUSDOStorage extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    maxFlashMint(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "maxFlashMint()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     minDstGasLookup(
       arg0: PromiseOrValue<BigNumberish>,
@@ -3357,24 +3261,6 @@ export interface BaseUSDOStorage extends BaseContract {
       _nonce?: null,
       _hash?: null
     ): CallOFTReceivedSuccessEventFilter;
-
-    "FlashMintFeeUpdated(uint256,uint256)"(
-      _old?: null,
-      _new?: null
-    ): FlashMintFeeUpdatedEventFilter;
-    FlashMintFeeUpdated(
-      _old?: null,
-      _new?: null
-    ): FlashMintFeeUpdatedEventFilter;
-
-    "MaxFlashMintUpdated(uint256,uint256)"(
-      _old?: null,
-      _new?: null
-    ): MaxFlashMintUpdatedEventFilter;
-    MaxFlashMintUpdated(
-      _old?: null,
-      _new?: null
-    ): MaxFlashMintUpdatedEventFilter;
 
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)"(
       _srcChainId?: null,
@@ -3714,10 +3600,6 @@ export interface BaseUSDOStorage extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    flashMintFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "flashMintFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     forceResumeReceive(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -3799,10 +3681,6 @@ export interface BaseUSDOStorage extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
-
-    maxFlashMint(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "maxFlashMint()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     minDstGasLookup(
       arg0: PromiseOrValue<BigNumberish>,
@@ -4312,10 +4190,6 @@ export interface BaseUSDOStorage extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    flashMintFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "flashMintFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     forceResumeReceive(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -4397,10 +4271,6 @@ export interface BaseUSDOStorage extends BaseContract {
       _payload: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
-
-    maxFlashMint(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "maxFlashMint()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     minDstGasLookup(
       arg0: PromiseOrValue<BigNumberish>,

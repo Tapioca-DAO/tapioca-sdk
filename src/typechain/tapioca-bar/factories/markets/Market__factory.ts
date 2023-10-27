@@ -101,6 +101,25 @@ const _abi = [
       {
         indexed: true,
         internalType: "address",
+        name: "oldVal",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newVal",
+        type: "address",
+      },
+    ],
+    name: "LeverageExecutorSet",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
         name: "liquidator",
         type: "address",
       },
@@ -174,25 +193,6 @@ const _abi = [
       },
     ],
     name: "LogBorrowCapUpdated",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "uint256",
-        name: "_oldVal",
-        type: "uint256",
-      },
-      {
-        indexed: true,
-        internalType: "uint256",
-        name: "_newVal",
-        type: "uint256",
-      },
-    ],
-    name: "LogBorrowingFee",
     type: "event",
   },
   {
@@ -445,19 +445,6 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "borrowOpeningFee",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
     name: "callerFee",
     outputs: [
       {
@@ -623,6 +610,19 @@ const _abi = [
         internalType: "uint256",
         name: "",
         type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "leverageExecutor",
+    outputs: [
+      {
+        internalType: "contract ILeverageExecutor",
+        name: "",
+        type: "address",
       },
     ],
     stateMutability: "view",
@@ -942,10 +942,18 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "_borrowOpeningFee",
-        type: "uint256",
+        internalType: "contract ILeverageExecutor",
+        name: "_executor",
+        type: "address",
       },
+    ],
+    name: "setLeverageExecutor",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
       {
         internalType: "contract IOracle",
         name: "_oracle",

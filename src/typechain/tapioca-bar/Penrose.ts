@@ -76,6 +76,7 @@ export interface PenroseInterface extends utils.Interface {
     "registerSingularityMasterContract(address,uint8)": FunctionFragment;
     "setBigBangEthMarket(address)": FunctionFragment;
     "setBigBangEthMarketDebtRate(uint256)": FunctionFragment;
+    "setCluster(address)": FunctionFragment;
     "setConservator(address)": FunctionFragment;
     "setUsdoToken(address)": FunctionFragment;
     "singularityMarkets()": FunctionFragment;
@@ -161,6 +162,8 @@ export interface PenroseInterface extends utils.Interface {
       | "setBigBangEthMarket(address)"
       | "setBigBangEthMarketDebtRate"
       | "setBigBangEthMarketDebtRate(uint256)"
+      | "setCluster"
+      | "setCluster(address)"
       | "setConservator"
       | "setConservator(address)"
       | "setUsdoToken"
@@ -471,6 +474,14 @@ export interface PenroseInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "setBigBangEthMarketDebtRate(uint256)",
     values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setCluster",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setCluster(address)",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "setConservator",
@@ -818,6 +829,11 @@ export interface PenroseInterface extends utils.Interface {
     functionFragment: "setBigBangEthMarketDebtRate(uint256)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "setCluster", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setCluster(address)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "setConservator",
     data: BytesLike
@@ -908,6 +924,7 @@ export interface PenroseInterface extends utils.Interface {
   events: {
     "BigBangEthMarketDebtRate(uint256)": EventFragment;
     "BigBangEthMarketSet(address)": EventFragment;
+    "ClusterSet(address,address)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
     "LogDeploy(address,bytes,address)": EventFragment;
     "LogTwTapFeesDeposit(uint256,uint256)": EventFragment;
@@ -929,6 +946,10 @@ export interface PenroseInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "BigBangEthMarketSet"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "BigBangEthMarketSet(address)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ClusterSet"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "ClusterSet(address,address)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ConservatorUpdated"): EventFragment;
   getEvent(
@@ -1003,6 +1024,17 @@ export type BigBangEthMarketSetEvent = TypedEvent<
 
 export type BigBangEthMarketSetEventFilter =
   TypedEventFilter<BigBangEthMarketSetEvent>;
+
+export interface ClusterSetEventObject {
+  old: string;
+  _new: string;
+}
+export type ClusterSetEvent = TypedEvent<
+  [string, string],
+  ClusterSetEventObject
+>;
+
+export type ClusterSetEventFilter = TypedEventFilter<ClusterSetEvent>;
 
 export interface ConservatorUpdatedEventObject {
   old: string;
@@ -1473,6 +1505,16 @@ export interface Penrose extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    setCluster(
+      _newCluster: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setCluster(address)"(
+      _newCluster: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     setConservator(
       _conservator: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1868,6 +1910,16 @@ export interface Penrose extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  setCluster(
+    _newCluster: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setCluster(address)"(
+    _newCluster: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   setConservator(
     _conservator: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2255,6 +2307,16 @@ export interface Penrose extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setCluster(
+      _newCluster: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setCluster(address)"(
+      _newCluster: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     setConservator(
       _conservator: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -2368,6 +2430,15 @@ export interface Penrose extends BaseContract {
     BigBangEthMarketSet(
       _newAddress?: PromiseOrValue<string> | null
     ): BigBangEthMarketSetEventFilter;
+
+    "ClusterSet(address,address)"(
+      old?: PromiseOrValue<string> | null,
+      _new?: PromiseOrValue<string> | null
+    ): ClusterSetEventFilter;
+    ClusterSet(
+      old?: PromiseOrValue<string> | null,
+      _new?: PromiseOrValue<string> | null
+    ): ClusterSetEventFilter;
 
     "ConservatorUpdated(address,address)"(
       old?: PromiseOrValue<string> | null,
@@ -2775,6 +2846,16 @@ export interface Penrose extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    setCluster(
+      _newCluster: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setCluster(address)"(
+      _newCluster: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     setConservator(
       _conservator: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -3174,6 +3255,16 @@ export interface Penrose extends BaseContract {
 
     "setBigBangEthMarketDebtRate(uint256)"(
       _rate: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setCluster(
+      _newCluster: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setCluster(address)"(
+      _newCluster: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
