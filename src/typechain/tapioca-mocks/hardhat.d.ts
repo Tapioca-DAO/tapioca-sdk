@@ -13,6 +13,10 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "BalancerVaultMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BalancerVaultMock__factory>;
+    getContractFactory(
       name: "ContractThatCannotBeDeployed",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ContractThatCannotBeDeployed__factory>;
@@ -133,6 +137,11 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.YieldBoxMock__factory>;
 
+    getContractAt(
+      name: "BalancerVaultMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BalancerVaultMock>;
     getContractAt(
       name: "ContractThatCannotBeDeployed",
       address: string,
