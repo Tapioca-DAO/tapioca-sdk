@@ -122,6 +122,7 @@ export interface GmxMarketMockInterface extends utils.Interface {
     "createDeposit((address,address,address,address,address,address,address[],address[],uint256,bool,uint256,uint256))": FunctionFragment;
     "createWithdrawal((address,address,address,address,address[],address[],uint256,uint256,bool,uint256,uint256))": FunctionFragment;
     "decimals()": FunctionFragment;
+    "lp()": FunctionFragment;
     "multicall(bytes[])": FunctionFragment;
     "name()": FunctionFragment;
     "nonces(address)": FunctionFragment;
@@ -152,6 +153,8 @@ export interface GmxMarketMockInterface extends utils.Interface {
       | "createWithdrawal((address,address,address,address,address[],address[],uint256,uint256,bool,uint256,uint256))"
       | "decimals"
       | "decimals()"
+      | "lp"
+      | "lp()"
       | "multicall"
       | "multicall(bytes[])"
       | "name"
@@ -231,6 +234,8 @@ export interface GmxMarketMockInterface extends utils.Interface {
     functionFragment: "decimals()",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "lp", values?: undefined): string;
+  encodeFunctionData(functionFragment: "lp()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "multicall",
     values: [PromiseOrValue<BytesLike>[]]
@@ -377,6 +382,8 @@ export interface GmxMarketMockInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "lp", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "lp()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "multicall", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "multicall(bytes[])",
@@ -562,6 +569,10 @@ export interface GmxMarketMock extends BaseContract {
 
     "decimals()"(overrides?: CallOverrides): Promise<[number]>;
 
+    lp(overrides?: CallOverrides): Promise<[string]>;
+
+    "lp()"(overrides?: CallOverrides): Promise<[string]>;
+
     multicall(
       data: PromiseOrValue<BytesLike>[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -739,6 +750,10 @@ export interface GmxMarketMock extends BaseContract {
 
   "decimals()"(overrides?: CallOverrides): Promise<number>;
 
+  lp(overrides?: CallOverrides): Promise<string>;
+
+  "lp()"(overrides?: CallOverrides): Promise<string>;
+
   multicall(
     data: PromiseOrValue<BytesLike>[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -915,6 +930,10 @@ export interface GmxMarketMock extends BaseContract {
     decimals(overrides?: CallOverrides): Promise<number>;
 
     "decimals()"(overrides?: CallOverrides): Promise<number>;
+
+    lp(overrides?: CallOverrides): Promise<string>;
+
+    "lp()"(overrides?: CallOverrides): Promise<string>;
 
     multicall(
       data: PromiseOrValue<BytesLike>[],
@@ -1118,6 +1137,10 @@ export interface GmxMarketMock extends BaseContract {
 
     "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    lp(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "lp()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     multicall(
       data: PromiseOrValue<BytesLike>[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -1297,6 +1320,10 @@ export interface GmxMarketMock extends BaseContract {
     decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    lp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "lp()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     multicall(
       data: PromiseOrValue<BytesLike>[],
