@@ -15,6 +15,7 @@ export type { ContractThatReverts } from "./ContractThatReverts";
 export type { CurvePoolMock } from "./CurvePoolMock";
 export type { ERC20Mock } from "./ERC20Mock";
 export type { ERC721Mock } from "./ERC721Mock";
+export type { GmxMarketMock } from "./GmxMarketMock";
 export type { LQSingularityMock } from "./LQSingularityMock";
 export type { LZEndpointMock } from "./LZEndpointMock";
 export type { MarketLiquidationReceiverMock } from "./MarketLiquidationReceiverMock";
@@ -42,6 +43,7 @@ export type { FlashBorrowerMock } from "./FlashBorrowerMock.sol/FlashBorrowerMoc
 export { FlashBorrowerMock__factory } from "./factories/FlashBorrowerMock.sol/FlashBorrowerMock__factory";
 export type { FlashMaliciousBorrowerMock } from "./FlashBorrowerMock.sol/FlashMaliciousBorrowerMock";
 export { FlashMaliciousBorrowerMock__factory } from "./factories/FlashBorrowerMock.sol/FlashMaliciousBorrowerMock__factory";
+export { GmxMarketMock__factory } from "./factories/GmxMarketMock__factory";
 export { LQSingularityMock__factory } from "./factories/LQSingularityMock__factory";
 export { LZEndpointMock__factory } from "./factories/LZEndpointMock__factory";
 export { MarketLiquidationReceiverMock__factory } from "./factories/MarketLiquidationReceiverMock__factory";

@@ -11,6 +11,7 @@ export { ContractThatReverts__factory } from "./ContractThatReverts__factory";
 export { CurvePoolMock__factory } from "./CurvePoolMock__factory";
 export { ERC20Mock__factory } from "./ERC20Mock__factory";
 export { ERC721Mock__factory } from "./ERC721Mock__factory";
+export { GmxMarketMock__factory } from "./GmxMarketMock__factory";
 export { LQSingularityMock__factory } from "./LQSingularityMock__factory";
 export { LZEndpointMock__factory } from "./LZEndpointMock__factory";
 export { MarketLiquidationReceiverMock__factory } from "./MarketLiquidationReceiverMock__factory";

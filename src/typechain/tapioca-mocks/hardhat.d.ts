@@ -45,6 +45,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.FlashMaliciousBorrowerMock__factory>;
     getContractFactory(
+      name: "GmxMarketMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.GmxMarketMock__factory>;
+    getContractFactory(
       name: "LQSingularityMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.LQSingularityMock__factory>;
@@ -177,6 +181,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.FlashMaliciousBorrowerMock>;
+    getContractAt(
+      name: "GmxMarketMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.GmxMarketMock>;
     getContractAt(
       name: "LQSingularityMock",
       address: string,
