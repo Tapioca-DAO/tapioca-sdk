@@ -8,7 +8,7 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
-  Overrides,
+  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -278,7 +278,7 @@ export interface MockSwapper extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       arg3: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
@@ -286,7 +286,7 @@ export interface MockSwapper extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       arg3: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
@@ -339,7 +339,7 @@ export interface MockSwapper extends BaseContract {
     amountOutMin: PromiseOrValue<BigNumberish>,
     to: PromiseOrValue<string>,
     arg3: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
@@ -347,7 +347,7 @@ export interface MockSwapper extends BaseContract {
     amountOutMin: PromiseOrValue<BigNumberish>,
     to: PromiseOrValue<string>,
     arg3: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -468,7 +468,7 @@ export interface MockSwapper extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       arg3: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
@@ -476,7 +476,7 @@ export interface MockSwapper extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       arg3: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
@@ -530,7 +530,7 @@ export interface MockSwapper extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       arg3: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "swap(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),uint256,address,bytes)"(
@@ -538,7 +538,7 @@ export interface MockSwapper extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       arg3: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }
