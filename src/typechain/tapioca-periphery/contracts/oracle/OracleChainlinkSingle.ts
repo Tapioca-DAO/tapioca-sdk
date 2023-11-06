@@ -33,6 +33,7 @@ export interface OracleChainlinkSingleInterface extends utils.Interface {
     "DEFAULT_ADMIN_ROLE()": FunctionFragment;
     "GRACE_PERIOD_TIME()": FunctionFragment;
     "GUARDIAN_ROLE_CHAINLINK()": FunctionFragment;
+    "SEQUENCER_ROLE()": FunctionFragment;
     "SEQUENCER_UPTIME_FEED()": FunctionFragment;
     "chainlinkDecimals()": FunctionFragment;
     "changeGracePeriod(uint32)": FunctionFragment;
@@ -65,6 +66,8 @@ export interface OracleChainlinkSingleInterface extends utils.Interface {
       | "GRACE_PERIOD_TIME()"
       | "GUARDIAN_ROLE_CHAINLINK"
       | "GUARDIAN_ROLE_CHAINLINK()"
+      | "SEQUENCER_ROLE"
+      | "SEQUENCER_ROLE()"
       | "SEQUENCER_UPTIME_FEED"
       | "SEQUENCER_UPTIME_FEED()"
       | "chainlinkDecimals"
@@ -131,6 +134,14 @@ export interface OracleChainlinkSingleInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "GUARDIAN_ROLE_CHAINLINK()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "SEQUENCER_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "SEQUENCER_ROLE()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -294,6 +305,14 @@ export interface OracleChainlinkSingleInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "GUARDIAN_ROLE_CHAINLINK()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "SEQUENCER_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "SEQUENCER_ROLE()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -523,6 +542,10 @@ export interface OracleChainlinkSingle extends BaseContract {
 
     "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<[string]>;
 
+    SEQUENCER_ROLE(overrides?: CallOverrides): Promise<[string]>;
+
+    "SEQUENCER_ROLE()"(overrides?: CallOverrides): Promise<[string]>;
+
     SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<[string]>;
 
     "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<[string]>;
@@ -692,6 +715,10 @@ export interface OracleChainlinkSingle extends BaseContract {
 
   "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<string>;
 
+  SEQUENCER_ROLE(overrides?: CallOverrides): Promise<string>;
+
+  "SEQUENCER_ROLE()"(overrides?: CallOverrides): Promise<string>;
+
   SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<string>;
 
   "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<string>;
@@ -850,6 +877,10 @@ export interface OracleChainlinkSingle extends BaseContract {
     GUARDIAN_ROLE_CHAINLINK(overrides?: CallOverrides): Promise<string>;
 
     "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<string>;
+
+    SEQUENCER_ROLE(overrides?: CallOverrides): Promise<string>;
+
+    "SEQUENCER_ROLE()"(overrides?: CallOverrides): Promise<string>;
 
     SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<string>;
 
@@ -1046,6 +1077,10 @@ export interface OracleChainlinkSingle extends BaseContract {
 
     "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    SEQUENCER_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "SEQUENCER_ROLE()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<BigNumber>;
 
     "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1213,6 +1248,12 @@ export interface OracleChainlinkSingle extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "GUARDIAN_ROLE_CHAINLINK()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    SEQUENCER_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "SEQUENCER_ROLE()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

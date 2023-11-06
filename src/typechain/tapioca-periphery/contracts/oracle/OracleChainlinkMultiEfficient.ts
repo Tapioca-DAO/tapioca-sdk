@@ -32,11 +32,8 @@ export interface OracleChainlinkMultiEfficientInterface
   functions: {
     "BASE()": FunctionFragment;
     "DEFAULT_ADMIN_ROLE()": FunctionFragment;
-    "GRACE_PERIOD_TIME()": FunctionFragment;
     "GUARDIAN_ROLE_CHAINLINK()": FunctionFragment;
     "OUTBASE()": FunctionFragment;
-    "SEQUENCER_UPTIME_FEED()": FunctionFragment;
-    "changeGracePeriod(uint32)": FunctionFragment;
     "changeStalePeriod(uint32)": FunctionFragment;
     "getRoleAdmin(bytes32)": FunctionFragment;
     "grantRole(bytes32,address)": FunctionFragment;
@@ -59,16 +56,10 @@ export interface OracleChainlinkMultiEfficientInterface
       | "BASE()"
       | "DEFAULT_ADMIN_ROLE"
       | "DEFAULT_ADMIN_ROLE()"
-      | "GRACE_PERIOD_TIME"
-      | "GRACE_PERIOD_TIME()"
       | "GUARDIAN_ROLE_CHAINLINK"
       | "GUARDIAN_ROLE_CHAINLINK()"
       | "OUTBASE"
       | "OUTBASE()"
-      | "SEQUENCER_UPTIME_FEED"
-      | "SEQUENCER_UPTIME_FEED()"
-      | "changeGracePeriod"
-      | "changeGracePeriod(uint32)"
       | "changeStalePeriod"
       | "changeStalePeriod(uint32)"
       | "getRoleAdmin"
@@ -110,14 +101,6 @@ export interface OracleChainlinkMultiEfficientInterface
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "GRACE_PERIOD_TIME",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "GRACE_PERIOD_TIME()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "GUARDIAN_ROLE_CHAINLINK",
     values?: undefined
   ): string;
@@ -127,22 +110,6 @@ export interface OracleChainlinkMultiEfficientInterface
   ): string;
   encodeFunctionData(functionFragment: "OUTBASE", values?: undefined): string;
   encodeFunctionData(functionFragment: "OUTBASE()", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "SEQUENCER_UPTIME_FEED",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "SEQUENCER_UPTIME_FEED()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "changeGracePeriod",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "changeGracePeriod(uint32)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
   encodeFunctionData(
     functionFragment: "changeStalePeriod",
     values: [PromiseOrValue<BigNumberish>]
@@ -243,14 +210,6 @@ export interface OracleChainlinkMultiEfficientInterface
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "GRACE_PERIOD_TIME",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "GRACE_PERIOD_TIME()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "GUARDIAN_ROLE_CHAINLINK",
     data: BytesLike
   ): Result;
@@ -260,22 +219,6 @@ export interface OracleChainlinkMultiEfficientInterface
   ): Result;
   decodeFunctionResult(functionFragment: "OUTBASE", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "OUTBASE()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "SEQUENCER_UPTIME_FEED",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "SEQUENCER_UPTIME_FEED()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "changeGracePeriod",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "changeGracePeriod(uint32)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "changeStalePeriod",
     data: BytesLike
@@ -447,10 +390,6 @@ export interface OracleChainlinkMultiEfficient extends BaseContract {
 
     "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<[string]>;
 
-    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     GUARDIAN_ROLE_CHAINLINK(overrides?: CallOverrides): Promise<[string]>;
 
     "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<[string]>;
@@ -458,20 +397,6 @@ export interface OracleChainlinkMultiEfficient extends BaseContract {
     OUTBASE(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "OUTBASE()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<[string]>;
-
-    "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<[string]>;
-
-    changeGracePeriod(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "changeGracePeriod(uint32)"(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
 
     changeStalePeriod(
       _stalePeriod: PromiseOrValue<BigNumberish>,
@@ -604,10 +529,6 @@ export interface OracleChainlinkMultiEfficient extends BaseContract {
 
   "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<string>;
 
-  GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   GUARDIAN_ROLE_CHAINLINK(overrides?: CallOverrides): Promise<string>;
 
   "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<string>;
@@ -615,20 +536,6 @@ export interface OracleChainlinkMultiEfficient extends BaseContract {
   OUTBASE(overrides?: CallOverrides): Promise<BigNumber>;
 
   "OUTBASE()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<string>;
-
-  "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<string>;
-
-  changeGracePeriod(
-    _gracePeriod: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "changeGracePeriod(uint32)"(
-    _gracePeriod: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
 
   changeStalePeriod(
     _stalePeriod: PromiseOrValue<BigNumberish>,
@@ -751,10 +658,6 @@ export interface OracleChainlinkMultiEfficient extends BaseContract {
 
     "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<string>;
 
-    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     GUARDIAN_ROLE_CHAINLINK(overrides?: CallOverrides): Promise<string>;
 
     "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<string>;
@@ -762,20 +665,6 @@ export interface OracleChainlinkMultiEfficient extends BaseContract {
     OUTBASE(overrides?: CallOverrides): Promise<BigNumber>;
 
     "OUTBASE()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<string>;
-
-    "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<string>;
-
-    changeGracePeriod(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "changeGracePeriod(uint32)"(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     changeStalePeriod(
       _stalePeriod: PromiseOrValue<BigNumberish>,
@@ -934,10 +823,6 @@ export interface OracleChainlinkMultiEfficient extends BaseContract {
 
     "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     GUARDIAN_ROLE_CHAINLINK(overrides?: CallOverrides): Promise<BigNumber>;
 
     "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -945,20 +830,6 @@ export interface OracleChainlinkMultiEfficient extends BaseContract {
     OUTBASE(overrides?: CallOverrides): Promise<BigNumber>;
 
     "OUTBASE()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    changeGracePeriod(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "changeGracePeriod(uint32)"(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
 
     changeStalePeriod(
       _stalePeriod: PromiseOrValue<BigNumberish>,
@@ -1086,12 +957,6 @@ export interface OracleChainlinkMultiEfficient extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "GRACE_PERIOD_TIME()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     GUARDIAN_ROLE_CHAINLINK(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1103,24 +968,6 @@ export interface OracleChainlinkMultiEfficient extends BaseContract {
     OUTBASE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "OUTBASE()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    SEQUENCER_UPTIME_FEED(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "SEQUENCER_UPTIME_FEED()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    changeGracePeriod(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "changeGracePeriod(uint32)"(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
 
     changeStalePeriod(
       _stalePeriod: PromiseOrValue<BigNumberish>,

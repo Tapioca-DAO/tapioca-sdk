@@ -17,4 +17,7 @@ export type { OracleChainlinkMultiEfficient } from "./OracleChainlinkMultiEffici
 export type { OracleChainlinkSingle } from "./OracleChainlinkSingle";
 export type { OracleDAI } from "./OracleDAI";
 export type { OracleMulti } from "./OracleMulti";
+export type { OracleUniSolo } from "./OracleUniSolo";
 export type { Seer } from "./Seer";
+export type { SeerCLSolo } from "./SeerCLSolo";
+export type { SeerUniSolo } from "./SeerUniSolo";

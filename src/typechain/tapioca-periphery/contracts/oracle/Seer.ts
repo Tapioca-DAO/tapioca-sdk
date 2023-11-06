@@ -34,6 +34,7 @@ export interface SeerInterface extends utils.Interface {
     "GRACE_PERIOD_TIME()": FunctionFragment;
     "GUARDIAN_ROLE_CHAINLINK()": FunctionFragment;
     "GUARDIAN_ROLE_UNISWAP()": FunctionFragment;
+    "SEQUENCER_ROLE()": FunctionFragment;
     "SEQUENCER_UPTIME_FEED()": FunctionFragment;
     "_name()": FunctionFragment;
     "_symbol()": FunctionFragment;
@@ -83,6 +84,8 @@ export interface SeerInterface extends utils.Interface {
       | "GUARDIAN_ROLE_CHAINLINK()"
       | "GUARDIAN_ROLE_UNISWAP"
       | "GUARDIAN_ROLE_UNISWAP()"
+      | "SEQUENCER_ROLE"
+      | "SEQUENCER_ROLE()"
       | "SEQUENCER_UPTIME_FEED"
       | "SEQUENCER_UPTIME_FEED()"
       | "_name"
@@ -187,6 +190,14 @@ export interface SeerInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "GUARDIAN_ROLE_UNISWAP()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "SEQUENCER_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "SEQUENCER_ROLE()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -457,6 +468,14 @@ export interface SeerInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "GUARDIAN_ROLE_UNISWAP()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "SEQUENCER_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "SEQUENCER_ROLE()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -765,6 +784,10 @@ export interface Seer extends BaseContract {
 
     "GUARDIAN_ROLE_UNISWAP()"(overrides?: CallOverrides): Promise<[string]>;
 
+    SEQUENCER_ROLE(overrides?: CallOverrides): Promise<[string]>;
+
+    "SEQUENCER_ROLE()"(overrides?: CallOverrides): Promise<[string]>;
+
     SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<[string]>;
 
     "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<[string]>;
@@ -1068,6 +1091,10 @@ export interface Seer extends BaseContract {
 
   "GUARDIAN_ROLE_UNISWAP()"(overrides?: CallOverrides): Promise<string>;
 
+  SEQUENCER_ROLE(overrides?: CallOverrides): Promise<string>;
+
+  "SEQUENCER_ROLE()"(overrides?: CallOverrides): Promise<string>;
+
   SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<string>;
 
   "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<string>;
@@ -1362,6 +1389,10 @@ export interface Seer extends BaseContract {
     GUARDIAN_ROLE_UNISWAP(overrides?: CallOverrides): Promise<string>;
 
     "GUARDIAN_ROLE_UNISWAP()"(overrides?: CallOverrides): Promise<string>;
+
+    SEQUENCER_ROLE(overrides?: CallOverrides): Promise<string>;
+
+    "SEQUENCER_ROLE()"(overrides?: CallOverrides): Promise<string>;
 
     SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<string>;
 
@@ -1694,6 +1725,10 @@ export interface Seer extends BaseContract {
 
     "GUARDIAN_ROLE_UNISWAP()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    SEQUENCER_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "SEQUENCER_ROLE()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<BigNumber>;
 
     "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2001,6 +2036,12 @@ export interface Seer extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "GUARDIAN_ROLE_UNISWAP()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    SEQUENCER_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "SEQUENCER_ROLE()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
