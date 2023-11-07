@@ -28,38 +28,57 @@ import type {
   PromiseOrValue,
 } from "../../common";
 
-export interface AssetTotsDaiLeverageExecutorInterface extends utils.Interface {
+export interface AssetToGmxEthUsdcLpLeverageExecutorInterface
+  extends utils.Interface {
   functions: {
+    "FEE()": FunctionFragment;
     "buildSwapDefaultData(address,address,uint256)": FunctionFragment;
     "claimOwnership()": FunctionFragment;
     "cluster()": FunctionFragment;
+    "depositVault()": FunctionFragment;
+    "exchangeRouter()": FunctionFragment;
     "getAsset(uint256,address,address,uint256,address,bytes)": FunctionFragment;
     "getCollateral(uint256,address,address,uint256,address,bytes)": FunctionFragment;
+    "gmMarket()": FunctionFragment;
     "owner()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
+    "router()": FunctionFragment;
     "setCluster(address)": FunctionFragment;
     "setSwapper(address)": FunctionFragment;
     "swapper()": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
+    "usdc()": FunctionFragment;
+    "weth()": FunctionFragment;
+    "withdrawalVault()": FunctionFragment;
     "yieldBox()": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "FEE"
+      | "FEE()"
       | "buildSwapDefaultData"
       | "buildSwapDefaultData(address,address,uint256)"
       | "claimOwnership"
       | "claimOwnership()"
       | "cluster"
       | "cluster()"
+      | "depositVault"
+      | "depositVault()"
+      | "exchangeRouter"
+      | "exchangeRouter()"
       | "getAsset"
       | "getAsset(uint256,address,address,uint256,address,bytes)"
       | "getCollateral"
       | "getCollateral(uint256,address,address,uint256,address,bytes)"
+      | "gmMarket"
+      | "gmMarket()"
       | "owner"
       | "owner()"
       | "pendingOwner"
       | "pendingOwner()"
+      | "router"
+      | "router()"
       | "setCluster"
       | "setCluster(address)"
       | "setSwapper"
@@ -68,10 +87,18 @@ export interface AssetTotsDaiLeverageExecutorInterface extends utils.Interface {
       | "swapper()"
       | "transferOwnership"
       | "transferOwnership(address,bool,bool)"
+      | "usdc"
+      | "usdc()"
+      | "weth"
+      | "weth()"
+      | "withdrawalVault"
+      | "withdrawalVault()"
       | "yieldBox"
       | "yieldBox()"
   ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "FEE", values?: undefined): string;
+  encodeFunctionData(functionFragment: "FEE()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "buildSwapDefaultData",
     values: [
@@ -98,6 +125,22 @@ export interface AssetTotsDaiLeverageExecutorInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "cluster", values?: undefined): string;
   encodeFunctionData(functionFragment: "cluster()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "depositVault",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "depositVault()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "exchangeRouter",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "exchangeRouter()",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "getAsset",
     values: [
@@ -142,6 +185,11 @@ export interface AssetTotsDaiLeverageExecutorInterface extends utils.Interface {
       PromiseOrValue<BytesLike>
     ]
   ): string;
+  encodeFunctionData(functionFragment: "gmMarket", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "gmMarket()",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
   encodeFunctionData(
@@ -152,6 +200,8 @@ export interface AssetTotsDaiLeverageExecutorInterface extends utils.Interface {
     functionFragment: "pendingOwner()",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "router", values?: undefined): string;
+  encodeFunctionData(functionFragment: "router()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "setCluster",
     values: [PromiseOrValue<string>]
@@ -186,12 +236,26 @@ export interface AssetTotsDaiLeverageExecutorInterface extends utils.Interface {
       PromiseOrValue<boolean>
     ]
   ): string;
+  encodeFunctionData(functionFragment: "usdc", values?: undefined): string;
+  encodeFunctionData(functionFragment: "usdc()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "weth", values?: undefined): string;
+  encodeFunctionData(functionFragment: "weth()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "withdrawalVault",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawalVault()",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "yieldBox", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "yieldBox()",
     values?: undefined
   ): string;
 
+  decodeFunctionResult(functionFragment: "FEE", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "FEE()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "buildSwapDefaultData",
     data: BytesLike
@@ -210,6 +274,22 @@ export interface AssetTotsDaiLeverageExecutorInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "cluster", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "cluster()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "depositVault",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "depositVault()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "exchangeRouter",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "exchangeRouter()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "getAsset", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getAsset(uint256,address,address,uint256,address,bytes)",
@@ -223,6 +303,8 @@ export interface AssetTotsDaiLeverageExecutorInterface extends utils.Interface {
     functionFragment: "getCollateral(uint256,address,address,uint256,address,bytes)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "gmMarket", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "gmMarket()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
   decodeFunctionResult(
@@ -233,6 +315,8 @@ export interface AssetTotsDaiLeverageExecutorInterface extends utils.Interface {
     functionFragment: "pendingOwner()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "router", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "router()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setCluster", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setCluster(address)",
@@ -251,6 +335,18 @@ export interface AssetTotsDaiLeverageExecutorInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership(address,bool,bool)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "usdc", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "usdc()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "weth", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "weth()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawalVault",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawalVault()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "yieldBox", data: BytesLike): Result;
@@ -278,14 +374,14 @@ export type OwnershipTransferredEvent = TypedEvent<
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
 
-export interface AssetTotsDaiLeverageExecutor extends BaseContract {
-  contractName: "AssetTotsDaiLeverageExecutor";
+export interface AssetToGmxEthUsdcLpLeverageExecutor extends BaseContract {
+  contractName: "AssetToGmxEthUsdcLpLeverageExecutor";
 
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: AssetTotsDaiLeverageExecutorInterface;
+  interface: AssetToGmxEthUsdcLpLeverageExecutorInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -307,6 +403,10 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    FEE(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "FEE()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     buildSwapDefaultData(
       tokenIn: PromiseOrValue<string>,
       tokenOut: PromiseOrValue<string>,
@@ -332,6 +432,14 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
     cluster(overrides?: CallOverrides): Promise<[string]>;
 
     "cluster()"(overrides?: CallOverrides): Promise<[string]>;
+
+    depositVault(overrides?: CallOverrides): Promise<[string]>;
+
+    "depositVault()"(overrides?: CallOverrides): Promise<[string]>;
+
+    exchangeRouter(overrides?: CallOverrides): Promise<[string]>;
+
+    "exchangeRouter()"(overrides?: CallOverrides): Promise<[string]>;
 
     getAsset(
       assetId: PromiseOrValue<BigNumberish>,
@@ -373,6 +481,10 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    gmMarket(overrides?: CallOverrides): Promise<[string]>;
+
+    "gmMarket()"(overrides?: CallOverrides): Promise<[string]>;
+
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
@@ -380,6 +492,10 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<[string]>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<[string]>;
+
+    router(overrides?: CallOverrides): Promise<[string]>;
+
+    "router()"(overrides?: CallOverrides): Promise<[string]>;
 
     setCluster(
       _cluster: PromiseOrValue<string>,
@@ -419,10 +535,26 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    usdc(overrides?: CallOverrides): Promise<[string]>;
+
+    "usdc()"(overrides?: CallOverrides): Promise<[string]>;
+
+    weth(overrides?: CallOverrides): Promise<[string]>;
+
+    "weth()"(overrides?: CallOverrides): Promise<[string]>;
+
+    withdrawalVault(overrides?: CallOverrides): Promise<[string]>;
+
+    "withdrawalVault()"(overrides?: CallOverrides): Promise<[string]>;
+
     yieldBox(overrides?: CallOverrides): Promise<[string]>;
 
     "yieldBox()"(overrides?: CallOverrides): Promise<[string]>;
   };
+
+  FEE(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "FEE()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   buildSwapDefaultData(
     tokenIn: PromiseOrValue<string>,
@@ -449,6 +581,14 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
   cluster(overrides?: CallOverrides): Promise<string>;
 
   "cluster()"(overrides?: CallOverrides): Promise<string>;
+
+  depositVault(overrides?: CallOverrides): Promise<string>;
+
+  "depositVault()"(overrides?: CallOverrides): Promise<string>;
+
+  exchangeRouter(overrides?: CallOverrides): Promise<string>;
+
+  "exchangeRouter()"(overrides?: CallOverrides): Promise<string>;
 
   getAsset(
     assetId: PromiseOrValue<BigNumberish>,
@@ -490,6 +630,10 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  gmMarket(overrides?: CallOverrides): Promise<string>;
+
+  "gmMarket()"(overrides?: CallOverrides): Promise<string>;
+
   owner(overrides?: CallOverrides): Promise<string>;
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -497,6 +641,10 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
   pendingOwner(overrides?: CallOverrides): Promise<string>;
 
   "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
+
+  router(overrides?: CallOverrides): Promise<string>;
+
+  "router()"(overrides?: CallOverrides): Promise<string>;
 
   setCluster(
     _cluster: PromiseOrValue<string>,
@@ -536,11 +684,27 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  usdc(overrides?: CallOverrides): Promise<string>;
+
+  "usdc()"(overrides?: CallOverrides): Promise<string>;
+
+  weth(overrides?: CallOverrides): Promise<string>;
+
+  "weth()"(overrides?: CallOverrides): Promise<string>;
+
+  withdrawalVault(overrides?: CallOverrides): Promise<string>;
+
+  "withdrawalVault()"(overrides?: CallOverrides): Promise<string>;
+
   yieldBox(overrides?: CallOverrides): Promise<string>;
 
   "yieldBox()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
+    FEE(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "FEE()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     buildSwapDefaultData(
       tokenIn: PromiseOrValue<string>,
       tokenOut: PromiseOrValue<string>,
@@ -562,6 +726,14 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
     cluster(overrides?: CallOverrides): Promise<string>;
 
     "cluster()"(overrides?: CallOverrides): Promise<string>;
+
+    depositVault(overrides?: CallOverrides): Promise<string>;
+
+    "depositVault()"(overrides?: CallOverrides): Promise<string>;
+
+    exchangeRouter(overrides?: CallOverrides): Promise<string>;
+
+    "exchangeRouter()"(overrides?: CallOverrides): Promise<string>;
 
     getAsset(
       assetId: PromiseOrValue<BigNumberish>,
@@ -603,6 +775,10 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    gmMarket(overrides?: CallOverrides): Promise<string>;
+
+    "gmMarket()"(overrides?: CallOverrides): Promise<string>;
+
     owner(overrides?: CallOverrides): Promise<string>;
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -610,6 +786,10 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<string>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
+
+    router(overrides?: CallOverrides): Promise<string>;
+
+    "router()"(overrides?: CallOverrides): Promise<string>;
 
     setCluster(
       _cluster: PromiseOrValue<string>,
@@ -649,6 +829,18 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    usdc(overrides?: CallOverrides): Promise<string>;
+
+    "usdc()"(overrides?: CallOverrides): Promise<string>;
+
+    weth(overrides?: CallOverrides): Promise<string>;
+
+    "weth()"(overrides?: CallOverrides): Promise<string>;
+
+    withdrawalVault(overrides?: CallOverrides): Promise<string>;
+
+    "withdrawalVault()"(overrides?: CallOverrides): Promise<string>;
+
     yieldBox(overrides?: CallOverrides): Promise<string>;
 
     "yieldBox()"(overrides?: CallOverrides): Promise<string>;
@@ -666,6 +858,10 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
   };
 
   estimateGas: {
+    FEE(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "FEE()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     buildSwapDefaultData(
       tokenIn: PromiseOrValue<string>,
       tokenOut: PromiseOrValue<string>,
@@ -691,6 +887,14 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
     cluster(overrides?: CallOverrides): Promise<BigNumber>;
 
     "cluster()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    depositVault(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "depositVault()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    exchangeRouter(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "exchangeRouter()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     getAsset(
       assetId: PromiseOrValue<BigNumberish>,
@@ -732,6 +936,10 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    gmMarket(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "gmMarket()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -739,6 +947,10 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    router(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "router()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     setCluster(
       _cluster: PromiseOrValue<string>,
@@ -778,12 +990,28 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    usdc(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "usdc()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    weth(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "weth()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    withdrawalVault(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "withdrawalVault()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     yieldBox(overrides?: CallOverrides): Promise<BigNumber>;
 
     "yieldBox()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
+    FEE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "FEE()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     buildSwapDefaultData(
       tokenIn: PromiseOrValue<string>,
       tokenOut: PromiseOrValue<string>,
@@ -809,6 +1037,16 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
     cluster(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "cluster()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    depositVault(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "depositVault()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    exchangeRouter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "exchangeRouter()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     getAsset(
       assetId: PromiseOrValue<BigNumberish>,
@@ -850,6 +1088,10 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    gmMarket(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "gmMarket()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -857,6 +1099,10 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    router(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "router()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     setCluster(
       _cluster: PromiseOrValue<string>,
@@ -894,6 +1140,20 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
       direct: PromiseOrValue<boolean>,
       renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    usdc(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "usdc()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    weth(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "weth()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    withdrawalVault(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "withdrawalVault()"(
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     yieldBox(overrides?: CallOverrides): Promise<PopulatedTransaction>;

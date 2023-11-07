@@ -53,9 +53,21 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AssetToGLPLeverageExecutor__factory>;
     getContractFactory(
+      name: "AssetToGmxEthUsdcLpLeverageExecutor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AssetToGmxEthUsdcLpLeverageExecutor__factory>;
+    getContractFactory(
+      name: "AssetToRethLeverageExecutor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AssetToRethLeverageExecutor__factory>;
+    getContractFactory(
       name: "AssetTotsDaiLeverageExecutor",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AssetTotsDaiLeverageExecutor__factory>;
+    getContractFactory(
+      name: "AssetToWstethLeverageExecutor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AssetToWstethLeverageExecutor__factory>;
     getContractFactory(
       name: "BaseLeverageExecutor",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -216,10 +228,25 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.AssetToGLPLeverageExecutor>;
     getContractAt(
+      name: "AssetToGmxEthUsdcLpLeverageExecutor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AssetToGmxEthUsdcLpLeverageExecutor>;
+    getContractAt(
+      name: "AssetToRethLeverageExecutor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AssetToRethLeverageExecutor>;
+    getContractAt(
       name: "AssetTotsDaiLeverageExecutor",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.AssetTotsDaiLeverageExecutor>;
+    getContractAt(
+      name: "AssetToWstethLeverageExecutor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AssetToWstethLeverageExecutor>;
     getContractAt(
       name: "BaseLeverageExecutor",
       address: string,

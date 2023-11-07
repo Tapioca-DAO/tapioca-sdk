@@ -28,8 +28,14 @@ export type { AssetToEthLeverageExecutor } from "./markets/leverage/AssetToEthLe
 export { AssetToEthLeverageExecutor__factory } from "./factories/markets/leverage/AssetToEthLeverageExecutor__factory";
 export type { AssetToGLPLeverageExecutor } from "./markets/leverage/AssetToGLPLeverageExecutor";
 export { AssetToGLPLeverageExecutor__factory } from "./factories/markets/leverage/AssetToGLPLeverageExecutor__factory";
+export type { AssetToGmxEthUsdcLpLeverageExecutor } from "./markets/leverage/AssetToGmxEthUsdcLpLeverageExecutor";
+export { AssetToGmxEthUsdcLpLeverageExecutor__factory } from "./factories/markets/leverage/AssetToGmxEthUsdcLpLeverageExecutor__factory";
+export type { AssetToRethLeverageExecutor } from "./markets/leverage/AssetToRethLeverageExecutor";
+export { AssetToRethLeverageExecutor__factory } from "./factories/markets/leverage/AssetToRethLeverageExecutor__factory";
 export type { AssetTotsDaiLeverageExecutor } from "./markets/leverage/AssetTotsDaiLeverageExecutor";
 export { AssetTotsDaiLeverageExecutor__factory } from "./factories/markets/leverage/AssetTotsDaiLeverageExecutor__factory";
+export type { AssetToWstethLeverageExecutor } from "./markets/leverage/AssetToWstethLeverageExecutor";
+export { AssetToWstethLeverageExecutor__factory } from "./factories/markets/leverage/AssetToWstethLeverageExecutor__factory";
 export type { BaseLeverageExecutor } from "./markets/leverage/BaseLeverageExecutor";
 export { BaseLeverageExecutor__factory } from "./factories/markets/leverage/BaseLeverageExecutor__factory";
 export type { SimpleLeverageExecutor } from "./markets/leverage/SimpleLeverageExecutor";

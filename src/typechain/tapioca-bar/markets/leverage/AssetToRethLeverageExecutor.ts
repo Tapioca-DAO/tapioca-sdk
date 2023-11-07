@@ -28,7 +28,7 @@ import type {
   PromiseOrValue,
 } from "../../common";
 
-export interface AssetTotsDaiLeverageExecutorInterface extends utils.Interface {
+export interface AssetToRethLeverageExecutorInterface extends utils.Interface {
   functions: {
     "buildSwapDefaultData(address,address,uint256)": FunctionFragment;
     "claimOwnership()": FunctionFragment;
@@ -37,10 +37,13 @@ export interface AssetTotsDaiLeverageExecutorInterface extends utils.Interface {
     "getCollateral(uint256,address,address,uint256,address,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
+    "poolId()": FunctionFragment;
     "setCluster(address)": FunctionFragment;
     "setSwapper(address)": FunctionFragment;
     "swapper()": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
+    "vault()": FunctionFragment;
+    "weth()": FunctionFragment;
     "yieldBox()": FunctionFragment;
   };
 
@@ -60,6 +63,8 @@ export interface AssetTotsDaiLeverageExecutorInterface extends utils.Interface {
       | "owner()"
       | "pendingOwner"
       | "pendingOwner()"
+      | "poolId"
+      | "poolId()"
       | "setCluster"
       | "setCluster(address)"
       | "setSwapper"
@@ -68,6 +73,10 @@ export interface AssetTotsDaiLeverageExecutorInterface extends utils.Interface {
       | "swapper()"
       | "transferOwnership"
       | "transferOwnership(address,bool,bool)"
+      | "vault"
+      | "vault()"
+      | "weth"
+      | "weth()"
       | "yieldBox"
       | "yieldBox()"
   ): FunctionFragment;
@@ -152,6 +161,8 @@ export interface AssetTotsDaiLeverageExecutorInterface extends utils.Interface {
     functionFragment: "pendingOwner()",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "poolId", values?: undefined): string;
+  encodeFunctionData(functionFragment: "poolId()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "setCluster",
     values: [PromiseOrValue<string>]
@@ -186,6 +197,10 @@ export interface AssetTotsDaiLeverageExecutorInterface extends utils.Interface {
       PromiseOrValue<boolean>
     ]
   ): string;
+  encodeFunctionData(functionFragment: "vault", values?: undefined): string;
+  encodeFunctionData(functionFragment: "vault()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "weth", values?: undefined): string;
+  encodeFunctionData(functionFragment: "weth()", values?: undefined): string;
   encodeFunctionData(functionFragment: "yieldBox", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "yieldBox()",
@@ -233,6 +248,8 @@ export interface AssetTotsDaiLeverageExecutorInterface extends utils.Interface {
     functionFragment: "pendingOwner()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "poolId", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "poolId()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setCluster", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setCluster(address)",
@@ -253,6 +270,10 @@ export interface AssetTotsDaiLeverageExecutorInterface extends utils.Interface {
     functionFragment: "transferOwnership(address,bool,bool)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "vault", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "vault()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "weth", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "weth()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "yieldBox", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "yieldBox()", data: BytesLike): Result;
 
@@ -278,14 +299,14 @@ export type OwnershipTransferredEvent = TypedEvent<
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
 
-export interface AssetTotsDaiLeverageExecutor extends BaseContract {
-  contractName: "AssetTotsDaiLeverageExecutor";
+export interface AssetToRethLeverageExecutor extends BaseContract {
+  contractName: "AssetToRethLeverageExecutor";
 
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: AssetTotsDaiLeverageExecutorInterface;
+  interface: AssetToRethLeverageExecutorInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -381,6 +402,10 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<[string]>;
 
+    poolId(overrides?: CallOverrides): Promise<[string]>;
+
+    "poolId()"(overrides?: CallOverrides): Promise<[string]>;
+
     setCluster(
       _cluster: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -418,6 +443,14 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
       renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    vault(overrides?: CallOverrides): Promise<[string]>;
+
+    "vault()"(overrides?: CallOverrides): Promise<[string]>;
+
+    weth(overrides?: CallOverrides): Promise<[string]>;
+
+    "weth()"(overrides?: CallOverrides): Promise<[string]>;
 
     yieldBox(overrides?: CallOverrides): Promise<[string]>;
 
@@ -498,6 +531,10 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
 
   "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
 
+  poolId(overrides?: CallOverrides): Promise<string>;
+
+  "poolId()"(overrides?: CallOverrides): Promise<string>;
+
   setCluster(
     _cluster: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -535,6 +572,14 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
     renounce: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  vault(overrides?: CallOverrides): Promise<string>;
+
+  "vault()"(overrides?: CallOverrides): Promise<string>;
+
+  weth(overrides?: CallOverrides): Promise<string>;
+
+  "weth()"(overrides?: CallOverrides): Promise<string>;
 
   yieldBox(overrides?: CallOverrides): Promise<string>;
 
@@ -611,6 +656,10 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
 
+    poolId(overrides?: CallOverrides): Promise<string>;
+
+    "poolId()"(overrides?: CallOverrides): Promise<string>;
+
     setCluster(
       _cluster: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -648,6 +697,14 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
       renounce: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    vault(overrides?: CallOverrides): Promise<string>;
+
+    "vault()"(overrides?: CallOverrides): Promise<string>;
+
+    weth(overrides?: CallOverrides): Promise<string>;
+
+    "weth()"(overrides?: CallOverrides): Promise<string>;
 
     yieldBox(overrides?: CallOverrides): Promise<string>;
 
@@ -740,6 +797,10 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    poolId(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "poolId()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     setCluster(
       _cluster: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -777,6 +838,14 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
       renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    vault(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "vault()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    weth(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "weth()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     yieldBox(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -858,6 +927,10 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    poolId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "poolId()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     setCluster(
       _cluster: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -895,6 +968,14 @@ export interface AssetTotsDaiLeverageExecutor extends BaseContract {
       renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    vault(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "vault()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    weth(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "weth()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     yieldBox(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

@@ -9,6 +9,7 @@ import type {
   CallOverrides,
   ContractTransaction,
   Overrides,
+  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -366,7 +367,7 @@ export interface AssetToGLPLeverageExecutor extends BaseContract {
       assetAmountIn: PromiseOrValue<BigNumberish>,
       from: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "getCollateral(uint256,address,address,uint256,address,bytes)"(
@@ -376,7 +377,7 @@ export interface AssetToGLPLeverageExecutor extends BaseContract {
       assetAmountIn: PromiseOrValue<BigNumberish>,
       from: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
@@ -487,7 +488,7 @@ export interface AssetToGLPLeverageExecutor extends BaseContract {
     assetAmountIn: PromiseOrValue<BigNumberish>,
     from: PromiseOrValue<string>,
     data: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "getCollateral(uint256,address,address,uint256,address,bytes)"(
@@ -497,7 +498,7 @@ export interface AssetToGLPLeverageExecutor extends BaseContract {
     assetAmountIn: PromiseOrValue<BigNumberish>,
     from: PromiseOrValue<string>,
     data: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
@@ -737,7 +738,7 @@ export interface AssetToGLPLeverageExecutor extends BaseContract {
       assetAmountIn: PromiseOrValue<BigNumberish>,
       from: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "getCollateral(uint256,address,address,uint256,address,bytes)"(
@@ -747,7 +748,7 @@ export interface AssetToGLPLeverageExecutor extends BaseContract {
       assetAmountIn: PromiseOrValue<BigNumberish>,
       from: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
@@ -859,7 +860,7 @@ export interface AssetToGLPLeverageExecutor extends BaseContract {
       assetAmountIn: PromiseOrValue<BigNumberish>,
       from: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "getCollateral(uint256,address,address,uint256,address,bytes)"(
@@ -869,7 +870,7 @@ export interface AssetToGLPLeverageExecutor extends BaseContract {
       assetAmountIn: PromiseOrValue<BigNumberish>,
       from: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;

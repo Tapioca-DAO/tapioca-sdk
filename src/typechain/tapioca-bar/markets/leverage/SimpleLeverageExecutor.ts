@@ -9,6 +9,7 @@ import type {
   CallOverrides,
   ContractTransaction,
   Overrides,
+  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -29,6 +30,7 @@ import type {
 
 export interface SimpleLeverageExecutorInterface extends utils.Interface {
   functions: {
+    "buildSwapDefaultData(address,address,uint256)": FunctionFragment;
     "claimOwnership()": FunctionFragment;
     "cluster()": FunctionFragment;
     "getAsset(uint256,address,address,uint256,address,bytes)": FunctionFragment;
@@ -44,6 +46,8 @@ export interface SimpleLeverageExecutorInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "buildSwapDefaultData"
+      | "buildSwapDefaultData(address,address,uint256)"
       | "claimOwnership"
       | "claimOwnership()"
       | "cluster"
@@ -68,6 +72,22 @@ export interface SimpleLeverageExecutorInterface extends utils.Interface {
       | "yieldBox()"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "buildSwapDefaultData",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "buildSwapDefaultData(address,address,uint256)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
   encodeFunctionData(
     functionFragment: "claimOwnership",
     values?: undefined
@@ -172,6 +192,14 @@ export interface SimpleLeverageExecutorInterface extends utils.Interface {
     values?: undefined
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "buildSwapDefaultData",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "buildSwapDefaultData(address,address,uint256)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "claimOwnership",
     data: BytesLike
@@ -279,6 +307,20 @@ export interface SimpleLeverageExecutor extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    buildSwapDefaultData(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    "buildSwapDefaultData(address,address,uint256)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
     claimOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -318,7 +360,7 @@ export interface SimpleLeverageExecutor extends BaseContract {
       assetAmountIn: PromiseOrValue<BigNumberish>,
       from: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "getCollateral(uint256,address,address,uint256,address,bytes)"(
@@ -328,7 +370,7 @@ export interface SimpleLeverageExecutor extends BaseContract {
       assetAmountIn: PromiseOrValue<BigNumberish>,
       from: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
@@ -382,6 +424,20 @@ export interface SimpleLeverageExecutor extends BaseContract {
     "yieldBox()"(overrides?: CallOverrides): Promise<[string]>;
   };
 
+  buildSwapDefaultData(
+    tokenIn: PromiseOrValue<string>,
+    tokenOut: PromiseOrValue<string>,
+    amountIn: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  "buildSwapDefaultData(address,address,uint256)"(
+    tokenIn: PromiseOrValue<string>,
+    tokenOut: PromiseOrValue<string>,
+    amountIn: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
   claimOwnership(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -421,7 +477,7 @@ export interface SimpleLeverageExecutor extends BaseContract {
     assetAmountIn: PromiseOrValue<BigNumberish>,
     from: PromiseOrValue<string>,
     data: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "getCollateral(uint256,address,address,uint256,address,bytes)"(
@@ -431,7 +487,7 @@ export interface SimpleLeverageExecutor extends BaseContract {
     assetAmountIn: PromiseOrValue<BigNumberish>,
     from: PromiseOrValue<string>,
     data: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
@@ -485,6 +541,20 @@ export interface SimpleLeverageExecutor extends BaseContract {
   "yieldBox()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
+    buildSwapDefaultData(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "buildSwapDefaultData(address,address,uint256)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
     claimOwnership(overrides?: CallOverrides): Promise<void>;
 
     "claimOwnership()"(overrides?: CallOverrides): Promise<void>;
@@ -596,6 +666,20 @@ export interface SimpleLeverageExecutor extends BaseContract {
   };
 
   estimateGas: {
+    buildSwapDefaultData(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "buildSwapDefaultData(address,address,uint256)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     claimOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -635,7 +719,7 @@ export interface SimpleLeverageExecutor extends BaseContract {
       assetAmountIn: PromiseOrValue<BigNumberish>,
       from: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "getCollateral(uint256,address,address,uint256,address,bytes)"(
@@ -645,7 +729,7 @@ export interface SimpleLeverageExecutor extends BaseContract {
       assetAmountIn: PromiseOrValue<BigNumberish>,
       from: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
@@ -700,6 +784,20 @@ export interface SimpleLeverageExecutor extends BaseContract {
   };
 
   populateTransaction: {
+    buildSwapDefaultData(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "buildSwapDefaultData(address,address,uint256)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     claimOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -739,7 +837,7 @@ export interface SimpleLeverageExecutor extends BaseContract {
       assetAmountIn: PromiseOrValue<BigNumberish>,
       from: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "getCollateral(uint256,address,address,uint256,address,bytes)"(
@@ -749,7 +847,7 @@ export interface SimpleLeverageExecutor extends BaseContract {
       assetAmountIn: PromiseOrValue<BigNumberish>,
       from: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
