@@ -25,4 +25,4 @@ export const saveBlockNumber__task = async (
     });
     hre.SDK.db.saveGlobally(dep, 'non-contracts', tag);
     console.log('Done');
-}
+};
