@@ -45,6 +45,38 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BigBang__factory>;
     getContractFactory(
+      name: "AssetToEthLeverageExecutor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AssetToEthLeverageExecutor__factory>;
+    getContractFactory(
+      name: "AssetToGLPLeverageExecutor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AssetToGLPLeverageExecutor__factory>;
+    getContractFactory(
+      name: "AssetToGmxEthUsdcLpLeverageExecutor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AssetToGmxEthUsdcLpLeverageExecutor__factory>;
+    getContractFactory(
+      name: "AssetToRethLeverageExecutor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AssetToRethLeverageExecutor__factory>;
+    getContractFactory(
+      name: "AssetTotsDaiLeverageExecutor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AssetTotsDaiLeverageExecutor__factory>;
+    getContractFactory(
+      name: "AssetToWstethLeverageExecutor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AssetToWstethLeverageExecutor__factory>;
+    getContractFactory(
+      name: "BaseLeverageExecutor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseLeverageExecutor__factory>;
+    getContractFactory(
+      name: "SimpleLeverageExecutor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SimpleLeverageExecutor__factory>;
+    getContractFactory(
       name: "Market",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Market__factory>;
@@ -185,6 +217,46 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.BigBang>;
+    getContractAt(
+      name: "AssetToEthLeverageExecutor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AssetToEthLeverageExecutor>;
+    getContractAt(
+      name: "AssetToGLPLeverageExecutor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AssetToGLPLeverageExecutor>;
+    getContractAt(
+      name: "AssetToGmxEthUsdcLpLeverageExecutor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AssetToGmxEthUsdcLpLeverageExecutor>;
+    getContractAt(
+      name: "AssetToRethLeverageExecutor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AssetToRethLeverageExecutor>;
+    getContractAt(
+      name: "AssetTotsDaiLeverageExecutor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AssetTotsDaiLeverageExecutor>;
+    getContractAt(
+      name: "AssetToWstethLeverageExecutor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AssetToWstethLeverageExecutor>;
+    getContractAt(
+      name: "BaseLeverageExecutor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseLeverageExecutor>;
+    getContractAt(
+      name: "SimpleLeverageExecutor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SimpleLeverageExecutor>;
     getContractAt(
       name: "Market",
       address: string,

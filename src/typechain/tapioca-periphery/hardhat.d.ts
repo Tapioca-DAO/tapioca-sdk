@@ -65,13 +65,17 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AccessControl__factory>;
     getContractFactory(
-      name: "ARBTriCryptoOracle",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ARBTriCryptoOracle__factory>;
-    getContractFactory(
       name: "GLPOracle",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.GLPOracle__factory>;
+    getContractFactory(
+      name: "TapOracle",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TapOracle__factory>;
+    getContractFactory(
+      name: "ARBTriCryptoOracle",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ARBTriCryptoOracle__factory>;
     getContractFactory(
       name: "SGOracle",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -117,9 +121,21 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.OracleMulti__factory>;
     getContractFactory(
+      name: "OracleUniSolo",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.OracleUniSolo__factory>;
+    getContractFactory(
       name: "Seer",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Seer__factory>;
+    getContractFactory(
+      name: "SeerCLSolo",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SeerCLSolo__factory>;
+    getContractFactory(
+      name: "SeerUniSolo",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SeerUniSolo__factory>;
     getContractFactory(
       name: "ChainlinkUtils",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -227,15 +243,20 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.AccessControl>;
     getContractAt(
-      name: "ARBTriCryptoOracle",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ARBTriCryptoOracle>;
-    getContractAt(
       name: "GLPOracle",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.GLPOracle>;
+    getContractAt(
+      name: "TapOracle",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TapOracle>;
+    getContractAt(
+      name: "ARBTriCryptoOracle",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ARBTriCryptoOracle>;
     getContractAt(
       name: "SGOracle",
       address: string,
@@ -292,10 +313,25 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.OracleMulti>;
     getContractAt(
+      name: "OracleUniSolo",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.OracleUniSolo>;
+    getContractAt(
       name: "Seer",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.Seer>;
+    getContractAt(
+      name: "SeerCLSolo",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SeerCLSolo>;
+    getContractAt(
+      name: "SeerUniSolo",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SeerUniSolo>;
     getContractAt(
       name: "ChainlinkUtils",
       address: string,

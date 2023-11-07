@@ -2,6 +2,7 @@ import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { askForTag } from '../../utils';
 
 export const saveBlockNumber__task = async (
+    // eslint-disable-next-line @typescript-eslint/ban-types
     _taskArgs: {},
     hre: HardhatRuntimeEnvironment,
 ) => {
