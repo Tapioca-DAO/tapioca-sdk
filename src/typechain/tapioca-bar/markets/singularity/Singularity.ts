@@ -1583,12 +1583,10 @@ export interface SingularityInterface extends utils.Interface {
     functionFragment: "removeAsset(address,address,uint256)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "repay", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "removeCollateral",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "rescueEth", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "removeCollateral(address,address,uint256)",
     data: BytesLike
