@@ -61,6 +61,7 @@ export declare namespace ICommonData {
     permitAll: PromiseOrValue<boolean>;
     allowFailure: PromiseOrValue<boolean>;
     yieldBoxTypeApproval: PromiseOrValue<boolean>;
+    revokeYieldBox: PromiseOrValue<boolean>;
     actionType: PromiseOrValue<BigNumberish>;
     target: PromiseOrValue<string>;
     permitBorrow: PromiseOrValue<boolean>;
@@ -74,6 +75,7 @@ export declare namespace ICommonData {
   };
 
   export type IApprovalStructOutput = [
+    boolean,
     boolean,
     boolean,
     boolean,
@@ -91,6 +93,7 @@ export declare namespace ICommonData {
     permitAll: boolean;
     allowFailure: boolean;
     yieldBoxTypeApproval: boolean;
+    revokeYieldBox: boolean;
     actionType: number;
     target: string;
     permitBorrow: boolean;
@@ -124,6 +127,7 @@ export interface USDOGenericModuleInterface extends utils.Interface {
     "decreaseAllowance(address,uint256)": FunctionFragment;
     "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)": FunctionFragment;
     "estimateSendFee(uint16,bytes32,uint256,bool,bytes)": FunctionFragment;
+    "executeApproval(address,uint16,bytes,uint64,bytes)": FunctionFragment;
     "failedMessages(uint16,bytes,uint64)": FunctionFragment;
     "forceResumeReceive(uint16,bytes)": FunctionFragment;
     "getConfig(uint16,uint16,address,uint256)": FunctionFragment;
@@ -161,7 +165,8 @@ export interface USDOGenericModuleInterface extends utils.Interface {
     "transfer(address,uint256)": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
-    "triggerSendFrom(uint16,bytes,uint256,(address,address,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
+    "triggerApproveOrRevoke(uint16,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
+    "triggerSendFrom(uint16,bytes,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "trustedRemoteLookup(uint16)": FunctionFragment;
     "useCustomAdapterParams()": FunctionFragment;
     "yieldBox()": FunctionFragment;
@@ -205,6 +210,8 @@ export interface USDOGenericModuleInterface extends utils.Interface {
       | "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)"
       | "estimateSendFee"
       | "estimateSendFee(uint16,bytes32,uint256,bool,bytes)"
+      | "executeApproval"
+      | "executeApproval(address,uint16,bytes,uint64,bytes)"
       | "failedMessages"
       | "failedMessages(uint16,bytes,uint64)"
       | "forceResumeReceive"
@@ -279,8 +286,10 @@ export interface USDOGenericModuleInterface extends utils.Interface {
       | "transferFrom(address,address,uint256)"
       | "transferOwnership"
       | "transferOwnership(address)"
+      | "triggerApproveOrRevoke"
+      | "triggerApproveOrRevoke(uint16,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "triggerSendFrom"
-      | "triggerSendFrom(uint16,bytes,uint256,(address,address,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
+      | "triggerSendFrom(uint16,bytes,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "trustedRemoteLookup"
       | "trustedRemoteLookup(uint16)"
       | "useCustomAdapterParams"
@@ -469,6 +478,26 @@ export interface USDOGenericModuleInterface extends utils.Interface {
       PromiseOrValue<BytesLike>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<boolean>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "executeApproval",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "executeApproval(address,uint16,bytes,uint64,bytes)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
@@ -850,6 +879,22 @@ export interface USDOGenericModuleInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "triggerApproveOrRevoke",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      ISendFrom.LzCallParamsStruct,
+      ICommonData.IApprovalStruct[]
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "triggerApproveOrRevoke(uint16,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      ISendFrom.LzCallParamsStruct,
+      ICommonData.IApprovalStruct[]
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "triggerSendFrom",
     values: [
       PromiseOrValue<BigNumberish>,
@@ -860,7 +905,7 @@ export interface USDOGenericModuleInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "triggerSendFrom(uint16,bytes,uint256,(address,address,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "triggerSendFrom(uint16,bytes,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
@@ -1006,6 +1051,14 @@ export interface USDOGenericModuleInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "estimateSendFee(uint16,bytes32,uint256,bool,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "executeApproval",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "executeApproval(address,uint16,bytes,uint64,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1251,11 +1304,19 @@ export interface USDOGenericModuleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "triggerApproveOrRevoke",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "triggerApproveOrRevoke(uint16,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "triggerSendFrom",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "triggerSendFrom(uint16,bytes,uint256,(address,address,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "triggerSendFrom(uint16,bytes,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1784,6 +1845,24 @@ export interface USDOGenericModule extends BaseContract {
       [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
     >;
 
+    executeApproval(
+      arg0: PromiseOrValue<string>,
+      lzSrcChainId: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "executeApproval(address,uint16,bytes,uint64,bytes)"(
+      arg0: PromiseOrValue<string>,
+      lzSrcChainId: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     failedMessages(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
@@ -2184,6 +2263,20 @@ export interface USDOGenericModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    triggerApproveOrRevoke(
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lzCallParams: ISendFrom.LzCallParamsStruct,
+      approvals: ICommonData.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "triggerApproveOrRevoke(uint16,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lzCallParams: ISendFrom.LzCallParamsStruct,
+      approvals: ICommonData.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     triggerSendFrom(
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
@@ -2193,7 +2286,7 @@ export interface USDOGenericModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "triggerSendFrom(uint16,bytes,uint256,(address,address,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "triggerSendFrom(uint16,bytes,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
@@ -2408,6 +2501,24 @@ export interface USDOGenericModule extends BaseContract {
   ): Promise<
     [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
   >;
+
+  executeApproval(
+    arg0: PromiseOrValue<string>,
+    lzSrcChainId: PromiseOrValue<BigNumberish>,
+    arg2: PromiseOrValue<BytesLike>,
+    arg3: PromiseOrValue<BigNumberish>,
+    _payload: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "executeApproval(address,uint16,bytes,uint64,bytes)"(
+    arg0: PromiseOrValue<string>,
+    lzSrcChainId: PromiseOrValue<BigNumberish>,
+    arg2: PromiseOrValue<BytesLike>,
+    arg3: PromiseOrValue<BigNumberish>,
+    _payload: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   failedMessages(
     arg0: PromiseOrValue<BigNumberish>,
@@ -2809,6 +2920,20 @@ export interface USDOGenericModule extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  triggerApproveOrRevoke(
+    lzDstChainId: PromiseOrValue<BigNumberish>,
+    lzCallParams: ISendFrom.LzCallParamsStruct,
+    approvals: ICommonData.IApprovalStruct[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "triggerApproveOrRevoke(uint16,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    lzDstChainId: PromiseOrValue<BigNumberish>,
+    lzCallParams: ISendFrom.LzCallParamsStruct,
+    approvals: ICommonData.IApprovalStruct[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   triggerSendFrom(
     lzDstChainId: PromiseOrValue<BigNumberish>,
     airdropAdapterParams: PromiseOrValue<BytesLike>,
@@ -2818,7 +2943,7 @@ export interface USDOGenericModule extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "triggerSendFrom(uint16,bytes,uint256,(address,address,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+  "triggerSendFrom(uint16,bytes,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
     lzDstChainId: PromiseOrValue<BigNumberish>,
     airdropAdapterParams: PromiseOrValue<BytesLike>,
     amount: PromiseOrValue<BigNumberish>,
@@ -3035,6 +3160,24 @@ export interface USDOGenericModule extends BaseContract {
     ): Promise<
       [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
     >;
+
+    executeApproval(
+      arg0: PromiseOrValue<string>,
+      lzSrcChainId: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "executeApproval(address,uint16,bytes,uint64,bytes)"(
+      arg0: PromiseOrValue<string>,
+      lzSrcChainId: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     failedMessages(
       arg0: PromiseOrValue<BigNumberish>,
@@ -3432,6 +3575,20 @@ export interface USDOGenericModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    triggerApproveOrRevoke(
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lzCallParams: ISendFrom.LzCallParamsStruct,
+      approvals: ICommonData.IApprovalStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "triggerApproveOrRevoke(uint16,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lzCallParams: ISendFrom.LzCallParamsStruct,
+      approvals: ICommonData.IApprovalStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     triggerSendFrom(
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
@@ -3441,7 +3598,7 @@ export interface USDOGenericModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "triggerSendFrom(uint16,bytes,uint256,(address,address,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "triggerSendFrom(uint16,bytes,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
@@ -3816,6 +3973,24 @@ export interface USDOGenericModule extends BaseContract {
       _useZro: PromiseOrValue<boolean>,
       _adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    executeApproval(
+      arg0: PromiseOrValue<string>,
+      lzSrcChainId: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "executeApproval(address,uint16,bytes,uint64,bytes)"(
+      arg0: PromiseOrValue<string>,
+      lzSrcChainId: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     failedMessages(
@@ -4218,6 +4393,20 @@ export interface USDOGenericModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    triggerApproveOrRevoke(
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lzCallParams: ISendFrom.LzCallParamsStruct,
+      approvals: ICommonData.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "triggerApproveOrRevoke(uint16,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lzCallParams: ISendFrom.LzCallParamsStruct,
+      approvals: ICommonData.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     triggerSendFrom(
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
@@ -4227,7 +4416,7 @@ export interface USDOGenericModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "triggerSendFrom(uint16,bytes,uint256,(address,address,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "triggerSendFrom(uint16,bytes,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
@@ -4442,6 +4631,24 @@ export interface USDOGenericModule extends BaseContract {
       _useZro: PromiseOrValue<boolean>,
       _adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    executeApproval(
+      arg0: PromiseOrValue<string>,
+      lzSrcChainId: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "executeApproval(address,uint16,bytes,uint64,bytes)"(
+      arg0: PromiseOrValue<string>,
+      lzSrcChainId: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BigNumberish>,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     failedMessages(
@@ -4846,6 +5053,20 @@ export interface USDOGenericModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    triggerApproveOrRevoke(
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lzCallParams: ISendFrom.LzCallParamsStruct,
+      approvals: ICommonData.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "triggerApproveOrRevoke(uint16,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      lzCallParams: ISendFrom.LzCallParamsStruct,
+      approvals: ICommonData.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     triggerSendFrom(
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
@@ -4855,7 +5076,7 @@ export interface USDOGenericModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "triggerSendFrom(uint16,bytes,uint256,(address,address,bytes),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "triggerSendFrom(uint16,bytes,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       lzDstChainId: PromiseOrValue<BigNumberish>,
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
