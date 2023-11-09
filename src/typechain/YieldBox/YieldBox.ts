@@ -57,6 +57,8 @@ export interface YieldBoxInterface extends utils.Interface {
     "permitAll(address,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "permitToken(address,address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "registerAsset(uint8,address,address,uint256)": FunctionFragment;
+    "revoke(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "revokeAll(address,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,uint256,bytes)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
@@ -237,6 +239,22 @@ export interface YieldBoxInterface extends utils.Interface {
     values: [BigNumberish, string, string, BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "revoke",
+    values: [
+      string,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BytesLike,
+      BytesLike
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokeAll",
+    values: [string, string, BigNumberish, BigNumberish, BytesLike, BytesLike]
+  ): string;
+  encodeFunctionData(
     functionFragment: "safeBatchTransferFrom",
     values: [string, string, BigNumberish[], BigNumberish[], BytesLike]
   ): string;
@@ -388,6 +406,8 @@ export interface YieldBoxInterface extends utils.Interface {
     functionFragment: "registerAsset",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "revoke", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "revokeAll", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "safeBatchTransferFrom",
     data: BytesLike
@@ -873,6 +893,27 @@ export interface YieldBox extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    revoke(
+      owner: string,
+      spender: string,
+      assetId: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    revokeAll(
+      owner: string,
+      spender: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     safeBatchTransferFrom(
       from: string,
       to: string,
@@ -1215,6 +1256,27 @@ export interface YieldBox extends BaseContract {
     contractAddress: string,
     strategy: string,
     tokenId: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  revoke(
+    owner: string,
+    spender: string,
+    assetId: BigNumberish,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  revokeAll(
+    owner: string,
+    spender: string,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -1575,6 +1637,27 @@ export interface YieldBox extends BaseContract {
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    revoke(
+      owner: string,
+      spender: string,
+      assetId: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    revokeAll(
+      owner: string,
+      spender: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     safeBatchTransferFrom(
       from: string,
@@ -2058,6 +2141,27 @@ export interface YieldBox extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    revoke(
+      owner: string,
+      spender: string,
+      assetId: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    revokeAll(
+      owner: string,
+      spender: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     safeBatchTransferFrom(
       from: string,
       to: string,
@@ -2403,6 +2507,27 @@ export interface YieldBox extends BaseContract {
       contractAddress: string,
       strategy: string,
       tokenId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    revoke(
+      owner: string,
+      spender: string,
+      assetId: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    revokeAll(
+      owner: string,
+      spender: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

@@ -23,6 +23,7 @@ export interface ERC1155Interface extends utils.Interface {
     "balanceOf(address,uint256)": FunctionFragment;
     "balanceOfBatch(address[],uint256[])": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
+    "isApprovedForAsset(address,address,uint256)": FunctionFragment;
     "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,uint256,bytes)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
@@ -42,6 +43,10 @@ export interface ERC1155Interface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
     values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isApprovedForAsset",
+    values: [string, string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "safeBatchTransferFrom",
@@ -72,6 +77,10 @@ export interface ERC1155Interface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isApprovedForAsset",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -195,6 +204,13 @@ export interface ERC1155 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    isApprovedForAsset(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     safeBatchTransferFrom(
       from: string,
       to: string,
@@ -250,6 +266,13 @@ export interface ERC1155 extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  isApprovedForAsset(
+    arg0: string,
+    arg1: string,
+    arg2: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
   safeBatchTransferFrom(
     from: string,
     to: string,
@@ -302,6 +325,13 @@ export interface ERC1155 extends BaseContract {
     isApprovedForAll(
       arg0: string,
       arg1: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    isApprovedForAsset(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -410,6 +440,13 @@ export interface ERC1155 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    isApprovedForAsset(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     safeBatchTransferFrom(
       from: string,
       to: string,
@@ -463,6 +500,13 @@ export interface ERC1155 extends BaseContract {
     isApprovedForAll(
       arg0: string,
       arg1: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    isApprovedForAsset(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

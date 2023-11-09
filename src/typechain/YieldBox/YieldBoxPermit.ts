@@ -24,6 +24,8 @@ export interface YieldBoxPermitInterface extends utils.Interface {
     "nonces(address)": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "permitAll(address,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "revoke(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "revokeAll(address,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -47,6 +49,22 @@ export interface YieldBoxPermitInterface extends utils.Interface {
     functionFragment: "permitAll",
     values: [string, string, BigNumberish, BigNumberish, BytesLike, BytesLike]
   ): string;
+  encodeFunctionData(
+    functionFragment: "revoke",
+    values: [
+      string,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BytesLike,
+      BytesLike
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokeAll",
+    values: [string, string, BigNumberish, BigNumberish, BytesLike, BytesLike]
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "DOMAIN_SEPARATOR",
@@ -55,6 +73,8 @@ export interface YieldBoxPermitInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "permit", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "permitAll", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "revoke", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "revokeAll", data: BytesLike): Result;
 
   events: {};
 }
@@ -111,6 +131,27 @@ export interface YieldBoxPermit extends BaseContract {
       s: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    revoke(
+      owner: string,
+      spender: string,
+      assetId: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    revokeAll(
+      owner: string,
+      spender: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
   };
 
   DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
@@ -138,6 +179,27 @@ export interface YieldBoxPermit extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  revoke(
+    owner: string,
+    spender: string,
+    assetId: BigNumberish,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  revokeAll(
+    owner: string,
+    spender: string,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
 
@@ -155,6 +217,27 @@ export interface YieldBoxPermit extends BaseContract {
     ): Promise<void>;
 
     permitAll(
+      owner: string,
+      spender: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    revoke(
+      owner: string,
+      spender: string,
+      assetId: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    revokeAll(
       owner: string,
       spender: string,
       deadline: BigNumberish,
@@ -192,6 +275,27 @@ export interface YieldBoxPermit extends BaseContract {
       s: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    revoke(
+      owner: string,
+      spender: string,
+      assetId: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    revokeAll(
+      owner: string,
+      spender: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -214,6 +318,27 @@ export interface YieldBoxPermit extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     permitAll(
+      owner: string,
+      spender: string,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    revoke(
+      owner: string,
+      spender: string,
+      assetId: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    revokeAll(
       owner: string,
       spender: string,
       deadline: BigNumberish,
