@@ -107,10 +107,7 @@ export declare namespace ICommonData {
     permitAll: PromiseOrValue<boolean>;
     allowFailure: PromiseOrValue<boolean>;
     yieldBoxTypeApproval: PromiseOrValue<boolean>;
-<<<<<<< HEAD
     revokeYieldBox: PromiseOrValue<boolean>;
-=======
->>>>>>> 8b8a53bd31b2309521290411363a0dd1b30c6bde
     actionType: PromiseOrValue<BigNumberish>;
     target: PromiseOrValue<string>;
     permitBorrow: PromiseOrValue<boolean>;
@@ -127,10 +124,7 @@ export declare namespace ICommonData {
     boolean,
     boolean,
     boolean,
-<<<<<<< HEAD
     boolean,
-=======
->>>>>>> 8b8a53bd31b2309521290411363a0dd1b30c6bde
     number,
     string,
     boolean,
@@ -145,10 +139,7 @@ export declare namespace ICommonData {
     permitAll: boolean;
     allowFailure: boolean;
     yieldBoxTypeApproval: boolean;
-<<<<<<< HEAD
     revokeYieldBox: boolean;
-=======
->>>>>>> 8b8a53bd31b2309521290411363a0dd1b30c6bde
     actionType: number;
     target: string;
     permitBorrow: boolean;
@@ -167,6 +158,7 @@ export declare namespace ICommonData {
     withdrawOnOtherChain: PromiseOrValue<boolean>;
     withdrawLzChainId: PromiseOrValue<BigNumberish>;
     withdrawAdapterParams: PromiseOrValue<BytesLike>;
+    unwrap: PromiseOrValue<boolean>;
   };
 
   export type IWithdrawParamsStructOutput = [
@@ -174,13 +166,15 @@ export declare namespace ICommonData {
     BigNumber,
     boolean,
     number,
-    string
+    string,
+    boolean
   ] & {
     withdraw: boolean;
     withdrawLzFeeAmount: BigNumber;
     withdrawOnOtherChain: boolean;
     withdrawLzChainId: number;
     withdrawAdapterParams: string;
+    unwrap: boolean;
   };
 }
 
@@ -225,11 +219,7 @@ export interface USDOMarketDestinationModuleInterface extends utils.Interface {
     "increaseAllowance(address,uint256)": FunctionFragment;
     "isTrustedRemote(uint16,bytes)": FunctionFragment;
     "lend(address,uint16,bytes,uint64,bytes)": FunctionFragment;
-<<<<<<< HEAD
-    "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes),uint256)": FunctionFragment;
-=======
-    "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes),uint256)": FunctionFragment;
->>>>>>> 8b8a53bd31b2309521290411363a0dd1b30c6bde
+    "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool),uint256)": FunctionFragment;
     "lzEndpoint()": FunctionFragment;
     "lzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
     "minDstGasLookup(uint16,uint16)": FunctionFragment;
@@ -319,11 +309,7 @@ export interface USDOMarketDestinationModuleInterface extends utils.Interface {
       | "lend"
       | "lend(address,uint16,bytes,uint64,bytes)"
       | "lendInternal"
-<<<<<<< HEAD
-      | "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes),uint256)"
-=======
-      | "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes),uint256)"
->>>>>>> 8b8a53bd31b2309521290411363a0dd1b30c6bde
+      | "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool),uint256)"
       | "lzEndpoint"
       | "lzEndpoint()"
       | "lzReceive"
@@ -674,11 +660,7 @@ export interface USDOMarketDestinationModuleInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-<<<<<<< HEAD
-    functionFragment: "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes),uint256)",
-=======
-    functionFragment: "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes),uint256)",
->>>>>>> 8b8a53bd31b2309521290411363a0dd1b30c6bde
+    functionFragment: "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool),uint256)",
     values: [
       PromiseOrValue<string>,
       IUSDOBase.ILendOrRepayParamsStruct,
@@ -1192,11 +1174,7 @@ export interface USDOMarketDestinationModuleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-<<<<<<< HEAD
-    functionFragment: "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes),uint256)",
-=======
-    functionFragment: "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes),uint256)",
->>>>>>> 8b8a53bd31b2309521290411363a0dd1b30c6bde
+    functionFragment: "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool),uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "lzEndpoint", data: BytesLike): Result;
@@ -2022,11 +2000,7 @@ export interface USDOMarketDestinationModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-<<<<<<< HEAD
-    "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes),uint256)"(
-=======
-    "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes),uint256)"(
->>>>>>> 8b8a53bd31b2309521290411363a0dd1b30c6bde
+    "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool),uint256)"(
       to: PromiseOrValue<string>,
       lendParams: IUSDOBase.ILendOrRepayParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
@@ -2669,11 +2643,7 @@ export interface USDOMarketDestinationModule extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-<<<<<<< HEAD
-  "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes),uint256)"(
-=======
-  "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes),uint256)"(
->>>>>>> 8b8a53bd31b2309521290411363a0dd1b30c6bde
+  "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool),uint256)"(
     to: PromiseOrValue<string>,
     lendParams: IUSDOBase.ILendOrRepayParamsStruct,
     approvals: ICommonData.IApprovalStruct[],
@@ -3318,11 +3288,7 @@ export interface USDOMarketDestinationModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-<<<<<<< HEAD
-    "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes),uint256)"(
-=======
-    "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes),uint256)"(
->>>>>>> 8b8a53bd31b2309521290411363a0dd1b30c6bde
+    "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool),uint256)"(
       to: PromiseOrValue<string>,
       lendParams: IUSDOBase.ILendOrRepayParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
@@ -4122,11 +4088,7 @@ export interface USDOMarketDestinationModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-<<<<<<< HEAD
-    "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes),uint256)"(
-=======
-    "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes),uint256)"(
->>>>>>> 8b8a53bd31b2309521290411363a0dd1b30c6bde
+    "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool),uint256)"(
       to: PromiseOrValue<string>,
       lendParams: IUSDOBase.ILendOrRepayParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
@@ -4770,11 +4732,7 @@ export interface USDOMarketDestinationModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-<<<<<<< HEAD
-    "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes),uint256)"(
-=======
-    "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes),uint256)"(
->>>>>>> 8b8a53bd31b2309521290411363a0dd1b30c6bde
+    "lendInternal(address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool),uint256)"(
       to: PromiseOrValue<string>,
       lendParams: IUSDOBase.ILendOrRepayParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
