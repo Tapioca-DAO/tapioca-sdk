@@ -148,6 +148,7 @@ export declare namespace ICommonData {
     withdrawOnOtherChain: PromiseOrValue<boolean>;
     withdrawLzChainId: PromiseOrValue<BigNumberish>;
     withdrawAdapterParams: PromiseOrValue<BytesLike>;
+    unwrap: PromiseOrValue<boolean>;
   };
 
   export type IWithdrawParamsStructOutput = [
@@ -155,13 +156,15 @@ export declare namespace ICommonData {
     BigNumber,
     boolean,
     number,
-    string
+    string,
+    boolean
   ] & {
     withdraw: boolean;
     withdrawLzFeeAmount: BigNumber;
     withdrawOnOtherChain: boolean;
     withdrawLzChainId: number;
     withdrawAdapterParams: string;
+    unwrap: boolean;
   };
 
   export type ISendOptionsStruct = {
@@ -278,20 +281,6 @@ export declare namespace IUSDOBase {
   ] & { swapper: string; magnetar: string; tOft: string; srcMarket: string };
 }
 
-export declare namespace ISendFrom {
-  export type LzCallParamsStruct = {
-    refundAddress: PromiseOrValue<string>;
-    zroPaymentAddress: PromiseOrValue<string>;
-    adapterParams: PromiseOrValue<BytesLike>;
-  };
-
-  export type LzCallParamsStructOutput = [string, string, string] & {
-    refundAddress: string;
-    zroPaymentAddress: string;
-    adapterParams: string;
-  };
-}
-
 export interface TapiocaOFTInterface extends utils.Interface {
   functions: {
     "DEFAULT_PAYLOAD_SIZE_LIMIT()": FunctionFragment;
@@ -330,7 +319,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
     "payloadSizeLimitLookup(uint16)": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "precrime()": FunctionFragment;
-    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)": FunctionFragment;
+    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "rescueEth(uint256,address)": FunctionFragment;
     "retrieveFromStrategy(address,uint256,uint256,uint16,address,bytes)": FunctionFragment;
@@ -339,7 +328,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
     "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
     "sendToStrategy(address,address,uint256,uint256,uint16,(uint256,address))": FunctionFragment;
-    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "setCluster(address)": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
     "setMaxSlippage(uint256)": FunctionFragment;
@@ -362,6 +351,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
     "transferOwnership(address)": FunctionFragment;
     "triggerApproveOrRevoke(uint16,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
+    "triggerSendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "trustedRemoteLookup(uint16)": FunctionFragment;
     "unwrap(address,uint256)": FunctionFragment;
     "useCustomAdapterParams()": FunctionFragment;
@@ -445,7 +435,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
       | "precrime"
       | "precrime()"
       | "removeCollateral"
-      | "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"
+      | "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"
       | "renounceOwnership"
       | "renounceOwnership()"
       | "rescueEth"
@@ -463,7 +453,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
       | "sendToStrategy"
       | "sendToStrategy(address,address,uint256,uint256,uint16,(uint256,address))"
       | "sendToYBAndBorrow"
-      | "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
+      | "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "setCluster"
       | "setCluster(address)"
       | "setConfig"
@@ -508,6 +498,8 @@ export interface TapiocaOFTInterface extends utils.Interface {
       | "triggerApproveOrRevoke(uint16,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "triggerSendFrom"
       | "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
+      | "triggerSendFromWithParams"
+      | "triggerSendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "trustedRemoteLookup"
       | "trustedRemoteLookup(uint16)"
       | "unwrap"
@@ -908,7 +900,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
+    functionFragment: "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -1076,7 +1068,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -1280,7 +1272,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
     functionFragment: "triggerApproveOrRevoke",
     values: [
       PromiseOrValue<BigNumberish>,
-      ISendFrom.LzCallParamsStruct,
+      ICommonOFT.LzCallParamsStruct,
       ICommonData.IApprovalStruct[]
     ]
   ): string;
@@ -1288,7 +1280,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
     functionFragment: "triggerApproveOrRevoke(uint16,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     values: [
       PromiseOrValue<BigNumberish>,
-      ISendFrom.LzCallParamsStruct,
+      ICommonOFT.LzCallParamsStruct,
       ICommonData.IApprovalStruct[]
     ]
   ): string;
@@ -1299,7 +1291,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
       PromiseOrValue<BytesLike>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
-      ISendFrom.LzCallParamsStruct,
+      ICommonOFT.LzCallParamsStruct,
       ICommonData.IApprovalStruct[]
     ]
   ): string;
@@ -1310,7 +1302,31 @@ export interface TapiocaOFTInterface extends utils.Interface {
       PromiseOrValue<BytesLike>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
-      ISendFrom.LzCallParamsStruct,
+      ICommonOFT.LzCallParamsStruct,
+      ICommonData.IApprovalStruct[]
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "triggerSendFromWithParams",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      ICommonOFT.LzCallParamsStruct,
+      PromiseOrValue<boolean>,
+      ICommonData.IApprovalStruct[]
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "triggerSendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      ICommonOFT.LzCallParamsStruct,
+      PromiseOrValue<boolean>,
       ICommonData.IApprovalStruct[]
     ]
   ): string;
@@ -1589,7 +1605,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
+    functionFragment: "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1655,7 +1671,7 @@ export interface TapiocaOFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "setCluster", data: BytesLike): Result;
@@ -1808,6 +1824,14 @@ export interface TapiocaOFTInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "triggerSendFromWithParams",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "triggerSendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2498,7 +2522,7 @@ export interface TapiocaOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -2656,7 +2680,7 @@ export interface TapiocaOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -2878,14 +2902,14 @@ export interface TapiocaOFT extends BaseContract {
 
     triggerApproveOrRevoke(
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      lzCallParams: ISendFrom.LzCallParamsStruct,
+      lzCallParams: ICommonOFT.LzCallParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "triggerApproveOrRevoke(uint16,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      lzCallParams: ISendFrom.LzCallParamsStruct,
+      lzCallParams: ICommonOFT.LzCallParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2895,7 +2919,7 @@ export interface TapiocaOFT extends BaseContract {
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       zroPaymentAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
-      sendFromData: ISendFrom.LzCallParamsStruct,
+      sendFromData: ICommonOFT.LzCallParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2905,7 +2929,29 @@ export interface TapiocaOFT extends BaseContract {
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       zroPaymentAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
-      sendFromData: ISendFrom.LzCallParamsStruct,
+      sendFromData: ICommonOFT.LzCallParamsStruct,
+      approvals: ICommonData.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    triggerSendFromWithParams(
+      from: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      callParams: ICommonOFT.LzCallParamsStruct,
+      unwrap: PromiseOrValue<boolean>,
+      approvals: ICommonData.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "triggerSendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      callParams: ICommonOFT.LzCallParamsStruct,
+      unwrap: PromiseOrValue<boolean>,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -3343,7 +3389,7 @@ export interface TapiocaOFT extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+  "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3501,7 +3547,7 @@ export interface TapiocaOFT extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+  "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3723,14 +3769,14 @@ export interface TapiocaOFT extends BaseContract {
 
   triggerApproveOrRevoke(
     lzDstChainId: PromiseOrValue<BigNumberish>,
-    lzCallParams: ISendFrom.LzCallParamsStruct,
+    lzCallParams: ICommonOFT.LzCallParamsStruct,
     approvals: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "triggerApproveOrRevoke(uint16,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
     lzDstChainId: PromiseOrValue<BigNumberish>,
-    lzCallParams: ISendFrom.LzCallParamsStruct,
+    lzCallParams: ICommonOFT.LzCallParamsStruct,
     approvals: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -3740,7 +3786,7 @@ export interface TapiocaOFT extends BaseContract {
     airdropAdapterParams: PromiseOrValue<BytesLike>,
     zroPaymentAddress: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
-    sendFromData: ISendFrom.LzCallParamsStruct,
+    sendFromData: ICommonOFT.LzCallParamsStruct,
     approvals: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -3750,7 +3796,29 @@ export interface TapiocaOFT extends BaseContract {
     airdropAdapterParams: PromiseOrValue<BytesLike>,
     zroPaymentAddress: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
-    sendFromData: ISendFrom.LzCallParamsStruct,
+    sendFromData: ICommonOFT.LzCallParamsStruct,
+    approvals: ICommonData.IApprovalStruct[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  triggerSendFromWithParams(
+    from: PromiseOrValue<string>,
+    lzDstChainId: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<BytesLike>,
+    amount: PromiseOrValue<BigNumberish>,
+    callParams: ICommonOFT.LzCallParamsStruct,
+    unwrap: PromiseOrValue<boolean>,
+    approvals: ICommonData.IApprovalStruct[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "triggerSendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    from: PromiseOrValue<string>,
+    lzDstChainId: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<BytesLike>,
+    amount: PromiseOrValue<BigNumberish>,
+    callParams: ICommonOFT.LzCallParamsStruct,
+    unwrap: PromiseOrValue<boolean>,
     approvals: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -4190,7 +4258,7 @@ export interface TapiocaOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -4344,7 +4412,7 @@ export interface TapiocaOFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -4566,14 +4634,14 @@ export interface TapiocaOFT extends BaseContract {
 
     triggerApproveOrRevoke(
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      lzCallParams: ISendFrom.LzCallParamsStruct,
+      lzCallParams: ICommonOFT.LzCallParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     "triggerApproveOrRevoke(uint16,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      lzCallParams: ISendFrom.LzCallParamsStruct,
+      lzCallParams: ICommonOFT.LzCallParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
@@ -4583,7 +4651,7 @@ export interface TapiocaOFT extends BaseContract {
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       zroPaymentAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
-      sendFromData: ISendFrom.LzCallParamsStruct,
+      sendFromData: ICommonOFT.LzCallParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
@@ -4593,7 +4661,29 @@ export interface TapiocaOFT extends BaseContract {
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       zroPaymentAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
-      sendFromData: ISendFrom.LzCallParamsStruct,
+      sendFromData: ICommonOFT.LzCallParamsStruct,
+      approvals: ICommonData.IApprovalStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    triggerSendFromWithParams(
+      from: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      callParams: ICommonOFT.LzCallParamsStruct,
+      unwrap: PromiseOrValue<boolean>,
+      approvals: ICommonData.IApprovalStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "triggerSendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      callParams: ICommonOFT.LzCallParamsStruct,
+      unwrap: PromiseOrValue<boolean>,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
@@ -5168,7 +5258,7 @@ export interface TapiocaOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -5326,7 +5416,7 @@ export interface TapiocaOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -5548,14 +5638,14 @@ export interface TapiocaOFT extends BaseContract {
 
     triggerApproveOrRevoke(
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      lzCallParams: ISendFrom.LzCallParamsStruct,
+      lzCallParams: ICommonOFT.LzCallParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "triggerApproveOrRevoke(uint16,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      lzCallParams: ISendFrom.LzCallParamsStruct,
+      lzCallParams: ICommonOFT.LzCallParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -5565,7 +5655,7 @@ export interface TapiocaOFT extends BaseContract {
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       zroPaymentAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
-      sendFromData: ISendFrom.LzCallParamsStruct,
+      sendFromData: ICommonOFT.LzCallParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -5575,7 +5665,29 @@ export interface TapiocaOFT extends BaseContract {
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       zroPaymentAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
-      sendFromData: ISendFrom.LzCallParamsStruct,
+      sendFromData: ICommonOFT.LzCallParamsStruct,
+      approvals: ICommonData.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    triggerSendFromWithParams(
+      from: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      callParams: ICommonOFT.LzCallParamsStruct,
+      unwrap: PromiseOrValue<boolean>,
+      approvals: ICommonData.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "triggerSendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      callParams: ICommonOFT.LzCallParamsStruct,
+      unwrap: PromiseOrValue<boolean>,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -6018,7 +6130,7 @@ export interface TapiocaOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -6176,7 +6288,7 @@ export interface TapiocaOFT extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -6400,14 +6512,14 @@ export interface TapiocaOFT extends BaseContract {
 
     triggerApproveOrRevoke(
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      lzCallParams: ISendFrom.LzCallParamsStruct,
+      lzCallParams: ICommonOFT.LzCallParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "triggerApproveOrRevoke(uint16,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      lzCallParams: ISendFrom.LzCallParamsStruct,
+      lzCallParams: ICommonOFT.LzCallParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -6417,7 +6529,7 @@ export interface TapiocaOFT extends BaseContract {
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       zroPaymentAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
-      sendFromData: ISendFrom.LzCallParamsStruct,
+      sendFromData: ICommonOFT.LzCallParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -6427,7 +6539,29 @@ export interface TapiocaOFT extends BaseContract {
       airdropAdapterParams: PromiseOrValue<BytesLike>,
       zroPaymentAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
-      sendFromData: ISendFrom.LzCallParamsStruct,
+      sendFromData: ICommonOFT.LzCallParamsStruct,
+      approvals: ICommonData.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    triggerSendFromWithParams(
+      from: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      callParams: ICommonOFT.LzCallParamsStruct,
+      unwrap: PromiseOrValue<boolean>,
+      approvals: ICommonData.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "triggerSendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      callParams: ICommonOFT.LzCallParamsStruct,
+      unwrap: PromiseOrValue<boolean>,
       approvals: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
