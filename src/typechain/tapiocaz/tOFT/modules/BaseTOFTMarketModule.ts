@@ -195,12 +195,12 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
     "owner()": FunctionFragment;
     "payloadSizeLimitLookup(uint16)": FunctionFragment;
     "precrime()": FunctionFragment;
-    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)": FunctionFragment;
+    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
-    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
     "setMaxSlippage(uint256)": FunctionFragment;
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
@@ -291,7 +291,7 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
       | "precrime"
       | "precrime()"
       | "removeCollateral"
-      | "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"
+      | "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"
       | "renounceOwnership"
       | "renounceOwnership()"
       | "retryMessage"
@@ -301,7 +301,7 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
       | "sendFrom"
       | "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"
       | "sendToYBAndBorrow"
-      | "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
+      | "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "setConfig"
       | "setConfig(uint16,uint16,uint256,bytes)"
       | "setMaxSlippage"
@@ -668,11 +668,12 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
       ICommonData.IWithdrawParamsStruct,
       ITapiocaOFT.IRemoveParamsStruct,
       ICommonData.IApprovalStruct[],
+      ICommonData.IApprovalStruct[],
       PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
+    functionFragment: "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -680,6 +681,7 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
       PromiseOrValue<string>,
       ICommonData.IWithdrawParamsStruct,
       ITapiocaOFT.IRemoveParamsStruct,
+      ICommonData.IApprovalStruct[],
       ICommonData.IApprovalStruct[],
       PromiseOrValue<BytesLike>
     ]
@@ -764,11 +766,12 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
       ITapiocaOFT.IBorrowParamsStruct,
       ICommonData.IWithdrawParamsStruct,
       ICommonData.ISendOptionsStruct,
+      ICommonData.IApprovalStruct[],
       ICommonData.IApprovalStruct[]
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -777,6 +780,7 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
       ITapiocaOFT.IBorrowParamsStruct,
       ICommonData.IWithdrawParamsStruct,
       ICommonData.ISendOptionsStruct,
+      ICommonData.IApprovalStruct[],
       ICommonData.IApprovalStruct[]
     ]
   ): string;
@@ -1161,7 +1165,7 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
+    functionFragment: "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1198,7 +1202,7 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "setConfig", data: BytesLike): Result;
@@ -1945,11 +1949,12 @@ export interface BaseTOFTMarketModule extends BaseContract {
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -1957,6 +1962,7 @@ export interface BaseTOFTMarketModule extends BaseContract {
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2034,10 +2040,11 @@ export interface BaseTOFTMarketModule extends BaseContract {
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       options: ICommonData.ISendOptionsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -2046,6 +2053,7 @@ export interface BaseTOFTMarketModule extends BaseContract {
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       options: ICommonData.ISendOptionsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2572,11 +2580,12 @@ export interface BaseTOFTMarketModule extends BaseContract {
     withdrawParams: ICommonData.IWithdrawParamsStruct,
     removeParams: ITapiocaOFT.IRemoveParamsStruct,
     approvals: ICommonData.IApprovalStruct[],
+    revokes: ICommonData.IApprovalStruct[],
     adapterParams: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+  "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -2584,6 +2593,7 @@ export interface BaseTOFTMarketModule extends BaseContract {
     withdrawParams: ICommonData.IWithdrawParamsStruct,
     removeParams: ITapiocaOFT.IRemoveParamsStruct,
     approvals: ICommonData.IApprovalStruct[],
+    revokes: ICommonData.IApprovalStruct[],
     adapterParams: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -2661,10 +2671,11 @@ export interface BaseTOFTMarketModule extends BaseContract {
     withdrawParams: ICommonData.IWithdrawParamsStruct,
     options: ICommonData.ISendOptionsStruct,
     approvals: ICommonData.IApprovalStruct[],
+    revokes: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+  "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
     _from: PromiseOrValue<string>,
     _to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -2673,6 +2684,7 @@ export interface BaseTOFTMarketModule extends BaseContract {
     withdrawParams: ICommonData.IWithdrawParamsStruct,
     options: ICommonData.ISendOptionsStruct,
     approvals: ICommonData.IApprovalStruct[],
+    revokes: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3201,11 +3213,12 @@ export interface BaseTOFTMarketModule extends BaseContract {
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3213,6 +3226,7 @@ export interface BaseTOFTMarketModule extends BaseContract {
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -3286,10 +3300,11 @@ export interface BaseTOFTMarketModule extends BaseContract {
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       options: ICommonData.ISendOptionsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3298,6 +3313,7 @@ export interface BaseTOFTMarketModule extends BaseContract {
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       options: ICommonData.ISendOptionsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3961,11 +3977,12 @@ export interface BaseTOFTMarketModule extends BaseContract {
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3973,6 +3990,7 @@ export interface BaseTOFTMarketModule extends BaseContract {
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -4050,10 +4068,11 @@ export interface BaseTOFTMarketModule extends BaseContract {
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       options: ICommonData.ISendOptionsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -4062,6 +4081,7 @@ export interface BaseTOFTMarketModule extends BaseContract {
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       options: ICommonData.ISendOptionsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4591,11 +4611,12 @@ export interface BaseTOFTMarketModule extends BaseContract {
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -4603,6 +4624,7 @@ export interface BaseTOFTMarketModule extends BaseContract {
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       removeParams: ITapiocaOFT.IRemoveParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
       adapterParams: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -4680,10 +4702,11 @@ export interface BaseTOFTMarketModule extends BaseContract {
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       options: ICommonData.ISendOptionsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -4692,6 +4715,7 @@ export interface BaseTOFTMarketModule extends BaseContract {
       withdrawParams: ICommonData.IWithdrawParamsStruct,
       options: ICommonData.ISendOptionsStruct,
       approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
