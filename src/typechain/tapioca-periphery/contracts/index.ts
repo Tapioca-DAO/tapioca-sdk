@@ -17,3 +17,4 @@ import type * as interfaces from "./interfaces";
 export type { interfaces };
 import type * as oracle from "./oracle";
 export type { oracle };
+export type { StargateLbpHelper } from "./StargateLbpHelper";
