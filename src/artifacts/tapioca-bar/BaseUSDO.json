@@ -1589,6 +1589,11 @@
                   "internalType": "bytes",
                   "name": "withdrawAdapterParams",
                   "type": "bytes"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "unwrap",
+                  "type": "bool"
                 }
               ],
               "internalType": "struct ICommonData.IWithdrawParams",
@@ -1621,6 +1626,11 @@
                   "internalType": "bytes",
                   "name": "withdrawAdapterParams",
                   "type": "bytes"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "unwrap",
+                  "type": "bool"
                 }
               ],
               "internalType": "struct ICommonData.IWithdrawParams",
@@ -2049,6 +2059,11 @@
               "internalType": "bytes",
               "name": "withdrawAdapterParams",
               "type": "bytes"
+            },
+            {
+              "internalType": "bool",
+              "name": "unwrap",
+              "type": "bool"
             }
           ],
           "internalType": "struct ICommonData.IWithdrawParams",
@@ -2606,7 +2621,7 @@
               "type": "bytes"
             }
           ],
-          "internalType": "struct ISendFrom.LzCallParams",
+          "internalType": "struct ICommonOFT.LzCallParams",
           "name": "lzCallParams",
           "type": "tuple"
         },
@@ -2728,7 +2743,7 @@
               "type": "bytes"
             }
           ],
-          "internalType": "struct ISendFrom.LzCallParams",
+          "internalType": "struct ICommonOFT.LzCallParams",
           "name": "sendFromData",
           "type": "tuple"
         },

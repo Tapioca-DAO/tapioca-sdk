@@ -1222,6 +1222,11 @@ const _abi = [
             name: "withdrawAdapterParams",
             type: "bytes",
           },
+          {
+            internalType: "bool",
+            name: "unwrap",
+            type: "bool",
+          },
         ],
         internalType: "struct ICommonData.IWithdrawParams",
         name: "withdrawParams",

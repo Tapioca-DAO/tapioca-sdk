@@ -1667,7 +1667,7 @@
               "type": "bytes"
             }
           ],
-          "internalType": "struct ISendFrom.LzCallParams",
+          "internalType": "struct ICommonOFT.LzCallParams",
           "name": "lzCallParams",
           "type": "tuple"
         },
@@ -1789,7 +1789,7 @@
               "type": "bytes"
             }
           ],
-          "internalType": "struct ISendFrom.LzCallParams",
+          "internalType": "struct ICommonOFT.LzCallParams",
           "name": "sendFromData",
           "type": "tuple"
         },

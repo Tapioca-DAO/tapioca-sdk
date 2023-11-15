@@ -32,10 +32,11 @@ export enum EPacketType {
     PT_MARKET_MULTIHOP_SELL = 773,
     PT_YB_SEND_SGL_BORROW = 775,
     PT_LEVERAGE_MARKET_DOWN = 776,
+    PT_SEND_FROM_PARAMS = 780,
 
     //COMMON
     PT_TAP_EXERCISE = 777,
-    PT_SEND_FROM = 778,
+    PT_TRIGGER_SEND_FROM = 778,
     PT_APPROVE = 779,
 
     // TapOFT
@@ -61,7 +62,8 @@ export const MIN_GAS_FOR_PACKET_TYPE = {
     [EPacketType.PT_YB_SEND_SGL_BORROW]: 200_000,
     [EPacketType.PT_LEVERAGE_MARKET_DOWN]: 200_000,
     [EPacketType.PT_TAP_EXERCISE]: 200_000,
-    [EPacketType.PT_SEND_FROM]: 200_000,
+    [EPacketType.PT_TRIGGER_SEND_FROM]: 200_000,
+    [EPacketType.PT_SEND_FROM_PARAMS]: 200_000,
     [EPacketType.PT_APPROVE]: 200_000,
     [EPacketType.PT_LOCK_TWTAP]: 550_000,
     [EPacketType.PT_UNLOCK_TWTAP]: 750_000,
@@ -141,6 +143,7 @@ export const TOFT_PACKET_TYPES = [
     EPacketType.PT_MARKET_MULTIHOP_SELL,
     EPacketType.PT_YB_SEND_SGL_BORROW,
     EPacketType.PT_LEVERAGE_MARKET_DOWN,
+    EPacketType.PT_SEND_FROM_PARAMS,
 ];
 export const ONFT_PACKET_TYPES = [EPacketType.PT_SEND_AND_CALL];
 export const TAPOFT_PACKET_TYPES = [
@@ -152,7 +155,7 @@ export const TAPOFT_PACKET_TYPES = [
 ];
 export const COMMON_PACKET_TYPES = [
     EPacketType.PT_TAP_EXERCISE,
-    EPacketType.PT_SEND_FROM,
+    EPacketType.PT_TRIGGER_SEND_FROM,
     EPacketType.PT_APPROVE,
 ];
 

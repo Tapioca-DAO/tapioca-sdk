@@ -1236,7 +1236,6 @@ const _abi = [
   },
   {
     inputs: [],
-<<<<<<< HEAD
     name: "liquidationMultiplier",
     outputs: [
       {
@@ -1250,8 +1249,6 @@ const _abi = [
   },
   {
     inputs: [],
-=======
->>>>>>> 8b8a53bd31b2309521290411363a0dd1b30c6bde
     name: "lqCollateralizationRate",
     outputs: [
       {
