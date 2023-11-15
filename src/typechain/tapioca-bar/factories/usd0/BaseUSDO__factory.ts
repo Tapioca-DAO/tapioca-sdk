@@ -1060,6 +1060,83 @@ const _abi = [
         type: "tuple[]",
       },
       {
+        components: [
+          {
+            internalType: "bool",
+            name: "permitAll",
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "allowFailure",
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "yieldBoxTypeApproval",
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "revokeYieldBox",
+            type: "bool",
+          },
+          {
+            internalType: "uint16",
+            name: "actionType",
+            type: "uint16",
+          },
+          {
+            internalType: "address",
+            name: "target",
+            type: "address",
+          },
+          {
+            internalType: "bool",
+            name: "permitBorrow",
+            type: "bool",
+          },
+          {
+            internalType: "address",
+            name: "owner",
+            type: "address",
+          },
+          {
+            internalType: "address",
+            name: "spender",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "value",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "deadline",
+            type: "uint256",
+          },
+          {
+            internalType: "uint8",
+            name: "v",
+            type: "uint8",
+          },
+          {
+            internalType: "bytes32",
+            name: "r",
+            type: "bytes32",
+          },
+          {
+            internalType: "bytes32",
+            name: "s",
+            type: "bytes32",
+          },
+        ],
+        internalType: "struct ICommonData.IApproval[]",
+        name: "revokes",
+        type: "tuple[]",
+      },
+      {
         internalType: "bytes",
         name: "adapterParams",
         type: "bytes",
@@ -1726,6 +1803,83 @@ const _abi = [
         name: "approvals",
         type: "tuple[]",
       },
+      {
+        components: [
+          {
+            internalType: "bool",
+            name: "permitAll",
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "allowFailure",
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "yieldBoxTypeApproval",
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "revokeYieldBox",
+            type: "bool",
+          },
+          {
+            internalType: "uint16",
+            name: "actionType",
+            type: "uint16",
+          },
+          {
+            internalType: "address",
+            name: "target",
+            type: "address",
+          },
+          {
+            internalType: "bool",
+            name: "permitBorrow",
+            type: "bool",
+          },
+          {
+            internalType: "address",
+            name: "owner",
+            type: "address",
+          },
+          {
+            internalType: "address",
+            name: "spender",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "value",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "deadline",
+            type: "uint256",
+          },
+          {
+            internalType: "uint8",
+            name: "v",
+            type: "uint8",
+          },
+          {
+            internalType: "bytes32",
+            name: "r",
+            type: "bytes32",
+          },
+          {
+            internalType: "bytes32",
+            name: "s",
+            type: "bytes32",
+          },
+        ],
+        internalType: "struct ICommonData.IApproval[]",
+        name: "revokes",
+        type: "tuple[]",
+      },
     ],
     name: "removeAsset",
     outputs: [],
@@ -2040,6 +2194,83 @@ const _abi = [
         ],
         internalType: "struct ICommonData.IApproval[]",
         name: "approvals",
+        type: "tuple[]",
+      },
+      {
+        components: [
+          {
+            internalType: "bool",
+            name: "permitAll",
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "allowFailure",
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "yieldBoxTypeApproval",
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "revokeYieldBox",
+            type: "bool",
+          },
+          {
+            internalType: "uint16",
+            name: "actionType",
+            type: "uint16",
+          },
+          {
+            internalType: "address",
+            name: "target",
+            type: "address",
+          },
+          {
+            internalType: "bool",
+            name: "permitBorrow",
+            type: "bool",
+          },
+          {
+            internalType: "address",
+            name: "owner",
+            type: "address",
+          },
+          {
+            internalType: "address",
+            name: "spender",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "value",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "deadline",
+            type: "uint256",
+          },
+          {
+            internalType: "uint8",
+            name: "v",
+            type: "uint8",
+          },
+          {
+            internalType: "bytes32",
+            name: "r",
+            type: "bytes32",
+          },
+          {
+            internalType: "bytes32",
+            name: "s",
+            type: "bytes32",
+          },
+        ],
+        internalType: "struct ICommonData.IApproval[]",
+        name: "revokes",
         type: "tuple[]",
       },
       {
@@ -2831,6 +3062,83 @@ const _abi = [
         ],
         internalType: "struct ICommonData.IApproval[]",
         name: "approvals",
+        type: "tuple[]",
+      },
+      {
+        components: [
+          {
+            internalType: "bool",
+            name: "permitAll",
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "allowFailure",
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "yieldBoxTypeApproval",
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "revokeYieldBox",
+            type: "bool",
+          },
+          {
+            internalType: "uint16",
+            name: "actionType",
+            type: "uint16",
+          },
+          {
+            internalType: "address",
+            name: "target",
+            type: "address",
+          },
+          {
+            internalType: "bool",
+            name: "permitBorrow",
+            type: "bool",
+          },
+          {
+            internalType: "address",
+            name: "owner",
+            type: "address",
+          },
+          {
+            internalType: "address",
+            name: "spender",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "value",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "deadline",
+            type: "uint256",
+          },
+          {
+            internalType: "uint8",
+            name: "v",
+            type: "uint8",
+          },
+          {
+            internalType: "bytes32",
+            name: "r",
+            type: "bytes32",
+          },
+          {
+            internalType: "bytes32",
+            name: "s",
+            type: "bytes32",
+          },
+        ],
+        internalType: "struct ICommonData.IApproval[]",
+        name: "revokes",
         type: "tuple[]",
       },
     ],
