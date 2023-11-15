@@ -39,6 +39,7 @@ export interface ERC20MockInterface extends utils.Interface {
     "decreaseAllowance(address,uint256)": FunctionFragment;
     "deposit()": FunctionFragment;
     "extractTokens(uint256)": FunctionFragment;
+    "feeRecipient()": FunctionFragment;
     "freeMint(uint256)": FunctionFragment;
     "hasMintRestrictions()": FunctionFragment;
     "increaseAllowance(address,uint256)": FunctionFragment;
@@ -50,10 +51,13 @@ export interface ERC20MockInterface extends utils.Interface {
     "owner()": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
+    "setFeeRecipient(address)": FunctionFragment;
+    "setTransferFee(uint32)": FunctionFragment;
     "symbol()": FunctionFragment;
     "toggleRestrictions()": FunctionFragment;
     "totalSupply()": FunctionFragment;
     "transfer(address,uint256)": FunctionFragment;
+    "transferFee()": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "updateMintLimit(uint256)": FunctionFragment;
@@ -80,6 +84,8 @@ export interface ERC20MockInterface extends utils.Interface {
       | "deposit()"
       | "extractTokens"
       | "extractTokens(uint256)"
+      | "feeRecipient"
+      | "feeRecipient()"
       | "freeMint"
       | "freeMint(uint256)"
       | "hasMintRestrictions"
@@ -102,6 +108,10 @@ export interface ERC20MockInterface extends utils.Interface {
       | "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)"
       | "renounceOwnership"
       | "renounceOwnership()"
+      | "setFeeRecipient"
+      | "setFeeRecipient(address)"
+      | "setTransferFee"
+      | "setTransferFee(uint32)"
       | "symbol"
       | "symbol()"
       | "toggleRestrictions"
@@ -110,6 +120,8 @@ export interface ERC20MockInterface extends utils.Interface {
       | "totalSupply()"
       | "transfer"
       | "transfer(address,uint256)"
+      | "transferFee"
+      | "transferFee()"
       | "transferFrom"
       | "transferFrom(address,address,uint256)"
       | "transferOwnership"
@@ -182,6 +194,14 @@ export interface ERC20MockInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "extractTokens(uint256)",
     values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "feeRecipient",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "feeRecipient()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "freeMint",
@@ -272,6 +292,22 @@ export interface ERC20MockInterface extends utils.Interface {
     functionFragment: "renounceOwnership()",
     values?: undefined
   ): string;
+  encodeFunctionData(
+    functionFragment: "setFeeRecipient",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setFeeRecipient(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setTransferFee",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setTransferFee(uint32)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
   encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
   encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
   encodeFunctionData(
@@ -297,6 +333,14 @@ export interface ERC20MockInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "transfer(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFee",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFee()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "transferFrom",
@@ -390,6 +434,14 @@ export interface ERC20MockInterface extends utils.Interface {
     functionFragment: "extractTokens(uint256)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "feeRecipient",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "feeRecipient()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "freeMint", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "freeMint(uint256)",
@@ -448,6 +500,22 @@ export interface ERC20MockInterface extends utils.Interface {
     functionFragment: "renounceOwnership()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "setFeeRecipient",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setFeeRecipient(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setTransferFee",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setTransferFee(uint32)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
   decodeFunctionResult(
@@ -469,6 +537,14 @@ export interface ERC20MockInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "transfer", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "transfer(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFee",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFee()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -689,6 +765,10 @@ export interface ERC20Mock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    feeRecipient(overrides?: CallOverrides): Promise<[string]>;
+
+    "feeRecipient()"(overrides?: CallOverrides): Promise<[string]>;
+
     freeMint(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -789,6 +869,26 @@ export interface ERC20Mock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    setFeeRecipient(
+      _feeRecipient: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setFeeRecipient(address)"(
+      _feeRecipient: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setTransferFee(
+      _fee: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setTransferFee(uint32)"(
+      _fee: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     symbol(overrides?: CallOverrides): Promise<[string]>;
 
     "symbol()"(overrides?: CallOverrides): Promise<[string]>;
@@ -806,27 +906,31 @@ export interface ERC20Mock extends BaseContract {
     "totalSupply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     transfer(
-      to: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "transfer(address,uint256)"(
-      to: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    transferFee(overrides?: CallOverrides): Promise<[number]>;
+
+    "transferFee()"(overrides?: CallOverrides): Promise<[number]>;
+
     transferFrom(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
+      sender: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "transferFrom(address,address,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
+      sender: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -938,6 +1042,10 @@ export interface ERC20Mock extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  feeRecipient(overrides?: CallOverrides): Promise<string>;
+
+  "feeRecipient()"(overrides?: CallOverrides): Promise<string>;
+
   freeMint(
     _val: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1038,6 +1146,26 @@ export interface ERC20Mock extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  setFeeRecipient(
+    _feeRecipient: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setFeeRecipient(address)"(
+    _feeRecipient: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setTransferFee(
+    _fee: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setTransferFee(uint32)"(
+    _fee: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   symbol(overrides?: CallOverrides): Promise<string>;
 
   "symbol()"(overrides?: CallOverrides): Promise<string>;
@@ -1055,27 +1183,31 @@ export interface ERC20Mock extends BaseContract {
   "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   transfer(
-    to: PromiseOrValue<string>,
+    recipient: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "transfer(address,uint256)"(
-    to: PromiseOrValue<string>,
+    recipient: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  transferFee(overrides?: CallOverrides): Promise<number>;
+
+  "transferFee()"(overrides?: CallOverrides): Promise<number>;
+
   transferFrom(
-    from: PromiseOrValue<string>,
-    to: PromiseOrValue<string>,
+    sender: PromiseOrValue<string>,
+    recipient: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "transferFrom(address,address,uint256)"(
-    from: PromiseOrValue<string>,
-    to: PromiseOrValue<string>,
+    sender: PromiseOrValue<string>,
+    recipient: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -1183,6 +1315,10 @@ export interface ERC20Mock extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    feeRecipient(overrides?: CallOverrides): Promise<string>;
+
+    "feeRecipient()"(overrides?: CallOverrides): Promise<string>;
+
     freeMint(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1279,6 +1415,26 @@ export interface ERC20Mock extends BaseContract {
 
     "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
 
+    setFeeRecipient(
+      _feeRecipient: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setFeeRecipient(address)"(
+      _feeRecipient: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setTransferFee(
+      _fee: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setTransferFee(uint32)"(
+      _fee: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     symbol(overrides?: CallOverrides): Promise<string>;
 
     "symbol()"(overrides?: CallOverrides): Promise<string>;
@@ -1292,27 +1448,31 @@ export interface ERC20Mock extends BaseContract {
     "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     transfer(
-      to: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     "transfer(address,uint256)"(
-      to: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
+    transferFee(overrides?: CallOverrides): Promise<number>;
+
+    "transferFee()"(overrides?: CallOverrides): Promise<number>;
+
     transferFrom(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
+      sender: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     "transferFrom(address,address,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
+      sender: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
@@ -1476,6 +1636,10 @@ export interface ERC20Mock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    feeRecipient(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "feeRecipient()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     freeMint(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1576,6 +1740,26 @@ export interface ERC20Mock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    setFeeRecipient(
+      _feeRecipient: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setFeeRecipient(address)"(
+      _feeRecipient: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setTransferFee(
+      _fee: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setTransferFee(uint32)"(
+      _fee: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     symbol(overrides?: CallOverrides): Promise<BigNumber>;
 
     "symbol()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1593,27 +1777,31 @@ export interface ERC20Mock extends BaseContract {
     "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     transfer(
-      to: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "transfer(address,uint256)"(
-      to: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    transferFee(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "transferFee()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     transferFrom(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
+      sender: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "transferFrom(address,address,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
+      sender: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -1728,6 +1916,10 @@ export interface ERC20Mock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    feeRecipient(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "feeRecipient()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     freeMint(
       _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1832,6 +2024,26 @@ export interface ERC20Mock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    setFeeRecipient(
+      _feeRecipient: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setFeeRecipient(address)"(
+      _feeRecipient: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setTransferFee(
+      _fee: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setTransferFee(uint32)"(
+      _fee: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "symbol()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1849,27 +2061,31 @@ export interface ERC20Mock extends BaseContract {
     "totalSupply()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transfer(
-      to: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "transfer(address,uint256)"(
-      to: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    transferFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "transferFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     transferFrom(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
+      sender: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "transferFrom(address,address,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
+      sender: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
