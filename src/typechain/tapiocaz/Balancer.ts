@@ -47,6 +47,7 @@ export interface BalancerInterface extends utils.Interface {
     "addRebalanceAmount(address,uint16,uint256)": FunctionFragment;
     "checker(address,uint16)": FunctionFragment;
     "connectedOFTs(address,uint16)": FunctionFragment;
+    "emergencySaveTokens(address,uint256)": FunctionFragment;
     "initConnectedOFT(address,uint16,address,bytes)": FunctionFragment;
     "instantRedeemLocal(uint16,uint256,address)": FunctionFragment;
     "owner()": FunctionFragment;
@@ -67,6 +68,8 @@ export interface BalancerInterface extends utils.Interface {
       | "checker(address,uint16)"
       | "connectedOFTs"
       | "connectedOFTs(address,uint16)"
+      | "emergencySaveTokens"
+      | "emergencySaveTokens(address,uint256)"
       | "initConnectedOFT"
       | "initConnectedOFT(address,uint16,address,bytes)"
       | "instantRedeemLocal"
@@ -119,6 +122,14 @@ export interface BalancerInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "connectedOFTs(address,uint16)",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "emergencySaveTokens",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "emergencySaveTokens(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
@@ -278,6 +289,14 @@ export interface BalancerInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "connectedOFTs(address,uint16)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "emergencySaveTokens",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "emergencySaveTokens(address,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -498,6 +517,18 @@ export interface Balancer extends BaseContract {
       }
     >;
 
+    emergencySaveTokens(
+      _token: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "emergencySaveTokens(address,uint256)"(
+      _token: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     initConnectedOFT(
       _srcOft: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -680,6 +711,18 @@ export interface Balancer extends BaseContract {
       rebalanceable: BigNumber;
     }
   >;
+
+  emergencySaveTokens(
+    _token: PromiseOrValue<string>,
+    _amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "emergencySaveTokens(address,uint256)"(
+    _token: PromiseOrValue<string>,
+    _amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   initConnectedOFT(
     _srcOft: PromiseOrValue<string>,
@@ -864,6 +907,18 @@ export interface Balancer extends BaseContract {
       }
     >;
 
+    emergencySaveTokens(
+      _token: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "emergencySaveTokens(address,uint256)"(
+      _token: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     initConnectedOFT(
       _srcOft: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -998,12 +1053,12 @@ export interface Balancer extends BaseContract {
   filters: {
     "ConnectedChainUpdated(address,uint16,address)"(
       _srcOft?: PromiseOrValue<string> | null,
-      _dstChainId?: null,
+      _dstChainId?: PromiseOrValue<BigNumberish> | null,
       _dstOft?: PromiseOrValue<string> | null
     ): ConnectedChainUpdatedEventFilter;
     ConnectedChainUpdated(
       _srcOft?: PromiseOrValue<string> | null,
-      _dstChainId?: null,
+      _dstChainId?: PromiseOrValue<BigNumberish> | null,
       _dstOft?: PromiseOrValue<string> | null
     ): ConnectedChainUpdatedEventFilter;
 
@@ -1018,28 +1073,28 @@ export interface Balancer extends BaseContract {
 
     "RebalanceAmountUpdated(address,uint16,uint256,uint256)"(
       _srcOft?: PromiseOrValue<string> | null,
-      _dstChainId?: null,
-      _amount?: null,
+      _dstChainId?: PromiseOrValue<BigNumberish> | null,
+      _amount?: PromiseOrValue<BigNumberish> | null,
       _totalAmount?: null
     ): RebalanceAmountUpdatedEventFilter;
     RebalanceAmountUpdated(
       _srcOft?: PromiseOrValue<string> | null,
-      _dstChainId?: null,
-      _amount?: null,
+      _dstChainId?: PromiseOrValue<BigNumberish> | null,
+      _amount?: PromiseOrValue<BigNumberish> | null,
       _totalAmount?: null
     ): RebalanceAmountUpdatedEventFilter;
 
     "Rebalanced(address,uint16,uint256,uint256,bool)"(
       _srcOft?: PromiseOrValue<string> | null,
-      _dstChainId?: null,
-      _slippage?: null,
+      _dstChainId?: PromiseOrValue<BigNumberish> | null,
+      _slippage?: PromiseOrValue<BigNumberish> | null,
       _amount?: null,
       _isNative?: null
     ): RebalancedEventFilter;
     Rebalanced(
       _srcOft?: PromiseOrValue<string> | null,
-      _dstChainId?: null,
-      _slippage?: null,
+      _dstChainId?: PromiseOrValue<BigNumberish> | null,
+      _slippage?: PromiseOrValue<BigNumberish> | null,
       _amount?: null,
       _isNative?: null
     ): RebalancedEventFilter;
@@ -1082,6 +1137,18 @@ export interface Balancer extends BaseContract {
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    emergencySaveTokens(
+      _token: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "emergencySaveTokens(address,uint256)"(
+      _token: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     initConnectedOFT(
@@ -1252,6 +1319,18 @@ export interface Balancer extends BaseContract {
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    emergencySaveTokens(
+      _token: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "emergencySaveTokens(address,uint256)"(
+      _token: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     initConnectedOFT(

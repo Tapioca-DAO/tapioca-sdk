@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export { FakeTapOFT__factory } from "./FakeTapOFT__factory";
+export { FakeTwTAP__factory } from "./FakeTwTAP__factory";

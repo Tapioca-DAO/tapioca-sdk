@@ -98,6 +98,7 @@ export interface TwTAPInterface extends utils.Interface {
     "lastProcessedWeek()": FunctionFragment;
     "lzEndpoint()": FunctionFragment;
     "lzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
+    "maxRewardTokens()": FunctionFragment;
     "minDstGasLookup(uint16,uint16)": FunctionFragment;
     "minGasToTransferAndStore()": FunctionFragment;
     "mintedTWTap()": FunctionFragment;
@@ -124,6 +125,7 @@ export interface TwTAPInterface extends utils.Interface {
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
     "setDstChainIdToBatchLimit(uint16,uint256)": FunctionFragment;
     "setDstChainIdToTransferGas(uint16,uint256)": FunctionFragment;
+    "setMaxRewardTokensLength(uint256)": FunctionFragment;
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
     "setMinGasToTransferAndStore(uint256)": FunctionFragment;
     "setPayloadSizeLimit(uint16,uint256)": FunctionFragment;
@@ -214,6 +216,8 @@ export interface TwTAPInterface extends utils.Interface {
       | "lzEndpoint()"
       | "lzReceive"
       | "lzReceive(uint16,bytes,uint64,bytes)"
+      | "maxRewardTokens"
+      | "maxRewardTokens()"
       | "minDstGasLookup"
       | "minDstGasLookup(uint16,uint16)"
       | "minGasToTransferAndStore"
@@ -264,6 +268,8 @@ export interface TwTAPInterface extends utils.Interface {
       | "setDstChainIdToBatchLimit(uint16,uint256)"
       | "setDstChainIdToTransferGas"
       | "setDstChainIdToTransferGas(uint16,uint256)"
+      | "setMaxRewardTokensLength"
+      | "setMaxRewardTokensLength(uint256)"
       | "setMinDstGas"
       | "setMinDstGas(uint16,uint16,uint256)"
       | "setMinGasToTransferAndStore"
@@ -624,6 +630,14 @@ export interface TwTAPInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "maxRewardTokens",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "maxRewardTokens()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "minDstGasLookup",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
@@ -900,6 +914,14 @@ export interface TwTAPInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "setDstChainIdToTransferGas(uint16,uint256)",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setMaxRewardTokensLength",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setMaxRewardTokensLength(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMinDstGas",
@@ -1290,6 +1312,14 @@ export interface TwTAPInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "maxRewardTokens",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "maxRewardTokens()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "minDstGasLookup",
     data: BytesLike
   ): Result;
@@ -1454,6 +1484,14 @@ export interface TwTAPInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "setMaxRewardTokensLength",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setMaxRewardTokensLength(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "setMinDstGas",
     data: BytesLike
   ): Result;
@@ -1581,6 +1619,7 @@ export interface TwTAPInterface extends utils.Interface {
     "CreditCleared(bytes32)": EventFragment;
     "CreditStored(bytes32,bytes)": EventFragment;
     "ExitPosition(uint256,uint256)": EventFragment;
+    "LogMaxRewardsLength(uint256,uint256,uint256)": EventFragment;
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "Participate(address,uint256,uint256)": EventFragment;
@@ -1615,6 +1654,10 @@ export interface TwTAPInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "ExitPosition"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ExitPosition(uint256,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogMaxRewardsLength"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LogMaxRewardsLength(uint256,uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MessageFailed"): EventFragment;
   getEvent(
@@ -1724,6 +1767,19 @@ export type ExitPositionEvent = TypedEvent<
 >;
 
 export type ExitPositionEventFilter = TypedEventFilter<ExitPositionEvent>;
+
+export interface LogMaxRewardsLengthEventObject {
+  _oldLength: BigNumber;
+  _newLength: BigNumber;
+  _currentLength: BigNumber;
+}
+export type LogMaxRewardsLengthEvent = TypedEvent<
+  [BigNumber, BigNumber, BigNumber],
+  LogMaxRewardsLengthEventObject
+>;
+
+export type LogMaxRewardsLengthEventFilter =
+  TypedEventFilter<LogMaxRewardsLengthEvent>;
 
 export interface MessageFailedEventObject {
   _srcChainId: number;
@@ -2236,6 +2292,10 @@ export interface TwTAP extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    maxRewardTokens(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "maxRewardTokens()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     minDstGasLookup(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
@@ -2568,6 +2628,16 @@ export interface TwTAP extends BaseContract {
     "setDstChainIdToTransferGas(uint16,uint256)"(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _dstChainIdToTransferGas: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setMaxRewardTokensLength(
+      _length: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setMaxRewardTokensLength(uint256)"(
+      _length: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -3122,6 +3192,10 @@ export interface TwTAP extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  maxRewardTokens(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "maxRewardTokens()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   minDstGasLookup(
     arg0: PromiseOrValue<BigNumberish>,
     arg1: PromiseOrValue<BigNumberish>,
@@ -3452,6 +3526,16 @@ export interface TwTAP extends BaseContract {
   "setDstChainIdToTransferGas(uint16,uint256)"(
     _dstChainId: PromiseOrValue<BigNumberish>,
     _dstChainIdToTransferGas: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setMaxRewardTokensLength(
+    _length: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setMaxRewardTokensLength(uint256)"(
+    _length: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -4008,6 +4092,10 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    maxRewardTokens(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "maxRewardTokens()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     minDstGasLookup(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
@@ -4337,6 +4425,16 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setMaxRewardTokensLength(
+      _length: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setMaxRewardTokensLength(uint256)"(
+      _length: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     setMinDstGas(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _packetType: PromiseOrValue<BigNumberish>,
@@ -4548,14 +4646,14 @@ export interface TwTAP extends BaseContract {
 
   filters: {
     "AMLDivergence(uint256,uint256,uint256)"(
-      cumulative?: null,
-      averageMagnitude?: null,
-      totalParticipants?: null
+      cumulative?: PromiseOrValue<BigNumberish> | null,
+      averageMagnitude?: PromiseOrValue<BigNumberish> | null,
+      totalParticipants?: PromiseOrValue<BigNumberish> | null
     ): AMLDivergenceEventFilter;
     AMLDivergence(
-      cumulative?: null,
-      averageMagnitude?: null,
-      totalParticipants?: null
+      cumulative?: PromiseOrValue<BigNumberish> | null,
+      averageMagnitude?: PromiseOrValue<BigNumberish> | null,
+      totalParticipants?: PromiseOrValue<BigNumberish> | null
     ): AMLDivergenceEventFilter;
 
     "Approval(address,address,uint256)"(
@@ -4594,12 +4692,23 @@ export interface TwTAP extends BaseContract {
 
     "ExitPosition(uint256,uint256)"(
       tokenId?: PromiseOrValue<BigNumberish> | null,
-      amount?: null
+      amount?: PromiseOrValue<BigNumberish> | null
     ): ExitPositionEventFilter;
     ExitPosition(
       tokenId?: PromiseOrValue<BigNumberish> | null,
-      amount?: null
+      amount?: PromiseOrValue<BigNumberish> | null
     ): ExitPositionEventFilter;
+
+    "LogMaxRewardsLength(uint256,uint256,uint256)"(
+      _oldLength?: PromiseOrValue<BigNumberish> | null,
+      _newLength?: PromiseOrValue<BigNumberish> | null,
+      _currentLength?: PromiseOrValue<BigNumberish> | null
+    ): LogMaxRewardsLengthEventFilter;
+    LogMaxRewardsLength(
+      _oldLength?: PromiseOrValue<BigNumberish> | null,
+      _newLength?: PromiseOrValue<BigNumberish> | null,
+      _currentLength?: PromiseOrValue<BigNumberish> | null
+    ): LogMaxRewardsLengthEventFilter;
 
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)"(
       _srcChainId?: null,
@@ -4627,13 +4736,13 @@ export interface TwTAP extends BaseContract {
 
     "Participate(address,uint256,uint256)"(
       participant?: PromiseOrValue<string> | null,
-      tapAmount?: null,
-      multiplier?: null
+      tapAmount?: PromiseOrValue<BigNumberish> | null,
+      multiplier?: PromiseOrValue<BigNumberish> | null
     ): ParticipateEventFilter;
     Participate(
       participant?: PromiseOrValue<string> | null,
-      tapAmount?: null,
-      multiplier?: null
+      tapAmount?: PromiseOrValue<BigNumberish> | null,
+      multiplier?: PromiseOrValue<BigNumberish> | null
     ): ParticipateEventFilter;
 
     "ReceiveFromChain(uint16,bytes,address,uint256[])"(
@@ -5056,6 +5165,10 @@ export interface TwTAP extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    maxRewardTokens(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "maxRewardTokens()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     minDstGasLookup(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
@@ -5342,6 +5455,16 @@ export interface TwTAP extends BaseContract {
     "setDstChainIdToTransferGas(uint16,uint256)"(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _dstChainIdToTransferGas: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setMaxRewardTokensLength(
+      _length: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setMaxRewardTokensLength(uint256)"(
+      _length: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5871,6 +5994,12 @@ export interface TwTAP extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    maxRewardTokens(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "maxRewardTokens()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     minDstGasLookup(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
@@ -6161,6 +6290,16 @@ export interface TwTAP extends BaseContract {
     "setDstChainIdToTransferGas(uint16,uint256)"(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _dstChainIdToTransferGas: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setMaxRewardTokensLength(
+      _length: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setMaxRewardTokensLength(uint256)"(
+      _length: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

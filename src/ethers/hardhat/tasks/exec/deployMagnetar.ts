@@ -27,7 +27,7 @@ export const deployMagnetar__task = async (
 
     let clusterAddress = hre.ethers.constants.AddressZero;
     let clusterDep = hre.SDK.db
-        .loadGlobalDeployment(tag, 'Cluster', chainInfo.chainId)
+        .loadGlobalDeployment(tag, 'tapioca-periphery', chainInfo.chainId)
         .find((e) => e.name == 'Cluster');
 
     if (!clusterDep) {
@@ -88,6 +88,9 @@ export const deployMagnetar__task = async (
         ],
     });
     hre.SDK.db.saveGlobally(depHelper, TAPIOCA_PROJECTS[3], tag);
+
+    console.log('[+] Setting MagnetarHelper or Magnetar');
+    await magnetar.setHelper(magnetarHelper.address);
 
     try {
         console.log('[+] Verifying');

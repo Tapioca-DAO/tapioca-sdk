@@ -1710,23 +1710,23 @@ export interface AOTAP extends BaseContract {
     "Burn(address,uint256,tuple)"(
       from?: PromiseOrValue<string> | null,
       tokenId?: PromiseOrValue<BigNumberish> | null,
-      option?: null
+      option?: AirdropTapOptionStruct | null
     ): BurnEventFilter;
     Burn(
       from?: PromiseOrValue<string> | null,
       tokenId?: PromiseOrValue<BigNumberish> | null,
-      option?: null
+      option?: AirdropTapOptionStruct | null
     ): BurnEventFilter;
 
     "Mint(address,uint256,tuple)"(
       to?: PromiseOrValue<string> | null,
       tokenId?: PromiseOrValue<BigNumberish> | null,
-      option?: null
+      option?: AirdropTapOptionStruct | null
     ): MintEventFilter;
     Mint(
       to?: PromiseOrValue<string> | null,
       tokenId?: PromiseOrValue<BigNumberish> | null,
-      option?: null
+      option?: AirdropTapOptionStruct | null
     ): MintEventFilter;
 
     "OwnershipTransferred(address,address)"(

@@ -2210,23 +2210,23 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     "Burn(address,uint128,tuple)"(
       to?: PromiseOrValue<string> | null,
       sglAssetID?: PromiseOrValue<BigNumberish> | null,
-      lockPosition?: null
+      lockPosition?: LockPositionStruct | null
     ): BurnEventFilter;
     Burn(
       to?: PromiseOrValue<string> | null,
       sglAssetID?: PromiseOrValue<BigNumberish> | null,
-      lockPosition?: null
+      lockPosition?: LockPositionStruct | null
     ): BurnEventFilter;
 
     "Mint(address,uint128,tuple)"(
       to?: PromiseOrValue<string> | null,
       sglAssetID?: PromiseOrValue<BigNumberish> | null,
-      lockPosition?: null
+      lockPosition?: LockPositionStruct | null
     ): MintEventFilter;
     Mint(
       to?: PromiseOrValue<string> | null,
       sglAssetID?: PromiseOrValue<BigNumberish> | null,
-      lockPosition?: null
+      lockPosition?: LockPositionStruct | null
     ): MintEventFilter;
 
     "OwnershipTransferred(address,address)"(
@@ -2252,11 +2252,11 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "SetSGLPoolWeight(address,uint256)"(
       sgl?: PromiseOrValue<string> | null,
-      poolWeight?: null
+      poolWeight?: PromiseOrValue<BigNumberish> | null
     ): SetSGLPoolWeightEventFilter;
     SetSGLPoolWeight(
       sgl?: PromiseOrValue<string> | null,
-      poolWeight?: null
+      poolWeight?: PromiseOrValue<BigNumberish> | null
     ): SetSGLPoolWeightEventFilter;
 
     "Transfer(address,address,uint256)"(
@@ -2283,10 +2283,10 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     ): UnregisterSingularityEventFilter;
 
     "UpdateTotalSingularityPoolWeights(uint256)"(
-      totalSingularityPoolWeights?: null
+      totalSingularityPoolWeights?: PromiseOrValue<BigNumberish> | null
     ): UpdateTotalSingularityPoolWeightsEventFilter;
     UpdateTotalSingularityPoolWeights(
-      totalSingularityPoolWeights?: null
+      totalSingularityPoolWeights?: PromiseOrValue<BigNumberish> | null
     ): UpdateTotalSingularityPoolWeightsEventFilter;
   };
 

@@ -706,11 +706,11 @@ export interface Vesting extends BaseContract {
   filters: {
     "Claimed(address,uint256)"(
       user?: PromiseOrValue<string> | null,
-      amount?: null
+      amount?: PromiseOrValue<BigNumberish> | null
     ): ClaimedEventFilter;
     Claimed(
       user?: PromiseOrValue<string> | null,
-      amount?: null
+      amount?: PromiseOrValue<BigNumberish> | null
     ): ClaimedEventFilter;
 
     "OwnershipTransferred(address,address)"(
@@ -724,11 +724,11 @@ export interface Vesting extends BaseContract {
 
     "UserRegistered(address,uint256)"(
       user?: PromiseOrValue<string> | null,
-      amount?: null
+      amount?: PromiseOrValue<BigNumberish> | null
     ): UserRegisteredEventFilter;
     UserRegistered(
       user?: PromiseOrValue<string> | null,
-      amount?: null
+      amount?: PromiseOrValue<BigNumberish> | null
     ): UserRegisteredEventFilter;
   };
 

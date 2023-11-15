@@ -42,13 +42,13 @@ const _abi = [
         type: "uint16",
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: "bytes",
         name: "_payload",
         type: "bytes",
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: "bytes",
         name: "_reason",
         type: "bytes",
@@ -67,13 +67,13 @@ const _abi = [
         type: "uint16",
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: "bytes",
         name: "_payload",
         type: "bytes",
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: "string",
         name: "_reason",
         type: "string",
