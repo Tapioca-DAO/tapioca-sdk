@@ -484,6 +484,33 @@
             "80001": [],
             "421613": [
                 {
+                    "name": "BigBang-TapiocaOFT-WETHMock",
+                    "address": "0x2e2136F858600f074D57448fA43cee56a4563842",
+                    "meta": {
+                        "isBigBangMarket": true,
+                        "collateral": {
+                            "collateralAddress": "0xd384A44C510795753E92FacB3a09BD401E333c6c",
+                            "collateralStrategyAddress": "0xd2ff30b1A716CE7d0060338DBbfAF152cA1fed25"
+                        }
+                    }
+                },
+                {
+                    "name": "OracleMock-TapiocaOFT-WETHMock",
+                    "address": "0x394cfc69A75b755CBfDD369CEb0c0988380d9909",
+                    "meta": {
+                        "args": [
+                            "OracleMock-TapiocaOFT-WETHMock",
+                            "OCM-TapiocaOFT-WETHMock",
+                            {
+                                "type": "BigNumber",
+                                "hex": "0x106f4216d9dbb8f58c1cc8340000"
+                            }
+                        ],
+                        "salt": "0x3cfc5a7a1762565f7547299d00b65d31c0d6a4d591ace5e699cf7b1068402ee6",
+                        "create2": true
+                    }
+                },
+                {
                     "name": "Tapioca Singularity-TapiocaOFT-GLPMock",
                     "address": "0x19d67955b400e17C0548108375A5932398bAf61D",
                     "meta": {
