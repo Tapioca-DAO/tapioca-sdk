@@ -1,5 +1,4 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
-import { TAPIOCA_PROJECTS } from '../../../../api/config';
 import { Cluster__factory } from '../../../../typechain/tapioca-periphery';
 import { askForTag } from '../../utils';
 
