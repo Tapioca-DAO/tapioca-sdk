@@ -41,6 +41,7 @@ export interface TDeploymentVMContract extends TContract {
 interface IConstructorOptions {
     bytecodeSizeLimit: number; // Limit of bytecode size for a single transaction, error happened on Arb Goerli with Alchemy RPC
     debugMode: boolean;
+    globalWait?: number;
     tag?: string;
     multicall?: Multicall3;
     multisig?: MultisigMock;
@@ -174,7 +175,7 @@ export class DeployerVM {
      * Execute the current build queue and deploy the contracts, using Multicall3 to aggregate the calls.
      * @param wait Number of blocks to wait for the transaction to be mined. Default: 0
      */
-    async execute(wait = 0, runSimulations = true) {
+    async execute(wait = this.options.globalWait ?? 0, runSimulations = true) {
         if (this.executed) {
             throw new Error('[-] Deployment queue has already been executed');
         }
@@ -313,13 +314,13 @@ export class DeployerVM {
             const multicallTx = await (
                 await this.getMulticall()
             ).multicall(calls);
-            await multicallTx.wait(3);
+            await multicallTx.wait(this.options.globalWait ?? 3);
         } else {
             console.log('[+] Performing ownership transferal directly');
             const tx = await ownableContract
                 .connect(signer)
                 .transferOwnership(to);
-            await tx.wait(3);
+            await tx.wait(this.options.globalWait ?? 3);
         }
 
         console.log('[+] Ownership transferred\n');
@@ -348,15 +349,15 @@ export class DeployerVM {
         console.log('\n[+] Executing through Multisig');
 
         let tx = await multisig.submitTransaction(target, 0, calldata);
-        await tx.wait(3);
+        await tx.wait(this.options.globalWait ?? 3);
         console.log('   [+] Transaction submitted through multisig: ', tx.hash);
         const txCount = await multisig.getTransactionCount();
         const lastTx = txCount.sub(1);
         tx = await multisig.confirmTransaction(lastTx);
-        await tx.wait(3);
+        await tx.wait(this.options.globalWait ?? 3);
         console.log('   [+] Transaction confirmed: ', tx.hash);
         tx = await multisig.executeTransaction(lastTx);
-        await tx.wait(3);
+        await tx.wait(this.options.globalWait ?? 3);
         console.log('   [+] Transaction executed: ', tx.hash);
 
         console.log('[+] Multisig execution finished \n');
@@ -520,7 +521,9 @@ export class DeployerVM {
                     : {},
             );
 
-            await multicall.deployTransaction.wait(3);
+            await multicall.deployTransaction.wait(
+                this.options.globalWait ?? 3,
+            );
             console.log('[+] Deployed');
 
             // Save deployment
@@ -599,7 +602,7 @@ export class DeployerVM {
                 )[0],
             ).deploy(1);
 
-            await multisig.deployTransaction.wait(3);
+            await multisig.deployTransaction.wait(this.options.globalWait ?? 3);
             console.log('[+] Deployed');
 
             // Save deployment
@@ -836,7 +839,9 @@ export class DeployerVM {
                     : {},
             );
 
-            await tapiocaDeployer.deployTransaction.wait(3);
+            await tapiocaDeployer.deployTransaction.wait(
+                this.options.globalWait ?? 3,
+            );
 
             // Save deployment
             const dep = this.hre.SDK.db.buildLocalDeployment({

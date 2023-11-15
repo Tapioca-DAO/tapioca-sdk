@@ -131,6 +131,8 @@ export const USDO_PACKET_TYPES = [
     EPacketType.PT_LEVERAGE_MARKET_UP,
 ];
 export const TOFT_PACKET_TYPES = [
+    EPacketType.PT_SEND,
+    EPacketType.PT_SEND_AND_CALL,
     EPacketType.PT_YB_SEND_STRAT,
     EPacketType.PT_YB_RETRIEVE_STRAT,
     EPacketType.PT_MARKET_REMOVE_COLLATERAL,
@@ -140,6 +142,8 @@ export const TOFT_PACKET_TYPES = [
 ];
 export const ONFT_PACKET_TYPES = [EPacketType.PT_SEND_AND_CALL];
 export const TAPOFT_PACKET_TYPES = [
+    EPacketType.PT_SEND,
+    EPacketType.PT_SEND_AND_CALL,
     EPacketType.PT_LOCK_TWTAP,
     EPacketType.PT_UNLOCK_TWTAP,
     EPacketType.PT_CLAIM_REWARDS,
