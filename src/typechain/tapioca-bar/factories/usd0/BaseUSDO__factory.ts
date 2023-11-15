@@ -1000,6 +1000,11 @@ const _abi = [
             type: "bool",
           },
           {
+            internalType: "bool",
+            name: "revokeYieldBox",
+            type: "bool",
+          },
+          {
             internalType: "uint16",
             name: "actionType",
             type: "uint16",
@@ -1652,6 +1657,11 @@ const _abi = [
             type: "bool",
           },
           {
+            internalType: "bool",
+            name: "revokeYieldBox",
+            type: "bool",
+          },
+          {
             internalType: "uint16",
             name: "actionType",
             type: "uint16",
@@ -1960,6 +1970,11 @@ const _abi = [
           {
             internalType: "bool",
             name: "yieldBoxTypeApproval",
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "revokeYieldBox",
             type: "bool",
           },
           {
@@ -2583,6 +2598,118 @@ const _abi = [
         type: "uint16",
       },
       {
+        components: [
+          {
+            internalType: "address payable",
+            name: "refundAddress",
+            type: "address",
+          },
+          {
+            internalType: "address",
+            name: "zroPaymentAddress",
+            type: "address",
+          },
+          {
+            internalType: "bytes",
+            name: "adapterParams",
+            type: "bytes",
+          },
+        ],
+        internalType: "struct ISendFrom.LzCallParams",
+        name: "lzCallParams",
+        type: "tuple",
+      },
+      {
+        components: [
+          {
+            internalType: "bool",
+            name: "permitAll",
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "allowFailure",
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "yieldBoxTypeApproval",
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "revokeYieldBox",
+            type: "bool",
+          },
+          {
+            internalType: "uint16",
+            name: "actionType",
+            type: "uint16",
+          },
+          {
+            internalType: "address",
+            name: "target",
+            type: "address",
+          },
+          {
+            internalType: "bool",
+            name: "permitBorrow",
+            type: "bool",
+          },
+          {
+            internalType: "address",
+            name: "owner",
+            type: "address",
+          },
+          {
+            internalType: "address",
+            name: "spender",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "value",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "deadline",
+            type: "uint256",
+          },
+          {
+            internalType: "uint8",
+            name: "v",
+            type: "uint8",
+          },
+          {
+            internalType: "bytes32",
+            name: "r",
+            type: "bytes32",
+          },
+          {
+            internalType: "bytes32",
+            name: "s",
+            type: "bytes32",
+          },
+        ],
+        internalType: "struct ICommonData.IApproval[]",
+        name: "approvals",
+        type: "tuple[]",
+      },
+    ],
+    name: "triggerApproveOrRevoke",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint16",
+        name: "lzDstChainId",
+        type: "uint16",
+      },
+      {
         internalType: "bytes",
         name: "airdropAdapterParams",
         type: "bytes",
@@ -2629,6 +2756,11 @@ const _abi = [
           {
             internalType: "bool",
             name: "yieldBoxTypeApproval",
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "revokeYieldBox",
             type: "bool",
           },
           {

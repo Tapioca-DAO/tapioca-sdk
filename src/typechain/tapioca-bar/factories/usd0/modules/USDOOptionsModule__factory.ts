@@ -947,6 +947,14 @@ const _abi = [
           {
             internalType: "bool",
             name: "yieldBoxTypeApproval",
+<<<<<<< HEAD
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "revokeYieldBox",
+=======
+>>>>>>> 8b8a53bd31b2309521290411363a0dd1b30c6bde
             type: "bool",
           },
           {

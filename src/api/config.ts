@@ -36,6 +36,7 @@ export enum EPacketType {
     //COMMON
     PT_TAP_EXERCISE = 777,
     PT_SEND_FROM = 778,
+    PT_APPROVE = 779,
 
     // TapOFT
     PT_LOCK_TWTAP = 870,
@@ -61,6 +62,7 @@ export const MIN_GAS_FOR_PACKET_TYPE = {
     [EPacketType.PT_LEVERAGE_MARKET_DOWN]: 200_000,
     [EPacketType.PT_TAP_EXERCISE]: 200_000,
     [EPacketType.PT_SEND_FROM]: 200_000,
+    [EPacketType.PT_APPROVE]: 200_000,
     [EPacketType.PT_LOCK_TWTAP]: 550_000,
     [EPacketType.PT_UNLOCK_TWTAP]: 750_000,
     [EPacketType.PT_CLAIM_REWARDS]: 550_000,
@@ -151,6 +153,7 @@ export const TAPOFT_PACKET_TYPES = [
 export const COMMON_PACKET_TYPES = [
     EPacketType.PT_TAP_EXERCISE,
     EPacketType.PT_SEND_FROM,
+    EPacketType.PT_APPROVE,
 ];
 
 /**

@@ -24,6 +24,7 @@ export interface ERC1155MockInterface extends utils.Interface {
     "balanceOfBatch(address[],uint256[])": FunctionFragment;
     "burn(address,uint256,uint256)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
+    "isApprovedForAsset(address,address,uint256)": FunctionFragment;
     "mint(address,uint256,uint256)": FunctionFragment;
     "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,uint256,bytes)": FunctionFragment;
@@ -50,6 +51,10 @@ export interface ERC1155MockInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
     values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isApprovedForAsset",
+    values: [string, string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "mint",
@@ -93,6 +98,10 @@ export interface ERC1155MockInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isApprovedForAsset",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
@@ -232,6 +241,13 @@ export interface ERC1155Mock extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    isApprovedForAsset(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     mint(
       to: string,
       id: BigNumberish,
@@ -317,6 +333,13 @@ export interface ERC1155Mock extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  isApprovedForAsset(
+    arg0: string,
+    arg1: string,
+    arg2: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
   mint(
     to: string,
     id: BigNumberish,
@@ -399,6 +422,13 @@ export interface ERC1155Mock extends BaseContract {
     isApprovedForAll(
       arg0: string,
       arg1: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    isApprovedForAsset(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -537,6 +567,13 @@ export interface ERC1155Mock extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    isApprovedForAsset(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     mint(
       to: string,
       id: BigNumberish,
@@ -620,6 +657,13 @@ export interface ERC1155Mock extends BaseContract {
     isApprovedForAll(
       arg0: string,
       arg1: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    isApprovedForAsset(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

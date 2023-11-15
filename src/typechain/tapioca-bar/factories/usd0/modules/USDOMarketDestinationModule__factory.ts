@@ -1136,6 +1136,11 @@ const _abi = [
             type: "bool",
           },
           {
+            internalType: "bool",
+            name: "revokeYieldBox",
+            type: "bool",
+          },
+          {
             internalType: "uint16",
             name: "actionType",
             type: "uint16",
