@@ -24,6 +24,8 @@ export type { BBStorage } from "./markets/bigBang/BBStorage";
 export { BBStorage__factory } from "./factories/markets/bigBang/BBStorage__factory";
 export type { BigBang } from "./markets/bigBang/BigBang";
 export { BigBang__factory } from "./factories/markets/bigBang/BigBang__factory";
+export type { SimpleLeverageExecutor } from "./markets/leverage/SimpleLeverageExecutor";
+export { SimpleLeverageExecutor__factory } from "./factories/markets/leverage/SimpleLeverageExecutor__factory";
 export type { Market } from "./markets/Market";
 export { Market__factory } from "./factories/markets/Market__factory";
 export type { MarketERC20 } from "./markets/MarketERC20";

@@ -136,6 +136,25 @@ const _abi = [
       {
         indexed: true,
         internalType: "address",
+        name: "oldVal",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newVal",
+        type: "address",
+      },
+    ],
+    name: "LeverageExecutorSet",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
         name: "liquidator",
         type: "address",
       },
@@ -1144,6 +1163,19 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "leverageExecutor",
+    outputs: [
+      {
+        internalType: "contract ILeverageExecutor",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address[]",
@@ -1591,10 +1623,18 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "_borrowOpeningFee",
-        type: "uint256",
+        internalType: "contract ILeverageExecutor",
+        name: "_executor",
+        type: "address",
       },
+    ],
+    name: "setLeverageExecutor",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
       {
         internalType: "contract IOracle",
         name: "_oracle",

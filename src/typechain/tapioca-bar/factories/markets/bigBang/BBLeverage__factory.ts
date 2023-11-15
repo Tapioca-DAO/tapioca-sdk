@@ -62,6 +62,31 @@ const _abi = [
   },
   {
     anonymous: false,
+    inputs: [],
+    name: "AssetOracleDataUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "oldVal",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newVal",
+        type: "address",
+      },
+    ],
+    name: "AssetOracleUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
     inputs: [
       {
         indexed: true,
@@ -115,6 +140,25 @@ const _abi = [
       },
     ],
     name: "ExchangeRateDurationUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "oldVal",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newVal",
+        type: "address",
+      },
+    ],
+    name: "LeverageExecutorSet",
     type: "event",
   },
   {
@@ -277,25 +321,6 @@ const _abi = [
       },
     ],
     name: "LogBorrowCapUpdated",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "uint256",
-        name: "_oldVal",
-        type: "uint256",
-      },
-      {
-        indexed: true,
-        internalType: "uint256",
-        name: "_newVal",
-        type: "uint256",
-      },
-    ],
-    name: "LogBorrowingFee",
     type: "event",
   },
   {
@@ -487,6 +512,68 @@ const _abi = [
     type: "event",
   },
   {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "oldMin",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "newMin",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "oldMax",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "newMax",
+        type: "uint256",
+      },
+    ],
+    name: "UpdateMinMaxMintFee",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "oldMin",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "newMin",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "oldMax",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "newMax",
+        type: "uint256",
+      },
+    ],
+    name: "UpdateMinMaxMintRange",
+    type: "event",
+  },
+  {
     inputs: [],
     name: "DOMAIN_SEPARATOR",
     outputs: [
@@ -647,6 +734,32 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "assetOracle",
+    outputs: [
+      {
+        internalType: "contract IOracle",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "assetOracleData",
+    outputs: [
+      {
+        internalType: "bytes",
+        name: "",
+        type: "bytes",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -655,19 +768,6 @@ const _abi = [
       },
     ],
     name: "balanceOf",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "borrowOpeningFee",
     outputs: [
       {
         internalType: "uint256",
@@ -696,18 +796,8 @@ const _abi = [
         type: "uint256",
       },
       {
-        internalType: "uint256",
-        name: "minAmountOut",
-        type: "uint256",
-      },
-      {
-        internalType: "contract ISwapper",
-        name: "swapper",
-        type: "address",
-      },
-      {
         internalType: "bytes",
-        name: "dexData",
+        name: "data",
         type: "bytes",
       },
     ],
@@ -961,6 +1051,19 @@ const _abi = [
   },
   {
     inputs: [],
+    name: "leverageExecutor",
+    outputs: [
+      {
+        internalType: "contract ILeverageExecutor",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "liquidationBonusAmount",
     outputs: [
       {
@@ -1026,6 +1129,32 @@ const _abi = [
   },
   {
     inputs: [],
+    name: "maxMintFee",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "maxMintFeeStart",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "minDebtRate",
     outputs: [
       {
@@ -1040,6 +1169,32 @@ const _abi = [
   {
     inputs: [],
     name: "minLiquidatorReward",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "minMintFee",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "minMintFeeStart",
     outputs: [
       {
         internalType: "uint256",
@@ -1328,18 +1483,8 @@ const _abi = [
         type: "uint256",
       },
       {
-        internalType: "uint256",
-        name: "minAmountOut",
-        type: "uint256",
-      },
-      {
-        internalType: "contract ISwapper",
-        name: "swapper",
-        type: "address",
-      },
-      {
         internalType: "bytes",
-        name: "dexData",
+        name: "data",
         type: "bytes",
       },
     ],
@@ -1357,10 +1502,18 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "_borrowOpeningFee",
-        type: "uint256",
+        internalType: "contract ILeverageExecutor",
+        name: "_executor",
+        type: "address",
       },
+    ],
+    name: "setLeverageExecutor",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
       {
         internalType: "contract IOracle",
         name: "_oracle",
