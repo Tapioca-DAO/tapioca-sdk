@@ -13,6 +13,10 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "BalancerVaultMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BalancerVaultMock__factory>;
+    getContractFactory(
       name: "ContractThatCannotBeDeployed",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ContractThatCannotBeDeployed__factory>;
@@ -40,6 +44,10 @@ declare module "hardhat/types/runtime" {
       name: "FlashMaliciousBorrowerMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.FlashMaliciousBorrowerMock__factory>;
+    getContractFactory(
+      name: "GmxMarketMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.GmxMarketMock__factory>;
     getContractFactory(
       name: "LQSingularityMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -72,6 +80,10 @@ declare module "hardhat/types/runtime" {
       name: "ReceiverTest",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ReceiverTest__factory>;
+    getContractFactory(
+      name: "SavingsDaiMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SavingsDaiMock__factory>;
     getContractFactory(
       name: "StargateRouterETHMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -130,6 +142,11 @@ declare module "hardhat/types/runtime" {
     ): Promise<Contracts.YieldBoxMock__factory>;
 
     getContractAt(
+      name: "BalancerVaultMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BalancerVaultMock>;
+    getContractAt(
       name: "ContractThatCannotBeDeployed",
       address: string,
       signer?: ethers.Signer
@@ -164,6 +181,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.FlashMaliciousBorrowerMock>;
+    getContractAt(
+      name: "GmxMarketMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.GmxMarketMock>;
     getContractAt(
       name: "LQSingularityMock",
       address: string,
@@ -204,6 +226,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ReceiverTest>;
+    getContractAt(
+      name: "SavingsDaiMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SavingsDaiMock>;
     getContractAt(
       name: "StargateRouterETHMock",
       address: string,

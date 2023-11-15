@@ -1193,39 +1193,6 @@ const _abi = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-      {
-        internalType: "uint16",
-        name: "",
-        type: "uint16",
-      },
-      {
-        internalType: "bytes",
-        name: "",
-        type: "bytes",
-      },
-      {
-        internalType: "uint64",
-        name: "",
-        type: "uint64",
-      },
-      {
-        internalType: "bytes",
-        name: "_payload",
-        type: "bytes",
-      },
-    ],
-    name: "multiHop",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
     inputs: [],
     name: "name",
     outputs: [

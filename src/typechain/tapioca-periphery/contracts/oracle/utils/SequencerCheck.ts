@@ -26,6 +26,7 @@ import type {
 export interface SequencerCheckInterface extends utils.Interface {
   functions: {
     "GRACE_PERIOD_TIME()": FunctionFragment;
+    "SEQUENCER_ROLE()": FunctionFragment;
     "SEQUENCER_UPTIME_FEED()": FunctionFragment;
     "changeGracePeriod(uint32)": FunctionFragment;
   };
@@ -34,6 +35,8 @@ export interface SequencerCheckInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "GRACE_PERIOD_TIME"
       | "GRACE_PERIOD_TIME()"
+      | "SEQUENCER_ROLE"
+      | "SEQUENCER_ROLE()"
       | "SEQUENCER_UPTIME_FEED"
       | "SEQUENCER_UPTIME_FEED()"
       | "changeGracePeriod"
@@ -46,6 +49,14 @@ export interface SequencerCheckInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "GRACE_PERIOD_TIME()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "SEQUENCER_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "SEQUENCER_ROLE()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -71,6 +82,14 @@ export interface SequencerCheckInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "GRACE_PERIOD_TIME()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "SEQUENCER_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "SEQUENCER_ROLE()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -126,6 +145,10 @@ export interface SequencerCheck extends BaseContract {
 
     "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    SEQUENCER_ROLE(overrides?: CallOverrides): Promise<[string]>;
+
+    "SEQUENCER_ROLE()"(overrides?: CallOverrides): Promise<[string]>;
+
     SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<[string]>;
 
     "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<[string]>;
@@ -145,6 +168,10 @@ export interface SequencerCheck extends BaseContract {
 
   "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  SEQUENCER_ROLE(overrides?: CallOverrides): Promise<string>;
+
+  "SEQUENCER_ROLE()"(overrides?: CallOverrides): Promise<string>;
+
   SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<string>;
 
   "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<string>;
@@ -163,6 +190,10 @@ export interface SequencerCheck extends BaseContract {
     GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<BigNumber>;
 
     "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    SEQUENCER_ROLE(overrides?: CallOverrides): Promise<string>;
+
+    "SEQUENCER_ROLE()"(overrides?: CallOverrides): Promise<string>;
 
     SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<string>;
 
@@ -186,6 +217,10 @@ export interface SequencerCheck extends BaseContract {
 
     "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    SEQUENCER_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "SEQUENCER_ROLE()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<BigNumber>;
 
     "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -205,6 +240,12 @@ export interface SequencerCheck extends BaseContract {
     GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "GRACE_PERIOD_TIME()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    SEQUENCER_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "SEQUENCER_ROLE()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

@@ -725,6 +725,10 @@ const _abi = [
     stateMutability: "view",
     type: "function",
   },
+  {
+    stateMutability: "payable",
+    type: "receive",
+  },
 ] as const;
 
 const _bytecode =

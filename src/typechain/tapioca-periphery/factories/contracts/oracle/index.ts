@@ -12,4 +12,7 @@ export { OracleChainlinkMultiEfficient__factory } from "./OracleChainlinkMultiEf
 export { OracleChainlinkSingle__factory } from "./OracleChainlinkSingle__factory";
 export { OracleDAI__factory } from "./OracleDAI__factory";
 export { OracleMulti__factory } from "./OracleMulti__factory";
+export { OracleUniSolo__factory } from "./OracleUniSolo__factory";
 export { Seer__factory } from "./Seer__factory";
+export { SeerCLSolo__factory } from "./SeerCLSolo__factory";
+export { SeerUniSolo__factory } from "./SeerUniSolo__factory";

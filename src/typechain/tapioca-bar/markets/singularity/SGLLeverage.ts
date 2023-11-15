@@ -9,7 +9,6 @@ import type {
   CallOverrides,
   ContractTransaction,
   Overrides,
-  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -40,62 +39,6 @@ export declare namespace ISingularity {
     lastAccrued: BigNumber;
     feesEarnedFraction: BigNumber;
   };
-}
-
-export declare namespace IUSDOBase {
-  export type ILeverageSwapDataStruct = {
-    tokenOut: PromiseOrValue<string>;
-    amountOutMin: PromiseOrValue<BigNumberish>;
-    data: PromiseOrValue<BytesLike>;
-  };
-
-  export type ILeverageSwapDataStructOutput = [string, BigNumber, string] & {
-    tokenOut: string;
-    amountOutMin: BigNumber;
-    data: string;
-  };
-
-  export type ILeverageLZDataStruct = {
-    srcExtraGasLimit: PromiseOrValue<BigNumberish>;
-    lzSrcChainId: PromiseOrValue<BigNumberish>;
-    lzDstChainId: PromiseOrValue<BigNumberish>;
-    zroPaymentAddress: PromiseOrValue<string>;
-    dstAirdropAdapterParam: PromiseOrValue<BytesLike>;
-    srcAirdropAdapterParam: PromiseOrValue<BytesLike>;
-    refundAddress: PromiseOrValue<string>;
-  };
-
-  export type ILeverageLZDataStructOutput = [
-    BigNumber,
-    number,
-    number,
-    string,
-    string,
-    string,
-    string
-  ] & {
-    srcExtraGasLimit: BigNumber;
-    lzSrcChainId: number;
-    lzDstChainId: number;
-    zroPaymentAddress: string;
-    dstAirdropAdapterParam: string;
-    srcAirdropAdapterParam: string;
-    refundAddress: string;
-  };
-
-  export type ILeverageExternalContractsDataStruct = {
-    swapper: PromiseOrValue<string>;
-    magnetar: PromiseOrValue<string>;
-    tOft: PromiseOrValue<string>;
-    srcMarket: PromiseOrValue<string>;
-  };
-
-  export type ILeverageExternalContractsDataStructOutput = [
-    string,
-    string,
-    string,
-    string
-  ] & { swapper: string; magnetar: string; tOft: string; srcMarket: string };
 }
 
 export interface SGLLeverageInterface extends utils.Interface {
@@ -137,8 +80,6 @@ export interface SGLLeverageInterface extends utils.Interface {
     "minLiquidatorReward()": FunctionFragment;
     "minimumInterestPerSecond()": FunctionFragment;
     "minimumTargetUtilization()": FunctionFragment;
-    "multiHopBuyCollateral(address,uint256,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))": FunctionFragment;
-    "multiHopSellCollateral(address,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))": FunctionFragment;
     "name()": FunctionFragment;
     "nonces(address)": FunctionFragment;
     "oracle()": FunctionFragment;
@@ -249,10 +190,6 @@ export interface SGLLeverageInterface extends utils.Interface {
       | "minimumInterestPerSecond()"
       | "minimumTargetUtilization"
       | "minimumTargetUtilization()"
-      | "multiHopBuyCollateral"
-      | "multiHopBuyCollateral(address,uint256,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"
-      | "multiHopSellCollateral"
-      | "multiHopSellCollateral(address,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"
       | "name"
       | "name()"
       | "nonces"
@@ -608,52 +545,6 @@ export interface SGLLeverageInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "minimumTargetUtilization()",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "multiHopBuyCollateral",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<boolean>,
-      IUSDOBase.ILeverageSwapDataStruct,
-      IUSDOBase.ILeverageLZDataStruct,
-      IUSDOBase.ILeverageExternalContractsDataStruct
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "multiHopBuyCollateral(address,uint256,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<boolean>,
-      IUSDOBase.ILeverageSwapDataStruct,
-      IUSDOBase.ILeverageLZDataStruct,
-      IUSDOBase.ILeverageExternalContractsDataStruct
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "multiHopSellCollateral",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<boolean>,
-      IUSDOBase.ILeverageSwapDataStruct,
-      IUSDOBase.ILeverageLZDataStruct,
-      IUSDOBase.ILeverageExternalContractsDataStruct
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "multiHopSellCollateral(address,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<boolean>,
-      IUSDOBase.ILeverageSwapDataStruct,
-      IUSDOBase.ILeverageLZDataStruct,
-      IUSDOBase.ILeverageExternalContractsDataStruct
-    ]
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(functionFragment: "name()", values?: undefined): string;
@@ -1211,22 +1102,6 @@ export interface SGLLeverageInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "minimumTargetUtilization()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "multiHopBuyCollateral",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "multiHopBuyCollateral(address,uint256,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "multiHopSellCollateral",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "multiHopSellCollateral(address,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
@@ -2325,48 +2200,6 @@ export interface SGLLeverage extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    multiHopBuyCollateral(
-      from: PromiseOrValue<string>,
-      collateralAmount: PromiseOrValue<BigNumberish>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      useAirdroppedFunds: PromiseOrValue<boolean>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "multiHopBuyCollateral(address,uint256,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
-      from: PromiseOrValue<string>,
-      collateralAmount: PromiseOrValue<BigNumberish>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      useAirdroppedFunds: PromiseOrValue<boolean>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    multiHopSellCollateral(
-      from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      useAirdroppedFunds: PromiseOrValue<boolean>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "multiHopSellCollateral(address,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
-      from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      useAirdroppedFunds: PromiseOrValue<boolean>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     name(overrides?: CallOverrides): Promise<[string]>;
 
     "name()"(overrides?: CallOverrides): Promise<[string]>;
@@ -2942,48 +2775,6 @@ export interface SGLLeverage extends BaseContract {
 
   "minimumTargetUtilization()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-  multiHopBuyCollateral(
-    from: PromiseOrValue<string>,
-    collateralAmount: PromiseOrValue<BigNumberish>,
-    borrowAmount: PromiseOrValue<BigNumberish>,
-    useAirdroppedFunds: PromiseOrValue<boolean>,
-    swapData: IUSDOBase.ILeverageSwapDataStruct,
-    lzData: IUSDOBase.ILeverageLZDataStruct,
-    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "multiHopBuyCollateral(address,uint256,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
-    from: PromiseOrValue<string>,
-    collateralAmount: PromiseOrValue<BigNumberish>,
-    borrowAmount: PromiseOrValue<BigNumberish>,
-    useAirdroppedFunds: PromiseOrValue<boolean>,
-    swapData: IUSDOBase.ILeverageSwapDataStruct,
-    lzData: IUSDOBase.ILeverageLZDataStruct,
-    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  multiHopSellCollateral(
-    from: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    useAirdroppedFunds: PromiseOrValue<boolean>,
-    swapData: IUSDOBase.ILeverageSwapDataStruct,
-    lzData: IUSDOBase.ILeverageLZDataStruct,
-    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "multiHopSellCollateral(address,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
-    from: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    useAirdroppedFunds: PromiseOrValue<boolean>,
-    swapData: IUSDOBase.ILeverageSwapDataStruct,
-    lzData: IUSDOBase.ILeverageLZDataStruct,
-    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   name(overrides?: CallOverrides): Promise<string>;
 
   "name()"(overrides?: CallOverrides): Promise<string>;
@@ -3540,48 +3331,6 @@ export interface SGLLeverage extends BaseContract {
     minimumTargetUtilization(overrides?: CallOverrides): Promise<BigNumber>;
 
     "minimumTargetUtilization()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    multiHopBuyCollateral(
-      from: PromiseOrValue<string>,
-      collateralAmount: PromiseOrValue<BigNumberish>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      useAirdroppedFunds: PromiseOrValue<boolean>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "multiHopBuyCollateral(address,uint256,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
-      from: PromiseOrValue<string>,
-      collateralAmount: PromiseOrValue<BigNumberish>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      useAirdroppedFunds: PromiseOrValue<boolean>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    multiHopSellCollateral(
-      from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      useAirdroppedFunds: PromiseOrValue<boolean>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "multiHopSellCollateral(address,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
-      from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      useAirdroppedFunds: PromiseOrValue<boolean>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     name(overrides?: CallOverrides): Promise<string>;
 
@@ -4440,48 +4189,6 @@ export interface SGLLeverage extends BaseContract {
 
     "minimumTargetUtilization()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    multiHopBuyCollateral(
-      from: PromiseOrValue<string>,
-      collateralAmount: PromiseOrValue<BigNumberish>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      useAirdroppedFunds: PromiseOrValue<boolean>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "multiHopBuyCollateral(address,uint256,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
-      from: PromiseOrValue<string>,
-      collateralAmount: PromiseOrValue<BigNumberish>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      useAirdroppedFunds: PromiseOrValue<boolean>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    multiHopSellCollateral(
-      from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      useAirdroppedFunds: PromiseOrValue<boolean>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "multiHopSellCollateral(address,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
-      from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      useAirdroppedFunds: PromiseOrValue<boolean>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
     "name()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -5056,48 +4763,6 @@ export interface SGLLeverage extends BaseContract {
 
     "minimumTargetUtilization()"(
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    multiHopBuyCollateral(
-      from: PromiseOrValue<string>,
-      collateralAmount: PromiseOrValue<BigNumberish>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      useAirdroppedFunds: PromiseOrValue<boolean>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "multiHopBuyCollateral(address,uint256,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
-      from: PromiseOrValue<string>,
-      collateralAmount: PromiseOrValue<BigNumberish>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      useAirdroppedFunds: PromiseOrValue<boolean>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    multiHopSellCollateral(
-      from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      useAirdroppedFunds: PromiseOrValue<boolean>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "multiHopSellCollateral(address,uint256,bool,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address))"(
-      from: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      useAirdroppedFunds: PromiseOrValue<boolean>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;

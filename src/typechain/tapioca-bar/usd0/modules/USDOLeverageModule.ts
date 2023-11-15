@@ -28,19 +28,21 @@ import type {
   PromiseOrValue,
 } from "../../common";
 
+export declare namespace ICommonOFT {
+  export type LzCallParamsStruct = {
+    refundAddress: PromiseOrValue<string>;
+    zroPaymentAddress: PromiseOrValue<string>;
+    adapterParams: PromiseOrValue<BytesLike>;
+  };
+
+  export type LzCallParamsStructOutput = [string, string, string] & {
+    refundAddress: string;
+    zroPaymentAddress: string;
+    adapterParams: string;
+  };
+}
+
 export declare namespace IUSDOBase {
-  export type ILeverageSwapDataStruct = {
-    tokenOut: PromiseOrValue<string>;
-    amountOutMin: PromiseOrValue<BigNumberish>;
-    data: PromiseOrValue<BytesLike>;
-  };
-
-  export type ILeverageSwapDataStructOutput = [string, BigNumber, string] & {
-    tokenOut: string;
-    amountOutMin: BigNumber;
-    data: string;
-  };
-
   export type ILeverageLZDataStruct = {
     srcExtraGasLimit: PromiseOrValue<BigNumberish>;
     lzSrcChainId: PromiseOrValue<BigNumberish>;
@@ -69,6 +71,18 @@ export declare namespace IUSDOBase {
     refundAddress: string;
   };
 
+  export type ILeverageSwapDataStruct = {
+    tokenOut: PromiseOrValue<string>;
+    amountOutMin: PromiseOrValue<BigNumberish>;
+    data: PromiseOrValue<BytesLike>;
+  };
+
+  export type ILeverageSwapDataStructOutput = [string, BigNumber, string] & {
+    tokenOut: string;
+    amountOutMin: BigNumber;
+    data: string;
+  };
+
   export type ILeverageExternalContractsDataStruct = {
     swapper: PromiseOrValue<string>;
     magnetar: PromiseOrValue<string>;
@@ -82,68 +96,6 @@ export declare namespace IUSDOBase {
     string,
     string
   ] & { swapper: string; magnetar: string; tOft: string; srcMarket: string };
-}
-
-export declare namespace ICommonData {
-  export type IApprovalStruct = {
-    permitAll: PromiseOrValue<boolean>;
-    allowFailure: PromiseOrValue<boolean>;
-    yieldBoxTypeApproval: PromiseOrValue<boolean>;
-    actionType: PromiseOrValue<BigNumberish>;
-    target: PromiseOrValue<string>;
-    permitBorrow: PromiseOrValue<boolean>;
-    owner: PromiseOrValue<string>;
-    spender: PromiseOrValue<string>;
-    value: PromiseOrValue<BigNumberish>;
-    deadline: PromiseOrValue<BigNumberish>;
-    v: PromiseOrValue<BigNumberish>;
-    r: PromiseOrValue<BytesLike>;
-    s: PromiseOrValue<BytesLike>;
-  };
-
-  export type IApprovalStructOutput = [
-    boolean,
-    boolean,
-    boolean,
-    number,
-    string,
-    boolean,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    number,
-    string,
-    string
-  ] & {
-    permitAll: boolean;
-    allowFailure: boolean;
-    yieldBoxTypeApproval: boolean;
-    actionType: number;
-    target: string;
-    permitBorrow: boolean;
-    owner: string;
-    spender: string;
-    value: BigNumber;
-    deadline: BigNumber;
-    v: number;
-    r: string;
-    s: string;
-  };
-}
-
-export declare namespace ICommonOFT {
-  export type LzCallParamsStruct = {
-    refundAddress: PromiseOrValue<string>;
-    zroPaymentAddress: PromiseOrValue<string>;
-    adapterParams: PromiseOrValue<BytesLike>;
-  };
-
-  export type LzCallParamsStructOutput = [string, string, string] & {
-    refundAddress: string;
-    zroPaymentAddress: string;
-    adapterParams: string;
-  };
 }
 
 export interface USDOLeverageModuleInterface extends utils.Interface {
@@ -171,7 +123,6 @@ export interface USDOLeverageModuleInterface extends utils.Interface {
     "getConfig(uint16,uint16,address,uint256)": FunctionFragment;
     "getTrustedRemoteAddress(uint16)": FunctionFragment;
     "increaseAllowance(address,uint256)": FunctionFragment;
-    "initMultiHopBuy(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "isTrustedRemote(uint16,bytes)": FunctionFragment;
     "lzEndpoint()": FunctionFragment;
     "lzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
@@ -257,8 +208,6 @@ export interface USDOLeverageModuleInterface extends utils.Interface {
       | "getTrustedRemoteAddress(uint16)"
       | "increaseAllowance"
       | "increaseAllowance(address,uint256)"
-      | "initMultiHopBuy"
-      | "initMultiHopBuy(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "isTrustedRemote"
       | "isTrustedRemote(uint16,bytes)"
       | "lzEndpoint"
@@ -571,32 +520,6 @@ export interface USDOLeverageModuleInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "increaseAllowance(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "initMultiHopBuy",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      IUSDOBase.ILeverageSwapDataStruct,
-      IUSDOBase.ILeverageLZDataStruct,
-      IUSDOBase.ILeverageExternalContractsDataStruct,
-      PromiseOrValue<BytesLike>,
-      ICommonData.IApprovalStruct[]
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "initMultiHopBuy(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      IUSDOBase.ILeverageSwapDataStruct,
-      IUSDOBase.ILeverageLZDataStruct,
-      IUSDOBase.ILeverageExternalContractsDataStruct,
-      PromiseOrValue<BytesLike>,
-      ICommonData.IApprovalStruct[]
-    ]
   ): string;
   encodeFunctionData(
     functionFragment: "isTrustedRemote",
@@ -1091,14 +1014,6 @@ export interface USDOLeverageModuleInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "increaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "initMultiHopBuy",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "initMultiHopBuy(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1896,30 +1811,6 @@ export interface USDOLeverageModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    initMultiHopBuy(
-      from: PromiseOrValue<string>,
-      collateralAmount: PromiseOrValue<BigNumberish>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "initMultiHopBuy(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-      from: PromiseOrValue<string>,
-      collateralAmount: PromiseOrValue<BigNumberish>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -2525,30 +2416,6 @@ export interface USDOLeverageModule extends BaseContract {
     spender: PromiseOrValue<string>,
     addedValue: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  initMultiHopBuy(
-    from: PromiseOrValue<string>,
-    collateralAmount: PromiseOrValue<BigNumberish>,
-    borrowAmount: PromiseOrValue<BigNumberish>,
-    swapData: IUSDOBase.ILeverageSwapDataStruct,
-    lzData: IUSDOBase.ILeverageLZDataStruct,
-    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-    airdropAdapterParams: PromiseOrValue<BytesLike>,
-    approvals: ICommonData.IApprovalStruct[],
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "initMultiHopBuy(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-    from: PromiseOrValue<string>,
-    collateralAmount: PromiseOrValue<BigNumberish>,
-    borrowAmount: PromiseOrValue<BigNumberish>,
-    swapData: IUSDOBase.ILeverageSwapDataStruct,
-    lzData: IUSDOBase.ILeverageLZDataStruct,
-    externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-    airdropAdapterParams: PromiseOrValue<BytesLike>,
-    approvals: ICommonData.IApprovalStruct[],
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   isTrustedRemote(
@@ -3159,30 +3026,6 @@ export interface USDOLeverageModule extends BaseContract {
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
-
-    initMultiHopBuy(
-      from: PromiseOrValue<string>,
-      collateralAmount: PromiseOrValue<BigNumberish>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "initMultiHopBuy(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-      from: PromiseOrValue<string>,
-      collateralAmount: PromiseOrValue<BigNumberish>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
@@ -3948,30 +3791,6 @@ export interface USDOLeverageModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    initMultiHopBuy(
-      from: PromiseOrValue<string>,
-      collateralAmount: PromiseOrValue<BigNumberish>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "initMultiHopBuy(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-      from: PromiseOrValue<string>,
-      collateralAmount: PromiseOrValue<BigNumberish>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     isTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _srcAddress: PromiseOrValue<BytesLike>,
@@ -4578,30 +4397,6 @@ export interface USDOLeverageModule extends BaseContract {
       spender: PromiseOrValue<string>,
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    initMultiHopBuy(
-      from: PromiseOrValue<string>,
-      collateralAmount: PromiseOrValue<BigNumberish>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "initMultiHopBuy(address,uint256,uint256,(address,uint256,bytes),(uint256,uint16,uint16,address,bytes,bytes,address),(address,address,address,address),bytes,(bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-      from: PromiseOrValue<string>,
-      collateralAmount: PromiseOrValue<BigNumberish>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      swapData: IUSDOBase.ILeverageSwapDataStruct,
-      lzData: IUSDOBase.ILeverageLZDataStruct,
-      externalData: IUSDOBase.ILeverageExternalContractsDataStruct,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      approvals: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     isTrustedRemote(

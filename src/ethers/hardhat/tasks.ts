@@ -98,7 +98,6 @@ addCliParams(
         .addParam('value', 'Amount to send, (ex: 1.45)'),
 );
 
-
 addDebugModeParams(
     task(
         'saveBlockNumber',
