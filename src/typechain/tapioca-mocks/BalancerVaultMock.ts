@@ -71,15 +71,23 @@ export declare namespace BalancerVaultMock {
 
 export interface BalancerVaultMockInterface extends utils.Interface {
   functions: {
+    "getPoolId()": FunctionFragment;
     "swap((bytes32,uint8,address,address,uint256,bytes),(address,bool,address,bool),uint256,uint256)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "getPoolId"
+      | "getPoolId()"
       | "swap"
       | "swap((bytes32,uint8,address,address,uint256,bytes),(address,bool,address,bool),uint256,uint256)"
   ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "getPoolId", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "getPoolId()",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "swap",
     values: [
@@ -99,6 +107,11 @@ export interface BalancerVaultMockInterface extends utils.Interface {
     ]
   ): string;
 
+  decodeFunctionResult(functionFragment: "getPoolId", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getPoolId()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "swap", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "swap((bytes32,uint8,address,address,uint256,bytes),(address,bool,address,bool),uint256,uint256)",
@@ -137,6 +150,10 @@ export interface BalancerVaultMock extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    getPoolId(overrides?: CallOverrides): Promise<[string]>;
+
+    "getPoolId()"(overrides?: CallOverrides): Promise<[string]>;
+
     swap(
       singleSwap: BalancerVaultMock.SingleSwapStruct,
       arg1: BalancerVaultMock.FundManagementStruct,
@@ -153,6 +170,10 @@ export interface BalancerVaultMock extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
+
+  getPoolId(overrides?: CallOverrides): Promise<string>;
+
+  "getPoolId()"(overrides?: CallOverrides): Promise<string>;
 
   swap(
     singleSwap: BalancerVaultMock.SingleSwapStruct,
@@ -171,6 +192,10 @@ export interface BalancerVaultMock extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    getPoolId(overrides?: CallOverrides): Promise<string>;
+
+    "getPoolId()"(overrides?: CallOverrides): Promise<string>;
+
     swap(
       singleSwap: BalancerVaultMock.SingleSwapStruct,
       arg1: BalancerVaultMock.FundManagementStruct,
@@ -191,6 +216,10 @@ export interface BalancerVaultMock extends BaseContract {
   filters: {};
 
   estimateGas: {
+    getPoolId(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "getPoolId()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     swap(
       singleSwap: BalancerVaultMock.SingleSwapStruct,
       arg1: BalancerVaultMock.FundManagementStruct,
@@ -209,6 +238,10 @@ export interface BalancerVaultMock extends BaseContract {
   };
 
   populateTransaction: {
+    getPoolId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "getPoolId()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     swap(
       singleSwap: BalancerVaultMock.SingleSwapStruct,
       arg1: BalancerVaultMock.FundManagementStruct,

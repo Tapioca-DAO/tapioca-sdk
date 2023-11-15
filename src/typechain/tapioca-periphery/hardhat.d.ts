@@ -157,6 +157,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.UniswapUtils__factory>;
     getContractFactory(
+      name: "StargateLbpHelper",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.StargateLbpHelper__factory>;
+    getContractFactory(
       name: "BaseSwapper",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BaseSwapper__factory>;
@@ -357,6 +361,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.UniswapUtils>;
+    getContractAt(
+      name: "StargateLbpHelper",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.StargateLbpHelper>;
     getContractAt(
       name: "BaseSwapper",
       address: string,

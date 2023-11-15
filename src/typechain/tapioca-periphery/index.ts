@@ -76,6 +76,8 @@ export type { SequencerCheck } from "./contracts/oracle/utils/SequencerCheck";
 export { SequencerCheck__factory } from "./factories/contracts/oracle/utils/SequencerCheck__factory";
 export type { UniswapUtils } from "./contracts/oracle/utils/UniswapUtils";
 export { UniswapUtils__factory } from "./factories/contracts/oracle/utils/UniswapUtils__factory";
+export type { StargateLbpHelper } from "./contracts/StargateLbpHelper";
+export { StargateLbpHelper__factory } from "./factories/contracts/StargateLbpHelper__factory";
 export type { BaseSwapper } from "./contracts/Swapper/BaseSwapper";
 export { BaseSwapper__factory } from "./factories/contracts/Swapper/BaseSwapper__factory";
 export type { CurveSwapper } from "./contracts/Swapper/CurveSwapper";

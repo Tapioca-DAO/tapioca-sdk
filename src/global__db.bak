@@ -1135,6 +1135,47 @@
                     "meta": {}
                 }
             ]
+        },
+        "tapioca-mocks": {
+            "4002": [
+                {
+                    "name": "FTMMock",
+                    "address": "0x5dE5619f168c902532F09f152e57267fA879ef09",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
+                {
+                    "name": "FTMLPMock",
+                    "address": "0x42425C0412ED25ddeA13827e07ef45bcaE4FfF9E",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
+                {
+                    "name": "WETHMock",
+                    "address": "0xf8CBf810E80DCC5bBAb7B0be8C64D31319EA996D",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                }
+            ],
+            "421613": [
+                {
+                    "name": "GLPMock",
+                    "address": "0xc6A552e280500D4BDF39E6fFAC4E65FF39737fa7",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
+                {
+                    "name": "WETHMock",
+                    "address": "0x00AAc35Ff4f40FfA2E623D3E341762E75D47927b",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                }
+            ]
         }
     }
 }
