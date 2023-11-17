@@ -17,10 +17,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.FakeTapOFT__factory>;
     getContractFactory(
-      name: "FakeTwTAP",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.FakeTwTAP__factory>;
-    getContractFactory(
       name: "TwTAP",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TwTAP__factory>;
@@ -45,6 +41,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapiocaOptionLiquidityProvision__factory>;
     getContractFactory(
+      name: "Simulations",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Simulations__factory>;
+    getContractFactory(
       name: "BaseTapOFT",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BaseTapOFT__factory>;
@@ -66,11 +66,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.FakeTapOFT>;
-    getContractAt(
-      name: "FakeTwTAP",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.FakeTwTAP>;
     getContractAt(
       name: "TwTAP",
       address: string,
@@ -101,6 +96,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TapiocaOptionLiquidityProvision>;
+    getContractAt(
+      name: "Simulations",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Simulations>;
     getContractAt(
       name: "BaseTapOFT",
       address: string,

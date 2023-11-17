@@ -49,6 +49,7 @@ export type LockPositionStructOutput = [
 export interface TapiocaOptionBrokerInterface extends utils.Interface {
   functions: {
     "EPOCH_DURATION()": FunctionFragment;
+    "MIN_WEIGHT_FACTOR()": FunctionFragment;
     "claimOwnership()": FunctionFragment;
     "collectPaymentTokens(address[])": FunctionFragment;
     "emissionsStartTime()": FunctionFragment;
@@ -58,7 +59,6 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     "exitPosition(uint256)": FunctionFragment;
     "getCurrentWeek()": FunctionFragment;
     "getOTCDealDetails(uint256,address,uint256)": FunctionFragment;
-    "lastEpochUpdate()": FunctionFragment;
     "netDepositedForEpoch(uint256,uint256)": FunctionFragment;
     "newEpoch()": FunctionFragment;
     "oTAP()": FunctionFragment;
@@ -71,6 +71,7 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     "paymentTokenBeneficiary()": FunctionFragment;
     "paymentTokens(address)": FunctionFragment;
     "pendingOwner()": FunctionFragment;
+    "setMinWeightFactor(uint256)": FunctionFragment;
     "setPaymentToken(address,address,bytes)": FunctionFragment;
     "setPaymentTokenBeneficiary(address)": FunctionFragment;
     "setTapOracle(address,bytes)": FunctionFragment;
@@ -88,6 +89,8 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "EPOCH_DURATION"
       | "EPOCH_DURATION()"
+      | "MIN_WEIGHT_FACTOR"
+      | "MIN_WEIGHT_FACTOR()"
       | "claimOwnership"
       | "claimOwnership()"
       | "collectPaymentTokens"
@@ -106,8 +109,6 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
       | "getCurrentWeek()"
       | "getOTCDealDetails"
       | "getOTCDealDetails(uint256,address,uint256)"
-      | "lastEpochUpdate"
-      | "lastEpochUpdate()"
       | "netDepositedForEpoch"
       | "netDepositedForEpoch(uint256,uint256)"
       | "newEpoch"
@@ -132,6 +133,8 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
       | "paymentTokens(address)"
       | "pendingOwner"
       | "pendingOwner()"
+      | "setMinWeightFactor"
+      | "setMinWeightFactor(uint256)"
       | "setPaymentToken"
       | "setPaymentToken(address,address,bytes)"
       | "setPaymentTokenBeneficiary"
@@ -162,6 +165,14 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "EPOCH_DURATION()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "MIN_WEIGHT_FACTOR",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "MIN_WEIGHT_FACTOR()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -247,14 +258,6 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "lastEpochUpdate",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "lastEpochUpdate()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "netDepositedForEpoch",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
@@ -328,6 +331,14 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "pendingOwner()",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setMinWeightFactor",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setMinWeightFactor(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setPaymentToken",
@@ -428,6 +439,14 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "MIN_WEIGHT_FACTOR",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "MIN_WEIGHT_FACTOR()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "claimOwnership",
     data: BytesLike
   ): Result;
@@ -491,14 +510,6 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "getOTCDealDetails(uint256,address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "lastEpochUpdate",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "lastEpochUpdate()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -568,6 +579,14 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "pendingOwner()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setMinWeightFactor",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setMinWeightFactor(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -839,6 +858,10 @@ export interface TapiocaOptionBroker extends BaseContract {
 
     "EPOCH_DURATION()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    MIN_WEIGHT_FACTOR(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "MIN_WEIGHT_FACTOR()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     claimOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -922,10 +945,6 @@ export interface TapiocaOptionBroker extends BaseContract {
         tapAmount: BigNumber;
       }
     >;
-
-    lastEpochUpdate(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "lastEpochUpdate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     netDepositedForEpoch(
       epoch: PromiseOrValue<BigNumberish>,
@@ -1028,6 +1047,16 @@ export interface TapiocaOptionBroker extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<[string]>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<[string]>;
+
+    setMinWeightFactor(
+      _minWeightFactor: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setMinWeightFactor(uint256)"(
+      _minWeightFactor: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     setPaymentToken(
       _paymentToken: PromiseOrValue<string>,
@@ -1146,6 +1175,10 @@ export interface TapiocaOptionBroker extends BaseContract {
 
   "EPOCH_DURATION()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  MIN_WEIGHT_FACTOR(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "MIN_WEIGHT_FACTOR()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   claimOwnership(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -1229,10 +1262,6 @@ export interface TapiocaOptionBroker extends BaseContract {
       tapAmount: BigNumber;
     }
   >;
-
-  lastEpochUpdate(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "lastEpochUpdate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   netDepositedForEpoch(
     epoch: PromiseOrValue<BigNumberish>,
@@ -1335,6 +1364,16 @@ export interface TapiocaOptionBroker extends BaseContract {
   pendingOwner(overrides?: CallOverrides): Promise<string>;
 
   "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
+
+  setMinWeightFactor(
+    _minWeightFactor: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setMinWeightFactor(uint256)"(
+    _minWeightFactor: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   setPaymentToken(
     _paymentToken: PromiseOrValue<string>,
@@ -1453,6 +1492,10 @@ export interface TapiocaOptionBroker extends BaseContract {
 
     "EPOCH_DURATION()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    MIN_WEIGHT_FACTOR(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "MIN_WEIGHT_FACTOR()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     claimOwnership(overrides?: CallOverrides): Promise<void>;
 
     "claimOwnership()"(overrides?: CallOverrides): Promise<void>;
@@ -1532,10 +1575,6 @@ export interface TapiocaOptionBroker extends BaseContract {
         tapAmount: BigNumber;
       }
     >;
-
-    lastEpochUpdate(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "lastEpochUpdate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     netDepositedForEpoch(
       epoch: PromiseOrValue<BigNumberish>,
@@ -1630,6 +1669,16 @@ export interface TapiocaOptionBroker extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<string>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
+
+    setMinWeightFactor(
+      _minWeightFactor: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setMinWeightFactor(uint256)"(
+      _minWeightFactor: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     setPaymentToken(
       _paymentToken: PromiseOrValue<string>,
@@ -1851,6 +1900,10 @@ export interface TapiocaOptionBroker extends BaseContract {
 
     "EPOCH_DURATION()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    MIN_WEIGHT_FACTOR(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "MIN_WEIGHT_FACTOR()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     claimOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -1922,10 +1975,6 @@ export interface TapiocaOptionBroker extends BaseContract {
       _tapAmount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    lastEpochUpdate(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "lastEpochUpdate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     netDepositedForEpoch(
       epoch: PromiseOrValue<BigNumberish>,
@@ -2016,6 +2065,16 @@ export interface TapiocaOptionBroker extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    setMinWeightFactor(
+      _minWeightFactor: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setMinWeightFactor(uint256)"(
+      _minWeightFactor: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     setPaymentToken(
       _paymentToken: PromiseOrValue<string>,
@@ -2123,6 +2182,12 @@ export interface TapiocaOptionBroker extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    MIN_WEIGHT_FACTOR(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "MIN_WEIGHT_FACTOR()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     claimOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -2200,12 +2265,6 @@ export interface TapiocaOptionBroker extends BaseContract {
       _oTAPTokenID: PromiseOrValue<BigNumberish>,
       _paymentToken: PromiseOrValue<string>,
       _tapAmount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    lastEpochUpdate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "lastEpochUpdate()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -2302,6 +2361,16 @@ export interface TapiocaOptionBroker extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    setMinWeightFactor(
+      _minWeightFactor: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setMinWeightFactor(uint256)"(
+      _minWeightFactor: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     setPaymentToken(
       _paymentToken: PromiseOrValue<string>,
