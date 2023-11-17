@@ -9,7 +9,6 @@ import type {
   CallOverrides,
   ContractTransaction,
   Overrides,
-  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -64,100 +63,60 @@ export type ParticipationStructOutput = [
 
 export interface TwTAPInterface extends utils.Interface {
   functions: {
-    "DEFAULT_PAYLOAD_SIZE_LIMIT()": FunctionFragment;
     "DOMAIN_SEPARATOR()": FunctionFragment;
     "EPOCH_DURATION()": FunctionFragment;
-    "FUNCTION_TYPE_SEND()": FunctionFragment;
-    "HOST_CHAIN_ID()": FunctionFragment;
     "addRewardToken(address)": FunctionFragment;
     "advanceWeek(uint256)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "claimAndSendRewards(uint256,address[])": FunctionFragment;
+    "claimOwnership()": FunctionFragment;
     "claimRewards(uint256,address)": FunctionFragment;
     "claimable(uint256)": FunctionFragment;
     "claimed(uint256,uint256)": FunctionFragment;
-    "clearCredits(bytes)": FunctionFragment;
     "creation()": FunctionFragment;
     "currentWeek()": FunctionFragment;
     "distributeReward(uint256,uint256)": FunctionFragment;
-    "dstChainIdToBatchLimit(uint16)": FunctionFragment;
-    "dstChainIdToTransferGas(uint16)": FunctionFragment;
-    "estimateSendBatchFee(uint16,bytes,uint256[],bool,bytes)": FunctionFragment;
-    "estimateSendFee(uint16,bytes,uint256,bool,bytes)": FunctionFragment;
     "exitPosition(uint256)": FunctionFragment;
     "exitPositionAndSendTap(uint256)": FunctionFragment;
-    "failedMessages(uint16,bytes,uint64)": FunctionFragment;
-    "forceResumeReceive(uint16,bytes)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
-    "getConfig(uint16,uint16,address,uint256)": FunctionFragment;
     "getParticipation(uint256)": FunctionFragment;
-    "getTrustedRemoteAddress(uint16)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
-    "isTrustedRemote(uint16,bytes)": FunctionFragment;
     "lastProcessedWeek()": FunctionFragment;
-    "lzEndpoint()": FunctionFragment;
-    "lzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
     "maxRewardTokens()": FunctionFragment;
-    "minDstGasLookup(uint16,uint16)": FunctionFragment;
-    "minGasToTransferAndStore()": FunctionFragment;
     "mintedTWTap()": FunctionFragment;
     "name()": FunctionFragment;
-    "nonblockingLzReceive(uint16,bytes,uint64,bytes)": FunctionFragment;
     "nonces(address)": FunctionFragment;
     "owner()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
     "participants(uint256)": FunctionFragment;
     "participate(address,uint256,uint256)": FunctionFragment;
-    "payloadSizeLimitLookup(uint16)": FunctionFragment;
+    "paused()": FunctionFragment;
+    "pendingOwner()": FunctionFragment;
     "permit(address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "precrime()": FunctionFragment;
     "releaseTap(uint256,address)": FunctionFragment;
-    "renounceOwnership()": FunctionFragment;
-    "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
     "rewardTokenIndex(address)": FunctionFragment;
     "rewardTokens(uint256)": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,bytes)": FunctionFragment;
-    "sendBatchFrom(address,uint16,bytes,uint256[],address,address,bytes)": FunctionFragment;
-    "sendFrom(address,uint16,bytes,uint256,address,address,bytes)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
-    "setDstChainIdToBatchLimit(uint16,uint256)": FunctionFragment;
-    "setDstChainIdToTransferGas(uint16,uint256)": FunctionFragment;
     "setMaxRewardTokensLength(uint256)": FunctionFragment;
-    "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
-    "setMinGasToTransferAndStore(uint256)": FunctionFragment;
-    "setPayloadSizeLimit(uint16,uint256)": FunctionFragment;
-    "setPrecrime(address)": FunctionFragment;
-    "setReceiveVersion(uint16)": FunctionFragment;
-    "setSendVersion(uint16)": FunctionFragment;
-    "setTrustedRemote(uint16,bytes)": FunctionFragment;
-    "setTrustedRemoteAddress(uint16,bytes)": FunctionFragment;
-    "storedCredits(bytes32)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
     "tapOFT()": FunctionFragment;
     "tokenURI(uint256)": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
-    "transferOwnership(address)": FunctionFragment;
-    "trustedRemoteLookup(uint16)": FunctionFragment;
+    "transferOwnership(address,bool,bool)": FunctionFragment;
     "twAML()": FunctionFragment;
     "weekTotals(uint256)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "DEFAULT_PAYLOAD_SIZE_LIMIT"
-      | "DEFAULT_PAYLOAD_SIZE_LIMIT()"
       | "DOMAIN_SEPARATOR"
       | "DOMAIN_SEPARATOR()"
       | "EPOCH_DURATION"
       | "EPOCH_DURATION()"
-      | "FUNCTION_TYPE_SEND"
-      | "FUNCTION_TYPE_SEND()"
-      | "HOST_CHAIN_ID"
-      | "HOST_CHAIN_ID()"
       | "addRewardToken"
       | "addRewardToken(address)"
       | "advanceWeek"
@@ -168,66 +127,38 @@ export interface TwTAPInterface extends utils.Interface {
       | "balanceOf(address)"
       | "claimAndSendRewards"
       | "claimAndSendRewards(uint256,address[])"
+      | "claimOwnership"
+      | "claimOwnership()"
       | "claimRewards"
       | "claimRewards(uint256,address)"
       | "claimable"
       | "claimable(uint256)"
       | "claimed"
       | "claimed(uint256,uint256)"
-      | "clearCredits"
-      | "clearCredits(bytes)"
       | "creation"
       | "creation()"
       | "currentWeek"
       | "currentWeek()"
       | "distributeReward"
       | "distributeReward(uint256,uint256)"
-      | "dstChainIdToBatchLimit"
-      | "dstChainIdToBatchLimit(uint16)"
-      | "dstChainIdToTransferGas"
-      | "dstChainIdToTransferGas(uint16)"
-      | "estimateSendBatchFee"
-      | "estimateSendBatchFee(uint16,bytes,uint256[],bool,bytes)"
-      | "estimateSendFee"
-      | "estimateSendFee(uint16,bytes,uint256,bool,bytes)"
       | "exitPosition"
       | "exitPosition(uint256)"
       | "exitPositionAndSendTap"
       | "exitPositionAndSendTap(uint256)"
-      | "failedMessages"
-      | "failedMessages(uint16,bytes,uint64)"
-      | "forceResumeReceive"
-      | "forceResumeReceive(uint16,bytes)"
       | "getApproved"
       | "getApproved(uint256)"
-      | "getConfig"
-      | "getConfig(uint16,uint16,address,uint256)"
       | "getParticipation"
       | "getParticipation(uint256)"
-      | "getTrustedRemoteAddress"
-      | "getTrustedRemoteAddress(uint16)"
       | "isApprovedForAll"
       | "isApprovedForAll(address,address)"
-      | "isTrustedRemote"
-      | "isTrustedRemote(uint16,bytes)"
       | "lastProcessedWeek"
       | "lastProcessedWeek()"
-      | "lzEndpoint"
-      | "lzEndpoint()"
-      | "lzReceive"
-      | "lzReceive(uint16,bytes,uint64,bytes)"
       | "maxRewardTokens"
       | "maxRewardTokens()"
-      | "minDstGasLookup"
-      | "minDstGasLookup(uint16,uint16)"
-      | "minGasToTransferAndStore"
-      | "minGasToTransferAndStore()"
       | "mintedTWTap"
       | "mintedTWTap()"
       | "name"
       | "name()"
-      | "nonblockingLzReceive"
-      | "nonblockingLzReceive(uint16,bytes,uint64,bytes)"
       | "nonces"
       | "nonces(address)"
       | "owner"
@@ -238,56 +169,24 @@ export interface TwTAPInterface extends utils.Interface {
       | "participants(uint256)"
       | "participate"
       | "participate(address,uint256,uint256)"
-      | "payloadSizeLimitLookup"
-      | "payloadSizeLimitLookup(uint16)"
+      | "paused"
+      | "paused()"
+      | "pendingOwner"
+      | "pendingOwner()"
       | "permit"
       | "permit(address,uint256,uint256,uint8,bytes32,bytes32)"
-      | "precrime"
-      | "precrime()"
       | "releaseTap"
       | "releaseTap(uint256,address)"
-      | "renounceOwnership"
-      | "renounceOwnership()"
-      | "retryMessage"
-      | "retryMessage(uint16,bytes,uint64,bytes)"
       | "rewardTokenIndex"
       | "rewardTokenIndex(address)"
       | "rewardTokens"
       | "rewardTokens(uint256)"
       | "safeTransferFrom(address,address,uint256)"
       | "safeTransferFrom(address,address,uint256,bytes)"
-      | "sendBatchFrom"
-      | "sendBatchFrom(address,uint16,bytes,uint256[],address,address,bytes)"
-      | "sendFrom"
-      | "sendFrom(address,uint16,bytes,uint256,address,address,bytes)"
       | "setApprovalForAll"
       | "setApprovalForAll(address,bool)"
-      | "setConfig"
-      | "setConfig(uint16,uint16,uint256,bytes)"
-      | "setDstChainIdToBatchLimit"
-      | "setDstChainIdToBatchLimit(uint16,uint256)"
-      | "setDstChainIdToTransferGas"
-      | "setDstChainIdToTransferGas(uint16,uint256)"
       | "setMaxRewardTokensLength"
       | "setMaxRewardTokensLength(uint256)"
-      | "setMinDstGas"
-      | "setMinDstGas(uint16,uint16,uint256)"
-      | "setMinGasToTransferAndStore"
-      | "setMinGasToTransferAndStore(uint256)"
-      | "setPayloadSizeLimit"
-      | "setPayloadSizeLimit(uint16,uint256)"
-      | "setPrecrime"
-      | "setPrecrime(address)"
-      | "setReceiveVersion"
-      | "setReceiveVersion(uint16)"
-      | "setSendVersion"
-      | "setSendVersion(uint16)"
-      | "setTrustedRemote"
-      | "setTrustedRemote(uint16,bytes)"
-      | "setTrustedRemoteAddress"
-      | "setTrustedRemoteAddress(uint16,bytes)"
-      | "storedCredits"
-      | "storedCredits(bytes32)"
       | "supportsInterface"
       | "supportsInterface(bytes4)"
       | "symbol"
@@ -299,23 +198,13 @@ export interface TwTAPInterface extends utils.Interface {
       | "transferFrom"
       | "transferFrom(address,address,uint256)"
       | "transferOwnership"
-      | "transferOwnership(address)"
-      | "trustedRemoteLookup"
-      | "trustedRemoteLookup(uint16)"
+      | "transferOwnership(address,bool,bool)"
       | "twAML"
       | "twAML()"
       | "weekTotals"
       | "weekTotals(uint256)"
   ): FunctionFragment;
 
-  encodeFunctionData(
-    functionFragment: "DEFAULT_PAYLOAD_SIZE_LIMIT",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "DEFAULT_PAYLOAD_SIZE_LIMIT()",
-    values?: undefined
-  ): string;
   encodeFunctionData(
     functionFragment: "DOMAIN_SEPARATOR",
     values?: undefined
@@ -330,22 +219,6 @@ export interface TwTAPInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "EPOCH_DURATION()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "FUNCTION_TYPE_SEND",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "FUNCTION_TYPE_SEND()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "HOST_CHAIN_ID",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "HOST_CHAIN_ID()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -389,6 +262,14 @@ export interface TwTAPInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>[]]
   ): string;
   encodeFunctionData(
+    functionFragment: "claimOwnership",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "claimOwnership()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "claimRewards",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
@@ -412,14 +293,6 @@ export interface TwTAPInterface extends utils.Interface {
     functionFragment: "claimed(uint256,uint256)",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(
-    functionFragment: "clearCredits",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "clearCredits(bytes)",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
   encodeFunctionData(functionFragment: "creation", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "creation()",
@@ -442,62 +315,6 @@ export interface TwTAPInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "dstChainIdToBatchLimit",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "dstChainIdToBatchLimit(uint16)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "dstChainIdToTransferGas",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "dstChainIdToTransferGas(uint16)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "estimateSendBatchFee",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>[],
-      PromiseOrValue<boolean>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "estimateSendBatchFee(uint16,bytes,uint256[],bool,bytes)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>[],
-      PromiseOrValue<boolean>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "estimateSendFee",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "estimateSendFee(uint16,bytes,uint256,bool,bytes)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "exitPosition",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
@@ -514,30 +331,6 @@ export interface TwTAPInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "failedMessages",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "failedMessages(uint16,bytes,uint64)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "forceResumeReceive",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "forceResumeReceive(uint16,bytes)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "getApproved",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
@@ -546,37 +339,11 @@ export interface TwTAPInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "getConfig",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getConfig(uint16,uint16,address,uint256)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "getParticipation",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getParticipation(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getTrustedRemoteAddress",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getTrustedRemoteAddress(uint16)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
@@ -588,14 +355,6 @@ export interface TwTAPInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "isTrustedRemote",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isTrustedRemote(uint16,bytes)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "lastProcessedWeek",
     values?: undefined
   ): string;
@@ -604,53 +363,11 @@ export interface TwTAPInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "lzEndpoint",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "lzEndpoint()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "lzReceive",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "lzReceive(uint16,bytes,uint64,bytes)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "maxRewardTokens",
     values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "maxRewardTokens()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "minDstGasLookup",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "minDstGasLookup(uint16,uint16)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "minGasToTransferAndStore",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "minGasToTransferAndStore()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -663,24 +380,6 @@ export interface TwTAPInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(functionFragment: "name()", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "nonblockingLzReceive",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "nonblockingLzReceive(uint16,bytes,uint64,bytes)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
   encodeFunctionData(
     functionFragment: "nonces",
     values: [PromiseOrValue<string>]
@@ -723,13 +422,15 @@ export interface TwTAPInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>
     ]
   ): string;
+  encodeFunctionData(functionFragment: "paused", values?: undefined): string;
+  encodeFunctionData(functionFragment: "paused()", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "payloadSizeLimitLookup",
-    values: [PromiseOrValue<BigNumberish>]
+    functionFragment: "pendingOwner",
+    values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "payloadSizeLimitLookup(uint16)",
-    values: [PromiseOrValue<BigNumberish>]
+    functionFragment: "pendingOwner()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "permit",
@@ -753,11 +454,6 @@ export interface TwTAPInterface extends utils.Interface {
       PromiseOrValue<BytesLike>
     ]
   ): string;
-  encodeFunctionData(functionFragment: "precrime", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "precrime()",
-    values?: undefined
-  ): string;
   encodeFunctionData(
     functionFragment: "releaseTap",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
@@ -765,32 +461,6 @@ export interface TwTAPInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "releaseTap(uint256,address)",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "renounceOwnership",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "renounceOwnership()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "retryMessage",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "retryMessage(uint16,bytes,uint64,bytes)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
   ): string;
   encodeFunctionData(
     functionFragment: "rewardTokenIndex",
@@ -826,54 +496,6 @@ export interface TwTAPInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "sendBatchFrom",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>[],
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "sendBatchFrom(address,uint16,bytes,uint256[],address,address,bytes)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>[],
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "sendFrom",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "sendFrom(address,uint16,bytes,uint256,address,address,bytes)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "setApprovalForAll",
     values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
   ): string;
@@ -882,126 +504,12 @@ export interface TwTAPInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
-    functionFragment: "setConfig",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setConfig(uint16,uint16,uint256,bytes)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setDstChainIdToBatchLimit",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setDstChainIdToBatchLimit(uint16,uint256)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setDstChainIdToTransferGas",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setDstChainIdToTransferGas(uint16,uint256)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "setMaxRewardTokensLength",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMaxRewardTokensLength(uint256)",
     values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setMinDstGas",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setMinDstGas(uint16,uint16,uint256)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setMinGasToTransferAndStore",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setMinGasToTransferAndStore(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setPayloadSizeLimit",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setPayloadSizeLimit(uint16,uint256)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setPrecrime",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setPrecrime(address)",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setReceiveVersion",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setReceiveVersion(uint16)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setSendVersion",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setSendVersion(uint16)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setTrustedRemote",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setTrustedRemote(uint16,bytes)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setTrustedRemoteAddress",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setTrustedRemoteAddress(uint16,bytes)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "storedCredits",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "storedCredits(bytes32)",
-    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "supportsInterface",
@@ -1041,19 +549,19 @@ export interface TwTAPInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
-    values: [PromiseOrValue<string>]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<boolean>,
+      PromiseOrValue<boolean>
+    ]
   ): string;
   encodeFunctionData(
-    functionFragment: "transferOwnership(address)",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "trustedRemoteLookup",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "trustedRemoteLookup(uint16)",
-    values: [PromiseOrValue<BigNumberish>]
+    functionFragment: "transferOwnership(address,bool,bool)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<boolean>,
+      PromiseOrValue<boolean>
+    ]
   ): string;
   encodeFunctionData(functionFragment: "twAML", values?: undefined): string;
   encodeFunctionData(functionFragment: "twAML()", values?: undefined): string;
@@ -1066,14 +574,6 @@ export interface TwTAPInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
 
-  decodeFunctionResult(
-    functionFragment: "DEFAULT_PAYLOAD_SIZE_LIMIT",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "DEFAULT_PAYLOAD_SIZE_LIMIT()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "DOMAIN_SEPARATOR",
     data: BytesLike
@@ -1088,22 +588,6 @@ export interface TwTAPInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "EPOCH_DURATION()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "FUNCTION_TYPE_SEND",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "FUNCTION_TYPE_SEND()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "HOST_CHAIN_ID",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "HOST_CHAIN_ID()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1141,6 +625,14 @@ export interface TwTAPInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "claimOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "claimOwnership()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "claimRewards",
     data: BytesLike
   ): Result;
@@ -1156,14 +648,6 @@ export interface TwTAPInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "claimed", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "claimed(uint256,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "clearCredits",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "clearCredits(bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "creation", data: BytesLike): Result;
@@ -1185,38 +669,6 @@ export interface TwTAPInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "dstChainIdToBatchLimit",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "dstChainIdToBatchLimit(uint16)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "dstChainIdToTransferGas",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "dstChainIdToTransferGas(uint16)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "estimateSendBatchFee",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "estimateSendBatchFee(uint16,bytes,uint256[],bool,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "estimateSendFee",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "estimateSendFee(uint16,bytes,uint256,bool,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "exitPosition",
     data: BytesLike
   ): Result;
@@ -1233,32 +685,11 @@ export interface TwTAPInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "failedMessages",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "failedMessages(uint16,bytes,uint64)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "forceResumeReceive",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "forceResumeReceive(uint16,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "getApproved",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "getApproved(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "getConfig", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getConfig(uint16,uint16,address,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1270,27 +701,11 @@ export interface TwTAPInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getTrustedRemoteAddress",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getTrustedRemoteAddress(uint16)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "isApprovedForAll",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll(address,address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isTrustedRemote",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isTrustedRemote(uint16,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1301,38 +716,12 @@ export interface TwTAPInterface extends utils.Interface {
     functionFragment: "lastProcessedWeek()",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "lzEndpoint", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "lzEndpoint()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "lzReceive", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "lzReceive(uint16,bytes,uint64,bytes)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "maxRewardTokens",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "maxRewardTokens()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "minDstGasLookup",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "minDstGasLookup(uint16,uint16)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "minGasToTransferAndStore",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "minGasToTransferAndStore()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1345,14 +734,6 @@ export interface TwTAPInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "nonblockingLzReceive",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "nonblockingLzReceive(uint16,bytes,uint64,bytes)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "nonces(address)",
@@ -1381,12 +762,14 @@ export interface TwTAPInterface extends utils.Interface {
     functionFragment: "participate(address,uint256,uint256)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "paused()", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "payloadSizeLimitLookup",
+    functionFragment: "pendingOwner",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "payloadSizeLimitLookup(uint16)",
+    functionFragment: "pendingOwner()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "permit", data: BytesLike): Result;
@@ -1394,27 +777,9 @@ export interface TwTAPInterface extends utils.Interface {
     functionFragment: "permit(address,uint256,uint256,uint8,bytes32,bytes32)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "precrime", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "precrime()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "releaseTap", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "releaseTap(uint256,address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "retryMessage",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "retryMessage(uint16,bytes,uint64,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1442,45 +807,11 @@ export interface TwTAPInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "sendBatchFrom",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "sendBatchFrom(address,uint16,bytes,uint256[],address,address,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "sendFrom", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "sendFrom(address,uint16,bytes,uint256,address,address,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "setApprovalForAll",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "setApprovalForAll(address,bool)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "setConfig", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "setConfig(uint16,uint16,uint256,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setDstChainIdToBatchLimit",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setDstChainIdToBatchLimit(uint16,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setDstChainIdToTransferGas",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setDstChainIdToTransferGas(uint16,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1489,78 +820,6 @@ export interface TwTAPInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setMaxRewardTokensLength(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setMinDstGas",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setMinDstGas(uint16,uint16,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setMinGasToTransferAndStore",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setMinGasToTransferAndStore(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setPayloadSizeLimit",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setPayloadSizeLimit(uint16,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setPrecrime",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setPrecrime(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setReceiveVersion",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setReceiveVersion(uint16)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setSendVersion",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setSendVersion(uint16)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setTrustedRemote",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setTrustedRemote(uint16,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setTrustedRemoteAddress",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setTrustedRemoteAddress(uint16,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "storedCredits",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "storedCredits(bytes32)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1593,15 +852,7 @@ export interface TwTAPInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "transferOwnership(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "trustedRemoteLookup",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "trustedRemoteLookup(uint16)",
+    functionFragment: "transferOwnership(address,bool,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "twAML", data: BytesLike): Result;
@@ -1616,21 +867,13 @@ export interface TwTAPInterface extends utils.Interface {
     "AMLDivergence(uint256,uint256,uint256)": EventFragment;
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalForAll(address,address,bool)": EventFragment;
-    "CreditCleared(bytes32)": EventFragment;
-    "CreditStored(bytes32,bytes)": EventFragment;
     "ExitPosition(uint256,uint256)": EventFragment;
     "LogMaxRewardsLength(uint256,uint256,uint256)": EventFragment;
-    "MessageFailed(uint16,bytes,uint64,bytes,bytes)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "Participate(address,uint256,uint256)": EventFragment;
-    "ReceiveFromChain(uint16,bytes,address,uint256[])": EventFragment;
-    "RetryMessageSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
-    "SendToChain(uint16,address,bytes,uint256[])": EventFragment;
-    "SetMinDstGas(uint16,uint16,uint256)": EventFragment;
-    "SetPrecrime(address)": EventFragment;
-    "SetTrustedRemote(uint16,bytes)": EventFragment;
-    "SetTrustedRemoteAddress(uint16,bytes)": EventFragment;
+    "Paused(address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
+    "Unpaused(address)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "AMLDivergence"): EventFragment;
@@ -1645,12 +888,6 @@ export interface TwTAPInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "ApprovalForAll(address,address,bool)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "CreditCleared"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "CreditCleared(bytes32)"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "CreditStored"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "CreditStored(bytes32,bytes)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ExitPosition"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ExitPosition(uint256,uint256)"
@@ -1658,10 +895,6 @@ export interface TwTAPInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "LogMaxRewardsLength"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "LogMaxRewardsLength(uint256,uint256,uint256)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "MessageFailed"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "MessageFailed(uint16,bytes,uint64,bytes,bytes)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
@@ -1671,36 +904,14 @@ export interface TwTAPInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "Participate(address,uint256,uint256)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "ReceiveFromChain"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "ReceiveFromChain(uint16,bytes,address,uint256[])"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "RetryMessageSuccess"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "RetryMessageSuccess(uint16,bytes,uint64,bytes32)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "SendToChain"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "SendToChain(uint16,address,bytes,uint256[])"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "SetMinDstGas"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "SetMinDstGas(uint16,uint16,uint256)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "SetPrecrime"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "SetPrecrime(address)"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "SetTrustedRemote"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "SetTrustedRemote(uint16,bytes)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "SetTrustedRemoteAddress"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "SetTrustedRemoteAddress(uint16,bytes)"
-  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Paused"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Paused(address)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Transfer(address,address,uint256)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Unpaused"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Unpaused(address)"): EventFragment;
 }
 
 export interface AMLDivergenceEventObject {
@@ -1739,24 +950,6 @@ export type ApprovalForAllEvent = TypedEvent<
 
 export type ApprovalForAllEventFilter = TypedEventFilter<ApprovalForAllEvent>;
 
-export interface CreditClearedEventObject {
-  _hashedPayload: string;
-}
-export type CreditClearedEvent = TypedEvent<[string], CreditClearedEventObject>;
-
-export type CreditClearedEventFilter = TypedEventFilter<CreditClearedEvent>;
-
-export interface CreditStoredEventObject {
-  _hashedPayload: string;
-  _payload: string;
-}
-export type CreditStoredEvent = TypedEvent<
-  [string, string],
-  CreditStoredEventObject
->;
-
-export type CreditStoredEventFilter = TypedEventFilter<CreditStoredEvent>;
-
 export interface ExitPositionEventObject {
   tokenId: BigNumber;
   amount: BigNumber;
@@ -1780,20 +973,6 @@ export type LogMaxRewardsLengthEvent = TypedEvent<
 
 export type LogMaxRewardsLengthEventFilter =
   TypedEventFilter<LogMaxRewardsLengthEvent>;
-
-export interface MessageFailedEventObject {
-  _srcChainId: number;
-  _srcAddress: string;
-  _nonce: BigNumber;
-  _payload: string;
-  _reason: string;
-}
-export type MessageFailedEvent = TypedEvent<
-  [number, string, BigNumber, string, string],
-  MessageFailedEventObject
->;
-
-export type MessageFailedEventFilter = TypedEventFilter<MessageFailedEvent>;
 
 export interface OwnershipTransferredEventObject {
   previousOwner: string;
@@ -1819,89 +998,12 @@ export type ParticipateEvent = TypedEvent<
 
 export type ParticipateEventFilter = TypedEventFilter<ParticipateEvent>;
 
-export interface ReceiveFromChainEventObject {
-  _srcChainId: number;
-  _srcAddress: string;
-  _toAddress: string;
-  _tokenIds: BigNumber[];
+export interface PausedEventObject {
+  account: string;
 }
-export type ReceiveFromChainEvent = TypedEvent<
-  [number, string, string, BigNumber[]],
-  ReceiveFromChainEventObject
->;
+export type PausedEvent = TypedEvent<[string], PausedEventObject>;
 
-export type ReceiveFromChainEventFilter =
-  TypedEventFilter<ReceiveFromChainEvent>;
-
-export interface RetryMessageSuccessEventObject {
-  _srcChainId: number;
-  _srcAddress: string;
-  _nonce: BigNumber;
-  _payloadHash: string;
-}
-export type RetryMessageSuccessEvent = TypedEvent<
-  [number, string, BigNumber, string],
-  RetryMessageSuccessEventObject
->;
-
-export type RetryMessageSuccessEventFilter =
-  TypedEventFilter<RetryMessageSuccessEvent>;
-
-export interface SendToChainEventObject {
-  _dstChainId: number;
-  _from: string;
-  _toAddress: string;
-  _tokenIds: BigNumber[];
-}
-export type SendToChainEvent = TypedEvent<
-  [number, string, string, BigNumber[]],
-  SendToChainEventObject
->;
-
-export type SendToChainEventFilter = TypedEventFilter<SendToChainEvent>;
-
-export interface SetMinDstGasEventObject {
-  _dstChainId: number;
-  _type: number;
-  _minDstGas: BigNumber;
-}
-export type SetMinDstGasEvent = TypedEvent<
-  [number, number, BigNumber],
-  SetMinDstGasEventObject
->;
-
-export type SetMinDstGasEventFilter = TypedEventFilter<SetMinDstGasEvent>;
-
-export interface SetPrecrimeEventObject {
-  precrime: string;
-}
-export type SetPrecrimeEvent = TypedEvent<[string], SetPrecrimeEventObject>;
-
-export type SetPrecrimeEventFilter = TypedEventFilter<SetPrecrimeEvent>;
-
-export interface SetTrustedRemoteEventObject {
-  _remoteChainId: number;
-  _path: string;
-}
-export type SetTrustedRemoteEvent = TypedEvent<
-  [number, string],
-  SetTrustedRemoteEventObject
->;
-
-export type SetTrustedRemoteEventFilter =
-  TypedEventFilter<SetTrustedRemoteEvent>;
-
-export interface SetTrustedRemoteAddressEventObject {
-  _remoteChainId: number;
-  _remoteAddress: string;
-}
-export type SetTrustedRemoteAddressEvent = TypedEvent<
-  [number, string],
-  SetTrustedRemoteAddressEventObject
->;
-
-export type SetTrustedRemoteAddressEventFilter =
-  TypedEventFilter<SetTrustedRemoteAddressEvent>;
+export type PausedEventFilter = TypedEventFilter<PausedEvent>;
 
 export interface TransferEventObject {
   from: string;
@@ -1914,6 +1016,13 @@ export type TransferEvent = TypedEvent<
 >;
 
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
+
+export interface UnpausedEventObject {
+  account: string;
+}
+export type UnpausedEvent = TypedEvent<[string], UnpausedEventObject>;
+
+export type UnpausedEventFilter = TypedEventFilter<UnpausedEvent>;
 
 export interface TwTAP extends BaseContract {
   contractName: "TwTAP";
@@ -1944,12 +1053,6 @@ export interface TwTAP extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    DEFAULT_PAYLOAD_SIZE_LIMIT(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "DEFAULT_PAYLOAD_SIZE_LIMIT()"(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<[string]>;
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<[string]>;
@@ -1957,14 +1060,6 @@ export interface TwTAP extends BaseContract {
     EPOCH_DURATION(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "EPOCH_DURATION()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    FUNCTION_TYPE_SEND(overrides?: CallOverrides): Promise<[number]>;
-
-    "FUNCTION_TYPE_SEND()"(overrides?: CallOverrides): Promise<[number]>;
-
-    HOST_CHAIN_ID(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "HOST_CHAIN_ID()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     addRewardToken(
       token: PromiseOrValue<string>,
@@ -2020,6 +1115,14 @@ export interface TwTAP extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    claimOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "claimOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     claimRewards(
       _tokenId: PromiseOrValue<BigNumberish>,
       _to: PromiseOrValue<string>,
@@ -2054,16 +1157,6 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    clearCredits(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "clearCredits(bytes)"(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     creation(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "creation()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -2083,70 +1176,6 @@ export interface TwTAP extends BaseContract {
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
-
-    dstChainIdToBatchLimit(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "dstChainIdToBatchLimit(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    dstChainIdToTransferGas(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "dstChainIdToTransferGas(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    estimateSendBatchFee(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenIds: PromiseOrValue<BigNumberish>[],
-      _useZro: PromiseOrValue<boolean>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
-    >;
-
-    "estimateSendBatchFee(uint16,bytes,uint256[],bool,bytes)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenIds: PromiseOrValue<BigNumberish>[],
-      _useZro: PromiseOrValue<boolean>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
-    >;
-
-    estimateSendFee(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _useZro: PromiseOrValue<boolean>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
-    >;
-
-    "estimateSendFee(uint16,bytes,uint256,bool,bytes)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _useZro: PromiseOrValue<boolean>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
-    >;
 
     exitPosition(
       _tokenId: PromiseOrValue<BigNumberish>,
@@ -2168,32 +1197,6 @@ export interface TwTAP extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    failedMessages(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BytesLike>,
-      arg2: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    "failedMessages(uint16,bytes,uint64)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BytesLike>,
-      arg2: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    forceResumeReceive(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "forceResumeReceive(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     getApproved(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -2201,22 +1204,6 @@ export interface TwTAP extends BaseContract {
 
     "getApproved(uint256)"(
       tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    getConfig(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<string>,
-      _configType: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    "getConfig(uint16,uint16,address,uint256)"(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<string>,
-      _configType: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
@@ -2234,16 +1221,6 @@ export interface TwTAP extends BaseContract {
       [ParticipationStructOutput] & { participant: ParticipationStructOutput }
     >;
 
-    getTrustedRemoteAddress(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    "getTrustedRemoteAddress(uint16)"(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
     isApprovedForAll(
       owner: PromiseOrValue<string>,
       operator: PromiseOrValue<string>,
@@ -2256,63 +1233,13 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
-    isTrustedRemote(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
-    "isTrustedRemote(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
     lastProcessedWeek(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "lastProcessedWeek()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    lzEndpoint(overrides?: CallOverrides): Promise<[string]>;
-
-    "lzEndpoint()"(overrides?: CallOverrides): Promise<[string]>;
-
-    lzReceive(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "lzReceive(uint16,bytes,uint64,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     maxRewardTokens(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "maxRewardTokens()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    minDstGasLookup(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "minDstGasLookup(uint16,uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    minGasToTransferAndStore(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "minGasToTransferAndStore()"(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
 
     mintedTWTap(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -2321,22 +1248,6 @@ export interface TwTAP extends BaseContract {
     name(overrides?: CallOverrides): Promise<[string]>;
 
     "name()"(overrides?: CallOverrides): Promise<[string]>;
-
-    nonblockingLzReceive(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "nonblockingLzReceive(uint16,bytes,uint64,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -2430,15 +1341,13 @@ export interface TwTAP extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    payloadSizeLimitLookup(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    paused(overrides?: CallOverrides): Promise<[boolean]>;
 
-    "payloadSizeLimitLookup(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    "paused()"(overrides?: CallOverrides): Promise<[boolean]>;
+
+    pendingOwner(overrides?: CallOverrides): Promise<[string]>;
+
+    "pendingOwner()"(overrides?: CallOverrides): Promise<[string]>;
 
     permit(
       spender: PromiseOrValue<string>,
@@ -2460,10 +1369,6 @@ export interface TwTAP extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    precrime(overrides?: CallOverrides): Promise<[string]>;
-
-    "precrime()"(overrides?: CallOverrides): Promise<[string]>;
-
     releaseTap(
       _tokenId: PromiseOrValue<BigNumberish>,
       _to: PromiseOrValue<string>,
@@ -2474,30 +1379,6 @@ export interface TwTAP extends BaseContract {
       _tokenId: PromiseOrValue<BigNumberish>,
       _to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    renounceOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "renounceOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    retryMessage(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "retryMessage(uint16,bytes,uint64,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     rewardTokenIndex(
@@ -2535,50 +1416,6 @@ export interface TwTAP extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    sendBatchFrom(
-      _from: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenIds: PromiseOrValue<BigNumberish>[],
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "sendBatchFrom(address,uint16,bytes,uint256[],address,address,bytes)"(
-      _from: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenIds: PromiseOrValue<BigNumberish>[],
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    sendFrom(
-      _from: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "sendFrom(address,uint16,bytes,uint256,address,address,bytes)"(
-      _from: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     setApprovalForAll(
       operator: PromiseOrValue<string>,
       approved: PromiseOrValue<boolean>,
@@ -2591,46 +1428,6 @@ export interface TwTAP extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    setConfig(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      _configType: PromiseOrValue<BigNumberish>,
-      _config: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setConfig(uint16,uint16,uint256,bytes)"(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      _configType: PromiseOrValue<BigNumberish>,
-      _config: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setDstChainIdToBatchLimit(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _dstChainIdToBatchLimit: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setDstChainIdToBatchLimit(uint16,uint256)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _dstChainIdToBatchLimit: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setDstChainIdToTransferGas(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _dstChainIdToTransferGas: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setDstChainIdToTransferGas(uint16,uint256)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _dstChainIdToTransferGas: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     setMaxRewardTokensLength(
       _length: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2640,120 +1437,6 @@ export interface TwTAP extends BaseContract {
       _length: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
-
-    setMinDstGas(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _packetType: PromiseOrValue<BigNumberish>,
-      _minGas: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setMinDstGas(uint16,uint16,uint256)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _packetType: PromiseOrValue<BigNumberish>,
-      _minGas: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setMinGasToTransferAndStore(
-      _minGasToTransferAndStore: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setMinGasToTransferAndStore(uint256)"(
-      _minGasToTransferAndStore: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setPayloadSizeLimit(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _size: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setPayloadSizeLimit(uint16,uint256)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _size: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setPrecrime(
-      _precrime: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setPrecrime(address)"(
-      _precrime: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setReceiveVersion(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setReceiveVersion(uint16)"(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setSendVersion(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setSendVersion(uint16)"(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setTrustedRemote(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _path: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setTrustedRemote(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _path: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setTrustedRemoteAddress(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      _remoteAddress: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setTrustedRemoteAddress(uint16,bytes)"(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      _remoteAddress: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    storedCredits(
-      arg0: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<
-      [number, string, BigNumber, boolean] & {
-        srcChainId: number;
-        toAddress: string;
-        index: BigNumber;
-        creditsRemain: boolean;
-      }
-    >;
-
-    "storedCredits(bytes32)"(
-      arg0: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<
-      [number, string, BigNumber, boolean] & {
-        srcChainId: number;
-        toAddress: string;
-        index: BigNumber;
-        creditsRemain: boolean;
-      }
-    >;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
@@ -2799,23 +1482,17 @@ export interface TwTAP extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "transferOwnership(address)"(
+    "transferOwnership(address,bool,bool)"(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
-
-    trustedRemoteLookup(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    "trustedRemoteLookup(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
 
     twAML(
       overrides?: CallOverrides
@@ -2850,10 +1527,6 @@ export interface TwTAP extends BaseContract {
     ): Promise<[BigNumber] & { netActiveVotes: BigNumber }>;
   };
 
-  DEFAULT_PAYLOAD_SIZE_LIMIT(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "DEFAULT_PAYLOAD_SIZE_LIMIT()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
 
   "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
@@ -2861,14 +1534,6 @@ export interface TwTAP extends BaseContract {
   EPOCH_DURATION(overrides?: CallOverrides): Promise<BigNumber>;
 
   "EPOCH_DURATION()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  FUNCTION_TYPE_SEND(overrides?: CallOverrides): Promise<number>;
-
-  "FUNCTION_TYPE_SEND()"(overrides?: CallOverrides): Promise<number>;
-
-  HOST_CHAIN_ID(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "HOST_CHAIN_ID()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   addRewardToken(
     token: PromiseOrValue<string>,
@@ -2924,6 +1589,14 @@ export interface TwTAP extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  claimOwnership(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "claimOwnership()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   claimRewards(
     _tokenId: PromiseOrValue<BigNumberish>,
     _to: PromiseOrValue<string>,
@@ -2958,16 +1631,6 @@ export interface TwTAP extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  clearCredits(
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "clearCredits(bytes)"(
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   creation(overrides?: CallOverrides): Promise<BigNumber>;
 
   "creation()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2987,70 +1650,6 @@ export interface TwTAP extends BaseContract {
     _amount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
-
-  dstChainIdToBatchLimit(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "dstChainIdToBatchLimit(uint16)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  dstChainIdToTransferGas(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "dstChainIdToTransferGas(uint16)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  estimateSendBatchFee(
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _toAddress: PromiseOrValue<BytesLike>,
-    _tokenIds: PromiseOrValue<BigNumberish>[],
-    _useZro: PromiseOrValue<boolean>,
-    _adapterParams: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
-  >;
-
-  "estimateSendBatchFee(uint16,bytes,uint256[],bool,bytes)"(
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _toAddress: PromiseOrValue<BytesLike>,
-    _tokenIds: PromiseOrValue<BigNumberish>[],
-    _useZro: PromiseOrValue<boolean>,
-    _adapterParams: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
-  >;
-
-  estimateSendFee(
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _toAddress: PromiseOrValue<BytesLike>,
-    _tokenId: PromiseOrValue<BigNumberish>,
-    _useZro: PromiseOrValue<boolean>,
-    _adapterParams: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
-  >;
-
-  "estimateSendFee(uint16,bytes,uint256,bool,bytes)"(
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _toAddress: PromiseOrValue<BytesLike>,
-    _tokenId: PromiseOrValue<BigNumberish>,
-    _useZro: PromiseOrValue<boolean>,
-    _adapterParams: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
-  >;
 
   exitPosition(
     _tokenId: PromiseOrValue<BigNumberish>,
@@ -3072,32 +1671,6 @@ export interface TwTAP extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  failedMessages(
-    arg0: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<BytesLike>,
-    arg2: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  "failedMessages(uint16,bytes,uint64)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<BytesLike>,
-    arg2: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  forceResumeReceive(
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _srcAddress: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "forceResumeReceive(uint16,bytes)"(
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _srcAddress: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   getApproved(
     tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -3105,22 +1678,6 @@ export interface TwTAP extends BaseContract {
 
   "getApproved(uint256)"(
     tokenId: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  getConfig(
-    _version: PromiseOrValue<BigNumberish>,
-    _chainId: PromiseOrValue<BigNumberish>,
-    arg2: PromiseOrValue<string>,
-    _configType: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  "getConfig(uint16,uint16,address,uint256)"(
-    _version: PromiseOrValue<BigNumberish>,
-    _chainId: PromiseOrValue<BigNumberish>,
-    arg2: PromiseOrValue<string>,
-    _configType: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -3134,16 +1691,6 @@ export interface TwTAP extends BaseContract {
     overrides?: CallOverrides
   ): Promise<ParticipationStructOutput>;
 
-  getTrustedRemoteAddress(
-    _remoteChainId: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  "getTrustedRemoteAddress(uint16)"(
-    _remoteChainId: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
   isApprovedForAll(
     owner: PromiseOrValue<string>,
     operator: PromiseOrValue<string>,
@@ -3156,61 +1703,13 @@ export interface TwTAP extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  isTrustedRemote(
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _srcAddress: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  "isTrustedRemote(uint16,bytes)"(
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _srcAddress: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
   lastProcessedWeek(overrides?: CallOverrides): Promise<BigNumber>;
 
   "lastProcessedWeek()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-  lzEndpoint(overrides?: CallOverrides): Promise<string>;
-
-  "lzEndpoint()"(overrides?: CallOverrides): Promise<string>;
-
-  lzReceive(
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _srcAddress: PromiseOrValue<BytesLike>,
-    _nonce: PromiseOrValue<BigNumberish>,
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "lzReceive(uint16,bytes,uint64,bytes)"(
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _srcAddress: PromiseOrValue<BytesLike>,
-    _nonce: PromiseOrValue<BigNumberish>,
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   maxRewardTokens(overrides?: CallOverrides): Promise<BigNumber>;
 
   "maxRewardTokens()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  minDstGasLookup(
-    arg0: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "minDstGasLookup(uint16,uint16)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  minGasToTransferAndStore(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "minGasToTransferAndStore()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   mintedTWTap(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3219,22 +1718,6 @@ export interface TwTAP extends BaseContract {
   name(overrides?: CallOverrides): Promise<string>;
 
   "name()"(overrides?: CallOverrides): Promise<string>;
-
-  nonblockingLzReceive(
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _srcAddress: PromiseOrValue<BytesLike>,
-    _nonce: PromiseOrValue<BigNumberish>,
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "nonblockingLzReceive(uint16,bytes,uint64,bytes)"(
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _srcAddress: PromiseOrValue<BytesLike>,
-    _nonce: PromiseOrValue<BigNumberish>,
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
 
   nonces(
     owner: PromiseOrValue<string>,
@@ -3328,15 +1811,13 @@ export interface TwTAP extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  payloadSizeLimitLookup(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  paused(overrides?: CallOverrides): Promise<boolean>;
 
-  "payloadSizeLimitLookup(uint16)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  "paused()"(overrides?: CallOverrides): Promise<boolean>;
+
+  pendingOwner(overrides?: CallOverrides): Promise<string>;
+
+  "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
 
   permit(
     spender: PromiseOrValue<string>,
@@ -3358,10 +1839,6 @@ export interface TwTAP extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  precrime(overrides?: CallOverrides): Promise<string>;
-
-  "precrime()"(overrides?: CallOverrides): Promise<string>;
-
   releaseTap(
     _tokenId: PromiseOrValue<BigNumberish>,
     _to: PromiseOrValue<string>,
@@ -3372,30 +1849,6 @@ export interface TwTAP extends BaseContract {
     _tokenId: PromiseOrValue<BigNumberish>,
     _to: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  renounceOwnership(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "renounceOwnership()"(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  retryMessage(
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _srcAddress: PromiseOrValue<BytesLike>,
-    _nonce: PromiseOrValue<BigNumberish>,
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "retryMessage(uint16,bytes,uint64,bytes)"(
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _srcAddress: PromiseOrValue<BytesLike>,
-    _nonce: PromiseOrValue<BigNumberish>,
-    _payload: PromiseOrValue<BytesLike>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   rewardTokenIndex(
@@ -3433,50 +1886,6 @@ export interface TwTAP extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  sendBatchFrom(
-    _from: PromiseOrValue<string>,
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _toAddress: PromiseOrValue<BytesLike>,
-    _tokenIds: PromiseOrValue<BigNumberish>[],
-    _refundAddress: PromiseOrValue<string>,
-    _zroPaymentAddress: PromiseOrValue<string>,
-    _adapterParams: PromiseOrValue<BytesLike>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "sendBatchFrom(address,uint16,bytes,uint256[],address,address,bytes)"(
-    _from: PromiseOrValue<string>,
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _toAddress: PromiseOrValue<BytesLike>,
-    _tokenIds: PromiseOrValue<BigNumberish>[],
-    _refundAddress: PromiseOrValue<string>,
-    _zroPaymentAddress: PromiseOrValue<string>,
-    _adapterParams: PromiseOrValue<BytesLike>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  sendFrom(
-    _from: PromiseOrValue<string>,
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _toAddress: PromiseOrValue<BytesLike>,
-    _tokenId: PromiseOrValue<BigNumberish>,
-    _refundAddress: PromiseOrValue<string>,
-    _zroPaymentAddress: PromiseOrValue<string>,
-    _adapterParams: PromiseOrValue<BytesLike>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "sendFrom(address,uint16,bytes,uint256,address,address,bytes)"(
-    _from: PromiseOrValue<string>,
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _toAddress: PromiseOrValue<BytesLike>,
-    _tokenId: PromiseOrValue<BigNumberish>,
-    _refundAddress: PromiseOrValue<string>,
-    _zroPaymentAddress: PromiseOrValue<string>,
-    _adapterParams: PromiseOrValue<BytesLike>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   setApprovalForAll(
     operator: PromiseOrValue<string>,
     approved: PromiseOrValue<boolean>,
@@ -3489,46 +1898,6 @@ export interface TwTAP extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  setConfig(
-    _version: PromiseOrValue<BigNumberish>,
-    _chainId: PromiseOrValue<BigNumberish>,
-    _configType: PromiseOrValue<BigNumberish>,
-    _config: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setConfig(uint16,uint16,uint256,bytes)"(
-    _version: PromiseOrValue<BigNumberish>,
-    _chainId: PromiseOrValue<BigNumberish>,
-    _configType: PromiseOrValue<BigNumberish>,
-    _config: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setDstChainIdToBatchLimit(
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _dstChainIdToBatchLimit: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setDstChainIdToBatchLimit(uint16,uint256)"(
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _dstChainIdToBatchLimit: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setDstChainIdToTransferGas(
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _dstChainIdToTransferGas: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setDstChainIdToTransferGas(uint16,uint256)"(
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _dstChainIdToTransferGas: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   setMaxRewardTokensLength(
     _length: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -3538,120 +1907,6 @@ export interface TwTAP extends BaseContract {
     _length: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
-
-  setMinDstGas(
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _packetType: PromiseOrValue<BigNumberish>,
-    _minGas: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setMinDstGas(uint16,uint16,uint256)"(
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _packetType: PromiseOrValue<BigNumberish>,
-    _minGas: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setMinGasToTransferAndStore(
-    _minGasToTransferAndStore: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setMinGasToTransferAndStore(uint256)"(
-    _minGasToTransferAndStore: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setPayloadSizeLimit(
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _size: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setPayloadSizeLimit(uint16,uint256)"(
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _size: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setPrecrime(
-    _precrime: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setPrecrime(address)"(
-    _precrime: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setReceiveVersion(
-    _version: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setReceiveVersion(uint16)"(
-    _version: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setSendVersion(
-    _version: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setSendVersion(uint16)"(
-    _version: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setTrustedRemote(
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _path: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setTrustedRemote(uint16,bytes)"(
-    _srcChainId: PromiseOrValue<BigNumberish>,
-    _path: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setTrustedRemoteAddress(
-    _remoteChainId: PromiseOrValue<BigNumberish>,
-    _remoteAddress: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setTrustedRemoteAddress(uint16,bytes)"(
-    _remoteChainId: PromiseOrValue<BigNumberish>,
-    _remoteAddress: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  storedCredits(
-    arg0: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<
-    [number, string, BigNumber, boolean] & {
-      srcChainId: number;
-      toAddress: string;
-      index: BigNumber;
-      creditsRemain: boolean;
-    }
-  >;
-
-  "storedCredits(bytes32)"(
-    arg0: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<
-    [number, string, BigNumber, boolean] & {
-      srcChainId: number;
-      toAddress: string;
-      index: BigNumber;
-      creditsRemain: boolean;
-    }
-  >;
 
   supportsInterface(
     interfaceId: PromiseOrValue<BytesLike>,
@@ -3697,23 +1952,17 @@ export interface TwTAP extends BaseContract {
 
   transferOwnership(
     newOwner: PromiseOrValue<string>,
+    direct: PromiseOrValue<boolean>,
+    renounce: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "transferOwnership(address)"(
+  "transferOwnership(address,bool,bool)"(
     newOwner: PromiseOrValue<string>,
+    direct: PromiseOrValue<boolean>,
+    renounce: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
-
-  trustedRemoteLookup(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  "trustedRemoteLookup(uint16)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<string>;
 
   twAML(
     overrides?: CallOverrides
@@ -3748,12 +1997,6 @@ export interface TwTAP extends BaseContract {
   ): Promise<BigNumber>;
 
   callStatic: {
-    DEFAULT_PAYLOAD_SIZE_LIMIT(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "DEFAULT_PAYLOAD_SIZE_LIMIT()"(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
@@ -3761,14 +2004,6 @@ export interface TwTAP extends BaseContract {
     EPOCH_DURATION(overrides?: CallOverrides): Promise<BigNumber>;
 
     "EPOCH_DURATION()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    FUNCTION_TYPE_SEND(overrides?: CallOverrides): Promise<number>;
-
-    "FUNCTION_TYPE_SEND()"(overrides?: CallOverrides): Promise<number>;
-
-    HOST_CHAIN_ID(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "HOST_CHAIN_ID()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     addRewardToken(
       token: PromiseOrValue<string>,
@@ -3824,6 +2059,10 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    claimOwnership(overrides?: CallOverrides): Promise<void>;
+
+    "claimOwnership()"(overrides?: CallOverrides): Promise<void>;
+
     claimRewards(
       _tokenId: PromiseOrValue<BigNumberish>,
       _to: PromiseOrValue<string>,
@@ -3858,16 +2097,6 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    clearCredits(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "clearCredits(bytes)"(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     creation(overrides?: CallOverrides): Promise<BigNumber>;
 
     "creation()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3887,70 +2116,6 @@ export interface TwTAP extends BaseContract {
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    dstChainIdToBatchLimit(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "dstChainIdToBatchLimit(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    dstChainIdToTransferGas(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "dstChainIdToTransferGas(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    estimateSendBatchFee(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenIds: PromiseOrValue<BigNumberish>[],
-      _useZro: PromiseOrValue<boolean>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
-    >;
-
-    "estimateSendBatchFee(uint16,bytes,uint256[],bool,bytes)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenIds: PromiseOrValue<BigNumberish>[],
-      _useZro: PromiseOrValue<boolean>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
-    >;
-
-    estimateSendFee(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _useZro: PromiseOrValue<boolean>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
-    >;
-
-    "estimateSendFee(uint16,bytes,uint256,bool,bytes)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _useZro: PromiseOrValue<boolean>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { nativeFee: BigNumber; zroFee: BigNumber }
-    >;
 
     exitPosition(
       _tokenId: PromiseOrValue<BigNumberish>,
@@ -3972,32 +2137,6 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    failedMessages(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BytesLike>,
-      arg2: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    "failedMessages(uint16,bytes,uint64)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BytesLike>,
-      arg2: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    forceResumeReceive(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "forceResumeReceive(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     getApproved(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -4005,22 +2144,6 @@ export interface TwTAP extends BaseContract {
 
     "getApproved(uint256)"(
       tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    getConfig(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<string>,
-      _configType: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    "getConfig(uint16,uint16,address,uint256)"(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<string>,
-      _configType: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -4034,16 +2157,6 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<ParticipationStructOutput>;
 
-    getTrustedRemoteAddress(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    "getTrustedRemoteAddress(uint16)"(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
     isApprovedForAll(
       owner: PromiseOrValue<string>,
       operator: PromiseOrValue<string>,
@@ -4056,61 +2169,13 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    isTrustedRemote(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    "isTrustedRemote(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     lastProcessedWeek(overrides?: CallOverrides): Promise<BigNumber>;
 
     "lastProcessedWeek()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    lzEndpoint(overrides?: CallOverrides): Promise<string>;
-
-    "lzEndpoint()"(overrides?: CallOverrides): Promise<string>;
-
-    lzReceive(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "lzReceive(uint16,bytes,uint64,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     maxRewardTokens(overrides?: CallOverrides): Promise<BigNumber>;
 
     "maxRewardTokens()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    minDstGasLookup(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "minDstGasLookup(uint16,uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    minGasToTransferAndStore(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "minGasToTransferAndStore()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     mintedTWTap(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -4119,22 +2184,6 @@ export interface TwTAP extends BaseContract {
     name(overrides?: CallOverrides): Promise<string>;
 
     "name()"(overrides?: CallOverrides): Promise<string>;
-
-    nonblockingLzReceive(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "nonblockingLzReceive(uint16,bytes,uint64,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -4228,15 +2277,13 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    payloadSizeLimitLookup(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    paused(overrides?: CallOverrides): Promise<boolean>;
 
-    "payloadSizeLimitLookup(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    "paused()"(overrides?: CallOverrides): Promise<boolean>;
+
+    pendingOwner(overrides?: CallOverrides): Promise<string>;
+
+    "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
 
     permit(
       spender: PromiseOrValue<string>,
@@ -4258,10 +2305,6 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    precrime(overrides?: CallOverrides): Promise<string>;
-
-    "precrime()"(overrides?: CallOverrides): Promise<string>;
-
     releaseTap(
       _tokenId: PromiseOrValue<BigNumberish>,
       _to: PromiseOrValue<string>,
@@ -4271,26 +2314,6 @@ export interface TwTAP extends BaseContract {
     "releaseTap(uint256,address)"(
       _tokenId: PromiseOrValue<BigNumberish>,
       _to: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
-
-    retryMessage(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "retryMessage(uint16,bytes,uint64,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4329,50 +2352,6 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    sendBatchFrom(
-      _from: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenIds: PromiseOrValue<BigNumberish>[],
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "sendBatchFrom(address,uint16,bytes,uint256[],address,address,bytes)"(
-      _from: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenIds: PromiseOrValue<BigNumberish>[],
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    sendFrom(
-      _from: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "sendFrom(address,uint16,bytes,uint256,address,address,bytes)"(
-      _from: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     setApprovalForAll(
       operator: PromiseOrValue<string>,
       approved: PromiseOrValue<boolean>,
@@ -4385,46 +2364,6 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setConfig(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      _configType: PromiseOrValue<BigNumberish>,
-      _config: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setConfig(uint16,uint16,uint256,bytes)"(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      _configType: PromiseOrValue<BigNumberish>,
-      _config: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setDstChainIdToBatchLimit(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _dstChainIdToBatchLimit: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setDstChainIdToBatchLimit(uint16,uint256)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _dstChainIdToBatchLimit: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setDstChainIdToTransferGas(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _dstChainIdToTransferGas: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setDstChainIdToTransferGas(uint16,uint256)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _dstChainIdToTransferGas: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     setMaxRewardTokensLength(
       _length: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -4434,120 +2373,6 @@ export interface TwTAP extends BaseContract {
       _length: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    setMinDstGas(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _packetType: PromiseOrValue<BigNumberish>,
-      _minGas: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setMinDstGas(uint16,uint16,uint256)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _packetType: PromiseOrValue<BigNumberish>,
-      _minGas: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setMinGasToTransferAndStore(
-      _minGasToTransferAndStore: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setMinGasToTransferAndStore(uint256)"(
-      _minGasToTransferAndStore: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setPayloadSizeLimit(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _size: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setPayloadSizeLimit(uint16,uint256)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _size: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setPrecrime(
-      _precrime: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setPrecrime(address)"(
-      _precrime: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setReceiveVersion(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setReceiveVersion(uint16)"(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setSendVersion(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setSendVersion(uint16)"(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setTrustedRemote(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _path: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setTrustedRemote(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _path: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setTrustedRemoteAddress(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      _remoteAddress: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setTrustedRemoteAddress(uint16,bytes)"(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      _remoteAddress: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    storedCredits(
-      arg0: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<
-      [number, string, BigNumber, boolean] & {
-        srcChainId: number;
-        toAddress: string;
-        index: BigNumber;
-        creditsRemain: boolean;
-      }
-    >;
-
-    "storedCredits(bytes32)"(
-      arg0: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<
-      [number, string, BigNumber, boolean] & {
-        srcChainId: number;
-        toAddress: string;
-        index: BigNumber;
-        creditsRemain: boolean;
-      }
-    >;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
@@ -4593,23 +2418,17 @@ export interface TwTAP extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "transferOwnership(address)"(
+    "transferOwnership(address,bool,bool)"(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    trustedRemoteLookup(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    "trustedRemoteLookup(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<string>;
 
     twAML(
       overrides?: CallOverrides
@@ -4678,18 +2497,6 @@ export interface TwTAP extends BaseContract {
       approved?: null
     ): ApprovalForAllEventFilter;
 
-    "CreditCleared(bytes32)"(_hashedPayload?: null): CreditClearedEventFilter;
-    CreditCleared(_hashedPayload?: null): CreditClearedEventFilter;
-
-    "CreditStored(bytes32,bytes)"(
-      _hashedPayload?: null,
-      _payload?: null
-    ): CreditStoredEventFilter;
-    CreditStored(
-      _hashedPayload?: null,
-      _payload?: null
-    ): CreditStoredEventFilter;
-
     "ExitPosition(uint256,uint256)"(
       tokenId?: PromiseOrValue<BigNumberish> | null,
       amount?: PromiseOrValue<BigNumberish> | null
@@ -4709,21 +2516,6 @@ export interface TwTAP extends BaseContract {
       _newLength?: PromiseOrValue<BigNumberish> | null,
       _currentLength?: PromiseOrValue<BigNumberish> | null
     ): LogMaxRewardsLengthEventFilter;
-
-    "MessageFailed(uint16,bytes,uint64,bytes,bytes)"(
-      _srcChainId?: null,
-      _srcAddress?: null,
-      _nonce?: null,
-      _payload?: null,
-      _reason?: null
-    ): MessageFailedEventFilter;
-    MessageFailed(
-      _srcChainId?: null,
-      _srcAddress?: null,
-      _nonce?: null,
-      _payload?: null,
-      _reason?: null
-    ): MessageFailedEventFilter;
 
     "OwnershipTransferred(address,address)"(
       previousOwner?: PromiseOrValue<string> | null,
@@ -4745,76 +2537,8 @@ export interface TwTAP extends BaseContract {
       multiplier?: PromiseOrValue<BigNumberish> | null
     ): ParticipateEventFilter;
 
-    "ReceiveFromChain(uint16,bytes,address,uint256[])"(
-      _srcChainId?: PromiseOrValue<BigNumberish> | null,
-      _srcAddress?: PromiseOrValue<BytesLike> | null,
-      _toAddress?: PromiseOrValue<string> | null,
-      _tokenIds?: null
-    ): ReceiveFromChainEventFilter;
-    ReceiveFromChain(
-      _srcChainId?: PromiseOrValue<BigNumberish> | null,
-      _srcAddress?: PromiseOrValue<BytesLike> | null,
-      _toAddress?: PromiseOrValue<string> | null,
-      _tokenIds?: null
-    ): ReceiveFromChainEventFilter;
-
-    "RetryMessageSuccess(uint16,bytes,uint64,bytes32)"(
-      _srcChainId?: null,
-      _srcAddress?: null,
-      _nonce?: null,
-      _payloadHash?: null
-    ): RetryMessageSuccessEventFilter;
-    RetryMessageSuccess(
-      _srcChainId?: null,
-      _srcAddress?: null,
-      _nonce?: null,
-      _payloadHash?: null
-    ): RetryMessageSuccessEventFilter;
-
-    "SendToChain(uint16,address,bytes,uint256[])"(
-      _dstChainId?: PromiseOrValue<BigNumberish> | null,
-      _from?: PromiseOrValue<string> | null,
-      _toAddress?: PromiseOrValue<BytesLike> | null,
-      _tokenIds?: null
-    ): SendToChainEventFilter;
-    SendToChain(
-      _dstChainId?: PromiseOrValue<BigNumberish> | null,
-      _from?: PromiseOrValue<string> | null,
-      _toAddress?: PromiseOrValue<BytesLike> | null,
-      _tokenIds?: null
-    ): SendToChainEventFilter;
-
-    "SetMinDstGas(uint16,uint16,uint256)"(
-      _dstChainId?: null,
-      _type?: null,
-      _minDstGas?: null
-    ): SetMinDstGasEventFilter;
-    SetMinDstGas(
-      _dstChainId?: null,
-      _type?: null,
-      _minDstGas?: null
-    ): SetMinDstGasEventFilter;
-
-    "SetPrecrime(address)"(precrime?: null): SetPrecrimeEventFilter;
-    SetPrecrime(precrime?: null): SetPrecrimeEventFilter;
-
-    "SetTrustedRemote(uint16,bytes)"(
-      _remoteChainId?: null,
-      _path?: null
-    ): SetTrustedRemoteEventFilter;
-    SetTrustedRemote(
-      _remoteChainId?: null,
-      _path?: null
-    ): SetTrustedRemoteEventFilter;
-
-    "SetTrustedRemoteAddress(uint16,bytes)"(
-      _remoteChainId?: null,
-      _remoteAddress?: null
-    ): SetTrustedRemoteAddressEventFilter;
-    SetTrustedRemoteAddress(
-      _remoteChainId?: null,
-      _remoteAddress?: null
-    ): SetTrustedRemoteAddressEventFilter;
+    "Paused(address)"(account?: null): PausedEventFilter;
+    Paused(account?: null): PausedEventFilter;
 
     "Transfer(address,address,uint256)"(
       from?: PromiseOrValue<string> | null,
@@ -4826,15 +2550,12 @@ export interface TwTAP extends BaseContract {
       to?: PromiseOrValue<string> | null,
       tokenId?: PromiseOrValue<BigNumberish> | null
     ): TransferEventFilter;
+
+    "Unpaused(address)"(account?: null): UnpausedEventFilter;
+    Unpaused(account?: null): UnpausedEventFilter;
   };
 
   estimateGas: {
-    DEFAULT_PAYLOAD_SIZE_LIMIT(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "DEFAULT_PAYLOAD_SIZE_LIMIT()"(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<BigNumber>;
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -4842,14 +2563,6 @@ export interface TwTAP extends BaseContract {
     EPOCH_DURATION(overrides?: CallOverrides): Promise<BigNumber>;
 
     "EPOCH_DURATION()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    FUNCTION_TYPE_SEND(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "FUNCTION_TYPE_SEND()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    HOST_CHAIN_ID(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "HOST_CHAIN_ID()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     addRewardToken(
       token: PromiseOrValue<string>,
@@ -4905,6 +2618,14 @@ export interface TwTAP extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    claimOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "claimOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     claimRewards(
       _tokenId: PromiseOrValue<BigNumberish>,
       _to: PromiseOrValue<string>,
@@ -4939,16 +2660,6 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    clearCredits(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "clearCredits(bytes)"(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     creation(overrides?: CallOverrides): Promise<BigNumber>;
 
     "creation()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -4967,62 +2678,6 @@ export interface TwTAP extends BaseContract {
       _rewardTokenId: PromiseOrValue<BigNumberish>,
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    dstChainIdToBatchLimit(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "dstChainIdToBatchLimit(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    dstChainIdToTransferGas(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "dstChainIdToTransferGas(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    estimateSendBatchFee(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenIds: PromiseOrValue<BigNumberish>[],
-      _useZro: PromiseOrValue<boolean>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "estimateSendBatchFee(uint16,bytes,uint256[],bool,bytes)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenIds: PromiseOrValue<BigNumberish>[],
-      _useZro: PromiseOrValue<boolean>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    estimateSendFee(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _useZro: PromiseOrValue<boolean>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "estimateSendFee(uint16,bytes,uint256,bool,bytes)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _useZro: PromiseOrValue<boolean>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     exitPosition(
@@ -5045,32 +2700,6 @@ export interface TwTAP extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    failedMessages(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BytesLike>,
-      arg2: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "failedMessages(uint16,bytes,uint64)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BytesLike>,
-      arg2: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    forceResumeReceive(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "forceResumeReceive(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     getApproved(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -5081,22 +2710,6 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getConfig(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<string>,
-      _configType: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "getConfig(uint16,uint16,address,uint256)"(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<string>,
-      _configType: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     getParticipation(
       _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -5104,16 +2717,6 @@ export interface TwTAP extends BaseContract {
 
     "getParticipation(uint256)"(
       _tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    getTrustedRemoteAddress(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "getTrustedRemoteAddress(uint16)"(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -5129,61 +2732,13 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    isTrustedRemote(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "isTrustedRemote(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     lastProcessedWeek(overrides?: CallOverrides): Promise<BigNumber>;
 
     "lastProcessedWeek()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    lzEndpoint(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "lzEndpoint()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    lzReceive(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "lzReceive(uint16,bytes,uint64,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     maxRewardTokens(overrides?: CallOverrides): Promise<BigNumber>;
 
     "maxRewardTokens()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    minDstGasLookup(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "minDstGasLookup(uint16,uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    minGasToTransferAndStore(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "minGasToTransferAndStore()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     mintedTWTap(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -5192,22 +2747,6 @@ export interface TwTAP extends BaseContract {
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
     "name()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    nonblockingLzReceive(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "nonblockingLzReceive(uint16,bytes,uint64,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -5257,15 +2796,13 @@ export interface TwTAP extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    payloadSizeLimitLookup(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    paused(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "payloadSizeLimitLookup(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    "paused()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "pendingOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     permit(
       spender: PromiseOrValue<string>,
@@ -5287,10 +2824,6 @@ export interface TwTAP extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    precrime(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "precrime()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     releaseTap(
       _tokenId: PromiseOrValue<BigNumberish>,
       _to: PromiseOrValue<string>,
@@ -5301,30 +2834,6 @@ export interface TwTAP extends BaseContract {
       _tokenId: PromiseOrValue<BigNumberish>,
       _to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    renounceOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "renounceOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    retryMessage(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "retryMessage(uint16,bytes,uint64,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     rewardTokenIndex(
@@ -5362,50 +2871,6 @@ export interface TwTAP extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    sendBatchFrom(
-      _from: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenIds: PromiseOrValue<BigNumberish>[],
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "sendBatchFrom(address,uint16,bytes,uint256[],address,address,bytes)"(
-      _from: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenIds: PromiseOrValue<BigNumberish>[],
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    sendFrom(
-      _from: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "sendFrom(address,uint16,bytes,uint256,address,address,bytes)"(
-      _from: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     setApprovalForAll(
       operator: PromiseOrValue<string>,
       approved: PromiseOrValue<boolean>,
@@ -5418,46 +2883,6 @@ export interface TwTAP extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    setConfig(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      _configType: PromiseOrValue<BigNumberish>,
-      _config: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setConfig(uint16,uint16,uint256,bytes)"(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      _configType: PromiseOrValue<BigNumberish>,
-      _config: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setDstChainIdToBatchLimit(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _dstChainIdToBatchLimit: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setDstChainIdToBatchLimit(uint16,uint256)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _dstChainIdToBatchLimit: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setDstChainIdToTransferGas(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _dstChainIdToTransferGas: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setDstChainIdToTransferGas(uint16,uint256)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _dstChainIdToTransferGas: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     setMaxRewardTokensLength(
       _length: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -5466,106 +2891,6 @@ export interface TwTAP extends BaseContract {
     "setMaxRewardTokensLength(uint256)"(
       _length: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setMinDstGas(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _packetType: PromiseOrValue<BigNumberish>,
-      _minGas: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setMinDstGas(uint16,uint16,uint256)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _packetType: PromiseOrValue<BigNumberish>,
-      _minGas: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setMinGasToTransferAndStore(
-      _minGasToTransferAndStore: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setMinGasToTransferAndStore(uint256)"(
-      _minGasToTransferAndStore: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setPayloadSizeLimit(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _size: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setPayloadSizeLimit(uint16,uint256)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _size: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setPrecrime(
-      _precrime: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setPrecrime(address)"(
-      _precrime: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setReceiveVersion(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setReceiveVersion(uint16)"(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setSendVersion(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setSendVersion(uint16)"(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setTrustedRemote(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _path: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setTrustedRemote(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _path: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setTrustedRemoteAddress(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      _remoteAddress: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setTrustedRemoteAddress(uint16,bytes)"(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      _remoteAddress: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    storedCredits(
-      arg0: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "storedCredits(bytes32)"(
-      arg0: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     supportsInterface(
@@ -5612,22 +2937,16 @@ export interface TwTAP extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "transferOwnership(address)"(
+    "transferOwnership(address,bool,bool)"(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    trustedRemoteLookup(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "trustedRemoteLookup(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     twAML(overrides?: CallOverrides): Promise<BigNumber>;
@@ -5646,14 +2965,6 @@ export interface TwTAP extends BaseContract {
   };
 
   populateTransaction: {
-    DEFAULT_PAYLOAD_SIZE_LIMIT(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "DEFAULT_PAYLOAD_SIZE_LIMIT()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "DOMAIN_SEPARATOR()"(
@@ -5665,18 +2976,6 @@ export interface TwTAP extends BaseContract {
     "EPOCH_DURATION()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    FUNCTION_TYPE_SEND(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "FUNCTION_TYPE_SEND()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    HOST_CHAIN_ID(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "HOST_CHAIN_ID()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     addRewardToken(
       token: PromiseOrValue<string>,
@@ -5732,6 +3031,14 @@ export interface TwTAP extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    claimOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "claimOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     claimRewards(
       _tokenId: PromiseOrValue<BigNumberish>,
       _to: PromiseOrValue<string>,
@@ -5766,16 +3073,6 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    clearCredits(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "clearCredits(bytes)"(
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     creation(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "creation()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -5794,62 +3091,6 @@ export interface TwTAP extends BaseContract {
       _rewardTokenId: PromiseOrValue<BigNumberish>,
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    dstChainIdToBatchLimit(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "dstChainIdToBatchLimit(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    dstChainIdToTransferGas(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "dstChainIdToTransferGas(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    estimateSendBatchFee(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenIds: PromiseOrValue<BigNumberish>[],
-      _useZro: PromiseOrValue<boolean>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "estimateSendBatchFee(uint16,bytes,uint256[],bool,bytes)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenIds: PromiseOrValue<BigNumberish>[],
-      _useZro: PromiseOrValue<boolean>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    estimateSendFee(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _useZro: PromiseOrValue<boolean>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "estimateSendFee(uint16,bytes,uint256,bool,bytes)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _useZro: PromiseOrValue<boolean>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     exitPosition(
@@ -5872,32 +3113,6 @@ export interface TwTAP extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    failedMessages(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BytesLike>,
-      arg2: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "failedMessages(uint16,bytes,uint64)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BytesLike>,
-      arg2: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    forceResumeReceive(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "forceResumeReceive(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     getApproved(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -5908,22 +3123,6 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getConfig(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<string>,
-      _configType: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "getConfig(uint16,uint16,address,uint256)"(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<string>,
-      _configType: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     getParticipation(
       _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -5931,16 +3130,6 @@ export interface TwTAP extends BaseContract {
 
     "getParticipation(uint256)"(
       _tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    getTrustedRemoteAddress(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "getTrustedRemoteAddress(uint16)"(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -5956,67 +3145,15 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    isTrustedRemote(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "isTrustedRemote(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     lastProcessedWeek(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "lastProcessedWeek()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    lzEndpoint(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "lzEndpoint()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    lzReceive(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "lzReceive(uint16,bytes,uint64,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     maxRewardTokens(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "maxRewardTokens()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    minDstGasLookup(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "minDstGasLookup(uint16,uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    minGasToTransferAndStore(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "minGasToTransferAndStore()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -6027,22 +3164,6 @@ export interface TwTAP extends BaseContract {
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    nonblockingLzReceive(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "nonblockingLzReceive(uint16,bytes,uint64,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -6092,15 +3213,13 @@ export interface TwTAP extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    payloadSizeLimitLookup(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    paused(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "payloadSizeLimitLookup(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    "paused()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "pendingOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     permit(
       spender: PromiseOrValue<string>,
@@ -6122,10 +3241,6 @@ export interface TwTAP extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    precrime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "precrime()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     releaseTap(
       _tokenId: PromiseOrValue<BigNumberish>,
       _to: PromiseOrValue<string>,
@@ -6136,30 +3251,6 @@ export interface TwTAP extends BaseContract {
       _tokenId: PromiseOrValue<BigNumberish>,
       _to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    renounceOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "renounceOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    retryMessage(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "retryMessage(uint16,bytes,uint64,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _srcAddress: PromiseOrValue<BytesLike>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _payload: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     rewardTokenIndex(
@@ -6197,50 +3288,6 @@ export interface TwTAP extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    sendBatchFrom(
-      _from: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenIds: PromiseOrValue<BigNumberish>[],
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "sendBatchFrom(address,uint16,bytes,uint256[],address,address,bytes)"(
-      _from: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenIds: PromiseOrValue<BigNumberish>[],
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    sendFrom(
-      _from: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "sendFrom(address,uint16,bytes,uint256,address,address,bytes)"(
-      _from: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      _tokenId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _zroPaymentAddress: PromiseOrValue<string>,
-      _adapterParams: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     setApprovalForAll(
       operator: PromiseOrValue<string>,
       approved: PromiseOrValue<boolean>,
@@ -6253,46 +3300,6 @@ export interface TwTAP extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    setConfig(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      _configType: PromiseOrValue<BigNumberish>,
-      _config: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setConfig(uint16,uint16,uint256,bytes)"(
-      _version: PromiseOrValue<BigNumberish>,
-      _chainId: PromiseOrValue<BigNumberish>,
-      _configType: PromiseOrValue<BigNumberish>,
-      _config: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setDstChainIdToBatchLimit(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _dstChainIdToBatchLimit: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setDstChainIdToBatchLimit(uint16,uint256)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _dstChainIdToBatchLimit: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setDstChainIdToTransferGas(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _dstChainIdToTransferGas: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setDstChainIdToTransferGas(uint16,uint256)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _dstChainIdToTransferGas: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     setMaxRewardTokensLength(
       _length: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -6301,106 +3308,6 @@ export interface TwTAP extends BaseContract {
     "setMaxRewardTokensLength(uint256)"(
       _length: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setMinDstGas(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _packetType: PromiseOrValue<BigNumberish>,
-      _minGas: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setMinDstGas(uint16,uint16,uint256)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _packetType: PromiseOrValue<BigNumberish>,
-      _minGas: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setMinGasToTransferAndStore(
-      _minGasToTransferAndStore: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setMinGasToTransferAndStore(uint256)"(
-      _minGasToTransferAndStore: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setPayloadSizeLimit(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _size: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setPayloadSizeLimit(uint16,uint256)"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _size: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setPrecrime(
-      _precrime: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setPrecrime(address)"(
-      _precrime: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setReceiveVersion(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setReceiveVersion(uint16)"(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setSendVersion(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setSendVersion(uint16)"(
-      _version: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setTrustedRemote(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _path: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setTrustedRemote(uint16,bytes)"(
-      _srcChainId: PromiseOrValue<BigNumberish>,
-      _path: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setTrustedRemoteAddress(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      _remoteAddress: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setTrustedRemoteAddress(uint16,bytes)"(
-      _remoteChainId: PromiseOrValue<BigNumberish>,
-      _remoteAddress: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    storedCredits(
-      arg0: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "storedCredits(bytes32)"(
-      arg0: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     supportsInterface(
@@ -6447,22 +3354,16 @@ export interface TwTAP extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "transferOwnership(address)"(
+    "transferOwnership(address,bool,bool)"(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    trustedRemoteLookup(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "trustedRemoteLookup(uint16)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     twAML(overrides?: CallOverrides): Promise<PopulatedTransaction>;

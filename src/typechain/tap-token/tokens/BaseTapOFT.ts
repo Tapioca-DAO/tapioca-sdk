@@ -30,27 +30,13 @@ import type {
 
 export type IRewardClaimSendFromParamsStruct = {
   ethValue: PromiseOrValue<BigNumberish>;
-  callParams: ISendFrom.LzCallParamsStruct;
+  callParams: ICommonOFT.LzCallParamsStruct;
 };
 
 export type IRewardClaimSendFromParamsStructOutput = [
   BigNumber,
-  ISendFrom.LzCallParamsStructOutput
-] & { ethValue: BigNumber; callParams: ISendFrom.LzCallParamsStructOutput };
-
-export declare namespace ISendFrom {
-  export type LzCallParamsStruct = {
-    refundAddress: PromiseOrValue<string>;
-    zroPaymentAddress: PromiseOrValue<string>;
-    adapterParams: PromiseOrValue<BytesLike>;
-  };
-
-  export type LzCallParamsStructOutput = [string, string, string] & {
-    refundAddress: string;
-    zroPaymentAddress: string;
-    adapterParams: string;
-  };
-}
+  ICommonOFT.LzCallParamsStructOutput
+] & { ethValue: BigNumber; callParams: ICommonOFT.LzCallParamsStructOutput };
 
 export declare namespace ICommonOFT {
   export type LzCallParamsStruct = {

@@ -5,4 +5,5 @@ export * as governance from "./governance";
 export * as optionAirdrop from "./option-airdrop";
 export * as options from "./options";
 export * as tokens from "./tokens";
+export { Simulations__factory } from "./Simulations__factory";
 export { Vesting__factory } from "./Vesting__factory";

@@ -620,7 +620,7 @@ const _abi = [
                 type: "bytes",
               },
             ],
-            internalType: "struct ISendFrom.LzCallParams",
+            internalType: "struct ICommonOFT.LzCallParams",
             name: "callParams",
             type: "tuple",
           },

@@ -51,18 +51,26 @@ export type SingularityPoolStruct = {
   sglAssetID: PromiseOrValue<BigNumberish>;
   totalDeposited: PromiseOrValue<BigNumberish>;
   poolWeight: PromiseOrValue<BigNumberish>;
+  rescue: PromiseOrValue<boolean>;
 };
 
-export type SingularityPoolStructOutput = [BigNumber, BigNumber, BigNumber] & {
+export type SingularityPoolStructOutput = [
+  BigNumber,
+  BigNumber,
+  BigNumber,
+  boolean
+] & {
   sglAssetID: BigNumber;
   totalDeposited: BigNumber;
   poolWeight: BigNumber;
+  rescue: boolean;
 };
 
 export interface TapiocaOptionLiquidityProvisionInterface
   extends utils.Interface {
   functions: {
     "DOMAIN_SEPARATOR()": FunctionFragment;
+    "activateSGLPoolRescue(address)": FunctionFragment;
     "activeSingularities(address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
@@ -107,6 +115,8 @@ export interface TapiocaOptionLiquidityProvisionInterface
     nameOrSignatureOrTopic:
       | "DOMAIN_SEPARATOR"
       | "DOMAIN_SEPARATOR()"
+      | "activateSGLPoolRescue"
+      | "activateSGLPoolRescue(address)"
       | "activeSingularities"
       | "activeSingularities(address)"
       | "approve"
@@ -190,6 +200,14 @@ export interface TapiocaOptionLiquidityProvisionInterface
   encodeFunctionData(
     functionFragment: "DOMAIN_SEPARATOR()",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "activateSGLPoolRescue",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "activateSGLPoolRescue(address)",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "activeSingularities",
@@ -535,6 +553,14 @@ export interface TapiocaOptionLiquidityProvisionInterface
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "activateSGLPoolRescue",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "activateSGLPoolRescue(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "activeSingularities",
     data: BytesLike
   ): Result;
@@ -772,6 +798,7 @@ export interface TapiocaOptionLiquidityProvisionInterface
   decodeFunctionResult(functionFragment: "yieldBox()", data: BytesLike): Result;
 
   events: {
+    "ActivateSGLPoolRescue(address)": EventFragment;
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalForAll(address,address,bool)": EventFragment;
     "Burn(address,uint128,tuple)": EventFragment;
@@ -786,6 +813,10 @@ export interface TapiocaOptionLiquidityProvisionInterface
     "UpdateTotalSingularityPoolWeights(uint256)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "ActivateSGLPoolRescue"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "ActivateSGLPoolRescue(address)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Approval(address,address,uint256)"
@@ -833,6 +864,17 @@ export interface TapiocaOptionLiquidityProvisionInterface
     nameOrSignatureOrTopic: "UpdateTotalSingularityPoolWeights(uint256)"
   ): EventFragment;
 }
+
+export interface ActivateSGLPoolRescueEventObject {
+  sgl: string;
+}
+export type ActivateSGLPoolRescueEvent = TypedEvent<
+  [string],
+  ActivateSGLPoolRescueEventObject
+>;
+
+export type ActivateSGLPoolRescueEventFilter =
+  TypedEventFilter<ActivateSGLPoolRescueEvent>;
 
 export interface ApprovalEventObject {
   owner: string;
@@ -1000,14 +1042,25 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<[string]>;
 
+    activateSGLPoolRescue(
+      singularity: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "activateSGLPoolRescue(address)"(
+      singularity: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     activeSingularities(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, BigNumber] & {
+      [BigNumber, BigNumber, BigNumber, boolean] & {
         sglAssetID: BigNumber;
         totalDeposited: BigNumber;
         poolWeight: BigNumber;
+        rescue: boolean;
       }
     >;
 
@@ -1015,10 +1068,11 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, BigNumber] & {
+      [BigNumber, BigNumber, BigNumber, boolean] & {
         sglAssetID: BigNumber;
         totalDeposited: BigNumber;
         poolWeight: BigNumber;
+        rescue: boolean;
       }
     >;
 
@@ -1077,12 +1131,12 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     getLock(
       _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[boolean, LockPositionStructOutput]>;
+    ): Promise<[LockPositionStructOutput]>;
 
     "getLock(uint256)"(
       _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[boolean, LockPositionStructOutput]>;
+    ): Promise<[LockPositionStructOutput]>;
 
     getSingularities(overrides?: CallOverrides): Promise<[BigNumber[]]>;
 
@@ -1400,14 +1454,25 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
   "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
 
+  activateSGLPoolRescue(
+    singularity: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "activateSGLPoolRescue(address)"(
+    singularity: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   activeSingularities(
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<
-    [BigNumber, BigNumber, BigNumber] & {
+    [BigNumber, BigNumber, BigNumber, boolean] & {
       sglAssetID: BigNumber;
       totalDeposited: BigNumber;
       poolWeight: BigNumber;
+      rescue: boolean;
     }
   >;
 
@@ -1415,10 +1480,11 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<
-    [BigNumber, BigNumber, BigNumber] & {
+    [BigNumber, BigNumber, BigNumber, boolean] & {
       sglAssetID: BigNumber;
       totalDeposited: BigNumber;
       poolWeight: BigNumber;
+      rescue: boolean;
     }
   >;
 
@@ -1477,12 +1543,12 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
   getLock(
     _tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
-  ): Promise<[boolean, LockPositionStructOutput]>;
+  ): Promise<LockPositionStructOutput>;
 
   "getLock(uint256)"(
     _tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
-  ): Promise<[boolean, LockPositionStructOutput]>;
+  ): Promise<LockPositionStructOutput>;
 
   getSingularities(overrides?: CallOverrides): Promise<BigNumber[]>;
 
@@ -1794,14 +1860,25 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
 
+    activateSGLPoolRescue(
+      singularity: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "activateSGLPoolRescue(address)"(
+      singularity: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     activeSingularities(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, BigNumber] & {
+      [BigNumber, BigNumber, BigNumber, boolean] & {
         sglAssetID: BigNumber;
         totalDeposited: BigNumber;
         poolWeight: BigNumber;
+        rescue: boolean;
       }
     >;
 
@@ -1809,10 +1886,11 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, BigNumber] & {
+      [BigNumber, BigNumber, BigNumber, boolean] & {
         sglAssetID: BigNumber;
         totalDeposited: BigNumber;
         poolWeight: BigNumber;
+        rescue: boolean;
       }
     >;
 
@@ -1867,12 +1945,12 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     getLock(
       _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[boolean, LockPositionStructOutput]>;
+    ): Promise<LockPositionStructOutput>;
 
     "getLock(uint256)"(
       _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[boolean, LockPositionStructOutput]>;
+    ): Promise<LockPositionStructOutput>;
 
     getSingularities(overrides?: CallOverrides): Promise<BigNumber[]>;
 
@@ -2185,6 +2263,11 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
   };
 
   filters: {
+    "ActivateSGLPoolRescue(address)"(
+      sgl?: null
+    ): ActivateSGLPoolRescueEventFilter;
+    ActivateSGLPoolRescue(sgl?: null): ActivateSGLPoolRescueEventFilter;
+
     "Approval(address,address,uint256)"(
       owner?: PromiseOrValue<string> | null,
       approved?: PromiseOrValue<string> | null,
@@ -2210,23 +2293,23 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     "Burn(address,uint128,tuple)"(
       to?: PromiseOrValue<string> | null,
       sglAssetID?: PromiseOrValue<BigNumberish> | null,
-      lockPosition?: LockPositionStruct | null
+      lockPosition?: null
     ): BurnEventFilter;
     Burn(
       to?: PromiseOrValue<string> | null,
       sglAssetID?: PromiseOrValue<BigNumberish> | null,
-      lockPosition?: LockPositionStruct | null
+      lockPosition?: null
     ): BurnEventFilter;
 
     "Mint(address,uint128,tuple)"(
       to?: PromiseOrValue<string> | null,
       sglAssetID?: PromiseOrValue<BigNumberish> | null,
-      lockPosition?: LockPositionStruct | null
+      lockPosition?: null
     ): MintEventFilter;
     Mint(
       to?: PromiseOrValue<string> | null,
       sglAssetID?: PromiseOrValue<BigNumberish> | null,
-      lockPosition?: LockPositionStruct | null
+      lockPosition?: null
     ): MintEventFilter;
 
     "OwnershipTransferred(address,address)"(
@@ -2242,21 +2325,21 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     Paused(account?: null): PausedEventFilter;
 
     "RegisterSingularity(address,uint256)"(
-      sgl?: PromiseOrValue<string> | null,
-      assetID?: PromiseOrValue<BigNumberish> | null
+      sgl?: null,
+      assetID?: null
     ): RegisterSingularityEventFilter;
     RegisterSingularity(
-      sgl?: PromiseOrValue<string> | null,
-      assetID?: PromiseOrValue<BigNumberish> | null
+      sgl?: null,
+      assetID?: null
     ): RegisterSingularityEventFilter;
 
     "SetSGLPoolWeight(address,uint256)"(
       sgl?: PromiseOrValue<string> | null,
-      poolWeight?: PromiseOrValue<BigNumberish> | null
+      poolWeight?: null
     ): SetSGLPoolWeightEventFilter;
     SetSGLPoolWeight(
       sgl?: PromiseOrValue<string> | null,
-      poolWeight?: PromiseOrValue<BigNumberish> | null
+      poolWeight?: null
     ): SetSGLPoolWeightEventFilter;
 
     "Transfer(address,address,uint256)"(
@@ -2274,19 +2357,19 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     Unpaused(account?: null): UnpausedEventFilter;
 
     "UnregisterSingularity(address,uint256)"(
-      sgl?: PromiseOrValue<string> | null,
-      assetID?: PromiseOrValue<BigNumberish> | null
+      sgl?: null,
+      assetID?: null
     ): UnregisterSingularityEventFilter;
     UnregisterSingularity(
-      sgl?: PromiseOrValue<string> | null,
-      assetID?: PromiseOrValue<BigNumberish> | null
+      sgl?: null,
+      assetID?: null
     ): UnregisterSingularityEventFilter;
 
     "UpdateTotalSingularityPoolWeights(uint256)"(
-      totalSingularityPoolWeights?: PromiseOrValue<BigNumberish> | null
+      totalSingularityPoolWeights?: null
     ): UpdateTotalSingularityPoolWeightsEventFilter;
     UpdateTotalSingularityPoolWeights(
-      totalSingularityPoolWeights?: PromiseOrValue<BigNumberish> | null
+      totalSingularityPoolWeights?: null
     ): UpdateTotalSingularityPoolWeightsEventFilter;
   };
 
@@ -2294,6 +2377,16 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<BigNumber>;
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    activateSGLPoolRescue(
+      singularity: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "activateSGLPoolRescue(address)"(
+      singularity: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     activeSingularities(
       arg0: PromiseOrValue<string>,
@@ -2660,6 +2753,16 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "DOMAIN_SEPARATOR()"(
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    activateSGLPoolRescue(
+      singularity: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "activateSGLPoolRescue(address)"(
+      singularity: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     activeSingularities(
