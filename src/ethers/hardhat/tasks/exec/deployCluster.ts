@@ -18,7 +18,6 @@ export const deployCluster__task = async (
 
     const signer = (await hre.ethers.getSigners())[0];
     const Cluster = new Cluster__factory(signer);
-
     const cluster = await Cluster.deploy(chainInfo.address, signer.address);
 
     const depHelper = hre.SDK.db.buildLocalDeployment({
