@@ -76,6 +76,13 @@
             ]
         },
         "generic": {
+            "4002": [
+                {
+                    "name": "Multicall3",
+                    "address": "0xe8134DdE7d04039578182eb9625D4e6d707b2855",
+                    "meta": {}
+                }
+            ],
             "421613": [
                 {
                     "name": "Multicall3",
