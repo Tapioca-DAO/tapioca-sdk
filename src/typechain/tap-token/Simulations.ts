@@ -7,8 +7,6 @@ import type {
   BigNumberish,
   BytesLike,
   CallOverrides,
-  ContractTransaction,
-  Overrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -151,13 +149,9 @@ export interface Simulations extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    test(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
+    test(overrides?: CallOverrides): Promise<[void]>;
 
-    "test()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
+    "test()"(overrides?: CallOverrides): Promise<[void]>;
   };
 
   computeAM(
@@ -188,13 +182,9 @@ export interface Simulations extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  test(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
+  test(overrides?: CallOverrides): Promise<void>;
 
-  "test()"(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
+  "test()"(overrides?: CallOverrides): Promise<void>;
 
   callStatic: {
     computeAM(
@@ -261,13 +251,9 @@ export interface Simulations extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    test(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
+    test(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "test()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
+    "test()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -299,12 +285,8 @@ export interface Simulations extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    test(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
+    test(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "test()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
+    "test()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }
