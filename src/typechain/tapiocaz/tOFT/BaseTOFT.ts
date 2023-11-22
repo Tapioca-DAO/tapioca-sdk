@@ -337,6 +337,7 @@ export interface BaseTOFTInterface extends utils.Interface {
     "setPrecrime(address)": FunctionFragment;
     "setReceiveVersion(uint16)": FunctionFragment;
     "setSendVersion(uint16)": FunctionFragment;
+    "setStargateRouter(address)": FunctionFragment;
     "setTrustedRemote(uint16,bytes)": FunctionFragment;
     "setTrustedRemoteAddress(uint16,bytes)": FunctionFragment;
     "setUseCustomAdapterParams(bool)": FunctionFragment;
@@ -468,6 +469,8 @@ export interface BaseTOFTInterface extends utils.Interface {
       | "setReceiveVersion(uint16)"
       | "setSendVersion"
       | "setSendVersion(uint16)"
+      | "setStargateRouter"
+      | "setStargateRouter(address)"
       | "setTrustedRemote"
       | "setTrustedRemote(uint16,bytes)"
       | "setTrustedRemoteAddress"
@@ -1163,6 +1166,14 @@ export interface BaseTOFTInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
+    functionFragment: "setStargateRouter",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setStargateRouter(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "setTrustedRemote",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
   ): string;
@@ -1710,6 +1721,14 @@ export interface BaseTOFTInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setSendVersion(uint16)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setStargateRouter",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setStargateRouter(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2760,6 +2779,16 @@ export interface BaseTOFT extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    setStargateRouter(
+      _router: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setStargateRouter(address)"(
+      _router: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     setTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _path: PromiseOrValue<BytesLike>,
@@ -3611,6 +3640,16 @@ export interface BaseTOFT extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  setStargateRouter(
+    _router: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setStargateRouter(address)"(
+    _router: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   setTrustedRemote(
     _srcChainId: PromiseOrValue<BigNumberish>,
     _path: PromiseOrValue<BytesLike>,
@@ -4457,6 +4496,16 @@ export interface BaseTOFT extends BaseContract {
 
     "setSendVersion(uint16)"(
       _version: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setStargateRouter(
+      _router: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setStargateRouter(address)"(
+      _router: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -5448,6 +5497,16 @@ export interface BaseTOFT extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    setStargateRouter(
+      _router: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setStargateRouter(address)"(
+      _router: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     setTrustedRemote(
       _srcChainId: PromiseOrValue<BigNumberish>,
       _path: PromiseOrValue<BytesLike>,
@@ -6301,6 +6360,16 @@ export interface BaseTOFT extends BaseContract {
 
     "setSendVersion(uint16)"(
       _version: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setStargateRouter(
+      _router: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setStargateRouter(address)"(
+      _router: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

@@ -4,6 +4,21 @@
   "sourceName": "contracts/tOFT/modules/TOFTCommon.sol",
   "abi": [
     {
+      "inputs": [],
+      "name": "ActionTypeNotValid",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NotAuthorized",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NotValid",
+      "type": "error"
+    },
+    {
       "anonymous": false,
       "inputs": [
         {
