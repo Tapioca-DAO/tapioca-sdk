@@ -5,8 +5,30 @@
             "421613": []
         },
         "tapioca-periphery": {
-            "4002": [],
-            "421613": []
+            "4002": [
+                {
+                    "name": "Cluster",
+                    "address": "0x93A9c6F182359BA8D52572020781F2801E3e27Ea",
+                    "meta": {
+                        "args": [
+                            "0x7dcAD72640F835B0FA36EFD3D6d3ec902C7E5acf",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ]
+                    }
+                }
+            ],
+            "421613": [
+                {
+                    "name": "Cluster",
+                    "address": "0xFE39df109CC03424946eb3Ea766Fe4876ACabb1b",
+                    "meta": {
+                        "args": [
+                            "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ]
+                    }
+                }
+            ]
         },
         "tapiocaz": {
             "4002": [],
@@ -54,6 +76,13 @@
             ]
         },
         "generic": {
+            "4002": [
+                {
+                    "name": "Multicall3",
+                    "address": "0x21F7B444d2440E9C69E8b85EC4Eb19001F51d03C",
+                    "meta": {}
+                }
+            ],
             "421613": [
                 {
                     "name": "Multicall3",
