@@ -47,6 +47,7 @@ export interface BalancerInterface extends utils.Interface {
     "addRebalanceAmount(address,uint16,uint256)": FunctionFragment;
     "checker(address,uint16)": FunctionFragment;
     "connectedOFTs(address,uint16)": FunctionFragment;
+    "disableEth()": FunctionFragment;
     "emergencySaveTokens(address,uint256)": FunctionFragment;
     "initConnectedOFT(address,uint16,address,bytes)": FunctionFragment;
     "instantRedeemLocal(uint16,uint256,address)": FunctionFragment;
@@ -58,6 +59,7 @@ export interface BalancerInterface extends utils.Interface {
     "router()": FunctionFragment;
     "routerETH()": FunctionFragment;
     "setOwner(address)": FunctionFragment;
+    "setSwapEth(bool)": FunctionFragment;
   };
 
   getFunction(
@@ -68,6 +70,8 @@ export interface BalancerInterface extends utils.Interface {
       | "checker(address,uint16)"
       | "connectedOFTs"
       | "connectedOFTs(address,uint16)"
+      | "disableEth"
+      | "disableEth()"
       | "emergencySaveTokens"
       | "emergencySaveTokens(address,uint256)"
       | "initConnectedOFT"
@@ -90,6 +94,8 @@ export interface BalancerInterface extends utils.Interface {
       | "routerETH()"
       | "setOwner"
       | "setOwner(address)"
+      | "setSwapEth"
+      | "setSwapEth(bool)"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -123,6 +129,14 @@ export interface BalancerInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "connectedOFTs(address,uint16)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "disableEth",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "disableEth()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "emergencySaveTokens",
@@ -269,6 +283,14 @@ export interface BalancerInterface extends utils.Interface {
     functionFragment: "setOwner(address)",
     values: [PromiseOrValue<string>]
   ): string;
+  encodeFunctionData(
+    functionFragment: "setSwapEth",
+    values: [PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setSwapEth(bool)",
+    values: [PromiseOrValue<boolean>]
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "addRebalanceAmount",
@@ -289,6 +311,11 @@ export interface BalancerInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "connectedOFTs(address,uint16)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "disableEth", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "disableEth()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -356,6 +383,11 @@ export interface BalancerInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "setOwner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setOwner(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "setSwapEth", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setSwapEth(bool)",
     data: BytesLike
   ): Result;
 
@@ -517,6 +549,10 @@ export interface Balancer extends BaseContract {
       }
     >;
 
+    disableEth(overrides?: CallOverrides): Promise<[boolean]>;
+
+    "disableEth()"(overrides?: CallOverrides): Promise<[boolean]>;
+
     emergencySaveTokens(
       _token: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
@@ -658,6 +694,16 @@ export interface Balancer extends BaseContract {
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    setSwapEth(
+      _val: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setSwapEth(bool)"(
+      _val: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
 
   addRebalanceAmount(
@@ -711,6 +757,10 @@ export interface Balancer extends BaseContract {
       rebalanceable: BigNumber;
     }
   >;
+
+  disableEth(overrides?: CallOverrides): Promise<boolean>;
+
+  "disableEth()"(overrides?: CallOverrides): Promise<boolean>;
 
   emergencySaveTokens(
     _token: PromiseOrValue<string>,
@@ -854,6 +904,16 @@ export interface Balancer extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  setSwapEth(
+    _val: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setSwapEth(bool)"(
+    _val: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     addRebalanceAmount(
       _srcOft: PromiseOrValue<string>,
@@ -906,6 +966,10 @@ export interface Balancer extends BaseContract {
         rebalanceable: BigNumber;
       }
     >;
+
+    disableEth(overrides?: CallOverrides): Promise<boolean>;
+
+    "disableEth()"(overrides?: CallOverrides): Promise<boolean>;
 
     emergencySaveTokens(
       _token: PromiseOrValue<string>,
@@ -1048,6 +1112,16 @@ export interface Balancer extends BaseContract {
       newOwner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    setSwapEth(
+      _val: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setSwapEth(bool)"(
+      _val: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
@@ -1138,6 +1212,10 @@ export interface Balancer extends BaseContract {
       arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    disableEth(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "disableEth()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     emergencySaveTokens(
       _token: PromiseOrValue<string>,
@@ -1280,6 +1358,16 @@ export interface Balancer extends BaseContract {
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    setSwapEth(
+      _val: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setSwapEth(bool)"(
+      _val: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -1320,6 +1408,10 @@ export interface Balancer extends BaseContract {
       arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    disableEth(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "disableEth()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     emergencySaveTokens(
       _token: PromiseOrValue<string>,
@@ -1460,6 +1552,16 @@ export interface Balancer extends BaseContract {
 
     "setOwner(address)"(
       newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setSwapEth(
+      _val: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setSwapEth(bool)"(
+      _val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
