@@ -25,6 +25,7 @@ export interface TestInterface extends utils.Interface {
   functions: {
     "computeMintFeeTest(uint256,uint256,uint256)": FunctionFragment;
     "getCallerReward(uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
+    "getRevert(bytes4)": FunctionFragment;
     "x()": FunctionFragment;
   };
 
@@ -34,6 +35,8 @@ export interface TestInterface extends utils.Interface {
       | "computeMintFeeTest(uint256,uint256,uint256)"
       | "getCallerReward"
       | "getCallerReward(uint256,uint256,uint256,uint256,uint256)"
+      | "getRevert"
+      | "getRevert(bytes4)"
       | "x"
       | "x()"
   ): FunctionFragment;
@@ -74,6 +77,14 @@ export interface TestInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>
     ]
   ): string;
+  encodeFunctionData(
+    functionFragment: "getRevert",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getRevert(bytes4)",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
   encodeFunctionData(functionFragment: "x", values?: undefined): string;
   encodeFunctionData(functionFragment: "x()", values?: undefined): string;
 
@@ -91,6 +102,11 @@ export interface TestInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "getCallerReward(uint256,uint256,uint256,uint256,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "getRevert", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getRevert(bytes4)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "x", data: BytesLike): Result;
@@ -160,6 +176,16 @@ export interface Test extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
+    getRevert(
+      _returnData: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string] & { result: string }>;
+
+    "getRevert(bytes4)"(
+      _returnData: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string] & { result: string }>;
+
     x(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "x()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -197,6 +223,16 @@ export interface Test extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  getRevert(
+    _returnData: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  "getRevert(bytes4)"(
+    _returnData: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
   x(overrides?: CallOverrides): Promise<BigNumber>;
 
   "x()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -233,6 +269,16 @@ export interface Test extends BaseContract {
       maxLiquidatorReward: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    getRevert(
+      _returnData: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "getRevert(bytes4)"(
+      _returnData: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     x(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -274,6 +320,16 @@ export interface Test extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    getRevert(
+      _returnData: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getRevert(bytes4)"(
+      _returnData: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     x(overrides?: CallOverrides): Promise<BigNumber>;
 
     "x()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -309,6 +365,16 @@ export interface Test extends BaseContract {
       maxTVLInAsset: PromiseOrValue<BigNumberish>,
       minLiquidatorReward: PromiseOrValue<BigNumberish>,
       maxLiquidatorReward: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getRevert(
+      _returnData: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "getRevert(bytes4)"(
+      _returnData: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
