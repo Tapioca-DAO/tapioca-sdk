@@ -230,6 +230,17 @@
             ]
         },
         "non-contracts": {
+            "4002": [
+                {
+                    "name": "NonContract-BlockDetails",
+                    "address": "0x0000000000000000000000000000000000000000",
+                    "meta": {
+                        "blockNumber": 22521116,
+                        "nonce": "0x0000000000000000",
+                        "timestamp": 1700638134
+                    }
+                }
+            ],
             "421613": [
                 {
                     "name": "NonContract-BlockDetails",
