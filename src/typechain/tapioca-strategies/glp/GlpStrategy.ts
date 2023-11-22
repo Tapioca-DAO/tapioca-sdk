@@ -35,18 +35,28 @@ export interface GlpStrategyInterface extends utils.Interface {
     "currentBalance()": FunctionFragment;
     "deposited(uint256)": FunctionFragment;
     "description()": FunctionFragment;
+    "emergencyWithdraw()": FunctionFragment;
     "feeRecipient()": FunctionFragment;
     "feesPending()": FunctionFragment;
+    "gmxGlpOracle()": FunctionFragment;
+    "gmxGlpOracleData()": FunctionFragment;
     "harvest()": FunctionFragment;
     "harvestGmx(uint256,uint256)": FunctionFragment;
     "name()": FunctionFragment;
     "owner()": FunctionFragment;
+    "paused()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
     "setFeeRecipient(address)": FunctionFragment;
+    "setSlippage(uint256)": FunctionFragment;
     "tokenId()": FunctionFragment;
     "tokenType()": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
     "uniswapV3SwapCallback(int256,int256,bytes)": FunctionFragment;
+    "updatePaused(bool)": FunctionFragment;
+    "wethGlpOracle()": FunctionFragment;
+    "wethGlpOracleData()": FunctionFragment;
+    "wethUsdgOracle()": FunctionFragment;
+    "wethUsdgOracleData()": FunctionFragment;
     "withdraw(address,uint256)": FunctionFragment;
     "withdrawFees()": FunctionFragment;
     "withdrawable()": FunctionFragment;
@@ -67,10 +77,16 @@ export interface GlpStrategyInterface extends utils.Interface {
       | "deposited(uint256)"
       | "description"
       | "description()"
+      | "emergencyWithdraw"
+      | "emergencyWithdraw()"
       | "feeRecipient"
       | "feeRecipient()"
       | "feesPending"
       | "feesPending()"
+      | "gmxGlpOracle"
+      | "gmxGlpOracle()"
+      | "gmxGlpOracleData"
+      | "gmxGlpOracleData()"
       | "harvest"
       | "harvest()"
       | "harvestGmx"
@@ -79,10 +95,14 @@ export interface GlpStrategyInterface extends utils.Interface {
       | "name()"
       | "owner"
       | "owner()"
+      | "paused"
+      | "paused()"
       | "pendingOwner"
       | "pendingOwner()"
       | "setFeeRecipient"
       | "setFeeRecipient(address)"
+      | "setSlippage"
+      | "setSlippage(uint256)"
       | "tokenId"
       | "tokenId()"
       | "tokenType"
@@ -91,6 +111,16 @@ export interface GlpStrategyInterface extends utils.Interface {
       | "transferOwnership(address,bool,bool)"
       | "uniswapV3SwapCallback"
       | "uniswapV3SwapCallback(int256,int256,bytes)"
+      | "updatePaused"
+      | "updatePaused(bool)"
+      | "wethGlpOracle"
+      | "wethGlpOracle()"
+      | "wethGlpOracleData"
+      | "wethGlpOracleData()"
+      | "wethUsdgOracle"
+      | "wethUsdgOracle()"
+      | "wethUsdgOracleData"
+      | "wethUsdgOracleData()"
       | "withdraw"
       | "withdraw(address,uint256)"
       | "withdrawFees"
@@ -150,6 +180,14 @@ export interface GlpStrategyInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "emergencyWithdraw",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "emergencyWithdraw()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "feeRecipient",
     values?: undefined
   ): string;
@@ -163,6 +201,22 @@ export interface GlpStrategyInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "feesPending()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "gmxGlpOracle",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "gmxGlpOracle()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "gmxGlpOracleData",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "gmxGlpOracleData()",
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "harvest", values?: undefined): string;
@@ -179,6 +233,8 @@ export interface GlpStrategyInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "name()", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "paused", values?: undefined): string;
+  encodeFunctionData(functionFragment: "paused()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "pendingOwner",
     values?: undefined
@@ -194,6 +250,14 @@ export interface GlpStrategyInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "setFeeRecipient(address)",
     values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setSlippage",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setSlippage(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "tokenId", values?: undefined): string;
   encodeFunctionData(functionFragment: "tokenId()", values?: undefined): string;
@@ -233,6 +297,46 @@ export interface GlpStrategyInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updatePaused",
+    values: [PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updatePaused(bool)",
+    values: [PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "wethGlpOracle",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "wethGlpOracle()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "wethGlpOracleData",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "wethGlpOracleData()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "wethUsdgOracle",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "wethUsdgOracle()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "wethUsdgOracleData",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "wethUsdgOracleData()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "withdraw",
@@ -310,6 +414,14 @@ export interface GlpStrategyInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "emergencyWithdraw",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "emergencyWithdraw()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "feeRecipient",
     data: BytesLike
   ): Result;
@@ -325,6 +437,22 @@ export interface GlpStrategyInterface extends utils.Interface {
     functionFragment: "feesPending()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "gmxGlpOracle",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "gmxGlpOracle()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "gmxGlpOracleData",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "gmxGlpOracleData()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "harvest", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "harvest()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "harvestGmx", data: BytesLike): Result;
@@ -336,6 +464,8 @@ export interface GlpStrategyInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "paused()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "pendingOwner",
     data: BytesLike
@@ -350,6 +480,14 @@ export interface GlpStrategyInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setFeeRecipient(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setSlippage",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setSlippage(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "tokenId", data: BytesLike): Result;
@@ -373,6 +511,46 @@ export interface GlpStrategyInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "uniswapV3SwapCallback(int256,int256,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updatePaused",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updatePaused(bool)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "wethGlpOracle",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "wethGlpOracle()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "wethGlpOracleData",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "wethGlpOracleData()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "wethUsdgOracle",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "wethUsdgOracle()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "wethUsdgOracleData",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "wethUsdgOracleData()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
@@ -488,9 +666,21 @@ export interface GlpStrategy extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    description(overrides?: CallOverrides): Promise<[string]>;
+    description(
+      overrides?: CallOverrides
+    ): Promise<[string] & { description_: string }>;
 
-    "description()"(overrides?: CallOverrides): Promise<[string]>;
+    "description()"(
+      overrides?: CallOverrides
+    ): Promise<[string] & { description_: string }>;
+
+    emergencyWithdraw(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "emergencyWithdraw()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     feeRecipient(overrides?: CallOverrides): Promise<[string]>;
 
@@ -499,6 +689,14 @@ export interface GlpStrategy extends BaseContract {
     feesPending(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "feesPending()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    gmxGlpOracle(overrides?: CallOverrides): Promise<[string]>;
+
+    "gmxGlpOracle()"(overrides?: CallOverrides): Promise<[string]>;
+
+    gmxGlpOracleData(overrides?: CallOverrides): Promise<[string]>;
+
+    "gmxGlpOracleData()"(overrides?: CallOverrides): Promise<[string]>;
 
     harvest(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -520,13 +718,17 @@ export interface GlpStrategy extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    name(overrides?: CallOverrides): Promise<[string]>;
+    name(overrides?: CallOverrides): Promise<[string] & { name_: string }>;
 
-    "name()"(overrides?: CallOverrides): Promise<[string]>;
+    "name()"(overrides?: CallOverrides): Promise<[string] & { name_: string }>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
+
+    paused(overrides?: CallOverrides): Promise<[boolean]>;
+
+    "paused()"(overrides?: CallOverrides): Promise<[boolean]>;
 
     pendingOwner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -539,6 +741,16 @@ export interface GlpStrategy extends BaseContract {
 
     "setFeeRecipient(address)"(
       recipient: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setSlippage(
+      _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setSlippage(uint256)"(
+      _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -577,6 +789,32 @@ export interface GlpStrategy extends BaseContract {
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    updatePaused(
+      _val: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "updatePaused(bool)"(
+      _val: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    wethGlpOracle(overrides?: CallOverrides): Promise<[string]>;
+
+    "wethGlpOracle()"(overrides?: CallOverrides): Promise<[string]>;
+
+    wethGlpOracleData(overrides?: CallOverrides): Promise<[string]>;
+
+    "wethGlpOracleData()"(overrides?: CallOverrides): Promise<[string]>;
+
+    wethUsdgOracle(overrides?: CallOverrides): Promise<[string]>;
+
+    "wethUsdgOracle()"(overrides?: CallOverrides): Promise<[string]>;
+
+    wethUsdgOracleData(overrides?: CallOverrides): Promise<[string]>;
+
+    "wethUsdgOracleData()"(overrides?: CallOverrides): Promise<[string]>;
 
     withdraw(
       to: PromiseOrValue<string>,
@@ -645,6 +883,14 @@ export interface GlpStrategy extends BaseContract {
 
   "description()"(overrides?: CallOverrides): Promise<string>;
 
+  emergencyWithdraw(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "emergencyWithdraw()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   feeRecipient(overrides?: CallOverrides): Promise<string>;
 
   "feeRecipient()"(overrides?: CallOverrides): Promise<string>;
@@ -652,6 +898,14 @@ export interface GlpStrategy extends BaseContract {
   feesPending(overrides?: CallOverrides): Promise<BigNumber>;
 
   "feesPending()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  gmxGlpOracle(overrides?: CallOverrides): Promise<string>;
+
+  "gmxGlpOracle()"(overrides?: CallOverrides): Promise<string>;
+
+  gmxGlpOracleData(overrides?: CallOverrides): Promise<string>;
+
+  "gmxGlpOracleData()"(overrides?: CallOverrides): Promise<string>;
 
   harvest(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -681,6 +935,10 @@ export interface GlpStrategy extends BaseContract {
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
 
+  paused(overrides?: CallOverrides): Promise<boolean>;
+
+  "paused()"(overrides?: CallOverrides): Promise<boolean>;
+
   pendingOwner(overrides?: CallOverrides): Promise<string>;
 
   "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
@@ -692,6 +950,16 @@ export interface GlpStrategy extends BaseContract {
 
   "setFeeRecipient(address)"(
     recipient: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setSlippage(
+    _val: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setSlippage(uint256)"(
+    _val: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -730,6 +998,32 @@ export interface GlpStrategy extends BaseContract {
     data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  updatePaused(
+    _val: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "updatePaused(bool)"(
+    _val: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  wethGlpOracle(overrides?: CallOverrides): Promise<string>;
+
+  "wethGlpOracle()"(overrides?: CallOverrides): Promise<string>;
+
+  wethGlpOracleData(overrides?: CallOverrides): Promise<string>;
+
+  "wethGlpOracleData()"(overrides?: CallOverrides): Promise<string>;
+
+  wethUsdgOracle(overrides?: CallOverrides): Promise<string>;
+
+  "wethUsdgOracle()"(overrides?: CallOverrides): Promise<string>;
+
+  wethUsdgOracleData(overrides?: CallOverrides): Promise<string>;
+
+  "wethUsdgOracleData()"(overrides?: CallOverrides): Promise<string>;
 
   withdraw(
     to: PromiseOrValue<string>,
@@ -790,6 +1084,10 @@ export interface GlpStrategy extends BaseContract {
 
     "description()"(overrides?: CallOverrides): Promise<string>;
 
+    emergencyWithdraw(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "emergencyWithdraw()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     feeRecipient(overrides?: CallOverrides): Promise<string>;
 
     "feeRecipient()"(overrides?: CallOverrides): Promise<string>;
@@ -797,6 +1095,14 @@ export interface GlpStrategy extends BaseContract {
     feesPending(overrides?: CallOverrides): Promise<BigNumber>;
 
     "feesPending()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    gmxGlpOracle(overrides?: CallOverrides): Promise<string>;
+
+    "gmxGlpOracle()"(overrides?: CallOverrides): Promise<string>;
+
+    gmxGlpOracleData(overrides?: CallOverrides): Promise<string>;
+
+    "gmxGlpOracleData()"(overrides?: CallOverrides): Promise<string>;
 
     harvest(overrides?: CallOverrides): Promise<void>;
 
@@ -822,6 +1128,10 @@ export interface GlpStrategy extends BaseContract {
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
 
+    paused(overrides?: CallOverrides): Promise<boolean>;
+
+    "paused()"(overrides?: CallOverrides): Promise<boolean>;
+
     pendingOwner(overrides?: CallOverrides): Promise<string>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
@@ -833,6 +1143,16 @@ export interface GlpStrategy extends BaseContract {
 
     "setFeeRecipient(address)"(
       recipient: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setSlippage(
+      _val: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setSlippage(uint256)"(
+      _val: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -871,6 +1191,32 @@ export interface GlpStrategy extends BaseContract {
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    updatePaused(
+      _val: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "updatePaused(bool)"(
+      _val: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    wethGlpOracle(overrides?: CallOverrides): Promise<string>;
+
+    "wethGlpOracle()"(overrides?: CallOverrides): Promise<string>;
+
+    wethGlpOracleData(overrides?: CallOverrides): Promise<string>;
+
+    "wethGlpOracleData()"(overrides?: CallOverrides): Promise<string>;
+
+    wethUsdgOracle(overrides?: CallOverrides): Promise<string>;
+
+    "wethUsdgOracle()"(overrides?: CallOverrides): Promise<string>;
+
+    wethUsdgOracleData(overrides?: CallOverrides): Promise<string>;
+
+    "wethUsdgOracleData()"(overrides?: CallOverrides): Promise<string>;
 
     withdraw(
       to: PromiseOrValue<string>,
@@ -943,6 +1289,14 @@ export interface GlpStrategy extends BaseContract {
 
     "description()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    emergencyWithdraw(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "emergencyWithdraw()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     feeRecipient(overrides?: CallOverrides): Promise<BigNumber>;
 
     "feeRecipient()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -950,6 +1304,14 @@ export interface GlpStrategy extends BaseContract {
     feesPending(overrides?: CallOverrides): Promise<BigNumber>;
 
     "feesPending()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    gmxGlpOracle(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "gmxGlpOracle()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    gmxGlpOracleData(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "gmxGlpOracleData()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     harvest(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -979,6 +1341,10 @@ export interface GlpStrategy extends BaseContract {
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    paused(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "paused()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -990,6 +1356,16 @@ export interface GlpStrategy extends BaseContract {
 
     "setFeeRecipient(address)"(
       recipient: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setSlippage(
+      _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setSlippage(uint256)"(
+      _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1028,6 +1404,32 @@ export interface GlpStrategy extends BaseContract {
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    updatePaused(
+      _val: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "updatePaused(bool)"(
+      _val: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    wethGlpOracle(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "wethGlpOracle()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    wethGlpOracleData(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "wethGlpOracleData()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    wethUsdgOracle(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "wethUsdgOracle()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    wethUsdgOracleData(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "wethUsdgOracleData()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     withdraw(
       to: PromiseOrValue<string>,
@@ -1099,6 +1501,14 @@ export interface GlpStrategy extends BaseContract {
 
     "description()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    emergencyWithdraw(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "emergencyWithdraw()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     feeRecipient(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "feeRecipient()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1106,6 +1516,16 @@ export interface GlpStrategy extends BaseContract {
     feesPending(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "feesPending()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    gmxGlpOracle(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "gmxGlpOracle()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    gmxGlpOracleData(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "gmxGlpOracleData()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     harvest(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1135,6 +1555,10 @@ export interface GlpStrategy extends BaseContract {
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    paused(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "paused()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "pendingOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1146,6 +1570,16 @@ export interface GlpStrategy extends BaseContract {
 
     "setFeeRecipient(address)"(
       recipient: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setSlippage(
+      _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setSlippage(uint256)"(
+      _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1183,6 +1617,40 @@ export interface GlpStrategy extends BaseContract {
       arg1: PromiseOrValue<BigNumberish>,
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    updatePaused(
+      _val: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "updatePaused(bool)"(
+      _val: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    wethGlpOracle(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "wethGlpOracle()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    wethGlpOracleData(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "wethGlpOracleData()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    wethUsdgOracle(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "wethUsdgOracle()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    wethUsdgOracleData(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "wethUsdgOracleData()"(
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     withdraw(

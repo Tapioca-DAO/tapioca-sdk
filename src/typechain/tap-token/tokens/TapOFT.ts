@@ -1585,6 +1585,7 @@ export interface TapOFTInterface extends utils.Interface {
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
+    "BoostedTAP(uint256)": EventFragment;
     "Burned(address,uint256)": EventFragment;
     "CallFailedBytes(uint16,bytes,bytes)": EventFragment;
     "CallFailedStr(uint16,bytes,string)": EventFragment;
@@ -1612,6 +1613,8 @@ export interface TapOFTInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "Approval(address,address,uint256)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "BoostedTAP"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "BoostedTAP(uint256)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Burned"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Burned(address,uint256)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "CallFailedBytes"): EventFragment;
@@ -1703,6 +1706,13 @@ export type ApprovalEvent = TypedEvent<
 >;
 
 export type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
+
+export interface BoostedTAPEventObject {
+  _amount: BigNumber;
+}
+export type BoostedTAPEvent = TypedEvent<[BigNumber], BoostedTAPEventObject>;
+
+export type BoostedTAPEventFilter = TypedEventFilter<BoostedTAPEvent>;
 
 export interface BurnedEventObject {
   _from: string;
@@ -4387,6 +4397,13 @@ export interface TapOFT extends BaseContract {
       spender?: PromiseOrValue<string> | null,
       value?: null
     ): ApprovalEventFilter;
+
+    "BoostedTAP(uint256)"(
+      _amount?: PromiseOrValue<BigNumberish> | null
+    ): BoostedTAPEventFilter;
+    BoostedTAP(
+      _amount?: PromiseOrValue<BigNumberish> | null
+    ): BoostedTAPEventFilter;
 
     "Burned(address,uint256)"(
       _from?: PromiseOrValue<string> | null,

@@ -17,6 +17,14 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AaveStrategy__factory>;
     getContractFactory(
+      name: "AaveV3Strategy",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AaveV3Strategy__factory>;
+    getContractFactory(
+      name: "AaveV3PoolMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AaveV3PoolMock__factory>;
+    getContractFactory(
       name: "LendingPoolMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.LendingPoolMock__factory>;
@@ -44,6 +52,10 @@ declare module "hardhat/types/runtime" {
       name: "CompoundStrategy",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.CompoundStrategy__factory>;
+    getContractFactory(
+      name: "ComptrollerMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ComptrollerMock__factory>;
     getContractFactory(
       name: "CTokenMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -89,10 +101,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TricryptoNativeStrategy__factory>;
     getContractFactory(
-      name: "GlpStrategy",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.GlpStrategy__factory>;
-    getContractFactory(
       name: "LidoEthStrategy",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.LidoEthStrategy__factory>;
@@ -104,6 +112,26 @@ declare module "hardhat/types/runtime" {
       name: "StEthMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.StEthMock__factory>;
+    getContractFactory(
+      name: "YearnVaultMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.YearnVaultMock__factory>;
+    getContractFactory(
+      name: "YearnStrategy",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.YearnStrategy__factory>;
+    getContractFactory(
+      name: "FeeCollector",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.FeeCollector__factory>;
+    getContractFactory(
+      name: "GlpStrategy",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.GlpStrategy__factory>;
+    getContractFactory(
+      name: "SDaiStrategy",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SDaiStrategy__factory>;
     getContractFactory(
       name: "LPStakingMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -128,20 +156,22 @@ declare module "hardhat/types/runtime" {
       name: "StargateSwapperV3",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.StargateSwapperV3__factory>;
-    getContractFactory(
-      name: "YearnVaultMock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.YearnVaultMock__factory>;
-    getContractFactory(
-      name: "YearnStrategy",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.YearnStrategy__factory>;
 
     getContractAt(
       name: "AaveStrategy",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.AaveStrategy>;
+    getContractAt(
+      name: "AaveV3Strategy",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AaveV3Strategy>;
+    getContractAt(
+      name: "AaveV3PoolMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AaveV3PoolMock>;
     getContractAt(
       name: "LendingPoolMock",
       address: string,
@@ -177,6 +207,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.CompoundStrategy>;
+    getContractAt(
+      name: "ComptrollerMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ComptrollerMock>;
     getContractAt(
       name: "CTokenMock",
       address: string,
@@ -233,11 +268,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.TricryptoNativeStrategy>;
     getContractAt(
-      name: "GlpStrategy",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.GlpStrategy>;
-    getContractAt(
       name: "LidoEthStrategy",
       address: string,
       signer?: ethers.Signer
@@ -252,6 +282,31 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.StEthMock>;
+    getContractAt(
+      name: "YearnVaultMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.YearnVaultMock>;
+    getContractAt(
+      name: "YearnStrategy",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.YearnStrategy>;
+    getContractAt(
+      name: "FeeCollector",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.FeeCollector>;
+    getContractAt(
+      name: "GlpStrategy",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.GlpStrategy>;
+    getContractAt(
+      name: "SDaiStrategy",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SDaiStrategy>;
     getContractAt(
       name: "LPStakingMock",
       address: string,
@@ -282,16 +337,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.StargateSwapperV3>;
-    getContractAt(
-      name: "YearnVaultMock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.YearnVaultMock>;
-    getContractAt(
-      name: "YearnStrategy",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.YearnStrategy>;
 
     // default types
     getContractFactory(
