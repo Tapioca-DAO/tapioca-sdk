@@ -11,6 +11,16 @@ import type {
 
 const _abi = [
   {
+    inputs: [],
+    name: "SwapperNotAuthorized",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "SwapperNotValid",
+    type: "error",
+  },
+  {
     anonymous: false,
     inputs: [
       {
