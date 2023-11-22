@@ -36,6 +36,7 @@ export interface StargateStrategyInterface extends utils.Interface {
     "compoundAmount()": FunctionFragment;
     "contractAddress()": FunctionFragment;
     "currentBalance()": FunctionFragment;
+    "defaultSwapData()": FunctionFragment;
     "depositThreshold()": FunctionFragment;
     "deposited(uint256)": FunctionFragment;
     "description()": FunctionFragment;
@@ -44,12 +45,17 @@ export interface StargateStrategyInterface extends utils.Interface {
     "lpStaking()": FunctionFragment;
     "lpStakingPid()": FunctionFragment;
     "name()": FunctionFragment;
+    "oracle()": FunctionFragment;
+    "oracleData()": FunctionFragment;
     "owner()": FunctionFragment;
+    "paused()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
     "rescueEth(uint256,address)": FunctionFragment;
     "router()": FunctionFragment;
+    "setDefaultSwapData(bytes)": FunctionFragment;
     "setDepositThreshold(uint256)": FunctionFragment;
     "setMultiSwapper(address)": FunctionFragment;
+    "setSlippage(uint256)": FunctionFragment;
     "stgEthPool()": FunctionFragment;
     "stgNative()": FunctionFragment;
     "stgTokenReward()": FunctionFragment;
@@ -57,6 +63,7 @@ export interface StargateStrategyInterface extends utils.Interface {
     "tokenId()": FunctionFragment;
     "tokenType()": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
+    "updatePaused(bool)": FunctionFragment;
     "withdraw(address,uint256)": FunctionFragment;
     "withdrawable()": FunctionFragment;
     "wrappedNative()": FunctionFragment;
@@ -79,6 +86,8 @@ export interface StargateStrategyInterface extends utils.Interface {
       | "contractAddress()"
       | "currentBalance"
       | "currentBalance()"
+      | "defaultSwapData"
+      | "defaultSwapData()"
       | "depositThreshold"
       | "depositThreshold()"
       | "deposited"
@@ -95,18 +104,28 @@ export interface StargateStrategyInterface extends utils.Interface {
       | "lpStakingPid()"
       | "name"
       | "name()"
+      | "oracle"
+      | "oracle()"
+      | "oracleData"
+      | "oracleData()"
       | "owner"
       | "owner()"
+      | "paused"
+      | "paused()"
       | "pendingOwner"
       | "pendingOwner()"
       | "rescueEth"
       | "rescueEth(uint256,address)"
       | "router"
       | "router()"
+      | "setDefaultSwapData"
+      | "setDefaultSwapData(bytes)"
       | "setDepositThreshold"
       | "setDepositThreshold(uint256)"
       | "setMultiSwapper"
       | "setMultiSwapper(address)"
+      | "setSlippage"
+      | "setSlippage(uint256)"
       | "stgEthPool"
       | "stgEthPool()"
       | "stgNative"
@@ -121,6 +140,8 @@ export interface StargateStrategyInterface extends utils.Interface {
       | "tokenType()"
       | "transferOwnership"
       | "transferOwnership(address,bool,bool)"
+      | "updatePaused"
+      | "updatePaused(bool)"
       | "withdraw"
       | "withdraw(address,uint256)"
       | "withdrawable"
@@ -188,6 +209,14 @@ export interface StargateStrategyInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "defaultSwapData",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "defaultSwapData()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "depositThreshold",
     values?: undefined
   ): string;
@@ -242,8 +271,20 @@ export interface StargateStrategyInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(functionFragment: "name()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "oracle", values?: undefined): string;
+  encodeFunctionData(functionFragment: "oracle()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "oracleData",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "oracleData()",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "paused", values?: undefined): string;
+  encodeFunctionData(functionFragment: "paused()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "pendingOwner",
     values?: undefined
@@ -263,6 +304,14 @@ export interface StargateStrategyInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "router", values?: undefined): string;
   encodeFunctionData(functionFragment: "router()", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "setDefaultSwapData",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setDefaultSwapData(bytes)",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "setDepositThreshold",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
@@ -277,6 +326,14 @@ export interface StargateStrategyInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "setMultiSwapper(address)",
     values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setSlippage",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setSlippage(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "stgEthPool",
@@ -323,6 +380,14 @@ export interface StargateStrategyInterface extends utils.Interface {
       PromiseOrValue<boolean>,
       PromiseOrValue<boolean>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updatePaused",
+    values: [PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updatePaused(bool)",
+    values: [PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "withdraw",
@@ -408,6 +473,14 @@ export interface StargateStrategyInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "defaultSwapData",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "defaultSwapData()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "depositThreshold",
     data: BytesLike
   ): Result;
@@ -459,8 +532,17 @@ export interface StargateStrategyInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "oracle", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "oracle()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "oracleData", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "oracleData()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "paused()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "pendingOwner",
     data: BytesLike
@@ -477,6 +559,14 @@ export interface StargateStrategyInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "router", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "router()", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "setDefaultSwapData",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setDefaultSwapData(bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "setDepositThreshold",
     data: BytesLike
   ): Result;
@@ -490,6 +580,14 @@ export interface StargateStrategyInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setMultiSwapper(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setSlippage",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setSlippage(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "stgEthPool", data: BytesLike): Result;
@@ -525,6 +623,14 @@ export interface StargateStrategyInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership(address,bool,bool)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updatePaused",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updatePaused(bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
@@ -698,12 +804,12 @@ export interface StargateStrategy extends BaseContract {
     ): Promise<ContractTransaction>;
 
     compound(
-      arg0: PromiseOrValue<BytesLike>,
+      dexData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "compound(bytes)"(
-      arg0: PromiseOrValue<BytesLike>,
+      dexData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -726,6 +832,10 @@ export interface StargateStrategy extends BaseContract {
     "currentBalance()"(
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { amount: BigNumber }>;
+
+    defaultSwapData(overrides?: CallOverrides): Promise<[string]>;
+
+    "defaultSwapData()"(overrides?: CallOverrides): Promise<[string]>;
 
     depositThreshold(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -773,9 +883,21 @@ export interface StargateStrategy extends BaseContract {
 
     "name()"(overrides?: CallOverrides): Promise<[string] & { name_: string }>;
 
+    oracle(overrides?: CallOverrides): Promise<[string]>;
+
+    "oracle()"(overrides?: CallOverrides): Promise<[string]>;
+
+    oracleData(overrides?: CallOverrides): Promise<[string]>;
+
+    "oracleData()"(overrides?: CallOverrides): Promise<[string]>;
+
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
+
+    paused(overrides?: CallOverrides): Promise<[boolean]>;
+
+    "paused()"(overrides?: CallOverrides): Promise<[boolean]>;
 
     pendingOwner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -797,6 +919,16 @@ export interface StargateStrategy extends BaseContract {
 
     "router()"(overrides?: CallOverrides): Promise<[string]>;
 
+    setDefaultSwapData(
+      _data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setDefaultSwapData(bytes)"(
+      _data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     setDepositThreshold(
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -814,6 +946,16 @@ export interface StargateStrategy extends BaseContract {
 
     "setMultiSwapper(address)"(
       _swapper: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setSlippage(
+      _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setSlippage(uint256)"(
+      _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -852,6 +994,16 @@ export interface StargateStrategy extends BaseContract {
       newOwner: PromiseOrValue<string>,
       direct: PromiseOrValue<boolean>,
       renounce: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    updatePaused(
+      _val: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "updatePaused(bool)"(
+      _val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -901,12 +1053,12 @@ export interface StargateStrategy extends BaseContract {
   ): Promise<ContractTransaction>;
 
   compound(
-    arg0: PromiseOrValue<BytesLike>,
+    dexData: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "compound(bytes)"(
-    arg0: PromiseOrValue<BytesLike>,
+    dexData: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -921,6 +1073,10 @@ export interface StargateStrategy extends BaseContract {
   currentBalance(overrides?: CallOverrides): Promise<BigNumber>;
 
   "currentBalance()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  defaultSwapData(overrides?: CallOverrides): Promise<string>;
+
+  "defaultSwapData()"(overrides?: CallOverrides): Promise<string>;
 
   depositThreshold(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -964,9 +1120,21 @@ export interface StargateStrategy extends BaseContract {
 
   "name()"(overrides?: CallOverrides): Promise<string>;
 
+  oracle(overrides?: CallOverrides): Promise<string>;
+
+  "oracle()"(overrides?: CallOverrides): Promise<string>;
+
+  oracleData(overrides?: CallOverrides): Promise<string>;
+
+  "oracleData()"(overrides?: CallOverrides): Promise<string>;
+
   owner(overrides?: CallOverrides): Promise<string>;
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
+
+  paused(overrides?: CallOverrides): Promise<boolean>;
+
+  "paused()"(overrides?: CallOverrides): Promise<boolean>;
 
   pendingOwner(overrides?: CallOverrides): Promise<string>;
 
@@ -988,6 +1156,16 @@ export interface StargateStrategy extends BaseContract {
 
   "router()"(overrides?: CallOverrides): Promise<string>;
 
+  setDefaultSwapData(
+    _data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setDefaultSwapData(bytes)"(
+    _data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   setDepositThreshold(
     amount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1005,6 +1183,16 @@ export interface StargateStrategy extends BaseContract {
 
   "setMultiSwapper(address)"(
     _swapper: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setSlippage(
+    _val: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setSlippage(uint256)"(
+    _val: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1046,6 +1234,16 @@ export interface StargateStrategy extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  updatePaused(
+    _val: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "updatePaused(bool)"(
+    _val: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   withdraw(
     to: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
@@ -1084,12 +1282,12 @@ export interface StargateStrategy extends BaseContract {
     "claimOwnership()"(overrides?: CallOverrides): Promise<void>;
 
     compound(
-      arg0: PromiseOrValue<BytesLike>,
+      dexData: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "compound(bytes)"(
-      arg0: PromiseOrValue<BytesLike>,
+      dexData: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1104,6 +1302,10 @@ export interface StargateStrategy extends BaseContract {
     currentBalance(overrides?: CallOverrides): Promise<BigNumber>;
 
     "currentBalance()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    defaultSwapData(overrides?: CallOverrides): Promise<string>;
+
+    "defaultSwapData()"(overrides?: CallOverrides): Promise<string>;
 
     depositThreshold(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1143,9 +1345,21 @@ export interface StargateStrategy extends BaseContract {
 
     "name()"(overrides?: CallOverrides): Promise<string>;
 
+    oracle(overrides?: CallOverrides): Promise<string>;
+
+    "oracle()"(overrides?: CallOverrides): Promise<string>;
+
+    oracleData(overrides?: CallOverrides): Promise<string>;
+
+    "oracleData()"(overrides?: CallOverrides): Promise<string>;
+
     owner(overrides?: CallOverrides): Promise<string>;
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
+
+    paused(overrides?: CallOverrides): Promise<boolean>;
+
+    "paused()"(overrides?: CallOverrides): Promise<boolean>;
 
     pendingOwner(overrides?: CallOverrides): Promise<string>;
 
@@ -1167,6 +1381,16 @@ export interface StargateStrategy extends BaseContract {
 
     "router()"(overrides?: CallOverrides): Promise<string>;
 
+    setDefaultSwapData(
+      _data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setDefaultSwapData(bytes)"(
+      _data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     setDepositThreshold(
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1184,6 +1408,16 @@ export interface StargateStrategy extends BaseContract {
 
     "setMultiSwapper(address)"(
       _swapper: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setSlippage(
+      _val: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setSlippage(uint256)"(
+      _val: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1225,6 +1459,16 @@ export interface StargateStrategy extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    updatePaused(
+      _val: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "updatePaused(bool)"(
+      _val: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     withdraw(
       to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
@@ -1251,26 +1495,37 @@ export interface StargateStrategy extends BaseContract {
   };
 
   filters: {
-    "AmountDeposited(uint256)"(amount?: null): AmountDepositedEventFilter;
-    AmountDeposited(amount?: null): AmountDepositedEventFilter;
+    "AmountDeposited(uint256)"(
+      amount?: PromiseOrValue<BigNumberish> | null
+    ): AmountDepositedEventFilter;
+    AmountDeposited(
+      amount?: PromiseOrValue<BigNumberish> | null
+    ): AmountDepositedEventFilter;
 
-    "AmountQueued(uint256)"(amount?: null): AmountQueuedEventFilter;
-    AmountQueued(amount?: null): AmountQueuedEventFilter;
+    "AmountQueued(uint256)"(
+      amount?: PromiseOrValue<BigNumberish> | null
+    ): AmountQueuedEventFilter;
+    AmountQueued(
+      amount?: PromiseOrValue<BigNumberish> | null
+    ): AmountQueuedEventFilter;
 
     "AmountWithdrawn(address,uint256)"(
       to?: PromiseOrValue<string> | null,
-      amount?: null
+      amount?: PromiseOrValue<BigNumberish> | null
     ): AmountWithdrawnEventFilter;
     AmountWithdrawn(
       to?: PromiseOrValue<string> | null,
-      amount?: null
+      amount?: PromiseOrValue<BigNumberish> | null
     ): AmountWithdrawnEventFilter;
 
     "DepositThreshold(uint256,uint256)"(
-      _old?: null,
-      _new?: null
+      _old?: PromiseOrValue<BigNumberish> | null,
+      _new?: PromiseOrValue<BigNumberish> | null
     ): DepositThresholdEventFilter;
-    DepositThreshold(_old?: null, _new?: null): DepositThresholdEventFilter;
+    DepositThreshold(
+      _old?: PromiseOrValue<BigNumberish> | null,
+      _new?: PromiseOrValue<BigNumberish> | null
+    ): DepositThresholdEventFilter;
 
     "MultiSwapper(address,address)"(
       _old?: PromiseOrValue<string> | null,
@@ -1309,12 +1564,12 @@ export interface StargateStrategy extends BaseContract {
     ): Promise<BigNumber>;
 
     compound(
-      arg0: PromiseOrValue<BytesLike>,
+      dexData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "compound(bytes)"(
-      arg0: PromiseOrValue<BytesLike>,
+      dexData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1329,6 +1584,10 @@ export interface StargateStrategy extends BaseContract {
     currentBalance(overrides?: CallOverrides): Promise<BigNumber>;
 
     "currentBalance()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    defaultSwapData(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "defaultSwapData()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     depositThreshold(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1372,9 +1631,21 @@ export interface StargateStrategy extends BaseContract {
 
     "name()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    oracle(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "oracle()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    oracleData(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "oracleData()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    paused(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "paused()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1396,6 +1667,16 @@ export interface StargateStrategy extends BaseContract {
 
     "router()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    setDefaultSwapData(
+      _data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setDefaultSwapData(bytes)"(
+      _data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     setDepositThreshold(
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1413,6 +1694,16 @@ export interface StargateStrategy extends BaseContract {
 
     "setMultiSwapper(address)"(
       _swapper: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setSlippage(
+      _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setSlippage(uint256)"(
+      _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1451,6 +1742,16 @@ export interface StargateStrategy extends BaseContract {
       newOwner: PromiseOrValue<string>,
       direct: PromiseOrValue<boolean>,
       renounce: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    updatePaused(
+      _val: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "updatePaused(bool)"(
+      _val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1503,12 +1804,12 @@ export interface StargateStrategy extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     compound(
-      arg0: PromiseOrValue<BytesLike>,
+      dexData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "compound(bytes)"(
-      arg0: PromiseOrValue<BytesLike>,
+      dexData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1527,6 +1828,12 @@ export interface StargateStrategy extends BaseContract {
     currentBalance(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "currentBalance()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    defaultSwapData(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "defaultSwapData()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1574,9 +1881,21 @@ export interface StargateStrategy extends BaseContract {
 
     "name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    oracle(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "oracle()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    oracleData(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "oracleData()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    paused(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "paused()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -1598,6 +1917,16 @@ export interface StargateStrategy extends BaseContract {
 
     "router()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    setDefaultSwapData(
+      _data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setDefaultSwapData(bytes)"(
+      _data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     setDepositThreshold(
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1615,6 +1944,16 @@ export interface StargateStrategy extends BaseContract {
 
     "setMultiSwapper(address)"(
       _swapper: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setSlippage(
+      _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setSlippage(uint256)"(
+      _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1655,6 +1994,16 @@ export interface StargateStrategy extends BaseContract {
       newOwner: PromiseOrValue<string>,
       direct: PromiseOrValue<boolean>,
       renounce: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    updatePaused(
+      _val: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "updatePaused(bool)"(
+      _val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

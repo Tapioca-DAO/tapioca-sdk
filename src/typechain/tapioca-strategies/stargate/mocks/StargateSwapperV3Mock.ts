@@ -264,8 +264,14 @@ export interface StargateSwapperV3Mock extends BaseContract {
   };
 
   filters: {
-    "PoolFee(uint256,uint256)"(_old?: null, _new?: null): PoolFeeEventFilter;
-    PoolFee(_old?: null, _new?: null): PoolFeeEventFilter;
+    "PoolFee(uint256,uint256)"(
+      _old?: PromiseOrValue<BigNumberish> | null,
+      _new?: PromiseOrValue<BigNumberish> | null
+    ): PoolFeeEventFilter;
+    PoolFee(
+      _old?: PromiseOrValue<BigNumberish> | null,
+      _new?: PromiseOrValue<BigNumberish> | null
+    ): PoolFeeEventFilter;
   };
 
   estimateGas: {
