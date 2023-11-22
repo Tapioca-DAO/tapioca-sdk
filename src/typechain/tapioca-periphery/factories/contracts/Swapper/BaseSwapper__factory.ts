@@ -16,6 +16,26 @@ const _abi = [
     type: "error",
   },
   {
+    inputs: [],
+    name: "AmountZero",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "Failed",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "NoContract",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "NotValid",
+    type: "error",
+  },
+  {
     anonymous: false,
     inputs: [
       {
