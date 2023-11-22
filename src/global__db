@@ -1082,12 +1082,32 @@
         "generic": {
             "4002": [
                 {
+                    "name": "MagnetarHelper",
+                    "address": "0x966A38De7D6644a95E4e4Af46090d012A207EcE6",
+                    "meta": {}
+                },
+                {
+                    "name": "Magnetar",
+                    "address": "0x3A3245bFC6AE8E8dD803143Aa78FBe0d76f9E11C",
+                    "meta": {}
+                },
+                {
                     "name": "Multicall3",
                     "address": "0xe8134DdE7d04039578182eb9625D4e6d707b2855",
                     "meta": {}
                 }
             ],
             "421613": [
+                {
+                    "name": "MagnetarHelper",
+                    "address": "0xDef359FEf9A18317aa61D42a14eC485279Aeb449",
+                    "meta": {}
+                },
+                {
+                    "name": "Magnetar",
+                    "address": "0xA79Af017519cF5c92D5C4ba108c5A50DaC680d26",
+                    "meta": {}
+                },
                 {
                     "name": "Multicall3",
                     "address": "0x7AEB6eF0905289ad5bCCb64901B66b08111B2054",
