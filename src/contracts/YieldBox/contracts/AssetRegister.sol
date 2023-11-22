@@ -15,8 +15,6 @@ struct Asset {
 contract AssetRegister is ERC1155 {
     using BoringAddress for address;
 
-    mapping(address => mapping(address => mapping(uint256 => bool))) public isApprovedForAsset;
-
     event AssetRegistered(
         TokenType indexed tokenType,
         address indexed contractAddress,

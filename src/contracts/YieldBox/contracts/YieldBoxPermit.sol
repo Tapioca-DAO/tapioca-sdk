@@ -23,14 +23,10 @@ abstract contract YieldBoxPermit is EIP712 {
 
     mapping(address => Counters.Counter) private _nonces;
 
-
     bytes32 private constant _PERMIT_TYPEHASH =
         keccak256("Permit(address owner,address spender,uint256 assetId,uint256 nonce,uint256 deadline)");
-    
 
-    bytes32 private constant _PERMIT_ALL_TYPEHASH =
-        keccak256("PermitAll(address owner,address spender,uint256 nonce,uint256 deadline)");
-    
+    bytes32 private constant _PERMIT_ALL_TYPEHASH = keccak256("PermitAll(address owner,address spender,uint256 nonce,uint256 deadline)");
 
     /**
      * @dev Initializes the {EIP712} domain separator using the `name` parameter, and setting `version` to `"1"`.
@@ -39,15 +35,15 @@ abstract contract YieldBoxPermit is EIP712 {
      */
     constructor(string memory name) EIP712(name, "1") {}
 
-    function permit(
-        address owner,
-        address spender,
-        uint256 assetId,
-        uint256 deadline,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) public virtual {
+    function permit(address owner, address spender, uint256 assetId, uint256 deadline, uint8 v, bytes32 r, bytes32 s) public virtual {
+        _permit(owner, spender, assetId, deadline, v, r, s, true);
+    }
+
+    function revoke(address owner, address spender, uint256 assetId, uint256 deadline, uint8 v, bytes32 r, bytes32 s) public virtual {
+        _permit(owner, spender, assetId, deadline, v, r, s, false);
+    }
+
+    function _permit(address owner, address spender, uint256 assetId, uint256 deadline, uint8 v, bytes32 r, bytes32 s, bool state) private {
         require(block.timestamp <= deadline, "YieldBoxPermit: expired deadline");
 
         bytes32 structHash = keccak256(abi.encode(_PERMIT_TYPEHASH, owner, spender, assetId, _useNonce(owner), deadline));
@@ -57,26 +53,20 @@ abstract contract YieldBoxPermit is EIP712 {
         address signer = ECDSA.recover(hash, v, r, s);
         require(signer == owner, "YieldBoxPermit: invalid signature");
 
-        _setApprovalForAsset(owner, spender, assetId, true);
+        _setApprovalForAsset(owner, spender, assetId, state);
     }
 
+    function _setApprovalForAsset(address owner, address spender, uint256 assetId, bool approved) internal virtual;
 
-    function _setApprovalForAsset(
-        address owner,
-        address spender,
-        uint256 assetId,
-        bool approved
-    ) internal virtual;
+    function permitAll(address owner, address spender, uint256 deadline, uint8 v, bytes32 r, bytes32 s) public virtual {
+        _permitAll(owner, spender, deadline, v, r, s, true);
+    }
 
+    function revokeAll(address owner, address spender, uint256 deadline, uint8 v, bytes32 r, bytes32 s) public virtual {
+        _permitAll(owner, spender, deadline, v, r, s, false);
+    }
 
-    function permitAll(
-        address owner,
-        address spender,
-        uint256 deadline,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) public virtual {
+    function _permitAll(address owner, address spender, uint256 deadline, uint8 v, bytes32 r, bytes32 s, bool state) private {
         require(block.timestamp <= deadline, "YieldBoxPermit: expired deadline");
 
         bytes32 structHash = keccak256(abi.encode(_PERMIT_ALL_TYPEHASH, owner, spender, _useNonce(owner), deadline));
@@ -86,15 +76,11 @@ abstract contract YieldBoxPermit is EIP712 {
         address signer = ECDSA.recover(hash, v, r, s);
         require(signer == owner, "YieldBoxPermit: invalid signature");
 
-        _setApprovalForAll(owner, spender, true);
+        _setApprovalForAll(owner, spender, state);
     }
 
-    function _setApprovalForAll(
-        address _owner,
-        address operator,
-        bool approved
-    ) internal virtual;
-    
+    function _setApprovalForAll(address _owner, address operator, bool approved) internal virtual;
+
     /**
      * @dev See {IERC20Permit-nonces}.
      */
