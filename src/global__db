@@ -1316,6 +1316,36 @@
                     "meta": {}
                 }
             ]
+        },
+        "yieldbox": {
+            "421613": [
+                {
+                    "name": "YieldBoxURIBuilder",
+                    "address": "0x3ce7F7C9e95E642499AA60C56a1D13CAE0b3dB69",
+                    "meta": {
+                        "args": [],
+                        "salt": "0x46db06d640b8d771ead2203e11371474b84f37a31736659b4e89cd08d35b3521",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "YieldBox",
+                    "address": "0xE5e5cE31cbF94cEd8029c6736e74cedD4906CaD7",
+                    "meta": {
+                        "args": [
+                            "0x00AAc35Ff4f40FfA2E623D3E341762E75D47927b",
+                            "0x3ce7F7C9e95E642499AA60C56a1D13CAE0b3dB69"
+                        ],
+                        "salt": "0xb2937029e82d1b1ee3b6c2bc24ca9f82ec46943339ca195ebb9c3755e69e2e1b",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "TapiocaDeployer",
+                    "address": "0x6128a40744f4405EB95D8F315CeC014bf335A728",
+                    "meta": {}
+                }
+            ]
         }
     }
 }

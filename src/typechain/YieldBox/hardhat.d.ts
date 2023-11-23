@@ -165,14 +165,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC20WithoutStrategy__factory>;
     getContractFactory(
-      name: "SushiStakingBufferStrategy",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.SushiStakingBufferStrategy__factory>;
-    getContractFactory(
-      name: "SushiStakingStrategy",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.SushiStakingStrategy__factory>;
-    getContractFactory(
       name: "YieldBox",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.YieldBox__factory>;
@@ -375,16 +367,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ERC20WithoutStrategy>;
-    getContractAt(
-      name: "SushiStakingBufferStrategy",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.SushiStakingBufferStrategy>;
-    getContractAt(
-      name: "SushiStakingStrategy",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.SushiStakingStrategy>;
     getContractAt(
       name: "YieldBox",
       address: string,
