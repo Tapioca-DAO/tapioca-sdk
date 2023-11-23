@@ -3,6 +3,4 @@
 /* eslint-disable */
 export * as baseBufferStrategySol from "./BaseBufferStrategy.sol";
 export * as baseStrategySol from "./BaseStrategy.sol";
-export * as sushiStakingSimpleStrategySol from "./SushiStakingSimpleStrategy.sol";
 export { ERC20WithoutStrategy__factory } from "./ERC20WithoutStrategy__factory";
-export { SushiStakingBufferStrategy__factory } from "./SushiStakingBufferStrategy__factory";

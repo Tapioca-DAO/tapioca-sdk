@@ -5,7 +5,4 @@ import type * as baseBufferStrategySol from "./BaseBufferStrategy.sol";
 export type { baseBufferStrategySol };
 import type * as baseStrategySol from "./BaseStrategy.sol";
 export type { baseStrategySol };
-import type * as sushiStakingSimpleStrategySol from "./SushiStakingSimpleStrategy.sol";
-export type { sushiStakingSimpleStrategySol };
 export type { ERC20WithoutStrategy } from "./ERC20WithoutStrategy";
-export type { SushiStakingBufferStrategy } from "./SushiStakingBufferStrategy";
