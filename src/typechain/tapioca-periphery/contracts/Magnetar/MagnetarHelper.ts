@@ -7,17 +7,11 @@ import type {
   BigNumberish,
   BytesLike,
   CallOverrides,
-  ContractTransaction,
-  Overrides,
   PopulatedTransaction,
   Signer,
   utils,
 } from "ethers";
-import type {
-  FunctionFragment,
-  Result,
-  EventFragment,
-} from "@ethersproject/abi";
+import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type {
   TypedEventFilter,
@@ -233,10 +227,7 @@ export interface MagnetarHelperInterface extends utils.Interface {
     "getCollateralAmountForShare(address,uint256)": FunctionFragment;
     "getCollateralSharesForBorrowPart(address,uint256,uint256,uint256)": FunctionFragment;
     "getFractionForAmount(address,uint256)": FunctionFragment;
-    "owner()": FunctionFragment;
-    "renounceOwnership()": FunctionFragment;
     "singularityMarketInfo(address,address[])": FunctionFragment;
-    "transferOwnership(address)": FunctionFragment;
   };
 
   getFunction(
@@ -255,14 +246,8 @@ export interface MagnetarHelperInterface extends utils.Interface {
       | "getCollateralSharesForBorrowPart(address,uint256,uint256,uint256)"
       | "getFractionForAmount"
       | "getFractionForAmount(address,uint256)"
-      | "owner"
-      | "owner()"
-      | "renounceOwnership"
-      | "renounceOwnership()"
       | "singularityMarketInfo"
       | "singularityMarketInfo(address,address[])"
-      | "transferOwnership"
-      | "transferOwnership(address)"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -331,16 +316,6 @@ export interface MagnetarHelperInterface extends utils.Interface {
     functionFragment: "getFractionForAmount(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
-  encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "renounceOwnership",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "renounceOwnership()",
-    values?: undefined
-  ): string;
   encodeFunctionData(
     functionFragment: "singularityMarketInfo",
     values: [PromiseOrValue<string>, PromiseOrValue<string>[]]
@@ -348,14 +323,6 @@ export interface MagnetarHelperInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "singularityMarketInfo(address,address[])",
     values: [PromiseOrValue<string>, PromiseOrValue<string>[]]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership(address)",
-    values: [PromiseOrValue<string>]
   ): string;
 
   decodeFunctionResult(
@@ -414,16 +381,6 @@ export interface MagnetarHelperInterface extends utils.Interface {
     functionFragment: "getFractionForAmount(address,uint256)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "singularityMarketInfo",
     data: BytesLike
@@ -432,36 +389,9 @@ export interface MagnetarHelperInterface extends utils.Interface {
     functionFragment: "singularityMarketInfo(address,address[])",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership(address)",
-    data: BytesLike
-  ): Result;
 
-  events: {
-    "OwnershipTransferred(address,address)": EventFragment;
-  };
-
-  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "OwnershipTransferred(address,address)"
-  ): EventFragment;
+  events: {};
 }
-
-export interface OwnershipTransferredEventObject {
-  previousOwner: string;
-  newOwner: string;
-}
-export type OwnershipTransferredEvent = TypedEvent<
-  [string, string],
-  OwnershipTransferredEventObject
->;
-
-export type OwnershipTransferredEventFilter =
-  TypedEventFilter<OwnershipTransferredEvent>;
 
 export interface MagnetarHelper extends BaseContract {
   contractName: "MagnetarHelper";
@@ -580,18 +510,6 @@ export interface MagnetarHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { fraction: BigNumber }>;
 
-    owner(overrides?: CallOverrides): Promise<[string]>;
-
-    "owner()"(overrides?: CallOverrides): Promise<[string]>;
-
-    renounceOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "renounceOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     singularityMarketInfo(
       who: PromiseOrValue<string>,
       markets: PromiseOrValue<string>[],
@@ -603,16 +521,6 @@ export interface MagnetarHelper extends BaseContract {
       markets: PromiseOrValue<string>[],
       overrides?: CallOverrides
     ): Promise<[MagnetarHelper.SingularityInfoStructOutput[]]>;
-
-    transferOwnership(
-      newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "transferOwnership(address)"(
-      newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
   };
 
   bigBangMarketInfo(
@@ -703,18 +611,6 @@ export interface MagnetarHelper extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  owner(overrides?: CallOverrides): Promise<string>;
-
-  "owner()"(overrides?: CallOverrides): Promise<string>;
-
-  renounceOwnership(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "renounceOwnership()"(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   singularityMarketInfo(
     who: PromiseOrValue<string>,
     markets: PromiseOrValue<string>[],
@@ -726,16 +622,6 @@ export interface MagnetarHelper extends BaseContract {
     markets: PromiseOrValue<string>[],
     overrides?: CallOverrides
   ): Promise<MagnetarHelper.SingularityInfoStructOutput[]>;
-
-  transferOwnership(
-    newOwner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "transferOwnership(address)"(
-    newOwner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
 
   callStatic: {
     bigBangMarketInfo(
@@ -826,14 +712,6 @@ export interface MagnetarHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    owner(overrides?: CallOverrides): Promise<string>;
-
-    "owner()"(overrides?: CallOverrides): Promise<string>;
-
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
-
     singularityMarketInfo(
       who: PromiseOrValue<string>,
       markets: PromiseOrValue<string>[],
@@ -845,28 +723,9 @@ export interface MagnetarHelper extends BaseContract {
       markets: PromiseOrValue<string>[],
       overrides?: CallOverrides
     ): Promise<MagnetarHelper.SingularityInfoStructOutput[]>;
-
-    transferOwnership(
-      newOwner: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "transferOwnership(address)"(
-      newOwner: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
   };
 
-  filters: {
-    "OwnershipTransferred(address,address)"(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
-    ): OwnershipTransferredEventFilter;
-    OwnershipTransferred(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
-    ): OwnershipTransferredEventFilter;
-  };
+  filters: {};
 
   estimateGas: {
     bigBangMarketInfo(
@@ -957,18 +816,6 @@ export interface MagnetarHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    owner(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    renounceOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "renounceOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     singularityMarketInfo(
       who: PromiseOrValue<string>,
       markets: PromiseOrValue<string>[],
@@ -979,16 +826,6 @@ export interface MagnetarHelper extends BaseContract {
       who: PromiseOrValue<string>,
       markets: PromiseOrValue<string>[],
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    transferOwnership(
-      newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "transferOwnership(address)"(
-      newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
@@ -1081,18 +918,6 @@ export interface MagnetarHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    renounceOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "renounceOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     singularityMarketInfo(
       who: PromiseOrValue<string>,
       markets: PromiseOrValue<string>[],
@@ -1103,16 +928,6 @@ export interface MagnetarHelper extends BaseContract {
       who: PromiseOrValue<string>,
       markets: PromiseOrValue<string>[],
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    transferOwnership(
-      newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "transferOwnership(address)"(
-      newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

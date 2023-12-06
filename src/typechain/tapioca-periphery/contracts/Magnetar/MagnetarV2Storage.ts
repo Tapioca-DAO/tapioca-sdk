@@ -74,31 +74,14 @@ export interface MagnetarV2StorageInterface extends utils.Interface {
   ): Result;
 
   events: {
-    "ApprovalForAll(address,address,bool)": EventFragment;
     "ClusterSet(address,address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "ApprovalForAll(address,address,bool)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ClusterSet"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ClusterSet(address,address)"
   ): EventFragment;
 }
-
-export interface ApprovalForAllEventObject {
-  owner: string;
-  operator: string;
-  approved: boolean;
-}
-export type ApprovalForAllEvent = TypedEvent<
-  [string, string, boolean],
-  ApprovalForAllEventObject
->;
-
-export type ApprovalForAllEventFilter = TypedEventFilter<ApprovalForAllEvent>;
 
 export interface ClusterSetEventObject {
   oldCluster: string;
@@ -204,17 +187,6 @@ export interface MagnetarV2Storage extends BaseContract {
   };
 
   filters: {
-    "ApprovalForAll(address,address,bool)"(
-      owner?: PromiseOrValue<string> | null,
-      operator?: PromiseOrValue<string> | null,
-      approved?: null
-    ): ApprovalForAllEventFilter;
-    ApprovalForAll(
-      owner?: PromiseOrValue<string> | null,
-      operator?: PromiseOrValue<string> | null,
-      approved?: null
-    ): ApprovalForAllEventFilter;
-
     "ClusterSet(address,address)"(
       oldCluster?: PromiseOrValue<string> | null,
       newCluster?: PromiseOrValue<string> | null

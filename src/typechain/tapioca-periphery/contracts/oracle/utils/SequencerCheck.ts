@@ -141,9 +141,9 @@ export interface SequencerCheck extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<[BigNumber]>;
+    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<[number]>;
 
-    "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+    "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<[number]>;
 
     SEQUENCER_ROLE(overrides?: CallOverrides): Promise<[string]>;
 
@@ -164,9 +164,9 @@ export interface SequencerCheck extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<BigNumber>;
+  GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<number>;
 
-  "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
+  "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<number>;
 
   SEQUENCER_ROLE(overrides?: CallOverrides): Promise<string>;
 
@@ -187,9 +187,9 @@ export interface SequencerCheck extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<BigNumber>;
+    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<number>;
 
-    "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<number>;
 
     SEQUENCER_ROLE(overrides?: CallOverrides): Promise<string>;
 

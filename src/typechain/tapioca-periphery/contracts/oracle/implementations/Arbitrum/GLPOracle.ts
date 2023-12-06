@@ -33,17 +33,29 @@ export interface GLPOracleInterface extends utils.Interface {
     "GRACE_PERIOD_TIME()": FunctionFragment;
     "SEQUENCER_ROLE()": FunctionFragment;
     "SEQUENCER_UPTIME_FEED()": FunctionFragment;
+    "acceptDefaultAdminTransfer()": FunctionFragment;
+    "beginDefaultAdminTransfer(address)": FunctionFragment;
+    "cancelDefaultAdminTransfer()": FunctionFragment;
+    "changeDefaultAdminDelay(uint48)": FunctionFragment;
     "changeGracePeriod(uint32)": FunctionFragment;
     "decimals()": FunctionFragment;
+    "defaultAdmin()": FunctionFragment;
+    "defaultAdminDelay()": FunctionFragment;
+    "defaultAdminDelayIncreaseWait()": FunctionFragment;
     "get(bytes)": FunctionFragment;
     "getRoleAdmin(bytes32)": FunctionFragment;
     "grantRole(bytes32,address)": FunctionFragment;
     "hasRole(bytes32,address)": FunctionFragment;
     "name(bytes)": FunctionFragment;
+    "owner()": FunctionFragment;
     "peek(bytes)": FunctionFragment;
     "peekSpot(bytes)": FunctionFragment;
+    "pendingDefaultAdmin()": FunctionFragment;
+    "pendingDefaultAdminDelay()": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
+    "rollbackDefaultAdminDelay()": FunctionFragment;
+    "supportsInterface(bytes4)": FunctionFragment;
     "symbol(bytes)": FunctionFragment;
   };
 
@@ -57,10 +69,24 @@ export interface GLPOracleInterface extends utils.Interface {
       | "SEQUENCER_ROLE()"
       | "SEQUENCER_UPTIME_FEED"
       | "SEQUENCER_UPTIME_FEED()"
+      | "acceptDefaultAdminTransfer"
+      | "acceptDefaultAdminTransfer()"
+      | "beginDefaultAdminTransfer"
+      | "beginDefaultAdminTransfer(address)"
+      | "cancelDefaultAdminTransfer"
+      | "cancelDefaultAdminTransfer()"
+      | "changeDefaultAdminDelay"
+      | "changeDefaultAdminDelay(uint48)"
       | "changeGracePeriod"
       | "changeGracePeriod(uint32)"
       | "decimals"
       | "decimals()"
+      | "defaultAdmin"
+      | "defaultAdmin()"
+      | "defaultAdminDelay"
+      | "defaultAdminDelay()"
+      | "defaultAdminDelayIncreaseWait"
+      | "defaultAdminDelayIncreaseWait()"
       | "get"
       | "get(bytes)"
       | "getRoleAdmin"
@@ -71,14 +97,24 @@ export interface GLPOracleInterface extends utils.Interface {
       | "hasRole(bytes32,address)"
       | "name"
       | "name(bytes)"
+      | "owner"
+      | "owner()"
       | "peek"
       | "peek(bytes)"
       | "peekSpot"
       | "peekSpot(bytes)"
+      | "pendingDefaultAdmin"
+      | "pendingDefaultAdmin()"
+      | "pendingDefaultAdminDelay"
+      | "pendingDefaultAdminDelay()"
       | "renounceRole"
       | "renounceRole(bytes32,address)"
       | "revokeRole"
       | "revokeRole(bytes32,address)"
+      | "rollbackDefaultAdminDelay"
+      | "rollbackDefaultAdminDelay()"
+      | "supportsInterface"
+      | "supportsInterface(bytes4)"
       | "symbol"
       | "symbol(bytes)"
   ): FunctionFragment;
@@ -116,6 +152,38 @@ export interface GLPOracleInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "acceptDefaultAdminTransfer",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "acceptDefaultAdminTransfer()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "beginDefaultAdminTransfer",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "beginDefaultAdminTransfer(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "cancelDefaultAdminTransfer",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "cancelDefaultAdminTransfer()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "changeDefaultAdminDelay",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "changeDefaultAdminDelay(uint48)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "changeGracePeriod",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
@@ -126,6 +194,30 @@ export interface GLPOracleInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "decimals()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "defaultAdmin",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "defaultAdmin()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "defaultAdminDelay",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "defaultAdminDelay()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "defaultAdminDelayIncreaseWait",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "defaultAdminDelayIncreaseWait()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -168,6 +260,8 @@ export interface GLPOracleInterface extends utils.Interface {
     functionFragment: "name(bytes)",
     values: [PromiseOrValue<BytesLike>]
   ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "peek",
     values: [PromiseOrValue<BytesLike>]
@@ -185,6 +279,22 @@ export interface GLPOracleInterface extends utils.Interface {
     values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
+    functionFragment: "pendingDefaultAdmin",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "pendingDefaultAdmin()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "pendingDefaultAdminDelay",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "pendingDefaultAdminDelay()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "renounceRole",
     values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
   ): string;
@@ -199,6 +309,22 @@ export interface GLPOracleInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "revokeRole(bytes32,address)",
     values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rollbackDefaultAdminDelay",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rollbackDefaultAdminDelay()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface(bytes4)",
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "symbol",
@@ -242,6 +368,38 @@ export interface GLPOracleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "acceptDefaultAdminTransfer",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "acceptDefaultAdminTransfer()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "beginDefaultAdminTransfer",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "beginDefaultAdminTransfer(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "cancelDefaultAdminTransfer",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "cancelDefaultAdminTransfer()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "changeDefaultAdminDelay",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "changeDefaultAdminDelay(uint48)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "changeGracePeriod",
     data: BytesLike
   ): Result;
@@ -251,6 +409,30 @@ export interface GLPOracleInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "defaultAdmin",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "defaultAdmin()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "defaultAdminDelay",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "defaultAdminDelay()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "defaultAdminDelayIncreaseWait",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "defaultAdminDelayIncreaseWait()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "get", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "get(bytes)", data: BytesLike): Result;
   decodeFunctionResult(
@@ -276,6 +458,8 @@ export interface GLPOracleInterface extends utils.Interface {
     functionFragment: "name(bytes)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "peek", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "peek(bytes)",
@@ -284,6 +468,22 @@ export interface GLPOracleInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "peekSpot", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "peekSpot(bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "pendingDefaultAdmin",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "pendingDefaultAdmin()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "pendingDefaultAdminDelay",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "pendingDefaultAdminDelay()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -299,6 +499,22 @@ export interface GLPOracleInterface extends utils.Interface {
     functionFragment: "revokeRole(bytes32,address)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "rollbackDefaultAdminDelay",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "rollbackDefaultAdminDelay()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface(bytes4)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "symbol(bytes)",
@@ -306,11 +522,39 @@ export interface GLPOracleInterface extends utils.Interface {
   ): Result;
 
   events: {
+    "DefaultAdminDelayChangeCanceled()": EventFragment;
+    "DefaultAdminDelayChangeScheduled(uint48,uint48)": EventFragment;
+    "DefaultAdminTransferCanceled()": EventFragment;
+    "DefaultAdminTransferScheduled(address,uint48)": EventFragment;
     "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
     "RoleGranted(bytes32,address,address)": EventFragment;
     "RoleRevoked(bytes32,address,address)": EventFragment;
   };
 
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminDelayChangeCanceled"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminDelayChangeCanceled()"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminDelayChangeScheduled"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminDelayChangeScheduled(uint48,uint48)"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminTransferCanceled"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminTransferCanceled()"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminTransferScheduled"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminTransferScheduled(address,uint48)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleAdminChanged"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "RoleAdminChanged(bytes32,bytes32,bytes32)"
@@ -324,6 +568,48 @@ export interface GLPOracleInterface extends utils.Interface {
     nameOrSignatureOrTopic: "RoleRevoked(bytes32,address,address)"
   ): EventFragment;
 }
+
+export interface DefaultAdminDelayChangeCanceledEventObject {}
+export type DefaultAdminDelayChangeCanceledEvent = TypedEvent<
+  [],
+  DefaultAdminDelayChangeCanceledEventObject
+>;
+
+export type DefaultAdminDelayChangeCanceledEventFilter =
+  TypedEventFilter<DefaultAdminDelayChangeCanceledEvent>;
+
+export interface DefaultAdminDelayChangeScheduledEventObject {
+  newDelay: number;
+  effectSchedule: number;
+}
+export type DefaultAdminDelayChangeScheduledEvent = TypedEvent<
+  [number, number],
+  DefaultAdminDelayChangeScheduledEventObject
+>;
+
+export type DefaultAdminDelayChangeScheduledEventFilter =
+  TypedEventFilter<DefaultAdminDelayChangeScheduledEvent>;
+
+export interface DefaultAdminTransferCanceledEventObject {}
+export type DefaultAdminTransferCanceledEvent = TypedEvent<
+  [],
+  DefaultAdminTransferCanceledEventObject
+>;
+
+export type DefaultAdminTransferCanceledEventFilter =
+  TypedEventFilter<DefaultAdminTransferCanceledEvent>;
+
+export interface DefaultAdminTransferScheduledEventObject {
+  newAdmin: string;
+  acceptSchedule: number;
+}
+export type DefaultAdminTransferScheduledEvent = TypedEvent<
+  [string, number],
+  DefaultAdminTransferScheduledEventObject
+>;
+
+export type DefaultAdminTransferScheduledEventFilter =
+  TypedEventFilter<DefaultAdminTransferScheduledEvent>;
 
 export interface RoleAdminChangedEventObject {
   role: string;
@@ -395,9 +681,9 @@ export interface GLPOracle extends BaseContract {
 
     "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<[string]>;
 
-    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<[BigNumber]>;
+    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<[number]>;
 
-    "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+    "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<[number]>;
 
     SEQUENCER_ROLE(overrides?: CallOverrides): Promise<[string]>;
 
@@ -406,6 +692,42 @@ export interface GLPOracle extends BaseContract {
     SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<[string]>;
 
     "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<[string]>;
+
+    acceptDefaultAdminTransfer(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "acceptDefaultAdminTransfer()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    beginDefaultAdminTransfer(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "beginDefaultAdminTransfer(address)"(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    cancelDefaultAdminTransfer(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "cancelDefaultAdminTransfer()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    changeDefaultAdminDelay(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "changeDefaultAdminDelay(uint48)"(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     changeGracePeriod(
       _gracePeriod: PromiseOrValue<BigNumberish>,
@@ -420,6 +742,20 @@ export interface GLPOracle extends BaseContract {
     decimals(overrides?: CallOverrides): Promise<[number]>;
 
     "decimals()"(overrides?: CallOverrides): Promise<[number]>;
+
+    defaultAdmin(overrides?: CallOverrides): Promise<[string]>;
+
+    "defaultAdmin()"(overrides?: CallOverrides): Promise<[string]>;
+
+    defaultAdminDelay(overrides?: CallOverrides): Promise<[number]>;
+
+    "defaultAdminDelay()"(overrides?: CallOverrides): Promise<[number]>;
+
+    defaultAdminDelayIncreaseWait(overrides?: CallOverrides): Promise<[number]>;
+
+    "defaultAdminDelayIncreaseWait()"(
+      overrides?: CallOverrides
+    ): Promise<[number]>;
 
     get(
       arg0: PromiseOrValue<BytesLike>,
@@ -475,6 +811,10 @@ export interface GLPOracle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
+    owner(overrides?: CallOverrides): Promise<[string]>;
+
+    "owner()"(overrides?: CallOverrides): Promise<[string]>;
+
     peek(
       arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -494,6 +834,22 @@ export interface GLPOracle extends BaseContract {
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { rate: BigNumber }>;
+
+    pendingDefaultAdmin(
+      overrides?: CallOverrides
+    ): Promise<[string, number] & { newAdmin: string; schedule: number }>;
+
+    "pendingDefaultAdmin()"(
+      overrides?: CallOverrides
+    ): Promise<[string, number] & { newAdmin: string; schedule: number }>;
+
+    pendingDefaultAdminDelay(
+      overrides?: CallOverrides
+    ): Promise<[number, number] & { newDelay: number; schedule: number }>;
+
+    "pendingDefaultAdminDelay()"(
+      overrides?: CallOverrides
+    ): Promise<[number, number] & { newDelay: number; schedule: number }>;
 
     renounceRole(
       role: PromiseOrValue<BytesLike>,
@@ -519,6 +875,24 @@ export interface GLPOracle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    rollbackDefaultAdminDelay(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "rollbackDefaultAdminDelay()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     symbol(
       arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -534,9 +908,9 @@ export interface GLPOracle extends BaseContract {
 
   "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<string>;
 
-  GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<BigNumber>;
+  GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<number>;
 
-  "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
+  "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<number>;
 
   SEQUENCER_ROLE(overrides?: CallOverrides): Promise<string>;
 
@@ -545,6 +919,42 @@ export interface GLPOracle extends BaseContract {
   SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<string>;
 
   "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<string>;
+
+  acceptDefaultAdminTransfer(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "acceptDefaultAdminTransfer()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  beginDefaultAdminTransfer(
+    newAdmin: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "beginDefaultAdminTransfer(address)"(
+    newAdmin: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  cancelDefaultAdminTransfer(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "cancelDefaultAdminTransfer()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  changeDefaultAdminDelay(
+    newDelay: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "changeDefaultAdminDelay(uint48)"(
+    newDelay: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   changeGracePeriod(
     _gracePeriod: PromiseOrValue<BigNumberish>,
@@ -559,6 +969,18 @@ export interface GLPOracle extends BaseContract {
   decimals(overrides?: CallOverrides): Promise<number>;
 
   "decimals()"(overrides?: CallOverrides): Promise<number>;
+
+  defaultAdmin(overrides?: CallOverrides): Promise<string>;
+
+  "defaultAdmin()"(overrides?: CallOverrides): Promise<string>;
+
+  defaultAdminDelay(overrides?: CallOverrides): Promise<number>;
+
+  "defaultAdminDelay()"(overrides?: CallOverrides): Promise<number>;
+
+  defaultAdminDelayIncreaseWait(overrides?: CallOverrides): Promise<number>;
+
+  "defaultAdminDelayIncreaseWait()"(overrides?: CallOverrides): Promise<number>;
 
   get(
     arg0: PromiseOrValue<BytesLike>,
@@ -614,6 +1036,10 @@ export interface GLPOracle extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
+  owner(overrides?: CallOverrides): Promise<string>;
+
+  "owner()"(overrides?: CallOverrides): Promise<string>;
+
   peek(
     arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
@@ -633,6 +1059,22 @@ export interface GLPOracle extends BaseContract {
     data: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
+
+  pendingDefaultAdmin(
+    overrides?: CallOverrides
+  ): Promise<[string, number] & { newAdmin: string; schedule: number }>;
+
+  "pendingDefaultAdmin()"(
+    overrides?: CallOverrides
+  ): Promise<[string, number] & { newAdmin: string; schedule: number }>;
+
+  pendingDefaultAdminDelay(
+    overrides?: CallOverrides
+  ): Promise<[number, number] & { newDelay: number; schedule: number }>;
+
+  "pendingDefaultAdminDelay()"(
+    overrides?: CallOverrides
+  ): Promise<[number, number] & { newDelay: number; schedule: number }>;
 
   renounceRole(
     role: PromiseOrValue<BytesLike>,
@@ -658,6 +1100,24 @@ export interface GLPOracle extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  rollbackDefaultAdminDelay(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "rollbackDefaultAdminDelay()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  supportsInterface(
+    interfaceId: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "supportsInterface(bytes4)"(
+    interfaceId: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
   symbol(
     arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
@@ -673,9 +1133,9 @@ export interface GLPOracle extends BaseContract {
 
     "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<string>;
 
-    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<BigNumber>;
+    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<number>;
 
-    "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<number>;
 
     SEQUENCER_ROLE(overrides?: CallOverrides): Promise<string>;
 
@@ -684,6 +1144,34 @@ export interface GLPOracle extends BaseContract {
     SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<string>;
 
     "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<string>;
+
+    acceptDefaultAdminTransfer(overrides?: CallOverrides): Promise<void>;
+
+    "acceptDefaultAdminTransfer()"(overrides?: CallOverrides): Promise<void>;
+
+    beginDefaultAdminTransfer(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "beginDefaultAdminTransfer(address)"(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    cancelDefaultAdminTransfer(overrides?: CallOverrides): Promise<void>;
+
+    "cancelDefaultAdminTransfer()"(overrides?: CallOverrides): Promise<void>;
+
+    changeDefaultAdminDelay(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "changeDefaultAdminDelay(uint48)"(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     changeGracePeriod(
       _gracePeriod: PromiseOrValue<BigNumberish>,
@@ -698,6 +1186,20 @@ export interface GLPOracle extends BaseContract {
     decimals(overrides?: CallOverrides): Promise<number>;
 
     "decimals()"(overrides?: CallOverrides): Promise<number>;
+
+    defaultAdmin(overrides?: CallOverrides): Promise<string>;
+
+    "defaultAdmin()"(overrides?: CallOverrides): Promise<string>;
+
+    defaultAdminDelay(overrides?: CallOverrides): Promise<number>;
+
+    "defaultAdminDelay()"(overrides?: CallOverrides): Promise<number>;
+
+    defaultAdminDelayIncreaseWait(overrides?: CallOverrides): Promise<number>;
+
+    "defaultAdminDelayIncreaseWait()"(
+      overrides?: CallOverrides
+    ): Promise<number>;
 
     get(
       arg0: PromiseOrValue<BytesLike>,
@@ -753,6 +1255,10 @@ export interface GLPOracle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
+    owner(overrides?: CallOverrides): Promise<string>;
+
+    "owner()"(overrides?: CallOverrides): Promise<string>;
+
     peek(
       arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -772,6 +1278,22 @@ export interface GLPOracle extends BaseContract {
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    pendingDefaultAdmin(
+      overrides?: CallOverrides
+    ): Promise<[string, number] & { newAdmin: string; schedule: number }>;
+
+    "pendingDefaultAdmin()"(
+      overrides?: CallOverrides
+    ): Promise<[string, number] & { newAdmin: string; schedule: number }>;
+
+    pendingDefaultAdminDelay(
+      overrides?: CallOverrides
+    ): Promise<[number, number] & { newDelay: number; schedule: number }>;
+
+    "pendingDefaultAdminDelay()"(
+      overrides?: CallOverrides
+    ): Promise<[number, number] & { newDelay: number; schedule: number }>;
 
     renounceRole(
       role: PromiseOrValue<BytesLike>,
@@ -797,6 +1319,20 @@ export interface GLPOracle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    rollbackDefaultAdminDelay(overrides?: CallOverrides): Promise<void>;
+
+    "rollbackDefaultAdminDelay()"(overrides?: CallOverrides): Promise<void>;
+
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
     symbol(
       arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -809,6 +1345,30 @@ export interface GLPOracle extends BaseContract {
   };
 
   filters: {
+    "DefaultAdminDelayChangeCanceled()"(): DefaultAdminDelayChangeCanceledEventFilter;
+    DefaultAdminDelayChangeCanceled(): DefaultAdminDelayChangeCanceledEventFilter;
+
+    "DefaultAdminDelayChangeScheduled(uint48,uint48)"(
+      newDelay?: null,
+      effectSchedule?: null
+    ): DefaultAdminDelayChangeScheduledEventFilter;
+    DefaultAdminDelayChangeScheduled(
+      newDelay?: null,
+      effectSchedule?: null
+    ): DefaultAdminDelayChangeScheduledEventFilter;
+
+    "DefaultAdminTransferCanceled()"(): DefaultAdminTransferCanceledEventFilter;
+    DefaultAdminTransferCanceled(): DefaultAdminTransferCanceledEventFilter;
+
+    "DefaultAdminTransferScheduled(address,uint48)"(
+      newAdmin?: PromiseOrValue<string> | null,
+      acceptSchedule?: null
+    ): DefaultAdminTransferScheduledEventFilter;
+    DefaultAdminTransferScheduled(
+      newAdmin?: PromiseOrValue<string> | null,
+      acceptSchedule?: null
+    ): DefaultAdminTransferScheduledEventFilter;
+
     "RoleAdminChanged(bytes32,bytes32,bytes32)"(
       role?: PromiseOrValue<BytesLike> | null,
       previousAdminRole?: PromiseOrValue<BytesLike> | null,
@@ -860,6 +1420,42 @@ export interface GLPOracle extends BaseContract {
 
     "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    acceptDefaultAdminTransfer(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "acceptDefaultAdminTransfer()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    beginDefaultAdminTransfer(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "beginDefaultAdminTransfer(address)"(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    cancelDefaultAdminTransfer(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "cancelDefaultAdminTransfer()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    changeDefaultAdminDelay(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "changeDefaultAdminDelay(uint48)"(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     changeGracePeriod(
       _gracePeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -873,6 +1469,22 @@ export interface GLPOracle extends BaseContract {
     decimals(overrides?: CallOverrides): Promise<BigNumber>;
 
     "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    defaultAdmin(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "defaultAdmin()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    defaultAdminDelay(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "defaultAdminDelay()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    defaultAdminDelayIncreaseWait(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "defaultAdminDelayIncreaseWait()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     get(
       arg0: PromiseOrValue<BytesLike>,
@@ -928,6 +1540,10 @@ export interface GLPOracle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    owner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     peek(
       arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -947,6 +1563,14 @@ export interface GLPOracle extends BaseContract {
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    pendingDefaultAdmin(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "pendingDefaultAdmin()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    pendingDefaultAdminDelay(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "pendingDefaultAdminDelay()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     renounceRole(
       role: PromiseOrValue<BytesLike>,
@@ -970,6 +1594,24 @@ export interface GLPOracle extends BaseContract {
       role: PromiseOrValue<BytesLike>,
       account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    rollbackDefaultAdminDelay(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "rollbackDefaultAdminDelay()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     symbol(
@@ -1012,6 +1654,42 @@ export interface GLPOracle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    acceptDefaultAdminTransfer(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "acceptDefaultAdminTransfer()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    beginDefaultAdminTransfer(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "beginDefaultAdminTransfer(address)"(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    cancelDefaultAdminTransfer(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "cancelDefaultAdminTransfer()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    changeDefaultAdminDelay(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "changeDefaultAdminDelay(uint48)"(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     changeGracePeriod(
       _gracePeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1025,6 +1703,24 @@ export interface GLPOracle extends BaseContract {
     decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    defaultAdmin(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "defaultAdmin()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    defaultAdminDelay(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "defaultAdminDelay()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    defaultAdminDelayIncreaseWait(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "defaultAdminDelayIncreaseWait()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     get(
       arg0: PromiseOrValue<BytesLike>,
@@ -1080,6 +1776,10 @@ export interface GLPOracle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     peek(
       arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -1097,6 +1797,22 @@ export interface GLPOracle extends BaseContract {
 
     "peekSpot(bytes)"(
       data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    pendingDefaultAdmin(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "pendingDefaultAdmin()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    pendingDefaultAdminDelay(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "pendingDefaultAdminDelay()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1122,6 +1838,24 @@ export interface GLPOracle extends BaseContract {
       role: PromiseOrValue<BytesLike>,
       account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    rollbackDefaultAdminDelay(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "rollbackDefaultAdminDelay()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     symbol(

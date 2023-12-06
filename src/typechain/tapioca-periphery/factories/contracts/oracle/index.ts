@@ -10,7 +10,6 @@ export { OracleAbstract__factory } from "./OracleAbstract__factory";
 export { OracleChainlinkMulti__factory } from "./OracleChainlinkMulti__factory";
 export { OracleChainlinkMultiEfficient__factory } from "./OracleChainlinkMultiEfficient__factory";
 export { OracleChainlinkSingle__factory } from "./OracleChainlinkSingle__factory";
-export { OracleDAI__factory } from "./OracleDAI__factory";
 export { OracleMulti__factory } from "./OracleMulti__factory";
 export { OracleUniSolo__factory } from "./OracleUniSolo__factory";
 export { Seer__factory } from "./Seer__factory";

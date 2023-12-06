@@ -15,7 +15,6 @@ export type { OracleAbstract } from "./OracleAbstract";
 export type { OracleChainlinkMulti } from "./OracleChainlinkMulti";
 export type { OracleChainlinkMultiEfficient } from "./OracleChainlinkMultiEfficient";
 export type { OracleChainlinkSingle } from "./OracleChainlinkSingle";
-export type { OracleDAI } from "./OracleDAI";
 export type { OracleMulti } from "./OracleMulti";
 export type { OracleUniSolo } from "./OracleUniSolo";
 export type { Seer } from "./Seer";

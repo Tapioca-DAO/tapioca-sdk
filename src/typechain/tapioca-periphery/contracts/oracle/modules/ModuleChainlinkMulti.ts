@@ -31,16 +31,28 @@ export interface ModuleChainlinkMultiInterface extends utils.Interface {
   functions: {
     "DEFAULT_ADMIN_ROLE()": FunctionFragment;
     "GUARDIAN_ROLE_CHAINLINK()": FunctionFragment;
+    "acceptDefaultAdminTransfer()": FunctionFragment;
+    "beginDefaultAdminTransfer(address)": FunctionFragment;
+    "cancelDefaultAdminTransfer()": FunctionFragment;
     "chainlinkDecimals(uint256)": FunctionFragment;
+    "changeDefaultAdminDelay(uint48)": FunctionFragment;
     "changeStalePeriod(uint32)": FunctionFragment;
     "circuitChainIsMultiplied(uint256)": FunctionFragment;
     "circuitChainlink(uint256)": FunctionFragment;
+    "defaultAdmin()": FunctionFragment;
+    "defaultAdminDelay()": FunctionFragment;
+    "defaultAdminDelayIncreaseWait()": FunctionFragment;
     "getRoleAdmin(bytes32)": FunctionFragment;
     "grantRole(bytes32,address)": FunctionFragment;
     "hasRole(bytes32,address)": FunctionFragment;
+    "owner()": FunctionFragment;
+    "pendingDefaultAdmin()": FunctionFragment;
+    "pendingDefaultAdminDelay()": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
+    "rollbackDefaultAdminDelay()": FunctionFragment;
     "stalePeriod()": FunctionFragment;
+    "supportsInterface(bytes4)": FunctionFragment;
   };
 
   getFunction(
@@ -49,26 +61,50 @@ export interface ModuleChainlinkMultiInterface extends utils.Interface {
       | "DEFAULT_ADMIN_ROLE()"
       | "GUARDIAN_ROLE_CHAINLINK"
       | "GUARDIAN_ROLE_CHAINLINK()"
+      | "acceptDefaultAdminTransfer"
+      | "acceptDefaultAdminTransfer()"
+      | "beginDefaultAdminTransfer"
+      | "beginDefaultAdminTransfer(address)"
+      | "cancelDefaultAdminTransfer"
+      | "cancelDefaultAdminTransfer()"
       | "chainlinkDecimals"
       | "chainlinkDecimals(uint256)"
+      | "changeDefaultAdminDelay"
+      | "changeDefaultAdminDelay(uint48)"
       | "changeStalePeriod"
       | "changeStalePeriod(uint32)"
       | "circuitChainIsMultiplied"
       | "circuitChainIsMultiplied(uint256)"
       | "circuitChainlink"
       | "circuitChainlink(uint256)"
+      | "defaultAdmin"
+      | "defaultAdmin()"
+      | "defaultAdminDelay"
+      | "defaultAdminDelay()"
+      | "defaultAdminDelayIncreaseWait"
+      | "defaultAdminDelayIncreaseWait()"
       | "getRoleAdmin"
       | "getRoleAdmin(bytes32)"
       | "grantRole"
       | "grantRole(bytes32,address)"
       | "hasRole"
       | "hasRole(bytes32,address)"
+      | "owner"
+      | "owner()"
+      | "pendingDefaultAdmin"
+      | "pendingDefaultAdmin()"
+      | "pendingDefaultAdminDelay"
+      | "pendingDefaultAdminDelay()"
       | "renounceRole"
       | "renounceRole(bytes32,address)"
       | "revokeRole"
       | "revokeRole(bytes32,address)"
+      | "rollbackDefaultAdminDelay"
+      | "rollbackDefaultAdminDelay()"
       | "stalePeriod"
       | "stalePeriod()"
+      | "supportsInterface"
+      | "supportsInterface(bytes4)"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -88,11 +124,43 @@ export interface ModuleChainlinkMultiInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "acceptDefaultAdminTransfer",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "acceptDefaultAdminTransfer()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "beginDefaultAdminTransfer",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "beginDefaultAdminTransfer(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "cancelDefaultAdminTransfer",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "cancelDefaultAdminTransfer()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "chainlinkDecimals",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "chainlinkDecimals(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "changeDefaultAdminDelay",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "changeDefaultAdminDelay(uint48)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
@@ -118,6 +186,30 @@ export interface ModuleChainlinkMultiInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "circuitChainlink(uint256)",
     values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "defaultAdmin",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "defaultAdmin()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "defaultAdminDelay",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "defaultAdminDelay()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "defaultAdminDelayIncreaseWait",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "defaultAdminDelayIncreaseWait()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "getRoleAdmin",
@@ -143,6 +235,24 @@ export interface ModuleChainlinkMultiInterface extends utils.Interface {
     functionFragment: "hasRole(bytes32,address)",
     values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
   ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "pendingDefaultAdmin",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "pendingDefaultAdmin()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "pendingDefaultAdminDelay",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "pendingDefaultAdminDelay()",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "renounceRole",
     values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
@@ -160,12 +270,28 @@ export interface ModuleChainlinkMultiInterface extends utils.Interface {
     values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "rollbackDefaultAdminDelay",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rollbackDefaultAdminDelay()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "stalePeriod",
     values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "stalePeriod()",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface(bytes4)",
+    values: [PromiseOrValue<BytesLike>]
   ): string;
 
   decodeFunctionResult(
@@ -185,11 +311,43 @@ export interface ModuleChainlinkMultiInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "acceptDefaultAdminTransfer",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "acceptDefaultAdminTransfer()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "beginDefaultAdminTransfer",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "beginDefaultAdminTransfer(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "cancelDefaultAdminTransfer",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "cancelDefaultAdminTransfer()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "chainlinkDecimals",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "chainlinkDecimals(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "changeDefaultAdminDelay",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "changeDefaultAdminDelay(uint48)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -217,6 +375,30 @@ export interface ModuleChainlinkMultiInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "defaultAdmin",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "defaultAdmin()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "defaultAdminDelay",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "defaultAdminDelay()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "defaultAdminDelayIncreaseWait",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "defaultAdminDelayIncreaseWait()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "getRoleAdmin",
     data: BytesLike
   ): Result;
@@ -234,6 +416,24 @@ export interface ModuleChainlinkMultiInterface extends utils.Interface {
     functionFragment: "hasRole(bytes32,address)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "pendingDefaultAdmin",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "pendingDefaultAdmin()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "pendingDefaultAdminDelay",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "pendingDefaultAdminDelay()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "renounceRole",
     data: BytesLike
@@ -248,6 +448,14 @@ export interface ModuleChainlinkMultiInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "rollbackDefaultAdminDelay",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "rollbackDefaultAdminDelay()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "stalePeriod",
     data: BytesLike
   ): Result;
@@ -255,13 +463,49 @@ export interface ModuleChainlinkMultiInterface extends utils.Interface {
     functionFragment: "stalePeriod()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface(bytes4)",
+    data: BytesLike
+  ): Result;
 
   events: {
+    "DefaultAdminDelayChangeCanceled()": EventFragment;
+    "DefaultAdminDelayChangeScheduled(uint48,uint48)": EventFragment;
+    "DefaultAdminTransferCanceled()": EventFragment;
+    "DefaultAdminTransferScheduled(address,uint48)": EventFragment;
     "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
     "RoleGranted(bytes32,address,address)": EventFragment;
     "RoleRevoked(bytes32,address,address)": EventFragment;
   };
 
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminDelayChangeCanceled"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminDelayChangeCanceled()"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminDelayChangeScheduled"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminDelayChangeScheduled(uint48,uint48)"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminTransferCanceled"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminTransferCanceled()"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminTransferScheduled"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminTransferScheduled(address,uint48)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleAdminChanged"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "RoleAdminChanged(bytes32,bytes32,bytes32)"
@@ -275,6 +519,48 @@ export interface ModuleChainlinkMultiInterface extends utils.Interface {
     nameOrSignatureOrTopic: "RoleRevoked(bytes32,address,address)"
   ): EventFragment;
 }
+
+export interface DefaultAdminDelayChangeCanceledEventObject {}
+export type DefaultAdminDelayChangeCanceledEvent = TypedEvent<
+  [],
+  DefaultAdminDelayChangeCanceledEventObject
+>;
+
+export type DefaultAdminDelayChangeCanceledEventFilter =
+  TypedEventFilter<DefaultAdminDelayChangeCanceledEvent>;
+
+export interface DefaultAdminDelayChangeScheduledEventObject {
+  newDelay: number;
+  effectSchedule: number;
+}
+export type DefaultAdminDelayChangeScheduledEvent = TypedEvent<
+  [number, number],
+  DefaultAdminDelayChangeScheduledEventObject
+>;
+
+export type DefaultAdminDelayChangeScheduledEventFilter =
+  TypedEventFilter<DefaultAdminDelayChangeScheduledEvent>;
+
+export interface DefaultAdminTransferCanceledEventObject {}
+export type DefaultAdminTransferCanceledEvent = TypedEvent<
+  [],
+  DefaultAdminTransferCanceledEventObject
+>;
+
+export type DefaultAdminTransferCanceledEventFilter =
+  TypedEventFilter<DefaultAdminTransferCanceledEvent>;
+
+export interface DefaultAdminTransferScheduledEventObject {
+  newAdmin: string;
+  acceptSchedule: number;
+}
+export type DefaultAdminTransferScheduledEvent = TypedEvent<
+  [string, number],
+  DefaultAdminTransferScheduledEventObject
+>;
+
+export type DefaultAdminTransferScheduledEventFilter =
+  TypedEventFilter<DefaultAdminTransferScheduledEvent>;
 
 export interface RoleAdminChangedEventObject {
   role: string;
@@ -350,6 +636,32 @@ export interface ModuleChainlinkMulti extends BaseContract {
 
     "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<[string]>;
 
+    acceptDefaultAdminTransfer(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "acceptDefaultAdminTransfer()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    beginDefaultAdminTransfer(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "beginDefaultAdminTransfer(address)"(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    cancelDefaultAdminTransfer(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "cancelDefaultAdminTransfer()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     chainlinkDecimals(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -359,6 +671,16 @@ export interface ModuleChainlinkMulti extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[number]>;
+
+    changeDefaultAdminDelay(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "changeDefaultAdminDelay(uint48)"(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     changeStalePeriod(
       _stalePeriod: PromiseOrValue<BigNumberish>,
@@ -389,6 +711,20 @@ export interface ModuleChainlinkMulti extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
+
+    defaultAdmin(overrides?: CallOverrides): Promise<[string]>;
+
+    "defaultAdmin()"(overrides?: CallOverrides): Promise<[string]>;
+
+    defaultAdminDelay(overrides?: CallOverrides): Promise<[number]>;
+
+    "defaultAdminDelay()"(overrides?: CallOverrides): Promise<[number]>;
+
+    defaultAdminDelayIncreaseWait(overrides?: CallOverrides): Promise<[number]>;
+
+    "defaultAdminDelayIncreaseWait()"(
+      overrides?: CallOverrides
+    ): Promise<[number]>;
 
     getRoleAdmin(
       role: PromiseOrValue<BytesLike>,
@@ -424,6 +760,26 @@ export interface ModuleChainlinkMulti extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    owner(overrides?: CallOverrides): Promise<[string]>;
+
+    "owner()"(overrides?: CallOverrides): Promise<[string]>;
+
+    pendingDefaultAdmin(
+      overrides?: CallOverrides
+    ): Promise<[string, number] & { newAdmin: string; schedule: number }>;
+
+    "pendingDefaultAdmin()"(
+      overrides?: CallOverrides
+    ): Promise<[string, number] & { newAdmin: string; schedule: number }>;
+
+    pendingDefaultAdminDelay(
+      overrides?: CallOverrides
+    ): Promise<[number, number] & { newDelay: number; schedule: number }>;
+
+    "pendingDefaultAdminDelay()"(
+      overrides?: CallOverrides
+    ): Promise<[number, number] & { newDelay: number; schedule: number }>;
+
     renounceRole(
       role: PromiseOrValue<BytesLike>,
       account: PromiseOrValue<string>,
@@ -448,9 +804,27 @@ export interface ModuleChainlinkMulti extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    rollbackDefaultAdminDelay(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "rollbackDefaultAdminDelay()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     stalePeriod(overrides?: CallOverrides): Promise<[number]>;
 
     "stalePeriod()"(overrides?: CallOverrides): Promise<[number]>;
+
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
   };
 
   DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
@@ -461,6 +835,32 @@ export interface ModuleChainlinkMulti extends BaseContract {
 
   "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<string>;
 
+  acceptDefaultAdminTransfer(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "acceptDefaultAdminTransfer()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  beginDefaultAdminTransfer(
+    newAdmin: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "beginDefaultAdminTransfer(address)"(
+    newAdmin: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  cancelDefaultAdminTransfer(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "cancelDefaultAdminTransfer()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   chainlinkDecimals(
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -470,6 +870,16 @@ export interface ModuleChainlinkMulti extends BaseContract {
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<number>;
+
+  changeDefaultAdminDelay(
+    newDelay: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "changeDefaultAdminDelay(uint48)"(
+    newDelay: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   changeStalePeriod(
     _stalePeriod: PromiseOrValue<BigNumberish>,
@@ -500,6 +910,18 @@ export interface ModuleChainlinkMulti extends BaseContract {
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
+
+  defaultAdmin(overrides?: CallOverrides): Promise<string>;
+
+  "defaultAdmin()"(overrides?: CallOverrides): Promise<string>;
+
+  defaultAdminDelay(overrides?: CallOverrides): Promise<number>;
+
+  "defaultAdminDelay()"(overrides?: CallOverrides): Promise<number>;
+
+  defaultAdminDelayIncreaseWait(overrides?: CallOverrides): Promise<number>;
+
+  "defaultAdminDelayIncreaseWait()"(overrides?: CallOverrides): Promise<number>;
 
   getRoleAdmin(
     role: PromiseOrValue<BytesLike>,
@@ -535,6 +957,26 @@ export interface ModuleChainlinkMulti extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  owner(overrides?: CallOverrides): Promise<string>;
+
+  "owner()"(overrides?: CallOverrides): Promise<string>;
+
+  pendingDefaultAdmin(
+    overrides?: CallOverrides
+  ): Promise<[string, number] & { newAdmin: string; schedule: number }>;
+
+  "pendingDefaultAdmin()"(
+    overrides?: CallOverrides
+  ): Promise<[string, number] & { newAdmin: string; schedule: number }>;
+
+  pendingDefaultAdminDelay(
+    overrides?: CallOverrides
+  ): Promise<[number, number] & { newDelay: number; schedule: number }>;
+
+  "pendingDefaultAdminDelay()"(
+    overrides?: CallOverrides
+  ): Promise<[number, number] & { newDelay: number; schedule: number }>;
+
   renounceRole(
     role: PromiseOrValue<BytesLike>,
     account: PromiseOrValue<string>,
@@ -559,9 +1001,27 @@ export interface ModuleChainlinkMulti extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  rollbackDefaultAdminDelay(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "rollbackDefaultAdminDelay()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   stalePeriod(overrides?: CallOverrides): Promise<number>;
 
   "stalePeriod()"(overrides?: CallOverrides): Promise<number>;
+
+  supportsInterface(
+    interfaceId: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "supportsInterface(bytes4)"(
+    interfaceId: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   callStatic: {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
@@ -572,6 +1032,24 @@ export interface ModuleChainlinkMulti extends BaseContract {
 
     "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<string>;
 
+    acceptDefaultAdminTransfer(overrides?: CallOverrides): Promise<void>;
+
+    "acceptDefaultAdminTransfer()"(overrides?: CallOverrides): Promise<void>;
+
+    beginDefaultAdminTransfer(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "beginDefaultAdminTransfer(address)"(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    cancelDefaultAdminTransfer(overrides?: CallOverrides): Promise<void>;
+
+    "cancelDefaultAdminTransfer()"(overrides?: CallOverrides): Promise<void>;
+
     chainlinkDecimals(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -581,6 +1059,16 @@ export interface ModuleChainlinkMulti extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<number>;
+
+    changeDefaultAdminDelay(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "changeDefaultAdminDelay(uint48)"(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     changeStalePeriod(
       _stalePeriod: PromiseOrValue<BigNumberish>,
@@ -611,6 +1099,20 @@ export interface ModuleChainlinkMulti extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    defaultAdmin(overrides?: CallOverrides): Promise<string>;
+
+    "defaultAdmin()"(overrides?: CallOverrides): Promise<string>;
+
+    defaultAdminDelay(overrides?: CallOverrides): Promise<number>;
+
+    "defaultAdminDelay()"(overrides?: CallOverrides): Promise<number>;
+
+    defaultAdminDelayIncreaseWait(overrides?: CallOverrides): Promise<number>;
+
+    "defaultAdminDelayIncreaseWait()"(
+      overrides?: CallOverrides
+    ): Promise<number>;
 
     getRoleAdmin(
       role: PromiseOrValue<BytesLike>,
@@ -646,6 +1148,26 @@ export interface ModuleChainlinkMulti extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
+    owner(overrides?: CallOverrides): Promise<string>;
+
+    "owner()"(overrides?: CallOverrides): Promise<string>;
+
+    pendingDefaultAdmin(
+      overrides?: CallOverrides
+    ): Promise<[string, number] & { newAdmin: string; schedule: number }>;
+
+    "pendingDefaultAdmin()"(
+      overrides?: CallOverrides
+    ): Promise<[string, number] & { newAdmin: string; schedule: number }>;
+
+    pendingDefaultAdminDelay(
+      overrides?: CallOverrides
+    ): Promise<[number, number] & { newDelay: number; schedule: number }>;
+
+    "pendingDefaultAdminDelay()"(
+      overrides?: CallOverrides
+    ): Promise<[number, number] & { newDelay: number; schedule: number }>;
+
     renounceRole(
       role: PromiseOrValue<BytesLike>,
       account: PromiseOrValue<string>,
@@ -670,12 +1192,50 @@ export interface ModuleChainlinkMulti extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    rollbackDefaultAdminDelay(overrides?: CallOverrides): Promise<void>;
+
+    "rollbackDefaultAdminDelay()"(overrides?: CallOverrides): Promise<void>;
+
     stalePeriod(overrides?: CallOverrides): Promise<number>;
 
     "stalePeriod()"(overrides?: CallOverrides): Promise<number>;
+
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
   };
 
   filters: {
+    "DefaultAdminDelayChangeCanceled()"(): DefaultAdminDelayChangeCanceledEventFilter;
+    DefaultAdminDelayChangeCanceled(): DefaultAdminDelayChangeCanceledEventFilter;
+
+    "DefaultAdminDelayChangeScheduled(uint48,uint48)"(
+      newDelay?: null,
+      effectSchedule?: null
+    ): DefaultAdminDelayChangeScheduledEventFilter;
+    DefaultAdminDelayChangeScheduled(
+      newDelay?: null,
+      effectSchedule?: null
+    ): DefaultAdminDelayChangeScheduledEventFilter;
+
+    "DefaultAdminTransferCanceled()"(): DefaultAdminTransferCanceledEventFilter;
+    DefaultAdminTransferCanceled(): DefaultAdminTransferCanceledEventFilter;
+
+    "DefaultAdminTransferScheduled(address,uint48)"(
+      newAdmin?: PromiseOrValue<string> | null,
+      acceptSchedule?: null
+    ): DefaultAdminTransferScheduledEventFilter;
+    DefaultAdminTransferScheduled(
+      newAdmin?: PromiseOrValue<string> | null,
+      acceptSchedule?: null
+    ): DefaultAdminTransferScheduledEventFilter;
+
     "RoleAdminChanged(bytes32,bytes32,bytes32)"(
       role?: PromiseOrValue<BytesLike> | null,
       previousAdminRole?: PromiseOrValue<BytesLike> | null,
@@ -719,6 +1279,32 @@ export interface ModuleChainlinkMulti extends BaseContract {
 
     "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    acceptDefaultAdminTransfer(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "acceptDefaultAdminTransfer()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    beginDefaultAdminTransfer(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "beginDefaultAdminTransfer(address)"(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    cancelDefaultAdminTransfer(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "cancelDefaultAdminTransfer()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     chainlinkDecimals(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -727,6 +1313,16 @@ export interface ModuleChainlinkMulti extends BaseContract {
     "chainlinkDecimals(uint256)"(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    changeDefaultAdminDelay(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "changeDefaultAdminDelay(uint48)"(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     changeStalePeriod(
@@ -756,6 +1352,22 @@ export interface ModuleChainlinkMulti extends BaseContract {
 
     "circuitChainlink(uint256)"(
       arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    defaultAdmin(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "defaultAdmin()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    defaultAdminDelay(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "defaultAdminDelay()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    defaultAdminDelayIncreaseWait(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "defaultAdminDelayIncreaseWait()"(
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -793,6 +1405,18 @@ export interface ModuleChainlinkMulti extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    owner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    pendingDefaultAdmin(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "pendingDefaultAdmin()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    pendingDefaultAdminDelay(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "pendingDefaultAdminDelay()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     renounceRole(
       role: PromiseOrValue<BytesLike>,
       account: PromiseOrValue<string>,
@@ -817,9 +1441,27 @@ export interface ModuleChainlinkMulti extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    rollbackDefaultAdminDelay(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "rollbackDefaultAdminDelay()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     stalePeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
     "stalePeriod()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -839,6 +1481,32 @@ export interface ModuleChainlinkMulti extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    acceptDefaultAdminTransfer(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "acceptDefaultAdminTransfer()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    beginDefaultAdminTransfer(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "beginDefaultAdminTransfer(address)"(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    cancelDefaultAdminTransfer(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "cancelDefaultAdminTransfer()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     chainlinkDecimals(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -847,6 +1515,16 @@ export interface ModuleChainlinkMulti extends BaseContract {
     "chainlinkDecimals(uint256)"(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    changeDefaultAdminDelay(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "changeDefaultAdminDelay(uint48)"(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     changeStalePeriod(
@@ -876,6 +1554,24 @@ export interface ModuleChainlinkMulti extends BaseContract {
 
     "circuitChainlink(uint256)"(
       arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    defaultAdmin(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "defaultAdmin()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    defaultAdminDelay(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "defaultAdminDelay()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    defaultAdminDelayIncreaseWait(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "defaultAdminDelayIncreaseWait()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -913,6 +1609,26 @@ export interface ModuleChainlinkMulti extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    pendingDefaultAdmin(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "pendingDefaultAdmin()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    pendingDefaultAdminDelay(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "pendingDefaultAdminDelay()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     renounceRole(
       role: PromiseOrValue<BytesLike>,
       account: PromiseOrValue<string>,
@@ -937,8 +1653,26 @@ export interface ModuleChainlinkMulti extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    rollbackDefaultAdminDelay(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "rollbackDefaultAdminDelay()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     stalePeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "stalePeriod()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
   };
 }

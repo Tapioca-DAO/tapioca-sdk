@@ -30,6 +30,8 @@ export type { Multicall3 } from "./contracts/Multicall/Multicall3";
 export { Multicall3__factory } from "./factories/contracts/Multicall/Multicall3__factory";
 export type { AccessControl } from "./contracts/oracle/external/AccessControl";
 export { AccessControl__factory } from "./factories/contracts/oracle/external/AccessControl__factory";
+export type { AccessControlDefaultAdminRules } from "./contracts/oracle/external/AccessControlDefaultAdminRules";
+export { AccessControlDefaultAdminRules__factory } from "./factories/contracts/oracle/external/AccessControlDefaultAdminRules__factory";
 export type { GLPOracle } from "./contracts/oracle/implementations/Arbitrum/GLPOracle";
 export { GLPOracle__factory } from "./factories/contracts/oracle/implementations/Arbitrum/GLPOracle__factory";
 export type { TapOracle } from "./contracts/oracle/implementations/Arbitrum/TapOracle";
@@ -54,8 +56,6 @@ export type { OracleChainlinkMultiEfficient } from "./contracts/oracle/OracleCha
 export { OracleChainlinkMultiEfficient__factory } from "./factories/contracts/oracle/OracleChainlinkMultiEfficient__factory";
 export type { OracleChainlinkSingle } from "./contracts/oracle/OracleChainlinkSingle";
 export { OracleChainlinkSingle__factory } from "./factories/contracts/oracle/OracleChainlinkSingle__factory";
-export type { OracleDAI } from "./contracts/oracle/OracleDAI";
-export { OracleDAI__factory } from "./factories/contracts/oracle/OracleDAI__factory";
 export type { OracleMulti } from "./contracts/oracle/OracleMulti";
 export { OracleMulti__factory } from "./factories/contracts/oracle/OracleMulti__factory";
 export type { OracleUniSolo } from "./contracts/oracle/OracleUniSolo";

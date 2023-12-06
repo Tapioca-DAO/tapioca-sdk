@@ -31,15 +31,27 @@ export interface ModuleUniswapMultiInterface extends utils.Interface {
   functions: {
     "DEFAULT_ADMIN_ROLE()": FunctionFragment;
     "GUARDIAN_ROLE_UNISWAP()": FunctionFragment;
+    "acceptDefaultAdminTransfer()": FunctionFragment;
+    "beginDefaultAdminTransfer(address)": FunctionFragment;
+    "cancelDefaultAdminTransfer()": FunctionFragment;
+    "changeDefaultAdminDelay(uint48)": FunctionFragment;
     "changeTwapPeriod(uint32)": FunctionFragment;
     "circuitUniIsMultiplied(uint256)": FunctionFragment;
     "circuitUniswap(uint256)": FunctionFragment;
+    "defaultAdmin()": FunctionFragment;
+    "defaultAdminDelay()": FunctionFragment;
+    "defaultAdminDelayIncreaseWait()": FunctionFragment;
     "getRoleAdmin(bytes32)": FunctionFragment;
     "grantRole(bytes32,address)": FunctionFragment;
     "hasRole(bytes32,address)": FunctionFragment;
     "increaseTWAPStore(uint16)": FunctionFragment;
+    "owner()": FunctionFragment;
+    "pendingDefaultAdmin()": FunctionFragment;
+    "pendingDefaultAdminDelay()": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
+    "rollbackDefaultAdminDelay()": FunctionFragment;
+    "supportsInterface(bytes4)": FunctionFragment;
     "twapPeriod()": FunctionFragment;
   };
 
@@ -49,12 +61,26 @@ export interface ModuleUniswapMultiInterface extends utils.Interface {
       | "DEFAULT_ADMIN_ROLE()"
       | "GUARDIAN_ROLE_UNISWAP"
       | "GUARDIAN_ROLE_UNISWAP()"
+      | "acceptDefaultAdminTransfer"
+      | "acceptDefaultAdminTransfer()"
+      | "beginDefaultAdminTransfer"
+      | "beginDefaultAdminTransfer(address)"
+      | "cancelDefaultAdminTransfer"
+      | "cancelDefaultAdminTransfer()"
+      | "changeDefaultAdminDelay"
+      | "changeDefaultAdminDelay(uint48)"
       | "changeTwapPeriod"
       | "changeTwapPeriod(uint32)"
       | "circuitUniIsMultiplied"
       | "circuitUniIsMultiplied(uint256)"
       | "circuitUniswap"
       | "circuitUniswap(uint256)"
+      | "defaultAdmin"
+      | "defaultAdmin()"
+      | "defaultAdminDelay"
+      | "defaultAdminDelay()"
+      | "defaultAdminDelayIncreaseWait"
+      | "defaultAdminDelayIncreaseWait()"
       | "getRoleAdmin"
       | "getRoleAdmin(bytes32)"
       | "grantRole"
@@ -63,10 +89,20 @@ export interface ModuleUniswapMultiInterface extends utils.Interface {
       | "hasRole(bytes32,address)"
       | "increaseTWAPStore"
       | "increaseTWAPStore(uint16)"
+      | "owner"
+      | "owner()"
+      | "pendingDefaultAdmin"
+      | "pendingDefaultAdmin()"
+      | "pendingDefaultAdminDelay"
+      | "pendingDefaultAdminDelay()"
       | "renounceRole"
       | "renounceRole(bytes32,address)"
       | "revokeRole"
       | "revokeRole(bytes32,address)"
+      | "rollbackDefaultAdminDelay"
+      | "rollbackDefaultAdminDelay()"
+      | "supportsInterface"
+      | "supportsInterface(bytes4)"
       | "twapPeriod"
       | "twapPeriod()"
   ): FunctionFragment;
@@ -86,6 +122,38 @@ export interface ModuleUniswapMultiInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "GUARDIAN_ROLE_UNISWAP()",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "acceptDefaultAdminTransfer",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "acceptDefaultAdminTransfer()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "beginDefaultAdminTransfer",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "beginDefaultAdminTransfer(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "cancelDefaultAdminTransfer",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "cancelDefaultAdminTransfer()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "changeDefaultAdminDelay",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "changeDefaultAdminDelay(uint48)",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "changeTwapPeriod",
@@ -110,6 +178,30 @@ export interface ModuleUniswapMultiInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "circuitUniswap(uint256)",
     values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "defaultAdmin",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "defaultAdmin()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "defaultAdminDelay",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "defaultAdminDelay()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "defaultAdminDelayIncreaseWait",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "defaultAdminDelayIncreaseWait()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "getRoleAdmin",
@@ -143,6 +235,24 @@ export interface ModuleUniswapMultiInterface extends utils.Interface {
     functionFragment: "increaseTWAPStore(uint16)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "pendingDefaultAdmin",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "pendingDefaultAdmin()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "pendingDefaultAdminDelay",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "pendingDefaultAdminDelay()",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "renounceRole",
     values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
@@ -158,6 +268,22 @@ export interface ModuleUniswapMultiInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "revokeRole(bytes32,address)",
     values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rollbackDefaultAdminDelay",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rollbackDefaultAdminDelay()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface(bytes4)",
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "twapPeriod",
@@ -185,6 +311,38 @@ export interface ModuleUniswapMultiInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "acceptDefaultAdminTransfer",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "acceptDefaultAdminTransfer()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "beginDefaultAdminTransfer",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "beginDefaultAdminTransfer(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "cancelDefaultAdminTransfer",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "cancelDefaultAdminTransfer()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "changeDefaultAdminDelay",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "changeDefaultAdminDelay(uint48)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "changeTwapPeriod",
     data: BytesLike
   ): Result;
@@ -206,6 +364,30 @@ export interface ModuleUniswapMultiInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "circuitUniswap(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "defaultAdmin",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "defaultAdmin()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "defaultAdminDelay",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "defaultAdminDelay()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "defaultAdminDelayIncreaseWait",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "defaultAdminDelayIncreaseWait()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -234,6 +416,24 @@ export interface ModuleUniswapMultiInterface extends utils.Interface {
     functionFragment: "increaseTWAPStore(uint16)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "pendingDefaultAdmin",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "pendingDefaultAdmin()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "pendingDefaultAdminDelay",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "pendingDefaultAdminDelay()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "renounceRole",
     data: BytesLike
@@ -247,6 +447,22 @@ export interface ModuleUniswapMultiInterface extends utils.Interface {
     functionFragment: "revokeRole(bytes32,address)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "rollbackDefaultAdminDelay",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "rollbackDefaultAdminDelay()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface(bytes4)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "twapPeriod", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "twapPeriod()",
@@ -254,11 +470,39 @@ export interface ModuleUniswapMultiInterface extends utils.Interface {
   ): Result;
 
   events: {
+    "DefaultAdminDelayChangeCanceled()": EventFragment;
+    "DefaultAdminDelayChangeScheduled(uint48,uint48)": EventFragment;
+    "DefaultAdminTransferCanceled()": EventFragment;
+    "DefaultAdminTransferScheduled(address,uint48)": EventFragment;
     "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
     "RoleGranted(bytes32,address,address)": EventFragment;
     "RoleRevoked(bytes32,address,address)": EventFragment;
   };
 
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminDelayChangeCanceled"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminDelayChangeCanceled()"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminDelayChangeScheduled"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminDelayChangeScheduled(uint48,uint48)"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminTransferCanceled"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminTransferCanceled()"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminTransferScheduled"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "DefaultAdminTransferScheduled(address,uint48)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleAdminChanged"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "RoleAdminChanged(bytes32,bytes32,bytes32)"
@@ -272,6 +516,48 @@ export interface ModuleUniswapMultiInterface extends utils.Interface {
     nameOrSignatureOrTopic: "RoleRevoked(bytes32,address,address)"
   ): EventFragment;
 }
+
+export interface DefaultAdminDelayChangeCanceledEventObject {}
+export type DefaultAdminDelayChangeCanceledEvent = TypedEvent<
+  [],
+  DefaultAdminDelayChangeCanceledEventObject
+>;
+
+export type DefaultAdminDelayChangeCanceledEventFilter =
+  TypedEventFilter<DefaultAdminDelayChangeCanceledEvent>;
+
+export interface DefaultAdminDelayChangeScheduledEventObject {
+  newDelay: number;
+  effectSchedule: number;
+}
+export type DefaultAdminDelayChangeScheduledEvent = TypedEvent<
+  [number, number],
+  DefaultAdminDelayChangeScheduledEventObject
+>;
+
+export type DefaultAdminDelayChangeScheduledEventFilter =
+  TypedEventFilter<DefaultAdminDelayChangeScheduledEvent>;
+
+export interface DefaultAdminTransferCanceledEventObject {}
+export type DefaultAdminTransferCanceledEvent = TypedEvent<
+  [],
+  DefaultAdminTransferCanceledEventObject
+>;
+
+export type DefaultAdminTransferCanceledEventFilter =
+  TypedEventFilter<DefaultAdminTransferCanceledEvent>;
+
+export interface DefaultAdminTransferScheduledEventObject {
+  newAdmin: string;
+  acceptSchedule: number;
+}
+export type DefaultAdminTransferScheduledEvent = TypedEvent<
+  [string, number],
+  DefaultAdminTransferScheduledEventObject
+>;
+
+export type DefaultAdminTransferScheduledEventFilter =
+  TypedEventFilter<DefaultAdminTransferScheduledEvent>;
 
 export interface RoleAdminChangedEventObject {
   role: string;
@@ -347,6 +633,42 @@ export interface ModuleUniswapMulti extends BaseContract {
 
     "GUARDIAN_ROLE_UNISWAP()"(overrides?: CallOverrides): Promise<[string]>;
 
+    acceptDefaultAdminTransfer(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "acceptDefaultAdminTransfer()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    beginDefaultAdminTransfer(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "beginDefaultAdminTransfer(address)"(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    cancelDefaultAdminTransfer(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "cancelDefaultAdminTransfer()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    changeDefaultAdminDelay(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "changeDefaultAdminDelay(uint48)"(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     changeTwapPeriod(
       _twapPeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -376,6 +698,20 @@ export interface ModuleUniswapMulti extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
+
+    defaultAdmin(overrides?: CallOverrides): Promise<[string]>;
+
+    "defaultAdmin()"(overrides?: CallOverrides): Promise<[string]>;
+
+    defaultAdminDelay(overrides?: CallOverrides): Promise<[number]>;
+
+    "defaultAdminDelay()"(overrides?: CallOverrides): Promise<[number]>;
+
+    defaultAdminDelayIncreaseWait(overrides?: CallOverrides): Promise<[number]>;
+
+    "defaultAdminDelayIncreaseWait()"(
+      overrides?: CallOverrides
+    ): Promise<[number]>;
 
     getRoleAdmin(
       role: PromiseOrValue<BytesLike>,
@@ -421,6 +757,26 @@ export interface ModuleUniswapMulti extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    owner(overrides?: CallOverrides): Promise<[string]>;
+
+    "owner()"(overrides?: CallOverrides): Promise<[string]>;
+
+    pendingDefaultAdmin(
+      overrides?: CallOverrides
+    ): Promise<[string, number] & { newAdmin: string; schedule: number }>;
+
+    "pendingDefaultAdmin()"(
+      overrides?: CallOverrides
+    ): Promise<[string, number] & { newAdmin: string; schedule: number }>;
+
+    pendingDefaultAdminDelay(
+      overrides?: CallOverrides
+    ): Promise<[number, number] & { newDelay: number; schedule: number }>;
+
+    "pendingDefaultAdminDelay()"(
+      overrides?: CallOverrides
+    ): Promise<[number, number] & { newDelay: number; schedule: number }>;
+
     renounceRole(
       role: PromiseOrValue<BytesLike>,
       account: PromiseOrValue<string>,
@@ -445,6 +801,24 @@ export interface ModuleUniswapMulti extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    rollbackDefaultAdminDelay(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "rollbackDefaultAdminDelay()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     twapPeriod(overrides?: CallOverrides): Promise<[number]>;
 
     "twapPeriod()"(overrides?: CallOverrides): Promise<[number]>;
@@ -457,6 +831,42 @@ export interface ModuleUniswapMulti extends BaseContract {
   GUARDIAN_ROLE_UNISWAP(overrides?: CallOverrides): Promise<string>;
 
   "GUARDIAN_ROLE_UNISWAP()"(overrides?: CallOverrides): Promise<string>;
+
+  acceptDefaultAdminTransfer(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "acceptDefaultAdminTransfer()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  beginDefaultAdminTransfer(
+    newAdmin: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "beginDefaultAdminTransfer(address)"(
+    newAdmin: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  cancelDefaultAdminTransfer(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "cancelDefaultAdminTransfer()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  changeDefaultAdminDelay(
+    newDelay: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "changeDefaultAdminDelay(uint48)"(
+    newDelay: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   changeTwapPeriod(
     _twapPeriod: PromiseOrValue<BigNumberish>,
@@ -487,6 +897,18 @@ export interface ModuleUniswapMulti extends BaseContract {
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
+
+  defaultAdmin(overrides?: CallOverrides): Promise<string>;
+
+  "defaultAdmin()"(overrides?: CallOverrides): Promise<string>;
+
+  defaultAdminDelay(overrides?: CallOverrides): Promise<number>;
+
+  "defaultAdminDelay()"(overrides?: CallOverrides): Promise<number>;
+
+  defaultAdminDelayIncreaseWait(overrides?: CallOverrides): Promise<number>;
+
+  "defaultAdminDelayIncreaseWait()"(overrides?: CallOverrides): Promise<number>;
 
   getRoleAdmin(
     role: PromiseOrValue<BytesLike>,
@@ -532,6 +954,26 @@ export interface ModuleUniswapMulti extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  owner(overrides?: CallOverrides): Promise<string>;
+
+  "owner()"(overrides?: CallOverrides): Promise<string>;
+
+  pendingDefaultAdmin(
+    overrides?: CallOverrides
+  ): Promise<[string, number] & { newAdmin: string; schedule: number }>;
+
+  "pendingDefaultAdmin()"(
+    overrides?: CallOverrides
+  ): Promise<[string, number] & { newAdmin: string; schedule: number }>;
+
+  pendingDefaultAdminDelay(
+    overrides?: CallOverrides
+  ): Promise<[number, number] & { newDelay: number; schedule: number }>;
+
+  "pendingDefaultAdminDelay()"(
+    overrides?: CallOverrides
+  ): Promise<[number, number] & { newDelay: number; schedule: number }>;
+
   renounceRole(
     role: PromiseOrValue<BytesLike>,
     account: PromiseOrValue<string>,
@@ -556,6 +998,24 @@ export interface ModuleUniswapMulti extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  rollbackDefaultAdminDelay(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "rollbackDefaultAdminDelay()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  supportsInterface(
+    interfaceId: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "supportsInterface(bytes4)"(
+    interfaceId: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
   twapPeriod(overrides?: CallOverrides): Promise<number>;
 
   "twapPeriod()"(overrides?: CallOverrides): Promise<number>;
@@ -568,6 +1028,34 @@ export interface ModuleUniswapMulti extends BaseContract {
     GUARDIAN_ROLE_UNISWAP(overrides?: CallOverrides): Promise<string>;
 
     "GUARDIAN_ROLE_UNISWAP()"(overrides?: CallOverrides): Promise<string>;
+
+    acceptDefaultAdminTransfer(overrides?: CallOverrides): Promise<void>;
+
+    "acceptDefaultAdminTransfer()"(overrides?: CallOverrides): Promise<void>;
+
+    beginDefaultAdminTransfer(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "beginDefaultAdminTransfer(address)"(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    cancelDefaultAdminTransfer(overrides?: CallOverrides): Promise<void>;
+
+    "cancelDefaultAdminTransfer()"(overrides?: CallOverrides): Promise<void>;
+
+    changeDefaultAdminDelay(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "changeDefaultAdminDelay(uint48)"(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     changeTwapPeriod(
       _twapPeriod: PromiseOrValue<BigNumberish>,
@@ -598,6 +1086,20 @@ export interface ModuleUniswapMulti extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    defaultAdmin(overrides?: CallOverrides): Promise<string>;
+
+    "defaultAdmin()"(overrides?: CallOverrides): Promise<string>;
+
+    defaultAdminDelay(overrides?: CallOverrides): Promise<number>;
+
+    "defaultAdminDelay()"(overrides?: CallOverrides): Promise<number>;
+
+    defaultAdminDelayIncreaseWait(overrides?: CallOverrides): Promise<number>;
+
+    "defaultAdminDelayIncreaseWait()"(
+      overrides?: CallOverrides
+    ): Promise<number>;
 
     getRoleAdmin(
       role: PromiseOrValue<BytesLike>,
@@ -643,6 +1145,26 @@ export interface ModuleUniswapMulti extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    owner(overrides?: CallOverrides): Promise<string>;
+
+    "owner()"(overrides?: CallOverrides): Promise<string>;
+
+    pendingDefaultAdmin(
+      overrides?: CallOverrides
+    ): Promise<[string, number] & { newAdmin: string; schedule: number }>;
+
+    "pendingDefaultAdmin()"(
+      overrides?: CallOverrides
+    ): Promise<[string, number] & { newAdmin: string; schedule: number }>;
+
+    pendingDefaultAdminDelay(
+      overrides?: CallOverrides
+    ): Promise<[number, number] & { newDelay: number; schedule: number }>;
+
+    "pendingDefaultAdminDelay()"(
+      overrides?: CallOverrides
+    ): Promise<[number, number] & { newDelay: number; schedule: number }>;
+
     renounceRole(
       role: PromiseOrValue<BytesLike>,
       account: PromiseOrValue<string>,
@@ -667,12 +1189,50 @@ export interface ModuleUniswapMulti extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    rollbackDefaultAdminDelay(overrides?: CallOverrides): Promise<void>;
+
+    "rollbackDefaultAdminDelay()"(overrides?: CallOverrides): Promise<void>;
+
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
     twapPeriod(overrides?: CallOverrides): Promise<number>;
 
     "twapPeriod()"(overrides?: CallOverrides): Promise<number>;
   };
 
   filters: {
+    "DefaultAdminDelayChangeCanceled()"(): DefaultAdminDelayChangeCanceledEventFilter;
+    DefaultAdminDelayChangeCanceled(): DefaultAdminDelayChangeCanceledEventFilter;
+
+    "DefaultAdminDelayChangeScheduled(uint48,uint48)"(
+      newDelay?: null,
+      effectSchedule?: null
+    ): DefaultAdminDelayChangeScheduledEventFilter;
+    DefaultAdminDelayChangeScheduled(
+      newDelay?: null,
+      effectSchedule?: null
+    ): DefaultAdminDelayChangeScheduledEventFilter;
+
+    "DefaultAdminTransferCanceled()"(): DefaultAdminTransferCanceledEventFilter;
+    DefaultAdminTransferCanceled(): DefaultAdminTransferCanceledEventFilter;
+
+    "DefaultAdminTransferScheduled(address,uint48)"(
+      newAdmin?: PromiseOrValue<string> | null,
+      acceptSchedule?: null
+    ): DefaultAdminTransferScheduledEventFilter;
+    DefaultAdminTransferScheduled(
+      newAdmin?: PromiseOrValue<string> | null,
+      acceptSchedule?: null
+    ): DefaultAdminTransferScheduledEventFilter;
+
     "RoleAdminChanged(bytes32,bytes32,bytes32)"(
       role?: PromiseOrValue<BytesLike> | null,
       previousAdminRole?: PromiseOrValue<BytesLike> | null,
@@ -716,6 +1276,42 @@ export interface ModuleUniswapMulti extends BaseContract {
 
     "GUARDIAN_ROLE_UNISWAP()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    acceptDefaultAdminTransfer(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "acceptDefaultAdminTransfer()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    beginDefaultAdminTransfer(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "beginDefaultAdminTransfer(address)"(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    cancelDefaultAdminTransfer(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "cancelDefaultAdminTransfer()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    changeDefaultAdminDelay(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "changeDefaultAdminDelay(uint48)"(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     changeTwapPeriod(
       _twapPeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -743,6 +1339,22 @@ export interface ModuleUniswapMulti extends BaseContract {
 
     "circuitUniswap(uint256)"(
       arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    defaultAdmin(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "defaultAdmin()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    defaultAdminDelay(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "defaultAdminDelay()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    defaultAdminDelayIncreaseWait(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "defaultAdminDelayIncreaseWait()"(
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -790,6 +1402,18 @@ export interface ModuleUniswapMulti extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    owner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    pendingDefaultAdmin(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "pendingDefaultAdmin()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    pendingDefaultAdminDelay(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "pendingDefaultAdminDelay()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     renounceRole(
       role: PromiseOrValue<BytesLike>,
       account: PromiseOrValue<string>,
@@ -812,6 +1436,24 @@ export interface ModuleUniswapMulti extends BaseContract {
       role: PromiseOrValue<BytesLike>,
       account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    rollbackDefaultAdminDelay(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "rollbackDefaultAdminDelay()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     twapPeriod(overrides?: CallOverrides): Promise<BigNumber>;
@@ -836,6 +1478,42 @@ export interface ModuleUniswapMulti extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    acceptDefaultAdminTransfer(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "acceptDefaultAdminTransfer()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    beginDefaultAdminTransfer(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "beginDefaultAdminTransfer(address)"(
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    cancelDefaultAdminTransfer(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "cancelDefaultAdminTransfer()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    changeDefaultAdminDelay(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "changeDefaultAdminDelay(uint48)"(
+      newDelay: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     changeTwapPeriod(
       _twapPeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -863,6 +1541,24 @@ export interface ModuleUniswapMulti extends BaseContract {
 
     "circuitUniswap(uint256)"(
       arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    defaultAdmin(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "defaultAdmin()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    defaultAdminDelay(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "defaultAdminDelay()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    defaultAdminDelayIncreaseWait(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "defaultAdminDelayIncreaseWait()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -910,6 +1606,26 @@ export interface ModuleUniswapMulti extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    pendingDefaultAdmin(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "pendingDefaultAdmin()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    pendingDefaultAdminDelay(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "pendingDefaultAdminDelay()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     renounceRole(
       role: PromiseOrValue<BytesLike>,
       account: PromiseOrValue<string>,
@@ -932,6 +1648,24 @@ export interface ModuleUniswapMulti extends BaseContract {
       role: PromiseOrValue<BytesLike>,
       account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    rollbackDefaultAdminDelay(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "rollbackDefaultAdminDelay()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     twapPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;

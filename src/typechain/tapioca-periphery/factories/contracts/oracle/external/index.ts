@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export { AccessControl__factory } from "./AccessControl__factory";
+export { AccessControlDefaultAdminRules__factory } from "./AccessControlDefaultAdminRules__factory";

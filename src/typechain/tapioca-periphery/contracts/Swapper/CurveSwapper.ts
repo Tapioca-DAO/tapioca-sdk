@@ -96,8 +96,8 @@ export declare namespace ISwapper {
 
 export interface CurveSwapperInterface extends utils.Interface {
   functions: {
-    "buildSwapData(address,address,uint256,uint256,bool,bool)": FunctionFragment;
     "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)": FunctionFragment;
+    "buildSwapData(address,address,uint256,uint256)": FunctionFragment;
     "curvePool()": FunctionFragment;
     "getDefaultDexOptions()": FunctionFragment;
     "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)": FunctionFragment;
@@ -111,8 +111,8 @@ export interface CurveSwapperInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "buildSwapData(address,address,uint256,uint256,bool,bool)"
       | "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"
+      | "buildSwapData(address,address,uint256,uint256)"
       | "curvePool"
       | "curvePool()"
       | "getDefaultDexOptions"
@@ -134,17 +134,6 @@ export interface CurveSwapperInterface extends utils.Interface {
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "buildSwapData(address,address,uint256,uint256,bool,bool)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<boolean>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)",
     values: [
       PromiseOrValue<BigNumberish>,
@@ -153,6 +142,15 @@ export interface CurveSwapperInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<boolean>,
       PromiseOrValue<boolean>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "buildSwapData(address,address,uint256,uint256)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
     ]
   ): string;
   encodeFunctionData(functionFragment: "curvePool", values?: undefined): string;
@@ -227,11 +225,11 @@ export interface CurveSwapperInterface extends utils.Interface {
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "buildSwapData(address,address,uint256,uint256,bool,bool)",
+    functionFragment: "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)",
+    functionFragment: "buildSwapData(address,address,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "curvePool", data: BytesLike): Result;
@@ -340,16 +338,6 @@ export interface CurveSwapper extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    "buildSwapData(address,address,uint256,uint256,bool,bool)"(
-      tokenIn: PromiseOrValue<string>,
-      tokenOut: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      withdrawFromYb: PromiseOrValue<boolean>,
-      depositToYb: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<[ISwapper.SwapDataStructOutput]>;
-
     "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
       tokenInId: PromiseOrValue<BigNumberish>,
       tokenOutId: PromiseOrValue<BigNumberish>,
@@ -357,6 +345,14 @@ export interface CurveSwapper extends BaseContract {
       shareIn: PromiseOrValue<BigNumberish>,
       withdrawFromYb: PromiseOrValue<boolean>,
       depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<[ISwapper.SwapDataStructOutput]>;
+
+    "buildSwapData(address,address,uint256,uint256)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[ISwapper.SwapDataStructOutput]>;
 
@@ -435,16 +431,6 @@ export interface CurveSwapper extends BaseContract {
     "yieldBox()"(overrides?: CallOverrides): Promise<[string]>;
   };
 
-  "buildSwapData(address,address,uint256,uint256,bool,bool)"(
-    tokenIn: PromiseOrValue<string>,
-    tokenOut: PromiseOrValue<string>,
-    amountIn: PromiseOrValue<BigNumberish>,
-    shareIn: PromiseOrValue<BigNumberish>,
-    withdrawFromYb: PromiseOrValue<boolean>,
-    depositToYb: PromiseOrValue<boolean>,
-    overrides?: CallOverrides
-  ): Promise<ISwapper.SwapDataStructOutput>;
-
   "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
     tokenInId: PromiseOrValue<BigNumberish>,
     tokenOutId: PromiseOrValue<BigNumberish>,
@@ -452,6 +438,14 @@ export interface CurveSwapper extends BaseContract {
     shareIn: PromiseOrValue<BigNumberish>,
     withdrawFromYb: PromiseOrValue<boolean>,
     depositToYb: PromiseOrValue<boolean>,
+    overrides?: CallOverrides
+  ): Promise<ISwapper.SwapDataStructOutput>;
+
+  "buildSwapData(address,address,uint256,uint256)"(
+    tokenIn: PromiseOrValue<string>,
+    tokenOut: PromiseOrValue<string>,
+    amountIn: PromiseOrValue<BigNumberish>,
+    shareIn: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<ISwapper.SwapDataStructOutput>;
 
@@ -530,16 +524,6 @@ export interface CurveSwapper extends BaseContract {
   "yieldBox()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
-    "buildSwapData(address,address,uint256,uint256,bool,bool)"(
-      tokenIn: PromiseOrValue<string>,
-      tokenOut: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      withdrawFromYb: PromiseOrValue<boolean>,
-      depositToYb: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<ISwapper.SwapDataStructOutput>;
-
     "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
       tokenInId: PromiseOrValue<BigNumberish>,
       tokenOutId: PromiseOrValue<BigNumberish>,
@@ -547,6 +531,14 @@ export interface CurveSwapper extends BaseContract {
       shareIn: PromiseOrValue<BigNumberish>,
       withdrawFromYb: PromiseOrValue<boolean>,
       depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<ISwapper.SwapDataStructOutput>;
+
+    "buildSwapData(address,address,uint256,uint256)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<ISwapper.SwapDataStructOutput>;
 
@@ -637,16 +629,6 @@ export interface CurveSwapper extends BaseContract {
   };
 
   estimateGas: {
-    "buildSwapData(address,address,uint256,uint256,bool,bool)"(
-      tokenIn: PromiseOrValue<string>,
-      tokenOut: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      withdrawFromYb: PromiseOrValue<boolean>,
-      depositToYb: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
       tokenInId: PromiseOrValue<BigNumberish>,
       tokenOutId: PromiseOrValue<BigNumberish>,
@@ -654,6 +636,14 @@ export interface CurveSwapper extends BaseContract {
       shareIn: PromiseOrValue<BigNumberish>,
       withdrawFromYb: PromiseOrValue<boolean>,
       depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "buildSwapData(address,address,uint256,uint256)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -733,16 +723,6 @@ export interface CurveSwapper extends BaseContract {
   };
 
   populateTransaction: {
-    "buildSwapData(address,address,uint256,uint256,bool,bool)"(
-      tokenIn: PromiseOrValue<string>,
-      tokenOut: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      withdrawFromYb: PromiseOrValue<boolean>,
-      depositToYb: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
       tokenInId: PromiseOrValue<BigNumberish>,
       tokenOutId: PromiseOrValue<BigNumberish>,
@@ -750,6 +730,14 @@ export interface CurveSwapper extends BaseContract {
       shareIn: PromiseOrValue<BigNumberish>,
       withdrawFromYb: PromiseOrValue<boolean>,
       depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "buildSwapData(address,address,uint256,uint256)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
