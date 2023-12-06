@@ -35,10 +35,11 @@ export interface VestingInterface extends utils.Interface {
     "claimable()": FunctionFragment;
     "cliff()": FunctionFragment;
     "duration()": FunctionFragment;
-    "init(address,uint256)": FunctionFragment;
+    "init(address,uint256,uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
     "registerUser(address,uint256)": FunctionFragment;
+    "registerUsers(address[],uint256[])": FunctionFragment;
     "seeded()": FunctionFragment;
     "start()": FunctionFragment;
     "token()": FunctionFragment;
@@ -62,13 +63,15 @@ export interface VestingInterface extends utils.Interface {
       | "duration"
       | "duration()"
       | "init"
-      | "init(address,uint256)"
+      | "init(address,uint256,uint256)"
       | "owner"
       | "owner()"
       | "pendingOwner"
       | "pendingOwner()"
       | "registerUser"
       | "registerUser(address,uint256)"
+      | "registerUsers"
+      | "registerUsers(address[],uint256[])"
       | "seeded"
       | "seeded()"
       | "start"
@@ -112,11 +115,19 @@ export interface VestingInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "init",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
-    functionFragment: "init(address,uint256)",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+    functionFragment: "init(address,uint256,uint256)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
@@ -135,6 +146,14 @@ export interface VestingInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "registerUser(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "registerUsers",
+    values: [PromiseOrValue<string>[], PromiseOrValue<BigNumberish>[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "registerUsers(address[],uint256[])",
+    values: [PromiseOrValue<string>[], PromiseOrValue<BigNumberish>[]]
   ): string;
   encodeFunctionData(functionFragment: "seeded", values?: undefined): string;
   encodeFunctionData(functionFragment: "seeded()", values?: undefined): string;
@@ -204,7 +223,7 @@ export interface VestingInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "duration()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "init", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "init(address,uint256)",
+    functionFragment: "init(address,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -223,6 +242,14 @@ export interface VestingInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "registerUser(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "registerUsers",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "registerUsers(address[],uint256[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "seeded", data: BytesLike): Result;
@@ -370,12 +397,14 @@ export interface Vesting extends BaseContract {
     init(
       _token: PromiseOrValue<string>,
       _seededAmount: PromiseOrValue<BigNumberish>,
+      _initialUnlock: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "init(address,uint256)"(
+    "init(address,uint256,uint256)"(
       _token: PromiseOrValue<string>,
       _seededAmount: PromiseOrValue<BigNumberish>,
+      _initialUnlock: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -396,6 +425,18 @@ export interface Vesting extends BaseContract {
     "registerUser(address,uint256)"(
       _user: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    registerUsers(
+      _users: PromiseOrValue<string>[],
+      _amounts: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "registerUsers(address[],uint256[])"(
+      _users: PromiseOrValue<string>[],
+      _amounts: PromiseOrValue<BigNumberish>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -495,12 +536,14 @@ export interface Vesting extends BaseContract {
   init(
     _token: PromiseOrValue<string>,
     _seededAmount: PromiseOrValue<BigNumberish>,
+    _initialUnlock: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "init(address,uint256)"(
+  "init(address,uint256,uint256)"(
     _token: PromiseOrValue<string>,
     _seededAmount: PromiseOrValue<BigNumberish>,
+    _initialUnlock: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -521,6 +564,18 @@ export interface Vesting extends BaseContract {
   "registerUser(address,uint256)"(
     _user: PromiseOrValue<string>,
     _amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  registerUsers(
+    _users: PromiseOrValue<string>[],
+    _amounts: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "registerUsers(address[],uint256[])"(
+    _users: PromiseOrValue<string>[],
+    _amounts: PromiseOrValue<BigNumberish>[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -612,12 +667,14 @@ export interface Vesting extends BaseContract {
     init(
       _token: PromiseOrValue<string>,
       _seededAmount: PromiseOrValue<BigNumberish>,
+      _initialUnlock: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "init(address,uint256)"(
+    "init(address,uint256,uint256)"(
       _token: PromiseOrValue<string>,
       _seededAmount: PromiseOrValue<BigNumberish>,
+      _initialUnlock: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -638,6 +695,18 @@ export interface Vesting extends BaseContract {
     "registerUser(address,uint256)"(
       _user: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    registerUsers(
+      _users: PromiseOrValue<string>[],
+      _amounts: PromiseOrValue<BigNumberish>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "registerUsers(address[],uint256[])"(
+      _users: PromiseOrValue<string>[],
+      _amounts: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -767,12 +836,14 @@ export interface Vesting extends BaseContract {
     init(
       _token: PromiseOrValue<string>,
       _seededAmount: PromiseOrValue<BigNumberish>,
+      _initialUnlock: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "init(address,uint256)"(
+    "init(address,uint256,uint256)"(
       _token: PromiseOrValue<string>,
       _seededAmount: PromiseOrValue<BigNumberish>,
+      _initialUnlock: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -793,6 +864,18 @@ export interface Vesting extends BaseContract {
     "registerUser(address,uint256)"(
       _user: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    registerUsers(
+      _users: PromiseOrValue<string>[],
+      _amounts: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "registerUsers(address[],uint256[])"(
+      _users: PromiseOrValue<string>[],
+      _amounts: PromiseOrValue<BigNumberish>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -879,12 +962,14 @@ export interface Vesting extends BaseContract {
     init(
       _token: PromiseOrValue<string>,
       _seededAmount: PromiseOrValue<BigNumberish>,
+      _initialUnlock: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "init(address,uint256)"(
+    "init(address,uint256,uint256)"(
       _token: PromiseOrValue<string>,
       _seededAmount: PromiseOrValue<BigNumberish>,
+      _initialUnlock: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -905,6 +990,18 @@ export interface Vesting extends BaseContract {
     "registerUser(address,uint256)"(
       _user: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    registerUsers(
+      _users: PromiseOrValue<string>[],
+      _amounts: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "registerUsers(address[],uint256[])"(
+      _users: PromiseOrValue<string>[],
+      _amounts: PromiseOrValue<BigNumberish>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

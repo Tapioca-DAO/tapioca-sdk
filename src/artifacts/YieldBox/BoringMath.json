@@ -1,0 +1,10 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "BoringMath",
+  "sourceName": "contracts/BoringMath.sol",
+  "abi": [],
+  "bytecode": "0x60808060405234601757603a9081601d823930815050f35b600080fdfe600080fdfea26469706673582212200e3b3c8ceac98ef42b6921fbdad2449d45ad3c0bf8f12bd746e42265fe26bd3864736f6c63430008120033",
+  "deployedBytecode": "0x600080fdfea26469706673582212200e3b3c8ceac98ef42b6921fbdad2449d45ad3c0bf8f12bd746e42265fe26bd3864736f6c63430008120033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

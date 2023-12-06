@@ -1,0 +1,48 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "ExternalFunctionMock",
+  "sourceName": "contracts/mocks/ExternalFunctionMock.sol",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "output",
+          "type": "uint256"
+        }
+      ],
+      "name": "Result",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "a",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "b",
+          "type": "uint256"
+        }
+      ],
+      "name": "sum",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "c",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608080604052346100155760c4908161001b8239f35b600080fdfe6080806040526004361015601257600080fd5b6000803560e01c63cad0899b14602757600080fd5b34608b576040366003190112608b57600435906024358201809211607757507fa9bb0fa194e939eadb11be8d62dd4a16e0f5e89f37fb73fa7f0f8446f1abba6160208383829552a1604051908152f35b634e487b7160e01b81526011600452602490fd5b80fdfea264697066735822122051f5e88372f501763f8e6e599e0dc9e72f545386331d40884950be339b654ab464736f6c63430008120033",
+  "deployedBytecode": "0x6080806040526004361015601257600080fd5b6000803560e01c63cad0899b14602757600080fd5b34608b576040366003190112608b57600435906024358201809211607757507fa9bb0fa194e939eadb11be8d62dd4a16e0f5e89f37fb73fa7f0f8446f1abba6160208383829552a1604051908152f35b634e487b7160e01b81526011600452602490fd5b80fdfea264697066735822122051f5e88372f501763f8e6e599e0dc9e72f545386331d40884950be339b654ab464736f6c63430008120033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

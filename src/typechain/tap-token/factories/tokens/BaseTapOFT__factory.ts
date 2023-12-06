@@ -8,6 +8,26 @@ import type { BaseTapOFT, BaseTapOFTInterface } from "../../tokens/BaseTapOFT";
 
 const _abi = [
   {
+    inputs: [],
+    name: "Failed",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "LengthMismatch",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "NotAuthorized",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "TooSmall",
+    type: "error",
+  },
+  {
     anonymous: false,
     inputs: [
       {
@@ -620,7 +640,7 @@ const _abi = [
                 type: "bytes",
               },
             ],
-            internalType: "struct ISendFrom.LzCallParams",
+            internalType: "struct ICommonOFT.LzCallParams",
             name: "callParams",
             type: "tuple",
           },

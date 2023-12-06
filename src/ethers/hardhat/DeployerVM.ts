@@ -20,7 +20,7 @@ import { IOwnable__factory } from '../../typechain/tapioca-periphery/factories/I
 import { getOverrideOptions } from '../../api/utils';
 import { TAPIOCA_PROJECTS_NAME } from '../../api/config';
 
-interface IDependentOn {
+export interface IDependentOn {
     deploymentName: string;
     argPosition: number;
 }

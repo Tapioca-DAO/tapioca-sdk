@@ -9,3 +9,4 @@ export * as swapper from "./Swapper";
 export * as tapiocaDeployer from "./TapiocaDeployer";
 export * as interfaces from "./interfaces";
 export * as oracle from "./oracle";
+export { StargateLbpHelper__factory } from "./StargateLbpHelper__factory";

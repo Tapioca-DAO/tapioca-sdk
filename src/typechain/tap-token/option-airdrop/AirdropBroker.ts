@@ -42,6 +42,7 @@ export interface AirdropBrokerInterface extends utils.Interface {
     "aoTAPCalls(uint256,uint256)": FunctionFragment;
     "claimOwnership()": FunctionFragment;
     "collectPaymentTokens(address[])": FunctionFragment;
+    "daoRecoverTAP()": FunctionFragment;
     "epoch()": FunctionFragment;
     "epochTAPValuation()": FunctionFragment;
     "exerciseOption(uint256,address,uint256)": FunctionFragment;
@@ -97,6 +98,8 @@ export interface AirdropBrokerInterface extends utils.Interface {
       | "claimOwnership()"
       | "collectPaymentTokens"
       | "collectPaymentTokens(address[])"
+      | "daoRecoverTAP"
+      | "daoRecoverTAP()"
       | "epoch"
       | "epoch()"
       | "epochTAPValuation"
@@ -240,6 +243,14 @@ export interface AirdropBrokerInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "collectPaymentTokens(address[])",
     values: [PromiseOrValue<string>[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "daoRecoverTAP",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "daoRecoverTAP()",
+    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "epoch", values?: undefined): string;
   encodeFunctionData(functionFragment: "epoch()", values?: undefined): string;
@@ -553,6 +564,14 @@ export interface AirdropBrokerInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "collectPaymentTokens(address[])",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "daoRecoverTAP",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "daoRecoverTAP()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "epoch", data: BytesLike): Result;
@@ -964,6 +983,14 @@ export interface AirdropBroker extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    daoRecoverTAP(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "daoRecoverTAP()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     epoch(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "epoch()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -1285,6 +1312,14 @@ export interface AirdropBroker extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  daoRecoverTAP(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "daoRecoverTAP()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   epoch(overrides?: CallOverrides): Promise<BigNumber>;
 
   "epoch()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1597,6 +1632,10 @@ export interface AirdropBroker extends BaseContract {
       _paymentTokens: PromiseOrValue<string>[],
       overrides?: CallOverrides
     ): Promise<void>;
+
+    daoRecoverTAP(overrides?: CallOverrides): Promise<void>;
+
+    "daoRecoverTAP()"(overrides?: CallOverrides): Promise<void>;
 
     epoch(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1983,6 +2022,14 @@ export interface AirdropBroker extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    daoRecoverTAP(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "daoRecoverTAP()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     epoch(overrides?: CallOverrides): Promise<BigNumber>;
 
     "epoch()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2302,6 +2349,14 @@ export interface AirdropBroker extends BaseContract {
 
     "collectPaymentTokens(address[])"(
       _paymentTokens: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    daoRecoverTAP(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "daoRecoverTAP()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

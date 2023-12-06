@@ -11,6 +11,21 @@ import type {
 
 const _abi = [
   {
+    inputs: [],
+    name: "ActionTypeNotValid",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "NotAuthorized",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "NotValid",
+    type: "error",
+  },
+  {
     anonymous: false,
     inputs: [
       {

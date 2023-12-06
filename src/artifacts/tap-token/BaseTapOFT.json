@@ -4,6 +4,26 @@
   "sourceName": "contracts/tokens/BaseTapOFT.sol",
   "abi": [
     {
+      "inputs": [],
+      "name": "Failed",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "LengthMismatch",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NotAuthorized",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "TooSmall",
+      "type": "error"
+    },
+    {
       "anonymous": false,
       "inputs": [
         {
@@ -616,7 +636,7 @@
                   "type": "bytes"
                 }
               ],
-              "internalType": "struct ISendFrom.LzCallParams",
+              "internalType": "struct ICommonOFT.LzCallParams",
               "name": "callParams",
               "type": "tuple"
             }

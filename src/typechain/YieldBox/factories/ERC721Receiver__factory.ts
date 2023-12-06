@@ -2,7 +2,8 @@
 /* tslint:disable */
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
-import { Provider, TransactionRequest } from "@ethersproject/providers";
+import type { Provider, TransactionRequest } from "@ethersproject/providers";
+import type { PromiseOrValue } from "../common";
 import type {
   ERC721Receiver,
   ERC721ReceiverInterface,
@@ -43,10 +44,10 @@ const _abi = [
     stateMutability: "pure",
     type: "function",
   },
-];
+] as const;
 
 const _bytecode =
-  "0x608060405234801561001057600080fd5b50610159806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c8063150b7a0214610030575b600080fd5b61004f61003e366004610088565b630a85bd0160e11b95945050505050565b6040516001600160e01b0319909116815260200160405180910390f35b80356001600160a01b038116811461008357600080fd5b919050565b6000806000806000608086880312156100a057600080fd5b6100a98661006c565b94506100b76020870161006c565b935060408601359250606086013567ffffffffffffffff808211156100db57600080fd5b818801915088601f8301126100ef57600080fd5b8135818111156100fe57600080fd5b89602082850101111561011057600080fd5b969995985093965060200194939250505056fea26469706673582212208672ca74a10fd60ed8b564b8f4b727be0e833a3767c4a5c8a0dc55b689cdb2a564736f6c63430008090033";
+  "0x608080604052346100155760e2908161001b8239f35b600080fdfe6080806040526004361015601257600080fd5b600090813560e01c63150b7a0214602857600080fd5b3460a057608036600319011260a05773ffffffffffffffffffffffffffffffffffffffff6004358181160360a8576024359081160360a05760643567ffffffffffffffff80821160a4573660238301121560a457816004013590811160a4573691016024011160a057630a85bd0160e11b8152602090f35b5080fd5b8380fd5b8280fdfea2646970667358221220f87d4fcb5efea9739125d02871affe692b8ec759f4481c0dbbc6a922b178470464736f6c63430008120033";
 
 type ERC721ReceiverConstructorParams =
   | [signer?: Signer]
@@ -66,24 +67,26 @@ export class ERC721Receiver__factory extends ContractFactory {
     this.contractName = "ERC721Receiver";
   }
 
-  deploy(
-    overrides?: Overrides & { from?: string | Promise<string> }
+  override deploy(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ERC721Receiver> {
     return super.deploy(overrides || {}) as Promise<ERC721Receiver>;
   }
-  getDeployTransaction(
-    overrides?: Overrides & { from?: string | Promise<string> }
+  override getDeployTransaction(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): TransactionRequest {
     return super.getDeployTransaction(overrides || {});
   }
-  attach(address: string): ERC721Receiver {
+  override attach(address: string): ERC721Receiver {
     return super.attach(address) as ERC721Receiver;
   }
-  connect(signer: Signer): ERC721Receiver__factory {
+  override connect(signer: Signer): ERC721Receiver__factory {
     return super.connect(signer) as ERC721Receiver__factory;
   }
   static readonly contractName: "ERC721Receiver";
+
   public readonly contractName: "ERC721Receiver";
+
   static readonly bytecode = _bytecode;
   static readonly abi = _abi;
   static createInterface(): ERC721ReceiverInterface {
