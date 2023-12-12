@@ -11,6 +11,14 @@ const SUPPORTED_CHAINS = [
         tags: ['testnet'],
     },
     {
+        name: 'sepolia',
+        address: '0xae92d5aD7583AD66E49A0c67BAd18F6ba52dDDc1',
+        chainId: EChainID.GOERLI,
+        lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.GOERLI],
+        rpc: 'https://eth-sepolia.g.alchemy.com/v2/<api_key>',
+        tags: ['testnet'],
+    },
+    {
         name: 'bsc_testnet',
         address: '0x6Fcb97553D41516Cb228ac03FdC8B9a0a9df04A1',
         chainId: EChainID.BSC_TESTNET,
