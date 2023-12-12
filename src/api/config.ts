@@ -85,6 +85,7 @@ export enum EChainID {
     HARMONY = '1666600000',
     // Testnets
     GOERLI = '5',
+    SEPOLIA = '11155111',
     BSC_TESTNET = '97',
     FUJI_AVALANCHE = '43113',
     MUMBAI_POLYGON = '80001',
@@ -109,6 +110,7 @@ export enum ELZChainID {
     HARMONY = '116',
     // Testnets
     GOERLI = '10121',
+    SEPOLIA = '10161',
     BSC_TESTNET = '10102',
     FUJI_AVALANCHE = '10106',
     MUMBAI_POLYGON = '10109',
@@ -174,6 +176,7 @@ export const NETWORK_MAPPING_CHAIN_TO_LZ: INetworkMappingChainToLZ = {
     [EChainID.HARMONY]: ELZChainID.HARMONY,
     // Testnets
     [EChainID.GOERLI]: ELZChainID.GOERLI,
+    [EChainID.SEPOLIA]: ELZChainID.SEPOLIA,
     [EChainID.BSC_TESTNET]: ELZChainID.BSC_TESTNET,
     [EChainID.FUJI_AVALANCHE]: ELZChainID.FUJI_AVALANCHE,
     [EChainID.MUMBAI_POLYGON]: ELZChainID.MUMBAI_POLYGON,
@@ -209,6 +212,7 @@ export const NETWORK_MAPPING_LZ_TO_CHAIN: INetworkMappingLZToChain = {
     [ELZChainID.HARMONY]: EChainID.HARMONY,
     // Testnets
     [ELZChainID.GOERLI]: EChainID.GOERLI,
+    [ELZChainID.SEPOLIA]: EChainID.SEPOLIA,
     [ELZChainID.BSC_TESTNET]: EChainID.BSC_TESTNET,
     [ELZChainID.FUJI_AVALANCHE]: EChainID.FUJI_AVALANCHE,
     [ELZChainID.MUMBAI_POLYGON]: EChainID.MUMBAI_POLYGON,
