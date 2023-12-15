@@ -65,6 +65,14 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AccessControl__factory>;
     getContractFactory(
+      name: "AccessControlDefaultAdminRules",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AccessControlDefaultAdminRules__factory>;
+    getContractFactory(
+      name: "EthGlpOracle",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.EthGlpOracle__factory>;
+    getContractFactory(
       name: "GLPOracle",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.GLPOracle__factory>;
@@ -112,10 +120,6 @@ declare module "hardhat/types/runtime" {
       name: "OracleChainlinkSingle",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.OracleChainlinkSingle__factory>;
-    getContractFactory(
-      name: "OracleDAI",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.OracleDAI__factory>;
     getContractFactory(
       name: "OracleMulti",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -176,6 +180,10 @@ declare module "hardhat/types/runtime" {
       name: "UniswapV3Swapper",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.UniswapV3Swapper__factory>;
+    getContractFactory(
+      name: "ZeroXSwapper",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ZeroXSwapper__factory>;
     getContractFactory(
       name: "TapiocaDeployer",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -247,6 +255,16 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.AccessControl>;
     getContractAt(
+      name: "AccessControlDefaultAdminRules",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AccessControlDefaultAdminRules>;
+    getContractAt(
+      name: "EthGlpOracle",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.EthGlpOracle>;
+    getContractAt(
       name: "GLPOracle",
       address: string,
       signer?: ethers.Signer
@@ -306,11 +324,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.OracleChainlinkSingle>;
-    getContractAt(
-      name: "OracleDAI",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.OracleDAI>;
     getContractAt(
       name: "OracleMulti",
       address: string,
@@ -386,6 +399,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.UniswapV3Swapper>;
+    getContractAt(
+      name: "ZeroXSwapper",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ZeroXSwapper>;
     getContractAt(
       name: "TapiocaDeployer",
       address: string,

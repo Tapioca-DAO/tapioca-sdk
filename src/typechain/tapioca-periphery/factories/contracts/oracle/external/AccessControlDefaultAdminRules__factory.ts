@@ -5,9 +5,9 @@
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
 import type {
-  UniswapUtils,
-  UniswapUtilsInterface,
-} from "../../../../contracts/oracle/utils/UniswapUtils";
+  AccessControlDefaultAdminRules,
+  AccessControlDefaultAdminRulesInterface,
+} from "../../../../contracts/oracle/external/AccessControlDefaultAdminRules";
 
 const _abi = [
   {
@@ -198,19 +198,6 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "GUARDIAN_ROLE_UNISWAP",
-    outputs: [
-      {
-        internalType: "bytes32",
-        name: "",
-        type: "bytes32",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
     name: "acceptDefaultAdminTransfer",
     outputs: [],
     stateMutability: "nonpayable",
@@ -245,19 +232,6 @@ const _abi = [
       },
     ],
     name: "changeDefaultAdminDelay",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint32",
-        name: "_twapPeriod",
-        type: "uint32",
-      },
-    ],
-    name: "changeTwapPeriod",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -473,30 +447,21 @@ const _abi = [
     stateMutability: "view",
     type: "function",
   },
-  {
-    inputs: [],
-    name: "twapPeriod",
-    outputs: [
-      {
-        internalType: "uint32",
-        name: "",
-        type: "uint32",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
 ] as const;
 
-export class UniswapUtils__factory {
+export class AccessControlDefaultAdminRules__factory {
   static readonly abi = _abi;
-  static createInterface(): UniswapUtilsInterface {
-    return new utils.Interface(_abi) as UniswapUtilsInterface;
+  static createInterface(): AccessControlDefaultAdminRulesInterface {
+    return new utils.Interface(_abi) as AccessControlDefaultAdminRulesInterface;
   }
   static connect(
     address: string,
     signerOrProvider: Signer | Provider
-  ): UniswapUtils {
-    return new Contract(address, _abi, signerOrProvider) as UniswapUtils;
+  ): AccessControlDefaultAdminRules {
+    return new Contract(
+      address,
+      _abi,
+      signerOrProvider
+    ) as AccessControlDefaultAdminRules;
   }
 }

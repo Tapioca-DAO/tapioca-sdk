@@ -5,3 +5,4 @@ export type { BaseSwapper } from "./BaseSwapper";
 export type { CurveSwapper } from "./CurveSwapper";
 export type { UniswapV2Swapper } from "./UniswapV2Swapper";
 export type { UniswapV3Swapper } from "./UniswapV3Swapper";
+export type { ZeroXSwapper } from "./ZeroXSwapper";

@@ -25,167 +25,77 @@ import type {
   TypedListener,
   OnEvent,
   PromiseOrValue,
-} from "../../common";
+} from "../../../common";
 
-export interface OracleChainlinkSingleInterface extends utils.Interface {
+export interface AccessControlDefaultAdminRulesInterface
+  extends utils.Interface {
   functions: {
-    "BASE()": FunctionFragment;
     "DEFAULT_ADMIN_ROLE()": FunctionFragment;
-    "GRACE_PERIOD_TIME()": FunctionFragment;
-    "GUARDIAN_ROLE_CHAINLINK()": FunctionFragment;
-    "SEQUENCER_ROLE()": FunctionFragment;
-    "SEQUENCER_UPTIME_FEED()": FunctionFragment;
     "acceptDefaultAdminTransfer()": FunctionFragment;
     "beginDefaultAdminTransfer(address)": FunctionFragment;
     "cancelDefaultAdminTransfer()": FunctionFragment;
-    "chainlinkDecimals()": FunctionFragment;
     "changeDefaultAdminDelay(uint48)": FunctionFragment;
-    "changeGracePeriod(uint32)": FunctionFragment;
-    "changeStalePeriod(uint32)": FunctionFragment;
     "defaultAdmin()": FunctionFragment;
     "defaultAdminDelay()": FunctionFragment;
     "defaultAdminDelayIncreaseWait()": FunctionFragment;
-    "description()": FunctionFragment;
     "getRoleAdmin(bytes32)": FunctionFragment;
     "grantRole(bytes32,address)": FunctionFragment;
     "hasRole(bytes32,address)": FunctionFragment;
-    "inBase()": FunctionFragment;
-    "isChainlinkMultiplied()": FunctionFragment;
     "owner()": FunctionFragment;
     "pendingDefaultAdmin()": FunctionFragment;
     "pendingDefaultAdminDelay()": FunctionFragment;
-    "poolChainlink()": FunctionFragment;
-    "read()": FunctionFragment;
-    "readAll()": FunctionFragment;
-    "readLower()": FunctionFragment;
-    "readQuote(uint256)": FunctionFragment;
-    "readQuoteLower(uint256)": FunctionFragment;
-    "readUpper()": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
     "rollbackDefaultAdminDelay()": FunctionFragment;
-    "stalePeriod()": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "BASE"
-      | "BASE()"
       | "DEFAULT_ADMIN_ROLE"
       | "DEFAULT_ADMIN_ROLE()"
-      | "GRACE_PERIOD_TIME"
-      | "GRACE_PERIOD_TIME()"
-      | "GUARDIAN_ROLE_CHAINLINK"
-      | "GUARDIAN_ROLE_CHAINLINK()"
-      | "SEQUENCER_ROLE"
-      | "SEQUENCER_ROLE()"
-      | "SEQUENCER_UPTIME_FEED"
-      | "SEQUENCER_UPTIME_FEED()"
       | "acceptDefaultAdminTransfer"
       | "acceptDefaultAdminTransfer()"
       | "beginDefaultAdminTransfer"
       | "beginDefaultAdminTransfer(address)"
       | "cancelDefaultAdminTransfer"
       | "cancelDefaultAdminTransfer()"
-      | "chainlinkDecimals"
-      | "chainlinkDecimals()"
       | "changeDefaultAdminDelay"
       | "changeDefaultAdminDelay(uint48)"
-      | "changeGracePeriod"
-      | "changeGracePeriod(uint32)"
-      | "changeStalePeriod"
-      | "changeStalePeriod(uint32)"
       | "defaultAdmin"
       | "defaultAdmin()"
       | "defaultAdminDelay"
       | "defaultAdminDelay()"
       | "defaultAdminDelayIncreaseWait"
       | "defaultAdminDelayIncreaseWait()"
-      | "description"
-      | "description()"
       | "getRoleAdmin"
       | "getRoleAdmin(bytes32)"
       | "grantRole"
       | "grantRole(bytes32,address)"
       | "hasRole"
       | "hasRole(bytes32,address)"
-      | "inBase"
-      | "inBase()"
-      | "isChainlinkMultiplied"
-      | "isChainlinkMultiplied()"
       | "owner"
       | "owner()"
       | "pendingDefaultAdmin"
       | "pendingDefaultAdmin()"
       | "pendingDefaultAdminDelay"
       | "pendingDefaultAdminDelay()"
-      | "poolChainlink"
-      | "poolChainlink()"
-      | "read"
-      | "read()"
-      | "readAll"
-      | "readAll()"
-      | "readLower"
-      | "readLower()"
-      | "readQuote"
-      | "readQuote(uint256)"
-      | "readQuoteLower"
-      | "readQuoteLower(uint256)"
-      | "readUpper"
-      | "readUpper()"
       | "renounceRole"
       | "renounceRole(bytes32,address)"
       | "revokeRole"
       | "revokeRole(bytes32,address)"
       | "rollbackDefaultAdminDelay"
       | "rollbackDefaultAdminDelay()"
-      | "stalePeriod"
-      | "stalePeriod()"
       | "supportsInterface"
       | "supportsInterface(bytes4)"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "BASE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "BASE()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "DEFAULT_ADMIN_ROLE",
     values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "DEFAULT_ADMIN_ROLE()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "GRACE_PERIOD_TIME",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "GRACE_PERIOD_TIME()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "GUARDIAN_ROLE_CHAINLINK",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "GUARDIAN_ROLE_CHAINLINK()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "SEQUENCER_ROLE",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "SEQUENCER_ROLE()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "SEQUENCER_UPTIME_FEED",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "SEQUENCER_UPTIME_FEED()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -213,35 +123,11 @@ export interface OracleChainlinkSingleInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "chainlinkDecimals",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "chainlinkDecimals()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "changeDefaultAdminDelay",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "changeDefaultAdminDelay(uint48)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "changeGracePeriod",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "changeGracePeriod(uint32)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "changeStalePeriod",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "changeStalePeriod(uint32)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
@@ -269,14 +155,6 @@ export interface OracleChainlinkSingleInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "description",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "description()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "getRoleAdmin",
     values: [PromiseOrValue<BytesLike>]
   ): string;
@@ -300,16 +178,6 @@ export interface OracleChainlinkSingleInterface extends utils.Interface {
     functionFragment: "hasRole(bytes32,address)",
     values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
   ): string;
-  encodeFunctionData(functionFragment: "inBase", values?: undefined): string;
-  encodeFunctionData(functionFragment: "inBase()", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "isChainlinkMultiplied",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isChainlinkMultiplied()",
-    values?: undefined
-  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
   encodeFunctionData(
@@ -326,44 +194,6 @@ export interface OracleChainlinkSingleInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "pendingDefaultAdminDelay()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "poolChainlink",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "poolChainlink()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "read", values?: undefined): string;
-  encodeFunctionData(functionFragment: "read()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "readAll", values?: undefined): string;
-  encodeFunctionData(functionFragment: "readAll()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "readLower", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "readLower()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "readQuote",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "readQuote(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "readQuoteLower",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "readQuoteLower(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(functionFragment: "readUpper", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "readUpper()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -391,14 +221,6 @@ export interface OracleChainlinkSingleInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "stalePeriod",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "stalePeriod()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "supportsInterface",
     values: [PromiseOrValue<BytesLike>]
   ): string;
@@ -407,46 +229,12 @@ export interface OracleChainlinkSingleInterface extends utils.Interface {
     values: [PromiseOrValue<BytesLike>]
   ): string;
 
-  decodeFunctionResult(functionFragment: "BASE", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "BASE()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "DEFAULT_ADMIN_ROLE",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "DEFAULT_ADMIN_ROLE()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "GRACE_PERIOD_TIME",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "GRACE_PERIOD_TIME()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "GUARDIAN_ROLE_CHAINLINK",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "GUARDIAN_ROLE_CHAINLINK()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "SEQUENCER_ROLE",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "SEQUENCER_ROLE()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "SEQUENCER_UPTIME_FEED",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "SEQUENCER_UPTIME_FEED()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -474,35 +262,11 @@ export interface OracleChainlinkSingleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "chainlinkDecimals",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "chainlinkDecimals()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "changeDefaultAdminDelay",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "changeDefaultAdminDelay(uint48)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "changeGracePeriod",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "changeGracePeriod(uint32)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "changeStalePeriod",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "changeStalePeriod(uint32)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -530,14 +294,6 @@ export interface OracleChainlinkSingleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "description",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "description()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "getRoleAdmin",
     data: BytesLike
   ): Result;
@@ -553,16 +309,6 @@ export interface OracleChainlinkSingleInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "hasRole", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "hasRole(bytes32,address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "inBase", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "inBase()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "isChainlinkMultiplied",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isChainlinkMultiplied()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -584,41 +330,6 @@ export interface OracleChainlinkSingleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "poolChainlink",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "poolChainlink()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "read", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "read()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "readAll", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "readAll()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "readLower", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "readLower()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "readQuote", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "readQuote(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "readQuoteLower",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "readQuoteLower(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "readUpper", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "readUpper()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "renounceRole",
     data: BytesLike
   ): Result;
@@ -637,14 +348,6 @@ export interface OracleChainlinkSingleInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "rollbackDefaultAdminDelay()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "stalePeriod",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "stalePeriod()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -783,14 +486,14 @@ export type RoleRevokedEvent = TypedEvent<
 
 export type RoleRevokedEventFilter = TypedEventFilter<RoleRevokedEvent>;
 
-export interface OracleChainlinkSingle extends BaseContract {
-  contractName: "OracleChainlinkSingle";
+export interface AccessControlDefaultAdminRules extends BaseContract {
+  contractName: "AccessControlDefaultAdminRules";
 
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: OracleChainlinkSingleInterface;
+  interface: AccessControlDefaultAdminRulesInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -812,29 +515,9 @@ export interface OracleChainlinkSingle extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    BASE(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "BASE()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<[string]>;
 
     "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<[string]>;
-
-    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<[number]>;
-
-    "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<[number]>;
-
-    GUARDIAN_ROLE_CHAINLINK(overrides?: CallOverrides): Promise<[string]>;
-
-    "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<[string]>;
-
-    SEQUENCER_ROLE(overrides?: CallOverrides): Promise<[string]>;
-
-    "SEQUENCER_ROLE()"(overrides?: CallOverrides): Promise<[string]>;
-
-    SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<[string]>;
-
-    "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<[string]>;
 
     acceptDefaultAdminTransfer(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -862,10 +545,6 @@ export interface OracleChainlinkSingle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    chainlinkDecimals(overrides?: CallOverrides): Promise<[number]>;
-
-    "chainlinkDecimals()"(overrides?: CallOverrides): Promise<[number]>;
-
     changeDefaultAdminDelay(
       newDelay: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -873,26 +552,6 @@ export interface OracleChainlinkSingle extends BaseContract {
 
     "changeDefaultAdminDelay(uint48)"(
       newDelay: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    changeGracePeriod(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "changeGracePeriod(uint32)"(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    changeStalePeriod(
-      _stalePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "changeStalePeriod(uint32)"(
-      _stalePeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -909,10 +568,6 @@ export interface OracleChainlinkSingle extends BaseContract {
     "defaultAdminDelayIncreaseWait()"(
       overrides?: CallOverrides
     ): Promise<[number]>;
-
-    description(overrides?: CallOverrides): Promise<[string]>;
-
-    "description()"(overrides?: CallOverrides): Promise<[string]>;
 
     getRoleAdmin(
       role: PromiseOrValue<BytesLike>,
@@ -948,14 +603,6 @@ export interface OracleChainlinkSingle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
-    inBase(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "inBase()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    isChainlinkMultiplied(overrides?: CallOverrides): Promise<[number]>;
-
-    "isChainlinkMultiplied()"(overrides?: CallOverrides): Promise<[number]>;
-
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
@@ -975,56 +622,6 @@ export interface OracleChainlinkSingle extends BaseContract {
     "pendingDefaultAdminDelay()"(
       overrides?: CallOverrides
     ): Promise<[number, number] & { newDelay: number; schedule: number }>;
-
-    poolChainlink(overrides?: CallOverrides): Promise<[string]>;
-
-    "poolChainlink()"(overrides?: CallOverrides): Promise<[string]>;
-
-    read(overrides?: CallOverrides): Promise<[BigNumber] & { rate: BigNumber }>;
-
-    "read()"(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { rate: BigNumber }>;
-
-    readAll(overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
-
-    "readAll()"(overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
-
-    readLower(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { rate: BigNumber }>;
-
-    "readLower()"(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { rate: BigNumber }>;
-
-    readQuote(
-      quoteAmount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "readQuote(uint256)"(
-      quoteAmount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    readQuoteLower(
-      quoteAmount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "readQuoteLower(uint256)"(
-      quoteAmount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    readUpper(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { rate: BigNumber }>;
-
-    "readUpper()"(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { rate: BigNumber }>;
 
     renounceRole(
       role: PromiseOrValue<BytesLike>,
@@ -1058,10 +655,6 @@ export interface OracleChainlinkSingle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    stalePeriod(overrides?: CallOverrides): Promise<[number]>;
-
-    "stalePeriod()"(overrides?: CallOverrides): Promise<[number]>;
-
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -1073,29 +666,9 @@ export interface OracleChainlinkSingle extends BaseContract {
     ): Promise<[boolean]>;
   };
 
-  BASE(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "BASE()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
 
   "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<string>;
-
-  GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<number>;
-
-  "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<number>;
-
-  GUARDIAN_ROLE_CHAINLINK(overrides?: CallOverrides): Promise<string>;
-
-  "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<string>;
-
-  SEQUENCER_ROLE(overrides?: CallOverrides): Promise<string>;
-
-  "SEQUENCER_ROLE()"(overrides?: CallOverrides): Promise<string>;
-
-  SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<string>;
-
-  "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<string>;
 
   acceptDefaultAdminTransfer(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1123,10 +696,6 @@ export interface OracleChainlinkSingle extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  chainlinkDecimals(overrides?: CallOverrides): Promise<number>;
-
-  "chainlinkDecimals()"(overrides?: CallOverrides): Promise<number>;
-
   changeDefaultAdminDelay(
     newDelay: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1134,26 +703,6 @@ export interface OracleChainlinkSingle extends BaseContract {
 
   "changeDefaultAdminDelay(uint48)"(
     newDelay: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  changeGracePeriod(
-    _gracePeriod: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "changeGracePeriod(uint32)"(
-    _gracePeriod: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  changeStalePeriod(
-    _stalePeriod: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "changeStalePeriod(uint32)"(
-    _stalePeriod: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1168,10 +717,6 @@ export interface OracleChainlinkSingle extends BaseContract {
   defaultAdminDelayIncreaseWait(overrides?: CallOverrides): Promise<number>;
 
   "defaultAdminDelayIncreaseWait()"(overrides?: CallOverrides): Promise<number>;
-
-  description(overrides?: CallOverrides): Promise<string>;
-
-  "description()"(overrides?: CallOverrides): Promise<string>;
 
   getRoleAdmin(
     role: PromiseOrValue<BytesLike>,
@@ -1207,14 +752,6 @@ export interface OracleChainlinkSingle extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  inBase(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "inBase()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  isChainlinkMultiplied(overrides?: CallOverrides): Promise<number>;
-
-  "isChainlinkMultiplied()"(overrides?: CallOverrides): Promise<number>;
-
   owner(overrides?: CallOverrides): Promise<string>;
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -1234,46 +771,6 @@ export interface OracleChainlinkSingle extends BaseContract {
   "pendingDefaultAdminDelay()"(
     overrides?: CallOverrides
   ): Promise<[number, number] & { newDelay: number; schedule: number }>;
-
-  poolChainlink(overrides?: CallOverrides): Promise<string>;
-
-  "poolChainlink()"(overrides?: CallOverrides): Promise<string>;
-
-  read(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "read()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  readAll(overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
-
-  "readAll()"(overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
-
-  readLower(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "readLower()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  readQuote(
-    quoteAmount: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "readQuote(uint256)"(
-    quoteAmount: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  readQuoteLower(
-    quoteAmount: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "readQuoteLower(uint256)"(
-    quoteAmount: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  readUpper(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "readUpper()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   renounceRole(
     role: PromiseOrValue<BytesLike>,
@@ -1307,10 +804,6 @@ export interface OracleChainlinkSingle extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  stalePeriod(overrides?: CallOverrides): Promise<number>;
-
-  "stalePeriod()"(overrides?: CallOverrides): Promise<number>;
-
   supportsInterface(
     interfaceId: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
@@ -1322,29 +815,9 @@ export interface OracleChainlinkSingle extends BaseContract {
   ): Promise<boolean>;
 
   callStatic: {
-    BASE(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "BASE()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
 
     "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<string>;
-
-    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<number>;
-
-    "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<number>;
-
-    GUARDIAN_ROLE_CHAINLINK(overrides?: CallOverrides): Promise<string>;
-
-    "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<string>;
-
-    SEQUENCER_ROLE(overrides?: CallOverrides): Promise<string>;
-
-    "SEQUENCER_ROLE()"(overrides?: CallOverrides): Promise<string>;
-
-    SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<string>;
-
-    "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<string>;
 
     acceptDefaultAdminTransfer(overrides?: CallOverrides): Promise<void>;
 
@@ -1364,10 +837,6 @@ export interface OracleChainlinkSingle extends BaseContract {
 
     "cancelDefaultAdminTransfer()"(overrides?: CallOverrides): Promise<void>;
 
-    chainlinkDecimals(overrides?: CallOverrides): Promise<number>;
-
-    "chainlinkDecimals()"(overrides?: CallOverrides): Promise<number>;
-
     changeDefaultAdminDelay(
       newDelay: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1375,26 +844,6 @@ export interface OracleChainlinkSingle extends BaseContract {
 
     "changeDefaultAdminDelay(uint48)"(
       newDelay: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    changeGracePeriod(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "changeGracePeriod(uint32)"(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    changeStalePeriod(
-      _stalePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "changeStalePeriod(uint32)"(
-      _stalePeriod: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1411,10 +860,6 @@ export interface OracleChainlinkSingle extends BaseContract {
     "defaultAdminDelayIncreaseWait()"(
       overrides?: CallOverrides
     ): Promise<number>;
-
-    description(overrides?: CallOverrides): Promise<string>;
-
-    "description()"(overrides?: CallOverrides): Promise<string>;
 
     getRoleAdmin(
       role: PromiseOrValue<BytesLike>,
@@ -1450,14 +895,6 @@ export interface OracleChainlinkSingle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    inBase(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "inBase()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    isChainlinkMultiplied(overrides?: CallOverrides): Promise<number>;
-
-    "isChainlinkMultiplied()"(overrides?: CallOverrides): Promise<number>;
-
     owner(overrides?: CallOverrides): Promise<string>;
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -1477,46 +914,6 @@ export interface OracleChainlinkSingle extends BaseContract {
     "pendingDefaultAdminDelay()"(
       overrides?: CallOverrides
     ): Promise<[number, number] & { newDelay: number; schedule: number }>;
-
-    poolChainlink(overrides?: CallOverrides): Promise<string>;
-
-    "poolChainlink()"(overrides?: CallOverrides): Promise<string>;
-
-    read(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "read()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    readAll(overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
-
-    "readAll()"(overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
-
-    readLower(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "readLower()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    readQuote(
-      quoteAmount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "readQuote(uint256)"(
-      quoteAmount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    readQuoteLower(
-      quoteAmount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "readQuoteLower(uint256)"(
-      quoteAmount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    readUpper(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "readUpper()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     renounceRole(
       role: PromiseOrValue<BytesLike>,
@@ -1545,10 +942,6 @@ export interface OracleChainlinkSingle extends BaseContract {
     rollbackDefaultAdminDelay(overrides?: CallOverrides): Promise<void>;
 
     "rollbackDefaultAdminDelay()"(overrides?: CallOverrides): Promise<void>;
-
-    stalePeriod(overrides?: CallOverrides): Promise<number>;
-
-    "stalePeriod()"(overrides?: CallOverrides): Promise<number>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
@@ -1621,29 +1014,9 @@ export interface OracleChainlinkSingle extends BaseContract {
   };
 
   estimateGas: {
-    BASE(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "BASE()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
 
     "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    GUARDIAN_ROLE_CHAINLINK(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    SEQUENCER_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "SEQUENCER_ROLE()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     acceptDefaultAdminTransfer(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1671,10 +1044,6 @@ export interface OracleChainlinkSingle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    chainlinkDecimals(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "chainlinkDecimals()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     changeDefaultAdminDelay(
       newDelay: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1682,26 +1051,6 @@ export interface OracleChainlinkSingle extends BaseContract {
 
     "changeDefaultAdminDelay(uint48)"(
       newDelay: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    changeGracePeriod(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "changeGracePeriod(uint32)"(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    changeStalePeriod(
-      _stalePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "changeStalePeriod(uint32)"(
-      _stalePeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1720,10 +1069,6 @@ export interface OracleChainlinkSingle extends BaseContract {
     "defaultAdminDelayIncreaseWait()"(
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    description(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "description()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     getRoleAdmin(
       role: PromiseOrValue<BytesLike>,
@@ -1759,14 +1104,6 @@ export interface OracleChainlinkSingle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    inBase(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "inBase()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    isChainlinkMultiplied(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "isChainlinkMultiplied()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1778,46 +1115,6 @@ export interface OracleChainlinkSingle extends BaseContract {
     pendingDefaultAdminDelay(overrides?: CallOverrides): Promise<BigNumber>;
 
     "pendingDefaultAdminDelay()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    poolChainlink(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "poolChainlink()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    read(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "read()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    readAll(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "readAll()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    readLower(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "readLower()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    readQuote(
-      quoteAmount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "readQuote(uint256)"(
-      quoteAmount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    readQuoteLower(
-      quoteAmount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "readQuoteLower(uint256)"(
-      quoteAmount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    readUpper(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "readUpper()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     renounceRole(
       role: PromiseOrValue<BytesLike>,
@@ -1851,10 +1148,6 @@ export interface OracleChainlinkSingle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    stalePeriod(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "stalePeriod()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -1867,43 +1160,11 @@ export interface OracleChainlinkSingle extends BaseContract {
   };
 
   populateTransaction: {
-    BASE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "BASE()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     DEFAULT_ADMIN_ROLE(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "DEFAULT_ADMIN_ROLE()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "GRACE_PERIOD_TIME()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    GUARDIAN_ROLE_CHAINLINK(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "GUARDIAN_ROLE_CHAINLINK()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    SEQUENCER_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "SEQUENCER_ROLE()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    SEQUENCER_UPTIME_FEED(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "SEQUENCER_UPTIME_FEED()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1933,12 +1194,6 @@ export interface OracleChainlinkSingle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    chainlinkDecimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "chainlinkDecimals()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     changeDefaultAdminDelay(
       newDelay: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1946,26 +1201,6 @@ export interface OracleChainlinkSingle extends BaseContract {
 
     "changeDefaultAdminDelay(uint48)"(
       newDelay: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    changeGracePeriod(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "changeGracePeriod(uint32)"(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    changeStalePeriod(
-      _stalePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "changeStalePeriod(uint32)"(
-      _stalePeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1986,10 +1221,6 @@ export interface OracleChainlinkSingle extends BaseContract {
     "defaultAdminDelayIncreaseWait()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    description(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "description()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getRoleAdmin(
       role: PromiseOrValue<BytesLike>,
@@ -2022,18 +1253,6 @@ export interface OracleChainlinkSingle extends BaseContract {
     "hasRole(bytes32,address)"(
       role: PromiseOrValue<BytesLike>,
       account: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    inBase(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "inBase()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    isChainlinkMultiplied(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "isChainlinkMultiplied()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -2057,46 +1276,6 @@ export interface OracleChainlinkSingle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    poolChainlink(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "poolChainlink()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    read(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "read()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    readAll(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "readAll()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    readLower(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "readLower()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    readQuote(
-      quoteAmount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "readQuote(uint256)"(
-      quoteAmount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    readQuoteLower(
-      quoteAmount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "readQuoteLower(uint256)"(
-      quoteAmount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    readUpper(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "readUpper()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     renounceRole(
       role: PromiseOrValue<BytesLike>,
       account: PromiseOrValue<string>,
@@ -2128,10 +1307,6 @@ export interface OracleChainlinkSingle extends BaseContract {
     "rollbackDefaultAdminDelay()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
-
-    stalePeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "stalePeriod()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,

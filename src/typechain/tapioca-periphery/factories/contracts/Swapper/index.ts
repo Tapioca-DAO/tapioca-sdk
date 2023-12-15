@@ -5,3 +5,4 @@ export { BaseSwapper__factory } from "./BaseSwapper__factory";
 export { CurveSwapper__factory } from "./CurveSwapper__factory";
 export { UniswapV2Swapper__factory } from "./UniswapV2Swapper__factory";
 export { UniswapV3Swapper__factory } from "./UniswapV3Swapper__factory";
+export { ZeroXSwapper__factory } from "./ZeroXSwapper__factory";

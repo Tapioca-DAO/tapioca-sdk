@@ -34,6 +34,7 @@ export interface AccessControlInterface extends utils.Interface {
     "hasRole(bytes32,address)": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
+    "supportsInterface(bytes4)": FunctionFragment;
   };
 
   getFunction(
@@ -50,6 +51,8 @@ export interface AccessControlInterface extends utils.Interface {
       | "renounceRole(bytes32,address)"
       | "revokeRole"
       | "revokeRole(bytes32,address)"
+      | "supportsInterface"
+      | "supportsInterface(bytes4)"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -100,6 +103,14 @@ export interface AccessControlInterface extends utils.Interface {
     functionFragment: "revokeRole(bytes32,address)",
     values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
   ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface(bytes4)",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "DEFAULT_ADMIN_ROLE",
@@ -138,6 +149,14 @@ export interface AccessControlInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "revokeRole(bytes32,address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface(bytes4)",
     data: BytesLike
   ): Result;
 
@@ -267,13 +286,13 @@ export interface AccessControl extends BaseContract {
 
     renounceRole(
       role: PromiseOrValue<BytesLike>,
-      account: PromiseOrValue<string>,
+      callerConfirmation: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "renounceRole(bytes32,address)"(
       role: PromiseOrValue<BytesLike>,
-      account: PromiseOrValue<string>,
+      callerConfirmation: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -288,6 +307,16 @@ export interface AccessControl extends BaseContract {
       account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
   };
 
   DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
@@ -330,13 +359,13 @@ export interface AccessControl extends BaseContract {
 
   renounceRole(
     role: PromiseOrValue<BytesLike>,
-    account: PromiseOrValue<string>,
+    callerConfirmation: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "renounceRole(bytes32,address)"(
     role: PromiseOrValue<BytesLike>,
-    account: PromiseOrValue<string>,
+    callerConfirmation: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -351,6 +380,16 @@ export interface AccessControl extends BaseContract {
     account: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  supportsInterface(
+    interfaceId: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "supportsInterface(bytes4)"(
+    interfaceId: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   callStatic: {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
@@ -393,13 +432,13 @@ export interface AccessControl extends BaseContract {
 
     renounceRole(
       role: PromiseOrValue<BytesLike>,
-      account: PromiseOrValue<string>,
+      callerConfirmation: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "renounceRole(bytes32,address)"(
       role: PromiseOrValue<BytesLike>,
-      account: PromiseOrValue<string>,
+      callerConfirmation: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -414,6 +453,16 @@ export interface AccessControl extends BaseContract {
       account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
   };
 
   filters: {
@@ -492,13 +541,13 @@ export interface AccessControl extends BaseContract {
 
     renounceRole(
       role: PromiseOrValue<BytesLike>,
-      account: PromiseOrValue<string>,
+      callerConfirmation: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "renounceRole(bytes32,address)"(
       role: PromiseOrValue<BytesLike>,
-      account: PromiseOrValue<string>,
+      callerConfirmation: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -512,6 +561,16 @@ export interface AccessControl extends BaseContract {
       role: PromiseOrValue<BytesLike>,
       account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
@@ -560,13 +619,13 @@ export interface AccessControl extends BaseContract {
 
     renounceRole(
       role: PromiseOrValue<BytesLike>,
-      account: PromiseOrValue<string>,
+      callerConfirmation: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "renounceRole(bytes32,address)"(
       role: PromiseOrValue<BytesLike>,
-      account: PromiseOrValue<string>,
+      callerConfirmation: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -580,6 +639,16 @@ export interface AccessControl extends BaseContract {
       role: PromiseOrValue<BytesLike>,
       account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }
