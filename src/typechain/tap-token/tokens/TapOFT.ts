@@ -71,6 +71,7 @@ export interface TapOFTInterface extends utils.Interface {
     "decimals()": FunctionFragment;
     "decreaseAllowance(address,uint256)": FunctionFragment;
     "dso_supply()": FunctionFragment;
+    "eip712Domain()": FunctionFragment;
     "emissionForWeek(uint256)": FunctionFragment;
     "emissionsStartTime()": FunctionFragment;
     "emitForWeek()": FunctionFragment;
@@ -170,6 +171,8 @@ export interface TapOFTInterface extends utils.Interface {
       | "decreaseAllowance(address,uint256)"
       | "dso_supply"
       | "dso_supply()"
+      | "eip712Domain"
+      | "eip712Domain()"
       | "emissionForWeek"
       | "emissionForWeek(uint256)"
       | "emissionsStartTime"
@@ -455,6 +458,14 @@ export interface TapOFTInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "dso_supply()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "eip712Domain",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "eip712Domain()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -1182,6 +1193,14 @@ export interface TapOFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "eip712Domain",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "eip712Domain()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "emissionForWeek",
     data: BytesLike
   ): Result;
@@ -1590,6 +1609,7 @@ export interface TapOFTInterface extends utils.Interface {
     "CallFailedBytes(uint16,bytes,bytes)": EventFragment;
     "CallFailedStr(uint16,bytes,string)": EventFragment;
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
+    "EIP712DomainChanged()": EventFragment;
     "Emitted(uint256,uint256)": EventFragment;
     "GovernanceChainIdentifierUpdated(uint256,uint256)": EventFragment;
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)": EventFragment;
@@ -1629,6 +1649,8 @@ export interface TapOFTInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged()"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Emitted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Emitted(uint256,uint256)"): EventFragment;
   getEvent(
@@ -1759,6 +1781,15 @@ export type CallOFTReceivedSuccessEvent = TypedEvent<
 
 export type CallOFTReceivedSuccessEventFilter =
   TypedEventFilter<CallOFTReceivedSuccessEvent>;
+
+export interface EIP712DomainChangedEventObject {}
+export type EIP712DomainChangedEvent = TypedEvent<
+  [],
+  EIP712DomainChangedEventObject
+>;
+
+export type EIP712DomainChangedEventFilter =
+  TypedEventFilter<EIP712DomainChangedEvent>;
 
 export interface EmittedEventObject {
   week: BigNumber;
@@ -2136,6 +2167,34 @@ export interface TapOFT extends BaseContract {
     dso_supply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "dso_supply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
 
     emissionForWeek(
       arg0: PromiseOrValue<BigNumberish>,
@@ -2938,6 +2997,34 @@ export interface TapOFT extends BaseContract {
 
   "dso_supply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  eip712Domain(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
+
+  "eip712Domain()"(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
+
   emissionForWeek(
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -3739,6 +3826,34 @@ export interface TapOFT extends BaseContract {
 
     "dso_supply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
     emissionForWeek(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -4449,6 +4564,9 @@ export interface TapOFT extends BaseContract {
       _hash?: null
     ): CallOFTReceivedSuccessEventFilter;
 
+    "EIP712DomainChanged()"(): EIP712DomainChangedEventFilter;
+    EIP712DomainChanged(): EIP712DomainChangedEventFilter;
+
     "Emitted(uint256,uint256)"(
       week?: PromiseOrValue<BigNumberish> | null,
       amount?: PromiseOrValue<BigNumberish> | null
@@ -4761,6 +4879,10 @@ export interface TapOFT extends BaseContract {
     dso_supply(overrides?: CallOverrides): Promise<BigNumber>;
 
     "dso_supply()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    eip712Domain(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "eip712Domain()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     emissionForWeek(
       arg0: PromiseOrValue<BigNumberish>,
@@ -5567,6 +5689,10 @@ export interface TapOFT extends BaseContract {
     dso_supply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "dso_supply()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    eip712Domain(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "eip712Domain()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     emissionForWeek(
       arg0: PromiseOrValue<BigNumberish>,

@@ -76,6 +76,7 @@ export interface TapiocaOptionLiquidityProvisionInterface
     "balanceOf(address)": FunctionFragment;
     "batch(bytes[],bool)": FunctionFragment;
     "claimOwnership()": FunctionFragment;
+    "eip712Domain()": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
     "getLock(uint256)": FunctionFragment;
     "getSingularities()": FunctionFragment;
@@ -127,6 +128,8 @@ export interface TapiocaOptionLiquidityProvisionInterface
       | "batch(bytes[],bool)"
       | "claimOwnership"
       | "claimOwnership()"
+      | "eip712Domain"
+      | "eip712Domain()"
       | "getApproved"
       | "getApproved(uint256)"
       | "getLock"
@@ -247,6 +250,14 @@ export interface TapiocaOptionLiquidityProvisionInterface
   ): string;
   encodeFunctionData(
     functionFragment: "claimOwnership()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "eip712Domain",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "eip712Domain()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -592,6 +603,14 @@ export interface TapiocaOptionLiquidityProvisionInterface
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "eip712Domain",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "eip712Domain()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "getApproved",
     data: BytesLike
   ): Result;
@@ -802,6 +821,7 @@ export interface TapiocaOptionLiquidityProvisionInterface
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalForAll(address,address,bool)": EventFragment;
     "Burn(address,uint128,tuple)": EventFragment;
+    "EIP712DomainChanged()": EventFragment;
     "Mint(address,uint128,tuple)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "Paused(address)": EventFragment;
@@ -829,6 +849,8 @@ export interface TapiocaOptionLiquidityProvisionInterface
   getEvent(
     nameOrSignatureOrTopic: "Burn(address,uint128,tuple)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged()"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Mint"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Mint(address,uint128,tuple)"
@@ -911,6 +933,15 @@ export type BurnEvent = TypedEvent<
 >;
 
 export type BurnEventFilter = TypedEventFilter<BurnEvent>;
+
+export interface EIP712DomainChangedEventObject {}
+export type EIP712DomainChangedEvent = TypedEvent<
+  [],
+  EIP712DomainChangedEventObject
+>;
+
+export type EIP712DomainChangedEventFilter =
+  TypedEventFilter<EIP712DomainChangedEvent>;
 
 export interface MintEventObject {
   to: string;
@@ -1117,6 +1148,34 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     "claimOwnership()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
 
     getApproved(
       tokenId: PromiseOrValue<BigNumberish>,
@@ -1530,6 +1589,34 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  eip712Domain(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
+
+  "eip712Domain()"(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
+
   getApproved(
     tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -1932,6 +2019,34 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "claimOwnership()"(overrides?: CallOverrides): Promise<void>;
 
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
     getApproved(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -2301,6 +2416,9 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
       lockPosition?: null
     ): BurnEventFilter;
 
+    "EIP712DomainChanged()"(): EIP712DomainChangedEventFilter;
+    EIP712DomainChanged(): EIP712DomainChangedEventFilter;
+
     "Mint(address,uint128,tuple)"(
       to?: PromiseOrValue<string> | null,
       sglAssetID?: PromiseOrValue<BigNumberish> | null,
@@ -2439,6 +2557,10 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     "claimOwnership()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    eip712Domain(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "eip712Domain()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     getApproved(
       tokenId: PromiseOrValue<BigNumberish>,
@@ -2816,6 +2938,10 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     "claimOwnership()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    eip712Domain(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "eip712Domain()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getApproved(
       tokenId: PromiseOrValue<BigNumberish>,

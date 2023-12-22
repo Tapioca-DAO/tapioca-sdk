@@ -30,6 +30,7 @@ import type {
 export interface AirdropBrokerInterface extends utils.Interface {
   functions: {
     "EPOCH_DURATION()": FunctionFragment;
+    "LAST_EPOCH()": FunctionFragment;
     "PCNFT()": FunctionFragment;
     "PHASE_1_DISCOUNT()": FunctionFragment;
     "PHASE_2_AMOUNT_PER_USER(uint256)": FunctionFragment;
@@ -58,7 +59,7 @@ export interface AirdropBrokerInterface extends utils.Interface {
     "phase1Users(address)": FunctionFragment;
     "phase2MerkleRoots(uint256)": FunctionFragment;
     "phase4Users(address)": FunctionFragment;
-    "registerUserForPhase(uint256,address[],uint256[])": FunctionFragment;
+    "registerUsersForPhase(uint256,address[],uint256[])": FunctionFragment;
     "setPaymentToken(address,address,bytes)": FunctionFragment;
     "setPaymentTokenBeneficiary(address)": FunctionFragment;
     "setPhase2MerkleRoots(bytes32[4])": FunctionFragment;
@@ -74,6 +75,8 @@ export interface AirdropBrokerInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "EPOCH_DURATION"
       | "EPOCH_DURATION()"
+      | "LAST_EPOCH"
+      | "LAST_EPOCH()"
       | "PCNFT"
       | "PCNFT()"
       | "PHASE_1_DISCOUNT"
@@ -130,8 +133,8 @@ export interface AirdropBrokerInterface extends utils.Interface {
       | "phase2MerkleRoots(uint256)"
       | "phase4Users"
       | "phase4Users(address)"
-      | "registerUserForPhase"
-      | "registerUserForPhase(uint256,address[],uint256[])"
+      | "registerUsersForPhase"
+      | "registerUsersForPhase(uint256,address[],uint256[])"
       | "setPaymentToken"
       | "setPaymentToken(address,address,bytes)"
       | "setPaymentTokenBeneficiary"
@@ -158,6 +161,14 @@ export interface AirdropBrokerInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "EPOCH_DURATION()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "LAST_EPOCH",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "LAST_EPOCH()",
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "PCNFT", values?: undefined): string;
@@ -368,7 +379,7 @@ export interface AirdropBrokerInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "registerUserForPhase",
+    functionFragment: "registerUsersForPhase",
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>[],
@@ -376,7 +387,7 @@ export interface AirdropBrokerInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "registerUserForPhase(uint256,address[],uint256[])",
+    functionFragment: "registerUsersForPhase(uint256,address[],uint256[])",
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>[],
@@ -483,6 +494,11 @@ export interface AirdropBrokerInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "EPOCH_DURATION()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "LAST_EPOCH", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "LAST_EPOCH()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "PCNFT", data: BytesLike): Result;
@@ -671,11 +687,11 @@ export interface AirdropBrokerInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "registerUserForPhase",
+    functionFragment: "registerUsersForPhase",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "registerUserForPhase(uint256,address[],uint256[])",
+    functionFragment: "registerUsersForPhase(uint256,address[],uint256[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -748,6 +764,7 @@ export interface AirdropBrokerInterface extends utils.Interface {
     "OwnershipTransferred(address,address)": EventFragment;
     "Participate(uint256,uint256)": EventFragment;
     "Paused(address)": EventFragment;
+    "Phase2MerkleRootsUpdated()": EventFragment;
     "SetPaymentToken(address,address,bytes)": EventFragment;
     "SetTapOracle(address,bytes)": EventFragment;
     "Unpaused(address)": EventFragment;
@@ -769,6 +786,8 @@ export interface AirdropBrokerInterface extends utils.Interface {
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Paused"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Paused(address)"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Phase2MerkleRootsUpdated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Phase2MerkleRootsUpdated()"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SetPaymentToken"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "SetPaymentToken(address,address,bytes)"
@@ -836,6 +855,15 @@ export type PausedEvent = TypedEvent<[string], PausedEventObject>;
 
 export type PausedEventFilter = TypedEventFilter<PausedEvent>;
 
+export interface Phase2MerkleRootsUpdatedEventObject {}
+export type Phase2MerkleRootsUpdatedEvent = TypedEvent<
+  [],
+  Phase2MerkleRootsUpdatedEventObject
+>;
+
+export type Phase2MerkleRootsUpdatedEventFilter =
+  TypedEventFilter<Phase2MerkleRootsUpdatedEvent>;
+
 export interface SetPaymentTokenEventObject {
   paymentToken: string;
   oracle: string;
@@ -898,6 +926,10 @@ export interface AirdropBroker extends BaseContract {
     EPOCH_DURATION(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "EPOCH_DURATION()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    LAST_EPOCH(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "LAST_EPOCH()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     PCNFT(overrides?: CallOverrides): Promise<[string]>;
 
@@ -1117,14 +1149,14 @@ export interface AirdropBroker extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    registerUserForPhase(
+    registerUsersForPhase(
       _phase: PromiseOrValue<BigNumberish>,
       _users: PromiseOrValue<string>[],
       _amounts: PromiseOrValue<BigNumberish>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "registerUserForPhase(uint256,address[],uint256[])"(
+    "registerUsersForPhase(uint256,address[],uint256[])"(
       _phase: PromiseOrValue<BigNumberish>,
       _users: PromiseOrValue<string>[],
       _amounts: PromiseOrValue<BigNumberish>[],
@@ -1229,6 +1261,10 @@ export interface AirdropBroker extends BaseContract {
   EPOCH_DURATION(overrides?: CallOverrides): Promise<BigNumber>;
 
   "EPOCH_DURATION()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  LAST_EPOCH(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "LAST_EPOCH()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   PCNFT(overrides?: CallOverrides): Promise<string>;
 
@@ -1446,14 +1482,14 @@ export interface AirdropBroker extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  registerUserForPhase(
+  registerUsersForPhase(
     _phase: PromiseOrValue<BigNumberish>,
     _users: PromiseOrValue<string>[],
     _amounts: PromiseOrValue<BigNumberish>[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "registerUserForPhase(uint256,address[],uint256[])"(
+  "registerUsersForPhase(uint256,address[],uint256[])"(
     _phase: PromiseOrValue<BigNumberish>,
     _users: PromiseOrValue<string>[],
     _amounts: PromiseOrValue<BigNumberish>[],
@@ -1558,6 +1594,10 @@ export interface AirdropBroker extends BaseContract {
     EPOCH_DURATION(overrides?: CallOverrides): Promise<BigNumber>;
 
     "EPOCH_DURATION()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    LAST_EPOCH(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "LAST_EPOCH()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     PCNFT(overrides?: CallOverrides): Promise<string>;
 
@@ -1759,14 +1799,14 @@ export interface AirdropBroker extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    registerUserForPhase(
+    registerUsersForPhase(
       _phase: PromiseOrValue<BigNumberish>,
       _users: PromiseOrValue<string>[],
       _amounts: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "registerUserForPhase(uint256,address[],uint256[])"(
+    "registerUsersForPhase(uint256,address[],uint256[])"(
       _phase: PromiseOrValue<BigNumberish>,
       _users: PromiseOrValue<string>[],
       _amounts: PromiseOrValue<BigNumberish>[],
@@ -1914,6 +1954,9 @@ export interface AirdropBroker extends BaseContract {
     "Paused(address)"(account?: null): PausedEventFilter;
     Paused(account?: null): PausedEventFilter;
 
+    "Phase2MerkleRootsUpdated()"(): Phase2MerkleRootsUpdatedEventFilter;
+    Phase2MerkleRootsUpdated(): Phase2MerkleRootsUpdatedEventFilter;
+
     "SetPaymentToken(address,address,bytes)"(
       paymentToken?: null,
       oracle?: null,
@@ -1939,6 +1982,10 @@ export interface AirdropBroker extends BaseContract {
     EPOCH_DURATION(overrides?: CallOverrides): Promise<BigNumber>;
 
     "EPOCH_DURATION()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    LAST_EPOCH(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "LAST_EPOCH()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     PCNFT(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2144,14 +2191,14 @@ export interface AirdropBroker extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    registerUserForPhase(
+    registerUsersForPhase(
       _phase: PromiseOrValue<BigNumberish>,
       _users: PromiseOrValue<string>[],
       _amounts: PromiseOrValue<BigNumberish>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "registerUserForPhase(uint256,address[],uint256[])"(
+    "registerUsersForPhase(uint256,address[],uint256[])"(
       _phase: PromiseOrValue<BigNumberish>,
       _users: PromiseOrValue<string>[],
       _amounts: PromiseOrValue<BigNumberish>[],
@@ -2259,6 +2306,10 @@ export interface AirdropBroker extends BaseContract {
     "EPOCH_DURATION()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    LAST_EPOCH(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "LAST_EPOCH()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     PCNFT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -2482,14 +2533,14 @@ export interface AirdropBroker extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    registerUserForPhase(
+    registerUsersForPhase(
       _phase: PromiseOrValue<BigNumberish>,
       _users: PromiseOrValue<string>[],
       _amounts: PromiseOrValue<BigNumberish>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "registerUserForPhase(uint256,address[],uint256[])"(
+    "registerUsersForPhase(uint256,address[],uint256[])"(
       _phase: PromiseOrValue<BigNumberish>,
       _users: PromiseOrValue<string>[],
       _amounts: PromiseOrValue<BigNumberish>[],

@@ -77,6 +77,7 @@ export interface TwTAPInterface extends utils.Interface {
     "creation()": FunctionFragment;
     "currentWeek()": FunctionFragment;
     "distributeReward(uint256,uint256)": FunctionFragment;
+    "eip712Domain()": FunctionFragment;
     "exitPosition(uint256)": FunctionFragment;
     "exitPositionAndSendTap(uint256)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
@@ -141,6 +142,8 @@ export interface TwTAPInterface extends utils.Interface {
       | "currentWeek()"
       | "distributeReward"
       | "distributeReward(uint256,uint256)"
+      | "eip712Domain"
+      | "eip712Domain()"
       | "exitPosition"
       | "exitPosition(uint256)"
       | "exitPositionAndSendTap"
@@ -313,6 +316,14 @@ export interface TwTAPInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "distributeReward(uint256,uint256)",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "eip712Domain",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "eip712Domain()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "exitPosition",
@@ -669,6 +680,14 @@ export interface TwTAPInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "eip712Domain",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "eip712Domain()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "exitPosition",
     data: BytesLike
   ): Result;
@@ -867,6 +886,7 @@ export interface TwTAPInterface extends utils.Interface {
     "AMLDivergence(uint256,uint256,uint256)": EventFragment;
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalForAll(address,address,bool)": EventFragment;
+    "EIP712DomainChanged()": EventFragment;
     "ExitPosition(uint256,uint256)": EventFragment;
     "LogMaxRewardsLength(uint256,uint256,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
@@ -888,6 +908,8 @@ export interface TwTAPInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "ApprovalForAll(address,address,bool)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged()"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ExitPosition"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ExitPosition(uint256,uint256)"
@@ -949,6 +971,15 @@ export type ApprovalForAllEvent = TypedEvent<
 >;
 
 export type ApprovalForAllEventFilter = TypedEventFilter<ApprovalForAllEvent>;
+
+export interface EIP712DomainChangedEventObject {}
+export type EIP712DomainChangedEvent = TypedEvent<
+  [],
+  EIP712DomainChangedEventObject
+>;
+
+export type EIP712DomainChangedEventFilter =
+  TypedEventFilter<EIP712DomainChangedEvent>;
 
 export interface ExitPositionEventObject {
   tokenId: BigNumber;
@@ -1176,6 +1207,34 @@ export interface TwTAP extends BaseContract {
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
 
     exitPosition(
       _tokenId: PromiseOrValue<BigNumberish>,
@@ -1651,6 +1710,34 @@ export interface TwTAP extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  eip712Domain(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
+
+  "eip712Domain()"(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
+
   exitPosition(
     _tokenId: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2117,6 +2204,34 @@ export interface TwTAP extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
     exitPosition(
       _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -2497,6 +2612,9 @@ export interface TwTAP extends BaseContract {
       approved?: null
     ): ApprovalForAllEventFilter;
 
+    "EIP712DomainChanged()"(): EIP712DomainChangedEventFilter;
+    EIP712DomainChanged(): EIP712DomainChangedEventFilter;
+
     "ExitPosition(uint256,uint256)"(
       tokenId?: PromiseOrValue<BigNumberish> | null,
       amount?: PromiseOrValue<BigNumberish> | null
@@ -2679,6 +2797,10 @@ export interface TwTAP extends BaseContract {
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    eip712Domain(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "eip712Domain()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     exitPosition(
       _tokenId: PromiseOrValue<BigNumberish>,
@@ -3092,6 +3214,10 @@ export interface TwTAP extends BaseContract {
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    eip712Domain(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "eip712Domain()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     exitPosition(
       _tokenId: PromiseOrValue<BigNumberish>,

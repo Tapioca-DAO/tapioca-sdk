@@ -34,6 +34,7 @@ export interface VestingInterface extends utils.Interface {
     "claimable(address)": FunctionFragment;
     "claimable()": FunctionFragment;
     "cliff()": FunctionFragment;
+    "computeTimeFromAmount(uint256,uint256,uint256,uint256)": FunctionFragment;
     "duration()": FunctionFragment;
     "init(address,uint256,uint256)": FunctionFragment;
     "owner()": FunctionFragment;
@@ -60,6 +61,8 @@ export interface VestingInterface extends utils.Interface {
       | "claimable()"
       | "cliff"
       | "cliff()"
+      | "computeTimeFromAmount"
+      | "computeTimeFromAmount(uint256,uint256,uint256,uint256)"
       | "duration"
       | "duration()"
       | "init"
@@ -108,6 +111,24 @@ export interface VestingInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "cliff", values?: undefined): string;
   encodeFunctionData(functionFragment: "cliff()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "computeTimeFromAmount",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "computeTimeFromAmount(uint256,uint256,uint256,uint256)",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
   encodeFunctionData(functionFragment: "duration", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "duration()",
@@ -219,6 +240,14 @@ export interface VestingInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "cliff", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "cliff()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "computeTimeFromAmount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "computeTimeFromAmount(uint256,uint256,uint256,uint256)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "duration", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "duration()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "init", data: BytesLike): Result;
@@ -390,6 +419,22 @@ export interface Vesting extends BaseContract {
 
     "cliff()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    computeTimeFromAmount(
+      _start: PromiseOrValue<BigNumberish>,
+      _totalAmount: PromiseOrValue<BigNumberish>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "computeTimeFromAmount(uint256,uint256,uint256,uint256)"(
+      _start: PromiseOrValue<BigNumberish>,
+      _totalAmount: PromiseOrValue<BigNumberish>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     duration(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "duration()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -529,6 +574,22 @@ export interface Vesting extends BaseContract {
 
   "cliff()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  computeTimeFromAmount(
+    _start: PromiseOrValue<BigNumberish>,
+    _totalAmount: PromiseOrValue<BigNumberish>,
+    _amount: PromiseOrValue<BigNumberish>,
+    _duration: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "computeTimeFromAmount(uint256,uint256,uint256,uint256)"(
+    _start: PromiseOrValue<BigNumberish>,
+    _totalAmount: PromiseOrValue<BigNumberish>,
+    _amount: PromiseOrValue<BigNumberish>,
+    _duration: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   duration(overrides?: CallOverrides): Promise<BigNumber>;
 
   "duration()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -659,6 +720,22 @@ export interface Vesting extends BaseContract {
     cliff(overrides?: CallOverrides): Promise<BigNumber>;
 
     "cliff()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    computeTimeFromAmount(
+      _start: PromiseOrValue<BigNumberish>,
+      _totalAmount: PromiseOrValue<BigNumberish>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "computeTimeFromAmount(uint256,uint256,uint256,uint256)"(
+      _start: PromiseOrValue<BigNumberish>,
+      _totalAmount: PromiseOrValue<BigNumberish>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     duration(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -829,6 +906,22 @@ export interface Vesting extends BaseContract {
 
     "cliff()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    computeTimeFromAmount(
+      _start: PromiseOrValue<BigNumberish>,
+      _totalAmount: PromiseOrValue<BigNumberish>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "computeTimeFromAmount(uint256,uint256,uint256,uint256)"(
+      _start: PromiseOrValue<BigNumberish>,
+      _totalAmount: PromiseOrValue<BigNumberish>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     duration(overrides?: CallOverrides): Promise<BigNumber>;
 
     "duration()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -954,6 +1047,22 @@ export interface Vesting extends BaseContract {
     cliff(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "cliff()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    computeTimeFromAmount(
+      _start: PromiseOrValue<BigNumberish>,
+      _totalAmount: PromiseOrValue<BigNumberish>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "computeTimeFromAmount(uint256,uint256,uint256,uint256)"(
+      _start: PromiseOrValue<BigNumberish>,
+      _totalAmount: PromiseOrValue<BigNumberish>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     duration(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

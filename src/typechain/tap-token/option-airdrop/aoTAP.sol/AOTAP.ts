@@ -51,6 +51,7 @@ export interface AOTAPInterface extends utils.Interface {
     "brokerClaim()": FunctionFragment;
     "burn(uint256)": FunctionFragment;
     "claimOwnership()": FunctionFragment;
+    "eip712Domain()": FunctionFragment;
     "exists(uint256)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
@@ -96,6 +97,8 @@ export interface AOTAPInterface extends utils.Interface {
       | "burn(uint256)"
       | "claimOwnership"
       | "claimOwnership()"
+      | "eip712Domain"
+      | "eip712Domain()"
       | "exists"
       | "exists(uint256)"
       | "getApproved"
@@ -206,6 +209,14 @@ export interface AOTAPInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "claimOwnership()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "eip712Domain",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "eip712Domain()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -467,6 +478,14 @@ export interface AOTAPInterface extends utils.Interface {
     functionFragment: "claimOwnership()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "eip712Domain",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "eip712Domain()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "exists", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "exists(uint256)",
@@ -606,6 +625,7 @@ export interface AOTAPInterface extends utils.Interface {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalForAll(address,address,bool)": EventFragment;
     "Burn(address,uint256,tuple)": EventFragment;
+    "EIP712DomainChanged()": EventFragment;
     "Mint(address,uint256,tuple)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
@@ -623,6 +643,8 @@ export interface AOTAPInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "Burn(address,uint256,tuple)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged()"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Mint"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Mint(address,uint256,tuple)"
@@ -672,6 +694,15 @@ export type BurnEvent = TypedEvent<
 >;
 
 export type BurnEventFilter = TypedEventFilter<BurnEvent>;
+
+export interface EIP712DomainChangedEventObject {}
+export type EIP712DomainChangedEvent = TypedEvent<
+  [],
+  EIP712DomainChangedEventObject
+>;
+
+export type EIP712DomainChangedEventFilter =
+  TypedEventFilter<EIP712DomainChangedEvent>;
 
 export interface MintEventObject {
   to: string;
@@ -815,6 +846,34 @@ export interface AOTAP extends BaseContract {
     "claimOwnership()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
 
     exists(
       _tokenId: PromiseOrValue<BigNumberish>,
@@ -1134,6 +1193,34 @@ export interface AOTAP extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  eip712Domain(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
+
+  "eip712Domain()"(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
+
   exists(
     _tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -1444,6 +1531,34 @@ export interface AOTAP extends BaseContract {
 
     "claimOwnership()"(overrides?: CallOverrides): Promise<void>;
 
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
     exists(
       _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1718,6 +1833,9 @@ export interface AOTAP extends BaseContract {
       option?: AirdropTapOptionStruct | null
     ): BurnEventFilter;
 
+    "EIP712DomainChanged()"(): EIP712DomainChangedEventFilter;
+    EIP712DomainChanged(): EIP712DomainChangedEventFilter;
+
     "Mint(address,uint256,tuple)"(
       to?: PromiseOrValue<string> | null,
       tokenId?: PromiseOrValue<BigNumberish> | null,
@@ -1828,6 +1946,10 @@ export interface AOTAP extends BaseContract {
     "claimOwnership()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    eip712Domain(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "eip712Domain()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     exists(
       _tokenId: PromiseOrValue<BigNumberish>,
@@ -2137,6 +2259,10 @@ export interface AOTAP extends BaseContract {
     "claimOwnership()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    eip712Domain(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "eip712Domain()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     exists(
       _tokenId: PromiseOrValue<BigNumberish>,
