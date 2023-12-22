@@ -70,6 +70,7 @@ export declare namespace ICommonData {
     withdrawLzChainId: PromiseOrValue<BigNumberish>;
     withdrawAdapterParams: PromiseOrValue<BytesLike>;
     unwrap: PromiseOrValue<boolean>;
+    refundAddress: PromiseOrValue<string>;
   };
 
   export type IWithdrawParamsStructOutput = [
@@ -78,7 +79,8 @@ export declare namespace ICommonData {
     boolean,
     number,
     string,
-    boolean
+    boolean,
+    string
   ] & {
     withdraw: boolean;
     withdrawLzFeeAmount: BigNumber;
@@ -86,6 +88,7 @@ export declare namespace ICommonData {
     withdrawLzChainId: number;
     withdrawAdapterParams: string;
     unwrap: boolean;
+    refundAddress: string;
   };
 
   export type ICommonExternalContractsStruct = {
@@ -234,9 +237,9 @@ export interface MagnetarV2Interface extends utils.Interface {
   functions: {
     "burst((uint16,address,uint256,bool,bytes)[])": FunctionFragment;
     "cluster()": FunctionFragment;
-    "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes,bool))": FunctionFragment;
-    "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes,bool))": FunctionFragment;
-    "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool),(bool,uint256,bool,uint16,bytes,bool)))": FunctionFragment;
+    "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes,bool,address))": FunctionFragment;
+    "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes,bool,address))": FunctionFragment;
+    "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address),(bool,uint256,bool,uint16,bytes,bool,address)))": FunctionFragment;
     "helper()": FunctionFragment;
     "marketModule()": FunctionFragment;
     "mintFromBBAndLendOnSGL(address,uint256,(bool,uint256,(bool,uint256,bool)),(bool,uint256,bool),(bool,address,uint128,uint128,uint256),(bool,address,uint256),(address,address,address))": FunctionFragment;
@@ -257,11 +260,11 @@ export interface MagnetarV2Interface extends utils.Interface {
       | "cluster"
       | "cluster()"
       | "depositAddCollateralAndBorrowFromMarket"
-      | "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes,bool))"
+      | "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes,bool,address))"
       | "depositRepayAndRemoveCollateralFromMarket"
-      | "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes,bool))"
+      | "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes,bool,address))"
       | "exitPositionAndRemoveCollateral"
-      | "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool),(bool,uint256,bool,uint16,bytes,bool)))"
+      | "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address),(bool,uint256,bool,uint16,bytes,bool,address)))"
       | "helper"
       | "helper()"
       | "marketModule"
@@ -309,7 +312,7 @@ export interface MagnetarV2Interface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes,bool))",
+    functionFragment: "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes,bool,address))",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -333,7 +336,7 @@ export interface MagnetarV2Interface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes,bool))",
+    functionFragment: "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes,bool,address))",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -353,7 +356,7 @@ export interface MagnetarV2Interface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool),(bool,uint256,bool,uint16,bytes,bool)))",
+    functionFragment: "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address),(bool,uint256,bool,uint16,bytes,bool,address)))",
     values: [
       PromiseOrValue<string>,
       ICommonData.ICommonExternalContractsStruct,
@@ -497,7 +500,7 @@ export interface MagnetarV2Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes,bool))",
+    functionFragment: "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes,bool,address))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -505,7 +508,7 @@ export interface MagnetarV2Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes,bool))",
+    functionFragment: "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes,bool,address))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -513,7 +516,7 @@ export interface MagnetarV2Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool),(bool,uint256,bool,uint16,bytes,bool)))",
+    functionFragment: "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address),(bool,uint256,bool,uint16,bytes,bool,address)))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "helper", data: BytesLike): Result;
@@ -692,7 +695,7 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes,bool))"(
+    "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes,bool,address))"(
       market: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       collateralAmount: PromiseOrValue<BigNumberish>,
@@ -714,7 +717,7 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes,bool))"(
+    "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes,bool,address))"(
       market: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       depositAmount: PromiseOrValue<BigNumberish>,
@@ -732,7 +735,7 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool),(bool,uint256,bool,uint16,bytes,bool)))"(
+    "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address),(bool,uint256,bool,uint16,bytes,bool,address)))"(
       user: PromiseOrValue<string>,
       externalData: ICommonData.ICommonExternalContractsStruct,
       removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
@@ -893,7 +896,7 @@ export interface MagnetarV2 extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes,bool))"(
+  "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes,bool,address))"(
     market: PromiseOrValue<string>,
     user: PromiseOrValue<string>,
     collateralAmount: PromiseOrValue<BigNumberish>,
@@ -915,7 +918,7 @@ export interface MagnetarV2 extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes,bool))"(
+  "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes,bool,address))"(
     market: PromiseOrValue<string>,
     user: PromiseOrValue<string>,
     depositAmount: PromiseOrValue<BigNumberish>,
@@ -933,7 +936,7 @@ export interface MagnetarV2 extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool),(bool,uint256,bool,uint16,bytes,bool)))"(
+  "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address),(bool,uint256,bool,uint16,bytes,bool,address)))"(
     user: PromiseOrValue<string>,
     externalData: ICommonData.ICommonExternalContractsStruct,
     removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
@@ -1094,7 +1097,7 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes,bool))"(
+    "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes,bool,address))"(
       market: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       collateralAmount: PromiseOrValue<BigNumberish>,
@@ -1116,7 +1119,7 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes,bool))"(
+    "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes,bool,address))"(
       market: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       depositAmount: PromiseOrValue<BigNumberish>,
@@ -1134,7 +1137,7 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool),(bool,uint256,bool,uint16,bytes,bool)))"(
+    "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address),(bool,uint256,bool,uint16,bytes,bool,address)))"(
       user: PromiseOrValue<string>,
       externalData: ICommonData.ICommonExternalContractsStruct,
       removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
@@ -1321,7 +1324,7 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes,bool))"(
+    "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes,bool,address))"(
       market: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       collateralAmount: PromiseOrValue<BigNumberish>,
@@ -1343,7 +1346,7 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes,bool))"(
+    "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes,bool,address))"(
       market: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       depositAmount: PromiseOrValue<BigNumberish>,
@@ -1361,7 +1364,7 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool),(bool,uint256,bool,uint16,bytes,bool)))"(
+    "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address),(bool,uint256,bool,uint16,bytes,bool,address)))"(
       user: PromiseOrValue<string>,
       externalData: ICommonData.ICommonExternalContractsStruct,
       removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,
@@ -1523,7 +1526,7 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes,bool))"(
+    "depositAddCollateralAndBorrowFromMarket(address,address,uint256,uint256,bool,bool,(bool,uint256,bool,uint16,bytes,bool,address))"(
       market: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       collateralAmount: PromiseOrValue<BigNumberish>,
@@ -1545,7 +1548,7 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes,bool))"(
+    "depositRepayAndRemoveCollateralFromMarket(address,address,uint256,uint256,uint256,bool,(bool,uint256,bool,uint16,bytes,bool,address))"(
       market: PromiseOrValue<string>,
       user: PromiseOrValue<string>,
       depositAmount: PromiseOrValue<BigNumberish>,
@@ -1563,7 +1566,7 @@ export interface MagnetarV2 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool),(bool,uint256,bool,uint16,bytes,bool)))"(
+    "exitPositionAndRemoveCollateral(address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address),(bool,uint256,bool,uint16,bytes,bool,address)))"(
       user: PromiseOrValue<string>,
       externalData: ICommonData.ICommonExternalContractsStruct,
       removeAndRepayData: IUSDOBase.IRemoveAndRepayStruct,

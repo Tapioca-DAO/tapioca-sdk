@@ -96,8 +96,8 @@ export declare namespace ISwapper {
 
 export interface BaseSwapperInterface extends utils.Interface {
   functions: {
-    "buildSwapData(address,address,uint256,uint256,bool,bool)": FunctionFragment;
     "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)": FunctionFragment;
+    "buildSwapData(address,address,uint256,uint256)": FunctionFragment;
     "getDefaultDexOptions()": FunctionFragment;
     "getInputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)": FunctionFragment;
     "getOutputAmount(((address,uint256,address,uint256),(uint256,uint256,uint256,uint256),(bool,bool)),bytes)": FunctionFragment;
@@ -109,8 +109,8 @@ export interface BaseSwapperInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "buildSwapData(address,address,uint256,uint256,bool,bool)"
       | "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"
+      | "buildSwapData(address,address,uint256,uint256)"
       | "getDefaultDexOptions"
       | "getDefaultDexOptions()"
       | "getInputAmount"
@@ -128,17 +128,6 @@ export interface BaseSwapperInterface extends utils.Interface {
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "buildSwapData(address,address,uint256,uint256,bool,bool)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<boolean>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)",
     values: [
       PromiseOrValue<BigNumberish>,
@@ -147,6 +136,15 @@ export interface BaseSwapperInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<boolean>,
       PromiseOrValue<boolean>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "buildSwapData(address,address,uint256,uint256)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
     ]
   ): string;
   encodeFunctionData(
@@ -211,11 +209,11 @@ export interface BaseSwapperInterface extends utils.Interface {
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "buildSwapData(address,address,uint256,uint256,bool,bool)",
+    functionFragment: "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)",
+    functionFragment: "buildSwapData(address,address,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -317,16 +315,6 @@ export interface BaseSwapper extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    "buildSwapData(address,address,uint256,uint256,bool,bool)"(
-      tokenIn: PromiseOrValue<string>,
-      tokenOut: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      withdrawFromYb: PromiseOrValue<boolean>,
-      depositToYb: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<[ISwapper.SwapDataStructOutput]>;
-
     "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
       tokenInId: PromiseOrValue<BigNumberish>,
       tokenOutId: PromiseOrValue<BigNumberish>,
@@ -334,6 +322,14 @@ export interface BaseSwapper extends BaseContract {
       shareIn: PromiseOrValue<BigNumberish>,
       withdrawFromYb: PromiseOrValue<boolean>,
       depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<[ISwapper.SwapDataStructOutput]>;
+
+    "buildSwapData(address,address,uint256,uint256)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[ISwapper.SwapDataStructOutput]>;
 
@@ -404,16 +400,6 @@ export interface BaseSwapper extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  "buildSwapData(address,address,uint256,uint256,bool,bool)"(
-    tokenIn: PromiseOrValue<string>,
-    tokenOut: PromiseOrValue<string>,
-    amountIn: PromiseOrValue<BigNumberish>,
-    shareIn: PromiseOrValue<BigNumberish>,
-    withdrawFromYb: PromiseOrValue<boolean>,
-    depositToYb: PromiseOrValue<boolean>,
-    overrides?: CallOverrides
-  ): Promise<ISwapper.SwapDataStructOutput>;
-
   "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
     tokenInId: PromiseOrValue<BigNumberish>,
     tokenOutId: PromiseOrValue<BigNumberish>,
@@ -421,6 +407,14 @@ export interface BaseSwapper extends BaseContract {
     shareIn: PromiseOrValue<BigNumberish>,
     withdrawFromYb: PromiseOrValue<boolean>,
     depositToYb: PromiseOrValue<boolean>,
+    overrides?: CallOverrides
+  ): Promise<ISwapper.SwapDataStructOutput>;
+
+  "buildSwapData(address,address,uint256,uint256)"(
+    tokenIn: PromiseOrValue<string>,
+    tokenOut: PromiseOrValue<string>,
+    amountIn: PromiseOrValue<BigNumberish>,
+    shareIn: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<ISwapper.SwapDataStructOutput>;
 
@@ -491,16 +485,6 @@ export interface BaseSwapper extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    "buildSwapData(address,address,uint256,uint256,bool,bool)"(
-      tokenIn: PromiseOrValue<string>,
-      tokenOut: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      withdrawFromYb: PromiseOrValue<boolean>,
-      depositToYb: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<ISwapper.SwapDataStructOutput>;
-
     "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
       tokenInId: PromiseOrValue<BigNumberish>,
       tokenOutId: PromiseOrValue<BigNumberish>,
@@ -508,6 +492,14 @@ export interface BaseSwapper extends BaseContract {
       shareIn: PromiseOrValue<BigNumberish>,
       withdrawFromYb: PromiseOrValue<boolean>,
       depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<ISwapper.SwapDataStructOutput>;
+
+    "buildSwapData(address,address,uint256,uint256)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<ISwapper.SwapDataStructOutput>;
 
@@ -590,16 +582,6 @@ export interface BaseSwapper extends BaseContract {
   };
 
   estimateGas: {
-    "buildSwapData(address,address,uint256,uint256,bool,bool)"(
-      tokenIn: PromiseOrValue<string>,
-      tokenOut: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      withdrawFromYb: PromiseOrValue<boolean>,
-      depositToYb: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
       tokenInId: PromiseOrValue<BigNumberish>,
       tokenOutId: PromiseOrValue<BigNumberish>,
@@ -607,6 +589,14 @@ export interface BaseSwapper extends BaseContract {
       shareIn: PromiseOrValue<BigNumberish>,
       withdrawFromYb: PromiseOrValue<boolean>,
       depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "buildSwapData(address,address,uint256,uint256)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -678,16 +668,6 @@ export interface BaseSwapper extends BaseContract {
   };
 
   populateTransaction: {
-    "buildSwapData(address,address,uint256,uint256,bool,bool)"(
-      tokenIn: PromiseOrValue<string>,
-      tokenOut: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      shareIn: PromiseOrValue<BigNumberish>,
-      withdrawFromYb: PromiseOrValue<boolean>,
-      depositToYb: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     "buildSwapData(uint256,uint256,uint256,uint256,bool,bool)"(
       tokenInId: PromiseOrValue<BigNumberish>,
       tokenOutId: PromiseOrValue<BigNumberish>,
@@ -695,6 +675,14 @@ export interface BaseSwapper extends BaseContract {
       shareIn: PromiseOrValue<BigNumberish>,
       withdrawFromYb: PromiseOrValue<boolean>,
       depositToYb: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "buildSwapData(address,address,uint256,uint256)"(
+      tokenIn: PromiseOrValue<string>,
+      tokenOut: PromiseOrValue<string>,
+      amountIn: PromiseOrValue<BigNumberish>,
+      shareIn: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

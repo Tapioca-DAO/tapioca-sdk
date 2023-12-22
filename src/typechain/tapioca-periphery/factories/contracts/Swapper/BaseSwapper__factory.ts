@@ -57,14 +57,14 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "tokenIn",
-        type: "address",
+        internalType: "uint256",
+        name: "tokenInId",
+        type: "uint256",
       },
       {
-        internalType: "address",
-        name: "tokenOut",
-        type: "address",
+        internalType: "uint256",
+        name: "tokenOutId",
+        type: "uint256",
       },
       {
         internalType: "uint256",
@@ -174,14 +174,14 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "tokenInId",
-        type: "uint256",
+        internalType: "address",
+        name: "tokenIn",
+        type: "address",
       },
       {
-        internalType: "uint256",
-        name: "tokenOutId",
-        type: "uint256",
+        internalType: "address",
+        name: "tokenOut",
+        type: "address",
       },
       {
         internalType: "uint256",
@@ -192,16 +192,6 @@ const _abi = [
         internalType: "uint256",
         name: "shareIn",
         type: "uint256",
-      },
-      {
-        internalType: "bool",
-        name: "withdrawFromYb",
-        type: "bool",
-      },
-      {
-        internalType: "bool",
-        name: "depositToYb",
-        type: "bool",
       },
     ],
     name: "buildSwapData",

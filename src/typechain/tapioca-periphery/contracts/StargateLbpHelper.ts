@@ -34,10 +34,14 @@ export declare namespace StargateLbpHelper {
     targetToken: PromiseOrValue<string>;
     dstChainId: PromiseOrValue<BigNumberish>;
     peer: PromiseOrValue<string>;
+    receiver: PromiseOrValue<string>;
     amount: PromiseOrValue<BigNumberish>;
     slippage: PromiseOrValue<BigNumberish>;
     srcPoolId: PromiseOrValue<BigNumberish>;
     dstPoolId: PromiseOrValue<BigNumberish>;
+    getDust: PromiseOrValue<boolean>;
+    dstAirdropAmount: PromiseOrValue<BigNumberish>;
+    dstGasLimit: PromiseOrValue<BigNumberish>;
   };
 
   export type StargateDataStructOutput = [
@@ -45,8 +49,12 @@ export declare namespace StargateLbpHelper {
     string,
     number,
     string,
+    string,
     BigNumber,
     BigNumber,
+    BigNumber,
+    BigNumber,
+    boolean,
     BigNumber,
     BigNumber
   ] & {
@@ -54,10 +62,14 @@ export declare namespace StargateLbpHelper {
     targetToken: string;
     dstChainId: number;
     peer: string;
+    receiver: string;
     amount: BigNumber;
     slippage: BigNumber;
     srcPoolId: BigNumber;
     dstPoolId: BigNumber;
+    getDust: boolean;
+    dstAirdropAmount: BigNumber;
+    dstGasLimit: BigNumber;
   };
 
   export type ParticipateDataStruct = {
@@ -99,11 +111,13 @@ export declare namespace IStargateRouterBase {
 
 export interface StargateLbpHelperInterface extends utils.Interface {
   functions: {
+    "_sgReceive(address,uint256,bytes)": FunctionFragment;
     "instantRedeemLocal(uint16,uint256,address)": FunctionFragment;
     "lbpPool()": FunctionFragment;
     "lbpVault()": FunctionFragment;
     "owner()": FunctionFragment;
-    "participate((address,address,uint16,address,uint256,uint256,uint256,uint256),(address,address,uint256,uint256,uint256))": FunctionFragment;
+    "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256,uint256))": FunctionFragment;
+    "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))": FunctionFragment;
     "redeemLocal(uint16,uint256,uint256,address,uint256,bytes,(uint256,uint256,bytes))": FunctionFragment;
     "redeemRemote(uint16,uint256,uint256,address,uint256,uint256,bytes,(uint256,uint256,bytes))": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
@@ -115,6 +129,8 @@ export interface StargateLbpHelperInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "_sgReceive"
+      | "_sgReceive(address,uint256,bytes)"
       | "instantRedeemLocal"
       | "instantRedeemLocal(uint16,uint256,address)"
       | "lbpPool"
@@ -124,7 +140,9 @@ export interface StargateLbpHelperInterface extends utils.Interface {
       | "owner"
       | "owner()"
       | "participate"
-      | "participate((address,address,uint16,address,uint256,uint256,uint256,uint256),(address,address,uint256,uint256,uint256))"
+      | "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256,uint256))"
+      | "quoteLayerZeroFee"
+      | "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))"
       | "redeemLocal"
       | "redeemLocal(uint16,uint256,uint256,address,uint256,bytes,(uint256,uint256,bytes))"
       | "redeemRemote"
@@ -141,6 +159,22 @@ export interface StargateLbpHelperInterface extends utils.Interface {
       | "transferOwnership(address)"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "_sgReceive",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_sgReceive(address,uint256,bytes)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
   encodeFunctionData(
     functionFragment: "instantRedeemLocal",
     values: [
@@ -174,10 +208,30 @@ export interface StargateLbpHelperInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "participate((address,address,uint16,address,uint256,uint256,uint256,uint256),(address,address,uint256,uint256,uint256))",
+    functionFragment: "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256,uint256))",
     values: [
       StargateLbpHelper.StargateDataStruct,
       StargateLbpHelper.ParticipateDataStruct
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "quoteLayerZeroFee",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>,
+      IStargateRouterBase.LzTxObjStruct
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>,
+      IStargateRouterBase.LzTxObjStruct
     ]
   ): string;
   encodeFunctionData(
@@ -287,6 +341,11 @@ export interface StargateLbpHelperInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
 
+  decodeFunctionResult(functionFragment: "_sgReceive", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "_sgReceive(address,uint256,bytes)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "instantRedeemLocal",
     data: BytesLike
@@ -306,7 +365,15 @@ export interface StargateLbpHelperInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "participate((address,address,uint16,address,uint256,uint256,uint256,uint256),(address,address,uint256,uint256,uint256))",
+    functionFragment: "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256,uint256))",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "quoteLayerZeroFee",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -359,11 +426,21 @@ export interface StargateLbpHelperInterface extends utils.Interface {
 
   events: {
     "OwnershipTransferred(address,address)": EventFragment;
+    "ReceiveFailed(uint16,address,uint256,uint256,bytes)": EventFragment;
+    "ReceiveSuccess(uint16,address,uint256,uint256,bytes)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "OwnershipTransferred(address,address)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ReceiveFailed"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "ReceiveFailed(uint16,address,uint256,uint256,bytes)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ReceiveSuccess"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "ReceiveSuccess(uint16,address,uint256,uint256,bytes)"
   ): EventFragment;
 }
 
@@ -378,6 +455,34 @@ export type OwnershipTransferredEvent = TypedEvent<
 
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
+
+export interface ReceiveFailedEventObject {
+  srcChainId: number;
+  token: string;
+  nonce: BigNumber;
+  amountLD: BigNumber;
+  payload: string;
+}
+export type ReceiveFailedEvent = TypedEvent<
+  [number, string, BigNumber, BigNumber, string],
+  ReceiveFailedEventObject
+>;
+
+export type ReceiveFailedEventFilter = TypedEventFilter<ReceiveFailedEvent>;
+
+export interface ReceiveSuccessEventObject {
+  srcChainId: number;
+  token: string;
+  nonce: BigNumber;
+  amountLD: BigNumber;
+  payload: string;
+}
+export type ReceiveSuccessEvent = TypedEvent<
+  [number, string, BigNumber, BigNumber, string],
+  ReceiveSuccessEventObject
+>;
+
+export type ReceiveSuccessEventFilter = TypedEventFilter<ReceiveSuccessEvent>;
 
 export interface StargateLbpHelper extends BaseContract {
   contractName: "StargateLbpHelper";
@@ -408,6 +513,20 @@ export interface StargateLbpHelper extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    _sgReceive(
+      token: PromiseOrValue<string>,
+      amountLD: PromiseOrValue<BigNumberish>,
+      payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "_sgReceive(address,uint256,bytes)"(
+      token: PromiseOrValue<string>,
+      amountLD: PromiseOrValue<BigNumberish>,
+      payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     instantRedeemLocal(
       _srcPoolId: PromiseOrValue<BigNumberish>,
       _amountLP: PromiseOrValue<BigNumberish>,
@@ -440,11 +559,29 @@ export interface StargateLbpHelper extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "participate((address,address,uint16,address,uint256,uint256,uint256,uint256),(address,address,uint256,uint256,uint256))"(
+    "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256,uint256))"(
       stargateData: StargateLbpHelper.StargateDataStruct,
       lbpData: StargateLbpHelper.ParticipateDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    quoteLayerZeroFee(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _functionType: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BytesLike>,
+      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber]>;
+
+    "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))"(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _functionType: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BytesLike>,
+      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber]>;
 
     redeemLocal(
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -519,9 +656,9 @@ export interface StargateLbpHelper extends BaseContract {
     "router()"(overrides?: CallOverrides): Promise<[string]>;
 
     sgReceive(
-      arg0: PromiseOrValue<BigNumberish>,
+      srcChainId: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
-      arg2: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
       token: PromiseOrValue<string>,
       amountLD: PromiseOrValue<BigNumberish>,
       payload: PromiseOrValue<BytesLike>,
@@ -529,9 +666,9 @@ export interface StargateLbpHelper extends BaseContract {
     ): Promise<ContractTransaction>;
 
     "sgReceive(uint16,bytes,uint256,address,uint256,bytes)"(
-      arg0: PromiseOrValue<BigNumberish>,
+      srcChainId: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
-      arg2: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
       token: PromiseOrValue<string>,
       amountLD: PromiseOrValue<BigNumberish>,
       payload: PromiseOrValue<BytesLike>,
@@ -548,6 +685,20 @@ export interface StargateLbpHelper extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
+
+  _sgReceive(
+    token: PromiseOrValue<string>,
+    amountLD: PromiseOrValue<BigNumberish>,
+    payload: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "_sgReceive(address,uint256,bytes)"(
+    token: PromiseOrValue<string>,
+    amountLD: PromiseOrValue<BigNumberish>,
+    payload: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   instantRedeemLocal(
     _srcPoolId: PromiseOrValue<BigNumberish>,
@@ -581,11 +732,29 @@ export interface StargateLbpHelper extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "participate((address,address,uint16,address,uint256,uint256,uint256,uint256),(address,address,uint256,uint256,uint256))"(
+  "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256,uint256))"(
     stargateData: StargateLbpHelper.StargateDataStruct,
     lbpData: StargateLbpHelper.ParticipateDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  quoteLayerZeroFee(
+    _dstChainId: PromiseOrValue<BigNumberish>,
+    _functionType: PromiseOrValue<BigNumberish>,
+    _toAddress: PromiseOrValue<BytesLike>,
+    arg3: PromiseOrValue<BytesLike>,
+    _lzTxParams: IStargateRouterBase.LzTxObjStruct,
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, BigNumber]>;
+
+  "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))"(
+    _dstChainId: PromiseOrValue<BigNumberish>,
+    _functionType: PromiseOrValue<BigNumberish>,
+    _toAddress: PromiseOrValue<BytesLike>,
+    arg3: PromiseOrValue<BytesLike>,
+    _lzTxParams: IStargateRouterBase.LzTxObjStruct,
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, BigNumber]>;
 
   redeemLocal(
     _dstChainId: PromiseOrValue<BigNumberish>,
@@ -660,9 +829,9 @@ export interface StargateLbpHelper extends BaseContract {
   "router()"(overrides?: CallOverrides): Promise<string>;
 
   sgReceive(
-    arg0: PromiseOrValue<BigNumberish>,
+    srcChainId: PromiseOrValue<BigNumberish>,
     arg1: PromiseOrValue<BytesLike>,
-    arg2: PromiseOrValue<BigNumberish>,
+    nonce: PromiseOrValue<BigNumberish>,
     token: PromiseOrValue<string>,
     amountLD: PromiseOrValue<BigNumberish>,
     payload: PromiseOrValue<BytesLike>,
@@ -670,9 +839,9 @@ export interface StargateLbpHelper extends BaseContract {
   ): Promise<ContractTransaction>;
 
   "sgReceive(uint16,bytes,uint256,address,uint256,bytes)"(
-    arg0: PromiseOrValue<BigNumberish>,
+    srcChainId: PromiseOrValue<BigNumberish>,
     arg1: PromiseOrValue<BytesLike>,
-    arg2: PromiseOrValue<BigNumberish>,
+    nonce: PromiseOrValue<BigNumberish>,
     token: PromiseOrValue<string>,
     amountLD: PromiseOrValue<BigNumberish>,
     payload: PromiseOrValue<BytesLike>,
@@ -690,6 +859,20 @@ export interface StargateLbpHelper extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    _sgReceive(
+      token: PromiseOrValue<string>,
+      amountLD: PromiseOrValue<BigNumberish>,
+      payload: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "_sgReceive(address,uint256,bytes)"(
+      token: PromiseOrValue<string>,
+      amountLD: PromiseOrValue<BigNumberish>,
+      payload: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     instantRedeemLocal(
       _srcPoolId: PromiseOrValue<BigNumberish>,
       _amountLP: PromiseOrValue<BigNumberish>,
@@ -722,11 +905,29 @@ export interface StargateLbpHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "participate((address,address,uint16,address,uint256,uint256,uint256,uint256),(address,address,uint256,uint256,uint256))"(
+    "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256,uint256))"(
       stargateData: StargateLbpHelper.StargateDataStruct,
       lbpData: StargateLbpHelper.ParticipateDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    quoteLayerZeroFee(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _functionType: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BytesLike>,
+      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber]>;
+
+    "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))"(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _functionType: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BytesLike>,
+      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber]>;
 
     redeemLocal(
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -797,9 +998,9 @@ export interface StargateLbpHelper extends BaseContract {
     "router()"(overrides?: CallOverrides): Promise<string>;
 
     sgReceive(
-      arg0: PromiseOrValue<BigNumberish>,
+      srcChainId: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
-      arg2: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
       token: PromiseOrValue<string>,
       amountLD: PromiseOrValue<BigNumberish>,
       payload: PromiseOrValue<BytesLike>,
@@ -807,9 +1008,9 @@ export interface StargateLbpHelper extends BaseContract {
     ): Promise<void>;
 
     "sgReceive(uint16,bytes,uint256,address,uint256,bytes)"(
-      arg0: PromiseOrValue<BigNumberish>,
+      srcChainId: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
-      arg2: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
       token: PromiseOrValue<string>,
       amountLD: PromiseOrValue<BigNumberish>,
       payload: PromiseOrValue<BytesLike>,
@@ -836,9 +1037,53 @@ export interface StargateLbpHelper extends BaseContract {
       previousOwner?: PromiseOrValue<string> | null,
       newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
+
+    "ReceiveFailed(uint16,address,uint256,uint256,bytes)"(
+      srcChainId?: PromiseOrValue<BigNumberish> | null,
+      token?: PromiseOrValue<string> | null,
+      nonce?: PromiseOrValue<BigNumberish> | null,
+      amountLD?: null,
+      payload?: null
+    ): ReceiveFailedEventFilter;
+    ReceiveFailed(
+      srcChainId?: PromiseOrValue<BigNumberish> | null,
+      token?: PromiseOrValue<string> | null,
+      nonce?: PromiseOrValue<BigNumberish> | null,
+      amountLD?: null,
+      payload?: null
+    ): ReceiveFailedEventFilter;
+
+    "ReceiveSuccess(uint16,address,uint256,uint256,bytes)"(
+      srcChainId?: PromiseOrValue<BigNumberish> | null,
+      token?: PromiseOrValue<string> | null,
+      nonce?: PromiseOrValue<BigNumberish> | null,
+      amountLD?: null,
+      payload?: null
+    ): ReceiveSuccessEventFilter;
+    ReceiveSuccess(
+      srcChainId?: PromiseOrValue<BigNumberish> | null,
+      token?: PromiseOrValue<string> | null,
+      nonce?: PromiseOrValue<BigNumberish> | null,
+      amountLD?: null,
+      payload?: null
+    ): ReceiveSuccessEventFilter;
   };
 
   estimateGas: {
+    _sgReceive(
+      token: PromiseOrValue<string>,
+      amountLD: PromiseOrValue<BigNumberish>,
+      payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "_sgReceive(address,uint256,bytes)"(
+      token: PromiseOrValue<string>,
+      amountLD: PromiseOrValue<BigNumberish>,
+      payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     instantRedeemLocal(
       _srcPoolId: PromiseOrValue<BigNumberish>,
       _amountLP: PromiseOrValue<BigNumberish>,
@@ -871,10 +1116,28 @@ export interface StargateLbpHelper extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "participate((address,address,uint16,address,uint256,uint256,uint256,uint256),(address,address,uint256,uint256,uint256))"(
+    "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256,uint256))"(
       stargateData: StargateLbpHelper.StargateDataStruct,
       lbpData: StargateLbpHelper.ParticipateDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    quoteLayerZeroFee(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _functionType: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BytesLike>,
+      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))"(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _functionType: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BytesLike>,
+      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     redeemLocal(
@@ -950,9 +1213,9 @@ export interface StargateLbpHelper extends BaseContract {
     "router()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     sgReceive(
-      arg0: PromiseOrValue<BigNumberish>,
+      srcChainId: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
-      arg2: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
       token: PromiseOrValue<string>,
       amountLD: PromiseOrValue<BigNumberish>,
       payload: PromiseOrValue<BytesLike>,
@@ -960,9 +1223,9 @@ export interface StargateLbpHelper extends BaseContract {
     ): Promise<BigNumber>;
 
     "sgReceive(uint16,bytes,uint256,address,uint256,bytes)"(
-      arg0: PromiseOrValue<BigNumberish>,
+      srcChainId: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
-      arg2: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
       token: PromiseOrValue<string>,
       amountLD: PromiseOrValue<BigNumberish>,
       payload: PromiseOrValue<BytesLike>,
@@ -981,6 +1244,20 @@ export interface StargateLbpHelper extends BaseContract {
   };
 
   populateTransaction: {
+    _sgReceive(
+      token: PromiseOrValue<string>,
+      amountLD: PromiseOrValue<BigNumberish>,
+      payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "_sgReceive(address,uint256,bytes)"(
+      token: PromiseOrValue<string>,
+      amountLD: PromiseOrValue<BigNumberish>,
+      payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     instantRedeemLocal(
       _srcPoolId: PromiseOrValue<BigNumberish>,
       _amountLP: PromiseOrValue<BigNumberish>,
@@ -1013,10 +1290,28 @@ export interface StargateLbpHelper extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "participate((address,address,uint16,address,uint256,uint256,uint256,uint256),(address,address,uint256,uint256,uint256))"(
+    "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256,uint256))"(
       stargateData: StargateLbpHelper.StargateDataStruct,
       lbpData: StargateLbpHelper.ParticipateDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    quoteLayerZeroFee(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _functionType: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BytesLike>,
+      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))"(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _functionType: PromiseOrValue<BigNumberish>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      arg3: PromiseOrValue<BytesLike>,
+      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     redeemLocal(
@@ -1092,9 +1387,9 @@ export interface StargateLbpHelper extends BaseContract {
     "router()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     sgReceive(
-      arg0: PromiseOrValue<BigNumberish>,
+      srcChainId: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
-      arg2: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
       token: PromiseOrValue<string>,
       amountLD: PromiseOrValue<BigNumberish>,
       payload: PromiseOrValue<BytesLike>,
@@ -1102,9 +1397,9 @@ export interface StargateLbpHelper extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "sgReceive(uint16,bytes,uint256,address,uint256,bytes)"(
-      arg0: PromiseOrValue<BigNumberish>,
+      srcChainId: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BytesLike>,
-      arg2: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
       token: PromiseOrValue<string>,
       amountLD: PromiseOrValue<BigNumberish>,
       payload: PromiseOrValue<BytesLike>,
