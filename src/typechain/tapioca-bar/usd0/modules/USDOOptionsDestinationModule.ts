@@ -1302,6 +1302,7 @@ export interface USDOOptionsDestinationModuleInterface extends utils.Interface {
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
+    "CallFailedBytes(uint16,bytes,bytes)": EventFragment;
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)": EventFragment;
     "NonContractAddress(address)": EventFragment;
@@ -1323,6 +1324,10 @@ export interface USDOOptionsDestinationModuleInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Approval(address,address,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "CallFailedBytes"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "CallFailedBytes(uint16,bytes,bytes)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "CallOFTReceivedSuccess"): EventFragment;
   getEvent(
@@ -1397,6 +1402,18 @@ export type ApprovalEvent = TypedEvent<
 >;
 
 export type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
+
+export interface CallFailedBytesEventObject {
+  _srcChainId: number;
+  _payload: string;
+  _reason: string;
+}
+export type CallFailedBytesEvent = TypedEvent<
+  [number, string, string],
+  CallFailedBytesEventObject
+>;
+
+export type CallFailedBytesEventFilter = TypedEventFilter<CallFailedBytesEvent>;
 
 export interface CallOFTReceivedSuccessEventObject {
   _srcChainId: number;
@@ -3533,6 +3550,17 @@ export interface USDOOptionsDestinationModule extends BaseContract {
       spender?: PromiseOrValue<string> | null,
       value?: null
     ): ApprovalEventFilter;
+
+    "CallFailedBytes(uint16,bytes,bytes)"(
+      _srcChainId?: PromiseOrValue<BigNumberish> | null,
+      _payload?: PromiseOrValue<BytesLike> | null,
+      _reason?: PromiseOrValue<BytesLike> | null
+    ): CallFailedBytesEventFilter;
+    CallFailedBytes(
+      _srcChainId?: PromiseOrValue<BigNumberish> | null,
+      _payload?: PromiseOrValue<BytesLike> | null,
+      _reason?: PromiseOrValue<BytesLike> | null
+    ): CallFailedBytesEventFilter;
 
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"(
       _srcChainId?: PromiseOrValue<BigNumberish> | null,

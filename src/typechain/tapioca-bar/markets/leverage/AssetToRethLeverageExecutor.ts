@@ -359,7 +359,7 @@ export interface AssetToRethLeverageExecutor extends BaseContract {
       collateralAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAmountIn: PromiseOrValue<BigNumberish>,
-      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -369,7 +369,7 @@ export interface AssetToRethLeverageExecutor extends BaseContract {
       collateralAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAmountIn: PromiseOrValue<BigNumberish>,
-      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -379,7 +379,7 @@ export interface AssetToRethLeverageExecutor extends BaseContract {
       assetAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAmountIn: PromiseOrValue<BigNumberish>,
-      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -389,7 +389,7 @@ export interface AssetToRethLeverageExecutor extends BaseContract {
       assetAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAmountIn: PromiseOrValue<BigNumberish>,
-      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -488,7 +488,7 @@ export interface AssetToRethLeverageExecutor extends BaseContract {
     collateralAddress: PromiseOrValue<string>,
     assetAddress: PromiseOrValue<string>,
     collateralAmountIn: PromiseOrValue<BigNumberish>,
-    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
     data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -498,7 +498,7 @@ export interface AssetToRethLeverageExecutor extends BaseContract {
     collateralAddress: PromiseOrValue<string>,
     assetAddress: PromiseOrValue<string>,
     collateralAmountIn: PromiseOrValue<BigNumberish>,
-    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
     data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -508,7 +508,7 @@ export interface AssetToRethLeverageExecutor extends BaseContract {
     assetAddress: PromiseOrValue<string>,
     collateralAddress: PromiseOrValue<string>,
     assetAmountIn: PromiseOrValue<BigNumberish>,
-    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
     data: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -518,7 +518,7 @@ export interface AssetToRethLeverageExecutor extends BaseContract {
     assetAddress: PromiseOrValue<string>,
     collateralAddress: PromiseOrValue<string>,
     assetAmountIn: PromiseOrValue<BigNumberish>,
-    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
     data: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -613,7 +613,7 @@ export interface AssetToRethLeverageExecutor extends BaseContract {
       collateralAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAmountIn: PromiseOrValue<BigNumberish>,
-      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -623,7 +623,7 @@ export interface AssetToRethLeverageExecutor extends BaseContract {
       collateralAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAmountIn: PromiseOrValue<BigNumberish>,
-      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -633,7 +633,7 @@ export interface AssetToRethLeverageExecutor extends BaseContract {
       assetAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAmountIn: PromiseOrValue<BigNumberish>,
-      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -643,7 +643,7 @@ export interface AssetToRethLeverageExecutor extends BaseContract {
       assetAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAmountIn: PromiseOrValue<BigNumberish>,
-      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -754,7 +754,7 @@ export interface AssetToRethLeverageExecutor extends BaseContract {
       collateralAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAmountIn: PromiseOrValue<BigNumberish>,
-      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -764,7 +764,7 @@ export interface AssetToRethLeverageExecutor extends BaseContract {
       collateralAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAmountIn: PromiseOrValue<BigNumberish>,
-      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -774,7 +774,7 @@ export interface AssetToRethLeverageExecutor extends BaseContract {
       assetAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAmountIn: PromiseOrValue<BigNumberish>,
-      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -784,7 +784,7 @@ export interface AssetToRethLeverageExecutor extends BaseContract {
       assetAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAmountIn: PromiseOrValue<BigNumberish>,
-      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -884,7 +884,7 @@ export interface AssetToRethLeverageExecutor extends BaseContract {
       collateralAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAmountIn: PromiseOrValue<BigNumberish>,
-      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -894,7 +894,7 @@ export interface AssetToRethLeverageExecutor extends BaseContract {
       collateralAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAmountIn: PromiseOrValue<BigNumberish>,
-      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -904,7 +904,7 @@ export interface AssetToRethLeverageExecutor extends BaseContract {
       assetAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAmountIn: PromiseOrValue<BigNumberish>,
-      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -914,7 +914,7 @@ export interface AssetToRethLeverageExecutor extends BaseContract {
       assetAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAmountIn: PromiseOrValue<BigNumberish>,
-      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;

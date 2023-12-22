@@ -2,9 +2,8 @@
 /* tslint:disable */
 /* eslint-disable */
 export { AssetToEthLeverageExecutor__factory } from "./AssetToEthLeverageExecutor__factory";
-export { AssetToGLPLeverageExecutor__factory } from "./AssetToGLPLeverageExecutor__factory";
-export { AssetToGmxEthUsdcLpLeverageExecutor__factory } from "./AssetToGmxEthUsdcLpLeverageExecutor__factory";
 export { AssetToRethLeverageExecutor__factory } from "./AssetToRethLeverageExecutor__factory";
+export { AssetToSGLPLeverageExecutor__factory } from "./AssetToSGLPLeverageExecutor__factory";
 export { AssetToWstethLeverageExecutor__factory } from "./AssetToWstethLeverageExecutor__factory";
 export { AssetTotsDaiLeverageExecutor__factory } from "./AssetTotsDaiLeverageExecutor__factory";
 export { BaseLeverageExecutor__factory } from "./BaseLeverageExecutor__factory";

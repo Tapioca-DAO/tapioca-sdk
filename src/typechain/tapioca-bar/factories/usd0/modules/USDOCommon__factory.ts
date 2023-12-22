@@ -16,6 +16,17 @@ const _abi = [
     type: "error",
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "invalidAddress",
+        type: "address",
+      },
+    ],
+    name: "NotAuthorized",
+    type: "error",
+  },
+  {
     inputs: [],
     name: "NotValid",
     type: "error",
@@ -23,11 +34,6 @@ const _abi = [
   {
     inputs: [],
     name: "SenderNotAuthorized",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "SwapperNotAuthorized",
     type: "error",
   },
   {
@@ -53,6 +59,31 @@ const _abi = [
       },
     ],
     name: "Approval",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "uint16",
+        name: "_srcChainId",
+        type: "uint16",
+      },
+      {
+        indexed: true,
+        internalType: "bytes",
+        name: "_payload",
+        type: "bytes",
+      },
+      {
+        indexed: true,
+        internalType: "bytes",
+        name: "_reason",
+        type: "bytes",
+      },
+    ],
+    name: "CallFailedBytes",
     type: "event",
   },
   {

@@ -28,7 +28,7 @@ import type {
   PromiseOrValue,
 } from "../../common";
 
-export interface SimpleLeverageExecutorInterface extends utils.Interface {
+export interface AssetToSGLPLeverageExecutorInterface extends utils.Interface {
   functions: {
     "buildSwapDefaultData(address,address,uint256)": FunctionFragment;
     "claimOwnership()": FunctionFragment;
@@ -41,6 +41,7 @@ export interface SimpleLeverageExecutorInterface extends utils.Interface {
     "setSwapper(address)": FunctionFragment;
     "swapper()": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
+    "usdc()": FunctionFragment;
     "yieldBox()": FunctionFragment;
   };
 
@@ -68,6 +69,8 @@ export interface SimpleLeverageExecutorInterface extends utils.Interface {
       | "swapper()"
       | "transferOwnership"
       | "transferOwnership(address,bool,bool)"
+      | "usdc"
+      | "usdc()"
       | "yieldBox"
       | "yieldBox()"
   ): FunctionFragment;
@@ -186,6 +189,8 @@ export interface SimpleLeverageExecutorInterface extends utils.Interface {
       PromiseOrValue<boolean>
     ]
   ): string;
+  encodeFunctionData(functionFragment: "usdc", values?: undefined): string;
+  encodeFunctionData(functionFragment: "usdc()", values?: undefined): string;
   encodeFunctionData(functionFragment: "yieldBox", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "yieldBox()",
@@ -253,6 +258,8 @@ export interface SimpleLeverageExecutorInterface extends utils.Interface {
     functionFragment: "transferOwnership(address,bool,bool)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "usdc", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "usdc()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "yieldBox", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "yieldBox()", data: BytesLike): Result;
 
@@ -278,14 +285,14 @@ export type OwnershipTransferredEvent = TypedEvent<
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
 
-export interface SimpleLeverageExecutor extends BaseContract {
-  contractName: "SimpleLeverageExecutor";
+export interface AssetToSGLPLeverageExecutor extends BaseContract {
+  contractName: "AssetToSGLPLeverageExecutor";
 
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: SimpleLeverageExecutorInterface;
+  interface: AssetToSGLPLeverageExecutorInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -419,6 +426,10 @@ export interface SimpleLeverageExecutor extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    usdc(overrides?: CallOverrides): Promise<[string]>;
+
+    "usdc()"(overrides?: CallOverrides): Promise<[string]>;
+
     yieldBox(overrides?: CallOverrides): Promise<[string]>;
 
     "yieldBox()"(overrides?: CallOverrides): Promise<[string]>;
@@ -536,6 +547,10 @@ export interface SimpleLeverageExecutor extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  usdc(overrides?: CallOverrides): Promise<string>;
+
+  "usdc()"(overrides?: CallOverrides): Promise<string>;
+
   yieldBox(overrides?: CallOverrides): Promise<string>;
 
   "yieldBox()"(overrides?: CallOverrides): Promise<string>;
@@ -648,6 +663,10 @@ export interface SimpleLeverageExecutor extends BaseContract {
       renounce: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    usdc(overrides?: CallOverrides): Promise<string>;
+
+    "usdc()"(overrides?: CallOverrides): Promise<string>;
 
     yieldBox(overrides?: CallOverrides): Promise<string>;
 
@@ -778,6 +797,10 @@ export interface SimpleLeverageExecutor extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    usdc(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "usdc()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     yieldBox(overrides?: CallOverrides): Promise<BigNumber>;
 
     "yieldBox()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -895,6 +918,10 @@ export interface SimpleLeverageExecutor extends BaseContract {
       renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    usdc(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "usdc()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     yieldBox(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

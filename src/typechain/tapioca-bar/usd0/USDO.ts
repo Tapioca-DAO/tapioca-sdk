@@ -161,6 +161,7 @@ export declare namespace ICommonData {
     withdrawLzChainId: PromiseOrValue<BigNumberish>;
     withdrawAdapterParams: PromiseOrValue<BytesLike>;
     unwrap: PromiseOrValue<boolean>;
+    refundAddress: PromiseOrValue<string>;
   };
 
   export type IWithdrawParamsStructOutput = [
@@ -169,7 +170,8 @@ export declare namespace ICommonData {
     boolean,
     number,
     string,
-    boolean
+    boolean,
+    string
   ] & {
     withdraw: boolean;
     withdrawLzFeeAmount: BigNumber;
@@ -177,6 +179,7 @@ export declare namespace ICommonData {
     withdrawLzChainId: number;
     withdrawAdapterParams: string;
     unwrap: boolean;
+    refundAddress: string;
   };
 }
 
@@ -404,6 +407,7 @@ export interface USDOInterface extends utils.Interface {
     "creditedPackets(uint16,bytes,uint64)": FunctionFragment;
     "decimals()": FunctionFragment;
     "decreaseAllowance(address,uint256)": FunctionFragment;
+    "eip712Domain()": FunctionFragment;
     "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)": FunctionFragment;
     "estimateSendFee(uint16,bytes32,uint256,bool,bytes)": FunctionFragment;
     "exerciseOption((address,address,uint256,uint256,address,uint256),(uint16,address,uint256),(bool,address,uint16,uint256,address,uint256),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)": FunctionFragment;
@@ -427,12 +431,12 @@ export interface USDOInterface extends utils.Interface {
     "payloadSizeLimitLookup(uint16)": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "precrime()": FunctionFragment;
-    "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool),(bool,uint256,bool,uint16,bytes,bool)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
+    "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address),(bool,uint256,bool,uint16,bytes,bool,address)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "rescueEth(uint256,address)": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
-    "sendAndLendOrRepay(address,address,uint16,address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool),bytes)": FunctionFragment;
+    "sendAndLendOrRepay(address,address,uint16,address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool,address),bytes)": FunctionFragment;
     "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
     "setBurnerStatus(address,bool)": FunctionFragment;
@@ -505,6 +509,8 @@ export interface USDOInterface extends utils.Interface {
       | "decimals()"
       | "decreaseAllowance"
       | "decreaseAllowance(address,uint256)"
+      | "eip712Domain"
+      | "eip712Domain()"
       | "estimateSendAndCallFee"
       | "estimateSendAndCallFee(uint16,bytes32,uint256,bytes,uint64,bool,bytes)"
       | "estimateSendFee"
@@ -552,7 +558,7 @@ export interface USDOInterface extends utils.Interface {
       | "precrime"
       | "precrime()"
       | "removeAsset"
-      | "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool),(bool,uint256,bool,uint16,bytes,bool)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
+      | "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address),(bool,uint256,bool,uint16,bytes,bool,address)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "renounceOwnership"
       | "renounceOwnership()"
       | "rescueEth"
@@ -562,7 +568,7 @@ export interface USDOInterface extends utils.Interface {
       | "sendAndCall"
       | "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))"
       | "sendAndLendOrRepay"
-      | "sendAndLendOrRepay(address,address,uint16,address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool),bytes)"
+      | "sendAndLendOrRepay(address,address,uint16,address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool,address),bytes)"
       | "sendForLeverage"
       | "sendForLeverage(uint256,address,(uint256,uint16,uint16,address,bytes,bytes,address),(address,uint256,bytes),(address,address,address,address))"
       | "sendFrom"
@@ -787,6 +793,14 @@ export interface USDOInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "decreaseAllowance(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "eip712Domain",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "eip712Domain()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "estimateSendAndCallFee",
@@ -1062,7 +1076,7 @@ export interface USDOInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool),(bool,uint256,bool,uint16,bytes,bool)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address),(bool,uint256,bool,uint16,bytes,bool,address)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -1148,7 +1162,7 @@ export interface USDOInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "sendAndLendOrRepay(address,address,uint16,address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool),bytes)",
+    functionFragment: "sendAndLendOrRepay(address,address,uint16,address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool,address),bytes)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -1582,6 +1596,14 @@ export interface USDOInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "eip712Domain",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "eip712Domain()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "estimateSendAndCallFee",
     data: BytesLike
   ): Result;
@@ -1728,7 +1750,7 @@ export interface USDOInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool),(bool,uint256,bool,uint16,bytes,bool)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address),(bool,uint256,bool,uint16,bytes,bool,address)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1765,7 +1787,7 @@ export interface USDOInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "sendAndLendOrRepay(address,address,uint16,address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool),bytes)",
+    functionFragment: "sendAndLendOrRepay(address,address,uint16,address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool,address),bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1981,7 +2003,9 @@ export interface USDOInterface extends utils.Interface {
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
+    "CallFailedBytes(uint16,bytes,bytes)": EventFragment;
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
+    "EIP712DomainChanged()": EventFragment;
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)": EventFragment;
     "NonContractAddress(address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
@@ -2003,10 +2027,16 @@ export interface USDOInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "Approval(address,address,uint256)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "CallFailedBytes"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "CallFailedBytes(uint16,bytes,bytes)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "CallOFTReceivedSuccess"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged()"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MessageFailed"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "MessageFailed(uint16,bytes,uint64,bytes,bytes)"
@@ -2077,6 +2107,18 @@ export type ApprovalEvent = TypedEvent<
 
 export type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
 
+export interface CallFailedBytesEventObject {
+  _srcChainId: number;
+  _payload: string;
+  _reason: string;
+}
+export type CallFailedBytesEvent = TypedEvent<
+  [number, string, string],
+  CallFailedBytesEventObject
+>;
+
+export type CallFailedBytesEventFilter = TypedEventFilter<CallFailedBytesEvent>;
+
 export interface CallOFTReceivedSuccessEventObject {
   _srcChainId: number;
   _srcAddress: string;
@@ -2090,6 +2132,15 @@ export type CallOFTReceivedSuccessEvent = TypedEvent<
 
 export type CallOFTReceivedSuccessEventFilter =
   TypedEventFilter<CallOFTReceivedSuccessEvent>;
+
+export interface EIP712DomainChangedEventObject {}
+export type EIP712DomainChangedEvent = TypedEvent<
+  [],
+  EIP712DomainChangedEventObject
+>;
+
+export type EIP712DomainChangedEventFilter =
+  TypedEventFilter<EIP712DomainChangedEvent>;
 
 export interface MessageFailedEventObject {
   _srcChainId: number;
@@ -2464,6 +2515,34 @@ export interface USDO extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
     estimateSendAndCallFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
@@ -2751,7 +2830,7 @@ export interface USDO extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool),(bool,uint256,bool,uint16,bytes,bool)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address),(bool,uint256,bool,uint16,bytes,bool,address)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -2835,7 +2914,7 @@ export interface USDO extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "sendAndLendOrRepay(address,address,uint16,address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool),bytes)"(
+    "sendAndLendOrRepay(address,address,uint16,address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool,address),bytes)"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3335,6 +3414,34 @@ export interface USDO extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  eip712Domain(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
+
+  "eip712Domain()"(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
+
   estimateSendAndCallFee(
     _dstChainId: PromiseOrValue<BigNumberish>,
     _toAddress: PromiseOrValue<BytesLike>,
@@ -3622,7 +3729,7 @@ export interface USDO extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool),(bool,uint256,bool,uint16,bytes,bool)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+  "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address),(bool,uint256,bool,uint16,bytes,bool,address)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3706,7 +3813,7 @@ export interface USDO extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "sendAndLendOrRepay(address,address,uint16,address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool),bytes)"(
+  "sendAndLendOrRepay(address,address,uint16,address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool,address),bytes)"(
     _from: PromiseOrValue<string>,
     _to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -4208,6 +4315,34 @@ export interface USDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
     estimateSendAndCallFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
@@ -4491,7 +4626,7 @@ export interface USDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool),(bool,uint256,bool,uint16,bytes,bool)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address),(bool,uint256,bool,uint16,bytes,bool,address)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -4571,7 +4706,7 @@ export interface USDO extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "sendAndLendOrRepay(address,address,uint16,address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool),bytes)"(
+    "sendAndLendOrRepay(address,address,uint16,address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool,address),bytes)"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -4917,6 +5052,17 @@ export interface USDO extends BaseContract {
       value?: null
     ): ApprovalEventFilter;
 
+    "CallFailedBytes(uint16,bytes,bytes)"(
+      _srcChainId?: PromiseOrValue<BigNumberish> | null,
+      _payload?: PromiseOrValue<BytesLike> | null,
+      _reason?: PromiseOrValue<BytesLike> | null
+    ): CallFailedBytesEventFilter;
+    CallFailedBytes(
+      _srcChainId?: PromiseOrValue<BigNumberish> | null,
+      _payload?: PromiseOrValue<BytesLike> | null,
+      _reason?: PromiseOrValue<BytesLike> | null
+    ): CallFailedBytesEventFilter;
+
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"(
       _srcChainId?: PromiseOrValue<BigNumberish> | null,
       _srcAddress?: null,
@@ -4929,6 +5075,9 @@ export interface USDO extends BaseContract {
       _nonce?: null,
       _hash?: null
     ): CallOFTReceivedSuccessEventFilter;
+
+    "EIP712DomainChanged()"(): EIP712DomainChangedEventFilter;
+    EIP712DomainChanged(): EIP712DomainChangedEventFilter;
 
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)"(
       _srcChainId?: null,
@@ -5240,6 +5389,10 @@ export interface USDO extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    eip712Domain(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "eip712Domain()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     estimateSendAndCallFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
@@ -5519,7 +5672,7 @@ export interface USDO extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool),(bool,uint256,bool,uint16,bytes,bool)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address),(bool,uint256,bool,uint16,bytes,bool,address)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -5603,7 +5756,7 @@ export interface USDO extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "sendAndLendOrRepay(address,address,uint16,address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool),bytes)"(
+    "sendAndLendOrRepay(address,address,uint16,address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool,address),bytes)"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -6114,6 +6267,10 @@ export interface USDO extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    eip712Domain(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "eip712Domain()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     estimateSendAndCallFee(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _toAddress: PromiseOrValue<BytesLike>,
@@ -6395,7 +6552,7 @@ export interface USDO extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool),(bool,uint256,bool,uint16,bytes,bool)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "removeAsset(address,address,uint16,address,bytes,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address),(bool,uint256,bool,uint16,bytes,bool,address)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -6479,7 +6636,7 @@ export interface USDO extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "sendAndLendOrRepay(address,address,uint16,address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool),bytes)"(
+    "sendAndLendOrRepay(address,address,uint16,address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,uint256,bool,uint16,bytes,bool,address),bytes)"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,

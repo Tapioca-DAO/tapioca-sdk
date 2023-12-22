@@ -32,6 +32,7 @@ export interface MarketLiquidatorReceiverInterface extends utils.Interface {
     "allowances(address,address)": FunctionFragment;
     "assignOracle(address,address,bytes,uint256)": FunctionFragment;
     "assignSwapper(address,address)": FunctionFragment;
+    "cachedRates(address)": FunctionFragment;
     "claimOwnership()": FunctionFragment;
     "decreaseAllowance(address,address,uint256)": FunctionFragment;
     "increaseAllowance(address,address,uint256)": FunctionFragment;
@@ -41,6 +42,7 @@ export interface MarketLiquidatorReceiverInterface extends utils.Interface {
     "pendingOwner()": FunctionFragment;
     "swappers(address)": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
+    "updateRates(address[])": FunctionFragment;
   };
 
   getFunction(
@@ -51,6 +53,8 @@ export interface MarketLiquidatorReceiverInterface extends utils.Interface {
       | "assignOracle(address,address,bytes,uint256)"
       | "assignSwapper"
       | "assignSwapper(address,address)"
+      | "cachedRates"
+      | "cachedRates(address)"
       | "claimOwnership"
       | "claimOwnership()"
       | "decreaseAllowance"
@@ -69,6 +73,8 @@ export interface MarketLiquidatorReceiverInterface extends utils.Interface {
       | "swappers(address)"
       | "transferOwnership"
       | "transferOwnership(address,bool,bool)"
+      | "updateRates"
+      | "updateRates(address[])"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -104,6 +110,14 @@ export interface MarketLiquidatorReceiverInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "assignSwapper(address,address)",
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "cachedRates",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "cachedRates(address)",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "claimOwnership",
@@ -207,6 +221,14 @@ export interface MarketLiquidatorReceiverInterface extends utils.Interface {
       PromiseOrValue<boolean>
     ]
   ): string;
+  encodeFunctionData(
+    functionFragment: "updateRates",
+    values: [PromiseOrValue<string>[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updateRates(address[])",
+    values: [PromiseOrValue<string>[]]
+  ): string;
 
   decodeFunctionResult(functionFragment: "allowances", data: BytesLike): Result;
   decodeFunctionResult(
@@ -227,6 +249,14 @@ export interface MarketLiquidatorReceiverInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "assignSwapper(address,address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "cachedRates",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "cachedRates(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -287,6 +317,14 @@ export interface MarketLiquidatorReceiverInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership(address,bool,bool)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateRates",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateRates(address[])",
     data: BytesLike
   ): Result;
 
@@ -413,6 +451,16 @@ export interface MarketLiquidatorReceiver extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    cachedRates(
+      oracle: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { rate: BigNumber }>;
+
+    "cachedRates(address)"(
+      oracle: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { rate: BigNumber }>;
+
     claimOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -520,6 +568,16 @@ export interface MarketLiquidatorReceiver extends BaseContract {
       renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    updateRates(
+      _tokens: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "updateRates(address[])"(
+      _tokens: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
 
   allowances(
@@ -561,6 +619,16 @@ export interface MarketLiquidatorReceiver extends BaseContract {
     _swapper: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  cachedRates(
+    oracle: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "cachedRates(address)"(
+    oracle: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   claimOwnership(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -670,6 +738,16 @@ export interface MarketLiquidatorReceiver extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  updateRates(
+    _tokens: PromiseOrValue<string>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "updateRates(address[])"(
+    _tokens: PromiseOrValue<string>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     allowances(
       sender: PromiseOrValue<string>,
@@ -710,6 +788,16 @@ export interface MarketLiquidatorReceiver extends BaseContract {
       _swapper: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    cachedRates(
+      oracle: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "cachedRates(address)"(
+      oracle: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     claimOwnership(overrides?: CallOverrides): Promise<void>;
 
@@ -814,6 +902,16 @@ export interface MarketLiquidatorReceiver extends BaseContract {
       renounce: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    updateRates(
+      _tokens: PromiseOrValue<string>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "updateRates(address[])"(
+      _tokens: PromiseOrValue<string>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
@@ -884,6 +982,16 @@ export interface MarketLiquidatorReceiver extends BaseContract {
       _tokenIn: PromiseOrValue<string>,
       _swapper: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    cachedRates(
+      oracle: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "cachedRates(address)"(
+      oracle: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     claimOwnership(
@@ -981,6 +1089,16 @@ export interface MarketLiquidatorReceiver extends BaseContract {
       renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    updateRates(
+      _tokens: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "updateRates(address[])"(
+      _tokens: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -1022,6 +1140,16 @@ export interface MarketLiquidatorReceiver extends BaseContract {
       _tokenIn: PromiseOrValue<string>,
       _swapper: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    cachedRates(
+      oracle: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "cachedRates(address)"(
+      oracle: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     claimOwnership(
@@ -1117,6 +1245,16 @@ export interface MarketLiquidatorReceiver extends BaseContract {
       newOwner: PromiseOrValue<string>,
       direct: PromiseOrValue<boolean>,
       renounce: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    updateRates(
+      _tokens: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "updateRates(address[])"(
+      _tokens: PromiseOrValue<string>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };

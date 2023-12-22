@@ -403,13 +403,13 @@ export interface USDOFlashloanHelper extends BaseContract {
     ): Promise<ContractTransaction>;
 
     flashFee(
-      token: PromiseOrValue<string>,
+      _usdo: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     "flashFee(address,uint256)"(
-      token: PromiseOrValue<string>,
+      _usdo: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
@@ -528,13 +528,13 @@ export interface USDOFlashloanHelper extends BaseContract {
   ): Promise<ContractTransaction>;
 
   flashFee(
-    token: PromiseOrValue<string>,
+    _usdo: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   "flashFee(address,uint256)"(
-    token: PromiseOrValue<string>,
+    _usdo: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
@@ -649,13 +649,13 @@ export interface USDOFlashloanHelper extends BaseContract {
     "claimOwnership()"(overrides?: CallOverrides): Promise<void>;
 
     flashFee(
-      token: PromiseOrValue<string>,
+      _usdo: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "flashFee(address,uint256)"(
-      token: PromiseOrValue<string>,
+      _usdo: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -804,13 +804,13 @@ export interface USDOFlashloanHelper extends BaseContract {
     ): Promise<BigNumber>;
 
     flashFee(
-      token: PromiseOrValue<string>,
+      _usdo: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "flashFee(address,uint256)"(
-      token: PromiseOrValue<string>,
+      _usdo: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -930,13 +930,13 @@ export interface USDOFlashloanHelper extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     flashFee(
-      token: PromiseOrValue<string>,
+      _usdo: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "flashFee(address,uint256)"(
-      token: PromiseOrValue<string>,
+      _usdo: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;

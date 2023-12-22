@@ -49,6 +49,7 @@ export interface SGLStorageInterface extends utils.Interface {
     "computeTVLInfo(address,uint256)": FunctionFragment;
     "conservator()": FunctionFragment;
     "decimals()": FunctionFragment;
+    "eip712Domain()": FunctionFragment;
     "exchangeRate()": FunctionFragment;
     "fullUtilizationMinusMax()": FunctionFragment;
     "interestElasticity()": FunctionFragment;
@@ -138,6 +139,8 @@ export interface SGLStorageInterface extends utils.Interface {
       | "conservator()"
       | "decimals"
       | "decimals()"
+      | "eip712Domain"
+      | "eip712Domain()"
       | "exchangeRate"
       | "exchangeRate()"
       | "fullUtilizationMinusMax"
@@ -378,6 +381,14 @@ export interface SGLStorageInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "decimals()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "eip712Domain",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "eip712Domain()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -905,6 +916,14 @@ export interface SGLStorageInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "eip712Domain",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "eip712Domain()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "exchangeRate",
     data: BytesLike
   ): Result;
@@ -1219,6 +1238,7 @@ export interface SGLStorageInterface extends utils.Interface {
     "ApprovalBorrow(address,address,uint256)": EventFragment;
     "BidExecutionSwapperUpdated(address)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
+    "EIP712DomainChanged()": EventFragment;
     "ExchangeRateDurationUpdated(uint256,uint256)": EventFragment;
     "InterestElasticityUpdated(uint256,uint256)": EventFragment;
     "LeverageExecutorSet(address,address)": EventFragment;
@@ -1242,12 +1262,13 @@ export interface SGLStorageInterface extends utils.Interface {
     "MinimumInterestPerSecondUpdated(uint256,uint256)": EventFragment;
     "MinimumTargetUtilizationUpdated(uint256,uint256)": EventFragment;
     "OracleDataUpdated()": EventFragment;
-    "OracleUpdated()": EventFragment;
+    "OracleUpdated(address)": EventFragment;
     "OrderBookLiquidationMultiplierUpdated(uint256,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "PausedUpdated(uint8,bool,bool)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
     "UsdoSwapperUpdated(address)": EventFragment;
+    "ValueUpdated(uint256,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
@@ -1266,6 +1287,8 @@ export interface SGLStorageInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "ConservatorUpdated(address,address)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged()"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ExchangeRateDurationUpdated"
   ): EventFragment;
@@ -1369,7 +1392,7 @@ export interface SGLStorageInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "OracleDataUpdated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OracleDataUpdated()"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OracleUpdated"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "OracleUpdated()"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OracleUpdated(address)"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "OrderBookLiquidationMultiplierUpdated"
   ): EventFragment;
@@ -1391,6 +1414,10 @@ export interface SGLStorageInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "UsdoSwapperUpdated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "UsdoSwapperUpdated(address)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ValueUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "ValueUpdated(uint256,uint256)"
   ): EventFragment;
 }
 
@@ -1440,6 +1467,15 @@ export type ConservatorUpdatedEvent = TypedEvent<
 
 export type ConservatorUpdatedEventFilter =
   TypedEventFilter<ConservatorUpdatedEvent>;
+
+export interface EIP712DomainChangedEventObject {}
+export type EIP712DomainChangedEvent = TypedEvent<
+  [],
+  EIP712DomainChangedEventObject
+>;
+
+export type EIP712DomainChangedEventFilter =
+  TypedEventFilter<EIP712DomainChangedEvent>;
 
 export interface ExchangeRateDurationUpdatedEventObject {
   _oldVal: BigNumber;
@@ -1721,8 +1757,10 @@ export type OracleDataUpdatedEvent = TypedEvent<
 export type OracleDataUpdatedEventFilter =
   TypedEventFilter<OracleDataUpdatedEvent>;
 
-export interface OracleUpdatedEventObject {}
-export type OracleUpdatedEvent = TypedEvent<[], OracleUpdatedEventObject>;
+export interface OracleUpdatedEventObject {
+  newAddr: string;
+}
+export type OracleUpdatedEvent = TypedEvent<[string], OracleUpdatedEventObject>;
 
 export type OracleUpdatedEventFilter = TypedEventFilter<OracleUpdatedEvent>;
 
@@ -1784,6 +1822,17 @@ export type UsdoSwapperUpdatedEvent = TypedEvent<
 
 export type UsdoSwapperUpdatedEventFilter =
   TypedEventFilter<UsdoSwapperUpdatedEvent>;
+
+export interface ValueUpdatedEventObject {
+  valType: BigNumber;
+  _newVal: BigNumber;
+}
+export type ValueUpdatedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  ValueUpdatedEventObject
+>;
+
+export type ValueUpdatedEventFilter = TypedEventFilter<ValueUpdatedEvent>;
 
 export interface SGLStorage extends BaseContract {
   contractName: "SGLStorage";
@@ -1989,6 +2038,34 @@ export interface SGLStorage extends BaseContract {
     decimals(overrides?: CallOverrides): Promise<[number]>;
 
     "decimals()"(overrides?: CallOverrides): Promise<[number]>;
+
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
 
     exchangeRate(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -2521,6 +2598,34 @@ export interface SGLStorage extends BaseContract {
 
   "decimals()"(overrides?: CallOverrides): Promise<number>;
 
+  eip712Domain(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
+
+  "eip712Domain()"(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
+
   exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
 
   "exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3026,6 +3131,34 @@ export interface SGLStorage extends BaseContract {
 
     "decimals()"(overrides?: CallOverrides): Promise<number>;
 
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
     exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3408,6 +3541,9 @@ export interface SGLStorage extends BaseContract {
       _new?: PromiseOrValue<string> | null
     ): ConservatorUpdatedEventFilter;
 
+    "EIP712DomainChanged()"(): EIP712DomainChangedEventFilter;
+    EIP712DomainChanged(): EIP712DomainChangedEventFilter;
+
     "ExchangeRateDurationUpdated(uint256,uint256)"(
       _oldVal?: null,
       _newVal?: null
@@ -3641,8 +3777,8 @@ export interface SGLStorage extends BaseContract {
     "OracleDataUpdated()"(): OracleDataUpdatedEventFilter;
     OracleDataUpdated(): OracleDataUpdatedEventFilter;
 
-    "OracleUpdated()"(): OracleUpdatedEventFilter;
-    OracleUpdated(): OracleUpdatedEventFilter;
+    "OracleUpdated(address)"(newAddr?: null): OracleUpdatedEventFilter;
+    OracleUpdated(newAddr?: null): OracleUpdatedEventFilter;
 
     "OrderBookLiquidationMultiplierUpdated(uint256,uint256)"(
       oldVal?: PromiseOrValue<BigNumberish> | null,
@@ -3690,6 +3826,15 @@ export interface SGLStorage extends BaseContract {
     UsdoSwapperUpdated(
       newAddress?: PromiseOrValue<string> | null
     ): UsdoSwapperUpdatedEventFilter;
+
+    "ValueUpdated(uint256,uint256)"(
+      valType?: PromiseOrValue<BigNumberish> | null,
+      _newVal?: PromiseOrValue<BigNumberish> | null
+    ): ValueUpdatedEventFilter;
+    ValueUpdated(
+      valType?: PromiseOrValue<BigNumberish> | null,
+      _newVal?: PromiseOrValue<BigNumberish> | null
+    ): ValueUpdatedEventFilter;
   };
 
   estimateGas: {
@@ -3840,6 +3985,10 @@ export interface SGLStorage extends BaseContract {
     decimals(overrides?: CallOverrides): Promise<BigNumber>;
 
     "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    eip712Domain(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "eip712Domain()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -4324,6 +4473,10 @@ export interface SGLStorage extends BaseContract {
     decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    eip712Domain(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "eip712Domain()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     exchangeRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

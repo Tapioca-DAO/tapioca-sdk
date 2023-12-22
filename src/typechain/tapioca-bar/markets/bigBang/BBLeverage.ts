@@ -52,7 +52,7 @@ export interface BBLeverageInterface extends utils.Interface {
     "computeTVLInfo(address,uint256)": FunctionFragment;
     "conservator()": FunctionFragment;
     "debtRateAgainstEthMarket()": FunctionFragment;
-    "debtStartPoint()": FunctionFragment;
+    "eip712Domain()": FunctionFragment;
     "exchangeRate()": FunctionFragment;
     "getDebtRate()": FunctionFragment;
     "getTotalDebt()": FunctionFragment;
@@ -148,8 +148,8 @@ export interface BBLeverageInterface extends utils.Interface {
       | "conservator()"
       | "debtRateAgainstEthMarket"
       | "debtRateAgainstEthMarket()"
-      | "debtStartPoint"
-      | "debtStartPoint()"
+      | "eip712Domain"
+      | "eip712Domain()"
       | "exchangeRate"
       | "exchangeRate()"
       | "getDebtRate"
@@ -424,11 +424,11 @@ export interface BBLeverageInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "debtStartPoint",
+    functionFragment: "eip712Domain",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "debtStartPoint()",
+    functionFragment: "eip712Domain()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -1000,11 +1000,11 @@ export interface BBLeverageInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "debtStartPoint",
+    functionFragment: "eip712Domain",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "debtStartPoint()",
+    functionFragment: "eip712Domain()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1333,6 +1333,7 @@ export interface BBLeverageInterface extends utils.Interface {
     "AssetOracleUpdated(address,address)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
     "DebtRateAgainstEthUpdated(uint256,uint256)": EventFragment;
+    "EIP712DomainChanged()": EventFragment;
     "ExchangeRateDurationUpdated(uint256,uint256)": EventFragment;
     "LeverageExecutorSet(address,address)": EventFragment;
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)": EventFragment;
@@ -1347,12 +1348,13 @@ export interface BBLeverageInterface extends utils.Interface {
     "MaxDebtRateUpdated(uint256,uint256)": EventFragment;
     "MinDebtRateUpdated(uint256,uint256)": EventFragment;
     "OracleDataUpdated()": EventFragment;
-    "OracleUpdated()": EventFragment;
+    "OracleUpdated(address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "PausedUpdated(uint8,bool,bool)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
     "UpdateMinMaxMintFee(uint256,uint256,uint256,uint256)": EventFragment;
     "UpdateMinMaxMintRange(uint256,uint256,uint256,uint256)": EventFragment;
+    "ValueUpdated(uint256,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
@@ -1377,6 +1379,8 @@ export interface BBLeverageInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "DebtRateAgainstEthUpdated(uint256,uint256)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged()"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ExchangeRateDurationUpdated"
   ): EventFragment;
@@ -1432,7 +1436,7 @@ export interface BBLeverageInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "OracleDataUpdated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OracleDataUpdated()"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OracleUpdated"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "OracleUpdated()"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OracleUpdated(address)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "OwnershipTransferred(address,address)"
@@ -1452,6 +1456,10 @@ export interface BBLeverageInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "UpdateMinMaxMintRange"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "UpdateMinMaxMintRange(uint256,uint256,uint256,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ValueUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "ValueUpdated(uint256,uint256)"
   ): EventFragment;
 }
 
@@ -1523,6 +1531,15 @@ export type DebtRateAgainstEthUpdatedEvent = TypedEvent<
 
 export type DebtRateAgainstEthUpdatedEventFilter =
   TypedEventFilter<DebtRateAgainstEthUpdatedEvent>;
+
+export interface EIP712DomainChangedEventObject {}
+export type EIP712DomainChangedEvent = TypedEvent<
+  [],
+  EIP712DomainChangedEventObject
+>;
+
+export type EIP712DomainChangedEventFilter =
+  TypedEventFilter<EIP712DomainChangedEvent>;
 
 export interface ExchangeRateDurationUpdatedEventObject {
   _oldVal: BigNumber;
@@ -1694,8 +1711,10 @@ export type OracleDataUpdatedEvent = TypedEvent<
 export type OracleDataUpdatedEventFilter =
   TypedEventFilter<OracleDataUpdatedEvent>;
 
-export interface OracleUpdatedEventObject {}
-export type OracleUpdatedEvent = TypedEvent<[], OracleUpdatedEventObject>;
+export interface OracleUpdatedEventObject {
+  newAddr: string;
+}
+export type OracleUpdatedEvent = TypedEvent<[string], OracleUpdatedEventObject>;
 
 export type OracleUpdatedEventFilter = TypedEventFilter<OracleUpdatedEvent>;
 
@@ -1762,6 +1781,17 @@ export type UpdateMinMaxMintRangeEvent = TypedEvent<
 
 export type UpdateMinMaxMintRangeEventFilter =
   TypedEventFilter<UpdateMinMaxMintRangeEvent>;
+
+export interface ValueUpdatedEventObject {
+  valType: BigNumber;
+  _newVal: BigNumber;
+}
+export type ValueUpdatedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  ValueUpdatedEventObject
+>;
+
+export type ValueUpdatedEventFilter = TypedEventFilter<ValueUpdatedEvent>;
 
 export interface BBLeverage extends BaseContract {
   contractName: "BBLeverage";
@@ -1990,9 +2020,33 @@ export interface BBLeverage extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    debtStartPoint(overrides?: CallOverrides): Promise<[BigNumber]>;
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
 
-    "debtStartPoint()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
 
     exchangeRate(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -2539,9 +2593,33 @@ export interface BBLeverage extends BaseContract {
 
   "debtRateAgainstEthMarket()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-  debtStartPoint(overrides?: CallOverrides): Promise<BigNumber>;
+  eip712Domain(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
 
-  "debtStartPoint()"(overrides?: CallOverrides): Promise<BigNumber>;
+  "eip712Domain()"(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
 
   exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3076,9 +3154,33 @@ export interface BBLeverage extends BaseContract {
 
     "debtRateAgainstEthMarket()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    debtStartPoint(overrides?: CallOverrides): Promise<BigNumber>;
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
 
-    "debtStartPoint()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
 
     exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3482,6 +3584,9 @@ export interface BBLeverage extends BaseContract {
       newVal?: PromiseOrValue<BigNumberish> | null
     ): DebtRateAgainstEthUpdatedEventFilter;
 
+    "EIP712DomainChanged()"(): EIP712DomainChangedEventFilter;
+    EIP712DomainChanged(): EIP712DomainChangedEventFilter;
+
     "ExchangeRateDurationUpdated(uint256,uint256)"(
       _oldVal?: null,
       _newVal?: null
@@ -3622,8 +3727,8 @@ export interface BBLeverage extends BaseContract {
     "OracleDataUpdated()"(): OracleDataUpdatedEventFilter;
     OracleDataUpdated(): OracleDataUpdatedEventFilter;
 
-    "OracleUpdated()"(): OracleUpdatedEventFilter;
-    OracleUpdated(): OracleUpdatedEventFilter;
+    "OracleUpdated(address)"(newAddr?: null): OracleUpdatedEventFilter;
+    OracleUpdated(newAddr?: null): OracleUpdatedEventFilter;
 
     "OwnershipTransferred(address,address)"(
       previousOwner?: PromiseOrValue<string> | null,
@@ -3681,6 +3786,15 @@ export interface BBLeverage extends BaseContract {
       oldMax?: PromiseOrValue<BigNumberish> | null,
       newMax?: null
     ): UpdateMinMaxMintRangeEventFilter;
+
+    "ValueUpdated(uint256,uint256)"(
+      valType?: PromiseOrValue<BigNumberish> | null,
+      _newVal?: PromiseOrValue<BigNumberish> | null
+    ): ValueUpdatedEventFilter;
+    ValueUpdated(
+      valType?: PromiseOrValue<BigNumberish> | null,
+      _newVal?: PromiseOrValue<BigNumberish> | null
+    ): ValueUpdatedEventFilter;
   };
 
   estimateGas: {
@@ -3860,9 +3974,9 @@ export interface BBLeverage extends BaseContract {
 
     "debtRateAgainstEthMarket()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    debtStartPoint(overrides?: CallOverrides): Promise<BigNumber>;
+    eip712Domain(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "debtStartPoint()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "eip712Domain()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -4394,11 +4508,9 @@ export interface BBLeverage extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    debtStartPoint(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    eip712Domain(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "debtStartPoint()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    "eip712Domain()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     exchangeRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

@@ -35,6 +35,7 @@ export interface MarketERC20Interface extends utils.Interface {
     "approve(address,uint256)": FunctionFragment;
     "approveBorrow(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
+    "eip712Domain()": FunctionFragment;
     "nonces(address)": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "permitAction(bytes,uint16)": FunctionFragment;
@@ -58,6 +59,8 @@ export interface MarketERC20Interface extends utils.Interface {
       | "approveBorrow(address,uint256)"
       | "balanceOf"
       | "balanceOf(address)"
+      | "eip712Domain"
+      | "eip712Domain()"
       | "nonces"
       | "nonces(address)"
       | "permit"
@@ -121,6 +124,14 @@ export interface MarketERC20Interface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "balanceOf(address)",
     values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "eip712Domain",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "eip712Domain()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "nonces",
@@ -258,6 +269,14 @@ export interface MarketERC20Interface extends utils.Interface {
     functionFragment: "balanceOf(address)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "eip712Domain",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "eip712Domain()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "nonces(address)",
@@ -309,6 +328,7 @@ export interface MarketERC20Interface extends utils.Interface {
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalBorrow(address,address,uint256)": EventFragment;
+    "EIP712DomainChanged()": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
 
@@ -320,6 +340,8 @@ export interface MarketERC20Interface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "ApprovalBorrow(address,address,uint256)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged()"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Transfer(address,address,uint256)"
@@ -349,6 +371,15 @@ export type ApprovalBorrowEvent = TypedEvent<
 >;
 
 export type ApprovalBorrowEventFilter = TypedEventFilter<ApprovalBorrowEvent>;
+
+export interface EIP712DomainChangedEventObject {}
+export type EIP712DomainChangedEvent = TypedEvent<
+  [],
+  EIP712DomainChangedEventObject
+>;
+
+export type EIP712DomainChangedEventFilter =
+  TypedEventFilter<EIP712DomainChangedEvent>;
 
 export interface TransferEventObject {
   from: string;
@@ -452,6 +483,34 @@ export interface MarketERC20 extends BaseContract {
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
+
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -612,6 +671,34 @@ export interface MarketERC20 extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  eip712Domain(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
+
+  "eip712Domain()"(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
+
   nonces(
     owner: PromiseOrValue<string>,
     overrides?: CallOverrides
@@ -771,6 +858,34 @@ export interface MarketERC20 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
     nonces(
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -891,6 +1006,9 @@ export interface MarketERC20 extends BaseContract {
       value?: PromiseOrValue<BigNumberish> | null
     ): ApprovalBorrowEventFilter;
 
+    "EIP712DomainChanged()"(): EIP712DomainChangedEventFilter;
+    EIP712DomainChanged(): EIP712DomainChangedEventFilter;
+
     "Transfer(address,address,uint256)"(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
@@ -965,6 +1083,10 @@ export interface MarketERC20 extends BaseContract {
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    eip712Domain(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "eip712Domain()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -1127,6 +1249,10 @@ export interface MarketERC20 extends BaseContract {
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    eip712Domain(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "eip712Domain()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     nonces(
       owner: PromiseOrValue<string>,

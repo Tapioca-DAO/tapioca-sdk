@@ -42,7 +42,6 @@ export declare namespace IPenrose {
 
 export interface PenroseInterface extends utils.Interface {
   functions: {
-    "_getMasterContractLength((address,uint8)[])": FunctionFragment;
     "addBigBang(address,address)": FunctionFragment;
     "addSingularity(address,address)": FunctionFragment;
     "allBigBangMarkets(uint256)": FunctionFragment;
@@ -55,10 +54,12 @@ export interface PenroseInterface extends utils.Interface {
     "clonesOf(address,uint256)": FunctionFragment;
     "clonesOfCount(address)": FunctionFragment;
     "cluster()": FunctionFragment;
+    "computeTotalDebt()": FunctionFragment;
     "conservator()": FunctionFragment;
     "deploy(address,bytes,bool)": FunctionFragment;
     "emptyStrategies(address)": FunctionFragment;
     "executeMarketFn(address[],bytes[],bool)": FunctionFragment;
+    "getAllMasterContractClones((address,uint8)[])": FunctionFragment;
     "hostLzChainId()": FunctionFragment;
     "isBigBangMasterContractRegistered(address)": FunctionFragment;
     "isMarketRegistered(address)": FunctionFragment;
@@ -66,6 +67,7 @@ export interface PenroseInterface extends utils.Interface {
     "mainAssetId()": FunctionFragment;
     "mainToken()": FunctionFragment;
     "masterContractOf(address)": FunctionFragment;
+    "mintOpenInterestDebt(address)": FunctionFragment;
     "owner()": FunctionFragment;
     "paused()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
@@ -88,14 +90,13 @@ export interface PenroseInterface extends utils.Interface {
     "updatePause(bool)": FunctionFragment;
     "usdoAssetId()": FunctionFragment;
     "usdoToken()": FunctionFragment;
+    "viewTotalDebt()": FunctionFragment;
     "withdrawAllMarketFees(address[],address)": FunctionFragment;
     "yieldBox()": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "_getMasterContractLength"
-      | "_getMasterContractLength((address,uint8)[])"
       | "addBigBang"
       | "addBigBang(address,address)"
       | "addSingularity"
@@ -120,6 +121,8 @@ export interface PenroseInterface extends utils.Interface {
       | "clonesOfCount(address)"
       | "cluster"
       | "cluster()"
+      | "computeTotalDebt"
+      | "computeTotalDebt()"
       | "conservator"
       | "conservator()"
       | "deploy"
@@ -128,6 +131,8 @@ export interface PenroseInterface extends utils.Interface {
       | "emptyStrategies(address)"
       | "executeMarketFn"
       | "executeMarketFn(address[],bytes[],bool)"
+      | "getAllMasterContractClones"
+      | "getAllMasterContractClones((address,uint8)[])"
       | "hostLzChainId"
       | "hostLzChainId()"
       | "isBigBangMasterContractRegistered"
@@ -142,6 +147,8 @@ export interface PenroseInterface extends utils.Interface {
       | "mainToken()"
       | "masterContractOf"
       | "masterContractOf(address)"
+      | "mintOpenInterestDebt"
+      | "mintOpenInterestDebt(address)"
       | "owner"
       | "owner()"
       | "paused"
@@ -186,20 +193,14 @@ export interface PenroseInterface extends utils.Interface {
       | "usdoAssetId()"
       | "usdoToken"
       | "usdoToken()"
+      | "viewTotalDebt"
+      | "viewTotalDebt()"
       | "withdrawAllMarketFees"
       | "withdrawAllMarketFees(address[],address)"
       | "yieldBox"
       | "yieldBox()"
   ): FunctionFragment;
 
-  encodeFunctionData(
-    functionFragment: "_getMasterContractLength",
-    values: [IPenrose.MasterContractStruct[]]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "_getMasterContractLength((address,uint8)[])",
-    values: [IPenrose.MasterContractStruct[]]
-  ): string;
   encodeFunctionData(
     functionFragment: "addBigBang",
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
@@ -291,6 +292,14 @@ export interface PenroseInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "cluster", values?: undefined): string;
   encodeFunctionData(functionFragment: "cluster()", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "computeTotalDebt",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "computeTotalDebt()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "conservator",
     values?: undefined
   ): string;
@@ -337,6 +346,14 @@ export interface PenroseInterface extends utils.Interface {
       PromiseOrValue<BytesLike>[],
       PromiseOrValue<boolean>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getAllMasterContractClones",
+    values: [IPenrose.MasterContractStruct[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getAllMasterContractClones((address,uint8)[])",
+    values: [IPenrose.MasterContractStruct[]]
   ): string;
   encodeFunctionData(
     functionFragment: "hostLzChainId",
@@ -389,6 +406,14 @@ export interface PenroseInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "masterContractOf(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "mintOpenInterestDebt",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "mintOpenInterestDebt(address)",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
@@ -574,6 +599,14 @@ export interface PenroseInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "viewTotalDebt",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "viewTotalDebt()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "withdrawAllMarketFees",
     values: [PromiseOrValue<string>[], PromiseOrValue<string>]
   ): string;
@@ -587,14 +620,6 @@ export interface PenroseInterface extends utils.Interface {
     values?: undefined
   ): string;
 
-  decodeFunctionResult(
-    functionFragment: "_getMasterContractLength",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "_getMasterContractLength((address,uint8)[])",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "addBigBang", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "addBigBang(address,address)",
@@ -680,6 +705,14 @@ export interface PenroseInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "cluster", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "cluster()", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "computeTotalDebt",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "computeTotalDebt()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "conservator",
     data: BytesLike
   ): Result;
@@ -706,6 +739,14 @@ export interface PenroseInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "executeMarketFn(address[],bytes[],bool)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getAllMasterContractClones",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getAllMasterContractClones((address,uint8)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -759,6 +800,14 @@ export interface PenroseInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "masterContractOf(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "mintOpenInterestDebt",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "mintOpenInterestDebt(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -911,6 +960,14 @@ export interface PenroseInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "viewTotalDebt",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "viewTotalDebt()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "withdrawAllMarketFees",
     data: BytesLike
   ): Result;
@@ -922,30 +979,33 @@ export interface PenroseInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "yieldBox()", data: BytesLike): Result;
 
   events: {
-    "BigBangEthMarketDebtRate(uint256)": EventFragment;
-    "BigBangEthMarketSet(address)": EventFragment;
+    "BigBangEthMarketDebtRateUpdated(uint256,uint256)": EventFragment;
+    "BigBangEthMarketUpdated(address,address)": EventFragment;
     "ClusterSet(address,address)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
     "LogDeploy(address,bytes,address)": EventFragment;
-    "LogTwTapFeesDeposit(uint256,uint256)": EventFragment;
+    "LogTwTapFeesDeposit(uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "PausedUpdated(bool,bool)": EventFragment;
     "ProtocolWithdrawal(address[],uint256)": EventFragment;
+    "ReaccruedMarkets(bool)": EventFragment;
     "RegisterBigBang(address,address)": EventFragment;
     "RegisterBigBangMasterContract(address,uint8)": EventFragment;
     "RegisterSingularity(address,address)": EventFragment;
     "RegisterSingularityMasterContract(address,uint8)": EventFragment;
-    "SwapperUpdate(address,uint16,bool)": EventFragment;
+    "TotalUsdoDebt(uint256)": EventFragment;
     "UsdoTokenUpdated(address,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "BigBangEthMarketDebtRate"): EventFragment;
   getEvent(
-    nameOrSignatureOrTopic: "BigBangEthMarketDebtRate(uint256)"
+    nameOrSignatureOrTopic: "BigBangEthMarketDebtRateUpdated"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "BigBangEthMarketSet"): EventFragment;
   getEvent(
-    nameOrSignatureOrTopic: "BigBangEthMarketSet(address)"
+    nameOrSignatureOrTopic: "BigBangEthMarketDebtRateUpdated(uint256,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "BigBangEthMarketUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "BigBangEthMarketUpdated(address,address)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ClusterSet"): EventFragment;
   getEvent(
@@ -961,7 +1021,7 @@ export interface PenroseInterface extends utils.Interface {
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LogTwTapFeesDeposit"): EventFragment;
   getEvent(
-    nameOrSignatureOrTopic: "LogTwTapFeesDeposit(uint256,uint256)"
+    nameOrSignatureOrTopic: "LogTwTapFeesDeposit(uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
@@ -973,6 +1033,8 @@ export interface PenroseInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "ProtocolWithdrawal(address[],uint256)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ReaccruedMarkets"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ReaccruedMarkets(bool)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RegisterBigBang"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "RegisterBigBang(address,address)"
@@ -993,37 +1055,37 @@ export interface PenroseInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "RegisterSingularityMasterContract(address,uint8)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "SwapperUpdate"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "SwapperUpdate(address,uint16,bool)"
-  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "TotalUsdoDebt"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "TotalUsdoDebt(uint256)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "UsdoTokenUpdated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "UsdoTokenUpdated(address,uint256)"
   ): EventFragment;
 }
 
-export interface BigBangEthMarketDebtRateEventObject {
-  _rate: BigNumber;
+export interface BigBangEthMarketDebtRateUpdatedEventObject {
+  _oldRate: BigNumber;
+  _newRate: BigNumber;
 }
-export type BigBangEthMarketDebtRateEvent = TypedEvent<
-  [BigNumber],
-  BigBangEthMarketDebtRateEventObject
+export type BigBangEthMarketDebtRateUpdatedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  BigBangEthMarketDebtRateUpdatedEventObject
 >;
 
-export type BigBangEthMarketDebtRateEventFilter =
-  TypedEventFilter<BigBangEthMarketDebtRateEvent>;
+export type BigBangEthMarketDebtRateUpdatedEventFilter =
+  TypedEventFilter<BigBangEthMarketDebtRateUpdatedEvent>;
 
-export interface BigBangEthMarketSetEventObject {
+export interface BigBangEthMarketUpdatedEventObject {
+  _oldAddress: string;
   _newAddress: string;
 }
-export type BigBangEthMarketSetEvent = TypedEvent<
-  [string],
-  BigBangEthMarketSetEventObject
+export type BigBangEthMarketUpdatedEvent = TypedEvent<
+  [string, string],
+  BigBangEthMarketUpdatedEventObject
 >;
 
-export type BigBangEthMarketSetEventFilter =
-  TypedEventFilter<BigBangEthMarketSetEvent>;
+export type BigBangEthMarketUpdatedEventFilter =
+  TypedEventFilter<BigBangEthMarketUpdatedEvent>;
 
 export interface ClusterSetEventObject {
   old: string;
@@ -1061,11 +1123,10 @@ export type LogDeployEvent = TypedEvent<
 export type LogDeployEventFilter = TypedEventFilter<LogDeployEvent>;
 
 export interface LogTwTapFeesDepositEventObject {
-  feeShares: BigNumber;
-  ethAmount: BigNumber;
+  amount: BigNumber;
 }
 export type LogTwTapFeesDepositEvent = TypedEvent<
-  [BigNumber, BigNumber],
+  [BigNumber],
   LogTwTapFeesDepositEventObject
 >;
 
@@ -1106,6 +1167,17 @@ export type ProtocolWithdrawalEvent = TypedEvent<
 
 export type ProtocolWithdrawalEventFilter =
   TypedEventFilter<ProtocolWithdrawalEvent>;
+
+export interface ReaccruedMarketsEventObject {
+  mainMarketIncluded: boolean;
+}
+export type ReaccruedMarketsEvent = TypedEvent<
+  [boolean],
+  ReaccruedMarketsEventObject
+>;
+
+export type ReaccruedMarketsEventFilter =
+  TypedEventFilter<ReaccruedMarketsEvent>;
 
 export interface RegisterBigBangEventObject {
   location: string;
@@ -1154,17 +1226,15 @@ export type RegisterSingularityMasterContractEvent = TypedEvent<
 export type RegisterSingularityMasterContractEventFilter =
   TypedEventFilter<RegisterSingularityMasterContractEvent>;
 
-export interface SwapperUpdateEventObject {
-  swapper: string;
-  id: number;
-  isRegistered: boolean;
+export interface TotalUsdoDebtEventObject {
+  amount: BigNumber;
 }
-export type SwapperUpdateEvent = TypedEvent<
-  [string, number, boolean],
-  SwapperUpdateEventObject
+export type TotalUsdoDebtEvent = TypedEvent<
+  [BigNumber],
+  TotalUsdoDebtEventObject
 >;
 
-export type SwapperUpdateEventFilter = TypedEventFilter<SwapperUpdateEvent>;
+export type TotalUsdoDebtEventFilter = TypedEventFilter<TotalUsdoDebtEvent>;
 
 export interface UsdoTokenUpdatedEventObject {
   usdoToken: string;
@@ -1207,16 +1277,6 @@ export interface Penrose extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    _getMasterContractLength(
-      array: IPenrose.MasterContractStruct[],
-      overrides?: CallOverrides
-    ): Promise<[string[]] & { markets: string[] }>;
-
-    "_getMasterContractLength((address,uint8)[])"(
-      array: IPenrose.MasterContractStruct[],
-      overrides?: CallOverrides
-    ): Promise<[string[]] & { markets: string[] }>;
-
     addBigBang(
       mc: PromiseOrValue<string>,
       _contract: PromiseOrValue<string>,
@@ -1319,6 +1379,14 @@ export interface Penrose extends BaseContract {
 
     "cluster()"(overrides?: CallOverrides): Promise<[string]>;
 
+    computeTotalDebt(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "computeTotalDebt()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     conservator(overrides?: CallOverrides): Promise<[string]>;
 
     "conservator()"(overrides?: CallOverrides): Promise<[string]>;
@@ -1360,6 +1428,16 @@ export interface Penrose extends BaseContract {
       forceSuccess: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    getAllMasterContractClones(
+      array: IPenrose.MasterContractStruct[],
+      overrides?: CallOverrides
+    ): Promise<[string[]] & { markets: string[] }>;
+
+    "getAllMasterContractClones((address,uint8)[])"(
+      array: IPenrose.MasterContractStruct[],
+      overrides?: CallOverrides
+    ): Promise<[string[]] & { markets: string[] }>;
 
     hostLzChainId(overrides?: CallOverrides): Promise<[number]>;
 
@@ -1412,6 +1490,16 @@ export interface Penrose extends BaseContract {
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[string]>;
+
+    mintOpenInterestDebt(
+      twTap: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "mintOpenInterestDebt(address)"(
+      twTap: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -1601,6 +1689,10 @@ export interface Penrose extends BaseContract {
 
     "usdoToken()"(overrides?: CallOverrides): Promise<[string]>;
 
+    viewTotalDebt(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "viewTotalDebt()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     withdrawAllMarketFees(
       markets_: PromiseOrValue<string>[],
       twTap: PromiseOrValue<string>,
@@ -1617,16 +1709,6 @@ export interface Penrose extends BaseContract {
 
     "yieldBox()"(overrides?: CallOverrides): Promise<[string]>;
   };
-
-  _getMasterContractLength(
-    array: IPenrose.MasterContractStruct[],
-    overrides?: CallOverrides
-  ): Promise<string[]>;
-
-  "_getMasterContractLength((address,uint8)[])"(
-    array: IPenrose.MasterContractStruct[],
-    overrides?: CallOverrides
-  ): Promise<string[]>;
 
   addBigBang(
     mc: PromiseOrValue<string>,
@@ -1724,6 +1806,14 @@ export interface Penrose extends BaseContract {
 
   "cluster()"(overrides?: CallOverrides): Promise<string>;
 
+  computeTotalDebt(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "computeTotalDebt()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   conservator(overrides?: CallOverrides): Promise<string>;
 
   "conservator()"(overrides?: CallOverrides): Promise<string>;
@@ -1765,6 +1855,16 @@ export interface Penrose extends BaseContract {
     forceSuccess: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  getAllMasterContractClones(
+    array: IPenrose.MasterContractStruct[],
+    overrides?: CallOverrides
+  ): Promise<string[]>;
+
+  "getAllMasterContractClones((address,uint8)[])"(
+    array: IPenrose.MasterContractStruct[],
+    overrides?: CallOverrides
+  ): Promise<string[]>;
 
   hostLzChainId(overrides?: CallOverrides): Promise<number>;
 
@@ -1817,6 +1917,16 @@ export interface Penrose extends BaseContract {
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<string>;
+
+  mintOpenInterestDebt(
+    twTap: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "mintOpenInterestDebt(address)"(
+    twTap: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -2002,6 +2112,10 @@ export interface Penrose extends BaseContract {
 
   "usdoToken()"(overrides?: CallOverrides): Promise<string>;
 
+  viewTotalDebt(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "viewTotalDebt()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   withdrawAllMarketFees(
     markets_: PromiseOrValue<string>[],
     twTap: PromiseOrValue<string>,
@@ -2019,16 +2133,6 @@ export interface Penrose extends BaseContract {
   "yieldBox()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
-    _getMasterContractLength(
-      array: IPenrose.MasterContractStruct[],
-      overrides?: CallOverrides
-    ): Promise<string[]>;
-
-    "_getMasterContractLength((address,uint8)[])"(
-      array: IPenrose.MasterContractStruct[],
-      overrides?: CallOverrides
-    ): Promise<string[]>;
-
     addBigBang(
       mc: PromiseOrValue<string>,
       _contract: PromiseOrValue<string>,
@@ -2121,6 +2225,10 @@ export interface Penrose extends BaseContract {
 
     "cluster()"(overrides?: CallOverrides): Promise<string>;
 
+    computeTotalDebt(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "computeTotalDebt()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     conservator(overrides?: CallOverrides): Promise<string>;
 
     "conservator()"(overrides?: CallOverrides): Promise<string>;
@@ -2166,6 +2274,16 @@ export interface Penrose extends BaseContract {
     ): Promise<
       [boolean[], string[]] & { success: boolean[]; result: string[] }
     >;
+
+    getAllMasterContractClones(
+      array: IPenrose.MasterContractStruct[],
+      overrides?: CallOverrides
+    ): Promise<string[]>;
+
+    "getAllMasterContractClones((address,uint8)[])"(
+      array: IPenrose.MasterContractStruct[],
+      overrides?: CallOverrides
+    ): Promise<string[]>;
 
     hostLzChainId(overrides?: CallOverrides): Promise<number>;
 
@@ -2218,6 +2336,16 @@ export interface Penrose extends BaseContract {
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    mintOpenInterestDebt(
+      twTap: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "mintOpenInterestDebt(address)"(
+      twTap: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -2399,6 +2527,10 @@ export interface Penrose extends BaseContract {
 
     "usdoToken()"(overrides?: CallOverrides): Promise<string>;
 
+    viewTotalDebt(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "viewTotalDebt()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     withdrawAllMarketFees(
       markets_: PromiseOrValue<string>[],
       twTap: PromiseOrValue<string>,
@@ -2417,19 +2549,23 @@ export interface Penrose extends BaseContract {
   };
 
   filters: {
-    "BigBangEthMarketDebtRate(uint256)"(
-      _rate?: PromiseOrValue<BigNumberish> | null
-    ): BigBangEthMarketDebtRateEventFilter;
-    BigBangEthMarketDebtRate(
-      _rate?: PromiseOrValue<BigNumberish> | null
-    ): BigBangEthMarketDebtRateEventFilter;
+    "BigBangEthMarketDebtRateUpdated(uint256,uint256)"(
+      _oldRate?: PromiseOrValue<BigNumberish> | null,
+      _newRate?: PromiseOrValue<BigNumberish> | null
+    ): BigBangEthMarketDebtRateUpdatedEventFilter;
+    BigBangEthMarketDebtRateUpdated(
+      _oldRate?: PromiseOrValue<BigNumberish> | null,
+      _newRate?: PromiseOrValue<BigNumberish> | null
+    ): BigBangEthMarketDebtRateUpdatedEventFilter;
 
-    "BigBangEthMarketSet(address)"(
+    "BigBangEthMarketUpdated(address,address)"(
+      _oldAddress?: PromiseOrValue<string> | null,
       _newAddress?: PromiseOrValue<string> | null
-    ): BigBangEthMarketSetEventFilter;
-    BigBangEthMarketSet(
+    ): BigBangEthMarketUpdatedEventFilter;
+    BigBangEthMarketUpdated(
+      _oldAddress?: PromiseOrValue<string> | null,
       _newAddress?: PromiseOrValue<string> | null
-    ): BigBangEthMarketSetEventFilter;
+    ): BigBangEthMarketUpdatedEventFilter;
 
     "ClusterSet(address,address)"(
       old?: PromiseOrValue<string> | null,
@@ -2460,13 +2596,11 @@ export interface Penrose extends BaseContract {
       cloneAddress?: PromiseOrValue<string> | null
     ): LogDeployEventFilter;
 
-    "LogTwTapFeesDeposit(uint256,uint256)"(
-      feeShares?: PromiseOrValue<BigNumberish> | null,
-      ethAmount?: PromiseOrValue<BigNumberish> | null
+    "LogTwTapFeesDeposit(uint256)"(
+      amount?: PromiseOrValue<BigNumberish> | null
     ): LogTwTapFeesDepositEventFilter;
     LogTwTapFeesDeposit(
-      feeShares?: PromiseOrValue<BigNumberish> | null,
-      ethAmount?: PromiseOrValue<BigNumberish> | null
+      amount?: PromiseOrValue<BigNumberish> | null
     ): LogTwTapFeesDepositEventFilter;
 
     "OwnershipTransferred(address,address)"(
@@ -2495,6 +2629,13 @@ export interface Penrose extends BaseContract {
       markets?: PromiseOrValue<string>[] | null,
       timestamp?: PromiseOrValue<BigNumberish> | null
     ): ProtocolWithdrawalEventFilter;
+
+    "ReaccruedMarkets(bool)"(
+      mainMarketIncluded?: PromiseOrValue<boolean> | null
+    ): ReaccruedMarketsEventFilter;
+    ReaccruedMarkets(
+      mainMarketIncluded?: PromiseOrValue<boolean> | null
+    ): ReaccruedMarketsEventFilter;
 
     "RegisterBigBang(address,address)"(
       location?: PromiseOrValue<string> | null,
@@ -2532,16 +2673,12 @@ export interface Penrose extends BaseContract {
       risk?: PromiseOrValue<BigNumberish> | null
     ): RegisterSingularityMasterContractEventFilter;
 
-    "SwapperUpdate(address,uint16,bool)"(
-      swapper?: PromiseOrValue<string> | null,
-      id?: PromiseOrValue<BigNumberish> | null,
-      isRegistered?: PromiseOrValue<boolean> | null
-    ): SwapperUpdateEventFilter;
-    SwapperUpdate(
-      swapper?: PromiseOrValue<string> | null,
-      id?: PromiseOrValue<BigNumberish> | null,
-      isRegistered?: PromiseOrValue<boolean> | null
-    ): SwapperUpdateEventFilter;
+    "TotalUsdoDebt(uint256)"(
+      amount?: PromiseOrValue<BigNumberish> | null
+    ): TotalUsdoDebtEventFilter;
+    TotalUsdoDebt(
+      amount?: PromiseOrValue<BigNumberish> | null
+    ): TotalUsdoDebtEventFilter;
 
     "UsdoTokenUpdated(address,uint256)"(
       usdoToken?: PromiseOrValue<string> | null,
@@ -2554,16 +2691,6 @@ export interface Penrose extends BaseContract {
   };
 
   estimateGas: {
-    _getMasterContractLength(
-      array: IPenrose.MasterContractStruct[],
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "_getMasterContractLength((address,uint8)[])"(
-      array: IPenrose.MasterContractStruct[],
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     addBigBang(
       mc: PromiseOrValue<string>,
       _contract: PromiseOrValue<string>,
@@ -2660,6 +2787,14 @@ export interface Penrose extends BaseContract {
 
     "cluster()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    computeTotalDebt(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "computeTotalDebt()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     conservator(overrides?: CallOverrides): Promise<BigNumber>;
 
     "conservator()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2700,6 +2835,16 @@ export interface Penrose extends BaseContract {
       data: PromiseOrValue<BytesLike>[],
       forceSuccess: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    getAllMasterContractClones(
+      array: IPenrose.MasterContractStruct[],
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getAllMasterContractClones((address,uint8)[])"(
+      array: IPenrose.MasterContractStruct[],
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     hostLzChainId(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2752,6 +2897,16 @@ export interface Penrose extends BaseContract {
     "masterContractOf(address)"(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    mintOpenInterestDebt(
+      twTap: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "mintOpenInterestDebt(address)"(
+      twTap: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2938,6 +3093,10 @@ export interface Penrose extends BaseContract {
 
     "usdoToken()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    viewTotalDebt(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "viewTotalDebt()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     withdrawAllMarketFees(
       markets_: PromiseOrValue<string>[],
       twTap: PromiseOrValue<string>,
@@ -2956,16 +3115,6 @@ export interface Penrose extends BaseContract {
   };
 
   populateTransaction: {
-    _getMasterContractLength(
-      array: IPenrose.MasterContractStruct[],
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "_getMasterContractLength((address,uint8)[])"(
-      array: IPenrose.MasterContractStruct[],
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     addBigBang(
       mc: PromiseOrValue<string>,
       _contract: PromiseOrValue<string>,
@@ -3072,6 +3221,14 @@ export interface Penrose extends BaseContract {
 
     "cluster()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    computeTotalDebt(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "computeTotalDebt()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     conservator(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "conservator()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -3112,6 +3269,16 @@ export interface Penrose extends BaseContract {
       data: PromiseOrValue<BytesLike>[],
       forceSuccess: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    getAllMasterContractClones(
+      array: IPenrose.MasterContractStruct[],
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "getAllMasterContractClones((address,uint8)[])"(
+      array: IPenrose.MasterContractStruct[],
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     hostLzChainId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -3164,6 +3331,16 @@ export interface Penrose extends BaseContract {
     "masterContractOf(address)"(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    mintOpenInterestDebt(
+      twTap: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "mintOpenInterestDebt(address)"(
+      twTap: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -3353,6 +3530,10 @@ export interface Penrose extends BaseContract {
     usdoToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "usdoToken()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    viewTotalDebt(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "viewTotalDebt()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     withdrawAllMarketFees(
       markets_: PromiseOrValue<string>[],

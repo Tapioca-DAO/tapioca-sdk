@@ -71,6 +71,7 @@ export interface SingularityInterface extends utils.Interface {
     "computeTVLInfo(address,uint256)": FunctionFragment;
     "conservator()": FunctionFragment;
     "decimals()": FunctionFragment;
+    "eip712Domain()": FunctionFragment;
     "exchangeRate()": FunctionFragment;
     "execute(bytes[],bool)": FunctionFragment;
     "fullUtilizationMinusMax()": FunctionFragment;
@@ -127,10 +128,10 @@ export interface SingularityInterface extends utils.Interface {
     "transferOwnership(address,bool,bool)": FunctionFragment;
     "updateExchangeRate()": FunctionFragment;
     "updatePause(uint8,bool)": FunctionFragment;
+    "updatePause(uint8,bool,bool)": FunctionFragment;
     "userBorrowPart(address)": FunctionFragment;
     "userCollateralShare(address)": FunctionFragment;
     "yieldBox()": FunctionFragment;
-    "yieldBoxShares(address,uint256)": FunctionFragment;
   };
 
   getFunction(
@@ -191,6 +192,8 @@ export interface SingularityInterface extends utils.Interface {
       | "conservator()"
       | "decimals"
       | "decimals()"
+      | "eip712Domain"
+      | "eip712Domain()"
       | "exchangeRate"
       | "exchangeRate()"
       | "execute"
@@ -301,16 +304,14 @@ export interface SingularityInterface extends utils.Interface {
       | "transferOwnership(address,bool,bool)"
       | "updateExchangeRate"
       | "updateExchangeRate()"
-      | "updatePause"
       | "updatePause(uint8,bool)"
+      | "updatePause(uint8,bool,bool)"
       | "userBorrowPart"
       | "userBorrowPart(address)"
       | "userCollateralShare"
       | "userCollateralShare(address)"
       | "yieldBox"
       | "yieldBox()"
-      | "yieldBoxShares"
-      | "yieldBoxShares(address,uint256)"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -559,6 +560,14 @@ export interface SingularityInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "decimals()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "eip712Domain",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "eip712Domain()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -1116,12 +1125,16 @@ export interface SingularityInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "updatePause",
+    functionFragment: "updatePause(uint8,bool)",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
-    functionFragment: "updatePause(uint8,bool)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]
+    functionFragment: "updatePause(uint8,bool,bool)",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<boolean>,
+      PromiseOrValue<boolean>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "userBorrowPart",
@@ -1143,14 +1156,6 @@ export interface SingularityInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "yieldBox()",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "yieldBoxShares",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "yieldBoxShares(address,uint256)",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(
@@ -1329,6 +1334,14 @@ export interface SingularityInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "eip712Domain",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "eip712Domain()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "exchangeRate",
     data: BytesLike
@@ -1710,11 +1723,11 @@ export interface SingularityInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "updatePause",
+    functionFragment: "updatePause(uint8,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "updatePause(uint8,bool)",
+    functionFragment: "updatePause(uint8,bool,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1735,20 +1748,13 @@ export interface SingularityInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "yieldBox", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "yieldBox()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "yieldBoxShares",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "yieldBoxShares(address,uint256)",
-    data: BytesLike
-  ): Result;
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalBorrow(address,address,uint256)": EventFragment;
     "BidExecutionSwapperUpdated(address)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
+    "EIP712DomainChanged()": EventFragment;
     "ExchangeRateDurationUpdated(uint256,uint256)": EventFragment;
     "InterestElasticityUpdated(uint256,uint256)": EventFragment;
     "LeverageExecutorSet(address,address)": EventFragment;
@@ -1772,12 +1778,13 @@ export interface SingularityInterface extends utils.Interface {
     "MinimumInterestPerSecondUpdated(uint256,uint256)": EventFragment;
     "MinimumTargetUtilizationUpdated(uint256,uint256)": EventFragment;
     "OracleDataUpdated()": EventFragment;
-    "OracleUpdated()": EventFragment;
+    "OracleUpdated(address)": EventFragment;
     "OrderBookLiquidationMultiplierUpdated(uint256,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "PausedUpdated(uint8,bool,bool)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
     "UsdoSwapperUpdated(address)": EventFragment;
+    "ValueUpdated(uint256,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
@@ -1796,6 +1803,8 @@ export interface SingularityInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "ConservatorUpdated(address,address)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged()"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ExchangeRateDurationUpdated"
   ): EventFragment;
@@ -1899,7 +1908,7 @@ export interface SingularityInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "OracleDataUpdated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OracleDataUpdated()"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OracleUpdated"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "OracleUpdated()"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OracleUpdated(address)"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "OrderBookLiquidationMultiplierUpdated"
   ): EventFragment;
@@ -1921,6 +1930,10 @@ export interface SingularityInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "UsdoSwapperUpdated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "UsdoSwapperUpdated(address)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ValueUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "ValueUpdated(uint256,uint256)"
   ): EventFragment;
 }
 
@@ -1970,6 +1983,15 @@ export type ConservatorUpdatedEvent = TypedEvent<
 
 export type ConservatorUpdatedEventFilter =
   TypedEventFilter<ConservatorUpdatedEvent>;
+
+export interface EIP712DomainChangedEventObject {}
+export type EIP712DomainChangedEvent = TypedEvent<
+  [],
+  EIP712DomainChangedEventObject
+>;
+
+export type EIP712DomainChangedEventFilter =
+  TypedEventFilter<EIP712DomainChangedEvent>;
 
 export interface ExchangeRateDurationUpdatedEventObject {
   _oldVal: BigNumber;
@@ -2251,8 +2273,10 @@ export type OracleDataUpdatedEvent = TypedEvent<
 export type OracleDataUpdatedEventFilter =
   TypedEventFilter<OracleDataUpdatedEvent>;
 
-export interface OracleUpdatedEventObject {}
-export type OracleUpdatedEvent = TypedEvent<[], OracleUpdatedEventObject>;
+export interface OracleUpdatedEventObject {
+  newAddr: string;
+}
+export type OracleUpdatedEvent = TypedEvent<[string], OracleUpdatedEventObject>;
 
 export type OracleUpdatedEventFilter = TypedEventFilter<OracleUpdatedEvent>;
 
@@ -2314,6 +2338,17 @@ export type UsdoSwapperUpdatedEvent = TypedEvent<
 
 export type UsdoSwapperUpdatedEventFilter =
   TypedEventFilter<UsdoSwapperUpdatedEvent>;
+
+export interface ValueUpdatedEventObject {
+  valType: BigNumber;
+  _newVal: BigNumber;
+}
+export type ValueUpdatedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  ValueUpdatedEventObject
+>;
+
+export type ValueUpdatedEventFilter = TypedEventFilter<ValueUpdatedEvent>;
 
 export interface Singularity extends BaseContract {
   contractName: "Singularity";
@@ -2611,6 +2646,34 @@ export interface Singularity extends BaseContract {
     decimals(overrides?: CallOverrides): Promise<[number]>;
 
     "decimals()"(overrides?: CallOverrides): Promise<[number]>;
+
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
 
     exchangeRate(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -3112,15 +3175,16 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    updatePause(
+    "updatePause(uint8,bool)"(
       _type: PromiseOrValue<BigNumberish>,
       val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "updatePause(uint8,bool)"(
+    "updatePause(uint8,bool,bool)"(
       _type: PromiseOrValue<BigNumberish>,
       val: PromiseOrValue<boolean>,
+      resetAccrueTimestmap: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -3147,18 +3211,6 @@ export interface Singularity extends BaseContract {
     yieldBox(overrides?: CallOverrides): Promise<[string]>;
 
     "yieldBox()"(overrides?: CallOverrides): Promise<[string]>;
-
-    yieldBoxShares(
-      _user: PromiseOrValue<string>,
-      _assetId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "yieldBoxShares(address,uint256)"(
-      _user: PromiseOrValue<string>,
-      _assetId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
   };
 
   DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
@@ -3428,6 +3480,34 @@ export interface Singularity extends BaseContract {
   decimals(overrides?: CallOverrides): Promise<number>;
 
   "decimals()"(overrides?: CallOverrides): Promise<number>;
+
+  eip712Domain(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
+
+  "eip712Domain()"(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
 
   exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3907,15 +3987,16 @@ export interface Singularity extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  updatePause(
+  "updatePause(uint8,bool)"(
     _type: PromiseOrValue<BigNumberish>,
     val: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "updatePause(uint8,bool)"(
+  "updatePause(uint8,bool,bool)"(
     _type: PromiseOrValue<BigNumberish>,
     val: PromiseOrValue<boolean>,
+    resetAccrueTimestmap: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3942,18 +4023,6 @@ export interface Singularity extends BaseContract {
   yieldBox(overrides?: CallOverrides): Promise<string>;
 
   "yieldBox()"(overrides?: CallOverrides): Promise<string>;
-
-  yieldBoxShares(
-    _user: PromiseOrValue<string>,
-    _assetId: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "yieldBoxShares(address,uint256)"(
-    _user: PromiseOrValue<string>,
-    _assetId: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
 
   callStatic: {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
@@ -4215,6 +4284,34 @@ export interface Singularity extends BaseContract {
     decimals(overrides?: CallOverrides): Promise<number>;
 
     "decimals()"(overrides?: CallOverrides): Promise<number>;
+
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
 
     exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -4704,15 +4801,16 @@ export interface Singularity extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { updated: boolean; rate: BigNumber }>;
 
-    updatePause(
+    "updatePause(uint8,bool)"(
       _type: PromiseOrValue<BigNumberish>,
       val: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "updatePause(uint8,bool)"(
+    "updatePause(uint8,bool,bool)"(
       _type: PromiseOrValue<BigNumberish>,
       val: PromiseOrValue<boolean>,
+      resetAccrueTimestmap: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4739,18 +4837,6 @@ export interface Singularity extends BaseContract {
     yieldBox(overrides?: CallOverrides): Promise<string>;
 
     "yieldBox()"(overrides?: CallOverrides): Promise<string>;
-
-    yieldBoxShares(
-      _user: PromiseOrValue<string>,
-      _assetId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "yieldBoxShares(address,uint256)"(
-      _user: PromiseOrValue<string>,
-      _assetId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
   };
 
   filters: {
@@ -4791,6 +4877,9 @@ export interface Singularity extends BaseContract {
       old?: PromiseOrValue<string> | null,
       _new?: PromiseOrValue<string> | null
     ): ConservatorUpdatedEventFilter;
+
+    "EIP712DomainChanged()"(): EIP712DomainChangedEventFilter;
+    EIP712DomainChanged(): EIP712DomainChangedEventFilter;
 
     "ExchangeRateDurationUpdated(uint256,uint256)"(
       _oldVal?: null,
@@ -5025,8 +5114,8 @@ export interface Singularity extends BaseContract {
     "OracleDataUpdated()"(): OracleDataUpdatedEventFilter;
     OracleDataUpdated(): OracleDataUpdatedEventFilter;
 
-    "OracleUpdated()"(): OracleUpdatedEventFilter;
-    OracleUpdated(): OracleUpdatedEventFilter;
+    "OracleUpdated(address)"(newAddr?: null): OracleUpdatedEventFilter;
+    OracleUpdated(newAddr?: null): OracleUpdatedEventFilter;
 
     "OrderBookLiquidationMultiplierUpdated(uint256,uint256)"(
       oldVal?: PromiseOrValue<BigNumberish> | null,
@@ -5074,6 +5163,15 @@ export interface Singularity extends BaseContract {
     UsdoSwapperUpdated(
       newAddress?: PromiseOrValue<string> | null
     ): UsdoSwapperUpdatedEventFilter;
+
+    "ValueUpdated(uint256,uint256)"(
+      valType?: PromiseOrValue<BigNumberish> | null,
+      _newVal?: PromiseOrValue<BigNumberish> | null
+    ): ValueUpdatedEventFilter;
+    ValueUpdated(
+      valType?: PromiseOrValue<BigNumberish> | null,
+      _newVal?: PromiseOrValue<BigNumberish> | null
+    ): ValueUpdatedEventFilter;
   };
 
   estimateGas: {
@@ -5316,6 +5414,10 @@ export interface Singularity extends BaseContract {
     decimals(overrides?: CallOverrides): Promise<BigNumber>;
 
     "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    eip712Domain(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "eip712Domain()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -5775,15 +5877,16 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    updatePause(
+    "updatePause(uint8,bool)"(
       _type: PromiseOrValue<BigNumberish>,
       val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "updatePause(uint8,bool)"(
+    "updatePause(uint8,bool,bool)"(
       _type: PromiseOrValue<BigNumberish>,
       val: PromiseOrValue<boolean>,
+      resetAccrueTimestmap: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5810,18 +5913,6 @@ export interface Singularity extends BaseContract {
     yieldBox(overrides?: CallOverrides): Promise<BigNumber>;
 
     "yieldBox()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    yieldBoxShares(
-      _user: PromiseOrValue<string>,
-      _assetId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "yieldBoxShares(address,uint256)"(
-      _user: PromiseOrValue<string>,
-      _assetId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -6074,6 +6165,10 @@ export interface Singularity extends BaseContract {
     decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    eip712Domain(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "eip712Domain()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     exchangeRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -6597,15 +6692,16 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    updatePause(
+    "updatePause(uint8,bool)"(
       _type: PromiseOrValue<BigNumberish>,
       val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "updatePause(uint8,bool)"(
+    "updatePause(uint8,bool,bool)"(
       _type: PromiseOrValue<BigNumberish>,
       val: PromiseOrValue<boolean>,
+      resetAccrueTimestmap: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -6632,17 +6728,5 @@ export interface Singularity extends BaseContract {
     yieldBox(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "yieldBox()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    yieldBoxShares(
-      _user: PromiseOrValue<string>,
-      _assetId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "yieldBoxShares(address,uint256)"(
-      _user: PromiseOrValue<string>,
-      _assetId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
   };
 }
