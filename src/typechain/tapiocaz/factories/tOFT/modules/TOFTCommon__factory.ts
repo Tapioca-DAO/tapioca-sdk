@@ -17,6 +17,17 @@ const _abi = [
   },
   {
     inputs: [],
+    name: "ModuleNotAuthorized",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "invalidAddress",
+        type: "address",
+      },
+    ],
     name: "NotAuthorized",
     type: "error",
   },
