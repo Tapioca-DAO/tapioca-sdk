@@ -32,8 +32,6 @@ export interface SDaiStrategyInterface extends utils.Interface {
     "FEE_BPS()": FunctionFragment;
     "cheapWithdrawable()": FunctionFragment;
     "claimOwnership()": FunctionFragment;
-    "compound(bytes)": FunctionFragment;
-    "compoundAmount()": FunctionFragment;
     "contractAddress()": FunctionFragment;
     "currentBalance()": FunctionFragment;
     "dai()": FunctionFragment;
@@ -43,6 +41,7 @@ export interface SDaiStrategyInterface extends utils.Interface {
     "emergencyWithdraw()": FunctionFragment;
     "feeRecipient()": FunctionFragment;
     "feesPending()": FunctionFragment;
+    "harvestable()": FunctionFragment;
     "name()": FunctionFragment;
     "owner()": FunctionFragment;
     "paused()": FunctionFragment;
@@ -52,7 +51,9 @@ export interface SDaiStrategyInterface extends utils.Interface {
     "setDepositThreshold(uint256)": FunctionFragment;
     "tokenId()": FunctionFragment;
     "tokenType()": FunctionFragment;
+    "totalActiveDeposits()": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
+    "updateFeeRecipient(address)": FunctionFragment;
     "updatePaused(bool)": FunctionFragment;
     "withdraw(address,uint256)": FunctionFragment;
     "withdrawFees(uint256)": FunctionFragment;
@@ -68,10 +69,6 @@ export interface SDaiStrategyInterface extends utils.Interface {
       | "cheapWithdrawable()"
       | "claimOwnership"
       | "claimOwnership()"
-      | "compound"
-      | "compound(bytes)"
-      | "compoundAmount"
-      | "compoundAmount()"
       | "contractAddress"
       | "contractAddress()"
       | "currentBalance"
@@ -90,6 +87,8 @@ export interface SDaiStrategyInterface extends utils.Interface {
       | "feeRecipient()"
       | "feesPending"
       | "feesPending()"
+      | "harvestable"
+      | "harvestable()"
       | "name"
       | "name()"
       | "owner"
@@ -108,8 +107,12 @@ export interface SDaiStrategyInterface extends utils.Interface {
       | "tokenId()"
       | "tokenType"
       | "tokenType()"
+      | "totalActiveDeposits"
+      | "totalActiveDeposits()"
       | "transferOwnership"
       | "transferOwnership(address,bool,bool)"
+      | "updateFeeRecipient"
+      | "updateFeeRecipient(address)"
       | "updatePaused"
       | "updatePaused(bool)"
       | "withdraw"
@@ -138,22 +141,6 @@ export interface SDaiStrategyInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "claimOwnership()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "compound",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "compound(bytes)",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "compoundAmount",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "compoundAmount()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -222,6 +209,14 @@ export interface SDaiStrategyInterface extends utils.Interface {
     functionFragment: "feesPending()",
     values?: undefined
   ): string;
+  encodeFunctionData(
+    functionFragment: "harvestable",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "harvestable()",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(functionFragment: "name()", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
@@ -262,6 +257,14 @@ export interface SDaiStrategyInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "totalActiveDeposits",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalActiveDeposits()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [
       PromiseOrValue<string>,
@@ -276,6 +279,14 @@ export interface SDaiStrategyInterface extends utils.Interface {
       PromiseOrValue<boolean>,
       PromiseOrValue<boolean>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updateFeeRecipient",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updateFeeRecipient(address)",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "updatePaused",
@@ -331,19 +342,6 @@ export interface SDaiStrategyInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "claimOwnership()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "compound", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "compound(bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "compoundAmount",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "compoundAmount()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -409,6 +407,14 @@ export interface SDaiStrategyInterface extends utils.Interface {
     functionFragment: "feesPending()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "harvestable",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "harvestable()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -446,11 +452,27 @@ export interface SDaiStrategyInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "totalActiveDeposits",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "totalActiveDeposits()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership(address,bool,bool)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateFeeRecipient",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateFeeRecipient(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -615,24 +637,6 @@ export interface SDaiStrategy extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    compound(
-      dexData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "compound(bytes)"(
-      dexData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    compoundAmount(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { result: BigNumber }>;
-
-    "compoundAmount()"(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { result: BigNumber }>;
-
     contractAddress(overrides?: CallOverrides): Promise<[string]>;
 
     "contractAddress()"(overrides?: CallOverrides): Promise<[string]>;
@@ -687,6 +691,14 @@ export interface SDaiStrategy extends BaseContract {
 
     "feesPending()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    harvestable(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber] & { result: BigNumber; fees: BigNumber }>;
+
+    "harvestable()"(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber] & { result: BigNumber; fees: BigNumber }>;
+
     name(overrides?: CallOverrides): Promise<[string] & { name_: string }>;
 
     "name()"(overrides?: CallOverrides): Promise<[string] & { name_: string }>;
@@ -737,6 +749,10 @@ export interface SDaiStrategy extends BaseContract {
 
     "tokenType()"(overrides?: CallOverrides): Promise<[number]>;
 
+    totalActiveDeposits(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "totalActiveDeposits()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     transferOwnership(
       newOwner: PromiseOrValue<string>,
       direct: PromiseOrValue<boolean>,
@@ -748,6 +764,16 @@ export interface SDaiStrategy extends BaseContract {
       newOwner: PromiseOrValue<string>,
       direct: PromiseOrValue<boolean>,
       renounce: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    updateFeeRecipient(
+      _val: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "updateFeeRecipient(address)"(
+      _val: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -812,20 +838,6 @@ export interface SDaiStrategy extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  compound(
-    dexData: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "compound(bytes)"(
-    dexData: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  compoundAmount(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "compoundAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   contractAddress(overrides?: CallOverrides): Promise<string>;
 
   "contractAddress()"(overrides?: CallOverrides): Promise<string>;
@@ -871,6 +883,14 @@ export interface SDaiStrategy extends BaseContract {
   feesPending(overrides?: CallOverrides): Promise<BigNumber>;
 
   "feesPending()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  harvestable(
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, BigNumber] & { result: BigNumber; fees: BigNumber }>;
+
+  "harvestable()"(
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, BigNumber] & { result: BigNumber; fees: BigNumber }>;
 
   name(overrides?: CallOverrides): Promise<string>;
 
@@ -922,6 +942,10 @@ export interface SDaiStrategy extends BaseContract {
 
   "tokenType()"(overrides?: CallOverrides): Promise<number>;
 
+  totalActiveDeposits(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "totalActiveDeposits()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   transferOwnership(
     newOwner: PromiseOrValue<string>,
     direct: PromiseOrValue<boolean>,
@@ -933,6 +957,16 @@ export interface SDaiStrategy extends BaseContract {
     newOwner: PromiseOrValue<string>,
     direct: PromiseOrValue<boolean>,
     renounce: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  updateFeeRecipient(
+    _val: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "updateFeeRecipient(address)"(
+    _val: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -989,20 +1023,6 @@ export interface SDaiStrategy extends BaseContract {
 
     "claimOwnership()"(overrides?: CallOverrides): Promise<void>;
 
-    compound(
-      dexData: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "compound(bytes)"(
-      dexData: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    compoundAmount(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "compoundAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     contractAddress(overrides?: CallOverrides): Promise<string>;
 
     "contractAddress()"(overrides?: CallOverrides): Promise<string>;
@@ -1033,9 +1053,9 @@ export interface SDaiStrategy extends BaseContract {
 
     "description()"(overrides?: CallOverrides): Promise<string>;
 
-    emergencyWithdraw(overrides?: CallOverrides): Promise<BigNumber>;
+    emergencyWithdraw(overrides?: CallOverrides): Promise<void>;
 
-    "emergencyWithdraw()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "emergencyWithdraw()"(overrides?: CallOverrides): Promise<void>;
 
     feeRecipient(overrides?: CallOverrides): Promise<string>;
 
@@ -1044,6 +1064,14 @@ export interface SDaiStrategy extends BaseContract {
     feesPending(overrides?: CallOverrides): Promise<BigNumber>;
 
     "feesPending()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    harvestable(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber] & { result: BigNumber; fees: BigNumber }>;
+
+    "harvestable()"(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber] & { result: BigNumber; fees: BigNumber }>;
 
     name(overrides?: CallOverrides): Promise<string>;
 
@@ -1095,6 +1123,10 @@ export interface SDaiStrategy extends BaseContract {
 
     "tokenType()"(overrides?: CallOverrides): Promise<number>;
 
+    totalActiveDeposits(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "totalActiveDeposits()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     transferOwnership(
       newOwner: PromiseOrValue<string>,
       direct: PromiseOrValue<boolean>,
@@ -1106,6 +1138,16 @@ export interface SDaiStrategy extends BaseContract {
       newOwner: PromiseOrValue<string>,
       direct: PromiseOrValue<boolean>,
       renounce: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    updateFeeRecipient(
+      _val: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "updateFeeRecipient(address)"(
+      _val: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1210,20 +1252,6 @@ export interface SDaiStrategy extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    compound(
-      dexData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "compound(bytes)"(
-      dexData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    compoundAmount(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "compoundAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     contractAddress(overrides?: CallOverrides): Promise<BigNumber>;
 
     "contractAddress()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1269,6 +1297,10 @@ export interface SDaiStrategy extends BaseContract {
     feesPending(overrides?: CallOverrides): Promise<BigNumber>;
 
     "feesPending()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    harvestable(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "harvestable()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1320,6 +1352,10 @@ export interface SDaiStrategy extends BaseContract {
 
     "tokenType()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    totalActiveDeposits(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "totalActiveDeposits()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     transferOwnership(
       newOwner: PromiseOrValue<string>,
       direct: PromiseOrValue<boolean>,
@@ -1331,6 +1367,16 @@ export interface SDaiStrategy extends BaseContract {
       newOwner: PromiseOrValue<string>,
       direct: PromiseOrValue<boolean>,
       renounce: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    updateFeeRecipient(
+      _val: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "updateFeeRecipient(address)"(
+      _val: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1394,22 +1440,6 @@ export interface SDaiStrategy extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    compound(
-      dexData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "compound(bytes)"(
-      dexData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    compoundAmount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "compoundAmount()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     contractAddress(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "contractAddress()"(
@@ -1462,6 +1492,10 @@ export interface SDaiStrategy extends BaseContract {
 
     "feesPending()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    harvestable(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "harvestable()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1512,6 +1546,14 @@ export interface SDaiStrategy extends BaseContract {
 
     "tokenType()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    totalActiveDeposits(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "totalActiveDeposits()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     transferOwnership(
       newOwner: PromiseOrValue<string>,
       direct: PromiseOrValue<boolean>,
@@ -1523,6 +1565,16 @@ export interface SDaiStrategy extends BaseContract {
       newOwner: PromiseOrValue<string>,
       direct: PromiseOrValue<boolean>,
       renounce: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    updateFeeRecipient(
+      _val: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "updateFeeRecipient(address)"(
+      _val: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
