@@ -8,6 +8,4 @@ export { BaseTOFTMarketDestinationModule__factory } from "./BaseTOFTMarketDestin
 export { BaseTOFTMarketModule__factory } from "./BaseTOFTMarketModule__factory";
 export { BaseTOFTOptionsDestinationModule__factory } from "./BaseTOFTOptionsDestinationModule__factory";
 export { BaseTOFTOptionsModule__factory } from "./BaseTOFTOptionsModule__factory";
-export { BaseTOFTStrategyDestinationModule__factory } from "./BaseTOFTStrategyDestinationModule__factory";
-export { BaseTOFTStrategyModule__factory } from "./BaseTOFTStrategyModule__factory";
 export { TOFTCommon__factory } from "./TOFTCommon__factory";
