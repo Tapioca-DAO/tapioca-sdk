@@ -127,7 +127,6 @@ export interface SingularityInterface extends utils.Interface {
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
     "updateExchangeRate()": FunctionFragment;
-    "updatePause(uint8,bool)": FunctionFragment;
     "updatePause(uint8,bool,bool)": FunctionFragment;
     "userBorrowPart(address)": FunctionFragment;
     "userCollateralShare(address)": FunctionFragment;
@@ -304,7 +303,7 @@ export interface SingularityInterface extends utils.Interface {
       | "transferOwnership(address,bool,bool)"
       | "updateExchangeRate"
       | "updateExchangeRate()"
-      | "updatePause(uint8,bool)"
+      | "updatePause"
       | "updatePause(uint8,bool,bool)"
       | "userBorrowPart"
       | "userBorrowPart(address)"
@@ -1125,8 +1124,12 @@ export interface SingularityInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "updatePause(uint8,bool)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]
+    functionFragment: "updatePause",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<boolean>,
+      PromiseOrValue<boolean>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "updatePause(uint8,bool,bool)",
@@ -1723,7 +1726,7 @@ export interface SingularityInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "updatePause(uint8,bool)",
+    functionFragment: "updatePause",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -3175,9 +3178,10 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "updatePause(uint8,bool)"(
+    updatePause(
       _type: PromiseOrValue<BigNumberish>,
       val: PromiseOrValue<boolean>,
+      resetAccrueTimestmap: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -3987,9 +3991,10 @@ export interface Singularity extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "updatePause(uint8,bool)"(
+  updatePause(
     _type: PromiseOrValue<BigNumberish>,
     val: PromiseOrValue<boolean>,
+    resetAccrueTimestmap: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -4801,9 +4806,10 @@ export interface Singularity extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { updated: boolean; rate: BigNumber }>;
 
-    "updatePause(uint8,bool)"(
+    updatePause(
       _type: PromiseOrValue<BigNumberish>,
       val: PromiseOrValue<boolean>,
+      resetAccrueTimestmap: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -5877,9 +5883,10 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "updatePause(uint8,bool)"(
+    updatePause(
       _type: PromiseOrValue<BigNumberish>,
       val: PromiseOrValue<boolean>,
+      resetAccrueTimestmap: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -6692,9 +6699,10 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "updatePause(uint8,bool)"(
+    updatePause(
       _type: PromiseOrValue<BigNumberish>,
       val: PromiseOrValue<boolean>,
+      resetAccrueTimestmap: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

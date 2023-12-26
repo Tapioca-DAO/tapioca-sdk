@@ -1260,24 +1260,6 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "enum Market.PauseType",
-        name: "_type",
-        type: "uint8",
-      },
-      {
-        internalType: "bool",
-        name: "val",
-        type: "bool",
-      },
-    ],
-    name: "updatePause",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
         internalType: "address",
         name: "",
         type: "address",

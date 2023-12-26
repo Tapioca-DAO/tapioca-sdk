@@ -107,7 +107,6 @@ export interface SGLCommonInterface extends utils.Interface {
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
     "updateExchangeRate()": FunctionFragment;
-    "updatePause(uint8,bool)": FunctionFragment;
     "userBorrowPart(address)": FunctionFragment;
     "userCollateralShare(address)": FunctionFragment;
     "yieldBox()": FunctionFragment;
@@ -243,8 +242,6 @@ export interface SGLCommonInterface extends utils.Interface {
       | "transferOwnership(address,bool,bool)"
       | "updateExchangeRate"
       | "updateExchangeRate()"
-      | "updatePause"
-      | "updatePause(uint8,bool)"
       | "userBorrowPart"
       | "userBorrowPart(address)"
       | "userCollateralShare"
@@ -792,14 +789,6 @@ export interface SGLCommonInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "updatePause",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "updatePause(uint8,bool)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "userBorrowPart",
     values: [PromiseOrValue<string>]
   ): string;
@@ -1244,14 +1233,6 @@ export interface SGLCommonInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "updateExchangeRate()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "updatePause",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "updatePause(uint8,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2451,18 +2432,6 @@ export interface SGLCommon extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    updatePause(
-      _type: PromiseOrValue<BigNumberish>,
-      val: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "updatePause(uint8,bool)"(
-      _type: PromiseOrValue<BigNumberish>,
-      val: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     userBorrowPart(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -3011,18 +2980,6 @@ export interface SGLCommon extends BaseContract {
   ): Promise<ContractTransaction>;
 
   "updateExchangeRate()"(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  updatePause(
-    _type: PromiseOrValue<BigNumberish>,
-    val: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "updatePause(uint8,bool)"(
-    _type: PromiseOrValue<BigNumberish>,
-    val: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3578,18 +3535,6 @@ export interface SGLCommon extends BaseContract {
     "updateExchangeRate()"(
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { updated: boolean; rate: BigNumber }>;
-
-    updatePause(
-      _type: PromiseOrValue<BigNumberish>,
-      val: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "updatePause(uint8,bool)"(
-      _type: PromiseOrValue<BigNumberish>,
-      val: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     userBorrowPart(
       arg0: PromiseOrValue<string>,
@@ -4406,18 +4351,6 @@ export interface SGLCommon extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    updatePause(
-      _type: PromiseOrValue<BigNumberish>,
-      val: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "updatePause(uint8,bool)"(
-      _type: PromiseOrValue<BigNumberish>,
-      val: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     userBorrowPart(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -4963,18 +4896,6 @@ export interface SGLCommon extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "updateExchangeRate()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    updatePause(
-      _type: PromiseOrValue<BigNumberish>,
-      val: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "updatePause(uint8,bool)"(
-      _type: PromiseOrValue<BigNumberish>,
-      val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

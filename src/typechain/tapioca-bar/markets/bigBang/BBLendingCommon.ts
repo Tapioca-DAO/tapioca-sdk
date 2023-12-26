@@ -69,7 +69,6 @@ export interface BBLendingCommonInterface extends utils.Interface {
     "minMintFee()": FunctionFragment;
     "minMintFeeStart()": FunctionFragment;
     "nonces(address)": FunctionFragment;
-    "openingFees(address)": FunctionFragment;
     "oracle()": FunctionFragment;
     "oracleData()": FunctionFragment;
     "owner()": FunctionFragment;
@@ -92,7 +91,6 @@ export interface BBLendingCommonInterface extends utils.Interface {
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
     "updateExchangeRate()": FunctionFragment;
-    "updatePause(uint8,bool)": FunctionFragment;
     "userBorrowPart(address)": FunctionFragment;
     "userCollateralShare(address)": FunctionFragment;
     "yieldBox()": FunctionFragment;
@@ -180,8 +178,6 @@ export interface BBLendingCommonInterface extends utils.Interface {
       | "minMintFeeStart()"
       | "nonces"
       | "nonces(address)"
-      | "openingFees"
-      | "openingFees(address)"
       | "oracle"
       | "oracle()"
       | "oracleData"
@@ -226,8 +222,6 @@ export interface BBLendingCommonInterface extends utils.Interface {
       | "transferOwnership(address,bool,bool)"
       | "updateExchangeRate"
       | "updateExchangeRate()"
-      | "updatePause"
-      | "updatePause(uint8,bool)"
       | "userBorrowPart"
       | "userBorrowPart(address)"
       | "userCollateralShare"
@@ -543,14 +537,6 @@ export interface BBLendingCommonInterface extends utils.Interface {
     functionFragment: "nonces(address)",
     values: [PromiseOrValue<string>]
   ): string;
-  encodeFunctionData(
-    functionFragment: "openingFees",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "openingFees(address)",
-    values: [PromiseOrValue<string>]
-  ): string;
   encodeFunctionData(functionFragment: "oracle", values?: undefined): string;
   encodeFunctionData(functionFragment: "oracle()", values?: undefined): string;
   encodeFunctionData(
@@ -780,14 +766,6 @@ export interface BBLendingCommonInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "updateExchangeRate()",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "updatePause",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "updatePause(uint8,bool)",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "userBorrowPart",
@@ -1086,14 +1064,6 @@ export interface BBLendingCommonInterface extends utils.Interface {
     functionFragment: "nonces(address)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "openingFees",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "openingFees(address)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "oracle", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "oracle()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "oracleData", data: BytesLike): Result;
@@ -1241,14 +1211,6 @@ export interface BBLendingCommonInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "updateExchangeRate()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "updatePause",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "updatePause(uint8,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2054,16 +2016,6 @@ export interface BBLendingCommon extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    openingFees(
-      user: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { fee: BigNumber }>;
-
-    "openingFees(address)"(
-      user: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { fee: BigNumber }>;
-
     oracle(overrides?: CallOverrides): Promise<[string]>;
 
     "oracle()"(overrides?: CallOverrides): Promise<[string]>;
@@ -2271,18 +2223,6 @@ export interface BBLendingCommon extends BaseContract {
     ): Promise<ContractTransaction>;
 
     "updateExchangeRate()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    updatePause(
-      _type: PromiseOrValue<BigNumberish>,
-      val: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "updatePause(uint8,bool)"(
-      _type: PromiseOrValue<BigNumberish>,
-      val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2597,16 +2537,6 @@ export interface BBLendingCommon extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  openingFees(
-    user: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "openingFees(address)"(
-    user: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   oracle(overrides?: CallOverrides): Promise<string>;
 
   "oracle()"(overrides?: CallOverrides): Promise<string>;
@@ -2810,18 +2740,6 @@ export interface BBLendingCommon extends BaseContract {
   ): Promise<ContractTransaction>;
 
   "updateExchangeRate()"(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  updatePause(
-    _type: PromiseOrValue<BigNumberish>,
-    val: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "updatePause(uint8,bool)"(
-    _type: PromiseOrValue<BigNumberish>,
-    val: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3128,16 +3046,6 @@ export interface BBLendingCommon extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    openingFees(
-      user: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "openingFees(address)"(
-      user: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     oracle(overrides?: CallOverrides): Promise<string>;
 
     "oracle()"(overrides?: CallOverrides): Promise<string>;
@@ -3347,18 +3255,6 @@ export interface BBLendingCommon extends BaseContract {
     "updateExchangeRate()"(
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { updated: boolean; rate: BigNumber }>;
-
-    updatePause(
-      _type: PromiseOrValue<BigNumberish>,
-      val: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "updatePause(uint8,bool)"(
-      _type: PromiseOrValue<BigNumberish>,
-      val: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     userBorrowPart(
       arg0: PromiseOrValue<string>,
@@ -3894,16 +3790,6 @@ export interface BBLendingCommon extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    openingFees(
-      user: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "openingFees(address)"(
-      user: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     oracle(overrides?: CallOverrides): Promise<BigNumber>;
 
     "oracle()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -4103,18 +3989,6 @@ export interface BBLendingCommon extends BaseContract {
     ): Promise<BigNumber>;
 
     "updateExchangeRate()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    updatePause(
-      _type: PromiseOrValue<BigNumberish>,
-      val: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "updatePause(uint8,bool)"(
-      _type: PromiseOrValue<BigNumberish>,
-      val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4420,16 +4294,6 @@ export interface BBLendingCommon extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    openingFees(
-      user: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "openingFees(address)"(
-      user: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     oracle(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "oracle()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -4637,18 +4501,6 @@ export interface BBLendingCommon extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "updateExchangeRate()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    updatePause(
-      _type: PromiseOrValue<BigNumberish>,
-      val: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "updatePause(uint8,bool)"(
-      _type: PromiseOrValue<BigNumberish>,
-      val: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

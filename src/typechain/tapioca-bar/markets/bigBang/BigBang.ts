@@ -80,7 +80,6 @@ export interface BigBangInterface extends utils.Interface {
     "minMintFee()": FunctionFragment;
     "minMintFeeStart()": FunctionFragment;
     "nonces(address)": FunctionFragment;
-    "openingFees(address)": FunctionFragment;
     "oracle()": FunctionFragment;
     "oracleData()": FunctionFragment;
     "owner()": FunctionFragment;
@@ -222,8 +221,6 @@ export interface BigBangInterface extends utils.Interface {
       | "minMintFeeStart()"
       | "nonces"
       | "nonces(address)"
-      | "openingFees"
-      | "openingFees(address)"
       | "oracle"
       | "oracle()"
       | "oracleData"
@@ -739,14 +736,6 @@ export interface BigBangInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "nonces(address)",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "openingFees",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "openingFees(address)",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "oracle", values?: undefined): string;
@@ -1466,14 +1455,6 @@ export interface BigBangInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "nonces(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "openingFees",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "openingFees(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "oracle", data: BytesLike): Result;
@@ -2620,16 +2601,6 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    openingFees(
-      user: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { fee: BigNumber }>;
-
-    "openingFees(address)"(
-      user: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { fee: BigNumber }>;
-
     oracle(overrides?: CallOverrides): Promise<[string]>;
 
     "oracle()"(overrides?: CallOverrides): Promise<[string]>;
@@ -3397,16 +3368,6 @@ export interface BigBang extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  openingFees(
-    user: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "openingFees(address)"(
-    user: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   oracle(overrides?: CallOverrides): Promise<string>;
 
   "oracle()"(overrides?: CallOverrides): Promise<string>;
@@ -4163,16 +4124,6 @@ export interface BigBang extends BaseContract {
 
     "nonces(address)"(
       owner: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    openingFees(
-      user: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "openingFees(address)"(
-      user: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -5162,16 +5113,6 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    openingFees(
-      user: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "openingFees(address)"(
-      user: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     oracle(overrides?: CallOverrides): Promise<BigNumber>;
 
     "oracle()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -5925,16 +5866,6 @@ export interface BigBang extends BaseContract {
 
     "nonces(address)"(
       owner: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    openingFees(
-      user: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "openingFees(address)"(
-      user: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
