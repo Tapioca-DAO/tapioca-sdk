@@ -70,6 +70,7 @@ export interface TapiocaOptionLiquidityProvisionInterface
   extends utils.Interface {
   functions: {
     "DOMAIN_SEPARATOR()": FunctionFragment;
+    "EPOCH_DURATION()": FunctionFragment;
     "activateSGLPoolRescue(address)": FunctionFragment;
     "activeSingularities(address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
@@ -116,6 +117,8 @@ export interface TapiocaOptionLiquidityProvisionInterface
     nameOrSignatureOrTopic:
       | "DOMAIN_SEPARATOR"
       | "DOMAIN_SEPARATOR()"
+      | "EPOCH_DURATION"
+      | "EPOCH_DURATION()"
       | "activateSGLPoolRescue"
       | "activateSGLPoolRescue(address)"
       | "activeSingularities"
@@ -202,6 +205,14 @@ export interface TapiocaOptionLiquidityProvisionInterface
   ): string;
   encodeFunctionData(
     functionFragment: "DOMAIN_SEPARATOR()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "EPOCH_DURATION",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "EPOCH_DURATION()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -561,6 +572,14 @@ export interface TapiocaOptionLiquidityProvisionInterface
   ): Result;
   decodeFunctionResult(
     functionFragment: "DOMAIN_SEPARATOR()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "EPOCH_DURATION",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "EPOCH_DURATION()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1073,6 +1092,10 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<[string]>;
 
+    EPOCH_DURATION(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "EPOCH_DURATION()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     activateSGLPoolRescue(
       singularity: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1513,6 +1536,10 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
   "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
 
+  EPOCH_DURATION(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "EPOCH_DURATION()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   activateSGLPoolRescue(
     singularity: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1946,6 +1973,10 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
+
+    EPOCH_DURATION(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "EPOCH_DURATION()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     activateSGLPoolRescue(
       singularity: PromiseOrValue<string>,
@@ -2496,6 +2527,10 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    EPOCH_DURATION(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "EPOCH_DURATION()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     activateSGLPoolRescue(
       singularity: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2874,6 +2909,12 @@ export interface TapiocaOptionLiquidityProvision extends BaseContract {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "DOMAIN_SEPARATOR()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    EPOCH_DURATION(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "EPOCH_DURATION()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
