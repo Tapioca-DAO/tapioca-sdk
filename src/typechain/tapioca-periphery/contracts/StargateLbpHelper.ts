@@ -75,7 +75,6 @@ export declare namespace StargateLbpHelper {
   export type ParticipateDataStruct = {
     assetIn: PromiseOrValue<string>;
     assetOut: PromiseOrValue<string>;
-    poolId: PromiseOrValue<BigNumberish>;
     deadline: PromiseOrValue<BigNumberish>;
     minAmountOut: PromiseOrValue<BigNumberish>;
   };
@@ -84,12 +83,10 @@ export declare namespace StargateLbpHelper {
     string,
     string,
     BigNumber,
-    BigNumber,
     BigNumber
   ] & {
     assetIn: string;
     assetOut: string;
-    poolId: BigNumber;
     deadline: BigNumber;
     minAmountOut: BigNumber;
   };
@@ -116,7 +113,7 @@ export interface StargateLbpHelperInterface extends utils.Interface {
     "lbpPool()": FunctionFragment;
     "lbpVault()": FunctionFragment;
     "owner()": FunctionFragment;
-    "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256,uint256))": FunctionFragment;
+    "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256))": FunctionFragment;
     "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))": FunctionFragment;
     "redeemLocal(uint16,uint256,uint256,address,uint256,bytes,(uint256,uint256,bytes))": FunctionFragment;
     "redeemRemote(uint16,uint256,uint256,address,uint256,uint256,bytes,(uint256,uint256,bytes))": FunctionFragment;
@@ -140,7 +137,7 @@ export interface StargateLbpHelperInterface extends utils.Interface {
       | "owner"
       | "owner()"
       | "participate"
-      | "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256,uint256))"
+      | "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256))"
       | "quoteLayerZeroFee"
       | "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))"
       | "redeemLocal"
@@ -208,7 +205,7 @@ export interface StargateLbpHelperInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256,uint256))",
+    functionFragment: "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256))",
     values: [
       StargateLbpHelper.StargateDataStruct,
       StargateLbpHelper.ParticipateDataStruct
@@ -365,7 +362,7 @@ export interface StargateLbpHelperInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256,uint256))",
+    functionFragment: "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -559,7 +556,7 @@ export interface StargateLbpHelper extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256,uint256))"(
+    "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256))"(
       stargateData: StargateLbpHelper.StargateDataStruct,
       lbpData: StargateLbpHelper.ParticipateDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -732,7 +729,7 @@ export interface StargateLbpHelper extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256,uint256))"(
+  "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256))"(
     stargateData: StargateLbpHelper.StargateDataStruct,
     lbpData: StargateLbpHelper.ParticipateDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -905,7 +902,7 @@ export interface StargateLbpHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256,uint256))"(
+    "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256))"(
       stargateData: StargateLbpHelper.StargateDataStruct,
       lbpData: StargateLbpHelper.ParticipateDataStruct,
       overrides?: CallOverrides
@@ -1116,7 +1113,7 @@ export interface StargateLbpHelper extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256,uint256))"(
+    "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256))"(
       stargateData: StargateLbpHelper.StargateDataStruct,
       lbpData: StargateLbpHelper.ParticipateDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -1290,7 +1287,7 @@ export interface StargateLbpHelper extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256,uint256))"(
+    "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256))"(
       stargateData: StargateLbpHelper.StargateDataStruct,
       lbpData: StargateLbpHelper.ParticipateDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
