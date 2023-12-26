@@ -1225,12 +1225,12 @@ export interface Seer extends BaseContract {
     "description()"(overrides?: CallOverrides): Promise<[string]>;
 
     get(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "get(bytes)"(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1301,22 +1301,22 @@ export interface Seer extends BaseContract {
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
 
     peek(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
     "peek(bytes)"(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
     peekSpot(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { rate: BigNumber }>;
 
     "peekSpot(bytes)"(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { rate: BigNumber }>;
 
@@ -1618,12 +1618,12 @@ export interface Seer extends BaseContract {
   "description()"(overrides?: CallOverrides): Promise<string>;
 
   get(
-    arg0: PromiseOrValue<BytesLike>,
+    data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "get(bytes)"(
-    arg0: PromiseOrValue<BytesLike>,
+    data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1694,22 +1694,22 @@ export interface Seer extends BaseContract {
   "owner()"(overrides?: CallOverrides): Promise<string>;
 
   peek(
-    arg0: PromiseOrValue<BytesLike>,
+    data: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
   "peek(bytes)"(
-    arg0: PromiseOrValue<BytesLike>,
+    data: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
   peekSpot(
-    arg0: PromiseOrValue<BytesLike>,
+    data: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   "peekSpot(bytes)"(
-    arg0: PromiseOrValue<BytesLike>,
+    data: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -1997,12 +1997,12 @@ export interface Seer extends BaseContract {
     "description()"(overrides?: CallOverrides): Promise<string>;
 
     get(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
     "get(bytes)"(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
@@ -2073,22 +2073,22 @@ export interface Seer extends BaseContract {
     "owner()"(overrides?: CallOverrides): Promise<string>;
 
     peek(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
     "peek(bytes)"(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { success: boolean; rate: BigNumber }>;
 
     peekSpot(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "peekSpot(bytes)"(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -2442,12 +2442,12 @@ export interface Seer extends BaseContract {
     "description()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     get(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "get(bytes)"(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -2518,22 +2518,22 @@ export interface Seer extends BaseContract {
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     peek(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "peek(bytes)"(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     peekSpot(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "peekSpot(bytes)"(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -2846,12 +2846,12 @@ export interface Seer extends BaseContract {
     "description()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     get(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "get(bytes)"(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -2922,22 +2922,22 @@ export interface Seer extends BaseContract {
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     peek(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "peek(bytes)"(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     peekSpot(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "peekSpot(bytes)"(
-      arg0: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
