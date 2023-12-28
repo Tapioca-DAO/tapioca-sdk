@@ -221,7 +221,21 @@ function buildCalls(
             target.contract.address,
             contractToConf.address,
         ]);
+
+        // Set payload size
+        console.log('\t- Payload size: ');
+        calls.push({
+            target: contractToConf.address,
+            callData:
+                TapiocaZ.tOft.BaseTOFT__factory.createInterface().encodeFunctionData(
+                    'setPayloadSizeLimit',
+                    [target.lzChainId, 1000],
+                ),
+            allowFailure: false,
+        });
+
         // Set trusted remote
+        console.log('\t- Trusted remote: ');
         calls.push({
             target: contractToConf.address,
             callData:
