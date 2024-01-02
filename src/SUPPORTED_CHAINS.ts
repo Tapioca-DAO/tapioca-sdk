@@ -13,8 +13,8 @@ const SUPPORTED_CHAINS = [
     {
         name: 'sepolia',
         address: '0xae92d5aD7583AD66E49A0c67BAd18F6ba52dDDc1',
-        chainId: EChainID.GOERLI,
-        lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.GOERLI],
+        chainId: EChainID.SEPOLIA,
+        lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.SEPOLIA],
         rpc: 'https://eth-sepolia.g.alchemy.com/v2/<api_key>',
         tags: ['testnet'],
     },
