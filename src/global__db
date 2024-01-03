@@ -1148,6 +1148,13 @@
                     "address": "0x7AEB6eF0905289ad5bCCb64901B66b08111B2054",
                     "meta": {}
                 }
+            ],
+            "11155111": [
+                {
+                    "name": "Multicall3",
+                    "address": "0xC41A2B66E7B598f907Ed948733AC75462d81b66e",
+                    "meta": {}
+                }
             ]
         },
         "tap-token": {
@@ -1344,6 +1351,41 @@
                     "name": "TapiocaDeployer",
                     "address": "0x6128a40744f4405EB95D8F315CeC014bf335A728",
                     "meta": {}
+                }
+            ],
+            "11155111": [
+                {
+                    "name": "YieldBoxURIBuilder",
+                    "address": "0x49a1B9ac8856c882af3BCb0ed8EC2915025aaCDb",
+                    "meta": {
+                        "args": [],
+                        "salt": "0x28bed8c0f6401d54f21b56dfdbdc465e522d56406f6d52a5b7fa7c3aa18c643a",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "YieldBox",
+                    "address": "0x9e0DB53C2d1b6D420dA5726343537901FcE6D8fe",
+                    "meta": {
+                        "args": [
+                            "0xA4D1077F9A5bc94ddE22B3d01807329De9543607",
+                            "0x49a1B9ac8856c882af3BCb0ed8EC2915025aaCDb"
+                        ],
+                        "salt": "0x5d0e6d0a51d13dea6d010a1ba3217c7842a29e338c886b39ba343e4211e070d5",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "TapiocaDeployer",
+                    "address": "0x7363df7f81f041008D7b723835d07de12e0AcA43",
+                    "meta": {}
+                },
+                {
+                    "name": "WETHMock",
+                    "address": "0xA4D1077F9A5bc94ddE22B3d01807329De9543607",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
                 }
             ]
         },
