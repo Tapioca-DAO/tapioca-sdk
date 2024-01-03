@@ -109,16 +109,12 @@ export declare namespace IStargateRouterBase {
 export interface StargateLbpHelperInterface extends utils.Interface {
   functions: {
     "_sgReceive(address,uint256,bytes)": FunctionFragment;
-    "instantRedeemLocal(uint16,uint256,address)": FunctionFragment;
     "lbpPool()": FunctionFragment;
     "lbpVault()": FunctionFragment;
     "owner()": FunctionFragment;
     "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256))": FunctionFragment;
     "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))": FunctionFragment;
-    "redeemLocal(uint16,uint256,uint256,address,uint256,bytes,(uint256,uint256,bytes))": FunctionFragment;
-    "redeemRemote(uint16,uint256,uint256,address,uint256,uint256,bytes,(uint256,uint256,bytes))": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "retryRevert(uint16,bytes,uint256)": FunctionFragment;
     "router()": FunctionFragment;
     "sgReceive(uint16,bytes,uint256,address,uint256,bytes)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
@@ -128,8 +124,6 @@ export interface StargateLbpHelperInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "_sgReceive"
       | "_sgReceive(address,uint256,bytes)"
-      | "instantRedeemLocal"
-      | "instantRedeemLocal(uint16,uint256,address)"
       | "lbpPool"
       | "lbpPool()"
       | "lbpVault"
@@ -140,14 +134,8 @@ export interface StargateLbpHelperInterface extends utils.Interface {
       | "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256))"
       | "quoteLayerZeroFee"
       | "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))"
-      | "redeemLocal"
-      | "redeemLocal(uint16,uint256,uint256,address,uint256,bytes,(uint256,uint256,bytes))"
-      | "redeemRemote"
-      | "redeemRemote(uint16,uint256,uint256,address,uint256,uint256,bytes,(uint256,uint256,bytes))"
       | "renounceOwnership"
       | "renounceOwnership()"
-      | "retryRevert"
-      | "retryRevert(uint16,bytes,uint256)"
       | "router"
       | "router()"
       | "sgReceive"
@@ -170,22 +158,6 @@ export interface StargateLbpHelperInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "instantRedeemLocal",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "instantRedeemLocal(uint16,uint256,address)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>
     ]
   ): string;
   encodeFunctionData(functionFragment: "lbpPool", values?: undefined): string;
@@ -232,78 +204,12 @@ export interface StargateLbpHelperInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "redeemLocal",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      IStargateRouterBase.LzTxObjStruct
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "redeemLocal(uint16,uint256,uint256,address,uint256,bytes,(uint256,uint256,bytes))",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      IStargateRouterBase.LzTxObjStruct
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "redeemRemote",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      IStargateRouterBase.LzTxObjStruct
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "redeemRemote(uint16,uint256,uint256,address,uint256,uint256,bytes,(uint256,uint256,bytes))",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      IStargateRouterBase.LzTxObjStruct
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "renounceOwnership",
     values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership()",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "retryRevert",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "retryRevert(uint16,bytes,uint256)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>
-    ]
   ): string;
   encodeFunctionData(functionFragment: "router", values?: undefined): string;
   encodeFunctionData(functionFragment: "router()", values?: undefined): string;
@@ -343,14 +249,6 @@ export interface StargateLbpHelperInterface extends utils.Interface {
     functionFragment: "_sgReceive(address,uint256,bytes)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "instantRedeemLocal",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "instantRedeemLocal(uint16,uint256,address)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "lbpPool", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "lbpPool()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "lbpVault", data: BytesLike): Result;
@@ -374,35 +272,11 @@ export interface StargateLbpHelperInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "redeemLocal",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "redeemLocal(uint16,uint256,uint256,address,uint256,bytes,(uint256,uint256,bytes))",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "redeemRemote",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "redeemRemote(uint16,uint256,uint256,address,uint256,uint256,bytes,(uint256,uint256,bytes))",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "renounceOwnership",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "retryRevert",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "retryRevert(uint16,bytes,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "router", data: BytesLike): Result;
@@ -524,20 +398,6 @@ export interface StargateLbpHelper extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    instantRedeemLocal(
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "instantRedeemLocal(uint16,uint256,address)"(
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     lbpPool(overrides?: CallOverrides): Promise<[string]>;
 
     "lbpPool()"(overrides?: CallOverrides): Promise<[string]>;
@@ -580,72 +440,12 @@ export interface StargateLbpHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber]>;
 
-    redeemLocal(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _dstPoolId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "redeemLocal(uint16,uint256,uint256,address,uint256,bytes,(uint256,uint256,bytes))"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _dstPoolId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    redeemRemote(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _dstPoolId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _minAmountLD: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "redeemRemote(uint16,uint256,uint256,address,uint256,uint256,bytes,(uint256,uint256,bytes))"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _dstPoolId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _minAmountLD: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "renounceOwnership()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    retryRevert(
-      srcChainId: PromiseOrValue<BigNumberish>,
-      srcAddress: PromiseOrValue<BytesLike>,
-      nonce: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "retryRevert(uint16,bytes,uint256)"(
-      srcChainId: PromiseOrValue<BigNumberish>,
-      srcAddress: PromiseOrValue<BytesLike>,
-      nonce: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     router(overrides?: CallOverrides): Promise<[string]>;
@@ -697,20 +497,6 @@ export interface StargateLbpHelper extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  instantRedeemLocal(
-    _srcPoolId: PromiseOrValue<BigNumberish>,
-    _amountLP: PromiseOrValue<BigNumberish>,
-    _to: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "instantRedeemLocal(uint16,uint256,address)"(
-    _srcPoolId: PromiseOrValue<BigNumberish>,
-    _amountLP: PromiseOrValue<BigNumberish>,
-    _to: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   lbpPool(overrides?: CallOverrides): Promise<string>;
 
   "lbpPool()"(overrides?: CallOverrides): Promise<string>;
@@ -753,72 +539,12 @@ export interface StargateLbpHelper extends BaseContract {
     overrides?: CallOverrides
   ): Promise<[BigNumber, BigNumber]>;
 
-  redeemLocal(
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _srcPoolId: PromiseOrValue<BigNumberish>,
-    _dstPoolId: PromiseOrValue<BigNumberish>,
-    _refundAddress: PromiseOrValue<string>,
-    _amountLP: PromiseOrValue<BigNumberish>,
-    _to: PromiseOrValue<BytesLike>,
-    _lzTxParams: IStargateRouterBase.LzTxObjStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "redeemLocal(uint16,uint256,uint256,address,uint256,bytes,(uint256,uint256,bytes))"(
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _srcPoolId: PromiseOrValue<BigNumberish>,
-    _dstPoolId: PromiseOrValue<BigNumberish>,
-    _refundAddress: PromiseOrValue<string>,
-    _amountLP: PromiseOrValue<BigNumberish>,
-    _to: PromiseOrValue<BytesLike>,
-    _lzTxParams: IStargateRouterBase.LzTxObjStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  redeemRemote(
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _srcPoolId: PromiseOrValue<BigNumberish>,
-    _dstPoolId: PromiseOrValue<BigNumberish>,
-    _refundAddress: PromiseOrValue<string>,
-    _amountLP: PromiseOrValue<BigNumberish>,
-    _minAmountLD: PromiseOrValue<BigNumberish>,
-    _to: PromiseOrValue<BytesLike>,
-    _lzTxParams: IStargateRouterBase.LzTxObjStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "redeemRemote(uint16,uint256,uint256,address,uint256,uint256,bytes,(uint256,uint256,bytes))"(
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _srcPoolId: PromiseOrValue<BigNumberish>,
-    _dstPoolId: PromiseOrValue<BigNumberish>,
-    _refundAddress: PromiseOrValue<string>,
-    _amountLP: PromiseOrValue<BigNumberish>,
-    _minAmountLD: PromiseOrValue<BigNumberish>,
-    _to: PromiseOrValue<BytesLike>,
-    _lzTxParams: IStargateRouterBase.LzTxObjStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   renounceOwnership(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "renounceOwnership()"(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  retryRevert(
-    srcChainId: PromiseOrValue<BigNumberish>,
-    srcAddress: PromiseOrValue<BytesLike>,
-    nonce: PromiseOrValue<BigNumberish>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "retryRevert(uint16,bytes,uint256)"(
-    srcChainId: PromiseOrValue<BigNumberish>,
-    srcAddress: PromiseOrValue<BytesLike>,
-    nonce: PromiseOrValue<BigNumberish>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   router(overrides?: CallOverrides): Promise<string>;
@@ -870,20 +596,6 @@ export interface StargateLbpHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    instantRedeemLocal(
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "instantRedeemLocal(uint16,uint256,address)"(
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     lbpPool(overrides?: CallOverrides): Promise<string>;
 
     "lbpPool()"(overrides?: CallOverrides): Promise<string>;
@@ -926,69 +638,9 @@ export interface StargateLbpHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber]>;
 
-    redeemLocal(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _dstPoolId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "redeemLocal(uint16,uint256,uint256,address,uint256,bytes,(uint256,uint256,bytes))"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _dstPoolId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    redeemRemote(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _dstPoolId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _minAmountLD: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "redeemRemote(uint16,uint256,uint256,address,uint256,uint256,bytes,(uint256,uint256,bytes))"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _dstPoolId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _minAmountLD: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
     "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
-
-    retryRevert(
-      srcChainId: PromiseOrValue<BigNumberish>,
-      srcAddress: PromiseOrValue<BytesLike>,
-      nonce: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "retryRevert(uint16,bytes,uint256)"(
-      srcChainId: PromiseOrValue<BigNumberish>,
-      srcAddress: PromiseOrValue<BytesLike>,
-      nonce: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     router(overrides?: CallOverrides): Promise<string>;
 
@@ -1081,20 +733,6 @@ export interface StargateLbpHelper extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    instantRedeemLocal(
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "instantRedeemLocal(uint16,uint256,address)"(
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     lbpPool(overrides?: CallOverrides): Promise<BigNumber>;
 
     "lbpPool()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1137,72 +775,12 @@ export interface StargateLbpHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    redeemLocal(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _dstPoolId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "redeemLocal(uint16,uint256,uint256,address,uint256,bytes,(uint256,uint256,bytes))"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _dstPoolId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    redeemRemote(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _dstPoolId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _minAmountLD: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "redeemRemote(uint16,uint256,uint256,address,uint256,uint256,bytes,(uint256,uint256,bytes))"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _dstPoolId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _minAmountLD: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "renounceOwnership()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    retryRevert(
-      srcChainId: PromiseOrValue<BigNumberish>,
-      srcAddress: PromiseOrValue<BytesLike>,
-      nonce: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "retryRevert(uint16,bytes,uint256)"(
-      srcChainId: PromiseOrValue<BigNumberish>,
-      srcAddress: PromiseOrValue<BytesLike>,
-      nonce: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     router(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1255,20 +833,6 @@ export interface StargateLbpHelper extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    instantRedeemLocal(
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "instantRedeemLocal(uint16,uint256,address)"(
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     lbpPool(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "lbpPool()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1311,72 +875,12 @@ export interface StargateLbpHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    redeemLocal(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _dstPoolId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "redeemLocal(uint16,uint256,uint256,address,uint256,bytes,(uint256,uint256,bytes))"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _dstPoolId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    redeemRemote(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _dstPoolId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _minAmountLD: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "redeemRemote(uint16,uint256,uint256,address,uint256,uint256,bytes,(uint256,uint256,bytes))"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _srcPoolId: PromiseOrValue<BigNumberish>,
-      _dstPoolId: PromiseOrValue<BigNumberish>,
-      _refundAddress: PromiseOrValue<string>,
-      _amountLP: PromiseOrValue<BigNumberish>,
-      _minAmountLD: PromiseOrValue<BigNumberish>,
-      _to: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "renounceOwnership()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    retryRevert(
-      srcChainId: PromiseOrValue<BigNumberish>,
-      srcAddress: PromiseOrValue<BytesLike>,
-      nonce: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "retryRevert(uint16,bytes,uint256)"(
-      srcChainId: PromiseOrValue<BigNumberish>,
-      srcAddress: PromiseOrValue<BytesLike>,
-      nonce: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     router(overrides?: CallOverrides): Promise<PopulatedTransaction>;
