@@ -122,17 +122,22 @@ export interface GmxMarketMockInterface extends utils.Interface {
     "createDeposit((address,address,address,address,address,address,address[],address[],uint256,bool,uint256,uint256))": FunctionFragment;
     "createWithdrawal((address,address,address,address,address[],address[],uint256,uint256,bool,uint256,uint256))": FunctionFragment;
     "decimals()": FunctionFragment;
+    "glp()": FunctionFragment;
+    "glpManager()": FunctionFragment;
     "lp()": FunctionFragment;
+    "mintAndStakeGlp(address,uint256,uint256,uint256)": FunctionFragment;
     "multicall(bytes[])": FunctionFragment;
     "name()": FunctionFragment;
     "nonces(address)": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "sendTokens(address,address,uint256)": FunctionFragment;
     "sendWnt(address,uint256)": FunctionFragment;
+    "setGlp(address)": FunctionFragment;
     "symbol()": FunctionFragment;
     "totalSupply()": FunctionFragment;
     "transfer(address,uint256)": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
+    "unstakeAndRedeemGlp(address,uint256,uint256,address)": FunctionFragment;
     "usdc()": FunctionFragment;
     "weth()": FunctionFragment;
   };
@@ -153,8 +158,14 @@ export interface GmxMarketMockInterface extends utils.Interface {
       | "createWithdrawal((address,address,address,address,address[],address[],uint256,uint256,bool,uint256,uint256))"
       | "decimals"
       | "decimals()"
+      | "glp"
+      | "glp()"
+      | "glpManager"
+      | "glpManager()"
       | "lp"
       | "lp()"
+      | "mintAndStakeGlp"
+      | "mintAndStakeGlp(address,uint256,uint256,uint256)"
       | "multicall"
       | "multicall(bytes[])"
       | "name"
@@ -167,6 +178,8 @@ export interface GmxMarketMockInterface extends utils.Interface {
       | "sendTokens(address,address,uint256)"
       | "sendWnt"
       | "sendWnt(address,uint256)"
+      | "setGlp"
+      | "setGlp(address)"
       | "symbol"
       | "symbol()"
       | "totalSupply"
@@ -175,6 +188,8 @@ export interface GmxMarketMockInterface extends utils.Interface {
       | "transfer(address,uint256)"
       | "transferFrom"
       | "transferFrom(address,address,uint256)"
+      | "unstakeAndRedeemGlp"
+      | "unstakeAndRedeemGlp(address,uint256,uint256,address)"
       | "usdc"
       | "usdc()"
       | "weth"
@@ -234,8 +249,36 @@ export interface GmxMarketMockInterface extends utils.Interface {
     functionFragment: "decimals()",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "glp", values?: undefined): string;
+  encodeFunctionData(functionFragment: "glp()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "glpManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "glpManager()",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "lp", values?: undefined): string;
   encodeFunctionData(functionFragment: "lp()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "mintAndStakeGlp",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "mintAndStakeGlp(address,uint256,uint256,uint256)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
   encodeFunctionData(
     functionFragment: "multicall",
     values: [PromiseOrValue<BytesLike>[]]
@@ -302,6 +345,14 @@ export interface GmxMarketMockInterface extends utils.Interface {
     functionFragment: "sendWnt(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
+  encodeFunctionData(
+    functionFragment: "setGlp",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setGlp(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
   encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
   encodeFunctionData(
@@ -334,6 +385,24 @@ export interface GmxMarketMockInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "unstakeAndRedeemGlp",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "unstakeAndRedeemGlp(address,uint256,uint256,address)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>
     ]
   ): string;
   encodeFunctionData(functionFragment: "usdc", values?: undefined): string;
@@ -382,8 +451,23 @@ export interface GmxMarketMockInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "glp", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "glp()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "glpManager", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "glpManager()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "lp", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "lp()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "mintAndStakeGlp",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "mintAndStakeGlp(address,uint256,uint256,uint256)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "multicall", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "multicall(bytes[])",
@@ -411,6 +495,11 @@ export interface GmxMarketMockInterface extends utils.Interface {
     functionFragment: "sendWnt(address,uint256)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "setGlp", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setGlp(address)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
   decodeFunctionResult(
@@ -432,6 +521,14 @@ export interface GmxMarketMockInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "transferFrom(address,address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "unstakeAndRedeemGlp",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "unstakeAndRedeemGlp(address,uint256,uint256,address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "usdc", data: BytesLike): Result;
@@ -569,9 +666,33 @@ export interface GmxMarketMock extends BaseContract {
 
     "decimals()"(overrides?: CallOverrides): Promise<[number]>;
 
+    glp(overrides?: CallOverrides): Promise<[string]>;
+
+    "glp()"(overrides?: CallOverrides): Promise<[string]>;
+
+    glpManager(overrides?: CallOverrides): Promise<[string]>;
+
+    "glpManager()"(overrides?: CallOverrides): Promise<[string]>;
+
     lp(overrides?: CallOverrides): Promise<[string]>;
 
     "lp()"(overrides?: CallOverrides): Promise<[string]>;
+
+    mintAndStakeGlp(
+      _token: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "mintAndStakeGlp(address,uint256,uint256,uint256)"(
+      _token: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     multicall(
       data: PromiseOrValue<BytesLike>[],
@@ -645,6 +766,16 @@ export interface GmxMarketMock extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    setGlp(
+      _glp: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setGlp(address)"(
+      _glp: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     symbol(overrides?: CallOverrides): Promise<[string]>;
 
     "symbol()"(overrides?: CallOverrides): Promise<[string]>;
@@ -676,6 +807,22 @@ export interface GmxMarketMock extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    unstakeAndRedeemGlp(
+      _tokenOut: PromiseOrValue<string>,
+      _glpAmount: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BigNumberish>,
+      _receiver: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "unstakeAndRedeemGlp(address,uint256,uint256,address)"(
+      _tokenOut: PromiseOrValue<string>,
+      _glpAmount: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BigNumberish>,
+      _receiver: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -750,9 +897,33 @@ export interface GmxMarketMock extends BaseContract {
 
   "decimals()"(overrides?: CallOverrides): Promise<number>;
 
+  glp(overrides?: CallOverrides): Promise<string>;
+
+  "glp()"(overrides?: CallOverrides): Promise<string>;
+
+  glpManager(overrides?: CallOverrides): Promise<string>;
+
+  "glpManager()"(overrides?: CallOverrides): Promise<string>;
+
   lp(overrides?: CallOverrides): Promise<string>;
 
   "lp()"(overrides?: CallOverrides): Promise<string>;
+
+  mintAndStakeGlp(
+    _token: PromiseOrValue<string>,
+    _amount: PromiseOrValue<BigNumberish>,
+    arg2: PromiseOrValue<BigNumberish>,
+    arg3: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "mintAndStakeGlp(address,uint256,uint256,uint256)"(
+    _token: PromiseOrValue<string>,
+    _amount: PromiseOrValue<BigNumberish>,
+    arg2: PromiseOrValue<BigNumberish>,
+    arg3: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   multicall(
     data: PromiseOrValue<BytesLike>[],
@@ -826,6 +997,16 @@ export interface GmxMarketMock extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  setGlp(
+    _glp: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setGlp(address)"(
+    _glp: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   symbol(overrides?: CallOverrides): Promise<string>;
 
   "symbol()"(overrides?: CallOverrides): Promise<string>;
@@ -857,6 +1038,22 @@ export interface GmxMarketMock extends BaseContract {
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  unstakeAndRedeemGlp(
+    _tokenOut: PromiseOrValue<string>,
+    _glpAmount: PromiseOrValue<BigNumberish>,
+    arg2: PromiseOrValue<BigNumberish>,
+    _receiver: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "unstakeAndRedeemGlp(address,uint256,uint256,address)"(
+    _tokenOut: PromiseOrValue<string>,
+    _glpAmount: PromiseOrValue<BigNumberish>,
+    arg2: PromiseOrValue<BigNumberish>,
+    _receiver: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -931,9 +1128,33 @@ export interface GmxMarketMock extends BaseContract {
 
     "decimals()"(overrides?: CallOverrides): Promise<number>;
 
+    glp(overrides?: CallOverrides): Promise<string>;
+
+    "glp()"(overrides?: CallOverrides): Promise<string>;
+
+    glpManager(overrides?: CallOverrides): Promise<string>;
+
+    "glpManager()"(overrides?: CallOverrides): Promise<string>;
+
     lp(overrides?: CallOverrides): Promise<string>;
 
     "lp()"(overrides?: CallOverrides): Promise<string>;
+
+    mintAndStakeGlp(
+      _token: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "mintAndStakeGlp(address,uint256,uint256,uint256)"(
+      _token: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     multicall(
       data: PromiseOrValue<BytesLike>[],
@@ -1007,6 +1228,16 @@ export interface GmxMarketMock extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setGlp(
+      _glp: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setGlp(address)"(
+      _glp: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     symbol(overrides?: CallOverrides): Promise<string>;
 
     "symbol()"(overrides?: CallOverrides): Promise<string>;
@@ -1040,6 +1271,22 @@ export interface GmxMarketMock extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
+
+    unstakeAndRedeemGlp(
+      _tokenOut: PromiseOrValue<string>,
+      _glpAmount: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BigNumberish>,
+      _receiver: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "unstakeAndRedeemGlp(address,uint256,uint256,address)"(
+      _tokenOut: PromiseOrValue<string>,
+      _glpAmount: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BigNumberish>,
+      _receiver: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     usdc(overrides?: CallOverrides): Promise<string>;
 
@@ -1137,9 +1384,33 @@ export interface GmxMarketMock extends BaseContract {
 
     "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    glp(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "glp()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    glpManager(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "glpManager()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     lp(overrides?: CallOverrides): Promise<BigNumber>;
 
     "lp()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    mintAndStakeGlp(
+      _token: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "mintAndStakeGlp(address,uint256,uint256,uint256)"(
+      _token: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     multicall(
       data: PromiseOrValue<BytesLike>[],
@@ -1213,6 +1484,16 @@ export interface GmxMarketMock extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    setGlp(
+      _glp: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setGlp(address)"(
+      _glp: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     symbol(overrides?: CallOverrides): Promise<BigNumber>;
 
     "symbol()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1244,6 +1525,22 @@ export interface GmxMarketMock extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    unstakeAndRedeemGlp(
+      _tokenOut: PromiseOrValue<string>,
+      _glpAmount: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BigNumberish>,
+      _receiver: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "unstakeAndRedeemGlp(address,uint256,uint256,address)"(
+      _tokenOut: PromiseOrValue<string>,
+      _glpAmount: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BigNumberish>,
+      _receiver: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1321,9 +1618,33 @@ export interface GmxMarketMock extends BaseContract {
 
     "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    glp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "glp()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    glpManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "glpManager()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     lp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "lp()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    mintAndStakeGlp(
+      _token: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "mintAndStakeGlp(address,uint256,uint256,uint256)"(
+      _token: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     multicall(
       data: PromiseOrValue<BytesLike>[],
@@ -1397,6 +1718,16 @@ export interface GmxMarketMock extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    setGlp(
+      _glp: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setGlp(address)"(
+      _glp: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "symbol()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1428,6 +1759,22 @@ export interface GmxMarketMock extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    unstakeAndRedeemGlp(
+      _tokenOut: PromiseOrValue<string>,
+      _glpAmount: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BigNumberish>,
+      _receiver: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "unstakeAndRedeemGlp(address,uint256,uint256,address)"(
+      _tokenOut: PromiseOrValue<string>,
+      _glpAmount: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BigNumberish>,
+      _receiver: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
