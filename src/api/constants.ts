@@ -26,7 +26,7 @@ export const TAP_DISTRIBUTION: {
         supportersAddress: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
     },
     // Testnet
-    [EChainID.ARBITRUM_GOERLI]: {
+    [EChainID.SEPOLIA]: {
         teamAddress: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
         advisorAddress: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
         daoAddress: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
