@@ -13,8 +13,46 @@
             "421613": []
         },
         "tapioca-mocks": {
-            "4002": [],
-            "421613": []
+            "4002": [
+                {
+                    "name": "FTMMock",
+                    "address": "0x736bfacA81c2e00b640dFc93dA6839d6AA79D144",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
+                {
+                    "name": "WETHMock",
+                    "address": "0xe473Ce87ABcED0F0711054a2a3C24017B8ad924c",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
+                {
+                    "name": "FTMLPMock",
+                    "address": "0xe9B9Bb1c0532270F604E0fCB2E8CEef221115C53",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                }
+            ],
+            "421613": [],
+            "421614": [
+                {
+                    "name": "GLPMock",
+                    "address": "0x6bcaD0CAAee740d5401AA58565ED3fa83308ac24",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
+                {
+                    "name": "WETHMock",
+                    "address": "0x665A6450a3c4C225a4C2F37A4014D8EC2665346f",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                }
+            ]
         },
         "generic": {
             "421613": [],
