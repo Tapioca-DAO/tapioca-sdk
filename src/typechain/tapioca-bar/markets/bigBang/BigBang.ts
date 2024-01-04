@@ -66,7 +66,7 @@ export interface BigBangInterface extends utils.Interface {
     "leverageExecutor()": FunctionFragment;
     "leverageModule()": FunctionFragment;
     "liquidate(address[],uint256[],uint256[],address[],bytes[])": FunctionFragment;
-    "liquidateBadDebt(address,address,address,bytes,bool)": FunctionFragment;
+    "liquidateBadDebt(address,address,address,address,bytes,bool)": FunctionFragment;
     "liquidationBonusAmount()": FunctionFragment;
     "liquidationCollateralizationRate()": FunctionFragment;
     "liquidationModule()": FunctionFragment;
@@ -194,7 +194,7 @@ export interface BigBangInterface extends utils.Interface {
       | "liquidate"
       | "liquidate(address[],uint256[],uint256[],address[],bytes[])"
       | "liquidateBadDebt"
-      | "liquidateBadDebt(address,address,address,bytes,bool)"
+      | "liquidateBadDebt(address,address,address,address,bytes,bool)"
       | "liquidationBonusAmount"
       | "liquidationBonusAmount()"
       | "liquidationCollateralizationRate"
@@ -624,13 +624,15 @@ export interface BigBangInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<string>,
+      PromiseOrValue<string>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<boolean>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "liquidateBadDebt(address,address,address,bytes,bool)",
+    functionFragment: "liquidateBadDebt(address,address,address,address,bytes,bool)",
     values: [
+      PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -1363,7 +1365,7 @@ export interface BigBangInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "liquidateBadDebt(address,address,address,bytes,bool)",
+    functionFragment: "liquidateBadDebt(address,address,address,address,bytes,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -2531,6 +2533,7 @@ export interface BigBang extends BaseContract {
 
     liquidateBadDebt(
       user: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
       liquidatorReceiver: PromiseOrValue<string>,
       liquidatorReceiverData: PromiseOrValue<BytesLike>,
@@ -2538,8 +2541,9 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "liquidateBadDebt(address,address,address,bytes,bool)"(
+    "liquidateBadDebt(address,address,address,address,bytes,bool)"(
       user: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
       liquidatorReceiver: PromiseOrValue<string>,
       liquidatorReceiverData: PromiseOrValue<BytesLike>,
@@ -3302,6 +3306,7 @@ export interface BigBang extends BaseContract {
 
   liquidateBadDebt(
     user: PromiseOrValue<string>,
+    from: PromiseOrValue<string>,
     receiver: PromiseOrValue<string>,
     liquidatorReceiver: PromiseOrValue<string>,
     liquidatorReceiverData: PromiseOrValue<BytesLike>,
@@ -3309,8 +3314,9 @@ export interface BigBang extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "liquidateBadDebt(address,address,address,bytes,bool)"(
+  "liquidateBadDebt(address,address,address,address,bytes,bool)"(
     user: PromiseOrValue<string>,
+    from: PromiseOrValue<string>,
     receiver: PromiseOrValue<string>,
     liquidatorReceiver: PromiseOrValue<string>,
     liquidatorReceiverData: PromiseOrValue<BytesLike>,
@@ -4065,6 +4071,7 @@ export interface BigBang extends BaseContract {
 
     liquidateBadDebt(
       user: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
       liquidatorReceiver: PromiseOrValue<string>,
       liquidatorReceiverData: PromiseOrValue<BytesLike>,
@@ -4072,8 +4079,9 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "liquidateBadDebt(address,address,address,bytes,bool)"(
+    "liquidateBadDebt(address,address,address,address,bytes,bool)"(
       user: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
       liquidatorReceiver: PromiseOrValue<string>,
       liquidatorReceiverData: PromiseOrValue<BytesLike>,
@@ -5055,6 +5063,7 @@ export interface BigBang extends BaseContract {
 
     liquidateBadDebt(
       user: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
       liquidatorReceiver: PromiseOrValue<string>,
       liquidatorReceiverData: PromiseOrValue<BytesLike>,
@@ -5062,8 +5071,9 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "liquidateBadDebt(address,address,address,bytes,bool)"(
+    "liquidateBadDebt(address,address,address,address,bytes,bool)"(
       user: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
       liquidatorReceiver: PromiseOrValue<string>,
       liquidatorReceiverData: PromiseOrValue<BytesLike>,
@@ -5793,6 +5803,7 @@ export interface BigBang extends BaseContract {
 
     liquidateBadDebt(
       user: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
       liquidatorReceiver: PromiseOrValue<string>,
       liquidatorReceiverData: PromiseOrValue<BytesLike>,
@@ -5800,8 +5811,9 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "liquidateBadDebt(address,address,address,bytes,bool)"(
+    "liquidateBadDebt(address,address,address,address,bytes,bool)"(
       user: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
       liquidatorReceiver: PromiseOrValue<string>,
       liquidatorReceiverData: PromiseOrValue<BytesLike>,
