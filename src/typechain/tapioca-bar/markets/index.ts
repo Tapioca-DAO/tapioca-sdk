@@ -5,6 +5,8 @@ import type * as bigBang from "./bigBang";
 export type { bigBang };
 import type * as leverage from "./leverage";
 export type { leverage };
+import type * as origins from "./origins";
+export type { origins };
 import type * as singularity from "./singularity";
 export type { singularity };
 export type { Market } from "./Market";

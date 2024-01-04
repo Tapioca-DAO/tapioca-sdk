@@ -85,6 +85,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MarketLiquidatorReceiver__factory>;
     getContractFactory(
+      name: "Origins",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Origins__factory>;
+    getContractFactory(
       name: "SGLBorrow",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SGLBorrow__factory>;
@@ -263,6 +267,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.MarketLiquidatorReceiver>;
+    getContractAt(
+      name: "Origins",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Origins>;
     getContractAt(
       name: "SGLBorrow",
       address: string,

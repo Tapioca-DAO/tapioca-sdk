@@ -43,8 +43,10 @@ export declare namespace IPenrose {
 export interface PenroseInterface extends utils.Interface {
   functions: {
     "addBigBang(address,address)": FunctionFragment;
+    "addOriginsMarket(address)": FunctionFragment;
     "addSingularity(address,address)": FunctionFragment;
     "allBigBangMarkets(uint256)": FunctionFragment;
+    "allOriginsMarkets(uint256)": FunctionFragment;
     "bigBangEthDebtRate()": FunctionFragment;
     "bigBangEthMarket()": FunctionFragment;
     "bigBangMarkets()": FunctionFragment;
@@ -63,6 +65,7 @@ export interface PenroseInterface extends utils.Interface {
     "hostLzChainId()": FunctionFragment;
     "isBigBangMasterContractRegistered(address)": FunctionFragment;
     "isMarketRegistered(address)": FunctionFragment;
+    "isOriginRegistered(address)": FunctionFragment;
     "isSingularityMasterContractRegistered(address)": FunctionFragment;
     "mainAssetId()": FunctionFragment;
     "mainToken()": FunctionFragment;
@@ -99,10 +102,14 @@ export interface PenroseInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "addBigBang"
       | "addBigBang(address,address)"
+      | "addOriginsMarket"
+      | "addOriginsMarket(address)"
       | "addSingularity"
       | "addSingularity(address,address)"
       | "allBigBangMarkets"
       | "allBigBangMarkets(uint256)"
+      | "allOriginsMarkets"
+      | "allOriginsMarkets(uint256)"
       | "bigBangEthDebtRate"
       | "bigBangEthDebtRate()"
       | "bigBangEthMarket"
@@ -139,6 +146,8 @@ export interface PenroseInterface extends utils.Interface {
       | "isBigBangMasterContractRegistered(address)"
       | "isMarketRegistered"
       | "isMarketRegistered(address)"
+      | "isOriginRegistered"
+      | "isOriginRegistered(address)"
       | "isSingularityMasterContractRegistered"
       | "isSingularityMasterContractRegistered(address)"
       | "mainAssetId"
@@ -210,6 +219,14 @@ export interface PenroseInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "addOriginsMarket",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "addOriginsMarket(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "addSingularity",
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
@@ -223,6 +240,14 @@ export interface PenroseInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "allBigBangMarkets(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "allOriginsMarkets",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "allOriginsMarkets(uint256)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
@@ -377,6 +402,14 @@ export interface PenroseInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "isMarketRegistered(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isOriginRegistered",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isOriginRegistered(address)",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
@@ -626,6 +659,14 @@ export interface PenroseInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "addOriginsMarket",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "addOriginsMarket(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "addSingularity",
     data: BytesLike
   ): Result;
@@ -639,6 +680,14 @@ export interface PenroseInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "allBigBangMarkets(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "allOriginsMarkets",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "allOriginsMarkets(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -771,6 +820,14 @@ export interface PenroseInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "isMarketRegistered(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isOriginRegistered",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isOriginRegistered(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -991,6 +1048,7 @@ export interface PenroseInterface extends utils.Interface {
     "ReaccruedMarkets(bool)": EventFragment;
     "RegisterBigBang(address,address)": EventFragment;
     "RegisterBigBangMasterContract(address,uint8)": EventFragment;
+    "RegisterOrigins(address)": EventFragment;
     "RegisterSingularity(address,address)": EventFragment;
     "RegisterSingularityMasterContract(address,uint8)": EventFragment;
     "TotalUsdoDebt(uint256)": EventFragment;
@@ -1045,6 +1103,8 @@ export interface PenroseInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "RegisterBigBangMasterContract(address,uint8)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RegisterOrigins"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RegisterOrigins(address)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RegisterSingularity"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "RegisterSingularity(address,address)"
@@ -1202,6 +1262,16 @@ export type RegisterBigBangMasterContractEvent = TypedEvent<
 export type RegisterBigBangMasterContractEventFilter =
   TypedEventFilter<RegisterBigBangMasterContractEvent>;
 
+export interface RegisterOriginsEventObject {
+  location: string;
+}
+export type RegisterOriginsEvent = TypedEvent<
+  [string],
+  RegisterOriginsEventObject
+>;
+
+export type RegisterOriginsEventFilter = TypedEventFilter<RegisterOriginsEvent>;
+
 export interface RegisterSingularityEventObject {
   location: string;
   masterContract: string;
@@ -1289,6 +1359,16 @@ export interface Penrose extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    addOriginsMarket(
+      _contract: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "addOriginsMarket(address)"(
+      _contract: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     addSingularity(
       mc: PromiseOrValue<string>,
       _contract: PromiseOrValue<string>,
@@ -1307,6 +1387,16 @@ export interface Penrose extends BaseContract {
     ): Promise<[string]>;
 
     "allBigBangMarkets(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    allOriginsMarkets(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    "allOriginsMarkets(uint256)"(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
@@ -1459,6 +1549,16 @@ export interface Penrose extends BaseContract {
     ): Promise<[boolean]>;
 
     "isMarketRegistered(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    isOriginRegistered(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "isOriginRegistered(address)"(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
@@ -1722,6 +1822,16 @@ export interface Penrose extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  addOriginsMarket(
+    _contract: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "addOriginsMarket(address)"(
+    _contract: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   addSingularity(
     mc: PromiseOrValue<string>,
     _contract: PromiseOrValue<string>,
@@ -1740,6 +1850,16 @@ export interface Penrose extends BaseContract {
   ): Promise<string>;
 
   "allBigBangMarkets(uint256)"(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  allOriginsMarkets(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  "allOriginsMarkets(uint256)"(
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
@@ -1886,6 +2006,16 @@ export interface Penrose extends BaseContract {
   ): Promise<boolean>;
 
   "isMarketRegistered(address)"(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  isOriginRegistered(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "isOriginRegistered(address)"(
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<boolean>;
@@ -2145,6 +2275,16 @@ export interface Penrose extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    addOriginsMarket(
+      _contract: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "addOriginsMarket(address)"(
+      _contract: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     addSingularity(
       mc: PromiseOrValue<string>,
       _contract: PromiseOrValue<string>,
@@ -2163,6 +2303,16 @@ export interface Penrose extends BaseContract {
     ): Promise<string>;
 
     "allBigBangMarkets(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    allOriginsMarkets(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "allOriginsMarkets(uint256)"(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
@@ -2305,6 +2455,16 @@ export interface Penrose extends BaseContract {
     ): Promise<boolean>;
 
     "isMarketRegistered(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    isOriginRegistered(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "isOriginRegistered(address)"(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<boolean>;
@@ -2655,6 +2815,13 @@ export interface Penrose extends BaseContract {
       risk?: PromiseOrValue<BigNumberish> | null
     ): RegisterBigBangMasterContractEventFilter;
 
+    "RegisterOrigins(address)"(
+      location?: PromiseOrValue<string> | null
+    ): RegisterOriginsEventFilter;
+    RegisterOrigins(
+      location?: PromiseOrValue<string> | null
+    ): RegisterOriginsEventFilter;
+
     "RegisterSingularity(address,address)"(
       location?: PromiseOrValue<string> | null,
       masterContract?: PromiseOrValue<string> | null
@@ -2703,6 +2870,16 @@ export interface Penrose extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    addOriginsMarket(
+      _contract: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "addOriginsMarket(address)"(
+      _contract: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     addSingularity(
       mc: PromiseOrValue<string>,
       _contract: PromiseOrValue<string>,
@@ -2721,6 +2898,16 @@ export interface Penrose extends BaseContract {
     ): Promise<BigNumber>;
 
     "allBigBangMarkets(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    allOriginsMarkets(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "allOriginsMarkets(uint256)"(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -2867,6 +3054,16 @@ export interface Penrose extends BaseContract {
     ): Promise<BigNumber>;
 
     "isMarketRegistered(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    isOriginRegistered(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "isOriginRegistered(address)"(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -3127,6 +3324,16 @@ export interface Penrose extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    addOriginsMarket(
+      _contract: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "addOriginsMarket(address)"(
+      _contract: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     addSingularity(
       mc: PromiseOrValue<string>,
       _contract: PromiseOrValue<string>,
@@ -3145,6 +3352,16 @@ export interface Penrose extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "allBigBangMarkets(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    allOriginsMarkets(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "allOriginsMarkets(uint256)"(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -3301,6 +3518,16 @@ export interface Penrose extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "isMarketRegistered(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    isOriginRegistered(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "isOriginRegistered(address)"(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
