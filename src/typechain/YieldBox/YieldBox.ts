@@ -50,6 +50,7 @@ export interface YieldBoxInterface extends utils.Interface {
     "depositETH(address,address,uint256)": FunctionFragment;
     "depositETHAsset(uint256,address,uint256)": FunctionFragment;
     "depositNFTAsset(uint256,address,address)": FunctionFragment;
+    "eip712Domain()": FunctionFragment;
     "ids(uint8,address,address,uint256)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "isApprovedForAsset(address,address,uint256)": FunctionFragment;
@@ -128,6 +129,8 @@ export interface YieldBoxInterface extends utils.Interface {
       | "depositETHAsset(uint256,address,uint256)"
       | "depositNFTAsset"
       | "depositNFTAsset(uint256,address,address)"
+      | "eip712Domain"
+      | "eip712Domain()"
       | "ids"
       | "ids(uint8,address,address,uint256)"
       | "isApprovedForAll"
@@ -455,6 +458,14 @@ export interface YieldBoxInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<string>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "eip712Domain",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "eip712Domain()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "ids",
@@ -1094,6 +1105,14 @@ export interface YieldBoxInterface extends utils.Interface {
     functionFragment: "depositNFTAsset(uint256,address,address)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "eip712Domain",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "eip712Domain()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "ids", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "ids(uint8,address,address,uint256)",
@@ -1324,6 +1343,7 @@ export interface YieldBoxInterface extends utils.Interface {
     "ApprovalForAsset(address,address,uint256,bool)": EventFragment;
     "AssetRegistered(uint8,address,address,uint256,uint256)": EventFragment;
     "Deposited(address,address,address,uint256,uint256,uint256,uint256,uint256,bool)": EventFragment;
+    "EIP712DomainChanged()": EventFragment;
     "OwnershipTransferred(uint256,address,address)": EventFragment;
     "TokenCreated(address,string,string,uint8,uint256)": EventFragment;
     "TransferBatch(address,address,address,uint256[],uint256[])": EventFragment;
@@ -1348,6 +1368,8 @@ export interface YieldBoxInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "Deposited(address,address,address,uint256,uint256,uint256,uint256,uint256,bool)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged()"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "OwnershipTransferred(uint256,address,address)"
@@ -1439,6 +1461,15 @@ export type DepositedEvent = TypedEvent<
 >;
 
 export type DepositedEventFilter = TypedEventFilter<DepositedEvent>;
+
+export interface EIP712DomainChangedEventObject {}
+export type EIP712DomainChangedEvent = TypedEvent<
+  [],
+  EIP712DomainChangedEventObject
+>;
+
+export type EIP712DomainChangedEventFilter =
+  TypedEventFilter<EIP712DomainChangedEvent>;
 
 export interface OwnershipTransferredEventObject {
   tokenId: BigNumber;
@@ -1829,6 +1860,34 @@ export interface YieldBox extends BaseContract {
       to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
 
     ids(
       arg0: PromiseOrValue<BigNumberish>,
@@ -2602,6 +2661,34 @@ export interface YieldBox extends BaseContract {
     to: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  eip712Domain(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
+
+  "eip712Domain()"(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
 
   ids(
     arg0: PromiseOrValue<BigNumberish>,
@@ -3396,6 +3483,34 @@ export interface YieldBox extends BaseContract {
       [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
     >;
 
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
     ids(
       arg0: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<string>,
@@ -3964,6 +4079,9 @@ export interface YieldBox extends BaseContract {
       isNFT?: null
     ): DepositedEventFilter;
 
+    "EIP712DomainChanged()"(): EIP712DomainChangedEventFilter;
+    EIP712DomainChanged(): EIP712DomainChangedEventFilter;
+
     "OwnershipTransferred(uint256,address,address)"(
       tokenId?: PromiseOrValue<BigNumberish> | null,
       previousOwner?: PromiseOrValue<string> | null,
@@ -4305,6 +4423,10 @@ export interface YieldBox extends BaseContract {
       to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    eip712Domain(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "eip712Domain()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     ids(
       arg0: PromiseOrValue<BigNumberish>,
@@ -5049,6 +5171,10 @@ export interface YieldBox extends BaseContract {
       to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    eip712Domain(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "eip712Domain()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     ids(
       arg0: PromiseOrValue<BigNumberish>,

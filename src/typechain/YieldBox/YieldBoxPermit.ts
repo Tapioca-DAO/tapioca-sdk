@@ -13,7 +13,11 @@ import type {
   Signer,
   utils,
 } from "ethers";
-import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type {
+  FunctionFragment,
+  Result,
+  EventFragment,
+} from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type {
   TypedEventFilter,
@@ -26,6 +30,7 @@ import type {
 export interface YieldBoxPermitInterface extends utils.Interface {
   functions: {
     "DOMAIN_SEPARATOR()": FunctionFragment;
+    "eip712Domain()": FunctionFragment;
     "nonces(address)": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "permitAll(address,address,uint256,uint8,bytes32,bytes32)": FunctionFragment;
@@ -37,6 +42,8 @@ export interface YieldBoxPermitInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "DOMAIN_SEPARATOR"
       | "DOMAIN_SEPARATOR()"
+      | "eip712Domain"
+      | "eip712Domain()"
       | "nonces"
       | "nonces(address)"
       | "permit"
@@ -55,6 +62,14 @@ export interface YieldBoxPermitInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "DOMAIN_SEPARATOR()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "eip712Domain",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "eip712Domain()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -166,6 +181,14 @@ export interface YieldBoxPermitInterface extends utils.Interface {
     functionFragment: "DOMAIN_SEPARATOR()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "eip712Domain",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "eip712Domain()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "nonces(address)",
@@ -192,8 +215,22 @@ export interface YieldBoxPermitInterface extends utils.Interface {
     data: BytesLike
   ): Result;
 
-  events: {};
+  events: {
+    "EIP712DomainChanged()": EventFragment;
+  };
+
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EIP712DomainChanged()"): EventFragment;
 }
+
+export interface EIP712DomainChangedEventObject {}
+export type EIP712DomainChangedEvent = TypedEvent<
+  [],
+  EIP712DomainChangedEventObject
+>;
+
+export type EIP712DomainChangedEventFilter =
+  TypedEventFilter<EIP712DomainChangedEvent>;
 
 export interface YieldBoxPermit extends BaseContract {
   contractName: "YieldBoxPermit";
@@ -227,6 +264,34 @@ export interface YieldBoxPermit extends BaseContract {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<[string]>;
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<[string]>;
+
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -327,6 +392,34 @@ export interface YieldBoxPermit extends BaseContract {
 
   "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
 
+  eip712Domain(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
+
+  "eip712Domain()"(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, string, string, BigNumber[]] & {
+      fields: string;
+      name: string;
+      version: string;
+      chainId: BigNumber;
+      verifyingContract: string;
+      salt: string;
+      extensions: BigNumber[];
+    }
+  >;
+
   nonces(
     owner: PromiseOrValue<string>,
     overrides?: CallOverrides
@@ -426,6 +519,34 @@ export interface YieldBoxPermit extends BaseContract {
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
 
+    eip712Domain(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
+    "eip712Domain()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, string, string, BigNumber[]] & {
+        fields: string;
+        name: string;
+        version: string;
+        chainId: BigNumber;
+        verifyingContract: string;
+        salt: string;
+        extensions: BigNumber[];
+      }
+    >;
+
     nonces(
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -521,12 +642,19 @@ export interface YieldBoxPermit extends BaseContract {
     ): Promise<void>;
   };
 
-  filters: {};
+  filters: {
+    "EIP712DomainChanged()"(): EIP712DomainChangedEventFilter;
+    EIP712DomainChanged(): EIP712DomainChangedEventFilter;
+  };
 
   estimateGas: {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<BigNumber>;
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    eip712Domain(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "eip712Domain()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nonces(
       owner: PromiseOrValue<string>,
@@ -629,6 +757,10 @@ export interface YieldBoxPermit extends BaseContract {
     "DOMAIN_SEPARATOR()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    eip712Domain(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "eip712Domain()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     nonces(
       owner: PromiseOrValue<string>,
