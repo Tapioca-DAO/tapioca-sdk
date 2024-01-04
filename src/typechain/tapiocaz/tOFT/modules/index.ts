@@ -8,6 +8,4 @@ export type { BaseTOFTMarketDestinationModule } from "./BaseTOFTMarketDestinatio
 export type { BaseTOFTMarketModule } from "./BaseTOFTMarketModule";
 export type { BaseTOFTOptionsDestinationModule } from "./BaseTOFTOptionsDestinationModule";
 export type { BaseTOFTOptionsModule } from "./BaseTOFTOptionsModule";
-export type { BaseTOFTStrategyDestinationModule } from "./BaseTOFTStrategyDestinationModule";
-export type { BaseTOFTStrategyModule } from "./BaseTOFTStrategyModule";
 export type { TOFTCommon } from "./TOFTCommon";

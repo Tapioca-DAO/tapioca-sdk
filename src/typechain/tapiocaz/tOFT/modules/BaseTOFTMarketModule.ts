@@ -37,6 +37,7 @@ export declare namespace ICommonData {
     withdrawAdapterParams: PromiseOrValue<BytesLike>;
     unwrap: PromiseOrValue<boolean>;
     refundAddress: PromiseOrValue<string>;
+    zroPaymentAddress: PromiseOrValue<string>;
   };
 
   export type IWithdrawParamsStructOutput = [
@@ -46,6 +47,7 @@ export declare namespace ICommonData {
     number,
     string,
     boolean,
+    string,
     string
   ] & {
     withdraw: boolean;
@@ -55,6 +57,7 @@ export declare namespace ICommonData {
     withdrawAdapterParams: string;
     unwrap: boolean;
     refundAddress: string;
+    zroPaymentAddress: string;
   };
 
   export type IApprovalStruct = {
@@ -198,12 +201,12 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
     "owner()": FunctionFragment;
     "payloadSizeLimitLookup(uint16)": FunctionFragment;
     "precrime()": FunctionFragment;
-    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool,address),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)": FunctionFragment;
+    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool,address,address),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "retryMessage(uint16,bytes,uint64,bytes)": FunctionFragment;
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
-    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool,address),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool,address,address),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
     "setMaxSlippage(uint256)": FunctionFragment;
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
@@ -294,7 +297,7 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
       | "precrime"
       | "precrime()"
       | "removeCollateral"
-      | "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool,address),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"
+      | "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool,address,address),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"
       | "renounceOwnership"
       | "renounceOwnership()"
       | "retryMessage"
@@ -304,7 +307,7 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
       | "sendFrom"
       | "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"
       | "sendToYBAndBorrow"
-      | "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool,address),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
+      | "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool,address,address),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "setConfig"
       | "setConfig(uint16,uint16,uint256,bytes)"
       | "setMaxSlippage"
@@ -676,7 +679,7 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool,address),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
+    functionFragment: "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool,address,address),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -774,7 +777,7 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool,address),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool,address,address),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -1168,7 +1171,7 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool,address),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
+    functionFragment: "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool,address,address),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1205,7 +1208,7 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool,address),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool,address,address),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "setConfig", data: BytesLike): Result;
@@ -1356,6 +1359,7 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
+    "MaxSlippageUpdated(uint256,uint256)": EventFragment;
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)": EventFragment;
     "NonContractAddress(address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
@@ -1367,6 +1371,7 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
     "SetTrustedRemote(uint16,bytes)": EventFragment;
     "SetTrustedRemoteAddress(uint16,bytes)": EventFragment;
     "SetUseCustomAdapterParams(bool)": EventFragment;
+    "StargateRouterUpdated(address,address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
 
@@ -1377,6 +1382,10 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "CallOFTReceivedSuccess"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "MaxSlippageUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "MaxSlippageUpdated(uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MessageFailed"): EventFragment;
   getEvent(
@@ -1420,6 +1429,10 @@ export interface BaseTOFTMarketModuleInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "SetUseCustomAdapterParams(bool)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "StargateRouterUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "StargateRouterUpdated(address,address)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Transfer(address,address,uint256)"
@@ -1451,6 +1464,18 @@ export type CallOFTReceivedSuccessEvent = TypedEvent<
 
 export type CallOFTReceivedSuccessEventFilter =
   TypedEventFilter<CallOFTReceivedSuccessEvent>;
+
+export interface MaxSlippageUpdatedEventObject {
+  _old: BigNumber;
+  _newVal: BigNumber;
+}
+export type MaxSlippageUpdatedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  MaxSlippageUpdatedEventObject
+>;
+
+export type MaxSlippageUpdatedEventFilter =
+  TypedEventFilter<MaxSlippageUpdatedEvent>;
 
 export interface MessageFailedEventObject {
   _srcChainId: number;
@@ -1582,6 +1607,18 @@ export type SetUseCustomAdapterParamsEvent = TypedEvent<
 
 export type SetUseCustomAdapterParamsEventFilter =
   TypedEventFilter<SetUseCustomAdapterParamsEvent>;
+
+export interface StargateRouterUpdatedEventObject {
+  _old: string;
+  _new: string;
+}
+export type StargateRouterUpdatedEvent = TypedEvent<
+  [string, string],
+  StargateRouterUpdatedEventObject
+>;
+
+export type StargateRouterUpdatedEventFilter =
+  TypedEventFilter<StargateRouterUpdatedEvent>;
 
 export interface TransferEventObject {
   from: string;
@@ -1957,7 +1994,7 @@ export interface BaseTOFTMarketModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool,address),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool,address,address),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -2047,7 +2084,7 @@ export interface BaseTOFTMarketModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool,address),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool,address,address),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -2588,7 +2625,7 @@ export interface BaseTOFTMarketModule extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool,address),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+  "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool,address,address),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -2678,7 +2715,7 @@ export interface BaseTOFTMarketModule extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool,address),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+  "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool,address,address),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
     _from: PromiseOrValue<string>,
     _to: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3221,7 +3258,7 @@ export interface BaseTOFTMarketModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool,address),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool,address,address),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3307,7 +3344,7 @@ export interface BaseTOFTMarketModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool,address),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool,address,address),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -3542,6 +3579,15 @@ export interface BaseTOFTMarketModule extends BaseContract {
       _hash?: null
     ): CallOFTReceivedSuccessEventFilter;
 
+    "MaxSlippageUpdated(uint256,uint256)"(
+      _old?: PromiseOrValue<BigNumberish> | null,
+      _newVal?: PromiseOrValue<BigNumberish> | null
+    ): MaxSlippageUpdatedEventFilter;
+    MaxSlippageUpdated(
+      _old?: PromiseOrValue<BigNumberish> | null,
+      _newVal?: PromiseOrValue<BigNumberish> | null
+    ): MaxSlippageUpdatedEventFilter;
+
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)"(
       _srcChainId?: null,
       _srcAddress?: null,
@@ -3646,6 +3692,15 @@ export interface BaseTOFTMarketModule extends BaseContract {
     SetUseCustomAdapterParams(
       _useCustomAdapterParams?: null
     ): SetUseCustomAdapterParamsEventFilter;
+
+    "StargateRouterUpdated(address,address)"(
+      _old?: PromiseOrValue<string> | null,
+      _new?: PromiseOrValue<string> | null
+    ): StargateRouterUpdatedEventFilter;
+    StargateRouterUpdated(
+      _old?: PromiseOrValue<string> | null,
+      _new?: PromiseOrValue<string> | null
+    ): StargateRouterUpdatedEventFilter;
 
     "Transfer(address,address,uint256)"(
       from?: PromiseOrValue<string> | null,
@@ -3985,7 +4040,7 @@ export interface BaseTOFTMarketModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool,address),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool,address,address),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -4075,7 +4130,7 @@ export interface BaseTOFTMarketModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool,address),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool,address,address),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -4619,7 +4674,7 @@ export interface BaseTOFTMarketModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool,address),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
+    "removeCollateral(address,address,uint16,address,(bool,uint256,bool,uint16,bytes,bool,address,address),(uint256,address,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],bytes)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
@@ -4709,7 +4764,7 @@ export interface BaseTOFTMarketModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool,address),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "sendToYBAndBorrow(address,address,uint16,bytes,(uint256,uint256,address,address),(bool,uint256,bool,uint16,bytes,bool,address,address),(uint256,address),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
       _from: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,

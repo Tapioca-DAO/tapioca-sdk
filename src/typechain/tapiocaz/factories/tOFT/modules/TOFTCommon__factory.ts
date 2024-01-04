@@ -96,6 +96,25 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
+        indexed: true,
+        internalType: "uint256",
+        name: "_old",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "_newVal",
+        type: "uint256",
+      },
+    ],
+    name: "MaxSlippageUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
         indexed: false,
         internalType: "uint16",
         name: "_srcChainId",
@@ -335,6 +354,25 @@ const _abi = [
       },
     ],
     name: "SetUseCustomAdapterParams",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "_old",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "_new",
+        type: "address",
+      },
+    ],
+    name: "StargateRouterUpdated",
     type: "event",
   },
   {

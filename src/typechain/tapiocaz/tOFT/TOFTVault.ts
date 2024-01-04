@@ -30,30 +30,41 @@ import type {
 
 export interface TOFTVaultInterface extends utils.Interface {
   functions: {
+    "claimOwnership()": FunctionFragment;
     "depositNative()": FunctionFragment;
     "owner()": FunctionFragment;
-    "renounceOwnership()": FunctionFragment;
-    "transferOwnership(address)": FunctionFragment;
+    "pendingOwner()": FunctionFragment;
+    "transferOwnership(address,bool,bool)": FunctionFragment;
     "viewSupply()": FunctionFragment;
     "withdraw(address,uint256)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "claimOwnership"
+      | "claimOwnership()"
       | "depositNative"
       | "depositNative()"
       | "owner"
       | "owner()"
-      | "renounceOwnership"
-      | "renounceOwnership()"
+      | "pendingOwner"
+      | "pendingOwner()"
       | "transferOwnership"
-      | "transferOwnership(address)"
+      | "transferOwnership(address,bool,bool)"
       | "viewSupply"
       | "viewSupply()"
       | "withdraw"
       | "withdraw(address,uint256)"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "claimOwnership",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "claimOwnership()",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "depositNative",
     values?: undefined
@@ -65,20 +76,28 @@ export interface TOFTVaultInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "renounceOwnership",
+    functionFragment: "pendingOwner",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "renounceOwnership()",
+    functionFragment: "pendingOwner()",
     values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
-    values: [PromiseOrValue<string>]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<boolean>,
+      PromiseOrValue<boolean>
+    ]
   ): string;
   encodeFunctionData(
-    functionFragment: "transferOwnership(address)",
-    values: [PromiseOrValue<string>]
+    functionFragment: "transferOwnership(address,bool,bool)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<boolean>,
+      PromiseOrValue<boolean>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "viewSupply",
@@ -98,6 +117,14 @@ export interface TOFTVaultInterface extends utils.Interface {
   ): string;
 
   decodeFunctionResult(
+    functionFragment: "claimOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "claimOwnership()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "depositNative",
     data: BytesLike
   ): Result;
@@ -108,11 +135,11 @@ export interface TOFTVaultInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "renounceOwnership",
+    functionFragment: "pendingOwner",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "renounceOwnership()",
+    functionFragment: "pendingOwner()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -120,7 +147,7 @@ export interface TOFTVaultInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "transferOwnership(address)",
+    functionFragment: "transferOwnership(address,bool,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "viewSupply", data: BytesLike): Result;
@@ -185,6 +212,14 @@ export interface TOFTVault extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    claimOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "claimOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     depositNative(
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -197,21 +232,21 @@ export interface TOFTVault extends BaseContract {
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
 
-    renounceOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
+    pendingOwner(overrides?: CallOverrides): Promise<[string]>;
 
-    "renounceOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
+    "pendingOwner()"(overrides?: CallOverrides): Promise<[string]>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "transferOwnership(address)"(
+    "transferOwnership(address,bool,bool)"(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -232,6 +267,14 @@ export interface TOFTVault extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
+  claimOwnership(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "claimOwnership()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   depositNative(
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -244,21 +287,21 @@ export interface TOFTVault extends BaseContract {
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
 
-  renounceOwnership(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
+  pendingOwner(overrides?: CallOverrides): Promise<string>;
 
-  "renounceOwnership()"(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
+  "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
 
   transferOwnership(
     newOwner: PromiseOrValue<string>,
+    direct: PromiseOrValue<boolean>,
+    renounce: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "transferOwnership(address)"(
+  "transferOwnership(address,bool,bool)"(
     newOwner: PromiseOrValue<string>,
+    direct: PromiseOrValue<boolean>,
+    renounce: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -279,6 +322,10 @@ export interface TOFTVault extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    claimOwnership(overrides?: CallOverrides): Promise<void>;
+
+    "claimOwnership()"(overrides?: CallOverrides): Promise<void>;
+
     depositNative(overrides?: CallOverrides): Promise<void>;
 
     "depositNative()"(overrides?: CallOverrides): Promise<void>;
@@ -287,17 +334,21 @@ export interface TOFTVault extends BaseContract {
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
 
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
+    pendingOwner(overrides?: CallOverrides): Promise<string>;
 
-    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
+    "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "transferOwnership(address)"(
+    "transferOwnership(address,bool,bool)"(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -330,6 +381,14 @@ export interface TOFTVault extends BaseContract {
   };
 
   estimateGas: {
+    claimOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "claimOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     depositNative(
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -342,21 +401,21 @@ export interface TOFTVault extends BaseContract {
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    renounceOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
+    pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "renounceOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
+    "pendingOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "transferOwnership(address)"(
+    "transferOwnership(address,bool,bool)"(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -378,6 +437,14 @@ export interface TOFTVault extends BaseContract {
   };
 
   populateTransaction: {
+    claimOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "claimOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     depositNative(
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -390,21 +457,21 @@ export interface TOFTVault extends BaseContract {
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    renounceOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
+    pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "renounceOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
+    "pendingOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "transferOwnership(address)"(
+    "transferOwnership(address,bool,bool)"(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

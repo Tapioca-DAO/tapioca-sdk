@@ -134,6 +134,7 @@ export interface BaseTOFTGenericModuleInterface extends utils.Interface {
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
     "sendFromDestination(bytes)": FunctionFragment;
+    "sendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
     "setMaxSlippage(uint256)": FunctionFragment;
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
@@ -153,8 +154,7 @@ export interface BaseTOFTGenericModuleInterface extends utils.Interface {
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "triggerApproveOrRevoke(uint16,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
-    "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
-    "triggerSendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
+    "triggerSendFrom(address,uint16,bytes32,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "trustedRemoteLookup(uint16)": FunctionFragment;
     "useCustomAdapterParams()": FunctionFragment;
     "yieldBox()": FunctionFragment;
@@ -240,6 +240,8 @@ export interface BaseTOFTGenericModuleInterface extends utils.Interface {
       | "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"
       | "sendFromDestination"
       | "sendFromDestination(bytes)"
+      | "sendFromWithParams"
+      | "sendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "setConfig"
       | "setConfig(uint16,uint16,uint256,bytes)"
       | "setMaxSlippage"
@@ -279,9 +281,7 @@ export interface BaseTOFTGenericModuleInterface extends utils.Interface {
       | "triggerApproveOrRevoke"
       | "triggerApproveOrRevoke(uint16,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "triggerSendFrom"
-      | "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
-      | "triggerSendFromWithParams"
-      | "triggerSendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
+      | "triggerSendFrom(address,uint16,bytes32,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "trustedRemoteLookup"
       | "trustedRemoteLookup(uint16)"
       | "useCustomAdapterParams"
@@ -721,6 +721,32 @@ export interface BaseTOFTGenericModuleInterface extends utils.Interface {
     values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
+    functionFragment: "sendFromWithParams",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      ICommonOFT.LzCallParamsStruct,
+      PromiseOrValue<boolean>,
+      ICommonData.IApprovalStruct[],
+      ICommonData.IApprovalStruct[]
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "sendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      ICommonOFT.LzCallParamsStruct,
+      PromiseOrValue<boolean>,
+      ICommonData.IApprovalStruct[],
+      ICommonData.IApprovalStruct[]
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "setConfig",
     values: [
       PromiseOrValue<BigNumberish>,
@@ -897,9 +923,9 @@ export interface BaseTOFTGenericModuleInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "triggerSendFrom",
     values: [
+      PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       ICommonOFT.LzCallParamsStruct,
       ICommonData.IApprovalStruct[],
@@ -907,39 +933,13 @@ export interface BaseTOFTGenericModuleInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      ICommonOFT.LzCallParamsStruct,
-      ICommonData.IApprovalStruct[],
-      ICommonData.IApprovalStruct[]
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "triggerSendFromWithParams",
+    functionFragment: "triggerSendFrom(address,uint16,bytes32,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<BigNumberish>,
       ICommonOFT.LzCallParamsStruct,
-      PromiseOrValue<boolean>,
-      ICommonData.IApprovalStruct[],
-      ICommonData.IApprovalStruct[]
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "triggerSendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      ICommonOFT.LzCallParamsStruct,
-      PromiseOrValue<boolean>,
       ICommonData.IApprovalStruct[],
       ICommonData.IApprovalStruct[]
     ]
@@ -1215,6 +1215,14 @@ export interface BaseTOFTGenericModuleInterface extends utils.Interface {
     functionFragment: "sendFromDestination(bytes)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "sendFromWithParams",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "sendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "setConfig", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setConfig(uint16,uint16,uint256,bytes)",
@@ -1354,15 +1362,7 @@ export interface BaseTOFTGenericModuleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "triggerSendFromWithParams",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "triggerSendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
+    functionFragment: "triggerSendFrom(address,uint16,bytes32,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1387,6 +1387,7 @@ export interface BaseTOFTGenericModuleInterface extends utils.Interface {
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
+    "MaxSlippageUpdated(uint256,uint256)": EventFragment;
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)": EventFragment;
     "NonContractAddress(address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
@@ -1398,6 +1399,7 @@ export interface BaseTOFTGenericModuleInterface extends utils.Interface {
     "SetTrustedRemote(uint16,bytes)": EventFragment;
     "SetTrustedRemoteAddress(uint16,bytes)": EventFragment;
     "SetUseCustomAdapterParams(bool)": EventFragment;
+    "StargateRouterUpdated(address,address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
 
@@ -1408,6 +1410,10 @@ export interface BaseTOFTGenericModuleInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "CallOFTReceivedSuccess"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "MaxSlippageUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "MaxSlippageUpdated(uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MessageFailed"): EventFragment;
   getEvent(
@@ -1451,6 +1457,10 @@ export interface BaseTOFTGenericModuleInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "SetUseCustomAdapterParams(bool)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "StargateRouterUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "StargateRouterUpdated(address,address)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Transfer(address,address,uint256)"
@@ -1482,6 +1492,18 @@ export type CallOFTReceivedSuccessEvent = TypedEvent<
 
 export type CallOFTReceivedSuccessEventFilter =
   TypedEventFilter<CallOFTReceivedSuccessEvent>;
+
+export interface MaxSlippageUpdatedEventObject {
+  _old: BigNumber;
+  _newVal: BigNumber;
+}
+export type MaxSlippageUpdatedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  MaxSlippageUpdatedEventObject
+>;
+
+export type MaxSlippageUpdatedEventFilter =
+  TypedEventFilter<MaxSlippageUpdatedEvent>;
 
 export interface MessageFailedEventObject {
   _srcChainId: number;
@@ -1613,6 +1635,18 @@ export type SetUseCustomAdapterParamsEvent = TypedEvent<
 
 export type SetUseCustomAdapterParamsEventFilter =
   TypedEventFilter<SetUseCustomAdapterParamsEvent>;
+
+export interface StargateRouterUpdatedEventObject {
+  _old: string;
+  _new: string;
+}
+export type StargateRouterUpdatedEvent = TypedEvent<
+  [string, string],
+  StargateRouterUpdatedEventObject
+>;
+
+export type StargateRouterUpdatedEventFilter =
+  TypedEventFilter<StargateRouterUpdatedEvent>;
 
 export interface TransferEventObject {
   from: string;
@@ -2085,6 +2119,30 @@ export interface BaseTOFTGenericModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    sendFromWithParams(
+      from: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      toAddress: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      callParams: ICommonOFT.LzCallParamsStruct,
+      unwrap: PromiseOrValue<boolean>,
+      approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "sendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      toAddress: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      callParams: ICommonOFT.LzCallParamsStruct,
+      unwrap: PromiseOrValue<boolean>,
+      approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     setConfig(
       _version: PromiseOrValue<BigNumberish>,
       _chainId: PromiseOrValue<BigNumberish>,
@@ -2278,9 +2336,9 @@ export interface BaseTOFTGenericModule extends BaseContract {
     ): Promise<ContractTransaction>;
 
     triggerSendFrom(
+      from: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      zroPaymentAddress: PromiseOrValue<string>,
+      to: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
       sendFromData: ICommonOFT.LzCallParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
@@ -2288,36 +2346,12 @@ export interface BaseTOFTGenericModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "triggerSendFrom(address,uint16,bytes32,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      zroPaymentAddress: PromiseOrValue<string>,
+      to: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
       sendFromData: ICommonOFT.LzCallParamsStruct,
-      approvals: ICommonData.IApprovalStruct[],
-      revokes: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    triggerSendFromWithParams(
-      from: PromiseOrValue<string>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      toAddress: PromiseOrValue<BytesLike>,
-      amount: PromiseOrValue<BigNumberish>,
-      callParams: ICommonOFT.LzCallParamsStruct,
-      unwrap: PromiseOrValue<boolean>,
-      approvals: ICommonData.IApprovalStruct[],
-      revokes: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "triggerSendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-      from: PromiseOrValue<string>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      toAddress: PromiseOrValue<BytesLike>,
-      amount: PromiseOrValue<BigNumberish>,
-      callParams: ICommonOFT.LzCallParamsStruct,
-      unwrap: PromiseOrValue<boolean>,
       approvals: ICommonData.IApprovalStruct[],
       revokes: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -2770,6 +2804,30 @@ export interface BaseTOFTGenericModule extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  sendFromWithParams(
+    from: PromiseOrValue<string>,
+    lzDstChainId: PromiseOrValue<BigNumberish>,
+    toAddress: PromiseOrValue<BytesLike>,
+    amount: PromiseOrValue<BigNumberish>,
+    callParams: ICommonOFT.LzCallParamsStruct,
+    unwrap: PromiseOrValue<boolean>,
+    approvals: ICommonData.IApprovalStruct[],
+    revokes: ICommonData.IApprovalStruct[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "sendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    from: PromiseOrValue<string>,
+    lzDstChainId: PromiseOrValue<BigNumberish>,
+    toAddress: PromiseOrValue<BytesLike>,
+    amount: PromiseOrValue<BigNumberish>,
+    callParams: ICommonOFT.LzCallParamsStruct,
+    unwrap: PromiseOrValue<boolean>,
+    approvals: ICommonData.IApprovalStruct[],
+    revokes: ICommonData.IApprovalStruct[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   setConfig(
     _version: PromiseOrValue<BigNumberish>,
     _chainId: PromiseOrValue<BigNumberish>,
@@ -2963,9 +3021,9 @@ export interface BaseTOFTGenericModule extends BaseContract {
   ): Promise<ContractTransaction>;
 
   triggerSendFrom(
+    from: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
-    airdropAdapterParams: PromiseOrValue<BytesLike>,
-    zroPaymentAddress: PromiseOrValue<string>,
+    to: PromiseOrValue<BytesLike>,
     amount: PromiseOrValue<BigNumberish>,
     sendFromData: ICommonOFT.LzCallParamsStruct,
     approvals: ICommonData.IApprovalStruct[],
@@ -2973,36 +3031,12 @@ export interface BaseTOFTGenericModule extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+  "triggerSendFrom(address,uint16,bytes32,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    from: PromiseOrValue<string>,
     lzDstChainId: PromiseOrValue<BigNumberish>,
-    airdropAdapterParams: PromiseOrValue<BytesLike>,
-    zroPaymentAddress: PromiseOrValue<string>,
+    to: PromiseOrValue<BytesLike>,
     amount: PromiseOrValue<BigNumberish>,
     sendFromData: ICommonOFT.LzCallParamsStruct,
-    approvals: ICommonData.IApprovalStruct[],
-    revokes: ICommonData.IApprovalStruct[],
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  triggerSendFromWithParams(
-    from: PromiseOrValue<string>,
-    lzDstChainId: PromiseOrValue<BigNumberish>,
-    toAddress: PromiseOrValue<BytesLike>,
-    amount: PromiseOrValue<BigNumberish>,
-    callParams: ICommonOFT.LzCallParamsStruct,
-    unwrap: PromiseOrValue<boolean>,
-    approvals: ICommonData.IApprovalStruct[],
-    revokes: ICommonData.IApprovalStruct[],
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "triggerSendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-    from: PromiseOrValue<string>,
-    lzDstChainId: PromiseOrValue<BigNumberish>,
-    toAddress: PromiseOrValue<BytesLike>,
-    amount: PromiseOrValue<BigNumberish>,
-    callParams: ICommonOFT.LzCallParamsStruct,
-    unwrap: PromiseOrValue<boolean>,
     approvals: ICommonData.IApprovalStruct[],
     revokes: ICommonData.IApprovalStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -3453,6 +3487,30 @@ export interface BaseTOFTGenericModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    sendFromWithParams(
+      from: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      toAddress: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      callParams: ICommonOFT.LzCallParamsStruct,
+      unwrap: PromiseOrValue<boolean>,
+      approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "sendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      toAddress: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      callParams: ICommonOFT.LzCallParamsStruct,
+      unwrap: PromiseOrValue<boolean>,
+      approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     setConfig(
       _version: PromiseOrValue<BigNumberish>,
       _chainId: PromiseOrValue<BigNumberish>,
@@ -3646,9 +3704,9 @@ export interface BaseTOFTGenericModule extends BaseContract {
     ): Promise<void>;
 
     triggerSendFrom(
+      from: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      zroPaymentAddress: PromiseOrValue<string>,
+      to: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
       sendFromData: ICommonOFT.LzCallParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
@@ -3656,36 +3714,12 @@ export interface BaseTOFTGenericModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "triggerSendFrom(address,uint16,bytes32,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      zroPaymentAddress: PromiseOrValue<string>,
+      to: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
       sendFromData: ICommonOFT.LzCallParamsStruct,
-      approvals: ICommonData.IApprovalStruct[],
-      revokes: ICommonData.IApprovalStruct[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    triggerSendFromWithParams(
-      from: PromiseOrValue<string>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      toAddress: PromiseOrValue<BytesLike>,
-      amount: PromiseOrValue<BigNumberish>,
-      callParams: ICommonOFT.LzCallParamsStruct,
-      unwrap: PromiseOrValue<boolean>,
-      approvals: ICommonData.IApprovalStruct[],
-      revokes: ICommonData.IApprovalStruct[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "triggerSendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-      from: PromiseOrValue<string>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      toAddress: PromiseOrValue<BytesLike>,
-      amount: PromiseOrValue<BigNumberish>,
-      callParams: ICommonOFT.LzCallParamsStruct,
-      unwrap: PromiseOrValue<boolean>,
       approvals: ICommonData.IApprovalStruct[],
       revokes: ICommonData.IApprovalStruct[],
       overrides?: CallOverrides
@@ -3734,6 +3768,15 @@ export interface BaseTOFTGenericModule extends BaseContract {
       _nonce?: null,
       _hash?: null
     ): CallOFTReceivedSuccessEventFilter;
+
+    "MaxSlippageUpdated(uint256,uint256)"(
+      _old?: PromiseOrValue<BigNumberish> | null,
+      _newVal?: PromiseOrValue<BigNumberish> | null
+    ): MaxSlippageUpdatedEventFilter;
+    MaxSlippageUpdated(
+      _old?: PromiseOrValue<BigNumberish> | null,
+      _newVal?: PromiseOrValue<BigNumberish> | null
+    ): MaxSlippageUpdatedEventFilter;
 
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)"(
       _srcChainId?: null,
@@ -3839,6 +3882,15 @@ export interface BaseTOFTGenericModule extends BaseContract {
     SetUseCustomAdapterParams(
       _useCustomAdapterParams?: null
     ): SetUseCustomAdapterParamsEventFilter;
+
+    "StargateRouterUpdated(address,address)"(
+      _old?: PromiseOrValue<string> | null,
+      _new?: PromiseOrValue<string> | null
+    ): StargateRouterUpdatedEventFilter;
+    StargateRouterUpdated(
+      _old?: PromiseOrValue<string> | null,
+      _new?: PromiseOrValue<string> | null
+    ): StargateRouterUpdatedEventFilter;
 
     "Transfer(address,address,uint256)"(
       from?: PromiseOrValue<string> | null,
@@ -4275,6 +4327,30 @@ export interface BaseTOFTGenericModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    sendFromWithParams(
+      from: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      toAddress: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      callParams: ICommonOFT.LzCallParamsStruct,
+      unwrap: PromiseOrValue<boolean>,
+      approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "sendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      toAddress: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      callParams: ICommonOFT.LzCallParamsStruct,
+      unwrap: PromiseOrValue<boolean>,
+      approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     setConfig(
       _version: PromiseOrValue<BigNumberish>,
       _chainId: PromiseOrValue<BigNumberish>,
@@ -4468,9 +4544,9 @@ export interface BaseTOFTGenericModule extends BaseContract {
     ): Promise<BigNumber>;
 
     triggerSendFrom(
+      from: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      zroPaymentAddress: PromiseOrValue<string>,
+      to: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
       sendFromData: ICommonOFT.LzCallParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
@@ -4478,36 +4554,12 @@ export interface BaseTOFTGenericModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "triggerSendFrom(address,uint16,bytes32,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      zroPaymentAddress: PromiseOrValue<string>,
+      to: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
       sendFromData: ICommonOFT.LzCallParamsStruct,
-      approvals: ICommonData.IApprovalStruct[],
-      revokes: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    triggerSendFromWithParams(
-      from: PromiseOrValue<string>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      toAddress: PromiseOrValue<BytesLike>,
-      amount: PromiseOrValue<BigNumberish>,
-      callParams: ICommonOFT.LzCallParamsStruct,
-      unwrap: PromiseOrValue<boolean>,
-      approvals: ICommonData.IApprovalStruct[],
-      revokes: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "triggerSendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-      from: PromiseOrValue<string>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      toAddress: PromiseOrValue<BytesLike>,
-      amount: PromiseOrValue<BigNumberish>,
-      callParams: ICommonOFT.LzCallParamsStruct,
-      unwrap: PromiseOrValue<boolean>,
       approvals: ICommonData.IApprovalStruct[],
       revokes: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -4963,6 +5015,30 @@ export interface BaseTOFTGenericModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    sendFromWithParams(
+      from: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      toAddress: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      callParams: ICommonOFT.LzCallParamsStruct,
+      unwrap: PromiseOrValue<boolean>,
+      approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "sendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
+      lzDstChainId: PromiseOrValue<BigNumberish>,
+      toAddress: PromiseOrValue<BytesLike>,
+      amount: PromiseOrValue<BigNumberish>,
+      callParams: ICommonOFT.LzCallParamsStruct,
+      unwrap: PromiseOrValue<boolean>,
+      approvals: ICommonData.IApprovalStruct[],
+      revokes: ICommonData.IApprovalStruct[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     setConfig(
       _version: PromiseOrValue<BigNumberish>,
       _chainId: PromiseOrValue<BigNumberish>,
@@ -5158,9 +5234,9 @@ export interface BaseTOFTGenericModule extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     triggerSendFrom(
+      from: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      zroPaymentAddress: PromiseOrValue<string>,
+      to: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
       sendFromData: ICommonOFT.LzCallParamsStruct,
       approvals: ICommonData.IApprovalStruct[],
@@ -5168,36 +5244,12 @@ export interface BaseTOFTGenericModule extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "triggerSendFrom(uint16,bytes,address,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+    "triggerSendFrom(address,uint16,bytes32,uint256,(address,address,bytes),(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
+      from: PromiseOrValue<string>,
       lzDstChainId: PromiseOrValue<BigNumberish>,
-      airdropAdapterParams: PromiseOrValue<BytesLike>,
-      zroPaymentAddress: PromiseOrValue<string>,
+      to: PromiseOrValue<BytesLike>,
       amount: PromiseOrValue<BigNumberish>,
       sendFromData: ICommonOFT.LzCallParamsStruct,
-      approvals: ICommonData.IApprovalStruct[],
-      revokes: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    triggerSendFromWithParams(
-      from: PromiseOrValue<string>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      toAddress: PromiseOrValue<BytesLike>,
-      amount: PromiseOrValue<BigNumberish>,
-      callParams: ICommonOFT.LzCallParamsStruct,
-      unwrap: PromiseOrValue<boolean>,
-      approvals: ICommonData.IApprovalStruct[],
-      revokes: ICommonData.IApprovalStruct[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "triggerSendFromWithParams(address,uint16,bytes32,uint256,(address,address,bytes),bool,(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[],(bool,bool,bool,bool,uint16,address,bool,address,address,uint256,uint256,uint8,bytes32,bytes32)[])"(
-      from: PromiseOrValue<string>,
-      lzDstChainId: PromiseOrValue<BigNumberish>,
-      toAddress: PromiseOrValue<BytesLike>,
-      amount: PromiseOrValue<BigNumberish>,
-      callParams: ICommonOFT.LzCallParamsStruct,
-      unwrap: PromiseOrValue<boolean>,
       approvals: ICommonData.IApprovalStruct[],
       revokes: ICommonData.IApprovalStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }

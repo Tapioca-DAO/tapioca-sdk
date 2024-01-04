@@ -1304,6 +1304,7 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)": EventFragment;
+    "MaxSlippageUpdated(uint256,uint256)": EventFragment;
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)": EventFragment;
     "NonContractAddress(address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
@@ -1315,6 +1316,7 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
     "SetTrustedRemote(uint16,bytes)": EventFragment;
     "SetTrustedRemoteAddress(uint16,bytes)": EventFragment;
     "SetUseCustomAdapterParams(bool)": EventFragment;
+    "StargateRouterUpdated(address,address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
 
@@ -1325,6 +1327,10 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "CallOFTReceivedSuccess"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "CallOFTReceivedSuccess(uint16,bytes,uint64,bytes32)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "MaxSlippageUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "MaxSlippageUpdated(uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MessageFailed"): EventFragment;
   getEvent(
@@ -1368,6 +1374,10 @@ export interface BaseTOFTOptionsModuleInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "SetUseCustomAdapterParams(bool)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "StargateRouterUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "StargateRouterUpdated(address,address)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Transfer(address,address,uint256)"
@@ -1399,6 +1409,18 @@ export type CallOFTReceivedSuccessEvent = TypedEvent<
 
 export type CallOFTReceivedSuccessEventFilter =
   TypedEventFilter<CallOFTReceivedSuccessEvent>;
+
+export interface MaxSlippageUpdatedEventObject {
+  _old: BigNumber;
+  _newVal: BigNumber;
+}
+export type MaxSlippageUpdatedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  MaxSlippageUpdatedEventObject
+>;
+
+export type MaxSlippageUpdatedEventFilter =
+  TypedEventFilter<MaxSlippageUpdatedEvent>;
 
 export interface MessageFailedEventObject {
   _srcChainId: number;
@@ -1530,6 +1552,18 @@ export type SetUseCustomAdapterParamsEvent = TypedEvent<
 
 export type SetUseCustomAdapterParamsEventFilter =
   TypedEventFilter<SetUseCustomAdapterParamsEvent>;
+
+export interface StargateRouterUpdatedEventObject {
+  _old: string;
+  _new: string;
+}
+export type StargateRouterUpdatedEvent = TypedEvent<
+  [string, string],
+  StargateRouterUpdatedEventObject
+>;
+
+export type StargateRouterUpdatedEventFilter =
+  TypedEventFilter<StargateRouterUpdatedEvent>;
 
 export interface TransferEventObject {
   from: string;
@@ -3394,6 +3428,15 @@ export interface BaseTOFTOptionsModule extends BaseContract {
       _hash?: null
     ): CallOFTReceivedSuccessEventFilter;
 
+    "MaxSlippageUpdated(uint256,uint256)"(
+      _old?: PromiseOrValue<BigNumberish> | null,
+      _newVal?: PromiseOrValue<BigNumberish> | null
+    ): MaxSlippageUpdatedEventFilter;
+    MaxSlippageUpdated(
+      _old?: PromiseOrValue<BigNumberish> | null,
+      _newVal?: PromiseOrValue<BigNumberish> | null
+    ): MaxSlippageUpdatedEventFilter;
+
     "MessageFailed(uint16,bytes,uint64,bytes,bytes)"(
       _srcChainId?: null,
       _srcAddress?: null,
@@ -3498,6 +3541,15 @@ export interface BaseTOFTOptionsModule extends BaseContract {
     SetUseCustomAdapterParams(
       _useCustomAdapterParams?: null
     ): SetUseCustomAdapterParamsEventFilter;
+
+    "StargateRouterUpdated(address,address)"(
+      _old?: PromiseOrValue<string> | null,
+      _new?: PromiseOrValue<string> | null
+    ): StargateRouterUpdatedEventFilter;
+    StargateRouterUpdated(
+      _old?: PromiseOrValue<string> | null,
+      _new?: PromiseOrValue<string> | null
+    ): StargateRouterUpdatedEventFilter;
 
     "Transfer(address,address,uint256)"(
       from?: PromiseOrValue<string> | null,

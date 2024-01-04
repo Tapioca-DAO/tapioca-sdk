@@ -393,14 +393,20 @@ export interface BalancerInterface extends utils.Interface {
 
   events: {
     "ConnectedChainUpdated(address,uint16,address)": EventFragment;
+    "EmergencySaved(address,uint256,bool)": EventFragment;
     "OwnerUpdated(address,address)": EventFragment;
     "RebalanceAmountUpdated(address,uint16,uint256,uint256)": EventFragment;
     "Rebalanced(address,uint16,uint256,uint256,bool)": EventFragment;
+    "ToggledSwapEth(bool,bool)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "ConnectedChainUpdated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ConnectedChainUpdated(address,uint16,address)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "EmergencySaved"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "EmergencySaved(address,uint256,bool)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnerUpdated"): EventFragment;
   getEvent(
@@ -414,6 +420,8 @@ export interface BalancerInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "Rebalanced(address,uint16,uint256,uint256,bool)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ToggledSwapEth"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ToggledSwapEth(bool,bool)"): EventFragment;
 }
 
 export interface ConnectedChainUpdatedEventObject {
@@ -428,6 +436,18 @@ export type ConnectedChainUpdatedEvent = TypedEvent<
 
 export type ConnectedChainUpdatedEventFilter =
   TypedEventFilter<ConnectedChainUpdatedEvent>;
+
+export interface EmergencySavedEventObject {
+  _token: string;
+  _amount: BigNumber;
+  _native: boolean;
+}
+export type EmergencySavedEvent = TypedEvent<
+  [string, BigNumber, boolean],
+  EmergencySavedEventObject
+>;
+
+export type EmergencySavedEventFilter = TypedEventFilter<EmergencySavedEvent>;
 
 export interface OwnerUpdatedEventObject {
   user: string;
@@ -467,6 +487,17 @@ export type RebalancedEvent = TypedEvent<
 >;
 
 export type RebalancedEventFilter = TypedEventFilter<RebalancedEvent>;
+
+export interface ToggledSwapEthEventObject {
+  _old: boolean;
+  _new: boolean;
+}
+export type ToggledSwapEthEvent = TypedEvent<
+  [boolean, boolean],
+  ToggledSwapEthEventObject
+>;
+
+export type ToggledSwapEthEventFilter = TypedEventFilter<ToggledSwapEthEvent>;
 
 export interface Balancer extends BaseContract {
   contractName: "Balancer";
@@ -1136,6 +1167,17 @@ export interface Balancer extends BaseContract {
       _dstOft?: PromiseOrValue<string> | null
     ): ConnectedChainUpdatedEventFilter;
 
+    "EmergencySaved(address,uint256,bool)"(
+      _token?: PromiseOrValue<string> | null,
+      _amount?: PromiseOrValue<BigNumberish> | null,
+      _native?: PromiseOrValue<boolean> | null
+    ): EmergencySavedEventFilter;
+    EmergencySaved(
+      _token?: PromiseOrValue<string> | null,
+      _amount?: PromiseOrValue<BigNumberish> | null,
+      _native?: PromiseOrValue<boolean> | null
+    ): EmergencySavedEventFilter;
+
     "OwnerUpdated(address,address)"(
       user?: PromiseOrValue<string> | null,
       newOwner?: PromiseOrValue<string> | null
@@ -1172,6 +1214,15 @@ export interface Balancer extends BaseContract {
       _amount?: null,
       _isNative?: null
     ): RebalancedEventFilter;
+
+    "ToggledSwapEth(bool,bool)"(
+      _old?: PromiseOrValue<boolean> | null,
+      _new?: PromiseOrValue<boolean> | null
+    ): ToggledSwapEthEventFilter;
+    ToggledSwapEth(
+      _old?: PromiseOrValue<boolean> | null,
+      _new?: PromiseOrValue<boolean> | null
+    ): ToggledSwapEthEventFilter;
   };
 
   estimateGas: {

@@ -51,21 +51,24 @@ export declare namespace TapiocaWrapper {
 
 export interface TapiocaWrapperInterface extends utils.Interface {
   functions: {
+    "claimOwnership()": FunctionFragment;
     "createTOFT(address,bytes,bytes32,bool)": FunctionFragment;
     "executeCalls((address,uint256,bytes,bool)[])": FunctionFragment;
     "executeTOFT(address,bytes,bool)": FunctionFragment;
     "harvestableTapiocaOFTsLength()": FunctionFragment;
     "lastTOFT()": FunctionFragment;
     "owner()": FunctionFragment;
-    "renounceOwnership()": FunctionFragment;
+    "pendingOwner()": FunctionFragment;
     "tapiocaOFTLength()": FunctionFragment;
     "tapiocaOFTs(uint256)": FunctionFragment;
     "tapiocaOFTsByErc20(address)": FunctionFragment;
-    "transferOwnership(address)": FunctionFragment;
+    "transferOwnership(address,bool,bool)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "claimOwnership"
+      | "claimOwnership()"
       | "createTOFT"
       | "createTOFT(address,bytes,bytes32,bool)"
       | "executeCalls"
@@ -78,8 +81,8 @@ export interface TapiocaWrapperInterface extends utils.Interface {
       | "lastTOFT()"
       | "owner"
       | "owner()"
-      | "renounceOwnership"
-      | "renounceOwnership()"
+      | "pendingOwner"
+      | "pendingOwner()"
       | "tapiocaOFTLength"
       | "tapiocaOFTLength()"
       | "tapiocaOFTs"
@@ -87,9 +90,17 @@ export interface TapiocaWrapperInterface extends utils.Interface {
       | "tapiocaOFTsByErc20"
       | "tapiocaOFTsByErc20(address)"
       | "transferOwnership"
-      | "transferOwnership(address)"
+      | "transferOwnership(address,bool,bool)"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "claimOwnership",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "claimOwnership()",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "createTOFT",
     values: [
@@ -148,11 +159,11 @@ export interface TapiocaWrapperInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "renounceOwnership",
+    functionFragment: "pendingOwner",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "renounceOwnership()",
+    functionFragment: "pendingOwner()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -181,13 +192,29 @@ export interface TapiocaWrapperInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
-    values: [PromiseOrValue<string>]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<boolean>,
+      PromiseOrValue<boolean>
+    ]
   ): string;
   encodeFunctionData(
-    functionFragment: "transferOwnership(address)",
-    values: [PromiseOrValue<string>]
+    functionFragment: "transferOwnership(address,bool,bool)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<boolean>,
+      PromiseOrValue<boolean>
+    ]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "claimOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "claimOwnership()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "createTOFT", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "createTOFT(address,bytes,bytes32,bool)",
@@ -222,11 +249,11 @@ export interface TapiocaWrapperInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "renounceOwnership",
+    functionFragment: "pendingOwner",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "renounceOwnership()",
+    functionFragment: "pendingOwner()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -258,7 +285,7 @@ export interface TapiocaWrapperInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "transferOwnership(address)",
+    functionFragment: "transferOwnership(address,bool,bool)",
     data: BytesLike
   ): Result;
 
@@ -334,6 +361,14 @@ export interface TapiocaWrapper extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    claimOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "claimOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     createTOFT(
       _erc20: PromiseOrValue<string>,
       _bytecode: PromiseOrValue<BytesLike>,
@@ -390,13 +425,9 @@ export interface TapiocaWrapper extends BaseContract {
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
 
-    renounceOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
+    pendingOwner(overrides?: CallOverrides): Promise<[string]>;
 
-    "renounceOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
+    "pendingOwner()"(overrides?: CallOverrides): Promise<[string]>;
 
     tapiocaOFTLength(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -424,14 +455,26 @@ export interface TapiocaWrapper extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "transferOwnership(address)"(
+    "transferOwnership(address,bool,bool)"(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
+
+  claimOwnership(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "claimOwnership()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   createTOFT(
     _erc20: PromiseOrValue<string>,
@@ -487,13 +530,9 @@ export interface TapiocaWrapper extends BaseContract {
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
 
-  renounceOwnership(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
+  pendingOwner(overrides?: CallOverrides): Promise<string>;
 
-  "renounceOwnership()"(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
+  "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
 
   tapiocaOFTLength(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -521,15 +560,23 @@ export interface TapiocaWrapper extends BaseContract {
 
   transferOwnership(
     newOwner: PromiseOrValue<string>,
+    direct: PromiseOrValue<boolean>,
+    renounce: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "transferOwnership(address)"(
+  "transferOwnership(address,bool,bool)"(
     newOwner: PromiseOrValue<string>,
+    direct: PromiseOrValue<boolean>,
+    renounce: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    claimOwnership(overrides?: CallOverrides): Promise<void>;
+
+    "claimOwnership()"(overrides?: CallOverrides): Promise<void>;
+
     createTOFT(
       _erc20: PromiseOrValue<string>,
       _bytecode: PromiseOrValue<BytesLike>,
@@ -584,9 +631,9 @@ export interface TapiocaWrapper extends BaseContract {
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
 
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
+    pendingOwner(overrides?: CallOverrides): Promise<string>;
 
-    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
+    "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
 
     tapiocaOFTLength(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -614,11 +661,15 @@ export interface TapiocaWrapper extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "transferOwnership(address)"(
+    "transferOwnership(address,bool,bool)"(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -649,6 +700,14 @@ export interface TapiocaWrapper extends BaseContract {
   };
 
   estimateGas: {
+    claimOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "claimOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     createTOFT(
       _erc20: PromiseOrValue<string>,
       _bytecode: PromiseOrValue<BytesLike>,
@@ -703,13 +762,9 @@ export interface TapiocaWrapper extends BaseContract {
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    renounceOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
+    pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "renounceOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
+    "pendingOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     tapiocaOFTLength(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -737,16 +792,28 @@ export interface TapiocaWrapper extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "transferOwnership(address)"(
+    "transferOwnership(address,bool,bool)"(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
+    claimOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "claimOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     createTOFT(
       _erc20: PromiseOrValue<string>,
       _bytecode: PromiseOrValue<BytesLike>,
@@ -803,13 +870,9 @@ export interface TapiocaWrapper extends BaseContract {
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    renounceOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
+    pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "renounceOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
+    "pendingOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     tapiocaOFTLength(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -839,11 +902,15 @@ export interface TapiocaWrapper extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "transferOwnership(address)"(
+    "transferOwnership(address,bool,bool)"(
       newOwner: PromiseOrValue<string>,
+      direct: PromiseOrValue<boolean>,
+      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
