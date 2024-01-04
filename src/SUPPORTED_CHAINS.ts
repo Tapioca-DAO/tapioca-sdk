@@ -3,32 +3,32 @@ import { EChainID, NETWORK_MAPPING_CHAIN_TO_LZ } from './api/config';
 const SUPPORTED_CHAINS = [
     //testnets
     {
-        name: 'goerli',
-        address: '0xbfD2135BFfbb0B5378b56643c2Df8a87552Bfa23',
-        chainId: EChainID.GOERLI,
-        lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.GOERLI],
-        rpc: 'https://eth-goerli.g.alchemy.com/v2/<api_key>',
-        tags: ['testnet'],
-    },
-    {
         name: 'sepolia',
-        address: '0xae92d5aD7583AD66E49A0c67BAd18F6ba52dDDc1',
+        address: '0x464570adA09869d8741132183721B4f0769a0287',
         chainId: EChainID.SEPOLIA,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.SEPOLIA],
         rpc: 'https://eth-sepolia.g.alchemy.com/v2/<api_key>',
         tags: ['testnet'],
     },
     {
-        name: 'bsc_testnet',
-        address: '0x6Fcb97553D41516Cb228ac03FdC8B9a0a9df04A1',
-        chainId: EChainID.BSC_TESTNET,
-        lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.BSC_TESTNET],
-        rpc: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
+        name: 'arbitrum_sepolia',
+        address: '0x464570adA09869d8741132183721B4f0769a0287',
+        chainId: EChainID.SEPOLIA,
+        lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.SEPOLIA],
+        rpc: 'https://arb-sepolia.g.alchemy.com/v2/<api_key>',
+        tags: ['testnet'],
+    },
+    {
+        name: 'optimism_sepolia',
+        address: '0x464570adA09869d8741132183721B4f0769a0287',
+        chainId: EChainID.SEPOLIA,
+        lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.SEPOLIA],
+        rpc: 'https://arb-sepolia.g.alchemy.com/v2/<api_key>',
         tags: ['testnet'],
     },
     {
         name: 'fuji_avalanche',
-        address: '0x93f54D755A063cE7bB9e6Ac47Eccc8e33411d706',
+        address: '0x464570adA09869d8741132183721B4f0769a0287',
         chainId: EChainID.FUJI_AVALANCHE,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.FUJI_AVALANCHE],
         rpc: 'https://api.avax-test.network/ext/bc/C/rpc',
@@ -36,7 +36,7 @@ const SUPPORTED_CHAINS = [
     },
     {
         name: 'mumbai',
-        address: '0xf69186dfBa60DdB133E91E9A4B5673624293d8F8',
+        address: '0x464570adA09869d8741132183721B4f0769a0287',
         chainId: EChainID.MUMBAI_POLYGON,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.MUMBAI_POLYGON],
         rpc: 'https://polygon-mumbai.g.alchemy.com/v2/<api_key>',
@@ -44,37 +44,14 @@ const SUPPORTED_CHAINS = [
     },
     {
         name: 'fantom_testnet',
-        address: '0x7dcAD72640F835B0FA36EFD3D6d3ec902C7E5acf',
+        address: '0x464570adA09869d8741132183721B4f0769a0287',
         chainId: EChainID.FANTOM_TESTNET,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.FANTOM_TESTNET],
         rpc: 'https://rpc.testnet.fantom.network/',
         tags: ['testnet'],
     },
-    {
-        name: 'arbitrum_goerli',
-        address: '0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab',
-        chainId: EChainID.ARBITRUM_GOERLI,
-        lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.ARBITRUM_GOERLI],
-        rpc: 'https://arb-goerli.g.alchemy.com/v2/<api_key>',
-        tags: ['testnet'],
-    },
-    {
-        name: 'optimism_goerli',
-        address: '0xae92d5aD7583AD66E49A0c67BAd18F6ba52dDDc1',
-        chainId: EChainID.OPTIMISM_GOERLI,
-        lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.OPTIMISM_GOERLI],
-        rpc: 'https://opt-goerli.g.alchemy.com/v2/<api_key>',
-        tags: ['testnet'],
-    },
-    {
-        name: 'harmony_testnet',
-        address: '0xae92d5aD7583AD66E49A0c67BAd18F6ba52dDDc1',
-        chainId: EChainID.HARMONY_TESTNET,
-        lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.HARMONY_TESTNET],
-        rpc: 'https://api.s0.b.hmny.io',
-        tags: ['testnet'],
-    },
 
+    // TODO use correct addresses when mainnet LZv2 is live.
     //mainnets
     {
         name: 'ethereum',
@@ -82,14 +59,6 @@ const SUPPORTED_CHAINS = [
         chainId: EChainID.MAINNET,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.MAINNET],
         rpc: 'https://eth-mainnet.g.alchemy.com/v2/<api_key>',
-        tags: ['mainnet'],
-    },
-    {
-        name: 'bsc',
-        address: '0x3c2269811836af69497E5F486A85D7316753cf62',
-        chainId: EChainID.BSC,
-        lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.BSC],
-        rpc: 'https://bsc-dataseed.binance.org',
         tags: ['mainnet'],
     },
     {
@@ -130,14 +99,6 @@ const SUPPORTED_CHAINS = [
         chainId: EChainID.FANTOM,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.FANTOM],
         rpc: 'https://rpc.ftm.tools/',
-        tags: ['mainnet'],
-    },
-    {
-        name: 'harmony',
-        address: '0x9740FF91F1985D8d2B71494aE1A2f723bb3Ed9E4',
-        chainId: EChainID.HARMONY,
-        lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.HARMONY],
-        rpc: 'https://api.harmony.one/',
         tags: ['mainnet'],
     },
 ] as const;
