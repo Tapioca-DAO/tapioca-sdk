@@ -4,7 +4,7 @@ const SUPPORTED_CHAINS = [
     //testnets
     {
         name: 'sepolia',
-        address: '0x464570adA09869d8741132183721B4f0769a0287',
+        address: '0xae92d5aD7583AD66E49A0c67BAd18F6ba52dDDc1',
         chainId: EChainID.SEPOLIA,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.SEPOLIA],
         rpc: 'https://eth-sepolia.g.alchemy.com/v2/<api_key>',
@@ -12,7 +12,7 @@ const SUPPORTED_CHAINS = [
     },
     {
         name: 'arbitrum_sepolia',
-        address: '0x464570adA09869d8741132183721B4f0769a0287',
+        address: '0x6098e96a28E02f27B1e6BD381f870F1C8Bd169d3',
         chainId: EChainID.ARBITRUM_SEPOLIA,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.ARBITRUM_SEPOLIA],
         rpc: 'https://arb-sepolia.g.alchemy.com/v2/<api_key>',
@@ -20,7 +20,7 @@ const SUPPORTED_CHAINS = [
     },
     {
         name: 'optimism_sepolia',
-        address: '0x464570adA09869d8741132183721B4f0769a0287',
+        address: '0x55370E0fBB5f5b8dAeD978BA1c075a499eB107B8',
         chainId: EChainID.OPTIMISM_SEPOLIA,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.OPTIMISM_SEPOLIA],
         rpc: 'https://arb-sepolia.g.alchemy.com/v2/<api_key>',
@@ -28,7 +28,7 @@ const SUPPORTED_CHAINS = [
     },
     {
         name: 'fuji_avalanche',
-        address: '0x464570adA09869d8741132183721B4f0769a0287',
+        address: '0x93f54D755A063cE7bB9e6Ac47Eccc8e33411d706',
         chainId: EChainID.FUJI_AVALANCHE,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.FUJI_AVALANCHE],
         rpc: 'https://api.avax-test.network/ext/bc/C/rpc',
@@ -36,7 +36,7 @@ const SUPPORTED_CHAINS = [
     },
     {
         name: 'mumbai',
-        address: '0x464570adA09869d8741132183721B4f0769a0287',
+        address: '0xf69186dfBa60DdB133E91E9A4B5673624293d8F8',
         chainId: EChainID.MUMBAI_POLYGON,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.MUMBAI_POLYGON],
         rpc: 'https://polygon-mumbai.g.alchemy.com/v2/<api_key>',
@@ -44,7 +44,7 @@ const SUPPORTED_CHAINS = [
     },
     {
         name: 'fantom_testnet',
-        address: '0x464570adA09869d8741132183721B4f0769a0287',
+        address: '0x7dcAD72640F835B0FA36EFD3D6d3ec902C7E5acf',
         chainId: EChainID.FANTOM_TESTNET,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.FANTOM_TESTNET],
         rpc: 'https://rpc.testnet.fantom.network/',
