@@ -1583,6 +1583,34 @@
             ],
             "421614": [
                 {
+                    "name": "YieldBoxURIBuilder",
+                    "address": "0x80950c575798411786697cF2FC9b9d1FFDac4BE7",
+                    "meta": {
+                        "args": [],
+                        "salt": "0xd1f6de040cc44969957ba861e1eea8f695378899f4ca1f8ac787d7479193fcd8",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "YieldBox",
+                    "address": "0x10D37c7d080f4117BA3C25a1a2bFd563d1587Bd4",
+                    "meta": {
+                        "args": [
+                            "0x3022494EFafC433b64B704dCbAD69ec0cf54B941",
+                            "0x80950c575798411786697cF2FC9b9d1FFDac4BE7"
+                        ],
+                        "salt": "0x77192e69d18623b2ddf239516772e39f876f101642a1c3d977f309b893d24a0d",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "WETHMock",
+                    "address": "0x3022494EFafC433b64B704dCbAD69ec0cf54B941",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
+                {
                     "name": "TapiocaDeployer",
                     "address": "0x8147313b6469B53fF8c6ac089DcC9F54729aEaaf",
                     "meta": {}
