@@ -261,6 +261,107 @@
             "421613": [],
             "421614": [
                 {
+                    "name": "BigBang-TapiocaOFT-FTMMock",
+                    "address": "0x4832C870526284C50A54284E400D3F250c6A880b",
+                    "meta": {
+                        "isBigBangMarket": true,
+                        "collateral": {
+                            "collateralAddress": "0xC4f3f9f28cF3Dd976193cF343569f8C89E1b6C03",
+                            "collateralStrategyAddress": "0xef4F14241dCE2AB77FF6748c81Ef96004373bEa6"
+                        }
+                    }
+                },
+                {
+                    "name": "OracleMock-TapiocaOFT-FTMMock",
+                    "address": "0xb414aa7a16C723946b78448221415D747c56762F",
+                    "meta": {
+                        "args": [
+                            "OracleMock-TapiocaOFT-FTMMock",
+                            "OCM-TapiocaOFT-FTMMock",
+                            {
+                                "type": "BigNumber",
+                                "hex": "0x0aeedcd069e62e729d9a92221c0000"
+                            }
+                        ],
+                        "salt": "0x80248b9a512966c59b0da2f96b6ab0aa78a8b736853ecf8353ea767384967696",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "BigBang-TapiocaOFT-WETHMock",
+                    "address": "0x3cD365a4BBDaB65CB907Ed33a6c5e5B2141277cB",
+                    "meta": {
+                        "isBigBangMarket": true,
+                        "collateral": {
+                            "collateralAddress": "0xb40d135405d36B452072C9cbBA6de559352a9e2F",
+                            "collateralStrategyAddress": "0x1FA76Fe3E38d777c5ed6570cD505Dc26a22C459E"
+                        }
+                    }
+                },
+                {
+                    "name": "OracleMock-TapiocaOFT-WETHMock",
+                    "address": "0xCaE424bB722c20dBf1291aEFf9f48dB871644438",
+                    "meta": {
+                        "args": [
+                            "OracleMock-TapiocaOFT-WETHMock",
+                            "OCM-TapiocaOFT-WETHMock",
+                            {
+                                "type": "BigNumber",
+                                "hex": "0x106f4216d9dbb8f58c1cc8340000"
+                            }
+                        ],
+                        "salt": "0xb92ae8076f489f00b0301b0961e89c9d3c60823649e6f12e0a804240ed06e934",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "AssetOracleMock",
+                    "address": "0xf1Df2011b14af5BF6c4028C0f89Ae373352C16A2",
+                    "meta": {
+                        "args": [
+                            "AssetOracleMock",
+                            "OCM-TapiocaOFT-WETHMock",
+                            {
+                                "type": "BigNumber",
+                                "hex": "0x0de0b6b3a7640000"
+                            }
+                        ],
+                        "salt": "0xcac95b60239eda0a4fcac1776106a0fec97a456a761868d4d26def4493b284c5",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "Tapioca Singularity-TapiocaOFT-GLPMock",
+                    "address": "0xe18C7E0A18458Fd66f661A0f75b38e4637f6E3d8",
+                    "meta": {
+                        "isSGLMarket": true,
+                        "collateral": {
+                            "collateralAddress": "0x901A59efc6667166375e60eF28522c2805D475c2",
+                            "collateralStrategyAddress": "0x6F609Ed3fE1b6ccD8753B2BA913FffBB5F560fF4"
+                        },
+                        "asset": {
+                            "assetAddress": "0xbf4A5FDBf359a3123085A81530456c537eE96343",
+                            "assetStrategyAddress": "0x43de72E92681D3221eBF2DeFFd41B0BAe4e688dD"
+                        }
+                    }
+                },
+                {
+                    "name": "OracleMock-TapiocaOFT-GLPMock",
+                    "address": "0xC266a941e0E317FBA7B82992A7Ee4144Db9a0E34",
+                    "meta": {
+                        "args": [
+                            "OracleMock-TapiocaOFT-GLPMock",
+                            "OCM-TapiocaOFT-GLPMock",
+                            {
+                                "type": "BigNumber",
+                                "hex": "0x0aeedcd069e62e729d9a92221c0000"
+                            }
+                        ],
+                        "salt": "0x26f51433cf08eec3c241a76d19c5e28103b0900099f9d4c1cc28c6c1ebabf47b",
+                        "create2": true
+                    }
+                },
+                {
                     "name": "ERC20WithoutStrategy-TapiocaOFT-FTMLPMock",
                     "address": "0xbccDb5B4aD3741C06B338F3B46F23c0D366935C2",
                     "meta": {
@@ -940,6 +1041,11 @@
         "generic": {
             "4002": [
                 {
+                    "name": "Magnetar",
+                    "address": "0xfFb0f41C6cECA72D494Dd2B0f771C5ce87d3D64F",
+                    "meta": {}
+                },
+                {
                     "name": "Multicall3",
                     "address": "0x8b169C1d3b749DD123626B54Baf9D9D403b8D5EF",
                     "meta": {}
@@ -947,6 +1053,16 @@
             ],
             "421613": [],
             "421614": [
+                {
+                    "name": "MagnetarHelper",
+                    "address": "0x36d63f6e39Babf6F743b4071186e45B6B952b637",
+                    "meta": {}
+                },
+                {
+                    "name": "Magnetar",
+                    "address": "0x2B391F5802742ed6beF719826cEfd121B0E2B919",
+                    "meta": {}
+                },
                 {
                     "name": "Multicall3",
                     "address": "0xb110284648691B5944b8E7c7cfB140e501f77d1C",
