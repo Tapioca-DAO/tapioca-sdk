@@ -1041,6 +1041,11 @@
         "generic": {
             "4002": [
                 {
+                    "name": "MagnetarHelper",
+                    "address": "0x9f33C5F867d0B0F597d11Cea3Cb1960E7E19CfEF",
+                    "meta": {}
+                },
+                {
                     "name": "Magnetar",
                     "address": "0xfFb0f41C6cECA72D494Dd2B0f771C5ce87d3D64F",
                     "meta": {}
