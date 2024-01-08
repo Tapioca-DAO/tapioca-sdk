@@ -6,9 +6,31 @@
             "421614": []
         },
         "tapioca-periphery": {
-            "4002": [],
+            "4002": [
+                {
+                    "name": "Cluster",
+                    "address": "0xBF30AbBD44Aa134aa491d1e7DDEA210CEA553327",
+                    "meta": {
+                        "args": [
+                            "0x7dcAD72640F835B0FA36EFD3D6d3ec902C7E5acf",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ]
+                    }
+                }
+            ],
             "421613": [],
-            "421614": []
+            "421614": [
+                {
+                    "name": "Cluster",
+                    "address": "0x7dc84E447684A80afD6F5de5Db29d79E8CB893cC",
+                    "meta": {
+                        "args": [
+                            "0x6098e96a28E02f27B1e6BD381f870F1C8Bd169d3",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ]
+                    }
+                }
+            ]
         },
         "tapiocaz": {
             "4002": [],
