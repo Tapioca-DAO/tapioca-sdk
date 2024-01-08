@@ -55,7 +55,6 @@ export interface TapiocaWrapperInterface extends utils.Interface {
     "createTOFT(address,bytes,bytes32,bool)": FunctionFragment;
     "executeCalls((address,uint256,bytes,bool)[])": FunctionFragment;
     "executeTOFT(address,bytes,bool)": FunctionFragment;
-    "harvestableTapiocaOFTsLength()": FunctionFragment;
     "lastTOFT()": FunctionFragment;
     "owner()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
@@ -75,8 +74,6 @@ export interface TapiocaWrapperInterface extends utils.Interface {
       | "executeCalls((address,uint256,bytes,bool)[])"
       | "executeTOFT"
       | "executeTOFT(address,bytes,bool)"
-      | "harvestableTapiocaOFTsLength"
-      | "harvestableTapiocaOFTsLength()"
       | "lastTOFT"
       | "lastTOFT()"
       | "owner"
@@ -142,14 +139,6 @@ export interface TapiocaWrapperInterface extends utils.Interface {
       PromiseOrValue<BytesLike>,
       PromiseOrValue<boolean>
     ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "harvestableTapiocaOFTsLength",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "harvestableTapiocaOFTsLength()",
-    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "lastTOFT", values?: undefined): string;
   encodeFunctionData(
@@ -236,14 +225,6 @@ export interface TapiocaWrapperInterface extends utils.Interface {
     functionFragment: "executeTOFT(address,bytes,bool)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "harvestableTapiocaOFTsLength",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "harvestableTapiocaOFTsLength()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "lastTOFT", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "lastTOFT()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -292,7 +273,7 @@ export interface TapiocaWrapperInterface extends utils.Interface {
   events: {
     "CreateOFT(address,address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
-    "SetFees(uint256)": EventFragment;
+    "RefundFailed(uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "CreateOFT"): EventFragment;
@@ -301,8 +282,8 @@ export interface TapiocaWrapperInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "OwnershipTransferred(address,address)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "SetFees"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "SetFees(uint256)"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RefundFailed"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RefundFailed(uint256)"): EventFragment;
 }
 
 export interface CreateOFTEventObject {
@@ -325,12 +306,15 @@ export type OwnershipTransferredEvent = TypedEvent<
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
 
-export interface SetFeesEventObject {
-  _newFee: BigNumber;
+export interface RefundFailedEventObject {
+  amount: BigNumber;
 }
-export type SetFeesEvent = TypedEvent<[BigNumber], SetFeesEventObject>;
+export type RefundFailedEvent = TypedEvent<
+  [BigNumber],
+  RefundFailedEventObject
+>;
 
-export type SetFeesEventFilter = TypedEventFilter<SetFeesEvent>;
+export type RefundFailedEventFilter = TypedEventFilter<RefundFailedEvent>;
 
 export interface TapiocaWrapper extends BaseContract {
   contractName: "TapiocaWrapper";
@@ -408,14 +392,6 @@ export interface TapiocaWrapper extends BaseContract {
       _revertOnFailure: PromiseOrValue<boolean>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
-
-    harvestableTapiocaOFTsLength(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "harvestableTapiocaOFTsLength()"(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
 
     lastTOFT(overrides?: CallOverrides): Promise<[string]>;
 
@@ -516,12 +492,6 @@ export interface TapiocaWrapper extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  harvestableTapiocaOFTsLength(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "harvestableTapiocaOFTsLength()"(
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   lastTOFT(overrides?: CallOverrides): Promise<string>;
 
   "lastTOFT()"(overrides?: CallOverrides): Promise<string>;
@@ -617,12 +587,6 @@ export interface TapiocaWrapper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean, string] & { success: boolean; result: string }>;
 
-    harvestableTapiocaOFTsLength(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "harvestableTapiocaOFTsLength()"(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     lastTOFT(overrides?: CallOverrides): Promise<string>;
 
     "lastTOFT()"(overrides?: CallOverrides): Promise<string>;
@@ -693,10 +657,12 @@ export interface TapiocaWrapper extends BaseContract {
       newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
 
-    "SetFees(uint256)"(
-      _newFee?: PromiseOrValue<BigNumberish> | null
-    ): SetFeesEventFilter;
-    SetFees(_newFee?: PromiseOrValue<BigNumberish> | null): SetFeesEventFilter;
+    "RefundFailed(uint256)"(
+      amount?: PromiseOrValue<BigNumberish> | null
+    ): RefundFailedEventFilter;
+    RefundFailed(
+      amount?: PromiseOrValue<BigNumberish> | null
+    ): RefundFailedEventFilter;
   };
 
   estimateGas: {
@@ -746,12 +712,6 @@ export interface TapiocaWrapper extends BaseContract {
       _bytecode: PromiseOrValue<BytesLike>,
       _revertOnFailure: PromiseOrValue<boolean>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    harvestableTapiocaOFTsLength(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "harvestableTapiocaOFTsLength()"(
-      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     lastTOFT(overrides?: CallOverrides): Promise<BigNumber>;
@@ -852,14 +812,6 @@ export interface TapiocaWrapper extends BaseContract {
       _bytecode: PromiseOrValue<BytesLike>,
       _revertOnFailure: PromiseOrValue<boolean>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    harvestableTapiocaOFTsLength(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "harvestableTapiocaOFTsLength()"(
-      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     lastTOFT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
