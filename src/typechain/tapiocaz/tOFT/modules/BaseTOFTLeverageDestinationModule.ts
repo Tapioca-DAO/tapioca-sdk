@@ -105,7 +105,6 @@ export interface BaseTOFTLeverageDestinationModuleInterface
     "NO_EXTRA_GAS()": FunctionFragment;
     "PT_SEND()": FunctionFragment;
     "PT_SEND_AND_CALL()": FunctionFragment;
-    "SWAP_MAX_SLIPPAGE()": FunctionFragment;
     "allowance(address,address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
@@ -140,7 +139,6 @@ export interface BaseTOFTLeverageDestinationModuleInterface
     "sendAndCall(address,uint16,bytes32,uint256,bytes,uint64,(address,address,bytes))": FunctionFragment;
     "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
-    "setMaxSlippage(uint256)": FunctionFragment;
     "setMinDstGas(uint16,uint16,uint256)": FunctionFragment;
     "setPayloadSizeLimit(uint16,uint256)": FunctionFragment;
     "setPrecrime(address)": FunctionFragment;
@@ -172,8 +170,6 @@ export interface BaseTOFTLeverageDestinationModuleInterface
       | "PT_SEND()"
       | "PT_SEND_AND_CALL"
       | "PT_SEND_AND_CALL()"
-      | "SWAP_MAX_SLIPPAGE"
-      | "SWAP_MAX_SLIPPAGE()"
       | "allowance"
       | "allowance(address,address)"
       | "approve"
@@ -242,8 +238,6 @@ export interface BaseTOFTLeverageDestinationModuleInterface
       | "sendFrom(address,uint16,bytes32,uint256,(address,address,bytes))"
       | "setConfig"
       | "setConfig(uint16,uint16,uint256,bytes)"
-      | "setMaxSlippage"
-      | "setMaxSlippage(uint256)"
       | "setMinDstGas"
       | "setMinDstGas(uint16,uint16,uint256)"
       | "setPayloadSizeLimit"
@@ -308,14 +302,6 @@ export interface BaseTOFTLeverageDestinationModuleInterface
   ): string;
   encodeFunctionData(
     functionFragment: "PT_SEND_AND_CALL()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "SWAP_MAX_SLIPPAGE",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "SWAP_MAX_SLIPPAGE()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -729,14 +715,6 @@ export interface BaseTOFTLeverageDestinationModuleInterface
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "setMaxSlippage",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setMaxSlippage(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "setMinDstGas",
     values: [
       PromiseOrValue<BigNumberish>,
@@ -914,14 +892,6 @@ export interface BaseTOFTLeverageDestinationModuleInterface
   ): Result;
   decodeFunctionResult(
     functionFragment: "PT_SEND_AND_CALL()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "SWAP_MAX_SLIPPAGE",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "SWAP_MAX_SLIPPAGE()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
@@ -1134,14 +1104,6 @@ export interface BaseTOFTLeverageDestinationModuleInterface
   decodeFunctionResult(functionFragment: "setConfig", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setConfig(uint16,uint16,uint256,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setMaxSlippage",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setMaxSlippage(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1599,10 +1561,6 @@ export interface BaseTOFTLeverageDestinationModule extends BaseContract {
 
     "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<[number]>;
 
-    SWAP_MAX_SLIPPAGE(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "SWAP_MAX_SLIPPAGE()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     allowance(
       owner: PromiseOrValue<string>,
       spender: PromiseOrValue<string>,
@@ -2021,16 +1979,6 @@ export interface BaseTOFTLeverageDestinationModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    setMaxSlippage(
-      _slippage: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setMaxSlippage(uint256)"(
-      _slippage: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     setMinDstGas(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _packetType: PromiseOrValue<BigNumberish>,
@@ -2217,10 +2165,6 @@ export interface BaseTOFTLeverageDestinationModule extends BaseContract {
   PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<number>;
 
   "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<number>;
-
-  SWAP_MAX_SLIPPAGE(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "SWAP_MAX_SLIPPAGE()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   allowance(
     owner: PromiseOrValue<string>,
@@ -2640,16 +2584,6 @@ export interface BaseTOFTLeverageDestinationModule extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  setMaxSlippage(
-    _slippage: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setMaxSlippage(uint256)"(
-    _slippage: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   setMinDstGas(
     _dstChainId: PromiseOrValue<BigNumberish>,
     _packetType: PromiseOrValue<BigNumberish>,
@@ -2838,10 +2772,6 @@ export interface BaseTOFTLeverageDestinationModule extends BaseContract {
     PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<number>;
 
     "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<number>;
-
-    SWAP_MAX_SLIPPAGE(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "SWAP_MAX_SLIPPAGE()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     allowance(
       owner: PromiseOrValue<string>,
@@ -3257,16 +3187,6 @@ export interface BaseTOFTLeverageDestinationModule extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setMaxSlippage(
-      _slippage: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setMaxSlippage(uint256)"(
-      _slippage: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     setMinDstGas(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _packetType: PromiseOrValue<BigNumberish>,
@@ -3616,10 +3536,6 @@ export interface BaseTOFTLeverageDestinationModule extends BaseContract {
     PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<BigNumber>;
 
     "PT_SEND_AND_CALL()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    SWAP_MAX_SLIPPAGE(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "SWAP_MAX_SLIPPAGE()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     allowance(
       owner: PromiseOrValue<string>,
@@ -4031,16 +3947,6 @@ export interface BaseTOFTLeverageDestinationModule extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    setMaxSlippage(
-      _slippage: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setMaxSlippage(uint256)"(
-      _slippage: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     setMinDstGas(
       _dstChainId: PromiseOrValue<BigNumberish>,
       _packetType: PromiseOrValue<BigNumberish>,
@@ -4232,12 +4138,6 @@ export interface BaseTOFTLeverageDestinationModule extends BaseContract {
     PT_SEND_AND_CALL(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "PT_SEND_AND_CALL()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    SWAP_MAX_SLIPPAGE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "SWAP_MAX_SLIPPAGE()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -4650,16 +4550,6 @@ export interface BaseTOFTLeverageDestinationModule extends BaseContract {
       _chainId: PromiseOrValue<BigNumberish>,
       _configType: PromiseOrValue<BigNumberish>,
       _config: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setMaxSlippage(
-      _slippage: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setMaxSlippage(uint256)"(
-      _slippage: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
