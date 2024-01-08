@@ -6,9 +6,31 @@
             "421614": []
         },
         "tapioca-periphery": {
-            "4002": [],
+            "4002": [
+                {
+                    "name": "Cluster",
+                    "address": "0xBF30AbBD44Aa134aa491d1e7DDEA210CEA553327",
+                    "meta": {
+                        "args": [
+                            "0x7dcAD72640F835B0FA36EFD3D6d3ec902C7E5acf",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ]
+                    }
+                }
+            ],
             "421613": [],
-            "421614": []
+            "421614": [
+                {
+                    "name": "Cluster",
+                    "address": "0x7dc84E447684A80afD6F5de5Db29d79E8CB893cC",
+                    "meta": {
+                        "args": [
+                            "0x6098e96a28E02f27B1e6BD381f870F1C8Bd169d3",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ]
+                    }
+                }
+            ]
         },
         "tapiocaz": {
             "4002": [],
@@ -19,37 +41,37 @@
             "4002": [
                 {
                     "name": "FTMMock",
-                    "address": "0x5dE5619f168c902532F09f152e57267fA879ef09",
+                    "address": "0x736bfacA81c2e00b640dFc93dA6839d6AA79D144",
+                    "meta": {
+                        "isERC20Mock": true
+                    }
+                },
+                {
+                    "name": "WETHMock",
+                    "address": "0xe473Ce87ABcED0F0711054a2a3C24017B8ad924c",
                     "meta": {
                         "isERC20Mock": true
                     }
                 },
                 {
                     "name": "FTMLPMock",
-                    "address": "0x42425C0412ED25ddeA13827e07ef45bcaE4FfF9E",
-                    "meta": {
-                        "isERC20Mock": true
-                    }
-                },
-                {
-                    "name": "WETHMock",
-                    "address": "0xf8CBf810E80DCC5bBAb7B0be8C64D31319EA996D",
+                    "address": "0xe9B9Bb1c0532270F604E0fCB2E8CEef221115C53",
                     "meta": {
                         "isERC20Mock": true
                     }
                 }
             ],
-            "421613": [
+            "421614": [
                 {
                     "name": "GLPMock",
-                    "address": "0xc6A552e280500D4BDF39E6fFAC4E65FF39737fa7",
+                    "address": "0x6bcaD0CAAee740d5401AA58565ED3fa83308ac24",
                     "meta": {
                         "isERC20Mock": true
                     }
                 },
                 {
                     "name": "WETHMock",
-                    "address": "0x00AAc35Ff4f40FfA2E623D3E341762E75D47927b",
+                    "address": "0x665A6450a3c4C225a4C2F37A4014D8EC2665346f",
                     "meta": {
                         "isERC20Mock": true
                     }
@@ -57,6 +79,13 @@
             ]
         },
         "generic": {
+            "4002": [
+                {
+                    "name": "Multicall3",
+                    "address": "0xA1C4b578A00a9d91d871D56d50D121B80B200bF2",
+                    "meta": {}
+                }
+            ],
             "421613": [
                 {
                     "name": "Multicall3",

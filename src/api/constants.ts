@@ -135,13 +135,7 @@ export const UNISWAP_DEPLOYMENTS: {
         v3Router02: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
     },
     // Testnet
-    [EChainID.GOERLI]: {
-        v2Router: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
-        v2factory: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
-        v3Router: '0xE592427A0AEce92De3Edee1F18E0157C05861564',
-        v3Router02: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
-    },
-    [EChainID.ARBITRUM_GOERLI]: {
+    [EChainID.ARBITRUM_SEPOLIA]: {
         v2Router: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
         v2factory: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
         v3Router: '0xE592427A0AEce92De3Edee1F18E0157C05861564',
@@ -185,14 +179,7 @@ export const CURVE_DEPLOYMENTS: {
         stEthPool: '0xdc24316b9ae028f1497c275eb9192a3ea0f67022',
     },
     // Testnet
-    [EChainID.GOERLI]: {
-        stablePool: '0x803147a1f65f9b838e7be39bac1a4f51e6d29a18',
-        tricryptoLiquidityPool: '0xD51a44d3FaE010294C616388b506AcdA1bfAAE46',
-        tricryptoGauge: '0xDeFd8FdD20e0f34115C7018CCfb655796F6B2168',
-        tricryptoMinter: '0xd061D61a4d941c39E5453435B6345Dc261C2fcE0',
-        stEthPool: '0xdc24316b9ae028f1497c275eb9192a3ea0f67022',
-    },
-    [EChainID.ARBITRUM_GOERLI]: {
+    [EChainID.ARBITRUM_SEPOLIA]: {
         stablePool: '0x803147a1f65f9b838e7be39bac1a4f51e6d29a18',
         tricryptoLiquidityPool: '0xD51a44d3FaE010294C616388b506AcdA1bfAAE46',
         tricryptoGauge: '0xDeFd8FdD20e0f34115C7018CCfb655796F6B2168',
