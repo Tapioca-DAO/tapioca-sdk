@@ -81,7 +81,7 @@ export interface SingularityInterface extends utils.Interface {
     "leverageExecutor()": FunctionFragment;
     "leverageModule()": FunctionFragment;
     "liquidate(address[],uint256[],uint256[],address[],bytes[])": FunctionFragment;
-    "liquidateBadDebt(address,address,address,bytes,bool)": FunctionFragment;
+    "liquidateBadDebt(address,address,address,address,bytes,bool)": FunctionFragment;
     "liquidationBonusAmount()": FunctionFragment;
     "liquidationCollateralizationRate()": FunctionFragment;
     "liquidationModule()": FunctionFragment;
@@ -130,6 +130,7 @@ export interface SingularityInterface extends utils.Interface {
     "updatePause(uint8,bool,bool)": FunctionFragment;
     "userBorrowPart(address)": FunctionFragment;
     "userCollateralShare(address)": FunctionFragment;
+    "viewLiquidationCollateralAmount(address,uint256,uint256)": FunctionFragment;
     "yieldBox()": FunctionFragment;
   };
 
@@ -212,7 +213,7 @@ export interface SingularityInterface extends utils.Interface {
       | "liquidate"
       | "liquidate(address[],uint256[],uint256[],address[],bytes[])"
       | "liquidateBadDebt"
-      | "liquidateBadDebt(address,address,address,bytes,bool)"
+      | "liquidateBadDebt(address,address,address,address,bytes,bool)"
       | "liquidationBonusAmount"
       | "liquidationBonusAmount()"
       | "liquidationCollateralizationRate"
@@ -309,6 +310,8 @@ export interface SingularityInterface extends utils.Interface {
       | "userBorrowPart(address)"
       | "userCollateralShare"
       | "userCollateralShare(address)"
+      | "viewLiquidationCollateralAmount"
+      | "viewLiquidationCollateralAmount(address,uint256,uint256)"
       | "yieldBox"
       | "yieldBox()"
   ): FunctionFragment;
@@ -659,13 +662,15 @@ export interface SingularityInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<string>,
+      PromiseOrValue<string>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<boolean>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "liquidateBadDebt(address,address,address,bytes,bool)",
+    functionFragment: "liquidateBadDebt(address,address,address,address,bytes,bool)",
     values: [
+      PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -1159,6 +1164,22 @@ export interface SingularityInterface extends utils.Interface {
     functionFragment: "userCollateralShare(address)",
     values: [PromiseOrValue<string>]
   ): string;
+  encodeFunctionData(
+    functionFragment: "viewLiquidationCollateralAmount",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "viewLiquidationCollateralAmount(address,uint256,uint256)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
   encodeFunctionData(functionFragment: "yieldBox", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "yieldBox()",
@@ -1417,7 +1438,7 @@ export interface SingularityInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "liquidateBadDebt(address,address,address,bytes,bool)",
+    functionFragment: "liquidateBadDebt(address,address,address,address,bytes,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1751,6 +1772,14 @@ export interface SingularityInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "userCollateralShare(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "viewLiquidationCollateralAmount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "viewLiquidationCollateralAmount(address,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "yieldBox", data: BytesLike): Result;
@@ -2764,6 +2793,7 @@ export interface Singularity extends BaseContract {
 
     liquidateBadDebt(
       user: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
       liquidatorReceiver: PromiseOrValue<string>,
       liquidatorReceiverData: PromiseOrValue<BytesLike>,
@@ -2771,8 +2801,9 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "liquidateBadDebt(address,address,address,bytes,bool)"(
+    "liquidateBadDebt(address,address,address,address,bytes,bool)"(
       user: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
       liquidatorReceiver: PromiseOrValue<string>,
       liquidatorReceiverData: PromiseOrValue<BytesLike>,
@@ -3220,6 +3251,20 @@ export interface Singularity extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
+    viewLiquidationCollateralAmount(
+      user: PromiseOrValue<string>,
+      maxBorrowPart: PromiseOrValue<BigNumberish>,
+      minLiquidationBonus: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    "viewLiquidationCollateralAmount(address,uint256,uint256)"(
+      user: PromiseOrValue<string>,
+      maxBorrowPart: PromiseOrValue<BigNumberish>,
+      minLiquidationBonus: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
     yieldBox(overrides?: CallOverrides): Promise<[string]>;
 
     "yieldBox()"(overrides?: CallOverrides): Promise<[string]>;
@@ -3601,6 +3646,7 @@ export interface Singularity extends BaseContract {
 
   liquidateBadDebt(
     user: PromiseOrValue<string>,
+    from: PromiseOrValue<string>,
     receiver: PromiseOrValue<string>,
     liquidatorReceiver: PromiseOrValue<string>,
     liquidatorReceiverData: PromiseOrValue<BytesLike>,
@@ -3608,8 +3654,9 @@ export interface Singularity extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "liquidateBadDebt(address,address,address,bytes,bool)"(
+  "liquidateBadDebt(address,address,address,address,bytes,bool)"(
     user: PromiseOrValue<string>,
+    from: PromiseOrValue<string>,
     receiver: PromiseOrValue<string>,
     liquidatorReceiver: PromiseOrValue<string>,
     liquidatorReceiverData: PromiseOrValue<BytesLike>,
@@ -4037,6 +4084,20 @@ export interface Singularity extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  viewLiquidationCollateralAmount(
+    user: PromiseOrValue<string>,
+    maxBorrowPart: PromiseOrValue<BigNumberish>,
+    minLiquidationBonus: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  "viewLiquidationCollateralAmount(address,uint256,uint256)"(
+    user: PromiseOrValue<string>,
+    maxBorrowPart: PromiseOrValue<BigNumberish>,
+    minLiquidationBonus: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
   yieldBox(overrides?: CallOverrides): Promise<string>;
 
   "yieldBox()"(overrides?: CallOverrides): Promise<string>;
@@ -4414,6 +4475,7 @@ export interface Singularity extends BaseContract {
 
     liquidateBadDebt(
       user: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
       liquidatorReceiver: PromiseOrValue<string>,
       liquidatorReceiverData: PromiseOrValue<BytesLike>,
@@ -4421,8 +4483,9 @@ export interface Singularity extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "liquidateBadDebt(address,address,address,bytes,bool)"(
+    "liquidateBadDebt(address,address,address,address,bytes,bool)"(
       user: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
       liquidatorReceiver: PromiseOrValue<string>,
       liquidatorReceiverData: PromiseOrValue<BytesLike>,
@@ -4855,6 +4918,20 @@ export interface Singularity extends BaseContract {
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    viewLiquidationCollateralAmount(
+      user: PromiseOrValue<string>,
+      maxBorrowPart: PromiseOrValue<BigNumberish>,
+      minLiquidationBonus: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "viewLiquidationCollateralAmount(address,uint256,uint256)"(
+      user: PromiseOrValue<string>,
+      maxBorrowPart: PromiseOrValue<BigNumberish>,
+      minLiquidationBonus: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     yieldBox(overrides?: CallOverrides): Promise<string>;
 
@@ -5507,6 +5584,7 @@ export interface Singularity extends BaseContract {
 
     liquidateBadDebt(
       user: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
       liquidatorReceiver: PromiseOrValue<string>,
       liquidatorReceiverData: PromiseOrValue<BytesLike>,
@@ -5514,8 +5592,9 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "liquidateBadDebt(address,address,address,bytes,bool)"(
+    "liquidateBadDebt(address,address,address,address,bytes,bool)"(
       user: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
       liquidatorReceiver: PromiseOrValue<string>,
       liquidatorReceiverData: PromiseOrValue<BytesLike>,
@@ -5937,6 +6016,20 @@ export interface Singularity extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    viewLiquidationCollateralAmount(
+      user: PromiseOrValue<string>,
+      maxBorrowPart: PromiseOrValue<BigNumberish>,
+      minLiquidationBonus: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "viewLiquidationCollateralAmount(address,uint256,uint256)"(
+      user: PromiseOrValue<string>,
+      maxBorrowPart: PromiseOrValue<BigNumberish>,
+      minLiquidationBonus: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     yieldBox(overrides?: CallOverrides): Promise<BigNumber>;
 
     "yieldBox()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -6279,6 +6372,7 @@ export interface Singularity extends BaseContract {
 
     liquidateBadDebt(
       user: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
       liquidatorReceiver: PromiseOrValue<string>,
       liquidatorReceiverData: PromiseOrValue<BytesLike>,
@@ -6286,8 +6380,9 @@ export interface Singularity extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "liquidateBadDebt(address,address,address,bytes,bool)"(
+    "liquidateBadDebt(address,address,address,address,bytes,bool)"(
       user: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
       liquidatorReceiver: PromiseOrValue<string>,
       liquidatorReceiverData: PromiseOrValue<BytesLike>,
@@ -6754,6 +6849,20 @@ export interface Singularity extends BaseContract {
 
     "userCollateralShare(address)"(
       arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    viewLiquidationCollateralAmount(
+      user: PromiseOrValue<string>,
+      maxBorrowPart: PromiseOrValue<BigNumberish>,
+      minLiquidationBonus: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "viewLiquidationCollateralAmount(address,uint256,uint256)"(
+      user: PromiseOrValue<string>,
+      maxBorrowPart: PromiseOrValue<BigNumberish>,
+      minLiquidationBonus: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
