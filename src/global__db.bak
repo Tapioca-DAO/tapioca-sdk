@@ -6,9 +6,31 @@
             "421614": []
         },
         "tapioca-periphery": {
-            "4002": [],
+            "4002": [
+                {
+                    "name": "Cluster",
+                    "address": "0x6f817c0196f59be73A71dAAbA751e23a3AaD24C4",
+                    "meta": {
+                        "args": [
+                            "0x7dcAD72640F835B0FA36EFD3D6d3ec902C7E5acf",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ]
+                    }
+                }
+            ],
             "421613": [],
-            "421614": []
+            "421614": [
+                {
+                    "name": "Cluster",
+                    "address": "0x3Ba99E08617446b716E024919784005c8d085C5D",
+                    "meta": {
+                        "args": [
+                            "0x6098e96a28E02f27B1e6BD381f870F1C8Bd169d3",
+                            "0x40282d3Cf4890D9806BC1853e97a59C93D813653"
+                        ]
+                    }
+                }
+            ]
         },
         "tapiocaz": {
             "4002": [],
@@ -59,12 +81,32 @@
         "generic": {
             "4002": [
                 {
+                    "name": "MagnetarHelper",
+                    "address": "0x4ffaCcBB6c8465B3389CD37FF27C203362A00F6D",
+                    "meta": {}
+                },
+                {
+                    "name": "Magnetar",
+                    "address": "0xC3A6DD1df9497B47A38c540B527D2F2Ed12FBF5d",
+                    "meta": {}
+                },
+                {
                     "name": "Multicall3",
                     "address": "0xA1C4b578A00a9d91d871D56d50D121B80B200bF2",
                     "meta": {}
                 }
             ],
             "421614": [
+                {
+                    "name": "MagnetarHelper",
+                    "address": "0x2607777859ae77E04A50336DEcF6F7A419A987E4",
+                    "meta": {}
+                },
+                {
+                    "name": "Magnetar",
+                    "address": "0x44CCE460D176766Bcba6583C27e0fF674a3822f3",
+                    "meta": {}
+                },
                 {
                     "name": "Multicall3",
                     "address": "0xcDA0B9B26F2c009beDd0Bd1510BA15343889Ba64",
@@ -689,6 +731,34 @@
             ]
         },
         "yieldbox": {
+            "4002": [
+                {
+                    "name": "YieldBoxURIBuilder",
+                    "address": "0x380e86Ba5527ba5Ea9b4e11180A9f42595ED0975",
+                    "meta": {
+                        "args": [],
+                        "salt": "0x89226a30a99c7899215a8ec2436668f4d2719cd3cb6f1ad99ec4555854971922",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "YieldBox",
+                    "address": "0x785B71FAf389aDeDeF4375DaBa54B4eC04Baecd5",
+                    "meta": {
+                        "args": [
+                            "0xe473Ce87ABcED0F0711054a2a3C24017B8ad924c",
+                            "0x380e86Ba5527ba5Ea9b4e11180A9f42595ED0975"
+                        ],
+                        "salt": "0xf52d781144c5ad12af86ca1c7098676241a68f7b0f924538d0a46db7852eb6b9",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "TapiocaDeployer",
+                    "address": "0x77175b8E6439cD5C87b365565cc2f5Fc6b19175b",
+                    "meta": {}
+                }
+            ],
             "421613": [
                 {
                     "name": "YieldBoxURIBuilder",
@@ -720,22 +790,22 @@
             "421614": [
                 {
                     "name": "YieldBoxURIBuilder",
-                    "address": "0x80950c575798411786697cF2FC9b9d1FFDac4BE7",
+                    "address": "0xA27f97C39546d275eAa997c38a014318c516556E",
                     "meta": {
                         "args": [],
-                        "salt": "0xd1f6de040cc44969957ba861e1eea8f695378899f4ca1f8ac787d7479193fcd8",
+                        "salt": "0xb73fc5b092709b9a0c9e75e4fbfd01a15fec6fabf30f09159704df9414feca08",
                         "create2": true
                     }
                 },
                 {
                     "name": "YieldBox",
-                    "address": "0x10D37c7d080f4117BA3C25a1a2bFd563d1587Bd4",
+                    "address": "0xb7Bd73f92Af817055B6a5E2bcb19804b9D515864",
                     "meta": {
                         "args": [
-                            "0x3022494EFafC433b64B704dCbAD69ec0cf54B941",
-                            "0x80950c575798411786697cF2FC9b9d1FFDac4BE7"
+                            "0x665A6450a3c4C225a4C2F37A4014D8EC2665346f",
+                            "0xA27f97C39546d275eAa997c38a014318c516556E"
                         ],
-                        "salt": "0x77192e69d18623b2ddf239516772e39f876f101642a1c3d977f309b893d24a0d",
+                        "salt": "0xefbae189926aa8866fbdbebde329065d48bf2d10cb5fe8955e8cb16f67330bd0",
                         "create2": true
                     }
                 },
