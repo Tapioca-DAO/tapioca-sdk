@@ -3,6 +3,58 @@
         "tapioca-bar": {
             "4002": [
                 {
+                    "name": "ERC20WithoutStrategy-TapiocaOFT-GLPMock",
+                    "address": "0xACc5F756A03A68365F20afe4fB44A6FFf791eF5C",
+                    "meta": {
+                        "stratFor": "TapiocaOFT-GLPMock",
+                        "args": [
+                            "0x785B71FAf389aDeDeF4375DaBa54B4eC04Baecd5",
+                            "0x8C4A569877D70778E59852307575297cEc87bCf8"
+                        ],
+                        "salt": "0x8924936e8d9d56fc2fcbb83d1b3f826c991d80c8ba0ace63d92218c689549d3e",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "ERC20WithoutStrategy-TapiocaOFT-WETHMock",
+                    "address": "0x2f71C033a203e0bbc69ecdfc0716cbd5d4339F95",
+                    "meta": {
+                        "stratFor": "TapiocaOFT-WETHMock",
+                        "args": [
+                            "0x785B71FAf389aDeDeF4375DaBa54B4eC04Baecd5",
+                            "0xBED8C0d1797B9C066b3726d18D7e79Ed7fECbbb8"
+                        ],
+                        "salt": "0x8e75054555b5240cb198a894d07cad45651c5885b871ed73bd1d73a6570221e1",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "ERC20WithoutStrategy-TapiocaOFT-FTMLPMock",
+                    "address": "0xAd77dca0c947e2F0E5B38FE1Ee0a3Cfbf568352D",
+                    "meta": {
+                        "stratFor": "TapiocaOFT-FTMLPMock",
+                        "args": [
+                            "0x785B71FAf389aDeDeF4375DaBa54B4eC04Baecd5",
+                            "0xf4836eE2E30C89a13CB60f739bc7d47dd1115fe6"
+                        ],
+                        "salt": "0xeb6811230b667bb188ac7a6ed5cbd96d04fd2409aba5256775202b55430af7c4",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "ERC20WithoutStrategy-TapiocaOFT-FTMMock",
+                    "address": "0xa7b1DA1a174F5D4c48daF4ef03c59EF8a18b54dD",
+                    "meta": {
+                        "stratFor": "TapiocaOFT-FTMMock",
+                        "args": [
+                            "0x785B71FAf389aDeDeF4375DaBa54B4eC04Baecd5",
+                            "0xA9D9150f0e41C54C499B4a06F38F86b06584D306"
+                        ],
+                        "salt": "0xbee058ef5e85216956e26e141c140d194e6bc9c6013cf365dac4d785590c7a9e",
+                        "create2": true
+                    }
+                },
+                {
                     "name": "Penrose",
                     "address": "0x503ad61b554e33288DCD6C63aD297fC244f4DD33",
                     "meta": {
@@ -291,6 +343,58 @@
             ],
             "421613": [],
             "421614": [
+                {
+                    "name": "ERC20WithoutStrategy-TapiocaOFT-FTMLPMock",
+                    "address": "0x522fC1D0a9925961aFdd497B5328250710DAE5DD",
+                    "meta": {
+                        "stratFor": "TapiocaOFT-FTMLPMock",
+                        "args": [
+                            "0xb7Bd73f92Af817055B6a5E2bcb19804b9D515864",
+                            "0x0F1E197a32E9B24E3fEdfe076C574fF7B6e2F4a7"
+                        ],
+                        "salt": "0x33b2d1c7d80240b46ff3e4b7bf3504d07f8ee04afac005f3a67b10f20c7293e7",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "ERC20WithoutStrategy-TapiocaOFT-FTMMock",
+                    "address": "0x3c6A07eeA19bd037169dE3193aF60eBBe535BC35",
+                    "meta": {
+                        "stratFor": "TapiocaOFT-FTMMock",
+                        "args": [
+                            "0xb7Bd73f92Af817055B6a5E2bcb19804b9D515864",
+                            "0x1CCDf7054394eecd7099712daABFAE6f4581C65c"
+                        ],
+                        "salt": "0x91b578ceb9f5fb5cd35ae7a74ca04c648a1621c5f6dcd408c34fc63f28452221",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "ERC20WithoutStrategy-TapiocaOFT-GLPMock",
+                    "address": "0xeb2eBD7F7A54E2AD02E8063D11C7Ac18C69BbD3d",
+                    "meta": {
+                        "stratFor": "TapiocaOFT-GLPMock",
+                        "args": [
+                            "0xb7Bd73f92Af817055B6a5E2bcb19804b9D515864",
+                            "0x60bd59f6Cf9Cfb84176796d1dB3bA1DeA57C93c8"
+                        ],
+                        "salt": "0x732b60b9f93b47446d42d9c6039c50d0948b35512890fa02044c00a9c859019f",
+                        "create2": true
+                    }
+                },
+                {
+                    "name": "ERC20WithoutStrategy-TapiocaOFT-WETHMock",
+                    "address": "0x14E7e6D303D02B32986143B797F6C3b731bAdD28",
+                    "meta": {
+                        "stratFor": "TapiocaOFT-WETHMock",
+                        "args": [
+                            "0xb7Bd73f92Af817055B6a5E2bcb19804b9D515864",
+                            "0xC6E0c28f559a11A6d986E69eC1b65cc64D951Af5"
+                        ],
+                        "salt": "0x241da8fd933b3706e4a7c02f3cd63ace966b58bd05ba61b150d0be009d1e5cc2",
+                        "create2": true
+                    }
+                },
                 {
                     "name": "Penrose",
                     "address": "0x5bcB4eb9F66f05735045118560C6DD7097e7582D",
