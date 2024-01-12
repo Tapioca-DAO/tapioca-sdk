@@ -97,12 +97,12 @@ export const STARGATE_ROUTERS: {
         router: '0x8731d54E9D02c286767d56ac03e8037C07e01e98',
     },
     // Testnet
-    [EChainID.GOERLI]: {
+    [EChainID.SEPOLIA]: {
         stargateChainId: '10121',
         routerETH: '0xdb19Ad528F4649692B92586828346beF9e4a3532',
         router: '0x7612aE2a34E5A363E137De748801FB4c86499152',
     },
-    [EChainID.ARBITRUM_GOERLI]: {
+    [EChainID.ARBITRUM_SEPOLIA]: {
         stargateChainId: '10143',
         routerETH: '0x7612aE2a34E5A363E137De748801FB4c86499152',
         router: '0xb850873f4c993Ac2405A1AdD71F6ca5D4d4d6b4f',
@@ -135,12 +135,6 @@ export const UNISWAP_DEPLOYMENTS: {
         v3Router02: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
     },
     // Testnet
-    [EChainID.ARBITRUM_SEPOLIA]: {
-        v2Router: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
-        v2factory: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
-        v3Router: '0xE592427A0AEce92De3Edee1F18E0157C05861564',
-        v3Router02: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
-    },
     [EChainID.FUJI_AVALANCHE]: {
         v2Router: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
         v2factory: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
@@ -154,6 +148,12 @@ export const UNISWAP_DEPLOYMENTS: {
         v3Router02: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
     },
     [EChainID.FANTOM_TESTNET]: {
+        v2Router: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
+        v2factory: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
+        v3Router: '0xE592427A0AEce92De3Edee1F18E0157C05861564',
+        v3Router02: '0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45',
+    },
+    [EChainID.ARBITRUM_SEPOLIA]: {
         v2Router: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
         v2factory: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
         v3Router: '0xE592427A0AEce92De3Edee1F18E0157C05861564',
@@ -179,13 +179,6 @@ export const CURVE_DEPLOYMENTS: {
         stEthPool: '0xdc24316b9ae028f1497c275eb9192a3ea0f67022',
     },
     // Testnet
-    [EChainID.ARBITRUM_SEPOLIA]: {
-        stablePool: '0x803147a1f65f9b838e7be39bac1a4f51e6d29a18',
-        tricryptoLiquidityPool: '0xD51a44d3FaE010294C616388b506AcdA1bfAAE46',
-        tricryptoGauge: '0xDeFd8FdD20e0f34115C7018CCfb655796F6B2168',
-        tricryptoMinter: '0xd061D61a4d941c39E5453435B6345Dc261C2fcE0',
-        stEthPool: '0xdc24316b9ae028f1497c275eb9192a3ea0f67022',
-    },
     [EChainID.FUJI_AVALANCHE]: {
         stablePool: '0x803147a1f65f9b838e7be39bac1a4f51e6d29a18',
         tricryptoLiquidityPool: '0xD51a44d3FaE010294C616388b506AcdA1bfAAE46',
@@ -201,6 +194,13 @@ export const CURVE_DEPLOYMENTS: {
         stEthPool: '0xdc24316b9ae028f1497c275eb9192a3ea0f67022',
     },
     [EChainID.FANTOM_TESTNET]: {
+        stablePool: '0x803147a1f65f9b838e7be39bac1a4f51e6d29a18',
+        tricryptoLiquidityPool: '0xD51a44d3FaE010294C616388b506AcdA1bfAAE46',
+        tricryptoGauge: '0xDeFd8FdD20e0f34115C7018CCfb655796F6B2168',
+        tricryptoMinter: '0xd061D61a4d941c39E5453435B6345Dc261C2fcE0',
+        stEthPool: '0xdc24316b9ae028f1497c275eb9192a3ea0f67022',
+    },
+    [EChainID.ARBITRUM_SEPOLIA]: {
         stablePool: '0x803147a1f65f9b838e7be39bac1a4f51e6d29a18',
         tricryptoLiquidityPool: '0xD51a44d3FaE010294C616388b506AcdA1bfAAE46',
         tricryptoGauge: '0xDeFd8FdD20e0f34115C7018CCfb655796F6B2168',
@@ -221,14 +221,6 @@ export const FEE_ADDRESSES: {
         feeCollector: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
     },
     // Testnet
-    [EChainID.GOERLI]: {
-        feeTo: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
-        feeCollector: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
-    },
-    [EChainID.ARBITRUM_GOERLI]: {
-        feeTo: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
-        feeCollector: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
-    },
     [EChainID.FUJI_AVALANCHE]: {
         feeTo: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
         feeCollector: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
@@ -238,6 +230,10 @@ export const FEE_ADDRESSES: {
         feeCollector: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
     },
     [EChainID.FANTOM_TESTNET]: {
+        feeTo: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
+        feeCollector: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
+    },
+    [EChainID.ARBITRUM_SEPOLIA]: {
         feeTo: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
         feeCollector: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
     },
@@ -261,20 +257,6 @@ export const TOKENS_DEPLOYMENTS: {
         usdt: '0xdac17f958d2ee523a2206206994597c13d831ec7',
     },
     // Testnet
-    [EChainID.GOERLI]: {
-        weth: '0x40282d3Cf4890D9806BC1853e97a59C93D813653',
-        bal: '0xba100000625a3754423978a60c9317c58a424e3D',
-        ceth: '0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5',
-        wbtc: '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599',
-        usdt: '0xdac17f958d2ee523a2206206994597c13d831ec7',
-    },
-    [EChainID.ARBITRUM_GOERLI]: {
-        weth: '0xd428690148436dA9c7422698eEe15F51C8cec871',
-        bal: '0xba100000625a3754423978a60c9317c58a424e3D',
-        ceth: '0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5',
-        wbtc: '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599',
-        usdt: '0xdac17f958d2ee523a2206206994597c13d831ec7',
-    },
     [EChainID.FUJI_AVALANCHE]: {
         weth: '0x71E4364611BDCc8865c61f2e8F979644Ba0ec7f7',
         bal: '0xba100000625a3754423978a60c9317c58a424e3D',
@@ -290,6 +272,13 @@ export const TOKENS_DEPLOYMENTS: {
         usdt: '0xdac17f958d2ee523a2206206994597c13d831ec7',
     },
     [EChainID.FANTOM_TESTNET]: {
+        weth: '0x95c7E83D6d44F3d81cb60FB4e5472dC5C0415571',
+        bal: '0xba100000625a3754423978a60c9317c58a424e3D',
+        ceth: '0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5',
+        wbtc: '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599',
+        usdt: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+    },
+    [EChainID.ARBITRUM_SEPOLIA]: {
         weth: '0x95c7E83D6d44F3d81cb60FB4e5472dC5C0415571',
         bal: '0xba100000625a3754423978a60c9317c58a424e3D',
         ceth: '0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5',
