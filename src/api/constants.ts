@@ -200,7 +200,7 @@ export const CURVE_DEPLOYMENTS: {
         tricryptoMinter: '0xd061D61a4d941c39E5453435B6345Dc261C2fcE0',
         stEthPool: '0xdc24316b9ae028f1497c275eb9192a3ea0f67022',
     },
-     [EChainID.ARBITRUM_SEPOLIA]: {
+    [EChainID.ARBITRUM_SEPOLIA]: {
         stablePool: '0x803147a1f65f9b838e7be39bac1a4f51e6d29a18',
         tricryptoLiquidityPool: '0xD51a44d3FaE010294C616388b506AcdA1bfAAE46',
         tricryptoGauge: '0xDeFd8FdD20e0f34115C7018CCfb655796F6B2168',
