@@ -12,7 +12,7 @@ const SUPPORTED_CHAINS = [
     },
     {
         name: 'arbitrum_sepolia',
-        address: '0x464570adA09869d8741132183721B4f0769a0287',
+        address: '0x6098e96a28E02f27B1e6BD381f870F1C8Bd169d3',
         chainId: EChainID.ARBITRUM_SEPOLIA,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.ARBITRUM_SEPOLIA],
         rpc: 'https://arb-sepolia.g.alchemy.com/v2/<api_key>',
@@ -44,7 +44,7 @@ const SUPPORTED_CHAINS = [
     },
     {
         name: 'fantom_testnet',
-        address: '0x464570adA09869d8741132183721B4f0769a0287',
+        address: '0x7dcAD72640F835B0FA36EFD3D6d3ec902C7E5acf',
         chainId: EChainID.FANTOM_TESTNET,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.FANTOM_TESTNET],
         rpc: 'https://rpc.testnet.fantom.network/',
