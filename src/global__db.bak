@@ -819,7 +819,7 @@
             "4002": [
                 {
                     "name": "Cluster",
-                    "address": "0x77Eab930484b3AF7ad37367a49D012C393656744",
+                    "address": "0x6f817c0196f59be73A71dAAbA751e23a3AaD24C4",
                     "meta": {
                         "args": [
                             "0x7dcAD72640F835B0FA36EFD3D6d3ec902C7E5acf",
@@ -832,7 +832,7 @@
             "421614": [
                 {
                     "name": "Cluster",
-                    "address": "0x92886dFc2357c0Fadcc1944AffDc7B38f9Ad4b08",
+                    "address": "0x3Ba99E08617446b716E024919784005c8d085C5D",
                     "meta": {
                         "args": [
                             "0x6098e96a28E02f27B1e6BD381f870F1C8Bd169d3",
@@ -1134,12 +1134,12 @@
             "4002": [
                 {
                     "name": "MagnetarHelper",
-                    "address": "0xE418e884258BA355a1bB6855D19De65F79A83539",
+                    "address": "0x6a1D04DddA9B939AB916a77425221c453096631A",
                     "meta": {}
                 },
                 {
                     "name": "Magnetar",
-                    "address": "0x3D9B4d1e49524DF0aF3316256480Cb6E8B8E9F07",
+                    "address": "0xfdce0e8BD43dEfD0267e25353a7485eC43FefB63",
                     "meta": {}
                 },
                 {
@@ -1151,12 +1151,12 @@
             "421614": [
                 {
                     "name": "MagnetarHelper",
-                    "address": "0x0B789DeD89F4F9dF9ee0841b98348bdEBa2d3BeD",
+                    "address": "0x7fF8ac4f6e3a5249634266137621F0c548Fa8d03",
                     "meta": {}
                 },
                 {
                     "name": "Magnetar",
-                    "address": "0x431509f755160688c4Da8764d97e665A014522a8",
+                    "address": "0x44bD817f2c31fCF0816932F26972cb8095f7ac8b",
                     "meta": {}
                 },
                 {
