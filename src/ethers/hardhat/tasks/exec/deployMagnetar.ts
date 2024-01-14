@@ -73,7 +73,7 @@ export const deployMagnetar__task = async (
     hre.SDK.db.saveGlobally(dep, TAPIOCA_PROJECTS[3], tag);
 
     const MagnetarHelper = new MagnetarHelper__factory(signer);
-    const magnetarHelper = await MagnetarHelper.deploy(signer.address);
+    const magnetarHelper = await MagnetarHelper.deploy();
     await magnetarHelper.deployTransaction.wait(3);
     console.log(`[+] Deployed MagnetarHelper at ${magnetarHelper.address}`);
 
@@ -115,7 +115,7 @@ export const deployMagnetar__task = async (
         console.log('[+] Verifying MagnetarHelper');
         await hre.run('verify', {
             address: magnetarHelper.address,
-            constructorArgsParams: [signer.address],
+            constructorArgsParams: [],
         });
         console.log('[+] Verified');
     } catch (err: any) {
