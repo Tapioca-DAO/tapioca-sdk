@@ -83,6 +83,7 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     "timestampToWeek(uint256)": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
     "twAML(uint256)": FunctionFragment;
+    "twAMLExit(uint256,uint256)": FunctionFragment;
   };
 
   getFunction(
@@ -157,6 +158,8 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
       | "transferOwnership(address,bool,bool)"
       | "twAML"
       | "twAML(uint256)"
+      | "twAMLExit"
+      | "twAMLExit(uint256,uint256)"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -429,6 +432,14 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
     functionFragment: "twAML(uint256)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
+  encodeFunctionData(
+    functionFragment: "twAMLExit",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "twAMLExit(uint256,uint256)",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "EPOCH_DURATION",
@@ -657,6 +668,11 @@ export interface TapiocaOptionBrokerInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "twAML", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "twAML(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "twAMLExit", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "twAMLExit(uint256,uint256)",
     data: BytesLike
   ): Result;
 
@@ -1169,6 +1185,32 @@ export interface TapiocaOptionBroker extends BaseContract {
         cumulative: BigNumber;
       }
     >;
+
+    twAMLExit(
+      epoch: PromiseOrValue<BigNumberish>,
+      sglAssetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber, BigNumber] & {
+        totalParticipants: BigNumber;
+        averageMagnitude: BigNumber;
+        totalDeposited: BigNumber;
+        cumulative: BigNumber;
+      }
+    >;
+
+    "twAMLExit(uint256,uint256)"(
+      epoch: PromiseOrValue<BigNumberish>,
+      sglAssetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber, BigNumber] & {
+        totalParticipants: BigNumber;
+        averageMagnitude: BigNumber;
+        totalDeposited: BigNumber;
+        cumulative: BigNumber;
+      }
+    >;
   };
 
   EPOCH_DURATION(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1487,6 +1529,32 @@ export interface TapiocaOptionBroker extends BaseContract {
     }
   >;
 
+  twAMLExit(
+    epoch: PromiseOrValue<BigNumberish>,
+    sglAssetId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber, BigNumber, BigNumber] & {
+      totalParticipants: BigNumber;
+      averageMagnitude: BigNumber;
+      totalDeposited: BigNumber;
+      cumulative: BigNumber;
+    }
+  >;
+
+  "twAMLExit(uint256,uint256)"(
+    epoch: PromiseOrValue<BigNumberish>,
+    sglAssetId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber, BigNumber, BigNumber] & {
+      totalParticipants: BigNumber;
+      averageMagnitude: BigNumber;
+      totalDeposited: BigNumber;
+      cumulative: BigNumber;
+    }
+  >;
+
   callStatic: {
     EPOCH_DURATION(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1782,6 +1850,32 @@ export interface TapiocaOptionBroker extends BaseContract {
 
     "twAML(uint256)"(
       arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber, BigNumber] & {
+        totalParticipants: BigNumber;
+        averageMagnitude: BigNumber;
+        totalDeposited: BigNumber;
+        cumulative: BigNumber;
+      }
+    >;
+
+    twAMLExit(
+      epoch: PromiseOrValue<BigNumberish>,
+      sglAssetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber, BigNumber] & {
+        totalParticipants: BigNumber;
+        averageMagnitude: BigNumber;
+        totalDeposited: BigNumber;
+        cumulative: BigNumber;
+      }
+    >;
+
+    "twAMLExit(uint256,uint256)"(
+      epoch: PromiseOrValue<BigNumberish>,
+      sglAssetId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber, BigNumber, BigNumber] & {
@@ -2173,6 +2267,18 @@ export interface TapiocaOptionBroker extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    twAMLExit(
+      epoch: PromiseOrValue<BigNumberish>,
+      sglAssetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "twAMLExit(uint256,uint256)"(
+      epoch: PromiseOrValue<BigNumberish>,
+      sglAssetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -2467,6 +2573,18 @@ export interface TapiocaOptionBroker extends BaseContract {
 
     "twAML(uint256)"(
       arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    twAMLExit(
+      epoch: PromiseOrValue<BigNumberish>,
+      sglAssetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "twAMLExit(uint256,uint256)"(
+      epoch: PromiseOrValue<BigNumberish>,
+      sglAssetId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

@@ -109,6 +109,7 @@ export interface TwTAPInterface extends utils.Interface {
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
     "twAML()": FunctionFragment;
+    "twAMLExit(uint256)": FunctionFragment;
     "weekTotals(uint256)": FunctionFragment;
   };
 
@@ -204,6 +205,8 @@ export interface TwTAPInterface extends utils.Interface {
       | "transferOwnership(address,bool,bool)"
       | "twAML"
       | "twAML()"
+      | "twAMLExit"
+      | "twAMLExit(uint256)"
       | "weekTotals"
       | "weekTotals(uint256)"
   ): FunctionFragment;
@@ -577,6 +580,14 @@ export interface TwTAPInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "twAML", values?: undefined): string;
   encodeFunctionData(functionFragment: "twAML()", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "twAMLExit",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "twAMLExit(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "weekTotals",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
@@ -876,6 +887,11 @@ export interface TwTAPInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "twAML", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "twAML()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "twAMLExit", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "twAMLExit(uint256)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "weekTotals", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "weekTotals(uint256)",
@@ -1575,6 +1591,30 @@ export interface TwTAP extends BaseContract {
       }
     >;
 
+    twAMLExit(
+      epoch: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber, BigNumber] & {
+        totalParticipants: BigNumber;
+        averageMagnitude: BigNumber;
+        totalDeposited: BigNumber;
+        cumulative: BigNumber;
+      }
+    >;
+
+    "twAMLExit(uint256)"(
+      epoch: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber, BigNumber] & {
+        totalParticipants: BigNumber;
+        averageMagnitude: BigNumber;
+        totalDeposited: BigNumber;
+        cumulative: BigNumber;
+      }
+    >;
+
     weekTotals(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -2073,6 +2113,30 @@ export interface TwTAP extends BaseContract {
     }
   >;
 
+  twAMLExit(
+    epoch: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber, BigNumber, BigNumber] & {
+      totalParticipants: BigNumber;
+      averageMagnitude: BigNumber;
+      totalDeposited: BigNumber;
+      cumulative: BigNumber;
+    }
+  >;
+
+  "twAMLExit(uint256)"(
+    epoch: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber, BigNumber, BigNumber] & {
+      totalParticipants: BigNumber;
+      averageMagnitude: BigNumber;
+      totalDeposited: BigNumber;
+      cumulative: BigNumber;
+    }
+  >;
+
   weekTotals(
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -2557,6 +2621,30 @@ export interface TwTAP extends BaseContract {
     >;
 
     "twAML()"(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber, BigNumber] & {
+        totalParticipants: BigNumber;
+        averageMagnitude: BigNumber;
+        totalDeposited: BigNumber;
+        cumulative: BigNumber;
+      }
+    >;
+
+    twAMLExit(
+      epoch: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber, BigNumber] & {
+        totalParticipants: BigNumber;
+        averageMagnitude: BigNumber;
+        totalDeposited: BigNumber;
+        cumulative: BigNumber;
+      }
+    >;
+
+    "twAMLExit(uint256)"(
+      epoch: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber, BigNumber, BigNumber] & {
@@ -3075,6 +3163,16 @@ export interface TwTAP extends BaseContract {
 
     "twAML()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    twAMLExit(
+      epoch: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "twAMLExit(uint256)"(
+      epoch: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     weekTotals(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -3495,6 +3593,16 @@ export interface TwTAP extends BaseContract {
     twAML(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "twAML()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    twAMLExit(
+      epoch: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "twAMLExit(uint256)"(
+      epoch: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     weekTotals(
       arg0: PromiseOrValue<BigNumberish>,
