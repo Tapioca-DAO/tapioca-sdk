@@ -10,6 +10,7 @@ import { Multicall3 } from '../../../../typechain/tapioca-periphery/Multicall/Mu
 /**
  * Configure the LZ app in one go
  */
+// TODO CAREFUL TRANSFERRING OWNERSHIP IN A NON ATOMIC TX
 export const setLZConfig__task = async (
     taskArgs: {
         debugMode?: boolean;

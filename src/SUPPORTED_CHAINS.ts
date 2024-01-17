@@ -23,7 +23,7 @@ const SUPPORTED_CHAINS = [
         address: '0x464570adA09869d8741132183721B4f0769a0287',
         chainId: EChainID.OPTIMISM_SEPOLIA,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.OPTIMISM_SEPOLIA],
-        rpc: 'https://arb-sepolia.g.alchemy.com/v2/<api_key>',
+        rpc: 'https://opt-sepolia.g.alchemy.com/v2/<api_key>',
         tags: ['testnet'],
     },
     {
