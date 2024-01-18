@@ -1790,6 +1790,13 @@
                     "address": "0xC41A2B66E7B598f907Ed948733AC75462d81b66e",
                     "meta": {}
                 }
+            ],
+            "11155420": [
+                {
+                    "name": "Multicall3",
+                    "address": "0x29CBa348D7eCB5A9f72520A22F49aDDf0739617B",
+                    "meta": {}
+                }
             ]
         },
         "tap-token": {
