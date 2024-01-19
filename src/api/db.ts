@@ -86,7 +86,7 @@ export const findLocalDeployment = (
     }) as TChainIdDeployment | undefined;
     if (!deployments)
         throw new Error(
-            `[-] Can not load local deployment with tag ${tag} and chainId ${chainId}`,
+            `[-] Can not load local deployment ${contractName} with tag ${tag} and chainId ${chainId}`,
         );
 
     const contract = _find(deployments.contracts, { name: contractName }) as
@@ -117,7 +117,7 @@ export const findGlobalDeployment = (
     }) as TChainIdDeployment | undefined;
     if (!deployments)
         throw new Error(
-            `[-] Can not load global deployment with tag ${tag} and chainId ${chainId} for project ${project}`,
+            `[-] Can not load global deployment ${contractName} with tag ${tag} and chainId ${chainId} for project ${project}`,
         );
 
     const contract = _find(deployments.contracts, { name: contractName }) as
