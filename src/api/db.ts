@@ -44,7 +44,9 @@ export const LOCAL_DB_PATH = './local.db.json';
  * @returns List of deployed contracts
  */
 export const loadLocalDeployment = (tag: string, chainId: string) => {
-    return readDeployment('local', { tag, chainId });
+    return readDeployment('local', { tag, chainId }) as
+        | TChainIdDeployment
+        | undefined;
 };
 
 /**
@@ -64,7 +66,7 @@ export const loadGlobalDeployment = (
         chainId,
         project,
         customPath: SUBREPO_GLOBAL_DB_PATH,
-    });
+    }) as TChainIdDeployment | undefined;
 };
 
 /**
