@@ -381,7 +381,7 @@ export class DeployerVM {
         this.hre.SDK.db.saveLocally(dep, this.options.tag);
         console.log(
             '[+] Deployment saved for chainId: ',
-            String(this.hre.network.config.chainId),
+            this.hre.network.name,
         );
 
         return this;
@@ -409,13 +409,6 @@ export class DeployerVM {
             }
 
             verifyList[verifyList.length - 1].push({
-                //TODO for testing purpose, remove later
-                ...(contract.name === 'YieldBoxMock'
-                    ? {
-                          contract:
-                              'contracts/options/mocks/YieldBoxMock.sol:YieldBoxMock',
-                      }
-                    : {}),
                 address: contract.address,
                 constructorArguments: contract.meta.args,
             });
@@ -425,6 +418,7 @@ export class DeployerVM {
         console.log(`[+] No. of batches to verify: ${verifyList.length}`);
 
         // Verify the contracts
+        // TODO Is there a way to make it faster?
         for (const batch of verifyList) {
             try {
                 await Promise.allSettled(
@@ -435,12 +429,11 @@ export class DeployerVM {
                         }),
                     ),
                 );
-                await new Promise((resolve) => setTimeout(resolve, 2000));
             } catch (e: any) {
-                console.log(`[-] Failed to verify ${e.message}`);
+                console.log(`[-] ${e.message}`);
             }
         }
-        console.log('[+] Verified');
+        console.log('[+] Verified all contracts');
 
         return this;
     }
@@ -767,9 +760,6 @@ export class DeployerVM {
         }
     }
 
-    /**
-     * Used to check for reverts
-     */
     /**
      * Used to check for reverts
      */
