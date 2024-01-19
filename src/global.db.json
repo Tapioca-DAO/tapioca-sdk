@@ -1,0 +1,17 @@
+{
+    "default": {
+        "generic": {
+            "421614": {
+                "name": "arbitrum_sepolia",
+                "lastBlockHeight": 8226293,
+                "contracts": [
+                    {
+                        "name": "Multicall3",
+                        "address": "0x43a931E7d98bA295218a959C0709B0fdB8F8b0fA",
+                        "meta": {}
+                    }
+                ]
+            }
+        }
+    }
+}
