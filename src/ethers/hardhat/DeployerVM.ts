@@ -164,7 +164,7 @@ export class DeployerVM {
         });
 
         console.log(
-            '[+] Adding contract to deployment queue: ',
+            '\t[+] Adding contract to deployment queue: ',
             contract.deploymentName,
         );
         this.deploymentQueue.push(contract);
@@ -191,10 +191,10 @@ export class DeployerVM {
         }
 
         if (!this.multicall) {
-            console.log('\n[+] Multicall3 not set');
+            console.log('\t[+] Multicall3 not set');
             await this.getMulticall();
             console.log(
-                `[+] Multicall3 deployed at: ${this.multicall!.address}`,
+                `\t[+] Deployed Multicall3 at: ${this.multicall!.address}`,
             );
             console.log('\n');
         }
@@ -241,7 +241,7 @@ export class DeployerVM {
         fromMultisig?: boolean,
         fromMulticall?: boolean,
     ) {
-        console.log(`[+] Transfering ownership to ${to}...`);
+        console.log(`\t[+] Transferring ownership to ${to}...`);
 
         // Get deployer deployment
         let deployment: TContract | undefined;
@@ -491,7 +491,7 @@ export class DeployerVM {
                 this.hre.SDK.db.SUBREPO_GLOBAL_DB_PATH,
             );
             if (deployment) {
-                console.log('[+] Previous Multicall3 deployment exists.');
+                console.log('\t\t[+] Using previous Multicall3 deployment.');
                 const _multicall = Multicall3__factory.connect(
                     deployment.address,
                     (await this.hre.ethers.getSigners())[0],
@@ -501,7 +501,7 @@ export class DeployerVM {
         } catch (e) {
             if (this.options.debugMode) {
                 console.log(
-                    `[-] Failed retrieving Multicall3 deployment with error: ${e}`,
+                    `\t\t[-] Failed retrieving Multicall3 deployment with error: ${e}`,
                 );
             }
         }
@@ -509,7 +509,7 @@ export class DeployerVM {
         // Deploy Multicall3 if not deployed
         if (!deployment) {
             // Deploy Multicall3
-            console.log('[+] Deploying Multicall3');
+            console.log('\t\t[+] Deploying Multicall3');
 
             const multicall = await new Multicall3__factory(
                 (
@@ -526,10 +526,10 @@ export class DeployerVM {
             await multicall.deployTransaction.wait(
                 this.options.globalWait ?? 3,
             );
-            console.log('[+] Deployed');
+            console.log('\t\t[+] Deployed');
 
             // Save deployment
-            console.log('[+] Saving Multicall3 deployment');
+            console.log('\t\t[+] Saving Multicall3 deployment');
             const dep = this.hre.SDK.db.buildLocalDeployment({
                 chainIdName: this.hre.network.name,
                 lastBlockHeight:
@@ -544,7 +544,7 @@ export class DeployerVM {
                 ],
             });
             this.hre.SDK.db.saveGlobally(dep, project, _tag);
-            console.log('[+] Saved');
+            console.log('\t\t[+] Saved');
 
             const _multicall = Multicall3__factory.connect(
                 multicall.address,
@@ -649,7 +649,7 @@ export class DeployerVM {
     private async getBuildCalls(
         runSimulations = true,
     ): Promise<Multicall3.CallStruct[][]> {
-        console.log('[+] Populating build queue');
+        console.log('\t[+] Populating build queue');
         await this.populateBuildQueue();
         if (runSimulations) {
             console.log('[+] Running static simulations');
@@ -827,7 +827,7 @@ export class DeployerVM {
             );
         } catch (e) {
             if (this.options.debugMode) {
-                console.log(`[-] Failed with error: ${e}`);
+                console.log(`\t\t[-] Failed with error: ${e}`);
             }
         }
 
