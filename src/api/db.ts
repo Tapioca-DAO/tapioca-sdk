@@ -80,10 +80,14 @@ export const findLocalDeployment = (
     contractName: string,
     tag = 'default',
 ) => {
-    const deployments = (readDeployment('local', {
+    const deployments = readDeployment('local', {
         tag,
         chainId,
-    }) ?? {}) as TChainIdDeployment;
+    }) as TChainIdDeployment | undefined;
+    if (!deployments)
+        throw new Error(
+            `[-] Can not load local deployment with tag ${tag} and chainId ${chainId}`,
+        );
 
     const contract = _find(deployments.contracts, { name: contractName }) as
         | TContract
@@ -110,7 +114,11 @@ export const findGlobalDeployment = (
         project,
         chainId,
         customPath,
-    }) as TChainIdDeployment;
+    }) as TChainIdDeployment | undefined;
+    if (!deployments)
+        throw new Error(
+            `[-] Can not load global deployment with tag ${tag} and chainId ${chainId} for project ${project}`,
+        );
 
     const contract = _find(deployments.contracts, { name: contractName }) as
         | TContract
