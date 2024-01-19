@@ -21,11 +21,12 @@ import {
  */
 
 // In the repo node module
-export const GLOBAL_DB_PATH = './node_modules/tapioca-sdk/src/global__db';
-export const SUBREPO_GLOBAL_DB_PATH = './gitsub_tapioca-sdk/src/global__db';
+// directory location should be root of the repo
+export const GLOBAL_DB_PATH = './lib/tapioca-sdk/src/global.db.json';
+export const SUBREPO_GLOBAL_DB_PATH = './gitsub_tapioca-sdk/src/global.db.json';
 
 // Relative to the Hardhat project root
-export const LOCAL_DB_PATH = './local__db';
+export const LOCAL_DB_PATH = './local.db.json';
 
 /*
  ******************
@@ -130,9 +131,6 @@ export const saveLocally = (data: TLocalDeployment, tag = 'default') => {
     const db = readDB('local') ?? {};
     const prevDep = db[tag] || {}; // Read previous deployments
 
-    // Save previous deployments in a backup file
-    if (db[tag]) writeDB('local', db, `${LOCAL_DB_PATH}.bak`);
-
     // Merge prev and new deployments
     const deployments = mergeDeployments(data, prevDep);
 
@@ -149,10 +147,8 @@ export const saveGlobally = (
     const db = readDB('global', SUBREPO_GLOBAL_DB_PATH) ?? {};
     const prevDep: any = db[tag]?.[project]; // Read previous deployments
 
-    // Save previous deployments in a backup file
-    if (prevDep) writeDB('global', db, `${SUBREPO_GLOBAL_DB_PATH}.bak`);
-    else {
-        // Create the project if it doesn't exist
+    // Create the project if it doesn't exist
+    if (!prevDep) {
         if (!db[tag]) db[tag] = {};
         if (!db[tag][project]) db[tag][project] = {};
     }
