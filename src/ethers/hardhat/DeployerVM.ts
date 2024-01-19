@@ -194,7 +194,7 @@ export class DeployerVM {
             console.log('\n[+] Multicall3 not set');
             await this.getMulticall();
             console.log(
-                `[+] Multicall3 deployed at: ${this.multicall.address}`,
+                `[+] Multicall3 deployed at: ${this.multicall!.address}`,
             );
             console.log('\n');
         }
@@ -202,7 +202,7 @@ export class DeployerVM {
         // Execute the calls
         try {
             for (const call of calls) {
-                const tx = await this.multicall.multicall(
+                const tx = await this.multicall!.multicall(
                     call,
                     this.options.overrideOptions
                         ? getOverrideOptions(
@@ -246,7 +246,7 @@ export class DeployerVM {
         // Get deployer deployment
         let deployment: TContract | undefined;
         try {
-            deployment = this.hre.SDK.db.getLocalDeployment(
+            deployment = this.hre.SDK.db.findLocalDeployment(
                 String(this.hre.network.config.chainId),
                 target.name,
                 this.options.tag,
@@ -260,7 +260,7 @@ export class DeployerVM {
         if (!deployment) {
             //try global__db
             try {
-                deployment = this.hre.SDK.db.getGlobalDeployment(
+                deployment = this.hre.SDK.db.findGlobalDeployment(
                     TAPIOCA_PROJECTS_NAME.Generic, //generic
                     String(this.hre.network.config.chainId),
                     target.name,
@@ -366,7 +366,7 @@ export class DeployerVM {
     /**
      * Save the deployments to the local database.
      */
-    save() {
+    async save() {
         if (!this.executed) {
             throw new Error(
                 '[-] Deployment queue has not been executed. Please call execute() before writing the deployment file',
@@ -375,6 +375,8 @@ export class DeployerVM {
 
         const dep = this.hre.SDK.db.buildLocalDeployment({
             chainId: String(this.hre.network.config.chainId),
+            chainIdName: this.hre.network.name,
+            lastBlockHeight: await this.hre.ethers.provider.getBlockNumber(),
             contracts: this.list(),
         });
         this.hre.SDK.db.saveLocally(dep, this.options.tag);
@@ -481,7 +483,7 @@ export class DeployerVM {
         // Get deployer deployment
         let deployment: TContract | undefined;
         try {
-            deployment = this.hre.SDK.db.getGlobalDeployment(
+            deployment = this.hre.SDK.db.findGlobalDeployment(
                 project,
                 String(this.hre.network.config.chainId),
                 'Multicall3',
@@ -529,6 +531,9 @@ export class DeployerVM {
             // Save deployment
             console.log('[+] Saving Multicall3 deployment');
             const dep = this.hre.SDK.db.buildLocalDeployment({
+                chainIdName: this.hre.network.name,
+                lastBlockHeight:
+                    await this.hre.ethers.provider.getBlockNumber(),
                 chainId: String(this.hre.network.config.chainId),
                 contracts: [
                     {
@@ -569,7 +574,7 @@ export class DeployerVM {
         // Get deployer deployment
         let deployment: TContract | undefined;
         try {
-            deployment = this.hre.SDK.db.getGlobalDeployment(
+            deployment = this.hre.SDK.db.findGlobalDeployment(
                 project,
                 String(this.hre.network.config.chainId),
                 'MultisigMock',
@@ -609,6 +614,9 @@ export class DeployerVM {
             console.log('[+] Saving MultisigMock deployment');
             const dep = this.hre.SDK.db.buildLocalDeployment({
                 chainId: String(this.hre.network.config.chainId),
+                chainIdName: this.hre.network.name,
+                lastBlockHeight:
+                    await this.hre.ethers.provider.getBlockNumber(),
                 contracts: [
                     {
                         name: 'MultisigMock',
@@ -812,7 +820,7 @@ export class DeployerVM {
         // Get deployer deployment
         let deployment: TContract | undefined;
         try {
-            deployment = this.hre.SDK.db.getLocalDeployment(
+            deployment = this.hre.SDK.db.findLocalDeployment(
                 String(this.hre.network.config.chainId),
                 'TapiocaDeployer',
                 this.options.tag,
@@ -846,6 +854,9 @@ export class DeployerVM {
             // Save deployment
             const dep = this.hre.SDK.db.buildLocalDeployment({
                 chainId: String(this.hre.network.config.chainId),
+                chainIdName: this.hre.network.name,
+                lastBlockHeight:
+                    await this.hre.ethers.provider.getBlockNumber(),
                 contracts: [
                     {
                         name: 'TapiocaDeployer',

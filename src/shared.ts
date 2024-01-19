@@ -11,14 +11,23 @@ export type TProjectCaller = TAPIOCA_PROJECTS_NAME;
 export type TContract = {
     name: string;
     address: string;
-    meta: { deploymentArgs: { arg: string; description: string }[] } & any;
+    meta: {
+        blockHeight: number;
+        deploymentArgs: { arg: string; description: string }[];
+    } & any;
+};
+
+export type TChainIdDeployment = {
+    name: string; // The name of the chain
+    lastBlockHeight: number; // The last block number used for a deployment
+    contracts: TContract[];
 };
 
 // A local deployment is a deployment of a single project, contracts are deployed per chain
 export type TLocalDeployment = {
-    [chainID in HLP_TChain]?: TContract[];
+    [chainID in HLP_TChain]?: TChainIdDeployment;
 } & {
-    [chainId: string]: TContract[];
+    [chainId: string]: TChainIdDeployment;
 };
 
 // A local database is a local deployment per tag

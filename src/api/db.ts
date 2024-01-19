@@ -4,7 +4,9 @@ import _isArray from 'lodash/isArray';
 import _merge from 'lodash/merge';
 import _mergeWith from 'lodash/mergeWith';
 import _unionBy from 'lodash/unionBy';
+import _sortBy from 'lodash/sortBy';
 import {
+    TChainIdDeployment,
     TContract,
     TGlobalDatabase,
     TGlobalDeployment,
@@ -68,23 +70,22 @@ export const loadGlobalDeployment = (
 };
 
 /**
- * Get a deployed contract on the local database
+ * Find a deployed contract on the local database
  * @param tag The tag to read the database under
  * @param chainId The chain ID to read the database under
  * @returns The contract
  */
-export const getLocalDeployment = (
+export const findLocalDeployment = (
     chainId: string,
     contractName: string,
     tag = 'default',
 ) => {
-    const deployments =
-        readDeployment('local', {
-            tag,
-            chainId,
-        }) ?? ([] as TContract[]);
+    const deployments = (readDeployment('local', {
+        tag,
+        chainId,
+    }) ?? {}) as TChainIdDeployment;
 
-    const contract = _find(deployments, { name: contractName }) as
+    const contract = _find(deployments.contracts, { name: contractName }) as
         | TContract
         | undefined;
 
@@ -92,12 +93,12 @@ export const getLocalDeployment = (
 };
 
 /**
- * Get a deployed contract on the global database
+ * Find a deployed contract on the global database
  * @param tag The tag to read the database under
  * @param chainId The chain ID to read the database under
  * @returns The contract
  */
-export const getGlobalDeployment = (
+export const findGlobalDeployment = (
     project: TProjectCaller,
     chainId: string,
     contractName: string,
@@ -109,8 +110,9 @@ export const getGlobalDeployment = (
         project,
         chainId,
         customPath,
-    });
-    const contract = _find(deployments, { name: contractName }) as
+    }) as TChainIdDeployment;
+
+    const contract = _find(deployments.contracts, { name: contractName }) as
         | TContract
         | undefined;
 
@@ -132,10 +134,12 @@ export const saveLocally = (data: TLocalDeployment, tag = 'default') => {
     const prevDep = db[tag] || {}; // Read previous deployments
 
     // Merge prev and new deployments
-    const deployments = mergeDeployments(data, prevDep);
+    const deployments = mergeDeployments(prevDep, data);
+
+    const deploymentToSave = { ...db, [tag]: deployments };
 
     // Save the new deployment
-    writeDB('local', { ...db, [tag]: deployments }, LOCAL_DB_PATH);
+    writeDB('local', sortJson(deploymentToSave), LOCAL_DB_PATH);
     return deployments;
 };
 
@@ -154,27 +158,12 @@ export const saveGlobally = (
     }
 
     // Merge prev and new deployments
-    const deployments = mergeDeployments(data, prevDep);
+    const deployments = mergeDeployments(prevDep, data);
 
     // Save the new deployment
     db[tag][project] = deployments;
     writeDB('global', db, SUBREPO_GLOBAL_DB_PATH);
     return deployments;
-};
-
-/**
- * Save a list of contracts to the local database
- *
- * @param contracts List of contracts to save
- * @param chainId The chain ID to save the contracts under
- * @param tag The tag to save the contracts under, defaults to 'default'
- */
-export const saveContracts = (
-    contracts: TContract[],
-    chainId: string,
-    tag = 'default',
-) => {
-    saveLocally({ [chainId]: contracts }, tag);
 };
 
 /*
@@ -188,15 +177,24 @@ export const saveContracts = (
  *
  * @param options The options to build the local deployment
  * @param options.chainId The chain ID to save the deployment under
+ * @param options.chainIdName The name of the chain ID
+ * @param options.lastBlockHeight The last block height used for a deployment
  * @param options.contracts The contracts to save
+ * @returns The local deployment
  */
 export const buildLocalDeployment = (options: {
     chainId: string;
+    chainIdName: string;
+    lastBlockHeight: number;
     contracts: TContract[];
 }): TLocalDeployment => {
-    const { chainId, contracts } = options;
+    const { chainId, contracts, chainIdName, lastBlockHeight } = options;
     return {
-        [chainId]: contracts,
+        [chainId]: {
+            name: chainIdName,
+            lastBlockHeight,
+            contracts,
+        },
     };
 };
 
@@ -206,17 +204,26 @@ export const buildLocalDeployment = (options: {
  * @param options The options to build the global deployment
  * @param options.project The project to save the deployment under
  * @param options.chainId The chain ID to save the deployment under
+ * @param options.chainIdName The name of the chain ID
+ * @param options.lastBlockHeight The last block height used for a deployment
  * @param options.contracts The contracts to save
  */
 export const buildGlobalDeployment = (options: {
     project: TProjectCaller;
     chainId: string;
+    chainIdName: string;
+    lastBlockHeight: number;
     contracts: TContract[];
 }): TGlobalDeployment => {
-    const { project, chainId, contracts } = options;
+    const { project, chainId, contracts, chainIdName, lastBlockHeight } =
+        options;
     return {
         [project]: {
-            [chainId]: contracts,
+            [chainId]: {
+                name: chainIdName,
+                lastBlockHeight,
+                contracts,
+            },
         },
     };
 };
@@ -227,19 +234,18 @@ export const buildGlobalDeployment = (options: {
  * @param options The options to build the local database
  * @param options.tag The tag to save the database under
  * @param options.chainId The chain ID to save the database under
+ * @param options.chainIdName The name of the chain ID
+ * @param options.lastBlockHeight The last block height used for a deployment
  * @param options.contracts The contracts to save
  * @returns The local database
  */
 export function buildLocalDatabase(options: {
     tag?: string;
-    chainId: string;
-    contracts: TContract[];
+    data: TLocalDeployment;
 }): TLocalDatabase {
-    const { tag, chainId, contracts } = options;
+    const { tag, data } = options;
     return {
-        [tag ?? 'default']: {
-            [chainId]: contracts,
-        },
+        [tag ?? 'default']: data,
     };
 }
 
@@ -255,17 +261,11 @@ export function buildLocalDatabase(options: {
  */
 export function buildGlobalDatabase(options: {
     tag?: string;
-    project: TProjectCaller;
-    chainId: string;
-    contracts: TContract[];
+    data: TGlobalDeployment;
 }): TGlobalDatabase {
-    const { tag, project, chainId, contracts } = options;
+    const { tag, data } = options;
     return {
-        [tag ?? 'default']: {
-            [project]: {
-                [chainId]: contracts,
-            },
-        },
+        [tag ?? 'default']: data,
     };
 }
 
@@ -299,21 +299,28 @@ export function readDeployment(
     return readDB(type, options.customPath)?.[tag][project]?.[chainId];
 }
 /**
- * merge 2 deployments, handles arrays
+ * Merge 2 deployments. Preserve old deployments, but override if the new a contract deployment is more recent.
+ * Output is sorted.
+ *
  * @param newest The newest deployment
  * @param old The old deployment
  * @returns The merged deployment
  */
 function mergeDeployments(newest: TLocalDeployment, old: TLocalDeployment) {
-    return _mergeWith(old, newest, (_old: any, _new: any) => {
-        if (!_old) _old = [];
-        if (!_new) _new = [];
-
-        if (_isArray(_old)) {
-            return _unionBy(_new, _old, (item: TContract) => item.name);
-        }
-        return _merge(_old, _new);
-    });
+    // Customize the merge by checking the nested value
+    return sortJson(
+        _mergeWith(old, newest, (_old: any, _new: any) => {
+            // If the value is an array, merge it by the name. It's like a TContract[]
+            if (_isArray(_old)) {
+                return _sortBy(
+                    _unionBy(_new, _old, (item: TContract) => item.name),
+                    'name',
+                );
+            }
+            // Otherwise, just override the old value
+            return _merge(_old, _new);
+        }),
+    );
 }
 
 /**
@@ -349,4 +356,16 @@ function writeDB<A extends 'local' | 'global'>(
 ) {
     const path = type === 'local' ? LOCAL_DB_PATH : GLOBAL_DB_PATH;
     FS.writeFileSync(`${customPath ?? path}`, JSON.stringify(data, null, 4));
+}
+
+// Remove the unused sortJson function
+
+// Fix the type error by adding an index signature to the obj variable
+function sortJson<T extends object>(target: T) {
+    return Object.keys(target)
+        .sort()
+        .reduce((obj, key) => {
+            obj[key as keyof T] = target[key as keyof T];
+            return obj;
+        }, {} as T);
 }
