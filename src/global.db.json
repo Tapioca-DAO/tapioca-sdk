@@ -12,6 +12,35 @@
                     }
                 ]
             }
+        },
+        "yieldbox": {
+            "421614": {
+                "name": "arbitrum_sepolia",
+                "lastBlockHeight": 8221128,
+                "contracts": [
+                    {
+                        "name": "TapiocaDeployer",
+                        "address": "0x0367eA4f3085a090e37afCaa037eE7BBE77EC0C0",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x823dde9355efdab999325d61231686b0461d574868a017f8472842686ad5f9f3",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YieldBox",
+                        "address": "0x84D4AFE6F1Ddf0C23caDA0FFE62E080Fe89872d5",
+                        "meta": {
+                            "args": [
+                                "0x5c9D03Cf98AeE1D13e1da9d7EBa302DF96251E84",
+                                "0x27b98AA169D24aecC5E2e84E33b09EDE9aB9E93e"
+                            ],
+                            "salt": "0x1f5fd97957b9aae805b611b981c0c0adf7a17fcebffb857025c60db797e84dd0",
+                            "create2": true
+                        }
+                    }
+                ]
+            }
         }
     }
 }
