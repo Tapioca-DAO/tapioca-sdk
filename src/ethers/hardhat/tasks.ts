@@ -1,4 +1,4 @@
-import { task } from 'hardhat/config';
+import { scope, task } from 'hardhat/config';
 import { ConfigurableTaskDefinition } from 'hardhat/types';
 import { deployERC20Mock__task } from './tasks/exec/deployERC20Mock';
 import { exportSDK__task } from './tasks/exec/exportSDK';
@@ -10,6 +10,8 @@ import { transferOwnership__task } from './tasks/exec/transferOwnership';
 import { deployMagnetar__task } from './tasks/exec/deployMagnetar';
 import { deployCluster__task } from './tasks/exec/deployCluster';
 import { saveBlockNumber__task } from './tasks/exec/saveBlockNumber';
+
+const sdkScope = scope('sdk', 'Tapioca SDK tasks');
 
 const addCliParams = (task: ConfigurableTaskDefinition) => {
     return task.addOptionalParam(
@@ -25,59 +27,44 @@ const addDebugModeParams = (task: ConfigurableTaskDefinition) => {
 /**
  * Getter tasks
  */
-task(
-    'getDeployment',
-    'Get a deployment from the local or global database',
-    getDeployment__task,
-).addFlag('global', 'Perform a lookup in the global database');
+sdkScope
+    .task(
+        'getDeployment',
+        'Get a deployment from the local or global database',
+        getDeployment__task,
+    )
+    .addFlag('global', 'Perform a lookup in the global database');
 
-task(
-    'getChains',
-    'Get a list of supported chains. If no filter used, returns all chains',
-    getChains__task,
-).addFlag(
-    'filter',
-    'Use if you want to filter the list of chains by the current network',
-);
+sdkScope
+    .task(
+        'getChains',
+        'Get a list of supported chains. If no filter used, returns all chains',
+        getChains__task,
+    )
+    .addFlag(
+        'filter',
+        'Use if you want to filter the list of chains by the current network',
+    );
 
 /**
  * Exec tasks
  */
 
-task(
-    'exportSDK',
-    'Generate and export the typings and/or addresses for the SDK.',
-    exportSDK__task,
-).addOptionalParam('tag', 'The tag of the deployment.');
+sdkScope
+    .task(
+        'exportSDK',
+        'Generate and export the typings and/or addresses for the SDK.',
+        exportSDK__task,
+    )
+    .addOptionalParam('tag', 'The tag of the deployment.');
 
-task('transferOwnership', 'Transfer ownership.', transferOwnership__task)
+sdkScope
+    .task('transferOwnership', 'Transfer ownership.', transferOwnership__task)
     .addParam('to', 'The new owner.')
     .addParam('targetAddress', 'Contract address to call transferOwnership for')
     .addParam('targetName', 'Contract name to call transferOwnership for')
     .addOptionalParam('fromMultisig', 'True if current owner is a multisig')
     .addOptionalParam('fromMulticall', 'True if current owner is a multicall');
-
-addDebugModeParams(
-    task(
-        'deployERC20Mock',
-        'Deploys an ERC20 mock contract',
-        deployERC20Mock__task,
-    )
-        .addFlag('save', 'Save the deployment to the local database')
-        .addOptionalParam('overrideOptions', 'Override options flag'),
-);
-
-addDebugModeParams(
-    task(
-        'deployMagnetar',
-        'Deploys Magnetar',
-        deployMagnetar__task,
-    ).addOptionalParam('overrideOptions', 'Override options flag'),
-);
-
-addDebugModeParams(
-    task('deployCluster', 'Deploys Cluster', deployCluster__task),
-);
 
 addDebugModeParams(
     task('setLZConfig', 'Set an LZ app config', setLZConfig__task)
