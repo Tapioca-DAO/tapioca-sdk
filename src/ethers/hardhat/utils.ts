@@ -21,7 +21,7 @@ export const getLocalContract = async <T extends Contract>(
     tag?: string,
 ) => {
     const chainId = String(hre.network.config.chainId);
-    const deployment = hre.SDK.db.getLocalDeployment(
+    const deployment = hre.SDK.db.findLocalDeployment(
         chainId,
         contractName,
         tag,

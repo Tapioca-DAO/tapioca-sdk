@@ -25,7 +25,6 @@ import {
 // In the repo node module
 // directory location should be root of the repo
 export const GLOBAL_DB_PATH = './lib/tapioca-sdk/src/global.db.json';
-export const SUBREPO_GLOBAL_DB_PATH = './gitsub_tapioca-sdk/src/global.db.json';
 
 // Relative to the Hardhat project root
 export const LOCAL_DB_PATH = './local.db.json';
@@ -65,7 +64,6 @@ export const loadGlobalDeployment = (
         tag,
         chainId,
         project,
-        customPath: SUBREPO_GLOBAL_DB_PATH,
     }) as TChainIdDeployment | undefined;
 };
 
@@ -107,13 +105,11 @@ export const findGlobalDeployment = (
     chainId: string,
     contractName: string,
     tag = 'default',
-    customPath?: string,
 ) => {
     const deployments = readDeployment('global', {
         tag,
         project,
         chainId,
-        customPath,
     }) as TChainIdDeployment | undefined;
     if (!deployments)
         throw new Error(
@@ -156,7 +152,7 @@ export const saveGlobally = (
     project: TProjectCaller,
     tag = 'default',
 ) => {
-    const db = readDB('global', SUBREPO_GLOBAL_DB_PATH) ?? {};
+    const db = readDB('global') ?? {};
     const prevDep: any = db[tag]?.[project]; // Read previous deployments
 
     // Create the project if it doesn't exist
@@ -170,7 +166,7 @@ export const saveGlobally = (
 
     // Save the new deployment
     db[tag][project] = deployments;
-    writeDB('global', db, SUBREPO_GLOBAL_DB_PATH);
+    writeDB('global', db, GLOBAL_DB_PATH);
     return deployments;
 };
 
@@ -289,22 +285,21 @@ export function readDeployment(
         tag?: string;
         chainId?: string;
         project?: TProjectCaller;
-        customPath?: string;
     },
 ) {
     const { tag, chainId, project } = options;
     if (type === 'local') {
-        if (!tag) return readDB(type, options.customPath);
-        if (!chainId) return readDB(type, options.customPath)?.[tag];
+        if (!tag) return readDB(type);
+        if (!chainId) return readDB(type)?.[tag];
 
-        return readDB(type, options.customPath)?.[tag][chainId];
+        return readDB(type)?.[tag][chainId];
     }
 
-    if (!tag) return readDB(type, options.customPath);
-    if (!project) return readDB(type, options.customPath)?.[tag];
-    if (!chainId) return readDB(type, options.customPath)?.[tag][project];
+    if (!tag) return readDB(type);
+    if (!project) return readDB(type)?.[tag];
+    if (!chainId) return readDB(type)?.[tag][project];
 
-    return readDB(type, options.customPath)?.[tag][project]?.[chainId];
+    return readDB(type)?.[tag][project]?.[chainId];
 }
 /**
  * Merge 2 deployments. Preserve old deployments, but override if the new a contract deployment is more recent.
@@ -336,12 +331,8 @@ function mergeDeployments(newest: TLocalDeployment, old: TLocalDeployment) {
  * @param type The type of database to read
  * @returns The database
  */
-function readDB<A extends 'local' | 'global'>(type: A, customPath?: string) {
-    let path = LOCAL_DB_PATH;
-    path = type === 'local' ? LOCAL_DB_PATH : GLOBAL_DB_PATH;
-    if (customPath) {
-        path = customPath;
-    }
+function readDB<A extends 'local' | 'global'>(type: A) {
+    const path = type === 'local' ? LOCAL_DB_PATH : GLOBAL_DB_PATH;
 
     try {
         return JSON.parse(FS.readFileSync(path, 'utf8')) as A extends 'local'

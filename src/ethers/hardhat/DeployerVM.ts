@@ -265,7 +265,6 @@ export class DeployerVM {
                     String(this.hre.network.config.chainId),
                     target.name,
                     'default',
-                    this.hre.SDK.db.SUBREPO_GLOBAL_DB_PATH,
                 );
             } catch (e) {
                 if (this.options.debugMode) {
@@ -488,7 +487,6 @@ export class DeployerVM {
                 String(this.hre.network.config.chainId),
                 'Multicall3',
                 _tag,
-                this.hre.SDK.db.SUBREPO_GLOBAL_DB_PATH,
             );
             if (deployment) {
                 console.log('\t\t[+] Using previous Multicall3 deployment.');
@@ -573,7 +571,6 @@ export class DeployerVM {
                 String(this.hre.network.config.chainId),
                 'MultisigMock',
                 _tag,
-                this.hre.SDK.db.SUBREPO_GLOBAL_DB_PATH,
             );
             console.log('[+] Previous MultisigMock deployment exists.');
             if (deployment) {
