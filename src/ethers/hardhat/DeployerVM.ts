@@ -499,11 +499,7 @@ export class DeployerVM {
                 this.multicall = _multicall;
             }
         } catch (e) {
-            if (this.options.debugMode) {
-                console.log(
-                    `\t\t[-] Failed retrieving Multicall3 deployment with error: ${e}`,
-                );
-            }
+            console.log('\t\t[-] Failed retrieving Multicall3 deployment');
         }
 
         // Deploy Multicall3 if not deployed
@@ -526,10 +522,8 @@ export class DeployerVM {
             await multicall.deployTransaction.wait(
                 this.options.globalWait ?? 3,
             );
-            console.log('\t\t[+] Deployed');
-
             // Save deployment
-            console.log('\t\t[+] Saving Multicall3 deployment');
+
             const dep = this.hre.SDK.db.buildLocalDeployment({
                 chainIdName: this.hre.network.name,
                 lastBlockHeight:
@@ -544,7 +538,7 @@ export class DeployerVM {
                 ],
             });
             this.hre.SDK.db.saveGlobally(dep, project, _tag);
-            console.log('\t\t[+] Saved');
+            console.log(`\t\t[+] Deployed at ${multicall.address}`);
 
             const _multicall = Multicall3__factory.connect(
                 multicall.address,
@@ -817,6 +811,9 @@ export class DeployerVM {
     private async getTapiocaDeployer(): Promise<TapiocaDeployer> {
         if (this.tapiocaDeployer) return this.tapiocaDeployer;
 
+        const project = TAPIOCA_PROJECTS_NAME.Generic;
+        const _tag = this.options.tag ?? 'default';
+
         // Get deployer deployment
         let deployment: TContract | undefined;
         try {
@@ -826,15 +823,13 @@ export class DeployerVM {
                 this.options.tag,
             );
         } catch (e) {
-            if (this.options.debugMode) {
-                console.log(`\t\t[-] Failed with error: ${e}`);
-            }
+            console.log('\t\t[-] Failed retrieving TapiocaDeployer deployment');
         }
 
         // Deploy TapiocaDeployer if not deployed
         if (!deployment) {
             // Deploy TapiocaDeployer
-
+            console.log('\t\t[+] Deploying TapiocaDeployer');
             const tapiocaDeployer = await new TapiocaDeployer__factory(
                 (
                     await this.hre.ethers.getSigners()
@@ -865,7 +860,8 @@ export class DeployerVM {
                     },
                 ],
             });
-            this.hre.SDK.db.saveLocally(dep, this.options.tag);
+            this.hre.SDK.db.saveGlobally(dep, project, _tag);
+            console.log(`\t\t[+] Deployed at ${tapiocaDeployer.address}`);
 
             this.tapiocaDeployer = tapiocaDeployer;
             return tapiocaDeployer;

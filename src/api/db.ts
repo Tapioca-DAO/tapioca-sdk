@@ -363,7 +363,9 @@ function writeDB<A extends 'local' | 'global'>(
     customPath?: string,
 ) {
     const path = type === 'local' ? LOCAL_DB_PATH : GLOBAL_DB_PATH;
-    FS.writeFileSync(`${customPath ?? path}`, JSON.stringify(data, null, 4));
+    FS.writeFileSync(`${customPath ?? path}`, JSON.stringify(data, null, 4), {
+        flag: 'w',
+    });
 }
 
 // Remove the unused sortJson function
