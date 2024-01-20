@@ -1,15 +1,10 @@
 import { scope, task } from 'hardhat/config';
 import { ConfigurableTaskDefinition } from 'hardhat/types';
-import { deployERC20Mock__task } from './tasks/exec/deployERC20Mock';
 import { exportSDK__task } from './tasks/exec/exportSDK';
-import { setLZConfig__task } from './tasks/exec/setLZConfig';
-import { toftSendFrom__task } from './tasks/exec/toftSendFrom';
+import { saveBlockNumber__task } from './tasks/exec/saveBlockNumber';
+import { transferOwnership__task } from './tasks/exec/transferOwnership';
 import { getChains__task } from './tasks/view/getChains';
 import { getDeployment__task } from './tasks/view/getDeployment';
-import { transferOwnership__task } from './tasks/exec/transferOwnership';
-import { deployMagnetar__task } from './tasks/exec/deployMagnetar';
-import { deployCluster__task } from './tasks/exec/deployCluster';
-import { saveBlockNumber__task } from './tasks/exec/saveBlockNumber';
 
 const sdkScope = scope('sdk', 'Tapioca SDK tasks');
 
@@ -65,25 +60,6 @@ sdkScope
     .addParam('targetName', 'Contract name to call transferOwnership for')
     .addOptionalParam('fromMultisig', 'True if current owner is a multisig')
     .addOptionalParam('fromMulticall', 'True if current owner is a multicall');
-
-addDebugModeParams(
-    task('setLZConfig', 'Set an LZ app config', setLZConfig__task)
-        .addOptionalParam('chainId', 'LZ chain id to configure for')
-        .addFlag('isToft', 'If the contract to configure is TOFT')
-        .addFlag('isOnft', 'If the contract to configure is ONFT'),
-);
-
-addCliParams(
-    task(
-        'toftSendFrom',
-        'Calls toftSendFrom on tOFT contract',
-        toftSendFrom__task,
-    )
-        .addParam('contractName', 'Name of the contract')
-        .addParam('src', 'Name of the source chain')
-        .addParam('dst', 'Name of the destination chain')
-        .addParam('value', 'Amount to send, (ex: 1.45)'),
-);
 
 addDebugModeParams(
     task(
