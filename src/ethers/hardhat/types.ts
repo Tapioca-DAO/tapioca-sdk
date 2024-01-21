@@ -50,24 +50,6 @@ extendEnvironment((hre) => {
     }
 });
 
-// Delete tasks
-extendEnvironment((hre) => {
-    // remove hardhat core tasks
-    delete hre.tasks['gas-reporter:merge'];
-    delete hre.tasks['export-artifacts'];
-    delete hre.tasks['size-contracts'];
-    delete hre.tasks['init-foundry'];
-    delete hre.tasks.coverage;
-    delete hre.tasks.sourcify;
-    delete hre.tasks.accounts;
-    delete hre.tasks.flatten;
-    delete hre.tasks.deploy;
-    delete hre.tasks.export;
-    delete hre.tasks.check;
-    delete hre.tasks.node;
-    delete hre.tasks.run;
-});
-
 extendConfig(
     (config: HardhatConfig, userConfig: Readonly<HardhatUserConfig>) => {
         config.SDK.project = userConfig.SDK.project;

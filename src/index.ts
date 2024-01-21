@@ -1,4 +1,5 @@
 // API
+import { extendEnvironment } from 'hardhat/config';
 import API from './api/index';
 
 // Ethers
@@ -33,6 +34,26 @@ export const loadEnv = () => {
             '[-] env vars not loaded, please specify a network with --network <network> and create its file in .env/<network>.env',
         );
     }
+};
+
+export const deleteDefaultTasks = () => {
+    // Delete tasks
+    extendEnvironment((hre) => {
+        // remove hardhat core tasks
+        delete hre.tasks['gas-reporter:merge'];
+        delete hre.tasks['export-artifacts'];
+        delete hre.tasks['size-contracts'];
+        delete hre.tasks['init-foundry'];
+        delete hre.tasks.coverage;
+        delete hre.tasks.sourcify;
+        delete hre.tasks.accounts;
+        delete hre.tasks.flatten;
+        delete hre.tasks.deploy;
+        delete hre.tasks.export;
+        delete hre.tasks.check;
+        delete hre.tasks.node;
+        delete hre.tasks.run;
+    });
 };
 
 export const SDK = { API, typechain };
