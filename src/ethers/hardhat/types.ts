@@ -63,9 +63,7 @@ extendEnvironment((hre) => {
     delete hre.tasks.flatten;
     delete hre.tasks.deploy;
     delete hre.tasks.export;
-    delete hre.tasks.export;
     delete hre.tasks.check;
-    delete hre.tasks.test;
     delete hre.tasks.node;
     delete hre.tasks.run;
 });
