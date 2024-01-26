@@ -136,6 +136,8 @@ export type { BaseSwapper } from "./contracts/Swapper/BaseSwapper";
 export { BaseSwapper__factory } from "./factories/contracts/Swapper/BaseSwapper__factory";
 export type { CurveSwapper } from "./contracts/Swapper/CurveSwapper";
 export { CurveSwapper__factory } from "./factories/contracts/Swapper/CurveSwapper__factory";
+export type { UniswapV2Swapper } from "./contracts/Swapper/Uniswapv2Swapper.sol/UniswapV2Swapper";
+export { UniswapV2Swapper__factory } from "./factories/contracts/Swapper/Uniswapv2Swapper.sol/UniswapV2Swapper__factory";
 export type { UniswapV3Swapper } from "./contracts/Swapper/UniswapV3Swapper";
 export { UniswapV3Swapper__factory } from "./factories/contracts/Swapper/UniswapV3Swapper__factory";
 export type { ZeroXSwapper } from "./contracts/Swapper/ZeroXSwapper";

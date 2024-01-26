@@ -273,6 +273,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.CurveSwapper__factory>;
     getContractFactory(
+      name: "UniswapV2Swapper",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.UniswapV2Swapper__factory>;
+    getContractFactory(
       name: "UniswapV3Swapper",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.UniswapV3Swapper__factory>;
@@ -618,6 +622,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.CurveSwapper>;
+    getContractAt(
+      name: "UniswapV2Swapper",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.UniswapV2Swapper>;
     getContractAt(
       name: "UniswapV3Swapper",
       address: string,
