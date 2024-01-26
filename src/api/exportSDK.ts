@@ -3,6 +3,7 @@ import { glob, runTypeChain } from 'typechain';
 import { TLocalDeployment, TProjectCaller } from '../shared';
 import { saveGlobally } from './db';
 
+const sdkRootPath = 'gitmodule/tapioca-sdk';
 /**
  * Export project local database and merge it with the global database, then generate typings
  *
@@ -38,7 +39,7 @@ export const run = async (params: {
         artifactFiles.forEach((file) => {
             fs.copySync(
                 file,
-                `gitsub_tapioca-sdk/src/artifacts/${projectCaller}/${
+                `${sdkRootPath}/src/artifacts/${projectCaller}/${
                     file.split('/').slice(-1)[0]
                 }`,
                 { overwrite: true },
@@ -81,7 +82,7 @@ const generateTypings = async (
                 cwd,
                 allFiles,
                 filesToProcess: [file],
-                outDir: `gitmodule/tapioca-sdk/src/typechain/${projectCaller}`,
+                outDir: `${sdkRootPath}/tapioca-sdk/src/typechain/${projectCaller}`,
                 target: 'ethers-v5',
                 flags: {
                     alwaysGenerateOverloads: true,
