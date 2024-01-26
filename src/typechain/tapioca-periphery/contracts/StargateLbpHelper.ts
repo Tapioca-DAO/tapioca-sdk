@@ -90,6 +90,28 @@ export declare namespace StargateLbpHelper {
     deadline: BigNumber;
     minAmountOut: BigNumber;
   };
+
+  export type QuoteLayerZeroFeeDataStruct = {
+    dstChainId: PromiseOrValue<BigNumberish>;
+    functionType: PromiseOrValue<BigNumberish>;
+    toAddress: PromiseOrValue<BytesLike>;
+    _empty: PromiseOrValue<BytesLike>;
+    lzTxParams: IStargateRouterBase.LzTxObjStruct;
+  };
+
+  export type QuoteLayerZeroFeeDataStructOutput = [
+    number,
+    number,
+    string,
+    string,
+    IStargateRouterBase.LzTxObjStructOutput
+  ] & {
+    dstChainId: number;
+    functionType: number;
+    toAddress: string;
+    _empty: string;
+    lzTxParams: IStargateRouterBase.LzTxObjStructOutput;
+  };
 }
 
 export declare namespace IStargateRouterBase {
@@ -113,7 +135,7 @@ export interface StargateLbpHelperInterface extends utils.Interface {
     "lbpVault()": FunctionFragment;
     "owner()": FunctionFragment;
     "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256))": FunctionFragment;
-    "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))": FunctionFragment;
+    "quoteLayerZeroFee((uint16,uint8,bytes,bytes,(uint256,uint256,bytes)))": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "router()": FunctionFragment;
     "sgReceive(uint16,bytes,uint256,address,uint256,bytes)": FunctionFragment;
@@ -133,7 +155,7 @@ export interface StargateLbpHelperInterface extends utils.Interface {
       | "participate"
       | "participate((address,address,uint16,address,address,uint256,uint256,uint256,uint256,bool,uint256,uint256),(address,address,uint256,uint256))"
       | "quoteLayerZeroFee"
-      | "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))"
+      | "quoteLayerZeroFee((uint16,uint8,bytes,bytes,(uint256,uint256,bytes)))"
       | "renounceOwnership"
       | "renounceOwnership()"
       | "router"
@@ -185,23 +207,11 @@ export interface StargateLbpHelperInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "quoteLayerZeroFee",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BytesLike>,
-      IStargateRouterBase.LzTxObjStruct
-    ]
+    values: [StargateLbpHelper.QuoteLayerZeroFeeDataStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BytesLike>,
-      IStargateRouterBase.LzTxObjStruct
-    ]
+    functionFragment: "quoteLayerZeroFee((uint16,uint8,bytes,bytes,(uint256,uint256,bytes)))",
+    values: [StargateLbpHelper.QuoteLayerZeroFeeDataStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
@@ -268,7 +278,7 @@ export interface StargateLbpHelperInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))",
+    functionFragment: "quoteLayerZeroFee((uint16,uint8,bytes,bytes,(uint256,uint256,bytes)))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -423,20 +433,12 @@ export interface StargateLbpHelper extends BaseContract {
     ): Promise<ContractTransaction>;
 
     quoteLayerZeroFee(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _functionType: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      arg3: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
+      _data: StargateLbpHelper.QuoteLayerZeroFeeDataStruct,
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber]>;
 
-    "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _functionType: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      arg3: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
+    "quoteLayerZeroFee((uint16,uint8,bytes,bytes,(uint256,uint256,bytes)))"(
+      _data: StargateLbpHelper.QuoteLayerZeroFeeDataStruct,
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber]>;
 
@@ -522,20 +524,12 @@ export interface StargateLbpHelper extends BaseContract {
   ): Promise<ContractTransaction>;
 
   quoteLayerZeroFee(
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _functionType: PromiseOrValue<BigNumberish>,
-    _toAddress: PromiseOrValue<BytesLike>,
-    arg3: PromiseOrValue<BytesLike>,
-    _lzTxParams: IStargateRouterBase.LzTxObjStruct,
+    _data: StargateLbpHelper.QuoteLayerZeroFeeDataStruct,
     overrides?: CallOverrides
   ): Promise<[BigNumber, BigNumber]>;
 
-  "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))"(
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _functionType: PromiseOrValue<BigNumberish>,
-    _toAddress: PromiseOrValue<BytesLike>,
-    arg3: PromiseOrValue<BytesLike>,
-    _lzTxParams: IStargateRouterBase.LzTxObjStruct,
+  "quoteLayerZeroFee((uint16,uint8,bytes,bytes,(uint256,uint256,bytes)))"(
+    _data: StargateLbpHelper.QuoteLayerZeroFeeDataStruct,
     overrides?: CallOverrides
   ): Promise<[BigNumber, BigNumber]>;
 
@@ -621,20 +615,12 @@ export interface StargateLbpHelper extends BaseContract {
     ): Promise<void>;
 
     quoteLayerZeroFee(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _functionType: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      arg3: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
+      _data: StargateLbpHelper.QuoteLayerZeroFeeDataStruct,
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber]>;
 
-    "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _functionType: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      arg3: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
+    "quoteLayerZeroFee((uint16,uint8,bytes,bytes,(uint256,uint256,bytes)))"(
+      _data: StargateLbpHelper.QuoteLayerZeroFeeDataStruct,
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber]>;
 
@@ -758,20 +744,12 @@ export interface StargateLbpHelper extends BaseContract {
     ): Promise<BigNumber>;
 
     quoteLayerZeroFee(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _functionType: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      arg3: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
+      _data: StargateLbpHelper.QuoteLayerZeroFeeDataStruct,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _functionType: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      arg3: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
+    "quoteLayerZeroFee((uint16,uint8,bytes,bytes,(uint256,uint256,bytes)))"(
+      _data: StargateLbpHelper.QuoteLayerZeroFeeDataStruct,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -858,20 +836,12 @@ export interface StargateLbpHelper extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     quoteLayerZeroFee(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _functionType: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      arg3: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
+      _data: StargateLbpHelper.QuoteLayerZeroFeeDataStruct,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))"(
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _functionType: PromiseOrValue<BigNumberish>,
-      _toAddress: PromiseOrValue<BytesLike>,
-      arg3: PromiseOrValue<BytesLike>,
-      _lzTxParams: IStargateRouterBase.LzTxObjStruct,
+    "quoteLayerZeroFee((uint16,uint8,bytes,bytes,(uint256,uint256,bytes)))"(
+      _data: StargateLbpHelper.QuoteLayerZeroFeeDataStruct,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

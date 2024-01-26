@@ -27,6 +27,40 @@ import type {
   PromiseOrValue,
 } from "../../common";
 
+export type OracleUniSoloConstructorDataStruct = {
+  addressInAndOutUni: PromiseOrValue<string>[];
+  _circuitUniswap: PromiseOrValue<string>[];
+  _circuitUniIsMultiplied: PromiseOrValue<BigNumberish>[];
+  _twapPeriod: PromiseOrValue<BigNumberish>;
+  observationLength: PromiseOrValue<BigNumberish>;
+  guardians: PromiseOrValue<string>[];
+  _description: PromiseOrValue<BytesLike>;
+  _sequencerUptimeFeed: PromiseOrValue<string>;
+  _admin: PromiseOrValue<string>;
+};
+
+export type OracleUniSoloConstructorDataStructOutput = [
+  string[],
+  string[],
+  number[],
+  number,
+  number,
+  string[],
+  string,
+  string,
+  string
+] & {
+  addressInAndOutUni: string[];
+  _circuitUniswap: string[];
+  _circuitUniIsMultiplied: number[];
+  _twapPeriod: number;
+  observationLength: number;
+  guardians: string[];
+  _description: string;
+  _sequencerUptimeFeed: string;
+  _admin: string;
+};
+
 export interface OracleUniSoloInterface extends utils.Interface {
   functions: {
     "BASE()": FunctionFragment;

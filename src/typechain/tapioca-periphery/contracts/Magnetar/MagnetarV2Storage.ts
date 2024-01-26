@@ -29,20 +29,97 @@ import type {
 
 export interface MagnetarV2StorageInterface extends utils.Interface {
   functions: {
+    "MAGNETAR_ACTION_MARKET()": FunctionFragment;
+    "MAGNETAR_ACTION_MARKET_MODULE()": FunctionFragment;
+    "MAGNETAR_ACTION_PERMIT()": FunctionFragment;
+    "MAGNETAR_ACTION_TAP_TOKEN()": FunctionFragment;
+    "MAGNETAR_ACTION_TOFT()": FunctionFragment;
+    "MAGNETAR_ACTION_YIELDBOX_MODULE()": FunctionFragment;
     "cluster()": FunctionFragment;
+    "modules(uint8)": FunctionFragment;
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "MAGNETAR_ACTION_MARKET"
+      | "MAGNETAR_ACTION_MARKET()"
+      | "MAGNETAR_ACTION_MARKET_MODULE"
+      | "MAGNETAR_ACTION_MARKET_MODULE()"
+      | "MAGNETAR_ACTION_PERMIT"
+      | "MAGNETAR_ACTION_PERMIT()"
+      | "MAGNETAR_ACTION_TAP_TOKEN"
+      | "MAGNETAR_ACTION_TAP_TOKEN()"
+      | "MAGNETAR_ACTION_TOFT"
+      | "MAGNETAR_ACTION_TOFT()"
+      | "MAGNETAR_ACTION_YIELDBOX_MODULE"
+      | "MAGNETAR_ACTION_YIELDBOX_MODULE()"
       | "cluster"
       | "cluster()"
+      | "modules"
+      | "modules(uint8)"
       | "onERC721Received"
       | "onERC721Received(address,address,uint256,bytes)"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "MAGNETAR_ACTION_MARKET",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "MAGNETAR_ACTION_MARKET()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "MAGNETAR_ACTION_MARKET_MODULE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "MAGNETAR_ACTION_MARKET_MODULE()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "MAGNETAR_ACTION_PERMIT",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "MAGNETAR_ACTION_PERMIT()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "MAGNETAR_ACTION_TAP_TOKEN",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "MAGNETAR_ACTION_TAP_TOKEN()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "MAGNETAR_ACTION_TOFT",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "MAGNETAR_ACTION_TOFT()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "MAGNETAR_ACTION_YIELDBOX_MODULE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "MAGNETAR_ACTION_YIELDBOX_MODULE()",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "cluster", values?: undefined): string;
   encodeFunctionData(functionFragment: "cluster()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "modules",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "modules(uint8)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
   encodeFunctionData(
     functionFragment: "onERC721Received",
     values: [
@@ -62,8 +139,61 @@ export interface MagnetarV2StorageInterface extends utils.Interface {
     ]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "MAGNETAR_ACTION_MARKET",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "MAGNETAR_ACTION_MARKET()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "MAGNETAR_ACTION_MARKET_MODULE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "MAGNETAR_ACTION_MARKET_MODULE()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "MAGNETAR_ACTION_PERMIT",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "MAGNETAR_ACTION_PERMIT()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "MAGNETAR_ACTION_TAP_TOKEN",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "MAGNETAR_ACTION_TAP_TOKEN()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "MAGNETAR_ACTION_TOFT",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "MAGNETAR_ACTION_TOFT()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "MAGNETAR_ACTION_YIELDBOX_MODULE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "MAGNETAR_ACTION_YIELDBOX_MODULE()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "cluster", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "cluster()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "modules", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "modules(uint8)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "onERC721Received",
     data: BytesLike
@@ -123,9 +253,49 @@ export interface MagnetarV2Storage extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    MAGNETAR_ACTION_MARKET(overrides?: CallOverrides): Promise<[number]>;
+
+    "MAGNETAR_ACTION_MARKET()"(overrides?: CallOverrides): Promise<[number]>;
+
+    MAGNETAR_ACTION_MARKET_MODULE(overrides?: CallOverrides): Promise<[number]>;
+
+    "MAGNETAR_ACTION_MARKET_MODULE()"(
+      overrides?: CallOverrides
+    ): Promise<[number]>;
+
+    MAGNETAR_ACTION_PERMIT(overrides?: CallOverrides): Promise<[number]>;
+
+    "MAGNETAR_ACTION_PERMIT()"(overrides?: CallOverrides): Promise<[number]>;
+
+    MAGNETAR_ACTION_TAP_TOKEN(overrides?: CallOverrides): Promise<[number]>;
+
+    "MAGNETAR_ACTION_TAP_TOKEN()"(overrides?: CallOverrides): Promise<[number]>;
+
+    MAGNETAR_ACTION_TOFT(overrides?: CallOverrides): Promise<[number]>;
+
+    "MAGNETAR_ACTION_TOFT()"(overrides?: CallOverrides): Promise<[number]>;
+
+    MAGNETAR_ACTION_YIELDBOX_MODULE(
+      overrides?: CallOverrides
+    ): Promise<[number]>;
+
+    "MAGNETAR_ACTION_YIELDBOX_MODULE()"(
+      overrides?: CallOverrides
+    ): Promise<[number]>;
+
     cluster(overrides?: CallOverrides): Promise<[string]>;
 
     "cluster()"(overrides?: CallOverrides): Promise<[string]>;
+
+    modules(
+      moduleId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string] & { moduleAddress: string }>;
+
+    "modules(uint8)"(
+      moduleId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string] & { moduleAddress: string }>;
 
     onERC721Received(
       arg0: PromiseOrValue<string>,
@@ -144,9 +314,45 @@ export interface MagnetarV2Storage extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
+  MAGNETAR_ACTION_MARKET(overrides?: CallOverrides): Promise<number>;
+
+  "MAGNETAR_ACTION_MARKET()"(overrides?: CallOverrides): Promise<number>;
+
+  MAGNETAR_ACTION_MARKET_MODULE(overrides?: CallOverrides): Promise<number>;
+
+  "MAGNETAR_ACTION_MARKET_MODULE()"(overrides?: CallOverrides): Promise<number>;
+
+  MAGNETAR_ACTION_PERMIT(overrides?: CallOverrides): Promise<number>;
+
+  "MAGNETAR_ACTION_PERMIT()"(overrides?: CallOverrides): Promise<number>;
+
+  MAGNETAR_ACTION_TAP_TOKEN(overrides?: CallOverrides): Promise<number>;
+
+  "MAGNETAR_ACTION_TAP_TOKEN()"(overrides?: CallOverrides): Promise<number>;
+
+  MAGNETAR_ACTION_TOFT(overrides?: CallOverrides): Promise<number>;
+
+  "MAGNETAR_ACTION_TOFT()"(overrides?: CallOverrides): Promise<number>;
+
+  MAGNETAR_ACTION_YIELDBOX_MODULE(overrides?: CallOverrides): Promise<number>;
+
+  "MAGNETAR_ACTION_YIELDBOX_MODULE()"(
+    overrides?: CallOverrides
+  ): Promise<number>;
+
   cluster(overrides?: CallOverrides): Promise<string>;
 
   "cluster()"(overrides?: CallOverrides): Promise<string>;
+
+  modules(
+    moduleId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  "modules(uint8)"(
+    moduleId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   onERC721Received(
     arg0: PromiseOrValue<string>,
@@ -165,9 +371,47 @@ export interface MagnetarV2Storage extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    MAGNETAR_ACTION_MARKET(overrides?: CallOverrides): Promise<number>;
+
+    "MAGNETAR_ACTION_MARKET()"(overrides?: CallOverrides): Promise<number>;
+
+    MAGNETAR_ACTION_MARKET_MODULE(overrides?: CallOverrides): Promise<number>;
+
+    "MAGNETAR_ACTION_MARKET_MODULE()"(
+      overrides?: CallOverrides
+    ): Promise<number>;
+
+    MAGNETAR_ACTION_PERMIT(overrides?: CallOverrides): Promise<number>;
+
+    "MAGNETAR_ACTION_PERMIT()"(overrides?: CallOverrides): Promise<number>;
+
+    MAGNETAR_ACTION_TAP_TOKEN(overrides?: CallOverrides): Promise<number>;
+
+    "MAGNETAR_ACTION_TAP_TOKEN()"(overrides?: CallOverrides): Promise<number>;
+
+    MAGNETAR_ACTION_TOFT(overrides?: CallOverrides): Promise<number>;
+
+    "MAGNETAR_ACTION_TOFT()"(overrides?: CallOverrides): Promise<number>;
+
+    MAGNETAR_ACTION_YIELDBOX_MODULE(overrides?: CallOverrides): Promise<number>;
+
+    "MAGNETAR_ACTION_YIELDBOX_MODULE()"(
+      overrides?: CallOverrides
+    ): Promise<number>;
+
     cluster(overrides?: CallOverrides): Promise<string>;
 
     "cluster()"(overrides?: CallOverrides): Promise<string>;
+
+    modules(
+      moduleId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "modules(uint8)"(
+      moduleId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     onERC721Received(
       arg0: PromiseOrValue<string>,
@@ -198,9 +442,53 @@ export interface MagnetarV2Storage extends BaseContract {
   };
 
   estimateGas: {
+    MAGNETAR_ACTION_MARKET(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "MAGNETAR_ACTION_MARKET()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    MAGNETAR_ACTION_MARKET_MODULE(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "MAGNETAR_ACTION_MARKET_MODULE()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    MAGNETAR_ACTION_PERMIT(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "MAGNETAR_ACTION_PERMIT()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    MAGNETAR_ACTION_TAP_TOKEN(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "MAGNETAR_ACTION_TAP_TOKEN()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    MAGNETAR_ACTION_TOFT(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "MAGNETAR_ACTION_TOFT()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    MAGNETAR_ACTION_YIELDBOX_MODULE(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "MAGNETAR_ACTION_YIELDBOX_MODULE()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     cluster(overrides?: CallOverrides): Promise<BigNumber>;
 
     "cluster()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    modules(
+      moduleId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "modules(uint8)"(
+      moduleId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     onERC721Received(
       arg0: PromiseOrValue<string>,
@@ -220,9 +508,67 @@ export interface MagnetarV2Storage extends BaseContract {
   };
 
   populateTransaction: {
+    MAGNETAR_ACTION_MARKET(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "MAGNETAR_ACTION_MARKET()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    MAGNETAR_ACTION_MARKET_MODULE(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "MAGNETAR_ACTION_MARKET_MODULE()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    MAGNETAR_ACTION_PERMIT(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "MAGNETAR_ACTION_PERMIT()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    MAGNETAR_ACTION_TAP_TOKEN(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "MAGNETAR_ACTION_TAP_TOKEN()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    MAGNETAR_ACTION_TOFT(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "MAGNETAR_ACTION_TOFT()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    MAGNETAR_ACTION_YIELDBOX_MODULE(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "MAGNETAR_ACTION_YIELDBOX_MODULE()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     cluster(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "cluster()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    modules(
+      moduleId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "modules(uint8)"(
+      moduleId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     onERC721Received(
       arg0: PromiseOrValue<string>,

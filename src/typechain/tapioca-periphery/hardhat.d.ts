@@ -13,10 +13,6 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
-      name: "AggregatorV3Interface",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.AggregatorV3Interface__factory>;
-    getContractFactory(
       name: "Cluster",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Cluster__factory>;
@@ -29,17 +25,117 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AggregatorV3Interface__factory>;
     getContractFactory(
-      name: "CurveStableToUsdoBidder",
+      name: "LzApp",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.CurveStableToUsdoBidder__factory>;
+    ): Promise<Contracts.LzApp__factory>;
     getContractFactory(
-      name: "UniUsdoToWethBidder",
+      name: "NonblockingLzApp",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.UniUsdoToWethBidder__factory>;
+    ): Promise<Contracts.NonblockingLzApp__factory>;
     getContractFactory(
-      name: "LiquidationQueue",
+      name: "ComposableBasedOFT",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.LiquidationQueue__factory>;
+    ): Promise<Contracts.ComposableBasedOFT__factory>;
+    getContractFactory(
+      name: "ComposableOFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ComposableOFT__factory>;
+    getContractFactory(
+      name: "ComposableOFTCore",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ComposableOFTCore__factory>;
+    getContractFactory(
+      name: "ComposableProxyOFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ComposableProxyOFT__factory>;
+    getContractFactory(
+      name: "BasedOFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BasedOFT__factory>;
+    getContractFactory(
+      name: "GlobalCappedOFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.GlobalCappedOFT__factory>;
+    getContractFactory(
+      name: "NativeOFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.NativeOFT__factory>;
+    getContractFactory(
+      name: "PausableOFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.PausableOFT__factory>;
+    getContractFactory(
+      name: "ProxyOFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ProxyOFT__factory>;
+    getContractFactory(
+      name: "OFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.OFT__factory>;
+    getContractFactory(
+      name: "OFTCore",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.OFTCore__factory>;
+    getContractFactory(
+      name: "BaseOFTV2",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseOFTV2__factory>;
+    getContractFactory(
+      name: "BaseOFTWithFee",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseOFTWithFee__factory>;
+    getContractFactory(
+      name: "Fee",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Fee__factory>;
+    getContractFactory(
+      name: "OFTWithFee",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.OFTWithFee__factory>;
+    getContractFactory(
+      name: "ProxyOFTWithFee",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ProxyOFTWithFee__factory>;
+    getContractFactory(
+      name: "OFTCoreV2",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.OFTCoreV2__factory>;
+    getContractFactory(
+      name: "OFTV2",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.OFTV2__factory>;
+    getContractFactory(
+      name: "ProxyOFTV2",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ProxyOFTV2__factory>;
+    getContractFactory(
+      name: "ProxyONFT1155",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ProxyONFT1155__factory>;
+    getContractFactory(
+      name: "ProxyONFT721",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ProxyONFT721__factory>;
+    getContractFactory(
+      name: "UniversalONFT721",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.UniversalONFT721__factory>;
+    getContractFactory(
+      name: "ONFT1155",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ONFT1155__factory>;
+    getContractFactory(
+      name: "ONFT1155Core",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ONFT1155Core__factory>;
+    getContractFactory(
+      name: "ONFT721",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ONFT721__factory>;
+    getContractFactory(
+      name: "ONFT721Core",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ONFT721Core__factory>;
     getContractFactory(
       name: "MagnetarHelper",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -53,9 +149,25 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MagnetarV2Storage__factory>;
     getContractFactory(
-      name: "MagnetarMarketModule",
+      name: "MagnetarMarketModule1",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MagnetarMarketModule__factory>;
+    ): Promise<Contracts.MagnetarMarketModule1__factory>;
+    getContractFactory(
+      name: "MagnetarMarketModule2",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MagnetarMarketModule2__factory>;
+    getContractFactory(
+      name: "MagnetarMarketModuleBase",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MagnetarMarketModuleBase__factory>;
+    getContractFactory(
+      name: "MagnetarYieldboxModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MagnetarYieldboxModule__factory>;
+    getContractFactory(
+      name: "SequencerFeedMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SequencerFeedMock__factory>;
     getContractFactory(
       name: "Multicall3",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -80,18 +192,6 @@ declare module "hardhat/types/runtime" {
       name: "TapOracle",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapOracle__factory>;
-    getContractFactory(
-      name: "ARBTriCryptoOracle",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ARBTriCryptoOracle__factory>;
-    getContractFactory(
-      name: "SGOracle",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.SGOracle__factory>;
-    getContractFactory(
-      name: "SequencerFeedMock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.SequencerFeedMock__factory>;
     getContractFactory(
       name: "ModuleChainlinkMulti",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -173,10 +273,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.CurveSwapper__factory>;
     getContractFactory(
-      name: "UniswapV2Swapper",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.UniswapV2Swapper__factory>;
-    getContractFactory(
       name: "UniswapV3Swapper",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.UniswapV3Swapper__factory>;
@@ -188,12 +284,15 @@ declare module "hardhat/types/runtime" {
       name: "TapiocaDeployer",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapiocaDeployer__factory>;
-
-    getContractAt(
+    getContractFactory(
+      name: "AccessControlledOffchainAggregator",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AccessControlledOffchainAggregator__factory>;
+    getContractFactory(
       name: "AggregatorV3Interface",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.AggregatorV3Interface>;
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AggregatorV3Interface__factory>;
+
     getContractAt(
       name: "Cluster",
       address: string,
@@ -210,20 +309,145 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.AggregatorV3Interface>;
     getContractAt(
-      name: "CurveStableToUsdoBidder",
+      name: "LzApp",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.CurveStableToUsdoBidder>;
+    ): Promise<Contracts.LzApp>;
     getContractAt(
-      name: "UniUsdoToWethBidder",
+      name: "NonblockingLzApp",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.UniUsdoToWethBidder>;
+    ): Promise<Contracts.NonblockingLzApp>;
     getContractAt(
-      name: "LiquidationQueue",
+      name: "ComposableBasedOFT",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.LiquidationQueue>;
+    ): Promise<Contracts.ComposableBasedOFT>;
+    getContractAt(
+      name: "ComposableOFT",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ComposableOFT>;
+    getContractAt(
+      name: "ComposableOFTCore",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ComposableOFTCore>;
+    getContractAt(
+      name: "ComposableProxyOFT",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ComposableProxyOFT>;
+    getContractAt(
+      name: "BasedOFT",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BasedOFT>;
+    getContractAt(
+      name: "GlobalCappedOFT",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.GlobalCappedOFT>;
+    getContractAt(
+      name: "NativeOFT",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.NativeOFT>;
+    getContractAt(
+      name: "PausableOFT",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PausableOFT>;
+    getContractAt(
+      name: "ProxyOFT",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ProxyOFT>;
+    getContractAt(
+      name: "OFT",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.OFT>;
+    getContractAt(
+      name: "OFTCore",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.OFTCore>;
+    getContractAt(
+      name: "BaseOFTV2",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseOFTV2>;
+    getContractAt(
+      name: "BaseOFTWithFee",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseOFTWithFee>;
+    getContractAt(
+      name: "Fee",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Fee>;
+    getContractAt(
+      name: "OFTWithFee",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.OFTWithFee>;
+    getContractAt(
+      name: "ProxyOFTWithFee",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ProxyOFTWithFee>;
+    getContractAt(
+      name: "OFTCoreV2",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.OFTCoreV2>;
+    getContractAt(
+      name: "OFTV2",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.OFTV2>;
+    getContractAt(
+      name: "ProxyOFTV2",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ProxyOFTV2>;
+    getContractAt(
+      name: "ProxyONFT1155",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ProxyONFT1155>;
+    getContractAt(
+      name: "ProxyONFT721",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ProxyONFT721>;
+    getContractAt(
+      name: "UniversalONFT721",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.UniversalONFT721>;
+    getContractAt(
+      name: "ONFT1155",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ONFT1155>;
+    getContractAt(
+      name: "ONFT1155Core",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ONFT1155Core>;
+    getContractAt(
+      name: "ONFT721",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ONFT721>;
+    getContractAt(
+      name: "ONFT721Core",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ONFT721Core>;
     getContractAt(
       name: "MagnetarHelper",
       address: string,
@@ -240,10 +464,30 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.MagnetarV2Storage>;
     getContractAt(
-      name: "MagnetarMarketModule",
+      name: "MagnetarMarketModule1",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.MagnetarMarketModule>;
+    ): Promise<Contracts.MagnetarMarketModule1>;
+    getContractAt(
+      name: "MagnetarMarketModule2",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MagnetarMarketModule2>;
+    getContractAt(
+      name: "MagnetarMarketModuleBase",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MagnetarMarketModuleBase>;
+    getContractAt(
+      name: "MagnetarYieldboxModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MagnetarYieldboxModule>;
+    getContractAt(
+      name: "SequencerFeedMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SequencerFeedMock>;
     getContractAt(
       name: "Multicall3",
       address: string,
@@ -274,21 +518,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TapOracle>;
-    getContractAt(
-      name: "ARBTriCryptoOracle",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ARBTriCryptoOracle>;
-    getContractAt(
-      name: "SGOracle",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.SGOracle>;
-    getContractAt(
-      name: "SequencerFeedMock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.SequencerFeedMock>;
     getContractAt(
       name: "ModuleChainlinkMulti",
       address: string,
@@ -390,11 +619,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.CurveSwapper>;
     getContractAt(
-      name: "UniswapV2Swapper",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.UniswapV2Swapper>;
-    getContractAt(
       name: "UniswapV3Swapper",
       address: string,
       signer?: ethers.Signer
@@ -409,6 +633,16 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TapiocaDeployer>;
+    getContractAt(
+      name: "AccessControlledOffchainAggregator",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AccessControlledOffchainAggregator>;
+    getContractAt(
+      name: "AggregatorV3Interface",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AggregatorV3Interface>;
 
     // default types
     getContractFactory(

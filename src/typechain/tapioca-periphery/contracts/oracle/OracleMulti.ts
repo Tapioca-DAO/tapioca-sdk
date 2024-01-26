@@ -27,6 +27,52 @@ import type {
   PromiseOrValue,
 } from "../../common";
 
+export type OracleMultiConstructorDataStruct = {
+  addressInAndOutUni: PromiseOrValue<string>[];
+  _circuitUniswap: PromiseOrValue<string>[];
+  _circuitUniIsMultiplied: PromiseOrValue<BigNumberish>[];
+  _twapPeriod: PromiseOrValue<BigNumberish>;
+  observationLength: PromiseOrValue<BigNumberish>;
+  _uniFinalCurrency: PromiseOrValue<BigNumberish>;
+  _circuitChainlink: PromiseOrValue<string>[];
+  _circuitChainIsMultiplied: PromiseOrValue<BigNumberish>[];
+  _stalePeriod: PromiseOrValue<BigNumberish>;
+  guardians: PromiseOrValue<string>[];
+  _description: PromiseOrValue<BytesLike>;
+  _sequencerUptimeFeed: PromiseOrValue<string>;
+  _admin: PromiseOrValue<string>;
+};
+
+export type OracleMultiConstructorDataStructOutput = [
+  string[],
+  string[],
+  number[],
+  number,
+  number,
+  number,
+  string[],
+  number[],
+  number,
+  string[],
+  string,
+  string,
+  string
+] & {
+  addressInAndOutUni: string[];
+  _circuitUniswap: string[];
+  _circuitUniIsMultiplied: number[];
+  _twapPeriod: number;
+  observationLength: number;
+  _uniFinalCurrency: number;
+  _circuitChainlink: string[];
+  _circuitChainIsMultiplied: number[];
+  _stalePeriod: number;
+  guardians: string[];
+  _description: string;
+  _sequencerUptimeFeed: string;
+  _admin: string;
+};
+
 export interface OracleMultiInterface extends utils.Interface {
   functions: {
     "BASE()": FunctionFragment;

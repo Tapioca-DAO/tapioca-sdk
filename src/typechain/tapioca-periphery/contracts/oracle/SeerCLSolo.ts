@@ -27,6 +27,37 @@ import type {
   PromiseOrValue,
 } from "../../common";
 
+export type OracleChainlinkSingleConstructorDataStruct = {
+  _poolChainlink: PromiseOrValue<string>;
+  _isChainlinkMultiplied: PromiseOrValue<BigNumberish>;
+  _inBase: PromiseOrValue<BigNumberish>;
+  stalePeriod: PromiseOrValue<BigNumberish>;
+  guardians: PromiseOrValue<string>[];
+  _description: PromiseOrValue<BytesLike>;
+  _sequencerUptimeFeed: PromiseOrValue<string>;
+  _admin: PromiseOrValue<string>;
+};
+
+export type OracleChainlinkSingleConstructorDataStructOutput = [
+  string,
+  number,
+  BigNumber,
+  number,
+  string[],
+  string,
+  string,
+  string
+] & {
+  _poolChainlink: string;
+  _isChainlinkMultiplied: number;
+  _inBase: BigNumber;
+  stalePeriod: number;
+  guardians: string[];
+  _description: string;
+  _sequencerUptimeFeed: string;
+  _admin: string;
+};
+
 export interface SeerCLSoloInterface extends utils.Interface {
   functions: {
     "BASE()": FunctionFragment;

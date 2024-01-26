@@ -29,26 +29,26 @@ import type {
 
 export interface ClusterInterface extends utils.Interface {
   functions: {
-    "batchUpdateContracts(uint16,address[],bool)": FunctionFragment;
+    "batchUpdateContracts(uint32,address[],bool)": FunctionFragment;
     "isEditor(address)": FunctionFragment;
-    "isWhitelisted(uint16,address)": FunctionFragment;
+    "isWhitelisted(uint32,address)": FunctionFragment;
     "lzChainId()": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
-    "updateContract(uint16,address,bool)": FunctionFragment;
+    "updateContract(uint32,address,bool)": FunctionFragment;
     "updateEditor(address,bool)": FunctionFragment;
-    "updateLzChain(uint16)": FunctionFragment;
+    "updateLzChain(uint32)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
       | "batchUpdateContracts"
-      | "batchUpdateContracts(uint16,address[],bool)"
+      | "batchUpdateContracts(uint32,address[],bool)"
       | "isEditor"
       | "isEditor(address)"
       | "isWhitelisted"
-      | "isWhitelisted(uint16,address)"
+      | "isWhitelisted(uint32,address)"
       | "lzChainId"
       | "lzChainId()"
       | "owner"
@@ -58,11 +58,11 @@ export interface ClusterInterface extends utils.Interface {
       | "transferOwnership"
       | "transferOwnership(address)"
       | "updateContract"
-      | "updateContract(uint16,address,bool)"
+      | "updateContract(uint32,address,bool)"
       | "updateEditor"
       | "updateEditor(address,bool)"
       | "updateLzChain"
-      | "updateLzChain(uint16)"
+      | "updateLzChain(uint32)"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -74,7 +74,7 @@ export interface ClusterInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "batchUpdateContracts(uint16,address[],bool)",
+    functionFragment: "batchUpdateContracts(uint32,address[],bool)",
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>[],
@@ -94,7 +94,7 @@ export interface ClusterInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "isWhitelisted(uint16,address)",
+    functionFragment: "isWhitelisted(uint32,address)",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "lzChainId", values?: undefined): string;
@@ -129,7 +129,7 @@ export interface ClusterInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "updateContract(uint16,address,bool)",
+    functionFragment: "updateContract(uint32,address,bool)",
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
@@ -149,7 +149,7 @@ export interface ClusterInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "updateLzChain(uint16)",
+    functionFragment: "updateLzChain(uint32)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
 
@@ -158,7 +158,7 @@ export interface ClusterInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "batchUpdateContracts(uint16,address[],bool)",
+    functionFragment: "batchUpdateContracts(uint32,address[],bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "isEditor", data: BytesLike): Result;
@@ -171,7 +171,7 @@ export interface ClusterInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "isWhitelisted(uint16,address)",
+    functionFragment: "isWhitelisted(uint32,address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "lzChainId", data: BytesLike): Result;
@@ -202,7 +202,7 @@ export interface ClusterInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "updateContract(uint16,address,bool)",
+    functionFragment: "updateContract(uint32,address,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -218,12 +218,12 @@ export interface ClusterInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "updateLzChain(uint16)",
+    functionFragment: "updateLzChain(uint32)",
     data: BytesLike
   ): Result;
 
   events: {
-    "ContractUpdated(address,uint16,bool,bool)": EventFragment;
+    "ContractUpdated(address,uint32,bool,bool)": EventFragment;
     "EditorUpdated(address,bool,bool)": EventFragment;
     "LzChainUpdate(uint256,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
@@ -231,7 +231,7 @@ export interface ClusterInterface extends utils.Interface {
 
   getEvent(nameOrSignatureOrTopic: "ContractUpdated"): EventFragment;
   getEvent(
-    nameOrSignatureOrTopic: "ContractUpdated(address,uint16,bool,bool)"
+    nameOrSignatureOrTopic: "ContractUpdated(address,uint32,bool,bool)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "EditorUpdated"): EventFragment;
   getEvent(
@@ -331,7 +331,7 @@ export interface Cluster extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "batchUpdateContracts(uint16,address[],bool)"(
+    "batchUpdateContracts(uint32,address[],bool)"(
       _lzChainId: PromiseOrValue<BigNumberish>,
       _addresses: PromiseOrValue<string>[],
       _status: PromiseOrValue<boolean>,
@@ -354,7 +354,7 @@ export interface Cluster extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
-    "isWhitelisted(uint16,address)"(
+    "isWhitelisted(uint32,address)"(
       _lzChainId: PromiseOrValue<BigNumberish>,
       _addr: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -393,7 +393,7 @@ export interface Cluster extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "updateContract(uint16,address,bool)"(
+    "updateContract(uint32,address,bool)"(
       _lzChainId: PromiseOrValue<BigNumberish>,
       _addr: PromiseOrValue<string>,
       _status: PromiseOrValue<boolean>,
@@ -417,7 +417,7 @@ export interface Cluster extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "updateLzChain(uint16)"(
+    "updateLzChain(uint32)"(
       _lzChainId: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -430,7 +430,7 @@ export interface Cluster extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "batchUpdateContracts(uint16,address[],bool)"(
+  "batchUpdateContracts(uint32,address[],bool)"(
     _lzChainId: PromiseOrValue<BigNumberish>,
     _addresses: PromiseOrValue<string>[],
     _status: PromiseOrValue<boolean>,
@@ -453,7 +453,7 @@ export interface Cluster extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  "isWhitelisted(uint16,address)"(
+  "isWhitelisted(uint32,address)"(
     _lzChainId: PromiseOrValue<BigNumberish>,
     _addr: PromiseOrValue<string>,
     overrides?: CallOverrides
@@ -492,7 +492,7 @@ export interface Cluster extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "updateContract(uint16,address,bool)"(
+  "updateContract(uint32,address,bool)"(
     _lzChainId: PromiseOrValue<BigNumberish>,
     _addr: PromiseOrValue<string>,
     _status: PromiseOrValue<boolean>,
@@ -516,7 +516,7 @@ export interface Cluster extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "updateLzChain(uint16)"(
+  "updateLzChain(uint32)"(
     _lzChainId: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -529,7 +529,7 @@ export interface Cluster extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "batchUpdateContracts(uint16,address[],bool)"(
+    "batchUpdateContracts(uint32,address[],bool)"(
       _lzChainId: PromiseOrValue<BigNumberish>,
       _addresses: PromiseOrValue<string>[],
       _status: PromiseOrValue<boolean>,
@@ -552,7 +552,7 @@ export interface Cluster extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    "isWhitelisted(uint16,address)"(
+    "isWhitelisted(uint32,address)"(
       _lzChainId: PromiseOrValue<BigNumberish>,
       _addr: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -587,7 +587,7 @@ export interface Cluster extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "updateContract(uint16,address,bool)"(
+    "updateContract(uint32,address,bool)"(
       _lzChainId: PromiseOrValue<BigNumberish>,
       _addr: PromiseOrValue<string>,
       _status: PromiseOrValue<boolean>,
@@ -611,14 +611,14 @@ export interface Cluster extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "updateLzChain(uint16)"(
+    "updateLzChain(uint32)"(
       _lzChainId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
   filters: {
-    "ContractUpdated(address,uint16,bool,bool)"(
+    "ContractUpdated(address,uint32,bool,bool)"(
       _contract?: PromiseOrValue<string> | null,
       _lzChainId?: PromiseOrValue<BigNumberish> | null,
       _oldStatus?: PromiseOrValue<boolean> | null,
@@ -669,7 +669,7 @@ export interface Cluster extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "batchUpdateContracts(uint16,address[],bool)"(
+    "batchUpdateContracts(uint32,address[],bool)"(
       _lzChainId: PromiseOrValue<BigNumberish>,
       _addresses: PromiseOrValue<string>[],
       _status: PromiseOrValue<boolean>,
@@ -692,7 +692,7 @@ export interface Cluster extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "isWhitelisted(uint16,address)"(
+    "isWhitelisted(uint32,address)"(
       _lzChainId: PromiseOrValue<BigNumberish>,
       _addr: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -731,7 +731,7 @@ export interface Cluster extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "updateContract(uint16,address,bool)"(
+    "updateContract(uint32,address,bool)"(
       _lzChainId: PromiseOrValue<BigNumberish>,
       _addr: PromiseOrValue<string>,
       _status: PromiseOrValue<boolean>,
@@ -755,7 +755,7 @@ export interface Cluster extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "updateLzChain(uint16)"(
+    "updateLzChain(uint32)"(
       _lzChainId: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -769,7 +769,7 @@ export interface Cluster extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "batchUpdateContracts(uint16,address[],bool)"(
+    "batchUpdateContracts(uint32,address[],bool)"(
       _lzChainId: PromiseOrValue<BigNumberish>,
       _addresses: PromiseOrValue<string>[],
       _status: PromiseOrValue<boolean>,
@@ -792,7 +792,7 @@ export interface Cluster extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "isWhitelisted(uint16,address)"(
+    "isWhitelisted(uint32,address)"(
       _lzChainId: PromiseOrValue<BigNumberish>,
       _addr: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -831,7 +831,7 @@ export interface Cluster extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "updateContract(uint16,address,bool)"(
+    "updateContract(uint32,address,bool)"(
       _lzChainId: PromiseOrValue<BigNumberish>,
       _addr: PromiseOrValue<string>,
       _status: PromiseOrValue<boolean>,
@@ -855,7 +855,7 @@ export interface Cluster extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "updateLzChain(uint16)"(
+    "updateLzChain(uint32)"(
       _lzChainId: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
