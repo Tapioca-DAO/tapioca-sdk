@@ -1643,7 +1643,7 @@
       "name": "yieldBox",
       "outputs": [
         {
-          "internalType": "contract IYieldBoxBase",
+          "internalType": "contract IYieldBox",
           "name": "",
           "type": "address"
         }

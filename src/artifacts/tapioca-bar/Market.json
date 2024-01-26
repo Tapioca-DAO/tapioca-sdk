@@ -804,7 +804,7 @@
       "name": "oracle",
       "outputs": [
         {
-          "internalType": "contract IOracle",
+          "internalType": "contract ITapiocaOracle",
           "name": "",
           "type": "address"
         }
@@ -1042,7 +1042,7 @@
     {
       "inputs": [
         {
-          "internalType": "contract IOracle",
+          "internalType": "contract ITapiocaOracle",
           "name": "_oracle",
           "type": "address"
         },
@@ -1296,7 +1296,7 @@
       "name": "yieldBox",
       "outputs": [
         {
-          "internalType": "contract YieldBox",
+          "internalType": "contract IYieldBox",
           "name": "",
           "type": "address"
         }
