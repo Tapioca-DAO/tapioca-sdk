@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
   "contractName": "AccessControlledOffchainAggregator",
-  "sourceName": "contracts/interfaces/IAggregatorV3Interface.sol",
+  "sourceName": "tapioca-periph/interfaces/external/chainlink/IAggregatorV3Interface.sol",
   "abi": [
     {
       "inputs": [],
