@@ -229,6 +229,38 @@ export class DeployerVM {
         return this;
     }
 
+    async executeMulticall(calls: Multicall3.CallStruct[]) {
+        console.log('[+] Number of calls:', calls.length);
+        const signer = (await this.hre.ethers.getSigners())[0];
+        try {
+            const tx = await (
+                await this.multicall!.multicall(calls)
+            ).wait(this.options.globalWait ?? 3);
+            console.log('[+] Multicall Tx: ', tx.transactionHash);
+        } catch (e) {
+            console.log('[-] Multicall failed');
+            console.log(
+                '[+] Trying to execute calls one by one with owner account',
+            );
+            // If one fail, try them one by one with owner's account
+            for (const call of calls) {
+                // Static call simulation
+                await signer.call({
+                    from: signer.address,
+                    data: call.callData,
+                    to: call.target,
+                });
+
+                await (
+                    await signer.sendTransaction({
+                        data: call.callData,
+                        to: call.target,
+                    })
+                ).wait(this.options.globalWait ?? 3);
+            }
+        }
+    }
+
     /**
      * Transfers ownership for a contract which inherits OZ Ownable
      * @param to The new owner address
