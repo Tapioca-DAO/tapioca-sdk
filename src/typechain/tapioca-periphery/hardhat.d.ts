@@ -13,6 +13,14 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "OFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.OFT__factory>;
+    getContractFactory(
+      name: "OFTCore",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.OFTCore__factory>;
+    getContractFactory(
       name: "Cluster",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Cluster__factory>;
@@ -169,10 +177,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SequencerFeedMock__factory>;
     getContractFactory(
-      name: "Multicall3",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Multicall3__factory>;
-    getContractFactory(
       name: "AccessControl",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AccessControl__factory>;
@@ -189,9 +193,9 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.GLPOracle__factory>;
     getContractFactory(
-      name: "TapOracle",
+      name: "TapOptionOracle",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TapOracle__factory>;
+    ): Promise<Contracts.TapOptionOracle__factory>;
     getContractFactory(
       name: "ModuleChainlinkMulti",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -289,6 +293,42 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapiocaDeployer__factory>;
     getContractFactory(
+      name: "TapiocaMulticall",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TapiocaMulticall__factory>;
+    getContractFactory(
+      name: "BaseTapiocaOmnichainEngine",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseTapiocaOmnichainEngine__factory>;
+    getContractFactory(
+      name: "BaseToeMsgType",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseToeMsgType__factory>;
+    getContractFactory(
+      name: "TapiocaOmnichainEngineHelper",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TapiocaOmnichainEngineHelper__factory>;
+    getContractFactory(
+      name: "TapiocaOmnichainExtExec",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TapiocaOmnichainExtExec__factory>;
+    getContractFactory(
+      name: "TapiocaOmnichainReceiver",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TapiocaOmnichainReceiver__factory>;
+    getContractFactory(
+      name: "TapiocaOmnichainSender",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TapiocaOmnichainSender__factory>;
+    getContractFactory(
+      name: "ERC721Permit",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC721Permit__factory>;
+    getContractFactory(
+      name: "TapiocaDeployer",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TapiocaDeployer__factory>;
+    getContractFactory(
       name: "AccessControlledOffchainAggregator",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AccessControlledOffchainAggregator__factory>;
@@ -296,7 +336,21 @@ declare module "hardhat/types/runtime" {
       name: "AggregatorV3Interface",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AggregatorV3Interface__factory>;
+    getContractFactory(
+      name: "ERC721Permit",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC721Permit__factory>;
 
+    getContractAt(
+      name: "OFT",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.OFT>;
+    getContractAt(
+      name: "OFTCore",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.OFTCore>;
     getContractAt(
       name: "Cluster",
       address: string,
@@ -493,11 +547,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.SequencerFeedMock>;
     getContractAt(
-      name: "Multicall3",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.Multicall3>;
-    getContractAt(
       name: "AccessControl",
       address: string,
       signer?: ethers.Signer
@@ -518,10 +567,10 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.GLPOracle>;
     getContractAt(
-      name: "TapOracle",
+      name: "TapOptionOracle",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.TapOracle>;
+    ): Promise<Contracts.TapOptionOracle>;
     getContractAt(
       name: "ModuleChainlinkMulti",
       address: string,
@@ -643,6 +692,51 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.TapiocaDeployer>;
     getContractAt(
+      name: "TapiocaMulticall",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TapiocaMulticall>;
+    getContractAt(
+      name: "BaseTapiocaOmnichainEngine",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseTapiocaOmnichainEngine>;
+    getContractAt(
+      name: "BaseToeMsgType",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseToeMsgType>;
+    getContractAt(
+      name: "TapiocaOmnichainEngineHelper",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TapiocaOmnichainEngineHelper>;
+    getContractAt(
+      name: "TapiocaOmnichainExtExec",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TapiocaOmnichainExtExec>;
+    getContractAt(
+      name: "TapiocaOmnichainReceiver",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TapiocaOmnichainReceiver>;
+    getContractAt(
+      name: "TapiocaOmnichainSender",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TapiocaOmnichainSender>;
+    getContractAt(
+      name: "ERC721Permit",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC721Permit>;
+    getContractAt(
+      name: "TapiocaDeployer",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TapiocaDeployer>;
+    getContractAt(
       name: "AccessControlledOffchainAggregator",
       address: string,
       signer?: ethers.Signer
@@ -652,6 +746,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.AggregatorV3Interface>;
+    getContractAt(
+      name: "ERC721Permit",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC721Permit>;
 
     // default types
     getContractFactory(
