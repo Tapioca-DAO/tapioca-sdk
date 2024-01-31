@@ -10,11 +10,12 @@ import * as typechain from './typechain';
 
 import * as dotenv from 'dotenv';
 import fs from 'fs';
+import { EChainID } from './api/config';
 
 /**
  * Load the env vars from the .env/<network>.env file
  */
-export const loadEnv = () => {
+export const loadEnv = (deleteTasks = true) => {
     const networkArg = process.argv.findIndex((c) => c === '--network');
     let networkName = 'localhost';
 
@@ -34,28 +35,30 @@ export const loadEnv = () => {
             '[-] env vars not loaded, please specify a network with --network <network> and create its file in .env/<network>.env',
         );
     }
-};
 
-export const deleteDefaultTasks = () => {
-    // Delete tasks
     extendEnvironment((hre) => {
-        // remove hardhat core tasks
-        delete hre.tasks['gas-reporter:merge'];
-        delete hre.tasks['export-artifacts'];
-        delete hre.tasks['size-contracts'];
-        delete hre.tasks['init-foundry'];
-        delete hre.tasks.coverage;
-        delete hre.tasks.sourcify;
-        delete hre.tasks.accounts;
-        delete hre.tasks.flatten;
-        delete hre.tasks.deploy;
-        delete hre.tasks.export;
-        delete hre.tasks.check;
-        delete hre.tasks.node;
-        delete hre.tasks.run;
+        hre.SDK.eChainId = String(hre.network.config.chainId) as EChainID;
     });
-};
 
+    if (deleteTasks) {
+        extendEnvironment((hre) => {
+            // remove hardhat core tasks
+            delete hre.tasks['gas-reporter:merge'];
+            delete hre.tasks['export-artifacts'];
+            delete hre.tasks['size-contracts'];
+            delete hre.tasks['init-foundry'];
+            delete hre.tasks.coverage;
+            delete hre.tasks.sourcify;
+            delete hre.tasks.accounts;
+            delete hre.tasks.flatten;
+            delete hre.tasks.deploy;
+            delete hre.tasks.export;
+            delete hre.tasks.check;
+            delete hre.tasks.node;
+            delete hre.tasks.run;
+        });
+    }
+};
 export const SDK = { API, typechain };
 export { API, typechain };
 export default SDK;
