@@ -1,13 +1,6 @@
 import { EChainID, NETWORK_MAPPING_CHAIN_TO_LZ } from './api/config';
 
 const SUPPORTED_CHAINS = [
-    // Localhost
-    {
-        name: 'hardhat',
-        address: '0x464570adA09869d8741132183721B4f0769a0287',
-        chainId: '31337',
-        tags: ['testnet'],
-    },
     // testnets
     {
         name: 'sepolia',
