@@ -1,10 +1,6 @@
+import deepmerge from 'deepmerge';
 import FS from 'fs';
 import _find from 'lodash/find';
-import _isArray from 'lodash/isArray';
-import _merge from 'lodash/merge';
-import _mergeWith from 'lodash/mergeWith';
-import _unionBy from 'lodash/unionBy';
-import _sortBy from 'lodash/sortBy';
 import {
     TChainIdDeployment,
     TContract,
@@ -319,19 +315,7 @@ export function readDeployment(
  */
 function mergeDeployments(newest: TLocalDeployment, old: TLocalDeployment) {
     // Customize the merge by checking the nested value
-    return sortJson(
-        _mergeWith(old, newest, (_old: any, _new: any) => {
-            // If the value is an array, merge it by the name. It's like a TContract[]
-            if (_isArray(_old)) {
-                return _sortBy(
-                    _unionBy(_new, _old, (item: TContract) => item.name),
-                    'name',
-                );
-            }
-            // Otherwise, just override the old value
-            return _merge(_old, _new);
-        }),
-    );
+    return sortJson(deepmerge(old, newest));
 }
 
 /**

@@ -26,6 +26,7 @@
     "copy-json": "copyfiles -u 1 \"src/**/*.json\" dist"
   },
   "dependencies": {
+    "deepmerge": "^4.3.1",
     "dotenv": "^16.3.2",
     "ethers": "^5.4.7",
     "fs-extra": "^11.1.1",
