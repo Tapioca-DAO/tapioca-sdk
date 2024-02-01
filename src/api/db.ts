@@ -1,6 +1,7 @@
 import deepmerge from 'deepmerge';
 import FS from 'fs';
 import _find from 'lodash/find';
+import _unionBy from 'lodash/unionBy';
 import {
     TChainIdDeployment,
     TContract,
@@ -305,7 +306,18 @@ export function readDeployment(
  */
 function mergeDeployments(newest: TLocalDeployment, old: TLocalDeployment) {
     // Customize the merge by checking the nested value
-    return sortJson(deepmerge(old, newest));
+    return sortJson(
+        deepmerge(old, newest, {
+            arrayMerge: (dstArr, srcArr) => {
+                if (!!dstArr[0]?.['name'] && !!srcArr[0]?.['name']) {
+                    return _unionBy(dstArr, srcArr, 'name').sort(
+                        (e) => e['name'],
+                    );
+                }
+                return srcArr;
+            },
+        }),
+    );
 }
 
 /**
