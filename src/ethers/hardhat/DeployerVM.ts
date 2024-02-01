@@ -1,24 +1,22 @@
-import { ContractFactory, ContractTransaction } from 'ethers';
+import { ContractFactory } from 'ethers';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { v4 as uuidv4 } from 'uuid';
 import { TContract } from '../../shared';
 import {
     TapiocaDeployer,
     TapiocaDeployer__factory,
-} from '../../typechain/tapioca-periphery';
-import {
-    Multicall3,
-    Multicall3__factory,
+    TapiocaMulticall,
+    TapiocaMulticall__factory,
 } from '../../typechain/tapioca-periphery';
 
 //TODO: retrieve from tapioca-mocks or tapioca-periphery
+import { TAPIOCA_PROJECTS_NAME } from '../../api/config';
+import { getOverrideOptions } from '../../api/utils';
 import {
     MultisigMock,
     MultisigMock__factory,
 } from '../../typechain/tapioca-mocks';
 import { IOwnable__factory } from '../../typechain/tapioca-periphery/factories/IOwnable';
-import { getOverrideOptions } from '../../api/utils';
-import { TAPIOCA_PROJECTS_NAME } from '../../api/config';
 
 export interface IDependentOn {
     deploymentName: string;
@@ -43,7 +41,7 @@ interface IConstructorOptions {
     debugMode: boolean;
     globalWait?: number;
     tag?: string;
-    multicall?: Multicall3;
+    multicall?: TapiocaMulticall;
     multisig?: MultisigMock;
     overrideOptions?: boolean;
 }
@@ -57,7 +55,7 @@ export interface IDeployerVMAdd<T extends ContractFactory>
 // TODO - Ability to load already deployed contract (To verify?)
 // TODO - Ability to add arbitrary calls in between deployments?
 /**
- * Class to deploy contracts using the TapiocaDeployer & Multicall3 to aggregate deployments in a single transaction.
+ * Class to deploy contracts using the TapiocaDeployer & TapiocaMulticall to aggregate deployments in a single transaction.
  * @param hre HardhatRuntimeEnvironment instance of Hardhat.
  * @param options Options to use.
  * @param options.bytecodeSizeLimit Limit of bytecode size for a single transaction, if RPC provider is not able to handle it, error will be thrown.
@@ -66,7 +64,7 @@ export interface IDeployerVMAdd<T extends ContractFactory>
  */
 export class DeployerVM {
     private tapiocaDeployer?: TapiocaDeployer;
-    private multicall?: Multicall3;
+    private multicall?: TapiocaMulticall;
     private multisig?: MultisigMock;
 
     hre: HardhatRuntimeEnvironment;
@@ -172,7 +170,7 @@ export class DeployerVM {
     }
 
     /**
-     * Execute the current build queue and deploy the contracts, using Multicall3 to aggregate the calls.
+     * Execute the current build queue and deploy the contracts, using TapiocaMulticall to aggregate the calls.
      * @param wait Number of blocks to wait for the transaction to be mined. Default: 0
      */
     async execute(wait = this.options.globalWait ?? 0, runSimulations = true) {
@@ -191,10 +189,12 @@ export class DeployerVM {
         }
 
         if (!this.multicall) {
-            console.log('\t[+] Multicall3 not set');
+            console.log('\t[+] TapiocaMulticall not set');
             await this.getMulticall();
             console.log(
-                `\t[+] Deployed Multicall3 at: ${this.multicall!.address}`,
+                `\t[+] Deployed TapiocaMulticall at: ${
+                    this.multicall!.address
+                }`,
             );
             console.log('\n');
         }
@@ -229,7 +229,7 @@ export class DeployerVM {
         return this;
     }
 
-    async executeMulticall(calls: Multicall3.CallStruct[]) {
+    async executeMulticall(calls: TapiocaMulticall.CallStruct[]) {
         console.log('[+] Number of calls:', calls.length);
         const signer = (await this.hre.ethers.getSigners())[0];
         try {
@@ -336,7 +336,7 @@ export class DeployerVM {
             console.log(
                 '[+] Performing ownership transferal through the Multicall',
             );
-            const calls: Multicall3.CallStruct[] = [];
+            const calls: TapiocaMulticall.CallStruct[] = [];
             calls.push({
                 target: target.address,
                 callData: calldata,
@@ -495,10 +495,10 @@ export class DeployerVM {
     // Getters
     // ***********
     /**
-     * Retrieves the Multicall3 contract
+     * Retrieves the TapiocaMulticall contract
      * If the contract doesn't exist, it will be deployed and saved globally
      */
-    getMulticall = async (): Promise<Multicall3> => {
+    getMulticall = async (): Promise<TapiocaMulticall> => {
         if (this.multicall) return this.multicall;
 
         const project = TAPIOCA_PROJECTS_NAME.Generic;
@@ -510,27 +510,38 @@ export class DeployerVM {
             deployment = this.hre.SDK.db.findGlobalDeployment(
                 project,
                 String(this.hre.network.config.chainId),
-                'Multicall3',
+                'TapiocaMulticall',
                 _tag,
             );
             if (deployment) {
-                console.log('\t\t[+] Using previous Multicall3 deployment.');
-                const _multicall = Multicall3__factory.connect(
+                console.log(
+                    '\t\t[+] Using previous TapiocaMulticall deployment.',
+                );
+                const _multicall = TapiocaMulticall__factory.connect(
                     deployment.address,
                     (await this.hre.ethers.getSigners())[0],
                 );
                 this.multicall = _multicall;
+                const signer = (await this.hre.ethers.getSigners())[0];
+                if (
+                    (await _multicall.owner()).toLowerCase() !==
+                    signer.address.toLowerCase()
+                ) {
+                    throw new Error('[-] Different owner, deploying new one.');
+                }
             }
         } catch (e) {
-            console.log('\t\t[-] Failed retrieving Multicall3 deployment');
+            console.log(
+                '\t\t[-] Failed retrieving TapiocaMulticall deployment',
+            );
         }
 
-        // Deploy Multicall3 if not deployed
+        // Deploy TapiocaMulticall if not deployed
         if (!deployment) {
-            // Deploy Multicall3
-            console.log('\t\t[+] Deploying Multicall3');
+            // Deploy TapiocaMulticall
+            console.log('\t\t[+] Deploying TapiocaMulticall');
 
-            const multicall = await new Multicall3__factory(
+            const multicall = await new TapiocaMulticall__factory(
                 (
                     await this.hre.ethers.getSigners()
                 )[0],
@@ -554,7 +565,7 @@ export class DeployerVM {
                 chainId: String(this.hre.network.config.chainId),
                 contracts: [
                     {
-                        name: 'Multicall3',
+                        name: 'TapiocaMulticall',
                         address: multicall.address,
                         meta: {},
                     },
@@ -563,7 +574,7 @@ export class DeployerVM {
             this.hre.SDK.db.saveGlobally(dep, project, _tag);
             console.log(`\t\t[+] Deployed at ${multicall.address}`);
 
-            const _multicall = Multicall3__factory.connect(
+            const _multicall = TapiocaMulticall__factory.connect(
                 multicall.address,
                 (await this.hre.ethers.getSigners())[0],
             );
@@ -572,7 +583,7 @@ export class DeployerVM {
         }
 
         // Return Multicall
-        return Multicall3__factory.connect(
+        return TapiocaMulticall__factory.connect(
             deployment.address,
             (await this.hre.ethers.getSigners())[0],
         );
@@ -613,9 +624,9 @@ export class DeployerVM {
             }
         }
 
-        // Deploy Multicall3 if not deployed
+        // Deploy TapiocaMulticall if not deployed
         if (!deployment) {
-            // Deploy Multicall3
+            // Deploy TapiocaMulticall
             console.log('[+] Deploying MultisigMock');
             const multisig = await new MultisigMock__factory(
                 (
@@ -664,7 +675,7 @@ export class DeployerVM {
     // ***********
     private async getBuildCalls(
         runSimulations = true,
-    ): Promise<Multicall3.CallStruct[][]> {
+    ): Promise<TapiocaMulticall.CallStruct[][]> {
         console.log('\t[+] Populating build queue');
         await this.populateBuildQueue();
         if (runSimulations) {
@@ -676,7 +687,7 @@ export class DeployerVM {
         // Build the calls
         let currentByteCodeSize = 0;
         let currentBatch = 0;
-        const calls: Multicall3.CallStruct[][] = [[]];
+        const calls: TapiocaMulticall.CallStruct[][] = [[]];
         for (const build of this.buildQueue) {
             // We'll batch the calls to avoid hitting the gas limit
             const callData = this.buildDeployerCode(

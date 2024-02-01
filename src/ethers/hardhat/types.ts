@@ -24,7 +24,9 @@ const SDK = {
 
 declare module 'hardhat/types/runtime' {
     interface HardhatRuntimeEnvironment {
-        SDK: typeof SDK;
+        SDK: typeof SDK & {
+            eChainId: config.EChainID;
+        };
     }
 }
 
@@ -39,6 +41,7 @@ declare module 'hardhat/types/config' {
 
 extendEnvironment((hre) => {
     // copy reference of config.tracer to tracer
+    // @ts-ignore
     hre.SDK = SDK;
     if (hre.network.name === 'hardhat') {
         console.error(
