@@ -6,8 +6,6 @@ const SUPPORTED_CHAINS = [
         name: 'hardhat',
         address: '0x464570adA09869d8741132183721B4f0769a0287',
         chainId: '31337',
-        lzChainId: '31337',
-        rpc: 'https://eth-sepolia.g.alchemy.com/v2/<api_key>',
         tags: ['testnet'],
     },
     // testnets
