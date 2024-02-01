@@ -1,0 +1,33 @@
+{
+    "tap-token-test": {
+        "yieldbox": {
+            "421614": {
+                "name": "arbitrum_sepolia",
+                "lastBlockHeight": 11109686,
+                "contracts": [
+                    {
+                        "name": "YieldBoxURIBuilder",
+                        "address": "0x9565233713066aFCCB0300aeD5236a1fac745e8B",
+                        "meta": {
+                            "args": [],
+                            "salt": "0xc14d4a8218bb69239c0cef66cdeebaf35b281aaf09c726f7d9a2d02d9ee915d2",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YieldBox",
+                        "address": "0xc8A3602A81A4c77Cbf067B606c1734eB0eBd7b63",
+                        "meta": {
+                            "args": [
+                                "0x662593C9aaA0b49F9B52AE6A0a9edd8618b8a310",
+                                "0x9565233713066aFCCB0300aeD5236a1fac745e8B"
+                            ],
+                            "salt": "0xcf52e24b32ee22ca774d34ab2e9fefe3ba579cd4141cee2ae8c42acde70c1f27",
+                            "create2": true
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
