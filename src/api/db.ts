@@ -131,16 +131,10 @@ export const findGlobalDeployment = (
  */
 export const saveLocally = (data: TLocalDeployment, tag = 'default') => {
     const db = readDB('local') ?? {};
-    const prevDep = db[tag] || {}; // Read previous deployments
+    const prevDep = db[tag] || data; // Read previous deployments
 
     // Merge prev and new deployments
-    console.log('prevData');
-    console.log(JSON.stringify(prevDep, null, 4));
-    console.log('data');
-    console.log(JSON.stringify(data, null, 4));
     const deployments = mergeDeployments(prevDep, data);
-    console.log('mergedData');
-    console.log(JSON.stringify(deployments, null, 4));
 
     const deploymentToSave = { ...db, [tag]: deployments };
 
@@ -155,20 +149,13 @@ export const saveGlobally = (
     tag = 'default',
 ) => {
     const db = readDB('global') ?? {};
-    const prevDep: any = db[tag]?.[project]; // Read previous deployments
-
-    // Create the project if it doesn't exist
-    if (!prevDep) {
-        if (!db[tag]) db[tag] = {};
-        if (!db[tag][project]) db[tag][project] = {};
-    }
+    const prevDep: any = db[tag]?.[project] || data; // Read previous deployments
 
     // Merge prev and new deployments
     const deployments = mergeDeployments(prevDep, data);
 
     // Save the new deployment
-    db[tag][project] = sortJson(deployments);
-    db[tag] = sortJson(db[tag]);
+    db[tag] = sortJson({ ...db[tag], [project]: sortJson(deployments) });
     writeDB('global', sortJson(db), GLOBAL_DB_PATH);
     return deployments;
 };
