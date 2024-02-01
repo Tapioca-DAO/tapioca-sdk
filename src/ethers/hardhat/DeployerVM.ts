@@ -392,8 +392,7 @@ export class DeployerVM {
             lastBlockHeight: await this.hre.ethers.provider.getBlockNumber(),
             contracts: this.list(),
         });
-        console.log('save()');
-        console.log(this.list().map((c) => c.name));
+
         this.hre.SDK.db.saveLocally(dep, this.options.tag);
         console.log(
             '[+] Deployment saved for chainId: ',
