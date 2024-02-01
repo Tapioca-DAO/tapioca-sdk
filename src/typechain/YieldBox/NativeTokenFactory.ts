@@ -890,20 +890,20 @@ export interface NativeTokenFactory extends BaseContract {
     ): Promise<ContractTransaction>;
 
     ids(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<string>,
-      arg3: PromiseOrValue<BigNumberish>,
+      tokenType: PromiseOrValue<BigNumberish>,
+      contractAddress: PromiseOrValue<string>,
+      strategy: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    ): Promise<[BigNumber] & { assetId: BigNumber }>;
 
     "ids(uint8,address,address,uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<string>,
-      arg3: PromiseOrValue<BigNumberish>,
+      tokenType: PromiseOrValue<BigNumberish>,
+      contractAddress: PromiseOrValue<string>,
+      strategy: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    ): Promise<[BigNumber] & { assetId: BigNumber }>;
 
     isApprovedForAll(
       arg0: PromiseOrValue<string>,
@@ -1235,18 +1235,18 @@ export interface NativeTokenFactory extends BaseContract {
   ): Promise<ContractTransaction>;
 
   ids(
-    arg0: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<string>,
-    arg2: PromiseOrValue<string>,
-    arg3: PromiseOrValue<BigNumberish>,
+    tokenType: PromiseOrValue<BigNumberish>,
+    contractAddress: PromiseOrValue<string>,
+    strategy: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   "ids(uint8,address,address,uint256)"(
-    arg0: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<string>,
-    arg2: PromiseOrValue<string>,
-    arg3: PromiseOrValue<BigNumberish>,
+    tokenType: PromiseOrValue<BigNumberish>,
+    contractAddress: PromiseOrValue<string>,
+    strategy: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -1580,18 +1580,18 @@ export interface NativeTokenFactory extends BaseContract {
     ): Promise<number>;
 
     ids(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<string>,
-      arg3: PromiseOrValue<BigNumberish>,
+      tokenType: PromiseOrValue<BigNumberish>,
+      contractAddress: PromiseOrValue<string>,
+      strategy: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "ids(uint8,address,address,uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<string>,
-      arg3: PromiseOrValue<BigNumberish>,
+      tokenType: PromiseOrValue<BigNumberish>,
+      contractAddress: PromiseOrValue<string>,
+      strategy: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -2018,18 +2018,18 @@ export interface NativeTokenFactory extends BaseContract {
     ): Promise<BigNumber>;
 
     ids(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<string>,
-      arg3: PromiseOrValue<BigNumberish>,
+      tokenType: PromiseOrValue<BigNumberish>,
+      contractAddress: PromiseOrValue<string>,
+      strategy: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "ids(uint8,address,address,uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<string>,
-      arg3: PromiseOrValue<BigNumberish>,
+      tokenType: PromiseOrValue<BigNumberish>,
+      contractAddress: PromiseOrValue<string>,
+      strategy: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -2336,18 +2336,18 @@ export interface NativeTokenFactory extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     ids(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<string>,
-      arg3: PromiseOrValue<BigNumberish>,
+      tokenType: PromiseOrValue<BigNumberish>,
+      contractAddress: PromiseOrValue<string>,
+      strategy: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "ids(uint8,address,address,uint256)"(
-      arg0: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<string>,
-      arg3: PromiseOrValue<BigNumberish>,
+      tokenType: PromiseOrValue<BigNumberish>,
+      contractAddress: PromiseOrValue<string>,
+      strategy: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
