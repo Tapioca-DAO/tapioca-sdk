@@ -24,7 +24,7 @@ import {
 
 // In the repo node module
 // directory location should be root of the repo
-export const GLOBAL_DB_PATH = './lib/tapioca-sdk/src/global.db.json';
+export const GLOBAL_DB_PATH = './gitmodule/tapioca-sdk/src/global.db.json';
 
 // Relative to the Hardhat project root
 export const LOCAL_DB_PATH = './local.db.json';
