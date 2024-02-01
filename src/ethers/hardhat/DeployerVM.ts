@@ -598,6 +598,13 @@ export class DeployerVM {
                 console.log(
                     `\t[+] Previous TapiocaDeployer deployment exists at ${deployment?.address}`,
                 );
+                const _tapiocaDeployer = TapiocaDeployer__factory.connect(
+                    deployment.address,
+                    (await this.hre.ethers.getSigners())[0],
+                );
+                this.tapiocaDeployer = _tapiocaDeployer;
+            } else {
+                throw new Error('[-] No deployment found');
             }
         } catch (e) {
             console.log('\t\t[-] Failed retrieving TapiocaDeployer deployment');
