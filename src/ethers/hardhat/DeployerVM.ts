@@ -125,22 +125,16 @@ export class DeployerVM {
      * Return a list of deployed contracts
      */
     list(): TDeploymentVMContract[] {
-        if (!this.executed) {
-            throw new Error('[-] Deployment queue has not been executed yet');
-        }
-        if (this.depList.length === 0) {
-            this.depList = this.buildQueue.map((contract) => ({
-                name: contract.deploymentName,
-                address: contract.deterministicAddress,
-                meta: {
-                    ...contract.meta,
-                    args: contract.args,
-                    salt: contract.salt,
-                    create2: true,
-                },
-            }));
-        }
-
+        this.depList = this.buildQueue.map((contract) => ({
+            name: contract.deploymentName,
+            address: contract.deterministicAddress,
+            meta: {
+                ...contract.meta,
+                args: contract.args,
+                salt: contract.salt,
+                create2: true,
+            },
+        }));
         return this.depList;
     }
 
@@ -388,10 +382,8 @@ export class DeployerVM {
      * Save the deployments to the local database.
      */
     async save() {
-        if (!this.executed) {
-            throw new Error(
-                '[-] Deployment queue has not been executed. Please call execute() before writing the deployment file',
-            );
+        if (this.list().length === 0) {
+            throw new Error('[-] No contract to save');
         }
 
         const dep = this.hre.SDK.db.buildLocalDeployment({
