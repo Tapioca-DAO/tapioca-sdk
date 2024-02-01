@@ -157,12 +157,11 @@ export const saveGlobally = (
     const db = readDB('global') ?? {};
     const prevDep: any = db[tag]?.[project]; // Read previous deployments
 
-    // Create the project if it doesn't exist on DB
-    if (!db[tag]) db[tag] = {};
-    if (!db[tag][project]) db[tag][project] = {};
-    // Create the tag if it doesn't exist on PrevDep
-    if (!prevDep[tag]) prevDep[tag] = {};
-    if (!prevDep[tag][project]) prevDep[tag][project] = {};
+    // Create the project if it doesn't exist
+    if (!prevDep) {
+        if (!db[tag]) db[tag] = {};
+        if (!db[tag][project]) db[tag][project] = {};
+    }
 
     // Merge prev and new deployments
     const deployments = mergeDeployments(prevDep, data);
