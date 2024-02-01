@@ -138,7 +138,13 @@ export const saveLocally = (data: TLocalDeployment, tag = 'default') => {
     const prevDep = db[tag] || {}; // Read previous deployments
 
     // Merge prev and new deployments
+    console.log('prevData');
+    console.log(JSON.stringify(prevDep, null, 4));
+    console.log('data');
+    console.log(JSON.stringify(data, null, 4));
     const deployments = mergeDeployments(prevDep, data);
+    console.log('mergedData');
+    console.log(JSON.stringify(deployments, null, 4));
 
     const deploymentToSave = { ...db, [tag]: deployments };
 
