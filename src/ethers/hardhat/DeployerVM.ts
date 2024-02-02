@@ -52,8 +52,6 @@ export interface IDeployerVMAdd<T extends ContractFactory>
     args: Parameters<T['deploy']>;
 }
 
-// TODO - Ability to load already deployed contract (To verify?)
-// TODO - Ability to add arbitrary calls in between deployments?
 /**
  * Class to deploy contracts using the TapiocaDeployer & TapiocaMulticall to aggregate deployments in a single transaction.
  * @param hre HardhatRuntimeEnvironment instance of Hardhat.
@@ -101,6 +99,7 @@ export class DeployerVM {
     constructor(hre: HardhatRuntimeEnvironment, options: IConstructorOptions) {
         this.hre = hre;
         this.options = options;
+        this.options.globalWait = options.globalWait ?? 3;
     }
 
     // ***********
@@ -167,7 +166,7 @@ export class DeployerVM {
      * Execute the current build queue and deploy the contracts, using TapiocaMulticall to aggregate the calls.
      * @param wait Number of blocks to wait for the transaction to be mined. Default: 0
      */
-    async execute(wait = this.options.globalWait ?? 0, runSimulations = true) {
+    async execute(wait = this.options.globalWait ?? 3, runSimulations = true) {
         if (this.executed) {
             throw new Error('[-] Deployment queue has already been executed');
         }
@@ -213,9 +212,11 @@ export class DeployerVM {
         return this;
     }
 
-    async executeMulticall(calls: TapiocaMulticall.CallStruct[]) {
+    async executeMulticall(
+        calls: TapiocaMulticall.CallStruct[],
+        gasLimit = 2_000_000,
+    ) {
         console.log('[+] Number of calls:', calls.length);
-        const signer = (await this.hre.ethers.getSigners())[0];
         try {
             const tx = await (
                 await this.multicall!.multicall(calls)
@@ -223,25 +224,11 @@ export class DeployerVM {
             console.log('[+] Multicall Tx: ', tx.transactionHash);
         } catch (e) {
             console.log('[-] Multicall failed');
-            console.log(
-                '[+] Trying to execute calls one by one with owner account',
-            );
-            // If one fail, try them one by one with owner's account
-            for (const call of calls) {
-                // Static call simulation
-                await signer.call({
-                    from: signer.address,
-                    data: call.callData,
-                    to: call.target,
-                });
-
-                await (
-                    await signer.sendTransaction({
-                        data: call.callData,
-                        to: call.target,
-                    })
-                ).wait(this.options.globalWait ?? 3);
-            }
+            console.log('[+] Forcing execution with gas limit', gasLimit);
+            const tx = await (
+                await this.multicall!.multicall(calls, { gasLimit })
+            ).wait(this.options.globalWait ?? 3);
+            console.log('[+] Multicall Tx: ', tx.transactionHash);
         }
     }
 
