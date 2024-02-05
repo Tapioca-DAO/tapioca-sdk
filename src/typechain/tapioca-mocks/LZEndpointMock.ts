@@ -32,6 +32,7 @@ export interface LZEndpointMockInterface extends utils.Interface {
   functions: {
     "blockNextMsg()": FunctionFragment;
     "defaultAdapterParams()": FunctionFragment;
+    "eid()": FunctionFragment;
     "estimateFees(uint16,address,bytes,bool,bytes)": FunctionFragment;
     "forceResumeReceive(uint16,bytes)": FunctionFragment;
     "getChainId()": FunctionFragment;
@@ -60,6 +61,7 @@ export interface LZEndpointMockInterface extends utils.Interface {
     "send(uint16,bytes,bytes,address,address,bytes)": FunctionFragment;
     "setConfig(uint16,uint16,uint256,bytes)": FunctionFragment;
     "setDefaultAdapterParams(bytes)": FunctionFragment;
+    "setDelegate(address)": FunctionFragment;
     "setDestLzEndpoint(address,address)": FunctionFragment;
     "setOracleFee(uint256)": FunctionFragment;
     "setProtocolFee(uint256,uint256)": FunctionFragment;
@@ -75,6 +77,8 @@ export interface LZEndpointMockInterface extends utils.Interface {
       | "blockNextMsg()"
       | "defaultAdapterParams"
       | "defaultAdapterParams()"
+      | "eid"
+      | "eid()"
       | "estimateFees"
       | "estimateFees(uint16,address,bytes,bool,bytes)"
       | "forceResumeReceive"
@@ -131,6 +135,8 @@ export interface LZEndpointMockInterface extends utils.Interface {
       | "setConfig(uint16,uint16,uint256,bytes)"
       | "setDefaultAdapterParams"
       | "setDefaultAdapterParams(bytes)"
+      | "setDelegate"
+      | "setDelegate(address)"
       | "setDestLzEndpoint"
       | "setDestLzEndpoint(address,address)"
       | "setOracleFee"
@@ -163,6 +169,8 @@ export interface LZEndpointMockInterface extends utils.Interface {
     functionFragment: "defaultAdapterParams()",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "eid", values?: undefined): string;
+  encodeFunctionData(functionFragment: "eid()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "estimateFees",
     values: [
@@ -461,6 +469,14 @@ export interface LZEndpointMockInterface extends utils.Interface {
     values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
+    functionFragment: "setDelegate",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setDelegate(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "setDestLzEndpoint",
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
@@ -545,6 +561,8 @@ export interface LZEndpointMockInterface extends utils.Interface {
     functionFragment: "defaultAdapterParams()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "eid", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "eid()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "estimateFees",
     data: BytesLike
@@ -755,6 +773,14 @@ export interface LZEndpointMockInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "setDelegate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setDelegate(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "setDestLzEndpoint",
     data: BytesLike
   ): Result;
@@ -928,6 +954,10 @@ export interface LZEndpointMock extends BaseContract {
     defaultAdapterParams(overrides?: CallOverrides): Promise<[string]>;
 
     "defaultAdapterParams()"(overrides?: CallOverrides): Promise<[string]>;
+
+    eid(overrides?: CallOverrides): Promise<[number]>;
+
+    "eid()"(overrides?: CallOverrides): Promise<[number]>;
 
     estimateFees(
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -1267,6 +1297,16 @@ export interface LZEndpointMock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    setDelegate(
+      _delegate: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setDelegate(address)"(
+      _delegate: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     setDestLzEndpoint(
       destAddr: PromiseOrValue<string>,
       lzEndpointAddr: PromiseOrValue<string>,
@@ -1375,6 +1415,10 @@ export interface LZEndpointMock extends BaseContract {
   defaultAdapterParams(overrides?: CallOverrides): Promise<string>;
 
   "defaultAdapterParams()"(overrides?: CallOverrides): Promise<string>;
+
+  eid(overrides?: CallOverrides): Promise<number>;
+
+  "eid()"(overrides?: CallOverrides): Promise<number>;
 
   estimateFees(
     _dstChainId: PromiseOrValue<BigNumberish>,
@@ -1714,6 +1758,16 @@ export interface LZEndpointMock extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  setDelegate(
+    _delegate: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setDelegate(address)"(
+    _delegate: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   setDestLzEndpoint(
     destAddr: PromiseOrValue<string>,
     lzEndpointAddr: PromiseOrValue<string>,
@@ -1818,6 +1872,10 @@ export interface LZEndpointMock extends BaseContract {
     defaultAdapterParams(overrides?: CallOverrides): Promise<string>;
 
     "defaultAdapterParams()"(overrides?: CallOverrides): Promise<string>;
+
+    eid(overrides?: CallOverrides): Promise<number>;
+
+    "eid()"(overrides?: CallOverrides): Promise<number>;
 
     estimateFees(
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -2157,6 +2215,16 @@ export interface LZEndpointMock extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setDelegate(
+      _delegate: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setDelegate(address)"(
+      _delegate: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     setDestLzEndpoint(
       destAddr: PromiseOrValue<string>,
       lzEndpointAddr: PromiseOrValue<string>,
@@ -2316,6 +2384,10 @@ export interface LZEndpointMock extends BaseContract {
     defaultAdapterParams(overrides?: CallOverrides): Promise<BigNumber>;
 
     "defaultAdapterParams()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    eid(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "eid()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     estimateFees(
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -2611,6 +2683,16 @@ export interface LZEndpointMock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    setDelegate(
+      _delegate: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setDelegate(address)"(
+      _delegate: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     setDestLzEndpoint(
       destAddr: PromiseOrValue<string>,
       lzEndpointAddr: PromiseOrValue<string>,
@@ -2712,6 +2794,10 @@ export interface LZEndpointMock extends BaseContract {
     "defaultAdapterParams()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    eid(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "eid()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     estimateFees(
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -3016,6 +3102,16 @@ export interface LZEndpointMock extends BaseContract {
 
     "setDefaultAdapterParams(bytes)"(
       _adapterParams: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setDelegate(
+      _delegate: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setDelegate(address)"(
+      _delegate: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
