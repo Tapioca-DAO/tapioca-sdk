@@ -15,15 +15,12 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "tsdx build --transpileOnly && npm run copy-dts && npm run copy-sol && npm run copy-json",
+    "build": "tsdx build --transpileOnly",
     "copy:sandbox": "cp -r dist/ sandbox/dist",
     "test": "tsdx test --passWithNoTests",
     "lint": "eslint . --fix",
     "prepare": "husky install && npm run build",
-    "deploy": "npm run prepare && npm publish",
-    "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" dist",
-    "copy-sol": "copyfiles -u 1 \"src/**/*.sol\" dist",
-    "copy-json": "copyfiles -u 1 \"src/**/*.json\" dist"
+    "deploy": "npm run prepare && npm publish"
   },
   "dependencies": {
     "deepmerge": "^4.3.1",
