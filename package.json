@@ -1,5 +1,5 @@
 {
-  "version": "1.6.8",
+  "version": "1.6.9",
   "license": "MIT",
   "name": "tapioca-sdk",
   "author": "TapiocaDao",
@@ -15,12 +15,15 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "tsdx build --transpileOnly",
+    "build": "tsdx build --transpileOnly && npm run copy-dts && npm run copy-sol && npm run copy-json",
     "copy:sandbox": "cp -r dist/ sandbox/dist",
     "test": "tsdx test --passWithNoTests",
     "lint": "eslint . --fix",
     "prepare": "husky install && npm run build",
-    "deploy": "npm run prepare && npm publish"
+    "deploy": "npm run prepare && npm publish",
+    "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" dist",
+    "copy-sol": "copyfiles -u 1 \"src/**/*.sol\" dist",
+    "copy-json": "copyfiles -u 1 \"src/**/*.json\" dist"
   },
   "dependencies": {
     "deepmerge": "^4.3.1",
