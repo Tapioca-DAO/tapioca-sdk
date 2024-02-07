@@ -12,6 +12,17 @@ import * as dotenv from 'dotenv';
 import fs from 'fs';
 import { EChainID } from './api/config';
 
+declare global {
+    // eslint-disable-next-line @typescript-eslint/no-namespace
+    namespace NodeJS {
+        interface ProcessEnv {
+            ALCHEMY_API_KEY: string;
+            ENV: string;
+            NETWORK: string; // For forking
+        }
+    }
+}
+
 /**
  * Load the env vars from the .env/<network>.env file
  */
@@ -21,6 +32,9 @@ export const loadEnv = (deleteTasks = true) => {
 
     if (networkArg !== -1) {
         networkName = process.argv[networkArg + 1]; // Get the network name
+    } else if (process.env.NETWORK) {
+        networkName = process.env.NETWORK;
+        console.log(`[+] Using ${networkName} network fork on localhost.`);
     } else {
         console.log('[!] No network specified, using localhost as default.');
     }
