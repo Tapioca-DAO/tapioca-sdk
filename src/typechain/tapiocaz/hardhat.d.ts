@@ -13,141 +13,366 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
-      name: "Balancer",
+      name: "BBBorrow",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Balancer__factory>;
+    ): Promise<Contracts.BBBorrow__factory>;
     getContractFactory(
-      name: "TapiocaWrapper",
+      name: "BBCollateral",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TapiocaWrapper__factory>;
+    ): Promise<Contracts.BBCollateral__factory>;
     getContractFactory(
-      name: "BaseTOFT",
+      name: "BBCommon",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.BaseTOFT__factory>;
+    ): Promise<Contracts.BBCommon__factory>;
     getContractFactory(
-      name: "BaseTOFTStorage",
+      name: "BBLendingCommon",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.BaseTOFTStorage__factory>;
+    ): Promise<Contracts.BBLendingCommon__factory>;
     getContractFactory(
-      name: "BaseTOFTGenericModule",
+      name: "BBLeverage",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.BaseTOFTGenericModule__factory>;
+    ): Promise<Contracts.BBLeverage__factory>;
     getContractFactory(
-      name: "BaseTOFTLeverageDestinationModule",
+      name: "BBLiquidation",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.BaseTOFTLeverageDestinationModule__factory>;
+    ): Promise<Contracts.BBLiquidation__factory>;
     getContractFactory(
-      name: "BaseTOFTLeverageModule",
+      name: "BBStorage",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.BaseTOFTLeverageModule__factory>;
+    ): Promise<Contracts.BBStorage__factory>;
     getContractFactory(
-      name: "BaseTOFTMarketDestinationModule",
+      name: "BigBang",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.BaseTOFTMarketDestinationModule__factory>;
+    ): Promise<Contracts.BigBang__factory>;
     getContractFactory(
-      name: "BaseTOFTMarketModule",
+      name: "AssetToEthLeverageExecutor",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.BaseTOFTMarketModule__factory>;
+    ): Promise<Contracts.AssetToEthLeverageExecutor__factory>;
     getContractFactory(
-      name: "BaseTOFTOptionsDestinationModule",
+      name: "AssetToRethLeverageExecutor",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.BaseTOFTOptionsDestinationModule__factory>;
+    ): Promise<Contracts.AssetToRethLeverageExecutor__factory>;
     getContractFactory(
-      name: "BaseTOFTOptionsModule",
+      name: "AssetToSGLPLeverageExecutor",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.BaseTOFTOptionsModule__factory>;
+    ): Promise<Contracts.AssetToSGLPLeverageExecutor__factory>;
     getContractFactory(
-      name: "TOFTCommon",
+      name: "AssetTotsDaiLeverageExecutor",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TOFTCommon__factory>;
+    ): Promise<Contracts.AssetTotsDaiLeverageExecutor__factory>;
     getContractFactory(
-      name: "MTapiocaOFT",
+      name: "AssetToWstethLeverageExecutor",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MTapiocaOFT__factory>;
+    ): Promise<Contracts.AssetToWstethLeverageExecutor__factory>;
     getContractFactory(
-      name: "TapiocaOFT",
+      name: "BaseLeverageExecutor",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TapiocaOFT__factory>;
+    ): Promise<Contracts.BaseLeverageExecutor__factory>;
     getContractFactory(
-      name: "TOFTVault",
+      name: "TOFTMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TOFTVault__factory>;
+    ): Promise<Contracts.TOFTMock__factory>;
+    getContractFactory(
+      name: "SimpleLeverageExecutor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SimpleLeverageExecutor__factory>;
+    getContractFactory(
+      name: "Market",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Market__factory>;
+    getContractFactory(
+      name: "MarketERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MarketERC20__factory>;
+    getContractFactory(
+      name: "MarketLiquidatorReceiver",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MarketLiquidatorReceiver__factory>;
+    getContractFactory(
+      name: "Origins",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Origins__factory>;
+    getContractFactory(
+      name: "SGLBorrow",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SGLBorrow__factory>;
+    getContractFactory(
+      name: "SGLCollateral",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SGLCollateral__factory>;
+    getContractFactory(
+      name: "SGLCommon",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SGLCommon__factory>;
+    getContractFactory(
+      name: "SGLLendingCommon",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SGLLendingCommon__factory>;
+    getContractFactory(
+      name: "SGLLeverage",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SGLLeverage__factory>;
+    getContractFactory(
+      name: "SGLLiquidation",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SGLLiquidation__factory>;
+    getContractFactory(
+      name: "SGLStorage",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SGLStorage__factory>;
+    getContractFactory(
+      name: "Singularity",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Singularity__factory>;
+    getContractFactory(
+      name: "Penrose",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Penrose__factory>;
+    getContractFactory(
+      name: "BaseUsdo",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseUsdo__factory>;
+    getContractFactory(
+      name: "UsdoExtExec",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.UsdoExtExec__factory>;
+    getContractFactory(
+      name: "UsdoHelper",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.UsdoHelper__factory>;
+    getContractFactory(
+      name: "ModuleManager",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ModuleManager__factory>;
+    getContractFactory(
+      name: "UsdoLeverageReceiverModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.UsdoLeverageReceiverModule__factory>;
+    getContractFactory(
+      name: "UsdoMarketReceiverModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.UsdoMarketReceiverModule__factory>;
+    getContractFactory(
+      name: "UsdoOptionReceiverModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.UsdoOptionReceiverModule__factory>;
+    getContractFactory(
+      name: "UsdoReceiver",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.UsdoReceiver__factory>;
+    getContractFactory(
+      name: "UsdoSender",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.UsdoSender__factory>;
+    getContractFactory(
+      name: "Usdo",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Usdo__factory>;
+    getContractFactory(
+      name: "USDOFlashloanHelper",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.USDOFlashloanHelper__factory>;
 
     getContractAt(
-      name: "Balancer",
+      name: "BBBorrow",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.Balancer>;
+    ): Promise<Contracts.BBBorrow>;
     getContractAt(
-      name: "TapiocaWrapper",
+      name: "BBCollateral",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.TapiocaWrapper>;
+    ): Promise<Contracts.BBCollateral>;
     getContractAt(
-      name: "BaseTOFT",
+      name: "BBCommon",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.BaseTOFT>;
+    ): Promise<Contracts.BBCommon>;
     getContractAt(
-      name: "BaseTOFTStorage",
+      name: "BBLendingCommon",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.BaseTOFTStorage>;
+    ): Promise<Contracts.BBLendingCommon>;
     getContractAt(
-      name: "BaseTOFTGenericModule",
+      name: "BBLeverage",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.BaseTOFTGenericModule>;
+    ): Promise<Contracts.BBLeverage>;
     getContractAt(
-      name: "BaseTOFTLeverageDestinationModule",
+      name: "BBLiquidation",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.BaseTOFTLeverageDestinationModule>;
+    ): Promise<Contracts.BBLiquidation>;
     getContractAt(
-      name: "BaseTOFTLeverageModule",
+      name: "BBStorage",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.BaseTOFTLeverageModule>;
+    ): Promise<Contracts.BBStorage>;
     getContractAt(
-      name: "BaseTOFTMarketDestinationModule",
+      name: "BigBang",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.BaseTOFTMarketDestinationModule>;
+    ): Promise<Contracts.BigBang>;
     getContractAt(
-      name: "BaseTOFTMarketModule",
+      name: "AssetToEthLeverageExecutor",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.BaseTOFTMarketModule>;
+    ): Promise<Contracts.AssetToEthLeverageExecutor>;
     getContractAt(
-      name: "BaseTOFTOptionsDestinationModule",
+      name: "AssetToRethLeverageExecutor",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.BaseTOFTOptionsDestinationModule>;
+    ): Promise<Contracts.AssetToRethLeverageExecutor>;
     getContractAt(
-      name: "BaseTOFTOptionsModule",
+      name: "AssetToSGLPLeverageExecutor",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.BaseTOFTOptionsModule>;
+    ): Promise<Contracts.AssetToSGLPLeverageExecutor>;
     getContractAt(
-      name: "TOFTCommon",
+      name: "AssetTotsDaiLeverageExecutor",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.TOFTCommon>;
+    ): Promise<Contracts.AssetTotsDaiLeverageExecutor>;
     getContractAt(
-      name: "MTapiocaOFT",
+      name: "AssetToWstethLeverageExecutor",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.MTapiocaOFT>;
+    ): Promise<Contracts.AssetToWstethLeverageExecutor>;
     getContractAt(
-      name: "TapiocaOFT",
+      name: "BaseLeverageExecutor",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.TapiocaOFT>;
+    ): Promise<Contracts.BaseLeverageExecutor>;
     getContractAt(
-      name: "TOFTVault",
+      name: "TOFTMock",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.TOFTVault>;
+    ): Promise<Contracts.TOFTMock>;
+    getContractAt(
+      name: "SimpleLeverageExecutor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SimpleLeverageExecutor>;
+    getContractAt(
+      name: "Market",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Market>;
+    getContractAt(
+      name: "MarketERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MarketERC20>;
+    getContractAt(
+      name: "MarketLiquidatorReceiver",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MarketLiquidatorReceiver>;
+    getContractAt(
+      name: "Origins",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Origins>;
+    getContractAt(
+      name: "SGLBorrow",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SGLBorrow>;
+    getContractAt(
+      name: "SGLCollateral",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SGLCollateral>;
+    getContractAt(
+      name: "SGLCommon",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SGLCommon>;
+    getContractAt(
+      name: "SGLLendingCommon",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SGLLendingCommon>;
+    getContractAt(
+      name: "SGLLeverage",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SGLLeverage>;
+    getContractAt(
+      name: "SGLLiquidation",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SGLLiquidation>;
+    getContractAt(
+      name: "SGLStorage",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SGLStorage>;
+    getContractAt(
+      name: "Singularity",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Singularity>;
+    getContractAt(
+      name: "Penrose",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Penrose>;
+    getContractAt(
+      name: "BaseUsdo",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseUsdo>;
+    getContractAt(
+      name: "UsdoExtExec",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.UsdoExtExec>;
+    getContractAt(
+      name: "UsdoHelper",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.UsdoHelper>;
+    getContractAt(
+      name: "ModuleManager",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ModuleManager>;
+    getContractAt(
+      name: "UsdoLeverageReceiverModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.UsdoLeverageReceiverModule>;
+    getContractAt(
+      name: "UsdoMarketReceiverModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.UsdoMarketReceiverModule>;
+    getContractAt(
+      name: "UsdoOptionReceiverModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.UsdoOptionReceiverModule>;
+    getContractAt(
+      name: "UsdoReceiver",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.UsdoReceiver>;
+    getContractAt(
+      name: "UsdoSender",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.UsdoSender>;
+    getContractAt(
+      name: "Usdo",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Usdo>;
+    getContractAt(
+      name: "USDOFlashloanHelper",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.USDOFlashloanHelper>;
 
     // default types
     getContractFactory(
