@@ -223,7 +223,7 @@ export const TAPIOCA_PROJECTS = [
     'tap-token',
     'tapioca-bar',
     'generic',
-    'tapioca-periphery',
+    'tapioca-periph',
     'tapioca-mocks',
     'pcnft',
     'tapioca-strategies',
