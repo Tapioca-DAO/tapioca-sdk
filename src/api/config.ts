@@ -211,7 +211,7 @@ export enum TAPIOCA_PROJECTS_NAME {
     TapToken = 'tap-token',
     TapiocaBar = 'tapioca-bar',
     Generic = 'generic',
-    TapiocaPeriphery = 'tapioca-periphery',
+    TapiocaPeriph = 'tapioca-periph',
     TapiocaMocks = 'tapioca-mocks',
     PCNFT = 'pcnft',
     TapiocaStrategies = 'tapioca-strategies',
