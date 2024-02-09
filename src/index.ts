@@ -50,6 +50,15 @@ export const loadEnv = (deleteTasks = true) => {
         );
     }
 
+    // Check if the folder /gen/typechain exists, if not, create it. This is needed if the repo was freshly cloned.
+    if (!fs.existsSync('./gen/typechain/index.ts')) {
+        try {
+            fs.mkdirSync('./gen/typechain', { recursive: true });
+        } catch (e) {}
+        fs.writeFileSync('./gen/typechain/index.ts', '');
+    }
+
+    // Extend environment
     extendEnvironment((hre) => {
         hre.SDK.eChainId = String(hre.network.config.chainId) as EChainID;
     });
