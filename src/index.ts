@@ -1,16 +1,15 @@
-// API
-import { extendEnvironment } from 'hardhat/config';
-import API from './api/index';
-
-// Ethers
-import './ethers';
-
-// Types
-import * as typechain from './typechain';
-
 import * as dotenv from 'dotenv';
 import fs from 'fs';
+
+// Hardhat
+import { TASK_COMPILE_GET_REMAPPINGS } from 'hardhat/builtin-tasks/task-names';
+import { extendEnvironment, subtask } from 'hardhat/config';
+import * as typechain from './typechain';
+
+// Tapioca
 import { EChainID } from './api/config';
+import API from './api/index';
+import './ethers';
 
 declare global {
     // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -57,6 +56,15 @@ export const loadEnv = (deleteTasks = true) => {
         } catch (e) {}
         fs.writeFileSync('./gen/typechain/index.ts', '');
     }
+
+    // Solves the hardhat error [Error HH415: Two different source names]
+    subtask(TASK_COMPILE_GET_REMAPPINGS).setAction(async (_, hre, runSuper) => {
+        // Get the list of source paths that would normally be passed to the Solidity compiler
+        const remappings = await runSuper();
+        fs.cpSync('contracts/', 'gen/contracts/', { recursive: true });
+        remappings[`${hre.config.SDK.project}/`] = 'gen/contracts/';
+        return remappings;
+    });
 
     // Extend environment
     extendEnvironment((hre) => {
