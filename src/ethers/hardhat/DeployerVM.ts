@@ -21,6 +21,7 @@ import { IOwnable__factory } from '../../typechain/tapioca-periphery/factories/I
 export interface IDependentOn {
     deploymentName: string;
     argPosition: number;
+    keyName?: string;
 }
 
 interface IDeploymentQueue {
@@ -147,7 +148,10 @@ export class DeployerVM {
     add<T extends ContractFactory>(contract: IDeployerVMAdd<T>) {
         // Validate contract dependencies
         contract.dependsOn?.forEach((dependency) => {
-            if (dependency.argPosition >= contract.args.length) {
+            if (
+                dependency.argPosition &&
+                dependency.argPosition >= contract.args.length
+            ) {
                 throw new Error(
                     `[-] Dependency for ${contract.deploymentName} argPosition is out of bounds`,
                 );
@@ -796,36 +800,12 @@ export class DeployerVM {
         for (const contract of this.deploymentQueue) {
             {
                 // Build dependencies if any
-                contract.dependsOn?.forEach((dependency) => {
-                    // Find the dependency
-                    const deps = this.buildQueue.find(
-                        (e) => e.deploymentName === dependency.deploymentName,
-                    );
-                    // Throw if not found
-                    if (!deps) {
-                        const dependencyAddress =
-                            contract.args[dependency.argPosition];
-                        if (
-                            !dependencyAddress ||
-                            dependencyAddress ==
-                                this.hre.ethers.constants.AddressZero
-                        ) {
-                            throw new Error(
-                                `[-] Dependency ${dependency.deploymentName} not found for ${contract.deploymentName}}`,
-                            );
-                        } else {
-                            console.log(
-                                `Dependency already provided: ${
-                                    contract.args[dependency.argPosition]
-                                }`,
-                            );
-                        }
-                    } else {
-                        // Set the dependency address in the contract args
-                        contract.args[dependency.argPosition] =
-                            deps.deterministicAddress;
-                    }
-                });
+                contract.dependsOn?.forEach((dependency) =>
+                    this._handlePopulateBuildQueueDependentOn(
+                        contract,
+                        dependency as IDependentOn,
+                    ),
+                );
 
                 // Build the creation code
                 const creationCode =
@@ -848,6 +828,45 @@ export class DeployerVM {
                     salt,
                     runStaticSimulations: contract.runStaticSimulation ?? true,
                 });
+            }
+        }
+    }
+    private _handlePopulateBuildQueueDependentOn(
+        contract: IDeploymentQueue,
+        dependency: IDependentOn,
+    ) {
+        // Find the dependency
+        const deps = this.buildQueue.find(
+            (e) => e.deploymentName === dependency.deploymentName,
+        );
+        // Throw if not found
+        if (!deps) {
+            const dependencyAddress = dependency.keyName
+                ? (<any>contract.args[dependency.argPosition])[
+                      dependency.keyName
+                  ]
+                : contract.args[dependency.argPosition];
+            if (
+                !dependencyAddress ||
+                dependencyAddress == this.hre.ethers.constants.AddressZero
+            ) {
+                throw new Error(
+                    `[-] Dependency ${dependency.deploymentName} not found for ${contract.deploymentName}}`,
+                );
+            } else {
+                console.log(
+                    `Dependency for ${dependency.deploymentName} already provided: ${dependencyAddress}`,
+                );
+            }
+        } else {
+            // Set the dependency address in the contract args
+            if (!!dependency.keyName) {
+                (<any>contract.args[dependency.argPosition])[
+                    dependency.keyName
+                ] = deps.deterministicAddress;
+            } else {
+                contract.args[dependency.argPosition] =
+                    deps.deterministicAddress;
             }
         }
     }
