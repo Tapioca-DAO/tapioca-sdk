@@ -77,7 +77,7 @@
                 "contracts": [
                     {
                         "name": "USDO",
-                        "address": "0xDe4710C9B9e92478a2803CD30fdd7F11DbD0196E",
+                        "address": "0xc8E182Dff2c48aD11f0B3DbF42600EF97EA5Df56",
                         "meta": {
                             "args": [
                                 "MOCK_USDO",
@@ -86,7 +86,7 @@
                                 18,
                                 "0x1566b0344b8Ff1ee1f38beF0037fe1935A7C1268"
                             ],
-                            "salt": "0xf20b0329f45655a82b4adbe2f29ce48c7c2d5f3f53dcb6c0e2c66d3dc19d8e83",
+                            "salt": "0x1c3c93c967ee2b1e095cfda4861efdd477166ab884999e1bc207d5015f52ea24",
                             "create2": true,
                             "mock": true,
                             "description": "Mock contract deployed from tap-token"
@@ -94,14 +94,14 @@
                     },
                     {
                         "name": "USDO_SEER_UNI_ORACLE",
-                        "address": "0x47036BdffeA36Be6607A2d903Bd7BC7b77f2154d",
+                        "address": "0x911bD5F72FF968cC9543b4Fb2e21Fae4582368A8",
                         "meta": {
                             "args": [
                                 "MOCK_USDO_ORACLE",
                                 "MOCK_USDO_ORACLE",
                                 "1000000000000000000"
                             ],
-                            "salt": "0xb5219fa499de8f306d298834a00dc2872a4c79f6db6de070990ef8e45e311153",
+                            "salt": "0xdb28c9db2b56f362af0b6ed06f649a13a41607c6d3ad951999b6ef3ae5808ae6",
                             "create2": true,
                             "mock": true,
                             "description": "Mock contract deployed from tap-token"
@@ -109,7 +109,7 @@
                     },
                     {
                         "name": "ARBITRUM_SGL_GLP",
-                        "address": "0xB30CF7FE3bD271d264a351B9a23706643ded0cC7",
+                        "address": "0x45B182A582Dc6c4Ed8c9A165c8cd9C040A786e76",
                         "meta": {
                             "args": [
                                 "MOCK_ARB_SGL_GLP",
@@ -118,7 +118,7 @@
                                 18,
                                 "0x1566b0344b8Ff1ee1f38beF0037fe1935A7C1268"
                             ],
-                            "salt": "0x77cd0ac2335f39ed4ece55817e1fd6ab5df717e770f802ac44865f63cbc6160d",
+                            "salt": "0xb28895ffbe3e2ff8579a1a7d5d156ccd5c6362e142e83a3043f5c07ce5a0736e",
                             "create2": true,
                             "mock": true,
                             "description": "Mock contract deployed from tap-token"
@@ -126,7 +126,7 @@
                     },
                     {
                         "name": "MAINNET_SGL_DAI",
-                        "address": "0xb912B6089C7EE679c3bbe7b5Df1895fe38BBe600",
+                        "address": "0xac5C585fced2F8B48CB9E7143d4A4CEBCE1F70B1",
                         "meta": {
                             "args": [
                                 "MOCK_TOFT_MAINNET_SGL_DAI",
@@ -135,7 +135,7 @@
                                 18,
                                 "0x1566b0344b8Ff1ee1f38beF0037fe1935A7C1268"
                             ],
-                            "salt": "0xf6013264213cdc2e46df1bb5396f440a232cf8be84c7a09c5b6c20c9f206c3a5",
+                            "salt": "0xb317e97a3421663fae3f3dde4dabec6c6856c5a6bbd2f7ff95685d4cb7b2eb3a",
                             "create2": true,
                             "mock": true,
                             "description": "Mock contract deployed from tap-token"
@@ -143,13 +143,13 @@
                     },
                     {
                         "name": "YB_SGL_ARB_GLP_STRATEGY",
-                        "address": "0x6e05B4e9DfCCd55F6A711E5638595b1E544426F6",
+                        "address": "0x9d70bCD29fDd8D781c9fb458a3bA5857239a0311",
                         "meta": {
                             "args": [
                                 "0xc8A3602A81A4c77Cbf067B606c1734eB0eBd7b63",
-                                "0xB30CF7FE3bD271d264a351B9a23706643ded0cC7"
+                                "0x45B182A582Dc6c4Ed8c9A165c8cd9C040A786e76"
                             ],
-                            "salt": "0x57f5b0fc7dcaa6a030cf2688c664fd602d1a2a2d2621ba5b6b3082de6b8bbe45",
+                            "salt": "0xc8f4407b575e277159506f1e46b54fcb5b85ad02f1c8326adffc942bb3ffb6b6",
                             "create2": true,
                             "mock": true,
                             "description": "Mock contract deployed from tap-token"
@@ -157,13 +157,13 @@
                     },
                     {
                         "name": "YB_SGL_MAINNET_DAI_STRATEGY",
-                        "address": "0x73690ba9B31AfbDA3a21c505168937aFcB6b7AA4",
+                        "address": "0xE746509885fe9a7B29D79027D6670b81B1A96d47",
                         "meta": {
                             "args": [
                                 "0xc8A3602A81A4c77Cbf067B606c1734eB0eBd7b63",
-                                "0xb912B6089C7EE679c3bbe7b5Df1895fe38BBe600"
+                                "0xac5C585fced2F8B48CB9E7143d4A4CEBCE1F70B1"
                             ],
-                            "salt": "0x8881fce254a155043cacbdf969676e9bde634d561a516c2bed45ac02d27db19e",
+                            "salt": "0x5fef07d55e3bc978ae8518eb4d1b595889279a47e18de4021208d6d5f95eab43",
                             "create2": true,
                             "mock": true,
                             "description": "Mock contract deployed from tap-token"
