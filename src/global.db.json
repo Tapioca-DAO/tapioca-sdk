@@ -82,6 +82,17 @@
                         "meta": {}
                     }
                 ]
+            },
+            "11155111": {
+                "name": "sepolia",
+                "lastBlockHeight": 5389901,
+                "contracts": [
+                    {
+                        "name": "TapiocaDeployer",
+                        "address": "0xb4b8262C89B2053d4e785A8F5c906d873b5E6f1b",
+                        "meta": {}
+                    }
+                ]
             }
         },
         "tap-token": {
@@ -232,6 +243,38 @@
                             "salt": "0xcf52e24b32ee22ca774d34ab2e9fefe3ba579cd4141cee2ae8c42acde70c1f27",
                             "create2": true
                         }
+                    }
+                ]
+            },
+            "11155111": {
+                "name": "sepolia",
+                "lastBlockHeight": 5389904,
+                "contracts": [
+                    {
+                        "name": "YieldBoxURIBuilder",
+                        "address": "0x4dCC272297481f69792826F0A8C989732cF50489",
+                        "meta": {
+                            "args": [],
+                            "salt": "0xf7069f768eb871818d6a0f9213fda5a5c83b5162d783b0fe677ac192b43c1bf5",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YieldBox",
+                        "address": "0x79a2CCbDF2d136EDd1fB445D49d9f1055C398c59",
+                        "meta": {
+                            "args": [
+                                "0x40C1BBF8CE9920FE1Be9c70b6b573eAb7145e67d",
+                                "0x4dCC272297481f69792826F0A8C989732cF50489"
+                            ],
+                            "salt": "0xe34a81193f635f99a8d8222875f3988f1ce0ce2173f209a86d33cf784be42aa6",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "TapiocaMulticall",
+                        "address": "0xA0822c47E458aa5E0FDe8B7b3BB2E1322D7c1168",
+                        "meta": {}
                     }
                 ]
             }
