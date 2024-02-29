@@ -221,6 +221,7 @@ export class DeployerVM {
         gasLimit = 2_000_000,
     ) {
         console.log('[+] Number of calls:', calls.length);
+        await this.getMulticall(); // Ensure multicall is deployed
         try {
             const tx = await (
                 await this.multicall!.multicall(calls)
