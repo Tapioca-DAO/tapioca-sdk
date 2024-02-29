@@ -40,6 +40,33 @@
                         }
                     }
                 ]
+            },
+            "11155111": {
+                "name": "sepolia",
+                "lastBlockHeight": 5389881,
+                "contracts": [
+                    {
+                        "name": "YieldBoxURIBuilder",
+                        "address": "0x7bD1C51d1E44dC2c12F5a52Dc124ff642887Fee0",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x2fbe0b2aaddcd94624cb6ecf554937ad494c52250b951709f0f1d969d4cf5ee4",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YieldBox",
+                        "address": "0x43e8Fa26DcF5c5Bd0de7226BeC48b74d786f206f",
+                        "meta": {
+                            "args": [
+                                "0x3E7F7A2530B77cb2268Cd0679208964D1A6064A9",
+                                "0x7bD1C51d1E44dC2c12F5a52Dc124ff642887Fee0"
+                            ],
+                            "salt": "0xbd0f2c435b637b2b6d1add09a125b69d77ee95c510f8d13a213768cdfb80d053",
+                            "create2": true
+                        }
+                    }
+                ]
             }
         }
     },
