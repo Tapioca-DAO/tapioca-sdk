@@ -1,0 +1,84 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "SequencerCheck",
+  "sourceName": "contracts/oracle/utils/SequencerCheck.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_sequencerUptimeFeed",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "GracePeriodNotOver",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "SequencerDown",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "GRACE_PERIOD_TIME",
+      "outputs": [
+        {
+          "internalType": "uint32",
+          "name": "",
+          "type": "uint32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "SEQUENCER_ROLE",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "SEQUENCER_UPTIME_FEED",
+      "outputs": [
+        {
+          "internalType": "contract AggregatorV3Interface",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint32",
+          "name": "_gracePeriod",
+          "type": "uint32"
+        }
+      ],
+      "name": "changeGracePeriod",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x60a06040526000805463ffffffff1916610e1017905534801561002157600080fd5b5060405161020d38038061020d83398101604081905261004091610051565b6001600160a01b0316608052610081565b60006020828403121561006357600080fd5b81516001600160a01b038116811461007a57600080fd5b9392505050565b60805161017261009b600039600060a301526101726000f3fe608060405234801561001057600080fd5b506004361061004c5760003560e01c8063408b0546146100515780634842855c14610064578063c59801821461009e578063ed2f8603146100ea575b600080fd5b61006261005f36600461010f565b50565b005b61008b7fac4f1890dc96c9a02330d1fa696648a38f3b282d2449c2d8e6f10507488c84c881565b6040519081526020015b60405180910390f35b6100c57f000000000000000000000000000000000000000000000000000000000000000081565b60405173ffffffffffffffffffffffffffffffffffffffff9091168152602001610095565b6000546100fa9063ffffffff1681565b60405163ffffffff9091168152602001610095565b60006020828403121561012157600080fd5b813563ffffffff8116811461013557600080fd5b939250505056fea2646970667358221220f2982479129f62d48ab1e793f0a884748139825b39ece204119a9d1d56f4fb4864736f6c63430008160033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061004c5760003560e01c8063408b0546146100515780634842855c14610064578063c59801821461009e578063ed2f8603146100ea575b600080fd5b61006261005f36600461010f565b50565b005b61008b7fac4f1890dc96c9a02330d1fa696648a38f3b282d2449c2d8e6f10507488c84c881565b6040519081526020015b60405180910390f35b6100c57f000000000000000000000000000000000000000000000000000000000000000081565b60405173ffffffffffffffffffffffffffffffffffffffff9091168152602001610095565b6000546100fa9063ffffffff1681565b60405163ffffffff9091168152602001610095565b60006020828403121561012157600080fd5b813563ffffffff8116811461013557600080fd5b939250505056fea2646970667358221220f2982479129f62d48ab1e793f0a884748139825b39ece204119a9d1d56f4fb4864736f6c63430008160033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
