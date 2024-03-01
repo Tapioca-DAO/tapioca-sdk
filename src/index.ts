@@ -76,8 +76,6 @@ export const loadEnv = (deleteTasks = true) => {
             // remove hardhat core tasks
             delete hre.tasks['gas-reporter:merge'];
             delete hre.tasks['export-artifacts'];
-            delete hre.tasks['size-contracts'];
-            delete hre.tasks['init-foundry'];
             delete hre.tasks.coverage;
             delete hre.tasks.sourcify;
             delete hre.tasks.accounts;
