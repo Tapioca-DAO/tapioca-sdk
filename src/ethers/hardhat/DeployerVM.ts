@@ -411,7 +411,7 @@ export class DeployerVM {
         const verifyList: TVerificationObject[][] = [[]];
 
         let counter = 1;
-        for (const contract of this.list()) {
+        for (const contract of this.depList) {
             if (counter % 5 === 0) {
                 verifyList.push([]);
             }
