@@ -16,6 +16,7 @@ declare global {
     namespace NodeJS {
         interface ProcessEnv {
             ALCHEMY_API_KEY: string;
+            SCAN_API_KEY: string;
             ENV: string;
             NETWORK: string; // For forking
         }
@@ -65,6 +66,13 @@ export const loadEnv = (deleteTasks = true) => {
         remappings[`${hre.config.SDK.project}/`] = 'gen/contracts/';
         return remappings;
     });
+
+    // Check if scan key is set
+    if (!process.env.SCAN_API_KEY) {
+        throw new Error(
+            '[-] SCAN_API_KEY is not set, please set it in .env/<network>.env',
+        );
+    }
 
     // Extend environment
     extendEnvironment((hre) => {
