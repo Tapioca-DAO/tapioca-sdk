@@ -93,6 +93,17 @@
                         "meta": {}
                     }
                 ]
+            },
+            "11155420": {
+                "name": "optimism_sepolia",
+                "lastBlockHeight": 8970948,
+                "contracts": [
+                    {
+                        "name": "TapiocaDeployer",
+                        "address": "0x8A7fa8dfB083c2eadf88BE90EA917F7F03954ebf",
+                        "meta": {}
+                    }
+                ]
             }
         },
         "tap-token": {
@@ -274,6 +285,17 @@
                     {
                         "name": "TapiocaMulticall",
                         "address": "0xA0822c47E458aa5E0FDe8B7b3BB2E1322D7c1168",
+                        "meta": {}
+                    }
+                ]
+            },
+            "11155420": {
+                "name": "optimism_sepolia",
+                "lastBlockHeight": 8970954,
+                "contracts": [
+                    {
+                        "name": "TapiocaMulticall",
+                        "address": "0x27dC1968deAaA10F343B27aD058Ee912C707144c",
                         "meta": {}
                     }
                 ]
