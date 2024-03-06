@@ -413,6 +413,27 @@
                 "lastBlockHeight": 8970954,
                 "contracts": [
                     {
+                        "name": "YieldBoxURIBuilder",
+                        "address": "0x7482A830b453C05B9A4ED8A3497E3C24feb61921",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x398f0de52c553d2553de354aa92b049104fe3c054b8670d18ff6033a44b8e41d",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YieldBox",
+                        "address": "0x69ef1F4AE4c6BDEdaa112b5044E708b957ee407e",
+                        "meta": {
+                            "args": [
+                                "0xC7457CD3767254F7DCAbFA4926c3245dfD6ED3C5",
+                                "0x7482A830b453C05B9A4ED8A3497E3C24feb61921"
+                            ],
+                            "salt": "0x58d715f38675e4b168b07ae7f9a0d442a037e52fbe2eda12b96fb8a809ca88d0",
+                            "create2": true
+                        }
+                    },
+                    {
                         "name": "TapiocaMulticall",
                         "address": "0x27dC1968deAaA10F343B27aD058Ee912C707144c",
                         "meta": {}
