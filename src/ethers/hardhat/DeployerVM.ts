@@ -44,6 +44,7 @@ interface IConstructorOptions {
     tag?: string;
     multicall?: TapiocaMulticall;
     multisig?: MultisigMock;
+    deployFreshContracts?: boolean; // If true, it will deploy the Multicall/Multisig contracts even if they are already deployed
     overrideOptions?: boolean;
 }
 
@@ -410,7 +411,7 @@ export class DeployerVM {
         const verifyList: TVerificationObject[][] = [[]];
 
         let counter = 1;
-        for (const contract of this.list()) {
+        for (const contract of this.depList) {
             if (counter % 5 === 0) {
                 verifyList.push([]);
             }
@@ -481,34 +482,38 @@ export class DeployerVM {
 
         // Get deployer deployment
         let deployment: TContract | undefined;
-        try {
-            deployment = this.hre.SDK.db.findGlobalDeployment(
-                project,
-                String(this.hre.network.config.chainId),
-                'TapiocaMulticall',
-                _tag,
-            );
-            if (deployment) {
-                console.log(
-                    `\t[+] Using previous TapiocaMulticall deployment. at ${deployment.address}`,
+        if (!this.options.deployFreshContracts) {
+            try {
+                deployment = this.hre.SDK.db.findGlobalDeployment(
+                    project,
+                    String(this.hre.network.config.chainId),
+                    'TapiocaMulticall',
+                    _tag,
                 );
-                const _multicall = TapiocaMulticall__factory.connect(
-                    deployment.address,
-                    (await this.hre.ethers.getSigners())[0],
-                );
-                this.multicall = _multicall;
-                const signer = (await this.hre.ethers.getSigners())[0];
-                if (
-                    (await _multicall.owner()).toLowerCase() !==
-                    signer.address.toLowerCase()
-                ) {
-                    throw new Error('[-] Different owner, deploying new one.');
+                if (deployment) {
+                    console.log(
+                        `\t[+] Using previous TapiocaMulticall deployment. at ${deployment.address}`,
+                    );
+                    const _multicall = TapiocaMulticall__factory.connect(
+                        deployment.address,
+                        (await this.hre.ethers.getSigners())[0],
+                    );
+                    this.multicall = _multicall;
+                    const signer = (await this.hre.ethers.getSigners())[0];
+                    if (
+                        (await _multicall.owner()).toLowerCase() !==
+                        signer.address.toLowerCase()
+                    ) {
+                        throw new Error(
+                            '[-] Different owner, deploying new one.',
+                        );
+                    }
                 }
+            } catch (e) {
+                console.log(
+                    '\t\t[-] Failed retrieving TapiocaMulticall deployment',
+                );
             }
-        } catch (e) {
-            console.log(
-                '\t\t[-] Failed retrieving TapiocaMulticall deployment',
-            );
         }
 
         // Deploy TapiocaMulticall if not deployed
@@ -572,27 +577,31 @@ export class DeployerVM {
 
         // Get deployer deployment
         let deployment: TContract | undefined;
-        try {
-            deployment = this.hre.SDK.db.findGlobalDeployment(
-                project,
-                this.hre.SDK.eChainId,
-                'TapiocaDeployer',
-                this.options.tag,
-            );
-            if (deployment) {
+        if (!this.options.deployFreshContracts) {
+            try {
+                deployment = this.hre.SDK.db.findGlobalDeployment(
+                    project,
+                    this.hre.SDK.eChainId,
+                    'TapiocaDeployer',
+                    this.options.tag,
+                );
+                if (deployment) {
+                    console.log(
+                        `\t[+] Previous TapiocaDeployer deployment exists at ${deployment?.address}`,
+                    );
+                    const _tapiocaDeployer = TapiocaDeployer__factory.connect(
+                        deployment.address,
+                        (await this.hre.ethers.getSigners())[0],
+                    );
+                    this.tapiocaDeployer = _tapiocaDeployer;
+                } else {
+                    throw new Error('[-] No deployment found');
+                }
+            } catch (e) {
                 console.log(
-                    `\t[+] Previous TapiocaDeployer deployment exists at ${deployment?.address}`,
+                    '\t\t[-] Failed retrieving TapiocaDeployer deployment',
                 );
-                const _tapiocaDeployer = TapiocaDeployer__factory.connect(
-                    deployment.address,
-                    (await this.hre.ethers.getSigners())[0],
-                );
-                this.tapiocaDeployer = _tapiocaDeployer;
-            } else {
-                throw new Error('[-] No deployment found');
             }
-        } catch (e) {
-            console.log('\t\t[-] Failed retrieving TapiocaDeployer deployment');
         }
 
         // Deploy TapiocaDeployer if not deployed
