@@ -128,6 +128,17 @@
                         "meta": {}
                     }
                 ]
+            },
+            "11155420": {
+                "name": "optimism_sepolia",
+                "lastBlockHeight": 8971213,
+                "contracts": [
+                    {
+                        "name": "TapiocaMulticall",
+                        "address": "0x458A40e0691C5542eeBBD95c526Eb81EFFe8E8BE",
+                        "meta": {}
+                    }
+                ]
             }
         },
         "tapioca-bar": {
@@ -343,6 +354,129 @@
                         "meta": {
                             "mock": true,
                             "desc": "Mock contract deployed from tap-token"
+                        }
+                    }
+                ]
+            },
+            "11155420": {
+                "name": "optimism_sepolia",
+                "lastBlockHeight": 8971229,
+                "contracts": [
+                    {
+                        "name": "USDO",
+                        "address": "0x115bAd46511b78C9B2e771C383AF6eBa0eE3e887",
+                        "meta": {
+                            "args": [
+                                "MOCK_USDO",
+                                "MOCK_USDO",
+                                "1000000000000000000",
+                                18,
+                                "0x458A40e0691C5542eeBBD95c526Eb81EFFe8E8BE"
+                            ],
+                            "salt": "0xe6deef2ab5210774e9aa1d69a22d5002f532c72c2f1ec4222b3cf94cd5ab1163",
+                            "create2": true,
+                            "mock": true,
+                            "description": "Mock contract deployed from tap-token"
+                        }
+                    },
+                    {
+                        "name": "USDO_SEER_UNI_ORACLE",
+                        "address": "0x49101F66F878a40Ff850787765ba4610dFD8338d",
+                        "meta": {
+                            "args": [
+                                "MOCK_USDO_ORACLE",
+                                "MOCK_USDO_ORACLE",
+                                "1000000000000000000"
+                            ],
+                            "salt": "0xbef1a446457ba912a25e79b5c90a4d37fd28aed233de9cbafd619e78ebfd74bc",
+                            "create2": true,
+                            "mock": true,
+                            "description": "Mock contract deployed from tap-token"
+                        }
+                    },
+                    {
+                        "name": "ARBITRUM_SGL_GLP",
+                        "address": "0xB9Bf1f406A77b317990CA67A7fe70A0730Eb0cE2",
+                        "meta": {
+                            "args": [
+                                "MOCK_ARB_SGL_GLP",
+                                "MOCK_ARB_SGL_GLP",
+                                "1000000000000000000",
+                                18,
+                                "0x458A40e0691C5542eeBBD95c526Eb81EFFe8E8BE"
+                            ],
+                            "salt": "0x0a8f2df9999f72f011c6679bb15e9fec1b442b587d8813a1f54eb9c5e007ac68",
+                            "create2": true,
+                            "mock": true,
+                            "description": "Mock contract deployed from tap-token"
+                        }
+                    },
+                    {
+                        "name": "MAINNET_SGL_DAI",
+                        "address": "0xb8A45D72D4e50bc518c2f1fBBf4AaEBaE36d28e3",
+                        "meta": {
+                            "args": [
+                                "MOCK_TOFT_MAINNET_SGL_DAI",
+                                "MOCK_TOFT_MAINNET_SGL_DAI",
+                                "1000000000000000000",
+                                18,
+                                "0x458A40e0691C5542eeBBD95c526Eb81EFFe8E8BE"
+                            ],
+                            "salt": "0x59ca11c9aba03f86b024a82eeb8904fa6c947128bdc29f6d12c3eab0c78912c5",
+                            "create2": true,
+                            "mock": true,
+                            "description": "Mock contract deployed from tap-token"
+                        }
+                    },
+                    {
+                        "name": "YB_SGL_ARB_GLP_STRATEGY",
+                        "address": "0x3e1faCabEEC3b0E27519CaDa288Fb18C5A4a49D9",
+                        "meta": {
+                            "args": [
+                                "0x69ef1F4AE4c6BDEdaa112b5044E708b957ee407e",
+                                "0xB9Bf1f406A77b317990CA67A7fe70A0730Eb0cE2"
+                            ],
+                            "salt": "0x25bf602af280346df664496e0cf3fd5d3d1b1eecc1d239c3e28b473d371b7242",
+                            "create2": true,
+                            "mock": true,
+                            "description": "Mock contract deployed from tap-token"
+                        }
+                    },
+                    {
+                        "name": "YB_SGL_MAINNET_DAI_STRATEGY",
+                        "address": "0x7502ecdc5584995bD865c15f764A5Bd966348A0C",
+                        "meta": {
+                            "args": [
+                                "0x69ef1F4AE4c6BDEdaa112b5044E708b957ee407e",
+                                "0xb8A45D72D4e50bc518c2f1fBBf4AaEBaE36d28e3"
+                            ],
+                            "salt": "0xff76fe3c8436519adb7424db0eef344ad6f40887ff5adc36e429466eafcc729b",
+                            "create2": true,
+                            "mock": true,
+                            "description": "Mock contract deployed from tap-token"
+                        }
+                    },
+                    {
+                        "name": "TAPIOCA_LBP",
+                        "address": "0xaC39b311DCEb2A4b2f5d8461c1cdaF756F4F7Ae9",
+                        "meta": {
+                            "mock": true,
+                            "desc": "Mock contract deployed from tap-token"
+                        }
+                    },
+                    {
+                        "name": "TOB_TAP_ORACLE",
+                        "address": "0x13C3C1A766d5A2F8A022aAA738192a5899cb8761",
+                        "meta": {
+                            "args": [
+                                "MOCK_TOB_TAP_ORACLE",
+                                "MOCK_TOB_TAP_ORACLE",
+                                "3300000000000000000"
+                            ],
+                            "salt": "0xbd45ce4e2c7ef1183bf6f91b883d41957582b83316bccb1047f34ff0d1bcac2c",
+                            "create2": true,
+                            "mock": true,
+                            "description": "Mock contract deployed from tap-token"
                         }
                     }
                 ]
