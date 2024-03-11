@@ -48,7 +48,6 @@ export interface ZeroXSwapperInterface extends utils.Interface {
   functions: {
     "cluster()": FunctionFragment;
     "isOneInchEnabled()": FunctionFragment;
-    "oneInchProxy()": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "setIsOneInchEnabled(bool)": FunctionFragment;
@@ -63,8 +62,6 @@ export interface ZeroXSwapperInterface extends utils.Interface {
       | "cluster()"
       | "isOneInchEnabled"
       | "isOneInchEnabled()"
-      | "oneInchProxy"
-      | "oneInchProxy()"
       | "owner"
       | "owner()"
       | "renounceOwnership"
@@ -87,14 +84,6 @@ export interface ZeroXSwapperInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "isOneInchEnabled()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "oneInchProxy",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "oneInchProxy()",
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
@@ -156,14 +145,6 @@ export interface ZeroXSwapperInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "isOneInchEnabled()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "oneInchProxy",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "oneInchProxy()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -262,10 +243,6 @@ export interface ZeroXSwapper extends BaseContract {
 
     "isOneInchEnabled()"(overrides?: CallOverrides): Promise<[boolean]>;
 
-    oneInchProxy(overrides?: CallOverrides): Promise<[string]>;
-
-    "oneInchProxy()"(overrides?: CallOverrides): Promise<[string]>;
-
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
@@ -325,10 +302,6 @@ export interface ZeroXSwapper extends BaseContract {
 
   "isOneInchEnabled()"(overrides?: CallOverrides): Promise<boolean>;
 
-  oneInchProxy(overrides?: CallOverrides): Promise<string>;
-
-  "oneInchProxy()"(overrides?: CallOverrides): Promise<string>;
-
   owner(overrides?: CallOverrides): Promise<string>;
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -387,10 +360,6 @@ export interface ZeroXSwapper extends BaseContract {
     isOneInchEnabled(overrides?: CallOverrides): Promise<boolean>;
 
     "isOneInchEnabled()"(overrides?: CallOverrides): Promise<boolean>;
-
-    oneInchProxy(overrides?: CallOverrides): Promise<string>;
-
-    "oneInchProxy()"(overrides?: CallOverrides): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -459,10 +428,6 @@ export interface ZeroXSwapper extends BaseContract {
 
     "isOneInchEnabled()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    oneInchProxy(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "oneInchProxy()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -524,10 +489,6 @@ export interface ZeroXSwapper extends BaseContract {
     "isOneInchEnabled()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    oneInchProxy(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "oneInchProxy()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
