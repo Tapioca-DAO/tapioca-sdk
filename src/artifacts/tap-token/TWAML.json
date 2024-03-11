@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
   "contractName": "TWAML",
-  "sourceName": "contracts/twAML.sol",
+  "sourceName": "tap-token/options/twAML.sol",
   "abi": [],
   "bytecode": "0x",
   "deployedBytecode": "0x",

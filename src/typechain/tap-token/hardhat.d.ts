@@ -13,13 +13,17 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
-      name: "FakeTapOFT",
+      name: "ERC721NftLoader",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.FakeTapOFT__factory>;
+    ): Promise<Contracts.ERC721NftLoader__factory>;
     getContractFactory(
       name: "TwTAP",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TwTAP__factory>;
+    getContractFactory(
+      name: "ERC20Mock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC20Mock__factory>;
     getContractFactory(
       name: "AirdropBroker",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -28,6 +32,10 @@ declare module "hardhat/types/runtime" {
       name: "AOTAP",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AOTAP__factory>;
+    getContractFactory(
+      name: "LTap",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.LTap__factory>;
     getContractFactory(
       name: "OTAP",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -41,36 +49,77 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapiocaOptionLiquidityProvision__factory>;
     getContractFactory(
-      name: "Simulations",
+      name: "BaseTapToken",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Simulations__factory>;
+    ): Promise<Contracts.BaseTapToken__factory>;
     getContractFactory(
-      name: "BaseTapOFT",
+      name: "TapTokenHelper",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.BaseTapOFT__factory>;
+    ): Promise<Contracts.TapTokenHelper__factory>;
     getContractFactory(
-      name: "LTap",
+      name: "ModuleManager",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.LTap__factory>;
+    ): Promise<Contracts.ModuleManager__factory>;
     getContractFactory(
-      name: "TapOFT",
+      name: "TapToken",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TapOFT__factory>;
+    ): Promise<Contracts.TapToken__factory>;
+    getContractFactory(
+      name: "TapTokenReceiver",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TapTokenReceiver__factory>;
+    getContractFactory(
+      name: "TapTokenSender",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TapTokenSender__factory>;
     getContractFactory(
       name: "Vesting",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Vesting__factory>;
+    getContractFactory(
+      name: "ERC721NftLoader",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC721NftLoader__factory>;
+    getContractFactory(
+      name: "TwTAP",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TwTAP__factory>;
+    getContractFactory(
+      name: "BaseTapToken",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseTapToken__factory>;
+    getContractFactory(
+      name: "ModuleManager",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ModuleManager__factory>;
+    getContractFactory(
+      name: "TapToken",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TapToken__factory>;
+    getContractFactory(
+      name: "TapTokenReceiver",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TapTokenReceiver__factory>;
+    getContractFactory(
+      name: "TapTokenSender",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TapTokenSender__factory>;
 
     getContractAt(
-      name: "FakeTapOFT",
+      name: "ERC721NftLoader",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.FakeTapOFT>;
+    ): Promise<Contracts.ERC721NftLoader>;
     getContractAt(
       name: "TwTAP",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TwTAP>;
+    getContractAt(
+      name: "ERC20Mock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20Mock>;
     getContractAt(
       name: "AirdropBroker",
       address: string,
@@ -81,6 +130,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.AOTAP>;
+    getContractAt(
+      name: "LTap",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.LTap>;
     getContractAt(
       name: "OTAP",
       address: string,
@@ -97,30 +151,75 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.TapiocaOptionLiquidityProvision>;
     getContractAt(
-      name: "Simulations",
+      name: "BaseTapToken",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.Simulations>;
+    ): Promise<Contracts.BaseTapToken>;
     getContractAt(
-      name: "BaseTapOFT",
+      name: "TapTokenHelper",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.BaseTapOFT>;
+    ): Promise<Contracts.TapTokenHelper>;
     getContractAt(
-      name: "LTap",
+      name: "ModuleManager",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.LTap>;
+    ): Promise<Contracts.ModuleManager>;
     getContractAt(
-      name: "TapOFT",
+      name: "TapToken",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.TapOFT>;
+    ): Promise<Contracts.TapToken>;
+    getContractAt(
+      name: "TapTokenReceiver",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TapTokenReceiver>;
+    getContractAt(
+      name: "TapTokenSender",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TapTokenSender>;
     getContractAt(
       name: "Vesting",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.Vesting>;
+    getContractAt(
+      name: "ERC721NftLoader",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC721NftLoader>;
+    getContractAt(
+      name: "TwTAP",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TwTAP>;
+    getContractAt(
+      name: "BaseTapToken",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseTapToken>;
+    getContractAt(
+      name: "ModuleManager",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ModuleManager>;
+    getContractAt(
+      name: "TapToken",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TapToken>;
+    getContractAt(
+      name: "TapTokenReceiver",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TapTokenReceiver>;
+    getContractAt(
+      name: "TapTokenSender",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TapTokenSender>;
 
     // default types
     getContractFactory(
