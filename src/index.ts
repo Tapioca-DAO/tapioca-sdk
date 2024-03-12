@@ -9,6 +9,7 @@ import * as typechain from './typechain';
 // Tapioca
 import { EChainID } from './api/config';
 import API from './api/index';
+import './ethers'; // Extends HRE environment
 
 declare global {
     // eslint-disable-next-line @typescript-eslint/no-namespace
