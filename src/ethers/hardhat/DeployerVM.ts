@@ -23,6 +23,11 @@ export interface IDependentOn {
     argPosition: number;
     keyName?: string;
 }
+export type TTapiocaDeployTaskArgs = {
+    tag?: string;
+    load?: boolean;
+    verify?: boolean;
+};
 
 interface IDeploymentQueue {
     deploymentName: string;
@@ -102,6 +107,112 @@ export class DeployerVM {
         this.hre = hre;
         this.options = options;
         this.options.globalWait = options.globalWait ?? 3;
+    }
+
+    /**
+     * Static method to create a new instance of DeployerVM with the default settings.
+     *
+     * @param hre HardhatRuntimeEnvironment instance of Hardhat.
+     * @param tag Tag to use for the deployment. If not provided, 'default' will be used (Per SDK).
+     * @param debugMode If true, it will log errors and debug information.
+     * @param bytecodeSizeLimit Limit of bytecode size for a single transaction, if RPC provider is not able to handle it, error will be thrown.
+     * @returns Instance of DeployerVM
+     */
+    static loadVM(
+        hre: HardhatRuntimeEnvironment,
+        tag?: string,
+        debugMode = true,
+        bytecodeSizeLimit = 100_000,
+    ) {
+        const VM = new hre.SDK.DeployerVM(hre, {
+            // Change this if you get bytecode size error / gas required exceeds allowance (550000000)/ anything related to bytecode size
+            // Could be different by network/RPC provider
+            bytecodeSizeLimit,
+            debugMode,
+            tag,
+        });
+        return VM;
+    }
+
+    /**
+     * Static method to deploy contracts using the TapiocaDeployer & TapiocaMulticall to aggregate deployments in a single transaction.
+     *
+     * @param taskArgs Default task arguments for the deployment & task specific arguments.
+     * @param hre HardhatRuntimeEnvironment instance of Hardhat.
+     * @param vmContractLoader Hook to load contracts into the VM.
+     * @param vmPostDeployment Hook to execute post deployment operations.
+     * @param wait Number of blocks to wait for the transaction to be mined. Default: 0
+     */
+    static async tapiocaDeployTask<T>(
+        taskArgs: TTapiocaDeployTaskArgs & T,
+        hre: HardhatRuntimeEnvironment,
+        vmContractLoader: (params: {
+            VM: DeployerVM;
+            taskArgs: TTapiocaDeployTaskArgs & T;
+            isTestnet: boolean;
+            tapiocaMulticallAddr: string;
+        }) => Promise<void>,
+        vmPostDeployment?: (params: {
+            VM: DeployerVM;
+            taskArgs: TTapiocaDeployTaskArgs & T;
+            isTestnet: boolean;
+            tapiocaMulticallAddr: string;
+        }) => Promise<void>,
+        wait = 3,
+    ) {
+        // Settings
+        const tag = taskArgs.tag ?? 'default';
+        const VM = DeployerVM.loadVM(hre, tag);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const chainInfo = hre.SDK.utils.getChainBy(
+            'chainId',
+            hre.SDK.eChainId,
+        )!;
+
+        const isTestnet = !!chainInfo.tags.find((tag) => tag === 'testnet');
+        const tapiocaMulticall = await VM.getMulticall();
+
+        // Build contracts
+        if (taskArgs.load) {
+            console.log(`[+] Loading contracts from ${tag} deployment... 📡`);
+            console.log(
+                `\t[+] ${hre.SDK.db
+                    .loadLocalDeployment(tag, hre.SDK.eChainId)
+                    ?.contracts.map((e) => e.name)
+                    .reduce((a, b) => `${a}, ${b}`)}`,
+            );
+
+            VM.load(
+                hre.SDK.db.loadLocalDeployment(tag, hre.SDK.eChainId)
+                    ?.contracts ?? [],
+            );
+        } else {
+            await vmContractLoader({
+                VM: VM as any,
+                taskArgs,
+                isTestnet,
+                tapiocaMulticallAddr: tapiocaMulticall.address,
+            });
+
+            // Add and execute
+            await VM.execute(wait);
+            await VM.save();
+        }
+
+        if (taskArgs.verify) {
+            await VM.verify();
+        }
+
+        if (vmPostDeployment) {
+            vmPostDeployment({
+                VM: VM as any,
+                taskArgs,
+                isTestnet,
+                tapiocaMulticallAddr: tapiocaMulticall.address,
+            });
+        }
+
+        console.log('[+] Stack deployed! 🎉');
     }
 
     // ***********
