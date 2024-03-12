@@ -9,7 +9,6 @@ import * as typechain from './typechain';
 // Tapioca
 import { EChainID } from './api/config';
 import API from './api/index';
-import './ethers';
 
 declare global {
     // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -96,6 +95,8 @@ export const loadEnv = (deleteTasks = true) => {
         });
     }
 };
+
+export { TAP_TASK } from './ethers/hardhat/tasks';
 export const SDK = { API, typechain };
 export { API, typechain };
 export default SDK;
