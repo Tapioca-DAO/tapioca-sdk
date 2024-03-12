@@ -1,23 +1,33 @@
-import { scope, task } from 'hardhat/config';
+import { scope } from 'hardhat/config';
 import { ConfigurableTaskDefinition } from 'hardhat/types';
 import { exportSDK__task } from './tasks/exec/exportSDK';
-import { saveBlockNumber__task } from './tasks/exec/saveBlockNumber';
 import { transferOwnership__task } from './tasks/exec/transferOwnership';
 import { getChains__task } from './tasks/view/getChains';
 import { getDeployment__task } from './tasks/view/getDeployment';
 
 const sdkScope = scope('sdk', 'Tapioca SDK tasks');
 
-const addCliParams = (task: ConfigurableTaskDefinition) => {
-    return task.addOptionalParam(
-        'tag',
-        'The tag to lookup, if not specified, "default" will be used',
-    );
-};
-
-const addDebugModeParams = (task: ConfigurableTaskDefinition) => {
-    return task.addOptionalParam('debugMode', 'true/false');
-};
+/**
+ * Wraps a task with common parameters for deployment tasks. This includes the tag, load and verify flags.
+ * --tag <tag> - The tag to use for the deployment. Defaults to "default" if not specified.
+ * --load - Load the contracts from the database instead of building them.
+ * --verify - Add to verify the contracts after deployment.
+ *
+ * @param task The task to overload.
+ * @returns The overloaded task.
+ */
+export const TAP_TASK = (task: ConfigurableTaskDefinition) =>
+    task
+        .addOptionalParam(
+            'tag',
+            'The tag to use for the deployment. Defaults to "default" if not specified.',
+            'default',
+        )
+        .addFlag(
+            'load',
+            'Load the contracts from the database instead of building them.',
+        )
+        .addFlag('verify', 'Add to verify the contracts after deployment.');
 
 /**
  * Getter tasks
@@ -60,11 +70,3 @@ sdkScope
     .addParam('targetName', 'Contract name to call transferOwnership for')
     .addOptionalParam('fromMultisig', 'True if current owner is a multisig')
     .addOptionalParam('fromMulticall', 'True if current owner is a multicall');
-
-addDebugModeParams(
-    task(
-        'saveBlockNumber',
-        'Saves current block number to global__db',
-        saveBlockNumber__task,
-    ),
-);
