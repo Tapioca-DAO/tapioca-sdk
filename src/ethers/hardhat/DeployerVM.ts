@@ -17,6 +17,7 @@ import {
     MultisigMock__factory,
 } from '../../typechain/tapioca-mocks';
 import { IOwnable__factory } from '../../typechain/tapioca-periphery/factories/IOwnable';
+import SUPPORTED_CHAINS from '../../SUPPORTED_CHAINS';
 
 export interface IDependentOn {
     deploymentName: string;
@@ -151,12 +152,14 @@ export class DeployerVM {
             taskArgs: TTapiocaDeployTaskArgs & T;
             isTestnet: boolean;
             tapiocaMulticallAddr: string;
+            chainInfo: (typeof SUPPORTED_CHAINS)[number];
         }) => Promise<void>,
         vmPostDeployment?: (params: {
             VM: DeployerVM;
             taskArgs: TTapiocaDeployTaskArgs & T;
             isTestnet: boolean;
             tapiocaMulticallAddr: string;
+            chainInfo: (typeof SUPPORTED_CHAINS)[number];
         }) => Promise<void>,
         wait = 3,
     ) {
@@ -192,6 +195,7 @@ export class DeployerVM {
                 taskArgs,
                 isTestnet,
                 tapiocaMulticallAddr: tapiocaMulticall.address,
+                chainInfo,
             });
 
             // Add and execute
@@ -209,6 +213,7 @@ export class DeployerVM {
                 taskArgs,
                 isTestnet,
                 tapiocaMulticallAddr: tapiocaMulticall.address,
+                chainInfo,
             });
         }
 
