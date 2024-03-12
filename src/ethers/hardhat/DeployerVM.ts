@@ -149,14 +149,14 @@ export class DeployerVM {
         hre: HardhatRuntimeEnvironment,
         vmContractLoader: (params: {
             VM: DeployerVM;
-            taskArgs: TTapiocaDeployTaskArgs & T;
+            taskArgs: TTapiocaDeployTaskArgs & { tag: string } & T;
             isTestnet: boolean;
             tapiocaMulticallAddr: string;
             chainInfo: (typeof SUPPORTED_CHAINS)[number];
         }) => Promise<void>,
         vmPostDeployment?: (params: {
             VM: DeployerVM;
-            taskArgs: TTapiocaDeployTaskArgs & T;
+            taskArgs: TTapiocaDeployTaskArgs & { tag: string } & T;
             isTestnet: boolean;
             tapiocaMulticallAddr: string;
             chainInfo: (typeof SUPPORTED_CHAINS)[number];
@@ -192,7 +192,7 @@ export class DeployerVM {
         } else {
             await vmContractLoader({
                 VM: VM as any,
-                taskArgs,
+                taskArgs: { ...taskArgs, tag },
                 isTestnet,
                 tapiocaMulticallAddr: tapiocaMulticall.address,
                 chainInfo,
@@ -210,7 +210,7 @@ export class DeployerVM {
         if (vmPostDeployment) {
             vmPostDeployment({
                 VM: VM as any,
-                taskArgs,
+                taskArgs: { ...taskArgs, tag },
                 isTestnet,
                 tapiocaMulticallAddr: tapiocaMulticall.address,
                 chainInfo,
