@@ -46,10 +46,7 @@ extendEnvironment((hre) => {
     // @ts-ignore
     hre.SDK = SDK;
     hre.SDK.eChainId = String(hre.network.config.chainId) as config.EChainID;
-    hre.SDK.chainInfo = hre.SDK.utils.getChainBy(
-        'lzChainId',
-        hre.SDK.eChainId,
-    )!;
+    hre.SDK.chainInfo = hre.SDK.utils.getChainBy('chainId', hre.SDK.eChainId)!;
 
     if (hre.network.name === 'hardhat') {
         console.error(
