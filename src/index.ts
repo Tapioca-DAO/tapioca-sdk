@@ -92,6 +92,11 @@ export const loadEnv = (deleteTasks = true) => {
     }
 };
 
+export {
+    checkExists,
+    loadGlobalContract,
+    loadLocalContract,
+} from './ethers/utils';
 export { TAP_TASK } from './ethers/hardhat/tasks';
 export const SDK = { API, typechain };
 export { API, typechain };
