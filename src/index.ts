@@ -74,11 +74,6 @@ export const loadEnv = (deleteTasks = true) => {
         );
     }
 
-    // Extend environment
-    extendEnvironment((hre) => {
-        hre.SDK.eChainId = String(hre.network.config.chainId) as EChainID;
-    });
-
     if (deleteTasks) {
         extendEnvironment((hre) => {
             // remove hardhat core tasks

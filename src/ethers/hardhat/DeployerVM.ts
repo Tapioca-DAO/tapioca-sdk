@@ -25,7 +25,7 @@ export interface IDependentOn {
     keyName?: string;
 }
 export type TTapiocaDeployTaskArgs = {
-    tag?: string;
+    tag: string;
     load?: boolean;
     verify?: boolean;
 };
@@ -149,14 +149,14 @@ export class DeployerVM {
         hre: HardhatRuntimeEnvironment,
         vmContractLoader: (params: {
             VM: DeployerVM;
-            taskArgs: TTapiocaDeployTaskArgs & { tag: string } & T;
+            taskArgs: TTapiocaDeployTaskArgs & T;
             isTestnet: boolean;
             tapiocaMulticallAddr: string;
             chainInfo: (typeof SUPPORTED_CHAINS)[number];
         }) => Promise<void>,
         vmPostDeployment?: (params: {
             VM: DeployerVM;
-            taskArgs: TTapiocaDeployTaskArgs & { tag: string } & T;
+            taskArgs: TTapiocaDeployTaskArgs & T;
             isTestnet: boolean;
             tapiocaMulticallAddr: string;
             chainInfo: (typeof SUPPORTED_CHAINS)[number];
@@ -164,7 +164,7 @@ export class DeployerVM {
         wait = 3,
     ) {
         // Settings
-        const tag = taskArgs.tag ?? 'default';
+        const { tag } = taskArgs;
         const VM = DeployerVM.loadVM(hre, tag);
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const chainInfo = hre.SDK.utils.getChainBy(
