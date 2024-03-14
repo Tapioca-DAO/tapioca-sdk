@@ -29,6 +29,13 @@ export type TTapiocaDeployTaskArgs = {
     load?: boolean;
     verify?: boolean;
 };
+export type TTapiocaDeployerVmPass<T> = {
+    VM: DeployerVM;
+    taskArgs: TTapiocaDeployTaskArgs & T;
+    isTestnet: boolean;
+    tapiocaMulticallAddr: string;
+    chainInfo: (typeof SUPPORTED_CHAINS)[number];
+};
 
 interface IDeploymentQueue {
     deploymentName: string;
@@ -147,20 +154,8 @@ export class DeployerVM {
     static async tapiocaDeployTask<T>(
         taskArgs: TTapiocaDeployTaskArgs & T,
         hre: HardhatRuntimeEnvironment,
-        vmContractLoader: (params: {
-            VM: DeployerVM;
-            taskArgs: TTapiocaDeployTaskArgs & T;
-            isTestnet: boolean;
-            tapiocaMulticallAddr: string;
-            chainInfo: (typeof SUPPORTED_CHAINS)[number];
-        }) => Promise<void>,
-        vmPostDeployment?: (params: {
-            VM: DeployerVM;
-            taskArgs: TTapiocaDeployTaskArgs & T;
-            isTestnet: boolean;
-            tapiocaMulticallAddr: string;
-            chainInfo: (typeof SUPPORTED_CHAINS)[number];
-        }) => Promise<void>,
+        vmContractLoader: (params: TTapiocaDeployerVmPass<T>) => Promise<void>,
+        vmPostDeployment?: (params: TTapiocaDeployerVmPass<T>) => Promise<void>,
         wait = 3,
     ) {
         // Settings
