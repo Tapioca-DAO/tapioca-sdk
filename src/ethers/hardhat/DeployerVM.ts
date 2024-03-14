@@ -30,6 +30,7 @@ export type TTapiocaDeployTaskArgs = {
     verify?: boolean;
 };
 export type TTapiocaDeployerVmPass<T> = {
+    hre: HardhatRuntimeEnvironment;
     VM: DeployerVM;
     taskArgs: TTapiocaDeployTaskArgs & T;
     isTestnet: boolean;
@@ -186,6 +187,7 @@ export class DeployerVM {
             );
         } else {
             await vmContractLoader({
+                hre,
                 VM: VM as any,
                 taskArgs: { ...taskArgs, tag },
                 isTestnet,
@@ -204,6 +206,7 @@ export class DeployerVM {
 
         if (vmPostDeployment) {
             vmPostDeployment({
+                hre,
                 VM: VM as any,
                 taskArgs: { ...taskArgs, tag },
                 isTestnet,
