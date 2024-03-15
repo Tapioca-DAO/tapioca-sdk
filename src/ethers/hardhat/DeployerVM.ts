@@ -312,7 +312,7 @@ export class DeployerVM {
             for (const call of calls) {
                 const tx = await this.multicall!.multicall(
                     call,
-                    this.options.overrideOptions,
+                    this.options.overrideOptions ?? {},
                 );
                 console.log(`[+] Execution batch hash: ${tx.hash}`);
                 await tx.wait(wait);
@@ -641,7 +641,7 @@ export class DeployerVM {
                 (
                     await this.hre.ethers.getSigners()
                 )[0],
-            ).deploy(this.options.overrideOptions);
+            ).deploy(this.options.overrideOptions ?? {});
 
             await multicall.deployTransaction.wait(
                 this.options.globalWait ?? 3,
@@ -722,7 +722,7 @@ export class DeployerVM {
                 (
                     await this.hre.ethers.getSigners()
                 )[0],
-            ).deploy(this.options.overrideOptions);
+            ).deploy(this.options.overrideOptions ?? {});
 
             await tapiocaDeployer.deployTransaction.wait(
                 this.options.globalWait ?? 3,
@@ -999,7 +999,7 @@ export class DeployerVM {
                         e.salt,
                         e.creationCode,
                         e.deploymentName,
-                        this.options.overrideOptions,
+                        this.options.overrideOptions ?? {},
                     );
                 }),
         );
