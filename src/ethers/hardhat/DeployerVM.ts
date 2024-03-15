@@ -29,6 +29,7 @@ export type TLoadVMParams = {
     debugMode?: boolean;
     bytecodeSizeLimit?: number;
     overrideOptions?: CallOverrides;
+    staticSimulation?: boolean;
 };
 export type TTapiocaDeployTaskArgs = {
     tag: string;
@@ -165,7 +166,7 @@ export class DeployerVM {
     ) {
         // Settings
         const { tag } = taskArgs;
-        const { hre } = params;
+        const { hre, staticSimulation } = params;
         const VM = DeployerVM.loadVM({ ...params, tag });
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const chainInfo = hre.SDK.utils.getChainBy(
@@ -201,7 +202,7 @@ export class DeployerVM {
             });
 
             // Add and execute
-            await VM.execute(wait);
+            await VM.execute(wait, staticSimulation ?? true);
             await VM.save();
         }
 
@@ -840,7 +841,7 @@ export class DeployerVM {
     // Utils
     // ***********
     private async getBuildCalls(
-        runSimulations = true,
+        runSimulations = false,
     ): Promise<TapiocaMulticall.CallStruct[][]> {
         console.log('\t[+] Populating build queue');
         await this.populateBuildQueue();
