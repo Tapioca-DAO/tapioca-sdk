@@ -1,4 +1,4 @@
-import { ContractFactory } from 'ethers';
+import { CallOverrides, ContractFactory } from 'ethers';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { v4 as uuidv4 } from 'uuid';
 import { TContract } from '../../shared';
@@ -10,20 +10,26 @@ import {
 } from '../../typechain/tapioca-periphery';
 
 //TODO: retrieve from tapioca-mocks or tapioca-periphery
+import SUPPORTED_CHAINS from '../../SUPPORTED_CHAINS';
 import { TAPIOCA_PROJECTS_NAME } from '../../api/config';
-import { getOverrideOptions } from '../../api/utils';
 import {
     MultisigMock,
     MultisigMock__factory,
 } from '../../typechain/tapioca-mocks';
 import { IOwnable__factory } from '../../typechain/tapioca-periphery/factories/IOwnable';
-import SUPPORTED_CHAINS from '../../SUPPORTED_CHAINS';
 
 export interface IDependentOn {
     deploymentName: string;
     argPosition: number;
     keyName?: string;
 }
+export type TLoadVMParams = {
+    hre: HardhatRuntimeEnvironment;
+    tag?: string;
+    debugMode?: boolean;
+    bytecodeSizeLimit?: number;
+    overrideOptions?: CallOverrides;
+};
 export type TTapiocaDeployTaskArgs = {
     tag: string;
     load?: boolean;
@@ -59,7 +65,7 @@ interface IConstructorOptions {
     multicall?: TapiocaMulticall;
     multisig?: MultisigMock;
     deployFreshContracts?: boolean; // If true, it will deploy the Multicall/Multisig contracts even if they are already deployed
-    overrideOptions?: boolean;
+    overrideOptions?: CallOverrides;
 }
 
 export interface IDeployerVMAdd<T extends ContractFactory>
@@ -127,18 +133,16 @@ export class DeployerVM {
      * @param bytecodeSizeLimit Limit of bytecode size for a single transaction, if RPC provider is not able to handle it, error will be thrown.
      * @returns Instance of DeployerVM
      */
-    static loadVM(
-        hre: HardhatRuntimeEnvironment,
-        tag?: string,
-        debugMode = true,
-        bytecodeSizeLimit = 100_000,
-    ) {
+    static loadVM(params: TLoadVMParams) {
+        const { hre, tag, debugMode, bytecodeSizeLimit, overrideOptions } =
+            params;
         const VM = new hre.SDK.DeployerVM(hre, {
             // Change this if you get bytecode size error / gas required exceeds allowance (550000000)/ anything related to bytecode size
             // Could be different by network/RPC provider
-            bytecodeSizeLimit,
-            debugMode,
-            tag,
+            bytecodeSizeLimit: bytecodeSizeLimit ?? 100_000,
+            debugMode: debugMode ?? true,
+            tag: tag ?? 'default',
+            overrideOptions,
         });
         return VM;
     }
@@ -154,14 +158,15 @@ export class DeployerVM {
      */
     static async tapiocaDeployTask<T>(
         taskArgs: TTapiocaDeployTaskArgs & T,
-        hre: HardhatRuntimeEnvironment,
+        params: TLoadVMParams,
         vmContractLoader: (params: TTapiocaDeployerVmPass<T>) => Promise<void>,
         vmPostDeployment?: (params: TTapiocaDeployerVmPass<T>) => Promise<void>,
         wait = 3,
     ) {
         // Settings
         const { tag } = taskArgs;
-        const VM = DeployerVM.loadVM(hre, tag);
+        const { hre } = params;
+        const VM = DeployerVM.loadVM({ ...params, tag });
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const chainInfo = hre.SDK.utils.getChainBy(
             'chainId',
@@ -306,11 +311,7 @@ export class DeployerVM {
             for (const call of calls) {
                 const tx = await this.multicall!.multicall(
                     call,
-                    this.options.overrideOptions
-                        ? getOverrideOptions(
-                              String(this.hre.network.config.chainId),
-                          )
-                        : {},
+                    this.options.overrideOptions,
                 );
                 console.log(`[+] Execution batch hash: ${tx.hash}`);
                 await tx.wait(wait);
@@ -639,13 +640,7 @@ export class DeployerVM {
                 (
                     await this.hre.ethers.getSigners()
                 )[0],
-            ).deploy(
-                this.options.overrideOptions
-                    ? getOverrideOptions(
-                          String(this.hre.network.config.chainId),
-                      )
-                    : {},
-            );
+            ).deploy(this.options.overrideOptions);
 
             await multicall.deployTransaction.wait(
                 this.options.globalWait ?? 3,
@@ -726,13 +721,7 @@ export class DeployerVM {
                 (
                     await this.hre.ethers.getSigners()
                 )[0],
-            ).deploy(
-                this.options.overrideOptions
-                    ? getOverrideOptions(
-                          String(this.hre.network.config.chainId),
-                      )
-                    : {},
-            );
+            ).deploy(this.options.overrideOptions);
 
             await tapiocaDeployer.deployTransaction.wait(
                 this.options.globalWait ?? 3,
@@ -1009,11 +998,7 @@ export class DeployerVM {
                         e.salt,
                         e.creationCode,
                         e.deploymentName,
-                        this.options.overrideOptions
-                            ? getOverrideOptions(
-                                  String(this.hre.network.config.chainId),
-                              )
-                            : {},
+                        this.options.overrideOptions,
                     );
                 }),
         );
