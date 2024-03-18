@@ -150,17 +150,18 @@ export class DeployerVM {
 
     /**
      * Static method to deploy contracts using the TapiocaDeployer & TapiocaMulticall to aggregate deployments in a single transaction.
+     * If [load] is passed, it will load the contracts from the local deployment file and bypass the deployment.
      *
      * @param taskArgs Default task arguments for the deployment & task specific arguments.
      * @param hre HardhatRuntimeEnvironment instance of Hardhat.
-     * @param vmContractLoader Hook to load contracts into the VM.
+     * @param vmAddContract Hook to load contracts into the VM.
      * @param vmPostDeployment Hook to execute post deployment operations.
      * @param wait Number of blocks to wait for the transaction to be mined. Default: 0
      */
     static async tapiocaDeployTask<T>(
         taskArgs: TTapiocaDeployTaskArgs & T,
         params: TLoadVMParams,
-        vmContractLoader: (params: TTapiocaDeployerVmPass<T>) => Promise<void>,
+        vmAddContract: (params: TTapiocaDeployerVmPass<T>) => Promise<void>,
         vmPostDeployment?: (params: TTapiocaDeployerVmPass<T>) => Promise<void>,
         wait = 3,
     ) {
@@ -192,7 +193,7 @@ export class DeployerVM {
                     ?.contracts ?? [],
             );
         } else {
-            await vmContractLoader({
+            await vmAddContract({
                 hre,
                 VM: VM as any,
                 taskArgs: { ...taskArgs, tag },
@@ -211,6 +212,7 @@ export class DeployerVM {
         }
 
         if (vmPostDeployment) {
+            console.log('[+] Post deployment setup');
             vmPostDeployment({
                 hre,
                 VM: VM as any,
