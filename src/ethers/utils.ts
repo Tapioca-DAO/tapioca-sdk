@@ -18,7 +18,6 @@ export function loadGlobalContract(
 
 export function loadLocalContract(
     hre: HardhatRuntimeEnvironment,
-    repo: TAPIOCA_PROJECTS_NAME,
     chainId: EChainID,
     contractName: string,
     tag: string,
@@ -27,7 +26,7 @@ export function loadLocalContract(
         hre,
         hre.SDK.db.findLocalDeployment(chainId, contractName, tag),
         contractName,
-        repo,
+        hre.SDK.chainInfo.name,
     );
 }
 
