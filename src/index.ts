@@ -7,7 +7,6 @@ import { extendEnvironment, subtask } from 'hardhat/config';
 import * as typechain from './typechain';
 
 // Tapioca
-import { EChainID } from './api/config';
 import API from './api/index';
 import './ethers'; // Extends HRE environment
 
@@ -92,12 +91,13 @@ export const loadEnv = (deleteTasks = true) => {
     }
 };
 
+export { TAP_TASK } from './ethers/hardhat/tasks';
+export { deployUniV3pool__task } from './ethers/hardhat/tasks/exec/deployUniV3Pool';
 export {
     checkExists,
     loadGlobalContract,
     loadLocalContract,
 } from './ethers/utils';
-export { TAP_TASK } from './ethers/hardhat/tasks';
-export const SDK = { API, typechain };
 export { API, typechain };
+export const SDK = { API, typechain };
 export default SDK;
