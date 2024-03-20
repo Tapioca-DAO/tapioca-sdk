@@ -16,7 +16,7 @@ export const deployUniV3pool__task = async (
         factory: string;
     },
     hre: HardhatRuntimeEnvironment,
-) => {
+): Promise<string> => {
     const { v3CoreFactory, positionManager } = await loadContract(
         hre,
         _taskArgs.positionManager,

@@ -213,7 +213,7 @@ export class DeployerVM {
 
         if (vmPostDeployment) {
             console.log('[+] Post deployment setup');
-            vmPostDeployment({
+            await vmPostDeployment({
                 hre,
                 VM: VM as any,
                 taskArgs: { ...taskArgs, tag },
