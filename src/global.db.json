@@ -6,8 +6,26 @@
                 "lastBlockHeight": 8226293,
                 "contracts": [
                     {
+                        "name": "TapiocaDeployer",
+                        "address": "0xc03999427B69449e0F6086Fd0FB0069eAF21BCb0",
+                        "meta": {}
+                    },
+                    {
                         "name": "Multicall3",
                         "address": "0x43a931E7d98bA295218a959C0709B0fdB8F8b0fA",
+                        "meta": {}
+                    }
+                ]
+            }
+        },
+        "tapioca-periph": {
+            "421614": {
+                "name": "arbitrum_sepolia",
+                "lastBlockHeight": 25203418,
+                "contracts": [
+                    {
+                        "name": "TapiocaMulticall",
+                        "address": "0xb1b19607175A2c9259D9f9b3D0094480EAeDcD3b",
                         "meta": {}
                     }
                 ]
