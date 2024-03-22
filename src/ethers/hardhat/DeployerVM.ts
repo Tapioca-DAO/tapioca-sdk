@@ -248,9 +248,8 @@ export class DeployerVM {
      * Return a list of deployed contracts
      */
     list(): TDeploymentVMContract[] {
-        if (this.executed) return this.depList as TDeploymentVMContract[];
-        else {
-            this.depList = this.buildQueue.map((contract) => ({
+        const buildQueueList: TDeploymentVMContract[] = this.buildQueue.map(
+            (contract) => ({
                 name: contract.deploymentName,
                 address: contract.deterministicAddress,
                 meta: {
@@ -259,7 +258,10 @@ export class DeployerVM {
                     salt: contract.salt,
                     create2: true,
                 },
-            }));
+            }),
+        );
+        if (buildQueueList.length > 0) {
+            this.depList = buildQueueList;
         }
         return this.depList;
     }
