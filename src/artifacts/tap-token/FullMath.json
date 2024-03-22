@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
   "contractName": "FullMath",
-  "sourceName": "tap-token/options/twAML.sol",
+  "sourceName": "tapioca-periph/oracle/external/FullMath.sol",
   "abi": [],
   "bytecode": "0x",
   "deployedBytecode": "0x",
