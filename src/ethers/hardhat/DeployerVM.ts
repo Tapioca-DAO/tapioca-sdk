@@ -248,16 +248,19 @@ export class DeployerVM {
      * Return a list of deployed contracts
      */
     list(): TDeploymentVMContract[] {
-        this.depList = this.buildQueue.map((contract) => ({
-            name: contract.deploymentName,
-            address: contract.deterministicAddress,
-            meta: {
-                ...contract.meta,
-                args: contract.args,
-                salt: contract.salt,
-                create2: true,
-            },
-        }));
+        if (this.executed) return this.depList as TDeploymentVMContract[];
+        else {
+            this.depList = this.buildQueue.map((contract) => ({
+                name: contract.deploymentName,
+                address: contract.deterministicAddress,
+                meta: {
+                    ...contract.meta,
+                    args: contract.args,
+                    salt: contract.salt,
+                    create2: true,
+                },
+            }));
+        }
         return this.depList;
     }
 
