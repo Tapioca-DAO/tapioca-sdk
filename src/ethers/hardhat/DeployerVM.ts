@@ -598,7 +598,7 @@ export class DeployerVM {
     getMulticall = async (): Promise<TapiocaMulticall> => {
         if (this.multicall) return this.multicall;
 
-        const project = this.hre.userConfig.SDK.project;
+        const project = TAPIOCA_PROJECTS_NAME.Generic;
         const _tag = this.options.tag ?? 'default';
 
         // Get deployer deployment
