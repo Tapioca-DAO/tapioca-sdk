@@ -5,6 +5,7 @@ import { transferOwnership__task } from './tasks/exec/transferOwnership';
 import { getChains__task } from './tasks/view/getChains';
 import { getDeployment__task } from './tasks/view/getDeployment';
 import { deployUniV3pool__task } from './tasks/exec/deployUniV3Pool';
+import { exportDep__task } from './tasks/exec/exportDep';
 
 const sdkScope = scope('sdk', 'Tapioca SDK tasks');
 
@@ -63,6 +64,14 @@ sdkScope
         exportSDK__task,
     )
     .addOptionalParam('tag', 'The tag of the deployment.');
+
+TAP_TASK(
+    sdkScope.task(
+        'exportDep',
+        'Export the local deployment for a given tag to the SDK.',
+        exportDep__task,
+    ),
+);
 
 sdkScope
     .task('transferOwnership', 'Transfer ownership.', transferOwnership__task)
