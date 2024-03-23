@@ -1337,7 +1337,7 @@
                 "contracts": [
                     {
                         "name": "ETH_ORACLE",
-                        "address": "0x969ACa17CA7828231010d3A48B56C78ECCa040Eb",
+                        "address": "0x91e95879acd3BE300712C20b7479a59a7EF0CAF2",
                         "meta": {
                             "args": [
                                 "ETH/USD",
@@ -1356,40 +1356,40 @@
                                     "_admin": "0xcD5B223b3ECF18ae695E797cb033e86b7b189C88"
                                 }
                             ],
-                            "salt": "0xb191d6dcd4dee20346a0ebf56dcc1dc95d0a53ce8682249ea2814950117a0a5d",
+                            "salt": "0xa5b95aa312ebcc6abc1b08a6b8ca19e60f58295272bdffc767e8692071408f1e",
                             "create2": true
                         }
                     },
                     {
                         "name": "GLP_ORACLE",
-                        "address": "0xB7A3F73aD14C55AA6CbC0E955b2f6Ea18404D1a8",
+                        "address": "0x8FE8B23eA08C5127BaF87299C706562259B32f22",
                         "meta": {
                             "args": [
                                 "0x9Dd145b3C100498eE3BFF45E53cEB93cDe0075b4",
                                 "0x0000000000000000000000000000000000000000",
                                 "0xcD5B223b3ECF18ae695E797cb033e86b7b189C88"
                             ],
-                            "salt": "0x62911135234e2cdcba8a3d130395a189f25feff97095b69b4585924ea5a21253",
+                            "salt": "0x5ab20a35b9bb2518496a637321db4f8f47f8b6305c0c2870f7cd14025f39fa54",
                             "create2": true
                         }
                     },
                     {
                         "name": "ETH_GLP_ORACLE",
-                        "address": "0x46b057D0A5C3164004cca67ec980Fbe29a871d63",
+                        "address": "0x8f669C8CE8162dda454d10A4c9f856220C3A4E35",
                         "meta": {
                             "args": [
-                                "0x969ACa17CA7828231010d3A48B56C78ECCa040Eb",
-                                "0xB7A3F73aD14C55AA6CbC0E955b2f6Ea18404D1a8",
+                                "0x91e95879acd3BE300712C20b7479a59a7EF0CAF2",
+                                "0x8FE8B23eA08C5127BaF87299C706562259B32f22",
                                 "0x0000000000000000000000000000000000000000",
                                 "0xcD5B223b3ECF18ae695E797cb033e86b7b189C88"
                             ],
-                            "salt": "0x3b5b289b6ec552b5e4af5ee9b9da9e1e6ca97c2dfdc0c1e44e382c709ffd7a55",
+                            "salt": "0xadd397231b4c1b1dea63b0c8ae6272694adfecff3444fcdcb41d3cf4872bff13",
                             "create2": true
                         }
                     },
                     {
                         "name": "GMX_ORACLE",
-                        "address": "0xA0D43Ece4383B9516Da9f354fE05A68F8467724a",
+                        "address": "0x535FAD65f8d8EE1A5F7E58320BD13FDd51ed39b4",
                         "meta": {
                             "args": [
                                 "GMX/USD",
@@ -1408,13 +1408,13 @@
                                     "_admin": "0xcD5B223b3ECF18ae695E797cb033e86b7b189C88"
                                 }
                             ],
-                            "salt": "0xff46e4be3b7bf17a5c3682055b11d1d124e77ae5e2d268cb0bf2fd745cc7a27d",
+                            "salt": "0xa479d3636a176dedc8daa7e23e9688244c7183a4f9aa83a8679af1f6ace038ea",
                             "create2": true
                         }
                     },
                     {
                         "name": "TAP_ORACLE",
-                        "address": "0x838048FCFd9bD6c8a582253580FdA2Db1979153f",
+                        "address": "0xD12c2B67cf92BAE10ed05A9262CD2aB09D2DF6b3",
                         "meta": {
                             "args": [
                                 "TAP/USD",
@@ -1449,13 +1449,13 @@
                                     "_admin": "0xcD5B223b3ECF18ae695E797cb033e86b7b189C88"
                                 }
                             ],
-                            "salt": "0x5faac421b9a720c9b77d2feae40f1b30ff18b2e971611f9d20644749b7431b25",
+                            "salt": "0x8fa164d589c0077fcb65bf6d9fc8337ee729f40d5df87cfe1518e72e2c91175d",
                             "create2": true
                         }
                     },
                     {
                         "name": "ADB_TAP_OPTION_ORACLE",
-                        "address": "0xA8d39C4Aa35F350A1b1778AEF8003165Aa0A47c7",
+                        "address": "0x0f45C095A8aD647Bb031364150f82CE421f77D55",
                         "meta": {
                             "args": [
                                 "TAP/USD",
@@ -1491,13 +1491,13 @@
                                     "_admin": "0xcD5B223b3ECF18ae695E797cb033e86b7b189C88"
                                 }
                             ],
-                            "salt": "0x079acc9c2d9de679110614f0232996d8454f8db159d8ef46e7e2467c55f40f9b",
+                            "salt": "0x300355798e4d9f0a6c3b9252e5b4a3508e6b99e41e4d2194f068bd11290c103e",
                             "create2": true
                         }
                     },
                     {
                         "name": "TOB_TAP_OPTION_ORACLE",
-                        "address": "0x05e748F961D7C72535513C87B232e652a5c2174D",
+                        "address": "0x4210a042aA27e3ae2F4295B77e7d42F8f9386370",
                         "meta": {
                             "args": [
                                 "TAP/USD",
@@ -1533,7 +1533,32 @@
                                     "_admin": "0xcD5B223b3ECF18ae695E797cb033e86b7b189C88"
                                 }
                             ],
-                            "salt": "0x458be730e64af83a6e9ce4f6766a9e847593dd1f5618eef888a52e68155aaa60",
+                            "salt": "0x2d6b19f2dce9646bce8adea0ff3be1b44af524fab5cd53cc2cc8e30cf9aa5b4c",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "USDC_SEER_CL_ORACLE",
+                        "address": "0x0bf283D362BB93DA04fb431aB970A36d248233c8",
+                        "meta": {
+                            "args": [
+                                "USDC/USD",
+                                "USDC/USD",
+                                18,
+                                {
+                                    "_poolChainlink": "0xC23507096A67D62d511CBE9D9f335dbef8F5De27",
+                                    "_isChainlinkMultiplied": 1,
+                                    "_inBase": "1000000",
+                                    "stalePeriod": 86400,
+                                    "guardians": [
+                                        "0xcD5B223b3ECF18ae695E797cb033e86b7b189C88"
+                                    ],
+                                    "_description": "0x555344432f555344000000000000000000000000000000000000000000000000",
+                                    "_sequencerUptimeFeed": "0x0000000000000000000000000000000000000000",
+                                    "_admin": "0xcD5B223b3ECF18ae695E797cb033e86b7b189C88"
+                                }
+                            ],
+                            "salt": "0x29e02f01efa8e323e50e6f765381c1d06cb831d9ab1a234282e3e1f34627f2b7",
                             "create2": true
                         }
                     },
