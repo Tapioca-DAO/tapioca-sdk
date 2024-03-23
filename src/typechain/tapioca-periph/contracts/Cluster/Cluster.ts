@@ -242,7 +242,6 @@ export interface ClusterInterface extends utils.Interface {
 
   events: {
     "ContractUpdated(address,uint32,bool,bool)": EventFragment;
-    "EditorUpdated(address,bool,bool)": EventFragment;
     "LzChainUpdate(uint256,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "RoleSet(address,bytes32,address,bool)": EventFragment;
@@ -251,10 +250,6 @@ export interface ClusterInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "ContractUpdated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ContractUpdated(address,uint32,bool,bool)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "EditorUpdated"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "EditorUpdated(address,bool,bool)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LzChainUpdate"): EventFragment;
   getEvent(
@@ -282,18 +277,6 @@ export type ContractUpdatedEvent = TypedEvent<
 >;
 
 export type ContractUpdatedEventFilter = TypedEventFilter<ContractUpdatedEvent>;
-
-export interface EditorUpdatedEventObject {
-  _editor: string;
-  _oldStatus: boolean;
-  _newStatus: boolean;
-}
-export type EditorUpdatedEvent = TypedEvent<
-  [string, boolean, boolean],
-  EditorUpdatedEventObject
->;
-
-export type EditorUpdatedEventFilter = TypedEventFilter<EditorUpdatedEvent>;
 
 export interface LzChainUpdateEventObject {
   _oldChain: BigNumber;
@@ -690,17 +673,6 @@ export interface Cluster extends BaseContract {
       _oldStatus?: PromiseOrValue<boolean> | null,
       _newStatus?: null
     ): ContractUpdatedEventFilter;
-
-    "EditorUpdated(address,bool,bool)"(
-      _editor?: PromiseOrValue<string> | null,
-      _oldStatus?: PromiseOrValue<boolean> | null,
-      _newStatus?: PromiseOrValue<boolean> | null
-    ): EditorUpdatedEventFilter;
-    EditorUpdated(
-      _editor?: PromiseOrValue<string> | null,
-      _oldStatus?: PromiseOrValue<boolean> | null,
-      _newStatus?: PromiseOrValue<boolean> | null
-    ): EditorUpdatedEventFilter;
 
     "LzChainUpdate(uint256,uint256)"(
       _oldChain?: PromiseOrValue<BigNumberish> | null,

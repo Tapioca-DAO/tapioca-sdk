@@ -27,23 +27,31 @@ import type {
   PromiseOrValue,
 } from "../../../../common";
 
-export type OracleUniSoloConstructorDataStruct = {
+export type OracleMultiConstructorDataStruct = {
   addressInAndOutUni: PromiseOrValue<string>[];
   _circuitUniswap: PromiseOrValue<string>[];
   _circuitUniIsMultiplied: PromiseOrValue<BigNumberish>[];
   _twapPeriod: PromiseOrValue<BigNumberish>;
   observationLength: PromiseOrValue<BigNumberish>;
+  _uniFinalCurrency: PromiseOrValue<BigNumberish>;
+  _circuitChainlink: PromiseOrValue<string>[];
+  _circuitChainIsMultiplied: PromiseOrValue<BigNumberish>[];
+  _stalePeriod: PromiseOrValue<BigNumberish>;
   guardians: PromiseOrValue<string>[];
   _description: PromiseOrValue<BytesLike>;
   _sequencerUptimeFeed: PromiseOrValue<string>;
   _admin: PromiseOrValue<string>;
 };
 
-export type OracleUniSoloConstructorDataStructOutput = [
+export type OracleMultiConstructorDataStructOutput = [
   string[],
   string[],
   number[],
   number,
+  number,
+  number,
+  string[],
+  number[],
   number,
   string[],
   string,
@@ -55,6 +63,10 @@ export type OracleUniSoloConstructorDataStructOutput = [
   _circuitUniIsMultiplied: number[];
   _twapPeriod: number;
   observationLength: number;
+  _uniFinalCurrency: number;
+  _circuitChainlink: string[];
+  _circuitChainIsMultiplied: number[];
+  _stalePeriod: number;
   guardians: string[];
   _description: string;
   _sequencerUptimeFeed: string;
@@ -67,7 +79,9 @@ export interface TapOptionOracleInterface extends utils.Interface {
     "DEFAULT_ADMIN_ROLE()": FunctionFragment;
     "FETCH_TIME()": FunctionFragment;
     "GRACE_PERIOD_TIME()": FunctionFragment;
+    "GUARDIAN_ROLE_CHAINLINK()": FunctionFragment;
     "GUARDIAN_ROLE_UNISWAP()": FunctionFragment;
+    "PRICE_UPDATER()": FunctionFragment;
     "SEQUENCER_ROLE()": FunctionFragment;
     "SEQUENCER_UPTIME_FEED()": FunctionFragment;
     "_name()": FunctionFragment;
@@ -75,9 +89,13 @@ export interface TapOptionOracleInterface extends utils.Interface {
     "acceptDefaultAdminTransfer()": FunctionFragment;
     "beginDefaultAdminTransfer(address)": FunctionFragment;
     "cancelDefaultAdminTransfer()": FunctionFragment;
+    "chainlinkDecimals(uint256)": FunctionFragment;
     "changeDefaultAdminDelay(uint48)": FunctionFragment;
     "changeGracePeriod(uint32)": FunctionFragment;
+    "changeStalePeriod(uint32)": FunctionFragment;
     "changeTwapPeriod(uint32)": FunctionFragment;
+    "circuitChainIsMultiplied(uint256)": FunctionFragment;
+    "circuitChainlink(uint256)": FunctionFragment;
     "circuitUniIsMultiplied(uint256)": FunctionFragment;
     "circuitUniswap(uint256)": FunctionFragment;
     "decimals()": FunctionFragment;
@@ -91,6 +109,8 @@ export interface TapOptionOracleInterface extends utils.Interface {
     "hasRole(bytes32,address)": FunctionFragment;
     "inBase()": FunctionFragment;
     "increaseTWAPStore(uint16)": FunctionFragment;
+    "lastCall()": FunctionFragment;
+    "lastIndex()": FunctionFragment;
     "lastPrices(uint256)": FunctionFragment;
     "name(bytes)": FunctionFragment;
     "outBase()": FunctionFragment;
@@ -108,9 +128,11 @@ export interface TapOptionOracleInterface extends utils.Interface {
     "renounceRole(bytes32,address)": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
     "rollbackDefaultAdminDelay()": FunctionFragment;
+    "stalePeriod()": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol(bytes)": FunctionFragment;
     "twapPeriod()": FunctionFragment;
+    "uniFinalCurrency()": FunctionFragment;
     "updateFetchTime(uint32)": FunctionFragment;
     "updateLastPrice()": FunctionFragment;
   };
@@ -125,8 +147,12 @@ export interface TapOptionOracleInterface extends utils.Interface {
       | "FETCH_TIME()"
       | "GRACE_PERIOD_TIME"
       | "GRACE_PERIOD_TIME()"
+      | "GUARDIAN_ROLE_CHAINLINK"
+      | "GUARDIAN_ROLE_CHAINLINK()"
       | "GUARDIAN_ROLE_UNISWAP"
       | "GUARDIAN_ROLE_UNISWAP()"
+      | "PRICE_UPDATER"
+      | "PRICE_UPDATER()"
       | "SEQUENCER_ROLE"
       | "SEQUENCER_ROLE()"
       | "SEQUENCER_UPTIME_FEED"
@@ -141,12 +167,20 @@ export interface TapOptionOracleInterface extends utils.Interface {
       | "beginDefaultAdminTransfer(address)"
       | "cancelDefaultAdminTransfer"
       | "cancelDefaultAdminTransfer()"
+      | "chainlinkDecimals"
+      | "chainlinkDecimals(uint256)"
       | "changeDefaultAdminDelay"
       | "changeDefaultAdminDelay(uint48)"
       | "changeGracePeriod"
       | "changeGracePeriod(uint32)"
+      | "changeStalePeriod"
+      | "changeStalePeriod(uint32)"
       | "changeTwapPeriod"
       | "changeTwapPeriod(uint32)"
+      | "circuitChainIsMultiplied"
+      | "circuitChainIsMultiplied(uint256)"
+      | "circuitChainlink"
+      | "circuitChainlink(uint256)"
       | "circuitUniIsMultiplied"
       | "circuitUniIsMultiplied(uint256)"
       | "circuitUniswap"
@@ -173,6 +207,10 @@ export interface TapOptionOracleInterface extends utils.Interface {
       | "inBase()"
       | "increaseTWAPStore"
       | "increaseTWAPStore(uint16)"
+      | "lastCall"
+      | "lastCall()"
+      | "lastIndex"
+      | "lastIndex()"
       | "lastPrices"
       | "lastPrices(uint256)"
       | "name"
@@ -207,12 +245,16 @@ export interface TapOptionOracleInterface extends utils.Interface {
       | "revokeRole(bytes32,address)"
       | "rollbackDefaultAdminDelay"
       | "rollbackDefaultAdminDelay()"
+      | "stalePeriod"
+      | "stalePeriod()"
       | "supportsInterface"
       | "supportsInterface(bytes4)"
       | "symbol"
       | "symbol(bytes)"
       | "twapPeriod"
       | "twapPeriod()"
+      | "uniFinalCurrency"
+      | "uniFinalCurrency()"
       | "updateFetchTime"
       | "updateFetchTime(uint32)"
       | "updateLastPrice"
@@ -246,11 +288,27 @@ export interface TapOptionOracleInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "GUARDIAN_ROLE_CHAINLINK",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "GUARDIAN_ROLE_CHAINLINK()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "GUARDIAN_ROLE_UNISWAP",
     values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "GUARDIAN_ROLE_UNISWAP()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PRICE_UPDATER",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PRICE_UPDATER()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -298,6 +356,14 @@ export interface TapOptionOracleInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "chainlinkDecimals",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "chainlinkDecimals(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "changeDefaultAdminDelay",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
@@ -314,11 +380,35 @@ export interface TapOptionOracleInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
+    functionFragment: "changeStalePeriod",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "changeStalePeriod(uint32)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "changeTwapPeriod",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "changeTwapPeriod(uint32)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "circuitChainIsMultiplied",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "circuitChainIsMultiplied(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "circuitChainlink",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "circuitChainlink(uint256)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
@@ -415,6 +505,16 @@ export interface TapOptionOracleInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "increaseTWAPStore(uint16)",
     values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(functionFragment: "lastCall", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "lastCall()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "lastIndex", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "lastIndex()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "lastPrices",
@@ -523,6 +623,14 @@ export interface TapOptionOracleInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "stalePeriod",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "stalePeriod()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "supportsInterface",
     values: [PromiseOrValue<BytesLike>]
   ): string;
@@ -544,6 +652,14 @@ export interface TapOptionOracleInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "twapPeriod()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "uniFinalCurrency",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "uniFinalCurrency()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -587,11 +703,27 @@ export interface TapOptionOracleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "GUARDIAN_ROLE_CHAINLINK",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "GUARDIAN_ROLE_CHAINLINK()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "GUARDIAN_ROLE_UNISWAP",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "GUARDIAN_ROLE_UNISWAP()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "PRICE_UPDATER",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "PRICE_UPDATER()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -639,6 +771,14 @@ export interface TapOptionOracleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "chainlinkDecimals",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "chainlinkDecimals(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "changeDefaultAdminDelay",
     data: BytesLike
   ): Result;
@@ -655,11 +795,35 @@ export interface TapOptionOracleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "changeStalePeriod",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "changeStalePeriod(uint32)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "changeTwapPeriod",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "changeTwapPeriod(uint32)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "circuitChainIsMultiplied",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "circuitChainIsMultiplied(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "circuitChainlink",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "circuitChainlink(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -740,6 +904,13 @@ export interface TapOptionOracleInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "increaseTWAPStore(uint16)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "lastCall", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "lastCall()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "lastIndex", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "lastIndex()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "lastPrices", data: BytesLike): Result;
@@ -831,6 +1002,14 @@ export interface TapOptionOracleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "stalePeriod",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "stalePeriod()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "supportsInterface",
     data: BytesLike
   ): Result;
@@ -846,6 +1025,14 @@ export interface TapOptionOracleInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "twapPeriod", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "twapPeriod()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "uniFinalCurrency",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "uniFinalCurrency()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1068,9 +1255,17 @@ export interface TapOptionOracle extends BaseContract {
 
     "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<[number]>;
 
+    GUARDIAN_ROLE_CHAINLINK(overrides?: CallOverrides): Promise<[string]>;
+
+    "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<[string]>;
+
     GUARDIAN_ROLE_UNISWAP(overrides?: CallOverrides): Promise<[string]>;
 
     "GUARDIAN_ROLE_UNISWAP()"(overrides?: CallOverrides): Promise<[string]>;
+
+    PRICE_UPDATER(overrides?: CallOverrides): Promise<[string]>;
+
+    "PRICE_UPDATER()"(overrides?: CallOverrides): Promise<[string]>;
 
     SEQUENCER_ROLE(overrides?: CallOverrides): Promise<[string]>;
 
@@ -1114,6 +1309,16 @@ export interface TapOptionOracle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    chainlinkDecimals(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[number]>;
+
+    "chainlinkDecimals(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[number]>;
+
     changeDefaultAdminDelay(
       newDelay: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1134,6 +1339,16 @@ export interface TapOptionOracle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    changeStalePeriod(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "changeStalePeriod(uint32)"(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     changeTwapPeriod(
       _twapPeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1143,6 +1358,26 @@ export interface TapOptionOracle extends BaseContract {
       _twapPeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    circuitChainIsMultiplied(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[number]>;
+
+    "circuitChainIsMultiplied(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[number]>;
+
+    circuitChainlink(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    "circuitChainlink(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     circuitUniIsMultiplied(
       arg0: PromiseOrValue<BigNumberish>,
@@ -1243,6 +1478,14 @@ export interface TapOptionOracle extends BaseContract {
       newLengthStored: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    lastCall(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "lastCall()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    lastIndex(overrides?: CallOverrides): Promise<[number]>;
+
+    "lastIndex()"(overrides?: CallOverrides): Promise<[number]>;
 
     lastPrices(
       arg0: PromiseOrValue<BigNumberish>,
@@ -1384,6 +1627,10 @@ export interface TapOptionOracle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    stalePeriod(overrides?: CallOverrides): Promise<[number]>;
+
+    "stalePeriod()"(overrides?: CallOverrides): Promise<[number]>;
+
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -1407,6 +1654,10 @@ export interface TapOptionOracle extends BaseContract {
     twapPeriod(overrides?: CallOverrides): Promise<[number]>;
 
     "twapPeriod()"(overrides?: CallOverrides): Promise<[number]>;
+
+    uniFinalCurrency(overrides?: CallOverrides): Promise<[number]>;
+
+    "uniFinalCurrency()"(overrides?: CallOverrides): Promise<[number]>;
 
     updateFetchTime(
       _newFetchTime: PromiseOrValue<BigNumberish>,
@@ -1443,9 +1694,17 @@ export interface TapOptionOracle extends BaseContract {
 
   "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<number>;
 
+  GUARDIAN_ROLE_CHAINLINK(overrides?: CallOverrides): Promise<string>;
+
+  "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<string>;
+
   GUARDIAN_ROLE_UNISWAP(overrides?: CallOverrides): Promise<string>;
 
   "GUARDIAN_ROLE_UNISWAP()"(overrides?: CallOverrides): Promise<string>;
+
+  PRICE_UPDATER(overrides?: CallOverrides): Promise<string>;
+
+  "PRICE_UPDATER()"(overrides?: CallOverrides): Promise<string>;
 
   SEQUENCER_ROLE(overrides?: CallOverrides): Promise<string>;
 
@@ -1489,6 +1748,16 @@ export interface TapOptionOracle extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  chainlinkDecimals(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<number>;
+
+  "chainlinkDecimals(uint256)"(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<number>;
+
   changeDefaultAdminDelay(
     newDelay: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1509,6 +1778,16 @@ export interface TapOptionOracle extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  changeStalePeriod(
+    _stalePeriod: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "changeStalePeriod(uint32)"(
+    _stalePeriod: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   changeTwapPeriod(
     _twapPeriod: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1518,6 +1797,26 @@ export interface TapOptionOracle extends BaseContract {
     _twapPeriod: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  circuitChainIsMultiplied(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<number>;
+
+  "circuitChainIsMultiplied(uint256)"(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<number>;
+
+  circuitChainlink(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  "circuitChainlink(uint256)"(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   circuitUniIsMultiplied(
     arg0: PromiseOrValue<BigNumberish>,
@@ -1616,6 +1915,14 @@ export interface TapOptionOracle extends BaseContract {
     newLengthStored: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  lastCall(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "lastCall()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  lastIndex(overrides?: CallOverrides): Promise<number>;
+
+  "lastIndex()"(overrides?: CallOverrides): Promise<number>;
 
   lastPrices(
     arg0: PromiseOrValue<BigNumberish>,
@@ -1749,6 +2056,10 @@ export interface TapOptionOracle extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  stalePeriod(overrides?: CallOverrides): Promise<number>;
+
+  "stalePeriod()"(overrides?: CallOverrides): Promise<number>;
+
   supportsInterface(
     interfaceId: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
@@ -1772,6 +2083,10 @@ export interface TapOptionOracle extends BaseContract {
   twapPeriod(overrides?: CallOverrides): Promise<number>;
 
   "twapPeriod()"(overrides?: CallOverrides): Promise<number>;
+
+  uniFinalCurrency(overrides?: CallOverrides): Promise<number>;
+
+  "uniFinalCurrency()"(overrides?: CallOverrides): Promise<number>;
 
   updateFetchTime(
     _newFetchTime: PromiseOrValue<BigNumberish>,
@@ -1808,9 +2123,17 @@ export interface TapOptionOracle extends BaseContract {
 
     "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<number>;
 
+    GUARDIAN_ROLE_CHAINLINK(overrides?: CallOverrides): Promise<string>;
+
+    "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<string>;
+
     GUARDIAN_ROLE_UNISWAP(overrides?: CallOverrides): Promise<string>;
 
     "GUARDIAN_ROLE_UNISWAP()"(overrides?: CallOverrides): Promise<string>;
+
+    PRICE_UPDATER(overrides?: CallOverrides): Promise<string>;
+
+    "PRICE_UPDATER()"(overrides?: CallOverrides): Promise<string>;
 
     SEQUENCER_ROLE(overrides?: CallOverrides): Promise<string>;
 
@@ -1846,6 +2169,16 @@ export interface TapOptionOracle extends BaseContract {
 
     "cancelDefaultAdminTransfer()"(overrides?: CallOverrides): Promise<void>;
 
+    chainlinkDecimals(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<number>;
+
+    "chainlinkDecimals(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<number>;
+
     changeDefaultAdminDelay(
       newDelay: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1866,6 +2199,16 @@ export interface TapOptionOracle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    changeStalePeriod(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "changeStalePeriod(uint32)"(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     changeTwapPeriod(
       _twapPeriod: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1875,6 +2218,26 @@ export interface TapOptionOracle extends BaseContract {
       _twapPeriod: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    circuitChainIsMultiplied(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<number>;
+
+    "circuitChainIsMultiplied(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<number>;
+
+    circuitChainlink(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "circuitChainlink(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     circuitUniIsMultiplied(
       arg0: PromiseOrValue<BigNumberish>,
@@ -1975,6 +2338,14 @@ export interface TapOptionOracle extends BaseContract {
       newLengthStored: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    lastCall(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "lastCall()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    lastIndex(overrides?: CallOverrides): Promise<number>;
+
+    "lastIndex()"(overrides?: CallOverrides): Promise<number>;
 
     lastPrices(
       arg0: PromiseOrValue<BigNumberish>,
@@ -2104,6 +2475,10 @@ export interface TapOptionOracle extends BaseContract {
 
     "rollbackDefaultAdminDelay()"(overrides?: CallOverrides): Promise<void>;
 
+    stalePeriod(overrides?: CallOverrides): Promise<number>;
+
+    "stalePeriod()"(overrides?: CallOverrides): Promise<number>;
+
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -2127,6 +2502,10 @@ export interface TapOptionOracle extends BaseContract {
     twapPeriod(overrides?: CallOverrides): Promise<number>;
 
     "twapPeriod()"(overrides?: CallOverrides): Promise<number>;
+
+    uniFinalCurrency(overrides?: CallOverrides): Promise<number>;
+
+    "uniFinalCurrency()"(overrides?: CallOverrides): Promise<number>;
 
     updateFetchTime(
       _newFetchTime: PromiseOrValue<BigNumberish>,
@@ -2233,9 +2612,17 @@ export interface TapOptionOracle extends BaseContract {
 
     "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    GUARDIAN_ROLE_CHAINLINK(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "GUARDIAN_ROLE_CHAINLINK()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     GUARDIAN_ROLE_UNISWAP(overrides?: CallOverrides): Promise<BigNumber>;
 
     "GUARDIAN_ROLE_UNISWAP()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    PRICE_UPDATER(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "PRICE_UPDATER()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     SEQUENCER_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2279,6 +2666,16 @@ export interface TapOptionOracle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    chainlinkDecimals(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "chainlinkDecimals(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     changeDefaultAdminDelay(
       newDelay: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2299,6 +2696,16 @@ export interface TapOptionOracle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    changeStalePeriod(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "changeStalePeriod(uint32)"(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     changeTwapPeriod(
       _twapPeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2307,6 +2714,26 @@ export interface TapOptionOracle extends BaseContract {
     "changeTwapPeriod(uint32)"(
       _twapPeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    circuitChainIsMultiplied(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "circuitChainIsMultiplied(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    circuitChainlink(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "circuitChainlink(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     circuitUniIsMultiplied(
@@ -2410,6 +2837,14 @@ export interface TapOptionOracle extends BaseContract {
       newLengthStored: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    lastCall(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "lastCall()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    lastIndex(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "lastIndex()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     lastPrices(
       arg0: PromiseOrValue<BigNumberish>,
@@ -2535,6 +2970,10 @@ export interface TapOptionOracle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    stalePeriod(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "stalePeriod()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -2558,6 +2997,10 @@ export interface TapOptionOracle extends BaseContract {
     twapPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
     "twapPeriod()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    uniFinalCurrency(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "uniFinalCurrency()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     updateFetchTime(
       _newFetchTime: PromiseOrValue<BigNumberish>,
@@ -2601,6 +3044,14 @@ export interface TapOptionOracle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    GUARDIAN_ROLE_CHAINLINK(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "GUARDIAN_ROLE_CHAINLINK()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     GUARDIAN_ROLE_UNISWAP(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -2608,6 +3059,10 @@ export interface TapOptionOracle extends BaseContract {
     "GUARDIAN_ROLE_UNISWAP()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    PRICE_UPDATER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "PRICE_UPDATER()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     SEQUENCER_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -2657,6 +3112,16 @@ export interface TapOptionOracle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    chainlinkDecimals(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "chainlinkDecimals(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     changeDefaultAdminDelay(
       newDelay: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2677,6 +3142,16 @@ export interface TapOptionOracle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    changeStalePeriod(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "changeStalePeriod(uint32)"(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     changeTwapPeriod(
       _twapPeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2685,6 +3160,26 @@ export interface TapOptionOracle extends BaseContract {
     "changeTwapPeriod(uint32)"(
       _twapPeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    circuitChainIsMultiplied(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "circuitChainIsMultiplied(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    circuitChainlink(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "circuitChainlink(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     circuitUniIsMultiplied(
@@ -2790,6 +3285,14 @@ export interface TapOptionOracle extends BaseContract {
       newLengthStored: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    lastCall(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "lastCall()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    lastIndex(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "lastIndex()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     lastPrices(
       arg0: PromiseOrValue<BigNumberish>,
@@ -2923,6 +3426,10 @@ export interface TapOptionOracle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    stalePeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "stalePeriod()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -2946,6 +3453,12 @@ export interface TapOptionOracle extends BaseContract {
     twapPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "twapPeriod()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    uniFinalCurrency(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "uniFinalCurrency()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     updateFetchTime(
       _newFetchTime: PromiseOrValue<BigNumberish>,

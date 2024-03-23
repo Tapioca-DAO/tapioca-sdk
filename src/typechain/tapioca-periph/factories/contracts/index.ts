@@ -11,5 +11,6 @@ export * as layerzero from "./layerzero";
 export * as mocks from "./mocks";
 export * as oracle from "./oracle";
 export * as pearlmit from "./pearlmit";
+export * as tapiocaBarFileLoaderSol from "./tapioca-bar-file-loader.sol";
 export * as tapiocaOmnichainEngine from "./tapiocaOmnichainEngine";
 export * as utils from "./utils";

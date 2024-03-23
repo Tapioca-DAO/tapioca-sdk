@@ -16,27 +16,6 @@ const _abi = [
     type: "error",
   },
   {
-    inputs: [],
-    name: "Magnetar_ExtractTokenFail",
-    type: "error",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "expected",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "received",
-        type: "uint256",
-      },
-    ],
-    name: "Magnetar_GasMismatch",
-    type: "error",
-  },
-  {
     inputs: [
       {
         internalType: "enum MagnetarModule",

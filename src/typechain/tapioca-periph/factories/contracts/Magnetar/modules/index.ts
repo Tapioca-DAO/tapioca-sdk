@@ -5,6 +5,7 @@ export { MagnetarAssetCommonModule__factory } from "./MagnetarAssetCommonModule_
 export { MagnetarAssetModule__factory } from "./MagnetarAssetModule__factory";
 export { MagnetarAssetXChainModule__factory } from "./MagnetarAssetXChainModule__factory";
 export { MagnetarBaseModule__factory } from "./MagnetarBaseModule__factory";
+export { MagnetarBaseModuleExternal__factory } from "./MagnetarBaseModuleExternal__factory";
 export { MagnetarCollateralModule__factory } from "./MagnetarCollateralModule__factory";
 export { MagnetarMintCommonModule__factory } from "./MagnetarMintCommonModule__factory";
 export { MagnetarMintModule__factory } from "./MagnetarMintModule__factory";

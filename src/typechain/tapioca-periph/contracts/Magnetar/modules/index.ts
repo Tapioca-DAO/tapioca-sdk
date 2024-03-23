@@ -5,6 +5,7 @@ export type { MagnetarAssetCommonModule } from "./MagnetarAssetCommonModule";
 export type { MagnetarAssetModule } from "./MagnetarAssetModule";
 export type { MagnetarAssetXChainModule } from "./MagnetarAssetXChainModule";
 export type { MagnetarBaseModule } from "./MagnetarBaseModule";
+export type { MagnetarBaseModuleExternal } from "./MagnetarBaseModuleExternal";
 export type { MagnetarCollateralModule } from "./MagnetarCollateralModule";
 export type { MagnetarMintCommonModule } from "./MagnetarMintCommonModule";
 export type { MagnetarMintModule } from "./MagnetarMintModule";

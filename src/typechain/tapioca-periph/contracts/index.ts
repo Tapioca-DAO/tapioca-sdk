@@ -21,6 +21,8 @@ import type * as oracle from "./oracle";
 export type { oracle };
 import type * as pearlmit from "./pearlmit";
 export type { pearlmit };
+import type * as tapiocaBarFileLoaderSol from "./tapioca-bar-file-loader.sol";
+export type { tapiocaBarFileLoaderSol };
 import type * as tapiocaOmnichainEngine from "./tapiocaOmnichainEngine";
 export type { tapiocaOmnichainEngine };
 import type * as utils from "./utils";

@@ -86,6 +86,8 @@ export type { MagnetarAssetXChainModule } from "./contracts/Magnetar/modules/Mag
 export { MagnetarAssetXChainModule__factory } from "./factories/contracts/Magnetar/modules/MagnetarAssetXChainModule__factory";
 export type { MagnetarBaseModule } from "./contracts/Magnetar/modules/MagnetarBaseModule";
 export { MagnetarBaseModule__factory } from "./factories/contracts/Magnetar/modules/MagnetarBaseModule__factory";
+export type { MagnetarBaseModuleExternal } from "./contracts/Magnetar/modules/MagnetarBaseModuleExternal";
+export { MagnetarBaseModuleExternal__factory } from "./factories/contracts/Magnetar/modules/MagnetarBaseModuleExternal__factory";
 export type { MagnetarCollateralModule } from "./contracts/Magnetar/modules/MagnetarCollateralModule";
 export { MagnetarCollateralModule__factory } from "./factories/contracts/Magnetar/modules/MagnetarCollateralModule__factory";
 export type { MagnetarMintCommonModule } from "./contracts/Magnetar/modules/MagnetarMintCommonModule";
@@ -152,6 +154,8 @@ export type { PearlmitHash } from "./contracts/pearlmit/PearlmitHash";
 export { PearlmitHash__factory } from "./factories/contracts/pearlmit/PearlmitHash__factory";
 export type { ZeroXSwapper } from "./contracts/Swapper/ZeroXSwapper";
 export { ZeroXSwapper__factory } from "./factories/contracts/Swapper/ZeroXSwapper__factory";
+export type { ForgeIERC20 } from "./contracts/tapioca-bar-file-loader.sol/ForgeIERC20";
+export { ForgeIERC20__factory } from "./factories/contracts/tapioca-bar-file-loader.sol/ForgeIERC20__factory";
 export type { TapiocaDeployer } from "./contracts/TapiocaDeployer/TapiocaDeployer";
 export { TapiocaDeployer__factory } from "./factories/contracts/TapiocaDeployer/TapiocaDeployer__factory";
 export type { TapiocaMulticall } from "./contracts/TapiocaMulticall/TapiocaMulticall";

@@ -177,6 +177,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MagnetarBaseModule__factory>;
     getContractFactory(
+      name: "MagnetarBaseModuleExternal",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MagnetarBaseModuleExternal__factory>;
+    getContractFactory(
       name: "MagnetarCollateralModule",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MagnetarCollateralModule__factory>;
@@ -308,6 +312,10 @@ declare module "hardhat/types/runtime" {
       name: "ZeroXSwapper",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ZeroXSwapper__factory>;
+    getContractFactory(
+      name: "ForgeIERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ForgeIERC20__factory>;
     getContractFactory(
       name: "TapiocaDeployer",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -583,6 +591,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.MagnetarBaseModule>;
     getContractAt(
+      name: "MagnetarBaseModuleExternal",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MagnetarBaseModuleExternal>;
+    getContractAt(
       name: "MagnetarCollateralModule",
       address: string,
       signer?: ethers.Signer
@@ -747,6 +760,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ZeroXSwapper>;
+    getContractAt(
+      name: "ForgeIERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ForgeIERC20>;
     getContractAt(
       name: "TapiocaDeployer",
       address: string,
