@@ -1,5 +1,7 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { EChainID, TAPIOCA_PROJECTS_NAME } from '../api/config';
+import { TContract } from '../shared';
+import SUPPORTED_CHAINS from '../SUPPORTED_CHAINS';
 
 export function loadGlobalContract(
     hre: HardhatRuntimeEnvironment,
@@ -28,6 +30,33 @@ export function loadLocalContract(
         contractName,
         hre.SDK.chainInfo.name,
     );
+}
+
+export function loadLocalContractOnAllChains(
+    hre: HardhatRuntimeEnvironment,
+    contractName: string,
+    tag: string,
+    isTestnet: boolean,
+): TContract[] {
+    const deployments: TContract[] = [];
+    // Get chains that are testnet or not
+    const chainsIds = SUPPORTED_CHAINS.filter((e) =>
+        isTestnet
+            ? !!e.tags.find((o) => o === 'testnet')
+            : !e.tags.find((o) => o === 'testnet'),
+    ).map((e) => e.chainId);
+
+    for (const chainId of chainsIds) {
+        const deployment = hre.SDK.db.findLocalDeployment(
+            chainId,
+            contractName,
+            tag,
+        );
+        if (deployment) {
+            deployments.push(deployment);
+        }
+    }
+    return deployments;
 }
 
 export function checkExists<T>(

@@ -97,6 +97,7 @@ export {
     checkExists,
     loadGlobalContract,
     loadLocalContract,
+    loadLocalContractOnAllChains,
 } from './ethers/utils';
 export { API, typechain };
 export const SDK = { API, typechain };
