@@ -95,14 +95,20 @@ export const loadEnv = (deleteTasks = true) => {
     }
 };
 
+// Tasks
 export { TAP_TASK } from './ethers/hardhat/tasks';
 export { deployUniV3pool__task } from './ethers/hardhat/tasks/exec/deployUniV3Pool';
+export { setLzPeer__task } from './ethers/hardhat/tasks/exec/setLzPeer';
+
+// Utils
 export {
     checkExists,
     loadGlobalContract,
     loadLocalContract,
     loadLocalContractOnAllChains,
 } from './ethers/utils';
+
+// Global
 export { API, typechain };
 export const SDK = { API, typechain };
 export default SDK;
