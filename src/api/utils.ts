@@ -39,7 +39,9 @@ export const getChainBy = (
     getBy: TGET_CHAIN_BY_FILTER,
     value: keyof typeof SUPPORTED_CHAINS | string,
 ) => {
-    return _find(SUPPORTED_CHAINS, (e) => e[getBy] === String(value));
+    const chain = SUPPORTED_CHAINS.filter((e) => e[getBy] === value)[0];
+    if (!chain) throw new Error(`[-] Chain not found for ${String(value)}`);
+    return chain;
 };
 
 /**

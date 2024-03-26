@@ -37,8 +37,8 @@ export function loadLocalContractOnAllChains(
     contractName: string,
     tag: string,
     isTestnet: boolean,
-): TContract[] {
-    const deployments: TContract[] = [];
+): (TContract & { chainId: string })[] {
+    const deployments: (TContract & { chainId: string })[] = [];
     // Get chains that are testnet or not
     const chainsIds = SUPPORTED_CHAINS.filter((e) =>
         isTestnet
@@ -53,7 +53,7 @@ export function loadLocalContractOnAllChains(
             tag,
         );
         if (deployment) {
-            deployments.push(deployment);
+            deployments.push({ ...deployment, chainId });
         }
     }
     return deployments;
@@ -71,4 +71,8 @@ export function checkExists<T>(
         );
     }
     return value;
+}
+
+export function getChainInfo(hre: HardhatRuntimeEnvironment) {
+    return hre.SDK.utils.getChainBy('chainId', hre.SDK.eChainId);
 }

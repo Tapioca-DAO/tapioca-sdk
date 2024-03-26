@@ -6,6 +6,7 @@ import { getChains__task } from './tasks/view/getChains';
 import { getDeployment__task } from './tasks/view/getDeployment';
 import { deployUniV3pool__task } from './tasks/exec/deployUniV3Pool';
 import { exportDep__task } from './tasks/exec/exportDep';
+import { setLzPeer__task } from './tasks/exec/setLzPeer';
 
 const sdkScope = scope('sdk', 'Tapioca SDK tasks');
 
@@ -110,5 +111,18 @@ TAP_TASK(
             'The fee tier for the pool. Default is 3000.',
             3000,
             types.int,
+        ),
+);
+
+TAP_TASK(
+    sdkScope
+        .task(
+            'setLzPeer',
+            'Layer zero peer contract setup. Linking 2 contracts together',
+            setLzPeer__task,
+        )
+        .addParam(
+            'targetName',
+            'The name of the deployment contract to set the lzPeer for. NEEDS to be deployed on every chain you want to link to.',
         ),
 );
