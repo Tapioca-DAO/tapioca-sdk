@@ -6,6 +6,7 @@ import { TContract, TLocalDeployment, TProjectCaller } from '../../shared';
 import { TapiocaWrapper } from '../../typechain/tapiocaz';
 import { Multicall3 } from '../../typechain/tapioca-periphery/Multicall';
 import SUPPORTED_CHAINS from '../../SUPPORTED_CHAINS';
+import { loadNetworkEnv } from '../..';
 
 /**
  * Get a local contract
@@ -174,17 +175,22 @@ export const askForChain = async (message?: string) => {
     return supportedChains.find((e) => e.name === chain);
 };
 
+/**
+ * @notice UNSTABLE??
+ */
 export const useNetwork = async (
     hre: HardhatRuntimeEnvironment,
     network: (typeof SUPPORTED_CHAINS)[number]['name'],
 ) => {
+    console.log(`\t\t[+] Switching to network ${network}...`);
     const pk = process.env.PRIVATE_KEY;
     if (pk === undefined) throw new Error('[-] PRIVATE_KEY env var not set');
     const info = hre.config.networks?.[network];
     if (!info)
         throw new Error(`[-] Hardhat network config not found for ${network} `);
 
-    const chain = hre.SDK.utils.getChainBy('name', network)!;
+    const chain = hre.SDK.utils.getChainBy('name', network);
+    loadNetworkEnv(network);
     const provider = new hre.ethers.providers.JsonRpcProvider(
         { url: chain.rpc.replace('<api_key>', process.env.ALCHEMY_API_KEY!) },
         { chainId: Number(chain.chainId), name: `rpc-${info.chainId}` },

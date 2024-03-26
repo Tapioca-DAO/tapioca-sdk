@@ -22,6 +22,19 @@ declare global {
     }
 }
 
+export const loadNetworkEnv = (networkName: string) => {
+    // dotenv loading can not load `export` env vars for some reasons
+    const path = `.env/${networkName}.env`;
+
+    if (fs.existsSync(path)) {
+        dotenv.config({ path });
+    } else {
+        throw new Error(
+            '[-] env vars not loaded, please specify a network with --network <network> and create its file in .env/<network>.env',
+        );
+    }
+};
+
 /**
  * Load the env vars from the .env/<network>.env file
  */
@@ -38,16 +51,7 @@ export const loadEnv = (deleteTasks = true) => {
         console.log('[!] No network specified, using localhost as default.');
     }
 
-    // dotenv loading can not load `export` env vars for some reasons
-    const path = `.env/${networkName}.env`;
-
-    if (fs.existsSync(path)) {
-        dotenv.config({ path });
-    } else {
-        throw new Error(
-            '[-] env vars not loaded, please specify a network with --network <network> and create its file in .env/<network>.env',
-        );
-    }
+    loadNetworkEnv(networkName);
 
     // Check if the folder /gen/typechain exists, if not, create it. This is needed if the repo was freshly cloned.
     if (!fs.existsSync('./gen/typechain/index.ts')) {
