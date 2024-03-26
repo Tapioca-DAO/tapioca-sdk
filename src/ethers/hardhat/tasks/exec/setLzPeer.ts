@@ -41,7 +41,7 @@ export const setLzPeer__task = async (
 
         console.log(`\t[+] Setting lzPeer on ${targetChain.name}...`);
         const calls = populateCalls(hre, targetDep, deployments);
-        VM.executeMulticall(calls);
+        await VM.executeMulticall(calls);
     }
 
     // Switch back to the original network
