@@ -1,9 +1,14 @@
-import { HardhatConfig, HardhatUserConfig } from 'hardhat/types';
+import {
+    EthereumProvider,
+    HardhatConfig,
+    HardhatUserConfig,
+} from 'hardhat/types';
 import '@nomicfoundation/hardhat-toolbox/dist/src';
 import { extendEnvironment } from 'hardhat/config';
 import { extendConfig } from 'hardhat/config';
 import 'hardhat/types/config';
 import 'hardhat/types/runtime';
+import { createProvider } from 'hardhat/internal/core/providers/construction';
 
 import * as exportSDK from '../../api/exportSDK';
 import { TProjectCaller } from '../../shared';
@@ -29,6 +34,8 @@ declare module 'hardhat/types/runtime' {
             eChainId: config.EChainID;
             chainInfo: (typeof SUPPORTED_CHAINS)[number];
         };
+        changeNetwork(newNetwork: string): Promise<void>;
+        getProvider(newNetwork: string): Promise<EthereumProvider>;
     }
 }
 
@@ -68,3 +75,50 @@ extendConfig(
         config.SDK.project = userConfig.SDK.project;
     },
 );
+
+// Network switching
+extendEnvironment((hre) => {
+    // We add a field to the Hardhat Runtime Environment here.
+    // We use lazyObject to avoid initializing things until they are actually
+    // needed.
+    const providers: { [name: string]: EthereumProvider } = {};
+
+    hre.getProvider = async function getProvider(
+        name: string,
+    ): Promise<EthereumProvider> {
+        if (!providers[name]) {
+            providers[name] = await createProvider(
+                this.config,
+                name,
+                this.artifacts,
+            );
+        }
+        return providers[name];
+    };
+
+    hre.changeNetwork = async function changeNetwork(newNetwork: string) {
+        if (!this.config.networks[newNetwork]) {
+            throw new Error(
+                `changeNetwork: Couldn't find network '${newNetwork}'`,
+            );
+        }
+
+        if (!providers[this.network.name]) {
+            providers[this.network.name] = this.network.provider;
+        }
+
+        this.network.name = newNetwork;
+        this.network.config = this.config.networks[newNetwork];
+        this.network.provider = await this.getProvider(newNetwork);
+
+        if ((this as any).ethers) {
+            const {
+                EthersProviderWrapper,
+                // eslint-disable-next-line @typescript-eslint/no-var-requires
+            } = require('@nomiclabs/hardhat-ethers/internal/ethers-provider-wrapper');
+            (this as any).ethers.provider = new EthersProviderWrapper(
+                this.network.provider,
+            );
+        }
+    };
+});

@@ -183,18 +183,12 @@ export const useNetwork = async (
     network: (typeof SUPPORTED_CHAINS)[number]['name'],
 ) => {
     console.log(`\t\t[+] Switching to network ${network}...`);
-    const pk = process.env.PRIVATE_KEY;
-    if (pk === undefined) throw new Error('[-] PRIVATE_KEY env var not set');
+    loadNetworkEnv(network);
+
     const info = hre.config.networks?.[network];
     if (!info)
         throw new Error(`[-] Hardhat network config not found for ${network} `);
 
-    const chain = hre.SDK.utils.getChainBy('name', network);
-    loadNetworkEnv(network);
-    const provider = new hre.ethers.providers.JsonRpcProvider(
-        { url: chain.rpc.replace('<api_key>', process.env.ALCHEMY_API_KEY!) },
-        { chainId: Number(chain.chainId), name: `rpc-${info.chainId}` },
-    );
-
-    return new hre.ethers.Wallet(pk, provider);
+    await hre.changeNetwork(network);
+    return hre.network.provider;
 };
