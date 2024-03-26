@@ -40,7 +40,8 @@ export const getChainBy = (
     value: keyof typeof SUPPORTED_CHAINS | string,
 ) => {
     const chain = _find(SUPPORTED_CHAINS, (e) => e[getBy] === String(value));
-    if (!chain) throw new Error(`[-] Chain not found for ${String(value)}`);
+    if (!chain)
+        throw new Error(`[-] Chain not found for ${getBy} == ${String(value)}`);
     return chain;
 };
 
