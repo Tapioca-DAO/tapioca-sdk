@@ -61,7 +61,7 @@ function populateCalls(
 
     const calls: TapiocaMulticall.CallStruct[] = [];
     const peers = deployments.filter(
-        (e: any) => targetDep.chainInfo.chainId !== e.chainId,
+        (e) => targetDep.chainInfo.chainId !== e.chainInfo.chainId,
     ); // Filter out the target chain
     for (const peer of peers) {
         console.log(`\t\t[+] Setting peer for ${peer.chainInfo.name}...`);
