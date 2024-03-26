@@ -47,14 +47,17 @@ export function loadLocalContractOnAllChains(
     ).map((e) => e.chainId);
 
     for (const chainId of chainsIds) {
-        const deployment = hre.SDK.db.findLocalDeployment(
-            chainId,
-            contractName,
-            tag,
-        );
-        if (deployment) {
-            deployments.push({ ...deployment, chainId });
-        }
+        // Will throw if deployment not found on a chainId
+        try {
+            const deployment = hre.SDK.db.findLocalDeployment(
+                chainId,
+                contractName,
+                tag,
+            );
+            if (deployment) {
+                deployments.push({ ...deployment, chainId });
+            }
+        } catch (e) {}
     }
     return deployments;
 }

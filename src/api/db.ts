@@ -11,6 +11,7 @@ import {
     TLocalDeployment,
     TProjectCaller,
 } from '../shared';
+import { getChainBy } from './utils';
 
 // TODO - Add a way to overwrite previous deps when merging to not shuffle the order (to not scramble Git diffs)
 /*
@@ -83,8 +84,9 @@ export const findLocalDeployment = (
         }) as TChainIdDeployment | undefined;
         if (!deployments) throw new Error();
     } catch (e) {
+        const chainInfo = getChainBy('chainId', chainId);
         throw new Error(
-            `[-] Can not load local deployment ${contractName} with tag ${tag} and chainId ${chainId}`,
+            `[-] No deployment found for chain ${chainInfo}. Trying to load local deployment ${contractName} with tag ${tag}`,
         );
     }
 
