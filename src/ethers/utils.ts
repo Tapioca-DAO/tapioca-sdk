@@ -32,30 +32,34 @@ export function loadLocalContract(
     );
 }
 
+export type TContractWithChainInfo = {
+    deployment: TContract;
+    chainInfo: (typeof SUPPORTED_CHAINS)[number];
+};
 export function loadLocalContractOnAllChains(
     hre: HardhatRuntimeEnvironment,
     contractName: string,
     tag: string,
     isTestnet: boolean,
-): (TContract & { chainId: string })[] {
-    const deployments: (TContract & { chainId: string })[] = [];
+): TContractWithChainInfo[] {
+    const deployments: TContractWithChainInfo[] = [];
     // Get chains that are testnet or not
-    const chainsIds = SUPPORTED_CHAINS.filter((e) =>
+    const chains = SUPPORTED_CHAINS.filter((e) =>
         isTestnet
             ? !!e.tags.find((o) => o === 'testnet')
             : !e.tags.find((o) => o === 'testnet'),
-    ).map((e) => e.chainId);
+    );
 
-    for (const chainId of chainsIds) {
+    for (const chainInfo of chains) {
         // Will throw if deployment not found on a chainId
         try {
             const deployment = hre.SDK.db.findLocalDeployment(
-                chainId,
+                chainInfo.chainId,
                 contractName,
                 tag,
             );
             if (deployment) {
-                deployments.push({ ...deployment, chainId });
+                deployments.push({ deployment, chainInfo });
             }
         } catch (e) {}
     }

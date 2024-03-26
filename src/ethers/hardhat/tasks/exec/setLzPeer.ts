@@ -2,14 +2,13 @@ import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { getChainBy } from '../../../../api/utils';
 import { BaseTapiocaOmnichainEngine__factory } from '../../../../typechain/tapioca-periph';
 import { TapiocaMulticall } from '../../../../typechain/tapioca-periphery';
-import { getChainInfo, loadLocalContractOnAllChains } from '../../../utils';
+import {
+    TContractWithChainInfo,
+    getChainInfo,
+    loadLocalContractOnAllChains,
+} from '../../../utils';
 import { TTapiocaDeployTaskArgs } from '../../DeployerVM';
-import { TContract } from '../../../../shared';
 import { useNetwork } from '../../utils';
-
-type TContractDeployment = TContract & {
-    chainId: string;
-};
 
 export const setLzPeer__task = async (
     _taskArgs: TTapiocaDeployTaskArgs & {
@@ -35,41 +34,41 @@ export const setLzPeer__task = async (
     }
 
     for (const targetDep of deployments) {
-        const targetChain = getChainBy('chainId', targetDep.chainId);
-        // dangerous?
+        const targetChain = getChainBy('chainId', targetDep.chainInfo.chainId);
+        // Not good
         await useNetwork(hre, targetChain.name); // Need to switch network to the target chain
+        const VM = hre.SDK.DeployerVM.loadVM({ hre, tag }); // Need to load the VM for every chainID to get the right multicall instance
 
         console.log(`\t[+] Setting lzPeer on ${targetChain.name}...`);
-
-        const VM = hre.SDK.DeployerVM.loadVM({ hre, tag }); // Need to load the VM for every chainID to get the right multicall instance
         const calls = populateCalls(hre, targetDep, deployments);
         VM.executeMulticall(calls);
     }
 
     // Switch back to the original network
-    await useNetwork(hre, chain.name);
     console.log(`[+] lzPeer setting for ${targetName} done!`);
+    await useNetwork(hre, chain.name);
 };
 
 function populateCalls(
     hre: HardhatRuntimeEnvironment,
-    targetDep: TContractDeployment,
-    deployments: TContractDeployment[],
+    targetDep: TContractWithChainInfo,
+    deployments: TContractWithChainInfo[],
 ) {
     const contract = BaseTapiocaOmnichainEngine__factory.connect(
-        targetDep.address,
+        targetDep.deployment.address,
         hre.ethers.provider.getSigner(),
     );
 
     const calls: TapiocaMulticall.CallStruct[] = [];
     const peers = deployments.filter(
-        (e: any) => targetDep.chainId !== e.chainId,
-    );
+        (e: any) => targetDep.chainInfo.chainId !== e.chainId,
+    ); // Filter out the target chain
     for (const peer of peers) {
+        console.log(`\t\t[+] Setting peer for ${peer.chainInfo.name}...`);
         calls.push({
             target: contract.address,
             callData: contract.interface.encodeFunctionData('setPeer', [
-                peer.chainId,
+                peer.chainInfo.lzChainId,
                 '0x'.concat(contract.address.slice(2).padStart(64, '0')),
             ]),
             allowFailure: false,
