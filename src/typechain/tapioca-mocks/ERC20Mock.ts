@@ -54,6 +54,7 @@ export interface ERC20MockInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "setFeeRecipient(address)": FunctionFragment;
     "setTransferFee(uint32)": FunctionFragment;
+    "setWhitelist(address,bool)": FunctionFragment;
     "symbol()": FunctionFragment;
     "toggleRestrictions()": FunctionFragment;
     "totalSupply()": FunctionFragment;
@@ -62,6 +63,7 @@ export interface ERC20MockInterface extends utils.Interface {
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "updateMintLimit(uint256)": FunctionFragment;
+    "whitelist(address)": FunctionFragment;
     "withdraw(uint256)": FunctionFragment;
   };
 
@@ -115,6 +117,8 @@ export interface ERC20MockInterface extends utils.Interface {
       | "setFeeRecipient(address)"
       | "setTransferFee"
       | "setTransferFee(uint32)"
+      | "setWhitelist"
+      | "setWhitelist(address,bool)"
       | "symbol"
       | "symbol()"
       | "toggleRestrictions"
@@ -131,6 +135,8 @@ export interface ERC20MockInterface extends utils.Interface {
       | "transferOwnership(address)"
       | "updateMintLimit"
       | "updateMintLimit(uint256)"
+      | "whitelist"
+      | "whitelist(address)"
       | "withdraw"
       | "withdraw(uint256)"
   ): FunctionFragment;
@@ -319,6 +325,14 @@ export interface ERC20MockInterface extends utils.Interface {
     functionFragment: "setTransferFee(uint32)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
+  encodeFunctionData(
+    functionFragment: "setWhitelist",
+    values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setWhitelist(address,bool)",
+    values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
+  ): string;
   encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
   encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
   encodeFunctionData(
@@ -384,6 +398,14 @@ export interface ERC20MockInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "updateMintLimit(uint256)",
     values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "whitelist",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "whitelist(address)",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "withdraw",
@@ -535,6 +557,14 @@ export interface ERC20MockInterface extends utils.Interface {
     functionFragment: "setTransferFee(uint32)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "setWhitelist",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setWhitelist(address,bool)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
   decodeFunctionResult(
@@ -588,6 +618,11 @@ export interface ERC20MockInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "updateMintLimit(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "whitelist", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "whitelist(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
@@ -948,6 +983,18 @@ export interface ERC20Mock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    setWhitelist(
+      _addr: PromiseOrValue<string>,
+      _value: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setWhitelist(address,bool)"(
+      _addr: PromiseOrValue<string>,
+      _value: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     symbol(overrides?: CallOverrides): Promise<[string]>;
 
     "symbol()"(overrides?: CallOverrides): Promise<[string]>;
@@ -1013,6 +1060,16 @@ export interface ERC20Mock extends BaseContract {
       _newVal: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    whitelist(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "whitelist(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
     withdraw(
       wad: PromiseOrValue<BigNumberish>,
@@ -1253,6 +1310,18 @@ export interface ERC20Mock extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  setWhitelist(
+    _addr: PromiseOrValue<string>,
+    _value: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setWhitelist(address,bool)"(
+    _addr: PromiseOrValue<string>,
+    _value: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   symbol(overrides?: CallOverrides): Promise<string>;
 
   "symbol()"(overrides?: CallOverrides): Promise<string>;
@@ -1318,6 +1387,16 @@ export interface ERC20Mock extends BaseContract {
     _newVal: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  whitelist(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "whitelist(address)"(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   withdraw(
     wad: PromiseOrValue<BigNumberish>,
@@ -1550,6 +1629,18 @@ export interface ERC20Mock extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setWhitelist(
+      _addr: PromiseOrValue<string>,
+      _value: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setWhitelist(address,bool)"(
+      _addr: PromiseOrValue<string>,
+      _value: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     symbol(overrides?: CallOverrides): Promise<string>;
 
     "symbol()"(overrides?: CallOverrides): Promise<string>;
@@ -1611,6 +1702,16 @@ export interface ERC20Mock extends BaseContract {
       _newVal: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    whitelist(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "whitelist(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     withdraw(
       wad: PromiseOrValue<BigNumberish>,
@@ -1882,6 +1983,18 @@ export interface ERC20Mock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    setWhitelist(
+      _addr: PromiseOrValue<string>,
+      _value: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setWhitelist(address,bool)"(
+      _addr: PromiseOrValue<string>,
+      _value: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     symbol(overrides?: CallOverrides): Promise<BigNumber>;
 
     "symbol()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1946,6 +2059,16 @@ export interface ERC20Mock extends BaseContract {
     "updateMintLimit(uint256)"(
       _newVal: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    whitelist(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "whitelist(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     withdraw(
@@ -2170,6 +2293,18 @@ export interface ERC20Mock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    setWhitelist(
+      _addr: PromiseOrValue<string>,
+      _value: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setWhitelist(address,bool)"(
+      _addr: PromiseOrValue<string>,
+      _value: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "symbol()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -2234,6 +2369,16 @@ export interface ERC20Mock extends BaseContract {
     "updateMintLimit(uint256)"(
       _newVal: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    whitelist(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "whitelist(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     withdraw(

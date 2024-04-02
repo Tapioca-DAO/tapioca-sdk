@@ -17,6 +17,14 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BalancerVaultMock__factory>;
     getContractFactory(
+      name: "AccessControlledOffchainAggregatorMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AccessControlledOffchainAggregatorMock__factory>;
+    getContractFactory(
+      name: "ChainlinkFeedMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ChainlinkFeedMock__factory>;
+    getContractFactory(
       name: "ContractThatCannotBeDeployed",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ContractThatCannotBeDeployed__factory>;
@@ -44,6 +52,10 @@ declare module "hardhat/types/runtime" {
       name: "FlashMaliciousBorrowerMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.FlashMaliciousBorrowerMock__factory>;
+    getContractFactory(
+      name: "GLPManagerMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.GLPManagerMock__factory>;
     getContractFactory(
       name: "GmxMarketMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -140,12 +152,26 @@ declare module "hardhat/types/runtime" {
       name: "YieldBoxMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.YieldBoxMock__factory>;
+    getContractFactory(
+      name: "ZeroXSwapperMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ZeroXSwapperMock__factory>;
 
     getContractAt(
       name: "BalancerVaultMock",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.BalancerVaultMock>;
+    getContractAt(
+      name: "AccessControlledOffchainAggregatorMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AccessControlledOffchainAggregatorMock>;
+    getContractAt(
+      name: "ChainlinkFeedMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ChainlinkFeedMock>;
     getContractAt(
       name: "ContractThatCannotBeDeployed",
       address: string,
@@ -181,6 +207,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.FlashMaliciousBorrowerMock>;
+    getContractAt(
+      name: "GLPManagerMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.GLPManagerMock>;
     getContractAt(
       name: "GmxMarketMock",
       address: string,
@@ -301,6 +332,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.YieldBoxMock>;
+    getContractAt(
+      name: "ZeroXSwapperMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ZeroXSwapperMock>;
 
     // default types
     getContractFactory(
