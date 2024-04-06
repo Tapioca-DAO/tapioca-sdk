@@ -2,6 +2,8 @@ import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { EChainID, TAPIOCA_PROJECTS_NAME } from '../api/config';
 import { TContract } from '../shared';
 import SUPPORTED_CHAINS from '../SUPPORTED_CHAINS';
+import { ContractFactory } from 'ethers';
+import { IDeployerVMAdd } from './hardhat/DeployerVM';
 
 export function loadGlobalContract(
     hre: HardhatRuntimeEnvironment,
@@ -83,3 +85,15 @@ export function checkExists<T>(
 export function getChainInfo(hre: HardhatRuntimeEnvironment) {
     return hre.SDK.utils.getChainBy('chainId', hre.SDK.eChainId);
 }
+
+type TFactory<T> = ContractFactory & T;
+export const buildContractDep = <T>(params: {
+    factory: TFactory<T>;
+    args: IDeployerVMAdd<TFactory<T>>;
+}): IDeployerVMAdd<TFactory<T>> => {
+    const { factory, args } = params;
+    return {
+        ...args,
+        contract: factory,
+    };
+};

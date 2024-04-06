@@ -106,6 +106,7 @@ export {
     loadGlobalContract,
     loadLocalContract,
     loadLocalContractOnAllChains,
+    buildContractDep,
 } from './ethers/utils';
 
 // Global
