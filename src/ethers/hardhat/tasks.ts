@@ -7,6 +7,7 @@ import { getDeployment__task } from './tasks/view/getDeployment';
 import { deployUniV3pool__task } from './tasks/exec/deployUniV3Pool';
 import { exportDep__task } from './tasks/exec/exportDep';
 import { setLzPeer__task } from './tasks/exec/setLzPeer';
+import { createEmptyStratYbAsset__task } from './tasks/exec/createEmptyStratYbAsset';
 
 const sdkScope = scope('sdk', 'Tapioca SDK tasks');
 
@@ -125,4 +126,15 @@ TAP_TASK(
             'targetName',
             'The name of the deployment contract to set the lzPeer for. NEEDS to be deployed on every chain you want to link to.',
         ),
+);
+
+TAP_TASK(
+    sdkScope
+        .task(
+            'createEmptyStratYbAsset',
+            'Deploys an empty strat and register the token as an asset on YieldBox with the strat',
+            createEmptyStratYbAsset__task,
+        )
+        .addParam('token', 'The address of the token to deploy.')
+        .addParam('deploymentName', 'The name of the deployment.'),
 );
