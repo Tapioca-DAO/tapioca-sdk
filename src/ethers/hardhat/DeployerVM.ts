@@ -929,11 +929,34 @@ export class DeployerVM {
                 );
 
                 // Build the creation code
-                const creationCode =
-                    contract.contract.bytecode +
-                    contract.contract.interface
-                        .encodeDeploy(contract.args)
-                        .split('x')[1];
+                let creationCode;
+                // Can throw an error if the creation code is invalid
+                // For example wrong arguments
+                try {
+                    creationCode =
+                        contract.contract.bytecode +
+                        contract.contract.interface
+                            .encodeDeploy(contract.args)
+                            .split('x')[1];
+                } catch (e) {
+                    console.log(
+                        '[-] Failed to build creation code for contract:',
+                    );
+                    console.log(
+                        JSON.stringify(
+                            {
+                                contract: contract.deploymentName,
+                                args: contract.args,
+                                dependsOn: contract.dependsOn,
+                                meta: contract.meta,
+                            },
+                            null,
+                            2,
+                        ),
+                    );
+                    console.log('\n');
+                    throw e;
+                }
 
                 const salt = this.genSalt();
 
