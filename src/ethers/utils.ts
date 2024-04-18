@@ -87,13 +87,8 @@ export function getChainInfo(hre: HardhatRuntimeEnvironment) {
 }
 
 type TFactory<T> = ContractFactory & T;
-export const buildContractDep = <T>(params: {
-    factory: TFactory<T>;
-    args: IDeployerVMAdd<TFactory<T>>;
-}): IDeployerVMAdd<TFactory<T>> => {
-    const { factory, args } = params;
-    return {
-        ...args,
-        contract: factory,
-    };
+export const buildContractDep = <T>(
+    params: IDeployerVMAdd<TFactory<T>>,
+): IDeployerVMAdd<TFactory<T>> => {
+    return params;
 };
