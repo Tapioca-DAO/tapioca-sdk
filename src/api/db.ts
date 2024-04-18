@@ -150,11 +150,57 @@ export const saveLocally = (data: TLocalDeployment, tag = 'default') => {
     return deployments;
 };
 
+export const saveBuildLocally = (
+    options: {
+        chainId: string;
+        chainIdName: string;
+        lastBlockHeight: number;
+        contracts: TContract[];
+    },
+    tag = 'default',
+) => {
+    const data = buildLocalDeployment(options);
+    const db = readDB('local') ?? {};
+    const prevDep = db[tag] || data; // Read previous deployments
+
+    // Merge prev and new deployments
+    const deployments = mergeDeployments(prevDep, data);
+
+    const deploymentToSave = { ...db, [tag]: deployments };
+
+    // Save the new deployment
+    writeDB('local', sortJson(deploymentToSave), LOCAL_DB_PATH);
+    return deployments;
+};
+
 export const saveGlobally = (
     data: TLocalDeployment,
     project: TProjectCaller,
     tag = 'default',
 ) => {
+    const db = readDB('global') ?? {};
+    const prevDep: any = db[tag]?.[project] || data; // Read previous deployments
+
+    // Merge prev and new deployments
+    const deployments = mergeDeployments(prevDep, data);
+
+    // Save the new deployment
+    db[tag] = sortJson({ ...db[tag], [project]: sortJson(deployments) });
+    writeDB('global', sortJson(db), GLOBAL_DB_PATH);
+    return deployments;
+};
+
+export const saveBuildGlobally = (
+    options: {
+        chainId: string;
+        chainIdName: string;
+        lastBlockHeight: number;
+        contracts: TContract[];
+    },
+    project: TProjectCaller,
+    tag = 'default',
+) => {
+    const data = buildLocalDeployment(options);
     const db = readDB('global') ?? {};
     const prevDep: any = db[tag]?.[project] || data; // Read previous deployments
 
