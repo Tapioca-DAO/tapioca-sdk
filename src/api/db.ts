@@ -74,7 +74,7 @@ export const loadGlobalDeployment = (
 export const findLocalDeployment = (
     chainId: string,
     contractName: string,
-    tag = 'default',
+    tag: string,
 ) => {
     let deployments: TChainIdDeployment | undefined;
     try {
@@ -107,7 +107,7 @@ export const findGlobalDeployment = (
     project: TProjectCaller,
     chainId: string,
     contractName: string,
-    tag = 'default',
+    tag: string,
 ) => {
     const deployments = readDeployment('global', {
         tag,
@@ -136,7 +136,7 @@ export const findGlobalDeployment = (
  * @param data The deployment to save
  * @param tag The tag to save the deployment under
  */
-export const saveLocally = (data: TLocalDeployment, tag = 'default') => {
+export const saveLocally = (data: TLocalDeployment, tag: string) => {
     const db = readDB('local') ?? {};
     const prevDep = db[tag] || data; // Read previous deployments
 
@@ -157,7 +157,7 @@ export const saveBuildLocally = (
         lastBlockHeight: number;
         contracts: TContract[];
     },
-    tag = 'default',
+    tag: string,
 ) => {
     const data = buildLocalDeployment(options);
     const db = readDB('local') ?? {};
@@ -176,7 +176,7 @@ export const saveBuildLocally = (
 export const saveGlobally = (
     data: TLocalDeployment,
     project: TProjectCaller,
-    tag = 'default',
+    tag: string,
 ) => {
     const db = readDB('global') ?? {};
     const prevDep: any = db[tag]?.[project] || data; // Read previous deployments
@@ -198,7 +198,7 @@ export const saveBuildGlobally = (
         contracts: TContract[];
     },
     project: TProjectCaller,
-    tag = 'default',
+    tag: string,
 ) => {
     const data = buildLocalDeployment(options);
     const db = readDB('global') ?? {};
