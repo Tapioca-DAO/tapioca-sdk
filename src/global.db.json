@@ -1,6 +1,22 @@
 {
     "default": {
         "generic": {
+            "42161": {
+                "name": "arbitrum",
+                "lastBlockHeight": 203019733,
+                "contracts": [
+                    {
+                        "name": "TapiocaDeployer",
+                        "address": "0x1f6b85eb9eFB4a65045C92fF8AB5ac0cdD2Fcb16",
+                        "meta": {}
+                    },
+                    {
+                        "name": "TapiocaMulticall",
+                        "address": "0xD273F9a42242F43bA0F1D27f006a727952F0f7ed",
+                        "meta": {}
+                    }
+                ]
+            },
             "421614": {
                 "name": "arbitrum_sepolia",
                 "lastBlockHeight": 8226293,
