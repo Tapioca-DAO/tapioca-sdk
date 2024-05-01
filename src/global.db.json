@@ -3131,22 +3131,22 @@
                 "contracts": [
                     {
                         "name": "YieldBoxURIBuilder",
-                        "address": "0x4cFb529BF87C6f0b2b9F2B4fD36E269e1595F763",
+                        "address": "0xfd82A4EAcd5b9c716c7f9949c1DB890b0Ae13Fe4",
                         "meta": {
                             "args": [],
-                            "salt": "0x2bdf38d295e328e5a18ef5d696c7552021928046f58af3a4ea8817e73f4a47d9",
+                            "salt": "0xcf193366e3ad990ec88437504804f5be72c129b90a1d55edb4b80d460b5e8cc3",
                             "create2": true
                         }
                     },
                     {
                         "name": "YieldBox",
-                        "address": "0x56ae4588A04F401f3441b18A84bc1eb9c14663D8",
+                        "address": "0x99CB432F5c00Cdc99D3b6F2e3E390c3769403c8B",
                         "meta": {
                             "args": [
                                 "0x2EAe4fbc552fE35C1D3Df2B546032409bb0E431E",
-                                "0x4cFb529BF87C6f0b2b9F2B4fD36E269e1595F763"
+                                "0xfd82A4EAcd5b9c716c7f9949c1DB890b0Ae13Fe4"
                             ],
-                            "salt": "0xbd6c603fa005a4153f9d221bf6b639702c104c5e243baf68c18c3a7403550c85",
+                            "salt": "0x792420518bca7048154dbc4e91eb068dcd6e5ebfc2c87908e672e17053babb94",
                             "create2": true
                         }
                     }
@@ -3158,22 +3158,22 @@
                 "contracts": [
                     {
                         "name": "YieldBoxURIBuilder",
-                        "address": "0xB693216607A799aebd0A9631e1141aB83DC1a08f",
+                        "address": "0x6b3Be786ba49FCCe4DD0C41a494532ecB1Dcf64e",
                         "meta": {
                             "args": [],
-                            "salt": "0x0e8da6d9d43e497bf892295153de36444cf83ade44a7f5952ade4e3fc0e58636",
+                            "salt": "0x20446c3d4aa58323121de1f8d835c4d72c426af483ecf4baec5b1a490ee09998",
                             "create2": true
                         }
                     },
                     {
                         "name": "YieldBox",
-                        "address": "0xa6491a80bC939599593F49aEA41cDa9d98Fd908D",
+                        "address": "0x3d661d72696956f86DBD55E0D953512f709659F9",
                         "meta": {
                             "args": [
                                 "0xD8a79b479b0c47675E3882A1DAA494b6775CE227",
-                                "0xB693216607A799aebd0A9631e1141aB83DC1a08f"
+                                "0x6b3Be786ba49FCCe4DD0C41a494532ecB1Dcf64e"
                             ],
-                            "salt": "0x3b14863c5f5a19e9da53011694d54e9d38ca45f4c0d6793c042445cd16c61ac0",
+                            "salt": "0xb7389b190e948c4b899f57a80412fb58766716b20de2a1a8d771a22bd185925e",
                             "create2": true
                         }
                     }
