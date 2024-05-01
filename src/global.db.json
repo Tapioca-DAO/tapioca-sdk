@@ -3180,5 +3180,97 @@
                 ]
             }
         }
+    },
+    "test3": {
+        "generic": {
+            "421614": {
+                "name": "arbitrum_sepolia",
+                "lastBlockHeight": 39547238,
+                "contracts": [
+                    {
+                        "name": "TapiocaDeployer",
+                        "address": "0x1C54541ec05C25fAe837E9735adBe46110Bc75dA",
+                        "meta": {}
+                    },
+                    {
+                        "name": "TapiocaMulticall",
+                        "address": "0x23F1229C80E28362c95ca570dD06bA738419b7DD",
+                        "meta": {}
+                    }
+                ]
+            },
+            "11155111": {
+                "name": "sepolia",
+                "lastBlockHeight": 5816747,
+                "contracts": [
+                    {
+                        "name": "TapiocaDeployer",
+                        "address": "0xEA00f52250Cc64011Df5387172e4bdBC92a60D85",
+                        "meta": {}
+                    },
+                    {
+                        "name": "TapiocaMulticall",
+                        "address": "0xe74d60592EEcA33C725d6ca71Dd340eFaBdf4745",
+                        "meta": {}
+                    }
+                ]
+            }
+        },
+        "yieldbox": {
+            "421614": {
+                "name": "arbitrum_sepolia",
+                "lastBlockHeight": 39547282,
+                "contracts": [
+                    {
+                        "name": "YieldBoxURIBuilder",
+                        "address": "0xeC0917f142852CB5ad34cCd860Be338e72c2507b",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x8b4e70ab1e21d355bb2ba0c9a1955daab7e59c63f874633c645893bd235ed877",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YieldBox",
+                        "address": "0xE6F8730580b834d375867C720fB27A2c190A5a2A",
+                        "meta": {
+                            "args": [
+                                "0x2EAe4fbc552fE35C1D3Df2B546032409bb0E431E",
+                                "0xeC0917f142852CB5ad34cCd860Be338e72c2507b"
+                            ],
+                            "salt": "0x8a98538acaeae0ed859369e2fc46e6c958e97d6739895bc81f9cd5560f8a92bb",
+                            "create2": true
+                        }
+                    }
+                ]
+            },
+            "11155111": {
+                "name": "sepolia",
+                "lastBlockHeight": 5816754,
+                "contracts": [
+                    {
+                        "name": "YieldBoxURIBuilder",
+                        "address": "0xCa4cAb7176c126EA76a43A298923895d6B379B43",
+                        "meta": {
+                            "args": [],
+                            "salt": "0xbae640699d310fac0a2ecab6b730d5bd2964459def5328879a40ed396d99c8c0",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YieldBox",
+                        "address": "0x067Ec235808f3bEF0067De87ca49a93100b2BBD8",
+                        "meta": {
+                            "args": [
+                                "0xD8a79b479b0c47675E3882A1DAA494b6775CE227",
+                                "0xCa4cAb7176c126EA76a43A298923895d6B379B43"
+                            ],
+                            "salt": "0xb7e17d4a2cedabcdaef0afb02c69319a486902d190b60d83e4d45e7f8b565da4",
+                            "create2": true
+                        }
+                    }
+                ]
+            }
+        }
     }
 }
