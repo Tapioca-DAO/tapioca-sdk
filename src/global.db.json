@@ -328,6 +328,62 @@
                     }
                 ]
             }
+        },
+        "yieldbox": {
+            "421614": {
+                "name": "arbitrum_sepolia",
+                "lastBlockHeight": 39890924,
+                "contracts": [
+                    {
+                        "name": "YieldBoxURIBuilder",
+                        "address": "0x7088E1C609F56e0df90f7C182958425A5De97caA",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x419e379b4305a275cabbe47cf82c15d53b88fb51964787d4a58d55f68f9d8913",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YieldBox",
+                        "address": "0x06dD34CBb675d6a2eC71adA2b90D51E1Aa853bFa",
+                        "meta": {
+                            "args": [
+                                "0x2EAe4fbc552fE35C1D3Df2B546032409bb0E431E",
+                                "0x7088E1C609F56e0df90f7C182958425A5De97caA"
+                            ],
+                            "salt": "0xf4cd2b5b257410d012356a54a4ee7ec3581e88d7b9615cb4f959a761e036a458",
+                            "create2": true
+                        }
+                    }
+                ]
+            },
+            "11155420": {
+                "name": "optimism_sepolia",
+                "lastBlockHeight": 11436097,
+                "contracts": [
+                    {
+                        "name": "YieldBoxURIBuilder",
+                        "address": "0x5aB91dC76B0c84802898E8D5ec201f7e9950083f",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x04e5acbc3feff55996f8ac9ceb1dbb9321f388411f53f8c9d54670ad7370ff9d",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YieldBox",
+                        "address": "0x1Fe2357A29FD1f2352227B6Ff06245720D120832",
+                        "meta": {
+                            "args": [
+                                "0x4fB538Ed1a085200bD08F66083B72c0bfEb29112",
+                                "0x5aB91dC76B0c84802898E8D5ec201f7e9950083f"
+                            ],
+                            "salt": "0x646e84997e199881aff5f6c677e75e35857ccb19b46a419532c4e12d3b62087d",
+                            "create2": true
+                        }
+                    }
+                ]
+            }
         }
     },
     "8E3065CE-327F-4334-A8FA-2AEDE548F636": {
