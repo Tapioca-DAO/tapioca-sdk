@@ -3149,6 +3149,66 @@
                 "lastBlockHeight": 39915781,
                 "contracts": [
                     {
+                        "name": "LBP_AUTHORIZER",
+                        "address": "0x2A5ac826da559fb4C05124a260D97eA7e098f99D",
+                        "meta": {
+                            "args": [
+                                "0x90Eb269f9b033603895AF8a2A495975A61900379"
+                            ],
+                            "salt": "0x4a077e145712175193bace197d1837d426385937e7e8557f4c4cb0d559c554f9",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "LBP_VAULT",
+                        "address": "0x7C2C83D4059F4F189f5e5f1BC7408617c0BaA307",
+                        "meta": {
+                            "args": [
+                                "0x2A5ac826da559fb4C05124a260D97eA7e098f99D",
+                                "0x6D6a13AbE7935b2cf6d67e49bc17F5035362C705",
+                                0,
+                                0
+                            ],
+                            "salt": "0x24d12bb0a6cb48388a506b523d038cbecc1021067d380e3cafdfb2f1fcfdf212",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "TAP_USDC_LBP",
+                        "address": "0x5acCF671Df235F107bdC4402256Eed9C4A4456c7",
+                        "meta": {
+                            "args": [
+                                "0x7C2C83D4059F4F189f5e5f1BC7408617c0BaA307",
+                                "Tapioca USDC/TAP LBP",
+                                "USDC/TAP LBP",
+                                [
+                                    "0x6D6a13AbE7935b2cf6d67e49bc17F5035362C705",
+                                    "0x9A90A152CCec19AC75FAB9f6F7dF44b8CC423Bd4"
+                                ],
+                                [
+                                    {
+                                        "type": "BigNumber",
+                                        "hex": "0x2386f26fc10000"
+                                    },
+                                    {
+                                        "type": "BigNumber",
+                                        "hex": "0x0dbd2fc137a30000"
+                                    }
+                                ],
+                                {
+                                    "type": "BigNumber",
+                                    "hex": "0x2386f26fc10000"
+                                },
+                                0,
+                                0,
+                                "0x90Eb269f9b033603895AF8a2A495975A61900379",
+                                false
+                            ],
+                            "salt": "0x490227c198110f17e3fcf2551b0e29451ff87b2e42a4446fa3d549b305d1d13c",
+                            "create2": true
+                        }
+                    },
+                    {
                         "name": "PEARLMIT",
                         "address": "0x4A4D566C289FAFb264B9f21Bd0F9c2CcfCAb0078",
                         "meta": {
