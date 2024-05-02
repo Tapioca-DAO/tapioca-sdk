@@ -1,4 +1,43 @@
 {
+    "2ECFF8A1-FD68-47FD-A6C0-47E48729FEAE": {
+        "generic": {
+            "421614": {
+                "name": "arbitrum_sepolia",
+                "lastBlockHeight": 39837523,
+                "contracts": [
+                    {
+                        "name": "TapiocaDeployer",
+                        "address": "0xE41cAF0C4956aFCfaB1ec2bB5Cf92EAEfdff1804",
+                        "meta": {}
+                    },
+                    {
+                        "name": "TapiocaMulticall",
+                        "address": "0xf54368eC30ab78CED8625315233acD8414913744",
+                        "meta": {}
+                    }
+                ]
+            }
+        },
+        "tap-token": {
+            "421614": {
+                "name": "arbitrum_sepolia",
+                "lastBlockHeight": 39837566,
+                "contracts": [
+                    {
+                        "name": "LTAP",
+                        "address": "0x81fc032F97702b50C478506A99232F62244ceD0E",
+                        "meta": {
+                            "args": [
+                                "0xf54368eC30ab78CED8625315233acD8414913744"
+                            ],
+                            "salt": "0xba7f2d61de34e5d6231349f4c8ec43e15599b043e1bf0a78c56a2c83520e8c9c",
+                            "create2": true
+                        }
+                    }
+                ]
+            }
+        }
+    },
     "default": {
         "generic": {
             "421614": {
