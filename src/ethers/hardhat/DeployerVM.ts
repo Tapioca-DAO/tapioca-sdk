@@ -201,10 +201,13 @@ export class DeployerVM {
                 tapiocaMulticallAddr: tapiocaMulticall.address,
                 chainInfo,
             });
-
-            // Add and execute
-            await VM.execute(wait, staticSimulation ?? true);
-            await VM.save();
+            if (VM.getQueue().length === 0) {
+                console.log('[-] No contracts to deploy, skipping to setup.');
+            } else {
+                // Add and execute
+                await VM.execute(wait, staticSimulation ?? true);
+                await VM.save();
+            }
         }
 
         if (taskArgs.verify) {
