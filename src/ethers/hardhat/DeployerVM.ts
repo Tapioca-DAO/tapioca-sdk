@@ -88,6 +88,8 @@ export class DeployerVM {
     private multicall?: TapiocaMulticall;
     private multisig?: MultisigMock;
 
+    static TAPIOCA_MULTICALL_NAME = 'TapiocaMulticall';
+
     hre: HardhatRuntimeEnvironment;
     options: IConstructorOptions;
 
@@ -613,7 +615,7 @@ export class DeployerVM {
                 deployment = this.hre.SDK.db.findGlobalDeployment(
                     project,
                     String(this.hre.network.config.chainId),
-                    'TapiocaMulticall',
+                    TAPIOCA_MULTICALL_NAME,
                     _tag,
                 );
                 if (deployment) {
@@ -665,7 +667,7 @@ export class DeployerVM {
                 chainId: String(this.hre.network.config.chainId),
                 contracts: [
                     {
-                        name: 'TapiocaMulticall',
+                        name: TAPIOCA_MULTICALL_NAME,
                         address: multicall.address,
                         meta: {},
                     },
