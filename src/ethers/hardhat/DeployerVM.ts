@@ -499,9 +499,9 @@ export class DeployerVM {
      */
     async save() {
         if (this.list().length === 0) {
-            throw new Error('[-] No contract to save');
+            console.log('[-] No contract to save');
+            return this;
         }
-
         const dep = this.hre.SDK.db.buildLocalDeployment({
             chainId: String(this.hre.network.config.chainId),
             chainIdName: this.hre.network.name,
