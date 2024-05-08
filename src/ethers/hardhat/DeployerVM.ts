@@ -615,7 +615,7 @@ export class DeployerVM {
                 deployment = this.hre.SDK.db.findGlobalDeployment(
                     project,
                     String(this.hre.network.config.chainId),
-                    TAPIOCA_MULTICALL_NAME,
+                    DeployerVM.TAPIOCA_MULTICALL_NAME,
                     _tag,
                 );
                 if (deployment) {
@@ -667,7 +667,7 @@ export class DeployerVM {
                 chainId: String(this.hre.network.config.chainId),
                 contracts: [
                     {
-                        name: TAPIOCA_MULTICALL_NAME,
+                        name: DeployerVM.TAPIOCA_MULTICALL_NAME,
                         address: multicall.address,
                         meta: {},
                     },
