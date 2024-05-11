@@ -1347,6 +1347,66 @@
                 "lastBlockHeight": 22180359,
                 "contracts": [
                     {
+                        "name": "LBP_AUTHORIZER",
+                        "address": "0x35034CE812E1BaC8adc2eF5dCBFe8f3cd451bf24",
+                        "meta": {
+                            "args": [
+                                "0xcD5B223b3ECF18ae695E797cb033e86b7b189C88"
+                            ],
+                            "salt": "0x19a633d0b574efb4b7537fae2fea42ee8494d09c4318e0061fbabaef4653127c",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "LBP_VAULT",
+                        "address": "0xF8B5e7F8f64be94b97435BD0DFca6B4736EE0952",
+                        "meta": {
+                            "args": [
+                                "0x35034CE812E1BaC8adc2eF5dCBFe8f3cd451bf24",
+                                "0x6D6a13AbE7935b2cf6d67e49bc17F5035362C705",
+                                0,
+                                0
+                            ],
+                            "salt": "0xe262508c4669d6b670b56d82461c3249796d7ee3bec68e6fcc2c5d463c43a7ce",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "TAP_USDC_LBP",
+                        "address": "0xe025E519e3205AEBaA9A320eBd6b073D0C3Ea26B",
+                        "meta": {
+                            "args": [
+                                "0xF8B5e7F8f64be94b97435BD0DFca6B4736EE0952",
+                                "Tapioca USDC/TAP LBP",
+                                "USDC/TAP LBP",
+                                [
+                                    "0x6D6a13AbE7935b2cf6d67e49bc17F5035362C705",
+                                    "0xE05121418B03361664411d6bFEC0257D1a0BD494"
+                                ],
+                                [
+                                    {
+                                        "type": "BigNumber",
+                                        "hex": "0x2386f26fc10000"
+                                    },
+                                    {
+                                        "type": "BigNumber",
+                                        "hex": "0x0dbd2fc137a30000"
+                                    }
+                                ],
+                                {
+                                    "type": "BigNumber",
+                                    "hex": "0x2386f26fc10000"
+                                },
+                                0,
+                                0,
+                                "0xcD5B223b3ECF18ae695E797cb033e86b7b189C88",
+                                false
+                            ],
+                            "salt": "0xab9c8d11fc48e16e3dc689ca9c508921c946b4c445d9a0f611de22828faa231e",
+                            "create2": true
+                        }
+                    },
+                    {
                         "address": "0xfdC1FCa388203685869f353ED263C6606E685A74",
                         "name": "WETH_YB_EMPTY_STRAT",
                         "meta": {
@@ -2134,14 +2194,29 @@
                 "lastBlockHeight": 5566586,
                 "contracts": [
                     {
+                        "address": "0x7098afAc6E15927c4D86B55756A6A7d8fee9A849",
+                        "name": "WETH_YB_EMPTY_STRAT",
+                        "meta": {
+                            "token": "0xD8a79b479b0c47675E3882A1DAA494b6775CE227",
+                            "ybAssetId": 33
+                        }
+                    },
+                    {
+                        "address": "0xb90B2914D61A00E09AEFD33B81ffC6153DaE36cd",
+                        "name": "TAP_TOKEN_YB_EMPTY_STRAT",
+                        "meta": {
+                            "token": "0x7d3Ca9EC322D11946BDc7745723d6C6B37Deb39F",
+                            "ybAssetId": 32
+                        }
+                    },
+                    {
                         "name": "S_DAI_ORACLE",
-                        "address": "0x1525AB1D9337B14A87a1a2eEC3186D66367151E8",
+                        "address": "0x15D8D0B2AC63bD1935109AE3A199A0EC76095f2b",
                         "meta": {
                             "args": [
-                                "0xA30D6ad5f45EF99ea63A515F10bAA2C3B2f7720A",
-                                "0x46e0C2D6979034BA8bc82E63186E0723e51c7445"
+                                "0xA30D6ad5f45EF99ea63A515F10bAA2C3B2f7720A"
                             ],
-                            "salt": "0x8e3e875984b02c96f7a0ae396641d9b0426c74231f764e05f3d8c333bc263231",
+                            "salt": "0x0e16b602f5bc92c688e4b5f8c808ca166b162a084490a625cd443a1ea03afb8c",
                             "create2": true
                         }
                     },
