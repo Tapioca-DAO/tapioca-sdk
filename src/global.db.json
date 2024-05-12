@@ -3315,6 +3315,22 @@
                 "lastBlockHeight": 41310474,
                 "contracts": [
                     {
+                        "name": "ADB_TESTNET_ORACLE",
+                        "address": "0x6eF58dFd47aDe70E35cf571B66da3642B638BE5d",
+                        "meta": {
+                            "args": [
+                                "ADB_TESTNET_ORACLE",
+                                "ADB_TESTNET_ORACLE",
+                                {
+                                    "type": "BigNumber",
+                                    "hex": "0x98cb60aaa10d0000"
+                                }
+                            ],
+                            "salt": "0x006768abed62281689484ae8f0375a820366e155316762c16cbbf67e2d5054e4",
+                            "create2": true
+                        }
+                    },
+                    {
                         "name": "FormToken",
                         "address": "0x02a7945d8E84e6aa0f03E30Be2421b62d1C3cb39",
                         "meta": {
