@@ -3288,6 +3288,22 @@
                         "meta": {}
                     }
                 ]
+            },
+            "11155420": {
+                "name": "optimism_sepolia",
+                "lastBlockHeight": 11865321,
+                "contracts": [
+                    {
+                        "name": "TapiocaDeployer",
+                        "address": "0x464ECd54903EAff75B374804623f9b6a40524d33",
+                        "meta": {}
+                    },
+                    {
+                        "name": "TapiocaMulticall",
+                        "address": "0xD830E6D303b30fd0160371e7052c8B1205Ae2C98",
+                        "meta": {}
+                    }
+                ]
             }
         },
         "tap-token": {
