@@ -3315,6 +3315,22 @@
                 "lastBlockHeight": 41310474,
                 "contracts": [
                     {
+                        "name": "USDC_SEER_CL_ORACLE",
+                        "address": "0x12f3e9Bb479F0C18D747C2e40e89F4aB02fFEB1B",
+                        "meta": {
+                            "args": [
+                                "USDC_SEER_CL_ORACLE",
+                                "USDC_SEER_CL_ORACLE",
+                                {
+                                    "type": "BigNumber",
+                                    "hex": "0x0de0b6b3a7640000"
+                                }
+                            ],
+                            "salt": "0x6c117036f2e806e7925e9f817ebd08f9540a3449abeed5b7d2c820a0805f52f5",
+                            "create2": true
+                        }
+                    },
+                    {
                         "name": "ADB_TAP_OPTION_ORACLE",
                         "address": "0x77e3957776Eb13aEB1B81346420da01dbF40E0Ec",
                         "meta": {
