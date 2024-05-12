@@ -39,7 +39,9 @@ export const setLzPeer__task = async (
         await useNetwork(hre, targetChain.name); // Need to switch network to the target chain
         const VM = hre.SDK.DeployerVM.loadVM({ hre, tag }); // Need to load the VM for every chainID to get the right multicall instance
 
-        console.log(`\t[+] Setting lzPeer on ${targetChain.name}...`);
+        console.log(
+            `\t[+] Setting lzPeer on ${targetChain.name} for ${targetDep.deployment.address}...`,
+        );
         const calls = populateCalls(hre, targetDep, deployments);
         await VM.executeMulticall(calls);
     }
@@ -64,7 +66,9 @@ function populateCalls(
         (e) => targetDep.chainInfo.chainId !== e.chainInfo.chainId,
     ); // Filter out the target chain
     for (const peer of peers) {
-        console.log(`\t\t[+] Setting peer for ${peer.chainInfo.name}...`);
+        console.log(
+            `\t\t[+] Setting peer for ${peer.chainInfo.name} on ${peer.deployment.address}...`,
+        );
         calls.push({
             target: contract.address,
             callData: contract.interface.encodeFunctionData('setPeer', [
