@@ -3315,6 +3315,22 @@
                 "lastBlockHeight": 41310474,
                 "contracts": [
                     {
+                        "name": "ADB_TAP_OPTION_ORACLE",
+                        "address": "0x77e3957776Eb13aEB1B81346420da01dbF40E0Ec",
+                        "meta": {
+                            "args": [
+                                "ADB_TESTNET_ORACLE",
+                                "ADB_TESTNET_ORACLE",
+                                {
+                                    "type": "BigNumber",
+                                    "hex": "0x98cb60aaa10d0000"
+                                }
+                            ],
+                            "salt": "0x22c49236ecd6c85020f138f8e82d06141bf5ab7bad48af1cd11f5b842b5e479c",
+                            "create2": true
+                        }
+                    },
+                    {
                         "name": "ADB_TESTNET_ORACLE",
                         "address": "0x6eF58dFd47aDe70E35cf571B66da3642B638BE5d",
                         "meta": {
