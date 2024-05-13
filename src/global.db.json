@@ -3331,15 +3331,31 @@
                 "lastBlockHeight": 41310474,
                 "contracts": [
                     {
+                        "name": "FORM_SEER_ORACLE_MOCK",
+                        "address": "0xa80ac2E08454F2Dc1a6354267969C9fC24F70b37",
+                        "meta": {
+                            "args": [
+                                "FORM_SEER_ORACLE_MOCK",
+                                "FORM_SEER_ORACLE_MOCK",
+                                {
+                                    "type": "BigNumber",
+                                    "hex": "0x0de0b6b3a7640000"
+                                }
+                            ],
+                            "salt": "0xea992ec2674e74886f4a4f49ef45f99f907863f00daca5d6aa85bebf7bee26a8",
+                            "create2": true
+                        }
+                    },
+                    {
                         "name": "PCNFT_MOCK",
-                        "address": "0xD4c80D14dAaD45ad788e1EbE59e1891f688F3F3e",
+                        "address": "0x52b4B758d0dC4039747a2BD52F87e4448511158d",
                         "meta": {
                             "args": [
                                 "PCNFT_MOCK",
                                 "PCNFT_MOCK",
                                 "0x4b7964f7bC6edC0CfDB8e15A85214AE24D804101"
                             ],
-                            "salt": "0xb32757ff047a18c57a16af334edebcb4b70cf8f39fc8c14c49c95ba6678a061b",
+                            "salt": "0x5d1863766bdce811e86f9be880d81d36020ddad35325238f84a744b6980b0a4a",
                             "create2": true
                         }
                     },
