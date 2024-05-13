@@ -3331,6 +3331,22 @@
                 "lastBlockHeight": 41310474,
                 "contracts": [
                     {
+                        "name": "ADB_TAP_OPTION_ORACLE",
+                        "address": "0x8DA75Ce40dDaFCd1C31c62aa3eAbF048fE71Abd2",
+                        "meta": {
+                            "args": [
+                                "ADB_TAP_OPTION_ORACLE",
+                                "ADB_TAP_OPTION_ORACLE",
+                                {
+                                    "type": "BigNumber",
+                                    "hex": "0x98cd67c9caeaddc0"
+                                }
+                            ],
+                            "salt": "0xa5c21d9f43df766bf69e23f649585889124f99a8bb7896b8a70dd74b126957d3",
+                            "create2": true
+                        }
+                    },
+                    {
                         "name": "USDC_SEER_CL_ORACLE",
                         "address": "0x12f3e9Bb479F0C18D747C2e40e89F4aB02fFEB1B",
                         "meta": {
@@ -3343,22 +3359,6 @@
                                 }
                             ],
                             "salt": "0x6c117036f2e806e7925e9f817ebd08f9540a3449abeed5b7d2c820a0805f52f5",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "ADB_TAP_OPTION_ORACLE",
-                        "address": "0x77e3957776Eb13aEB1B81346420da01dbF40E0Ec",
-                        "meta": {
-                            "args": [
-                                "ADB_TESTNET_ORACLE",
-                                "ADB_TESTNET_ORACLE",
-                                {
-                                    "type": "BigNumber",
-                                    "hex": "0x98cb60aaa10d0000"
-                                }
-                            ],
-                            "salt": "0x22c49236ecd6c85020f138f8e82d06141bf5ab7bad48af1cd11f5b842b5e479c",
                             "create2": true
                         }
                     },
