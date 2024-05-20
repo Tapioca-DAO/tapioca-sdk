@@ -347,6 +347,7 @@ export class DeployerVM {
 
     async executeMulticall(
         calls: TapiocaMulticall.CallStruct[],
+        overrideOptions?: CallOverrides,
         gasLimit = 2_000_000,
     ) {
         console.log('[+] Number of calls:', calls.length);
@@ -360,7 +361,10 @@ export class DeployerVM {
             console.log('[-] Multicall failed');
             console.log('[+] Forcing execution with gas limit', gasLimit);
             const tx = await (
-                await this.multicall!.multicall(calls, { gasLimit })
+                await this.multicall!.multicall(calls, {
+                    ...overrideOptions,
+                    gasLimit,
+                })
             ).wait(this.options.globalWait ?? 3);
             console.log('[+] Multicall Tx: ', tx.transactionHash);
         }
