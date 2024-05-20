@@ -354,7 +354,7 @@ export class DeployerVM {
         await this.getMulticall(); // Ensure multicall is deployed
         try {
             const tx = await (
-                await this.multicall!.multicall(calls)
+                await this.multicall!.multicall(calls, overrideOptions)
             ).wait(this.options.globalWait ?? 3);
             console.log('[+] Multicall Tx: ', tx.transactionHash);
         } catch (e) {
