@@ -370,6 +370,31 @@ export class DeployerVM {
         }
     }
 
+    async executeMulticallValue(
+        calls: TapiocaMulticall.CallValueStruct[],
+        overrideOptions?: CallOverrides,
+        gasLimit = 2_000_000,
+    ) {
+        console.log('[+] Number of calls:', calls.length);
+        await this.getMulticall(); // Ensure multicall is deployed
+        try {
+            const tx = await (
+                await this.multicall!.multicallValue(calls, overrideOptions)
+            ).wait(this.options.globalWait ?? 3);
+            console.log('[+] MulticallValue Tx: ', tx.transactionHash);
+        } catch (e) {
+            console.log('[-] MulticallValue failed');
+            console.log('[+] Forcing execution with gas limit', gasLimit);
+            const tx = await (
+                await this.multicall!.multicallValue(calls, {
+                    ...overrideOptions,
+                    gasLimit,
+                })
+            ).wait(this.options.globalWait ?? 3);
+            console.log('[+] MulticallValue Tx: ', tx.transactionHash);
+        }
+    }
+
     /**
      * Transfers ownership for a contract which inherits OZ Ownable
      * @param to The new owner address
