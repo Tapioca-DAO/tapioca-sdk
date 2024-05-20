@@ -100,6 +100,7 @@ export { TAP_TASK } from './ethers/hardhat/tasks';
 export { deployUniV3pool__task } from './ethers/hardhat/tasks/exec/deployUniV3Pool';
 export { createEmptyStratYbAsset__task } from './ethers/hardhat/tasks/exec/createEmptyStratYbAsset';
 export { setLzPeer__task } from './ethers/hardhat/tasks/exec/setLzPeer';
+export { useNetwork } from './ethers/hardhat/utils';
 
 // Utils
 export {
