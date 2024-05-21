@@ -347,29 +347,29 @@ export class DeployerVM {
 
     async executeMulticall(
         calls: TapiocaMulticall.CallStruct[],
-        params: {
+        params?: {
             overrideOptions?: CallOverrides;
             gasLimit?: number;
             showError?: boolean;
         },
     ) {
         console.log('[+] Number of calls:', calls.length);
-        const gasLimit = params.gasLimit ?? 2_000_000;
+        const gasLimit = params?.gasLimit ?? 2_000_000;
         await this.getMulticall(); // Ensure multicall is deployed
         try {
             const tx = await (
-                await this.multicall!.multicall(calls, params.overrideOptions)
+                await this.multicall!.multicall(calls, params?.overrideOptions)
             ).wait(this.options.globalWait ?? 3);
             console.log('[+] Multicall Tx: ', tx.transactionHash);
         } catch (e) {
             console.log('[-] Multicall failed');
-            if (params.showError) {
+            if (params?.showError) {
                 console.log(e);
             }
             console.log('[+] Forcing execution with gas limit', gasLimit);
             const tx = await (
                 await this.multicall!.multicall(calls, {
-                    ...params.overrideOptions,
+                    ...params?.overrideOptions,
                     gasLimit,
                 })
             ).wait(this.options.globalWait ?? 3);
@@ -379,32 +379,32 @@ export class DeployerVM {
 
     async executeMulticallValue(
         calls: TapiocaMulticall.CallValueStruct[],
-        params: {
+        params?: {
             overrideOptions?: CallOverrides;
             gasLimit?: number;
             showError?: boolean;
         },
     ) {
         console.log('[+] Number of calls:', calls.length);
-        const gasLimit = params.gasLimit ?? 2_000_000;
+        const gasLimit = params?.gasLimit ?? 2_000_000;
         await this.getMulticall(); // Ensure multicall is deployed
         try {
             const tx = await (
                 await this.multicall!.multicallValue(
                     calls,
-                    params.overrideOptions,
+                    params?.overrideOptions,
                 )
             ).wait(this.options.globalWait ?? 3);
             console.log('[+] MulticallValue Tx: ', tx.transactionHash);
         } catch (e) {
             console.log('[-] MulticallValue failed');
-            if (params.showError) {
+            if (params?.showError) {
                 console.log(e);
             }
             console.log('[+] Forcing execution with gas limit', gasLimit);
             const tx = await (
                 await this.multicall!.multicallValue(calls, {
-                    ...params.overrideOptions,
+                    ...params?.overrideOptions,
                     gasLimit,
                 })
             ).wait(this.options.globalWait ?? 3);

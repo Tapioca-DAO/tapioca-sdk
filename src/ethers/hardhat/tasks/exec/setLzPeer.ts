@@ -73,7 +73,7 @@ function populateCalls(
             target: contract.address,
             callData: contract.interface.encodeFunctionData('setPeer', [
                 peer.chainInfo.lzChainId,
-                '0x'.concat(contract.address.slice(2).padStart(64, '0')),
+                '0x'.concat(peer.chainInfo.address.slice(2).padStart(64, '0')),
             ]),
             allowFailure: false,
         });
