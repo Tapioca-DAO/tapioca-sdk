@@ -358,7 +358,9 @@ export class DeployerVM {
         await this.getMulticall(); // Ensure multicall is deployed
         try {
             const tx = await (
-                await this.multicall!.multicall(calls, params?.overrideOptions)
+                await this.multicall!.multicall(calls, {
+                    ...params?.overrideOptions,
+                })
             ).wait(this.options.globalWait ?? 3);
             console.log('[+] Multicall Tx: ', tx.transactionHash);
         } catch (e) {
@@ -390,10 +392,9 @@ export class DeployerVM {
         await this.getMulticall(); // Ensure multicall is deployed
         try {
             const tx = await (
-                await this.multicall!.multicallValue(
-                    calls,
-                    params?.overrideOptions,
-                )
+                await this.multicall!.multicallValue(calls, {
+                    ...params?.overrideOptions,
+                })
             ).wait(this.options.globalWait ?? 3);
             console.log('[+] MulticallValue Tx: ', tx.transactionHash);
         } catch (e) {
