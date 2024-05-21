@@ -43,6 +43,9 @@ export const setLzPeer__task = async (
             `\t[+] Setting lzPeer on ${targetChain.name} for ${targetDep.deployment.address}...`,
         );
         const calls = populateCalls(hre, targetDep, deployments);
+        console.log(
+            '[!] Call might fail for some reasons, because of EthersJS bug, but forcing multicall works. Trace next Tx if needed.',
+        );
         await VM.executeMulticall(calls);
     }
 
@@ -69,11 +72,21 @@ function populateCalls(
         console.log(
             `\t\t[+] Setting peer for ${peer.chainInfo.name} on ${peer.deployment.address}...`,
         );
+        const dstContract = deployments.find(
+            (e) => e.chainInfo.chainId === peer.chainInfo.chainId,
+        )?.deployment.address;
+        if (!dstContract) {
+            console.log('[-] Deployments:');
+            console.log(deployments);
+            throw new Error(
+                `[-] No deployment found for ${peer.chainInfo.name} on ${peer.chainInfo.chainId}`,
+            );
+        }
         calls.push({
             target: contract.address,
             callData: contract.interface.encodeFunctionData('setPeer', [
                 peer.chainInfo.lzChainId,
-                '0x'.concat(peer.chainInfo.address.slice(2).padStart(64, '0')),
+                '0x'.concat(dstContract.slice(2).padStart(64, '0')),
             ]),
             allowFailure: false,
         });
