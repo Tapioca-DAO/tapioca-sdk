@@ -95,12 +95,12 @@ export enum EChainID {
  */
 export enum ELZChainID {
     // Mainnets
-    MAINNET = '101',
-    AVALANCHE = '106',
-    POLYGON = '109',
-    FANTOM = '112',
-    ARBITRUM = '110',
-    OPTIMISM = '111',
+    MAINNET = '30101',
+    AVALANCHE = '30106',
+    POLYGON = '30109',
+    FANTOM = '30112',
+    ARBITRUM = '30110',
+    OPTIMISM = '30111',
     // Testnets
     SEPOLIA = '40161',
     ARBITRUM_SEPOLIA = '40231',

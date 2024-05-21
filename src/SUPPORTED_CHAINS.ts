@@ -4,7 +4,7 @@ const SUPPORTED_CHAINS = [
     // testnets
     {
         name: 'sepolia',
-        address: '0x464570adA09869d8741132183721B4f0769a0287',
+        address: '0x6EDCE65403992e310A62460808c4b910D972f10f',
         chainId: EChainID.SEPOLIA,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.SEPOLIA],
         rpc: 'https://eth-sepolia.g.alchemy.com/v2/<api_key>',
@@ -12,7 +12,7 @@ const SUPPORTED_CHAINS = [
     },
     {
         name: 'arbitrum_sepolia',
-        address: '0x464570adA09869d8741132183721B4f0769a0287',
+        address: '0x6EDCE65403992e310A62460808c4b910D972f10f',
         chainId: EChainID.ARBITRUM_SEPOLIA,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.ARBITRUM_SEPOLIA],
         rpc: 'https://arb-sepolia.g.alchemy.com/v2/<api_key>',
@@ -20,7 +20,7 @@ const SUPPORTED_CHAINS = [
     },
     {
         name: 'optimism_sepolia',
-        address: '0x464570adA09869d8741132183721B4f0769a0287',
+        address: '0x6EDCE65403992e310A62460808c4b910D972f10f',
         chainId: EChainID.OPTIMISM_SEPOLIA,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.OPTIMISM_SEPOLIA],
         rpc: 'https://opt-sepolia.g.alchemy.com/v2/<api_key>',
@@ -28,7 +28,7 @@ const SUPPORTED_CHAINS = [
     },
     {
         name: 'fuji_avalanche',
-        address: '0x464570adA09869d8741132183721B4f0769a0287',
+        address: '0x6EDCE65403992e310A62460808c4b910D972f10f',
         chainId: EChainID.FUJI_AVALANCHE,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.FUJI_AVALANCHE],
         rpc: 'https://api.avax-test.network/ext/bc/C/rpc',
@@ -36,7 +36,7 @@ const SUPPORTED_CHAINS = [
     },
     {
         name: 'mumbai',
-        address: '0x464570adA09869d8741132183721B4f0769a0287',
+        address: '0x6EDCE65403992e310A62460808c4b910D972f10f',
         chainId: EChainID.MUMBAI_POLYGON,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.MUMBAI_POLYGON],
         rpc: 'https://polygon-mumbai.g.alchemy.com/v2/<api_key>',
@@ -44,7 +44,7 @@ const SUPPORTED_CHAINS = [
     },
     {
         name: 'fantom_testnet',
-        address: '0x464570adA09869d8741132183721B4f0769a0287',
+        address: '0x6EDCE65403992e310A62460808c4b910D972f10f',
         chainId: EChainID.FANTOM_TESTNET,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.FANTOM_TESTNET],
         rpc: 'https://rpc.testnet.fantom.network/',
@@ -55,7 +55,7 @@ const SUPPORTED_CHAINS = [
     //mainnets
     {
         name: 'ethereum',
-        address: '0x66A71Dcef29A0fFBDBE3c6a460a3B5BC225Cd675',
+        address: '0x1a44076050125825900e736c501f859c50fE728c',
         chainId: EChainID.MAINNET,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.MAINNET],
         rpc: 'https://eth-mainnet.g.alchemy.com/v2/<api_key>',
@@ -63,7 +63,7 @@ const SUPPORTED_CHAINS = [
     },
     {
         name: 'avalanche',
-        address: '0x3c2269811836af69497E5F486A85D7316753cf62',
+        address: '0x1a44076050125825900e736c501f859c50fE728c',
         chainId: EChainID.AVALANCHE,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.AVALANCHE],
         rpc: 'https://api.avax.network/ext/bc/C/rpc',
@@ -71,7 +71,7 @@ const SUPPORTED_CHAINS = [
     },
     {
         name: 'polygon',
-        address: '0x3c2269811836af69497E5F486A85D7316753cf62',
+        address: '0x1a44076050125825900e736c501f859c50fE728c',
         chainId: EChainID.POLYGON,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.POLYGON],
         rpc: 'https://polygon-mainnet.g.alchemy.com/v2/<api_key>',
@@ -79,7 +79,7 @@ const SUPPORTED_CHAINS = [
     },
     {
         name: 'arbitrum',
-        address: '0x3c2269811836af69497E5F486A85D7316753cf62',
+        address: '0x1a44076050125825900e736c501f859c50fE728c',
         chainId: EChainID.ARBITRUM,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.ARBITRUM],
         rpc: 'https://arb-mainnet.g.alchemy.com/v2/<api_key>',
@@ -87,7 +87,7 @@ const SUPPORTED_CHAINS = [
     },
     {
         name: 'optimism',
-        address: '0x3c2269811836af69497E5F486A85D7316753cf62',
+        address: '0x1a44076050125825900e736c501f859c50fE728c',
         chainId: EChainID.OPTIMISM,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.OPTIMISM],
         rpc: 'https://opt-mainnet.g.alchemy.com/v2/<api_key>',
@@ -95,7 +95,7 @@ const SUPPORTED_CHAINS = [
     },
     {
         name: 'fantom',
-        address: '0xb6319cC6c8c27A8F5dAF0dD3DF91EA35C4720dd7',
+        address: '0x1a44076050125825900e736c501f859c50fE728c',
         chainId: EChainID.FANTOM,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.FANTOM],
         rpc: 'https://rpc.ftm.tools/',
