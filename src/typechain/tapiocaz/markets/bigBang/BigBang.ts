@@ -27,105 +27,169 @@ import type {
   PromiseOrValue,
 } from "../../common";
 
+export type RebaseStruct = {
+  elastic: PromiseOrValue<BigNumberish>;
+  base: PromiseOrValue<BigNumberish>;
+};
+
+export type RebaseStructOutput = [BigNumber, BigNumber] & {
+  elastic: BigNumber;
+  base: BigNumber;
+};
+
 export interface BigBangInterface extends utils.Interface {
   functions: {
     "DOMAIN_SEPARATOR()": FunctionFragment;
+    "_asset()": FunctionFragment;
+    "_assetId()": FunctionFragment;
+    "_collateral()": FunctionFragment;
+    "_collateralId()": FunctionFragment;
+    "_collateralizationRate()": FunctionFragment;
+    "_conservator()": FunctionFragment;
+    "_exchangeRate()": FunctionFragment;
+    "_leverageExecutor()": FunctionFragment;
+    "_liquidationBonusAmount()": FunctionFragment;
+    "_liquidationCollateralizationRate()": FunctionFragment;
+    "_liquidationMultiplier()": FunctionFragment;
+    "_maxLiquidationSlippage()": FunctionFragment;
+    "_maxLiquidatorReward()": FunctionFragment;
+    "_minLiquidatorReward()": FunctionFragment;
+    "_oracle()": FunctionFragment;
+    "_oracleData()": FunctionFragment;
+    "_pauseOptions(uint8)": FunctionFragment;
+    "_pearlmit()": FunctionFragment;
+    "_penrose()": FunctionFragment;
+    "_protocolFee()": FunctionFragment;
+    "_rateTimestamp()": FunctionFragment;
+    "_rateValidDuration()": FunctionFragment;
+    "_totalBorrow()": FunctionFragment;
+    "_totalBorrowCap()": FunctionFragment;
+    "_totalCollateralShare()": FunctionFragment;
+    "_userBorrowPart(address)": FunctionFragment;
+    "_userCollateralShare(address)": FunctionFragment;
+    "_yieldBox()": FunctionFragment;
     "accrue()": FunctionFragment;
     "accrueInfo()": FunctionFragment;
-    "addCollateral(address,address,bool,uint256,uint256)": FunctionFragment;
     "allowance(address,address)": FunctionFragment;
     "allowanceBorrow(address,address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "approveBorrow(address,uint256)": FunctionFragment;
-    "asset()": FunctionFragment;
-    "assetId()": FunctionFragment;
     "assetOracle()": FunctionFragment;
     "assetOracleData()": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
-    "borrow(address,address,uint256)": FunctionFragment;
     "borrowModule()": FunctionFragment;
-    "buyCollateral(address,uint256,uint256,bytes)": FunctionFragment;
-    "claimOwnership()": FunctionFragment;
-    "collateral()": FunctionFragment;
-    "collateralId()": FunctionFragment;
     "collateralModule()": FunctionFragment;
-    "collateralizationRate()": FunctionFragment;
     "computeClosingFactor(uint256,uint256,uint256)": FunctionFragment;
     "computeLiquidatorReward(address,uint256)": FunctionFragment;
+    "computeOpenInterestMintable()": FunctionFragment;
     "computeTVLInfo(address,uint256)": FunctionFragment;
-    "conservator()": FunctionFragment;
+    "debtMinted()": FunctionFragment;
     "debtRateAgainstEthMarket()": FunctionFragment;
     "eip712Domain()": FunctionFragment;
-    "exchangeRate()": FunctionFragment;
-    "execute(bytes[],bool)": FunctionFragment;
+    "execute(uint8[],bytes[],bool)": FunctionFragment;
     "getDebtRate()": FunctionFragment;
     "getTotalDebt()": FunctionFragment;
     "init(bytes)": FunctionFragment;
     "isMainMarket()": FunctionFragment;
-    "leverageExecutor()": FunctionFragment;
     "leverageModule()": FunctionFragment;
-    "liquidate(address[],uint256[],uint256[],address[],bytes[])": FunctionFragment;
-    "liquidateBadDebt(address,address,address,address,bytes,bool)": FunctionFragment;
-    "liquidationBonusAmount()": FunctionFragment;
-    "liquidationCollateralizationRate()": FunctionFragment;
     "liquidationModule()": FunctionFragment;
-    "liquidationMultiplier()": FunctionFragment;
     "maxDebtRate()": FunctionFragment;
-    "maxLiquidatorReward()": FunctionFragment;
     "maxMintFee()": FunctionFragment;
     "maxMintFeeStart()": FunctionFragment;
     "minDebtRate()": FunctionFragment;
-    "minLiquidatorReward()": FunctionFragment;
     "minMintFee()": FunctionFragment;
     "minMintFeeStart()": FunctionFragment;
     "nonces(address)": FunctionFragment;
-    "oracle()": FunctionFragment;
-    "oracleData()": FunctionFragment;
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)": FunctionFragment;
+    "onERC1155Received(address,address,uint256,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
-    "pauseOptions(uint8)": FunctionFragment;
-    "pendingOwner()": FunctionFragment;
-    "penrose()": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "permitBorrow(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "protocolFee()": FunctionFragment;
-    "rateTimestamp()": FunctionFragment;
-    "rateValidDuration()": FunctionFragment;
     "refreshPenroseFees()": FunctionFragment;
-    "removeCollateral(address,address,uint256)": FunctionFragment;
-    "repay(address,address,bool,uint256)": FunctionFragment;
+    "renounceOwnership()": FunctionFragment;
     "rescueEth(uint256,address)": FunctionFragment;
-    "sellCollateral(address,uint256,bytes)": FunctionFragment;
     "setAssetOracle(address,bytes)": FunctionFragment;
     "setBigBangConfig(uint256,uint256,uint256,uint256)": FunctionFragment;
     "setLeverageExecutor(address)": FunctionFragment;
+    "setLiquidationMaxSlippage(uint256)": FunctionFragment;
     "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
     "setMinAndMaxMintFee(uint256,uint256)": FunctionFragment;
     "setMinAndMaxMintRange(uint256,uint256)": FunctionFragment;
-    "totalBorrow()": FunctionFragment;
-    "totalBorrowCap()": FunctionFragment;
-    "totalCollateralShare()": FunctionFragment;
+    "supportsInterface(bytes4)": FunctionFragment;
     "totalSupply()": FunctionFragment;
     "transfer(address,uint256)": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
-    "transferOwnership(address,bool,bool)": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
     "updateExchangeRate()": FunctionFragment;
     "updatePause(uint8,bool)": FunctionFragment;
     "updatePauseAll(bool)": FunctionFragment;
-    "userBorrowPart(address)": FunctionFragment;
-    "userCollateralShare(address)": FunctionFragment;
-    "yieldBox()": FunctionFragment;
+    "viewOpenInterest()": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
       | "DOMAIN_SEPARATOR"
       | "DOMAIN_SEPARATOR()"
+      | "_asset"
+      | "_asset()"
+      | "_assetId"
+      | "_assetId()"
+      | "_collateral"
+      | "_collateral()"
+      | "_collateralId"
+      | "_collateralId()"
+      | "_collateralizationRate"
+      | "_collateralizationRate()"
+      | "_conservator"
+      | "_conservator()"
+      | "_exchangeRate"
+      | "_exchangeRate()"
+      | "_leverageExecutor"
+      | "_leverageExecutor()"
+      | "_liquidationBonusAmount"
+      | "_liquidationBonusAmount()"
+      | "_liquidationCollateralizationRate"
+      | "_liquidationCollateralizationRate()"
+      | "_liquidationMultiplier"
+      | "_liquidationMultiplier()"
+      | "_maxLiquidationSlippage"
+      | "_maxLiquidationSlippage()"
+      | "_maxLiquidatorReward"
+      | "_maxLiquidatorReward()"
+      | "_minLiquidatorReward"
+      | "_minLiquidatorReward()"
+      | "_oracle"
+      | "_oracle()"
+      | "_oracleData"
+      | "_oracleData()"
+      | "_pauseOptions"
+      | "_pauseOptions(uint8)"
+      | "_pearlmit"
+      | "_pearlmit()"
+      | "_penrose"
+      | "_penrose()"
+      | "_protocolFee"
+      | "_protocolFee()"
+      | "_rateTimestamp"
+      | "_rateTimestamp()"
+      | "_rateValidDuration"
+      | "_rateValidDuration()"
+      | "_totalBorrow"
+      | "_totalBorrow()"
+      | "_totalBorrowCap"
+      | "_totalBorrowCap()"
+      | "_totalCollateralShare"
+      | "_totalCollateralShare()"
+      | "_userBorrowPart"
+      | "_userBorrowPart(address)"
+      | "_userCollateralShare"
+      | "_userCollateralShare(address)"
+      | "_yieldBox"
+      | "_yieldBox()"
       | "accrue"
       | "accrue()"
       | "accrueInfo"
       | "accrueInfo()"
-      | "addCollateral"
-      | "addCollateral(address,address,bool,uint256,uint256)"
       | "allowance"
       | "allowance(address,address)"
       | "allowanceBorrow"
@@ -134,48 +198,32 @@ export interface BigBangInterface extends utils.Interface {
       | "approve(address,uint256)"
       | "approveBorrow"
       | "approveBorrow(address,uint256)"
-      | "asset"
-      | "asset()"
-      | "assetId"
-      | "assetId()"
       | "assetOracle"
       | "assetOracle()"
       | "assetOracleData"
       | "assetOracleData()"
       | "balanceOf"
       | "balanceOf(address)"
-      | "borrow"
-      | "borrow(address,address,uint256)"
       | "borrowModule"
       | "borrowModule()"
-      | "buyCollateral"
-      | "buyCollateral(address,uint256,uint256,bytes)"
-      | "claimOwnership"
-      | "claimOwnership()"
-      | "collateral"
-      | "collateral()"
-      | "collateralId"
-      | "collateralId()"
       | "collateralModule"
       | "collateralModule()"
-      | "collateralizationRate"
-      | "collateralizationRate()"
       | "computeClosingFactor"
       | "computeClosingFactor(uint256,uint256,uint256)"
       | "computeLiquidatorReward"
       | "computeLiquidatorReward(address,uint256)"
+      | "computeOpenInterestMintable"
+      | "computeOpenInterestMintable()"
       | "computeTVLInfo"
       | "computeTVLInfo(address,uint256)"
-      | "conservator"
-      | "conservator()"
+      | "debtMinted"
+      | "debtMinted()"
       | "debtRateAgainstEthMarket"
       | "debtRateAgainstEthMarket()"
       | "eip712Domain"
       | "eip712Domain()"
-      | "exchangeRate"
-      | "exchangeRate()"
       | "execute"
-      | "execute(bytes[],bool)"
+      | "execute(uint8[],bytes[],bool)"
       | "getDebtRate"
       | "getDebtRate()"
       | "getTotalDebt"
@@ -184,90 +232,56 @@ export interface BigBangInterface extends utils.Interface {
       | "init(bytes)"
       | "isMainMarket"
       | "isMainMarket()"
-      | "leverageExecutor"
-      | "leverageExecutor()"
       | "leverageModule"
       | "leverageModule()"
-      | "liquidate"
-      | "liquidate(address[],uint256[],uint256[],address[],bytes[])"
-      | "liquidateBadDebt"
-      | "liquidateBadDebt(address,address,address,address,bytes,bool)"
-      | "liquidationBonusAmount"
-      | "liquidationBonusAmount()"
-      | "liquidationCollateralizationRate"
-      | "liquidationCollateralizationRate()"
       | "liquidationModule"
       | "liquidationModule()"
-      | "liquidationMultiplier"
-      | "liquidationMultiplier()"
       | "maxDebtRate"
       | "maxDebtRate()"
-      | "maxLiquidatorReward"
-      | "maxLiquidatorReward()"
       | "maxMintFee"
       | "maxMintFee()"
       | "maxMintFeeStart"
       | "maxMintFeeStart()"
       | "minDebtRate"
       | "minDebtRate()"
-      | "minLiquidatorReward"
-      | "minLiquidatorReward()"
       | "minMintFee"
       | "minMintFee()"
       | "minMintFeeStart"
       | "minMintFeeStart()"
       | "nonces"
       | "nonces(address)"
-      | "oracle"
-      | "oracle()"
-      | "oracleData"
-      | "oracleData()"
+      | "onERC1155BatchReceived"
+      | "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"
+      | "onERC1155Received"
+      | "onERC1155Received(address,address,uint256,uint256,bytes)"
       | "owner"
       | "owner()"
-      | "pauseOptions"
-      | "pauseOptions(uint8)"
-      | "pendingOwner"
-      | "pendingOwner()"
-      | "penrose"
-      | "penrose()"
       | "permit"
       | "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)"
       | "permitBorrow"
       | "permitBorrow(address,address,uint256,uint256,uint8,bytes32,bytes32)"
-      | "protocolFee"
-      | "protocolFee()"
-      | "rateTimestamp"
-      | "rateTimestamp()"
-      | "rateValidDuration"
-      | "rateValidDuration()"
       | "refreshPenroseFees"
       | "refreshPenroseFees()"
-      | "removeCollateral"
-      | "removeCollateral(address,address,uint256)"
-      | "repay"
-      | "repay(address,address,bool,uint256)"
+      | "renounceOwnership"
+      | "renounceOwnership()"
       | "rescueEth"
       | "rescueEth(uint256,address)"
-      | "sellCollateral"
-      | "sellCollateral(address,uint256,bytes)"
       | "setAssetOracle"
       | "setAssetOracle(address,bytes)"
       | "setBigBangConfig"
       | "setBigBangConfig(uint256,uint256,uint256,uint256)"
       | "setLeverageExecutor"
       | "setLeverageExecutor(address)"
+      | "setLiquidationMaxSlippage"
+      | "setLiquidationMaxSlippage(uint256)"
       | "setMarketConfig"
       | "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
       | "setMinAndMaxMintFee"
       | "setMinAndMaxMintFee(uint256,uint256)"
       | "setMinAndMaxMintRange"
       | "setMinAndMaxMintRange(uint256,uint256)"
-      | "totalBorrow"
-      | "totalBorrow()"
-      | "totalBorrowCap"
-      | "totalBorrowCap()"
-      | "totalCollateralShare"
-      | "totalCollateralShare()"
+      | "supportsInterface"
+      | "supportsInterface(bytes4)"
       | "totalSupply"
       | "totalSupply()"
       | "transfer"
@@ -275,19 +289,15 @@ export interface BigBangInterface extends utils.Interface {
       | "transferFrom"
       | "transferFrom(address,address,uint256)"
       | "transferOwnership"
-      | "transferOwnership(address,bool,bool)"
+      | "transferOwnership(address)"
       | "updateExchangeRate"
       | "updateExchangeRate()"
       | "updatePause"
       | "updatePause(uint8,bool)"
       | "updatePauseAll"
       | "updatePauseAll(bool)"
-      | "userBorrowPart"
-      | "userBorrowPart(address)"
-      | "userCollateralShare"
-      | "userCollateralShare(address)"
-      | "yieldBox"
-      | "yieldBox()"
+      | "viewOpenInterest"
+      | "viewOpenInterest()"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -296,6 +306,206 @@ export interface BigBangInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "DOMAIN_SEPARATOR()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "_asset", values?: undefined): string;
+  encodeFunctionData(functionFragment: "_asset()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "_assetId", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "_assetId()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_collateral",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_collateral()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_collateralId",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_collateralId()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_collateralizationRate",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_collateralizationRate()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_conservator",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_conservator()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_exchangeRate",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_exchangeRate()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_leverageExecutor",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_leverageExecutor()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_liquidationBonusAmount",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_liquidationBonusAmount()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_liquidationCollateralizationRate",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_liquidationCollateralizationRate()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_liquidationMultiplier",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_liquidationMultiplier()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_maxLiquidationSlippage",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_maxLiquidationSlippage()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_maxLiquidatorReward",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_maxLiquidatorReward()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_minLiquidatorReward",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_minLiquidatorReward()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "_oracle", values?: undefined): string;
+  encodeFunctionData(functionFragment: "_oracle()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "_oracleData",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_oracleData()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_pauseOptions",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_pauseOptions(uint8)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(functionFragment: "_pearlmit", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "_pearlmit()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "_penrose", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "_penrose()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_protocolFee",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_protocolFee()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_rateTimestamp",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_rateTimestamp()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_rateValidDuration",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_rateValidDuration()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_totalBorrow",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_totalBorrow()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_totalBorrowCap",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_totalBorrowCap()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_totalCollateralShare",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_totalCollateralShare()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_userBorrowPart",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_userBorrowPart(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_userCollateralShare",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_userCollateralShare(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(functionFragment: "_yieldBox", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "_yieldBox()",
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "accrue", values?: undefined): string;
@@ -307,26 +517,6 @@ export interface BigBangInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "accrueInfo()",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "addCollateral",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "addCollateral(address,address,bool,uint256,uint256)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
   ): string;
   encodeFunctionData(
     functionFragment: "allowance",
@@ -360,10 +550,6 @@ export interface BigBangInterface extends utils.Interface {
     functionFragment: "approveBorrow(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(functionFragment: "asset", values?: undefined): string;
-  encodeFunctionData(functionFragment: "asset()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "assetId", values?: undefined): string;
-  encodeFunctionData(functionFragment: "assetId()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "assetOracle",
     values?: undefined
@@ -389,22 +575,6 @@ export interface BigBangInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "borrow",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "borrow(address,address,uint256)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "borrowModule",
     values?: undefined
   ): string;
@@ -413,61 +583,11 @@ export interface BigBangInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "buyCollateral",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "buyCollateral(address,uint256,uint256,bytes)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "claimOwnership",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "claimOwnership()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "collateral",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "collateral()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "collateralId",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "collateralId()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "collateralModule",
     values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "collateralModule()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "collateralizationRate",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "collateralizationRate()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -495,6 +615,14 @@ export interface BigBangInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
+    functionFragment: "computeOpenInterestMintable",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "computeOpenInterestMintable()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "computeTVLInfo",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
@@ -503,11 +631,11 @@ export interface BigBangInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "conservator",
+    functionFragment: "debtMinted",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "conservator()",
+    functionFragment: "debtMinted()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -527,20 +655,20 @@ export interface BigBangInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "exchangeRate",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "exchangeRate()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "execute",
-    values: [PromiseOrValue<BytesLike>[], PromiseOrValue<boolean>]
+    values: [
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BytesLike>[],
+      PromiseOrValue<boolean>
+    ]
   ): string;
   encodeFunctionData(
-    functionFragment: "execute(bytes[],bool)",
-    values: [PromiseOrValue<BytesLike>[], PromiseOrValue<boolean>]
+    functionFragment: "execute(uint8[],bytes[],bool)",
+    values: [
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BytesLike>[],
+      PromiseOrValue<boolean>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "getDebtRate",
@@ -575,77 +703,11 @@ export interface BigBangInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "leverageExecutor",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "leverageExecutor()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "leverageModule",
     values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "leverageModule()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidate",
-    values: [
-      PromiseOrValue<string>[],
-      PromiseOrValue<BigNumberish>[],
-      PromiseOrValue<BigNumberish>[],
-      PromiseOrValue<string>[],
-      PromiseOrValue<BytesLike>[]
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidate(address[],uint256[],uint256[],address[],bytes[])",
-    values: [
-      PromiseOrValue<string>[],
-      PromiseOrValue<BigNumberish>[],
-      PromiseOrValue<BigNumberish>[],
-      PromiseOrValue<string>[],
-      PromiseOrValue<BytesLike>[]
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidateBadDebt",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<boolean>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidateBadDebt(address,address,address,address,bytes,bool)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<boolean>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidationBonusAmount",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidationBonusAmount()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidationCollateralizationRate",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidationCollateralizationRate()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -657,27 +719,11 @@ export interface BigBangInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "liquidationMultiplier",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidationMultiplier()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "maxDebtRate",
     values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "maxDebtRate()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "maxLiquidatorReward",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "maxLiquidatorReward()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -705,14 +751,6 @@ export interface BigBangInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "minLiquidatorReward",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "minLiquidatorReward()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "minMintFee",
     values?: undefined
   ): string;
@@ -736,36 +774,48 @@ export interface BigBangInterface extends utils.Interface {
     functionFragment: "nonces(address)",
     values: [PromiseOrValue<string>]
   ): string;
-  encodeFunctionData(functionFragment: "oracle", values?: undefined): string;
-  encodeFunctionData(functionFragment: "oracle()", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "oracleData",
-    values?: undefined
+    functionFragment: "onERC1155BatchReceived",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
-    functionFragment: "oracleData()",
-    values?: undefined
+    functionFragment: "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "onERC1155Received",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "onERC1155Received(address,address,uint256,uint256,bytes)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "pauseOptions",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "pauseOptions(uint8)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "pendingOwner",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "pendingOwner()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "penrose", values?: undefined): string;
-  encodeFunctionData(functionFragment: "penrose()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "permit",
     values: [
@@ -815,30 +865,6 @@ export interface BigBangInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "protocolFee",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "protocolFee()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "rateTimestamp",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "rateTimestamp()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "rateValidDuration",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "rateValidDuration()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "refreshPenroseFees",
     values?: undefined
   ): string;
@@ -847,38 +873,12 @@ export interface BigBangInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "removeCollateral",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
+    functionFragment: "renounceOwnership",
+    values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "removeCollateral(address,address,uint256)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "repay",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "repay(address,address,bool,uint256)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<BigNumberish>
-    ]
+    functionFragment: "renounceOwnership()",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "rescueEth",
@@ -887,22 +887,6 @@ export interface BigBangInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "rescueEth(uint256,address)",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "sellCollateral",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "sellCollateral(address,uint256,bytes)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
   ): string;
   encodeFunctionData(
     functionFragment: "setAssetOracle",
@@ -937,6 +921,14 @@ export interface BigBangInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "setLeverageExecutor(address)",
     values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLiquidationMaxSlippage",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLiquidationMaxSlippage(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMarketConfig",
@@ -985,28 +977,12 @@ export interface BigBangInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "totalBorrow",
-    values?: undefined
+    functionFragment: "supportsInterface",
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
-    functionFragment: "totalBorrow()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "totalBorrowCap",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "totalBorrowCap()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "totalCollateralShare",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "totalCollateralShare()",
-    values?: undefined
+    functionFragment: "supportsInterface(bytes4)",
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "totalSupply",
@@ -1042,19 +1018,11 @@ export interface BigBangInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<boolean>
-    ]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "transferOwnership(address,bool,bool)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<boolean>
-    ]
+    functionFragment: "transferOwnership(address)",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "updateExchangeRate",
@@ -1081,24 +1049,11 @@ export interface BigBangInterface extends utils.Interface {
     values: [PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
-    functionFragment: "userBorrowPart",
-    values: [PromiseOrValue<string>]
+    functionFragment: "viewOpenInterest",
+    values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "userBorrowPart(address)",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "userCollateralShare",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "userCollateralShare(address)",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(functionFragment: "yieldBox", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "yieldBox()",
+    functionFragment: "viewOpenInterest()",
     values?: undefined
   ): string;
 
@@ -1110,19 +1065,205 @@ export interface BigBangInterface extends utils.Interface {
     functionFragment: "DOMAIN_SEPARATOR()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "_asset", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "_asset()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "_assetId", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "_assetId()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "_collateral",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_collateral()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_collateralId",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_collateralId()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_collateralizationRate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_collateralizationRate()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_conservator",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_conservator()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_exchangeRate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_exchangeRate()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_leverageExecutor",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_leverageExecutor()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_liquidationBonusAmount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_liquidationBonusAmount()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_liquidationCollateralizationRate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_liquidationCollateralizationRate()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_liquidationMultiplier",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_liquidationMultiplier()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_maxLiquidationSlippage",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_maxLiquidationSlippage()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_maxLiquidatorReward",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_maxLiquidatorReward()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_minLiquidatorReward",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_minLiquidatorReward()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "_oracle", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "_oracle()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "_oracleData",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_oracleData()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_pauseOptions",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_pauseOptions(uint8)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "_pearlmit", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "_pearlmit()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "_penrose", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "_penrose()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "_protocolFee",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_protocolFee()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_rateTimestamp",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_rateTimestamp()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_rateValidDuration",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_rateValidDuration()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_totalBorrow",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_totalBorrow()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_totalBorrowCap",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_totalBorrowCap()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_totalCollateralShare",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_totalCollateralShare()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_userBorrowPart",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_userBorrowPart(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_userCollateralShare",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "_userCollateralShare(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "_yieldBox", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "_yieldBox()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "accrue", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "accrue()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "accrueInfo", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "accrueInfo()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "addCollateral",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "addCollateral(address,address,bool,uint256,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
@@ -1151,10 +1292,6 @@ export interface BigBangInterface extends utils.Interface {
     functionFragment: "approveBorrow(address,uint256)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "asset", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "asset()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "assetId", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "assetId()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "assetOracle",
     data: BytesLike
@@ -1176,11 +1313,6 @@ export interface BigBangInterface extends utils.Interface {
     functionFragment: "balanceOf(address)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "borrow", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "borrow(address,address,uint256)",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "borrowModule",
     data: BytesLike
@@ -1190,48 +1322,11 @@ export interface BigBangInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "buyCollateral",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "buyCollateral(address,uint256,uint256,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "claimOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "claimOwnership()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "collateral", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "collateral()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "collateralId",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "collateralId()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "collateralModule",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "collateralModule()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "collateralizationRate",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "collateralizationRate()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1251,6 +1346,14 @@ export interface BigBangInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "computeOpenInterestMintable",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "computeOpenInterestMintable()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "computeTVLInfo",
     data: BytesLike
   ): Result;
@@ -1258,12 +1361,9 @@ export interface BigBangInterface extends utils.Interface {
     functionFragment: "computeTVLInfo(address,uint256)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "debtMinted", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "conservator",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "conservator()",
+    functionFragment: "debtMinted()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1282,17 +1382,9 @@ export interface BigBangInterface extends utils.Interface {
     functionFragment: "eip712Domain()",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "exchangeRate",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "exchangeRate()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "execute", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "execute(bytes[],bool)",
+    functionFragment: "execute(uint8[],bytes[],bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1325,48 +1417,11 @@ export interface BigBangInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "leverageExecutor",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "leverageExecutor()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "leverageModule",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "leverageModule()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "liquidate", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidate(address[],uint256[],uint256[],address[],bytes[])",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidateBadDebt",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidateBadDebt(address,address,address,address,bytes,bool)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidationBonusAmount",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidationBonusAmount()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidationCollateralizationRate",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidationCollateralizationRate()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1378,27 +1433,11 @@ export interface BigBangInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "liquidationMultiplier",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidationMultiplier()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "maxDebtRate",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "maxDebtRate()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "maxLiquidatorReward",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "maxLiquidatorReward()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "maxMintFee", data: BytesLike): Result;
@@ -1422,14 +1461,6 @@ export interface BigBangInterface extends utils.Interface {
     functionFragment: "minDebtRate()",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "minLiquidatorReward",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "minLiquidatorReward()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "minMintFee", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "minMintFee()",
@@ -1448,33 +1479,24 @@ export interface BigBangInterface extends utils.Interface {
     functionFragment: "nonces(address)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "oracle", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "oracle()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "oracleData", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "oracleData()",
+    functionFragment: "onERC1155BatchReceived",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC1155Received",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC1155Received(address,address,uint256,uint256,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "pauseOptions",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "pauseOptions(uint8)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "pendingOwner",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "pendingOwner()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "penrose", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "penrose()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "permit", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)",
@@ -1489,30 +1511,6 @@ export interface BigBangInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "protocolFee",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "protocolFee()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "rateTimestamp",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "rateTimestamp()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "rateValidDuration",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "rateValidDuration()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "refreshPenroseFees",
     data: BytesLike
   ): Result;
@@ -1521,29 +1519,16 @@ export interface BigBangInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "removeCollateral",
+    functionFragment: "renounceOwnership",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "removeCollateral(address,address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "repay", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "repay(address,address,bool,uint256)",
+    functionFragment: "renounceOwnership()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "rescueEth", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "rescueEth(uint256,address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "sellCollateral",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "sellCollateral(address,uint256,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1571,6 +1556,14 @@ export interface BigBangInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "setLiquidationMaxSlippage",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setLiquidationMaxSlippage(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "setMarketConfig",
     data: BytesLike
   ): Result;
@@ -1595,27 +1588,11 @@ export interface BigBangInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "totalBorrow",
+    functionFragment: "supportsInterface",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "totalBorrow()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "totalBorrowCap",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "totalBorrowCap()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "totalCollateralShare",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "totalCollateralShare()",
+    functionFragment: "supportsInterface(bytes4)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1644,7 +1621,7 @@ export interface BigBangInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "transferOwnership(address,bool,bool)",
+    functionFragment: "transferOwnership(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1672,23 +1649,13 @@ export interface BigBangInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "userBorrowPart",
+    functionFragment: "viewOpenInterest",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "userBorrowPart(address)",
+    functionFragment: "viewOpenInterest()",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "userCollateralShare",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "userCollateralShare(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "yieldBox", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "yieldBox()", data: BytesLike): Result;
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
@@ -1701,6 +1668,7 @@ export interface BigBangInterface extends utils.Interface {
     "ExchangeRateDurationUpdated(uint256,uint256)": EventFragment;
     "LeverageExecutorSet(address,address)": EventFragment;
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)": EventFragment;
+    "LiquidationMaxSlippageUpdated(uint256,uint256)": EventFragment;
     "LiquidationMultiplierUpdated(uint256,uint256)": EventFragment;
     "LogAccrue(uint256,uint64)": EventFragment;
     "LogAddCollateral(address,address,uint256)": EventFragment;
@@ -1758,6 +1726,12 @@ export interface BigBangInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Liquidated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Liquidated(address,address[],uint256,uint256,uint256,uint256)"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LiquidationMaxSlippageUpdated"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LiquidationMaxSlippageUpdated(uint256,uint256)"
   ): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "LiquidationMultiplierUpdated"
@@ -1943,6 +1917,18 @@ export type LiquidatedEvent = TypedEvent<
 >;
 
 export type LiquidatedEventFilter = TypedEventFilter<LiquidatedEvent>;
+
+export interface LiquidationMaxSlippageUpdatedEventObject {
+  oldVal: BigNumber;
+  newVal: BigNumber;
+}
+export type LiquidationMaxSlippageUpdatedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  LiquidationMaxSlippageUpdatedEventObject
+>;
+
+export type LiquidationMaxSlippageUpdatedEventFilter =
+  TypedEventFilter<LiquidationMaxSlippageUpdatedEvent>;
 
 export interface LiquidationMultiplierUpdatedEventObject {
   oldVal: BigNumber;
@@ -2190,6 +2176,144 @@ export interface BigBang extends BaseContract {
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<[string]>;
 
+    _asset(overrides?: CallOverrides): Promise<[string]>;
+
+    "_asset()"(overrides?: CallOverrides): Promise<[string]>;
+
+    _assetId(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "_assetId()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    _collateral(overrides?: CallOverrides): Promise<[string]>;
+
+    "_collateral()"(overrides?: CallOverrides): Promise<[string]>;
+
+    _collateralId(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "_collateralId()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    _collateralizationRate(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "_collateralizationRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    _conservator(overrides?: CallOverrides): Promise<[string]>;
+
+    "_conservator()"(overrides?: CallOverrides): Promise<[string]>;
+
+    _exchangeRate(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "_exchangeRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    _leverageExecutor(overrides?: CallOverrides): Promise<[string]>;
+
+    "_leverageExecutor()"(overrides?: CallOverrides): Promise<[string]>;
+
+    _liquidationBonusAmount(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "_liquidationBonusAmount()"(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    _liquidationCollateralizationRate(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "_liquidationCollateralizationRate()"(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    _liquidationMultiplier(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "_liquidationMultiplier()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    _maxLiquidationSlippage(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "_maxLiquidationSlippage()"(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    _maxLiquidatorReward(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "_maxLiquidatorReward()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    _minLiquidatorReward(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "_minLiquidatorReward()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    _oracle(overrides?: CallOverrides): Promise<[string]>;
+
+    "_oracle()"(overrides?: CallOverrides): Promise<[string]>;
+
+    _oracleData(overrides?: CallOverrides): Promise<[string]>;
+
+    "_oracleData()"(overrides?: CallOverrides): Promise<[string]>;
+
+    _pauseOptions(
+      _pauseProp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "_pauseOptions(uint8)"(
+      _pauseProp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    _pearlmit(overrides?: CallOverrides): Promise<[string]>;
+
+    "_pearlmit()"(overrides?: CallOverrides): Promise<[string]>;
+
+    _penrose(overrides?: CallOverrides): Promise<[string]>;
+
+    "_penrose()"(overrides?: CallOverrides): Promise<[string]>;
+
+    _protocolFee(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "_protocolFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    _rateTimestamp(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "_rateTimestamp()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    _rateValidDuration(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "_rateValidDuration()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    _totalBorrow(overrides?: CallOverrides): Promise<[RebaseStructOutput]>;
+
+    "_totalBorrow()"(overrides?: CallOverrides): Promise<[RebaseStructOutput]>;
+
+    _totalBorrowCap(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "_totalBorrowCap()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    _totalCollateralShare(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "_totalCollateralShare()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    _userBorrowPart(
+      _user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "_userBorrowPart(address)"(
+      _user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    _userCollateralShare(
+      _user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "_userCollateralShare(address)"(
+      _user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    _yieldBox(overrides?: CallOverrides): Promise<[string]>;
+
+    "_yieldBox()"(overrides?: CallOverrides): Promise<[string]>;
+
     accrue(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2209,24 +2333,6 @@ export interface BigBang extends BaseContract {
     ): Promise<
       [BigNumber, BigNumber] & { debtRate: BigNumber; lastAccrued: BigNumber }
     >;
-
-    addCollateral(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "addCollateral(address,address,bool,uint256,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
 
     allowance(
       arg0: PromiseOrValue<string>,
@@ -2276,14 +2382,6 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    asset(overrides?: CallOverrides): Promise<[string]>;
-
-    "asset()"(overrides?: CallOverrides): Promise<[string]>;
-
-    assetId(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "assetId()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     assetOracle(overrides?: CallOverrides): Promise<[string]>;
 
     "assetOracle()"(overrides?: CallOverrides): Promise<[string]>;
@@ -2302,63 +2400,13 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    borrow(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "borrow(address,address,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     borrowModule(overrides?: CallOverrides): Promise<[string]>;
 
     "borrowModule()"(overrides?: CallOverrides): Promise<[string]>;
 
-    buyCollateral(
-      from: PromiseOrValue<string>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      supplyAmount: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "buyCollateral(address,uint256,uint256,bytes)"(
-      from: PromiseOrValue<string>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      supplyAmount: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    claimOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "claimOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    collateral(overrides?: CallOverrides): Promise<[string]>;
-
-    "collateral()"(overrides?: CallOverrides): Promise<[string]>;
-
-    collateralId(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "collateralId()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     collateralModule(overrides?: CallOverrides): Promise<[string]>;
 
     "collateralModule()"(overrides?: CallOverrides): Promise<[string]>;
-
-    collateralizationRate(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "collateralizationRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     computeClosingFactor(
       borrowPart: PromiseOrValue<BigNumberish>,
@@ -2386,6 +2434,14 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
+    computeOpenInterestMintable(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "computeOpenInterestMintable()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     computeTVLInfo(
       user: PromiseOrValue<string>,
       _exchangeRate: PromiseOrValue<BigNumberish>,
@@ -2410,9 +2466,9 @@ export interface BigBang extends BaseContract {
       }
     >;
 
-    conservator(overrides?: CallOverrides): Promise<[string]>;
+    debtMinted(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "conservator()"(overrides?: CallOverrides): Promise<[string]>;
+    "debtMinted()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     debtRateAgainstEthMarket(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -2448,17 +2504,15 @@ export interface BigBang extends BaseContract {
       }
     >;
 
-    exchangeRate(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "exchangeRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     execute(
+      modules: PromiseOrValue<BigNumberish>[],
       calls: PromiseOrValue<BytesLike>[],
       revertOnFail: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "execute(bytes[],bool)"(
+    "execute(uint8[],bytes[],bool)"(
+      modules: PromiseOrValue<BigNumberish>[],
       calls: PromiseOrValue<BytesLike>[],
       revertOnFail: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2486,79 +2540,17 @@ export interface BigBang extends BaseContract {
 
     "isMainMarket()"(overrides?: CallOverrides): Promise<[boolean]>;
 
-    leverageExecutor(overrides?: CallOverrides): Promise<[string]>;
-
-    "leverageExecutor()"(overrides?: CallOverrides): Promise<[string]>;
-
     leverageModule(overrides?: CallOverrides): Promise<[string]>;
 
     "leverageModule()"(overrides?: CallOverrides): Promise<[string]>;
-
-    liquidate(
-      users: PromiseOrValue<string>[],
-      maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      minLiquidationBonuses: PromiseOrValue<BigNumberish>[],
-      liquidatorReceivers: PromiseOrValue<string>[],
-      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "liquidate(address[],uint256[],uint256[],address[],bytes[])"(
-      users: PromiseOrValue<string>[],
-      maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      minLiquidationBonuses: PromiseOrValue<BigNumberish>[],
-      liquidatorReceivers: PromiseOrValue<string>[],
-      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    liquidateBadDebt(
-      user: PromiseOrValue<string>,
-      from: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      liquidatorReceiver: PromiseOrValue<string>,
-      liquidatorReceiverData: PromiseOrValue<BytesLike>,
-      swapCollateral: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "liquidateBadDebt(address,address,address,address,bytes,bool)"(
-      user: PromiseOrValue<string>,
-      from: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      liquidatorReceiver: PromiseOrValue<string>,
-      liquidatorReceiverData: PromiseOrValue<BytesLike>,
-      swapCollateral: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    liquidationBonusAmount(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    liquidationCollateralizationRate(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "liquidationCollateralizationRate()"(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
 
     liquidationModule(overrides?: CallOverrides): Promise<[string]>;
 
     "liquidationModule()"(overrides?: CallOverrides): Promise<[string]>;
 
-    liquidationMultiplier(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "liquidationMultiplier()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     maxDebtRate(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "maxDebtRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    maxLiquidatorReward(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "maxLiquidatorReward()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     maxMintFee(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -2571,10 +2563,6 @@ export interface BigBang extends BaseContract {
     minDebtRate(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "minDebtRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    minLiquidatorReward(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "minLiquidatorReward()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     minMintFee(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -2594,35 +2582,45 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    oracle(overrides?: CallOverrides): Promise<[string]>;
+    onERC1155BatchReceived(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
-    "oracle()"(overrides?: CallOverrides): Promise<[string]>;
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
-    oracleData(overrides?: CallOverrides): Promise<[string]>;
+    onERC1155Received(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
-    "oracleData()"(overrides?: CallOverrides): Promise<[string]>;
+    "onERC1155Received(address,address,uint256,uint256,bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
-
-    pauseOptions(
-      pauseProp: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { pauseStatus: boolean }>;
-
-    "pauseOptions(uint8)"(
-      pauseProp: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { pauseStatus: boolean }>;
-
-    pendingOwner(overrides?: CallOverrides): Promise<[string]>;
-
-    "pendingOwner()"(overrides?: CallOverrides): Promise<[string]>;
-
-    penrose(overrides?: CallOverrides): Promise<[string]>;
-
-    "penrose()"(overrides?: CallOverrides): Promise<[string]>;
 
     permit(
       owner: PromiseOrValue<string>,
@@ -2668,18 +2666,6 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    protocolFee(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "protocolFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    rateTimestamp(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "rateTimestamp()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    rateValidDuration(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "rateValidDuration()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     refreshPenroseFees(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -2688,33 +2674,11 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    removeCollateral(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+    renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "removeCollateral(address,address,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    repay(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      part: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "repay(address,address,bool,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      part: PromiseOrValue<BigNumberish>,
+    "renounceOwnership()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2727,20 +2691,6 @@ export interface BigBang extends BaseContract {
     "rescueEth(uint256,address)"(
       amount: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    sellCollateral(
-      from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "sellCollateral(address,uint256,bytes)"(
-      from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2779,6 +2729,16 @@ export interface BigBang extends BaseContract {
 
     "setLeverageExecutor(address)"(
       _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setLiquidationMaxSlippage(
+      _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setLiquidationMaxSlippage(uint256)"(
+      _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2834,67 +2794,53 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    totalBorrow(
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
-    >;
+    ): Promise<[boolean]>;
 
-    "totalBorrow()"(
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
-    >;
-
-    totalBorrowCap(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "totalBorrowCap()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    totalCollateralShare(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "totalCollateralShare()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+    ): Promise<[boolean]>;
 
     totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     transfer(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
-    "transfer(address,uint256)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
-    transferFrom(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
-    "transferFrom(address,address,uint256)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
-    transferOwnership(
-      newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "transferOwnership(address,bool,bool)"(
+    "transfer(address,uint256)"(
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    transferFrom(
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "transferFrom(address,address,uint256)"(
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    transferOwnership(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "transferOwnership(address)"(
+      newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2928,34 +2874,148 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    userBorrowPart(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    viewOpenInterest(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "userBorrowPart(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    userCollateralShare(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "userCollateralShare(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    yieldBox(overrides?: CallOverrides): Promise<[string]>;
-
-    "yieldBox()"(overrides?: CallOverrides): Promise<[string]>;
+    "viewOpenInterest()"(overrides?: CallOverrides): Promise<[BigNumber]>;
   };
 
   DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
 
   "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
+
+  _asset(overrides?: CallOverrides): Promise<string>;
+
+  "_asset()"(overrides?: CallOverrides): Promise<string>;
+
+  _assetId(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "_assetId()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  _collateral(overrides?: CallOverrides): Promise<string>;
+
+  "_collateral()"(overrides?: CallOverrides): Promise<string>;
+
+  _collateralId(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "_collateralId()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  _collateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "_collateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  _conservator(overrides?: CallOverrides): Promise<string>;
+
+  "_conservator()"(overrides?: CallOverrides): Promise<string>;
+
+  _exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "_exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  _leverageExecutor(overrides?: CallOverrides): Promise<string>;
+
+  "_leverageExecutor()"(overrides?: CallOverrides): Promise<string>;
+
+  _liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "_liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  _liquidationCollateralizationRate(
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "_liquidationCollateralizationRate()"(
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  _liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "_liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  _maxLiquidationSlippage(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "_maxLiquidationSlippage()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  _maxLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "_maxLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  _minLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "_minLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  _oracle(overrides?: CallOverrides): Promise<string>;
+
+  "_oracle()"(overrides?: CallOverrides): Promise<string>;
+
+  _oracleData(overrides?: CallOverrides): Promise<string>;
+
+  "_oracleData()"(overrides?: CallOverrides): Promise<string>;
+
+  _pauseOptions(
+    _pauseProp: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "_pauseOptions(uint8)"(
+    _pauseProp: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  _pearlmit(overrides?: CallOverrides): Promise<string>;
+
+  "_pearlmit()"(overrides?: CallOverrides): Promise<string>;
+
+  _penrose(overrides?: CallOverrides): Promise<string>;
+
+  "_penrose()"(overrides?: CallOverrides): Promise<string>;
+
+  _protocolFee(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "_protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  _rateTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "_rateTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  _rateValidDuration(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "_rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  _totalBorrow(overrides?: CallOverrides): Promise<RebaseStructOutput>;
+
+  "_totalBorrow()"(overrides?: CallOverrides): Promise<RebaseStructOutput>;
+
+  _totalBorrowCap(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "_totalBorrowCap()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  _totalCollateralShare(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "_totalCollateralShare()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  _userBorrowPart(
+    _user: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "_userBorrowPart(address)"(
+    _user: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  _userCollateralShare(
+    _user: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "_userCollateralShare(address)"(
+    _user: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  _yieldBox(overrides?: CallOverrides): Promise<string>;
+
+  "_yieldBox()"(overrides?: CallOverrides): Promise<string>;
 
   accrue(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2976,24 +3036,6 @@ export interface BigBang extends BaseContract {
   ): Promise<
     [BigNumber, BigNumber] & { debtRate: BigNumber; lastAccrued: BigNumber }
   >;
-
-  addCollateral(
-    from: PromiseOrValue<string>,
-    to: PromiseOrValue<string>,
-    skim: PromiseOrValue<boolean>,
-    amount: PromiseOrValue<BigNumberish>,
-    share: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "addCollateral(address,address,bool,uint256,uint256)"(
-    from: PromiseOrValue<string>,
-    to: PromiseOrValue<string>,
-    skim: PromiseOrValue<boolean>,
-    amount: PromiseOrValue<BigNumberish>,
-    share: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
 
   allowance(
     arg0: PromiseOrValue<string>,
@@ -3043,14 +3085,6 @@ export interface BigBang extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  asset(overrides?: CallOverrides): Promise<string>;
-
-  "asset()"(overrides?: CallOverrides): Promise<string>;
-
-  assetId(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "assetId()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   assetOracle(overrides?: CallOverrides): Promise<string>;
 
   "assetOracle()"(overrides?: CallOverrides): Promise<string>;
@@ -3069,63 +3103,13 @@ export interface BigBang extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  borrow(
-    from: PromiseOrValue<string>,
-    to: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "borrow(address,address,uint256)"(
-    from: PromiseOrValue<string>,
-    to: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   borrowModule(overrides?: CallOverrides): Promise<string>;
 
   "borrowModule()"(overrides?: CallOverrides): Promise<string>;
 
-  buyCollateral(
-    from: PromiseOrValue<string>,
-    borrowAmount: PromiseOrValue<BigNumberish>,
-    supplyAmount: PromiseOrValue<BigNumberish>,
-    data: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "buyCollateral(address,uint256,uint256,bytes)"(
-    from: PromiseOrValue<string>,
-    borrowAmount: PromiseOrValue<BigNumberish>,
-    supplyAmount: PromiseOrValue<BigNumberish>,
-    data: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  claimOwnership(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "claimOwnership()"(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  collateral(overrides?: CallOverrides): Promise<string>;
-
-  "collateral()"(overrides?: CallOverrides): Promise<string>;
-
-  collateralId(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "collateralId()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   collateralModule(overrides?: CallOverrides): Promise<string>;
 
   "collateralModule()"(overrides?: CallOverrides): Promise<string>;
-
-  collateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "collateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   computeClosingFactor(
     borrowPart: PromiseOrValue<BigNumberish>,
@@ -3153,6 +3137,14 @@ export interface BigBang extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  computeOpenInterestMintable(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "computeOpenInterestMintable()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   computeTVLInfo(
     user: PromiseOrValue<string>,
     _exchangeRate: PromiseOrValue<BigNumberish>,
@@ -3177,9 +3169,9 @@ export interface BigBang extends BaseContract {
     }
   >;
 
-  conservator(overrides?: CallOverrides): Promise<string>;
+  debtMinted(overrides?: CallOverrides): Promise<BigNumber>;
 
-  "conservator()"(overrides?: CallOverrides): Promise<string>;
+  "debtMinted()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   debtRateAgainstEthMarket(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3213,17 +3205,15 @@ export interface BigBang extends BaseContract {
     }
   >;
 
-  exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   execute(
+    modules: PromiseOrValue<BigNumberish>[],
     calls: PromiseOrValue<BytesLike>[],
     revertOnFail: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "execute(bytes[],bool)"(
+  "execute(uint8[],bytes[],bool)"(
+    modules: PromiseOrValue<BigNumberish>[],
     calls: PromiseOrValue<BytesLike>[],
     revertOnFail: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -3251,79 +3241,17 @@ export interface BigBang extends BaseContract {
 
   "isMainMarket()"(overrides?: CallOverrides): Promise<boolean>;
 
-  leverageExecutor(overrides?: CallOverrides): Promise<string>;
-
-  "leverageExecutor()"(overrides?: CallOverrides): Promise<string>;
-
   leverageModule(overrides?: CallOverrides): Promise<string>;
 
   "leverageModule()"(overrides?: CallOverrides): Promise<string>;
-
-  liquidate(
-    users: PromiseOrValue<string>[],
-    maxBorrowParts: PromiseOrValue<BigNumberish>[],
-    minLiquidationBonuses: PromiseOrValue<BigNumberish>[],
-    liquidatorReceivers: PromiseOrValue<string>[],
-    liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "liquidate(address[],uint256[],uint256[],address[],bytes[])"(
-    users: PromiseOrValue<string>[],
-    maxBorrowParts: PromiseOrValue<BigNumberish>[],
-    minLiquidationBonuses: PromiseOrValue<BigNumberish>[],
-    liquidatorReceivers: PromiseOrValue<string>[],
-    liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  liquidateBadDebt(
-    user: PromiseOrValue<string>,
-    from: PromiseOrValue<string>,
-    receiver: PromiseOrValue<string>,
-    liquidatorReceiver: PromiseOrValue<string>,
-    liquidatorReceiverData: PromiseOrValue<BytesLike>,
-    swapCollateral: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "liquidateBadDebt(address,address,address,address,bytes,bool)"(
-    user: PromiseOrValue<string>,
-    from: PromiseOrValue<string>,
-    receiver: PromiseOrValue<string>,
-    liquidatorReceiver: PromiseOrValue<string>,
-    liquidatorReceiverData: PromiseOrValue<BytesLike>,
-    swapCollateral: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  liquidationCollateralizationRate(
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "liquidationCollateralizationRate()"(
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
 
   liquidationModule(overrides?: CallOverrides): Promise<string>;
 
   "liquidationModule()"(overrides?: CallOverrides): Promise<string>;
 
-  liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   maxDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
   "maxDebtRate()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  maxLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "maxLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   maxMintFee(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3336,10 +3264,6 @@ export interface BigBang extends BaseContract {
   minDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
   "minDebtRate()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  minLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "minLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   minMintFee(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3359,35 +3283,45 @@ export interface BigBang extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  oracle(overrides?: CallOverrides): Promise<string>;
+  onERC1155BatchReceived(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<string>,
+    arg2: PromiseOrValue<BigNumberish>[],
+    arg3: PromiseOrValue<BigNumberish>[],
+    arg4: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  "oracle()"(overrides?: CallOverrides): Promise<string>;
+  "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<string>,
+    arg2: PromiseOrValue<BigNumberish>[],
+    arg3: PromiseOrValue<BigNumberish>[],
+    arg4: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  oracleData(overrides?: CallOverrides): Promise<string>;
+  onERC1155Received(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<string>,
+    arg2: PromiseOrValue<BigNumberish>,
+    arg3: PromiseOrValue<BigNumberish>,
+    arg4: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  "oracleData()"(overrides?: CallOverrides): Promise<string>;
+  "onERC1155Received(address,address,uint256,uint256,bytes)"(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<string>,
+    arg2: PromiseOrValue<BigNumberish>,
+    arg3: PromiseOrValue<BigNumberish>,
+    arg4: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
-
-  pauseOptions(
-    pauseProp: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  "pauseOptions(uint8)"(
-    pauseProp: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  pendingOwner(overrides?: CallOverrides): Promise<string>;
-
-  "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
-
-  penrose(overrides?: CallOverrides): Promise<string>;
-
-  "penrose()"(overrides?: CallOverrides): Promise<string>;
 
   permit(
     owner: PromiseOrValue<string>,
@@ -3433,18 +3367,6 @@ export interface BigBang extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  protocolFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  rateTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "rateTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  rateValidDuration(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   refreshPenroseFees(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -3453,33 +3375,11 @@ export interface BigBang extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  removeCollateral(
-    from: PromiseOrValue<string>,
-    to: PromiseOrValue<string>,
-    share: PromiseOrValue<BigNumberish>,
+  renounceOwnership(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "removeCollateral(address,address,uint256)"(
-    from: PromiseOrValue<string>,
-    to: PromiseOrValue<string>,
-    share: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  repay(
-    from: PromiseOrValue<string>,
-    to: PromiseOrValue<string>,
-    skim: PromiseOrValue<boolean>,
-    part: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "repay(address,address,bool,uint256)"(
-    from: PromiseOrValue<string>,
-    to: PromiseOrValue<string>,
-    skim: PromiseOrValue<boolean>,
-    part: PromiseOrValue<BigNumberish>,
+  "renounceOwnership()"(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3492,20 +3392,6 @@ export interface BigBang extends BaseContract {
   "rescueEth(uint256,address)"(
     amount: PromiseOrValue<BigNumberish>,
     to: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  sellCollateral(
-    from: PromiseOrValue<string>,
-    share: PromiseOrValue<BigNumberish>,
-    data: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "sellCollateral(address,uint256,bytes)"(
-    from: PromiseOrValue<string>,
-    share: PromiseOrValue<BigNumberish>,
-    data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3544,6 +3430,16 @@ export interface BigBang extends BaseContract {
 
   "setLeverageExecutor(address)"(
     _executor: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setLiquidationMaxSlippage(
+    _val: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setLiquidationMaxSlippage(uint256)"(
+    _val: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3599,63 +3495,53 @@ export interface BigBang extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  totalBorrow(
+  supportsInterface(
+    interfaceId: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
-  ): Promise<[BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }>;
+  ): Promise<boolean>;
 
-  "totalBorrow()"(
+  "supportsInterface(bytes4)"(
+    interfaceId: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
-  ): Promise<[BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }>;
-
-  totalBorrowCap(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "totalBorrowCap()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  totalCollateralShare(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "totalCollateralShare()"(overrides?: CallOverrides): Promise<BigNumber>;
+  ): Promise<boolean>;
 
   totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
   "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   transfer(
-    arg0: PromiseOrValue<string>,
-    arg1: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  "transfer(address,uint256)"(
-    arg0: PromiseOrValue<string>,
-    arg1: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  transferFrom(
-    arg0: PromiseOrValue<string>,
-    arg1: PromiseOrValue<string>,
-    arg2: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  "transferFrom(address,address,uint256)"(
-    arg0: PromiseOrValue<string>,
-    arg1: PromiseOrValue<string>,
-    arg2: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  transferOwnership(
-    newOwner: PromiseOrValue<string>,
-    direct: PromiseOrValue<boolean>,
-    renounce: PromiseOrValue<boolean>,
+    to: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "transferOwnership(address,bool,bool)"(
+  "transfer(address,uint256)"(
+    to: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  transferFrom(
+    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "transferFrom(address,address,uint256)"(
+    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  transferOwnership(
     newOwner: PromiseOrValue<string>,
-    direct: PromiseOrValue<boolean>,
-    renounce: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "transferOwnership(address)"(
+    newOwner: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3689,34 +3575,148 @@ export interface BigBang extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  userBorrowPart(
-    arg0: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  viewOpenInterest(overrides?: CallOverrides): Promise<BigNumber>;
 
-  "userBorrowPart(address)"(
-    arg0: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  userCollateralShare(
-    arg0: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "userCollateralShare(address)"(
-    arg0: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  yieldBox(overrides?: CallOverrides): Promise<string>;
-
-  "yieldBox()"(overrides?: CallOverrides): Promise<string>;
+  "viewOpenInterest()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   callStatic: {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
+
+    _asset(overrides?: CallOverrides): Promise<string>;
+
+    "_asset()"(overrides?: CallOverrides): Promise<string>;
+
+    _assetId(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_assetId()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _collateral(overrides?: CallOverrides): Promise<string>;
+
+    "_collateral()"(overrides?: CallOverrides): Promise<string>;
+
+    _collateralId(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_collateralId()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _collateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_collateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _conservator(overrides?: CallOverrides): Promise<string>;
+
+    "_conservator()"(overrides?: CallOverrides): Promise<string>;
+
+    _exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _leverageExecutor(overrides?: CallOverrides): Promise<string>;
+
+    "_leverageExecutor()"(overrides?: CallOverrides): Promise<string>;
+
+    _liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _liquidationCollateralizationRate(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "_liquidationCollateralizationRate()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    _liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _maxLiquidationSlippage(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_maxLiquidationSlippage()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _maxLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_maxLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _minLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_minLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _oracle(overrides?: CallOverrides): Promise<string>;
+
+    "_oracle()"(overrides?: CallOverrides): Promise<string>;
+
+    _oracleData(overrides?: CallOverrides): Promise<string>;
+
+    "_oracleData()"(overrides?: CallOverrides): Promise<string>;
+
+    _pauseOptions(
+      _pauseProp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "_pauseOptions(uint8)"(
+      _pauseProp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    _pearlmit(overrides?: CallOverrides): Promise<string>;
+
+    "_pearlmit()"(overrides?: CallOverrides): Promise<string>;
+
+    _penrose(overrides?: CallOverrides): Promise<string>;
+
+    "_penrose()"(overrides?: CallOverrides): Promise<string>;
+
+    _protocolFee(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _rateTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_rateTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _rateValidDuration(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _totalBorrow(overrides?: CallOverrides): Promise<RebaseStructOutput>;
+
+    "_totalBorrow()"(overrides?: CallOverrides): Promise<RebaseStructOutput>;
+
+    _totalBorrowCap(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_totalBorrowCap()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _totalCollateralShare(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_totalCollateralShare()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _userBorrowPart(
+      _user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "_userBorrowPart(address)"(
+      _user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    _userCollateralShare(
+      _user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "_userCollateralShare(address)"(
+      _user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    _yieldBox(overrides?: CallOverrides): Promise<string>;
+
+    "_yieldBox()"(overrides?: CallOverrides): Promise<string>;
 
     accrue(overrides?: CallOverrides): Promise<void>;
 
@@ -3733,24 +3733,6 @@ export interface BigBang extends BaseContract {
     ): Promise<
       [BigNumber, BigNumber] & { debtRate: BigNumber; lastAccrued: BigNumber }
     >;
-
-    addCollateral(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "addCollateral(address,address,bool,uint256,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     allowance(
       arg0: PromiseOrValue<string>,
@@ -3800,14 +3782,6 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    asset(overrides?: CallOverrides): Promise<string>;
-
-    "asset()"(overrides?: CallOverrides): Promise<string>;
-
-    assetId(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "assetId()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     assetOracle(overrides?: CallOverrides): Promise<string>;
 
     "assetOracle()"(overrides?: CallOverrides): Promise<string>;
@@ -3826,59 +3800,13 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    borrow(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber] & { part: BigNumber; share: BigNumber }>;
-
-    "borrow(address,address,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber] & { part: BigNumber; share: BigNumber }>;
-
     borrowModule(overrides?: CallOverrides): Promise<string>;
 
     "borrowModule()"(overrides?: CallOverrides): Promise<string>;
 
-    buyCollateral(
-      from: PromiseOrValue<string>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      supplyAmount: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "buyCollateral(address,uint256,uint256,bytes)"(
-      from: PromiseOrValue<string>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      supplyAmount: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    claimOwnership(overrides?: CallOverrides): Promise<void>;
-
-    "claimOwnership()"(overrides?: CallOverrides): Promise<void>;
-
-    collateral(overrides?: CallOverrides): Promise<string>;
-
-    "collateral()"(overrides?: CallOverrides): Promise<string>;
-
-    collateralId(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "collateralId()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     collateralModule(overrides?: CallOverrides): Promise<string>;
 
     "collateralModule()"(overrides?: CallOverrides): Promise<string>;
-
-    collateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "collateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     computeClosingFactor(
       borrowPart: PromiseOrValue<BigNumberish>,
@@ -3906,6 +3834,12 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    computeOpenInterestMintable(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "computeOpenInterestMintable()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     computeTVLInfo(
       user: PromiseOrValue<string>,
       _exchangeRate: PromiseOrValue<BigNumberish>,
@@ -3930,9 +3864,9 @@ export interface BigBang extends BaseContract {
       }
     >;
 
-    conservator(overrides?: CallOverrides): Promise<string>;
+    debtMinted(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "conservator()"(overrides?: CallOverrides): Promise<string>;
+    "debtMinted()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     debtRateAgainstEthMarket(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3966,11 +3900,8 @@ export interface BigBang extends BaseContract {
       }
     >;
 
-    exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     execute(
+      modules: PromiseOrValue<BigNumberish>[],
       calls: PromiseOrValue<BytesLike>[],
       revertOnFail: PromiseOrValue<boolean>,
       overrides?: CallOverrides
@@ -3978,7 +3909,8 @@ export interface BigBang extends BaseContract {
       [boolean[], string[]] & { successes: boolean[]; results: string[] }
     >;
 
-    "execute(bytes[],bool)"(
+    "execute(uint8[],bytes[],bool)"(
+      modules: PromiseOrValue<BigNumberish>[],
       calls: PromiseOrValue<BytesLike>[],
       revertOnFail: PromiseOrValue<boolean>,
       overrides?: CallOverrides
@@ -4008,79 +3940,17 @@ export interface BigBang extends BaseContract {
 
     "isMainMarket()"(overrides?: CallOverrides): Promise<boolean>;
 
-    leverageExecutor(overrides?: CallOverrides): Promise<string>;
-
-    "leverageExecutor()"(overrides?: CallOverrides): Promise<string>;
-
     leverageModule(overrides?: CallOverrides): Promise<string>;
 
     "leverageModule()"(overrides?: CallOverrides): Promise<string>;
-
-    liquidate(
-      users: PromiseOrValue<string>[],
-      maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      minLiquidationBonuses: PromiseOrValue<BigNumberish>[],
-      liquidatorReceivers: PromiseOrValue<string>[],
-      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "liquidate(address[],uint256[],uint256[],address[],bytes[])"(
-      users: PromiseOrValue<string>[],
-      maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      minLiquidationBonuses: PromiseOrValue<BigNumberish>[],
-      liquidatorReceivers: PromiseOrValue<string>[],
-      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    liquidateBadDebt(
-      user: PromiseOrValue<string>,
-      from: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      liquidatorReceiver: PromiseOrValue<string>,
-      liquidatorReceiverData: PromiseOrValue<BytesLike>,
-      swapCollateral: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "liquidateBadDebt(address,address,address,address,bytes,bool)"(
-      user: PromiseOrValue<string>,
-      from: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      liquidatorReceiver: PromiseOrValue<string>,
-      liquidatorReceiverData: PromiseOrValue<BytesLike>,
-      swapCollateral: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    liquidationCollateralizationRate(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "liquidationCollateralizationRate()"(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
 
     liquidationModule(overrides?: CallOverrides): Promise<string>;
 
     "liquidationModule()"(overrides?: CallOverrides): Promise<string>;
 
-    liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     maxDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "maxDebtRate()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    maxLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "maxLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     maxMintFee(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -4093,10 +3963,6 @@ export interface BigBang extends BaseContract {
     minDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "minDebtRate()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    minLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "minLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     minMintFee(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -4116,35 +3982,45 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    oracle(overrides?: CallOverrides): Promise<string>;
+    onERC1155BatchReceived(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    "oracle()"(overrides?: CallOverrides): Promise<string>;
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    oracleData(overrides?: CallOverrides): Promise<string>;
+    onERC1155Received(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    "oracleData()"(overrides?: CallOverrides): Promise<string>;
+    "onERC1155Received(address,address,uint256,uint256,bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
-
-    pauseOptions(
-      pauseProp: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    "pauseOptions(uint8)"(
-      pauseProp: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    pendingOwner(overrides?: CallOverrides): Promise<string>;
-
-    "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
-
-    penrose(overrides?: CallOverrides): Promise<string>;
-
-    "penrose()"(overrides?: CallOverrides): Promise<string>;
 
     permit(
       owner: PromiseOrValue<string>,
@@ -4190,51 +4066,13 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    protocolFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    rateTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "rateTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    rateValidDuration(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     refreshPenroseFees(overrides?: CallOverrides): Promise<BigNumber>;
 
     "refreshPenroseFees()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    removeCollateral(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
-    "removeCollateral(address,address,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    repay(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      part: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "repay(address,address,bool,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      part: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
 
     rescueEth(
       amount: PromiseOrValue<BigNumberish>,
@@ -4247,20 +4085,6 @@ export interface BigBang extends BaseContract {
       to: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    sellCollateral(
-      from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "sellCollateral(address,uint256,bytes)"(
-      from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
 
     setAssetOracle(
       _oracle: PromiseOrValue<string>,
@@ -4297,6 +4121,16 @@ export interface BigBang extends BaseContract {
 
     "setLeverageExecutor(address)"(
       _executor: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setLiquidationMaxSlippage(
+      _val: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setLiquidationMaxSlippage(uint256)"(
+      _val: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4352,67 +4186,53 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    totalBorrow(
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
-    >;
+    ): Promise<boolean>;
 
-    "totalBorrow()"(
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
-    >;
-
-    totalBorrowCap(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "totalBorrowCap()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    totalCollateralShare(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "totalCollateralShare()"(overrides?: CallOverrides): Promise<BigNumber>;
+    ): Promise<boolean>;
 
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     transfer(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     "transfer(address,uint256)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     transferFrom(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     "transferFrom(address,address,uint256)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "transferOwnership(address,bool,bool)"(
+    "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -4446,29 +4266,9 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    userBorrowPart(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    viewOpenInterest(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "userBorrowPart(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    userCollateralShare(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "userCollateralShare(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    yieldBox(overrides?: CallOverrides): Promise<string>;
-
-    "yieldBox()"(overrides?: CallOverrides): Promise<string>;
+    "viewOpenInterest()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   filters: {
@@ -4507,13 +4307,10 @@ export interface BigBang extends BaseContract {
     ): AssetOracleUpdatedEventFilter;
 
     "ConservatorUpdated(address,address)"(
-      old?: PromiseOrValue<string> | null,
-      _new?: PromiseOrValue<string> | null
+      old?: null,
+      _new?: null
     ): ConservatorUpdatedEventFilter;
-    ConservatorUpdated(
-      old?: PromiseOrValue<string> | null,
-      _new?: PromiseOrValue<string> | null
-    ): ConservatorUpdatedEventFilter;
+    ConservatorUpdated(old?: null, _new?: null): ConservatorUpdatedEventFilter;
 
     "DebtRateAgainstEthUpdated(uint256,uint256)"(
       oldVal?: PromiseOrValue<BigNumberish> | null,
@@ -4537,38 +4334,47 @@ export interface BigBang extends BaseContract {
     ): ExchangeRateDurationUpdatedEventFilter;
 
     "LeverageExecutorSet(address,address)"(
-      oldVal?: PromiseOrValue<string> | null,
-      newVal?: PromiseOrValue<string> | null
+      oldVal?: null,
+      newVal?: null
     ): LeverageExecutorSetEventFilter;
     LeverageExecutorSet(
-      oldVal?: PromiseOrValue<string> | null,
-      newVal?: PromiseOrValue<string> | null
+      oldVal?: null,
+      newVal?: null
     ): LeverageExecutorSetEventFilter;
 
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)"(
       liquidator?: PromiseOrValue<string> | null,
-      users?: PromiseOrValue<string>[] | null,
-      liquidatorReward?: PromiseOrValue<BigNumberish> | null,
+      users?: null,
+      liquidatorReward?: null,
       protocolReward?: null,
       repayedAmount?: null,
       collateralShareRemoved?: null
     ): LiquidatedEventFilter;
     Liquidated(
       liquidator?: PromiseOrValue<string> | null,
-      users?: PromiseOrValue<string>[] | null,
-      liquidatorReward?: PromiseOrValue<BigNumberish> | null,
+      users?: null,
+      liquidatorReward?: null,
       protocolReward?: null,
       repayedAmount?: null,
       collateralShareRemoved?: null
     ): LiquidatedEventFilter;
 
+    "LiquidationMaxSlippageUpdated(uint256,uint256)"(
+      oldVal?: null,
+      newVal?: null
+    ): LiquidationMaxSlippageUpdatedEventFilter;
+    LiquidationMaxSlippageUpdated(
+      oldVal?: null,
+      newVal?: null
+    ): LiquidationMaxSlippageUpdatedEventFilter;
+
     "LiquidationMultiplierUpdated(uint256,uint256)"(
-      oldVal?: PromiseOrValue<BigNumberish> | null,
-      newVal?: PromiseOrValue<BigNumberish> | null
+      oldVal?: null,
+      newVal?: null
     ): LiquidationMultiplierUpdatedEventFilter;
     LiquidationMultiplierUpdated(
-      oldVal?: PromiseOrValue<BigNumberish> | null,
-      newVal?: PromiseOrValue<BigNumberish> | null
+      oldVal?: null,
+      newVal?: null
     ): LiquidationMultiplierUpdatedEventFilter;
 
     "LogAccrue(uint256,uint64)"(
@@ -4607,20 +4413,16 @@ export interface BigBang extends BaseContract {
     ): LogBorrowEventFilter;
 
     "LogBorrowCapUpdated(uint256,uint256)"(
-      _oldVal?: PromiseOrValue<BigNumberish> | null,
-      _newVal?: PromiseOrValue<BigNumberish> | null
+      _oldVal?: null,
+      _newVal?: null
     ): LogBorrowCapUpdatedEventFilter;
     LogBorrowCapUpdated(
-      _oldVal?: PromiseOrValue<BigNumberish> | null,
-      _newVal?: PromiseOrValue<BigNumberish> | null
+      _oldVal?: null,
+      _newVal?: null
     ): LogBorrowCapUpdatedEventFilter;
 
-    "LogExchangeRate(uint256)"(
-      rate?: PromiseOrValue<BigNumberish> | null
-    ): LogExchangeRateEventFilter;
-    LogExchangeRate(
-      rate?: PromiseOrValue<BigNumberish> | null
-    ): LogExchangeRateEventFilter;
+    "LogExchangeRate(uint256)"(rate?: null): LogExchangeRateEventFilter;
+    LogExchangeRate(rate?: null): LogExchangeRateEventFilter;
 
     "LogRemoveCollateral(address,address,uint256)"(
       from?: PromiseOrValue<string> | null,
@@ -4681,13 +4483,13 @@ export interface BigBang extends BaseContract {
 
     "PausedUpdated(uint8,bool,bool)"(
       _type?: PromiseOrValue<BigNumberish> | null,
-      oldState?: PromiseOrValue<boolean> | null,
-      newState?: PromiseOrValue<boolean> | null
+      oldState?: null,
+      newState?: null
     ): PausedUpdatedEventFilter;
     PausedUpdated(
       _type?: PromiseOrValue<BigNumberish> | null,
-      oldState?: PromiseOrValue<boolean> | null,
-      newState?: PromiseOrValue<boolean> | null
+      oldState?: null,
+      newState?: null
     ): PausedUpdatedEventFilter;
 
     "Transfer(address,address,uint256)"(
@@ -4728,19 +4530,150 @@ export interface BigBang extends BaseContract {
     ): UpdateMinMaxMintRangeEventFilter;
 
     "ValueUpdated(uint256,uint256)"(
-      valType?: PromiseOrValue<BigNumberish> | null,
-      _newVal?: PromiseOrValue<BigNumberish> | null
+      valType?: null,
+      _newVal?: null
     ): ValueUpdatedEventFilter;
-    ValueUpdated(
-      valType?: PromiseOrValue<BigNumberish> | null,
-      _newVal?: PromiseOrValue<BigNumberish> | null
-    ): ValueUpdatedEventFilter;
+    ValueUpdated(valType?: null, _newVal?: null): ValueUpdatedEventFilter;
   };
 
   estimateGas: {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<BigNumber>;
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _asset(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_asset()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _assetId(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_assetId()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _collateral(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_collateral()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _collateralId(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_collateralId()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _collateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_collateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _conservator(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_conservator()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _leverageExecutor(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_leverageExecutor()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _liquidationCollateralizationRate(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "_liquidationCollateralizationRate()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    _liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _maxLiquidationSlippage(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_maxLiquidationSlippage()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _maxLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_maxLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _minLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_minLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _oracle(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_oracle()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _oracleData(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_oracleData()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _pauseOptions(
+      _pauseProp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "_pauseOptions(uint8)"(
+      _pauseProp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    _pearlmit(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_pearlmit()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _penrose(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_penrose()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _protocolFee(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _rateTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_rateTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _rateValidDuration(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _totalBorrow(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_totalBorrow()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _totalBorrowCap(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_totalBorrowCap()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _totalCollateralShare(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_totalCollateralShare()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    _userBorrowPart(
+      _user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "_userBorrowPart(address)"(
+      _user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    _userCollateralShare(
+      _user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "_userCollateralShare(address)"(
+      _user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    _yieldBox(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "_yieldBox()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     accrue(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -4753,24 +4686,6 @@ export interface BigBang extends BaseContract {
     accrueInfo(overrides?: CallOverrides): Promise<BigNumber>;
 
     "accrueInfo()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    addCollateral(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "addCollateral(address,address,bool,uint256,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
 
     allowance(
       arg0: PromiseOrValue<string>,
@@ -4820,14 +4735,6 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    asset(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "asset()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    assetId(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "assetId()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     assetOracle(overrides?: CallOverrides): Promise<BigNumber>;
 
     "assetOracle()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -4846,63 +4753,13 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    borrow(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "borrow(address,address,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     borrowModule(overrides?: CallOverrides): Promise<BigNumber>;
 
     "borrowModule()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    buyCollateral(
-      from: PromiseOrValue<string>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      supplyAmount: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "buyCollateral(address,uint256,uint256,bytes)"(
-      from: PromiseOrValue<string>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      supplyAmount: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    claimOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "claimOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    collateral(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "collateral()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    collateralId(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "collateralId()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     collateralModule(overrides?: CallOverrides): Promise<BigNumber>;
 
     "collateralModule()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    collateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "collateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     computeClosingFactor(
       borrowPart: PromiseOrValue<BigNumberish>,
@@ -4930,6 +4787,14 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    computeOpenInterestMintable(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "computeOpenInterestMintable()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     computeTVLInfo(
       user: PromiseOrValue<string>,
       _exchangeRate: PromiseOrValue<BigNumberish>,
@@ -4942,9 +4807,9 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    conservator(overrides?: CallOverrides): Promise<BigNumber>;
+    debtMinted(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "conservator()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "debtMinted()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     debtRateAgainstEthMarket(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -4954,17 +4819,15 @@ export interface BigBang extends BaseContract {
 
     "eip712Domain()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     execute(
+      modules: PromiseOrValue<BigNumberish>[],
       calls: PromiseOrValue<BytesLike>[],
       revertOnFail: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "execute(bytes[],bool)"(
+    "execute(uint8[],bytes[],bool)"(
+      modules: PromiseOrValue<BigNumberish>[],
       calls: PromiseOrValue<BytesLike>[],
       revertOnFail: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -4992,79 +4855,17 @@ export interface BigBang extends BaseContract {
 
     "isMainMarket()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    leverageExecutor(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "leverageExecutor()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     leverageModule(overrides?: CallOverrides): Promise<BigNumber>;
 
     "leverageModule()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    liquidate(
-      users: PromiseOrValue<string>[],
-      maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      minLiquidationBonuses: PromiseOrValue<BigNumberish>[],
-      liquidatorReceivers: PromiseOrValue<string>[],
-      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "liquidate(address[],uint256[],uint256[],address[],bytes[])"(
-      users: PromiseOrValue<string>[],
-      maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      minLiquidationBonuses: PromiseOrValue<BigNumberish>[],
-      liquidatorReceivers: PromiseOrValue<string>[],
-      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    liquidateBadDebt(
-      user: PromiseOrValue<string>,
-      from: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      liquidatorReceiver: PromiseOrValue<string>,
-      liquidatorReceiverData: PromiseOrValue<BytesLike>,
-      swapCollateral: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "liquidateBadDebt(address,address,address,address,bytes,bool)"(
-      user: PromiseOrValue<string>,
-      from: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      liquidatorReceiver: PromiseOrValue<string>,
-      liquidatorReceiverData: PromiseOrValue<BytesLike>,
-      swapCollateral: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    liquidationCollateralizationRate(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "liquidationCollateralizationRate()"(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
 
     liquidationModule(overrides?: CallOverrides): Promise<BigNumber>;
 
     "liquidationModule()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     maxDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "maxDebtRate()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    maxLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "maxLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     maxMintFee(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -5077,10 +4878,6 @@ export interface BigBang extends BaseContract {
     minDebtRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "minDebtRate()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    minLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "minLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     minMintFee(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -5100,35 +4897,45 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    oracle(overrides?: CallOverrides): Promise<BigNumber>;
+    onERC1155BatchReceived(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    "oracle()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    oracleData(overrides?: CallOverrides): Promise<BigNumber>;
+    onERC1155Received(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    "oracleData()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "onERC1155Received(address,address,uint256,uint256,bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    pauseOptions(
-      pauseProp: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "pauseOptions(uint8)"(
-      pauseProp: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "pendingOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    penrose(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "penrose()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     permit(
       owner: PromiseOrValue<string>,
@@ -5174,18 +4981,6 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    protocolFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    rateTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "rateTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    rateValidDuration(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     refreshPenroseFees(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -5194,33 +4989,11 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    removeCollateral(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+    renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "removeCollateral(address,address,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    repay(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      part: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "repay(address,address,bool,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      part: PromiseOrValue<BigNumberish>,
+    "renounceOwnership()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5233,20 +5006,6 @@ export interface BigBang extends BaseContract {
     "rescueEth(uint256,address)"(
       amount: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    sellCollateral(
-      from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "sellCollateral(address,uint256,bytes)"(
-      from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5285,6 +5044,16 @@ export interface BigBang extends BaseContract {
 
     "setLeverageExecutor(address)"(
       _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setLiquidationMaxSlippage(
+      _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setLiquidationMaxSlippage(uint256)"(
+      _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5340,59 +5109,53 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    totalBorrow(overrides?: CallOverrides): Promise<BigNumber>;
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    "totalBorrow()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    totalBorrowCap(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "totalBorrowCap()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    totalCollateralShare(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "totalCollateralShare()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     transfer(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "transfer(address,uint256)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     transferFrom(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "transferFrom(address,address,uint256)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "transferOwnership(address,bool,bool)"(
+    "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -5426,29 +5189,9 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    userBorrowPart(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    viewOpenInterest(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "userBorrowPart(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    userCollateralShare(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "userCollateralShare(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    yieldBox(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "yieldBox()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "viewOpenInterest()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -5457,6 +5200,178 @@ export interface BigBang extends BaseContract {
     "DOMAIN_SEPARATOR()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    _asset(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "_asset()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    _assetId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "_assetId()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    _collateral(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "_collateral()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    _collateralId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "_collateralId()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    _collateralizationRate(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "_collateralizationRate()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    _conservator(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "_conservator()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    _exchangeRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "_exchangeRate()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    _leverageExecutor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "_leverageExecutor()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    _liquidationBonusAmount(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "_liquidationBonusAmount()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    _liquidationCollateralizationRate(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "_liquidationCollateralizationRate()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    _liquidationMultiplier(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "_liquidationMultiplier()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    _maxLiquidationSlippage(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "_maxLiquidationSlippage()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    _maxLiquidatorReward(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "_maxLiquidatorReward()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    _minLiquidatorReward(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "_minLiquidatorReward()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    _oracle(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "_oracle()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    _oracleData(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "_oracleData()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    _pauseOptions(
+      _pauseProp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "_pauseOptions(uint8)"(
+      _pauseProp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    _pearlmit(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "_pearlmit()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    _penrose(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "_penrose()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    _protocolFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "_protocolFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    _rateTimestamp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "_rateTimestamp()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    _rateValidDuration(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "_rateValidDuration()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    _totalBorrow(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "_totalBorrow()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    _totalBorrowCap(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "_totalBorrowCap()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    _totalCollateralShare(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "_totalCollateralShare()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    _userBorrowPart(
+      _user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "_userBorrowPart(address)"(
+      _user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    _userCollateralShare(
+      _user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "_userCollateralShare(address)"(
+      _user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    _yieldBox(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "_yieldBox()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     accrue(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -5469,24 +5384,6 @@ export interface BigBang extends BaseContract {
     accrueInfo(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "accrueInfo()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    addCollateral(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "addCollateral(address,address,bool,uint256,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
 
     allowance(
       arg0: PromiseOrValue<string>,
@@ -5536,14 +5433,6 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    asset(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "asset()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    assetId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "assetId()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     assetOracle(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "assetOracle()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -5564,67 +5453,13 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    borrow(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "borrow(address,address,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     borrowModule(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "borrowModule()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    buyCollateral(
-      from: PromiseOrValue<string>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      supplyAmount: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "buyCollateral(address,uint256,uint256,bytes)"(
-      from: PromiseOrValue<string>,
-      borrowAmount: PromiseOrValue<BigNumberish>,
-      supplyAmount: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    claimOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "claimOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    collateral(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "collateral()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    collateralId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "collateralId()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     collateralModule(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "collateralModule()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    collateralizationRate(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "collateralizationRate()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -5654,6 +5489,14 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    computeOpenInterestMintable(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "computeOpenInterestMintable()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     computeTVLInfo(
       user: PromiseOrValue<string>,
       _exchangeRate: PromiseOrValue<BigNumberish>,
@@ -5666,9 +5509,9 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    conservator(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    debtMinted(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "conservator()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "debtMinted()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     debtRateAgainstEthMarket(
       overrides?: CallOverrides
@@ -5682,17 +5525,15 @@ export interface BigBang extends BaseContract {
 
     "eip712Domain()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    exchangeRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "exchangeRate()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     execute(
+      modules: PromiseOrValue<BigNumberish>[],
       calls: PromiseOrValue<BytesLike>[],
       revertOnFail: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "execute(bytes[],bool)"(
+    "execute(uint8[],bytes[],bool)"(
+      modules: PromiseOrValue<BigNumberish>[],
       calls: PromiseOrValue<BytesLike>[],
       revertOnFail: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -5720,69 +5561,9 @@ export interface BigBang extends BaseContract {
 
     "isMainMarket()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    leverageExecutor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "leverageExecutor()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     leverageModule(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "leverageModule()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    liquidate(
-      users: PromiseOrValue<string>[],
-      maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      minLiquidationBonuses: PromiseOrValue<BigNumberish>[],
-      liquidatorReceivers: PromiseOrValue<string>[],
-      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "liquidate(address[],uint256[],uint256[],address[],bytes[])"(
-      users: PromiseOrValue<string>[],
-      maxBorrowParts: PromiseOrValue<BigNumberish>[],
-      minLiquidationBonuses: PromiseOrValue<BigNumberish>[],
-      liquidatorReceivers: PromiseOrValue<string>[],
-      liquidatorReceiverDatas: PromiseOrValue<BytesLike>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    liquidateBadDebt(
-      user: PromiseOrValue<string>,
-      from: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      liquidatorReceiver: PromiseOrValue<string>,
-      liquidatorReceiverData: PromiseOrValue<BytesLike>,
-      swapCollateral: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "liquidateBadDebt(address,address,address,address,bytes,bool)"(
-      user: PromiseOrValue<string>,
-      from: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      liquidatorReceiver: PromiseOrValue<string>,
-      liquidatorReceiverData: PromiseOrValue<BytesLike>,
-      swapCollateral: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    liquidationBonusAmount(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "liquidationBonusAmount()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    liquidationCollateralizationRate(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "liquidationCollateralizationRate()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -5792,25 +5573,9 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    liquidationMultiplier(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "liquidationMultiplier()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     maxDebtRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "maxDebtRate()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    maxLiquidatorReward(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "maxLiquidatorReward()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
 
     maxMintFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -5825,14 +5590,6 @@ export interface BigBang extends BaseContract {
     minDebtRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "minDebtRate()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    minLiquidatorReward(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "minLiquidatorReward()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
 
     minMintFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -5854,35 +5611,45 @@ export interface BigBang extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    oracle(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    onERC1155BatchReceived(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    "oracle()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    oracleData(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    onERC1155Received(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    "oracleData()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "onERC1155Received(address,address,uint256,uint256,bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    pauseOptions(
-      pauseProp: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "pauseOptions(uint8)"(
-      pauseProp: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "pendingOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    penrose(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "penrose()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     permit(
       owner: PromiseOrValue<string>,
@@ -5928,20 +5695,6 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    protocolFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "protocolFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    rateTimestamp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "rateTimestamp()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    rateValidDuration(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "rateValidDuration()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     refreshPenroseFees(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -5950,33 +5703,11 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    removeCollateral(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+    renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "removeCollateral(address,address,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    repay(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      part: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "repay(address,address,bool,uint256)"(
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      skim: PromiseOrValue<boolean>,
-      part: PromiseOrValue<BigNumberish>,
+    "renounceOwnership()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -5989,20 +5720,6 @@ export interface BigBang extends BaseContract {
     "rescueEth(uint256,address)"(
       amount: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    sellCollateral(
-      from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "sellCollateral(address,uint256,bytes)"(
-      from: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -6041,6 +5758,16 @@ export interface BigBang extends BaseContract {
 
     "setLeverageExecutor(address)"(
       _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setLiquidationMaxSlippage(
+      _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setLiquidationMaxSlippage(uint256)"(
+      _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -6096,21 +5823,13 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    totalBorrow(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "totalBorrow()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    totalBorrowCap(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "totalBorrowCap()"(
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    totalCollateralShare(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "totalCollateralShare()"(
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -6119,42 +5838,38 @@ export interface BigBang extends BaseContract {
     "totalSupply()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transfer(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "transfer(address,uint256)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     transferFrom(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "transferFrom(address,address,uint256)"(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
-      arg2: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "transferOwnership(address,bool,bool)"(
+    "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -6188,28 +5903,10 @@ export interface BigBang extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    userBorrowPart(
-      arg0: PromiseOrValue<string>,
+    viewOpenInterest(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "viewOpenInterest()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    "userBorrowPart(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    userCollateralShare(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "userCollateralShare(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    yieldBox(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "yieldBox()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

@@ -34,9 +34,11 @@ export type UsdoInitStructStruct = {
   yieldBox: PromiseOrValue<string>;
   cluster: PromiseOrValue<string>;
   extExec: PromiseOrValue<string>;
+  pearlmit: PromiseOrValue<string>;
 };
 
 export type UsdoInitStructStructOutput = [
+  string,
   string,
   string,
   string,
@@ -48,6 +50,7 @@ export type UsdoInitStructStructOutput = [
   yieldBox: string;
   cluster: string;
   extExec: string;
+  pearlmit: string;
 };
 
 export type UsdoModulesInitStructStruct = {
@@ -55,11 +58,9 @@ export type UsdoModulesInitStructStruct = {
   usdoReceiverModule: PromiseOrValue<string>;
   marketReceiverModule: PromiseOrValue<string>;
   optionReceiverModule: PromiseOrValue<string>;
-  leverageReceiverModule: PromiseOrValue<string>;
 };
 
 export type UsdoModulesInitStructStructOutput = [
-  string,
   string,
   string,
   string,
@@ -69,7 +70,6 @@ export type UsdoModulesInitStructStructOutput = [
   usdoReceiverModule: string;
   marketReceiverModule: string;
   optionReceiverModule: string;
-  leverageReceiverModule: string;
 };
 
 export type EnforcedOptionParamStruct = {
@@ -250,6 +250,7 @@ export type LZSendParamStructOutput = [
 
 export interface UsdoInterface extends utils.Interface {
   functions: {
+    "CLUSTER_SLOT()": FunctionFragment;
     "DOMAIN_SEPARATOR()": FunctionFragment;
     "MSG_SEND()": FunctionFragment;
     "SEND()": FunctionFragment;
@@ -263,20 +264,19 @@ export interface UsdoInterface extends utils.Interface {
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "burn(address,uint256)": FunctionFragment;
-    "cluster()": FunctionFragment;
     "combineOptions(uint32,uint16,bytes)": FunctionFragment;
-    "composeMsgSender()": FunctionFragment;
     "decimalConversionRate()": FunctionFragment;
     "decimals()": FunctionFragment;
     "decreaseAllowance(address,uint256)": FunctionFragment;
     "eip712Domain()": FunctionFragment;
     "endpoint()": FunctionFragment;
     "enforcedOptions(uint32,uint16)": FunctionFragment;
-    "executeModule(uint8,bytes,bool)": FunctionFragment;
     "extractFees()": FunctionFragment;
     "flashLoanHelper()": FunctionFragment;
+    "getCluster()": FunctionFragment;
     "getTypedDataHash((address,address,uint256,uint256,uint256))": FunctionFragment;
     "increaseAllowance(address,uint256)": FunctionFragment;
+    "isComposeMsgSender((uint32,bytes32,uint64),bytes,address)": FunctionFragment;
     "isPeer(uint32,bytes32)": FunctionFragment;
     "lzReceive((uint32,bytes32,uint64),bytes32,bytes,address,bytes)": FunctionFragment;
     "lzReceiveAndRevert(((uint32,bytes32,uint64),uint32,address,bytes32,uint256,address,bytes,bytes)[])": FunctionFragment;
@@ -291,6 +291,7 @@ export interface UsdoInterface extends utils.Interface {
     "oftVersion()": FunctionFragment;
     "owner()": FunctionFragment;
     "paused()": FunctionFragment;
+    "pearlmit()": FunctionFragment;
     "peers(uint32)": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "preCrime()": FunctionFragment;
@@ -308,23 +309,28 @@ export interface UsdoInterface extends utils.Interface {
     "setFlashloanHelper(address)": FunctionFragment;
     "setMinterStatus(address,bool)": FunctionFragment;
     "setMsgInspector(address)": FunctionFragment;
+    "setPause(bool)": FunctionFragment;
+    "setPearlmit(address)": FunctionFragment;
     "setPeer(uint32,bytes32)": FunctionFragment;
     "setPreCrime(address)": FunctionFragment;
+    "setTapiocaOmnichainReceiveExtender(address)": FunctionFragment;
+    "setToeExtExec(address)": FunctionFragment;
     "sharedDecimals()": FunctionFragment;
     "symbol()": FunctionFragment;
+    "tapiocaOmnichainReceiveExtender()": FunctionFragment;
     "toeExtExec()": FunctionFragment;
     "token()": FunctionFragment;
     "totalSupply()": FunctionFragment;
     "transfer(address,uint256)": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
-    "usdoExtExec()": FunctionFragment;
-    "usdoHelper()": FunctionFragment;
     "yieldBox()": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "CLUSTER_SLOT"
+      | "CLUSTER_SLOT()"
       | "DOMAIN_SEPARATOR"
       | "DOMAIN_SEPARATOR()"
       | "MSG_SEND"
@@ -351,12 +357,8 @@ export interface UsdoInterface extends utils.Interface {
       | "balanceOf(address)"
       | "burn"
       | "burn(address,uint256)"
-      | "cluster"
-      | "cluster()"
       | "combineOptions"
       | "combineOptions(uint32,uint16,bytes)"
-      | "composeMsgSender"
-      | "composeMsgSender()"
       | "decimalConversionRate"
       | "decimalConversionRate()"
       | "decimals"
@@ -369,16 +371,18 @@ export interface UsdoInterface extends utils.Interface {
       | "endpoint()"
       | "enforcedOptions"
       | "enforcedOptions(uint32,uint16)"
-      | "executeModule"
-      | "executeModule(uint8,bytes,bool)"
       | "extractFees"
       | "extractFees()"
       | "flashLoanHelper"
       | "flashLoanHelper()"
+      | "getCluster"
+      | "getCluster()"
       | "getTypedDataHash"
       | "getTypedDataHash((address,address,uint256,uint256,uint256))"
       | "increaseAllowance"
       | "increaseAllowance(address,uint256)"
+      | "isComposeMsgSender"
+      | "isComposeMsgSender((uint32,bytes32,uint64),bytes,address)"
       | "isPeer"
       | "isPeer(uint32,bytes32)"
       | "lzReceive"
@@ -407,6 +411,8 @@ export interface UsdoInterface extends utils.Interface {
       | "owner()"
       | "paused"
       | "paused()"
+      | "pearlmit"
+      | "pearlmit()"
       | "peers"
       | "peers(uint32)"
       | "permit"
@@ -441,14 +447,24 @@ export interface UsdoInterface extends utils.Interface {
       | "setMinterStatus(address,bool)"
       | "setMsgInspector"
       | "setMsgInspector(address)"
+      | "setPause"
+      | "setPause(bool)"
+      | "setPearlmit"
+      | "setPearlmit(address)"
       | "setPeer"
       | "setPeer(uint32,bytes32)"
       | "setPreCrime"
       | "setPreCrime(address)"
+      | "setTapiocaOmnichainReceiveExtender"
+      | "setTapiocaOmnichainReceiveExtender(address)"
+      | "setToeExtExec"
+      | "setToeExtExec(address)"
       | "sharedDecimals"
       | "sharedDecimals()"
       | "symbol"
       | "symbol()"
+      | "tapiocaOmnichainReceiveExtender"
+      | "tapiocaOmnichainReceiveExtender()"
       | "toeExtExec"
       | "toeExtExec()"
       | "token"
@@ -461,14 +477,18 @@ export interface UsdoInterface extends utils.Interface {
       | "transferFrom(address,address,uint256)"
       | "transferOwnership"
       | "transferOwnership(address)"
-      | "usdoExtExec"
-      | "usdoExtExec()"
-      | "usdoHelper"
-      | "usdoHelper()"
       | "yieldBox"
       | "yieldBox()"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "CLUSTER_SLOT",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "CLUSTER_SLOT()",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "DOMAIN_SEPARATOR",
     values?: undefined
@@ -564,8 +584,6 @@ export interface UsdoInterface extends utils.Interface {
     functionFragment: "burn(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(functionFragment: "cluster", values?: undefined): string;
-  encodeFunctionData(functionFragment: "cluster()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "combineOptions",
     values: [
@@ -581,14 +599,6 @@ export interface UsdoInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "composeMsgSender",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "composeMsgSender()",
-    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "decimalConversionRate",
@@ -633,22 +643,6 @@ export interface UsdoInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "executeModule",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<boolean>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "executeModule(uint8,bytes,bool)",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<boolean>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "extractFees",
     values?: undefined
   ): string;
@@ -662,6 +656,14 @@ export interface UsdoInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "flashLoanHelper()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCluster",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCluster()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -679,6 +681,14 @@ export interface UsdoInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "increaseAllowance(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isComposeMsgSender",
+    values: [OriginStruct, PromiseOrValue<BytesLike>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isComposeMsgSender((uint32,bytes32,uint64),bytes,address)",
+    values: [OriginStruct, PromiseOrValue<BytesLike>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "isPeer",
@@ -792,6 +802,11 @@ export interface UsdoInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
   encodeFunctionData(functionFragment: "paused", values?: undefined): string;
   encodeFunctionData(functionFragment: "paused()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "pearlmit", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "pearlmit()",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "peers",
     values: [PromiseOrValue<BigNumberish>]
@@ -954,6 +969,22 @@ export interface UsdoInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "setPause",
+    values: [PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setPause(bool)",
+    values: [PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setPearlmit",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setPearlmit(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "setPeer",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
   ): string;
@@ -970,6 +1001,22 @@ export interface UsdoInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "setTapiocaOmnichainReceiveExtender",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setTapiocaOmnichainReceiveExtender(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setToeExtExec",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setToeExtExec(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "sharedDecimals",
     values?: undefined
   ): string;
@@ -979,6 +1026,14 @@ export interface UsdoInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
   encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "tapiocaOmnichainReceiveExtender",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "tapiocaOmnichainReceiveExtender()",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "toeExtExec",
     values?: undefined
@@ -1029,28 +1084,20 @@ export interface UsdoInterface extends utils.Interface {
     functionFragment: "transferOwnership(address)",
     values: [PromiseOrValue<string>]
   ): string;
-  encodeFunctionData(
-    functionFragment: "usdoExtExec",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "usdoExtExec()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "usdoHelper",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "usdoHelper()",
-    values?: undefined
-  ): string;
   encodeFunctionData(functionFragment: "yieldBox", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "yieldBox()",
     values?: undefined
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "CLUSTER_SLOT",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "CLUSTER_SLOT()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "DOMAIN_SEPARATOR",
     data: BytesLike
@@ -1131,22 +1178,12 @@ export interface UsdoInterface extends utils.Interface {
     functionFragment: "burn(address,uint256)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "cluster", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "cluster()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "combineOptions",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "combineOptions(uint32,uint16,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "composeMsgSender",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "composeMsgSender()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1186,14 +1223,6 @@ export interface UsdoInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "executeModule",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "executeModule(uint8,bytes,bool)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "extractFees",
     data: BytesLike
   ): Result;
@@ -1207,6 +1236,11 @@ export interface UsdoInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "flashLoanHelper()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "getCluster", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getCluster()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1223,6 +1257,14 @@ export interface UsdoInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "increaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isComposeMsgSender",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isComposeMsgSender((uint32,bytes32,uint64),bytes,address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "isPeer", data: BytesLike): Result;
@@ -1295,6 +1337,8 @@ export interface UsdoInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "paused()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "pearlmit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "pearlmit()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "peers", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "peers(uint32)",
@@ -1401,6 +1445,19 @@ export interface UsdoInterface extends utils.Interface {
     functionFragment: "setMsgInspector(address)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "setPause", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setPause(bool)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setPearlmit",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setPearlmit(address)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "setPeer", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setPeer(uint32,bytes32)",
@@ -1415,6 +1472,22 @@ export interface UsdoInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "setTapiocaOmnichainReceiveExtender",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setTapiocaOmnichainReceiveExtender(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setToeExtExec",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setToeExtExec(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "sharedDecimals",
     data: BytesLike
   ): Result;
@@ -1424,6 +1497,14 @@ export interface UsdoInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "tapiocaOmnichainReceiveExtender",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "tapiocaOmnichainReceiveExtender()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "toeExtExec", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "toeExtExec()",
@@ -1460,19 +1541,6 @@ export interface UsdoInterface extends utils.Interface {
     functionFragment: "transferOwnership(address)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "usdoExtExec",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "usdoExtExec()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "usdoHelper", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "usdoHelper()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "yieldBox", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "yieldBox()", data: BytesLike): Result;
 
@@ -1482,9 +1550,10 @@ export interface UsdoInterface extends utils.Interface {
     "EnforcedOptionSet(tuple[])": EventFragment;
     "MsgInspectorSet(address)": EventFragment;
     "OFTReceived(bytes32,uint32,address,uint256)": EventFragment;
-    "OFTSent(bytes32,uint32,address,uint256)": EventFragment;
+    "OFTSent(bytes32,uint32,address,uint256,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "Paused(address)": EventFragment;
+    "PearlmitUpdated(address,address)": EventFragment;
     "PeerSet(uint32,bytes32)": EventFragment;
     "PreCrimeSet(address)": EventFragment;
     "SetBurnerStatus(address,bool)": EventFragment;
@@ -1509,7 +1578,7 @@ export interface UsdoInterface extends utils.Interface {
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OFTSent"): EventFragment;
   getEvent(
-    nameOrSignatureOrTopic: "OFTSent(bytes32,uint32,address,uint256)"
+    nameOrSignatureOrTopic: "OFTSent(bytes32,uint32,address,uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
@@ -1517,6 +1586,10 @@ export interface UsdoInterface extends utils.Interface {
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Paused"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Paused(address)"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "PearlmitUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "PearlmitUpdated(address,address)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "PeerSet"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "PeerSet(uint32,bytes32)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "PreCrimeSet"): EventFragment;
@@ -1583,7 +1656,7 @@ export interface OFTReceivedEventObject {
   guid: string;
   srcEid: number;
   toAddress: string;
-  amountLD: BigNumber;
+  amountReceivedLD: BigNumber;
 }
 export type OFTReceivedEvent = TypedEvent<
   [string, number, string, BigNumber],
@@ -1596,10 +1669,11 @@ export interface OFTSentEventObject {
   guid: string;
   dstEid: number;
   fromAddress: string;
-  amountLD: BigNumber;
+  amountSentLD: BigNumber;
+  amountReceivedLD: BigNumber;
 }
 export type OFTSentEvent = TypedEvent<
-  [string, number, string, BigNumber],
+  [string, number, string, BigNumber, BigNumber],
   OFTSentEventObject
 >;
 
@@ -1623,6 +1697,17 @@ export interface PausedEventObject {
 export type PausedEvent = TypedEvent<[string], PausedEventObject>;
 
 export type PausedEventFilter = TypedEventFilter<PausedEvent>;
+
+export interface PearlmitUpdatedEventObject {
+  oldPearlmit: string;
+  newPearlmit: string;
+}
+export type PearlmitUpdatedEvent = TypedEvent<
+  [string, string],
+  PearlmitUpdatedEventObject
+>;
+
+export type PearlmitUpdatedEventFilter = TypedEventFilter<PearlmitUpdatedEvent>;
 
 export interface PeerSetEventObject {
   eid: number;
@@ -1709,6 +1794,10 @@ export interface Usdo extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    CLUSTER_SLOT(overrides?: CallOverrides): Promise<[string]>;
+
+    "CLUSTER_SLOT()"(overrides?: CallOverrides): Promise<[string]>;
+
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<[string]>;
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<[string]>;
@@ -1819,10 +1908,6 @@ export interface Usdo extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    cluster(overrides?: CallOverrides): Promise<[string]>;
-
-    "cluster()"(overrides?: CallOverrides): Promise<[string]>;
-
     combineOptions(
       _eid: PromiseOrValue<BigNumberish>,
       _msgType: PromiseOrValue<BigNumberish>,
@@ -1836,14 +1921,6 @@ export interface Usdo extends BaseContract {
       _extraOptions: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[string]>;
-
-    composeMsgSender(
-      overrides?: CallOverrides
-    ): Promise<[string] & { sender: string }>;
-
-    "composeMsgSender()"(
-      overrides?: CallOverrides
-    ): Promise<[string] & { sender: string }>;
 
     decimalConversionRate(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -1909,20 +1986,6 @@ export interface Usdo extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string] & { enforcedOption: string }>;
 
-    executeModule(
-      _module: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
-      _forwardRevert: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "executeModule(uint8,bytes,bool)"(
-      _module: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
-      _forwardRevert: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     extractFees(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -1934,6 +1997,10 @@ export interface Usdo extends BaseContract {
     flashLoanHelper(overrides?: CallOverrides): Promise<[string]>;
 
     "flashLoanHelper()"(overrides?: CallOverrides): Promise<[string]>;
+
+    getCluster(overrides?: CallOverrides): Promise<[string]>;
+
+    "getCluster()"(overrides?: CallOverrides): Promise<[string]>;
 
     getTypedDataHash(
       _permitData: ERC20PermitStructStruct,
@@ -1956,6 +2023,20 @@ export interface Usdo extends BaseContract {
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    isComposeMsgSender(
+      arg0: OriginStruct,
+      arg1: PromiseOrValue<BytesLike>,
+      _sender: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "isComposeMsgSender((uint32,bytes32,uint64),bytes,address)"(
+      arg0: OriginStruct,
+      arg1: PromiseOrValue<BytesLike>,
+      _sender: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
     isPeer(
       _eid: PromiseOrValue<BigNumberish>,
@@ -2098,6 +2179,10 @@ export interface Usdo extends BaseContract {
     paused(overrides?: CallOverrides): Promise<[boolean]>;
 
     "paused()"(overrides?: CallOverrides): Promise<[boolean]>;
+
+    pearlmit(overrides?: CallOverrides): Promise<[string]>;
+
+    "pearlmit()"(overrides?: CallOverrides): Promise<[string]>;
 
     peers(
       eid: PromiseOrValue<BigNumberish>,
@@ -2321,6 +2406,26 @@ export interface Usdo extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    setPause(
+      _pauseState: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setPause(bool)"(
+      _pauseState: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setPearlmit(
+      _pearlmit: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setPearlmit(address)"(
+      _pearlmit: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     setPeer(
       _eid: PromiseOrValue<BigNumberish>,
       _peer: PromiseOrValue<BytesLike>,
@@ -2343,6 +2448,26 @@ export interface Usdo extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    setTapiocaOmnichainReceiveExtender(
+      _tapiocaOmnichainReceiveExtender: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setTapiocaOmnichainReceiveExtender(address)"(
+      _tapiocaOmnichainReceiveExtender: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setToeExtExec(
+      _extExec: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setToeExtExec(address)"(
+      _extExec: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     sharedDecimals(overrides?: CallOverrides): Promise<[number]>;
 
     "sharedDecimals()"(overrides?: CallOverrides): Promise<[number]>;
@@ -2350,6 +2475,14 @@ export interface Usdo extends BaseContract {
     symbol(overrides?: CallOverrides): Promise<[string]>;
 
     "symbol()"(overrides?: CallOverrides): Promise<[string]>;
+
+    tapiocaOmnichainReceiveExtender(
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    "tapiocaOmnichainReceiveExtender()"(
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     toeExtExec(overrides?: CallOverrides): Promise<[string]>;
 
@@ -2399,18 +2532,14 @@ export interface Usdo extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    usdoExtExec(overrides?: CallOverrides): Promise<[string]>;
-
-    "usdoExtExec()"(overrides?: CallOverrides): Promise<[string]>;
-
-    usdoHelper(overrides?: CallOverrides): Promise<[string]>;
-
-    "usdoHelper()"(overrides?: CallOverrides): Promise<[string]>;
-
     yieldBox(overrides?: CallOverrides): Promise<[string]>;
 
     "yieldBox()"(overrides?: CallOverrides): Promise<[string]>;
   };
+
+  CLUSTER_SLOT(overrides?: CallOverrides): Promise<string>;
+
+  "CLUSTER_SLOT()"(overrides?: CallOverrides): Promise<string>;
 
   DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
 
@@ -2522,10 +2651,6 @@ export interface Usdo extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  cluster(overrides?: CallOverrides): Promise<string>;
-
-  "cluster()"(overrides?: CallOverrides): Promise<string>;
-
   combineOptions(
     _eid: PromiseOrValue<BigNumberish>,
     _msgType: PromiseOrValue<BigNumberish>,
@@ -2539,10 +2664,6 @@ export interface Usdo extends BaseContract {
     _extraOptions: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<string>;
-
-  composeMsgSender(overrides?: CallOverrides): Promise<string>;
-
-  "composeMsgSender()"(overrides?: CallOverrides): Promise<string>;
 
   decimalConversionRate(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2608,20 +2729,6 @@ export interface Usdo extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  executeModule(
-    _module: PromiseOrValue<BigNumberish>,
-    _data: PromiseOrValue<BytesLike>,
-    _forwardRevert: PromiseOrValue<boolean>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "executeModule(uint8,bytes,bool)"(
-    _module: PromiseOrValue<BigNumberish>,
-    _data: PromiseOrValue<BytesLike>,
-    _forwardRevert: PromiseOrValue<boolean>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   extractFees(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -2633,6 +2740,10 @@ export interface Usdo extends BaseContract {
   flashLoanHelper(overrides?: CallOverrides): Promise<string>;
 
   "flashLoanHelper()"(overrides?: CallOverrides): Promise<string>;
+
+  getCluster(overrides?: CallOverrides): Promise<string>;
+
+  "getCluster()"(overrides?: CallOverrides): Promise<string>;
 
   getTypedDataHash(
     _permitData: ERC20PermitStructStruct,
@@ -2655,6 +2766,20 @@ export interface Usdo extends BaseContract {
     addedValue: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  isComposeMsgSender(
+    arg0: OriginStruct,
+    arg1: PromiseOrValue<BytesLike>,
+    _sender: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "isComposeMsgSender((uint32,bytes32,uint64),bytes,address)"(
+    arg0: OriginStruct,
+    arg1: PromiseOrValue<BytesLike>,
+    _sender: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   isPeer(
     _eid: PromiseOrValue<BigNumberish>,
@@ -2793,6 +2918,10 @@ export interface Usdo extends BaseContract {
   paused(overrides?: CallOverrides): Promise<boolean>;
 
   "paused()"(overrides?: CallOverrides): Promise<boolean>;
+
+  pearlmit(overrides?: CallOverrides): Promise<string>;
+
+  "pearlmit()"(overrides?: CallOverrides): Promise<string>;
 
   peers(
     eid: PromiseOrValue<BigNumberish>,
@@ -3008,6 +3137,26 @@ export interface Usdo extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  setPause(
+    _pauseState: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setPause(bool)"(
+    _pauseState: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setPearlmit(
+    _pearlmit: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setPearlmit(address)"(
+    _pearlmit: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   setPeer(
     _eid: PromiseOrValue<BigNumberish>,
     _peer: PromiseOrValue<BytesLike>,
@@ -3030,6 +3179,26 @@ export interface Usdo extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  setTapiocaOmnichainReceiveExtender(
+    _tapiocaOmnichainReceiveExtender: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setTapiocaOmnichainReceiveExtender(address)"(
+    _tapiocaOmnichainReceiveExtender: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setToeExtExec(
+    _extExec: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setToeExtExec(address)"(
+    _extExec: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   sharedDecimals(overrides?: CallOverrides): Promise<number>;
 
   "sharedDecimals()"(overrides?: CallOverrides): Promise<number>;
@@ -3037,6 +3206,12 @@ export interface Usdo extends BaseContract {
   symbol(overrides?: CallOverrides): Promise<string>;
 
   "symbol()"(overrides?: CallOverrides): Promise<string>;
+
+  tapiocaOmnichainReceiveExtender(overrides?: CallOverrides): Promise<string>;
+
+  "tapiocaOmnichainReceiveExtender()"(
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   toeExtExec(overrides?: CallOverrides): Promise<string>;
 
@@ -3086,19 +3261,15 @@ export interface Usdo extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  usdoExtExec(overrides?: CallOverrides): Promise<string>;
-
-  "usdoExtExec()"(overrides?: CallOverrides): Promise<string>;
-
-  usdoHelper(overrides?: CallOverrides): Promise<string>;
-
-  "usdoHelper()"(overrides?: CallOverrides): Promise<string>;
-
   yieldBox(overrides?: CallOverrides): Promise<string>;
 
   "yieldBox()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
+    CLUSTER_SLOT(overrides?: CallOverrides): Promise<string>;
+
+    "CLUSTER_SLOT()"(overrides?: CallOverrides): Promise<string>;
+
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<string>;
@@ -3209,10 +3380,6 @@ export interface Usdo extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    cluster(overrides?: CallOverrides): Promise<string>;
-
-    "cluster()"(overrides?: CallOverrides): Promise<string>;
-
     combineOptions(
       _eid: PromiseOrValue<BigNumberish>,
       _msgType: PromiseOrValue<BigNumberish>,
@@ -3226,10 +3393,6 @@ export interface Usdo extends BaseContract {
       _extraOptions: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string>;
-
-    composeMsgSender(overrides?: CallOverrides): Promise<string>;
-
-    "composeMsgSender()"(overrides?: CallOverrides): Promise<string>;
 
     decimalConversionRate(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3295,20 +3458,6 @@ export interface Usdo extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    executeModule(
-      _module: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
-      _forwardRevert: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    "executeModule(uint8,bytes,bool)"(
-      _module: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
-      _forwardRevert: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
     extractFees(overrides?: CallOverrides): Promise<void>;
 
     "extractFees()"(overrides?: CallOverrides): Promise<void>;
@@ -3316,6 +3465,10 @@ export interface Usdo extends BaseContract {
     flashLoanHelper(overrides?: CallOverrides): Promise<string>;
 
     "flashLoanHelper()"(overrides?: CallOverrides): Promise<string>;
+
+    getCluster(overrides?: CallOverrides): Promise<string>;
+
+    "getCluster()"(overrides?: CallOverrides): Promise<string>;
 
     getTypedDataHash(
       _permitData: ERC20PermitStructStruct,
@@ -3336,6 +3489,20 @@ export interface Usdo extends BaseContract {
     "increaseAllowance(address,uint256)"(
       spender: PromiseOrValue<string>,
       addedValue: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    isComposeMsgSender(
+      arg0: OriginStruct,
+      arg1: PromiseOrValue<BytesLike>,
+      _sender: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "isComposeMsgSender((uint32,bytes32,uint64),bytes,address)"(
+      arg0: OriginStruct,
+      arg1: PromiseOrValue<BytesLike>,
+      _sender: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -3480,6 +3647,10 @@ export interface Usdo extends BaseContract {
     paused(overrides?: CallOverrides): Promise<boolean>;
 
     "paused()"(overrides?: CallOverrides): Promise<boolean>;
+
+    pearlmit(overrides?: CallOverrides): Promise<string>;
+
+    "pearlmit()"(overrides?: CallOverrides): Promise<string>;
 
     peers(
       eid: PromiseOrValue<BigNumberish>,
@@ -3711,6 +3882,26 @@ export interface Usdo extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setPause(
+      _pauseState: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setPause(bool)"(
+      _pauseState: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setPearlmit(
+      _pearlmit: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setPearlmit(address)"(
+      _pearlmit: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     setPeer(
       _eid: PromiseOrValue<BigNumberish>,
       _peer: PromiseOrValue<BytesLike>,
@@ -3733,6 +3924,26 @@ export interface Usdo extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setTapiocaOmnichainReceiveExtender(
+      _tapiocaOmnichainReceiveExtender: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setTapiocaOmnichainReceiveExtender(address)"(
+      _tapiocaOmnichainReceiveExtender: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setToeExtExec(
+      _extExec: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setToeExtExec(address)"(
+      _extExec: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     sharedDecimals(overrides?: CallOverrides): Promise<number>;
 
     "sharedDecimals()"(overrides?: CallOverrides): Promise<number>;
@@ -3740,6 +3951,12 @@ export interface Usdo extends BaseContract {
     symbol(overrides?: CallOverrides): Promise<string>;
 
     "symbol()"(overrides?: CallOverrides): Promise<string>;
+
+    tapiocaOmnichainReceiveExtender(overrides?: CallOverrides): Promise<string>;
+
+    "tapiocaOmnichainReceiveExtender()"(
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     toeExtExec(overrides?: CallOverrides): Promise<string>;
 
@@ -3789,14 +4006,6 @@ export interface Usdo extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    usdoExtExec(overrides?: CallOverrides): Promise<string>;
-
-    "usdoExtExec()"(overrides?: CallOverrides): Promise<string>;
-
-    usdoHelper(overrides?: CallOverrides): Promise<string>;
-
-    "usdoHelper()"(overrides?: CallOverrides): Promise<string>;
-
     yieldBox(overrides?: CallOverrides): Promise<string>;
 
     "yieldBox()"(overrides?: CallOverrides): Promise<string>;
@@ -3829,26 +4038,28 @@ export interface Usdo extends BaseContract {
       guid?: PromiseOrValue<BytesLike> | null,
       srcEid?: null,
       toAddress?: PromiseOrValue<string> | null,
-      amountLD?: null
+      amountReceivedLD?: null
     ): OFTReceivedEventFilter;
     OFTReceived(
       guid?: PromiseOrValue<BytesLike> | null,
       srcEid?: null,
       toAddress?: PromiseOrValue<string> | null,
-      amountLD?: null
+      amountReceivedLD?: null
     ): OFTReceivedEventFilter;
 
-    "OFTSent(bytes32,uint32,address,uint256)"(
+    "OFTSent(bytes32,uint32,address,uint256,uint256)"(
       guid?: PromiseOrValue<BytesLike> | null,
       dstEid?: null,
       fromAddress?: PromiseOrValue<string> | null,
-      amountLD?: null
+      amountSentLD?: null,
+      amountReceivedLD?: null
     ): OFTSentEventFilter;
     OFTSent(
       guid?: PromiseOrValue<BytesLike> | null,
       dstEid?: null,
       fromAddress?: PromiseOrValue<string> | null,
-      amountLD?: null
+      amountSentLD?: null,
+      amountReceivedLD?: null
     ): OFTSentEventFilter;
 
     "OwnershipTransferred(address,address)"(
@@ -3862,6 +4073,15 @@ export interface Usdo extends BaseContract {
 
     "Paused(address)"(account?: null): PausedEventFilter;
     Paused(account?: null): PausedEventFilter;
+
+    "PearlmitUpdated(address,address)"(
+      oldPearlmit?: null,
+      newPearlmit?: null
+    ): PearlmitUpdatedEventFilter;
+    PearlmitUpdated(
+      oldPearlmit?: null,
+      newPearlmit?: null
+    ): PearlmitUpdatedEventFilter;
 
     "PeerSet(uint32,bytes32)"(eid?: null, peer?: null): PeerSetEventFilter;
     PeerSet(eid?: null, peer?: null): PeerSetEventFilter;
@@ -3903,6 +4123,10 @@ export interface Usdo extends BaseContract {
   };
 
   estimateGas: {
+    CLUSTER_SLOT(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "CLUSTER_SLOT()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<BigNumber>;
 
     "DOMAIN_SEPARATOR()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -4013,10 +4237,6 @@ export interface Usdo extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    cluster(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "cluster()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     combineOptions(
       _eid: PromiseOrValue<BigNumberish>,
       _msgType: PromiseOrValue<BigNumberish>,
@@ -4030,10 +4250,6 @@ export interface Usdo extends BaseContract {
       _extraOptions: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    composeMsgSender(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "composeMsgSender()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     decimalConversionRate(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -4075,20 +4291,6 @@ export interface Usdo extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    executeModule(
-      _module: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
-      _forwardRevert: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "executeModule(uint8,bytes,bool)"(
-      _module: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
-      _forwardRevert: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     extractFees(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -4100,6 +4302,10 @@ export interface Usdo extends BaseContract {
     flashLoanHelper(overrides?: CallOverrides): Promise<BigNumber>;
 
     "flashLoanHelper()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getCluster(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "getCluster()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     getTypedDataHash(
       _permitData: ERC20PermitStructStruct,
@@ -4121,6 +4327,20 @@ export interface Usdo extends BaseContract {
       spender: PromiseOrValue<string>,
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    isComposeMsgSender(
+      arg0: OriginStruct,
+      arg1: PromiseOrValue<BytesLike>,
+      _sender: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "isComposeMsgSender((uint32,bytes32,uint64),bytes,address)"(
+      arg0: OriginStruct,
+      arg1: PromiseOrValue<BytesLike>,
+      _sender: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     isPeer(
@@ -4242,6 +4462,10 @@ export interface Usdo extends BaseContract {
     paused(overrides?: CallOverrides): Promise<BigNumber>;
 
     "paused()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    pearlmit(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "pearlmit()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     peers(
       eid: PromiseOrValue<BigNumberish>,
@@ -4437,6 +4661,26 @@ export interface Usdo extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    setPause(
+      _pauseState: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setPause(bool)"(
+      _pauseState: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setPearlmit(
+      _pearlmit: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setPearlmit(address)"(
+      _pearlmit: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     setPeer(
       _eid: PromiseOrValue<BigNumberish>,
       _peer: PromiseOrValue<BytesLike>,
@@ -4459,6 +4703,26 @@ export interface Usdo extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    setTapiocaOmnichainReceiveExtender(
+      _tapiocaOmnichainReceiveExtender: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setTapiocaOmnichainReceiveExtender(address)"(
+      _tapiocaOmnichainReceiveExtender: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setToeExtExec(
+      _extExec: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setToeExtExec(address)"(
+      _extExec: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     sharedDecimals(overrides?: CallOverrides): Promise<BigNumber>;
 
     "sharedDecimals()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -4466,6 +4730,14 @@ export interface Usdo extends BaseContract {
     symbol(overrides?: CallOverrides): Promise<BigNumber>;
 
     "symbol()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    tapiocaOmnichainReceiveExtender(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "tapiocaOmnichainReceiveExtender()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     toeExtExec(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -4515,20 +4787,16 @@ export interface Usdo extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    usdoExtExec(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "usdoExtExec()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    usdoHelper(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "usdoHelper()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     yieldBox(overrides?: CallOverrides): Promise<BigNumber>;
 
     "yieldBox()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
+    CLUSTER_SLOT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "CLUSTER_SLOT()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "DOMAIN_SEPARATOR()"(
@@ -4643,10 +4911,6 @@ export interface Usdo extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    cluster(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "cluster()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     combineOptions(
       _eid: PromiseOrValue<BigNumberish>,
       _msgType: PromiseOrValue<BigNumberish>,
@@ -4658,12 +4922,6 @@ export interface Usdo extends BaseContract {
       _eid: PromiseOrValue<BigNumberish>,
       _msgType: PromiseOrValue<BigNumberish>,
       _extraOptions: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    composeMsgSender(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "composeMsgSender()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -4711,20 +4969,6 @@ export interface Usdo extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    executeModule(
-      _module: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
-      _forwardRevert: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "executeModule(uint8,bytes,bool)"(
-      _module: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
-      _forwardRevert: PromiseOrValue<boolean>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     extractFees(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -4738,6 +4982,10 @@ export interface Usdo extends BaseContract {
     "flashLoanHelper()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    getCluster(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "getCluster()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getTypedDataHash(
       _permitData: ERC20PermitStructStruct,
@@ -4759,6 +5007,20 @@ export interface Usdo extends BaseContract {
       spender: PromiseOrValue<string>,
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    isComposeMsgSender(
+      arg0: OriginStruct,
+      arg1: PromiseOrValue<BytesLike>,
+      _sender: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "isComposeMsgSender((uint32,bytes32,uint64),bytes,address)"(
+      arg0: OriginStruct,
+      arg1: PromiseOrValue<BytesLike>,
+      _sender: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     isPeer(
@@ -4880,6 +5142,10 @@ export interface Usdo extends BaseContract {
     paused(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "paused()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    pearlmit(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "pearlmit()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     peers(
       eid: PromiseOrValue<BigNumberish>,
@@ -5075,6 +5341,26 @@ export interface Usdo extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    setPause(
+      _pauseState: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setPause(bool)"(
+      _pauseState: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setPearlmit(
+      _pearlmit: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setPearlmit(address)"(
+      _pearlmit: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     setPeer(
       _eid: PromiseOrValue<BigNumberish>,
       _peer: PromiseOrValue<BytesLike>,
@@ -5097,6 +5383,26 @@ export interface Usdo extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    setTapiocaOmnichainReceiveExtender(
+      _tapiocaOmnichainReceiveExtender: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setTapiocaOmnichainReceiveExtender(address)"(
+      _tapiocaOmnichainReceiveExtender: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setToeExtExec(
+      _extExec: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setToeExtExec(address)"(
+      _extExec: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     sharedDecimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "sharedDecimals()"(
@@ -5106,6 +5412,14 @@ export interface Usdo extends BaseContract {
     symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "symbol()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    tapiocaOmnichainReceiveExtender(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "tapiocaOmnichainReceiveExtender()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     toeExtExec(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -5154,14 +5468,6 @@ export interface Usdo extends BaseContract {
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
-
-    usdoExtExec(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "usdoExtExec()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    usdoHelper(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "usdoHelper()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     yieldBox(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

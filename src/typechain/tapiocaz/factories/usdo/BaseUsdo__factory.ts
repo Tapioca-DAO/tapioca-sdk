@@ -9,6 +9,16 @@ import type { BaseUsdo, BaseUsdoInterface } from "../../usdo/BaseUsdo";
 const _abi = [
   {
     inputs: [],
+    name: "BaseTapiocaOmnichainEngine_PearlmitFailed",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "BaseTapiocaOmnichainEngine_PearlmitNotApproved",
+    type: "error",
+  },
+  {
+    inputs: [],
     name: "InvalidDelegate",
     type: "error",
   },
@@ -216,7 +226,7 @@ const _abi = [
       {
         indexed: false,
         internalType: "uint256",
-        name: "amountLD",
+        name: "amountReceivedLD",
         type: "uint256",
       },
     ],
@@ -247,7 +257,13 @@ const _abi = [
       {
         indexed: false,
         internalType: "uint256",
-        name: "amountLD",
+        name: "amountSentLD",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amountReceivedLD",
         type: "uint256",
       },
     ],
@@ -271,6 +287,25 @@ const _abi = [
       },
     ],
     name: "OwnershipTransferred",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "contract IPearlmit",
+        name: "oldPearlmit",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "contract IPearlmit",
+        name: "newPearlmit",
+        type: "address",
+      },
+    ],
+    name: "PearlmitUpdated",
     type: "event",
   },
   {
@@ -329,6 +364,19 @@ const _abi = [
     ],
     name: "Transfer",
     type: "event",
+  },
+  {
+    inputs: [],
+    name: "CLUSTER_SLOT",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
@@ -486,19 +534,6 @@ const _abi = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "cluster",
-    outputs: [
-      {
-        internalType: "contract ICluster",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [
       {
         internalType: "uint32",
@@ -522,19 +557,6 @@ const _abi = [
         internalType: "bytes",
         name: "",
         type: "bytes",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "composeMsgSender",
-    outputs: [
-      {
-        internalType: "address",
-        name: "sender",
-        type: "address",
       },
     ],
     stateMutability: "view",
@@ -628,6 +650,19 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "getCluster",
+    outputs: [
+      {
+        internalType: "contract ICluster",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -649,6 +684,52 @@ const _abi = [
       },
     ],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        components: [
+          {
+            internalType: "uint32",
+            name: "srcEid",
+            type: "uint32",
+          },
+          {
+            internalType: "bytes32",
+            name: "sender",
+            type: "bytes32",
+          },
+          {
+            internalType: "uint64",
+            name: "nonce",
+            type: "uint64",
+          },
+        ],
+        internalType: "struct Origin",
+        name: "",
+        type: "tuple",
+      },
+      {
+        internalType: "bytes",
+        name: "",
+        type: "bytes",
+      },
+      {
+        internalType: "address",
+        name: "_sender",
+        type: "address",
+      },
+    ],
+    name: "isComposeMsgSender",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -952,6 +1033,19 @@ const _abi = [
     outputs: [
       {
         internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "pearlmit",
+    outputs: [
+      {
+        internalType: "contract IPearlmit",
         name: "",
         type: "address",
       },
@@ -1407,6 +1501,19 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "contract ICluster",
+        name: "_cluster",
+        type: "address",
+      },
+    ],
+    name: "setCluster",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "address",
         name: "_delegate",
         type: "address",
@@ -1463,6 +1570,19 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "contract IPearlmit",
+        name: "_pearlmit",
+        type: "address",
+      },
+    ],
+    name: "setPearlmit",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "uint32",
         name: "_eid",
         type: "uint32",
@@ -1492,6 +1612,32 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_tapiocaOmnichainReceiveExtender",
+        type: "address",
+      },
+    ],
+    name: "setTapiocaOmnichainReceiveExtender",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_extExec",
+        type: "address",
+      },
+    ],
+    name: "setToeExtExec",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "sharedDecimals",
     outputs: [
@@ -1501,7 +1647,7 @@ const _abi = [
         type: "uint8",
       },
     ],
-    stateMutability: "pure",
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -1512,6 +1658,19 @@ const _abi = [
         internalType: "string",
         name: "",
         type: "string",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "tapiocaOmnichainReceiveExtender",
+    outputs: [
+      {
+        internalType: "contract ITapiocaOmnichainReceiveExtender",
+        name: "",
+        type: "address",
       },
     ],
     stateMutability: "view",
@@ -1620,32 +1779,6 @@ const _abi = [
     name: "transferOwnership",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "usdoExtExec",
-    outputs: [
-      {
-        internalType: "contract UsdoExtExec",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "usdoHelper",
-    outputs: [
-      {
-        internalType: "contract UsdoHelper",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
     type: "function",
   },
   {

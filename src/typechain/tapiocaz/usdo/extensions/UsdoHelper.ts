@@ -21,6 +21,28 @@ import type {
   PromiseOrValue,
 } from "../../common";
 
+export type IExerciseOptionsDataStruct = {
+  from: PromiseOrValue<string>;
+  target: PromiseOrValue<string>;
+  paymentTokenAmount: PromiseOrValue<BigNumberish>;
+  oTAPTokenID: PromiseOrValue<BigNumberish>;
+  tapAmount: PromiseOrValue<BigNumberish>;
+};
+
+export type IExerciseOptionsDataStructOutput = [
+  string,
+  string,
+  BigNumber,
+  BigNumber,
+  BigNumber
+] & {
+  from: string;
+  target: string;
+  paymentTokenAmount: BigNumber;
+  oTAPTokenID: BigNumber;
+  tapAmount: BigNumber;
+};
+
 export type SendParamStruct = {
   dstEid: PromiseOrValue<BigNumberish>;
   to: PromiseOrValue<BytesLike>;
@@ -79,34 +101,66 @@ export type LZSendParamStructOutput = [
 };
 
 export type ExerciseOptionsMsgStruct = {
-  optionsData: ITapiocaOptionBrokerCrossChain.IExerciseOptionsDataStruct;
+  optionsData: IExerciseOptionsDataStruct;
   withdrawOnOtherChain: PromiseOrValue<boolean>;
   lzSendParams: LZSendParamStruct;
-  composeMsg: PromiseOrValue<BytesLike>;
 };
 
 export type ExerciseOptionsMsgStructOutput = [
-  ITapiocaOptionBrokerCrossChain.IExerciseOptionsDataStructOutput,
+  IExerciseOptionsDataStructOutput,
   boolean,
-  LZSendParamStructOutput,
-  string
+  LZSendParamStructOutput
 ] & {
-  optionsData: ITapiocaOptionBrokerCrossChain.IExerciseOptionsDataStructOutput;
+  optionsData: IExerciseOptionsDataStructOutput;
   withdrawOnOtherChain: boolean;
   lzSendParams: LZSendParamStructOutput;
-  composeMsg: string;
 };
+
+export type IOptionsLockDataStruct = {
+  lock: PromiseOrValue<boolean>;
+  target: PromiseOrValue<string>;
+  lockDuration: PromiseOrValue<BigNumberish>;
+  amount: PromiseOrValue<BigNumberish>;
+  fraction: PromiseOrValue<BigNumberish>;
+};
+
+export type IOptionsLockDataStructOutput = [
+  boolean,
+  string,
+  BigNumber,
+  BigNumber,
+  BigNumber
+] & {
+  lock: boolean;
+  target: string;
+  lockDuration: BigNumber;
+  amount: BigNumber;
+  fraction: BigNumber;
+};
+
+export type IOptionsParticipateDataStruct = {
+  participate: PromiseOrValue<boolean>;
+  target: PromiseOrValue<string>;
+  tOLPTokenId: PromiseOrValue<BigNumberish>;
+};
+
+export type IOptionsParticipateDataStructOutput = [
+  boolean,
+  string,
+  BigNumber
+] & { participate: boolean; target: string; tOLPTokenId: BigNumber };
 
 export type ILendOrRepayParamsStruct = {
   repay: PromiseOrValue<boolean>;
   depositAmount: PromiseOrValue<BigNumberish>;
   repayAmount: PromiseOrValue<BigNumberish>;
   marketHelper: PromiseOrValue<string>;
+  magnetar: PromiseOrValue<string>;
   market: PromiseOrValue<string>;
   removeCollateral: PromiseOrValue<boolean>;
   removeCollateralAmount: PromiseOrValue<BigNumberish>;
-  lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStruct;
-  participateData: ITapiocaOptionBroker.IOptionsParticipateDataStruct;
+  lockData: IOptionsLockDataStruct;
+  participateData: IOptionsParticipateDataStruct;
 };
 
 export type ILendOrRepayParamsStructOutput = [
@@ -115,126 +169,67 @@ export type ILendOrRepayParamsStructOutput = [
   BigNumber,
   string,
   string,
+  string,
   boolean,
   BigNumber,
-  ITapiocaOptionLiquidityProvision.IOptionsLockDataStructOutput,
-  ITapiocaOptionBroker.IOptionsParticipateDataStructOutput
+  IOptionsLockDataStructOutput,
+  IOptionsParticipateDataStructOutput
 ] & {
   repay: boolean;
   depositAmount: BigNumber;
   repayAmount: BigNumber;
   marketHelper: string;
+  magnetar: string;
   market: string;
   removeCollateral: boolean;
   removeCollateralAmount: BigNumber;
-  lockData: ITapiocaOptionLiquidityProvision.IOptionsLockDataStructOutput;
-  participateData: ITapiocaOptionBroker.IOptionsParticipateDataStructOutput;
+  lockData: IOptionsLockDataStructOutput;
+  participateData: IOptionsParticipateDataStructOutput;
 };
 
-export type IWithdrawParamsStruct = {
-  withdraw: PromiseOrValue<boolean>;
-  withdrawLzFeeAmount: PromiseOrValue<BigNumberish>;
-  withdrawOnOtherChain: PromiseOrValue<boolean>;
-  withdrawLzChainId: PromiseOrValue<BigNumberish>;
-  withdrawAdapterParams: PromiseOrValue<BytesLike>;
+export type MagnetarWithdrawDataStruct = {
+  yieldBox: PromiseOrValue<string>;
+  assetId: PromiseOrValue<BigNumberish>;
+  receiver: PromiseOrValue<string>;
+  amount: PromiseOrValue<BigNumberish>;
   unwrap: PromiseOrValue<boolean>;
-  refundAddress: PromiseOrValue<string>;
-  zroPaymentAddress: PromiseOrValue<string>;
+  withdraw: PromiseOrValue<boolean>;
 };
 
-export type IWithdrawParamsStructOutput = [
-  boolean,
+export type MagnetarWithdrawDataStructOutput = [
+  string,
+  BigNumber,
+  string,
   BigNumber,
   boolean,
-  number,
-  string,
-  boolean,
-  string,
-  string
+  boolean
 ] & {
-  withdraw: boolean;
-  withdrawLzFeeAmount: BigNumber;
-  withdrawOnOtherChain: boolean;
-  withdrawLzChainId: number;
-  withdrawAdapterParams: string;
+  yieldBox: string;
+  assetId: BigNumber;
+  receiver: string;
+  amount: BigNumber;
   unwrap: boolean;
-  refundAddress: string;
-  zroPaymentAddress: string;
+  withdraw: boolean;
 };
 
 export type MarketLendOrRepayMsgStruct = {
   user: PromiseOrValue<string>;
   lendParams: ILendOrRepayParamsStruct;
-  withdrawParams: IWithdrawParamsStruct;
+  withdrawParams: MagnetarWithdrawDataStruct;
 };
 
 export type MarketLendOrRepayMsgStructOutput = [
   string,
   ILendOrRepayParamsStructOutput,
-  IWithdrawParamsStructOutput
+  MagnetarWithdrawDataStructOutput
 ] & {
   user: string;
   lendParams: ILendOrRepayParamsStructOutput;
-  withdrawParams: IWithdrawParamsStructOutput;
-};
-
-export type ILeverageSwapDataStruct = {
-  tokenOut: PromiseOrValue<string>;
-  amountOutMin: PromiseOrValue<BigNumberish>;
-  data: PromiseOrValue<BytesLike>;
-};
-
-export type ILeverageSwapDataStructOutput = [string, BigNumber, string] & {
-  tokenOut: string;
-  amountOutMin: BigNumber;
-  data: string;
-};
-
-export type ILeverageExternalContractsDataStruct = {
-  swapper: PromiseOrValue<string>;
-  magnetar: PromiseOrValue<string>;
-  tOft: PromiseOrValue<string>;
-  srcMarket: PromiseOrValue<string>;
-};
-
-export type ILeverageExternalContractsDataStructOutput = [
-  string,
-  string,
-  string,
-  string
-] & { swapper: string; magnetar: string; tOft: string; srcMarket: string };
-
-export type MarketLeverageUpMsgStruct = {
-  user: PromiseOrValue<string>;
-  amount: PromiseOrValue<BigNumberish>;
-  swapData: ILeverageSwapDataStruct;
-  externalData: ILeverageExternalContractsDataStruct;
-  lzSendParams: LZSendParamStruct;
-  composeMsg: PromiseOrValue<BytesLike>;
-  composeGas: PromiseOrValue<BigNumberish>;
-};
-
-export type MarketLeverageUpMsgStructOutput = [
-  string,
-  BigNumber,
-  ILeverageSwapDataStructOutput,
-  ILeverageExternalContractsDataStructOutput,
-  LZSendParamStructOutput,
-  string,
-  BigNumber
-] & {
-  user: string;
-  amount: BigNumber;
-  swapData: ILeverageSwapDataStructOutput;
-  externalData: ILeverageExternalContractsDataStructOutput;
-  lzSendParams: LZSendParamStructOutput;
-  composeMsg: string;
-  composeGas: BigNumber;
+  withdrawParams: MagnetarWithdrawDataStructOutput;
 };
 
 export type MarketPermitActionMsgStruct = {
   target: PromiseOrValue<string>;
-  actionType: PromiseOrValue<BigNumberish>;
   owner: PromiseOrValue<string>;
   spender: PromiseOrValue<string>;
   value: PromiseOrValue<BigNumberish>;
@@ -247,7 +242,6 @@ export type MarketPermitActionMsgStruct = {
 
 export type MarketPermitActionMsgStructOutput = [
   string,
-  number,
   string,
   string,
   BigNumber,
@@ -258,7 +252,6 @@ export type MarketPermitActionMsgStructOutput = [
   boolean
 ] & {
   target: string;
-  actionType: number;
   owner: string;
   spender: string;
   value: BigNumber;
@@ -273,12 +266,43 @@ export type ICommonExternalContractsStruct = {
   magnetar: PromiseOrValue<string>;
   singularity: PromiseOrValue<string>;
   bigBang: PromiseOrValue<string>;
+  marketHelper: PromiseOrValue<string>;
 };
 
-export type ICommonExternalContractsStructOutput = [string, string, string] & {
+export type ICommonExternalContractsStructOutput = [
+  string,
+  string,
+  string,
+  string
+] & {
   magnetar: string;
   singularity: string;
   bigBang: string;
+  marketHelper: string;
+};
+
+export type IOptionsExitDataStruct = {
+  exit: PromiseOrValue<boolean>;
+  target: PromiseOrValue<string>;
+  oTAPTokenID: PromiseOrValue<BigNumberish>;
+};
+
+export type IOptionsExitDataStructOutput = [boolean, string, BigNumber] & {
+  exit: boolean;
+  target: string;
+  oTAPTokenID: BigNumber;
+};
+
+export type IOptionsUnlockDataStruct = {
+  unlock: PromiseOrValue<boolean>;
+  target: PromiseOrValue<string>;
+  tokenId: PromiseOrValue<BigNumberish>;
+};
+
+export type IOptionsUnlockDataStructOutput = [boolean, string, BigNumber] & {
+  unlock: boolean;
+  target: string;
+  tokenId: BigNumber;
 };
 
 export type IRemoveAndRepayStruct = {
@@ -288,10 +312,10 @@ export type IRemoveAndRepayStruct = {
   repayAmount: PromiseOrValue<BigNumberish>;
   removeCollateralFromBB: PromiseOrValue<boolean>;
   collateralAmount: PromiseOrValue<BigNumberish>;
-  exitData: ITapiocaOptionBroker.IOptionsExitDataStruct;
-  unlockData: ITapiocaOptionLiquidityProvision.IOptionsUnlockDataStruct;
-  assetWithdrawData: IWithdrawParamsStruct;
-  collateralWithdrawData: IWithdrawParamsStruct;
+  exitData: IOptionsExitDataStruct;
+  unlockData: IOptionsUnlockDataStruct;
+  assetWithdrawData: MagnetarWithdrawDataStruct;
+  collateralWithdrawData: MagnetarWithdrawDataStruct;
 };
 
 export type IRemoveAndRepayStructOutput = [
@@ -301,10 +325,10 @@ export type IRemoveAndRepayStructOutput = [
   BigNumber,
   boolean,
   BigNumber,
-  ITapiocaOptionBroker.IOptionsExitDataStructOutput,
-  ITapiocaOptionLiquidityProvision.IOptionsUnlockDataStructOutput,
-  IWithdrawParamsStructOutput,
-  IWithdrawParamsStructOutput
+  IOptionsExitDataStructOutput,
+  IOptionsUnlockDataStructOutput,
+  MagnetarWithdrawDataStructOutput,
+  MagnetarWithdrawDataStructOutput
 ] & {
   removeAssetFromSGL: boolean;
   removeAmount: BigNumber;
@@ -312,10 +336,10 @@ export type IRemoveAndRepayStructOutput = [
   repayAmount: BigNumber;
   removeCollateralFromBB: boolean;
   collateralAmount: BigNumber;
-  exitData: ITapiocaOptionBroker.IOptionsExitDataStructOutput;
-  unlockData: ITapiocaOptionLiquidityProvision.IOptionsUnlockDataStructOutput;
-  assetWithdrawData: IWithdrawParamsStructOutput;
-  collateralWithdrawData: IWithdrawParamsStructOutput;
+  exitData: IOptionsExitDataStructOutput;
+  unlockData: IOptionsUnlockDataStructOutput;
+  assetWithdrawData: MagnetarWithdrawDataStructOutput;
+  collateralWithdrawData: MagnetarWithdrawDataStructOutput;
 };
 
 export type MarketRemoveAssetMsgStruct = {
@@ -504,6 +528,7 @@ export type PrepareLzCallDataStruct = {
   composeMsgData: ComposeMsgDataStruct;
   lzReceiveGas: PromiseOrValue<BigNumberish>;
   lzReceiveValue: PromiseOrValue<BigNumberish>;
+  refundAddress: PromiseOrValue<string>;
 };
 
 export type PrepareLzCallDataStructOutput = [
@@ -514,7 +539,8 @@ export type PrepareLzCallDataStructOutput = [
   number,
   ComposeMsgDataStructOutput,
   BigNumber,
-  BigNumber
+  BigNumber,
+  string
 ] & {
   dstEid: number;
   recipient: string;
@@ -524,6 +550,7 @@ export type PrepareLzCallDataStructOutput = [
   composeMsgData: ComposeMsgDataStructOutput;
   lzReceiveGas: BigNumber;
   lzReceiveValue: BigNumber;
+  refundAddress: string;
 };
 
 export type PrepareLzCallReturnStruct = {
@@ -550,92 +577,6 @@ export type PrepareLzCallReturnStructOutput = [
   lzSendParam: LZSendParamStructOutput;
   oftMsgOptions: string;
 };
-
-export declare namespace ITapiocaOptionBrokerCrossChain {
-  export type IExerciseOptionsDataStruct = {
-    from: PromiseOrValue<string>;
-    target: PromiseOrValue<string>;
-    paymentTokenAmount: PromiseOrValue<BigNumberish>;
-    oTAPTokenID: PromiseOrValue<BigNumberish>;
-    tapAmount: PromiseOrValue<BigNumberish>;
-  };
-
-  export type IExerciseOptionsDataStructOutput = [
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    BigNumber
-  ] & {
-    from: string;
-    target: string;
-    paymentTokenAmount: BigNumber;
-    oTAPTokenID: BigNumber;
-    tapAmount: BigNumber;
-  };
-}
-
-export declare namespace ITapiocaOptionLiquidityProvision {
-  export type IOptionsLockDataStruct = {
-    lock: PromiseOrValue<boolean>;
-    target: PromiseOrValue<string>;
-    lockDuration: PromiseOrValue<BigNumberish>;
-    amount: PromiseOrValue<BigNumberish>;
-    fraction: PromiseOrValue<BigNumberish>;
-  };
-
-  export type IOptionsLockDataStructOutput = [
-    boolean,
-    string,
-    BigNumber,
-    BigNumber,
-    BigNumber
-  ] & {
-    lock: boolean;
-    target: string;
-    lockDuration: BigNumber;
-    amount: BigNumber;
-    fraction: BigNumber;
-  };
-
-  export type IOptionsUnlockDataStruct = {
-    unlock: PromiseOrValue<boolean>;
-    target: PromiseOrValue<string>;
-    tokenId: PromiseOrValue<BigNumberish>;
-  };
-
-  export type IOptionsUnlockDataStructOutput = [boolean, string, BigNumber] & {
-    unlock: boolean;
-    target: string;
-    tokenId: BigNumber;
-  };
-}
-
-export declare namespace ITapiocaOptionBroker {
-  export type IOptionsParticipateDataStruct = {
-    participate: PromiseOrValue<boolean>;
-    target: PromiseOrValue<string>;
-    tOLPTokenId: PromiseOrValue<BigNumberish>;
-  };
-
-  export type IOptionsParticipateDataStructOutput = [
-    boolean,
-    string,
-    BigNumber
-  ] & { participate: boolean; target: string; tOLPTokenId: BigNumber };
-
-  export type IOptionsExitDataStruct = {
-    exit: PromiseOrValue<boolean>;
-    target: PromiseOrValue<string>;
-    oTAPTokenID: PromiseOrValue<BigNumberish>;
-  };
-
-  export type IOptionsExitDataStructOutput = [boolean, string, BigNumber] & {
-    exit: boolean;
-    target: string;
-    oTAPTokenID: BigNumber;
-  };
-}
 
 export declare namespace IPearlmit {
   export type SignatureApprovalStruct = {
@@ -666,6 +607,8 @@ export declare namespace IPearlmit {
     nonce: PromiseOrValue<BigNumberish>;
     sigDeadline: PromiseOrValue<BigNumberish>;
     signedPermit: PromiseOrValue<BytesLike>;
+    executor: PromiseOrValue<string>;
+    hashedData: PromiseOrValue<BytesLike>;
   };
 
   export type PermitBatchTransferFromStructOutput = [
@@ -673,6 +616,8 @@ export declare namespace IPearlmit {
     string,
     BigNumber,
     number,
+    string,
+    string,
     string
   ] & {
     approvals: IPearlmit.SignatureApprovalStructOutput[];
@@ -680,25 +625,26 @@ export declare namespace IPearlmit {
     nonce: BigNumber;
     sigDeadline: number;
     signedPermit: string;
+    executor: string;
+    hashedData: string;
   };
 }
 
 export interface UsdoHelperInterface extends utils.Interface {
   functions: {
     "MSG_SEND()": FunctionFragment;
-    "buildExerciseOptionMsg(((address,address,uint256,uint256,uint256),bool,((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address),bytes))": FunctionFragment;
-    "buildMarketLendOrRepayMsg((address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,uint256,bool,uint16,bytes,bool,address,address)))": FunctionFragment;
-    "buildMarketLeverageUpMsg((address,uint256,(address,uint256,bytes),(address,address,address,address),((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address),bytes,uint128))": FunctionFragment;
-    "buildMarketPermitApprovalMsg((address,uint16,address,address,uint256,uint256,uint8,bytes32,bytes32,bool))": FunctionFragment;
-    "buildMarketRemoveAssetMsg((address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address,address),(bool,uint256,bool,uint16,bytes,bool,address,address))))": FunctionFragment;
+    "buildExerciseOptionMsg(((address,address,uint256,uint256,uint256),bool,((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address)))": FunctionFragment;
+    "buildMarketLendOrRepayMsg((address,(bool,uint256,uint256,address,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(address,uint256,address,uint256,bool,bool)))": FunctionFragment;
+    "buildMarketPermitApprovalMsg((address,address,address,uint256,uint256,uint8,bytes32,bytes32,bool))": FunctionFragment;
+    "buildMarketRemoveAssetMsg((address,(address,address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(address,uint256,address,uint256,bool,bool),(address,uint256,address,uint256,bool,bool))))": FunctionFragment;
     "buildRemoteTransferMsg((address,((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address),bytes))": FunctionFragment;
     "buildToeComposeMsgAndOptions(address,bytes,uint16,uint16,uint32,bytes,bytes)": FunctionFragment;
     "buildYieldBoxApproveAllMsg((address,address,address,uint256,uint8,bytes32,bytes32,bool))": FunctionFragment;
     "buildYieldBoxApproveAssetMsg((address,address,address,uint256,uint256,uint8,bytes32,bytes32,bool)[])": FunctionFragment;
     "encodeERC20PermitApprovalMsg((address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "encodeERC721PermitApprovalMsg((address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
-    "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))": FunctionFragment;
-    "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128))": FunctionFragment;
+    "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32))": FunctionFragment;
+    "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128,address))": FunctionFragment;
     "toLD(uint64,uint256)": FunctionFragment;
     "toSD(uint256,uint256)": FunctionFragment;
   };
@@ -708,15 +654,13 @@ export interface UsdoHelperInterface extends utils.Interface {
       | "MSG_SEND"
       | "MSG_SEND()"
       | "buildExerciseOptionMsg"
-      | "buildExerciseOptionMsg(((address,address,uint256,uint256,uint256),bool,((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address),bytes))"
+      | "buildExerciseOptionMsg(((address,address,uint256,uint256,uint256),bool,((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address)))"
       | "buildMarketLendOrRepayMsg"
-      | "buildMarketLendOrRepayMsg((address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,uint256,bool,uint16,bytes,bool,address,address)))"
-      | "buildMarketLeverageUpMsg"
-      | "buildMarketLeverageUpMsg((address,uint256,(address,uint256,bytes),(address,address,address,address),((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address),bytes,uint128))"
+      | "buildMarketLendOrRepayMsg((address,(bool,uint256,uint256,address,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(address,uint256,address,uint256,bool,bool)))"
       | "buildMarketPermitApprovalMsg"
-      | "buildMarketPermitApprovalMsg((address,uint16,address,address,uint256,uint256,uint8,bytes32,bytes32,bool))"
+      | "buildMarketPermitApprovalMsg((address,address,address,uint256,uint256,uint8,bytes32,bytes32,bool))"
       | "buildMarketRemoveAssetMsg"
-      | "buildMarketRemoveAssetMsg((address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address,address),(bool,uint256,bool,uint16,bytes,bool,address,address))))"
+      | "buildMarketRemoveAssetMsg((address,(address,address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(address,uint256,address,uint256,bool,bool),(address,uint256,address,uint256,bool,bool))))"
       | "buildRemoteTransferMsg"
       | "buildRemoteTransferMsg((address,((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address),bytes))"
       | "buildToeComposeMsgAndOptions"
@@ -730,9 +674,9 @@ export interface UsdoHelperInterface extends utils.Interface {
       | "encodeERC721PermitApprovalMsg"
       | "encodeERC721PermitApprovalMsg((address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "encodePearlmitApprovalMsg"
-      | "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"
+      | "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32))"
       | "prepareLzCall"
-      | "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128))"
+      | "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128,address))"
       | "toLD"
       | "toLD(uint64,uint256)"
       | "toSD"
@@ -749,7 +693,7 @@ export interface UsdoHelperInterface extends utils.Interface {
     values: [ExerciseOptionsMsgStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "buildExerciseOptionMsg(((address,address,uint256,uint256,uint256),bool,((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address),bytes))",
+    functionFragment: "buildExerciseOptionMsg(((address,address,uint256,uint256,uint256),bool,((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address)))",
     values: [ExerciseOptionsMsgStruct]
   ): string;
   encodeFunctionData(
@@ -757,23 +701,15 @@ export interface UsdoHelperInterface extends utils.Interface {
     values: [MarketLendOrRepayMsgStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "buildMarketLendOrRepayMsg((address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,uint256,bool,uint16,bytes,bool,address,address)))",
+    functionFragment: "buildMarketLendOrRepayMsg((address,(bool,uint256,uint256,address,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(address,uint256,address,uint256,bool,bool)))",
     values: [MarketLendOrRepayMsgStruct]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "buildMarketLeverageUpMsg",
-    values: [MarketLeverageUpMsgStruct]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "buildMarketLeverageUpMsg((address,uint256,(address,uint256,bytes),(address,address,address,address),((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address),bytes,uint128))",
-    values: [MarketLeverageUpMsgStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "buildMarketPermitApprovalMsg",
     values: [MarketPermitActionMsgStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "buildMarketPermitApprovalMsg((address,uint16,address,address,uint256,uint256,uint8,bytes32,bytes32,bool))",
+    functionFragment: "buildMarketPermitApprovalMsg((address,address,address,uint256,uint256,uint8,bytes32,bytes32,bool))",
     values: [MarketPermitActionMsgStruct]
   ): string;
   encodeFunctionData(
@@ -781,7 +717,7 @@ export interface UsdoHelperInterface extends utils.Interface {
     values: [MarketRemoveAssetMsgStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "buildMarketRemoveAssetMsg((address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address,address),(bool,uint256,bool,uint16,bytes,bool,address,address))))",
+    functionFragment: "buildMarketRemoveAssetMsg((address,(address,address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(address,uint256,address,uint256,bool,bool),(address,uint256,address,uint256,bool,bool))))",
     values: [MarketRemoveAssetMsgStruct]
   ): string;
   encodeFunctionData(
@@ -853,7 +789,7 @@ export interface UsdoHelperInterface extends utils.Interface {
     values: [PromiseOrValue<string>, IPearlmit.PermitBatchTransferFromStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))",
+    functionFragment: "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32))",
     values: [PromiseOrValue<string>, IPearlmit.PermitBatchTransferFromStruct]
   ): string;
   encodeFunctionData(
@@ -861,7 +797,7 @@ export interface UsdoHelperInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PrepareLzCallDataStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128))",
+    functionFragment: "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128,address))",
     values: [PromiseOrValue<string>, PrepareLzCallDataStruct]
   ): string;
   encodeFunctionData(
@@ -888,7 +824,7 @@ export interface UsdoHelperInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "buildExerciseOptionMsg(((address,address,uint256,uint256,uint256),bool,((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address),bytes))",
+    functionFragment: "buildExerciseOptionMsg(((address,address,uint256,uint256,uint256),bool,((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address)))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -896,15 +832,7 @@ export interface UsdoHelperInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "buildMarketLendOrRepayMsg((address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,uint256,bool,uint16,bytes,bool,address,address)))",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "buildMarketLeverageUpMsg",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "buildMarketLeverageUpMsg((address,uint256,(address,uint256,bytes),(address,address,address,address),((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address),bytes,uint128))",
+    functionFragment: "buildMarketLendOrRepayMsg((address,(bool,uint256,uint256,address,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(address,uint256,address,uint256,bool,bool)))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -912,7 +840,7 @@ export interface UsdoHelperInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "buildMarketPermitApprovalMsg((address,uint16,address,address,uint256,uint256,uint8,bytes32,bytes32,bool))",
+    functionFragment: "buildMarketPermitApprovalMsg((address,address,address,uint256,uint256,uint8,bytes32,bytes32,bool))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -920,7 +848,7 @@ export interface UsdoHelperInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "buildMarketRemoveAssetMsg((address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address,address),(bool,uint256,bool,uint16,bytes,bool,address,address))))",
+    functionFragment: "buildMarketRemoveAssetMsg((address,(address,address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(address,uint256,address,uint256,bool,bool),(address,uint256,address,uint256,bool,bool))))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -976,7 +904,7 @@ export interface UsdoHelperInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))",
+    functionFragment: "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -984,7 +912,7 @@ export interface UsdoHelperInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128))",
+    functionFragment: "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128,address))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "toLD", data: BytesLike): Result;
@@ -1039,7 +967,7 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    "buildExerciseOptionMsg(((address,address,uint256,uint256,uint256),bool,((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address),bytes))"(
+    "buildExerciseOptionMsg(((address,address,uint256,uint256,uint256),bool,((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address)))"(
       _msg: ExerciseOptionsMsgStruct,
       overrides?: CallOverrides
     ): Promise<[string]>;
@@ -1049,18 +977,8 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    "buildMarketLendOrRepayMsg((address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,uint256,bool,uint16,bytes,bool,address,address)))"(
+    "buildMarketLendOrRepayMsg((address,(bool,uint256,uint256,address,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(address,uint256,address,uint256,bool,bool)))"(
       _msg: MarketLendOrRepayMsgStruct,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    buildMarketLeverageUpMsg(
-      _marketMsg: MarketLeverageUpMsgStruct,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    "buildMarketLeverageUpMsg((address,uint256,(address,uint256,bytes),(address,address,address,address),((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address),bytes,uint128))"(
-      _marketMsg: MarketLeverageUpMsgStruct,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
@@ -1069,7 +987,7 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string] & { msg_: string }>;
 
-    "buildMarketPermitApprovalMsg((address,uint16,address,address,uint256,uint256,uint8,bytes32,bytes32,bool))"(
+    "buildMarketPermitApprovalMsg((address,address,address,uint256,uint256,uint8,bytes32,bytes32,bool))"(
       _marketPermitActionMsg: MarketPermitActionMsgStruct,
       overrides?: CallOverrides
     ): Promise<[string] & { msg_: string }>;
@@ -1079,7 +997,7 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    "buildMarketRemoveAssetMsg((address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address,address),(bool,uint256,bool,uint16,bytes,bool,address,address))))"(
+    "buildMarketRemoveAssetMsg((address,(address,address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(address,uint256,address,uint256,bool,bool),(address,uint256,address,uint256,bool,bool))))"(
       _msg: MarketRemoveAssetMsgStruct,
       overrides?: CallOverrides
     ): Promise<[string]>;
@@ -1162,7 +1080,7 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string] & { msg_: string }>;
 
-    "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"(
+    "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32))"(
       _pearlmit: PromiseOrValue<string>,
       _data: IPearlmit.PermitBatchTransferFromStruct,
       overrides?: CallOverrides
@@ -1178,7 +1096,7 @@ export interface UsdoHelper extends BaseContract {
       }
     >;
 
-    "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128))"(
+    "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128,address))"(
       _toeToken: PromiseOrValue<string>,
       _prepareLzCallData: PrepareLzCallDataStruct,
       overrides?: CallOverrides
@@ -1222,7 +1140,7 @@ export interface UsdoHelper extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  "buildExerciseOptionMsg(((address,address,uint256,uint256,uint256),bool,((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address),bytes))"(
+  "buildExerciseOptionMsg(((address,address,uint256,uint256,uint256),bool,((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address)))"(
     _msg: ExerciseOptionsMsgStruct,
     overrides?: CallOverrides
   ): Promise<string>;
@@ -1232,18 +1150,8 @@ export interface UsdoHelper extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  "buildMarketLendOrRepayMsg((address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,uint256,bool,uint16,bytes,bool,address,address)))"(
+  "buildMarketLendOrRepayMsg((address,(bool,uint256,uint256,address,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(address,uint256,address,uint256,bool,bool)))"(
     _msg: MarketLendOrRepayMsgStruct,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  buildMarketLeverageUpMsg(
-    _marketMsg: MarketLeverageUpMsgStruct,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  "buildMarketLeverageUpMsg((address,uint256,(address,uint256,bytes),(address,address,address,address),((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address),bytes,uint128))"(
-    _marketMsg: MarketLeverageUpMsgStruct,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -1252,7 +1160,7 @@ export interface UsdoHelper extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  "buildMarketPermitApprovalMsg((address,uint16,address,address,uint256,uint256,uint8,bytes32,bytes32,bool))"(
+  "buildMarketPermitApprovalMsg((address,address,address,uint256,uint256,uint8,bytes32,bytes32,bool))"(
     _marketPermitActionMsg: MarketPermitActionMsgStruct,
     overrides?: CallOverrides
   ): Promise<string>;
@@ -1262,7 +1170,7 @@ export interface UsdoHelper extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  "buildMarketRemoveAssetMsg((address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address,address),(bool,uint256,bool,uint16,bytes,bool,address,address))))"(
+  "buildMarketRemoveAssetMsg((address,(address,address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(address,uint256,address,uint256,bool,bool),(address,uint256,address,uint256,bool,bool))))"(
     _msg: MarketRemoveAssetMsgStruct,
     overrides?: CallOverrides
   ): Promise<string>;
@@ -1345,7 +1253,7 @@ export interface UsdoHelper extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"(
+  "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32))"(
     _pearlmit: PromiseOrValue<string>,
     _data: IPearlmit.PermitBatchTransferFromStruct,
     overrides?: CallOverrides
@@ -1357,7 +1265,7 @@ export interface UsdoHelper extends BaseContract {
     overrides?: CallOverrides
   ): Promise<PrepareLzCallReturnStructOutput>;
 
-  "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128))"(
+  "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128,address))"(
     _toeToken: PromiseOrValue<string>,
     _prepareLzCallData: PrepareLzCallDataStruct,
     overrides?: CallOverrides
@@ -1397,7 +1305,7 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    "buildExerciseOptionMsg(((address,address,uint256,uint256,uint256),bool,((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address),bytes))"(
+    "buildExerciseOptionMsg(((address,address,uint256,uint256,uint256),bool,((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address)))"(
       _msg: ExerciseOptionsMsgStruct,
       overrides?: CallOverrides
     ): Promise<string>;
@@ -1407,18 +1315,8 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    "buildMarketLendOrRepayMsg((address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,uint256,bool,uint16,bytes,bool,address,address)))"(
+    "buildMarketLendOrRepayMsg((address,(bool,uint256,uint256,address,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(address,uint256,address,uint256,bool,bool)))"(
       _msg: MarketLendOrRepayMsgStruct,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    buildMarketLeverageUpMsg(
-      _marketMsg: MarketLeverageUpMsgStruct,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    "buildMarketLeverageUpMsg((address,uint256,(address,uint256,bytes),(address,address,address,address),((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address),bytes,uint128))"(
-      _marketMsg: MarketLeverageUpMsgStruct,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -1427,7 +1325,7 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    "buildMarketPermitApprovalMsg((address,uint16,address,address,uint256,uint256,uint8,bytes32,bytes32,bool))"(
+    "buildMarketPermitApprovalMsg((address,address,address,uint256,uint256,uint8,bytes32,bytes32,bool))"(
       _marketPermitActionMsg: MarketPermitActionMsgStruct,
       overrides?: CallOverrides
     ): Promise<string>;
@@ -1437,7 +1335,7 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    "buildMarketRemoveAssetMsg((address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address,address),(bool,uint256,bool,uint16,bytes,bool,address,address))))"(
+    "buildMarketRemoveAssetMsg((address,(address,address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(address,uint256,address,uint256,bool,bool),(address,uint256,address,uint256,bool,bool))))"(
       _msg: MarketRemoveAssetMsgStruct,
       overrides?: CallOverrides
     ): Promise<string>;
@@ -1520,7 +1418,7 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"(
+    "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32))"(
       _pearlmit: PromiseOrValue<string>,
       _data: IPearlmit.PermitBatchTransferFromStruct,
       overrides?: CallOverrides
@@ -1532,7 +1430,7 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PrepareLzCallReturnStructOutput>;
 
-    "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128))"(
+    "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128,address))"(
       _toeToken: PromiseOrValue<string>,
       _prepareLzCallData: PrepareLzCallDataStruct,
       overrides?: CallOverrides
@@ -1575,7 +1473,7 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "buildExerciseOptionMsg(((address,address,uint256,uint256,uint256),bool,((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address),bytes))"(
+    "buildExerciseOptionMsg(((address,address,uint256,uint256,uint256),bool,((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address)))"(
       _msg: ExerciseOptionsMsgStruct,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1585,18 +1483,8 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "buildMarketLendOrRepayMsg((address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,uint256,bool,uint16,bytes,bool,address,address)))"(
+    "buildMarketLendOrRepayMsg((address,(bool,uint256,uint256,address,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(address,uint256,address,uint256,bool,bool)))"(
       _msg: MarketLendOrRepayMsgStruct,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    buildMarketLeverageUpMsg(
-      _marketMsg: MarketLeverageUpMsgStruct,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "buildMarketLeverageUpMsg((address,uint256,(address,uint256,bytes),(address,address,address,address),((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address),bytes,uint128))"(
-      _marketMsg: MarketLeverageUpMsgStruct,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1605,7 +1493,7 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "buildMarketPermitApprovalMsg((address,uint16,address,address,uint256,uint256,uint8,bytes32,bytes32,bool))"(
+    "buildMarketPermitApprovalMsg((address,address,address,uint256,uint256,uint8,bytes32,bytes32,bool))"(
       _marketPermitActionMsg: MarketPermitActionMsgStruct,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1615,7 +1503,7 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "buildMarketRemoveAssetMsg((address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address,address),(bool,uint256,bool,uint16,bytes,bool,address,address))))"(
+    "buildMarketRemoveAssetMsg((address,(address,address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(address,uint256,address,uint256,bool,bool),(address,uint256,address,uint256,bool,bool))))"(
       _msg: MarketRemoveAssetMsgStruct,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1698,7 +1586,7 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"(
+    "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32))"(
       _pearlmit: PromiseOrValue<string>,
       _data: IPearlmit.PermitBatchTransferFromStruct,
       overrides?: CallOverrides
@@ -1710,7 +1598,7 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128))"(
+    "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128,address))"(
       _toeToken: PromiseOrValue<string>,
       _prepareLzCallData: PrepareLzCallDataStruct,
       overrides?: CallOverrides
@@ -1751,7 +1639,7 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "buildExerciseOptionMsg(((address,address,uint256,uint256,uint256),bool,((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address),bytes))"(
+    "buildExerciseOptionMsg(((address,address,uint256,uint256,uint256),bool,((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address)))"(
       _msg: ExerciseOptionsMsgStruct,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1761,18 +1649,8 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "buildMarketLendOrRepayMsg((address,(bool,uint256,uint256,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(bool,uint256,bool,uint16,bytes,bool,address,address)))"(
+    "buildMarketLendOrRepayMsg((address,(bool,uint256,uint256,address,address,address,bool,uint256,(bool,address,uint128,uint128,uint256),(bool,address,uint256)),(address,uint256,address,uint256,bool,bool)))"(
       _msg: MarketLendOrRepayMsgStruct,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    buildMarketLeverageUpMsg(
-      _marketMsg: MarketLeverageUpMsgStruct,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "buildMarketLeverageUpMsg((address,uint256,(address,uint256,bytes),(address,address,address,address),((uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),bytes,address),bytes,uint128))"(
-      _marketMsg: MarketLeverageUpMsgStruct,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1781,7 +1659,7 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "buildMarketPermitApprovalMsg((address,uint16,address,address,uint256,uint256,uint8,bytes32,bytes32,bool))"(
+    "buildMarketPermitApprovalMsg((address,address,address,uint256,uint256,uint8,bytes32,bytes32,bool))"(
       _marketPermitActionMsg: MarketPermitActionMsgStruct,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1791,7 +1669,7 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "buildMarketRemoveAssetMsg((address,(address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(bool,uint256,bool,uint16,bytes,bool,address,address),(bool,uint256,bool,uint16,bytes,bool,address,address))))"(
+    "buildMarketRemoveAssetMsg((address,(address,address,address,address),(bool,uint256,bool,uint256,bool,uint256,(bool,address,uint256),(bool,address,uint256),(address,uint256,address,uint256,bool,bool),(address,uint256,address,uint256,bool,bool))))"(
       _msg: MarketRemoveAssetMsgStruct,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1874,7 +1752,7 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"(
+    "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32))"(
       _pearlmit: PromiseOrValue<string>,
       _data: IPearlmit.PermitBatchTransferFromStruct,
       overrides?: CallOverrides
@@ -1886,7 +1764,7 @@ export interface UsdoHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128))"(
+    "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128,address))"(
       _toeToken: PromiseOrValue<string>,
       _prepareLzCallData: PrepareLzCallDataStruct,
       overrides?: CallOverrides

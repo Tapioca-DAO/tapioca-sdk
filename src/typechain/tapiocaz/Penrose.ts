@@ -52,17 +52,13 @@ export interface PenroseInterface extends utils.Interface {
     "bigBangMarkets()": FunctionFragment;
     "bigBangMasterContractLength()": FunctionFragment;
     "bigbangMasterContracts(uint256)": FunctionFragment;
-    "claimOwnership()": FunctionFragment;
     "clonesOf(address,uint256)": FunctionFragment;
     "clonesOfCount(address)": FunctionFragment;
     "cluster()": FunctionFragment;
-    "computeTotalDebt()": FunctionFragment;
     "conservator()": FunctionFragment;
     "deploy(address,bytes,bool)": FunctionFragment;
-    "emptyStrategies(address)": FunctionFragment;
     "executeMarketFn(address[],bytes[],bool)": FunctionFragment;
     "getAllMasterContractClones((address,uint8)[])": FunctionFragment;
-    "hostLzChainId()": FunctionFragment;
     "isBigBangMasterContractRegistered(address)": FunctionFragment;
     "isMarketRegistered(address)": FunctionFragment;
     "isOriginRegistered(address)": FunctionFragment;
@@ -74,24 +70,24 @@ export interface PenroseInterface extends utils.Interface {
     "owner()": FunctionFragment;
     "paused()": FunctionFragment;
     "pearlmit()": FunctionFragment;
-    "pendingOwner()": FunctionFragment;
     "reAccrueBigBangMarkets()": FunctionFragment;
     "registerBigBang(address,bytes,bool)": FunctionFragment;
     "registerBigBangMasterContract(address,uint8)": FunctionFragment;
     "registerSingularity(address,bytes,bool)": FunctionFragment;
     "registerSingularityMasterContract(address,uint8)": FunctionFragment;
+    "renounceOwnership()": FunctionFragment;
     "setBigBangEthMarket(address)": FunctionFragment;
     "setBigBangEthMarketDebtRate(uint256)": FunctionFragment;
     "setCluster(address)": FunctionFragment;
     "setConservator(address)": FunctionFragment;
     "setPearlmit(address)": FunctionFragment;
-    "setUsdoToken(address)": FunctionFragment;
+    "setUsdoToken(address,uint256)": FunctionFragment;
     "singularityMarkets()": FunctionFragment;
     "singularityMasterContractLength()": FunctionFragment;
     "singularityMasterContracts(uint256)": FunctionFragment;
     "tapAssetId()": FunctionFragment;
     "tapToken()": FunctionFragment;
-    "transferOwnership(address,bool,bool)": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
     "updatePause(bool)": FunctionFragment;
     "usdoAssetId()": FunctionFragment;
     "usdoToken()": FunctionFragment;
@@ -122,28 +118,20 @@ export interface PenroseInterface extends utils.Interface {
       | "bigBangMasterContractLength()"
       | "bigbangMasterContracts"
       | "bigbangMasterContracts(uint256)"
-      | "claimOwnership"
-      | "claimOwnership()"
       | "clonesOf"
       | "clonesOf(address,uint256)"
       | "clonesOfCount"
       | "clonesOfCount(address)"
       | "cluster"
       | "cluster()"
-      | "computeTotalDebt"
-      | "computeTotalDebt()"
       | "conservator"
       | "conservator()"
       | "deploy"
       | "deploy(address,bytes,bool)"
-      | "emptyStrategies"
-      | "emptyStrategies(address)"
       | "executeMarketFn"
       | "executeMarketFn(address[],bytes[],bool)"
       | "getAllMasterContractClones"
       | "getAllMasterContractClones((address,uint8)[])"
-      | "hostLzChainId"
-      | "hostLzChainId()"
       | "isBigBangMasterContractRegistered"
       | "isBigBangMasterContractRegistered(address)"
       | "isMarketRegistered"
@@ -166,8 +154,6 @@ export interface PenroseInterface extends utils.Interface {
       | "paused()"
       | "pearlmit"
       | "pearlmit()"
-      | "pendingOwner"
-      | "pendingOwner()"
       | "reAccrueBigBangMarkets"
       | "reAccrueBigBangMarkets()"
       | "registerBigBang"
@@ -178,6 +164,8 @@ export interface PenroseInterface extends utils.Interface {
       | "registerSingularity(address,bytes,bool)"
       | "registerSingularityMasterContract"
       | "registerSingularityMasterContract(address,uint8)"
+      | "renounceOwnership"
+      | "renounceOwnership()"
       | "setBigBangEthMarket"
       | "setBigBangEthMarket(address)"
       | "setBigBangEthMarketDebtRate"
@@ -189,7 +177,7 @@ export interface PenroseInterface extends utils.Interface {
       | "setPearlmit"
       | "setPearlmit(address)"
       | "setUsdoToken"
-      | "setUsdoToken(address)"
+      | "setUsdoToken(address,uint256)"
       | "singularityMarkets"
       | "singularityMarkets()"
       | "singularityMasterContractLength"
@@ -201,7 +189,7 @@ export interface PenroseInterface extends utils.Interface {
       | "tapToken"
       | "tapToken()"
       | "transferOwnership"
-      | "transferOwnership(address,bool,bool)"
+      | "transferOwnership(address)"
       | "updatePause"
       | "updatePause(bool)"
       | "usdoAssetId"
@@ -297,14 +285,6 @@ export interface PenroseInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "claimOwnership",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "claimOwnership()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "clonesOf",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
@@ -322,14 +302,6 @@ export interface PenroseInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "cluster", values?: undefined): string;
   encodeFunctionData(functionFragment: "cluster()", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "computeTotalDebt",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "computeTotalDebt()",
-    values?: undefined
-  ): string;
   encodeFunctionData(
     functionFragment: "conservator",
     values?: undefined
@@ -355,14 +327,6 @@ export interface PenroseInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "emptyStrategies",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "emptyStrategies(address)",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "executeMarketFn",
     values: [
       PromiseOrValue<string>[],
@@ -385,14 +349,6 @@ export interface PenroseInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "getAllMasterContractClones((address,uint8)[])",
     values: [IPenrose.MasterContractStruct[]]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "hostLzChainId",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "hostLzChainId()",
-    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "isBigBangMasterContractRegistered",
@@ -465,14 +421,6 @@ export interface PenroseInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "pendingOwner",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "pendingOwner()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "reAccrueBigBangMarkets",
     values?: undefined
   ): string;
@@ -529,6 +477,14 @@ export interface PenroseInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
+    functionFragment: "renounceOwnership",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "renounceOwnership()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "setBigBangEthMarket",
     values: [PromiseOrValue<string>]
   ): string;
@@ -570,11 +526,11 @@ export interface PenroseInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setUsdoToken",
-    values: [PromiseOrValue<string>]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "setUsdoToken(address)",
-    values: [PromiseOrValue<string>]
+    functionFragment: "setUsdoToken(address,uint256)",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "singularityMarkets",
@@ -615,19 +571,11 @@ export interface PenroseInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<boolean>
-    ]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "transferOwnership(address,bool,bool)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<boolean>
-    ]
+    functionFragment: "transferOwnership(address)",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "updatePause",
@@ -749,14 +697,6 @@ export interface PenroseInterface extends utils.Interface {
     functionFragment: "bigbangMasterContracts(uint256)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "claimOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "claimOwnership()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "clonesOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "clonesOf(address,uint256)",
@@ -773,14 +713,6 @@ export interface PenroseInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "cluster", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "cluster()", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "computeTotalDebt",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "computeTotalDebt()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "conservator",
     data: BytesLike
   ): Result;
@@ -791,14 +723,6 @@ export interface PenroseInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "deploy", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "deploy(address,bytes,bool)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "emptyStrategies",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "emptyStrategies(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -815,14 +739,6 @@ export interface PenroseInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "getAllMasterContractClones((address,uint8)[])",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "hostLzChainId",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "hostLzChainId()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -893,14 +809,6 @@ export interface PenroseInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "pearlmit", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "pearlmit()", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "pendingOwner",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "pendingOwner()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "reAccrueBigBangMarkets",
     data: BytesLike
   ): Result;
@@ -938,6 +846,14 @@ export interface PenroseInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "registerSingularityMasterContract(address,uint8)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceOwnership()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -982,7 +898,7 @@ export interface PenroseInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setUsdoToken(address)",
+    functionFragment: "setUsdoToken(address,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1021,7 +937,7 @@ export interface PenroseInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "transferOwnership(address,bool,bool)",
+    functionFragment: "transferOwnership(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1073,7 +989,7 @@ export interface PenroseInterface extends utils.Interface {
     "LogTwTapFeesDeposit(uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "PausedUpdated(bool,bool)": EventFragment;
-    "PearlmitSet(address,address)": EventFragment;
+    "PearlmitUpdated(address,address)": EventFragment;
     "ProtocolWithdrawal(address[],uint256)": EventFragment;
     "ReaccruedMarkets(bool)": EventFragment;
     "RegisterBigBang(address,address)": EventFragment;
@@ -1117,9 +1033,9 @@ export interface PenroseInterface extends utils.Interface {
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "PausedUpdated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "PausedUpdated(bool,bool)"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "PearlmitSet"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "PearlmitUpdated"): EventFragment;
   getEvent(
-    nameOrSignatureOrTopic: "PearlmitSet(address,address)"
+    nameOrSignatureOrTopic: "PearlmitUpdated(address,address)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ProtocolWithdrawal"): EventFragment;
   getEvent(
@@ -1250,16 +1166,16 @@ export type PausedUpdatedEvent = TypedEvent<
 
 export type PausedUpdatedEventFilter = TypedEventFilter<PausedUpdatedEvent>;
 
-export interface PearlmitSetEventObject {
-  old: string;
-  _new: string;
+export interface PearlmitUpdatedEventObject {
+  oldPearlmit: string;
+  newPearlmit: string;
 }
-export type PearlmitSetEvent = TypedEvent<
+export type PearlmitUpdatedEvent = TypedEvent<
   [string, string],
-  PearlmitSetEventObject
+  PearlmitUpdatedEventObject
 >;
 
-export type PearlmitSetEventFilter = TypedEventFilter<PearlmitSetEvent>;
+export type PearlmitUpdatedEventFilter = TypedEventFilter<PearlmitUpdatedEvent>;
 
 export interface ProtocolWithdrawalEventObject {
   markets: string[];
@@ -1480,14 +1396,6 @@ export interface Penrose extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string, number] & { location: string; risk: number }>;
 
-    claimOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "claimOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     clonesOf(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<BigNumberish>,
@@ -1514,14 +1422,6 @@ export interface Penrose extends BaseContract {
 
     "cluster()"(overrides?: CallOverrides): Promise<[string]>;
 
-    computeTotalDebt(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "computeTotalDebt()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     conservator(overrides?: CallOverrides): Promise<[string]>;
 
     "conservator()"(overrides?: CallOverrides): Promise<[string]>;
@@ -1539,16 +1439,6 @@ export interface Penrose extends BaseContract {
       useCreate2: PromiseOrValue<boolean>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
-
-    emptyStrategies(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    "emptyStrategies(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
 
     executeMarketFn(
       mc: PromiseOrValue<string>[],
@@ -1573,10 +1463,6 @@ export interface Penrose extends BaseContract {
       array: IPenrose.MasterContractStruct[],
       overrides?: CallOverrides
     ): Promise<[string[]] & { markets: string[] }>;
-
-    hostLzChainId(overrides?: CallOverrides): Promise<[number]>;
-
-    "hostLzChainId()"(overrides?: CallOverrides): Promise<[number]>;
 
     isBigBangMasterContractRegistered(
       arg0: PromiseOrValue<string>,
@@ -1658,10 +1544,6 @@ export interface Penrose extends BaseContract {
 
     "pearlmit()"(overrides?: CallOverrides): Promise<[string]>;
 
-    pendingOwner(overrides?: CallOverrides): Promise<[string]>;
-
-    "pendingOwner()"(overrides?: CallOverrides): Promise<[string]>;
-
     reAccrueBigBangMarkets(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -1722,6 +1604,14 @@ export interface Penrose extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     setBigBangEthMarket(
       _market: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1763,22 +1653,24 @@ export interface Penrose extends BaseContract {
     ): Promise<ContractTransaction>;
 
     setPearlmit(
-      _newPearlmit: PromiseOrValue<string>,
+      _pearlmit: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "setPearlmit(address)"(
-      _newPearlmit: PromiseOrValue<string>,
+      _pearlmit: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setUsdoToken(
       _usdoToken: PromiseOrValue<string>,
+      _usdoAssetId: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setUsdoToken(address)"(
+    "setUsdoToken(address,uint256)"(
       _usdoToken: PromiseOrValue<string>,
+      _usdoAssetId: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1818,15 +1710,11 @@ export interface Penrose extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "transferOwnership(address,bool,bool)"(
+    "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1951,14 +1839,6 @@ export interface Penrose extends BaseContract {
     overrides?: CallOverrides
   ): Promise<[string, number] & { location: string; risk: number }>;
 
-  claimOwnership(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "claimOwnership()"(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   clonesOf(
     arg0: PromiseOrValue<string>,
     arg1: PromiseOrValue<BigNumberish>,
@@ -1985,14 +1865,6 @@ export interface Penrose extends BaseContract {
 
   "cluster()"(overrides?: CallOverrides): Promise<string>;
 
-  computeTotalDebt(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "computeTotalDebt()"(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   conservator(overrides?: CallOverrides): Promise<string>;
 
   "conservator()"(overrides?: CallOverrides): Promise<string>;
@@ -2010,16 +1882,6 @@ export interface Penrose extends BaseContract {
     useCreate2: PromiseOrValue<boolean>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
-
-  emptyStrategies(
-    arg0: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  "emptyStrategies(address)"(
-    arg0: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<string>;
 
   executeMarketFn(
     mc: PromiseOrValue<string>[],
@@ -2044,10 +1906,6 @@ export interface Penrose extends BaseContract {
     array: IPenrose.MasterContractStruct[],
     overrides?: CallOverrides
   ): Promise<string[]>;
-
-  hostLzChainId(overrides?: CallOverrides): Promise<number>;
-
-  "hostLzChainId()"(overrides?: CallOverrides): Promise<number>;
 
   isBigBangMasterContractRegistered(
     arg0: PromiseOrValue<string>,
@@ -2129,10 +1987,6 @@ export interface Penrose extends BaseContract {
 
   "pearlmit()"(overrides?: CallOverrides): Promise<string>;
 
-  pendingOwner(overrides?: CallOverrides): Promise<string>;
-
-  "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
-
   reAccrueBigBangMarkets(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -2193,6 +2047,14 @@ export interface Penrose extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  renounceOwnership(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "renounceOwnership()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   setBigBangEthMarket(
     _market: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2234,22 +2096,24 @@ export interface Penrose extends BaseContract {
   ): Promise<ContractTransaction>;
 
   setPearlmit(
-    _newPearlmit: PromiseOrValue<string>,
+    _pearlmit: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "setPearlmit(address)"(
-    _newPearlmit: PromiseOrValue<string>,
+    _pearlmit: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setUsdoToken(
     _usdoToken: PromiseOrValue<string>,
+    _usdoAssetId: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setUsdoToken(address)"(
+  "setUsdoToken(address,uint256)"(
     _usdoToken: PromiseOrValue<string>,
+    _usdoAssetId: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -2285,15 +2149,11 @@ export interface Penrose extends BaseContract {
 
   transferOwnership(
     newOwner: PromiseOrValue<string>,
-    direct: PromiseOrValue<boolean>,
-    renounce: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "transferOwnership(address,bool,bool)"(
+  "transferOwnership(address)"(
     newOwner: PromiseOrValue<string>,
-    direct: PromiseOrValue<boolean>,
-    renounce: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -2418,10 +2278,6 @@ export interface Penrose extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string, number] & { location: string; risk: number }>;
 
-    claimOwnership(overrides?: CallOverrides): Promise<void>;
-
-    "claimOwnership()"(overrides?: CallOverrides): Promise<void>;
-
     clonesOf(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<BigNumberish>,
@@ -2448,10 +2304,6 @@ export interface Penrose extends BaseContract {
 
     "cluster()"(overrides?: CallOverrides): Promise<string>;
 
-    computeTotalDebt(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "computeTotalDebt()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     conservator(overrides?: CallOverrides): Promise<string>;
 
     "conservator()"(overrides?: CallOverrides): Promise<string>;
@@ -2467,16 +2319,6 @@ export interface Penrose extends BaseContract {
       masterContract: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       useCreate2: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    emptyStrategies(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    "emptyStrategies(address)"(
-      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -2507,10 +2349,6 @@ export interface Penrose extends BaseContract {
       array: IPenrose.MasterContractStruct[],
       overrides?: CallOverrides
     ): Promise<string[]>;
-
-    hostLzChainId(overrides?: CallOverrides): Promise<number>;
-
-    "hostLzChainId()"(overrides?: CallOverrides): Promise<number>;
 
     isBigBangMasterContractRegistered(
       arg0: PromiseOrValue<string>,
@@ -2592,10 +2430,6 @@ export interface Penrose extends BaseContract {
 
     "pearlmit()"(overrides?: CallOverrides): Promise<string>;
 
-    pendingOwner(overrides?: CallOverrides): Promise<string>;
-
-    "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
-
     reAccrueBigBangMarkets(overrides?: CallOverrides): Promise<void>;
 
     "reAccrueBigBangMarkets()"(overrides?: CallOverrides): Promise<void>;
@@ -2652,6 +2486,10 @@ export interface Penrose extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    renounceOwnership(overrides?: CallOverrides): Promise<void>;
+
+    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
+
     setBigBangEthMarket(
       _market: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -2693,22 +2531,24 @@ export interface Penrose extends BaseContract {
     ): Promise<void>;
 
     setPearlmit(
-      _newPearlmit: PromiseOrValue<string>,
+      _pearlmit: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "setPearlmit(address)"(
-      _newPearlmit: PromiseOrValue<string>,
+      _pearlmit: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     setUsdoToken(
       _usdoToken: PromiseOrValue<string>,
+      _usdoAssetId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setUsdoToken(address)"(
+    "setUsdoToken(address,uint256)"(
       _usdoToken: PromiseOrValue<string>,
+      _usdoAssetId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -2744,15 +2584,11 @@ export interface Penrose extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "transferOwnership(address,bool,bool)"(
+    "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -2868,14 +2704,14 @@ export interface Penrose extends BaseContract {
       newState?: PromiseOrValue<boolean> | null
     ): PausedUpdatedEventFilter;
 
-    "PearlmitSet(address,address)"(
-      old?: PromiseOrValue<string> | null,
-      _new?: PromiseOrValue<string> | null
-    ): PearlmitSetEventFilter;
-    PearlmitSet(
-      old?: PromiseOrValue<string> | null,
-      _new?: PromiseOrValue<string> | null
-    ): PearlmitSetEventFilter;
+    "PearlmitUpdated(address,address)"(
+      oldPearlmit?: null,
+      newPearlmit?: null
+    ): PearlmitUpdatedEventFilter;
+    PearlmitUpdated(
+      oldPearlmit?: null,
+      newPearlmit?: null
+    ): PearlmitUpdatedEventFilter;
 
     "ProtocolWithdrawal(address[],uint256)"(
       markets?: PromiseOrValue<string>[] | null,
@@ -3036,14 +2872,6 @@ export interface Penrose extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    claimOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "claimOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     clonesOf(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<BigNumberish>,
@@ -3070,14 +2898,6 @@ export interface Penrose extends BaseContract {
 
     "cluster()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    computeTotalDebt(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "computeTotalDebt()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     conservator(overrides?: CallOverrides): Promise<BigNumber>;
 
     "conservator()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -3094,16 +2914,6 @@ export interface Penrose extends BaseContract {
       data: PromiseOrValue<BytesLike>,
       useCreate2: PromiseOrValue<boolean>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    emptyStrategies(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "emptyStrategies(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     executeMarketFn(
@@ -3129,10 +2939,6 @@ export interface Penrose extends BaseContract {
       array: IPenrose.MasterContractStruct[],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    hostLzChainId(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "hostLzChainId()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     isBigBangMasterContractRegistered(
       arg0: PromiseOrValue<string>,
@@ -3214,10 +3020,6 @@ export interface Penrose extends BaseContract {
 
     "pearlmit()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "pendingOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     reAccrueBigBangMarkets(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -3278,6 +3080,14 @@ export interface Penrose extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     setBigBangEthMarket(
       _market: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -3319,22 +3129,24 @@ export interface Penrose extends BaseContract {
     ): Promise<BigNumber>;
 
     setPearlmit(
-      _newPearlmit: PromiseOrValue<string>,
+      _pearlmit: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "setPearlmit(address)"(
-      _newPearlmit: PromiseOrValue<string>,
+      _pearlmit: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setUsdoToken(
       _usdoToken: PromiseOrValue<string>,
+      _usdoAssetId: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setUsdoToken(address)"(
+    "setUsdoToken(address,uint256)"(
       _usdoToken: PromiseOrValue<string>,
+      _usdoAssetId: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -3370,15 +3182,11 @@ export interface Penrose extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "transferOwnership(address,bool,bool)"(
+    "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -3514,14 +3322,6 @@ export interface Penrose extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    claimOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "claimOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     clonesOf(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<BigNumberish>,
@@ -3548,14 +3348,6 @@ export interface Penrose extends BaseContract {
 
     "cluster()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    computeTotalDebt(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "computeTotalDebt()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     conservator(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "conservator()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -3572,16 +3364,6 @@ export interface Penrose extends BaseContract {
       data: PromiseOrValue<BytesLike>,
       useCreate2: PromiseOrValue<boolean>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    emptyStrategies(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "emptyStrategies(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     executeMarketFn(
@@ -3607,10 +3389,6 @@ export interface Penrose extends BaseContract {
       array: IPenrose.MasterContractStruct[],
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    hostLzChainId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "hostLzChainId()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     isBigBangMasterContractRegistered(
       arg0: PromiseOrValue<string>,
@@ -3692,10 +3470,6 @@ export interface Penrose extends BaseContract {
 
     "pearlmit()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "pendingOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     reAccrueBigBangMarkets(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -3756,6 +3530,14 @@ export interface Penrose extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     setBigBangEthMarket(
       _market: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -3797,22 +3579,24 @@ export interface Penrose extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     setPearlmit(
-      _newPearlmit: PromiseOrValue<string>,
+      _pearlmit: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "setPearlmit(address)"(
-      _newPearlmit: PromiseOrValue<string>,
+      _pearlmit: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setUsdoToken(
       _usdoToken: PromiseOrValue<string>,
+      _usdoAssetId: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setUsdoToken(address)"(
+    "setUsdoToken(address,uint256)"(
       _usdoToken: PromiseOrValue<string>,
+      _usdoAssetId: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -3852,15 +3636,11 @@ export interface Penrose extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "transferOwnership(address,bool,bool)"(
+    "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

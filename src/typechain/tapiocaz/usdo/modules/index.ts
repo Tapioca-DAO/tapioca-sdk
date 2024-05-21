@@ -2,7 +2,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { ModuleManager } from "./ModuleManager";
-export type { UsdoLeverageReceiverModule } from "./UsdoLeverageReceiverModule";
 export type { UsdoMarketReceiverModule } from "./UsdoMarketReceiverModule";
 export type { UsdoOptionReceiverModule } from "./UsdoOptionReceiverModule";
 export type { UsdoReceiver } from "./UsdoReceiver";

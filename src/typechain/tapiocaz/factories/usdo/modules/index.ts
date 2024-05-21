@@ -2,7 +2,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export { ModuleManager__factory } from "./ModuleManager__factory";
-export { UsdoLeverageReceiverModule__factory } from "./UsdoLeverageReceiverModule__factory";
 export { UsdoMarketReceiverModule__factory } from "./UsdoMarketReceiverModule__factory";
 export { UsdoOptionReceiverModule__factory } from "./UsdoOptionReceiverModule__factory";
 export { UsdoReceiver__factory } from "./UsdoReceiver__factory";

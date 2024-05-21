@@ -45,13 +45,9 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BigBang__factory>;
     getContractFactory(
-      name: "AssetToEthLeverageExecutor",
+      name: "ExampleMarketLiquidatorReceiver",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.AssetToEthLeverageExecutor__factory>;
-    getContractFactory(
-      name: "AssetToRethLeverageExecutor",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.AssetToRethLeverageExecutor__factory>;
+    ): Promise<Contracts.ExampleMarketLiquidatorReceiver__factory>;
     getContractFactory(
       name: "AssetToSGLPLeverageExecutor",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -60,10 +56,6 @@ declare module "hardhat/types/runtime" {
       name: "AssetTotsDaiLeverageExecutor",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AssetTotsDaiLeverageExecutor__factory>;
-    getContractFactory(
-      name: "AssetToWstethLeverageExecutor",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.AssetToWstethLeverageExecutor__factory>;
     getContractFactory(
       name: "BaseLeverageExecutor",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -85,9 +77,13 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MarketERC20__factory>;
     getContractFactory(
-      name: "MarketLiquidatorReceiver",
+      name: "MarketHelper",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MarketLiquidatorReceiver__factory>;
+    ): Promise<Contracts.MarketHelper__factory>;
+    getContractFactory(
+      name: "MarketStateView",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MarketStateView__factory>;
     getContractFactory(
       name: "Origins",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -104,6 +100,10 @@ declare module "hardhat/types/runtime" {
       name: "SGLCommon",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SGLCommon__factory>;
+    getContractFactory(
+      name: "SGLInterestHelper",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SGLInterestHelper__factory>;
     getContractFactory(
       name: "SGLLendingCommon",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -133,10 +133,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BaseUsdo__factory>;
     getContractFactory(
-      name: "UsdoExtExec",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.UsdoExtExec__factory>;
-    getContractFactory(
       name: "UsdoHelper",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.UsdoHelper__factory>;
@@ -144,10 +140,6 @@ declare module "hardhat/types/runtime" {
       name: "ModuleManager",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ModuleManager__factory>;
-    getContractFactory(
-      name: "UsdoLeverageReceiverModule",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.UsdoLeverageReceiverModule__factory>;
     getContractFactory(
       name: "UsdoMarketReceiverModule",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -214,15 +206,10 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.BigBang>;
     getContractAt(
-      name: "AssetToEthLeverageExecutor",
+      name: "ExampleMarketLiquidatorReceiver",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.AssetToEthLeverageExecutor>;
-    getContractAt(
-      name: "AssetToRethLeverageExecutor",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.AssetToRethLeverageExecutor>;
+    ): Promise<Contracts.ExampleMarketLiquidatorReceiver>;
     getContractAt(
       name: "AssetToSGLPLeverageExecutor",
       address: string,
@@ -233,11 +220,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.AssetTotsDaiLeverageExecutor>;
-    getContractAt(
-      name: "AssetToWstethLeverageExecutor",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.AssetToWstethLeverageExecutor>;
     getContractAt(
       name: "BaseLeverageExecutor",
       address: string,
@@ -264,10 +246,15 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.MarketERC20>;
     getContractAt(
-      name: "MarketLiquidatorReceiver",
+      name: "MarketHelper",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.MarketLiquidatorReceiver>;
+    ): Promise<Contracts.MarketHelper>;
+    getContractAt(
+      name: "MarketStateView",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MarketStateView>;
     getContractAt(
       name: "Origins",
       address: string,
@@ -288,6 +275,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.SGLCommon>;
+    getContractAt(
+      name: "SGLInterestHelper",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SGLInterestHelper>;
     getContractAt(
       name: "SGLLendingCommon",
       address: string,
@@ -324,11 +316,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.BaseUsdo>;
     getContractAt(
-      name: "UsdoExtExec",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.UsdoExtExec>;
-    getContractAt(
       name: "UsdoHelper",
       address: string,
       signer?: ethers.Signer
@@ -338,11 +325,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ModuleManager>;
-    getContractAt(
-      name: "UsdoLeverageReceiverModule",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.UsdoLeverageReceiverModule>;
     getContractAt(
       name: "UsdoMarketReceiverModule",
       address: string,

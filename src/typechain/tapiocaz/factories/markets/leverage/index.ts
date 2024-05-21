@@ -2,10 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as mocks from "./mocks";
-export { AssetToEthLeverageExecutor__factory } from "./AssetToEthLeverageExecutor__factory";
-export { AssetToRethLeverageExecutor__factory } from "./AssetToRethLeverageExecutor__factory";
 export { AssetToSGLPLeverageExecutor__factory } from "./AssetToSGLPLeverageExecutor__factory";
-export { AssetToWstethLeverageExecutor__factory } from "./AssetToWstethLeverageExecutor__factory";
 export { AssetTotsDaiLeverageExecutor__factory } from "./AssetTotsDaiLeverageExecutor__factory";
 export { BaseLeverageExecutor__factory } from "./BaseLeverageExecutor__factory";
 export { SimpleLeverageExecutor__factory } from "./SimpleLeverageExecutor__factory";

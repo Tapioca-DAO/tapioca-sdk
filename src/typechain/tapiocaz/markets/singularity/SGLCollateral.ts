@@ -51,65 +51,41 @@ export interface SGLCollateralInterface extends utils.Interface {
     "allowanceBorrow(address,address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "approveBorrow(address,uint256)": FunctionFragment;
-    "asset()": FunctionFragment;
-    "assetId()": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "borrowOpeningFee()": FunctionFragment;
-    "claimOwnership()": FunctionFragment;
-    "collateral()": FunctionFragment;
-    "collateralId()": FunctionFragment;
-    "collateralizationRate()": FunctionFragment;
     "computeClosingFactor(uint256,uint256,uint256)": FunctionFragment;
     "computeLiquidatorReward(address,uint256)": FunctionFragment;
     "computeTVLInfo(address,uint256)": FunctionFragment;
-    "conservator()": FunctionFragment;
     "decimals()": FunctionFragment;
     "eip712Domain()": FunctionFragment;
-    "exchangeRate()": FunctionFragment;
-    "fullUtilizationMinusMax()": FunctionFragment;
     "getInterestDetails()": FunctionFragment;
     "interestElasticity()": FunctionFragment;
-    "leverageExecutor()": FunctionFragment;
-    "liquidationBonusAmount()": FunctionFragment;
-    "liquidationCollateralizationRate()": FunctionFragment;
-    "liquidationMultiplier()": FunctionFragment;
-    "lqCollateralizationRate()": FunctionFragment;
-    "maxLiquidatorReward()": FunctionFragment;
+    "interestHelper()": FunctionFragment;
     "maximumInterestPerSecond()": FunctionFragment;
     "maximumTargetUtilization()": FunctionFragment;
-    "minLiquidatorReward()": FunctionFragment;
     "minimumInterestPerSecond()": FunctionFragment;
     "minimumTargetUtilization()": FunctionFragment;
     "name()": FunctionFragment;
     "nonces(address)": FunctionFragment;
-    "oracle()": FunctionFragment;
-    "oracleData()": FunctionFragment;
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)": FunctionFragment;
+    "onERC1155Received(address,address,uint256,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
-    "pauseOptions(uint8)": FunctionFragment;
-    "pendingOwner()": FunctionFragment;
-    "penrose()": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "permitBorrow(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "protocolFee()": FunctionFragment;
-    "rateTimestamp()": FunctionFragment;
-    "rateValidDuration()": FunctionFragment;
     "removeCollateral(address,address,uint256)": FunctionFragment;
+    "renounceOwnership()": FunctionFragment;
     "setLeverageExecutor(address)": FunctionFragment;
+    "setLiquidationMaxSlippage(uint256)": FunctionFragment;
     "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
     "startingInterestPerSecond()": FunctionFragment;
+    "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
     "totalAsset()": FunctionFragment;
-    "totalBorrow()": FunctionFragment;
-    "totalBorrowCap()": FunctionFragment;
-    "totalCollateralShare()": FunctionFragment;
     "totalSupply()": FunctionFragment;
     "transfer(address,uint256)": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
-    "transferOwnership(address,bool,bool)": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
     "updateExchangeRate()": FunctionFragment;
-    "userBorrowPart(address)": FunctionFragment;
-    "userCollateralShare(address)": FunctionFragment;
-    "yieldBox()": FunctionFragment;
   };
 
   getFunction(
@@ -130,60 +106,30 @@ export interface SGLCollateralInterface extends utils.Interface {
       | "approve(address,uint256)"
       | "approveBorrow"
       | "approveBorrow(address,uint256)"
-      | "asset"
-      | "asset()"
-      | "assetId"
-      | "assetId()"
       | "balanceOf"
       | "balanceOf(address)"
       | "borrowOpeningFee"
       | "borrowOpeningFee()"
-      | "claimOwnership"
-      | "claimOwnership()"
-      | "collateral"
-      | "collateral()"
-      | "collateralId"
-      | "collateralId()"
-      | "collateralizationRate"
-      | "collateralizationRate()"
       | "computeClosingFactor"
       | "computeClosingFactor(uint256,uint256,uint256)"
       | "computeLiquidatorReward"
       | "computeLiquidatorReward(address,uint256)"
       | "computeTVLInfo"
       | "computeTVLInfo(address,uint256)"
-      | "conservator"
-      | "conservator()"
       | "decimals"
       | "decimals()"
       | "eip712Domain"
       | "eip712Domain()"
-      | "exchangeRate"
-      | "exchangeRate()"
-      | "fullUtilizationMinusMax"
-      | "fullUtilizationMinusMax()"
       | "getInterestDetails"
       | "getInterestDetails()"
       | "interestElasticity"
       | "interestElasticity()"
-      | "leverageExecutor"
-      | "leverageExecutor()"
-      | "liquidationBonusAmount"
-      | "liquidationBonusAmount()"
-      | "liquidationCollateralizationRate"
-      | "liquidationCollateralizationRate()"
-      | "liquidationMultiplier"
-      | "liquidationMultiplier()"
-      | "lqCollateralizationRate"
-      | "lqCollateralizationRate()"
-      | "maxLiquidatorReward"
-      | "maxLiquidatorReward()"
+      | "interestHelper"
+      | "interestHelper()"
       | "maximumInterestPerSecond"
       | "maximumInterestPerSecond()"
       | "maximumTargetUtilization"
       | "maximumTargetUtilization()"
-      | "minLiquidatorReward"
-      | "minLiquidatorReward()"
       | "minimumInterestPerSecond"
       | "minimumInterestPerSecond()"
       | "minimumTargetUtilization"
@@ -192,46 +138,34 @@ export interface SGLCollateralInterface extends utils.Interface {
       | "name()"
       | "nonces"
       | "nonces(address)"
-      | "oracle"
-      | "oracle()"
-      | "oracleData"
-      | "oracleData()"
+      | "onERC1155BatchReceived"
+      | "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"
+      | "onERC1155Received"
+      | "onERC1155Received(address,address,uint256,uint256,bytes)"
       | "owner"
       | "owner()"
-      | "pauseOptions"
-      | "pauseOptions(uint8)"
-      | "pendingOwner"
-      | "pendingOwner()"
-      | "penrose"
-      | "penrose()"
       | "permit"
       | "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)"
       | "permitBorrow"
       | "permitBorrow(address,address,uint256,uint256,uint8,bytes32,bytes32)"
-      | "protocolFee"
-      | "protocolFee()"
-      | "rateTimestamp"
-      | "rateTimestamp()"
-      | "rateValidDuration"
-      | "rateValidDuration()"
       | "removeCollateral"
       | "removeCollateral(address,address,uint256)"
+      | "renounceOwnership"
+      | "renounceOwnership()"
       | "setLeverageExecutor"
       | "setLeverageExecutor(address)"
+      | "setLiquidationMaxSlippage"
+      | "setLiquidationMaxSlippage(uint256)"
       | "setMarketConfig"
       | "setMarketConfig(address,bytes,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
       | "startingInterestPerSecond"
       | "startingInterestPerSecond()"
+      | "supportsInterface"
+      | "supportsInterface(bytes4)"
       | "symbol"
       | "symbol()"
       | "totalAsset"
       | "totalAsset()"
-      | "totalBorrow"
-      | "totalBorrow()"
-      | "totalBorrowCap"
-      | "totalBorrowCap()"
-      | "totalCollateralShare"
-      | "totalCollateralShare()"
       | "totalSupply"
       | "totalSupply()"
       | "transfer"
@@ -239,15 +173,9 @@ export interface SGLCollateralInterface extends utils.Interface {
       | "transferFrom"
       | "transferFrom(address,address,uint256)"
       | "transferOwnership"
-      | "transferOwnership(address,bool,bool)"
+      | "transferOwnership(address)"
       | "updateExchangeRate"
       | "updateExchangeRate()"
-      | "userBorrowPart"
-      | "userBorrowPart(address)"
-      | "userCollateralShare"
-      | "userCollateralShare(address)"
-      | "yieldBox"
-      | "yieldBox()"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -320,10 +248,6 @@ export interface SGLCollateralInterface extends utils.Interface {
     functionFragment: "approveBorrow(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(functionFragment: "asset", values?: undefined): string;
-  encodeFunctionData(functionFragment: "asset()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "assetId", values?: undefined): string;
-  encodeFunctionData(functionFragment: "assetId()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "balanceOf",
     values: [PromiseOrValue<string>]
@@ -338,38 +262,6 @@ export interface SGLCollateralInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "borrowOpeningFee()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "claimOwnership",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "claimOwnership()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "collateral",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "collateral()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "collateralId",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "collateralId()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "collateralizationRate",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "collateralizationRate()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -404,14 +296,6 @@ export interface SGLCollateralInterface extends utils.Interface {
     functionFragment: "computeTVLInfo(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(
-    functionFragment: "conservator",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "conservator()",
-    values?: undefined
-  ): string;
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "decimals()",
@@ -423,22 +307,6 @@ export interface SGLCollateralInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "eip712Domain()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "exchangeRate",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "exchangeRate()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "fullUtilizationMinusMax",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "fullUtilizationMinusMax()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -458,51 +326,11 @@ export interface SGLCollateralInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "leverageExecutor",
+    functionFragment: "interestHelper",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "leverageExecutor()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidationBonusAmount",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidationBonusAmount()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidationCollateralizationRate",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidationCollateralizationRate()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidationMultiplier",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidationMultiplier()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "lqCollateralizationRate",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "lqCollateralizationRate()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "maxLiquidatorReward",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "maxLiquidatorReward()",
+    functionFragment: "interestHelper()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -519,14 +347,6 @@ export interface SGLCollateralInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "maximumTargetUtilization()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "minLiquidatorReward",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "minLiquidatorReward()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -555,36 +375,48 @@ export interface SGLCollateralInterface extends utils.Interface {
     functionFragment: "nonces(address)",
     values: [PromiseOrValue<string>]
   ): string;
-  encodeFunctionData(functionFragment: "oracle", values?: undefined): string;
-  encodeFunctionData(functionFragment: "oracle()", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "oracleData",
-    values?: undefined
+    functionFragment: "onERC1155BatchReceived",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
-    functionFragment: "oracleData()",
-    values?: undefined
+    functionFragment: "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "onERC1155Received",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "onERC1155Received(address,address,uint256,uint256,bytes)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "pauseOptions",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "pauseOptions(uint8)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "pendingOwner",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "pendingOwner()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "penrose", values?: undefined): string;
-  encodeFunctionData(functionFragment: "penrose()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "permit",
     values: [
@@ -634,30 +466,6 @@ export interface SGLCollateralInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "protocolFee",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "protocolFee()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "rateTimestamp",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "rateTimestamp()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "rateValidDuration",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "rateValidDuration()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "removeCollateral",
     values: [
       PromiseOrValue<string>,
@@ -674,12 +482,28 @@ export interface SGLCollateralInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "renounceOwnership",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "renounceOwnership()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "setLeverageExecutor",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "setLeverageExecutor(address)",
     values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLiquidationMaxSlippage",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLiquidationMaxSlippage(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMarketConfig",
@@ -719,6 +543,14 @@ export interface SGLCollateralInterface extends utils.Interface {
     functionFragment: "startingInterestPerSecond()",
     values?: undefined
   ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface(bytes4)",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
   encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
   encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
   encodeFunctionData(
@@ -727,30 +559,6 @@ export interface SGLCollateralInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "totalAsset()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "totalBorrow",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "totalBorrow()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "totalBorrowCap",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "totalBorrowCap()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "totalCollateralShare",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "totalCollateralShare()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -787,19 +595,11 @@ export interface SGLCollateralInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<boolean>
-    ]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "transferOwnership(address,bool,bool)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<boolean>
-    ]
+    functionFragment: "transferOwnership(address)",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "updateExchangeRate",
@@ -807,27 +607,6 @@ export interface SGLCollateralInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "updateExchangeRate()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "userBorrowPart",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "userBorrowPart(address)",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "userCollateralShare",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "userCollateralShare(address)",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(functionFragment: "yieldBox", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "yieldBox()",
     values?: undefined
   ): string;
 
@@ -880,10 +659,6 @@ export interface SGLCollateralInterface extends utils.Interface {
     functionFragment: "approveBorrow(address,uint256)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "asset", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "asset()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "assetId", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "assetId()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "balanceOf(address)",
@@ -895,35 +670,6 @@ export interface SGLCollateralInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "borrowOpeningFee()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "claimOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "claimOwnership()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "collateral", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "collateral()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "collateralId",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "collateralId()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "collateralizationRate",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "collateralizationRate()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -950,14 +696,6 @@ export interface SGLCollateralInterface extends utils.Interface {
     functionFragment: "computeTVLInfo(address,uint256)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "conservator",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "conservator()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
   decodeFunctionResult(
@@ -966,22 +704,6 @@ export interface SGLCollateralInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "eip712Domain()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "exchangeRate",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "exchangeRate()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "fullUtilizationMinusMax",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "fullUtilizationMinusMax()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1001,51 +723,11 @@ export interface SGLCollateralInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "leverageExecutor",
+    functionFragment: "interestHelper",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "leverageExecutor()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidationBonusAmount",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidationBonusAmount()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidationCollateralizationRate",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidationCollateralizationRate()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidationMultiplier",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidationMultiplier()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "lqCollateralizationRate",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "lqCollateralizationRate()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "maxLiquidatorReward",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "maxLiquidatorReward()",
+    functionFragment: "interestHelper()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1062,14 +744,6 @@ export interface SGLCollateralInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "maximumTargetUtilization()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "minLiquidatorReward",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "minLiquidatorReward()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1095,33 +769,24 @@ export interface SGLCollateralInterface extends utils.Interface {
     functionFragment: "nonces(address)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "oracle", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "oracle()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "oracleData", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "oracleData()",
+    functionFragment: "onERC1155BatchReceived",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC1155Received",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC1155Received(address,address,uint256,uint256,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "pauseOptions",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "pauseOptions(uint8)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "pendingOwner",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "pendingOwner()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "penrose", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "penrose()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "permit", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)",
@@ -1136,30 +801,6 @@ export interface SGLCollateralInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "protocolFee",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "protocolFee()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "rateTimestamp",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "rateTimestamp()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "rateValidDuration",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "rateValidDuration()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "removeCollateral",
     data: BytesLike
   ): Result;
@@ -1168,11 +809,27 @@ export interface SGLCollateralInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "renounceOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceOwnership()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "setLeverageExecutor",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "setLeverageExecutor(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setLiquidationMaxSlippage",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setLiquidationMaxSlippage(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1191,35 +848,19 @@ export interface SGLCollateralInterface extends utils.Interface {
     functionFragment: "startingInterestPerSecond()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface(bytes4)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "totalAsset", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "totalAsset()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "totalBorrow",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "totalBorrow()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "totalBorrowCap",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "totalBorrowCap()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "totalCollateralShare",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "totalCollateralShare()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1248,7 +889,7 @@ export interface SGLCollateralInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "transferOwnership(address,bool,bool)",
+    functionFragment: "transferOwnership(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -1259,35 +900,18 @@ export interface SGLCollateralInterface extends utils.Interface {
     functionFragment: "updateExchangeRate()",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "userBorrowPart",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "userBorrowPart(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "userCollateralShare",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "userCollateralShare(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "yieldBox", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "yieldBox()", data: BytesLike): Result;
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalBorrow(address,address,uint256)": EventFragment;
-    "BidExecutionSwapperUpdated(address)": EventFragment;
     "ConservatorUpdated(address,address)": EventFragment;
     "EIP712DomainChanged()": EventFragment;
     "ExchangeRateDurationUpdated(uint256,uint256)": EventFragment;
     "InterestElasticityUpdated(uint256,uint256)": EventFragment;
+    "InterestHelperUpdated(address,address)": EventFragment;
     "LeverageExecutorSet(address,address)": EventFragment;
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)": EventFragment;
+    "LiquidationMaxSlippageUpdated(uint256,uint256)": EventFragment;
     "LiquidationMultiplierUpdated(uint256,uint256)": EventFragment;
     "LogAccrue(uint256,uint256,uint64,uint256)": EventFragment;
     "LogAddAsset(address,address,uint256,uint256)": EventFragment;
@@ -1300,19 +924,15 @@ export interface SGLCollateralInterface extends utils.Interface {
     "LogRemoveCollateral(address,address,uint256)": EventFragment;
     "LogRepay(address,address,uint256,uint256)": EventFragment;
     "LogWithdrawFees(address,uint256)": EventFragment;
-    "LogYieldBoxFeesDeposit(uint256,uint256)": EventFragment;
-    "LqCollateralizationRateUpdated(uint256,uint256)": EventFragment;
     "MaximumInterestPerSecondUpdated(uint256,uint256)": EventFragment;
     "MaximumTargetUtilizationUpdated(uint256,uint256)": EventFragment;
     "MinimumInterestPerSecondUpdated(uint256,uint256)": EventFragment;
     "MinimumTargetUtilizationUpdated(uint256,uint256)": EventFragment;
     "OracleDataUpdated()": EventFragment;
     "OracleUpdated(address)": EventFragment;
-    "OrderBookLiquidationMultiplierUpdated(uint256,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "PausedUpdated(uint8,bool,bool)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
-    "UsdoSwapperUpdated(address)": EventFragment;
     "ValueUpdated(uint256,uint256)": EventFragment;
   };
 
@@ -1323,10 +943,6 @@ export interface SGLCollateralInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "ApprovalBorrow"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ApprovalBorrow(address,address,uint256)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "BidExecutionSwapperUpdated"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "BidExecutionSwapperUpdated(address)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ConservatorUpdated"): EventFragment;
   getEvent(
@@ -1344,6 +960,10 @@ export interface SGLCollateralInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "InterestElasticityUpdated(uint256,uint256)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "InterestHelperUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "InterestHelperUpdated(address,address)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LeverageExecutorSet"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "LeverageExecutorSet(address,address)"
@@ -1351,6 +971,12 @@ export interface SGLCollateralInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Liquidated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Liquidated(address,address[],uint256,uint256,uint256,uint256)"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LiquidationMaxSlippageUpdated"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "LiquidationMaxSlippageUpdated(uint256,uint256)"
   ): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "LiquidationMultiplierUpdated"
@@ -1400,16 +1026,6 @@ export interface SGLCollateralInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "LogWithdrawFees(address,uint256)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "LogYieldBoxFeesDeposit"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "LogYieldBoxFeesDeposit(uint256,uint256)"
-  ): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "LqCollateralizationRateUpdated"
-  ): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "LqCollateralizationRateUpdated(uint256,uint256)"
-  ): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "MaximumInterestPerSecondUpdated"
   ): EventFragment;
@@ -1438,12 +1054,6 @@ export interface SGLCollateralInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "OracleDataUpdated()"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OracleUpdated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OracleUpdated(address)"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "OrderBookLiquidationMultiplierUpdated"
-  ): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "OrderBookLiquidationMultiplierUpdated(uint256,uint256)"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "OwnershipTransferred(address,address)"
@@ -1455,10 +1065,6 @@ export interface SGLCollateralInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Transfer(address,address,uint256)"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "UsdoSwapperUpdated"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "UsdoSwapperUpdated(address)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ValueUpdated"): EventFragment;
   getEvent(
@@ -1489,17 +1095,6 @@ export type ApprovalBorrowEvent = TypedEvent<
 >;
 
 export type ApprovalBorrowEventFilter = TypedEventFilter<ApprovalBorrowEvent>;
-
-export interface BidExecutionSwapperUpdatedEventObject {
-  newAddress: string;
-}
-export type BidExecutionSwapperUpdatedEvent = TypedEvent<
-  [string],
-  BidExecutionSwapperUpdatedEventObject
->;
-
-export type BidExecutionSwapperUpdatedEventFilter =
-  TypedEventFilter<BidExecutionSwapperUpdatedEvent>;
 
 export interface ConservatorUpdatedEventObject {
   old: string;
@@ -1546,6 +1141,18 @@ export type InterestElasticityUpdatedEvent = TypedEvent<
 export type InterestElasticityUpdatedEventFilter =
   TypedEventFilter<InterestElasticityUpdatedEvent>;
 
+export interface InterestHelperUpdatedEventObject {
+  oldVal: string;
+  newVal: string;
+}
+export type InterestHelperUpdatedEvent = TypedEvent<
+  [string, string],
+  InterestHelperUpdatedEventObject
+>;
+
+export type InterestHelperUpdatedEventFilter =
+  TypedEventFilter<InterestHelperUpdatedEvent>;
+
 export interface LeverageExecutorSetEventObject {
   oldVal: string;
   newVal: string;
@@ -1572,6 +1179,18 @@ export type LiquidatedEvent = TypedEvent<
 >;
 
 export type LiquidatedEventFilter = TypedEventFilter<LiquidatedEvent>;
+
+export interface LiquidationMaxSlippageUpdatedEventObject {
+  oldVal: BigNumber;
+  newVal: BigNumber;
+}
+export type LiquidationMaxSlippageUpdatedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  LiquidationMaxSlippageUpdatedEventObject
+>;
+
+export type LiquidationMaxSlippageUpdatedEventFilter =
+  TypedEventFilter<LiquidationMaxSlippageUpdatedEvent>;
 
 export interface LiquidationMultiplierUpdatedEventObject {
   oldVal: BigNumber;
@@ -1721,30 +1340,6 @@ export type LogWithdrawFeesEvent = TypedEvent<
 
 export type LogWithdrawFeesEventFilter = TypedEventFilter<LogWithdrawFeesEvent>;
 
-export interface LogYieldBoxFeesDepositEventObject {
-  feeShares: BigNumber;
-  ethAmount: BigNumber;
-}
-export type LogYieldBoxFeesDepositEvent = TypedEvent<
-  [BigNumber, BigNumber],
-  LogYieldBoxFeesDepositEventObject
->;
-
-export type LogYieldBoxFeesDepositEventFilter =
-  TypedEventFilter<LogYieldBoxFeesDepositEvent>;
-
-export interface LqCollateralizationRateUpdatedEventObject {
-  oldVal: BigNumber;
-  newVal: BigNumber;
-}
-export type LqCollateralizationRateUpdatedEvent = TypedEvent<
-  [BigNumber, BigNumber],
-  LqCollateralizationRateUpdatedEventObject
->;
-
-export type LqCollateralizationRateUpdatedEventFilter =
-  TypedEventFilter<LqCollateralizationRateUpdatedEvent>;
-
 export interface MaximumInterestPerSecondUpdatedEventObject {
   oldVal: BigNumber;
   newVal: BigNumber;
@@ -1809,18 +1404,6 @@ export type OracleUpdatedEvent = TypedEvent<[string], OracleUpdatedEventObject>;
 
 export type OracleUpdatedEventFilter = TypedEventFilter<OracleUpdatedEvent>;
 
-export interface OrderBookLiquidationMultiplierUpdatedEventObject {
-  oldVal: BigNumber;
-  newVal: BigNumber;
-}
-export type OrderBookLiquidationMultiplierUpdatedEvent = TypedEvent<
-  [BigNumber, BigNumber],
-  OrderBookLiquidationMultiplierUpdatedEventObject
->;
-
-export type OrderBookLiquidationMultiplierUpdatedEventFilter =
-  TypedEventFilter<OrderBookLiquidationMultiplierUpdatedEvent>;
-
 export interface OwnershipTransferredEventObject {
   previousOwner: string;
   newOwner: string;
@@ -1856,17 +1439,6 @@ export type TransferEvent = TypedEvent<
 >;
 
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
-
-export interface UsdoSwapperUpdatedEventObject {
-  newAddress: string;
-}
-export type UsdoSwapperUpdatedEvent = TypedEvent<
-  [string],
-  UsdoSwapperUpdatedEventObject
->;
-
-export type UsdoSwapperUpdatedEventFilter =
-  TypedEventFilter<UsdoSwapperUpdatedEvent>;
 
 export interface ValueUpdatedEventObject {
   valType: BigNumber;
@@ -2006,14 +1578,6 @@ export interface SGLCollateral extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    asset(overrides?: CallOverrides): Promise<[string]>;
-
-    "asset()"(overrides?: CallOverrides): Promise<[string]>;
-
-    assetId(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "assetId()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     balanceOf(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -2027,26 +1591,6 @@ export interface SGLCollateral extends BaseContract {
     borrowOpeningFee(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "borrowOpeningFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    claimOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "claimOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    collateral(overrides?: CallOverrides): Promise<[string]>;
-
-    "collateral()"(overrides?: CallOverrides): Promise<[string]>;
-
-    collateralId(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "collateralId()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    collateralizationRate(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "collateralizationRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     computeClosingFactor(
       borrowPart: PromiseOrValue<BigNumberish>,
@@ -2098,10 +1642,6 @@ export interface SGLCollateral extends BaseContract {
       }
     >;
 
-    conservator(overrides?: CallOverrides): Promise<[string]>;
-
-    "conservator()"(overrides?: CallOverrides): Promise<[string]>;
-
     decimals(overrides?: CallOverrides): Promise<[number]>;
 
     "decimals()"(overrides?: CallOverrides): Promise<[number]>;
@@ -2134,16 +1674,6 @@ export interface SGLCollateral extends BaseContract {
       }
     >;
 
-    exchangeRate(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "exchangeRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    fullUtilizationMinusMax(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "fullUtilizationMinusMax()"(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     getInterestDetails(
       overrides?: CallOverrides
     ): Promise<
@@ -2166,35 +1696,9 @@ export interface SGLCollateral extends BaseContract {
 
     "interestElasticity()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    leverageExecutor(overrides?: CallOverrides): Promise<[string]>;
+    interestHelper(overrides?: CallOverrides): Promise<[string]>;
 
-    "leverageExecutor()"(overrides?: CallOverrides): Promise<[string]>;
-
-    liquidationBonusAmount(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    liquidationCollateralizationRate(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "liquidationCollateralizationRate()"(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    liquidationMultiplier(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "liquidationMultiplier()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    lqCollateralizationRate(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "lqCollateralizationRate()"(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    maxLiquidatorReward(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "maxLiquidatorReward()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+    "interestHelper()"(overrides?: CallOverrides): Promise<[string]>;
 
     maximumInterestPerSecond(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -2207,10 +1711,6 @@ export interface SGLCollateral extends BaseContract {
     "maximumTargetUtilization()"(
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
-
-    minLiquidatorReward(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "minLiquidatorReward()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     minimumInterestPerSecond(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -2238,35 +1738,45 @@ export interface SGLCollateral extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    oracle(overrides?: CallOverrides): Promise<[string]>;
+    onERC1155BatchReceived(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
-    "oracle()"(overrides?: CallOverrides): Promise<[string]>;
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
-    oracleData(overrides?: CallOverrides): Promise<[string]>;
+    onERC1155Received(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
-    "oracleData()"(overrides?: CallOverrides): Promise<[string]>;
+    "onERC1155Received(address,address,uint256,uint256,bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
-
-    pauseOptions(
-      pauseProp: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { pauseStatus: boolean }>;
-
-    "pauseOptions(uint8)"(
-      pauseProp: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { pauseStatus: boolean }>;
-
-    pendingOwner(overrides?: CallOverrides): Promise<[string]>;
-
-    "pendingOwner()"(overrides?: CallOverrides): Promise<[string]>;
-
-    penrose(overrides?: CallOverrides): Promise<[string]>;
-
-    "penrose()"(overrides?: CallOverrides): Promise<[string]>;
 
     permit(
       owner: PromiseOrValue<string>,
@@ -2312,18 +1822,6 @@ export interface SGLCollateral extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    protocolFee(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "protocolFee()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    rateTimestamp(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "rateTimestamp()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    rateValidDuration(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "rateValidDuration()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     removeCollateral(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
@@ -2338,6 +1836,14 @@ export interface SGLCollateral extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     setLeverageExecutor(
       _executor: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2345,6 +1851,16 @@ export interface SGLCollateral extends BaseContract {
 
     "setLeverageExecutor(address)"(
       _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setLiquidationMaxSlippage(
+      _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setLiquidationMaxSlippage(uint256)"(
+      _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2382,6 +1898,16 @@ export interface SGLCollateral extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     symbol(overrides?: CallOverrides): Promise<[string]>;
 
     "symbol()"(overrides?: CallOverrides): Promise<[string]>;
@@ -2397,26 +1923,6 @@ export interface SGLCollateral extends BaseContract {
     ): Promise<
       [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
     >;
-
-    totalBorrow(
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
-    >;
-
-    "totalBorrow()"(
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
-    >;
-
-    totalBorrowCap(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "totalBorrowCap()"(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    totalCollateralShare(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "totalCollateralShare()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -2450,15 +1956,11 @@ export interface SGLCollateral extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "transferOwnership(address,bool,bool)"(
+    "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -2469,30 +1971,6 @@ export interface SGLCollateral extends BaseContract {
     "updateExchangeRate()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
-
-    userBorrowPart(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "userBorrowPart(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    userCollateralShare(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "userCollateralShare(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    yieldBox(overrides?: CallOverrides): Promise<[string]>;
-
-    "yieldBox()"(overrides?: CallOverrides): Promise<[string]>;
   };
 
   DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
@@ -2593,14 +2071,6 @@ export interface SGLCollateral extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  asset(overrides?: CallOverrides): Promise<string>;
-
-  "asset()"(overrides?: CallOverrides): Promise<string>;
-
-  assetId(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "assetId()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   balanceOf(
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
@@ -2614,26 +2084,6 @@ export interface SGLCollateral extends BaseContract {
   borrowOpeningFee(overrides?: CallOverrides): Promise<BigNumber>;
 
   "borrowOpeningFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  claimOwnership(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "claimOwnership()"(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  collateral(overrides?: CallOverrides): Promise<string>;
-
-  "collateral()"(overrides?: CallOverrides): Promise<string>;
-
-  collateralId(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "collateralId()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  collateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "collateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   computeClosingFactor(
     borrowPart: PromiseOrValue<BigNumberish>,
@@ -2685,10 +2135,6 @@ export interface SGLCollateral extends BaseContract {
     }
   >;
 
-  conservator(overrides?: CallOverrides): Promise<string>;
-
-  "conservator()"(overrides?: CallOverrides): Promise<string>;
-
   decimals(overrides?: CallOverrides): Promise<number>;
 
   "decimals()"(overrides?: CallOverrides): Promise<number>;
@@ -2721,14 +2167,6 @@ export interface SGLCollateral extends BaseContract {
     }
   >;
 
-  exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  fullUtilizationMinusMax(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "fullUtilizationMinusMax()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   getInterestDetails(
     overrides?: CallOverrides
   ): Promise<
@@ -2751,33 +2189,9 @@ export interface SGLCollateral extends BaseContract {
 
   "interestElasticity()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-  leverageExecutor(overrides?: CallOverrides): Promise<string>;
+  interestHelper(overrides?: CallOverrides): Promise<string>;
 
-  "leverageExecutor()"(overrides?: CallOverrides): Promise<string>;
-
-  liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  liquidationCollateralizationRate(
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "liquidationCollateralizationRate()"(
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  lqCollateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "lqCollateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  maxLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "maxLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
+  "interestHelper()"(overrides?: CallOverrides): Promise<string>;
 
   maximumInterestPerSecond(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2786,10 +2200,6 @@ export interface SGLCollateral extends BaseContract {
   maximumTargetUtilization(overrides?: CallOverrides): Promise<BigNumber>;
 
   "maximumTargetUtilization()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  minLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "minLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   minimumInterestPerSecond(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2813,35 +2223,45 @@ export interface SGLCollateral extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  oracle(overrides?: CallOverrides): Promise<string>;
+  onERC1155BatchReceived(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<string>,
+    arg2: PromiseOrValue<BigNumberish>[],
+    arg3: PromiseOrValue<BigNumberish>[],
+    arg4: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  "oracle()"(overrides?: CallOverrides): Promise<string>;
+  "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<string>,
+    arg2: PromiseOrValue<BigNumberish>[],
+    arg3: PromiseOrValue<BigNumberish>[],
+    arg4: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  oracleData(overrides?: CallOverrides): Promise<string>;
+  onERC1155Received(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<string>,
+    arg2: PromiseOrValue<BigNumberish>,
+    arg3: PromiseOrValue<BigNumberish>,
+    arg4: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  "oracleData()"(overrides?: CallOverrides): Promise<string>;
+  "onERC1155Received(address,address,uint256,uint256,bytes)"(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<string>,
+    arg2: PromiseOrValue<BigNumberish>,
+    arg3: PromiseOrValue<BigNumberish>,
+    arg4: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
-
-  pauseOptions(
-    pauseProp: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  "pauseOptions(uint8)"(
-    pauseProp: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  pendingOwner(overrides?: CallOverrides): Promise<string>;
-
-  "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
-
-  penrose(overrides?: CallOverrides): Promise<string>;
-
-  "penrose()"(overrides?: CallOverrides): Promise<string>;
 
   permit(
     owner: PromiseOrValue<string>,
@@ -2887,18 +2307,6 @@ export interface SGLCollateral extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  protocolFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  rateTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "rateTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  rateValidDuration(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
-
   removeCollateral(
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
@@ -2913,6 +2321,14 @@ export interface SGLCollateral extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  renounceOwnership(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "renounceOwnership()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   setLeverageExecutor(
     _executor: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2920,6 +2336,16 @@ export interface SGLCollateral extends BaseContract {
 
   "setLeverageExecutor(address)"(
     _executor: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setLiquidationMaxSlippage(
+    _val: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setLiquidationMaxSlippage(uint256)"(
+    _val: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -2955,6 +2381,16 @@ export interface SGLCollateral extends BaseContract {
 
   "startingInterestPerSecond()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  supportsInterface(
+    interfaceId: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "supportsInterface(bytes4)"(
+    interfaceId: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
   symbol(overrides?: CallOverrides): Promise<string>;
 
   "symbol()"(overrides?: CallOverrides): Promise<string>;
@@ -2966,22 +2402,6 @@ export interface SGLCollateral extends BaseContract {
   "totalAsset()"(
     overrides?: CallOverrides
   ): Promise<[BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }>;
-
-  totalBorrow(
-    overrides?: CallOverrides
-  ): Promise<[BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }>;
-
-  "totalBorrow()"(
-    overrides?: CallOverrides
-  ): Promise<[BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }>;
-
-  totalBorrowCap(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "totalBorrowCap()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  totalCollateralShare(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "totalCollateralShare()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3015,15 +2435,11 @@ export interface SGLCollateral extends BaseContract {
 
   transferOwnership(
     newOwner: PromiseOrValue<string>,
-    direct: PromiseOrValue<boolean>,
-    renounce: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "transferOwnership(address,bool,bool)"(
+  "transferOwnership(address)"(
     newOwner: PromiseOrValue<string>,
-    direct: PromiseOrValue<boolean>,
-    renounce: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -3034,30 +2450,6 @@ export interface SGLCollateral extends BaseContract {
   "updateExchangeRate()"(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
-
-  userBorrowPart(
-    arg0: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "userBorrowPart(address)"(
-    arg0: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  userCollateralShare(
-    arg0: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "userCollateralShare(address)"(
-    arg0: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  yieldBox(overrides?: CallOverrides): Promise<string>;
-
-  "yieldBox()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
@@ -3154,14 +2546,6 @@ export interface SGLCollateral extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    asset(overrides?: CallOverrides): Promise<string>;
-
-    "asset()"(overrides?: CallOverrides): Promise<string>;
-
-    assetId(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "assetId()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     balanceOf(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -3175,22 +2559,6 @@ export interface SGLCollateral extends BaseContract {
     borrowOpeningFee(overrides?: CallOverrides): Promise<BigNumber>;
 
     "borrowOpeningFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    claimOwnership(overrides?: CallOverrides): Promise<void>;
-
-    "claimOwnership()"(overrides?: CallOverrides): Promise<void>;
-
-    collateral(overrides?: CallOverrides): Promise<string>;
-
-    "collateral()"(overrides?: CallOverrides): Promise<string>;
-
-    collateralId(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "collateralId()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    collateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "collateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     computeClosingFactor(
       borrowPart: PromiseOrValue<BigNumberish>,
@@ -3242,10 +2610,6 @@ export interface SGLCollateral extends BaseContract {
       }
     >;
 
-    conservator(overrides?: CallOverrides): Promise<string>;
-
-    "conservator()"(overrides?: CallOverrides): Promise<string>;
-
     decimals(overrides?: CallOverrides): Promise<number>;
 
     "decimals()"(overrides?: CallOverrides): Promise<number>;
@@ -3278,14 +2642,6 @@ export interface SGLCollateral extends BaseContract {
       }
     >;
 
-    exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    fullUtilizationMinusMax(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "fullUtilizationMinusMax()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     getInterestDetails(
       overrides?: CallOverrides
     ): Promise<
@@ -3308,33 +2664,9 @@ export interface SGLCollateral extends BaseContract {
 
     "interestElasticity()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    leverageExecutor(overrides?: CallOverrides): Promise<string>;
+    interestHelper(overrides?: CallOverrides): Promise<string>;
 
-    "leverageExecutor()"(overrides?: CallOverrides): Promise<string>;
-
-    liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    liquidationCollateralizationRate(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "liquidationCollateralizationRate()"(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    lqCollateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "lqCollateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    maxLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "maxLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "interestHelper()"(overrides?: CallOverrides): Promise<string>;
 
     maximumInterestPerSecond(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3343,10 +2675,6 @@ export interface SGLCollateral extends BaseContract {
     maximumTargetUtilization(overrides?: CallOverrides): Promise<BigNumber>;
 
     "maximumTargetUtilization()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    minLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "minLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     minimumInterestPerSecond(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3370,35 +2698,45 @@ export interface SGLCollateral extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    oracle(overrides?: CallOverrides): Promise<string>;
+    onERC1155BatchReceived(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    "oracle()"(overrides?: CallOverrides): Promise<string>;
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    oracleData(overrides?: CallOverrides): Promise<string>;
+    onERC1155Received(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    "oracleData()"(overrides?: CallOverrides): Promise<string>;
+    "onERC1155Received(address,address,uint256,uint256,bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
-
-    pauseOptions(
-      pauseProp: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    "pauseOptions(uint8)"(
-      pauseProp: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    pendingOwner(overrides?: CallOverrides): Promise<string>;
-
-    "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
-
-    penrose(overrides?: CallOverrides): Promise<string>;
-
-    "penrose()"(overrides?: CallOverrides): Promise<string>;
 
     permit(
       owner: PromiseOrValue<string>,
@@ -3444,18 +2782,6 @@ export interface SGLCollateral extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    protocolFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    rateTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "rateTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    rateValidDuration(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     removeCollateral(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
@@ -3470,6 +2796,10 @@ export interface SGLCollateral extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    renounceOwnership(overrides?: CallOverrides): Promise<void>;
+
+    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
+
     setLeverageExecutor(
       _executor: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -3477,6 +2807,16 @@ export interface SGLCollateral extends BaseContract {
 
     "setLeverageExecutor(address)"(
       _executor: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setLiquidationMaxSlippage(
+      _val: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setLiquidationMaxSlippage(uint256)"(
+      _val: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3514,6 +2854,16 @@ export interface SGLCollateral extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
     symbol(overrides?: CallOverrides): Promise<string>;
 
     "symbol()"(overrides?: CallOverrides): Promise<string>;
@@ -3529,26 +2879,6 @@ export interface SGLCollateral extends BaseContract {
     ): Promise<
       [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
     >;
-
-    totalBorrow(
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
-    >;
-
-    "totalBorrow()"(
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { elastic: BigNumber; base: BigNumber }
-    >;
-
-    totalBorrowCap(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "totalBorrowCap()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    totalCollateralShare(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "totalCollateralShare()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3582,15 +2912,11 @@ export interface SGLCollateral extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "transferOwnership(address,bool,bool)"(
+    "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -3601,30 +2927,6 @@ export interface SGLCollateral extends BaseContract {
     "updateExchangeRate()"(
       overrides?: CallOverrides
     ): Promise<[boolean, BigNumber] & { updated: boolean; rate: BigNumber }>;
-
-    userBorrowPart(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "userBorrowPart(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    userCollateralShare(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "userCollateralShare(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    yieldBox(overrides?: CallOverrides): Promise<string>;
-
-    "yieldBox()"(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
@@ -3650,21 +2952,11 @@ export interface SGLCollateral extends BaseContract {
       value?: PromiseOrValue<BigNumberish> | null
     ): ApprovalBorrowEventFilter;
 
-    "BidExecutionSwapperUpdated(address)"(
-      newAddress?: PromiseOrValue<string> | null
-    ): BidExecutionSwapperUpdatedEventFilter;
-    BidExecutionSwapperUpdated(
-      newAddress?: PromiseOrValue<string> | null
-    ): BidExecutionSwapperUpdatedEventFilter;
-
     "ConservatorUpdated(address,address)"(
-      old?: PromiseOrValue<string> | null,
-      _new?: PromiseOrValue<string> | null
+      old?: null,
+      _new?: null
     ): ConservatorUpdatedEventFilter;
-    ConservatorUpdated(
-      old?: PromiseOrValue<string> | null,
-      _new?: PromiseOrValue<string> | null
-    ): ConservatorUpdatedEventFilter;
+    ConservatorUpdated(old?: null, _new?: null): ConservatorUpdatedEventFilter;
 
     "EIP712DomainChanged()"(): EIP712DomainChangedEventFilter;
     EIP712DomainChanged(): EIP712DomainChangedEventFilter;
@@ -3687,39 +2979,57 @@ export interface SGLCollateral extends BaseContract {
       newVal?: PromiseOrValue<BigNumberish> | null
     ): InterestElasticityUpdatedEventFilter;
 
-    "LeverageExecutorSet(address,address)"(
+    "InterestHelperUpdated(address,address)"(
       oldVal?: PromiseOrValue<string> | null,
       newVal?: PromiseOrValue<string> | null
+    ): InterestHelperUpdatedEventFilter;
+    InterestHelperUpdated(
+      oldVal?: PromiseOrValue<string> | null,
+      newVal?: PromiseOrValue<string> | null
+    ): InterestHelperUpdatedEventFilter;
+
+    "LeverageExecutorSet(address,address)"(
+      oldVal?: null,
+      newVal?: null
     ): LeverageExecutorSetEventFilter;
     LeverageExecutorSet(
-      oldVal?: PromiseOrValue<string> | null,
-      newVal?: PromiseOrValue<string> | null
+      oldVal?: null,
+      newVal?: null
     ): LeverageExecutorSetEventFilter;
 
     "Liquidated(address,address[],uint256,uint256,uint256,uint256)"(
       liquidator?: PromiseOrValue<string> | null,
-      users?: PromiseOrValue<string>[] | null,
-      liquidatorReward?: PromiseOrValue<BigNumberish> | null,
+      users?: null,
+      liquidatorReward?: null,
       protocolReward?: null,
       repayedAmount?: null,
       collateralShareRemoved?: null
     ): LiquidatedEventFilter;
     Liquidated(
       liquidator?: PromiseOrValue<string> | null,
-      users?: PromiseOrValue<string>[] | null,
-      liquidatorReward?: PromiseOrValue<BigNumberish> | null,
+      users?: null,
+      liquidatorReward?: null,
       protocolReward?: null,
       repayedAmount?: null,
       collateralShareRemoved?: null
     ): LiquidatedEventFilter;
 
+    "LiquidationMaxSlippageUpdated(uint256,uint256)"(
+      oldVal?: null,
+      newVal?: null
+    ): LiquidationMaxSlippageUpdatedEventFilter;
+    LiquidationMaxSlippageUpdated(
+      oldVal?: null,
+      newVal?: null
+    ): LiquidationMaxSlippageUpdatedEventFilter;
+
     "LiquidationMultiplierUpdated(uint256,uint256)"(
-      oldVal?: PromiseOrValue<BigNumberish> | null,
-      newVal?: PromiseOrValue<BigNumberish> | null
+      oldVal?: null,
+      newVal?: null
     ): LiquidationMultiplierUpdatedEventFilter;
     LiquidationMultiplierUpdated(
-      oldVal?: PromiseOrValue<BigNumberish> | null,
-      newVal?: PromiseOrValue<BigNumberish> | null
+      oldVal?: null,
+      newVal?: null
     ): LiquidationMultiplierUpdatedEventFilter;
 
     "LogAccrue(uint256,uint256,uint64,uint256)"(
@@ -3775,12 +3085,12 @@ export interface SGLCollateral extends BaseContract {
     ): LogBorrowEventFilter;
 
     "LogBorrowCapUpdated(uint256,uint256)"(
-      _oldVal?: PromiseOrValue<BigNumberish> | null,
-      _newVal?: PromiseOrValue<BigNumberish> | null
+      _oldVal?: null,
+      _newVal?: null
     ): LogBorrowCapUpdatedEventFilter;
     LogBorrowCapUpdated(
-      _oldVal?: PromiseOrValue<BigNumberish> | null,
-      _newVal?: PromiseOrValue<BigNumberish> | null
+      _oldVal?: null,
+      _newVal?: null
     ): LogBorrowCapUpdatedEventFilter;
 
     "LogBorrowingFee(uint256,uint256)"(
@@ -3792,12 +3102,8 @@ export interface SGLCollateral extends BaseContract {
       _newVal?: PromiseOrValue<BigNumberish> | null
     ): LogBorrowingFeeEventFilter;
 
-    "LogExchangeRate(uint256)"(
-      rate?: PromiseOrValue<BigNumberish> | null
-    ): LogExchangeRateEventFilter;
-    LogExchangeRate(
-      rate?: PromiseOrValue<BigNumberish> | null
-    ): LogExchangeRateEventFilter;
+    "LogExchangeRate(uint256)"(rate?: null): LogExchangeRateEventFilter;
+    LogExchangeRate(rate?: null): LogExchangeRateEventFilter;
 
     "LogRemoveAsset(address,address,uint256,uint256)"(
       from?: PromiseOrValue<string> | null,
@@ -3845,24 +3151,6 @@ export interface SGLCollateral extends BaseContract {
       feesEarnedFraction?: PromiseOrValue<BigNumberish> | null
     ): LogWithdrawFeesEventFilter;
 
-    "LogYieldBoxFeesDeposit(uint256,uint256)"(
-      feeShares?: PromiseOrValue<BigNumberish> | null,
-      ethAmount?: PromiseOrValue<BigNumberish> | null
-    ): LogYieldBoxFeesDepositEventFilter;
-    LogYieldBoxFeesDeposit(
-      feeShares?: PromiseOrValue<BigNumberish> | null,
-      ethAmount?: PromiseOrValue<BigNumberish> | null
-    ): LogYieldBoxFeesDepositEventFilter;
-
-    "LqCollateralizationRateUpdated(uint256,uint256)"(
-      oldVal?: PromiseOrValue<BigNumberish> | null,
-      newVal?: PromiseOrValue<BigNumberish> | null
-    ): LqCollateralizationRateUpdatedEventFilter;
-    LqCollateralizationRateUpdated(
-      oldVal?: PromiseOrValue<BigNumberish> | null,
-      newVal?: PromiseOrValue<BigNumberish> | null
-    ): LqCollateralizationRateUpdatedEventFilter;
-
     "MaximumInterestPerSecondUpdated(uint256,uint256)"(
       oldVal?: PromiseOrValue<BigNumberish> | null,
       newVal?: PromiseOrValue<BigNumberish> | null
@@ -3905,15 +3193,6 @@ export interface SGLCollateral extends BaseContract {
     "OracleUpdated(address)"(newAddr?: null): OracleUpdatedEventFilter;
     OracleUpdated(newAddr?: null): OracleUpdatedEventFilter;
 
-    "OrderBookLiquidationMultiplierUpdated(uint256,uint256)"(
-      oldVal?: PromiseOrValue<BigNumberish> | null,
-      newVal?: PromiseOrValue<BigNumberish> | null
-    ): OrderBookLiquidationMultiplierUpdatedEventFilter;
-    OrderBookLiquidationMultiplierUpdated(
-      oldVal?: PromiseOrValue<BigNumberish> | null,
-      newVal?: PromiseOrValue<BigNumberish> | null
-    ): OrderBookLiquidationMultiplierUpdatedEventFilter;
-
     "OwnershipTransferred(address,address)"(
       previousOwner?: PromiseOrValue<string> | null,
       newOwner?: PromiseOrValue<string> | null
@@ -3925,13 +3204,13 @@ export interface SGLCollateral extends BaseContract {
 
     "PausedUpdated(uint8,bool,bool)"(
       _type?: PromiseOrValue<BigNumberish> | null,
-      oldState?: PromiseOrValue<boolean> | null,
-      newState?: PromiseOrValue<boolean> | null
+      oldState?: null,
+      newState?: null
     ): PausedUpdatedEventFilter;
     PausedUpdated(
       _type?: PromiseOrValue<BigNumberish> | null,
-      oldState?: PromiseOrValue<boolean> | null,
-      newState?: PromiseOrValue<boolean> | null
+      oldState?: null,
+      newState?: null
     ): PausedUpdatedEventFilter;
 
     "Transfer(address,address,uint256)"(
@@ -3945,21 +3224,11 @@ export interface SGLCollateral extends BaseContract {
       value?: null
     ): TransferEventFilter;
 
-    "UsdoSwapperUpdated(address)"(
-      newAddress?: PromiseOrValue<string> | null
-    ): UsdoSwapperUpdatedEventFilter;
-    UsdoSwapperUpdated(
-      newAddress?: PromiseOrValue<string> | null
-    ): UsdoSwapperUpdatedEventFilter;
-
     "ValueUpdated(uint256,uint256)"(
-      valType?: PromiseOrValue<BigNumberish> | null,
-      _newVal?: PromiseOrValue<BigNumberish> | null
+      valType?: null,
+      _newVal?: null
     ): ValueUpdatedEventFilter;
-    ValueUpdated(
-      valType?: PromiseOrValue<BigNumberish> | null,
-      _newVal?: PromiseOrValue<BigNumberish> | null
-    ): ValueUpdatedEventFilter;
+    ValueUpdated(valType?: null, _newVal?: null): ValueUpdatedEventFilter;
   };
 
   estimateGas: {
@@ -4045,14 +3314,6 @@ export interface SGLCollateral extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    asset(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "asset()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    assetId(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "assetId()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     balanceOf(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -4066,26 +3327,6 @@ export interface SGLCollateral extends BaseContract {
     borrowOpeningFee(overrides?: CallOverrides): Promise<BigNumber>;
 
     "borrowOpeningFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    claimOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "claimOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    collateral(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "collateral()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    collateralId(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "collateralId()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    collateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "collateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     computeClosingFactor(
       borrowPart: PromiseOrValue<BigNumberish>,
@@ -4125,10 +3366,6 @@ export interface SGLCollateral extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    conservator(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "conservator()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     decimals(overrides?: CallOverrides): Promise<BigNumber>;
 
     "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -4136,14 +3373,6 @@ export interface SGLCollateral extends BaseContract {
     eip712Domain(overrides?: CallOverrides): Promise<BigNumber>;
 
     "eip712Domain()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "exchangeRate()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    fullUtilizationMinusMax(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "fullUtilizationMinusMax()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     getInterestDetails(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -4153,33 +3382,9 @@ export interface SGLCollateral extends BaseContract {
 
     "interestElasticity()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    leverageExecutor(overrides?: CallOverrides): Promise<BigNumber>;
+    interestHelper(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "leverageExecutor()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    liquidationBonusAmount(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "liquidationBonusAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    liquidationCollateralizationRate(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "liquidationCollateralizationRate()"(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    liquidationMultiplier(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "liquidationMultiplier()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    lqCollateralizationRate(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "lqCollateralizationRate()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    maxLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "maxLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "interestHelper()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     maximumInterestPerSecond(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -4188,10 +3393,6 @@ export interface SGLCollateral extends BaseContract {
     maximumTargetUtilization(overrides?: CallOverrides): Promise<BigNumber>;
 
     "maximumTargetUtilization()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    minLiquidatorReward(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "minLiquidatorReward()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     minimumInterestPerSecond(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -4215,35 +3416,45 @@ export interface SGLCollateral extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    oracle(overrides?: CallOverrides): Promise<BigNumber>;
+    onERC1155BatchReceived(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    "oracle()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    oracleData(overrides?: CallOverrides): Promise<BigNumber>;
+    onERC1155Received(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    "oracleData()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "onERC1155Received(address,address,uint256,uint256,bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    pauseOptions(
-      pauseProp: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "pauseOptions(uint8)"(
-      pauseProp: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "pendingOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    penrose(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "penrose()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     permit(
       owner: PromiseOrValue<string>,
@@ -4289,18 +3500,6 @@ export interface SGLCollateral extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    protocolFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "protocolFee()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    rateTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "rateTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    rateValidDuration(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "rateValidDuration()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     removeCollateral(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
@@ -4315,6 +3514,14 @@ export interface SGLCollateral extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     setLeverageExecutor(
       _executor: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -4322,6 +3529,16 @@ export interface SGLCollateral extends BaseContract {
 
     "setLeverageExecutor(address)"(
       _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setLiquidationMaxSlippage(
+      _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setLiquidationMaxSlippage(uint256)"(
+      _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4359,6 +3576,16 @@ export interface SGLCollateral extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     symbol(overrides?: CallOverrides): Promise<BigNumber>;
 
     "symbol()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -4366,18 +3593,6 @@ export interface SGLCollateral extends BaseContract {
     totalAsset(overrides?: CallOverrides): Promise<BigNumber>;
 
     "totalAsset()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    totalBorrow(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "totalBorrow()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    totalBorrowCap(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "totalBorrowCap()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    totalCollateralShare(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "totalCollateralShare()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -4411,15 +3626,11 @@ export interface SGLCollateral extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "transferOwnership(address,bool,bool)"(
+    "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -4430,30 +3641,6 @@ export interface SGLCollateral extends BaseContract {
     "updateExchangeRate()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
-
-    userBorrowPart(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "userBorrowPart(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    userCollateralShare(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "userCollateralShare(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    yieldBox(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "yieldBox()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -4541,14 +3728,6 @@ export interface SGLCollateral extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    asset(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "asset()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    assetId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "assetId()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     balanceOf(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -4562,30 +3741,6 @@ export interface SGLCollateral extends BaseContract {
     borrowOpeningFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "borrowOpeningFee()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    claimOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "claimOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    collateral(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "collateral()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    collateralId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "collateralId()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    collateralizationRate(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "collateralizationRate()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -4627,10 +3782,6 @@ export interface SGLCollateral extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    conservator(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "conservator()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -4638,18 +3789,6 @@ export interface SGLCollateral extends BaseContract {
     eip712Domain(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "eip712Domain()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    exchangeRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "exchangeRate()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    fullUtilizationMinusMax(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "fullUtilizationMinusMax()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
 
     getInterestDetails(
       overrides?: CallOverrides
@@ -4667,49 +3806,9 @@ export interface SGLCollateral extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    leverageExecutor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    interestHelper(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "leverageExecutor()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    liquidationBonusAmount(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "liquidationBonusAmount()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    liquidationCollateralizationRate(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "liquidationCollateralizationRate()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    liquidationMultiplier(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "liquidationMultiplier()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    lqCollateralizationRate(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "lqCollateralizationRate()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    maxLiquidatorReward(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "maxLiquidatorReward()"(
+    "interestHelper()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -4726,14 +3825,6 @@ export interface SGLCollateral extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "maximumTargetUtilization()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    minLiquidatorReward(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "minLiquidatorReward()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -4767,35 +3858,45 @@ export interface SGLCollateral extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    oracle(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    onERC1155BatchReceived(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    "oracle()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    oracleData(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    onERC1155Received(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    "oracleData()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "onERC1155Received(address,address,uint256,uint256,bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    pauseOptions(
-      pauseProp: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "pauseOptions(uint8)"(
-      pauseProp: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "pendingOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    penrose(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "penrose()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     permit(
       owner: PromiseOrValue<string>,
@@ -4841,20 +3942,6 @@ export interface SGLCollateral extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    protocolFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "protocolFee()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    rateTimestamp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "rateTimestamp()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    rateValidDuration(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "rateValidDuration()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     removeCollateral(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
@@ -4869,6 +3956,14 @@ export interface SGLCollateral extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     setLeverageExecutor(
       _executor: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -4876,6 +3971,16 @@ export interface SGLCollateral extends BaseContract {
 
     "setLeverageExecutor(address)"(
       _executor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setLiquidationMaxSlippage(
+      _val: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setLiquidationMaxSlippage(uint256)"(
+      _val: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -4915,6 +4020,16 @@ export interface SGLCollateral extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "symbol()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -4922,24 +4037,6 @@ export interface SGLCollateral extends BaseContract {
     totalAsset(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "totalAsset()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    totalBorrow(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "totalBorrow()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    totalBorrowCap(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "totalBorrowCap()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    totalCollateralShare(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "totalCollateralShare()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
 
     totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -4973,15 +4070,11 @@ export interface SGLCollateral extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "transferOwnership(address,bool,bool)"(
+    "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -4992,29 +4085,5 @@ export interface SGLCollateral extends BaseContract {
     "updateExchangeRate()"(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
-
-    userBorrowPart(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "userBorrowPart(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    userCollateralShare(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "userCollateralShare(address)"(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    yieldBox(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "yieldBox()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

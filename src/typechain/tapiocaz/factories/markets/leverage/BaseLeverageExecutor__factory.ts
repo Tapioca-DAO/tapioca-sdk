@@ -12,6 +12,37 @@ import type {
 const _abi = [
   {
     inputs: [],
+    name: "AddressNotValid",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "expected",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "received",
+        type: "uint256",
+      },
+    ],
+    name: "MinAmountNotValid",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "NativeNotSupported",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "SenderNotValid",
+    type: "error",
+  },
+  {
+    inputs: [],
     name: "SwapperNotAuthorized",
     type: "error",
   },
@@ -19,6 +50,30 @@ const _abi = [
     inputs: [],
     name: "SwapperNotValid",
     type: "error",
+  },
+  {
+    inputs: [],
+    name: "TokenNotValid",
+    type: "error",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "oldAddr",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newAddr",
+        type: "address",
+      },
+    ],
+    name: "AddressUpdated",
+    type: "event",
   },
   {
     anonymous: false,
@@ -40,42 +95,6 @@ const _abi = [
     type: "event",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "tokenIn",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "tokenOut",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "amountIn",
-        type: "uint256",
-      },
-    ],
-    name: "buildSwapDefaultData",
-    outputs: [
-      {
-        internalType: "bytes",
-        name: "",
-        type: "bytes",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "claimOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
     inputs: [],
     name: "cluster",
     outputs: [
@@ -91,9 +110,9 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "assetId",
-        type: "uint256",
+        internalType: "address",
+        name: "refundDustAddress",
+        type: "address",
       },
       {
         internalType: "address",
@@ -109,11 +128,6 @@ const _abi = [
         internalType: "uint256",
         name: "collateralAmountIn",
         type: "uint256",
-      },
-      {
-        internalType: "address",
-        name: "from",
-        type: "address",
       },
       {
         internalType: "bytes",
@@ -135,9 +149,9 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "collateralId",
-        type: "uint256",
+        internalType: "address",
+        name: "refundDustAddress",
+        type: "address",
       },
       {
         internalType: "address",
@@ -153,11 +167,6 @@ const _abi = [
         internalType: "uint256",
         name: "assetAmountIn",
         type: "uint256",
-      },
-      {
-        internalType: "address",
-        name: "from",
-        type: "address",
       },
       {
         internalType: "bytes",
@@ -191,15 +200,9 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "pendingOwner",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
+    name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -218,7 +221,7 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "contract ISwapper",
+        internalType: "contract IZeroXSwapper",
         name: "_swapper",
         type: "address",
       },
@@ -229,11 +232,24 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_weth",
+        type: "address",
+      },
+    ],
+    name: "setWeth",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "swapper",
     outputs: [
       {
-        internalType: "contract ISwapper",
+        internalType: "contract IZeroXSwapper",
         name: "",
         type: "address",
       },
@@ -248,16 +264,6 @@ const _abi = [
         name: "newOwner",
         type: "address",
       },
-      {
-        internalType: "bool",
-        name: "direct",
-        type: "bool",
-      },
-      {
-        internalType: "bool",
-        name: "renounce",
-        type: "bool",
-      },
     ],
     name: "transferOwnership",
     outputs: [],
@@ -266,16 +272,20 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "yieldBox",
+    name: "weth",
     outputs: [
       {
-        internalType: "contract IYieldBox",
+        internalType: "contract IWeth9",
         name: "",
         type: "address",
       },
     ],
     stateMutability: "view",
     type: "function",
+  },
+  {
+    stateMutability: "payable",
+    type: "receive",
   },
 ] as const;
 

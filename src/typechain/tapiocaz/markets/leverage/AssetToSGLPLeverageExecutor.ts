@@ -30,129 +30,103 @@ import type {
 
 export interface AssetToSGLPLeverageExecutorInterface extends utils.Interface {
   functions: {
-    "buildSwapDefaultData(address,address,uint256)": FunctionFragment;
-    "claimOwnership()": FunctionFragment;
     "cluster()": FunctionFragment;
-    "getAsset(uint256,address,address,uint256,address,bytes)": FunctionFragment;
-    "getCollateral(uint256,address,address,uint256,address,bytes)": FunctionFragment;
+    "getAsset(address,address,address,uint256,bytes)": FunctionFragment;
+    "getCollateral(address,address,address,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
-    "pendingOwner()": FunctionFragment;
+    "paused()": FunctionFragment;
+    "renounceOwnership()": FunctionFragment;
     "setCluster(address)": FunctionFragment;
+    "setPause(bool)": FunctionFragment;
     "setSwapper(address)": FunctionFragment;
+    "setWeth(address)": FunctionFragment;
     "swapper()": FunctionFragment;
-    "transferOwnership(address,bool,bool)": FunctionFragment;
-    "usdc()": FunctionFragment;
-    "yieldBox()": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
+    "weth()": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "buildSwapDefaultData"
-      | "buildSwapDefaultData(address,address,uint256)"
-      | "claimOwnership"
-      | "claimOwnership()"
       | "cluster"
       | "cluster()"
       | "getAsset"
-      | "getAsset(uint256,address,address,uint256,address,bytes)"
+      | "getAsset(address,address,address,uint256,bytes)"
       | "getCollateral"
-      | "getCollateral(uint256,address,address,uint256,address,bytes)"
+      | "getCollateral(address,address,address,uint256,bytes)"
       | "owner"
       | "owner()"
-      | "pendingOwner"
-      | "pendingOwner()"
+      | "paused"
+      | "paused()"
+      | "renounceOwnership"
+      | "renounceOwnership()"
       | "setCluster"
       | "setCluster(address)"
+      | "setPause"
+      | "setPause(bool)"
       | "setSwapper"
       | "setSwapper(address)"
+      | "setWeth"
+      | "setWeth(address)"
       | "swapper"
       | "swapper()"
       | "transferOwnership"
-      | "transferOwnership(address,bool,bool)"
-      | "usdc"
-      | "usdc()"
-      | "yieldBox"
-      | "yieldBox()"
+      | "transferOwnership(address)"
+      | "weth"
+      | "weth()"
   ): FunctionFragment;
 
-  encodeFunctionData(
-    functionFragment: "buildSwapDefaultData",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "buildSwapDefaultData(address,address,uint256)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "claimOwnership",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "claimOwnership()",
-    values?: undefined
-  ): string;
   encodeFunctionData(functionFragment: "cluster", values?: undefined): string;
   encodeFunctionData(functionFragment: "cluster()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "getAsset",
     values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "getAsset(uint256,address,address,uint256,address,bytes)",
+    functionFragment: "getAsset(address,address,address,uint256,bytes)",
     values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "getCollateral",
     values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "getCollateral(uint256,address,address,uint256,address,bytes)",
+    functionFragment: "getCollateral(address,address,address,uint256,bytes)",
     values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "paused", values?: undefined): string;
+  encodeFunctionData(functionFragment: "paused()", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "pendingOwner",
+    functionFragment: "renounceOwnership",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "pendingOwner()",
+    functionFragment: "renounceOwnership()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -164,6 +138,14 @@ export interface AssetToSGLPLeverageExecutorInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "setPause",
+    values: [PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setPause(bool)",
+    values: [PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "setSwapper",
     values: [PromiseOrValue<string>]
   ): string;
@@ -171,53 +153,32 @@ export interface AssetToSGLPLeverageExecutorInterface extends utils.Interface {
     functionFragment: "setSwapper(address)",
     values: [PromiseOrValue<string>]
   ): string;
+  encodeFunctionData(
+    functionFragment: "setWeth",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setWeth(address)",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(functionFragment: "swapper", values?: undefined): string;
   encodeFunctionData(functionFragment: "swapper()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<boolean>
-    ]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "transferOwnership(address,bool,bool)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<boolean>
-    ]
+    functionFragment: "transferOwnership(address)",
+    values: [PromiseOrValue<string>]
   ): string;
-  encodeFunctionData(functionFragment: "usdc", values?: undefined): string;
-  encodeFunctionData(functionFragment: "usdc()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "yieldBox", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "yieldBox()",
-    values?: undefined
-  ): string;
+  encodeFunctionData(functionFragment: "weth", values?: undefined): string;
+  encodeFunctionData(functionFragment: "weth()", values?: undefined): string;
 
-  decodeFunctionResult(
-    functionFragment: "buildSwapDefaultData",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "buildSwapDefaultData(address,address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "claimOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "claimOwnership()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "cluster", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "cluster()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getAsset", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "getAsset(uint256,address,address,uint256,address,bytes)",
+    functionFragment: "getAsset(address,address,address,uint256,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -225,17 +186,19 @@ export interface AssetToSGLPLeverageExecutorInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getCollateral(uint256,address,address,uint256,address,bytes)",
+    functionFragment: "getCollateral(address,address,address,uint256,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "paused()", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "pendingOwner",
+    functionFragment: "renounceOwnership",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "pendingOwner()",
+    functionFragment: "renounceOwnership()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "setCluster", data: BytesLike): Result;
@@ -243,9 +206,19 @@ export interface AssetToSGLPLeverageExecutorInterface extends utils.Interface {
     functionFragment: "setCluster(address)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "setPause", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setPause(bool)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "setSwapper", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setSwapper(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "setWeth", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setWeth(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "swapper", data: BytesLike): Result;
@@ -255,23 +228,43 @@ export interface AssetToSGLPLeverageExecutorInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "transferOwnership(address,bool,bool)",
+    functionFragment: "transferOwnership(address)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "usdc", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "usdc()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "yieldBox", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "yieldBox()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "weth", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "weth()", data: BytesLike): Result;
 
   events: {
+    "AddressUpdated(address,address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
+    "Paused(address)": EventFragment;
+    "Unpaused(address)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "AddressUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "AddressUpdated(address,address)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "OwnershipTransferred(address,address)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Paused"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Paused(address)"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Unpaused"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Unpaused(address)"): EventFragment;
 }
+
+export interface AddressUpdatedEventObject {
+  oldAddr: string;
+  newAddr: string;
+}
+export type AddressUpdatedEvent = TypedEvent<
+  [string, string],
+  AddressUpdatedEventObject
+>;
+
+export type AddressUpdatedEventFilter = TypedEventFilter<AddressUpdatedEvent>;
 
 export interface OwnershipTransferredEventObject {
   previousOwner: string;
@@ -284,6 +277,20 @@ export type OwnershipTransferredEvent = TypedEvent<
 
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
+
+export interface PausedEventObject {
+  account: string;
+}
+export type PausedEvent = TypedEvent<[string], PausedEventObject>;
+
+export type PausedEventFilter = TypedEventFilter<PausedEvent>;
+
+export interface UnpausedEventObject {
+  account: string;
+}
+export type UnpausedEvent = TypedEvent<[string], UnpausedEventObject>;
+
+export type UnpausedEventFilter = TypedEventFilter<UnpausedEvent>;
 
 export interface AssetToSGLPLeverageExecutor extends BaseContract {
   contractName: "AssetToSGLPLeverageExecutor";
@@ -314,68 +321,42 @@ export interface AssetToSGLPLeverageExecutor extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    buildSwapDefaultData(
-      tokenIn: PromiseOrValue<string>,
-      tokenOut: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    "buildSwapDefaultData(address,address,uint256)"(
-      tokenIn: PromiseOrValue<string>,
-      tokenOut: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    claimOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "claimOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     cluster(overrides?: CallOverrides): Promise<[string]>;
 
     "cluster()"(overrides?: CallOverrides): Promise<[string]>;
 
     getAsset(
-      assetId: PromiseOrValue<BigNumberish>,
+      refundDustAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAmountIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "getAsset(uint256,address,address,uint256,address,bytes)"(
-      assetId: PromiseOrValue<BigNumberish>,
+    "getAsset(address,address,address,uint256,bytes)"(
+      refundDustAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAmountIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     getCollateral(
-      collateralId: PromiseOrValue<BigNumberish>,
+      refundDustAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAmountIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "getCollateral(uint256,address,address,uint256,address,bytes)"(
-      collateralId: PromiseOrValue<BigNumberish>,
+    "getCollateral(address,address,address,uint256,bytes)"(
+      refundDustAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAmountIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -384,9 +365,17 @@ export interface AssetToSGLPLeverageExecutor extends BaseContract {
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
 
-    pendingOwner(overrides?: CallOverrides): Promise<[string]>;
+    paused(overrides?: CallOverrides): Promise<[boolean]>;
 
-    "pendingOwner()"(overrides?: CallOverrides): Promise<[string]>;
+    "paused()"(overrides?: CallOverrides): Promise<[boolean]>;
+
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     setCluster(
       _cluster: PromiseOrValue<string>,
@@ -395,6 +384,16 @@ export interface AssetToSGLPLeverageExecutor extends BaseContract {
 
     "setCluster(address)"(
       _cluster: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setPause(
+      _pauseState: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setPause(bool)"(
+      _pauseState: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -408,95 +407,71 @@ export interface AssetToSGLPLeverageExecutor extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    setWeth(
+      _weth: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setWeth(address)"(
+      _weth: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     swapper(overrides?: CallOverrides): Promise<[string]>;
 
     "swapper()"(overrides?: CallOverrides): Promise<[string]>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "transferOwnership(address,bool,bool)"(
+    "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    usdc(overrides?: CallOverrides): Promise<[string]>;
+    weth(overrides?: CallOverrides): Promise<[string]>;
 
-    "usdc()"(overrides?: CallOverrides): Promise<[string]>;
-
-    yieldBox(overrides?: CallOverrides): Promise<[string]>;
-
-    "yieldBox()"(overrides?: CallOverrides): Promise<[string]>;
+    "weth()"(overrides?: CallOverrides): Promise<[string]>;
   };
-
-  buildSwapDefaultData(
-    tokenIn: PromiseOrValue<string>,
-    tokenOut: PromiseOrValue<string>,
-    amountIn: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  "buildSwapDefaultData(address,address,uint256)"(
-    tokenIn: PromiseOrValue<string>,
-    tokenOut: PromiseOrValue<string>,
-    amountIn: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  claimOwnership(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "claimOwnership()"(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
 
   cluster(overrides?: CallOverrides): Promise<string>;
 
   "cluster()"(overrides?: CallOverrides): Promise<string>;
 
   getAsset(
-    assetId: PromiseOrValue<BigNumberish>,
+    refundDustAddress: PromiseOrValue<string>,
     collateralAddress: PromiseOrValue<string>,
     assetAddress: PromiseOrValue<string>,
     collateralAmountIn: PromiseOrValue<BigNumberish>,
-    to: PromiseOrValue<string>,
     data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "getAsset(uint256,address,address,uint256,address,bytes)"(
-    assetId: PromiseOrValue<BigNumberish>,
+  "getAsset(address,address,address,uint256,bytes)"(
+    refundDustAddress: PromiseOrValue<string>,
     collateralAddress: PromiseOrValue<string>,
     assetAddress: PromiseOrValue<string>,
     collateralAmountIn: PromiseOrValue<BigNumberish>,
-    to: PromiseOrValue<string>,
     data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   getCollateral(
-    collateralId: PromiseOrValue<BigNumberish>,
+    refundDustAddress: PromiseOrValue<string>,
     assetAddress: PromiseOrValue<string>,
     collateralAddress: PromiseOrValue<string>,
     assetAmountIn: PromiseOrValue<BigNumberish>,
-    to: PromiseOrValue<string>,
     data: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "getCollateral(uint256,address,address,uint256,address,bytes)"(
-    collateralId: PromiseOrValue<BigNumberish>,
+  "getCollateral(address,address,address,uint256,bytes)"(
+    refundDustAddress: PromiseOrValue<string>,
     assetAddress: PromiseOrValue<string>,
     collateralAddress: PromiseOrValue<string>,
     assetAmountIn: PromiseOrValue<BigNumberish>,
-    to: PromiseOrValue<string>,
     data: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -505,9 +480,17 @@ export interface AssetToSGLPLeverageExecutor extends BaseContract {
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
 
-  pendingOwner(overrides?: CallOverrides): Promise<string>;
+  paused(overrides?: CallOverrides): Promise<boolean>;
 
-  "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
+  "paused()"(overrides?: CallOverrides): Promise<boolean>;
+
+  renounceOwnership(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "renounceOwnership()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   setCluster(
     _cluster: PromiseOrValue<string>,
@@ -516,6 +499,16 @@ export interface AssetToSGLPLeverageExecutor extends BaseContract {
 
   "setCluster(address)"(
     _cluster: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setPause(
+    _pauseState: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setPause(bool)"(
+    _pauseState: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -529,91 +522,71 @@ export interface AssetToSGLPLeverageExecutor extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  setWeth(
+    _weth: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setWeth(address)"(
+    _weth: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   swapper(overrides?: CallOverrides): Promise<string>;
 
   "swapper()"(overrides?: CallOverrides): Promise<string>;
 
   transferOwnership(
     newOwner: PromiseOrValue<string>,
-    direct: PromiseOrValue<boolean>,
-    renounce: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "transferOwnership(address,bool,bool)"(
+  "transferOwnership(address)"(
     newOwner: PromiseOrValue<string>,
-    direct: PromiseOrValue<boolean>,
-    renounce: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  usdc(overrides?: CallOverrides): Promise<string>;
+  weth(overrides?: CallOverrides): Promise<string>;
 
-  "usdc()"(overrides?: CallOverrides): Promise<string>;
-
-  yieldBox(overrides?: CallOverrides): Promise<string>;
-
-  "yieldBox()"(overrides?: CallOverrides): Promise<string>;
+  "weth()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
-    buildSwapDefaultData(
-      tokenIn: PromiseOrValue<string>,
-      tokenOut: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    "buildSwapDefaultData(address,address,uint256)"(
-      tokenIn: PromiseOrValue<string>,
-      tokenOut: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    claimOwnership(overrides?: CallOverrides): Promise<void>;
-
-    "claimOwnership()"(overrides?: CallOverrides): Promise<void>;
-
     cluster(overrides?: CallOverrides): Promise<string>;
 
     "cluster()"(overrides?: CallOverrides): Promise<string>;
 
     getAsset(
-      assetId: PromiseOrValue<BigNumberish>,
+      refundDustAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAmountIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "getAsset(uint256,address,address,uint256,address,bytes)"(
-      assetId: PromiseOrValue<BigNumberish>,
+    "getAsset(address,address,address,uint256,bytes)"(
+      refundDustAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAmountIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getCollateral(
-      collateralId: PromiseOrValue<BigNumberish>,
+      refundDustAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAmountIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "getCollateral(uint256,address,address,uint256,address,bytes)"(
-      collateralId: PromiseOrValue<BigNumberish>,
+    "getCollateral(address,address,address,uint256,bytes)"(
+      refundDustAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAmountIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -622,9 +595,13 @@ export interface AssetToSGLPLeverageExecutor extends BaseContract {
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
 
-    pendingOwner(overrides?: CallOverrides): Promise<string>;
+    paused(overrides?: CallOverrides): Promise<boolean>;
 
-    "pendingOwner()"(overrides?: CallOverrides): Promise<string>;
+    "paused()"(overrides?: CallOverrides): Promise<boolean>;
+
+    renounceOwnership(overrides?: CallOverrides): Promise<void>;
+
+    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
 
     setCluster(
       _cluster: PromiseOrValue<string>,
@@ -636,6 +613,16 @@ export interface AssetToSGLPLeverageExecutor extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setPause(
+      _pauseState: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setPause(bool)"(
+      _pauseState: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     setSwapper(
       _swapper: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -643,6 +630,16 @@ export interface AssetToSGLPLeverageExecutor extends BaseContract {
 
     "setSwapper(address)"(
       _swapper: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setWeth(
+      _weth: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setWeth(address)"(
+      _weth: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -652,28 +649,29 @@ export interface AssetToSGLPLeverageExecutor extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "transferOwnership(address,bool,bool)"(
+    "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    usdc(overrides?: CallOverrides): Promise<string>;
+    weth(overrides?: CallOverrides): Promise<string>;
 
-    "usdc()"(overrides?: CallOverrides): Promise<string>;
-
-    yieldBox(overrides?: CallOverrides): Promise<string>;
-
-    "yieldBox()"(overrides?: CallOverrides): Promise<string>;
+    "weth()"(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
+    "AddressUpdated(address,address)"(
+      oldAddr?: PromiseOrValue<string> | null,
+      newAddr?: PromiseOrValue<string> | null
+    ): AddressUpdatedEventFilter;
+    AddressUpdated(
+      oldAddr?: PromiseOrValue<string> | null,
+      newAddr?: PromiseOrValue<string> | null
+    ): AddressUpdatedEventFilter;
+
     "OwnershipTransferred(address,address)"(
       previousOwner?: PromiseOrValue<string> | null,
       newOwner?: PromiseOrValue<string> | null
@@ -682,71 +680,51 @@ export interface AssetToSGLPLeverageExecutor extends BaseContract {
       previousOwner?: PromiseOrValue<string> | null,
       newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
+
+    "Paused(address)"(account?: null): PausedEventFilter;
+    Paused(account?: null): PausedEventFilter;
+
+    "Unpaused(address)"(account?: null): UnpausedEventFilter;
+    Unpaused(account?: null): UnpausedEventFilter;
   };
 
   estimateGas: {
-    buildSwapDefaultData(
-      tokenIn: PromiseOrValue<string>,
-      tokenOut: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "buildSwapDefaultData(address,address,uint256)"(
-      tokenIn: PromiseOrValue<string>,
-      tokenOut: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    claimOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "claimOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     cluster(overrides?: CallOverrides): Promise<BigNumber>;
 
     "cluster()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     getAsset(
-      assetId: PromiseOrValue<BigNumberish>,
+      refundDustAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAmountIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "getAsset(uint256,address,address,uint256,address,bytes)"(
-      assetId: PromiseOrValue<BigNumberish>,
+    "getAsset(address,address,address,uint256,bytes)"(
+      refundDustAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAmountIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getCollateral(
-      collateralId: PromiseOrValue<BigNumberish>,
+      refundDustAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAmountIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "getCollateral(uint256,address,address,uint256,address,bytes)"(
-      collateralId: PromiseOrValue<BigNumberish>,
+    "getCollateral(address,address,address,uint256,bytes)"(
+      refundDustAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAmountIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -755,9 +733,17 @@ export interface AssetToSGLPLeverageExecutor extends BaseContract {
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
+    paused(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "pendingOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "paused()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     setCluster(
       _cluster: PromiseOrValue<string>,
@@ -769,6 +755,16 @@ export interface AssetToSGLPLeverageExecutor extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    setPause(
+      _pauseState: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setPause(bool)"(
+      _pauseState: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     setSwapper(
       _swapper: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -776,6 +772,16 @@ export interface AssetToSGLPLeverageExecutor extends BaseContract {
 
     "setSwapper(address)"(
       _swapper: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setWeth(
+      _weth: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setWeth(address)"(
+      _weth: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -785,90 +791,56 @@ export interface AssetToSGLPLeverageExecutor extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "transferOwnership(address,bool,bool)"(
+    "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    usdc(overrides?: CallOverrides): Promise<BigNumber>;
+    weth(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "usdc()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    yieldBox(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "yieldBox()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "weth()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    buildSwapDefaultData(
-      tokenIn: PromiseOrValue<string>,
-      tokenOut: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "buildSwapDefaultData(address,address,uint256)"(
-      tokenIn: PromiseOrValue<string>,
-      tokenOut: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    claimOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "claimOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     cluster(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "cluster()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getAsset(
-      assetId: PromiseOrValue<BigNumberish>,
+      refundDustAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAmountIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "getAsset(uint256,address,address,uint256,address,bytes)"(
-      assetId: PromiseOrValue<BigNumberish>,
+    "getAsset(address,address,address,uint256,bytes)"(
+      refundDustAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAmountIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getCollateral(
-      collateralId: PromiseOrValue<BigNumberish>,
+      refundDustAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAmountIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "getCollateral(uint256,address,address,uint256,address,bytes)"(
-      collateralId: PromiseOrValue<BigNumberish>,
+    "getCollateral(address,address,address,uint256,bytes)"(
+      refundDustAddress: PromiseOrValue<string>,
       assetAddress: PromiseOrValue<string>,
       collateralAddress: PromiseOrValue<string>,
       assetAmountIn: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
       data: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -877,9 +849,17 @@ export interface AssetToSGLPLeverageExecutor extends BaseContract {
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    paused(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "pendingOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "paused()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "renounceOwnership()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     setCluster(
       _cluster: PromiseOrValue<string>,
@@ -888,6 +868,16 @@ export interface AssetToSGLPLeverageExecutor extends BaseContract {
 
     "setCluster(address)"(
       _cluster: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setPause(
+      _pauseState: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setPause(bool)"(
+      _pauseState: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -901,30 +891,32 @@ export interface AssetToSGLPLeverageExecutor extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    setWeth(
+      _weth: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setWeth(address)"(
+      _weth: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     swapper(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "swapper()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "transferOwnership(address,bool,bool)"(
+    "transferOwnership(address)"(
       newOwner: PromiseOrValue<string>,
-      direct: PromiseOrValue<boolean>,
-      renounce: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    usdc(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    weth(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "usdc()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    yieldBox(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "yieldBox()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "weth()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

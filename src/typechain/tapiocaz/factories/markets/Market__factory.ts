@@ -9,6 +9,16 @@ import type { Market, MarketInterface } from "../../markets/Market";
 const _abi = [
   {
     inputs: [],
+    name: "AllowanceNotValid",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "ExchangeRateNotValid",
+    type: "error",
+  },
+  {
+    inputs: [],
     name: "InvalidShortString",
     type: "error",
   },
@@ -77,13 +87,13 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: true,
+        indexed: false,
         internalType: "address",
         name: "old",
         type: "address",
       },
       {
-        indexed: true,
+        indexed: false,
         internalType: "address",
         name: "_new",
         type: "address",
@@ -121,13 +131,13 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: true,
+        indexed: false,
         internalType: "address",
         name: "oldVal",
         type: "address",
       },
       {
-        indexed: true,
+        indexed: false,
         internalType: "address",
         name: "newVal",
         type: "address",
@@ -146,13 +156,13 @@ const _abi = [
         type: "address",
       },
       {
-        indexed: true,
+        indexed: false,
         internalType: "address[]",
         name: "users",
         type: "address[]",
       },
       {
-        indexed: true,
+        indexed: false,
         internalType: "uint256",
         name: "liquidatorReward",
         type: "uint256",
@@ -183,13 +193,32 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: true,
+        indexed: false,
         internalType: "uint256",
         name: "oldVal",
         type: "uint256",
       },
       {
-        indexed: true,
+        indexed: false,
+        internalType: "uint256",
+        name: "newVal",
+        type: "uint256",
+      },
+    ],
+    name: "LiquidationMaxSlippageUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "oldVal",
+        type: "uint256",
+      },
+      {
+        indexed: false,
         internalType: "uint256",
         name: "newVal",
         type: "uint256",
@@ -202,13 +231,13 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: true,
+        indexed: false,
         internalType: "uint256",
         name: "_oldVal",
         type: "uint256",
       },
       {
-        indexed: true,
+        indexed: false,
         internalType: "uint256",
         name: "_newVal",
         type: "uint256",
@@ -221,7 +250,7 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: true,
+        indexed: false,
         internalType: "uint256",
         name: "rate",
         type: "uint256",
@@ -278,13 +307,13 @@ const _abi = [
         type: "uint8",
       },
       {
-        indexed: true,
+        indexed: false,
         internalType: "bool",
         name: "oldState",
         type: "bool",
       },
       {
-        indexed: true,
+        indexed: false,
         internalType: "bool",
         name: "newState",
         type: "bool",
@@ -322,13 +351,13 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: true,
+        indexed: false,
         internalType: "uint256",
         name: "valType",
         type: "uint256",
       },
       {
-        indexed: true,
+        indexed: false,
         internalType: "uint256",
         name: "_newVal",
         type: "uint256",
@@ -447,32 +476,6 @@ const _abi = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "asset",
-    outputs: [
-      {
-        internalType: "contract IERC20",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "assetId",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [
       {
         internalType: "address",
@@ -481,52 +484,6 @@ const _abi = [
       },
     ],
     name: "balanceOf",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "claimOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "collateral",
-    outputs: [
-      {
-        internalType: "contract IERC20",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "collateralId",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "collateralizationRate",
     outputs: [
       {
         internalType: "uint256",
@@ -626,19 +583,6 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "conservator",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
     name: "eip712Domain",
     outputs: [
       {
@@ -681,97 +625,6 @@ const _abi = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "exchangeRate",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "leverageExecutor",
-    outputs: [
-      {
-        internalType: "contract ILeverageExecutor",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "liquidationBonusAmount",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "liquidationCollateralizationRate",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "liquidationMultiplier",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "maxLiquidatorReward",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "minLiquidatorReward",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [
       {
         internalType: "address",
@@ -791,29 +644,81 @@ const _abi = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "oracle",
-    outputs: [
+    inputs: [
       {
-        internalType: "contract ITapiocaOracle",
+        internalType: "address",
         name: "",
         type: "address",
       },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "oracleData",
-    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
+        internalType: "uint256[]",
+        name: "",
+        type: "uint256[]",
+      },
+      {
+        internalType: "uint256[]",
+        name: "",
+        type: "uint256[]",
+      },
       {
         internalType: "bytes",
         name: "",
         type: "bytes",
       },
     ],
-    stateMutability: "view",
+    name: "onERC1155BatchReceived",
+    outputs: [
+      {
+        internalType: "bytes4",
+        name: "",
+        type: "bytes4",
+      },
+    ],
+    stateMutability: "pure",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+      {
+        internalType: "bytes",
+        name: "",
+        type: "bytes",
+      },
+    ],
+    name: "onERC1155Received",
+    outputs: [
+      {
+        internalType: "bytes4",
+        name: "",
+        type: "bytes4",
+      },
+    ],
+    stateMutability: "pure",
     type: "function",
   },
   {
@@ -822,51 +727,6 @@ const _abi = [
     outputs: [
       {
         internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "enum Market.PauseType",
-        name: "pauseProp",
-        type: "uint8",
-      },
-    ],
-    name: "pauseOptions",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "pauseStatus",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "pendingOwner",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "penrose",
-    outputs: [
-      {
-        internalType: "contract IPenrose",
         name: "",
         type: "address",
       },
@@ -962,41 +822,9 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "protocolFee",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "rateTimestamp",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "rateValidDuration",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
+    name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -1008,6 +836,19 @@ const _abi = [
       },
     ],
     name: "setLeverageExecutor",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_val",
+        type: "uint256",
+      },
+    ],
+    name: "setLiquidationMaxSlippage",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -1071,47 +912,22 @@ const _abi = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "totalBorrow",
-    outputs: [
+    inputs: [
       {
-        internalType: "uint128",
-        name: "elastic",
-        type: "uint128",
-      },
-      {
-        internalType: "uint128",
-        name: "base",
-        type: "uint128",
+        internalType: "bytes4",
+        name: "interfaceId",
+        type: "bytes4",
       },
     ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "totalBorrowCap",
+    name: "supportsInterface",
     outputs: [
       {
-        internalType: "uint256",
+        internalType: "bool",
         name: "",
-        type: "uint256",
+        type: "bool",
       },
     ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "totalCollateralShare",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
+    stateMutability: "pure",
     type: "function",
   },
   {
@@ -1187,16 +1003,6 @@ const _abi = [
         name: "newOwner",
         type: "address",
       },
-      {
-        internalType: "bool",
-        name: "direct",
-        type: "bool",
-      },
-      {
-        internalType: "bool",
-        name: "renounce",
-        type: "bool",
-      },
     ],
     name: "transferOwnership",
     outputs: [],
@@ -1219,57 +1025,6 @@ const _abi = [
       },
     ],
     stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    name: "userBorrowPart",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    name: "userCollateralShare",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "yieldBox",
-    outputs: [
-      {
-        internalType: "contract IYieldBox",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
     type: "function",
   },
 ] as const;

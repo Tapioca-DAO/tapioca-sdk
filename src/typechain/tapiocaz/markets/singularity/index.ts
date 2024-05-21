@@ -4,6 +4,7 @@
 export type { SGLBorrow } from "./SGLBorrow";
 export type { SGLCollateral } from "./SGLCollateral";
 export type { SGLCommon } from "./SGLCommon";
+export type { SGLInterestHelper } from "./SGLInterestHelper";
 export type { SGLLendingCommon } from "./SGLLendingCommon";
 export type { SGLLeverage } from "./SGLLeverage";
 export type { SGLLiquidation } from "./SGLLiquidation";
