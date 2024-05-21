@@ -47,10 +47,8 @@ export declare namespace IZeroXSwapper {
 export interface ZeroXSwapperInterface extends utils.Interface {
   functions: {
     "cluster()": FunctionFragment;
-    "isOneInchEnabled()": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setIsOneInchEnabled(bool)": FunctionFragment;
     "swap((address,address,address,bytes),uint256,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "zeroXProxy()": FunctionFragment;
@@ -60,14 +58,10 @@ export interface ZeroXSwapperInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "cluster"
       | "cluster()"
-      | "isOneInchEnabled"
-      | "isOneInchEnabled()"
       | "owner"
       | "owner()"
       | "renounceOwnership"
       | "renounceOwnership()"
-      | "setIsOneInchEnabled"
-      | "setIsOneInchEnabled(bool)"
       | "swap"
       | "swap((address,address,address,bytes),uint256,uint256)"
       | "transferOwnership"
@@ -78,14 +72,6 @@ export interface ZeroXSwapperInterface extends utils.Interface {
 
   encodeFunctionData(functionFragment: "cluster", values?: undefined): string;
   encodeFunctionData(functionFragment: "cluster()", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "isOneInchEnabled",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isOneInchEnabled()",
-    values?: undefined
-  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner()", values?: undefined): string;
   encodeFunctionData(
@@ -95,14 +81,6 @@ export interface ZeroXSwapperInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "renounceOwnership()",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setIsOneInchEnabled",
-    values: [PromiseOrValue<boolean>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setIsOneInchEnabled(bool)",
-    values: [PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "swap",
@@ -139,14 +117,6 @@ export interface ZeroXSwapperInterface extends utils.Interface {
 
   decodeFunctionResult(functionFragment: "cluster", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "cluster()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "isOneInchEnabled",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isOneInchEnabled()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner()", data: BytesLike): Result;
   decodeFunctionResult(
@@ -155,14 +125,6 @@ export interface ZeroXSwapperInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setIsOneInchEnabled",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setIsOneInchEnabled(bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "swap", data: BytesLike): Result;
@@ -239,10 +201,6 @@ export interface ZeroXSwapper extends BaseContract {
 
     "cluster()"(overrides?: CallOverrides): Promise<[string]>;
 
-    isOneInchEnabled(overrides?: CallOverrides): Promise<[boolean]>;
-
-    "isOneInchEnabled()"(overrides?: CallOverrides): Promise<[boolean]>;
-
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
@@ -252,16 +210,6 @@ export interface ZeroXSwapper extends BaseContract {
     ): Promise<ContractTransaction>;
 
     "renounceOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setIsOneInchEnabled(
-      _isOneInchEnabled: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "setIsOneInchEnabled(bool)"(
-      _isOneInchEnabled: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -298,10 +246,6 @@ export interface ZeroXSwapper extends BaseContract {
 
   "cluster()"(overrides?: CallOverrides): Promise<string>;
 
-  isOneInchEnabled(overrides?: CallOverrides): Promise<boolean>;
-
-  "isOneInchEnabled()"(overrides?: CallOverrides): Promise<boolean>;
-
   owner(overrides?: CallOverrides): Promise<string>;
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -311,16 +255,6 @@ export interface ZeroXSwapper extends BaseContract {
   ): Promise<ContractTransaction>;
 
   "renounceOwnership()"(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setIsOneInchEnabled(
-    _isOneInchEnabled: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "setIsOneInchEnabled(bool)"(
-    _isOneInchEnabled: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -357,10 +291,6 @@ export interface ZeroXSwapper extends BaseContract {
 
     "cluster()"(overrides?: CallOverrides): Promise<string>;
 
-    isOneInchEnabled(overrides?: CallOverrides): Promise<boolean>;
-
-    "isOneInchEnabled()"(overrides?: CallOverrides): Promise<boolean>;
-
     owner(overrides?: CallOverrides): Promise<string>;
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -368,16 +298,6 @@ export interface ZeroXSwapper extends BaseContract {
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
     "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
-
-    setIsOneInchEnabled(
-      _isOneInchEnabled: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "setIsOneInchEnabled(bool)"(
-      _isOneInchEnabled: PromiseOrValue<boolean>,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     swap(
       swapData: IZeroXSwapper.SZeroXSwapDataStruct,
@@ -424,10 +344,6 @@ export interface ZeroXSwapper extends BaseContract {
 
     "cluster()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    isOneInchEnabled(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "isOneInchEnabled()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -437,16 +353,6 @@ export interface ZeroXSwapper extends BaseContract {
     ): Promise<BigNumber>;
 
     "renounceOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setIsOneInchEnabled(
-      _isOneInchEnabled: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "setIsOneInchEnabled(bool)"(
-      _isOneInchEnabled: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -484,12 +390,6 @@ export interface ZeroXSwapper extends BaseContract {
 
     "cluster()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    isOneInchEnabled(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "isOneInchEnabled()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -499,16 +399,6 @@ export interface ZeroXSwapper extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "renounceOwnership()"(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setIsOneInchEnabled(
-      _isOneInchEnabled: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setIsOneInchEnabled(bool)"(
-      _isOneInchEnabled: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

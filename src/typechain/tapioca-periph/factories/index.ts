@@ -3,4 +3,6 @@
 /* eslint-disable */
 export * as layerzerolabs from "./@layerzerolabs";
 export * as contracts from "./contracts";
+export * as tapiocaBar from "./tapioca-bar";
 export * as tapiocaPeriph from "./tapioca-periph";
+export * as tapiocaz from "./tapiocaz";

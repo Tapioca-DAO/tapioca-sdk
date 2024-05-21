@@ -30,14 +30,10 @@ import type {
 export interface EthGlpOracleInterface extends utils.Interface {
   functions: {
     "DEFAULT_ADMIN_ROLE()": FunctionFragment;
-    "GRACE_PERIOD_TIME()": FunctionFragment;
-    "SEQUENCER_ROLE()": FunctionFragment;
-    "SEQUENCER_UPTIME_FEED()": FunctionFragment;
     "acceptDefaultAdminTransfer()": FunctionFragment;
     "beginDefaultAdminTransfer(address)": FunctionFragment;
     "cancelDefaultAdminTransfer()": FunctionFragment;
     "changeDefaultAdminDelay(uint48)": FunctionFragment;
-    "changeGracePeriod(uint32)": FunctionFragment;
     "decimals()": FunctionFragment;
     "defaultAdmin()": FunctionFragment;
     "defaultAdminDelay()": FunctionFragment;
@@ -65,12 +61,6 @@ export interface EthGlpOracleInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "DEFAULT_ADMIN_ROLE"
       | "DEFAULT_ADMIN_ROLE()"
-      | "GRACE_PERIOD_TIME"
-      | "GRACE_PERIOD_TIME()"
-      | "SEQUENCER_ROLE"
-      | "SEQUENCER_ROLE()"
-      | "SEQUENCER_UPTIME_FEED"
-      | "SEQUENCER_UPTIME_FEED()"
       | "acceptDefaultAdminTransfer"
       | "acceptDefaultAdminTransfer()"
       | "beginDefaultAdminTransfer"
@@ -79,8 +69,6 @@ export interface EthGlpOracleInterface extends utils.Interface {
       | "cancelDefaultAdminTransfer()"
       | "changeDefaultAdminDelay"
       | "changeDefaultAdminDelay(uint48)"
-      | "changeGracePeriod"
-      | "changeGracePeriod(uint32)"
       | "decimals"
       | "decimals()"
       | "defaultAdmin"
@@ -134,30 +122,6 @@ export interface EthGlpOracleInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "GRACE_PERIOD_TIME",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "GRACE_PERIOD_TIME()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "SEQUENCER_ROLE",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "SEQUENCER_ROLE()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "SEQUENCER_UPTIME_FEED",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "SEQUENCER_UPTIME_FEED()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "acceptDefaultAdminTransfer",
     values?: undefined
   ): string;
@@ -187,14 +151,6 @@ export interface EthGlpOracleInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "changeDefaultAdminDelay(uint48)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "changeGracePeriod",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "changeGracePeriod(uint32)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
@@ -366,30 +322,6 @@ export interface EthGlpOracleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "GRACE_PERIOD_TIME",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "GRACE_PERIOD_TIME()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "SEQUENCER_ROLE",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "SEQUENCER_ROLE()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "SEQUENCER_UPTIME_FEED",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "SEQUENCER_UPTIME_FEED()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "acceptDefaultAdminTransfer",
     data: BytesLike
   ): Result;
@@ -419,14 +351,6 @@ export interface EthGlpOracleInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "changeDefaultAdminDelay(uint48)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "changeGracePeriod",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "changeGracePeriod(uint32)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
@@ -719,18 +643,6 @@ export interface EthGlpOracle extends BaseContract {
 
     "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<[string]>;
 
-    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<[number]>;
-
-    "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<[number]>;
-
-    SEQUENCER_ROLE(overrides?: CallOverrides): Promise<[string]>;
-
-    "SEQUENCER_ROLE()"(overrides?: CallOverrides): Promise<[string]>;
-
-    SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<[string]>;
-
-    "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<[string]>;
-
     acceptDefaultAdminTransfer(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -764,16 +676,6 @@ export interface EthGlpOracle extends BaseContract {
 
     "changeDefaultAdminDelay(uint48)"(
       newDelay: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    changeGracePeriod(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "changeGracePeriod(uint32)"(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -954,18 +856,6 @@ export interface EthGlpOracle extends BaseContract {
 
   "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<string>;
 
-  GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<number>;
-
-  "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<number>;
-
-  SEQUENCER_ROLE(overrides?: CallOverrides): Promise<string>;
-
-  "SEQUENCER_ROLE()"(overrides?: CallOverrides): Promise<string>;
-
-  SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<string>;
-
-  "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<string>;
-
   acceptDefaultAdminTransfer(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -999,16 +889,6 @@ export interface EthGlpOracle extends BaseContract {
 
   "changeDefaultAdminDelay(uint48)"(
     newDelay: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  changeGracePeriod(
-    _gracePeriod: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "changeGracePeriod(uint32)"(
-    _gracePeriod: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1187,18 +1067,6 @@ export interface EthGlpOracle extends BaseContract {
 
     "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<string>;
 
-    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<number>;
-
-    "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<number>;
-
-    SEQUENCER_ROLE(overrides?: CallOverrides): Promise<string>;
-
-    "SEQUENCER_ROLE()"(overrides?: CallOverrides): Promise<string>;
-
-    SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<string>;
-
-    "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<string>;
-
     acceptDefaultAdminTransfer(overrides?: CallOverrides): Promise<void>;
 
     "acceptDefaultAdminTransfer()"(overrides?: CallOverrides): Promise<void>;
@@ -1224,16 +1092,6 @@ export interface EthGlpOracle extends BaseContract {
 
     "changeDefaultAdminDelay(uint48)"(
       newDelay: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    changeGracePeriod(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "changeGracePeriod(uint32)"(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1470,18 +1328,6 @@ export interface EthGlpOracle extends BaseContract {
 
     "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "GRACE_PERIOD_TIME()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    SEQUENCER_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "SEQUENCER_ROLE()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    SEQUENCER_UPTIME_FEED(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "SEQUENCER_UPTIME_FEED()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     acceptDefaultAdminTransfer(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -1515,16 +1361,6 @@ export interface EthGlpOracle extends BaseContract {
 
     "changeDefaultAdminDelay(uint48)"(
       newDelay: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    changeGracePeriod(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "changeGracePeriod(uint32)"(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1704,26 +1540,6 @@ export interface EthGlpOracle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "GRACE_PERIOD_TIME()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    SEQUENCER_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "SEQUENCER_ROLE()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    SEQUENCER_UPTIME_FEED(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "SEQUENCER_UPTIME_FEED()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     acceptDefaultAdminTransfer(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -1757,16 +1573,6 @@ export interface EthGlpOracle extends BaseContract {
 
     "changeDefaultAdminDelay(uint48)"(
       newDelay: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    changeGracePeriod(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "changeGracePeriod(uint32)"(
-      _gracePeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

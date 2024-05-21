@@ -36,7 +36,7 @@ export interface ERC721PermitInterface extends utils.Interface {
     "getApproved(uint256)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "name()": FunctionFragment;
-    "nonces(address)": FunctionFragment;
+    "nonces(uint256)": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
     "permit(address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
@@ -65,7 +65,7 @@ export interface ERC721PermitInterface extends utils.Interface {
       | "name"
       | "name()"
       | "nonces"
-      | "nonces(address)"
+      | "nonces(uint256)"
       | "ownerOf"
       | "ownerOf(uint256)"
       | "permit"
@@ -136,11 +136,11 @@ export interface ERC721PermitInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "name()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "nonces",
-    values: [PromiseOrValue<string>]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "nonces(address)",
-    values: [PromiseOrValue<string>]
+    functionFragment: "nonces(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "ownerOf",
@@ -278,7 +278,7 @@ export interface ERC721PermitInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "nonces(address)",
+    functionFragment: "nonces(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
@@ -509,12 +509,12 @@ export interface ERC721Permit extends BaseContract {
     "name()"(overrides?: CallOverrides): Promise<[string]>;
 
     nonces(
-      owner: PromiseOrValue<string>,
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    "nonces(address)"(
-      owner: PromiseOrValue<string>,
+    "nonces(uint256)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
@@ -695,12 +695,12 @@ export interface ERC721Permit extends BaseContract {
   "name()"(overrides?: CallOverrides): Promise<string>;
 
   nonces(
-    owner: PromiseOrValue<string>,
+    _tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  "nonces(address)"(
-    owner: PromiseOrValue<string>,
+  "nonces(uint256)"(
+    _tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -881,12 +881,12 @@ export interface ERC721Permit extends BaseContract {
     "name()"(overrides?: CallOverrides): Promise<string>;
 
     nonces(
-      owner: PromiseOrValue<string>,
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "nonces(address)"(
-      owner: PromiseOrValue<string>,
+    "nonces(uint256)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1082,12 +1082,12 @@ export interface ERC721Permit extends BaseContract {
     "name()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nonces(
-      owner: PromiseOrValue<string>,
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "nonces(address)"(
-      owner: PromiseOrValue<string>,
+    "nonces(uint256)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1247,12 +1247,12 @@ export interface ERC721Permit extends BaseContract {
     "name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     nonces(
-      owner: PromiseOrValue<string>,
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "nonces(address)"(
-      owner: PromiseOrValue<string>,
+    "nonces(uint256)"(
+      _tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

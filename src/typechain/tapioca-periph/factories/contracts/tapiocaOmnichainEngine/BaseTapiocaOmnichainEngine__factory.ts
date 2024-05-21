@@ -12,7 +12,12 @@ import type {
 const _abi = [
   {
     inputs: [],
-    name: "BaseTapiocaOmnichainEngine_NotValid",
+    name: "BaseTapiocaOmnichainEngine_PearlmitFailed",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "BaseTapiocaOmnichainEngine_PearlmitNotApproved",
     type: "error",
   },
   {
@@ -219,7 +224,7 @@ const _abi = [
       {
         indexed: false,
         internalType: "uint256",
-        name: "amountLD",
+        name: "amountReceivedLD",
         type: "uint256",
       },
     ],
@@ -250,7 +255,13 @@ const _abi = [
       {
         indexed: false,
         internalType: "uint256",
-        name: "amountLD",
+        name: "amountSentLD",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amountReceivedLD",
         type: "uint256",
       },
     ],
@@ -351,6 +362,19 @@ const _abi = [
     ],
     name: "Transfer",
     type: "event",
+  },
+  {
+    inputs: [],
+    name: "CLUSTER_SLOT",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
@@ -538,19 +562,6 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "composeMsgSender",
-    outputs: [
-      {
-        internalType: "address",
-        name: "sender",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
     name: "decimalConversionRate",
     outputs: [
       {
@@ -637,6 +648,19 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "getCluster",
+    outputs: [
+      {
+        internalType: "contract ICluster",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -658,6 +682,52 @@ const _abi = [
       },
     ],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        components: [
+          {
+            internalType: "uint32",
+            name: "srcEid",
+            type: "uint32",
+          },
+          {
+            internalType: "bytes32",
+            name: "sender",
+            type: "bytes32",
+          },
+          {
+            internalType: "uint64",
+            name: "nonce",
+            type: "uint64",
+          },
+        ],
+        internalType: "struct Origin",
+        name: "",
+        type: "tuple",
+      },
+      {
+        internalType: "bytes",
+        name: "",
+        type: "bytes",
+      },
+      {
+        internalType: "address",
+        name: "_sender",
+        type: "address",
+      },
+    ],
+    name: "isComposeMsgSender",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -1429,6 +1499,19 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "contract ICluster",
+        name: "_cluster",
+        type: "address",
+      },
+    ],
+    name: "setCluster",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "address",
         name: "_delegate",
         type: "address",
@@ -1540,6 +1623,19 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_extExec",
+        type: "address",
+      },
+    ],
+    name: "setToeExtExec",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "sharedDecimals",
     outputs: [
@@ -1549,7 +1645,7 @@ const _abi = [
         type: "uint8",
       },
     ],
-    stateMutability: "pure",
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -1655,7 +1751,7 @@ const _abi = [
       },
       {
         internalType: "uint256",
-        name: "value",
+        name: "amount",
         type: "uint256",
       },
     ],

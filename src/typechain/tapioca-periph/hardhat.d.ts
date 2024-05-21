@@ -25,6 +25,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Cluster__factory>;
     getContractFactory(
+      name: "AggregatorInterface",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AggregatorInterface__factory>;
+    getContractFactory(
       name: "AccessControlledOffchainAggregator",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AccessControlledOffchainAggregator__factory>;
@@ -161,41 +165,21 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MagnetarStorage__factory>;
     getContractFactory(
-      name: "MagnetarAssetCommonModule",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MagnetarAssetCommonModule__factory>;
-    getContractFactory(
       name: "MagnetarAssetModule",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MagnetarAssetModule__factory>;
-    getContractFactory(
-      name: "MagnetarAssetXChainModule",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MagnetarAssetXChainModule__factory>;
     getContractFactory(
       name: "MagnetarBaseModule",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MagnetarBaseModule__factory>;
     getContractFactory(
-      name: "MagnetarBaseModuleExternal",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MagnetarBaseModuleExternal__factory>;
-    getContractFactory(
       name: "MagnetarCollateralModule",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MagnetarCollateralModule__factory>;
     getContractFactory(
-      name: "MagnetarMintCommonModule",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MagnetarMintCommonModule__factory>;
-    getContractFactory(
       name: "MagnetarMintModule",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MagnetarMintModule__factory>;
-    getContractFactory(
-      name: "MagnetarMintXChainModule",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MagnetarMintXChainModule__factory>;
     getContractFactory(
       name: "MagnetarOptionModule",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -217,6 +201,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AccessControlDefaultAdminRules__factory>;
     getContractFactory(
+      name: "DualETHOracle",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.DualETHOracle__factory>;
+    getContractFactory(
       name: "EthGlpOracle",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.EthGlpOracle__factory>;
@@ -228,6 +216,10 @@ declare module "hardhat/types/runtime" {
       name: "TapOptionOracle",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapOptionOracle__factory>;
+    getContractFactory(
+      name: "SDaiOracle",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SDaiOracle__factory>;
     getContractFactory(
       name: "ModuleChainlinkMulti",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -269,6 +261,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Seer__factory>;
     getContractFactory(
+      name: "SeerCLMulti",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SeerCLMulti__factory>;
+    getContractFactory(
       name: "SeerCLSolo",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SeerCLSolo__factory>;
@@ -276,6 +272,10 @@ declare module "hardhat/types/runtime" {
       name: "SeerUniSolo",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SeerUniSolo__factory>;
+    getContractFactory(
+      name: "UsdoMarketOracle",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.UsdoMarketOracle__factory>;
     getContractFactory(
       name: "ChainlinkUtils",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -361,6 +361,14 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapiocaDeployer__factory>;
     getContractFactory(
+      name: "ModuleManager",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ModuleManager__factory>;
+    getContractFactory(
+      name: "AggregatorInterface",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AggregatorInterface__factory>;
+    getContractFactory(
       name: "AccessControlledOffchainAggregator",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AccessControlledOffchainAggregator__factory>;
@@ -369,9 +377,45 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AggregatorV3Interface__factory>;
     getContractFactory(
+      name: "MagnetarStorage",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MagnetarStorage__factory>;
+    getContractFactory(
+      name: "MagnetarAssetModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MagnetarAssetModule__factory>;
+    getContractFactory(
+      name: "MagnetarBaseModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MagnetarBaseModule__factory>;
+    getContractFactory(
+      name: "MagnetarCollateralModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MagnetarCollateralModule__factory>;
+    getContractFactory(
+      name: "MagnetarMintModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MagnetarMintModule__factory>;
+    getContractFactory(
+      name: "MagnetarOptionModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MagnetarOptionModule__factory>;
+    getContractFactory(
+      name: "MagnetarYieldBoxModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MagnetarYieldBoxModule__factory>;
+    getContractFactory(
       name: "PearlmitHandler",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.PearlmitHandler__factory>;
+    getContractFactory(
+      name: "TapiocaMulticall",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TapiocaMulticall__factory>;
+    getContractFactory(
+      name: "BaseTapiocaOmnichainEngine",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseTapiocaOmnichainEngine__factory>;
     getContractFactory(
       name: "BaseToeMsgType",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -381,9 +425,25 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TapiocaOmnichainEngineHelper__factory>;
     getContractFactory(
+      name: "TapiocaOmnichainExtExec",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TapiocaOmnichainExtExec__factory>;
+    getContractFactory(
+      name: "TapiocaOmnichainReceiver",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TapiocaOmnichainReceiver__factory>;
+    getContractFactory(
+      name: "TapiocaOmnichainSender",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TapiocaOmnichainSender__factory>;
+    getContractFactory(
       name: "ERC721Permit",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC721Permit__factory>;
+    getContractFactory(
+      name: "ModuleManager",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ModuleManager__factory>;
 
     getContractAt(
       name: "OFT",
@@ -400,6 +460,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.Cluster>;
+    getContractAt(
+      name: "AggregatorInterface",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AggregatorInterface>;
     getContractAt(
       name: "AccessControlledOffchainAggregator",
       address: string,
@@ -571,50 +636,25 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.MagnetarStorage>;
     getContractAt(
-      name: "MagnetarAssetCommonModule",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.MagnetarAssetCommonModule>;
-    getContractAt(
       name: "MagnetarAssetModule",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.MagnetarAssetModule>;
-    getContractAt(
-      name: "MagnetarAssetXChainModule",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.MagnetarAssetXChainModule>;
     getContractAt(
       name: "MagnetarBaseModule",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.MagnetarBaseModule>;
     getContractAt(
-      name: "MagnetarBaseModuleExternal",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.MagnetarBaseModuleExternal>;
-    getContractAt(
       name: "MagnetarCollateralModule",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.MagnetarCollateralModule>;
     getContractAt(
-      name: "MagnetarMintCommonModule",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.MagnetarMintCommonModule>;
-    getContractAt(
       name: "MagnetarMintModule",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.MagnetarMintModule>;
-    getContractAt(
-      name: "MagnetarMintXChainModule",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.MagnetarMintXChainModule>;
     getContractAt(
       name: "MagnetarOptionModule",
       address: string,
@@ -641,6 +681,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.AccessControlDefaultAdminRules>;
     getContractAt(
+      name: "DualETHOracle",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.DualETHOracle>;
+    getContractAt(
       name: "EthGlpOracle",
       address: string,
       signer?: ethers.Signer
@@ -655,6 +700,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TapOptionOracle>;
+    getContractAt(
+      name: "SDaiOracle",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SDaiOracle>;
     getContractAt(
       name: "ModuleChainlinkMulti",
       address: string,
@@ -706,6 +756,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.Seer>;
     getContractAt(
+      name: "SeerCLMulti",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SeerCLMulti>;
+    getContractAt(
       name: "SeerCLSolo",
       address: string,
       signer?: ethers.Signer
@@ -715,6 +770,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.SeerUniSolo>;
+    getContractAt(
+      name: "UsdoMarketOracle",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.UsdoMarketOracle>;
     getContractAt(
       name: "ChainlinkUtils",
       address: string,
@@ -821,6 +881,16 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.TapiocaDeployer>;
     getContractAt(
+      name: "ModuleManager",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ModuleManager>;
+    getContractAt(
+      name: "AggregatorInterface",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AggregatorInterface>;
+    getContractAt(
       name: "AccessControlledOffchainAggregator",
       address: string,
       signer?: ethers.Signer
@@ -831,10 +901,55 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.AggregatorV3Interface>;
     getContractAt(
+      name: "MagnetarStorage",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MagnetarStorage>;
+    getContractAt(
+      name: "MagnetarAssetModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MagnetarAssetModule>;
+    getContractAt(
+      name: "MagnetarBaseModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MagnetarBaseModule>;
+    getContractAt(
+      name: "MagnetarCollateralModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MagnetarCollateralModule>;
+    getContractAt(
+      name: "MagnetarMintModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MagnetarMintModule>;
+    getContractAt(
+      name: "MagnetarOptionModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MagnetarOptionModule>;
+    getContractAt(
+      name: "MagnetarYieldBoxModule",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MagnetarYieldBoxModule>;
+    getContractAt(
       name: "PearlmitHandler",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.PearlmitHandler>;
+    getContractAt(
+      name: "TapiocaMulticall",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TapiocaMulticall>;
+    getContractAt(
+      name: "BaseTapiocaOmnichainEngine",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseTapiocaOmnichainEngine>;
     getContractAt(
       name: "BaseToeMsgType",
       address: string,
@@ -846,10 +961,30 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.TapiocaOmnichainEngineHelper>;
     getContractAt(
+      name: "TapiocaOmnichainExtExec",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TapiocaOmnichainExtExec>;
+    getContractAt(
+      name: "TapiocaOmnichainReceiver",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TapiocaOmnichainReceiver>;
+    getContractAt(
+      name: "TapiocaOmnichainSender",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TapiocaOmnichainSender>;
+    getContractAt(
       name: "ERC721Permit",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ERC721Permit>;
+    getContractAt(
+      name: "ModuleManager",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ModuleManager>;
 
     // default types
     getContractFactory(

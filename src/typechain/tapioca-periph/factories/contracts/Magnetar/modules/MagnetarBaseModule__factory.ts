@@ -12,6 +12,11 @@ import type {
 const _abi = [
   {
     inputs: [],
+    name: "Magnetar_ActionParamsMismatch",
+    type: "error",
+  },
+  {
+    inputs: [],
     name: "Magnetar_ExtractTokenFail",
     type: "error",
   },
@@ -29,6 +34,17 @@ const _abi = [
       },
     ],
     name: "Magnetar_GasMismatch",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "call",
+        type: "bytes",
+      },
+    ],
+    name: "Magnetar_MarketCallFailed",
     type: "error",
   },
   {
@@ -62,7 +78,7 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
-        name: "target",
+        name: "addy",
         type: "address",
       },
     ],
@@ -72,6 +88,16 @@ const _abi = [
   {
     inputs: [],
     name: "Magnetar_UnknownReason",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "Magnetar_UserMismatch",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "Magnetar_tOLPTokenMismatch",
     type: "error",
   },
   {
@@ -127,19 +153,6 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE",
-    outputs: [
-      {
-        internalType: "uint8",
-        name: "",
-        type: "uint8",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
     name: "MAGNETAR_ACTION_COLLATERAL_MODULE",
     outputs: [
       {
@@ -167,19 +180,6 @@ const _abi = [
   {
     inputs: [],
     name: "MAGNETAR_ACTION_MINT_MODULE",
-    outputs: [
-      {
-        internalType: "uint8",
-        name: "",
-        type: "uint8",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "MAGNETAR_ACTION_MINT_XCHAIN_MODULE",
     outputs: [
       {
         internalType: "uint8",
@@ -231,7 +231,7 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "MAGNETAR_ACTION_TAP_TOKEN",
+    name: "MAGNETAR_ACTION_TAP_LOCK",
     outputs: [
       {
         internalType: "uint8",
@@ -244,7 +244,7 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "MAGNETAR_ACTION_WRAP",
+    name: "MAGNETAR_ACTION_TAP_UNLOCK",
     outputs: [
       {
         internalType: "uint8",
@@ -263,6 +263,19 @@ const _abi = [
         internalType: "uint8",
         name: "",
         type: "uint8",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "helper",
+    outputs: [
+      {
+        internalType: "contract IMagnetarHelper",
+        name: "",
+        type: "address",
       },
     ],
     stateMutability: "view",
@@ -346,6 +359,19 @@ const _abi = [
     name: "setPearlmit",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "toeHelper",
+    outputs: [
+      {
+        internalType: "contract TapiocaOmnichainEngineHelper",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {

@@ -3,3 +3,4 @@
 /* eslint-disable */
 import type * as iAggregatorV3InterfaceSol from "./IAggregatorV3Interface.sol";
 export type { iAggregatorV3InterfaceSol };
+export type { AggregatorInterface } from "./AggregatorInterface";

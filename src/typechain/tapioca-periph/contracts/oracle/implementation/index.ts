@@ -3,3 +3,5 @@
 /* eslint-disable */
 import type * as arbitrum from "./Arbitrum";
 export type { arbitrum };
+import type * as ethereum from "./ethereum";
+export type { ethereum };

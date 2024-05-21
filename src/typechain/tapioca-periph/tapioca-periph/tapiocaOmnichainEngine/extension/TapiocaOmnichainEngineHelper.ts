@@ -282,6 +282,7 @@ export type PrepareLzCallDataStruct = {
   composeMsgData: ComposeMsgDataStruct;
   lzReceiveGas: PromiseOrValue<BigNumberish>;
   lzReceiveValue: PromiseOrValue<BigNumberish>;
+  refundAddress: PromiseOrValue<string>;
 };
 
 export type PrepareLzCallDataStructOutput = [
@@ -292,7 +293,8 @@ export type PrepareLzCallDataStructOutput = [
   number,
   ComposeMsgDataStructOutput,
   BigNumber,
-  BigNumber
+  BigNumber,
+  string
 ] & {
   dstEid: number;
   recipient: string;
@@ -302,6 +304,7 @@ export type PrepareLzCallDataStructOutput = [
   composeMsgData: ComposeMsgDataStructOutput;
   lzReceiveGas: BigNumber;
   lzReceiveValue: BigNumber;
+  refundAddress: string;
 };
 
 export type PrepareLzCallReturnStruct = {
@@ -358,6 +361,8 @@ export declare namespace IPearlmit {
     nonce: PromiseOrValue<BigNumberish>;
     sigDeadline: PromiseOrValue<BigNumberish>;
     signedPermit: PromiseOrValue<BytesLike>;
+    executor: PromiseOrValue<string>;
+    hashedData: PromiseOrValue<BytesLike>;
   };
 
   export type PermitBatchTransferFromStructOutput = [
@@ -365,6 +370,8 @@ export declare namespace IPearlmit {
     string,
     BigNumber,
     number,
+    string,
+    string,
     string
   ] & {
     approvals: IPearlmit.SignatureApprovalStructOutput[];
@@ -372,6 +379,8 @@ export declare namespace IPearlmit {
     nonce: BigNumber;
     sigDeadline: number;
     signedPermit: string;
+    executor: string;
+    hashedData: string;
   };
 }
 
@@ -385,8 +394,8 @@ export interface TapiocaOmnichainEngineHelperInterface extends utils.Interface {
     "buildYieldBoxApproveAssetMsg((address,address,address,uint256,uint256,uint8,bytes32,bytes32,bool)[])": FunctionFragment;
     "encodeERC20PermitApprovalMsg((address,address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
     "encodeERC721PermitApprovalMsg((address,address,uint256,uint256,uint8,bytes32,bytes32)[])": FunctionFragment;
-    "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))": FunctionFragment;
-    "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128))": FunctionFragment;
+    "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32))": FunctionFragment;
+    "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128,address))": FunctionFragment;
     "toLD(uint64,uint256)": FunctionFragment;
     "toSD(uint256,uint256)": FunctionFragment;
   };
@@ -410,9 +419,9 @@ export interface TapiocaOmnichainEngineHelperInterface extends utils.Interface {
       | "encodeERC721PermitApprovalMsg"
       | "encodeERC721PermitApprovalMsg((address,address,uint256,uint256,uint8,bytes32,bytes32)[])"
       | "encodePearlmitApprovalMsg"
-      | "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"
+      | "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32))"
       | "prepareLzCall"
-      | "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128))"
+      | "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128,address))"
       | "toLD"
       | "toLD(uint64,uint256)"
       | "toSD"
@@ -501,7 +510,7 @@ export interface TapiocaOmnichainEngineHelperInterface extends utils.Interface {
     values: [PromiseOrValue<string>, IPearlmit.PermitBatchTransferFromStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))",
+    functionFragment: "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32))",
     values: [PromiseOrValue<string>, IPearlmit.PermitBatchTransferFromStruct]
   ): string;
   encodeFunctionData(
@@ -509,7 +518,7 @@ export interface TapiocaOmnichainEngineHelperInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PrepareLzCallDataStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128))",
+    functionFragment: "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128,address))",
     values: [PromiseOrValue<string>, PrepareLzCallDataStruct]
   ): string;
   encodeFunctionData(
@@ -592,7 +601,7 @@ export interface TapiocaOmnichainEngineHelperInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))",
+    functionFragment: "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -600,7 +609,7 @@ export interface TapiocaOmnichainEngineHelperInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128))",
+    functionFragment: "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128,address))",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "toLD", data: BytesLike): Result;
@@ -738,7 +747,7 @@ export interface TapiocaOmnichainEngineHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string] & { msg_: string }>;
 
-    "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"(
+    "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32))"(
       _pearlmit: PromiseOrValue<string>,
       _data: IPearlmit.PermitBatchTransferFromStruct,
       overrides?: CallOverrides
@@ -754,7 +763,7 @@ export interface TapiocaOmnichainEngineHelper extends BaseContract {
       }
     >;
 
-    "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128))"(
+    "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128,address))"(
       _toeToken: PromiseOrValue<string>,
       _prepareLzCallData: PrepareLzCallDataStruct,
       overrides?: CallOverrides
@@ -881,7 +890,7 @@ export interface TapiocaOmnichainEngineHelper extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"(
+  "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32))"(
     _pearlmit: PromiseOrValue<string>,
     _data: IPearlmit.PermitBatchTransferFromStruct,
     overrides?: CallOverrides
@@ -893,7 +902,7 @@ export interface TapiocaOmnichainEngineHelper extends BaseContract {
     overrides?: CallOverrides
   ): Promise<PrepareLzCallReturnStructOutput>;
 
-  "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128))"(
+  "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128,address))"(
     _toeToken: PromiseOrValue<string>,
     _prepareLzCallData: PrepareLzCallDataStruct,
     overrides?: CallOverrides
@@ -1016,7 +1025,7 @@ export interface TapiocaOmnichainEngineHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"(
+    "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32))"(
       _pearlmit: PromiseOrValue<string>,
       _data: IPearlmit.PermitBatchTransferFromStruct,
       overrides?: CallOverrides
@@ -1028,7 +1037,7 @@ export interface TapiocaOmnichainEngineHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PrepareLzCallReturnStructOutput>;
 
-    "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128))"(
+    "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128,address))"(
       _toeToken: PromiseOrValue<string>,
       _prepareLzCallData: PrepareLzCallDataStruct,
       overrides?: CallOverrides
@@ -1154,7 +1163,7 @@ export interface TapiocaOmnichainEngineHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"(
+    "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32))"(
       _pearlmit: PromiseOrValue<string>,
       _data: IPearlmit.PermitBatchTransferFromStruct,
       overrides?: CallOverrides
@@ -1166,7 +1175,7 @@ export interface TapiocaOmnichainEngineHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128))"(
+    "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128,address))"(
       _toeToken: PromiseOrValue<string>,
       _prepareLzCallData: PrepareLzCallDataStruct,
       overrides?: CallOverrides
@@ -1290,7 +1299,7 @@ export interface TapiocaOmnichainEngineHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"(
+    "encodePearlmitApprovalMsg(address,((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32))"(
       _pearlmit: PromiseOrValue<string>,
       _data: IPearlmit.PermitBatchTransferFromStruct,
       overrides?: CallOverrides
@@ -1302,7 +1311,7 @@ export interface TapiocaOmnichainEngineHelper extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128))"(
+    "prepareLzCall(address,(uint32,bytes32,uint256,uint256,uint16,(uint8,uint128,uint128,bytes,bytes,bytes),uint128,uint128,address))"(
       _toeToken: PromiseOrValue<string>,
       _prepareLzCallData: PrepareLzCallDataStruct,
       overrides?: CallOverrides

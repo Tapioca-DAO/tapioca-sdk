@@ -30,16 +30,14 @@ import type {
 export interface BaseMagnetarInterface extends utils.Interface {
   functions: {
     "MAGNETAR_ACTION_ASSET_MODULE()": FunctionFragment;
-    "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE()": FunctionFragment;
     "MAGNETAR_ACTION_COLLATERAL_MODULE()": FunctionFragment;
     "MAGNETAR_ACTION_MARKET()": FunctionFragment;
     "MAGNETAR_ACTION_MINT_MODULE()": FunctionFragment;
-    "MAGNETAR_ACTION_MINT_XCHAIN_MODULE()": FunctionFragment;
     "MAGNETAR_ACTION_OFT()": FunctionFragment;
     "MAGNETAR_ACTION_OPTION_MODULE()": FunctionFragment;
     "MAGNETAR_ACTION_PERMIT()": FunctionFragment;
-    "MAGNETAR_ACTION_TAP_TOKEN()": FunctionFragment;
-    "MAGNETAR_ACTION_WRAP()": FunctionFragment;
+    "MAGNETAR_ACTION_TAP_LOCK()": FunctionFragment;
+    "MAGNETAR_ACTION_TAP_UNLOCK()": FunctionFragment;
     "MAGNETAR_ACTION_YIELDBOX_MODULE()": FunctionFragment;
     "helper()": FunctionFragment;
     "magnetarModuleExtender()": FunctionFragment;
@@ -52,6 +50,7 @@ export interface BaseMagnetarInterface extends utils.Interface {
     "setHelper(address)": FunctionFragment;
     "setMagnetarModuleExtender(address)": FunctionFragment;
     "setPearlmit(address)": FunctionFragment;
+    "toeHelper()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
@@ -59,26 +58,22 @@ export interface BaseMagnetarInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "MAGNETAR_ACTION_ASSET_MODULE"
       | "MAGNETAR_ACTION_ASSET_MODULE()"
-      | "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE"
-      | "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE()"
       | "MAGNETAR_ACTION_COLLATERAL_MODULE"
       | "MAGNETAR_ACTION_COLLATERAL_MODULE()"
       | "MAGNETAR_ACTION_MARKET"
       | "MAGNETAR_ACTION_MARKET()"
       | "MAGNETAR_ACTION_MINT_MODULE"
       | "MAGNETAR_ACTION_MINT_MODULE()"
-      | "MAGNETAR_ACTION_MINT_XCHAIN_MODULE"
-      | "MAGNETAR_ACTION_MINT_XCHAIN_MODULE()"
       | "MAGNETAR_ACTION_OFT"
       | "MAGNETAR_ACTION_OFT()"
       | "MAGNETAR_ACTION_OPTION_MODULE"
       | "MAGNETAR_ACTION_OPTION_MODULE()"
       | "MAGNETAR_ACTION_PERMIT"
       | "MAGNETAR_ACTION_PERMIT()"
-      | "MAGNETAR_ACTION_TAP_TOKEN"
-      | "MAGNETAR_ACTION_TAP_TOKEN()"
-      | "MAGNETAR_ACTION_WRAP"
-      | "MAGNETAR_ACTION_WRAP()"
+      | "MAGNETAR_ACTION_TAP_LOCK"
+      | "MAGNETAR_ACTION_TAP_LOCK()"
+      | "MAGNETAR_ACTION_TAP_UNLOCK"
+      | "MAGNETAR_ACTION_TAP_UNLOCK()"
       | "MAGNETAR_ACTION_YIELDBOX_MODULE"
       | "MAGNETAR_ACTION_YIELDBOX_MODULE()"
       | "helper"
@@ -103,6 +98,8 @@ export interface BaseMagnetarInterface extends utils.Interface {
       | "setMagnetarModuleExtender(address)"
       | "setPearlmit"
       | "setPearlmit(address)"
+      | "toeHelper"
+      | "toeHelper()"
       | "transferOwnership"
       | "transferOwnership(address)"
   ): FunctionFragment;
@@ -113,14 +110,6 @@ export interface BaseMagnetarInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "MAGNETAR_ACTION_ASSET_MODULE()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -148,14 +137,6 @@ export interface BaseMagnetarInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "MAGNETAR_ACTION_MINT_XCHAIN_MODULE",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "MAGNETAR_ACTION_MINT_XCHAIN_MODULE()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "MAGNETAR_ACTION_OFT",
     values?: undefined
   ): string;
@@ -180,19 +161,19 @@ export interface BaseMagnetarInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "MAGNETAR_ACTION_TAP_TOKEN",
+    functionFragment: "MAGNETAR_ACTION_TAP_LOCK",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "MAGNETAR_ACTION_TAP_TOKEN()",
+    functionFragment: "MAGNETAR_ACTION_TAP_LOCK()",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "MAGNETAR_ACTION_WRAP",
+    functionFragment: "MAGNETAR_ACTION_TAP_UNLOCK",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "MAGNETAR_ACTION_WRAP()",
+    functionFragment: "MAGNETAR_ACTION_TAP_UNLOCK()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -286,6 +267,11 @@ export interface BaseMagnetarInterface extends utils.Interface {
     functionFragment: "setPearlmit(address)",
     values: [PromiseOrValue<string>]
   ): string;
+  encodeFunctionData(functionFragment: "toeHelper", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "toeHelper()",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [PromiseOrValue<string>]
@@ -301,14 +287,6 @@ export interface BaseMagnetarInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "MAGNETAR_ACTION_ASSET_MODULE()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -336,14 +314,6 @@ export interface BaseMagnetarInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "MAGNETAR_ACTION_MINT_XCHAIN_MODULE",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "MAGNETAR_ACTION_MINT_XCHAIN_MODULE()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "MAGNETAR_ACTION_OFT",
     data: BytesLike
   ): Result;
@@ -368,19 +338,19 @@ export interface BaseMagnetarInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "MAGNETAR_ACTION_TAP_TOKEN",
+    functionFragment: "MAGNETAR_ACTION_TAP_LOCK",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "MAGNETAR_ACTION_TAP_TOKEN()",
+    functionFragment: "MAGNETAR_ACTION_TAP_LOCK()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "MAGNETAR_ACTION_WRAP",
+    functionFragment: "MAGNETAR_ACTION_TAP_UNLOCK",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "MAGNETAR_ACTION_WRAP()",
+    functionFragment: "MAGNETAR_ACTION_TAP_UNLOCK()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -450,6 +420,11 @@ export interface BaseMagnetarInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setPearlmit(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "toeHelper", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "toeHelper()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -583,14 +558,6 @@ export interface BaseMagnetar extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[number]>;
 
-    MAGNETAR_ACTION_ASSET_XCHAIN_MODULE(
-      overrides?: CallOverrides
-    ): Promise<[number]>;
-
-    "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE()"(
-      overrides?: CallOverrides
-    ): Promise<[number]>;
-
     MAGNETAR_ACTION_COLLATERAL_MODULE(
       overrides?: CallOverrides
     ): Promise<[number]>;
@@ -609,14 +576,6 @@ export interface BaseMagnetar extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[number]>;
 
-    MAGNETAR_ACTION_MINT_XCHAIN_MODULE(
-      overrides?: CallOverrides
-    ): Promise<[number]>;
-
-    "MAGNETAR_ACTION_MINT_XCHAIN_MODULE()"(
-      overrides?: CallOverrides
-    ): Promise<[number]>;
-
     MAGNETAR_ACTION_OFT(overrides?: CallOverrides): Promise<[number]>;
 
     "MAGNETAR_ACTION_OFT()"(overrides?: CallOverrides): Promise<[number]>;
@@ -631,13 +590,15 @@ export interface BaseMagnetar extends BaseContract {
 
     "MAGNETAR_ACTION_PERMIT()"(overrides?: CallOverrides): Promise<[number]>;
 
-    MAGNETAR_ACTION_TAP_TOKEN(overrides?: CallOverrides): Promise<[number]>;
+    MAGNETAR_ACTION_TAP_LOCK(overrides?: CallOverrides): Promise<[number]>;
 
-    "MAGNETAR_ACTION_TAP_TOKEN()"(overrides?: CallOverrides): Promise<[number]>;
+    "MAGNETAR_ACTION_TAP_LOCK()"(overrides?: CallOverrides): Promise<[number]>;
 
-    MAGNETAR_ACTION_WRAP(overrides?: CallOverrides): Promise<[number]>;
+    MAGNETAR_ACTION_TAP_UNLOCK(overrides?: CallOverrides): Promise<[number]>;
 
-    "MAGNETAR_ACTION_WRAP()"(overrides?: CallOverrides): Promise<[number]>;
+    "MAGNETAR_ACTION_TAP_UNLOCK()"(
+      overrides?: CallOverrides
+    ): Promise<[number]>;
 
     MAGNETAR_ACTION_YIELDBOX_MODULE(
       overrides?: CallOverrides
@@ -739,6 +700,10 @@ export interface BaseMagnetar extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    toeHelper(overrides?: CallOverrides): Promise<[string]>;
+
+    "toeHelper()"(overrides?: CallOverrides): Promise<[string]>;
+
     transferOwnership(
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -754,14 +719,6 @@ export interface BaseMagnetar extends BaseContract {
 
   "MAGNETAR_ACTION_ASSET_MODULE()"(overrides?: CallOverrides): Promise<number>;
 
-  MAGNETAR_ACTION_ASSET_XCHAIN_MODULE(
-    overrides?: CallOverrides
-  ): Promise<number>;
-
-  "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE()"(
-    overrides?: CallOverrides
-  ): Promise<number>;
-
   MAGNETAR_ACTION_COLLATERAL_MODULE(overrides?: CallOverrides): Promise<number>;
 
   "MAGNETAR_ACTION_COLLATERAL_MODULE()"(
@@ -776,14 +733,6 @@ export interface BaseMagnetar extends BaseContract {
 
   "MAGNETAR_ACTION_MINT_MODULE()"(overrides?: CallOverrides): Promise<number>;
 
-  MAGNETAR_ACTION_MINT_XCHAIN_MODULE(
-    overrides?: CallOverrides
-  ): Promise<number>;
-
-  "MAGNETAR_ACTION_MINT_XCHAIN_MODULE()"(
-    overrides?: CallOverrides
-  ): Promise<number>;
-
   MAGNETAR_ACTION_OFT(overrides?: CallOverrides): Promise<number>;
 
   "MAGNETAR_ACTION_OFT()"(overrides?: CallOverrides): Promise<number>;
@@ -796,13 +745,13 @@ export interface BaseMagnetar extends BaseContract {
 
   "MAGNETAR_ACTION_PERMIT()"(overrides?: CallOverrides): Promise<number>;
 
-  MAGNETAR_ACTION_TAP_TOKEN(overrides?: CallOverrides): Promise<number>;
+  MAGNETAR_ACTION_TAP_LOCK(overrides?: CallOverrides): Promise<number>;
 
-  "MAGNETAR_ACTION_TAP_TOKEN()"(overrides?: CallOverrides): Promise<number>;
+  "MAGNETAR_ACTION_TAP_LOCK()"(overrides?: CallOverrides): Promise<number>;
 
-  MAGNETAR_ACTION_WRAP(overrides?: CallOverrides): Promise<number>;
+  MAGNETAR_ACTION_TAP_UNLOCK(overrides?: CallOverrides): Promise<number>;
 
-  "MAGNETAR_ACTION_WRAP()"(overrides?: CallOverrides): Promise<number>;
+  "MAGNETAR_ACTION_TAP_UNLOCK()"(overrides?: CallOverrides): Promise<number>;
 
   MAGNETAR_ACTION_YIELDBOX_MODULE(overrides?: CallOverrides): Promise<number>;
 
@@ -902,6 +851,10 @@ export interface BaseMagnetar extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  toeHelper(overrides?: CallOverrides): Promise<string>;
+
+  "toeHelper()"(overrides?: CallOverrides): Promise<string>;
+
   transferOwnership(
     newOwner: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -916,14 +869,6 @@ export interface BaseMagnetar extends BaseContract {
     MAGNETAR_ACTION_ASSET_MODULE(overrides?: CallOverrides): Promise<number>;
 
     "MAGNETAR_ACTION_ASSET_MODULE()"(
-      overrides?: CallOverrides
-    ): Promise<number>;
-
-    MAGNETAR_ACTION_ASSET_XCHAIN_MODULE(
-      overrides?: CallOverrides
-    ): Promise<number>;
-
-    "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE()"(
       overrides?: CallOverrides
     ): Promise<number>;
 
@@ -943,14 +888,6 @@ export interface BaseMagnetar extends BaseContract {
 
     "MAGNETAR_ACTION_MINT_MODULE()"(overrides?: CallOverrides): Promise<number>;
 
-    MAGNETAR_ACTION_MINT_XCHAIN_MODULE(
-      overrides?: CallOverrides
-    ): Promise<number>;
-
-    "MAGNETAR_ACTION_MINT_XCHAIN_MODULE()"(
-      overrides?: CallOverrides
-    ): Promise<number>;
-
     MAGNETAR_ACTION_OFT(overrides?: CallOverrides): Promise<number>;
 
     "MAGNETAR_ACTION_OFT()"(overrides?: CallOverrides): Promise<number>;
@@ -965,13 +902,13 @@ export interface BaseMagnetar extends BaseContract {
 
     "MAGNETAR_ACTION_PERMIT()"(overrides?: CallOverrides): Promise<number>;
 
-    MAGNETAR_ACTION_TAP_TOKEN(overrides?: CallOverrides): Promise<number>;
+    MAGNETAR_ACTION_TAP_LOCK(overrides?: CallOverrides): Promise<number>;
 
-    "MAGNETAR_ACTION_TAP_TOKEN()"(overrides?: CallOverrides): Promise<number>;
+    "MAGNETAR_ACTION_TAP_LOCK()"(overrides?: CallOverrides): Promise<number>;
 
-    MAGNETAR_ACTION_WRAP(overrides?: CallOverrides): Promise<number>;
+    MAGNETAR_ACTION_TAP_UNLOCK(overrides?: CallOverrides): Promise<number>;
 
-    "MAGNETAR_ACTION_WRAP()"(overrides?: CallOverrides): Promise<number>;
+    "MAGNETAR_ACTION_TAP_UNLOCK()"(overrides?: CallOverrides): Promise<number>;
 
     MAGNETAR_ACTION_YIELDBOX_MODULE(overrides?: CallOverrides): Promise<number>;
 
@@ -1067,6 +1004,10 @@ export interface BaseMagnetar extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    toeHelper(overrides?: CallOverrides): Promise<string>;
+
+    "toeHelper()"(overrides?: CallOverrides): Promise<string>;
+
     transferOwnership(
       newOwner: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -1132,14 +1073,6 @@ export interface BaseMagnetar extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    MAGNETAR_ACTION_ASSET_XCHAIN_MODULE(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE()"(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     MAGNETAR_ACTION_COLLATERAL_MODULE(
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1155,14 +1088,6 @@ export interface BaseMagnetar extends BaseContract {
     MAGNETAR_ACTION_MINT_MODULE(overrides?: CallOverrides): Promise<BigNumber>;
 
     "MAGNETAR_ACTION_MINT_MODULE()"(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    MAGNETAR_ACTION_MINT_XCHAIN_MODULE(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "MAGNETAR_ACTION_MINT_XCHAIN_MODULE()"(
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1182,15 +1107,15 @@ export interface BaseMagnetar extends BaseContract {
 
     "MAGNETAR_ACTION_PERMIT()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    MAGNETAR_ACTION_TAP_TOKEN(overrides?: CallOverrides): Promise<BigNumber>;
+    MAGNETAR_ACTION_TAP_LOCK(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "MAGNETAR_ACTION_TAP_TOKEN()"(
+    "MAGNETAR_ACTION_TAP_LOCK()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    MAGNETAR_ACTION_TAP_UNLOCK(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "MAGNETAR_ACTION_TAP_UNLOCK()"(
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    MAGNETAR_ACTION_WRAP(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "MAGNETAR_ACTION_WRAP()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     MAGNETAR_ACTION_YIELDBOX_MODULE(
       overrides?: CallOverrides
@@ -1292,6 +1217,10 @@ export interface BaseMagnetar extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    toeHelper(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "toeHelper()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     transferOwnership(
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1309,14 +1238,6 @@ export interface BaseMagnetar extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "MAGNETAR_ACTION_ASSET_MODULE()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    MAGNETAR_ACTION_ASSET_XCHAIN_MODULE(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1344,14 +1265,6 @@ export interface BaseMagnetar extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    MAGNETAR_ACTION_MINT_XCHAIN_MODULE(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "MAGNETAR_ACTION_MINT_XCHAIN_MODULE()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     MAGNETAR_ACTION_OFT(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1376,19 +1289,19 @@ export interface BaseMagnetar extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    MAGNETAR_ACTION_TAP_TOKEN(
+    MAGNETAR_ACTION_TAP_LOCK(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "MAGNETAR_ACTION_TAP_TOKEN()"(
+    "MAGNETAR_ACTION_TAP_LOCK()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    MAGNETAR_ACTION_WRAP(
+    MAGNETAR_ACTION_TAP_UNLOCK(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "MAGNETAR_ACTION_WRAP()"(
+    "MAGNETAR_ACTION_TAP_UNLOCK()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1495,6 +1408,10 @@ export interface BaseMagnetar extends BaseContract {
       _pearlmit: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    toeHelper(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "toeHelper()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,

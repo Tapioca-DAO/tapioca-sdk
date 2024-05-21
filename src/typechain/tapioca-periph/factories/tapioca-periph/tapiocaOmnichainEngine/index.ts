@@ -2,4 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as extension from "./extension";
+export { BaseTapiocaOmnichainEngine__factory } from "./BaseTapiocaOmnichainEngine__factory";
 export { BaseToeMsgType__factory } from "./BaseToeMsgType__factory";
+export { TapiocaOmnichainReceiver__factory } from "./TapiocaOmnichainReceiver__factory";
+export { TapiocaOmnichainSender__factory } from "./TapiocaOmnichainSender__factory";

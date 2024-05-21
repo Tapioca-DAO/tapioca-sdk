@@ -64,6 +64,11 @@ const _abi = [
     type: "error",
   },
   {
+    inputs: [],
+    name: "StalePeriodNotValid",
+    type: "error",
+  },
+  {
     anonymous: false,
     inputs: [],
     name: "DefaultAdminDelayChangeCanceled",
@@ -189,6 +194,25 @@ const _abi = [
     type: "event",
   },
   {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "contract AggregatorV3Interface",
+        name: "feed",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "uint32",
+        name: "val",
+        type: "uint32",
+      },
+    ],
+    name: "StalePeriodUpdated",
+    type: "event",
+  },
+  {
     inputs: [],
     name: "DEFAULT_ADMIN_ROLE",
     outputs: [
@@ -196,6 +220,19 @@ const _abi = [
         internalType: "bytes32",
         name: "",
         type: "bytes32",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "DEFAULT_STALE_PERIOD",
+    outputs: [
+      {
+        internalType: "uint32",
+        name: "",
+        type: "uint32",
       },
     ],
     stateMutability: "view",
@@ -262,7 +299,7 @@ const _abi = [
         type: "uint32",
       },
     ],
-    name: "changeStalePeriod",
+    name: "changeDefaultStalePeriod",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -460,8 +497,14 @@ const _abi = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "stalePeriod",
+    inputs: [
+      {
+        internalType: "contract AggregatorV3Interface",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "stalePeriods",
     outputs: [
       {
         internalType: "uint32",
@@ -489,6 +532,24 @@ const _abi = [
       },
     ],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "contract AggregatorV3Interface",
+        name: "_feed",
+        type: "address",
+      },
+      {
+        internalType: "uint32",
+        name: "_stalePeriod",
+        type: "uint32",
+      },
+    ],
+    name: "updateStalePeriod",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
 ] as const;

@@ -189,7 +189,7 @@ const _abi = [
       {
         indexed: false,
         internalType: "uint256",
-        name: "amountLD",
+        name: "amountReceivedLD",
         type: "uint256",
       },
     ],
@@ -220,7 +220,13 @@ const _abi = [
       {
         indexed: false,
         internalType: "uint256",
-        name: "amountLD",
+        name: "amountSentLD",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amountReceivedLD",
         type: "uint256",
       },
     ],
@@ -384,19 +390,6 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "composeMsgSender",
-    outputs: [
-      {
-        internalType: "address",
-        name: "sender",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
     name: "decimalConversionRate",
     outputs: [
       {
@@ -440,6 +433,52 @@ const _abi = [
         internalType: "bytes",
         name: "enforcedOption",
         type: "bytes",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        components: [
+          {
+            internalType: "uint32",
+            name: "srcEid",
+            type: "uint32",
+          },
+          {
+            internalType: "bytes32",
+            name: "sender",
+            type: "bytes32",
+          },
+          {
+            internalType: "uint64",
+            name: "nonce",
+            type: "uint64",
+          },
+        ],
+        internalType: "struct Origin",
+        name: "",
+        type: "tuple",
+      },
+      {
+        internalType: "bytes",
+        name: "",
+        type: "bytes",
+      },
+      {
+        internalType: "address",
+        name: "_sender",
+        type: "address",
+      },
+    ],
+    name: "isComposeMsgSender",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
       },
     ],
     stateMutability: "view",
@@ -724,7 +763,7 @@ const _abi = [
         type: "uint64",
       },
     ],
-    stateMutability: "view",
+    stateMutability: "pure",
     type: "function",
   },
   {
@@ -1175,7 +1214,7 @@ const _abi = [
         type: "uint8",
       },
     ],
-    stateMutability: "pure",
+    stateMutability: "view",
     type: "function",
   },
   {

@@ -30,13 +30,14 @@ import type {
 export interface ModuleChainlinkSingleInterface extends utils.Interface {
   functions: {
     "DEFAULT_ADMIN_ROLE()": FunctionFragment;
+    "DEFAULT_STALE_PERIOD()": FunctionFragment;
     "GUARDIAN_ROLE_CHAINLINK()": FunctionFragment;
     "acceptDefaultAdminTransfer()": FunctionFragment;
     "beginDefaultAdminTransfer(address)": FunctionFragment;
     "cancelDefaultAdminTransfer()": FunctionFragment;
     "chainlinkDecimals()": FunctionFragment;
     "changeDefaultAdminDelay(uint48)": FunctionFragment;
-    "changeStalePeriod(uint32)": FunctionFragment;
+    "changeDefaultStalePeriod(uint32)": FunctionFragment;
     "defaultAdmin()": FunctionFragment;
     "defaultAdminDelay()": FunctionFragment;
     "defaultAdminDelayIncreaseWait()": FunctionFragment;
@@ -51,14 +52,17 @@ export interface ModuleChainlinkSingleInterface extends utils.Interface {
     "renounceRole(bytes32,address)": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
     "rollbackDefaultAdminDelay()": FunctionFragment;
-    "stalePeriod()": FunctionFragment;
+    "stalePeriods(address)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
+    "updateStalePeriod(address,uint32)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
       | "DEFAULT_ADMIN_ROLE"
       | "DEFAULT_ADMIN_ROLE()"
+      | "DEFAULT_STALE_PERIOD"
+      | "DEFAULT_STALE_PERIOD()"
       | "GUARDIAN_ROLE_CHAINLINK"
       | "GUARDIAN_ROLE_CHAINLINK()"
       | "acceptDefaultAdminTransfer"
@@ -71,8 +75,8 @@ export interface ModuleChainlinkSingleInterface extends utils.Interface {
       | "chainlinkDecimals()"
       | "changeDefaultAdminDelay"
       | "changeDefaultAdminDelay(uint48)"
-      | "changeStalePeriod"
-      | "changeStalePeriod(uint32)"
+      | "changeDefaultStalePeriod"
+      | "changeDefaultStalePeriod(uint32)"
       | "defaultAdmin"
       | "defaultAdmin()"
       | "defaultAdminDelay"
@@ -101,10 +105,12 @@ export interface ModuleChainlinkSingleInterface extends utils.Interface {
       | "revokeRole(bytes32,address)"
       | "rollbackDefaultAdminDelay"
       | "rollbackDefaultAdminDelay()"
-      | "stalePeriod"
-      | "stalePeriod()"
+      | "stalePeriods"
+      | "stalePeriods(address)"
       | "supportsInterface"
       | "supportsInterface(bytes4)"
+      | "updateStalePeriod"
+      | "updateStalePeriod(address,uint32)"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -113,6 +119,14 @@ export interface ModuleChainlinkSingleInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "DEFAULT_ADMIN_ROLE()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "DEFAULT_STALE_PERIOD",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "DEFAULT_STALE_PERIOD()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -164,11 +178,11 @@ export interface ModuleChainlinkSingleInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "changeStalePeriod",
+    functionFragment: "changeDefaultStalePeriod",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "changeStalePeriod(uint32)",
+    functionFragment: "changeDefaultStalePeriod(uint32)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
@@ -278,12 +292,12 @@ export interface ModuleChainlinkSingleInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "stalePeriod",
-    values?: undefined
+    functionFragment: "stalePeriods",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "stalePeriod()",
-    values?: undefined
+    functionFragment: "stalePeriods(address)",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "supportsInterface",
@@ -293,6 +307,14 @@ export interface ModuleChainlinkSingleInterface extends utils.Interface {
     functionFragment: "supportsInterface(bytes4)",
     values: [PromiseOrValue<BytesLike>]
   ): string;
+  encodeFunctionData(
+    functionFragment: "updateStalePeriod",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updateStalePeriod(address,uint32)",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "DEFAULT_ADMIN_ROLE",
@@ -300,6 +322,14 @@ export interface ModuleChainlinkSingleInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "DEFAULT_ADMIN_ROLE()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "DEFAULT_STALE_PERIOD",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "DEFAULT_STALE_PERIOD()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -351,11 +381,11 @@ export interface ModuleChainlinkSingleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "changeStalePeriod",
+    functionFragment: "changeDefaultStalePeriod",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "changeStalePeriod(uint32)",
+    functionFragment: "changeDefaultStalePeriod(uint32)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -456,11 +486,11 @@ export interface ModuleChainlinkSingleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "stalePeriod",
+    functionFragment: "stalePeriods",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "stalePeriod()",
+    functionFragment: "stalePeriods(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -469,6 +499,14 @@ export interface ModuleChainlinkSingleInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "supportsInterface(bytes4)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateStalePeriod",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateStalePeriod(address,uint32)",
     data: BytesLike
   ): Result;
 
@@ -480,6 +518,7 @@ export interface ModuleChainlinkSingleInterface extends utils.Interface {
     "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
     "RoleGranted(bytes32,address,address)": EventFragment;
     "RoleRevoked(bytes32,address,address)": EventFragment;
+    "StalePeriodUpdated(address,uint32)": EventFragment;
   };
 
   getEvent(
@@ -517,6 +556,10 @@ export interface ModuleChainlinkSingleInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "RoleRevoked"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "RoleRevoked(bytes32,address,address)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "StalePeriodUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "StalePeriodUpdated(address,uint32)"
   ): EventFragment;
 }
 
@@ -599,6 +642,18 @@ export type RoleRevokedEvent = TypedEvent<
 
 export type RoleRevokedEventFilter = TypedEventFilter<RoleRevokedEvent>;
 
+export interface StalePeriodUpdatedEventObject {
+  feed: string;
+  val: number;
+}
+export type StalePeriodUpdatedEvent = TypedEvent<
+  [string, number],
+  StalePeriodUpdatedEventObject
+>;
+
+export type StalePeriodUpdatedEventFilter =
+  TypedEventFilter<StalePeriodUpdatedEvent>;
+
 export interface ModuleChainlinkSingle extends BaseContract {
   contractName: "ModuleChainlinkSingle";
 
@@ -631,6 +686,10 @@ export interface ModuleChainlinkSingle extends BaseContract {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<[string]>;
 
     "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<[string]>;
+
+    DEFAULT_STALE_PERIOD(overrides?: CallOverrides): Promise<[number]>;
+
+    "DEFAULT_STALE_PERIOD()"(overrides?: CallOverrides): Promise<[number]>;
 
     GUARDIAN_ROLE_CHAINLINK(overrides?: CallOverrides): Promise<[string]>;
 
@@ -676,12 +735,12 @@ export interface ModuleChainlinkSingle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    changeStalePeriod(
+    changeDefaultStalePeriod(
       _stalePeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "changeStalePeriod(uint32)"(
+    "changeDefaultStalePeriod(uint32)"(
       _stalePeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -794,9 +853,15 @@ export interface ModuleChainlinkSingle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    stalePeriod(overrides?: CallOverrides): Promise<[number]>;
+    stalePeriods(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[number]>;
 
-    "stalePeriod()"(overrides?: CallOverrides): Promise<[number]>;
+    "stalePeriods(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[number]>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
@@ -807,11 +872,27 @@ export interface ModuleChainlinkSingle extends BaseContract {
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
+
+    updateStalePeriod(
+      _feed: PromiseOrValue<string>,
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "updateStalePeriod(address,uint32)"(
+      _feed: PromiseOrValue<string>,
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
 
   DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
 
   "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<string>;
+
+  DEFAULT_STALE_PERIOD(overrides?: CallOverrides): Promise<number>;
+
+  "DEFAULT_STALE_PERIOD()"(overrides?: CallOverrides): Promise<number>;
 
   GUARDIAN_ROLE_CHAINLINK(overrides?: CallOverrides): Promise<string>;
 
@@ -857,12 +938,12 @@ export interface ModuleChainlinkSingle extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  changeStalePeriod(
+  changeDefaultStalePeriod(
     _stalePeriod: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "changeStalePeriod(uint32)"(
+  "changeDefaultStalePeriod(uint32)"(
     _stalePeriod: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -973,9 +1054,15 @@ export interface ModuleChainlinkSingle extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  stalePeriod(overrides?: CallOverrides): Promise<number>;
+  stalePeriods(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<number>;
 
-  "stalePeriod()"(overrides?: CallOverrides): Promise<number>;
+  "stalePeriods(address)"(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<number>;
 
   supportsInterface(
     interfaceId: PromiseOrValue<BytesLike>,
@@ -987,10 +1074,26 @@ export interface ModuleChainlinkSingle extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  updateStalePeriod(
+    _feed: PromiseOrValue<string>,
+    _stalePeriod: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "updateStalePeriod(address,uint32)"(
+    _feed: PromiseOrValue<string>,
+    _stalePeriod: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
 
     "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<string>;
+
+    DEFAULT_STALE_PERIOD(overrides?: CallOverrides): Promise<number>;
+
+    "DEFAULT_STALE_PERIOD()"(overrides?: CallOverrides): Promise<number>;
 
     GUARDIAN_ROLE_CHAINLINK(overrides?: CallOverrides): Promise<string>;
 
@@ -1028,12 +1131,12 @@ export interface ModuleChainlinkSingle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    changeStalePeriod(
+    changeDefaultStalePeriod(
       _stalePeriod: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "changeStalePeriod(uint32)"(
+    "changeDefaultStalePeriod(uint32)"(
       _stalePeriod: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -1142,9 +1245,15 @@ export interface ModuleChainlinkSingle extends BaseContract {
 
     "rollbackDefaultAdminDelay()"(overrides?: CallOverrides): Promise<void>;
 
-    stalePeriod(overrides?: CallOverrides): Promise<number>;
+    stalePeriods(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<number>;
 
-    "stalePeriod()"(overrides?: CallOverrides): Promise<number>;
+    "stalePeriods(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<number>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
@@ -1155,6 +1264,18 @@ export interface ModuleChainlinkSingle extends BaseContract {
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<boolean>;
+
+    updateStalePeriod(
+      _feed: PromiseOrValue<string>,
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "updateStalePeriod(address,uint32)"(
+      _feed: PromiseOrValue<string>,
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
@@ -1214,12 +1335,25 @@ export interface ModuleChainlinkSingle extends BaseContract {
       account?: PromiseOrValue<string> | null,
       sender?: PromiseOrValue<string> | null
     ): RoleRevokedEventFilter;
+
+    "StalePeriodUpdated(address,uint32)"(
+      feed?: PromiseOrValue<string> | null,
+      val?: PromiseOrValue<BigNumberish> | null
+    ): StalePeriodUpdatedEventFilter;
+    StalePeriodUpdated(
+      feed?: PromiseOrValue<string> | null,
+      val?: PromiseOrValue<BigNumberish> | null
+    ): StalePeriodUpdatedEventFilter;
   };
 
   estimateGas: {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
 
     "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    DEFAULT_STALE_PERIOD(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "DEFAULT_STALE_PERIOD()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     GUARDIAN_ROLE_CHAINLINK(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1265,12 +1399,12 @@ export interface ModuleChainlinkSingle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    changeStalePeriod(
+    changeDefaultStalePeriod(
       _stalePeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "changeStalePeriod(uint32)"(
+    "changeDefaultStalePeriod(uint32)"(
       _stalePeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -1377,9 +1511,15 @@ export interface ModuleChainlinkSingle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    stalePeriod(overrides?: CallOverrides): Promise<BigNumber>;
+    stalePeriods(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    "stalePeriod()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "stalePeriods(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
@@ -1390,6 +1530,18 @@ export interface ModuleChainlinkSingle extends BaseContract {
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    updateStalePeriod(
+      _feed: PromiseOrValue<string>,
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "updateStalePeriod(address,uint32)"(
+      _feed: PromiseOrValue<string>,
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -1398,6 +1550,14 @@ export interface ModuleChainlinkSingle extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "DEFAULT_ADMIN_ROLE()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    DEFAULT_STALE_PERIOD(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "DEFAULT_STALE_PERIOD()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1451,12 +1611,12 @@ export interface ModuleChainlinkSingle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    changeStalePeriod(
+    changeDefaultStalePeriod(
       _stalePeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "changeStalePeriod(uint32)"(
+    "changeDefaultStalePeriod(uint32)"(
       _stalePeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -1577,9 +1737,15 @@ export interface ModuleChainlinkSingle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    stalePeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    stalePeriods(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    "stalePeriod()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "stalePeriods(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
@@ -1589,6 +1755,18 @@ export interface ModuleChainlinkSingle extends BaseContract {
     "supportsInterface(bytes4)"(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    updateStalePeriod(
+      _feed: PromiseOrValue<string>,
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "updateStalePeriod(address,uint32)"(
+      _feed: PromiseOrValue<string>,
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

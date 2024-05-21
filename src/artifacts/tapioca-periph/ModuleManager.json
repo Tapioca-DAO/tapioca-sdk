@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
   "contractName": "ModuleManager",
-  "sourceName": "contracts/utils/ModuleManager.sol",
+  "sourceName": "tapiocaz/tOFT/modules/ModuleManager.sol",
   "abi": [
     {
       "inputs": [],

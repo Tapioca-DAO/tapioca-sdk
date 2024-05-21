@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { TapiocaOmnichainEngineHelper } from "./TapiocaOmnichainEngineHelper";
+export type { TapiocaOmnichainExtExec } from "./TapiocaOmnichainExtExec";

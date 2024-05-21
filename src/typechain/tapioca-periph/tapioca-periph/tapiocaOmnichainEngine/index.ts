@@ -3,4 +3,7 @@
 /* eslint-disable */
 import type * as extension from "./extension";
 export type { extension };
+export type { BaseTapiocaOmnichainEngine } from "./BaseTapiocaOmnichainEngine";
 export type { BaseToeMsgType } from "./BaseToeMsgType";
+export type { TapiocaOmnichainReceiver } from "./TapiocaOmnichainReceiver";
+export type { TapiocaOmnichainSender } from "./TapiocaOmnichainSender";

@@ -12,5 +12,7 @@ export { OracleChainlinkSingle__factory } from "./OracleChainlinkSingle__factory
 export { OracleMulti__factory } from "./OracleMulti__factory";
 export { OracleUniSolo__factory } from "./OracleUniSolo__factory";
 export { Seer__factory } from "./Seer__factory";
+export { SeerCLMulti__factory } from "./SeerCLMulti__factory";
 export { SeerCLSolo__factory } from "./SeerCLSolo__factory";
 export { SeerUniSolo__factory } from "./SeerUniSolo__factory";
+export { UsdoMarketOracle__factory } from "./UsdoMarketOracle__factory";

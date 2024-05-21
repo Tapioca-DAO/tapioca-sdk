@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as arbitrum from "./Arbitrum";
+export * as ethereum from "./ethereum";

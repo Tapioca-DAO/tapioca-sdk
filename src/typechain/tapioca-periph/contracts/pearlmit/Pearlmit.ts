@@ -68,6 +68,8 @@ export declare namespace IPearlmit {
     nonce: PromiseOrValue<BigNumberish>;
     sigDeadline: PromiseOrValue<BigNumberish>;
     signedPermit: PromiseOrValue<BytesLike>;
+    executor: PromiseOrValue<string>;
+    hashedData: PromiseOrValue<BytesLike>;
   };
 
   export type PermitBatchTransferFromStructOutput = [
@@ -75,6 +77,8 @@ export declare namespace IPearlmit {
     string,
     BigNumber,
     number,
+    string,
+    string,
     string
   ] & {
     approvals: IPearlmit.SignatureApprovalStructOutput[];
@@ -82,6 +86,8 @@ export declare namespace IPearlmit {
     nonce: BigNumber;
     sigDeadline: number;
     signedPermit: string;
+    executor: string;
+    hashedData: string;
   };
 }
 
@@ -90,17 +96,17 @@ export interface PearlmitInterface extends utils.Interface {
     "allowance(address,address,address,uint256,bytes32)": FunctionFragment;
     "allowance(address,address,address,uint256)": FunctionFragment;
     "approve(address,uint256,address,uint200,uint48)": FunctionFragment;
+    "clearAllowance(address,address,uint256)": FunctionFragment;
     "closePermittedOrder(address,address,uint256,bytes32)": FunctionFragment;
     "domainSeparatorV4()": FunctionFragment;
-    "fillPermittedOrderERC1155(bytes,(uint200,uint200,uint200),address,uint256,address,address,uint256,uint48,bytes32,bytes32)": FunctionFragment;
-    "fillPermittedOrderERC20(bytes,(uint200,uint200,uint200),address,address,address,uint256,uint48,bytes32,bytes32)": FunctionFragment;
+    "fillPermittedOrderERC1155(bytes,(uint256,uint256,uint256),address,uint256,address,address,uint256,uint48,bytes32,bytes32)": FunctionFragment;
+    "fillPermittedOrderERC20(bytes,(uint256,uint256,uint256),address,address,address,uint256,uint48,bytes32,bytes32)": FunctionFragment;
     "invalidateUnorderedNonce(uint256)": FunctionFragment;
     "isRegisteredAdditionalDataHash(bytes32)": FunctionFragment;
     "isValidUnorderedNonce(address,uint256)": FunctionFragment;
     "lockdown()": FunctionFragment;
     "masterNonce(address)": FunctionFragment;
-    "permitBatchApprove(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))": FunctionFragment;
-    "permitBatchTransferFrom(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))": FunctionFragment;
+    "permitBatchApprove(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32),bytes32)": FunctionFragment;
     "permitTransferFromERC1155(address,uint256,uint256,uint256,uint256,address,address,uint256,bytes)": FunctionFragment;
     "permitTransferFromERC20(address,uint256,uint256,uint256,address,address,uint256,bytes)": FunctionFragment;
     "permitTransferFromERC721(address,uint256,uint256,uint256,address,address,bytes)": FunctionFragment;
@@ -120,14 +126,16 @@ export interface PearlmitInterface extends utils.Interface {
       | "allowance(address,address,address,uint256)"
       | "approve"
       | "approve(address,uint256,address,uint200,uint48)"
+      | "clearAllowance"
+      | "clearAllowance(address,address,uint256)"
       | "closePermittedOrder"
       | "closePermittedOrder(address,address,uint256,bytes32)"
       | "domainSeparatorV4"
       | "domainSeparatorV4()"
       | "fillPermittedOrderERC1155"
-      | "fillPermittedOrderERC1155(bytes,(uint200,uint200,uint200),address,uint256,address,address,uint256,uint48,bytes32,bytes32)"
+      | "fillPermittedOrderERC1155(bytes,(uint256,uint256,uint256),address,uint256,address,address,uint256,uint48,bytes32,bytes32)"
       | "fillPermittedOrderERC20"
-      | "fillPermittedOrderERC20(bytes,(uint200,uint200,uint200),address,address,address,uint256,uint48,bytes32,bytes32)"
+      | "fillPermittedOrderERC20(bytes,(uint256,uint256,uint256),address,address,address,uint256,uint48,bytes32,bytes32)"
       | "invalidateUnorderedNonce"
       | "invalidateUnorderedNonce(uint256)"
       | "isRegisteredAdditionalDataHash"
@@ -139,9 +147,7 @@ export interface PearlmitInterface extends utils.Interface {
       | "masterNonce"
       | "masterNonce(address)"
       | "permitBatchApprove"
-      | "permitBatchApprove(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"
-      | "permitBatchTransferFrom"
-      | "permitBatchTransferFrom(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"
+      | "permitBatchApprove(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32),bytes32)"
       | "permitTransferFromERC1155"
       | "permitTransferFromERC1155(address,uint256,uint256,uint256,uint256,address,address,uint256,bytes)"
       | "permitTransferFromERC20"
@@ -206,6 +212,22 @@ export interface PearlmitInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "clearAllowance",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "clearAllowance(address,address,uint256)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "closePermittedOrder",
     values: [
       PromiseOrValue<string>,
@@ -247,7 +269,7 @@ export interface PearlmitInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "fillPermittedOrderERC1155(bytes,(uint200,uint200,uint200),address,uint256,address,address,uint256,uint48,bytes32,bytes32)",
+    functionFragment: "fillPermittedOrderERC1155(bytes,(uint256,uint256,uint256),address,uint256,address,address,uint256,uint48,bytes32,bytes32)",
     values: [
       PromiseOrValue<BytesLike>,
       OrderFillAmountsStruct,
@@ -276,7 +298,7 @@ export interface PearlmitInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "fillPermittedOrderERC20(bytes,(uint200,uint200,uint200),address,address,address,uint256,uint48,bytes32,bytes32)",
+    functionFragment: "fillPermittedOrderERC20(bytes,(uint256,uint256,uint256),address,address,address,uint256,uint48,bytes32,bytes32)",
     values: [
       PromiseOrValue<BytesLike>,
       OrderFillAmountsStruct,
@@ -328,19 +350,11 @@ export interface PearlmitInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "permitBatchApprove",
-    values: [IPearlmit.PermitBatchTransferFromStruct]
+    values: [IPearlmit.PermitBatchTransferFromStruct, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
-    functionFragment: "permitBatchApprove(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))",
-    values: [IPearlmit.PermitBatchTransferFromStruct]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "permitBatchTransferFrom",
-    values: [IPearlmit.PermitBatchTransferFromStruct]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "permitBatchTransferFrom(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))",
-    values: [IPearlmit.PermitBatchTransferFromStruct]
+    functionFragment: "permitBatchApprove(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32),bytes32)",
+    values: [IPearlmit.PermitBatchTransferFromStruct, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "permitTransferFromERC1155",
@@ -617,6 +631,14 @@ export interface PearlmitInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "clearAllowance",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "clearAllowance(address,address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "closePermittedOrder",
     data: BytesLike
   ): Result;
@@ -637,7 +659,7 @@ export interface PearlmitInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "fillPermittedOrderERC1155(bytes,(uint200,uint200,uint200),address,uint256,address,address,uint256,uint48,bytes32,bytes32)",
+    functionFragment: "fillPermittedOrderERC1155(bytes,(uint256,uint256,uint256),address,uint256,address,address,uint256,uint48,bytes32,bytes32)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -645,7 +667,7 @@ export interface PearlmitInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "fillPermittedOrderERC20(bytes,(uint200,uint200,uint200),address,address,address,uint256,uint48,bytes32,bytes32)",
+    functionFragment: "fillPermittedOrderERC20(bytes,(uint256,uint256,uint256),address,address,address,uint256,uint48,bytes32,bytes32)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -687,15 +709,7 @@ export interface PearlmitInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "permitBatchApprove(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "permitBatchTransferFrom",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "permitBatchTransferFrom(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))",
+    functionFragment: "permitBatchApprove(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32),bytes32)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -791,8 +805,9 @@ export interface PearlmitInterface extends utils.Interface {
     "Approval(address,address,address,uint256,uint200,uint48)": EventFragment;
     "Lockdown(address)": EventFragment;
     "OrderClosed(bytes32,address,address,bool)": EventFragment;
-    "OrderFilled(bytes32,address,address,uint200)": EventFragment;
-    "OrderOpened(bytes32,address,address,uint200)": EventFragment;
+    "OrderFilled(bytes32,address,address,uint256)": EventFragment;
+    "OrderOpened(bytes32,address,address,uint256)": EventFragment;
+    "OrderRestored(bytes32,address,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
@@ -807,11 +822,15 @@ export interface PearlmitInterface extends utils.Interface {
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OrderFilled"): EventFragment;
   getEvent(
-    nameOrSignatureOrTopic: "OrderFilled(bytes32,address,address,uint200)"
+    nameOrSignatureOrTopic: "OrderFilled(bytes32,address,address,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OrderOpened"): EventFragment;
   getEvent(
-    nameOrSignatureOrTopic: "OrderOpened(bytes32,address,address,uint200)"
+    nameOrSignatureOrTopic: "OrderOpened(bytes32,address,address,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OrderRestored"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "OrderRestored(bytes32,address,uint256)"
   ): EventFragment;
 }
 
@@ -875,6 +894,18 @@ export type OrderOpenedEvent = TypedEvent<
 >;
 
 export type OrderOpenedEventFilter = TypedEventFilter<OrderOpenedEvent>;
+
+export interface OrderRestoredEventObject {
+  orderId: string;
+  owner: string;
+  amountRestoredToOrder: BigNumber;
+}
+export type OrderRestoredEvent = TypedEvent<
+  [string, string, BigNumber],
+  OrderRestoredEventObject
+>;
+
+export type OrderRestoredEventFilter = TypedEventFilter<OrderRestoredEvent>;
 
 export interface Pearlmit extends BaseContract {
   contractName: "Pearlmit";
@@ -950,6 +981,20 @@ export interface Pearlmit extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    clearAllowance(
+      owner: PromiseOrValue<string>,
+      token: PromiseOrValue<string>,
+      id: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "clearAllowance(address,address,uint256)"(
+      owner: PromiseOrValue<string>,
+      token: PromiseOrValue<string>,
+      id: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     closePermittedOrder(
       owner: PromiseOrValue<string>,
       token: PromiseOrValue<string>,
@@ -988,7 +1033,7 @@ export interface Pearlmit extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "fillPermittedOrderERC1155(bytes,(uint200,uint200,uint200),address,uint256,address,address,uint256,uint48,bytes32,bytes32)"(
+    "fillPermittedOrderERC1155(bytes,(uint256,uint256,uint256),address,uint256,address,address,uint256,uint48,bytes32,bytes32)"(
       signedPermit: PromiseOrValue<BytesLike>,
       orderFillAmounts: OrderFillAmountsStruct,
       token: PromiseOrValue<string>,
@@ -1015,7 +1060,7 @@ export interface Pearlmit extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "fillPermittedOrderERC20(bytes,(uint200,uint200,uint200),address,address,address,uint256,uint48,bytes32,bytes32)"(
+    "fillPermittedOrderERC20(bytes,(uint256,uint256,uint256),address,address,address,uint256,uint48,bytes32,bytes32)"(
       signedPermit: PromiseOrValue<BytesLike>,
       orderFillAmounts: OrderFillAmountsStruct,
       token: PromiseOrValue<string>,
@@ -1080,21 +1125,13 @@ export interface Pearlmit extends BaseContract {
 
     permitBatchApprove(
       batch: IPearlmit.PermitBatchTransferFromStruct,
+      hashedData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "permitBatchApprove(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"(
+    "permitBatchApprove(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32),bytes32)"(
       batch: IPearlmit.PermitBatchTransferFromStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    permitBatchTransferFrom(
-      batch: IPearlmit.PermitBatchTransferFromStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "permitBatchTransferFrom(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"(
-      batch: IPearlmit.PermitBatchTransferFromStruct,
+      hashedData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1380,6 +1417,20 @@ export interface Pearlmit extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  clearAllowance(
+    owner: PromiseOrValue<string>,
+    token: PromiseOrValue<string>,
+    id: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "clearAllowance(address,address,uint256)"(
+    owner: PromiseOrValue<string>,
+    token: PromiseOrValue<string>,
+    id: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   closePermittedOrder(
     owner: PromiseOrValue<string>,
     token: PromiseOrValue<string>,
@@ -1414,7 +1465,7 @@ export interface Pearlmit extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "fillPermittedOrderERC1155(bytes,(uint200,uint200,uint200),address,uint256,address,address,uint256,uint48,bytes32,bytes32)"(
+  "fillPermittedOrderERC1155(bytes,(uint256,uint256,uint256),address,uint256,address,address,uint256,uint48,bytes32,bytes32)"(
     signedPermit: PromiseOrValue<BytesLike>,
     orderFillAmounts: OrderFillAmountsStruct,
     token: PromiseOrValue<string>,
@@ -1441,7 +1492,7 @@ export interface Pearlmit extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "fillPermittedOrderERC20(bytes,(uint200,uint200,uint200),address,address,address,uint256,uint48,bytes32,bytes32)"(
+  "fillPermittedOrderERC20(bytes,(uint256,uint256,uint256),address,address,address,uint256,uint48,bytes32,bytes32)"(
     signedPermit: PromiseOrValue<BytesLike>,
     orderFillAmounts: OrderFillAmountsStruct,
     token: PromiseOrValue<string>,
@@ -1506,21 +1557,13 @@ export interface Pearlmit extends BaseContract {
 
   permitBatchApprove(
     batch: IPearlmit.PermitBatchTransferFromStruct,
+    hashedData: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "permitBatchApprove(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"(
+  "permitBatchApprove(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32),bytes32)"(
     batch: IPearlmit.PermitBatchTransferFromStruct,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  permitBatchTransferFrom(
-    batch: IPearlmit.PermitBatchTransferFromStruct,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "permitBatchTransferFrom(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"(
-    batch: IPearlmit.PermitBatchTransferFromStruct,
+    hashedData: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1812,6 +1855,20 @@ export interface Pearlmit extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    clearAllowance(
+      owner: PromiseOrValue<string>,
+      token: PromiseOrValue<string>,
+      id: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "clearAllowance(address,address,uint256)"(
+      owner: PromiseOrValue<string>,
+      token: PromiseOrValue<string>,
+      id: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     closePermittedOrder(
       owner: PromiseOrValue<string>,
       token: PromiseOrValue<string>,
@@ -1848,7 +1905,7 @@ export interface Pearlmit extends BaseContract {
       [BigNumber, boolean] & { quantityFilled: BigNumber; isError: boolean }
     >;
 
-    "fillPermittedOrderERC1155(bytes,(uint200,uint200,uint200),address,uint256,address,address,uint256,uint48,bytes32,bytes32)"(
+    "fillPermittedOrderERC1155(bytes,(uint256,uint256,uint256),address,uint256,address,address,uint256,uint48,bytes32,bytes32)"(
       signedPermit: PromiseOrValue<BytesLike>,
       orderFillAmounts: OrderFillAmountsStruct,
       token: PromiseOrValue<string>,
@@ -1879,7 +1936,7 @@ export interface Pearlmit extends BaseContract {
       [BigNumber, boolean] & { quantityFilled: BigNumber; isError: boolean }
     >;
 
-    "fillPermittedOrderERC20(bytes,(uint200,uint200,uint200),address,address,address,uint256,uint48,bytes32,bytes32)"(
+    "fillPermittedOrderERC20(bytes,(uint256,uint256,uint256),address,address,address,uint256,uint48,bytes32,bytes32)"(
       signedPermit: PromiseOrValue<BytesLike>,
       orderFillAmounts: OrderFillAmountsStruct,
       token: PromiseOrValue<string>,
@@ -1942,23 +1999,15 @@ export interface Pearlmit extends BaseContract {
 
     permitBatchApprove(
       batch: IPearlmit.PermitBatchTransferFromStruct,
+      hashedData: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "permitBatchApprove(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"(
+    "permitBatchApprove(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32),bytes32)"(
       batch: IPearlmit.PermitBatchTransferFromStruct,
+      hashedData: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    permitBatchTransferFrom(
-      batch: IPearlmit.PermitBatchTransferFromStruct,
-      overrides?: CallOverrides
-    ): Promise<boolean[]>;
-
-    "permitBatchTransferFrom(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"(
-      batch: IPearlmit.PermitBatchTransferFromStruct,
-      overrides?: CallOverrides
-    ): Promise<boolean[]>;
 
     permitTransferFromERC1155(
       token: PromiseOrValue<string>,
@@ -2239,7 +2288,7 @@ export interface Pearlmit extends BaseContract {
       wasCancellation?: null
     ): OrderClosedEventFilter;
 
-    "OrderFilled(bytes32,address,address,uint200)"(
+    "OrderFilled(bytes32,address,address,uint256)"(
       orderId?: PromiseOrValue<BytesLike> | null,
       owner?: PromiseOrValue<string> | null,
       operator?: PromiseOrValue<string> | null,
@@ -2252,7 +2301,7 @@ export interface Pearlmit extends BaseContract {
       amount?: null
     ): OrderFilledEventFilter;
 
-    "OrderOpened(bytes32,address,address,uint200)"(
+    "OrderOpened(bytes32,address,address,uint256)"(
       orderId?: PromiseOrValue<BytesLike> | null,
       owner?: PromiseOrValue<string> | null,
       operator?: PromiseOrValue<string> | null,
@@ -2264,6 +2313,17 @@ export interface Pearlmit extends BaseContract {
       operator?: PromiseOrValue<string> | null,
       fillableQuantity?: null
     ): OrderOpenedEventFilter;
+
+    "OrderRestored(bytes32,address,uint256)"(
+      orderId?: PromiseOrValue<BytesLike> | null,
+      owner?: PromiseOrValue<string> | null,
+      amountRestoredToOrder?: null
+    ): OrderRestoredEventFilter;
+    OrderRestored(
+      orderId?: PromiseOrValue<BytesLike> | null,
+      owner?: PromiseOrValue<string> | null,
+      amountRestoredToOrder?: null
+    ): OrderRestoredEventFilter;
   };
 
   estimateGas: {
@@ -2302,6 +2362,20 @@ export interface Pearlmit extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    clearAllowance(
+      owner: PromiseOrValue<string>,
+      token: PromiseOrValue<string>,
+      id: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "clearAllowance(address,address,uint256)"(
+      owner: PromiseOrValue<string>,
+      token: PromiseOrValue<string>,
+      id: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     closePermittedOrder(
       owner: PromiseOrValue<string>,
       token: PromiseOrValue<string>,
@@ -2336,7 +2410,7 @@ export interface Pearlmit extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "fillPermittedOrderERC1155(bytes,(uint200,uint200,uint200),address,uint256,address,address,uint256,uint48,bytes32,bytes32)"(
+    "fillPermittedOrderERC1155(bytes,(uint256,uint256,uint256),address,uint256,address,address,uint256,uint48,bytes32,bytes32)"(
       signedPermit: PromiseOrValue<BytesLike>,
       orderFillAmounts: OrderFillAmountsStruct,
       token: PromiseOrValue<string>,
@@ -2363,7 +2437,7 @@ export interface Pearlmit extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "fillPermittedOrderERC20(bytes,(uint200,uint200,uint200),address,address,address,uint256,uint48,bytes32,bytes32)"(
+    "fillPermittedOrderERC20(bytes,(uint256,uint256,uint256),address,address,address,uint256,uint48,bytes32,bytes32)"(
       signedPermit: PromiseOrValue<BytesLike>,
       orderFillAmounts: OrderFillAmountsStruct,
       token: PromiseOrValue<string>,
@@ -2428,21 +2502,13 @@ export interface Pearlmit extends BaseContract {
 
     permitBatchApprove(
       batch: IPearlmit.PermitBatchTransferFromStruct,
+      hashedData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "permitBatchApprove(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"(
+    "permitBatchApprove(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32),bytes32)"(
       batch: IPearlmit.PermitBatchTransferFromStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    permitBatchTransferFrom(
-      batch: IPearlmit.PermitBatchTransferFromStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "permitBatchTransferFrom(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"(
-      batch: IPearlmit.PermitBatchTransferFromStruct,
+      hashedData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -2725,6 +2791,20 @@ export interface Pearlmit extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    clearAllowance(
+      owner: PromiseOrValue<string>,
+      token: PromiseOrValue<string>,
+      id: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "clearAllowance(address,address,uint256)"(
+      owner: PromiseOrValue<string>,
+      token: PromiseOrValue<string>,
+      id: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     closePermittedOrder(
       owner: PromiseOrValue<string>,
       token: PromiseOrValue<string>,
@@ -2761,7 +2841,7 @@ export interface Pearlmit extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "fillPermittedOrderERC1155(bytes,(uint200,uint200,uint200),address,uint256,address,address,uint256,uint48,bytes32,bytes32)"(
+    "fillPermittedOrderERC1155(bytes,(uint256,uint256,uint256),address,uint256,address,address,uint256,uint48,bytes32,bytes32)"(
       signedPermit: PromiseOrValue<BytesLike>,
       orderFillAmounts: OrderFillAmountsStruct,
       token: PromiseOrValue<string>,
@@ -2788,7 +2868,7 @@ export interface Pearlmit extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "fillPermittedOrderERC20(bytes,(uint200,uint200,uint200),address,address,address,uint256,uint48,bytes32,bytes32)"(
+    "fillPermittedOrderERC20(bytes,(uint256,uint256,uint256),address,address,address,uint256,uint48,bytes32,bytes32)"(
       signedPermit: PromiseOrValue<BytesLike>,
       orderFillAmounts: OrderFillAmountsStruct,
       token: PromiseOrValue<string>,
@@ -2853,21 +2933,13 @@ export interface Pearlmit extends BaseContract {
 
     permitBatchApprove(
       batch: IPearlmit.PermitBatchTransferFromStruct,
+      hashedData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "permitBatchApprove(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"(
+    "permitBatchApprove(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes,address,bytes32),bytes32)"(
       batch: IPearlmit.PermitBatchTransferFromStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    permitBatchTransferFrom(
-      batch: IPearlmit.PermitBatchTransferFromStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "permitBatchTransferFrom(((uint8,address,uint256,uint200,address)[],address,uint256,uint48,bytes))"(
-      batch: IPearlmit.PermitBatchTransferFromStruct,
+      hashedData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

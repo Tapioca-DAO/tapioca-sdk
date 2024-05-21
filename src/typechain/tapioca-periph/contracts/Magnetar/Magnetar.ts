@@ -32,41 +32,33 @@ export type MagnetarCallStruct = {
   id: PromiseOrValue<BigNumberish>;
   target: PromiseOrValue<string>;
   value: PromiseOrValue<BigNumberish>;
-  allowFailure: PromiseOrValue<boolean>;
   call: PromiseOrValue<BytesLike>;
 };
 
-export type MagnetarCallStructOutput = [
-  number,
-  string,
-  BigNumber,
-  boolean,
-  string
-] & {
+export type MagnetarCallStructOutput = [number, string, BigNumber, string] & {
   id: number;
   target: string;
   value: BigNumber;
-  allowFailure: boolean;
   call: string;
 };
 
 export interface MagnetarInterface extends utils.Interface {
   functions: {
     "MAGNETAR_ACTION_ASSET_MODULE()": FunctionFragment;
-    "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE()": FunctionFragment;
     "MAGNETAR_ACTION_COLLATERAL_MODULE()": FunctionFragment;
     "MAGNETAR_ACTION_MARKET()": FunctionFragment;
     "MAGNETAR_ACTION_MINT_MODULE()": FunctionFragment;
-    "MAGNETAR_ACTION_MINT_XCHAIN_MODULE()": FunctionFragment;
     "MAGNETAR_ACTION_OFT()": FunctionFragment;
     "MAGNETAR_ACTION_OPTION_MODULE()": FunctionFragment;
     "MAGNETAR_ACTION_PERMIT()": FunctionFragment;
-    "MAGNETAR_ACTION_TAP_TOKEN()": FunctionFragment;
-    "MAGNETAR_ACTION_WRAP()": FunctionFragment;
+    "MAGNETAR_ACTION_TAP_LOCK()": FunctionFragment;
+    "MAGNETAR_ACTION_TAP_UNLOCK()": FunctionFragment;
     "MAGNETAR_ACTION_YIELDBOX_MODULE()": FunctionFragment;
-    "burst((uint8,address,uint256,bool,bytes)[])": FunctionFragment;
+    "burst((uint8,address,uint256,bytes)[])": FunctionFragment;
     "helper()": FunctionFragment;
     "magnetarModuleExtender()": FunctionFragment;
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)": FunctionFragment;
+    "onERC1155Received(address,address,uint256,uint256,bytes)": FunctionFragment;
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "pearlmit()": FunctionFragment;
@@ -76,6 +68,8 @@ export interface MagnetarInterface extends utils.Interface {
     "setHelper(address)": FunctionFragment;
     "setMagnetarModuleExtender(address)": FunctionFragment;
     "setPearlmit(address)": FunctionFragment;
+    "supportsInterface(bytes4)": FunctionFragment;
+    "toeHelper()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
@@ -83,34 +77,34 @@ export interface MagnetarInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "MAGNETAR_ACTION_ASSET_MODULE"
       | "MAGNETAR_ACTION_ASSET_MODULE()"
-      | "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE"
-      | "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE()"
       | "MAGNETAR_ACTION_COLLATERAL_MODULE"
       | "MAGNETAR_ACTION_COLLATERAL_MODULE()"
       | "MAGNETAR_ACTION_MARKET"
       | "MAGNETAR_ACTION_MARKET()"
       | "MAGNETAR_ACTION_MINT_MODULE"
       | "MAGNETAR_ACTION_MINT_MODULE()"
-      | "MAGNETAR_ACTION_MINT_XCHAIN_MODULE"
-      | "MAGNETAR_ACTION_MINT_XCHAIN_MODULE()"
       | "MAGNETAR_ACTION_OFT"
       | "MAGNETAR_ACTION_OFT()"
       | "MAGNETAR_ACTION_OPTION_MODULE"
       | "MAGNETAR_ACTION_OPTION_MODULE()"
       | "MAGNETAR_ACTION_PERMIT"
       | "MAGNETAR_ACTION_PERMIT()"
-      | "MAGNETAR_ACTION_TAP_TOKEN"
-      | "MAGNETAR_ACTION_TAP_TOKEN()"
-      | "MAGNETAR_ACTION_WRAP"
-      | "MAGNETAR_ACTION_WRAP()"
+      | "MAGNETAR_ACTION_TAP_LOCK"
+      | "MAGNETAR_ACTION_TAP_LOCK()"
+      | "MAGNETAR_ACTION_TAP_UNLOCK"
+      | "MAGNETAR_ACTION_TAP_UNLOCK()"
       | "MAGNETAR_ACTION_YIELDBOX_MODULE"
       | "MAGNETAR_ACTION_YIELDBOX_MODULE()"
       | "burst"
-      | "burst((uint8,address,uint256,bool,bytes)[])"
+      | "burst((uint8,address,uint256,bytes)[])"
       | "helper"
       | "helper()"
       | "magnetarModuleExtender"
       | "magnetarModuleExtender()"
+      | "onERC1155BatchReceived"
+      | "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"
+      | "onERC1155Received"
+      | "onERC1155Received(address,address,uint256,uint256,bytes)"
       | "onERC721Received"
       | "onERC721Received(address,address,uint256,bytes)"
       | "owner"
@@ -129,6 +123,10 @@ export interface MagnetarInterface extends utils.Interface {
       | "setMagnetarModuleExtender(address)"
       | "setPearlmit"
       | "setPearlmit(address)"
+      | "supportsInterface"
+      | "supportsInterface(bytes4)"
+      | "toeHelper"
+      | "toeHelper()"
       | "transferOwnership"
       | "transferOwnership(address)"
   ): FunctionFragment;
@@ -139,14 +137,6 @@ export interface MagnetarInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "MAGNETAR_ACTION_ASSET_MODULE()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -174,14 +164,6 @@ export interface MagnetarInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "MAGNETAR_ACTION_MINT_XCHAIN_MODULE",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "MAGNETAR_ACTION_MINT_XCHAIN_MODULE()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "MAGNETAR_ACTION_OFT",
     values?: undefined
   ): string;
@@ -206,19 +188,19 @@ export interface MagnetarInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "MAGNETAR_ACTION_TAP_TOKEN",
+    functionFragment: "MAGNETAR_ACTION_TAP_LOCK",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "MAGNETAR_ACTION_TAP_TOKEN()",
+    functionFragment: "MAGNETAR_ACTION_TAP_LOCK()",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "MAGNETAR_ACTION_WRAP",
+    functionFragment: "MAGNETAR_ACTION_TAP_UNLOCK",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "MAGNETAR_ACTION_WRAP()",
+    functionFragment: "MAGNETAR_ACTION_TAP_UNLOCK()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -234,7 +216,7 @@ export interface MagnetarInterface extends utils.Interface {
     values: [MagnetarCallStruct[]]
   ): string;
   encodeFunctionData(
-    functionFragment: "burst((uint8,address,uint256,bool,bytes)[])",
+    functionFragment: "burst((uint8,address,uint256,bytes)[])",
     values: [MagnetarCallStruct[]]
   ): string;
   encodeFunctionData(functionFragment: "helper", values?: undefined): string;
@@ -246,6 +228,46 @@ export interface MagnetarInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "magnetarModuleExtender()",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "onERC1155BatchReceived",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "onERC1155Received",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "onERC1155Received(address,address,uint256,uint256,bytes)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "onERC721Received",
@@ -321,6 +343,19 @@ export interface MagnetarInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "supportsInterface",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface(bytes4)",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(functionFragment: "toeHelper", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "toeHelper()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [PromiseOrValue<string>]
   ): string;
@@ -335,14 +370,6 @@ export interface MagnetarInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "MAGNETAR_ACTION_ASSET_MODULE()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -370,14 +397,6 @@ export interface MagnetarInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "MAGNETAR_ACTION_MINT_XCHAIN_MODULE",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "MAGNETAR_ACTION_MINT_XCHAIN_MODULE()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "MAGNETAR_ACTION_OFT",
     data: BytesLike
   ): Result;
@@ -402,19 +421,19 @@ export interface MagnetarInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "MAGNETAR_ACTION_TAP_TOKEN",
+    functionFragment: "MAGNETAR_ACTION_TAP_LOCK",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "MAGNETAR_ACTION_TAP_TOKEN()",
+    functionFragment: "MAGNETAR_ACTION_TAP_LOCK()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "MAGNETAR_ACTION_WRAP",
+    functionFragment: "MAGNETAR_ACTION_TAP_UNLOCK",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "MAGNETAR_ACTION_WRAP()",
+    functionFragment: "MAGNETAR_ACTION_TAP_UNLOCK()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -427,7 +446,7 @@ export interface MagnetarInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "burst", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "burst((uint8,address,uint256,bool,bytes)[])",
+    functionFragment: "burst((uint8,address,uint256,bytes)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "helper", data: BytesLike): Result;
@@ -438,6 +457,22 @@ export interface MagnetarInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "magnetarModuleExtender()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC1155BatchReceived",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC1155Received",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC1155Received(address,address,uint256,uint256,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -489,6 +524,19 @@ export interface MagnetarInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setPearlmit(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface(bytes4)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "toeHelper", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "toeHelper()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -622,14 +670,6 @@ export interface Magnetar extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[number]>;
 
-    MAGNETAR_ACTION_ASSET_XCHAIN_MODULE(
-      overrides?: CallOverrides
-    ): Promise<[number]>;
-
-    "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE()"(
-      overrides?: CallOverrides
-    ): Promise<[number]>;
-
     MAGNETAR_ACTION_COLLATERAL_MODULE(
       overrides?: CallOverrides
     ): Promise<[number]>;
@@ -648,14 +688,6 @@ export interface Magnetar extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[number]>;
 
-    MAGNETAR_ACTION_MINT_XCHAIN_MODULE(
-      overrides?: CallOverrides
-    ): Promise<[number]>;
-
-    "MAGNETAR_ACTION_MINT_XCHAIN_MODULE()"(
-      overrides?: CallOverrides
-    ): Promise<[number]>;
-
     MAGNETAR_ACTION_OFT(overrides?: CallOverrides): Promise<[number]>;
 
     "MAGNETAR_ACTION_OFT()"(overrides?: CallOverrides): Promise<[number]>;
@@ -670,13 +702,15 @@ export interface Magnetar extends BaseContract {
 
     "MAGNETAR_ACTION_PERMIT()"(overrides?: CallOverrides): Promise<[number]>;
 
-    MAGNETAR_ACTION_TAP_TOKEN(overrides?: CallOverrides): Promise<[number]>;
+    MAGNETAR_ACTION_TAP_LOCK(overrides?: CallOverrides): Promise<[number]>;
 
-    "MAGNETAR_ACTION_TAP_TOKEN()"(overrides?: CallOverrides): Promise<[number]>;
+    "MAGNETAR_ACTION_TAP_LOCK()"(overrides?: CallOverrides): Promise<[number]>;
 
-    MAGNETAR_ACTION_WRAP(overrides?: CallOverrides): Promise<[number]>;
+    MAGNETAR_ACTION_TAP_UNLOCK(overrides?: CallOverrides): Promise<[number]>;
 
-    "MAGNETAR_ACTION_WRAP()"(overrides?: CallOverrides): Promise<[number]>;
+    "MAGNETAR_ACTION_TAP_UNLOCK()"(
+      overrides?: CallOverrides
+    ): Promise<[number]>;
 
     MAGNETAR_ACTION_YIELDBOX_MODULE(
       overrides?: CallOverrides
@@ -691,7 +725,7 @@ export interface Magnetar extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "burst((uint8,address,uint256,bool,bytes)[])"(
+    "burst((uint8,address,uint256,bytes)[])"(
       calls: MagnetarCallStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -703,6 +737,42 @@ export interface Magnetar extends BaseContract {
     magnetarModuleExtender(overrides?: CallOverrides): Promise<[string]>;
 
     "magnetarModuleExtender()"(overrides?: CallOverrides): Promise<[string]>;
+
+    onERC1155BatchReceived(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    onERC1155Received(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "onERC1155Received(address,address,uint256,uint256,bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     onERC721Received(
       arg0: PromiseOrValue<string>,
@@ -788,6 +858,20 @@ export interface Magnetar extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    toeHelper(overrides?: CallOverrides): Promise<[string]>;
+
+    "toeHelper()"(overrides?: CallOverrides): Promise<[string]>;
+
     transferOwnership(
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -803,14 +887,6 @@ export interface Magnetar extends BaseContract {
 
   "MAGNETAR_ACTION_ASSET_MODULE()"(overrides?: CallOverrides): Promise<number>;
 
-  MAGNETAR_ACTION_ASSET_XCHAIN_MODULE(
-    overrides?: CallOverrides
-  ): Promise<number>;
-
-  "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE()"(
-    overrides?: CallOverrides
-  ): Promise<number>;
-
   MAGNETAR_ACTION_COLLATERAL_MODULE(overrides?: CallOverrides): Promise<number>;
 
   "MAGNETAR_ACTION_COLLATERAL_MODULE()"(
@@ -825,14 +901,6 @@ export interface Magnetar extends BaseContract {
 
   "MAGNETAR_ACTION_MINT_MODULE()"(overrides?: CallOverrides): Promise<number>;
 
-  MAGNETAR_ACTION_MINT_XCHAIN_MODULE(
-    overrides?: CallOverrides
-  ): Promise<number>;
-
-  "MAGNETAR_ACTION_MINT_XCHAIN_MODULE()"(
-    overrides?: CallOverrides
-  ): Promise<number>;
-
   MAGNETAR_ACTION_OFT(overrides?: CallOverrides): Promise<number>;
 
   "MAGNETAR_ACTION_OFT()"(overrides?: CallOverrides): Promise<number>;
@@ -845,13 +913,13 @@ export interface Magnetar extends BaseContract {
 
   "MAGNETAR_ACTION_PERMIT()"(overrides?: CallOverrides): Promise<number>;
 
-  MAGNETAR_ACTION_TAP_TOKEN(overrides?: CallOverrides): Promise<number>;
+  MAGNETAR_ACTION_TAP_LOCK(overrides?: CallOverrides): Promise<number>;
 
-  "MAGNETAR_ACTION_TAP_TOKEN()"(overrides?: CallOverrides): Promise<number>;
+  "MAGNETAR_ACTION_TAP_LOCK()"(overrides?: CallOverrides): Promise<number>;
 
-  MAGNETAR_ACTION_WRAP(overrides?: CallOverrides): Promise<number>;
+  MAGNETAR_ACTION_TAP_UNLOCK(overrides?: CallOverrides): Promise<number>;
 
-  "MAGNETAR_ACTION_WRAP()"(overrides?: CallOverrides): Promise<number>;
+  "MAGNETAR_ACTION_TAP_UNLOCK()"(overrides?: CallOverrides): Promise<number>;
 
   MAGNETAR_ACTION_YIELDBOX_MODULE(overrides?: CallOverrides): Promise<number>;
 
@@ -864,7 +932,7 @@ export interface Magnetar extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "burst((uint8,address,uint256,bool,bytes)[])"(
+  "burst((uint8,address,uint256,bytes)[])"(
     calls: MagnetarCallStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -876,6 +944,42 @@ export interface Magnetar extends BaseContract {
   magnetarModuleExtender(overrides?: CallOverrides): Promise<string>;
 
   "magnetarModuleExtender()"(overrides?: CallOverrides): Promise<string>;
+
+  onERC1155BatchReceived(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<string>,
+    arg2: PromiseOrValue<BigNumberish>[],
+    arg3: PromiseOrValue<BigNumberish>[],
+    arg4: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<string>,
+    arg2: PromiseOrValue<BigNumberish>[],
+    arg3: PromiseOrValue<BigNumberish>[],
+    arg4: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  onERC1155Received(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<string>,
+    arg2: PromiseOrValue<BigNumberish>,
+    arg3: PromiseOrValue<BigNumberish>,
+    arg4: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "onERC1155Received(address,address,uint256,uint256,bytes)"(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<string>,
+    arg2: PromiseOrValue<BigNumberish>,
+    arg3: PromiseOrValue<BigNumberish>,
+    arg4: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   onERC721Received(
     arg0: PromiseOrValue<string>,
@@ -961,6 +1065,20 @@ export interface Magnetar extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  supportsInterface(
+    interfaceId: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "supportsInterface(bytes4)"(
+    interfaceId: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  toeHelper(overrides?: CallOverrides): Promise<string>;
+
+  "toeHelper()"(overrides?: CallOverrides): Promise<string>;
+
   transferOwnership(
     newOwner: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -975,14 +1093,6 @@ export interface Magnetar extends BaseContract {
     MAGNETAR_ACTION_ASSET_MODULE(overrides?: CallOverrides): Promise<number>;
 
     "MAGNETAR_ACTION_ASSET_MODULE()"(
-      overrides?: CallOverrides
-    ): Promise<number>;
-
-    MAGNETAR_ACTION_ASSET_XCHAIN_MODULE(
-      overrides?: CallOverrides
-    ): Promise<number>;
-
-    "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE()"(
       overrides?: CallOverrides
     ): Promise<number>;
 
@@ -1002,14 +1112,6 @@ export interface Magnetar extends BaseContract {
 
     "MAGNETAR_ACTION_MINT_MODULE()"(overrides?: CallOverrides): Promise<number>;
 
-    MAGNETAR_ACTION_MINT_XCHAIN_MODULE(
-      overrides?: CallOverrides
-    ): Promise<number>;
-
-    "MAGNETAR_ACTION_MINT_XCHAIN_MODULE()"(
-      overrides?: CallOverrides
-    ): Promise<number>;
-
     MAGNETAR_ACTION_OFT(overrides?: CallOverrides): Promise<number>;
 
     "MAGNETAR_ACTION_OFT()"(overrides?: CallOverrides): Promise<number>;
@@ -1024,13 +1126,13 @@ export interface Magnetar extends BaseContract {
 
     "MAGNETAR_ACTION_PERMIT()"(overrides?: CallOverrides): Promise<number>;
 
-    MAGNETAR_ACTION_TAP_TOKEN(overrides?: CallOverrides): Promise<number>;
+    MAGNETAR_ACTION_TAP_LOCK(overrides?: CallOverrides): Promise<number>;
 
-    "MAGNETAR_ACTION_TAP_TOKEN()"(overrides?: CallOverrides): Promise<number>;
+    "MAGNETAR_ACTION_TAP_LOCK()"(overrides?: CallOverrides): Promise<number>;
 
-    MAGNETAR_ACTION_WRAP(overrides?: CallOverrides): Promise<number>;
+    MAGNETAR_ACTION_TAP_UNLOCK(overrides?: CallOverrides): Promise<number>;
 
-    "MAGNETAR_ACTION_WRAP()"(overrides?: CallOverrides): Promise<number>;
+    "MAGNETAR_ACTION_TAP_UNLOCK()"(overrides?: CallOverrides): Promise<number>;
 
     MAGNETAR_ACTION_YIELDBOX_MODULE(overrides?: CallOverrides): Promise<number>;
 
@@ -1043,7 +1145,7 @@ export interface Magnetar extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "burst((uint8,address,uint256,bool,bytes)[])"(
+    "burst((uint8,address,uint256,bytes)[])"(
       calls: MagnetarCallStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
@@ -1055,6 +1157,42 @@ export interface Magnetar extends BaseContract {
     magnetarModuleExtender(overrides?: CallOverrides): Promise<string>;
 
     "magnetarModuleExtender()"(overrides?: CallOverrides): Promise<string>;
+
+    onERC1155BatchReceived(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    onERC1155Received(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "onERC1155Received(address,address,uint256,uint256,bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     onERC721Received(
       arg0: PromiseOrValue<string>,
@@ -1136,6 +1274,20 @@ export interface Magnetar extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    toeHelper(overrides?: CallOverrides): Promise<string>;
+
+    "toeHelper()"(overrides?: CallOverrides): Promise<string>;
+
     transferOwnership(
       newOwner: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -1201,14 +1353,6 @@ export interface Magnetar extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    MAGNETAR_ACTION_ASSET_XCHAIN_MODULE(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE()"(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     MAGNETAR_ACTION_COLLATERAL_MODULE(
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1224,14 +1368,6 @@ export interface Magnetar extends BaseContract {
     MAGNETAR_ACTION_MINT_MODULE(overrides?: CallOverrides): Promise<BigNumber>;
 
     "MAGNETAR_ACTION_MINT_MODULE()"(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    MAGNETAR_ACTION_MINT_XCHAIN_MODULE(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "MAGNETAR_ACTION_MINT_XCHAIN_MODULE()"(
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1251,15 +1387,15 @@ export interface Magnetar extends BaseContract {
 
     "MAGNETAR_ACTION_PERMIT()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    MAGNETAR_ACTION_TAP_TOKEN(overrides?: CallOverrides): Promise<BigNumber>;
+    MAGNETAR_ACTION_TAP_LOCK(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "MAGNETAR_ACTION_TAP_TOKEN()"(
+    "MAGNETAR_ACTION_TAP_LOCK()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    MAGNETAR_ACTION_TAP_UNLOCK(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "MAGNETAR_ACTION_TAP_UNLOCK()"(
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    MAGNETAR_ACTION_WRAP(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "MAGNETAR_ACTION_WRAP()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     MAGNETAR_ACTION_YIELDBOX_MODULE(
       overrides?: CallOverrides
@@ -1274,7 +1410,7 @@ export interface Magnetar extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "burst((uint8,address,uint256,bool,bytes)[])"(
+    "burst((uint8,address,uint256,bytes)[])"(
       calls: MagnetarCallStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -1286,6 +1422,42 @@ export interface Magnetar extends BaseContract {
     magnetarModuleExtender(overrides?: CallOverrides): Promise<BigNumber>;
 
     "magnetarModuleExtender()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    onERC1155BatchReceived(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    onERC1155Received(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "onERC1155Received(address,address,uint256,uint256,bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     onERC721Received(
       arg0: PromiseOrValue<string>,
@@ -1371,6 +1543,20 @@ export interface Magnetar extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    toeHelper(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "toeHelper()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     transferOwnership(
       newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1388,14 +1574,6 @@ export interface Magnetar extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "MAGNETAR_ACTION_ASSET_MODULE()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    MAGNETAR_ACTION_ASSET_XCHAIN_MODULE(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "MAGNETAR_ACTION_ASSET_XCHAIN_MODULE()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1423,14 +1601,6 @@ export interface Magnetar extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    MAGNETAR_ACTION_MINT_XCHAIN_MODULE(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "MAGNETAR_ACTION_MINT_XCHAIN_MODULE()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     MAGNETAR_ACTION_OFT(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1455,19 +1625,19 @@ export interface Magnetar extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    MAGNETAR_ACTION_TAP_TOKEN(
+    MAGNETAR_ACTION_TAP_LOCK(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "MAGNETAR_ACTION_TAP_TOKEN()"(
+    "MAGNETAR_ACTION_TAP_LOCK()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    MAGNETAR_ACTION_WRAP(
+    MAGNETAR_ACTION_TAP_UNLOCK(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "MAGNETAR_ACTION_WRAP()"(
+    "MAGNETAR_ACTION_TAP_UNLOCK()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1484,7 +1654,7 @@ export interface Magnetar extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "burst((uint8,address,uint256,bool,bytes)[])"(
+    "burst((uint8,address,uint256,bytes)[])"(
       calls: MagnetarCallStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -1499,6 +1669,42 @@ export interface Magnetar extends BaseContract {
 
     "magnetarModuleExtender()"(
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    onERC1155BatchReceived(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>[],
+      arg3: PromiseOrValue<BigNumberish>[],
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    onERC1155Received(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "onERC1155Received(address,address,uint256,uint256,bytes)"(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BigNumberish>,
+      arg3: PromiseOrValue<BigNumberish>,
+      arg4: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     onERC721Received(
@@ -1584,6 +1790,20 @@ export interface Magnetar extends BaseContract {
       _pearlmit: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "supportsInterface(bytes4)"(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    toeHelper(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "toeHelper()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,

@@ -36,7 +36,6 @@ export type OracleMultiConstructorDataStruct = {
   _uniFinalCurrency: PromiseOrValue<BigNumberish>;
   _circuitChainlink: PromiseOrValue<string>[];
   _circuitChainIsMultiplied: PromiseOrValue<BigNumberish>[];
-  _stalePeriod: PromiseOrValue<BigNumberish>;
   guardians: PromiseOrValue<string>[];
   _description: PromiseOrValue<BytesLike>;
   _sequencerUptimeFeed: PromiseOrValue<string>;
@@ -52,7 +51,6 @@ export type OracleMultiConstructorDataStructOutput = [
   number,
   string[],
   number[],
-  number,
   string[],
   string,
   string,
@@ -66,7 +64,6 @@ export type OracleMultiConstructorDataStructOutput = [
   _uniFinalCurrency: number;
   _circuitChainlink: string[];
   _circuitChainIsMultiplied: number[];
-  _stalePeriod: number;
   guardians: string[];
   _description: string;
   _sequencerUptimeFeed: string;
@@ -77,6 +74,7 @@ export interface SeerInterface extends utils.Interface {
   functions: {
     "BASE()": FunctionFragment;
     "DEFAULT_ADMIN_ROLE()": FunctionFragment;
+    "DEFAULT_STALE_PERIOD()": FunctionFragment;
     "GRACE_PERIOD_TIME()": FunctionFragment;
     "GUARDIAN_ROLE_CHAINLINK()": FunctionFragment;
     "GUARDIAN_ROLE_UNISWAP()": FunctionFragment;
@@ -89,8 +87,8 @@ export interface SeerInterface extends utils.Interface {
     "cancelDefaultAdminTransfer()": FunctionFragment;
     "chainlinkDecimals(uint256)": FunctionFragment;
     "changeDefaultAdminDelay(uint48)": FunctionFragment;
+    "changeDefaultStalePeriod(uint32)": FunctionFragment;
     "changeGracePeriod(uint32)": FunctionFragment;
-    "changeStalePeriod(uint32)": FunctionFragment;
     "changeTwapPeriod(uint32)": FunctionFragment;
     "circuitChainIsMultiplied(uint256)": FunctionFragment;
     "circuitChainlink(uint256)": FunctionFragment;
@@ -123,11 +121,12 @@ export interface SeerInterface extends utils.Interface {
     "renounceRole(bytes32,address)": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
     "rollbackDefaultAdminDelay()": FunctionFragment;
-    "stalePeriod()": FunctionFragment;
+    "stalePeriods(address)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol(bytes)": FunctionFragment;
     "twapPeriod()": FunctionFragment;
     "uniFinalCurrency()": FunctionFragment;
+    "updateStalePeriod(address,uint32)": FunctionFragment;
   };
 
   getFunction(
@@ -136,6 +135,8 @@ export interface SeerInterface extends utils.Interface {
       | "BASE()"
       | "DEFAULT_ADMIN_ROLE"
       | "DEFAULT_ADMIN_ROLE()"
+      | "DEFAULT_STALE_PERIOD"
+      | "DEFAULT_STALE_PERIOD()"
       | "GRACE_PERIOD_TIME"
       | "GRACE_PERIOD_TIME()"
       | "GUARDIAN_ROLE_CHAINLINK"
@@ -160,10 +161,10 @@ export interface SeerInterface extends utils.Interface {
       | "chainlinkDecimals(uint256)"
       | "changeDefaultAdminDelay"
       | "changeDefaultAdminDelay(uint48)"
+      | "changeDefaultStalePeriod"
+      | "changeDefaultStalePeriod(uint32)"
       | "changeGracePeriod"
       | "changeGracePeriod(uint32)"
-      | "changeStalePeriod"
-      | "changeStalePeriod(uint32)"
       | "changeTwapPeriod"
       | "changeTwapPeriod(uint32)"
       | "circuitChainIsMultiplied"
@@ -228,8 +229,8 @@ export interface SeerInterface extends utils.Interface {
       | "revokeRole(bytes32,address)"
       | "rollbackDefaultAdminDelay"
       | "rollbackDefaultAdminDelay()"
-      | "stalePeriod"
-      | "stalePeriod()"
+      | "stalePeriods"
+      | "stalePeriods(address)"
       | "supportsInterface"
       | "supportsInterface(bytes4)"
       | "symbol"
@@ -238,6 +239,8 @@ export interface SeerInterface extends utils.Interface {
       | "twapPeriod()"
       | "uniFinalCurrency"
       | "uniFinalCurrency()"
+      | "updateStalePeriod"
+      | "updateStalePeriod(address,uint32)"
   ): FunctionFragment;
 
   encodeFunctionData(functionFragment: "BASE", values?: undefined): string;
@@ -248,6 +251,14 @@ export interface SeerInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "DEFAULT_ADMIN_ROLE()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "DEFAULT_STALE_PERIOD",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "DEFAULT_STALE_PERIOD()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -335,19 +346,19 @@ export interface SeerInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
+    functionFragment: "changeDefaultStalePeriod",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "changeDefaultStalePeriod(uint32)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "changeGracePeriod",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "changeGracePeriod(uint32)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "changeStalePeriod",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "changeStalePeriod(uint32)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
@@ -568,12 +579,12 @@ export interface SeerInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "stalePeriod",
-    values?: undefined
+    functionFragment: "stalePeriods",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "stalePeriod()",
-    values?: undefined
+    functionFragment: "stalePeriods(address)",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "supportsInterface",
@@ -607,6 +618,14 @@ export interface SeerInterface extends utils.Interface {
     functionFragment: "uniFinalCurrency()",
     values?: undefined
   ): string;
+  encodeFunctionData(
+    functionFragment: "updateStalePeriod",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updateStalePeriod(address,uint32)",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
 
   decodeFunctionResult(functionFragment: "BASE", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "BASE()", data: BytesLike): Result;
@@ -616,6 +635,14 @@ export interface SeerInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "DEFAULT_ADMIN_ROLE()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "DEFAULT_STALE_PERIOD",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "DEFAULT_STALE_PERIOD()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -703,19 +730,19 @@ export interface SeerInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "changeDefaultStalePeriod",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "changeDefaultStalePeriod(uint32)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "changeGracePeriod",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "changeGracePeriod(uint32)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "changeStalePeriod",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "changeStalePeriod(uint32)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -906,11 +933,11 @@ export interface SeerInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "stalePeriod",
+    functionFragment: "stalePeriods",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "stalePeriod()",
+    functionFragment: "stalePeriods(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -939,6 +966,14 @@ export interface SeerInterface extends utils.Interface {
     functionFragment: "uniFinalCurrency()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateStalePeriod",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateStalePeriod(address,uint32)",
+    data: BytesLike
+  ): Result;
 
   events: {
     "DefaultAdminDelayChangeCanceled()": EventFragment;
@@ -948,6 +983,7 @@ export interface SeerInterface extends utils.Interface {
     "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
     "RoleGranted(bytes32,address,address)": EventFragment;
     "RoleRevoked(bytes32,address,address)": EventFragment;
+    "StalePeriodUpdated(address,uint32)": EventFragment;
   };
 
   getEvent(
@@ -985,6 +1021,10 @@ export interface SeerInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "RoleRevoked"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "RoleRevoked(bytes32,address,address)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "StalePeriodUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "StalePeriodUpdated(address,uint32)"
   ): EventFragment;
 }
 
@@ -1067,6 +1107,18 @@ export type RoleRevokedEvent = TypedEvent<
 
 export type RoleRevokedEventFilter = TypedEventFilter<RoleRevokedEvent>;
 
+export interface StalePeriodUpdatedEventObject {
+  feed: string;
+  val: number;
+}
+export type StalePeriodUpdatedEvent = TypedEvent<
+  [string, number],
+  StalePeriodUpdatedEventObject
+>;
+
+export type StalePeriodUpdatedEventFilter =
+  TypedEventFilter<StalePeriodUpdatedEvent>;
+
 export interface Seer extends BaseContract {
   contractName: "Seer";
 
@@ -1103,6 +1155,10 @@ export interface Seer extends BaseContract {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<[string]>;
 
     "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<[string]>;
+
+    DEFAULT_STALE_PERIOD(overrides?: CallOverrides): Promise<[number]>;
+
+    "DEFAULT_STALE_PERIOD()"(overrides?: CallOverrides): Promise<[number]>;
 
     GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<[number]>;
 
@@ -1178,6 +1234,16 @@ export interface Seer extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    changeDefaultStalePeriod(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "changeDefaultStalePeriod(uint32)"(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     changeGracePeriod(
       _gracePeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1185,16 +1251,6 @@ export interface Seer extends BaseContract {
 
     "changeGracePeriod(uint32)"(
       _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    changeStalePeriod(
-      _stalePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "changeStalePeriod(uint32)"(
-      _stalePeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1458,9 +1514,15 @@ export interface Seer extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    stalePeriod(overrides?: CallOverrides): Promise<[number]>;
+    stalePeriods(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[number]>;
 
-    "stalePeriod()"(overrides?: CallOverrides): Promise<[number]>;
+    "stalePeriods(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[number]>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
@@ -1489,6 +1551,18 @@ export interface Seer extends BaseContract {
     uniFinalCurrency(overrides?: CallOverrides): Promise<[number]>;
 
     "uniFinalCurrency()"(overrides?: CallOverrides): Promise<[number]>;
+
+    updateStalePeriod(
+      _feed: PromiseOrValue<string>,
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "updateStalePeriod(address,uint32)"(
+      _feed: PromiseOrValue<string>,
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
 
   BASE(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1498,6 +1572,10 @@ export interface Seer extends BaseContract {
   DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
 
   "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<string>;
+
+  DEFAULT_STALE_PERIOD(overrides?: CallOverrides): Promise<number>;
+
+  "DEFAULT_STALE_PERIOD()"(overrides?: CallOverrides): Promise<number>;
 
   GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<number>;
 
@@ -1573,6 +1651,16 @@ export interface Seer extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  changeDefaultStalePeriod(
+    _stalePeriod: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "changeDefaultStalePeriod(uint32)"(
+    _stalePeriod: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   changeGracePeriod(
     _gracePeriod: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1580,16 +1668,6 @@ export interface Seer extends BaseContract {
 
   "changeGracePeriod(uint32)"(
     _gracePeriod: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  changeStalePeriod(
-    _stalePeriod: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "changeStalePeriod(uint32)"(
-    _stalePeriod: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1843,9 +1921,15 @@ export interface Seer extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  stalePeriod(overrides?: CallOverrides): Promise<number>;
+  stalePeriods(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<number>;
 
-  "stalePeriod()"(overrides?: CallOverrides): Promise<number>;
+  "stalePeriods(address)"(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<number>;
 
   supportsInterface(
     interfaceId: PromiseOrValue<BytesLike>,
@@ -1875,6 +1959,18 @@ export interface Seer extends BaseContract {
 
   "uniFinalCurrency()"(overrides?: CallOverrides): Promise<number>;
 
+  updateStalePeriod(
+    _feed: PromiseOrValue<string>,
+    _stalePeriod: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "updateStalePeriod(address,uint32)"(
+    _feed: PromiseOrValue<string>,
+    _stalePeriod: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     BASE(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1883,6 +1979,10 @@ export interface Seer extends BaseContract {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
 
     "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<string>;
+
+    DEFAULT_STALE_PERIOD(overrides?: CallOverrides): Promise<number>;
+
+    "DEFAULT_STALE_PERIOD()"(overrides?: CallOverrides): Promise<number>;
 
     GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<number>;
 
@@ -1950,6 +2050,16 @@ export interface Seer extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    changeDefaultStalePeriod(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "changeDefaultStalePeriod(uint32)"(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     changeGracePeriod(
       _gracePeriod: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1957,16 +2067,6 @@ export interface Seer extends BaseContract {
 
     "changeGracePeriod(uint32)"(
       _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    changeStalePeriod(
-      _stalePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "changeStalePeriod(uint32)"(
-      _stalePeriod: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -2218,9 +2318,15 @@ export interface Seer extends BaseContract {
 
     "rollbackDefaultAdminDelay()"(overrides?: CallOverrides): Promise<void>;
 
-    stalePeriod(overrides?: CallOverrides): Promise<number>;
+    stalePeriods(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<number>;
 
-    "stalePeriod()"(overrides?: CallOverrides): Promise<number>;
+    "stalePeriods(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<number>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
@@ -2249,6 +2355,18 @@ export interface Seer extends BaseContract {
     uniFinalCurrency(overrides?: CallOverrides): Promise<number>;
 
     "uniFinalCurrency()"(overrides?: CallOverrides): Promise<number>;
+
+    updateStalePeriod(
+      _feed: PromiseOrValue<string>,
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "updateStalePeriod(address,uint32)"(
+      _feed: PromiseOrValue<string>,
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
@@ -2308,6 +2426,15 @@ export interface Seer extends BaseContract {
       account?: PromiseOrValue<string> | null,
       sender?: PromiseOrValue<string> | null
     ): RoleRevokedEventFilter;
+
+    "StalePeriodUpdated(address,uint32)"(
+      feed?: PromiseOrValue<string> | null,
+      val?: PromiseOrValue<BigNumberish> | null
+    ): StalePeriodUpdatedEventFilter;
+    StalePeriodUpdated(
+      feed?: PromiseOrValue<string> | null,
+      val?: PromiseOrValue<BigNumberish> | null
+    ): StalePeriodUpdatedEventFilter;
   };
 
   estimateGas: {
@@ -2318,6 +2445,10 @@ export interface Seer extends BaseContract {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
 
     "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    DEFAULT_STALE_PERIOD(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "DEFAULT_STALE_PERIOD()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     GRACE_PERIOD_TIME(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2393,6 +2524,16 @@ export interface Seer extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    changeDefaultStalePeriod(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "changeDefaultStalePeriod(uint32)"(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     changeGracePeriod(
       _gracePeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2400,16 +2541,6 @@ export interface Seer extends BaseContract {
 
     "changeGracePeriod(uint32)"(
       _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    changeStalePeriod(
-      _stalePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "changeStalePeriod(uint32)"(
-      _stalePeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -2659,9 +2790,15 @@ export interface Seer extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    stalePeriod(overrides?: CallOverrides): Promise<BigNumber>;
+    stalePeriods(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    "stalePeriod()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "stalePeriods(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
@@ -2690,6 +2827,18 @@ export interface Seer extends BaseContract {
     uniFinalCurrency(overrides?: CallOverrides): Promise<BigNumber>;
 
     "uniFinalCurrency()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    updateStalePeriod(
+      _feed: PromiseOrValue<string>,
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "updateStalePeriod(address,uint32)"(
+      _feed: PromiseOrValue<string>,
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -2702,6 +2851,14 @@ export interface Seer extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "DEFAULT_ADMIN_ROLE()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    DEFAULT_STALE_PERIOD(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "DEFAULT_STALE_PERIOD()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -2795,6 +2952,16 @@ export interface Seer extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    changeDefaultStalePeriod(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "changeDefaultStalePeriod(uint32)"(
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     changeGracePeriod(
       _gracePeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -2802,16 +2969,6 @@ export interface Seer extends BaseContract {
 
     "changeGracePeriod(uint32)"(
       _gracePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    changeStalePeriod(
-      _stalePeriod: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "changeStalePeriod(uint32)"(
-      _stalePeriod: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -3071,9 +3228,15 @@ export interface Seer extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    stalePeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    stalePeriods(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    "stalePeriod()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "stalePeriods(address)"(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
@@ -3103,6 +3266,18 @@ export interface Seer extends BaseContract {
 
     "uniFinalCurrency()"(
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    updateStalePeriod(
+      _feed: PromiseOrValue<string>,
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "updateStalePeriod(address,uint32)"(
+      _feed: PromiseOrValue<string>,
+      _stalePeriod: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

@@ -173,13 +173,13 @@ export interface OFTInterface extends utils.Interface {
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "combineOptions(uint32,uint16,bytes)": FunctionFragment;
-    "composeMsgSender()": FunctionFragment;
     "decimalConversionRate()": FunctionFragment;
     "decimals()": FunctionFragment;
     "decreaseAllowance(address,uint256)": FunctionFragment;
     "endpoint()": FunctionFragment;
     "enforcedOptions(uint32,uint16)": FunctionFragment;
     "increaseAllowance(address,uint256)": FunctionFragment;
+    "isComposeMsgSender((uint32,bytes32,uint64),bytes,address)": FunctionFragment;
     "isPeer(uint32,bytes32)": FunctionFragment;
     "lzReceive((uint32,bytes32,uint64),bytes32,bytes,address,bytes)": FunctionFragment;
     "lzReceiveAndRevert(((uint32,bytes32,uint64),uint32,address,bytes32,uint256,address,bytes,bytes)[])": FunctionFragment;
@@ -229,8 +229,6 @@ export interface OFTInterface extends utils.Interface {
       | "balanceOf(address)"
       | "combineOptions"
       | "combineOptions(uint32,uint16,bytes)"
-      | "composeMsgSender"
-      | "composeMsgSender()"
       | "decimalConversionRate"
       | "decimalConversionRate()"
       | "decimals"
@@ -243,6 +241,8 @@ export interface OFTInterface extends utils.Interface {
       | "enforcedOptions(uint32,uint16)"
       | "increaseAllowance"
       | "increaseAllowance(address,uint256)"
+      | "isComposeMsgSender"
+      | "isComposeMsgSender((uint32,bytes32,uint64),bytes,address)"
       | "isPeer"
       | "isPeer(uint32,bytes32)"
       | "lzReceive"
@@ -370,14 +370,6 @@ export interface OFTInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "composeMsgSender",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "composeMsgSender()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "decimalConversionRate",
     values?: undefined
   ): string;
@@ -418,6 +410,14 @@ export interface OFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "increaseAllowance(address,uint256)",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isComposeMsgSender",
+    values: [OriginStruct, PromiseOrValue<BytesLike>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isComposeMsgSender((uint32,bytes32,uint64),bytes,address)",
+    values: [OriginStruct, PromiseOrValue<BytesLike>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "isPeer",
@@ -701,14 +701,6 @@ export interface OFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "composeMsgSender",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "composeMsgSender()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "decimalConversionRate",
     data: BytesLike
   ): Result;
@@ -742,6 +734,14 @@ export interface OFTInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "increaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isComposeMsgSender",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isComposeMsgSender((uint32,bytes32,uint64),bytes,address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "isPeer", data: BytesLike): Result;
@@ -916,7 +916,7 @@ export interface OFTInterface extends utils.Interface {
     "EnforcedOptionSet(tuple[])": EventFragment;
     "MsgInspectorSet(address)": EventFragment;
     "OFTReceived(bytes32,uint32,address,uint256)": EventFragment;
-    "OFTSent(bytes32,uint32,address,uint256)": EventFragment;
+    "OFTSent(bytes32,uint32,address,uint256,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "PeerSet(uint32,bytes32)": EventFragment;
     "PreCrimeSet(address)": EventFragment;
@@ -937,7 +937,7 @@ export interface OFTInterface extends utils.Interface {
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OFTSent"): EventFragment;
   getEvent(
-    nameOrSignatureOrTopic: "OFTSent(bytes32,uint32,address,uint256)"
+    nameOrSignatureOrTopic: "OFTSent(bytes32,uint32,address,uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
@@ -990,7 +990,7 @@ export interface OFTReceivedEventObject {
   guid: string;
   srcEid: number;
   toAddress: string;
-  amountLD: BigNumber;
+  amountReceivedLD: BigNumber;
 }
 export type OFTReceivedEvent = TypedEvent<
   [string, number, string, BigNumber],
@@ -1003,10 +1003,11 @@ export interface OFTSentEventObject {
   guid: string;
   dstEid: number;
   fromAddress: string;
-  amountLD: BigNumber;
+  amountSentLD: BigNumber;
+  amountReceivedLD: BigNumber;
 }
 export type OFTSentEvent = TypedEvent<
-  [string, number, string, BigNumber],
+  [string, number, string, BigNumber, BigNumber],
   OFTSentEventObject
 >;
 
@@ -1150,14 +1151,6 @@ export interface OFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    composeMsgSender(
-      overrides?: CallOverrides
-    ): Promise<[string] & { sender: string }>;
-
-    "composeMsgSender()"(
-      overrides?: CallOverrides
-    ): Promise<[string] & { sender: string }>;
-
     decimalConversionRate(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "decimalConversionRate()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -1205,6 +1198,20 @@ export interface OFT extends BaseContract {
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    isComposeMsgSender(
+      arg0: OriginStruct,
+      arg1: PromiseOrValue<BytesLike>,
+      _sender: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "isComposeMsgSender((uint32,bytes32,uint64),bytes,address)"(
+      arg0: OriginStruct,
+      arg1: PromiseOrValue<BytesLike>,
+      _sender: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
     isPeer(
       _eid: PromiseOrValue<BigNumberish>,
@@ -1579,10 +1586,6 @@ export interface OFT extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  composeMsgSender(overrides?: CallOverrides): Promise<string>;
-
-  "composeMsgSender()"(overrides?: CallOverrides): Promise<string>;
-
   decimalConversionRate(overrides?: CallOverrides): Promise<BigNumber>;
 
   "decimalConversionRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1630,6 +1633,20 @@ export interface OFT extends BaseContract {
     addedValue: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  isComposeMsgSender(
+    arg0: OriginStruct,
+    arg1: PromiseOrValue<BytesLike>,
+    _sender: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "isComposeMsgSender((uint32,bytes32,uint64),bytes,address)"(
+    arg0: OriginStruct,
+    arg1: PromiseOrValue<BytesLike>,
+    _sender: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   isPeer(
     _eid: PromiseOrValue<BigNumberish>,
@@ -1996,10 +2013,6 @@ export interface OFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    composeMsgSender(overrides?: CallOverrides): Promise<string>;
-
-    "composeMsgSender()"(overrides?: CallOverrides): Promise<string>;
-
     decimalConversionRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "decimalConversionRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2045,6 +2058,20 @@ export interface OFT extends BaseContract {
     "increaseAllowance(address,uint256)"(
       spender: PromiseOrValue<string>,
       addedValue: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    isComposeMsgSender(
+      arg0: OriginStruct,
+      arg1: PromiseOrValue<BytesLike>,
+      _sender: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "isComposeMsgSender((uint32,bytes32,uint64),bytes,address)"(
+      arg0: OriginStruct,
+      arg1: PromiseOrValue<BytesLike>,
+      _sender: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -2377,26 +2404,28 @@ export interface OFT extends BaseContract {
       guid?: PromiseOrValue<BytesLike> | null,
       srcEid?: null,
       toAddress?: PromiseOrValue<string> | null,
-      amountLD?: null
+      amountReceivedLD?: null
     ): OFTReceivedEventFilter;
     OFTReceived(
       guid?: PromiseOrValue<BytesLike> | null,
       srcEid?: null,
       toAddress?: PromiseOrValue<string> | null,
-      amountLD?: null
+      amountReceivedLD?: null
     ): OFTReceivedEventFilter;
 
-    "OFTSent(bytes32,uint32,address,uint256)"(
+    "OFTSent(bytes32,uint32,address,uint256,uint256)"(
       guid?: PromiseOrValue<BytesLike> | null,
       dstEid?: null,
       fromAddress?: PromiseOrValue<string> | null,
-      amountLD?: null
+      amountSentLD?: null,
+      amountReceivedLD?: null
     ): OFTSentEventFilter;
     OFTSent(
       guid?: PromiseOrValue<BytesLike> | null,
       dstEid?: null,
       fromAddress?: PromiseOrValue<string> | null,
-      amountLD?: null
+      amountSentLD?: null,
+      amountReceivedLD?: null
     ): OFTSentEventFilter;
 
     "OwnershipTransferred(address,address)"(
@@ -2497,10 +2526,6 @@ export interface OFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    composeMsgSender(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "composeMsgSender()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     decimalConversionRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     "decimalConversionRate()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2547,6 +2572,20 @@ export interface OFT extends BaseContract {
       spender: PromiseOrValue<string>,
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    isComposeMsgSender(
+      arg0: OriginStruct,
+      arg1: PromiseOrValue<BytesLike>,
+      _sender: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "isComposeMsgSender((uint32,bytes32,uint64),bytes,address)"(
+      arg0: OriginStruct,
+      arg1: PromiseOrValue<BytesLike>,
+      _sender: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     isPeer(
@@ -2879,12 +2918,6 @@ export interface OFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    composeMsgSender(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "composeMsgSender()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     decimalConversionRate(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -2935,6 +2968,20 @@ export interface OFT extends BaseContract {
       spender: PromiseOrValue<string>,
       addedValue: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    isComposeMsgSender(
+      arg0: OriginStruct,
+      arg1: PromiseOrValue<BytesLike>,
+      _sender: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "isComposeMsgSender((uint32,bytes32,uint64),bytes,address)"(
+      arg0: OriginStruct,
+      arg1: PromiseOrValue<BytesLike>,
+      _sender: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     isPeer(

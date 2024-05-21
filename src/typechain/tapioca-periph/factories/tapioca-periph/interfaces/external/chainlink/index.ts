@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as iAggregatorV3InterfaceSol from "./IAggregatorV3Interface.sol";
+export { AggregatorInterface__factory } from "./AggregatorInterface__factory";
