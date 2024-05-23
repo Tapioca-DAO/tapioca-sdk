@@ -27,6 +27,10 @@ export const TAP_TASK = (task: ConfigurableTaskDefinition) =>
             'The tag to use for the deployment. Defaults to "default" if not specified.',
             'default',
         )
+        .addOptionalVariadicPositionalParam(
+            'deployOnly',
+            'list of contracts to deploy only',
+        )
         .addFlag(
             'load',
             'Load the contracts from the database instead of building them.',

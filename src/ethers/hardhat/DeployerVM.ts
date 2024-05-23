@@ -23,15 +23,9 @@ export interface IDependentOn {
     argPosition: number;
     keyName?: string;
 }
-export type TLoadVMParams = {
-    hre: HardhatRuntimeEnvironment;
-    tag?: string;
-    debugMode?: boolean;
-    bytecodeSizeLimit?: number;
-    overrideOptions?: CallOverrides;
-    staticSimulation?: boolean;
-};
+
 export type TTapiocaDeployTaskArgs = {
+    deployOnly?: string[];
     tag: string;
     load?: boolean;
     verify?: boolean;
@@ -67,7 +61,12 @@ interface IConstructorOptions {
     multisig?: MultisigMock;
     deployFreshContracts?: boolean; // If true, it will deploy the Multicall/Multisig contracts even if they are already deployed
     overrideOptions?: CallOverrides;
+    filter?: (contract: IDeploymentQueue) => boolean;
 }
+export type TLoadVMParams = IConstructorOptions & {
+    hre: HardhatRuntimeEnvironment;
+    staticSimulation?: boolean;
+};
 
 export interface IDeployerVMAdd<T extends ContractFactory>
     extends IDeploymentQueue {
@@ -140,6 +139,7 @@ export class DeployerVM {
         const { hre, tag, debugMode, bytecodeSizeLimit, overrideOptions } =
             params;
         const VM = new hre.SDK.DeployerVM(hre, {
+            ...params,
             // Change this if you get bytecode size error / gas required exceeds allowance (550000000)/ anything related to bytecode size
             // Could be different by network/RPC provider
             bytecodeSizeLimit: bytecodeSizeLimit ?? 100_000,
@@ -168,9 +168,14 @@ export class DeployerVM {
         wait = 3,
     ) {
         // Settings
-        const { tag } = taskArgs;
+        const { tag, deployOnly } = taskArgs;
         const { hre, staticSimulation } = params;
-        const VM = DeployerVM.loadVM({ ...params, tag });
+        let filter = params.filter;
+        if (deployOnly) {
+            filter = (contract: IDeploymentQueue) =>
+                deployOnly.includes(contract.deploymentName);
+        }
+        const VM = DeployerVM.loadVM({ ...params, tag, filter });
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const chainInfo = hre.SDK.utils.getChainBy(
             'chainId',
@@ -1025,6 +1030,10 @@ export class DeployerVM {
                     runStaticSimulations: contract.runStaticSimulation ?? true,
                 });
             }
+        }
+
+        if (this.options.filter) {
+            this.buildQueue = this.buildQueue.filter(this.options.filter);
         }
     }
     private _handlePopulateBuildQueueDependentOn(
