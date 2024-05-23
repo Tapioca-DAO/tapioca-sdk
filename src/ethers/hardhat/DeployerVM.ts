@@ -301,6 +301,12 @@ export class DeployerVM {
             }
         });
 
+        if (this.options.filter) {
+            if (!this.options.filter(contract)) {
+                return this;
+            }
+        }
+
         console.log(
             '\t[+] Adding contract to deployment queue: ',
             contract.deploymentName,
