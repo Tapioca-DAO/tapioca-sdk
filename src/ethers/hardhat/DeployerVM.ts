@@ -63,9 +63,14 @@ interface IConstructorOptions {
     overrideOptions?: CallOverrides;
     filter?: (contract: IDeploymentQueue) => boolean;
 }
-export type TLoadVMParams = IConstructorOptions & {
+export type TLoadVMParams = {
     hre: HardhatRuntimeEnvironment;
+    tag?: string;
+    debugMode?: boolean;
+    bytecodeSizeLimit?: number;
+    overrideOptions?: CallOverrides;
     staticSimulation?: boolean;
+    filter?: (contract: IDeploymentQueue) => boolean;
 };
 
 export interface IDeployerVMAdd<T extends ContractFactory>
