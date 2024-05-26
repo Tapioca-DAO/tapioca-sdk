@@ -4888,5 +4888,47 @@
                 ]
             }
         }
+    },
+    "tmp": {
+        "generic": {
+            "421614": {
+                "name": "arbitrum_sepolia",
+                "lastBlockHeight": 48153902,
+                "contracts": [
+                    {
+                        "name": "TapiocaDeployer",
+                        "address": "0x1b5b267691a6bACAeD1f48334638310dF16311b6",
+                        "meta": {}
+                    },
+                    {
+                        "name": "TapiocaMulticall",
+                        "address": "0x5B9f003Fd91baaB053bB3eeD623C56D44fb4D7A1",
+                        "meta": {}
+                    }
+                ]
+            }
+        },
+        "tapioca-periph": {
+            "421614": {
+                "name": "arbitrum_sepolia",
+                "lastBlockHeight": 48154681,
+                "contracts": [
+                    {
+                        "name": "PEARLMIT",
+                        "address": "0xa8Af245Ad771a3728266daD1078B83408520Cb4E",
+                        "meta": {
+                            "args": [
+                                "PEARLMIT",
+                                "1",
+                                "0x5B9f003Fd91baaB053bB3eeD623C56D44fb4D7A1",
+                                0
+                            ],
+                            "salt": "0x9b9d51457d16dbdc031c3d9fe228b7f14d89c23d0d5e6ea3453c78055f1f401b",
+                            "create2": true
+                        }
+                    }
+                ]
+            }
+        }
     }
 }
