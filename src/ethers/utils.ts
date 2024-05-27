@@ -68,6 +68,13 @@ export function loadLocalContractOnAllChains(
     return deployments;
 }
 
+export function isOnChain(
+    hre: HardhatRuntimeEnvironment,
+    chainId: EChainID,
+): boolean {
+    return hre.SDK.chainInfo.chainId === chainId;
+}
+
 export function checkExists<T>(
     hre: HardhatRuntimeEnvironment,
     value: T | undefined,

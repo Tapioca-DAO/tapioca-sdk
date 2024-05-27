@@ -109,6 +109,7 @@ export {
     loadLocalContract,
     loadLocalContractOnAllChains,
     buildContractDep,
+    isOnChain,
 } from './ethers/utils';
 
 // Global

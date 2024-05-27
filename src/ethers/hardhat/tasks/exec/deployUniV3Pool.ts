@@ -66,7 +66,7 @@ export const deployUniV3pool__task = async (
 };
 
 function validateFeeTier(feeTier: number) {
-    if (![500, 3000, 10000].includes(feeTier)) {
+    if (![100, 500, 3000, 10000].includes(feeTier)) {
         throw new Error(`Invalid fee tier: ${feeTier}`);
     }
     return feeTier;
