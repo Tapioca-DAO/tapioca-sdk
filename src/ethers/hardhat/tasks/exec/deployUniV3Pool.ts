@@ -55,7 +55,7 @@ export const deployUniV3pool__task = async (
             token1,
             feeTier,
             encodeSqrtRatioX96(ratio0, ratio1).toString(),
-            _taskArgs.overrideOptions,
+            { ..._taskArgs.overrideOptions },
         )
     ).wait(3);
 
