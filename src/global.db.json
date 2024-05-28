@@ -664,6 +664,17 @@
                 "lastBlockHeight": 48666580,
                 "contracts": [
                     {
+                        "name": "TAP_WETH_UNI_V3_POOL",
+                        "address": "0x52CBB8E391F7954E577138690fE290D8A7b982d8",
+                        "meta": {
+                            "token0": "0x27caD80BB14EC4105138d326A2d56C4bD0E4A5E3",
+                            "token1": "0x6D6a13AbE7935b2cf6d67e49bc17F5035362C705",
+                            "ratio0": 1,
+                            "ratio1": 1,
+                            "fee": 100
+                        }
+                    },
+                    {
                         "address": "0x74E42168F8c3B8E4ddd503979406F359057FC02A",
                         "name": "WETH_YB_EMPTY_STRAT",
                         "meta": {
@@ -1064,17 +1075,6 @@
                             ],
                             "salt": "0x4f90f0ce4f6ba4e42627ec920da6242a32c705a39cfbd7703df35a9745b8390f",
                             "create2": true
-                        }
-                    },
-                    {
-                        "name": "TAP_WETH_UNI_V3_POOL",
-                        "address": "0x3A1F4a0937d50304793c2A152E87dF912E4A0Add",
-                        "meta": {
-                            "token0": "0x2EAe4fbc552fE35C1D3Df2B546032409bb0E431E",
-                            "token1": "0x5E7baE0AaDCCD299C7f3c7C47cF54095EfeDE90B",
-                            "ratio0": 1,
-                            "ratio1": 7,
-                            "fee": 3000
                         }
                     },
                     {
