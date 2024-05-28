@@ -258,6 +258,35 @@
                     }
                 ]
             }
+        },
+        "yieldbox": {
+            "421614": {
+                "name": "arbitrum_sepolia",
+                "lastBlockHeight": 48667065,
+                "contracts": [
+                    {
+                        "name": "YieldBoxURIBuilder",
+                        "address": "0x6A6149eF49b5B10be8B49e342b94CebAE8a55F41",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x83cc8cc0db6f12973b0ba55854a017d703ca0acc3bbfab141aa79278928b72eb",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YieldBox",
+                        "address": "0xB5Bb7c0F2F1C690270D1764dCCF8569393104ea5",
+                        "meta": {
+                            "args": [
+                                "0x2EAe4fbc552fE35C1D3Df2B546032409bb0E431E",
+                                "0x6A6149eF49b5B10be8B49e342b94CebAE8a55F41"
+                            ],
+                            "salt": "0x70c423a0918354e866cd2aaa92950e3797021f6b3e8c7a387967e8ab189b4e08",
+                            "create2": true
+                        }
+                    }
+                ]
+            }
         }
     },
     "tap-token-test": {
