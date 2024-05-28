@@ -110,6 +110,22 @@
                         "meta": {}
                     }
                 ]
+            },
+            "11155420": {
+                "name": "optimism_sepolia",
+                "lastBlockHeight": 12532866,
+                "contracts": [
+                    {
+                        "name": "TapiocaDeployer",
+                        "address": "0xcE607D78D897CAE232c9C9870E33CC52FF0DbF3D",
+                        "meta": {}
+                    },
+                    {
+                        "name": "TapiocaMulticall",
+                        "address": "0x204ECbc5Eabb0fbE8f33707290b3c4a40460381B",
+                        "meta": {}
+                    }
+                ]
             }
         },
         "tap-token": {
@@ -126,6 +142,62 @@
                                 "0x7c0DFD9A7100824b53306D666E1Ee2D1C1D9Cd5b"
                             ],
                             "salt": "0x68ae729dd5355d14a57d1f045183cc0a22818ef335919f34aa10ac105d3ddde2",
+                            "create2": true
+                        }
+                    }
+                ]
+            }
+        },
+        "yieldbox": {
+            "421614": {
+                "name": "arbitrum_sepolia",
+                "lastBlockHeight": 48665009,
+                "contracts": [
+                    {
+                        "name": "YieldBoxURIBuilder",
+                        "address": "0x9D8a8C397Ee18d2b2dE4BE10FaD6457D3C05316c",
+                        "meta": {
+                            "args": [],
+                            "salt": "0xb7f83e4f7fb7531e6fbd83bea19962080efed324d0b6fcce1c07625280dbf7ce",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YieldBox",
+                        "address": "0x9d23f2a8f871cE2bAb1bA7aCC171e4186BE8CbC6",
+                        "meta": {
+                            "args": [
+                                "0x2EAe4fbc552fE35C1D3Df2B546032409bb0E431E",
+                                "0x9D8a8C397Ee18d2b2dE4BE10FaD6457D3C05316c"
+                            ],
+                            "salt": "0xf5f3a8a40c925f4b556ef7de144a81f89e50044f51b55e662fc962b4aa6b0f77",
+                            "create2": true
+                        }
+                    }
+                ]
+            },
+            "11155420": {
+                "name": "optimism_sepolia",
+                "lastBlockHeight": 12532876,
+                "contracts": [
+                    {
+                        "name": "YieldBoxURIBuilder",
+                        "address": "0x78Ec548F67b056416719ffBf91C28E7a28df816A",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x307b8fd6c9a064176a17e447f267cc7a6b02c474bbf7262d2d66bbce4f11674f",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YieldBox",
+                        "address": "0x37cf93F082c3a28E2fc86BCC5dC60F38c78c19c4",
+                        "meta": {
+                            "args": [
+                                "0x4fB538Ed1a085200bD08F66083B72c0bfEb29112",
+                                "0x78Ec548F67b056416719ffBf91C28E7a28df816A"
+                            ],
+                            "salt": "0xc6b0d89fd2856db7a5777ffb42747b8ad4cfe50cd445865abc488cf4c1b8792f",
                             "create2": true
                         }
                     }
