@@ -279,6 +279,15 @@
                 "lastBlockHeight": 48674090,
                 "contracts": [
                     {
+                        "name": "MARKET_HELPER",
+                        "address": "0x4d618aE69826562741756646147fE8772D31D471",
+                        "meta": {
+                            "args": [],
+                            "salt": "0xfe625a2d68425df32158107f7f447a10657b14f9d9207fa8618b5cb57f25b999",
+                            "create2": true
+                        }
+                    },
+                    {
                         "name": "ORIGINS_T_ETH_MARKET",
                         "address": "0xA293AeFDCfEe4F591b3Bb42F6BB85968e74bE216",
                         "meta": {
