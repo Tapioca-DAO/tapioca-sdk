@@ -4,6 +4,7 @@ import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { ERC20Mock } from '../../../../typechain/tap-token';
 import { checkExists } from '../../../utils';
 import { TTapiocaDeployTaskArgs } from '../../DeployerVM';
+import { Overrides } from 'ethers';
 
 export const deployUniV3pool__task = async (
     _taskArgs: TTapiocaDeployTaskArgs & {
@@ -14,6 +15,7 @@ export const deployUniV3pool__task = async (
         ratio1: number;
         positionManager: string;
         factory: string;
+        overrideOptions?: Overrides;
     },
     hre: HardhatRuntimeEnvironment,
 ): Promise<string> => {
@@ -53,9 +55,7 @@ export const deployUniV3pool__task = async (
             token1,
             feeTier,
             encodeSqrtRatioX96(ratio0, ratio1).toString(),
-            {
-                gasLimit: 5_000_000,
-            },
+            _taskArgs.overrideOptions,
         )
     ).wait(3);
 
