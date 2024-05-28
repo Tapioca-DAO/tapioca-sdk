@@ -673,6 +673,17 @@
                 "lastBlockHeight": 48666580,
                 "contracts": [
                     {
+                        "name": "USDO_USDC_UNI_V3_POOL",
+                        "address": "0xEBC7641E76EeFf8987B0c75AbF397235B9ca34D1",
+                        "meta": {
+                            "token0": "0x6D6a13AbE7935b2cf6d67e49bc17F5035362C705",
+                            "token1": "0xEd6D90A2e0e106eDecCa2D22eD4d91580C02B782",
+                            "ratio0": 1,
+                            "ratio1": 1,
+                            "fee": 100
+                        }
+                    },
+                    {
                         "name": "TAP_WETH_UNI_V3_POOL",
                         "address": "0x52CBB8E391F7954E577138690fE290D8A7b982d8",
                         "meta": {
