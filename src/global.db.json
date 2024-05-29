@@ -1865,6 +1865,33 @@
                         }
                     }
                 ]
+            },
+            "11155420": {
+                "name": "optimism_sepolia",
+                "lastBlockHeight": 12596561,
+                "contracts": [
+                    {
+                        "name": "YieldBoxURIBuilder",
+                        "address": "0x3136d757DB2cF1F0d00921db6a3de66A09821a77",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x424a886d00f2426959d85dd7a32de2ee380e4ef3eab74b6ac4340ec874f7e65a",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YieldBox",
+                        "address": "0x54993A2615de339542f2a79959e9CD806a9Ef7F8",
+                        "meta": {
+                            "args": [
+                                "0x4fB538Ed1a085200bD08F66083B72c0bfEb29112",
+                                "0x3136d757DB2cF1F0d00921db6a3de66A09821a77"
+                            ],
+                            "salt": "0x20e3e1cd05db79ec01b803c6234b127d04169884f9b3c51224c20881feea1c7b",
+                            "create2": true
+                        }
+                    }
+                ]
             }
         }
     },
