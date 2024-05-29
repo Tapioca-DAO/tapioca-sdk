@@ -287,6 +287,87 @@
                         }
                     }
                 ]
+            },
+            "11155420": {
+                "name": "optimism_sepolia",
+                "lastBlockHeight": 12596338,
+                "contracts": [
+                    {
+                        "name": "EXT_EXEC",
+                        "address": "0x3955862897e7EB5AEa31398B036857870C0232C6",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x95a7200c1939467a959d12227de43f6743be46c044952e882bc3a9e3b6d6488d",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "TAP_TOKEN_SENDER_MODULE",
+                        "address": "0xa55b2357BDcf115D86A49f1c11a17ba2B3568830",
+                        "meta": {
+                            "args": [
+                                "",
+                                "",
+                                "0x6EDCE65403992e310A62460808c4b910D972f10f",
+                                "0xa6954B5d10137c33576788f2749DDb9e5dd211F5",
+                                "0x0000000000000000000000000000000000000000"
+                            ],
+                            "salt": "0xaa8b4b3d27b6b6c1740b906991db968cf744fa908216c6847013d79ac8517d4f",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "TAP_TOKEN_RECEIVER_MODULE",
+                        "address": "0x85Cb3c52A22e639de1Ad9f7161D030EE73d3aEc1",
+                        "meta": {
+                            "args": [
+                                "",
+                                "",
+                                "0x6EDCE65403992e310A62460808c4b910D972f10f",
+                                "0xa6954B5d10137c33576788f2749DDb9e5dd211F5",
+                                "0x0000000000000000000000000000000000000000"
+                            ],
+                            "salt": "0x759e75a9ba079a72be0c92376a8cf16420973723f73ff4902bd722b753f3f09b",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "TAP_TOKEN",
+                        "address": "0x24aa986bA78AD9aC8D691aA12fa785851E1F908a",
+                        "meta": {
+                            "args": [
+                                {
+                                    "epochDuration": 604800,
+                                    "endpoint": "0x6EDCE65403992e310A62460808c4b910D972f10f",
+                                    "contributors": "0xa6954B5d10137c33576788f2749DDb9e5dd211F5",
+                                    "earlySupporters": "0x0000000000000000000000000000000000000000",
+                                    "supporters": "0x0000000000000000000000000000000000000000",
+                                    "lTap": "0x0000000000000000000000000000000000000000",
+                                    "dao": "0xa6954B5d10137c33576788f2749DDb9e5dd211F5",
+                                    "airdrop": "0x0000000000000000000000000000000000000000",
+                                    "governanceEid": "40231",
+                                    "owner": "0xa6954B5d10137c33576788f2749DDb9e5dd211F5",
+                                    "tapTokenSenderModule": "0xa55b2357BDcf115D86A49f1c11a17ba2B3568830",
+                                    "tapTokenReceiverModule": "0x85Cb3c52A22e639de1Ad9f7161D030EE73d3aEc1",
+                                    "extExec": "0x3955862897e7EB5AEa31398B036857870C0232C6",
+                                    "pearlmit": "0x0D288d45bE7130Da73e556CBFFebF2aE79Ec237C",
+                                    "cluster": "0x4756dc96942C29011d435a07dBb7211e8A6DBC6e"
+                                }
+                            ],
+                            "salt": "0x79dbdc90cfbcedafbf0677e1a703dad65049ce1275ab2839e9a54702d8b56a65",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "TAP_TOKEN_HELPER",
+                        "address": "0x2858AABFCAB4c65ff922cBA036D790E90FC4F328",
+                        "meta": {
+                            "args": [],
+                            "salt": "0xd69ffe24f3541bc8b0565ef263b62722a37b98c1fba919dfabd7f88d6b07a874",
+                            "create2": true
+                        }
+                    }
+                ]
             }
         },
         "tapioca-bar": {
