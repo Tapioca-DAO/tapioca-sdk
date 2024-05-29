@@ -1360,6 +1360,45 @@
                 "lastBlockHeight": 12596005,
                 "contracts": [
                     {
+                        "address": "0xb270e9005B1998A8a404B37FB1CB119A8c1B242C",
+                        "name": "WETH_YB_EMPTY_STRAT",
+                        "meta": {
+                            "token": "0x4fB538Ed1a085200bD08F66083B72c0bfEb29112",
+                            "ybAssetId": 2
+                        }
+                    },
+                    {
+                        "address": "0x129876E4C252f673034f2F1710B39f35df6C4A34",
+                        "name": "TAP_TOKEN_YB_EMPTY_STRAT",
+                        "meta": {
+                            "token": "0x24aa986bA78AD9aC8D691aA12fa785851E1F908a",
+                            "ybAssetId": 1
+                        }
+                    },
+                    {
+                        "name": "S_DAI_ORACLE",
+                        "address": "0xD625e05e82F63002837C80E165f21B1e57acc9b8",
+                        "meta": {
+                            "args": [
+                                "0x2dd69149d280B47659Df1648f420AD9a66c1A86f"
+                            ],
+                            "salt": "0x5c32037df54543327a3aff791399c3039091cabf61a5f349dbadfad356b9a36f",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "MARKET_SDAI_ORACLE",
+                        "address": "0x3f50F95b5D577d3F5630c2625058A2d30fbB490A",
+                        "meta": {
+                            "args": [
+                                "0xD625e05e82F63002837C80E165f21B1e57acc9b8",
+                                "0xa6954B5d10137c33576788f2749DDb9e5dd211F5"
+                            ],
+                            "salt": "0xaf78e75534acbcbdaba36cbdb5c1de48eb7b7aed92cda1aead9ab1db32af90bf",
+                            "create2": true
+                        }
+                    },
+                    {
                         "name": "PEARLMIT",
                         "address": "0x0D288d45bE7130Da73e556CBFFebF2aE79Ec237C",
                         "meta": {
