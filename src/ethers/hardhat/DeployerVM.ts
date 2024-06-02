@@ -35,6 +35,8 @@ export type TTapiocaDeployerVmPass<T> = {
     VM: DeployerVM;
     taskArgs: TTapiocaDeployTaskArgs & T;
     isTestnet: boolean;
+    isHostChain: boolean;
+    isSideChain: boolean;
     tapiocaMulticallAddr: string;
     chainInfo: (typeof SUPPORTED_CHAINS)[number];
 };
@@ -188,6 +190,9 @@ export class DeployerVM {
         )!;
 
         const isTestnet = !!chainInfo.tags.find((tag) => tag === 'testnet');
+        const isHostChain = !!chainInfo.tags.find((tag) => tag === 'host');
+        const isSideChain = !!chainInfo.tags.find((tag) => tag === 'side');
+
         const tapiocaMulticall = await VM.getMulticall();
 
         // Build contracts
@@ -210,6 +215,8 @@ export class DeployerVM {
                 VM: VM as any,
                 taskArgs: { ...taskArgs, tag },
                 isTestnet,
+                isHostChain,
+                isSideChain,
                 tapiocaMulticallAddr: tapiocaMulticall.address,
                 chainInfo,
             });
@@ -233,6 +240,8 @@ export class DeployerVM {
                 VM: VM as any,
                 taskArgs: { ...taskArgs, tag },
                 isTestnet,
+                isHostChain,
+                isSideChain,
                 tapiocaMulticallAddr: tapiocaMulticall.address,
                 chainInfo,
             });
