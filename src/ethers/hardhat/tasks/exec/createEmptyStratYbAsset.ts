@@ -20,7 +20,7 @@ export const createEmptyStratYbAsset__task = async (
     const yieldBox = YieldBox__factory.connect(
         loadGlobalContract(
             hre,
-            TAPIOCA_PROJECTS_NAME.YieldBox,
+            TAPIOCA_PROJECTS_NAME.TapiocaPeriph,
             hre.SDK.eChainId,
             'YieldBox', // Check DEPLOYMENT_NAME in tap-yieldbox
             tag,
