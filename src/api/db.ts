@@ -86,7 +86,7 @@ export const findLocalDeployment = (
     } catch (e) {
         const chainInfo = getChainBy('chainId', chainId);
         throw new Error(
-            `[-] No deployment found for chain ${chainInfo}. Trying to load local deployment ${contractName} with tag ${tag}`,
+            `[-] No deployment found for chain ${chainInfo.name} chain ID ${chainInfo.chainId}. Trying to load local deployment ${contractName} with tag ${tag}`,
         );
     }
 
