@@ -42,7 +42,7 @@ const SUPPORTED_CHAINS = [
         chainId: EChainID.FUJI_AVALANCHE,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.FUJI_AVALANCHE],
         rpc: 'https://api.avax-test.network/ext/bc/C/rpc',
-        tags: ['testnet'],
+        tags: ['testnet', 'side'],
     },
     {
         name: 'mumbai',
