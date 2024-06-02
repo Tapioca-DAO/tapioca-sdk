@@ -16,7 +16,7 @@ const SUPPORTED_CHAINS = [
         chainId: EChainID.ARBITRUM_SEPOLIA,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.ARBITRUM_SEPOLIA],
         rpc: 'https://arb-sepolia.g.alchemy.com/v2/<api_key>',
-        tags: ['testnet'],
+        tags: ['testnet', 'host'],
     },
     {
         name: 'optimism_sepolia',
@@ -24,8 +24,18 @@ const SUPPORTED_CHAINS = [
         chainId: EChainID.OPTIMISM_SEPOLIA,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.OPTIMISM_SEPOLIA],
         rpc: 'https://opt-sepolia.g.alchemy.com/v2/<api_key>',
-        tags: ['testnet'],
+        tags: ['testnet', 'side'],
     },
+
+    {
+        name: 'berachain_testnet',
+        address: '0x6EDCE65403992e310A62460808c4b910D972f10f',
+        chainId: EChainID.BERACHAIN_TESTNET,
+        lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.BERACHAIN_TESTNET],
+        rpc: 'https://artio.rpc.berachain.com/',
+        tags: ['testnet', 'side'],
+    },
+
     {
         name: 'fuji_avalanche',
         address: '0x6EDCE65403992e310A62460808c4b910D972f10f',
@@ -59,7 +69,7 @@ const SUPPORTED_CHAINS = [
         chainId: EChainID.MAINNET,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.MAINNET],
         rpc: 'https://eth-mainnet.g.alchemy.com/v2/<api_key>',
-        tags: ['mainnet'],
+        tags: ['mainnet', 'side'],
     },
     {
         name: 'avalanche',
@@ -83,7 +93,7 @@ const SUPPORTED_CHAINS = [
         chainId: EChainID.ARBITRUM,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.ARBITRUM],
         rpc: 'https://arb-mainnet.g.alchemy.com/v2/<api_key>',
-        tags: ['mainnet'],
+        tags: ['mainnet', 'host'],
     },
     {
         name: 'optimism',
