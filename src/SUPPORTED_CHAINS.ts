@@ -32,7 +32,7 @@ const SUPPORTED_CHAINS = [
         address: '0x6EDCE65403992e310A62460808c4b910D972f10f',
         chainId: EChainID.BERACHAIN_TESTNET,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.BERACHAIN_TESTNET],
-        rpc: 'https://artio.rpc.berachain.com/',
+        rpc: 'https://rpc.ankr.com/berachain_testnet',
         tags: ['testnet', 'side'],
     },
 
