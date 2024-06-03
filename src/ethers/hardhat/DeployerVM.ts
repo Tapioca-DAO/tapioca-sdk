@@ -151,7 +151,7 @@ export class DeployerVM {
             ...params,
             // Change this if you get bytecode size error / gas required exceeds allowance (550000000)/ anything related to bytecode size
             // Could be different by network/RPC provider
-            bytecodeSizeLimit: bytecodeSizeLimit ?? 100_000,
+            bytecodeSizeLimit: bytecodeSizeLimit ?? 70_000,
             debugMode: debugMode ?? true,
             tag: tag ?? 'default',
             overrideOptions,
@@ -357,13 +357,8 @@ export class DeployerVM {
                 await tx.wait(wait);
             }
         } catch (e) {
-            if (this.options.debugMode) {
-                console.log(`[-] Failed with error: ${e}`);
-            } else {
-                console.log(
-                    '[-] Error while executing deployment queue, try changing the bytecodeSizeLimit',
-                );
-            }
+            console.log('[-] Error while executing deployment queue');
+            throw new Error(e as string);
         }
 
         this.executed = true;
@@ -694,7 +689,7 @@ export class DeployerVM {
                 );
                 if (deployment) {
                     console.log(
-                        `\t[+] Using previous TapiocaMulticall deployment. at ${deployment.address}`,
+                        `\t[+] Using previous TapiocaMulticall from tag ${_tag} deployment. at ${deployment.address}`,
                     );
                     const _multicall = TapiocaMulticall__factory.connect(
                         deployment.address,
