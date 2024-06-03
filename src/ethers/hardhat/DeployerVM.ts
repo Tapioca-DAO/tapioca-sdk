@@ -64,6 +64,7 @@ interface IConstructorOptions {
     deployFreshContracts?: boolean; // If true, it will deploy the Multicall/Multisig contracts even if they are already deployed
     overrideOptions?: CallOverrides;
     filter?: (contract: IDeploymentQueue) => boolean;
+    useMulticallFromTag?: string;
 }
 export type TLoadVMParams = {
     hre: HardhatRuntimeEnvironment;
@@ -73,6 +74,7 @@ export type TLoadVMParams = {
     overrideOptions?: CallOverrides;
     staticSimulation?: boolean;
     filter?: (contract: IDeploymentQueue) => boolean;
+    useMulticallFromTag?: string;
 };
 
 export interface IDeployerVMAdd<T extends ContractFactory>
@@ -671,14 +673,14 @@ export class DeployerVM {
     // Getters
     // ***********
     /**
-     * Retrieves the TapiocaMulticall contract
+     * Retrieves the TapiocaMulticall contract. Uses 'tap-token-test' as the default tag.
      * If the contract doesn't exist, it will be deployed and saved globally
      */
     getMulticall = async (): Promise<TapiocaMulticall> => {
         if (this.multicall) return this.multicall;
 
         const project = TAPIOCA_PROJECTS_NAME.Generic;
-        const _tag = this.options.tag ?? 'default';
+        const _tag = this.options.useMulticallFromTag ?? 'tap-token-test'; // Default to tap-token-test
 
         // Get deployer deployment
         let deployment: TContract | undefined;
