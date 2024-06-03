@@ -24,6 +24,26 @@
                 ]
             }
         },
+        "tap-token": {
+            "421614": {
+                "name": "arbitrum_sepolia",
+                "lastBlockHeight": 50921054,
+                "contracts": [
+                    {
+                        "name": "LTAP",
+                        "address": "0x93f4610Ff6C897df455022F51083189D3A84084c",
+                        "meta": {
+                            "args": [
+                                "0xcD5B223b3ECF18ae695E797cb033e86b7b189C88",
+                                "0xcD5B223b3ECF18ae695E797cb033e86b7b189C88"
+                            ],
+                            "salt": "0x41fa0e2fe1428d70aa614164595d0b8e87077764cbf95a015ee4306e976c705d",
+                            "create2": true
+                        }
+                    }
+                ]
+            }
+        },
         "tapioca-periph": {
             "43113": {
                 "name": "fuji_avalanche",
