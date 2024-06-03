@@ -4,6 +4,7 @@ import { TContract } from '../shared';
 import SUPPORTED_CHAINS from '../SUPPORTED_CHAINS';
 import { ContractFactory } from 'ethers';
 import { IDeployerVMAdd } from './hardhat/DeployerVM';
+import { getChainBy } from '../api/utils';
 
 export function loadGlobalContract(
     hre: HardhatRuntimeEnvironment,
@@ -17,6 +18,7 @@ export function loadGlobalContract(
         hre.SDK.db.findGlobalDeployment(repo, chainId, contractName, tag),
         contractName,
         repo,
+        getChainBy('chainId', chainId).name,
     );
 }
 
@@ -31,6 +33,7 @@ export function loadLocalContract(
         hre.SDK.db.findLocalDeployment(chainId, contractName, tag),
         contractName,
         hre.SDK.chainInfo.name,
+        getChainBy('chainId', chainId).name,
     );
 }
 
@@ -80,10 +83,13 @@ export function checkExists<T>(
     value: T | undefined,
     name: string,
     repo: string,
+    chainName?: string,
 ): T {
     if (value === undefined) {
         throw new Error(
-            `[-] No \`${name}\` found on \`${repo}\` for chain \`${hre.SDK.chainInfo.name}\``,
+            `[-] No \`${name}\` found on \`${repo}\` for chain \`${
+                chainName ?? hre.SDK.chainInfo.name
+            }\``,
         );
     }
     return value;
