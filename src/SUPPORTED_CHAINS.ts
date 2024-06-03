@@ -35,6 +35,14 @@ const SUPPORTED_CHAINS = [
         rpc: 'https://rpc.ankr.com/berachain_testnet',
         tags: ['testnet', 'side'],
     },
+    {
+        name: 'base_sepolia',
+        address: '0x6EDCE65403992e310A62460808c4b910D972f10f',
+        chainId: EChainID.BASE_SEPOLIA,
+        lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.BASE_SEPOLIA],
+        rpc: 'https://base-sepolia.g.alchemy.com/v2/<api_key>',
+        tags: ['testnet', 'side'],
+    },
 
     {
         name: 'fuji_avalanche',
