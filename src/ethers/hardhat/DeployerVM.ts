@@ -675,7 +675,7 @@ export class DeployerVM {
         if (this.multicall) return this.multicall;
 
         const project = TAPIOCA_PROJECTS_NAME.Generic;
-        const _tag = this.options.useMulticallFromTag ?? 'tap-token-test'; // Default to tap-token-test
+        const _tag = this.options.useMulticallFromTag ?? this.options.tag; // Default to tap-token-test
 
         // Get deployer deployment
         let deployment: TContract | undefined;
