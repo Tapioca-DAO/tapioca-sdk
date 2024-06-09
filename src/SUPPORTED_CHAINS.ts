@@ -100,7 +100,7 @@ const SUPPORTED_CHAINS = [
         address: '0x1a44076050125825900e736c501f859c50fE728c',
         chainId: EChainID.ARBITRUM,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.ARBITRUM],
-        rpc: 'https://arbitrum.llamarpc.com/<api_key>',
+        rpc: 'https://arb-mainnet.g.alchemy.com/v2/<api_key>',
         tags: ['mainnet', 'host'],
     },
     {
