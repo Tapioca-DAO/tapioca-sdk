@@ -2397,6 +2397,24 @@
         }
     },
     "lbp-prod-test": {
+        "generic": {
+            "42161": {
+                "name": "arbitrum",
+                "lastBlockHeight": 220138002,
+                "contracts": [
+                    {
+                        "name": "TapiocaDeployer",
+                        "address": "0x9EC14ADAA1d71cde3Db4053801927b26740471c9",
+                        "meta": {}
+                    },
+                    {
+                        "name": "TapiocaMulticall",
+                        "address": "0x4364aef7C6f644bb0e719784F1A35100beAee6Db",
+                        "meta": {}
+                    }
+                ]
+            }
+        },
         "tap-token": {
             "42161": {
                 "name": "arbitrum",
@@ -2447,6 +2465,85 @@
                                 "0xcD5B223b3ECF18ae695E797cb033e86b7b189C88"
                             ],
                             "salt": "0x805a1b979a7e0d5c788ad955e244a8f3d1e53716684a59c7c2c67874dfd27e89",
+                            "create2": true
+                        }
+                    }
+                ]
+            }
+        },
+        "tapioca-periph": {
+            "42161": {
+                "name": "arbitrum",
+                "lastBlockHeight": 220141576,
+                "contracts": [
+                    {
+                        "name": "LBP_AUTHORIZER",
+                        "address": "0x87702669117Da3562a80eF6e3dCa0F7662b48520",
+                        "meta": {
+                            "args": [
+                                "0x4364aef7C6f644bb0e719784F1A35100beAee6Db"
+                            ],
+                            "salt": "0x1a1832db8e9ac9fb4ac869dad6a781adbf10fe288e299c40cd877e3f721dc623",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "LBP_VAULT",
+                        "address": "0xe49A46E939D6fB7e2A1aaB9293cFf8F114c484fA",
+                        "meta": {
+                            "args": [
+                                "0x87702669117Da3562a80eF6e3dCa0F7662b48520",
+                                "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
+                                0,
+                                0
+                            ],
+                            "salt": "0x422420c95eb4aaae6f4258b101fe50904eeac299e1eb0e15ae3b3b4cf59e3f08",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "LBP_BALANCER_QUERIES",
+                        "address": "0x130Ee559122671B36a92Be7529C07cEDA932fFF2",
+                        "meta": {
+                            "args": [
+                                "0xe49A46E939D6fB7e2A1aaB9293cFf8F114c484fA"
+                            ],
+                            "salt": "0xe31a973c5b044896211f78e9d12bf847ac3ec8c8a0a043ec1025205fcf1f57fb",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "TAP_USDC_LBP",
+                        "address": "0x493C5Ec2e712407c53E85e58A41F51D215c791E1",
+                        "meta": {
+                            "args": [
+                                "0xe49A46E939D6fB7e2A1aaB9293cFf8F114c484fA",
+                                "Tapioca USDC/TAP LBP",
+                                "USDC/TAP LBP",
+                                [
+                                    "0x43Cd078b91d082a9c0571a0233A3D3D7c7060596",
+                                    "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"
+                                ],
+                                [
+                                    {
+                                        "type": "BigNumber",
+                                        "hex": "0x0dbd2fc137a30000"
+                                    },
+                                    {
+                                        "type": "BigNumber",
+                                        "hex": "0x2386f26fc10000"
+                                    }
+                                ],
+                                {
+                                    "type": "BigNumber",
+                                    "hex": "0x2386f26fc10000"
+                                },
+                                0,
+                                0,
+                                "0x4364aef7C6f644bb0e719784F1A35100beAee6Db",
+                                false
+                            ],
+                            "salt": "0x81a2906cdb645ad741e6332ef0e975fd5664d2fa758b8619833800c4c6ffc9bf",
                             "create2": true
                         }
                     }
