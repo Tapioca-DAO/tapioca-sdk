@@ -35,7 +35,11 @@ export const TAP_TASK = (task: ConfigurableTaskDefinition) =>
             'load',
             'Load the contracts from the database instead of building them.',
         )
-        .addFlag('verify', 'Add to verify the contracts after deployment.');
+        .addFlag('verify', 'Add to verify the contracts after deployment.')
+        .addFlag(
+            'skipSetup',
+            'Skip the setup of the deployment and will only deploy the contracts.',
+        );
 
 /**
  * Getter tasks

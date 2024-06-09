@@ -29,6 +29,7 @@ export type TTapiocaDeployTaskArgs = {
     tag: string;
     load?: boolean;
     verify?: boolean;
+    skipSetup?: boolean;
 };
 export type TTapiocaDeployerVmPass<T> = {
     hre: HardhatRuntimeEnvironment;
@@ -177,7 +178,7 @@ export class DeployerVM {
         wait = 3,
     ) {
         // Settings
-        const { tag, deployOnly } = taskArgs;
+        const { tag, deployOnly, skipSetup } = taskArgs;
         const { hre, staticSimulation } = params;
         let filter = params.filter;
         if (deployOnly) {
@@ -235,7 +236,7 @@ export class DeployerVM {
             await VM.verify();
         }
 
-        if (vmPostDeployment) {
+        if (!skipSetup && vmPostDeployment) {
             console.log('[+] Post deployment setup');
             await vmPostDeployment({
                 hre,
