@@ -2422,13 +2422,13 @@
                 "contracts": [
                     {
                         "name": "LTAP",
-                        "address": "0x43Cd078b91d082a9c0571a0233A3D3D7c7060596",
+                        "address": "0x240BeD4Fd94EF75eb1433239413cc1D1C6a6b10E",
                         "meta": {
                             "args": [
-                                "0xEaA9312165C5Ff7EE0A6B3A2258B344286B8D85d",
-                                "0xEaA9312165C5Ff7EE0A6B3A2258B344286B8D85d"
+                                "0x4364aef7C6f644bb0e719784F1A35100beAee6Db",
+                                "0x4364aef7C6f644bb0e719784F1A35100beAee6Db"
                             ],
-                            "salt": "0x157fbc2e3bfb98846c77429bf7ebaa680563537334f01c6c15fdfa2ac5d453e3",
+                            "salt": "0x7dd28f811be664d093b1c7eb486a097db322a506105c5fc356ec79bb178721a0",
                             "create2": true
                         }
                     }
