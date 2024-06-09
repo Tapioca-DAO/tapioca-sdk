@@ -2396,6 +2396,64 @@
             }
         }
     },
+    "lbp-prod-test": {
+        "tap-token": {
+            "42161": {
+                "name": "arbitrum",
+                "lastBlockHeight": 219884247,
+                "contracts": [
+                    {
+                        "name": "LTAP",
+                        "address": "0x43Cd078b91d082a9c0571a0233A3D3D7c7060596",
+                        "meta": {
+                            "args": [
+                                "0xEaA9312165C5Ff7EE0A6B3A2258B344286B8D85d",
+                                "0xEaA9312165C5Ff7EE0A6B3A2258B344286B8D85d"
+                            ],
+                            "salt": "0x157fbc2e3bfb98846c77429bf7ebaa680563537334f01c6c15fdfa2ac5d453e3",
+                            "create2": true
+                        }
+                    }
+                ]
+            },
+            "43114": {
+                "name": "avalanche",
+                "lastBlockHeight": 46475244,
+                "contracts": [
+                    {
+                        "name": "LTAP",
+                        "address": "0x2cd108566Ce0A4228409F3A10F10c4c840Ea577B",
+                        "meta": {
+                            "args": [
+                                "0x29CBa348D7eCB5A9f72520A22F49aDDf0739617B",
+                                "0x29CBa348D7eCB5A9f72520A22F49aDDf0739617B"
+                            ],
+                            "salt": "0x05d525a21eafd932a2919d73d6f00e114c9331201350eb915158cf2af42ee233",
+                            "create2": true
+                        }
+                    }
+                ]
+            },
+            "421614": {
+                "name": "arbitrum_sepolia",
+                "lastBlockHeight": 52665330,
+                "contracts": [
+                    {
+                        "name": "LTAP",
+                        "address": "0xb6Df282ce3BA38d2B2276C3C9478f06B8775C0DF",
+                        "meta": {
+                            "args": [
+                                "0xcD5B223b3ECF18ae695E797cb033e86b7b189C88",
+                                "0xcD5B223b3ECF18ae695E797cb033e86b7b189C88"
+                            ],
+                            "salt": "0x805a1b979a7e0d5c788ad955e244a8f3d1e53716684a59c7c2c67874dfd27e89",
+                            "create2": true
+                        }
+                    }
+                ]
+            }
+        }
+    },
     "tap-token-test": {
         "generic": {
             "43113": {
