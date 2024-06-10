@@ -2478,50 +2478,50 @@
                 "contracts": [
                     {
                         "name": "LBP_AUTHORIZER",
-                        "address": "0xeFd572c135109991ac4536BccA46867e2E19521D",
+                        "address": "0x5d9D7424c104348A89f197c81835Cf4ba1a3adDC",
                         "meta": {
                             "args": [
                                 "0x4364aef7C6f644bb0e719784F1A35100beAee6Db"
                             ],
-                            "salt": "0xd183af14614d258e7ec3e0f8cd2d3b7737b58d824b9cda1d7c02e2118c4443f8",
+                            "salt": "0x444d3db3c80d0fb9b398bca384ff3f3850088d06616f95e9399a662fb9557b18",
                             "create2": true
                         }
                     },
                     {
                         "name": "LBP_VAULT",
-                        "address": "0xCfd52557944FCf15508cE2d82C538bc762c6a508",
+                        "address": "0xda6700Ac83111aB3DC2DdD04C322b7EEFea621B2",
                         "meta": {
                             "args": [
-                                "0xeFd572c135109991ac4536BccA46867e2E19521D",
+                                "0x5d9D7424c104348A89f197c81835Cf4ba1a3adDC",
                                 "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
                                 0,
                                 0
                             ],
-                            "salt": "0x7dbbc9e78bbc1b7b9fda7dc4caf07079e420549606e2f574b7660e9e78908028",
+                            "salt": "0x9c678c7c3f505904b672adb728899657a832ae3be7354bde03e8ad366152b004",
                             "create2": true
                         }
                     },
                     {
                         "name": "LBP_BALANCER_QUERIES",
-                        "address": "0xa0d4A41aAfcCf136082Fd4629695B91E4E8C720D",
+                        "address": "0x079C796CE837269BF33418135f8864c9394Bd340",
                         "meta": {
                             "args": [
-                                "0xCfd52557944FCf15508cE2d82C538bc762c6a508"
+                                "0xda6700Ac83111aB3DC2DdD04C322b7EEFea621B2"
                             ],
-                            "salt": "0xa7d57be479387b56b82a27a726c01ddad31953c69e8a5277de860e00dd2d2a63",
+                            "salt": "0x27636720f83436e7d61865b98c48b157f3e28238fa3129ea1c41bcf31db7b560",
                             "create2": true
                         }
                     },
                     {
                         "name": "TAP_USDC_LBP",
-                        "address": "0x2354fbadf2BeC0cE3fD29801B912ea660DED056f",
+                        "address": "0xd22C86FF717F11FFA1A65d0F67ec095e7CA8FEC8",
                         "meta": {
                             "args": [
-                                "0xCfd52557944FCf15508cE2d82C538bc762c6a508",
+                                "0xda6700Ac83111aB3DC2DdD04C322b7EEFea621B2",
                                 "Tapioca USDC/TAP LBP",
                                 "USDC/TAP LBP",
                                 [
-                                    "0x64793702DCd0a8a81a81fBF294411a516d46e7cB",
+                                    "0x1Dc08530604304FD610a2651a96dD1fa317453e6",
                                     "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"
                                 ],
                                 [
@@ -2543,7 +2543,7 @@
                                 "0x4364aef7C6f644bb0e719784F1A35100beAee6Db",
                                 false
                             ],
-                            "salt": "0x63b5691adf05c33bf2ff50c96b4ecfa775facdb85b1f53d55887746575b50c44",
+                            "salt": "0xf5574774804a27cf8212a088ad20d55ea18beb3844e41c96afe1f1272a8d316b",
                             "create2": true
                         }
                     }
