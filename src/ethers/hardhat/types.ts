@@ -3,7 +3,10 @@ import {
     HardhatConfig,
     HardhatUserConfig,
 } from 'hardhat/types';
-import '@nomicfoundation/hardhat-toolbox/dist/src';
+
+import '@nomiclabs/hardhat-ethers';
+import '@nomicfoundation/hardhat-verify';
+
 import { extendEnvironment } from 'hardhat/config';
 import { extendConfig } from 'hardhat/config';
 import 'hardhat/types/config';
