@@ -2541,82 +2541,82 @@
                 "contracts": [
                     {
                         "name": "AOTAP",
-                        "address": "0xfb39a5fEcB40610021b6884FB89C927eA60890B8",
+                        "address": "0x3649F77f092c99e8d3976ea3cD3fF7DBF680422B",
                         "meta": {
                             "args": [
                                 "0xAFc96f43A673557744A6EAad02db5CE5a3C3a827",
                                 "0x4364aef7C6f644bb0e719784F1A35100beAee6Db"
                             ],
-                            "salt": "0xdf406f832421feb0ca169e091da45e29f43e0429af714e0b6f5eb564f9d89d3f",
+                            "salt": "0x1fc53c733603421a35961a6d8f3392a9f79ddd9ee3c94965407d1c4643c07fd4",
                             "create2": true
                         }
                     },
                     {
                         "name": "VESTING_CONTRIBUTORS",
-                        "address": "0x699f35e1ffD25C19024BefCfB3A695594e29c75a",
+                        "address": "0x2007f1fA0Ea73B6435Db5f5404CA153E2Fa10362",
                         "meta": {
                             "args": [
                                 31104000,
                                 93312000,
                                 "0x4364aef7C6f644bb0e719784F1A35100beAee6Db"
                             ],
-                            "salt": "0xcb6861bd00c24ce714acde68e574756d163fcfed6ee528a7b02d81af57ca9265",
+                            "salt": "0x1b344418ff855c8f31f9134b436a01d21ea4e4eb6cc14e8ddeb24177d2cb86db",
                             "create2": true
                         }
                     },
                     {
                         "name": "VESTING_EARLY_SUPPORTERS",
-                        "address": "0x082106B414b43DBEEDa26D8A8C054F8a96Bf5273",
+                        "address": "0x7C659a1a27cB888a675f8541880c0a13087357b7",
                         "meta": {
                             "args": [
                                 0,
                                 62208000,
                                 "0x4364aef7C6f644bb0e719784F1A35100beAee6Db"
                             ],
-                            "salt": "0x5286c1f83a3c49a8f7ec744765564e50a6c7ef48771e05e8300a08088e3816ae",
+                            "salt": "0xae0cee8529c2b5013100ae02ab74f276f8b674605b190869a5d5ec53845ccb56",
                             "create2": true
                         }
                     },
                     {
                         "name": "VESTING_SUPPORTERS",
-                        "address": "0x9971fAeC96594e9731a27dd8bE6b68a3FAe5082F",
+                        "address": "0x6A6b8560a98073173Cec0ab41E80a99B0a21B3a3",
                         "meta": {
                             "args": [
                                 0,
                                 46656000,
                                 "0x4364aef7C6f644bb0e719784F1A35100beAee6Db"
                             ],
-                            "salt": "0x818c37f17e724522ba6dedc2e0b4f1570d5e81c7399829f53f30cb7752637a79",
+                            "salt": "0xe082c90da4f65c0cac5045d3ced17a5f461f438e84e23f7aeb5065d995612109",
                             "create2": true
                         }
                     },
                     {
                         "name": "AIRDROP_BROKER",
-                        "address": "0xaC66464a9D83aD4dAc9448C67E6888699bF84bd7",
+                        "address": "0xCB61BbAC82c808C38d188a838846B38d78Bb6f6f",
                         "meta": {
                             "args": [
-                                "0xfb39a5fEcB40610021b6884FB89C927eA60890B8",
+                                "0x3649F77f092c99e8d3976ea3cD3fF7DBF680422B",
                                 "0xA805E1b42590be85D2c74E09c0e1c1B6063Ea1A7",
                                 "0x7A3B760AcFaB78f6bc6a1AD80F7743f5bA0513Dc",
                                 "0xAFc96f43A673557744A6EAad02db5CE5a3C3a827",
                                 "0x4364aef7C6f644bb0e719784F1A35100beAee6Db"
                             ],
-                            "salt": "0xd0828a5d23971d623ac4825e6c2f3fd9b2f90fc54367619de6d9b7c13765c670",
+                            "salt": "0x6692e13118ec98c50208ca3b7cd1870c9beee4d3b17594b1fd1b1f958c8da06f",
                             "create2": true
                         }
                     },
                     {
                         "name": "EXT_EXEC",
-                        "address": "0x9aA6F3473ceBd7FFAedDd188ABb29AFC198501eD",
+                        "address": "0xD0a819Fb62fA2bE7CA15aAac55b461F5d08F8898",
                         "meta": {
                             "args": [],
-                            "salt": "0x9818b1983eceef78a17cdb37949451f0dc7bdb9c79cfaeb050741eb2d889eaea",
+                            "salt": "0xafdec87ad32bb7261d67fa2978ed139876205999b5027337fc378724e51818eb",
                             "create2": true
                         }
                     },
                     {
                         "name": "TAP_TOKEN_SENDER_MODULE",
-                        "address": "0x1290026c74A21A3f694E8082fc7EC5C82cfd698F",
+                        "address": "0x1D5E981860ef112e3a321Ed5d5f5127EAa664386",
                         "meta": {
                             "args": [
                                 "",
@@ -2625,13 +2625,13 @@
                                 "0x4364aef7C6f644bb0e719784F1A35100beAee6Db",
                                 "0x0000000000000000000000000000000000000000"
                             ],
-                            "salt": "0x315a340d44afc07e9d5d0ba82fba6ecad1ce51dd7e8c56697fdf13bd254496aa",
+                            "salt": "0x7477f659d698318ffe73582808790d87f916f6a74ffb5dbcbc1d34d7060d9308",
                             "create2": true
                         }
                     },
                     {
                         "name": "TAP_TOKEN_RECEIVER_MODULE",
-                        "address": "0x0d3C9f50754D2DfD324F1D3aeb3295E75e7F3246",
+                        "address": "0xd1506B4B11aC5679766116C60b04e500fD2Ec006",
                         "meta": {
                             "args": [
                                 "",
@@ -2640,43 +2640,43 @@
                                 "0x4364aef7C6f644bb0e719784F1A35100beAee6Db",
                                 "0x0000000000000000000000000000000000000000"
                             ],
-                            "salt": "0x5a7c8b502523eb340b9cb1c314b5302182e3240c0723a441c13cd0f5391d1c2b",
+                            "salt": "0x917022af478c969ccb0381370207908829f3af43df02d00baeb4c518d083ae05",
                             "create2": true
                         }
                     },
                     {
                         "name": "TAP_TOKEN",
-                        "address": "0x38409b8D76AE4fb45Edb076d0931Da2D87886711",
+                        "address": "0x05984392dB8702Ca4f4B6AB1715e6bDFCEF9066A",
                         "meta": {
                             "args": [
                                 {
                                     "epochDuration": 604800,
                                     "endpoint": "0x1a44076050125825900e736c501f859c50fE728c",
-                                    "contributors": "0x699f35e1ffD25C19024BefCfB3A695594e29c75a",
-                                    "earlySupporters": "0x082106B414b43DBEEDa26D8A8C054F8a96Bf5273",
-                                    "supporters": "0x9971fAeC96594e9731a27dd8bE6b68a3FAe5082F",
+                                    "contributors": "0x4364aef7C6f644bb0e719784F1A35100beAee6Db",
+                                    "earlySupporters": "0x7C659a1a27cB888a675f8541880c0a13087357b7",
+                                    "supporters": "0x6A6b8560a98073173Cec0ab41E80a99B0a21B3a3",
                                     "lTap": "0x1Dc08530604304FD610a2651a96dD1fa317453e6",
                                     "dao": "0x7A3B760AcFaB78f6bc6a1AD80F7743f5bA0513Dc",
-                                    "airdrop": "0xaC66464a9D83aD4dAc9448C67E6888699bF84bd7",
+                                    "airdrop": "0xCB61BbAC82c808C38d188a838846B38d78Bb6f6f",
                                     "governanceEid": "30110",
                                     "owner": "0x4364aef7C6f644bb0e719784F1A35100beAee6Db",
-                                    "tapTokenSenderModule": "0x1290026c74A21A3f694E8082fc7EC5C82cfd698F",
-                                    "tapTokenReceiverModule": "0x0d3C9f50754D2DfD324F1D3aeb3295E75e7F3246",
-                                    "extExec": "0x9aA6F3473ceBd7FFAedDd188ABb29AFC198501eD",
+                                    "tapTokenSenderModule": "0x1D5E981860ef112e3a321Ed5d5f5127EAa664386",
+                                    "tapTokenReceiverModule": "0xd1506B4B11aC5679766116C60b04e500fD2Ec006",
+                                    "extExec": "0xD0a819Fb62fA2bE7CA15aAac55b461F5d08F8898",
                                     "pearlmit": "0xAFc96f43A673557744A6EAad02db5CE5a3C3a827",
                                     "cluster": "0xd546Eb7c71BEA764c435bC02a3a1caA4Ce212650"
                                 }
                             ],
-                            "salt": "0xf89a41fb6a39a3b74807db51774a2f0848440b33ccdf4b68a0165e7e95142d52",
+                            "salt": "0xb34fcfd995c49b2314b22c3001de8109599278c54ccadb609340d47127dd4b6c",
                             "create2": true
                         }
                     },
                     {
                         "name": "TAP_TOKEN_HELPER",
-                        "address": "0x95A995c32BF58673D7d39Bd29aEC06952099db7a",
+                        "address": "0x8a12963672E545d8192D4D1C8cF9059C8A0c1973",
                         "meta": {
                             "args": [],
-                            "salt": "0x767c740180978a556c6f600c29121e42f2ba2f3c4e55b4df38ab4c2cec84c187",
+                            "salt": "0xfe54ab6077f5c88d8a345d76ae7a9f0f4f18755d47fbfae724c4e174c0532a44",
                             "create2": true
                         }
                     },
