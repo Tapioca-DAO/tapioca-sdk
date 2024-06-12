@@ -2737,19 +2737,77 @@
                 "lastBlockHeight": 220141576,
                 "contracts": [
                     {
-                        "address": "0x731df1426f0BD1f48F73be195957f5B32e4cf772",
-                        "name": "WETH_YB_EMPTY_STRAT",
+                        "name": "TAP_ORACLE",
+                        "address": "0x1E3a8AAC64A135a6a66b52182D0Eb8fCd6518F13",
                         "meta": {
-                            "token": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
-                            "ybAssetId": 4
+                            "args": [
+                                "TAP/USD",
+                                "TAP/USD",
+                                18,
+                                {
+                                    "addressInAndOutUni": [
+                                        "0xF772b0A03bFf734B6b22Be606e567700aeb0336A",
+                                        "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1"
+                                    ],
+                                    "_circuitUniswap": [
+                                        "0x10C652D531169F48C2DA2561434c6657Dc9c3ddF"
+                                    ],
+                                    "_circuitUniIsMultiplied": [
+                                        1
+                                    ],
+                                    "_twapPeriod": 3600,
+                                    "observationLength": 10,
+                                    "_uniFinalCurrency": 1,
+                                    "_circuitChainlink": [
+                                        "0x639fe6ab55c921f74e7fac1ee960c0b6293ba612"
+                                    ],
+                                    "_circuitChainIsMultiplied": [
+                                        1
+                                    ],
+                                    "guardians": [
+                                        "0x4364aef7C6f644bb0e719784F1A35100beAee6Db"
+                                    ],
+                                    "_description": "0x5441502f55534400000000000000000000000000000000000000000000000000",
+                                    "_sequencerUptimeFeed": "0xFdB631F5EE196F0ed6FAa767959853A9F217697D",
+                                    "_admin": "0x4364aef7C6f644bb0e719784F1A35100beAee6Db"
+                                }
+                            ],
+                            "salt": "0x295b469974a91f4731c15b24c6283a53cbda3a85548e9e21b6b237a25efe3db8",
+                            "create2": true
                         }
                     },
                     {
-                        "address": "0xeCC015E3e926904Ec194637aaBBb9215Bc070768",
+                        "address": "0x7374f2D260718aE77e599Af48E35642817C36BF7",
+                        "name": "ARRAKIS_TAP_WETH_VAULT",
+                        "meta": {
+                            "vaultNum": 36
+                        }
+                    },
+                    {
+                        "name": "TAP_WETH_UNI_V3_POOL",
+                        "address": "0x10C652D531169F48C2DA2561434c6657Dc9c3ddF",
+                        "meta": {
+                            "token0": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+                            "token1": "0xF772b0A03bFf734B6b22Be606e567700aeb0336A",
+                            "ratio0": "527231",
+                            "ratio1": "1000000000",
+                            "fee": 500
+                        }
+                    },
+                    {
+                        "address": "0x1DE1E9966A914013787420974B83ec9A1F3fDC3E",
+                        "name": "WETH_YB_EMPTY_STRAT",
+                        "meta": {
+                            "token": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+                            "ybAssetId": 6
+                        }
+                    },
+                    {
+                        "address": "0xfFF6672C4F1A4B88687aa2cBC48bca126efdb5d2",
                         "name": "TAP_TOKEN_YB_EMPTY_STRAT",
                         "meta": {
                             "token": "0xF772b0A03bFf734B6b22Be606e567700aeb0336A",
-                            "ybAssetId": 3
+                            "ybAssetId": 5
                         }
                     },
                     {
@@ -2879,46 +2937,6 @@
                                 }
                             ],
                             "salt": "0x63941e4719e720f7dcfde9a9caf7a36fdaba410cfd12bfceb338f4356ae96d5f",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "TAP_ORACLE",
-                        "address": "0xC2f54dbD74d25feC83c2E270B89e3c0dBC4CFac2",
-                        "meta": {
-                            "args": [
-                                "TAP/USD",
-                                "TAP/USD",
-                                18,
-                                {
-                                    "addressInAndOutUni": [
-                                        "0xF772b0A03bFf734B6b22Be606e567700aeb0336A",
-                                        "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1"
-                                    ],
-                                    "_circuitUniswap": [
-                                        "0xe35631C00d793ff75855Bf6A2B01c22962f07f8C"
-                                    ],
-                                    "_circuitUniIsMultiplied": [
-                                        1
-                                    ],
-                                    "_twapPeriod": 3600,
-                                    "observationLength": 10,
-                                    "_uniFinalCurrency": 1,
-                                    "_circuitChainlink": [
-                                        "0x639fe6ab55c921f74e7fac1ee960c0b6293ba612"
-                                    ],
-                                    "_circuitChainIsMultiplied": [
-                                        1
-                                    ],
-                                    "guardians": [
-                                        "0x4364aef7C6f644bb0e719784F1A35100beAee6Db"
-                                    ],
-                                    "_description": "0x5441502f55534400000000000000000000000000000000000000000000000000",
-                                    "_sequencerUptimeFeed": "0xFdB631F5EE196F0ed6FAa767959853A9F217697D",
-                                    "_admin": "0x4364aef7C6f644bb0e719784F1A35100beAee6Db"
-                                }
-                            ],
-                            "salt": "0x27b3dce6dcbfd282eacd385b22cbfd4484c7d7a452a1eae77b2d7830137ea7da",
                             "create2": true
                         }
                     },
@@ -3137,24 +3155,6 @@
                             ],
                             "salt": "0xb31d0e08305323764d4e0b166b848fffad03d110eee7b5ad9dfc1181b9b0af27",
                             "create2": true
-                        }
-                    },
-                    {
-                        "address": "0x92c23A8a883d23B6E208D9CBEc94eF2d76Ce4A94",
-                        "name": "ARRAKIS_TAP_WETH_VAULT",
-                        "meta": {
-                            "vaultNum": 34
-                        }
-                    },
-                    {
-                        "name": "TAP_WETH_UNI_V3_POOL",
-                        "address": "0xe35631C00d793ff75855Bf6A2B01c22962f07f8C",
-                        "meta": {
-                            "token0": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
-                            "token1": "0xF772b0A03bFf734B6b22Be606e567700aeb0336A",
-                            "ratio0": "1",
-                            "ratio1": "10",
-                            "fee": 3000
                         }
                     },
                     {
