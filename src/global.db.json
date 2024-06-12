@@ -2596,47 +2596,73 @@
                 "lastBlockHeight": 220141576,
                 "contracts": [
                     {
+                        "name": "PEARLMIT",
+                        "address": "0xAFc96f43A673557744A6EAad02db5CE5a3C3a827",
+                        "meta": {
+                            "args": [
+                                "PEARLMIT",
+                                "1",
+                                "0x4364aef7C6f644bb0e719784F1A35100beAee6Db",
+                                0
+                            ],
+                            "salt": "0xdaccc11d381b9613d8a779fef31d46977cbaa8f015670ef5ee0024870c460abd",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "CLUSTER",
+                        "address": "0xd546Eb7c71BEA764c435bC02a3a1caA4Ce212650",
+                        "meta": {
+                            "args": [
+                                "30110",
+                                "0x4364aef7C6f644bb0e719784F1A35100beAee6Db"
+                            ],
+                            "salt": "0x12f2baed0d36c9e52e0d4d1264b40758fd1ac7dcd4951da26e04892a2238a350",
+                            "create2": true
+                        }
+                    },
+                    {
                         "name": "LBP_AUTHORIZER",
-                        "address": "0x5d9D7424c104348A89f197c81835Cf4ba1a3adDC",
+                        "address": "0xf5f0109Bf4a17F93c475e14f05f41ab10bFf24de",
                         "meta": {
                             "args": [
                                 "0x4364aef7C6f644bb0e719784F1A35100beAee6Db"
                             ],
-                            "salt": "0x444d3db3c80d0fb9b398bca384ff3f3850088d06616f95e9399a662fb9557b18",
+                            "salt": "0xb2d8b6d2c745da017e94a73b5597bfd84e5fd8ba4c87957164f5dd78aa45b24f",
                             "create2": true
                         }
                     },
                     {
                         "name": "LBP_VAULT",
-                        "address": "0xda6700Ac83111aB3DC2DdD04C322b7EEFea621B2",
+                        "address": "0x95f756c16ff41104dc0e0fCBFc4f4C7CD4710004",
                         "meta": {
                             "args": [
-                                "0x5d9D7424c104348A89f197c81835Cf4ba1a3adDC",
+                                "0xf5f0109Bf4a17F93c475e14f05f41ab10bFf24de",
                                 "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
                                 0,
                                 0
                             ],
-                            "salt": "0x9c678c7c3f505904b672adb728899657a832ae3be7354bde03e8ad366152b004",
+                            "salt": "0x26001bd9cc2cf48755f7b245bf14b09337f9025a84f395f272057c28dc9c3dc4",
                             "create2": true
                         }
                     },
                     {
                         "name": "LBP_BALANCER_QUERIES",
-                        "address": "0x079C796CE837269BF33418135f8864c9394Bd340",
+                        "address": "0x61Cdd8351510f5B9d5474468672F5B1d049902b7",
                         "meta": {
                             "args": [
-                                "0xda6700Ac83111aB3DC2DdD04C322b7EEFea621B2"
+                                "0x95f756c16ff41104dc0e0fCBFc4f4C7CD4710004"
                             ],
-                            "salt": "0x27636720f83436e7d61865b98c48b157f3e28238fa3129ea1c41bcf31db7b560",
+                            "salt": "0x359e10a856dc46853ebef1df52240143c4b2da66fd5653e5cc01bb5f2a8c0e94",
                             "create2": true
                         }
                     },
                     {
                         "name": "TAP_USDC_LBP",
-                        "address": "0xd22C86FF717F11FFA1A65d0F67ec095e7CA8FEC8",
+                        "address": "0xA8159Feb87bCAc585FF7656418a6447B936da0bD",
                         "meta": {
                             "args": [
-                                "0xda6700Ac83111aB3DC2DdD04C322b7EEFea621B2",
+                                "0x95f756c16ff41104dc0e0fCBFc4f4C7CD4710004",
                                 "Tapioca USDC/TAP LBP",
                                 "USDC/TAP LBP",
                                 [
@@ -2662,7 +2688,7 @@
                                 "0x4364aef7C6f644bb0e719784F1A35100beAee6Db",
                                 false
                             ],
-                            "salt": "0xf5574774804a27cf8212a088ad20d55ea18beb3844e41c96afe1f1272a8d316b",
+                            "salt": "0xa1eae90595d6bda3a9c15f451f8cee9bc0b84c306c6fd08dc694e896a44ee981",
                             "create2": true
                         }
                     }
