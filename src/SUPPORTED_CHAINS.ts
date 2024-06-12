@@ -85,7 +85,7 @@ const SUPPORTED_CHAINS = [
         chainId: EChainID.AVALANCHE,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.AVALANCHE],
         rpc: 'https://api.avax.network/ext/bc/C/rpc',
-        tags: ['mainnet'],
+        tags: ['mainnet', 'side'],
     },
     {
         name: 'polygon',
@@ -93,7 +93,7 @@ const SUPPORTED_CHAINS = [
         chainId: EChainID.POLYGON,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.POLYGON],
         rpc: 'https://polygon-mainnet.g.alchemy.com/v2/<api_key>',
-        tags: ['mainnet'],
+        tags: ['mainnet', 'side'],
     },
     {
         name: 'arbitrum',
@@ -109,7 +109,7 @@ const SUPPORTED_CHAINS = [
         chainId: EChainID.OPTIMISM,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.OPTIMISM],
         rpc: 'https://opt-mainnet.g.alchemy.com/v2/<api_key>',
-        tags: ['mainnet'],
+        tags: ['mainnet', 'side'],
     },
     {
         name: 'fantom',
@@ -117,7 +117,7 @@ const SUPPORTED_CHAINS = [
         chainId: EChainID.FANTOM,
         lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.FANTOM],
         rpc: 'https://rpc.ftm.tools/',
-        tags: ['mainnet'],
+        tags: ['mainnet', 'side'],
     },
 ] as const;
 
