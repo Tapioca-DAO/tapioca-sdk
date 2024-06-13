@@ -104,6 +104,14 @@ const SUPPORTED_CHAINS = [
         tags: ['mainnet', 'host'],
     },
     {
+        name: 'arbitrum_tenderly_fork',
+        address: '0x1a44076050125825900e736c501f859c50fE728c',
+        chainId: EChainID.ARBITRUM,
+        lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.ARBITRUM],
+        rpc: 'https://virtual.arbitrum.rpc.tenderly.co/<api_key>',
+        tags: ['mainnet', 'host'],
+    },
+    {
         name: 'optimism',
         address: '0x1a44076050125825900e736c501f859c50fE728c',
         chainId: EChainID.OPTIMISM,
