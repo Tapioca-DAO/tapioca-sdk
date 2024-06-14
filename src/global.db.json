@@ -2441,6 +2441,55 @@
                 "lastBlockHeight": 220505928,
                 "contracts": [
                     {
+                        "name": "YIELD_BOX_URI_BUILDER",
+                        "address": "0xa6Ad71E0c7d8F2463c024e0cF9edc54bf922Fa54",
+                        "meta": {
+                            "args": [],
+                            "salt": "0xe266a467aaeb9a1f129aa1b0d576e1d2cd236feabd21c51691469a8d6b8d8e35",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YieldBox",
+                        "address": "0xCFFd997DB053c0fC54010770b55A4E02B1D104a5",
+                        "meta": {
+                            "args": [
+                                "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+                                "0xa6Ad71E0c7d8F2463c024e0cF9edc54bf922Fa54",
+                                "0x6668DE259da9EC896f51383f6CA3BD0beEd10EF9",
+                                "0x302E912826211b72222cDbaa684426Dc61F7fDED"
+                            ],
+                            "salt": "0x001c64f6ab964348e20f4a0104b9444c5311236ee532b285eccfe1e4c36bf703",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "PEARLMIT",
+                        "address": "0x6668DE259da9EC896f51383f6CA3BD0beEd10EF9",
+                        "meta": {
+                            "args": [
+                                "PEARLMIT",
+                                "1",
+                                "0x302E912826211b72222cDbaa684426Dc61F7fDED",
+                                0
+                            ],
+                            "salt": "0x70c4b64344e17f3ef5342d666b7aba3bf9d6901d7107d27ef15eeab34a8a575e",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "CLUSTER",
+                        "address": "0xe6d4944556a8c6605269528353C3cc35eEFf1313",
+                        "meta": {
+                            "args": [
+                                "30110",
+                                "0x302E912826211b72222cDbaa684426Dc61F7fDED"
+                            ],
+                            "salt": "0x5d24ffbcaa42ee0b8b85abe29b4ecec830f9d43e2ab147cdd1215f2ef1c2d646",
+                            "create2": true
+                        }
+                    },
+                    {
                         "name": "LBP_AUTHORIZER",
                         "address": "0xF043f34cacD17475CF1D1c0A3c19f2A5b05f2168",
                         "meta": {
