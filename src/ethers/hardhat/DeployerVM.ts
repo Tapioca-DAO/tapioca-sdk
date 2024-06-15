@@ -76,7 +76,7 @@ export type TLoadVMParams = {
     staticSimulation?: boolean;
     filter?: (contract: IDeploymentQueue) => boolean;
     useMulticallFromTag?: string;
-};
+} & Partial<IConstructorOptions>;
 
 export interface IDeployerVMAdd<T extends ContractFactory>
     extends IDeploymentQueue {
@@ -146,8 +146,14 @@ export class DeployerVM {
      * @returns Instance of DeployerVM
      */
     static loadVM(params: TLoadVMParams) {
-        const { hre, tag, debugMode, bytecodeSizeLimit, overrideOptions } =
-            params;
+        const {
+            hre,
+            tag,
+            debugMode,
+            bytecodeSizeLimit,
+            overrideOptions,
+            globalWait,
+        } = params;
         const VM = new hre.SDK.DeployerVM(hre, {
             ...params,
             // Change this if you get bytecode size error / gas required exceeds allowance (550000000)/ anything related to bytecode size
@@ -155,6 +161,7 @@ export class DeployerVM {
             bytecodeSizeLimit: bytecodeSizeLimit ?? 70_000,
             debugMode: debugMode ?? true,
             tag: tag ?? 'default',
+            globalWait,
             overrideOptions,
         });
         return VM;
