@@ -6631,6 +6631,98 @@
                 "lastBlockHeight": 22180359,
                 "contracts": [
                     {
+                        "name": "USDO_USDC_UNI_V3_ORACLE",
+                        "address": "0x4e99a2F3E1FE6cdD0193e63C435455783e88a303",
+                        "meta": {
+                            "args": [
+                                "UniV3 USDO/USC",
+                                "USDO/USDC",
+                                18,
+                                {
+                                    "addressInAndOutUni": [
+                                        "0x740FfB6868F241eCfa035FD202489a4f8674C806",
+                                        "0xF72c2794A9Ea95C5a8CD033999F319B15723E751"
+                                    ],
+                                    "_circuitUniswap": [
+                                        "0x42D4c0f80F822Cd93d8c0b1d35030441F5AdC686"
+                                    ],
+                                    "_circuitUniIsMultiplied": [
+                                        1
+                                    ],
+                                    "_twapPeriod": 1,
+                                    "observationLength": 1,
+                                    "_uniFinalCurrency": 1,
+                                    "_circuitChainlink": [
+                                        "0xC23507096A67D62d511CBE9D9f335dbef8F5De27"
+                                    ],
+                                    "_circuitChainIsMultiplied": [
+                                        1
+                                    ],
+                                    "guardians": [
+                                        "0xcD5B223b3ECF18ae695E797cb033e86b7b189C88"
+                                    ],
+                                    "_description": "0x5553444f2f555344430000000000000000000000000000000000000000000000",
+                                    "_sequencerUptimeFeed": "0x0000000000000000000000000000000000000000",
+                                    "_admin": "0xcD5B223b3ECF18ae695E797cb033e86b7b189C88"
+                                }
+                            ],
+                            "salt": "0x1806eeae3bf943b88aac23d92dd8200201917064a7890e618b792ea1bbb28473",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "address": "0xd3a8a9D92011A1845b55b5C0CFcbfc42AEbb0EF8",
+                        "name": "ARRAKIS_USDO_USDC_VAULT",
+                        "meta": {
+                            "vaultNum": 105
+                        }
+                    },
+                    {
+                        "name": "USDO_USDC_UNI_V3_POOL",
+                        "address": "0x42D4c0f80F822Cd93d8c0b1d35030441F5AdC686",
+                        "meta": {
+                            "token0": "0x740FfB6868F241eCfa035FD202489a4f8674C806",
+                            "token1": "0xF72c2794A9Ea95C5a8CD033999F319B15723E751",
+                            "ratio0": "1",
+                            "ratio1": "1",
+                            "fee": 100
+                        }
+                    },
+                    {
+                        "address": "0x3CEe3d1A2134add5665fFb04b56AEBB3f8D94aC8",
+                        "name": "WETH_YB_EMPTY_STRAT",
+                        "meta": {
+                            "token": "0x2EAe4fbc552fE35C1D3Df2B546032409bb0E431E",
+                            "ybAssetId": 8
+                        }
+                    },
+                    {
+                        "address": "0x4Ee5928c7CeEfa1a62680A637f13B9912fbA90A5",
+                        "name": "TAP_TOKEN_YB_EMPTY_STRAT",
+                        "meta": {
+                            "token": "0x3488d6fc4293E7954853ea2196580c9D3973ac3d",
+                            "ybAssetId": 7
+                        }
+                    },
+                    {
+                        "address": "0xb3E5B0f85EC25e79C6D643e680f0F64B569C095B",
+                        "name": "ARRAKIS_TAP_WETH_VAULT",
+                        "meta": {
+                            "vaultNum": 97
+                        }
+                    },
+                    {
+                        "name": "TAP_WETH_UNI_V3_POOL",
+                        "address": "0xE7a72b1BF3f91a4FC8B8fB10AA0eF7ED8Da54482",
+                        "meta": {
+                            "token0": "0x2EAe4fbc552fE35C1D3Df2B546032409bb0E431E",
+                            "token1": "0x3488d6fc4293E7954853ea2196580c9D3973ac3d",
+                            "ratio0": "10000000000000000000",
+                            "ratio1": "5741093174641887",
+                            "fee": 10000
+                        }
+                    },
+                    {
                         "name": "TOE_HELPER",
                         "address": "0xaEDD898241cbE374E37749aaf347238320B61795",
                         "meta": {
@@ -6890,57 +6982,6 @@
                         }
                     },
                     {
-                        "name": "USDO_USDC_UNI_V3_ORACLE",
-                        "address": "0x3866b0c2E3Ece2b91a3A30fAbD74490F4cA76688",
-                        "meta": {
-                            "args": [
-                                "UniV3 USDO/USC",
-                                "USDO/USDC",
-                                18,
-                                {
-                                    "addressInAndOutUni": [
-                                        "0x905EeDBc5e584E11B68f60E1deB50Efa08aD3e9F",
-                                        "0x6D6a13AbE7935b2cf6d67e49bc17F5035362C705"
-                                    ],
-                                    "_circuitUniswap": [
-                                        "0x2FcB03c285B69FFD655dfb71b1a550275E6BE0AE"
-                                    ],
-                                    "_circuitUniIsMultiplied": [
-                                        1
-                                    ],
-                                    "_twapPeriod": 1,
-                                    "observationLength": 1,
-                                    "_uniFinalCurrency": 1,
-                                    "_circuitChainlink": [
-                                        "0xC23507096A67D62d511CBE9D9f335dbef8F5De27"
-                                    ],
-                                    "_circuitChainIsMultiplied": [
-                                        1
-                                    ],
-                                    "guardians": [
-                                        "0xcD5B223b3ECF18ae695E797cb033e86b7b189C88"
-                                    ],
-                                    "_description": "0x5553444f2f555344430000000000000000000000000000000000000000000000",
-                                    "_sequencerUptimeFeed": "0x0000000000000000000000000000000000000000",
-                                    "_admin": "0xcD5B223b3ECF18ae695E797cb033e86b7b189C88"
-                                }
-                            ],
-                            "salt": "0xbcdecf72d8a4c3607489c3dcfacf05e6436aa9db07fb2f834a6210e42055497d",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "USDO_USDC_UNI_V3_POOL",
-                        "address": "0x2FcB03c285B69FFD655dfb71b1a550275E6BE0AE",
-                        "meta": {
-                            "token0": "0x6D6a13AbE7935b2cf6d67e49bc17F5035362C705",
-                            "token1": "0x905EeDBc5e584E11B68f60E1deB50Efa08aD3e9F",
-                            "ratio0": "1",
-                            "ratio1": "1",
-                            "fee": 100
-                        }
-                    },
-                    {
                         "name": "cltestmock",
                         "address": "0x500Eb9494F449dF951c48D23bCdEb06C75614876",
                         "meta": {
@@ -6953,22 +6994,6 @@
                             ],
                             "salt": "0xbfc98cf829840923025087f96a3175f878f39a9b8921b1deecf96d03207658df",
                             "create2": true
-                        }
-                    },
-                    {
-                        "address": "0xBAf75aAa91528201A735629a9e89Cb206e9d47EB",
-                        "name": "WETH_YB_EMPTY_STRAT",
-                        "meta": {
-                            "token": "0x2EAe4fbc552fE35C1D3Df2B546032409bb0E431E",
-                            "ybAssetId": 2
-                        }
-                    },
-                    {
-                        "address": "0xf2AB2dE8482716e425676C80dB9ba2f3BB074944",
-                        "name": "TAP_TOKEN_YB_EMPTY_STRAT",
-                        "meta": {
-                            "token": "0x3488d6fc4293E7954853ea2196580c9D3973ac3d",
-                            "ybAssetId": 1
                         }
                     },
                     {
@@ -7356,17 +7381,6 @@
                             ],
                             "salt": "0x79b749c9422f1289c99f6a41d8f5e93c080eb13ea594ee798d44e15aaccd771b",
                             "create2": true
-                        }
-                    },
-                    {
-                        "name": "TAP_WETH_UNI_V3_POOL",
-                        "address": "0xcac6cdE0283E2ddd011c8638E030f693Eb807B32",
-                        "meta": {
-                            "token0": "0x2EAe4fbc552fE35C1D3Df2B546032409bb0E431E",
-                            "token1": "0x3488d6fc4293E7954853ea2196580c9D3973ac3d",
-                            "ratio0": 1,
-                            "ratio1": 7,
-                            "fee": 3000
                         }
                     },
                     {
