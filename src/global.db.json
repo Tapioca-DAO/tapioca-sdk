@@ -5281,6 +5281,22 @@
                 "lastBlockHeight": 11110757,
                 "contracts": [
                     {
+                        "address": "0xa89ad987449f87B9a046438E90cA193d0E5eD3dc",
+                        "name": "YB_T_SGL_SGLP_ASSET_WITHOUT_STRATEGY",
+                        "meta": {
+                            "token": "0x4bA226a062f0cA8D2BB7aFaB553653A2fd5592a8",
+                            "ybAssetId": 13
+                        }
+                    },
+                    {
+                        "address": "0xdd06eBF80Ac0d81f1b0a7e900A7D477F5da7C1Ee",
+                        "name": "YB_T_SGL_SDAI_ASSET_WITHOUT_STRATEGY",
+                        "meta": {
+                            "token": "0x72e7E37B70d9bC452E99f9Ca2441309b4EfD5240",
+                            "ybAssetId": 11
+                        }
+                    },
+                    {
                         "name": "ORIGINS_T_ETH_MARKET",
                         "address": "0xD0431E4a0C422839A38809629A0c313c1F305E06",
                         "meta": {
@@ -5683,22 +5699,6 @@
                             "args": [],
                             "salt": "0xdff136baae6885931fbfab1b4657e58b6e125c2b548bdae63dbfafac26386ab7",
                             "create2": true
-                        }
-                    },
-                    {
-                        "address": "0x7924F61532BFfeAF927429DAe7aB5cceC6CE1955",
-                        "name": "YB_T_SGL_SGLP_ASSET_WITHOUT_STRATEGY",
-                        "meta": {
-                            "token": "0x7C3A083a61955519C15C4e89792dAF0C6bA37734",
-                            "ybAssetId": 20
-                        }
-                    },
-                    {
-                        "address": "0x46bF1Ea6113E734c3C58C1C7F14C8c75C9300a03",
-                        "name": "YB_T_SGL_SDAI_ASSET_WITHOUT_STRATEGY",
-                        "meta": {
-                            "token": "0x964F75A175e31ee1554F852Da09Fbf19f49D6faF",
-                            "ybAssetId": 19
                         }
                     },
                     {
