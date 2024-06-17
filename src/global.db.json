@@ -4074,16 +4074,16 @@
                 "contracts": [
                     {
                         "name": "EXT_EXEC",
-                        "address": "0x7AE144B461B44d2d155b22fa5ddFDd0261B922cA",
+                        "address": "0xaC4789ADf5732Bd57C9A05d543EA7dF9003a0628",
                         "meta": {
                             "args": [],
-                            "salt": "0x99b1c57a5f8f606b1c8f40afe5b5fb4515b909722150b3b513e0ab7df7a25017",
+                            "salt": "0x41e7ff6d4f2f878ca763f942d55eefb29a82c9d461749511f387cda78aafc074",
                             "create2": true
                         }
                     },
                     {
                         "name": "TAP_TOKEN_SENDER_MODULE",
-                        "address": "0xA85f1163AF1B06a0EA68F77c09308c80c1ae9de9",
+                        "address": "0xfA539E30A19D9E85b82C863Eff191009c8359739",
                         "meta": {
                             "args": [
                                 "",
@@ -4092,13 +4092,13 @@
                                 "0xc4c36140a88e92fa01bf31299da58e51265487d5",
                                 "0x0000000000000000000000000000000000000000"
                             ],
-                            "salt": "0x8935a74685e1b616d034f901a2b54b6f9245d4f0153f4a695580fc7fc16f72b3",
+                            "salt": "0x4c996beb648b87bb86f6b5ff5aafe99beb65ba90614513d595a965959f25fd29",
                             "create2": true
                         }
                     },
                     {
                         "name": "TAP_TOKEN_RECEIVER_MODULE",
-                        "address": "0x35Bd5fE504c2BDe0Ab67B027d31bF260fB3901b6",
+                        "address": "0x7E0988C6A833b49c0dF101B32536945861c9cAfd",
                         "meta": {
                             "args": [
                                 "",
@@ -4107,17 +4107,17 @@
                                 "0xc4c36140a88e92fa01bf31299da58e51265487d5",
                                 "0x0000000000000000000000000000000000000000"
                             ],
-                            "salt": "0x37708c8e1cbb12a14808c505bbef53ad057cbd48a87c0e3c73aa4ad260cb753f",
+                            "salt": "0x6380ad22af68ef3a054af4eabc00d635b588b70822984fb313f15279afa0bbe0",
                             "create2": true
                         }
                     },
                     {
                         "name": "TAP_TOKEN",
-                        "address": "0xfDfFaDa05Bbf1B0C98aBa97e7048975D789eC069",
+                        "address": "0xa9BB651bB756F6b106ca73e6166Cc691A2D5E444",
                         "meta": {
                             "args": [
                                 {
-                                    "epochDuration": 604800,
+                                    "epochDuration": 600,
                                     "endpoint": "0x6EDCE65403992e310A62460808c4b910D972f10f",
                                     "contributors": "0xc4c36140a88e92fa01bf31299da58e51265487d5",
                                     "earlySupporters": "0x0000000000000000000000000000000000000000",
@@ -4127,23 +4127,23 @@
                                     "airdrop": "0x0000000000000000000000000000000000000000",
                                     "governanceEid": "40231",
                                     "owner": "0xc4c36140a88e92fa01bf31299da58e51265487d5",
-                                    "tapTokenSenderModule": "0xA85f1163AF1B06a0EA68F77c09308c80c1ae9de9",
-                                    "tapTokenReceiverModule": "0x35Bd5fE504c2BDe0Ab67B027d31bF260fB3901b6",
-                                    "extExec": "0x7AE144B461B44d2d155b22fa5ddFDd0261B922cA",
-                                    "pearlmit": "0xC54EA9Fd65C10480dcd62Ee87d558A4C5CAF70BB",
-                                    "cluster": "0xc38286142d158b23DD6D5c115f20aC9A7e0Cff93"
+                                    "tapTokenSenderModule": "0xfA539E30A19D9E85b82C863Eff191009c8359739",
+                                    "tapTokenReceiverModule": "0x7E0988C6A833b49c0dF101B32536945861c9cAfd",
+                                    "extExec": "0xaC4789ADf5732Bd57C9A05d543EA7dF9003a0628",
+                                    "pearlmit": "0xBF5b665Ed84577A63b3a49895Ba8275Df2Ffc314",
+                                    "cluster": "0x296ED6d5598980eC4927463f9B60A91022da4D3b"
                                 }
                             ],
-                            "salt": "0x4e89ede375b61aa53c18addb4e304bd8cedd22e3677fee43a39f12fa14fafb44",
+                            "salt": "0x2a47592ad503bf5a2b61ed680d76e9661d03808b848bb65a96ebdae5f97cddb8",
                             "create2": true
                         }
                     },
                     {
                         "name": "TAP_TOKEN_HELPER",
-                        "address": "0x3CAE3dA89Ca3D698f4eA09E1C1bc28351fff7F1C",
+                        "address": "0x9EB855d59Ec49dD2ecf0F3f26B4Cb483A2Ab3e68",
                         "meta": {
                             "args": [],
-                            "salt": "0x58aa82d7c3764a995eb72d0c78040ebbd4c44a67d951489f9972b38a89934b13",
+                            "salt": "0xeff62d08871dc4dff3bef2939789a1367da1710ad3dc89fc825963d6e2c75810",
                             "create2": true
                         }
                     }
