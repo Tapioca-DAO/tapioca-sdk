@@ -6438,6 +6438,64 @@
                 "lastBlockHeight": 223945348,
                 "contracts": [
                     {
+                        "name": "USDO_USDC_UNI_V3_ORACLE",
+                        "address": "0x54fb6DDfB3158D7231e053cf0650f8AE2D8e2Cd2",
+                        "meta": {
+                            "args": [
+                                "USDO->USDC->USD",
+                                "USDO/USD",
+                                18,
+                                {
+                                    "addressInAndOutUni": [
+                                        "0x90bd62D2317914Fa178b37FeBA22d1640DED8BCA",
+                                        "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"
+                                    ],
+                                    "_circuitUniswap": [
+                                        "0x5f3a16D98f71a07d2107ec1F4127E6fF01c326Da"
+                                    ],
+                                    "_circuitUniIsMultiplied": [
+                                        1
+                                    ],
+                                    "_twapPeriod": 3600,
+                                    "observationLength": 10,
+                                    "_uniFinalCurrency": 0,
+                                    "_circuitChainlink": [
+                                        "0x50834F3163758fcC1Df9973b6e91f0F0F0434aD3"
+                                    ],
+                                    "_circuitChainIsMultiplied": [
+                                        1
+                                    ],
+                                    "guardians": [
+                                        "0x60D00F668A883988611Dc3515e473A9a9D6C8f6C"
+                                    ],
+                                    "_description": "0x5553444f2d3e555344432d3e5553440000000000000000000000000000000000",
+                                    "_sequencerUptimeFeed": "0xFdB631F5EE196F0ed6FAa767959853A9F217697D",
+                                    "_admin": "0x60D00F668A883988611Dc3515e473A9a9D6C8f6C"
+                                }
+                            ],
+                            "salt": "0x2cffdcb6e6f3feb355cf2b5985a60fe338d5684915502363152c50137943a53f",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "address": "0x3435b3f58d72FB84E0fF31D019db1b62C2B9F233",
+                        "name": "ARRAKIS_USDO_USDC_VAULT",
+                        "meta": {
+                            "vaultNum": 43
+                        }
+                    },
+                    {
+                        "name": "USDO_USDC_UNI_V3_POOL",
+                        "address": "0x5f3a16D98f71a07d2107ec1F4127E6fF01c326Da",
+                        "meta": {
+                            "token0": "0x90bd62D2317914Fa178b37FeBA22d1640DED8BCA",
+                            "token1": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
+                            "ratio0": "1",
+                            "ratio1": "1",
+                            "fee": 100
+                        }
+                    },
+                    {
                         "address": "0xEe2546Eac39e7dCEF10e698B1004921BA8Ff328C",
                         "name": "WETH_YB_EMPTY_STRAT",
                         "meta": {
@@ -7412,6 +7470,21 @@
                             "salt": "0x5287a569181c9a0552a9cbd0522f0e77dfa254a6ef7484bd1d91e0cc4338590e",
                             "create2": true
                         }
+                    }
+                ]
+            }
+        }
+    },
+    "prod-test-final": {
+        "generic": {
+            "42161": {
+                "name": "arbitrum",
+                "lastBlockHeight": 223967582,
+                "contracts": [
+                    {
+                        "name": "TapiocaMulticall",
+                        "address": "0x384bc0a3Df0A1d900d95a2B6945a7472408748B1",
+                        "meta": {}
                     }
                 ]
             }
