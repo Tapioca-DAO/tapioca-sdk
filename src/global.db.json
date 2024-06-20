@@ -7123,8 +7123,24 @@
                 "lastBlockHeight": 11110757,
                 "contracts": [
                     {
+                        "address": "0xE76D7aE8a2AC3424a2894E7a60F8e951762FBC9F",
+                        "name": "YB_T_SGL_SDAI_ASSET_WITHOUT_STRATEGY",
+                        "meta": {
+                            "token": "0x168Adad25f85a487890EE64b21605DF87Fd3e525",
+                            "ybAssetId": 34
+                        }
+                    },
+                    {
+                        "address": "0xfBaDC4caddeA03D30a69f4AC41f54C1065F52978",
+                        "name": "YB_T_SGL_SGLP_ASSET_WITHOUT_STRATEGY",
+                        "meta": {
+                            "token": "0x2A4A4bA26A25fdC77C22c7472DB24B87669E8f58",
+                            "ybAssetId": 33
+                        }
+                    },
+                    {
                         "name": "ORIGINS_T_ETH_MARKET",
-                        "address": "0x6c4731EAff0Aee6C8aE991B8Ae4c807A191232c4",
+                        "address": "0x580FAcCb170843fB36b1AF7282442932cC47B905",
                         "meta": {
                             "args": [
                                 "0xcD5B223b3ECF18ae695E797cb033e86b7b189C88",
@@ -7144,7 +7160,7 @@
                                 99000,
                                 "0x47bEe3D2F9e08A4be7F857C166918ADE9Bf23642"
                             ],
-                            "salt": "0xd455fa5d0b5c197a340dcc346df47ec4de327f337faebd8dd7dba7c08106297b",
+                            "salt": "0x0f7ad13762c2898a31444be0848d1576ba9a5bbab6508f42bf05d7c282cdb9ca",
                             "create2": true
                         }
                     },
@@ -7525,22 +7541,6 @@
                             "args": [],
                             "salt": "0x4b4455f0f173a32948634aef2a3704a949ee03a0656a07a1cb76fd13f2ed6bce",
                             "create2": true
-                        }
-                    },
-                    {
-                        "address": "0xa89ad987449f87B9a046438E90cA193d0E5eD3dc",
-                        "name": "YB_T_SGL_SGLP_ASSET_WITHOUT_STRATEGY",
-                        "meta": {
-                            "token": "0x4bA226a062f0cA8D2BB7aFaB553653A2fd5592a8",
-                            "ybAssetId": 13
-                        }
-                    },
-                    {
-                        "address": "0xdd06eBF80Ac0d81f1b0a7e900A7D477F5da7C1Ee",
-                        "name": "YB_T_SGL_SDAI_ASSET_WITHOUT_STRATEGY",
-                        "meta": {
-                            "token": "0x72e7E37B70d9bC452E99f9Ca2441309b4EfD5240",
-                            "ybAssetId": 11
                         }
                     },
                     {
