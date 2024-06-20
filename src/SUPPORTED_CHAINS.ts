@@ -88,6 +88,14 @@ const SUPPORTED_CHAINS = [
         tags: ['mainnet', 'side'],
     },
     {
+        name: 'ethereum_tenderly_devnet',
+        address: '0x1a44076050125825900e736c501f859c50fE728c',
+        chainId: EChainID.MAINNET,
+        lzChainId: NETWORK_MAPPING_CHAIN_TO_LZ[EChainID.MAINNET],
+        rpc: 'https://rpc.vnet.tenderly.co/devnet/<api_key>',
+        tags: ['mainnet', 'side'],
+    },
+    {
         name: 'avalanche',
         address: '0x1a44076050125825900e736c501f859c50fE728c',
         chainId: EChainID.AVALANCHE,
