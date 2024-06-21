@@ -6502,6 +6502,64 @@
                 "lastBlockHeight": 223945348,
                 "contracts": [
                     {
+                        "name": "USDO_USDC_UNI_V3_ORACLE",
+                        "address": "0x0F4a953D6e704D1938A1d708eB7Df05679Ea0f02",
+                        "meta": {
+                            "args": [
+                                "USDO->USDC->USD",
+                                "USDO/USD",
+                                18,
+                                {
+                                    "addressInAndOutUni": [
+                                        "0x2F639ca753B3b61cDA0662967166e266464D04da",
+                                        "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"
+                                    ],
+                                    "_circuitUniswap": [
+                                        "0x4aaEB74FafEac1F2eE152b873908D59EE564044D"
+                                    ],
+                                    "_circuitUniIsMultiplied": [
+                                        1
+                                    ],
+                                    "_twapPeriod": 3600,
+                                    "observationLength": 10,
+                                    "_uniFinalCurrency": 0,
+                                    "_circuitChainlink": [
+                                        "0x50834F3163758fcC1Df9973b6e91f0F0F0434aD3"
+                                    ],
+                                    "_circuitChainIsMultiplied": [
+                                        1
+                                    ],
+                                    "guardians": [
+                                        "0x60D00F668A883988611Dc3515e473A9a9D6C8f6C"
+                                    ],
+                                    "_description": "0x5553444f2d3e555344432d3e5553440000000000000000000000000000000000",
+                                    "_sequencerUptimeFeed": "0xFdB631F5EE196F0ed6FAa767959853A9F217697D",
+                                    "_admin": "0x60D00F668A883988611Dc3515e473A9a9D6C8f6C"
+                                }
+                            ],
+                            "salt": "0xabb3ac1dd0358d2ae9757cec998bc9a4ebdee2b2723104b72a81bf8598cb0e6a",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "address": "0x7D02c26E91970b428781f01f4ceD8a1730470b26",
+                        "name": "ARRAKIS_USDO_USDC_VAULT",
+                        "meta": {
+                            "vaultNum": 50
+                        }
+                    },
+                    {
+                        "name": "USDO_USDC_UNI_V3_POOL",
+                        "address": "0x4aaEB74FafEac1F2eE152b873908D59EE564044D",
+                        "meta": {
+                            "token0": "0x2F639ca753B3b61cDA0662967166e266464D04da",
+                            "token1": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
+                            "ratio0": "1",
+                            "ratio1": "1",
+                            "fee": 100
+                        }
+                    },
+                    {
                         "address": "0x88B6Bfb0eF638fEd2ab4CbEA32608D0402F5AFa8",
                         "name": "TAP_TOKEN_YB_EMPTY_STRAT",
                         "meta": {
@@ -6988,64 +7046,6 @@
                             ],
                             "salt": "0xe498d58a6dfa134f3b8c21d8ae225e5f3f9553e064e417a6503014d005cdcc8c",
                             "create2": true
-                        }
-                    },
-                    {
-                        "name": "USDO_USDC_UNI_V3_ORACLE",
-                        "address": "0x54fb6DDfB3158D7231e053cf0650f8AE2D8e2Cd2",
-                        "meta": {
-                            "args": [
-                                "USDO->USDC->USD",
-                                "USDO/USD",
-                                18,
-                                {
-                                    "addressInAndOutUni": [
-                                        "0x90bd62D2317914Fa178b37FeBA22d1640DED8BCA",
-                                        "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"
-                                    ],
-                                    "_circuitUniswap": [
-                                        "0x5f3a16D98f71a07d2107ec1F4127E6fF01c326Da"
-                                    ],
-                                    "_circuitUniIsMultiplied": [
-                                        1
-                                    ],
-                                    "_twapPeriod": 3600,
-                                    "observationLength": 10,
-                                    "_uniFinalCurrency": 0,
-                                    "_circuitChainlink": [
-                                        "0x50834F3163758fcC1Df9973b6e91f0F0F0434aD3"
-                                    ],
-                                    "_circuitChainIsMultiplied": [
-                                        1
-                                    ],
-                                    "guardians": [
-                                        "0x60D00F668A883988611Dc3515e473A9a9D6C8f6C"
-                                    ],
-                                    "_description": "0x5553444f2d3e555344432d3e5553440000000000000000000000000000000000",
-                                    "_sequencerUptimeFeed": "0xFdB631F5EE196F0ed6FAa767959853A9F217697D",
-                                    "_admin": "0x60D00F668A883988611Dc3515e473A9a9D6C8f6C"
-                                }
-                            ],
-                            "salt": "0x2cffdcb6e6f3feb355cf2b5985a60fe338d5684915502363152c50137943a53f",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "address": "0x3435b3f58d72FB84E0fF31D019db1b62C2B9F233",
-                        "name": "ARRAKIS_USDO_USDC_VAULT",
-                        "meta": {
-                            "vaultNum": 43
-                        }
-                    },
-                    {
-                        "name": "USDO_USDC_UNI_V3_POOL",
-                        "address": "0x5f3a16D98f71a07d2107ec1F4127E6fF01c326Da",
-                        "meta": {
-                            "token0": "0x90bd62D2317914Fa178b37FeBA22d1640DED8BCA",
-                            "token1": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
-                            "ratio0": "1",
-                            "ratio1": "1",
-                            "fee": 100
                         }
                     },
                     {
