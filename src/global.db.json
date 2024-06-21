@@ -6067,16 +6067,16 @@
                 "lastBlockHeight": 223955920,
                 "contracts": [
                     {
-                        "address": "0xB79AC8160f49d5C87359Cef98D036e5340E9ec19",
+                        "address": "0xFc924C7EA7D8000b41fA284d97f209454ef465aa",
                         "name": "YB_T_SGL_SGLP_ASSET_WITHOUT_STRATEGY",
                         "meta": {
                             "token": "0x9FC03321dC55d16764A732b2BD296548e48e1bC8",
-                            "ybAssetId": 17
+                            "ybAssetId": 19
                         }
                     },
                     {
                         "name": "YB_SGLP_ASSET_WITH_STRATEGY",
-                        "address": "0x6F6e842a5329751d26C4CE18d0F86893435704F2",
+                        "address": "0x929766B2064AE9B254451CACf4D8B5042B27B207",
                         "meta": {
                             "args": [
                                 "0xE86653FD643092a5f62218539248d5346AbB2a39",
@@ -6087,16 +6087,16 @@
                                 "0x",
                                 "0x60D00F668A883988611Dc3515e473A9a9D6C8f6C"
                             ],
-                            "salt": "0x8b379eeecd0d9dffd43224209acdb7ed314d9784e5a98fcb2d93ebe7b61cac50",
+                            "salt": "0x97745d7739ada9132ebb1678b663419a1ca75574138a56f80bca3006747c4e5e",
                             "create2": true
                         }
                     },
                     {
                         "name": "SGL_S_GLP_MARKET",
-                        "address": "0xa7B1E744EBd3892c702F50430843f4FC5fb4404c",
+                        "address": "0xc78D670dCBe218d22BA5adCb03492789E687623A",
                         "meta": {
                             "args": [],
-                            "salt": "0xa75ed2fcac7450efd6fc90c39a146fadc55d544d000b80f5875510822b37171a",
+                            "salt": "0xf5318e2a1c7da5e0716ec8a77c1a4a885927861204474df0ccd250f4f061a669",
                             "create2": true
                         }
                     },
