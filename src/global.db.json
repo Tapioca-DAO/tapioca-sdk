@@ -6068,7 +6068,7 @@
                 "contracts": [
                     {
                         "name": "SGL_GLP_LEVERAGE_EXECUTOR",
-                        "address": "0x1F60AbBA0a2f9e92103E11865fd1dB64bf5f10C5",
+                        "address": "0x1D01026cc2fF8B603152cef22400a1B761B3BC9c",
                         "meta": {
                             "args": [
                                 "0xB6c3B63F9a4d9Ac93e5fEB4Ae6C75e2Bb31044fF",
@@ -6077,7 +6077,7 @@
                                 "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
                                 "0xd1B04e34110e6a506DacDAb00639bad46079829d"
                             ],
-                            "salt": "0x4d0a93a9c20e488b2f014f7cc78766398c6c3d78e4155ed1e04a89c9f94f4765",
+                            "salt": "0x6d5edb98aa94eab29f1d7628b1cef4b8c0dfa15d6d35c8ac4f9e76fe9e92b2c8",
                             "create2": true
                         }
                     },
