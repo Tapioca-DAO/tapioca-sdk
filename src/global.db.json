@@ -6067,6 +6067,21 @@
                 "lastBlockHeight": 223955920,
                 "contracts": [
                     {
+                        "name": "SGL_GLP_LEVERAGE_EXECUTOR",
+                        "address": "0x1F60AbBA0a2f9e92103E11865fd1dB64bf5f10C5",
+                        "meta": {
+                            "args": [
+                                "0xB6c3B63F9a4d9Ac93e5fEB4Ae6C75e2Bb31044fF",
+                                "0x5DB88DDd9BbB88d0df2109926044Ce0779eAD1dE",
+                                "0xB95DB5B167D75e6d04227CfFFA61069348d271F5",
+                                "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+                                "0xd1B04e34110e6a506DacDAb00639bad46079829d"
+                            ],
+                            "salt": "0x4d0a93a9c20e488b2f014f7cc78766398c6c3d78e4155ed1e04a89c9f94f4765",
+                            "create2": true
+                        }
+                    },
+                    {
                         "address": "0x64BfB8dda25590FB2AfbA4BB6e48637D20AC9468",
                         "name": "YB_T_SGL_SGLP_ASSET_WITHOUT_STRATEGY",
                         "meta": {
