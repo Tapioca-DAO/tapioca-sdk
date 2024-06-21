@@ -6067,6 +6067,14 @@
                 "lastBlockHeight": 223955920,
                 "contracts": [
                     {
+                        "address": "0x2f55D11136A1e036C42F9f1f666Bf8621b747F6d",
+                        "name": "YB_T_SGL_SGLP_ASSET_WITHOUT_STRATEGY",
+                        "meta": {
+                            "token": "0x28CAEAcD02e11e17615AA3C37D35634780876B1f",
+                            "ybAssetId": 37
+                        }
+                    },
+                    {
                         "name": "YB_SGLP_ASSET_WITH_STRATEGY",
                         "address": "0x45CD37B8754F776D805F77b9ea1D593Ec357e82E",
                         "meta": {
@@ -6090,14 +6098,6 @@
                             "args": [],
                             "salt": "0x39632979e7a532337f4147a686a56198a6ba531692a49e5527b41437b0647115",
                             "create2": true
-                        }
-                    },
-                    {
-                        "address": "0xb82EDD5f98CEb288F5B74349E66e90aDf2c4af6f",
-                        "name": "YB_T_SGL_SGLP_ASSET_WITHOUT_STRATEGY",
-                        "meta": {
-                            "token": "0x7bC1077921721da0c45e0BcdB6B76477c0D6421C",
-                            "ybAssetId": 35
                         }
                     },
                     {
