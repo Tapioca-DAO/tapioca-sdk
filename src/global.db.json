@@ -6067,6 +6067,32 @@
                 "lastBlockHeight": 223955920,
                 "contracts": [
                     {
+                        "name": "YB_SGLP_ASSET_WITH_STRATEGY",
+                        "address": "0x6F6e842a5329751d26C4CE18d0F86893435704F2",
+                        "meta": {
+                            "args": [
+                                "0xE86653FD643092a5f62218539248d5346AbB2a39",
+                                "0x159854e14A862Df9E39E1D128b8e5F70B4A3cE9B",
+                                "0xB95DB5B167D75e6d04227CfFFA61069348d271F5",
+                                "0xac1C6ac2Cb3EAF7cfA771d3c871cdEd78E065754",
+                                "0xA952CD27dc4E75853c9Fd9711De59Cb73de94505",
+                                "0x",
+                                "0x60D00F668A883988611Dc3515e473A9a9D6C8f6C"
+                            ],
+                            "salt": "0x8b379eeecd0d9dffd43224209acdb7ed314d9784e5a98fcb2d93ebe7b61cac50",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "SGL_S_GLP_MARKET",
+                        "address": "0xa7B1E744EBd3892c702F50430843f4FC5fb4404c",
+                        "meta": {
+                            "args": [],
+                            "salt": "0xa75ed2fcac7450efd6fc90c39a146fadc55d544d000b80f5875510822b37171a",
+                            "create2": true
+                        }
+                    },
+                    {
                         "address": "0xF9BBF920505882d89255e90e5Da9E6A35C978E6d",
                         "name": "YB_T_SGL_SGLP_ASSET_WITHOUT_STRATEGY",
                         "meta": {
@@ -6464,32 +6490,6 @@
                         "meta": {
                             "args": [],
                             "salt": "0xb246c9b009070a0b6f8ae7de6a5138630233746ff6d561afca986d1e66f650a9",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "YB_SGLP_ASSET_WITH_STRATEGY",
-                        "address": "0x3a21B09f3b5e59b97860f11980acAB32D9a80B0e",
-                        "meta": {
-                            "args": [
-                                "0xE86653FD643092a5f62218539248d5346AbB2a39",
-                                "0x159854e14A862Df9E39E1D128b8e5F70B4A3cE9B",
-                                "0xB95DB5B167D75e6d04227CfFFA61069348d271F5",
-                                "0xac1C6ac2Cb3EAF7cfA771d3c871cdEd78E065754",
-                                "0xA952CD27dc4E75853c9Fd9711De59Cb73de94505",
-                                "0x",
-                                "0x60D00F668A883988611Dc3515e473A9a9D6C8f6C"
-                            ],
-                            "salt": "0x643efe9cbadf65d5a01f3b3ce0be7d4758b23ed1979681bf874a6f54b660dd5e",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "SGL_S_GLP_MARKET",
-                        "address": "0xB2C77787DE88e27644d99775892Eb807083dF52a",
-                        "meta": {
-                            "args": [],
-                            "salt": "0xfbf31ab1becf683836556ded3eb86e6a566488227d886258c0634a0b8d63f461",
                             "create2": true
                         }
                     }
