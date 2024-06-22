@@ -3024,6 +3024,46 @@
                 "lastBlockHeight": 220505928,
                 "contracts": [
                     {
+                        "name": "USDO_USDC_UNI_V3_ORACLE",
+                        "address": "0x8F0b09A0577dA6b342Ebd54294F9a69De265f8A7",
+                        "meta": {
+                            "args": [
+                                "USDO->USDC->USD",
+                                "USDO/USD",
+                                18,
+                                {
+                                    "addressInAndOutUni": [
+                                        "0xEB99062643cA5Ab880c077288345E0B14B297432",
+                                        "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"
+                                    ],
+                                    "_circuitUniswap": [
+                                        "0xae198f5B206f195f7FFD158718341a1f3905cFf9"
+                                    ],
+                                    "_circuitUniIsMultiplied": [
+                                        1
+                                    ],
+                                    "_twapPeriod": 3600,
+                                    "observationLength": 10,
+                                    "_uniFinalCurrency": 1,
+                                    "_circuitChainlink": [
+                                        "0x50834F3163758fcC1Df9973b6e91f0F0F0434aD3"
+                                    ],
+                                    "_circuitChainIsMultiplied": [
+                                        1
+                                    ],
+                                    "guardians": [
+                                        "0x302E912826211b72222cDbaa684426Dc61F7fDED"
+                                    ],
+                                    "_description": "0x5553444f2d3e555344432d3e5553440000000000000000000000000000000000",
+                                    "_sequencerUptimeFeed": "0xFdB631F5EE196F0ed6FAa767959853A9F217697D",
+                                    "_admin": "0x302E912826211b72222cDbaa684426Dc61F7fDED"
+                                }
+                            ],
+                            "salt": "0x745e68c6a78be4fb28097ded31324163f9506af375b8cc30e070057d57189645",
+                            "create2": true
+                        }
+                    },
+                    {
                         "address": "0x1ce2fD14BE41ccDD5ac022CB1e1480556108c6D1",
                         "name": "TAP_TOKEN_YB_EMPTY_STRAT",
                         "meta": {
