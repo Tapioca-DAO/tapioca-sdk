@@ -2638,6 +2638,17 @@
                 "lastBlockHeight": 224385125,
                 "contracts": [
                     {
+                        "name": "MARKET_LIQUIDATOR_RECEIVER",
+                        "address": "0xc998174b23D3cc20D1a9e037875228e85A5084c8",
+                        "meta": {
+                            "args": [
+                                "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1"
+                            ],
+                            "salt": "0x696bd60edcf2359b726859a926729a02376ceff582a375ddde64705f316c6a6c",
+                            "create2": true
+                        }
+                    },
+                    {
                         "address": "0x3E28E46C45E1C8d41Fe530100B7FaDBc5fcBD520",
                         "name": "YB_T_SGL_SGLP_ASSET_WITHOUT_STRATEGY",
                         "meta": {
