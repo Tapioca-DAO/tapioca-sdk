@@ -9955,6 +9955,71 @@
                 "lastBlockHeight": 11110757,
                 "contracts": [
                     {
+                        "name": "YB_T_USDC_MOCK_ASSET_WITHOUT_STRATEGY",
+                        "address": "0xc0C374365d1cf60E59D1a4470E95AAb921A0f9bB",
+                        "meta": {
+                            "args": [
+                                "0xFB9cea783160B5AD156c50BE29c38Fe736FDd025",
+                                "0xB97f3fda040662B44055BdcBEc2BaB7CAA70839c"
+                            ],
+                            "salt": "0x843bb42aa68372f0e7d4bd5bd4b86889d24ecb888ada2fbbf12d7b22378b2c0b",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "SGL_INIT",
+                        "address": "0x214e2dDabBAF4D3e98E2412B5062753cB8952e5a",
+                        "meta": {
+                            "args": [],
+                            "salt": "0xf1e232a96beabdee34636176c91385dec2ef3e7d2066f7d80ed539369c4501b0",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "SIMPLE_LEVERAGE_EXECUTOR",
+                        "address": "0xF09430e9604811EEbb798C16b02B6a5f3F8e66E3",
+                        "meta": {
+                            "args": [
+                                "0xc46184C35F371ec3d45DABA43Eb7C1e3986EE48E",
+                                "0xD528BAc2390c8876d5Ab72C3Bff10a94D1F9de35",
+                                "0x2EAe4fbc552fE35C1D3Df2B546032409bb0E431E",
+                                "0x5f885c006Af8193a0c75eCDCB95D997956dbb16c"
+                            ],
+                            "salt": "0x9bb63b061c5322e390c0aaad6627e72d66e12e35492f97edb8a2d4f009d93986",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "BB_T_USDC_MOCK_MARKET",
+                        "address": "0x18eccEB62d01B2059c66383Bc17cD772184fa45E",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x31b5215e0b0c837b7b411240327ad4ef32db8fe08a0ef1a503b06d982f9e8f85",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YB_USDC_MOCK_ASSET_WITHOUT_STRATEGY",
+                        "address": "0x183d1B6e5Bd67b2A0D97C0620a8622f4FCb7DaBF",
+                        "meta": {
+                            "args": [
+                                "0xFB9cea783160B5AD156c50BE29c38Fe736FDd025",
+                                "0xB97f3fda040662B44055BdcBEc2BaB7CAA70839c"
+                            ],
+                            "salt": "0x1ccb19325ace078f0e75deee6f5338ce2770d71b594a7e7cdd6d8f5709569315",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "SGL_USDC_MOCK_MARKET",
+                        "address": "0x7C9475577F5F7a5A924C0052e48f4A9c75172f4b",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x67d6f6a1faa762be5dfc96bcb383dfcdf8cdb58835b02b6826372da84de6e35d",
+                            "create2": true
+                        }
+                    },
+                    {
                         "address": "0xE76D7aE8a2AC3424a2894E7a60F8e951762FBC9F",
                         "name": "YB_T_SGL_SDAI_ASSET_WITHOUT_STRATEGY",
                         "meta": {
@@ -10091,20 +10156,6 @@
                         "meta": {
                             "args": [],
                             "salt": "0x1e81b22f564755fb1c7149ca27d0606a5e7a6041bdadddc4bfca3dbbd1c5e202",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "SIMPLE_LEVERAGE_EXECUTOR",
-                        "address": "0x7BFc064f5515a075AeA51416700b4956128E2769",
-                        "meta": {
-                            "args": [
-                                "0xc46184C35F371ec3d45DABA43Eb7C1e3986EE48E",
-                                "0xD528BAc2390c8876d5Ab72C3Bff10a94D1F9de35",
-                                "0x2EAe4fbc552fE35C1D3Df2B546032409bb0E431E",
-                                "0x5f885c006Af8193a0c75eCDCB95D997956dbb16c"
-                            ],
-                            "salt": "0x14ff3e3783377f984677349d972ec756e9fb52e012816e00b7214d57872a2a29",
                             "create2": true
                         }
                     },
