@@ -9847,6 +9847,15 @@
                 "lastBlockHeight": 14545607,
                 "contracts": [
                     {
+                        "name": "MAGNETAR_HELPER",
+                        "address": "0x7885464E28B87D48DCc1e34B8e913B38Dcc07Ce1",
+                        "meta": {
+                            "args": [],
+                            "salt": "0xa9557e693e222245f3d97b07a23cc5760823e43b3008ad582378efb098264756",
+                            "create2": true
+                        }
+                    },
+                    {
                         "name": "sdaiMock",
                         "address": "0x9384B3c4700f4B82e5961d98BE215A6eF2FAEeA5",
                         "meta": {
@@ -9985,15 +9994,6 @@
                         }
                     },
                     {
-                        "name": "MAGNETAR_HELPER",
-                        "address": "0x099c696827c93267E6A89e4936899430B560306b",
-                        "meta": {
-                            "args": [],
-                            "salt": "0xbee199f77565d2b566c4d45679ae037a7ee1059b9ba2228114b46bae249dc25d",
-                            "create2": true
-                        }
-                    },
-                    {
                         "name": "MAGNETAR",
                         "address": "0xF2Ab048C5B873CDF3e656995ae88D79EdD0e50f7",
                         "meta": {
@@ -10079,6 +10079,15 @@
                 "name": "arbitrum_sepolia",
                 "lastBlockHeight": 74977521,
                 "contracts": [
+                    {
+                        "name": "MAGNETAR_HELPER",
+                        "address": "0xD42A639298F42f8CF9708D54DB29397EB2F9E746",
+                        "meta": {
+                            "args": [],
+                            "salt": "0xe631ffee64bcdbf28f1765c688efdc1e2c37f3b661eb8b263b7672a383d09c81",
+                            "create2": true
+                        }
+                    },
                     {
                         "name": "USDO_USDC_UNI_V3_ORACLE",
                         "address": "0x6126D74B986543D5Ed8D849aF43bF3864eFF65A7",
@@ -10617,15 +10626,6 @@
                                 "0x0000000000000000000000000000000000000000"
                             ],
                             "salt": "0xc69cd4a90099bcdfd7b671b64f70f99dc462a835e5f3bc2d5a62eb55006917d8",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "MAGNETAR_HELPER",
-                        "address": "0xd0dBf5634915846C1979D6016338a6cAcD186cdc",
-                        "meta": {
-                            "args": [],
-                            "salt": "0xe5c9a6a791afb12ed15b184dd8cf0695ce2067514d7adafdb804b4026c1a3c7b",
                             "create2": true
                         }
                     },
