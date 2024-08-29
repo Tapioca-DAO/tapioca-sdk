@@ -8795,6 +8795,63 @@
                 "lastBlockHeight": 74985819,
                 "contracts": [
                     {
+                        "name": "TAPIOCA_OPTION_LIQUIDITY_PROVISION",
+                        "address": "0xA95Dc083961aa88630bb36Dd0d438F05799C0D80",
+                        "meta": {
+                            "args": [
+                                "0x746a6ba2D6e23D0F9A4F8c81C790F1f887b82420",
+                                604800,
+                                "0x3E83affD4ac671Be9Ea70702a4c67406AD4b08e3",
+                                "0x72F4f0c44537E7507b9807EFe6f2c72BB8dAAe94",
+                                "0x533385BC149b1AaA8CB958A592E96E4a0A81ce56"
+                            ],
+                            "salt": "0x78645ec05c299ff3ba018234919fb0ec369ccc8723fb5cbe12094c0f034b2d2b",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "OTAP",
+                        "address": "0x384f3d8ccd8EC747cC36A2BfF666F4a6F3503DeA",
+                        "meta": {
+                            "args": [
+                                "0x3E83affD4ac671Be9Ea70702a4c67406AD4b08e3",
+                                "0x533385BC149b1AaA8CB958A592E96E4a0A81ce56"
+                            ],
+                            "salt": "0x16356311d5d99b75ae396e83a3f5e8e1a9dc31e33f449cfc675335aef3511ba1",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "TAPIOCA_OPTION_BROKER",
+                        "address": "0xf8863F096F952C0214EF9b967cb48149D6e25f0F",
+                        "meta": {
+                            "args": [
+                                "0xA95Dc083961aa88630bb36Dd0d438F05799C0D80",
+                                "0x384f3d8ccd8EC747cC36A2BfF666F4a6F3503DeA",
+                                "0x35f2B1B01EAa8fD0427260594ba6940f3e68dB3c",
+                                "0x7A3B760AcFaB78f6bc6a1AD80F7743f5bA0513Dc",
+                                604800,
+                                "0x3E83affD4ac671Be9Ea70702a4c67406AD4b08e3",
+                                "0x533385BC149b1AaA8CB958A592E96E4a0A81ce56"
+                            ],
+                            "salt": "0xd10c9e3c6ffd0776fc51e5e4e642189e3647a0bbbc0165c9bd0e1a8b43b37447",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "TWTAP",
+                        "address": "0xb3e170A2BD4272d2b15114f23c55e436c038206d",
+                        "meta": {
+                            "args": [
+                                "0x35f2B1B01EAa8fD0427260594ba6940f3e68dB3c",
+                                "0x3E83affD4ac671Be9Ea70702a4c67406AD4b08e3",
+                                "0x533385BC149b1AaA8CB958A592E96E4a0A81ce56"
+                            ],
+                            "salt": "0x401e46b8d36266db8e79b30606b96721f73dfa7bd6760ea1041cc6e7e66dea85",
+                            "create2": true
+                        }
+                    },
+                    {
                         "name": "AOTAP",
                         "address": "0x9c80cF61c0c2297E8D99B220F3922a283Febad3e",
                         "meta": {
@@ -8944,6 +9001,87 @@
                                 "0x533385BC149b1AaA8CB958A592E96E4a0A81ce56"
                             ],
                             "salt": "0x3955f1d1de768a015a734c90a0ea2ddd1d556172b924facb1779b599742937b7",
+                            "create2": true
+                        }
+                    }
+                ]
+            },
+            "11155420": {
+                "name": "optimism_sepolia",
+                "lastBlockHeight": 16530307,
+                "contracts": [
+                    {
+                        "name": "EXT_EXEC",
+                        "address": "0xd7dAfb5f236213241cccffF1e40a0200d42f93F1",
+                        "meta": {
+                            "args": [],
+                            "salt": "0xc261162f43b4efc5209aac2bd1a2975e96b68837d3ba96158079b51f91eb678f",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "TAP_TOKEN_SENDER_MODULE",
+                        "address": "0x879Db405820Cd6f5a91c1cc5936A236a0D2fAe43",
+                        "meta": {
+                            "args": [
+                                "",
+                                "",
+                                "0x6EDCE65403992e310A62460808c4b910D972f10f",
+                                "0x730F5Cb8301FA61b5084E56Ba389A33404b3a2Ff",
+                                "0x0000000000000000000000000000000000000000"
+                            ],
+                            "salt": "0x1ce12d06335a3484c6f29cd0e65109ecf2bad232b37846d0133f254d91027590",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "TAP_TOKEN_RECEIVER_MODULE",
+                        "address": "0xA4C6e4007A3A3A60B3dCb5CD519511FaBcff294d",
+                        "meta": {
+                            "args": [
+                                "",
+                                "",
+                                "0x6EDCE65403992e310A62460808c4b910D972f10f",
+                                "0x730F5Cb8301FA61b5084E56Ba389A33404b3a2Ff",
+                                "0x0000000000000000000000000000000000000000"
+                            ],
+                            "salt": "0x6627359214cbb82bac5ee3a1b1ba785168967c84955657b7b1a40de99f1519b0",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "TAP_TOKEN",
+                        "address": "0xA85e40d5a7d3E3e2Ba09CDC1116325D2486Ef12f",
+                        "meta": {
+                            "args": [
+                                {
+                                    "epochDuration": 604800,
+                                    "endpoint": "0x6EDCE65403992e310A62460808c4b910D972f10f",
+                                    "contributors": "0x730F5Cb8301FA61b5084E56Ba389A33404b3a2Ff",
+                                    "earlySupporters": "0x0000000000000000000000000000000000000000",
+                                    "supporters": "0x0000000000000000000000000000000000000000",
+                                    "lTap": "0x0000000000000000000000000000000000000000",
+                                    "dao": "0x730F5Cb8301FA61b5084E56Ba389A33404b3a2Ff",
+                                    "airdrop": "0x0000000000000000000000000000000000000000",
+                                    "governanceEid": "40231",
+                                    "owner": "0x730F5Cb8301FA61b5084E56Ba389A33404b3a2Ff",
+                                    "tapTokenSenderModule": "0x879Db405820Cd6f5a91c1cc5936A236a0D2fAe43",
+                                    "tapTokenReceiverModule": "0xA4C6e4007A3A3A60B3dCb5CD519511FaBcff294d",
+                                    "extExec": "0xd7dAfb5f236213241cccffF1e40a0200d42f93F1",
+                                    "pearlmit": "0x43bEB931A1F1BB9CB66614600201ED6119d78E9d",
+                                    "cluster": "0x705b3E7cF046cFD0407C32ee7a3cE14eB5159b3A"
+                                }
+                            ],
+                            "salt": "0x5292281f4e2a946a659ba0933bfae86455caf9429fab49795bf4c3961eff2396",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "TAP_TOKEN_HELPER",
+                        "address": "0xfddC25725a81e6b61a2fE2b548B61E1EbB93b8be",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x74a8b7cb746c011f132543a34137ef1c0a5b40beabd2f5b9aae5314e2da170f4",
                             "create2": true
                         }
                     }
