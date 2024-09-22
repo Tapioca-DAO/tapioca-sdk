@@ -9042,6 +9042,32 @@
                 "lastBlockHeight": 82520869,
                 "contracts": [
                     {
+                        "name": "ORIGINS_T_ETH_MARKET",
+                        "address": "0xd70BDEfB27940D258e734E29472a9b46F938CB28",
+                        "meta": {
+                            "args": [
+                                "0x2ef8E4C470B568Ad53e367a1111603B2C7dA949A",
+                                "0x6277Ad496328B6652F0F90c62fd40A56e37B7A67",
+                                "0x5f7E143e3Efa6d7170D529fa591BEA636f7FAAb1",
+                                {
+                                    "type": "BigNumber",
+                                    "hex": "0x0f"
+                                },
+                                "0x0F07fDCd2B78cD1590ebd396467fC53b622c7582",
+                                {
+                                    "type": "BigNumber",
+                                    "hex": "0x12"
+                                },
+                                "0x60CAe59be9366b16602B7C2Ee77061eF586f71Cf",
+                                "1000000000000000000",
+                                99000,
+                                "0x303C6817702A8496688FC60042E3173308CB1f7c"
+                            ],
+                            "salt": "0x856be4c81496a88dda99d394aa4890f1f8ddca4e4b24b3f6f245501992b451a4",
+                            "create2": true
+                        }
+                    },
+                    {
                         "address": "0x7C28d65832593a6DC2b6756b67a3C063dd3C4D6c",
                         "name": "YB_USDO_ASSET_WITHOUT_STRATEGY",
                         "meta": {
@@ -9500,32 +9526,6 @@
                         "meta": {
                             "token": "0x8D045a0Cab40F4Fd87C1dD815B070b69F7d2f35e",
                             "ybAssetId": 13
-                        }
-                    },
-                    {
-                        "name": "ORIGINS_T_ETH_MARKET",
-                        "address": "0xa0f687dB489AEc5E0f69e53942e7a2121a8E64e2",
-                        "meta": {
-                            "args": [
-                                "0x2ef8E4C470B568Ad53e367a1111603B2C7dA949A",
-                                "0x6277Ad496328B6652F0F90c62fd40A56e37B7A67",
-                                "0x1dd0A700E3484f890A951C2A586E262cCF7b46E9",
-                                {
-                                    "type": "BigNumber",
-                                    "hex": "0x04"
-                                },
-                                "0x0F07fDCd2B78cD1590ebd396467fC53b622c7582",
-                                {
-                                    "type": "BigNumber",
-                                    "hex": "0x07"
-                                },
-                                "0x6c04F89D52854a48f3c1081F8887Ee85B82e6EE1",
-                                "1000000000000000000",
-                                99000,
-                                "0x6f91Eb29EF5863f62B257ce3425823897Fe2363F"
-                            ],
-                            "salt": "0xeac1f22c18bba731fb8060ac98e41d5ceb84a3eecd1dc50c0b0ac5522136dcab",
-                            "create2": true
                         }
                     }
                 ]
