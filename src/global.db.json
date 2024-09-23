@@ -9538,7 +9538,7 @@
                 "contracts": [
                     {
                         "name": "USDO_USDC_UNI_V3_ORACLE",
-                        "address": "0x43CED5c2f0e730C7E498fCB12De110C472121C91",
+                        "address": "0xd9E22Af6BEa7C6beaD117d0c94af9f72a3baA136",
                         "meta": {
                             "args": [
                                 "USDO->USDC->USD",
@@ -9546,7 +9546,7 @@
                                 18,
                                 {
                                     "addressInAndOutUni": [
-                                        "0x5f7E143e3Efa6d7170D529fa591BEA636f7FAAb1",
+                                        "0xc8E873ed83C350C826aC22607570043dDC9dB45C",
                                         "0xF72c2794A9Ea95C5a8CD033999F319B15723E751"
                                     ],
                                     "_circuitUniswap": [
@@ -9572,7 +9572,22 @@
                                     "_admin": "0x2ef8E4C470B568Ad53e367a1111603B2C7dA949A"
                                 }
                             ],
-                            "salt": "0xe76b4b83084bc5e02b89967c0e69ad5b322b16abd69d9ec5ffe6955bb41a3249",
+                            "salt": "0xb0c7bc32699d4f9ee8770fd3505d24ae1548c743d33c91c4b590a16aa2dd940c",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "StgUsdcV2Mock",
+                        "address": "0x94c6f996e3423C8e32cc61Fa5244AD110E02CD2D",
+                        "meta": {
+                            "args": [
+                                "StgUsdcV2Mock",
+                                "StgUsdcV2Mock",
+                                "1000000000000000000",
+                                18,
+                                "0x2ef8E4C470B568Ad53e367a1111603B2C7dA949A"
+                            ],
+                            "salt": "0x09ccabda4a32c403ba2e29ad6d6358232ef83d84c41da16b1c7c17ecf2e2b6c9",
                             "create2": true
                         }
                     },
@@ -10190,21 +10205,6 @@
                                 "0x2ef8E4C470B568Ad53e367a1111603B2C7dA949A"
                             ],
                             "salt": "0x9ba6c43194993a1ae3cf226ea3192ffbfb50da7bff979f23422c24ac4bb616e4",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "StgUsdcV2Mock",
-                        "address": "0xEea2F7EB8D51d02f2cB3A49e254f65A60169F0d5",
-                        "meta": {
-                            "args": [
-                                "StgUsdcV2Mock",
-                                "StgUsdcV2Mock",
-                                "1000000000000000000",
-                                6,
-                                "0x2ef8E4C470B568Ad53e367a1111603B2C7dA949A"
-                            ],
-                            "salt": "0x4dd95cc4a47aa2c93fdecc0607984aba0e570e3c1911c8aa8e1070809b000fce",
                             "create2": true
                         }
                     },
