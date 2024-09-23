@@ -8825,58 +8825,58 @@
                 "contracts": [
                     {
                         "name": "TAPIOCA_OPTION_LIQUIDITY_PROVISION",
-                        "address": "0x017f25976e8AaE07Ce2ae5FA1156369F7B8F3851",
+                        "address": "0x3268a22aFa0C1a8614670cCDfEb5B236945C08D7",
                         "meta": {
                             "args": [
                                 "0x6277Ad496328B6652F0F90c62fd40A56e37B7A67",
                                 172800,
                                 "0xf9BD3d9Aa71CcCbdA3eA48b479f0C58f9a0300F1",
-                                "0x303C6817702A8496688FC60042E3173308CB1f7c",
+                                "0xd89eA62C87cA62Bd74bba11813F6562A778A08DD",
                                 "0x2ef8E4C470B568Ad53e367a1111603B2C7dA949A"
                             ],
-                            "salt": "0x105ef422244f0b7c8bc2b2e3080c081cf369392e34c801411a5dd20882a9d7a6",
+                            "salt": "0x1760c303481e6eba4f6650487326ab94df5fe0012f852a6a373e84f121e0fd79",
                             "create2": true
                         }
                     },
                     {
                         "name": "OTAP",
-                        "address": "0x216eC00878b81866Fe85310153F3153AE3ebDd57",
+                        "address": "0x66807FF2521DaCc36c4e0C35d4b7F1eB3DCE7950",
                         "meta": {
                             "args": [
                                 "0xf9BD3d9Aa71CcCbdA3eA48b479f0C58f9a0300F1",
                                 "0x2ef8E4C470B568Ad53e367a1111603B2C7dA949A"
                             ],
-                            "salt": "0x7ef83ec9c7491ee323cd81854c3d4101ff2f52cd36727e3a2f71969382b82bca",
+                            "salt": "0x4f4a867fe0f8708f881f9566acfc9604e483931401a88e5766eb899d211773ea",
                             "create2": true
                         }
                     },
                     {
                         "name": "TAPIOCA_OPTION_BROKER",
-                        "address": "0x838F25f1179AE6EE289F89E7f32565294A7C0CE5",
+                        "address": "0x58bf5712011eF6E3483798710E67DB2F4Ae63C34",
                         "meta": {
                             "args": [
-                                "0x017f25976e8AaE07Ce2ae5FA1156369F7B8F3851",
-                                "0x216eC00878b81866Fe85310153F3153AE3ebDd57",
+                                "0x3268a22aFa0C1a8614670cCDfEb5B236945C08D7",
+                                "0x66807FF2521DaCc36c4e0C35d4b7F1eB3DCE7950",
                                 "0xE68246e60E437D86AcCCF7bc0f0f4C4D7246F963",
                                 "0x7A3B760AcFaB78f6bc6a1AD80F7743f5bA0513Dc",
                                 172800,
                                 "0xf9BD3d9Aa71CcCbdA3eA48b479f0C58f9a0300F1",
                                 "0x2ef8E4C470B568Ad53e367a1111603B2C7dA949A"
                             ],
-                            "salt": "0x5bd3b18e6acaf3f3108fecc714898e6f6f24499adae45f5ce6e5cfb72620e175",
+                            "salt": "0x7690fef0108b6f9ed038c89eb5e995b67ee7d222071d98630af01cd71baf5015",
                             "create2": true
                         }
                     },
                     {
                         "name": "TWTAP",
-                        "address": "0xe2D98f174997d475972a1885Ab4F8305A7D5c622",
+                        "address": "0xdb30592b96620D782F780388FA2390ACFe1B55B7",
                         "meta": {
                             "args": [
                                 "0xE68246e60E437D86AcCCF7bc0f0f4C4D7246F963",
                                 "0xf9BD3d9Aa71CcCbdA3eA48b479f0C58f9a0300F1",
                                 "0x2ef8E4C470B568Ad53e367a1111603B2C7dA949A"
                             ],
-                            "salt": "0x61b4b8a739c1f22f8080e13c6f2102e7fb94fc9ad6bb5182ba7c15799e14965f",
+                            "salt": "0xd680c6f53db99c61722c1333a200767469d9fd68b749f926a037c47e1ed973e6",
                             "create2": true
                         }
                     },
