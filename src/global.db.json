@@ -9042,6 +9042,14 @@
                 "lastBlockHeight": 82520869,
                 "contracts": [
                     {
+                        "address": "0xa972441aC63856185A542CaaEE4B099036612148",
+                        "name": "YB_T_SGL_STG_USDC_V2_ASSET_WITHOUT_STRATEGY",
+                        "meta": {
+                            "token": "0x9E292d55cCac70f9bA850254F81FA3977977BFfe",
+                            "ybAssetId": 41
+                        }
+                    },
+                    {
                         "name": "ORIGINS_T_ETH_MARKET",
                         "address": "0x9C8A0E09E482DbCBBccaC8eD76F92A9056E70ca7",
                         "meta": {
@@ -9518,14 +9526,6 @@
                             "args": [],
                             "salt": "0x7ad691927316dc6ee34b20bfca7a81b5838813f28a33ea2facd724754b635f5a",
                             "create2": true
-                        }
-                    },
-                    {
-                        "address": "0x802cfbf6495a2beCE4e32B18212393e81CF9694f",
-                        "name": "YB_T_SGL_STG_USDC_V2_ASSET_WITHOUT_STRATEGY",
-                        "meta": {
-                            "token": "0xc4Aa8c5360D00E0CC632c583B20d11E12854c21d",
-                            "ybAssetId": 32
                         }
                     }
                 ]
