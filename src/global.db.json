@@ -9538,7 +9538,7 @@
                 "contracts": [
                     {
                         "name": "USDO_USDC_UNI_V3_ORACLE",
-                        "address": "0x62F4e83E5FA392Af47F21c82b56Aa9b1F813003B",
+                        "address": "0xa5197a8FFef6470f39c277450F35f24F6a877cF7",
                         "meta": {
                             "args": [
                                 "USDO->USDC->USD",
@@ -9546,7 +9546,7 @@
                                 18,
                                 {
                                     "addressInAndOutUni": [
-                                        "0x1743167244AC771235eE670f913B173B503BDf7d",
+                                        "0xD86F2031Ee723f7e0589c5e0454A5dDf4141De7c",
                                         "0xF72c2794A9Ea95C5a8CD033999F319B15723E751"
                                     ],
                                     "_circuitUniswap": [
@@ -9572,7 +9572,7 @@
                                     "_admin": "0x2ef8E4C470B568Ad53e367a1111603B2C7dA949A"
                                 }
                             ],
-                            "salt": "0xe49fc5e5693ea23878707342bc82fe9ada4c01911f541fdf6e6141690e5d4c03",
+                            "salt": "0x1d9a1b1d2f4ee2bbf2724bfa96e8e607eb505e75e2fe5ef9a3c00f1c1139f990",
                             "create2": true
                         }
                     },
