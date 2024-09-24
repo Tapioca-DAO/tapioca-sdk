@@ -12139,6 +12139,46 @@
                 "lastBlockHeight": 74977521,
                 "contracts": [
                     {
+                        "name": "USDO_USDC_UNI_V3_ORACLE",
+                        "address": "0x77472550D2D453d16dfC0D8CF6E609832E266688",
+                        "meta": {
+                            "args": [
+                                "USDO->USDC->USD",
+                                "USDO/USD",
+                                18,
+                                {
+                                    "addressInAndOutUni": [
+                                        "0x319f2f4af79223CF85a259632D5EfD4FE5fA1656",
+                                        "0xF72c2794A9Ea95C5a8CD033999F319B15723E751"
+                                    ],
+                                    "_circuitUniswap": [
+                                        "0xAa717B0c4499253b34b13906576561DBF653ADf5"
+                                    ],
+                                    "_circuitUniIsMultiplied": [
+                                        1
+                                    ],
+                                    "_twapPeriod": 1,
+                                    "observationLength": 1,
+                                    "_uniFinalCurrency": 1,
+                                    "_circuitChainlink": [
+                                        "0x1190aE86f7e9531CB87504C9ce5bEd538a9c8aBa"
+                                    ],
+                                    "_circuitChainIsMultiplied": [
+                                        1
+                                    ],
+                                    "guardians": [
+                                        "0x533385BC149b1AaA8CB958A592E96E4a0A81ce56"
+                                    ],
+                                    "_description": "0x5553444f2d3e555344432d3e5553440000000000000000000000000000000000",
+                                    "_sequencerUptimeFeed": "0x0000000000000000000000000000000000000000",
+                                    "_admin": "0x533385BC149b1AaA8CB958A592E96E4a0A81ce56"
+                                }
+                            ],
+                            "salt": "0x266b81296c2951dbb54947f25d489a29f7040a7853d2ff2a9a599e65e19ceea7",
+                            "create2": true
+                        }
+                    },
+                    {
                         "address": "0x2e82a6b537F62741151d354649C829fDc8365aC2",
                         "name": "WETH_YB_EMPTY_STRAT",
                         "meta": {
@@ -12689,46 +12729,6 @@
                                 "0x593161b48276C9Bcf57030c3a2F128F447c2Dc80"
                             ],
                             "salt": "0x570946ff769a9b0f23d76f319721a86dada2b2c6dc9b44da18f5b552d6f97e72",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "USDO_USDC_UNI_V3_ORACLE",
-                        "address": "0x6126D74B986543D5Ed8D849aF43bF3864eFF65A7",
-                        "meta": {
-                            "args": [
-                                "USDO->USDC->USD",
-                                "USDO/USD",
-                                18,
-                                {
-                                    "addressInAndOutUni": [
-                                        "0xf01f1A29b1b0f97b99e44Ea5e85c8715C3aD8e74",
-                                        "0xF72c2794A9Ea95C5a8CD033999F319B15723E751"
-                                    ],
-                                    "_circuitUniswap": [
-                                        "0xAa717B0c4499253b34b13906576561DBF653ADf5"
-                                    ],
-                                    "_circuitUniIsMultiplied": [
-                                        1
-                                    ],
-                                    "_twapPeriod": 1,
-                                    "observationLength": 1,
-                                    "_uniFinalCurrency": 1,
-                                    "_circuitChainlink": [
-                                        "0xC23507096A67D62d511CBE9D9f335dbef8F5De27"
-                                    ],
-                                    "_circuitChainIsMultiplied": [
-                                        1
-                                    ],
-                                    "guardians": [
-                                        "0x533385BC149b1AaA8CB958A592E96E4a0A81ce56"
-                                    ],
-                                    "_description": "0x5553444f2d3e555344432d3e5553440000000000000000000000000000000000",
-                                    "_sequencerUptimeFeed": "0x0000000000000000000000000000000000000000",
-                                    "_admin": "0x533385BC149b1AaA8CB958A592E96E4a0A81ce56"
-                                }
-                            ],
-                            "salt": "0xc8f15f67520e3b51731ac0b1afe3216c243bc797db15298df9ff552f026f8b8b",
                             "create2": true
                         }
                     },
