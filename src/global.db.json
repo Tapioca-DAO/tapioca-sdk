@@ -11382,6 +11382,14 @@
                 "lastBlockHeight": 75007698,
                 "contracts": [
                     {
+                        "address": "0x9ba8cf720df78b17CC1159Bb7293131804A5f7fa",
+                        "name": "YB_T_SGL_STG_USDC_V2_ASSET_WITHOUT_STRATEGY",
+                        "meta": {
+                            "token": "0xEe6e94151c61e9f94B9828D7D686cc4CA3eB1C21",
+                            "ybAssetId": 11
+                        }
+                    },
+                    {
                         "name": "ORIGINS_T_ETH_MARKET",
                         "address": "0xfBCEfb086e00Cd73e4B7f29240e29B88788ef7DA",
                         "meta": {
