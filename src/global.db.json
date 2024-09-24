@@ -11382,6 +11382,485 @@
                 "lastBlockHeight": 75007698,
                 "contracts": [
                     {
+                        "name": "ORIGINS_T_ETH_MARKET",
+                        "address": "0xfBCEfb086e00Cd73e4B7f29240e29B88788ef7DA",
+                        "meta": {
+                            "args": [
+                                "0x533385BC149b1AaA8CB958A592E96E4a0A81ce56",
+                                "0x4eC99Ef5daBDe55D4Aba91A2619f2e3F0a149A22",
+                                "0x319f2f4af79223CF85a259632D5EfD4FE5fA1656",
+                                {
+                                    "type": "BigNumber",
+                                    "hex": "0x03"
+                                },
+                                "0x0F7F104171aBb79298aeE92E667ef266E662234f",
+                                {
+                                    "type": "BigNumber",
+                                    "hex": "0x06"
+                                },
+                                "0x0cDb7EE989ab24Bf0D903A35A343a8ad5fC45b2d",
+                                "1000000000000000000",
+                                99000,
+                                "0x6E59ddF622a71D8447bfD90CaC7F9151b96c7526"
+                            ],
+                            "salt": "0xdbb6d90d8636b2670823b391f336a5c6146d593a3d8aabb65e66b7edcd978be4",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "address": "0xfDDd3aE2782CcAF00d5c5b7eeDA545Cb2de4d6cA",
+                        "name": "YB_USDO_ASSET_WITHOUT_STRATEGY",
+                        "meta": {
+                            "token": "0x319f2f4af79223CF85a259632D5EfD4FE5fA1656",
+                            "ybAssetId": 3
+                        }
+                    },
+                    {
+                        "name": "MARKET_LIQUIDATOR_RECEIVER",
+                        "address": "0xA0B6279aC143C9c016913130DFD7034d492B8bd6",
+                        "meta": {
+                            "args": [
+                                "0x2EAe4fbc552fE35C1D3Df2B546032409bb0E431E",
+                                "0x08c3b177e3bBA10fA4F5Cf9C0BB898FEB192c120",
+                                "0x12108Ee1E47da9E44710A20d6Af1C24608ABbb2a",
+                                "0x533385BC149b1AaA8CB958A592E96E4a0A81ce56"
+                            ],
+                            "salt": "0xe0ce57494a370a4ec9dd35aca8b50f6755b05462ca8344593f7739be1890a5ad",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "USDO_SENDER_MODULE",
+                        "address": "0x3f640F6f5752071894e3Ab81dff3090024366698",
+                        "meta": {
+                            "args": [
+                                {
+                                    "cluster": "0x0000000000000000000000000000000000000001",
+                                    "delegate": "0x0000000000000000000000000000000000000001",
+                                    "endpoint": "0x6EDCE65403992e310A62460808c4b910D972f10f",
+                                    "extExec": "0x0000000000000000000000000000000000000001",
+                                    "pearlmit": "0x0000000000000000000000000000000000000001",
+                                    "yieldBox": "0x0000000000000000000000000000000000000001"
+                                }
+                            ],
+                            "salt": "0x9311194f6097111f0debec6b9b3936db8b451ef6a3408415563a70806cf42cf9",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "USDO_RECEIVER_MODULE",
+                        "address": "0xaE966b7e5CB672210A8131e519F7236577db0BAf",
+                        "meta": {
+                            "args": [
+                                {
+                                    "cluster": "0x0000000000000000000000000000000000000001",
+                                    "delegate": "0x0000000000000000000000000000000000000001",
+                                    "endpoint": "0x6EDCE65403992e310A62460808c4b910D972f10f",
+                                    "extExec": "0x0000000000000000000000000000000000000001",
+                                    "pearlmit": "0x0000000000000000000000000000000000000001",
+                                    "yieldBox": "0x0000000000000000000000000000000000000001"
+                                }
+                            ],
+                            "salt": "0xa45413f3838624b2b345dd1ece95e5cda956902afd09588f6dc22b6847f3e7d4",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "USDO_MARKET_RECEIVER_MODULE",
+                        "address": "0x363A985991E597dd09c659133C9e7fC419F91d91",
+                        "meta": {
+                            "args": [
+                                {
+                                    "cluster": "0x0000000000000000000000000000000000000001",
+                                    "delegate": "0x0000000000000000000000000000000000000001",
+                                    "endpoint": "0x6EDCE65403992e310A62460808c4b910D972f10f",
+                                    "extExec": "0x0000000000000000000000000000000000000001",
+                                    "pearlmit": "0x0000000000000000000000000000000000000001",
+                                    "yieldBox": "0x0000000000000000000000000000000000000001"
+                                }
+                            ],
+                            "salt": "0xd2b9ca430c18ee2624606dbf5b0a6277ade5940db1f14a8098c09e7a2936551b",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "USDO_OPTION_RECEIVER_MODULE",
+                        "address": "0xD03Fdd55Cd916A40a1b6Bacc089BEE9d4870A3d8",
+                        "meta": {
+                            "args": [
+                                {
+                                    "cluster": "0x0000000000000000000000000000000000000001",
+                                    "delegate": "0x0000000000000000000000000000000000000001",
+                                    "endpoint": "0x6EDCE65403992e310A62460808c4b910D972f10f",
+                                    "extExec": "0x0000000000000000000000000000000000000001",
+                                    "pearlmit": "0x0000000000000000000000000000000000000001",
+                                    "yieldBox": "0x0000000000000000000000000000000000000001"
+                                }
+                            ],
+                            "salt": "0x7c17c7d4d6e559c1ea9d6dae37e03c92faa1cb0e30443535cd00d3f49a4c581d",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "SGL_INIT",
+                        "address": "0xbB86770B92b638071888d91B40Fe56847EDD83ad",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x6a3d7f4995c006313d70effa72f0621a7a40e1a01601bc20e06ba3aa47bc68a3",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "USDO_HELPER",
+                        "address": "0xc378486401408Bf6eB6fDAB6Ae60fd663dA64337",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x3b910adcdb90f81e7181e6296b229db0fa4ee0cbaf65a470da9e3f8c3e96c7c9",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "USDO_EXT_EXEC",
+                        "address": "0xf968d1BB1Af2106C8F964bc9EB1AAf784f414dd1",
+                        "meta": {
+                            "args": [],
+                            "salt": "0xde5602f6034a1fd67e9b410a5505e537f75afd7d881fab61ba44ba11938d4aa1",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "SIMPLE_LEVERAGE_EXECUTOR",
+                        "address": "0x10831Ed895D62A1fb4F1F1cBeaC61AF37Ec0F962",
+                        "meta": {
+                            "args": [
+                                "0x12108Ee1E47da9E44710A20d6Af1C24608ABbb2a",
+                                "0x08c3b177e3bBA10fA4F5Cf9C0BB898FEB192c120",
+                                "0x2EAe4fbc552fE35C1D3Df2B546032409bb0E431E",
+                                "0xDeA9683812Bd5C61Cb307F5766aBB9c375C925B7"
+                            ],
+                            "salt": "0xa1ced973ca736dace105c31affd29c5590e596581c5778321ddd10736c093d01",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "USDO",
+                        "address": "0x319f2f4af79223CF85a259632D5EfD4FE5fA1656",
+                        "meta": {
+                            "args": [
+                                {
+                                    "endpoint": "0x6EDCE65403992e310A62460808c4b910D972f10f",
+                                    "delegate": "0x533385BC149b1AaA8CB958A592E96E4a0A81ce56",
+                                    "extExec": "0xf968d1BB1Af2106C8F964bc9EB1AAf784f414dd1",
+                                    "cluster": "0x08c3b177e3bBA10fA4F5Cf9C0BB898FEB192c120",
+                                    "pearlmit": "0xDeA9683812Bd5C61Cb307F5766aBB9c375C925B7",
+                                    "yieldBox": "0x4eC99Ef5daBDe55D4Aba91A2619f2e3F0a149A22"
+                                },
+                                {
+                                    "marketReceiverModule": "0x363A985991E597dd09c659133C9e7fC419F91d91",
+                                    "optionReceiverModule": "0xD03Fdd55Cd916A40a1b6Bacc089BEE9d4870A3d8",
+                                    "usdoReceiverModule": "0xaE966b7e5CB672210A8131e519F7236577db0BAf",
+                                    "usdoSenderModule": "0x3f640F6f5752071894e3Ab81dff3090024366698"
+                                }
+                            ],
+                            "salt": "0x7a6f7ebc241dc509c20e7bd5c567e662469bbac8b59b93bf36ffca5509526dc9",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "USDO_FLASHLOAN_HELPER",
+                        "address": "0xc051b4E678599699bFE25a92Ec98cF719e00E047",
+                        "meta": {
+                            "args": [
+                                "0x319f2f4af79223CF85a259632D5EfD4FE5fA1656",
+                                "0x533385BC149b1AaA8CB958A592E96E4a0A81ce56"
+                            ],
+                            "salt": "0x3f37eed44878432314d5b2481f209a9868ce9df8b5148f05784643646bdafae5",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "SGL_LIQUIDATION_MODULE",
+                        "address": "0xEA0ed860C0685634A2B85Bb83c37E490e9ef407D",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x973884e962624788a86511dfe3ff050a47657d7b3bd535c7abb2dac15fd50e0a",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "SGL_BORROW_MODULE",
+                        "address": "0xb077aFb7170a957467Dc3CBFe5eBCBB4193595aB",
+                        "meta": {
+                            "args": [],
+                            "salt": "0xdf9bd1122a1517d2c1df407ed54735c3dcc5d51d61060cb12c19d9b936f90aa0",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "SGL_COLLATERAL_MODULE",
+                        "address": "0x18C028e0874215a69910b21Ec51e0bC31938C026",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x331be68f09615dfd777fc404dbec45a00191eb2495fa74c61413406c7604ce0b",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "SGL_LEVERAGE_MODULE",
+                        "address": "0x637bfBf6049DD758B02bA2a3C90E8E892bD0a338",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x6ae4499b2d7ec1682bfc562dfc0f0c12744c14eafc6df24c48d745829b7109ef",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "PENROSE",
+                        "address": "0x6E59ddF622a71D8447bfD90CaC7F9151b96c7526",
+                        "meta": {
+                            "args": [
+                                "0x4eC99Ef5daBDe55D4Aba91A2619f2e3F0a149A22",
+                                "0x08c3b177e3bBA10fA4F5Cf9C0BB898FEB192c120",
+                                "0x412f0B06f64974A34Ba32C3Ff6141DA628Af3731",
+                                "0x2EAe4fbc552fE35C1D3Df2B546032409bb0E431E",
+                                "0xDeA9683812Bd5C61Cb307F5766aBB9c375C925B7",
+                                1,
+                                2,
+                                "0x533385BC149b1AaA8CB958A592E96E4a0A81ce56"
+                            ],
+                            "salt": "0x717848b37cfcda39f27097597651173c717c58104fd87a5a628c1303c4efe48c",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "SGL_MEDIUM_RISK_MC",
+                        "address": "0x17AE62615aFC6debD048aB509Dfd8Ec5141FA15A",
+                        "meta": {
+                            "args": [],
+                            "salt": "0xb5827a1678f5af8be588674a1bcd056b94efdc9d3245d8fdacce2edcab1a71a0",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "SGL_INTEREST_HELPER",
+                        "address": "0x53EF610984e5122720CBFB0f42B26666b686c0Cc",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x21b0387b34371d96e7cc9324b30d98c98a3ee7bb3e37635e70b882945d836c59",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "MARKET_HELPER",
+                        "address": "0x89c0030c84e67B9d237aC36df8E4351bF51403A4",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x8af94aca3d3c7d9aa59643b49bb47e55d7527d5c8a7f1c6b23551b9f990800ca",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "BB_LIQUIDATION_MODULE",
+                        "address": "0x45E8D494790971F36bF004AfE85c76B53eB68d50",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x4a9d5200e6c35e2291a19159cf54c372a23136fc59b96999ff1fcc14b99a6809",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "BB_BORROW_MODULE",
+                        "address": "0x5fD1e1fe93000Cc0D7aE185ad182Af3A04e48a58",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x95566eb4d93e93e39e38fbc0a26f8a7c38df2d0b22dcbd95939ea16f250c2792",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "BB_COLLATERAL_MODULE",
+                        "address": "0x86c1DC43d72811eb827627EC6e1C1BFe2D3449BE",
+                        "meta": {
+                            "args": [],
+                            "salt": "0xce8e1a22eafd6b4967a306720b120c0c040fc8eead75f02208ca868977796fd7",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "BB_LEVERAGE_MODULE",
+                        "address": "0x278eaddb71Acf636aBB8cEa915ED2515e7A9f1Bb",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x8401da31437663204fc07143a7e7d7ea0b3cce54297e07ca222cc3034a675ea1",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "BB_DEBT_RATE_HELPER",
+                        "address": "0xc5a9b3CF70d95682f40BA0568c83F0149EDE1447",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x85f38b499274c8b14b553b1db4642ed2ee11504d36e72e05b8601241601dbf94",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YB_MT_ETH_ASSET_WITHOUT_STRATEGY",
+                        "address": "0x2E422015Fbf189182D07933F94589Bc33B1F60f8",
+                        "meta": {
+                            "args": [
+                                "0x4eC99Ef5daBDe55D4Aba91A2619f2e3F0a149A22",
+                                "0xCaaDf609D3Aa61A56c56aAbc02D1e9647724dbaa"
+                            ],
+                            "salt": "0x33610abac41b764dbb05b7107a8abcf466fc97041c057b93cab84f075400d47e",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YB_T_ETH_ASSET_WITHOUT_STRATEGY",
+                        "address": "0x9E23c5F3ad6171840F49fa4fDFc4B97d4D63A4dA",
+                        "meta": {
+                            "args": [
+                                "0x4eC99Ef5daBDe55D4Aba91A2619f2e3F0a149A22",
+                                "0x0F7F104171aBb79298aeE92E667ef266E662234f"
+                            ],
+                            "salt": "0x9a3a2946a6874e747b09a3714bce712fffd0404bb29afa64a9263b9e22f88e0c",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YB_T_RETH_ASSET_WITHOUT_STRATEGY",
+                        "address": "0x8eF4D0619C2888efB565dDF60da93E7863b36D69",
+                        "meta": {
+                            "args": [
+                                "0x4eC99Ef5daBDe55D4Aba91A2619f2e3F0a149A22",
+                                "0x8D3488af7825422037f731782A76f9c8710d1c4e"
+                            ],
+                            "salt": "0x246bc5221050791b4a920f313d6637ef4ea4651b27f9fbf5e9f61d977c5de93c",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YB_T_WST_ETH_ASSET_WITHOUT_STRATEGY",
+                        "address": "0xA5F22d2E89D74c07c25b10Dd57C4Cd05018FFc45",
+                        "meta": {
+                            "args": [
+                                "0x4eC99Ef5daBDe55D4Aba91A2619f2e3F0a149A22",
+                                "0x065FDe0dfc69f061241ee91ceC61abe2bF4B0B9a"
+                            ],
+                            "salt": "0x6a5f923edec10caed1be6610875861a0c618f56de7afb81622f694a82c230f99",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YB_T_ZRO_ASSET_WITHOUT_STRATEGY",
+                        "address": "0x4c171cB849F37446E7946A05722E71bc94A45374",
+                        "meta": {
+                            "args": [
+                                "0x4eC99Ef5daBDe55D4Aba91A2619f2e3F0a149A22",
+                                "0xE2fEd7342b2100e0f231aBb87825824691af2DDA"
+                            ],
+                            "salt": "0x6a3a4d75ba08aa86e3eb9f615e7e64b3774d61808990302e5a7e9e6d114bb29a",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "BB_MEDIUM_RISK_MC",
+                        "address": "0x568CECb0885CdE58C461FDF7ceb208f90e84807f",
+                        "meta": {
+                            "args": [],
+                            "salt": "0xf3e2cf8edc5054f3a28b47082ff5011bb9e5067581d85b57047f8be9ff155548",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "BB_MT_ETH_MARKET",
+                        "address": "0x3C21Fbd6A72c50Ec7f372Da73D2FFe769e41dACD",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x70ffa276b3b6cc733638bd24ad0a38e5337b366bc7029b4ed84b5545b3b6ad4b",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "BB_T_RETH_MARKET",
+                        "address": "0x33F9f10569747aC921905be9284d61722c198371",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x57bda40c2e7493c10ae51e5dd85f803e859cbb886975cf998f3825d910cb2db3",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "BB_T_WST_ETH_MARKET",
+                        "address": "0x2c0b68F92158005491B722C2bCe42856AF725553",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x06939c340e01112fa842c9af528818e2feb22f578f4c5cd24d9e9c6dc42ff9ee",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "BB_T_ZRO_MARKET",
+                        "address": "0x272504CBd1Dab51840cacD0554B5c603fC6e5483",
+                        "meta": {
+                            "args": [],
+                            "salt": "0xf247337fb9069d80fb1223a8269b72d52dd11ccf3e8763b586597befd2fce595",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "BB_T_USDC_MOCK_MARKET",
+                        "address": "0xbd8f687429BCf65c6Dbf987080095a2007A71Bc9",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x91ea66f981bd13ac7fcba4def6331d1dae75404a564ee8436c6b9bc465f2b42d",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YB_STG_USDC_V2_ASSET_WITHOUT_STRATEGY",
+                        "address": "0x07C6a031D854Cb72E7CAd22Cdb7255A1DA19b10D",
+                        "meta": {
+                            "args": [
+                                "0x4eC99Ef5daBDe55D4Aba91A2619f2e3F0a149A22",
+                                "0x5a98769122A67D0f9ed77d67247B719a8c558dfe"
+                            ],
+                            "salt": "0x47ef83fe43a3cb75aff748ecb08fe726817d0354ec579a899f9e0b9ed8d7e055",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "YB_T_USDC_MOCK_ASSET_WITHOUT_STRATEGY",
+                        "address": "0x740006936DeABaCe923626d21f67694e2Ab905b1",
+                        "meta": {
+                            "args": [
+                                "0x4eC99Ef5daBDe55D4Aba91A2619f2e3F0a149A22",
+                                "0xB97f3fda040662B44055BdcBEc2BaB7CAA70839c"
+                            ],
+                            "salt": "0x27294a2631a2ec2e30e2c00de3377ecf74aa191699210020a87a5d680750f00c",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "SGL_STG_USDC_V2_MARKET",
+                        "address": "0xfC6CCC65c669ee3180462774D4dFF54A5DCDaDe2",
+                        "meta": {
+                            "args": [],
+                            "salt": "0xf4f72b52f0f646b0f5ae7473dff9cfa420c2d4987618585f0a0be60972ae13f9",
+                            "create2": true
+                        }
+                    },
+                    {
+                        "name": "SGL_USDC_MOCK_MARKET",
+                        "address": "0xCb8Bb12B7617dcA77d078E54cB116733Bc387a55",
+                        "meta": {
+                            "args": [],
+                            "salt": "0x65274cd4647e08d634ea926b3e4ffbfb5e5c85dfc8a7dc56b13683c0919c0b76",
+                            "create2": true
+                        }
+                    },
+                    {
                         "address": "0x10648Cd6Db149B4a2297Ea794a83C465D9e90DF2",
                         "name": "YB_T_SGL_USDC_MOCK_ASSET_WITHOUT_STRATEGY",
                         "meta": {
@@ -11398,422 +11877,6 @@
                         }
                     },
                     {
-                        "name": "ORIGINS_T_ETH_MARKET",
-                        "address": "0xCfA21062C20A40495e4be6c9B0F43262d14a5558",
-                        "meta": {
-                            "args": [
-                                "0x533385BC149b1AaA8CB958A592E96E4a0A81ce56",
-                                "0x746a6ba2D6e23D0F9A4F8c81C790F1f887b82420",
-                                "0xf01f1A29b1b0f97b99e44Ea5e85c8715C3aD8e74",
-                                {
-                                    "type": "BigNumber",
-                                    "hex": "0x04"
-                                },
-                                "0x2cCDa67FF683C5D347c90a09B4b6C1B2dDa56319",
-                                {
-                                    "type": "BigNumber",
-                                    "hex": "0x07"
-                                },
-                                "0x2Ba4fb0ae70987ecD0C6D094E0b9f1A8f56D9BcB",
-                                "1000000000000000000",
-                                99000,
-                                "0x72F4f0c44537E7507b9807EFe6f2c72BB8dAAe94"
-                            ],
-                            "salt": "0x197ec4d41c9b3958600e6e96f7b888621a9a40d431a421e75907c7456853c640",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "address": "0x0b13b3452b08c6687AcCe982073dAdd8d07b8cc5",
-                        "name": "YB_USDO_ASSET_WITHOUT_STRATEGY",
-                        "meta": {
-                            "token": "0xf01f1A29b1b0f97b99e44Ea5e85c8715C3aD8e74",
-                            "ybAssetId": 4
-                        }
-                    },
-                    {
-                        "name": "MARKET_LIQUIDATOR_RECEIVER",
-                        "address": "0xFDf3bd50220538353d4aC65b1d76ffa9AC0eebeb",
-                        "meta": {
-                            "args": [
-                                "0x2EAe4fbc552fE35C1D3Df2B546032409bb0E431E",
-                                "0x5903D7DcEaD165182Ea5025Eb60F8EA1b8010Abc",
-                                "0x12108Ee1E47da9E44710A20d6Af1C24608ABbb2a",
-                                "0x533385BC149b1AaA8CB958A592E96E4a0A81ce56"
-                            ],
-                            "salt": "0xf52406bae560ec70e4b6d876db725b1708d48285cef857b8122ee8002ceac04e",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "USDO_SENDER_MODULE",
-                        "address": "0x9f9Be33Cd899c8bd34cCed4fd5B81cE550eF2Eb9",
-                        "meta": {
-                            "args": [
-                                {
-                                    "cluster": "0x0000000000000000000000000000000000000001",
-                                    "delegate": "0x0000000000000000000000000000000000000001",
-                                    "endpoint": "0x6EDCE65403992e310A62460808c4b910D972f10f",
-                                    "extExec": "0x0000000000000000000000000000000000000001",
-                                    "pearlmit": "0x0000000000000000000000000000000000000001",
-                                    "yieldBox": "0x0000000000000000000000000000000000000001"
-                                }
-                            ],
-                            "salt": "0x7589aa21eb6f27a3f2cb7035d1fafaf75552e0ae2f687d49eba61d116ecd1746",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "USDO_RECEIVER_MODULE",
-                        "address": "0xaded7586326b56223E6cCBa6726Fa1Df405052CE",
-                        "meta": {
-                            "args": [
-                                {
-                                    "cluster": "0x0000000000000000000000000000000000000001",
-                                    "delegate": "0x0000000000000000000000000000000000000001",
-                                    "endpoint": "0x6EDCE65403992e310A62460808c4b910D972f10f",
-                                    "extExec": "0x0000000000000000000000000000000000000001",
-                                    "pearlmit": "0x0000000000000000000000000000000000000001",
-                                    "yieldBox": "0x0000000000000000000000000000000000000001"
-                                }
-                            ],
-                            "salt": "0x30873f376c88187c799d6c227400af16cd21fb335c35d65493f968fbf195ad0d",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "USDO_MARKET_RECEIVER_MODULE",
-                        "address": "0x639EBb3fa5B1B52C2395a4091FC32A869D1Ef4a1",
-                        "meta": {
-                            "args": [
-                                {
-                                    "cluster": "0x0000000000000000000000000000000000000001",
-                                    "delegate": "0x0000000000000000000000000000000000000001",
-                                    "endpoint": "0x6EDCE65403992e310A62460808c4b910D972f10f",
-                                    "extExec": "0x0000000000000000000000000000000000000001",
-                                    "pearlmit": "0x0000000000000000000000000000000000000001",
-                                    "yieldBox": "0x0000000000000000000000000000000000000001"
-                                }
-                            ],
-                            "salt": "0x1a06bc98d79a9f6bbfa0d0462b118e897b2e5c4ea2ae5df509645af59677a160",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "USDO_OPTION_RECEIVER_MODULE",
-                        "address": "0x3c79dfD76202BC0A21D96ED4FC1b090F54396B53",
-                        "meta": {
-                            "args": [
-                                {
-                                    "cluster": "0x0000000000000000000000000000000000000001",
-                                    "delegate": "0x0000000000000000000000000000000000000001",
-                                    "endpoint": "0x6EDCE65403992e310A62460808c4b910D972f10f",
-                                    "extExec": "0x0000000000000000000000000000000000000001",
-                                    "pearlmit": "0x0000000000000000000000000000000000000001",
-                                    "yieldBox": "0x0000000000000000000000000000000000000001"
-                                }
-                            ],
-                            "salt": "0x8298caa142dea5b20984033ad15a6a56020edc49dfbbf65347f653faf0b7b1e3",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "SGL_INIT",
-                        "address": "0x214ac01491DC9fD20E50fC048AEcEa40b7A93b39",
-                        "meta": {
-                            "args": [],
-                            "salt": "0xe40188995283c4e728d8185510866c919a00d686ab93dd7aec98bfff2319eb8c",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "USDO_HELPER",
-                        "address": "0xdB1BB91c0c365CC5F26332d71d1b41A631Ffb8af",
-                        "meta": {
-                            "args": [],
-                            "salt": "0xb35df77b13e2e48647ff7459c858e286c887878bc4b03511baca5d121289c81b",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "USDO_EXT_EXEC",
-                        "address": "0x7d9241565804fECB025326B40c01828608dA8c35",
-                        "meta": {
-                            "args": [],
-                            "salt": "0x97e452f8ed00746b506327dc0214e03454eadc8289ecbcbac6f316d7478c0f80",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "SIMPLE_LEVERAGE_EXECUTOR",
-                        "address": "0x1e5d57b1E346Ad0B6a81a2EA3970FEBb4D9bdfF7",
-                        "meta": {
-                            "args": [
-                                "0x12108Ee1E47da9E44710A20d6Af1C24608ABbb2a",
-                                "0x5903D7DcEaD165182Ea5025Eb60F8EA1b8010Abc",
-                                "0x2EAe4fbc552fE35C1D3Df2B546032409bb0E431E",
-                                "0x3E83affD4ac671Be9Ea70702a4c67406AD4b08e3"
-                            ],
-                            "salt": "0x87d2d70e2ad640d6d3e5c823663b4c8e4d6334a1176a21224d73cb945adf2bde",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "USDO",
-                        "address": "0xf01f1A29b1b0f97b99e44Ea5e85c8715C3aD8e74",
-                        "meta": {
-                            "args": [
-                                {
-                                    "endpoint": "0x6EDCE65403992e310A62460808c4b910D972f10f",
-                                    "delegate": "0x533385BC149b1AaA8CB958A592E96E4a0A81ce56",
-                                    "extExec": "0x7d9241565804fECB025326B40c01828608dA8c35",
-                                    "cluster": "0x5903D7DcEaD165182Ea5025Eb60F8EA1b8010Abc",
-                                    "pearlmit": "0x3E83affD4ac671Be9Ea70702a4c67406AD4b08e3",
-                                    "yieldBox": "0x746a6ba2D6e23D0F9A4F8c81C790F1f887b82420"
-                                },
-                                {
-                                    "marketReceiverModule": "0x639EBb3fa5B1B52C2395a4091FC32A869D1Ef4a1",
-                                    "optionReceiverModule": "0x3c79dfD76202BC0A21D96ED4FC1b090F54396B53",
-                                    "usdoReceiverModule": "0xaded7586326b56223E6cCBa6726Fa1Df405052CE",
-                                    "usdoSenderModule": "0x9f9Be33Cd899c8bd34cCed4fd5B81cE550eF2Eb9"
-                                }
-                            ],
-                            "salt": "0xc58bc831af5a0854e61e212574dd165fb413de33ad6522613286862441bd3636",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "USDO_FLASHLOAN_HELPER",
-                        "address": "0x1f176AEec096631f5Ae50eED1E2aB57F62Ee4F78",
-                        "meta": {
-                            "args": [
-                                "0xf01f1A29b1b0f97b99e44Ea5e85c8715C3aD8e74",
-                                "0x533385BC149b1AaA8CB958A592E96E4a0A81ce56"
-                            ],
-                            "salt": "0xf5256b3fcd6998dddc0232a783e0f77cd3a3670bfe7d1696d8089747a0ebf49d",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "SGL_LIQUIDATION_MODULE",
-                        "address": "0x56DF67601985fd9bdd9e1454f0857c5DA59404Ad",
-                        "meta": {
-                            "args": [],
-                            "salt": "0x33272ebcbe92908872614769798280ad626e6dd5b45b3e638148728a561fea0a",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "SGL_BORROW_MODULE",
-                        "address": "0xa8c598333cEdE51F522BC24100C34236B3B69C14",
-                        "meta": {
-                            "args": [],
-                            "salt": "0xd5d746ad93e30f60897b507fb8380744d77baae160be15539a23c8df139e6019",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "SGL_COLLATERAL_MODULE",
-                        "address": "0x656759ae19706D3860FF0f973593331Befc55124",
-                        "meta": {
-                            "args": [],
-                            "salt": "0x60f89b2366f30fa32a1b9bb1572d458348e134f76f69acd2cfc97e865c8a12eb",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "SGL_LEVERAGE_MODULE",
-                        "address": "0x56E1178dB51027556045894E74C76bA748b5026d",
-                        "meta": {
-                            "args": [],
-                            "salt": "0xb9e1b7f2193ad2bd74df4ce66e17a562e97f101a63669a520ce13ad02c934028",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "PENROSE",
-                        "address": "0x72F4f0c44537E7507b9807EFe6f2c72BB8dAAe94",
-                        "meta": {
-                            "args": [
-                                "0x746a6ba2D6e23D0F9A4F8c81C790F1f887b82420",
-                                "0x5903D7DcEaD165182Ea5025Eb60F8EA1b8010Abc",
-                                "0x35f2B1B01EAa8fD0427260594ba6940f3e68dB3c",
-                                "0x2EAe4fbc552fE35C1D3Df2B546032409bb0E431E",
-                                "0x3E83affD4ac671Be9Ea70702a4c67406AD4b08e3",
-                                1,
-                                2,
-                                "0x533385BC149b1AaA8CB958A592E96E4a0A81ce56"
-                            ],
-                            "salt": "0xafe2a8fc368f9cfcf41060d06f6f1171b00436fca0110f55190956657555b8b1",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "SGL_MEDIUM_RISK_MC",
-                        "address": "0xaf4630D097f7FF5b0b081381b0AC965972EA8E2e",
-                        "meta": {
-                            "args": [],
-                            "salt": "0xab7e030573606b222aabebf3723655f89e214552592181b4768363cc17b8b55d",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "SGL_INTEREST_HELPER",
-                        "address": "0xA287904CF11450530Ba0EdB86Be8061eE9CC94e2",
-                        "meta": {
-                            "args": [],
-                            "salt": "0x98a58d492149c7802b95dd8fc9f1c8c5e04fd6ae9a280007eba8839f2849733d",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "MARKET_HELPER",
-                        "address": "0x3A337f93D590b6eB22f1d8D21A24022a0389F06E",
-                        "meta": {
-                            "args": [],
-                            "salt": "0xf2e29228ba2a21800b4bbefc905f1e458a7a619c2061ba6754d298ebcebc44d4",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "BB_LIQUIDATION_MODULE",
-                        "address": "0x97992fd98B30051B41681082C47ed70320b92243",
-                        "meta": {
-                            "args": [],
-                            "salt": "0x1e8902b4534c266c54553e7310ccbec0dce4c079c84e61b9a9483fb9d7cfc132",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "BB_BORROW_MODULE",
-                        "address": "0x5AA3d763333969E91fd1D8181958B56E131Fe3b8",
-                        "meta": {
-                            "args": [],
-                            "salt": "0x2391488d2a1aaf8c6d9eff7bc3586c0a8b20f581ef8f7435d552a726a933da6f",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "BB_COLLATERAL_MODULE",
-                        "address": "0x3806168d86a9a5666A4D54ab372032868624d816",
-                        "meta": {
-                            "args": [],
-                            "salt": "0x30d8412327ec7f70422fb017e80ef228963c5da9f2371c90b9ba06e27c5ab51a",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "BB_LEVERAGE_MODULE",
-                        "address": "0x179661E723028740551E373Af699D8B9b35b9362",
-                        "meta": {
-                            "args": [],
-                            "salt": "0x6023f0cd9faa471fa58d930c99da448c12bcefdafc8e5671c73c36d97228639f",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "BB_DEBT_RATE_HELPER",
-                        "address": "0x0c8b9385e12f329628c6a40fe84DcA2b6c04160C",
-                        "meta": {
-                            "args": [],
-                            "salt": "0xfe9b64005dbf97ca26456e1668ef32b6cf0ffed2b39cdd4fb1cc2eb9c18b6a30",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "YB_MT_ETH_ASSET_WITHOUT_STRATEGY",
-                        "address": "0xDf11609aD9B27b1bc70fd71A91C67c47E6072929",
-                        "meta": {
-                            "args": [
-                                "0x746a6ba2D6e23D0F9A4F8c81C790F1f887b82420",
-                                "0xBfa92838fe7F3611cB84Db0518C8247e27e7A4E6"
-                            ],
-                            "salt": "0xa437e25176c9ab67c06cad045249bb0cc6fe42c2b160607ffad9784a86f8c129",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "YB_T_ETH_ASSET_WITHOUT_STRATEGY",
-                        "address": "0x602aa571bb3b36571d6c445B774A8D1f86f0691D",
-                        "meta": {
-                            "args": [
-                                "0x746a6ba2D6e23D0F9A4F8c81C790F1f887b82420",
-                                "0x2cCDa67FF683C5D347c90a09B4b6C1B2dDa56319"
-                            ],
-                            "salt": "0xe47224f28d67d5b07bd3b57484e4adddc0cbc9c5b9ac666c448ddd4a278d2a17",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "YB_T_RETH_ASSET_WITHOUT_STRATEGY",
-                        "address": "0xa0A07F8Ff8C9159bfb9F0EdB6DAf2D2c3F0e3242",
-                        "meta": {
-                            "args": [
-                                "0x746a6ba2D6e23D0F9A4F8c81C790F1f887b82420",
-                                "0xDbc1FF55EEfd07000751bDb2ACc095ABDD840d62"
-                            ],
-                            "salt": "0xeb59fc823bd9f7afe7ead924f96bc680116a526d5c2902520b3ecd73d30e635e",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "YB_T_WST_ETH_ASSET_WITHOUT_STRATEGY",
-                        "address": "0xbC6ec9e5C9121F2f3591454eD45431667b83A81D",
-                        "meta": {
-                            "args": [
-                                "0x746a6ba2D6e23D0F9A4F8c81C790F1f887b82420",
-                                "0x3a7030Ede358916D6dBFDA0c26d0954c50405C06"
-                            ],
-                            "salt": "0x4ac093687c621f8fc9ed9bd8993da72948ec0234b009b6c261f3e5f0d4cc79d0",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "BB_MEDIUM_RISK_MC",
-                        "address": "0xbc5973C06a4cC525Bc0119428deDA3B321e44993",
-                        "meta": {
-                            "args": [],
-                            "salt": "0x5c238e6f4dec3c8f24416b464ef914ac74c650a622430b215fea512ba7170597",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "BB_MT_ETH_MARKET",
-                        "address": "0x36F8D47b0fc385a62C75d2a942cf1ea226Cf892B",
-                        "meta": {
-                            "args": [],
-                            "salt": "0xd1148a92783836a7f33ff84cf50719705a620599be4b5f508a7cc6e41508f7f3",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "BB_T_RETH_MARKET",
-                        "address": "0x2520D71b32E2719230a4CC51aaCBbB1D45d95864",
-                        "meta": {
-                            "args": [],
-                            "salt": "0xd3736b5fc78870ee33abdd65f7114c353289712f42d97ed6ad511150f3a41b89",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "BB_T_WST_ETH_MARKET",
-                        "address": "0xd4958FCa6ed8cEC8c74a1452cd0BC9d4065aac77",
-                        "meta": {
-                            "args": [],
-                            "salt": "0x27f3f31991bcc0e3a6ec92025623835a431dcd1569d794b1a9fc275439567066",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "BB_T_USDC_MOCK_MARKET",
-                        "address": "0x5F6047a570Aec523C921dF36DCEd5B5089b5a1cd",
-                        "meta": {
-                            "args": [],
-                            "salt": "0x6236feea30b60ffbf6c98a9a872b614262760423e38ef69593ae4d25cfdd33e0",
-                            "create2": true
-                        }
-                    },
-                    {
                         "name": "YB_SGLP_ASSET_WITHOUT_STRATEGY",
                         "address": "0xEea83B37665f57960B9e9E08cF4eDb3AaC0baF41",
                         "meta": {
@@ -11826,32 +11889,11 @@
                         }
                     },
                     {
-                        "name": "YB_T_USDC_MOCK_ASSET_WITHOUT_STRATEGY",
-                        "address": "0xb971b99A69CA12fF0440E2A8d0CAA48a1951c9E6",
-                        "meta": {
-                            "args": [
-                                "0x746a6ba2D6e23D0F9A4F8c81C790F1f887b82420",
-                                "0xB97f3fda040662B44055BdcBEc2BaB7CAA70839c"
-                            ],
-                            "salt": "0x19d1a638200aac61d883b456756e472a1bb1ea89471afec58986e7c4deb03da2",
-                            "create2": true
-                        }
-                    },
-                    {
                         "name": "SGL_S_GLP_MARKET",
                         "address": "0xf63a2535c7A9CA8423593b97cC6297a7D7Ed6E39",
                         "meta": {
                             "args": [],
                             "salt": "0xda1d1e227aab25b29a2fd3a6b8701fc4c9b889a791358641553cd6747b3c2719",
-                            "create2": true
-                        }
-                    },
-                    {
-                        "name": "SGL_USDC_MOCK_MARKET",
-                        "address": "0xBd2339bAE79e55c9C1c824B181841Ed9526D921C",
-                        "meta": {
-                            "args": [],
-                            "salt": "0x7273275a1dd8e80c57999bd16b94bf169c9f1ee11a00197db971b9482de3ed74",
                             "create2": true
                         }
                     }
