@@ -923,6 +923,46 @@
                 "lastBlockHeight": 84006612,
                 "contracts": [
                     {
+                        "name": "USDO_USDC_UNI_V3_ORACLE",
+                        "address": "0xf9e174Dc915C7C37Fc41139e314eFB4288075Bb4",
+                        "meta": {
+                            "args": [
+                                "USDO->USDC->USD",
+                                "USDO/USD",
+                                18,
+                                {
+                                    "addressInAndOutUni": [
+                                        "0x9b8C394ffdf037F6c1f5bc632D498cDfA0DAf0ed",
+                                        "0xF72c2794A9Ea95C5a8CD033999F319B15723E751"
+                                    ],
+                                    "_circuitUniswap": [
+                                        "0xAa717B0c4499253b34b13906576561DBF653ADf5"
+                                    ],
+                                    "_circuitUniIsMultiplied": [
+                                        1
+                                    ],
+                                    "_twapPeriod": 1,
+                                    "observationLength": 1,
+                                    "_uniFinalCurrency": 1,
+                                    "_circuitChainlink": [
+                                        "0x1190aE86f7e9531CB87504C9ce5bEd538a9c8aBa"
+                                    ],
+                                    "_circuitChainIsMultiplied": [
+                                        1
+                                    ],
+                                    "guardians": [
+                                        "0x434b7A6C425E15A4521B96A3e07D7d00886b23d6"
+                                    ],
+                                    "_description": "0x5553444f2d3e555344432d3e5553440000000000000000000000000000000000",
+                                    "_sequencerUptimeFeed": "0x0000000000000000000000000000000000000000",
+                                    "_admin": "0x434b7A6C425E15A4521B96A3e07D7d00886b23d6"
+                                }
+                            ],
+                            "salt": "0xd33827ad96882fd286feabc516ee806d8a8ea8c6ad33a3e321cb9fc04bb8b43a",
+                            "create2": true
+                        }
+                    },
+                    {
                         "address": "0xa1733F0602A0e3a16d2811AA5C8B6FB1a111E5ff",
                         "name": "WETH_YB_EMPTY_STRAT",
                         "meta": {
