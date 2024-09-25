@@ -269,6 +269,26 @@
                 ]
             }
         },
+        "tap-token": {
+            "421614": {
+                "name": "arbitrum_sepolia",
+                "lastBlockHeight": 84008327,
+                "contracts": [
+                    {
+                        "name": "LTAP",
+                        "address": "0xec91bd2751152b23f572A136b7c27253051776FC",
+                        "meta": {
+                            "args": [
+                                "0x434b7A6C425E15A4521B96A3e07D7d00886b23d6",
+                                "0x434b7A6C425E15A4521B96A3e07D7d00886b23d6"
+                            ],
+                            "salt": "0x6016d3d16fdf764b4551a0189b4fe3fb5eb95f97fbc41fa429c575c5e2dfcab3",
+                            "create2": true
+                        }
+                    }
+                ]
+            }
+        },
         "tapioca-periph": {
             "421614": {
                 "name": "arbitrum_sepolia",
